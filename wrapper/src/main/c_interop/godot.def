@@ -1,0 +1,3 @@
+package = godot
+headers = gdnative_api_struct.gen.h
+compilerOpts = -I../../../../godot_headers/
