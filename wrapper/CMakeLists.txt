@@ -16,7 +16,7 @@ set(WRAPPER_NAME godot_wrapper)
 
 
 if (NOT GODOT_HEADERS_PATH)
-    set(GODOT_HEADERS_PATH ../godot_headers)
+    set(GODOT_HEADERS_PATH lib/godot_headers)
 endif()
 
 
