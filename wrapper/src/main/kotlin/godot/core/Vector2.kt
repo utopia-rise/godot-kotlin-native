@@ -1,11 +1,24 @@
 package kotlin.godot.core
 
-import godot.*
 import kotlinx.cinterop.*
-import platform.posix.cosf
 import kotlin.math.*
 
-data class Vector2(var x: Float, var y: Float) {
+class Vector2: Comparable<Vector2>, CoreType {
+
+    private val allocator = Arena()
+    private val memory: CArrayPointer<FloatVar> = allocator.allocArray(2)
+
+    override fun godotPointer(memScope: MemScope): COpaquePointer {
+        return memory
+    }
+
+    var x: Float get() = memory[0]; set(value) { memory[0] = value }
+    var y: Float get() = memory[1]; set(value) { memory[1] = value }
+
+    constructor(x: Float, y: Float) {
+        this.x = x
+        this.y = y
+    }
 
     var width: Float
         get() = x
@@ -17,6 +30,20 @@ data class Vector2(var x: Float, var y: Float) {
         set(value) {
             y = value
         }
+
+    operator fun get(p_idx: Int): Float =
+            when (p_idx) {
+                0 -> x
+                1 -> y
+                else -> throw IndexOutOfBoundsException()
+            }
+
+    operator fun set(n: Int, f: Float) =
+            when (n) {
+                0 -> x = f
+                1 -> y = f
+                else -> throw IndexOutOfBoundsException()
+            }
 
     operator fun plus(p_v: Vector2): Vector2 =
             Vector2(x + p_v.x, y + p_v.y)
@@ -39,8 +66,26 @@ data class Vector2(var x: Float, var y: Float) {
     operator fun unaryMinus(): Vector2 =
             Vector2(-x, -y)
 
-    fun equals(p_vec2: Vector2): Boolean =
-            (x == p_vec2.x && y == p_vec2.y)
+    override fun equals(other: Any?): Boolean =
+            when (other) {
+                is Vector2 -> (x == other.x && y == other.y)
+                else -> throw IllegalArgumentException()
+            }
+
+    override fun compareTo(other: Vector2): Int =
+            if (x == other.x) {
+                when {
+                    y < other.y -> -1
+                    y == other.y -> 0
+                    else -> 1
+                }
+            }
+            else {
+                when {
+                    x < other.x -> -1
+                    else -> 1
+                }
+            }
 
     fun normalize(): Unit {
         var l: Float = x*x + y*y
@@ -105,8 +150,8 @@ data class Vector2(var x: Float, var y: Float) {
 
     fun linear_interpolate(p_b: Vector2, p_t: Float): Vector2 {
         val res: Vector2 = this
-        res.x+= (p_t * (p_b.x-x))
-        res.y+= (p_t * (p_b.y-y))
+        res.x += (p_t * (p_b.x-x))
+        res.y += (p_t * (p_b.y-y))
         return res
     }
 
@@ -136,7 +181,7 @@ data class Vector2(var x: Float, var y: Float) {
             p_vec - this * this.dot(p_vec) * 2.0f
 
     fun angle(): Float =
-            atan2(y, x);
+            atan2(y, x)
 
     fun set_rotation(p_radians: Float): Unit {
         x = cos(p_radians)
@@ -160,19 +205,26 @@ data class Vector2(var x: Float, var y: Float) {
             Vector2(kotlin.math.floor(x), kotlin.math.floor(y))
 
     fun snapped(p_by: Vector2): Vector2 {
-        val new_x: Float
-        val new_y: Float
-
-        new_x = if (p_by.x != 0f)
+        val new_x: Float = if (p_by.x != 0f)
             kotlin.math.floor(x / p_by.x + 0.5f)
         else x
-
-        new_y = if (p_by.y != 0f)
+        val new_y: Float = if (p_by.y != 0f)
             kotlin.math.floor(y / p_by.y + 0.5f)
         else y
 
         return Vector2(new_x, new_y)
     }
 
+    fun aspect(): Float =
+            this.width / this.height
+
     override fun toString() = "$x, $y"
+    //TODO(Do this with godot string)
+
+
+    constructor():
+            this(0f,0f)
 }
+
+operator fun Float.times(p_vec: Vector2): Vector2 =
+        p_vec * this
