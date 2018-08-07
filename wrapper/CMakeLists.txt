@@ -42,6 +42,7 @@ konanc_dynamic(
 
 include_directories(${GODOT_HEADERS_PATH})
 
+message(${CMAKE_Kotlin_LIBRARY_DIR})
 include_directories(${CMAKE_Kotlin_LIBRARY_DIR})
 link_directories(${CMAKE_Kotlin_LIBRARY_DIR})
 
