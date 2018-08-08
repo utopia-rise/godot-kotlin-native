@@ -1,7 +1,5 @@
 package kotlin.godot
 
-import godot.*
-import kotlinx.cinterop.*
 import kotlin.godot.core.Godot
 import kotlin.godot.core.GodotString
 
@@ -9,10 +7,10 @@ import kotlin.godot.core.GodotString
 fun string_tests() {
     Godot.print(GodotString("Hello from constructor"))
     Godot.print("Testing constructors for nums")
-    Godot.print(GodotString("Scientific: ") + GodotString.num_scientific(1234567890.0987654321))
-    Godot.print(GodotString("Real: ") + GodotString.num_real(1234567890.0987654321))
+    Godot.print(GodotString("Scientific: ") + GodotString.numScientific(1234567890.0987654321))
+    Godot.print(GodotString("Real: ") + GodotString.numReal(1234567890.0987654321))
     Godot.print(GodotString("Num: ") + GodotString.num(1234567890.0987654321, 10))
-    Godot.print(GodotString("Int64: ") + GodotString.num_int64(1234567890))
+    Godot.print(GodotString("Int64: ") + GodotString.numInt64(1234567890))
     Godot.print(GodotString("Char: ") + GodotString.char('F'.toShort()))
     val str1 = GodotString("Equal")
     val str2 = GodotString("Equal")
@@ -29,22 +27,22 @@ fun string_tests() {
                 "ERROR")
 
     Godot.print("Testing begin_with: " +
-            if(GodotString("begin_with").begins_with(GodotString("be")) &&
-                    GodotString("begin_with").begins_with(GodotString("begi")) &&
-                    GodotString("begin_with").begins_with(GodotString("begin")) &&
-                    GodotString("begin_with").begins_with(GodotString("begin_w")) &&
-                    GodotString("begin_with").begins_with(GodotString("begin_with")) &&
-                    !GodotString("begin_with").begins_with(GodotString("with_begin")))
+            if(GodotString("begin_with").beginsWith(GodotString("be")) &&
+                    GodotString("begin_with").beginsWith(GodotString("begi")) &&
+                    GodotString("begin_with").beginsWith(GodotString("begin")) &&
+                    GodotString("begin_with").beginsWith(GodotString("begin_w")) &&
+                    GodotString("begin_with").beginsWith(GodotString("begin_with")) &&
+                    !GodotString("begin_with").beginsWith(GodotString("with_begin")))
                 "OK"
             else
                 "ERROR")
     Godot.print("Testing begin_with_char_array: " +
-            if(GodotString("begin_with").begins_with_char_array("be") &&
-                    GodotString("begin_with").begins_with_char_array("begi") &&
-                    GodotString("begin_with").begins_with_char_array("begin") &&
-                    GodotString("begin_with").begins_with_char_array("begin_w") &&
-                    GodotString("begin_with").begins_with_char_array("begin_with") &&
-                    !GodotString("begin_with").begins_with_char_array("with_begin"))
+            if(GodotString("begin_with").beginsWithCharArray("be") &&
+                    GodotString("begin_with").beginsWithCharArray("begi") &&
+                    GodotString("begin_with").beginsWithCharArray("begin") &&
+                    GodotString("begin_with").beginsWithCharArray("begin_w") &&
+                    GodotString("begin_with").beginsWithCharArray("begin_with") &&
+                    !GodotString("begin_with").beginsWithCharArray("with_begin"))
                 "OK"
             else
                 "ERROR")
@@ -61,8 +59,8 @@ fun string_tests() {
             else
                 "ERROR")
 
-    Godot.print("Testing hex_to_int: " +
-            if(GodotString("0xFF").hex_to_int() == 255)
+    Godot.print("Testing hexToInt: " +
+            if(GodotString("0xFF").hexToInt() == 255)
                 "OK"
             else
                 "ERROR")
