@@ -11,7 +11,9 @@ lateinit var nativescript_handle: COpaquePointer
 class Godot{
     companion object {
         fun print(message: GodotString) {
-            godot_print(message.godotString.ptr)
+            message.godotString.useContents {
+                godot_print(this.ptr)
+            }
         }
 
         fun print(message: String){

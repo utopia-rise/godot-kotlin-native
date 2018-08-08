@@ -18,7 +18,7 @@ fun string_tests() {
     val str2 = GodotString("Equal")
     val str3 = GodotString(str2)
     Godot.print("Testing equals: " +
-            if(str1 == str2 && str1 == str3)
+            if(str1 == str2 && str2 == str3)
                 "OK"
             else
                 "ERROR")
@@ -54,5 +54,16 @@ fun string_tests() {
                 "OK"
             else {
                 "ERROR"
-            })
+            } + "  Effect: " + str + " -> " + str.capitalize())
+    Godot.print("Testing get: " +
+            if(str[0] == 'c' && str[1] == 'a' && str[2] == 'p')
+                "OK"
+            else
+                "ERROR")
+
+    Godot.print("Testing hex_to_int: " +
+            if(GodotString("0xFF").hex_to_int() == 255)
+                "OK"
+            else
+                "ERROR")
 }
