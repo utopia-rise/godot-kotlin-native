@@ -22,6 +22,10 @@ class RID() : CoreType {
         }
     }
 
+    internal constructor(mem: COpaquePointer) : this() {
+        this.setRawMemory(mem)
+    }
+
     fun getRID() : Int = godot_rid_get_id(nativeValue)
 
     override fun equals(other: Any?): Boolean =

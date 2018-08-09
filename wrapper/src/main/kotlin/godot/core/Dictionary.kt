@@ -12,6 +12,10 @@ class Dictionary: CoreType {
         nativeValue = nativeValue.copy { godot_dictionary_new_copy(this.ptr, native) }
     }
 
+    internal constructor(mem: COpaquePointer) {
+        this.setRawMemory(mem)
+    }
+
     constructor(other: Dictionary) {
         nativeValue = nativeValue.copy { godot_dictionary_new_copy(this.ptr, other.nativeValue) }
     }

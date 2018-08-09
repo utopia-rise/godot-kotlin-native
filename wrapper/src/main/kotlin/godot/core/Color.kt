@@ -19,14 +19,20 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
         a = arr[3]
     }
 
-
     constructor() :
             this(0f, 0f, 0f, 1f)
 
-    internal constructor(native: CValue<godot_color>) : this(0f, 0f, 0f, 1f) {
+    constructor(r: Number, g: Number, b: Number, a: Number) :
+            this(r.toFloat(), g.toFloat(), b.toFloat(), a.toFloat())
+
+    internal constructor(native: CValue<godot_color>) : this() {
         memScoped {
             this@Color.setRawMemory(native.ptr)
         }
+    }
+
+    internal constructor(mem: COpaquePointer) : this() {
+        this.setRawMemory(mem)
     }
 
     operator fun get(n: Int): Float =

@@ -13,6 +13,10 @@ class GodotString : CoreType {
         nativeValue = nativeValue.copy { godot_string_new_copy(this.ptr, native) }
     }
 
+    internal constructor(mem: COpaquePointer) {
+        this.setRawMemory(mem)
+    }
+
     constructor(contents: String) {
         nativeValue = nativeValue.copy { godot_string_parse_utf8(this.ptr, contents) }
     }

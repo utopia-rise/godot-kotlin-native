@@ -12,6 +12,10 @@ class NodePath : CoreType {
         nativeValue = nativeValue.copy { godot_node_path_new_copy(this.ptr, native) }
     }
 
+    internal constructor(mem: COpaquePointer) {
+        this.setRawMemory(mem)
+    }
+
     constructor(other: GodotString){
         nativeValue = nativeValue.copy { godot_node_path_new(this.ptr, other.nativeValue) }
     }

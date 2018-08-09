@@ -12,6 +12,10 @@ class GodotArray: CoreType {
         nativeValue = nativeValue.copy { godot_array_new_copy(this.ptr, native) }
     }
 
+    internal constructor(mem: COpaquePointer) {
+        this.setRawMemory(mem)
+    }
+
     constructor(other: GodotArray) {
         nativeValue = nativeValue.copy { godot_array_new_copy(this.ptr, other.nativeValue) }
     }

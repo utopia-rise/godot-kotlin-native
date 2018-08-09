@@ -8,6 +8,9 @@ class Vector2(var x: Float, var y: Float) : Comparable<Vector2>, CoreType {
     constructor() :
             this(0f, 0f)
 
+    constructor(x: Number, y: Number) :
+            this(x.toFloat(), y.toFloat())
+
 
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
         return cValuesOf(x, y).getPointer(memScope)
@@ -19,10 +22,14 @@ class Vector2(var x: Float, var y: Float) : Comparable<Vector2>, CoreType {
         y = arr[1]
     }
 
-    constructor(native: CValue<godot_vector2>) : this(0f, 0f) {
+    internal constructor(native: CValue<godot_vector2>) : this(0f, 0f) {
         memScoped {
             this@Vector2.setRawMemory(native.ptr)
         }
+    }
+
+    internal constructor(mem: COpaquePointer) : this() {
+        this.setRawMemory(mem)
     }
 
     var width: Float

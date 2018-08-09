@@ -65,16 +65,20 @@ class Basis: CoreType {
         this[2][2] = axis_sq.z + cosine  * ( 1.0f - axis_sq.z )
     }
 
-    constructor(xx: Float, xy: Float, xz:Float, yx:Float, yy:Float, yz:Float, zx:Float, zy:Float, zz:Float):
+    constructor(xx: Number, xy: Number, xz: Number, yx: Number, yy: Number, yz: Number, zx: Number, zy: Number, zz: Number) :
             this(Vector3(xx,xy,xz), Vector3(yx,yy,yz), Vector3(zx,zy,zz))
 
     constructor():
             this(1f,0f, 0f, 0f, 1f, 0f, 0f, 0f, 1f)
 
-    internal constructor(native: CValue<godot_basis>) : this() {
+    internal constructor(native: CValue<godot_basis>) {
         memScoped {
             this@Basis.setRawMemory(native.ptr)
         }
+    }
+
+    internal constructor(mem: COpaquePointer) {
+        this.setRawMemory(mem)
     }
 
 

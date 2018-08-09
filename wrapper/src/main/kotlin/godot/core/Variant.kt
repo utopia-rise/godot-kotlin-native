@@ -12,6 +12,10 @@ class Variant: CoreType {
         nativeValue = nativeValue.copy { godot_variant_new_copy(this.ptr, native) }
     }
 
+    internal constructor(mem: COpaquePointer) {
+        this.setRawMemory(mem)
+    }
+
     constructor(other: Variant) {
         nativeValue = nativeValue.copy { godot_variant_new_copy(this.ptr, other.nativeValue) }
     }

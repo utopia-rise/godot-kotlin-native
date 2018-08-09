@@ -14,6 +14,8 @@ class Vector3(var x: Float, var y: Float, var z: Float) : Comparable<Vector3>, C
         AXIS_Z
     }
 
+    constructor(x: Number, y: Number, z: Number) :
+            this(x.toFloat(), y.toFloat(), z.toFloat())
 
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
         return cValuesOf(x, y, z).getPointer(memScope)
@@ -26,10 +28,14 @@ class Vector3(var x: Float, var y: Float, var z: Float) : Comparable<Vector3>, C
         z = arr[2]
     }
 
-    constructor(native: CValue<godot_vector3>) : this(0f, 0f, 0f) {
+    constructor(native: CValue<godot_vector3>) : this() {
         memScoped {
             this@Vector3.setRawMemory(native.ptr)
         }
+    }
+
+    internal constructor(mem: COpaquePointer) : this() {
+        this.setRawMemory(mem)
     }
 
     operator fun get(n: Int): Float =

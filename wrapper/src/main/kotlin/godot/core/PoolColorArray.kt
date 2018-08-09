@@ -12,6 +12,10 @@ class PoolColorArray : CoreType {
         nativeValue = nativeValue.copy { godot_pool_color_array_new_copy(this.ptr, native) }
     }
 
+    internal constructor(mem: COpaquePointer) {
+        this.setRawMemory(mem)
+    }
+
     constructor(other: PoolColorArray) {
         nativeValue = nativeValue.copy { godot_pool_color_array_new_copy(this.ptr, other.nativeValue) }
     }

@@ -12,11 +12,11 @@ class Quat: CoreType {
     var w: Float = 1f
 
 
-    constructor(x: Float, y: Float, z: Float, w: Float = 1f) {
-        this.x = x
-        this.y = y
-        this.z = z
-        this.w = w
+    constructor(x: Number, y: Number, z: Number, w: Number = 1f) {
+        this.x = x.toFloat()
+        this.y = y.toFloat()
+        this.z = z.toFloat()
+        this.w = w.toFloat()
     }
 
     constructor() :
@@ -70,6 +70,10 @@ class Quat: CoreType {
         memScoped {
             this@Quat.setRawMemory(native.ptr)
         }
+    }
+
+    internal constructor(mem: COpaquePointer) {
+        this.setRawMemory(mem)
     }
 
 

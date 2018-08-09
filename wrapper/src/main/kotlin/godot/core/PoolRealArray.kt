@@ -12,6 +12,10 @@ class PoolRealArray : CoreType {
         nativeValue = nativeValue.copy { godot_pool_real_array_new_copy(this.ptr, native) }
     }
 
+    internal constructor(mem: COpaquePointer) {
+        this.setRawMemory(mem)
+    }
+
     constructor(other: PoolRealArray) {
         nativeValue = nativeValue.copy { godot_pool_real_array_new_copy(this.ptr, other.nativeValue) }
     }
