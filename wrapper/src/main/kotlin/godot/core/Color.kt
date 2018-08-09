@@ -43,7 +43,7 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
     override fun equals(other: Any?): Boolean =
             when (other) {
                 is Color -> (r == other.r && g == other.g && b == other.b && a == other.a)
-                else -> throw IllegalArgumentException()
+                else -> false
             }
 
     fun to_32(): Int {

@@ -258,7 +258,7 @@ class Quat: CoreType {
     override fun equals(other: Any?): Boolean =
         when (other) {
             is Quat -> (x == other.x && y == other.y && z == other.z && w == other.w)
-            else -> throw IllegalArgumentException()
+            else -> false
         }
 
 

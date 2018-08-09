@@ -67,7 +67,7 @@ class Vector3(var x: Float, var y: Float, var z: Float) : Comparable<Vector3>, C
     override fun equals(other: Any?): Boolean =
             when (other) {
                 is Vector3 -> (x == other.x && y == other.y && z == other.z)
-                else -> throw IllegalArgumentException()
+                else -> false
             }
 
     override fun compareTo(other: Vector3): Int {

@@ -269,7 +269,7 @@ class Basis: CoreType {
                 }
             } else {
                 euler.x = -atan2(this[0][1], this[1][1])
-                euler.y = -Math_PI.toFloat() / 2f
+                euler.y = (-Math_PI).toFloat() / 2f
                 euler.z = 0f
             }
         } else {
@@ -343,7 +343,7 @@ class Basis: CoreType {
                 euler.z = 0f
             }
         } else { // m12 == 1
-            euler.x = -Math_PI.toFloat() * 0.5f
+            euler.x = (-Math_PI).toFloat() * 0.5f
             euler.y = -atan2(-this[0][1], this[0][0])
             euler.z = 0f
         }

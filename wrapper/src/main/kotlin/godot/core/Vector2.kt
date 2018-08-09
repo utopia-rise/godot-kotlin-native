@@ -68,7 +68,7 @@ class Vector2(var x: Float, var y: Float) : Comparable<Vector2>, CoreType {
     override fun equals(other: Any?): Boolean =
             when (other) {
                 is Vector2 -> (x == other.x && y == other.y)
-                else -> throw IllegalArgumentException()
+                else -> false
             }
 
     override fun compareTo(other: Vector2): Int =
