@@ -1,5 +1,6 @@
 package kotlin.godot.core
 
+import godot.*
 import kotlinx.cinterop.*
 import kotlin.godot.core.Defs.Companion.CMP_EPSILON
 import kotlin.math.*
@@ -65,6 +66,11 @@ class Quat: CoreType {
         w = arr[3]
     }
 
+    internal constructor(native: CValue<godot_quat>) : this() {
+        memScoped {
+            this@Quat.setRawMemory(native.ptr)
+        }
+    }
 
 
     fun set(p_x: Float, p_y: Float, p_z: Float, p_w: Float) {

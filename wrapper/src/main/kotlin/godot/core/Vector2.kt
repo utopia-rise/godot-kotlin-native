@@ -1,5 +1,6 @@
 package kotlin.godot.core
 
+import godot.*
 import kotlinx.cinterop.*
 import kotlin.math.*
 
@@ -18,6 +19,11 @@ class Vector2(var x: Float, var y: Float) : Comparable<Vector2>, CoreType {
         y = arr[1]
     }
 
+    constructor(native: CValue<godot_vector2>) : this(0f, 0f) {
+        memScoped {
+            this@Vector2.setRawMemory(native.ptr)
+        }
+    }
 
     var width: Float
         get() = x

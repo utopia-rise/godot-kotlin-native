@@ -3,12 +3,12 @@ package kotlin.godot.core
 import godot.*
 import kotlinx.cinterop.*
 
-class PoolByteArray: CoreType{
-    internal var nativeValue = cValue<godot_pool_byte_array>{ godot_pool_byte_array_new(this.ptr) }
+class PoolByteArray : CoreType {
+    internal var nativeValue = cValue<godot_pool_byte_array> { godot_pool_byte_array_new(this.ptr) }
 
     constructor()
 
-    constructor(native: CValue<godot_pool_byte_array>) {
+    internal constructor(native: CValue<godot_pool_byte_array>) {
         nativeValue = nativeValue.copy { godot_pool_byte_array_new_copy(this.ptr, native) }
     }
 
@@ -28,39 +28,39 @@ class PoolByteArray: CoreType{
         nativeValue = mem.reinterpret<godot_pool_byte_array>().pointed.readValue()
     }
 
-    fun append(data: Byte){
+    fun append(data: Byte) {
         nativeValue = nativeValue.copy { godot_pool_byte_array_append(this.ptr, data) }
     }
 
-    fun appendArray(data: GodotArray){
+    fun appendArray(data: GodotArray) {
         nativeValue = nativeValue.copy { godot_pool_byte_array_new_with_array(this.ptr, data.nativeValue) }
     }
 
-    fun insert(idx: Int, data: Byte){
+    fun insert(idx: Int, data: Byte) {
         nativeValue = nativeValue.copy { godot_pool_byte_array_insert(this.ptr, idx, data) }
     }
 
-    fun invert(){
+    fun invert() {
         nativeValue = nativeValue.copy { godot_pool_byte_array_invert(this.ptr) }
     }
 
-    fun push_back(data: Byte){
+    fun push_back(data: Byte) {
         nativeValue = nativeValue.copy { godot_pool_byte_array_push_back(this.ptr, data) }
     }
 
-    fun remove(idx: Int){
+    fun remove(idx: Int) {
         nativeValue = nativeValue.copy { godot_pool_byte_array_remove(this.ptr, idx) }
     }
 
-    fun resize(size: Int){
+    fun resize(size: Int) {
         nativeValue = nativeValue.copy { godot_pool_byte_array_resize(this.ptr, size) }
     }
 
-    fun set(idx: Int, data: Byte){
+    fun set(idx: Int, data: Byte) {
         nativeValue = nativeValue.copy { godot_pool_byte_array_set(this.ptr, idx, data) }
     }
 
-    operator fun get(idx: Int) = godot_pool_byte_array_get(nativeValue, idx)
+    operator fun get(idx: Int): Byte = godot_pool_byte_array_get(nativeValue, idx)
 
     fun size(): Int = godot_pool_byte_array_size(nativeValue)
 }

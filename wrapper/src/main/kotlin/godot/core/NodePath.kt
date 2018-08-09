@@ -8,7 +8,7 @@ class NodePath : CoreType {
 
     constructor()
 
-    constructor(native: CValue<godot_node_path>) {
+    internal constructor(native: CValue<godot_node_path>) {
         nativeValue = nativeValue.copy { godot_node_path_new_copy(this.ptr, native) }
     }
 

@@ -3,7 +3,7 @@ package kotlin.godot.core
 import godot.*
 import kotlinx.cinterop.*
 
-class RID: CoreType {
+class RID() : CoreType {
     internal var nativeValue : CValue<godot_rid> = cValue { godot_rid_new(this.ptr) }
 
     //TODO: Object constructor
@@ -14,6 +14,12 @@ class RID: CoreType {
 
     override fun setRawMemory(mem: COpaquePointer) {
         nativeValue = mem.reinterpret<godot_rid>().pointed.readValue()
+    }
+
+    internal constructor(native: CValue<godot_rid>) : this() {
+        memScoped {
+            this@RID.setRawMemory(native.ptr)
+        }
     }
 
     fun getRID() : Int = godot_rid_get_id(nativeValue)

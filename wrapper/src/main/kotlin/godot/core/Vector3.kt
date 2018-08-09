@@ -26,6 +26,11 @@ class Vector3(var x: Float, var y: Float, var z: Float) : Comparable<Vector3>, C
         z = arr[2]
     }
 
+    constructor(native: CValue<godot_vector3>) : this(0f, 0f, 0f) {
+        memScoped {
+            this@Vector3.setRawMemory(native.ptr)
+        }
+    }
 
     operator fun get(n: Int): Float =
             when (n) {

@@ -3,12 +3,12 @@ package kotlin.godot.core
 import godot.*
 import kotlinx.cinterop.*
 
-class PoolIntArray: CoreType{
-    internal var nativeValue = cValue<godot_pool_int_array>{ godot_pool_int_array_new(this.ptr) }
+class PoolIntArray : CoreType {
+    internal var nativeValue = cValue<godot_pool_int_array> { godot_pool_int_array_new(this.ptr) }
 
     constructor()
 
-    constructor(native: CValue<godot_pool_int_array>) {
+    internal constructor(native: CValue<godot_pool_int_array>) {
         nativeValue = nativeValue.copy { godot_pool_int_array_new_copy(this.ptr, native) }
     }
 
@@ -28,39 +28,39 @@ class PoolIntArray: CoreType{
         nativeValue = mem.reinterpret<godot_pool_int_array>().pointed.readValue()
     }
 
-    fun append(data: Int){
+    fun append(data: Int) {
         nativeValue = nativeValue.copy { godot_pool_int_array_append(this.ptr, data) }
     }
 
-    fun appendArray(data: GodotArray){
+    fun appendArray(data: GodotArray) {
         nativeValue = nativeValue.copy { godot_pool_int_array_new_with_array(this.ptr, data.nativeValue) }
     }
 
-    fun insert(idx: Int, data: Int){
+    fun insert(idx: Int, data: Int) {
         nativeValue = nativeValue.copy { godot_pool_int_array_insert(this.ptr, idx, data) }
     }
 
-    fun invert(){
+    fun invert() {
         nativeValue = nativeValue.copy { godot_pool_int_array_invert(this.ptr) }
     }
 
-    fun push_back(data: Int){
+    fun push_back(data: Int) {
         nativeValue = nativeValue.copy { godot_pool_int_array_push_back(this.ptr, data) }
     }
 
-    fun remove(idx: Int){
+    fun remove(idx: Int) {
         nativeValue = nativeValue.copy { godot_pool_int_array_remove(this.ptr, idx) }
     }
 
-    fun resize(size: Int){
+    fun resize(size: Int) {
         nativeValue = nativeValue.copy { godot_pool_int_array_resize(this.ptr, size) }
     }
 
-    fun set(idx: Int, data: Int){
+    fun set(idx: Int, data: Int) {
         nativeValue = nativeValue.copy { godot_pool_int_array_set(this.ptr, idx, data) }
     }
 
-    operator fun get(idx: Int) = godot_pool_int_array_get(nativeValue, idx)
+    operator fun get(idx: Int): Int = godot_pool_int_array_get(nativeValue, idx)
 
     fun size(): Int = godot_pool_int_array_size(nativeValue)
 }

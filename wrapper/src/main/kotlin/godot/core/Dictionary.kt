@@ -8,7 +8,7 @@ class Dictionary: CoreType {
 
     constructor()
 
-    constructor(native: CValue<godot_dictionary>) {
+    internal constructor(native: CValue<godot_dictionary>) {
         nativeValue = nativeValue.copy { godot_dictionary_new_copy(this.ptr, native) }
     }
 

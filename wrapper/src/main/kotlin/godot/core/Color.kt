@@ -1,5 +1,6 @@
 package kotlin.godot.core
 
+import godot.*
 import kotlinx.cinterop.*
 import kotlin.godot.core.GodotString
 import kotlin.math.*
@@ -21,6 +22,12 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
 
     constructor() :
             this(0f, 0f, 0f, 1f)
+
+    internal constructor(native: CValue<godot_color>) : this(0f, 0f, 0f, 1f) {
+        memScoped {
+            this@Color.setRawMemory(native.ptr)
+        }
+    }
 
     operator fun get(n: Int): Float =
             when (n) {

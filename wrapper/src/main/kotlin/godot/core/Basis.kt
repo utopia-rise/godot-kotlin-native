@@ -71,7 +71,11 @@ class Basis: CoreType {
     constructor():
             this(1f,0f, 0f, 0f, 1f, 0f, 0f, 0f, 1f)
 
-
+    internal constructor(native: CValue<godot_basis>) : this() {
+        memScoped {
+            this@Basis.setRawMemory(native.ptr)
+        }
+    }
 
 
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
@@ -90,7 +94,6 @@ class Basis: CoreType {
         z[1] = arr[7]
         z[2] = arr[8]
     }
-
 
     
     operator fun get(n: Int): Vector3 =
