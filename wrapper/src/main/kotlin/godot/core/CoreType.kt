@@ -1,9 +1,9 @@
 package kotlin.godot.core
 
-import kotlinx.cinterop.COpaquePointer
-import kotlinx.cinterop.MemScope
+import kotlinx.cinterop.*
 
 
 internal interface CoreType {
-    fun godotPointer(memScope: MemScope): COpaquePointer
+    fun getRawMemory(memScope: MemScope): COpaquePointer
+    fun setRawMemory(mem: COpaquePointer)
 }

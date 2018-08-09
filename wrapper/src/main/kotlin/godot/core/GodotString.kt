@@ -2,10 +2,22 @@ package kotlin.godot.core
 
 import godot.*
 import kotlinx.cinterop.*
-class GodotString : CoreType{
-    var godotString : CValue<godot_string> = cValue {
+
+
+class GodotString : CoreType {
+    var godotString: CValue<godot_string> = cValue {
         godot_string_new(this.ptr)
     }
+
+
+    override fun getRawMemory(memScope: MemScope): COpaquePointer {
+        return godotString.getPointer(memScope)
+    }
+
+    override fun setRawMemory(mem: COpaquePointer) {
+        godotString = mem.reinterpret<godot_string>().pointed.readValue()
+    }
+
 
     constructor()
 
@@ -14,22 +26,18 @@ class GodotString : CoreType{
             godot_string_parse_utf8(this.ptr, contents)
         }
     }
-    
+
     constructor(other: GodotString) {
         godotString = godotString.copy {
             val aThis = this
-            other.godotString.useContents{
+            other.godotString.useContents {
                 godot_string_new_copy(aThis.ptr, this.ptr)
             }
         }
     }
 
 
-    override fun godotPointer(memScope: MemScope): COpaquePointer {
-        return godotString.getPointer(memScope)
-    }
-
-    companion object{
+    companion object {
         fun num(p_num: Double, p_decimals: Int): GodotString {
             val newString = GodotString()
             newString.godotString = godot_string_num_with_decimals(p_num, p_decimals)
@@ -73,17 +81,17 @@ class GodotString : CoreType{
         }
     }
 
-    operator fun get(idx: Int) : Char = godotString.useContents {
+    operator fun get(idx: Int): Char = godotString.useContents {
         godot_string_operator_index(this.ptr, idx)!![0].toChar()
     }
 
 
     override fun equals(other: Any?): Boolean =
-        if(other is GodotString) {
-            Utils.useContents(godotString, other.godotString) { a, b ->
-                godot_string_operator_equal(a.ptr, b.ptr)
-            }
-        }else false
+            if (other is GodotString) {
+                Utils.useContents(godotString, other.godotString) { a, b ->
+                    godot_string_operator_equal(a.ptr, b.ptr)
+                }
+            } else false
 
     operator fun plus(other: GodotString): GodotString {
         val newString = GodotString()
@@ -94,24 +102,24 @@ class GodotString : CoreType{
     }
 
     operator fun compareTo(other: GodotString) =
-        if (this == other) 0
-        else if( Utils.useContents(godotString, other.godotString) { a, b ->
-                    godot_string_operator_less(a.ptr, b.ptr)
-                }) -1
-        else 1
+            if (this == other) 0
+            else if (Utils.useContents(godotString, other.godotString) { a, b ->
+                        godot_string_operator_less(a.ptr, b.ptr)
+                    }) -1
+            else 1
 
     override fun toString(): String = godotString.useContents {
         godot_string_utf8(this.ptr).useContents {
-                val ret = godot_char_string_get_data(this.ptr)!!.toKString()
-                godot_char_string_destroy(this.ptr)
+            val ret = godot_char_string_get_data(this.ptr)!!.toKString()
+            godot_char_string_destroy(this.ptr)
 
-                return ret
+            return ret
         }
     }
 
     fun length(): Int = godotString.useContents { godot_string_length(this.ptr) }
 
-    fun unicodeStr(): String  = godotString.useContents { godot_string_wide_str(this.ptr)!!.toKString()}
+    fun unicodeStr(): String = godotString.useContents { godot_string_wide_str(this.ptr)!!.toKString() }
 
     fun beginsWith(p_string: GodotString): Boolean = Utils.useContents(godotString, p_string.godotString) { a, b ->
         godot_string_begins_with(a.ptr, b.ptr)
@@ -121,7 +129,7 @@ class GodotString : CoreType{
         godot_string_begins_with_char_array(this.ptr, p_string)
     }
 
-    fun cEscape(): GodotString{
+    fun cEscape(): GodotString {
         val newString = GodotString()
         newString.godotString = godotString.useContents {
             godot_string_c_escape(this.ptr)
@@ -129,7 +137,7 @@ class GodotString : CoreType{
         return newString
     }
 
-    fun cUnescape(): GodotString{
+    fun cUnescape(): GodotString {
         val newString = GodotString()
         newString.godotString = godotString.useContents {
             godot_string_c_unescape(this.ptr)
@@ -137,7 +145,7 @@ class GodotString : CoreType{
         return newString
     }
 
-    fun capitalize(): GodotString{
+    fun capitalize(): GodotString {
         val newString = GodotString()
         newString.godotString = godotString.useContents {
             godot_string_capitalize(this.ptr)
@@ -177,7 +185,6 @@ class GodotString : CoreType{
         return newString
     }
 
-
     /* Doesn't work */
     fun get_File(): GodotString {
         val newString = GodotString()
@@ -188,7 +195,7 @@ class GodotString : CoreType{
         return newString
     }
 
-    override fun hashCode(): Int = godotString.useContents { godot_string_hash(this.ptr)  }
+    override fun hashCode(): Int = godotString.useContents { godot_string_hash(this.ptr) }
 
     fun hexToInt(): Int = godotString.useContents { godot_string_hex_to_int(this.ptr) }
 

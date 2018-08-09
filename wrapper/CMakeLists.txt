@@ -10,9 +10,7 @@ set(CMAKE_SHARED_LIBRARY_PREFIX "lib")
 
 set(CINTEROP_LIB_NAME godot)
 set(KLIB_NAME godot_wrapper_api)
-set(SHARED_LIB_NAME godot_wrapper_api) # TIP: do not change now
-set(WRAPPER_NAME godot_wrapper)
-
+set(SHARED_LIB_NAME godot_wrapper)
 
 
 if (NOT GODOT_HEADERS_PATH)
@@ -27,30 +25,12 @@ cinterop(
 
 konanc_library(
         NAME ${KLIB_NAME}
-        SOURCES src/main/kotlin/
+        SOURCES src/main/kotlin/godot
         LIBRARIES ${CINTEROP_LIB_NAME}
 )
 
 konanc_dynamic(
-        NAME lib${SHARED_LIB_NAME}
-        SOURCES src/main/kotlin
-        TEST_SOURCES src/test/kotlin
-        LIBRARIES ${CINTEROP_LIB_NAME}
+        NAME ${SHARED_LIB_NAME}
+        SOURCES src/main/kotlin/shared
+        LIBRARIES ${CINTEROP_LIB_NAME} ${KLIB_NAME}
 )
-
-
-
-include_directories(${GODOT_HEADERS_PATH})
-
-message(${CMAKE_Kotlin_LIBRARY_DIR})
-include_directories(${CMAKE_Kotlin_LIBRARY_DIR})
-link_directories(${CMAKE_Kotlin_LIBRARY_DIR})
-
-add_library(${WRAPPER_NAME} SHARED src/main/c/wrapper.c)
-
-target_link_libraries(${WRAPPER_NAME} ${SHARED_LIB_NAME}.dll)#${CMAKE_SHARED_LIBRARY_SUFFIX})
-
-add_dependencies(${WRAPPER_NAME} lib${SHARED_LIB_NAME} ${KLIB_NAME})
-
-
-

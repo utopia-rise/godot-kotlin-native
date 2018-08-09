@@ -4,29 +4,23 @@ import kotlinx.cinterop.*
 import kotlin.godot.core.GodotString
 import kotlin.math.*
 
-class Color: Comparable<Color>, CoreType {
+class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Comparable<Color>, CoreType {
 
-    private val allocator = Arena()
-    private val memory: CArrayPointer<FloatVar> = allocator.allocArray(4)
-
-    override fun godotPointer(memScope: MemScope): COpaquePointer {
-        return memory
+    override fun getRawMemory(memScope: MemScope): COpaquePointer {
+        return cValuesOf(r, g, b, a).getPointer(memScope)
     }
 
-    var r: Float get() = memory[0]; set(value) { memory[0] = value }
-    var g: Float get() = memory[1]; set(value) { memory[1] = value }
-    var b: Float get() = memory[2]; set(value) { memory[2] = value }
-    var a: Float get() = memory[3]; set(value) { memory[3] = value }
-
-    constructor(r: Float, g: Float, b: Float, a: Float = 1f) {
-        this.r = r
-        this.g = g
-        this.b = b
-        this.a = a
+    override fun setRawMemory(mem: COpaquePointer) {
+        val arr = mem.reinterpret<FloatVar>()
+        r = arr[0]
+        g = arr[1]
+        b = arr[2]
+        a = arr[3]
     }
 
-    constructor():
-            this(0f,0f,0f,1f)
+
+    constructor() :
+            this(0f, 0f, 0f, 1f)
 
     operator fun get(n: Int): Float =
             when (n) {
@@ -53,37 +47,37 @@ class Color: Comparable<Color>, CoreType {
             }
 
     fun to_32(): Int {
-        var c: Int = (a*255).roundToInt()
+        var c: Int = (a * 255).roundToInt()
         c = c shl 8
-        c = c or (r*255).roundToInt()
+        c = c or (r * 255).roundToInt()
         c = c shl 8
-        c = c or (g*255).roundToInt()
+        c = c or (g * 255).roundToInt()
         c = c shl 8
-        c = c or (b*255).roundToInt()
+        c = c or (b * 255).roundToInt()
 
         return c
     }
 
     fun to_ARGB32(): Int {
-        var c: Int = (a*255).roundToInt()
+        var c: Int = (a * 255).roundToInt()
         c = c shl 8
-        c = c or (r*255).roundToInt()
+        c = c or (r * 255).roundToInt()
         c = c shl 8
-        c = c or (g*255).roundToInt()
+        c = c or (g * 255).roundToInt()
         c = c shl 8
-        c = c or (b*255).roundToInt()
+        c = c or (b * 255).roundToInt()
 
         return c
     }
 
     fun gray(): Float =
-            (r+g+b)/3f
+            (r + g + b) / 3f
 
     fun get_h(): Float {
         var min = minOf(r, g)
         min = minOf(min, b)
         var max = maxOf(r, g)
-        max = maxOf(max,b)
+        max = maxOf(max, b)
 
         val delta = max - min
         if (delta == 0f) return 0f
@@ -107,7 +101,7 @@ class Color: Comparable<Color>, CoreType {
         var min = minOf(r, g)
         min = minOf(min, b)
         var max = maxOf(r, g)
-        max = maxOf(max,b)
+        max = maxOf(max, b)
 
         val delta = max - min
         return if (max != 0f) delta / max else 0f
@@ -115,7 +109,7 @@ class Color: Comparable<Color>, CoreType {
 
     fun get_v(): Float {
         var max = maxOf(r, g)
-        max = maxOf(max,b)
+        max = maxOf(max, b)
         return max
     }
 
@@ -127,7 +121,7 @@ class Color: Comparable<Color>, CoreType {
         val t: Float
 
         a = p_alpha
-        if ( p_s == 0f ) {
+        if (p_s == 0f) {
             // acp_chromatic (grey)
             r = p_v
             g = p_v
@@ -140,9 +134,9 @@ class Color: Comparable<Color>, CoreType {
         i = floor(p_h).toInt()
 
         f = p_h2 - i
-        p = p_v * ( 1 - p_s )
-        q = p_v * ( 1 - p_s * f )
-        t = p_v * ( 1 - p_s * ( 1 - f ) )
+        p = p_v * (1 - p_s)
+        q = p_v * (1 - p_s * f)
+        t = p_v * (1 - p_s * (1 - f))
 
         when (i) {
             0 -> { // Red is the dominant color
@@ -204,10 +198,10 @@ class Color: Comparable<Color>, CoreType {
 
     fun linear_interpolate(p_b: Color, p_t: Float): Color {
         val res = this
-        res.r+= (p_t * (p_b.r-r))
-        res.g+= (p_t * (p_b.g-g))
-        res.b+= (p_t * (p_b.b-b))
-        res.a+= (p_t * (p_b.a-a))
+        res.r += (p_t * (p_b.r - r))
+        res.g += (p_t * (p_b.g - g))
+        res.b += (p_t * (p_b.b - b))
+        res.a += (p_t * (p_b.a - a))
 
         return res
     }
@@ -215,12 +209,12 @@ class Color: Comparable<Color>, CoreType {
     fun blend(p_over: Color): Color {
         val res = Color()
         val sa = 1f - p_over.a
-        if (res.a==0f) {
-            return Color(0f,0f,0f,0f)
+        if (res.a == 0f) {
+            return Color(0f, 0f, 0f, 0f)
         } else {
-            res.r = (r*a*sa + p_over.r * p_over.a)/res.a
-            res.g = (g*a*sa + p_over.g * p_over.a)/res.a
-            res.b = (b*a*sa + p_over.b * p_over.a)/res.a
+            res.r = (r * a * sa + p_over.r * p_over.a) / res.a
+            res.g = (g * a * sa + p_over.g * p_over.a) / res.a
+            res.b = (b * a * sa + p_over.b * p_over.a) / res.a
         }
         return res
     }
@@ -280,7 +274,7 @@ class Color: Comparable<Color>, CoreType {
             return Color()
         }
 
-        return Color(r/255.0f,g/255.0f,b/255.0f,a/255.0f)
+        return Color(r / 255.0f, g / 255.0f, b / 255.0f, a / 255.0f)
     }
 
     fun html_is_valid(p_color: String): Boolean {
@@ -325,19 +319,17 @@ class Color: Comparable<Color>, CoreType {
             var ig = 0f
             for (i in 0..1) {
                 var v = 0
-                val c: Char = p_str[i+p_ofs]
+                val c: Char = p_str[i + p_ofs]
 
                 if (c in '0'..'9')
                     v = c.toInt() - '0'.toInt()
                 else if (c in 'a'..'f') {
                     v = c.toInt() - 'a'.toInt()
                     v += 10
-                }
-                else if (c in 'A'..'F') {
+                } else if (c in 'A'..'F') {
                     v = c.toInt() - 'A'.toInt()
                     v += 10
-                }
-                else return -1f
+                } else return -1f
 
                 if (i == 0)
                     ig += v * 16
@@ -374,29 +366,29 @@ class Color: Comparable<Color>, CoreType {
 
     fun to_html(p_alpha: Boolean): String {
         var txt = ""
-        txt+=_to_hex(r)
-        txt+=_to_hex(g)
-        txt+=_to_hex(b)
+        txt += _to_hex(r)
+        txt += _to_hex(g)
+        txt += _to_hex(b)
         if (p_alpha)
-            txt=_to_hex(a)+txt
+            txt = _to_hex(a) + txt
         return txt
     }
 
     override fun compareTo(other: Color): Int {
-        if (r==other.r) {
-            if (g==other.g) {
-                if(b==other.b) {
+        if (r == other.r) {
+            if (g == other.g) {
+                if (b == other.b) {
                     return when {
-                        a<other.a -> -1
-                        a==other.a -> 0
+                        a < other.a -> -1
+                        a == other.a -> 0
                         else -> 1
                     }
                 } else
-                    return if (b<other.b) -1 else 1
+                    return if (b < other.b) -1 else 1
             } else
-                return if (g<other.g) -1 else 1
+                return if (g < other.g) -1 else 1
         } else
-            return if (r<other.r) -1 else 1
+            return if (r < other.r) -1 else 1
     }
 
     override fun toString() = "$r, $g, $b, $a"

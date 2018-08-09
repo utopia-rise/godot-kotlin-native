@@ -4,43 +4,22 @@ import kotlin.math.sqrt
 import godot.*
 import kotlinx.cinterop.*
 
-class Vector3: Comparable<Vector3>, CoreType {
+class Vector3(var x: Float, var y: Float, var z: Float) : Comparable<Vector3>, CoreType {
 
-//    private var vect = cValue<godot.Vector3>{this.x = 0f; this.y = 0f; this.z = 0f}
-//
-//    override fun godotPointer(memScope: MemScope): COpaquePointer {
-//        vect.useContents { return this.ptr }
-//    }
-//
-//    var x: Float
-//        get() = vect.useContents { this.x }
-//        set(value) { vect = vect.copy { this.x = value } }
-//    var y: Float
-//        get() = vect.useContents { this.y }
-//        set(value) { vect = vect.copy { this.y = value } }
-//    var z: Float
-//        get() = vect.useContents { this.z }
-//        set(value) { vect = vect.copy { this.z = value } }
-
-    private val allocator = Arena()
-    private val memory: CArrayPointer<FloatVar> = allocator.allocArray(3)
-
-    override fun godotPointer(memScope: MemScope): COpaquePointer {
-        return memory
+    override fun getRawMemory(memScope: MemScope): COpaquePointer {
+        return cValuesOf(x, y, z).getPointer(memScope)
     }
 
-    var x: Float get() = memory[0]; set(value) { memory[0] = value }
-    var y: Float get() = memory[1]; set(value) { memory[1] = value }
-    var z: Float get() = memory[2]; set(value) { memory[2] = value }
-
-    constructor(x: Float, y: Float, z: Float) {
-        this.x = x
-        this.y = y
-        this.z = z
+    override fun setRawMemory(mem: COpaquePointer) {
+        val arr = mem.reinterpret<FloatVar>()
+        x = arr[0]
+        y = arr[1]
+        z = arr[2]
     }
 
-    constructor():
-            this(0f,0f,0f)
+
+    constructor() :
+            this(0f, 0f, 0f)
 
     enum class Axis {
         AXIS_X,
@@ -57,12 +36,12 @@ class Vector3: Comparable<Vector3>, CoreType {
             }
 
     operator fun set(n: Int, f: Float): Unit =
-        when (n) {
-            0 -> x = f
-            1 -> y = f
-            2 -> z = f
-            else -> throw IndexOutOfBoundsException()
-        }
+            when (n) {
+                0 -> x = f
+                1 -> y = f
+                2 -> z = f
+                else -> throw IndexOutOfBoundsException()
+            }
 
     operator fun plus(p_v: Vector3): Vector3 =
             Vector3(x + p_v.x, y + p_v.y, z + p_v.z)
@@ -106,16 +85,16 @@ class Vector3: Comparable<Vector3>, CoreType {
                 }
         } else
             return when {
-            x < other.x -> -1
-            else -> 1
-        }
+                x < other.x -> -1
+                else -> 1
+            }
     }
 
     fun abs(): Vector3 =
-            Vector3( kotlin.math.abs(x),  kotlin.math.abs(y), kotlin.math.abs(z) )
+            Vector3(kotlin.math.abs(x), kotlin.math.abs(y), kotlin.math.abs(z))
 
     fun ceil(): Vector3 =
-            Vector3( kotlin.math.ceil(x),  kotlin.math.ceil(y), kotlin.math.ceil(z) )
+            Vector3(kotlin.math.ceil(x), kotlin.math.ceil(y), kotlin.math.ceil(z))
 
     fun cross(b: Vector3): Vector3 =
             Vector3((y * b.z) - (z * b.y),
@@ -123,9 +102,9 @@ class Vector3: Comparable<Vector3>, CoreType {
                     (x * b.y) - (y * b.x))
 
     fun linear_interpolate(p_b: Vector3, p_t: Float): Vector3 =
-            Vector3(x+(p_t * (p_b.x-x)),
-                    y+(p_t * (p_b.y-y)),
-                    z+(p_t * (p_b.z-z)))
+            Vector3(x + (p_t * (p_b.x - x)),
+                    y + (p_t * (p_b.y - y)),
+                    z + (p_t * (p_b.z - z)))
 
     fun cubic_interpolate(b: Vector3, pre_a: Vector3, post_b: Vector3, t: Float): Vector3 {
         val p0: Vector3 = pre_a
@@ -136,17 +115,17 @@ class Vector3: Comparable<Vector3>, CoreType {
         val t2: Float = t * t
         val t3: Float = t2 * t
 
-        return ( ( p1 * 2.0f) +
-                ( -p0 + p2 ) * t +
-                ( p0 * 2.0f - p1 * 5.0f + p2 * 4f - p3 ) * t2 +
-                ( -p0 + p1 * 3.0f - p2 * 3.0f + p3 ) * t3 ) * 0.5f
+        return ((p1 * 2.0f) +
+                (-p0 + p2) * t +
+                (p0 * 2.0f - p1 * 5.0f + p2 * 4f - p3) * t2 +
+                (-p0 + p1 * 3.0f - p2 * 3.0f + p3) * t3) * 0.5f
     }
 
     fun length(): Float =
-            sqrt(x*x+y*y+z*z)
+            sqrt(x * x + y * y + z * z)
 
     fun length_squared(): Float =
-            x*x+y*y+z*z
+            x * x + y * y + z * z
 
     fun distance_squared_to(b: Vector3): Float =
             (b - this).length()
@@ -155,13 +134,13 @@ class Vector3: Comparable<Vector3>, CoreType {
             (b - this).length_squared()
 
     fun dot(b: Vector3): Float =
-            x*b.x + y*b.y + z*b.z
+            x * b.x + y * b.y + z * b.z
 
     fun floor(): Vector3 =
             Vector3(kotlin.math.floor(x), kotlin.math.floor(y), kotlin.math.floor(z))
 
     fun inverse(): Vector3 =
-            Vector3(1f/x, 1f/y, 1f/z)
+            Vector3(1f / x, 1f / y, 1f / z)
 
     fun max_axis(): Int =
             if (x < y)
@@ -185,11 +164,10 @@ class Vector3: Comparable<Vector3>, CoreType {
             x = 0f
             y = 0f
             z = 0f
-        }
-        else {
-            x/=l
-            y/=l
-            z/=l
+        } else {
+            x /= l
+            y /= l
+            z /= l
         }
     }
 
