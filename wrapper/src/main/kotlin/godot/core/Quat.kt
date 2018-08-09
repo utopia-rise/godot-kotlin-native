@@ -4,37 +4,11 @@ import kotlinx.cinterop.*
 import kotlin.godot.core.Defs.Companion.CMP_EPSILON
 import kotlin.math.*
 
-class Quat: CoreType{
-//    private var vect = cValue<godot.Quat>{this.x = 0f; this.y = 0f; this.z = 0f; this.w = 0f}
-//
-//    override fun godotPointer(memScope: MemScope): COpaquePointer {
-//        vect.useContents { return this.ptr }
-//    }
-//
-//    var x: Float
-//        get() = vect.useContents { this.x }
-//        set(value) { vect = vect.copy { this.x = value } }
-//    var y: Float
-//        get() = vect.useContents { this.y }
-//        set(value) { vect = vect.copy { this.y = value } }
-//    var z: Float
-//        get() = vect.useContents { this.z }
-//        set(value) { vect = vect.copy { this.z = value } }
-//    var w: Float
-//        get() = vect.useContents { this.w }
-//        set(value) { vect = vect.copy { this.w = value } }
-
-    private val allocator = Arena()
-    private val memory: CArrayPointer<FloatVar> = allocator.allocArray(4)
-
-    override fun godotPointer(memScope: MemScope): COpaquePointer {
-        return memory
-    }
-
-    var x: Float get() = memory[0]; set(value) { memory[0] = value }
-    var y: Float get() = memory[1]; set(value) { memory[1] = value }
-    var z: Float get() = memory[2]; set(value) { memory[2] = value }
-    var w: Float get() = memory[3]; set(value) { memory[3] = value }
+class Quat: CoreType {
+    var x: Float = 0f
+    var y: Float = 0f
+    var z: Float = 0f
+    var w: Float = 1f
 
 
     constructor(x: Float, y: Float, z: Float, w: Float = 1f) {
@@ -44,8 +18,8 @@ class Quat: CoreType{
         this.w = w
     }
 
-    constructor():
-            this(0f,0f,0f,1f)
+    constructor() :
+        this(0f, 0f, 0f, 1f)
 
     constructor(axis: Vector3, angle: Float) {
         val d: Float = axis.length()
@@ -57,6 +31,7 @@ class Quat: CoreType{
             set(axis.x * s, axis.y * s, axis.z * s, cos_angle)
         }
     }
+
     constructor(v0: Vector3, v1: Vector3) {
         val c = v0.cross(v1)
         val d = v0.dot(v1)
@@ -75,6 +50,22 @@ class Quat: CoreType{
             w = s * 0.5f
         }
     }
+
+
+
+    override fun getRawMemory(memScope: MemScope): COpaquePointer {
+        return cValuesOf(x, y, z, w).getPointer(memScope)
+    }
+
+    override fun setRawMemory(mem: COpaquePointer) {
+        val arr = mem.reinterpret<FloatVar>()
+        x = arr[0]
+        y = arr[1]
+        z = arr[2]
+        w = arr[3]
+    }
+
+
 
     fun set(p_x: Float, p_y: Float, p_z: Float, p_w: Float) {
         x = p_x

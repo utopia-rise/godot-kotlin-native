@@ -4,6 +4,9 @@ import kotlinx.cinterop.*
 import kotlin.math.*
 
 class Vector2(var x: Float, var y: Float) : Comparable<Vector2>, CoreType {
+    constructor() :
+            this(0f, 0f)
+
 
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
         return cValuesOf(x, y).getPointer(memScope)
@@ -215,10 +218,6 @@ class Vector2(var x: Float, var y: Float) : Comparable<Vector2>, CoreType {
 
     override fun toString() = "$x, $y"
     //TODO(Do this with godot string)
-
-
-    constructor() :
-            this(0f, 0f)
 }
 
 operator fun Float.times(p_vec: Vector2): Vector2 =

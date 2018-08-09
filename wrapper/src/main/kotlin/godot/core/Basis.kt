@@ -10,51 +10,59 @@ import kotlin.godot.core.Defs.Companion.Math_PI
 
 
 class Basis: CoreType {
+    lateinit var x: Vector3
+    lateinit var y: Vector3
+    lateinit var z: Vector3
 
-//    private var vect = cValue<godot.Basis>{
-//        //this.x = cValue<godot.Vector3>{this.x = 0f; this.y = 0f; this.z = 0f};
-//        this.
-//        //this.y = 0f; this.z = 0f
-//    }
-//
-//    override fun godotPointer(memScope: MemScope): COpaquePointer {
-//        vect.useContents { return this.ptr }
-//    }
-//
-//    var x: Vector3
-//        get() = vect.useContents { this.x }
-//        set(value) { vect = vect.copy { this.x = value } }
-//    var y: Vector3
-//        get() = vect.useContents { this.y }
-//        set(value) { vect = vect.copy { this.y = value } }
-//    var z: Vector3
-//        get() = vect.useContents { this.z }
-//        set(value) { vect = vect.copy { this.z = value } }
 
-    private val allocator = Arena()
-    private val memory: CArrayPointer<FloatVar> = allocator.allocArray(9)
-
-    override fun godotPointer(memScope: MemScope): COpaquePointer {
-        memory[0] = x[0]
-        memory[1] = x[1]
-        memory[2] = x[2]
-        memory[3] = y[0]
-        memory[4] = y[1]
-        memory[5] = y[2]
-        memory[6] = z[0]
-        memory[7] = z[1]
-        memory[8] = z[2]
-        return memory
+    constructor(x: Vector3, y: Vector3, z: Vector3) {
+        this.x = x
+        this.y = y
+        this.z = z
     }
 
-    var x: Vector3 = Vector3()
-    var y: Vector3 = Vector3()
-    var z: Vector3 = Vector3()
+    constructor(p_euler: Vector3) {
+        set_euler(p_euler)
+    }
 
-    constructor(v1: Vector3, v2: Vector3, v3: Vector3) {
-        this.x = v1
-        this.y = v2
-        this.z = v3
+    constructor(p_quat: Quat) {
+        val d = p_quat.length_squared()
+        val s = 2f / d
+        val xs = p_quat.x * s
+        val ys = p_quat.y * s
+        val zs = p_quat.z * s
+        val wx = p_quat.w * xs
+        val wy = p_quat.w * ys
+        val wz = p_quat.w * zs
+        val xx = p_quat.x * xs
+        val xy = p_quat.x * ys
+        val xz = p_quat.x * zs
+        val yy = p_quat.y * ys
+        val yz = p_quat.y * zs
+        val zz = p_quat.z * zs
+        set(	1.0f - (yy + zz), xy - wz, xz + wy,
+                xy + wz, 1.0f - (xx + zz), yz - wx,
+                xz - wy, yz + wx, 1.0f - (xx + yy))
+    }
+
+    constructor(p_axis: Vector3, p_phi: Float) {
+        // Rotation matrix from axis and angle, see https://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle
+        val axis_sq = Vector3(p_axis.x*p_axis.x,p_axis.y*p_axis.y,p_axis.z*p_axis.z);
+
+        val cosine: Float = cos(p_phi)
+        val sine: Float = sin(p_phi)
+
+        this[0][0] = axis_sq.x + cosine * ( 1.0f - axis_sq.x )
+        this[0][1] = p_axis.x * p_axis.y * ( 1.0f - cosine ) - p_axis.z * sine
+        this[0][2] = p_axis.z * p_axis.x * ( 1.0f - cosine ) + p_axis.y * sine
+
+        this[1][0] = p_axis.x * p_axis.y * ( 1.0f - cosine ) + p_axis.z * sine
+        this[1][1] = axis_sq.y + cosine  * ( 1.0f - axis_sq.y )
+        this[1][2] = p_axis.y * p_axis.z * ( 1.0f - cosine ) - p_axis.x * sine
+
+        this[2][0] = p_axis.z * p_axis.x * ( 1.0f - cosine ) - p_axis.y * sine
+        this[2][1] = p_axis.y * p_axis.z * ( 1.0f - cosine ) + p_axis.x * sine
+        this[2][2] = axis_sq.z + cosine  * ( 1.0f - axis_sq.z )
     }
 
     constructor(xx: Float, xy: Float, xz:Float, yx:Float, yy:Float, yz:Float, zx:Float, zy:Float, zz:Float):
@@ -63,6 +71,28 @@ class Basis: CoreType {
     constructor():
             this(1f,0f, 0f, 0f, 1f, 0f, 0f, 0f, 1f)
 
+
+
+
+    override fun getRawMemory(memScope: MemScope): COpaquePointer {
+        return cValuesOf(x[0], x[1], x[2], y[0], y[1], y[2], z[0], z[1], z[2]).getPointer(memScope)
+    }
+
+    override fun setRawMemory(mem: COpaquePointer) {
+        val arr = mem.reinterpret<FloatVar>()
+        x[0] = arr[0]
+        x[1] = arr[1]
+        x[2] = arr[2]
+        y[0] = arr[3]
+        y[1] = arr[4]
+        y[2] = arr[5]
+        z[0] = arr[6]
+        z[1] = arr[7]
+        z[2] = arr[8]
+    }
+
+
+    
     operator fun get(n: Int): Vector3 =
             when (n) {
                 0 -> x
@@ -581,51 +611,4 @@ class Basis: CoreType {
         this.y = ret.y
         this.z = ret.z
     }
-
-    constructor(p_euler: Vector3) {
-        set_euler(p_euler)
-    }
-
-    constructor(p_quat: Quat) {
-        val d = p_quat.length_squared()
-        val s = 2f / d
-        val xs = p_quat.x * s
-        val ys = p_quat.y * s
-        val zs = p_quat.z * s
-        val wx = p_quat.w * xs
-        val wy = p_quat.w * ys
-        val wz = p_quat.w * zs
-        val xx = p_quat.x * xs
-        val xy = p_quat.x * ys
-        val xz = p_quat.x * zs
-        val yy = p_quat.y * ys
-        val yz = p_quat.y * zs
-        val zz = p_quat.z * zs
-        set(	1.0f - (yy + zz), xy - wz, xz + wy,
-                xy + wz, 1.0f - (xx + zz), yz - wx,
-                xz - wy, yz + wx, 1.0f - (xx + yy))
-    }
-
-    constructor(p_axis: Vector3, p_phi: Float) {
-        // Rotation matrix from axis and angle, see https://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle
-        val axis_sq = Vector3(p_axis.x*p_axis.x,p_axis.y*p_axis.y,p_axis.z*p_axis.z);
-
-        val cosine: Float = cos(p_phi)
-        val sine: Float = sin(p_phi)
-
-        this[0][0] = axis_sq.x + cosine * ( 1.0f - axis_sq.x )
-        this[0][1] = p_axis.x * p_axis.y * ( 1.0f - cosine ) - p_axis.z * sine
-        this[0][2] = p_axis.z * p_axis.x * ( 1.0f - cosine ) + p_axis.y * sine
-
-        this[1][0] = p_axis.x * p_axis.y * ( 1.0f - cosine ) + p_axis.z * sine
-        this[1][1] = axis_sq.y + cosine  * ( 1.0f - axis_sq.y )
-        this[1][2] = p_axis.y * p_axis.z * ( 1.0f - cosine ) - p_axis.x * sine
-
-        this[2][0] = p_axis.z * p_axis.x * ( 1.0f - cosine ) - p_axis.y * sine
-        this[2][1] = p_axis.y * p_axis.z * ( 1.0f - cosine ) + p_axis.x * sine
-        this[2][2] = axis_sq.z + cosine  * ( 1.0f - axis_sq.z )
-    }
-
-
-
 }

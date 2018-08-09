@@ -5,6 +5,15 @@ import godot.*
 import kotlinx.cinterop.*
 
 class Vector3(var x: Float, var y: Float, var z: Float) : Comparable<Vector3>, CoreType {
+    constructor() :
+            this(0f, 0f, 0f)
+
+    enum class Axis {
+        AXIS_X,
+        AXIS_Y,
+        AXIS_Z
+    }
+
 
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
         return cValuesOf(x, y, z).getPointer(memScope)
@@ -17,15 +26,6 @@ class Vector3(var x: Float, var y: Float, var z: Float) : Comparable<Vector3>, C
         z = arr[2]
     }
 
-
-    constructor() :
-            this(0f, 0f, 0f)
-
-    enum class Axis {
-        AXIS_X,
-        AXIS_Y,
-        AXIS_Z
-    }
 
     operator fun get(n: Int): Float =
             when (n) {
