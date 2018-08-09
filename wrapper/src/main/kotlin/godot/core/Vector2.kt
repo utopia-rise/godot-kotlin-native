@@ -5,6 +5,19 @@ import kotlin.math.*
 
 class Vector2: Comparable<Vector2>, CoreType {
 
+//    private var vect = cValue<godot.Vector2>{this.x = 0f; this.y = 0f}
+//
+//    override fun godotPointer(memScope: MemScope): COpaquePointer {
+//        vect.useContents { return this.ptr }
+//    }
+//
+//    var x: Float
+//        get() = vect.useContents { this.x }
+//        set(value) { vect = vect.copy { this.x = value } }
+//    var y: Float
+//        get() = vect.useContents { this.y }
+//        set(value) { vect = vect.copy { this.y = value } }
+
     private val allocator = Arena()
     private val memory: CArrayPointer<FloatVar> = allocator.allocArray(2)
 

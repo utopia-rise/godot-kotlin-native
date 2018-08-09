@@ -6,6 +6,22 @@ import kotlinx.cinterop.*
 
 class Vector3: Comparable<Vector3>, CoreType {
 
+//    private var vect = cValue<godot.Vector3>{this.x = 0f; this.y = 0f; this.z = 0f}
+//
+//    override fun godotPointer(memScope: MemScope): COpaquePointer {
+//        vect.useContents { return this.ptr }
+//    }
+//
+//    var x: Float
+//        get() = vect.useContents { this.x }
+//        set(value) { vect = vect.copy { this.x = value } }
+//    var y: Float
+//        get() = vect.useContents { this.y }
+//        set(value) { vect = vect.copy { this.y = value } }
+//    var z: Float
+//        get() = vect.useContents { this.z }
+//        set(value) { vect = vect.copy { this.z = value } }
+
     private val allocator = Arena()
     private val memory: CArrayPointer<FloatVar> = allocator.allocArray(3)
 
@@ -193,7 +209,10 @@ class Vector3: Comparable<Vector3>, CoreType {
     }
 
     fun rotate(p_axis: Vector3, p_phi: Float): Unit {
-        this = Basis(p_axis, p_phi).xform(this)
+        val ret = Basis(p_axis, p_phi).xform(this)
+        this.x = ret.x
+        this.y = ret.y
+        this.z = ret.z
     }
 
     fun slide(by: Vector3): Vector3 =

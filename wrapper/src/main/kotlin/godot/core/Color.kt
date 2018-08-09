@@ -1,7 +1,7 @@
 package kotlin.godot.core
 
 import kotlinx.cinterop.*
-import platform.posix.wchar_t
+import kotlin.godot.core.GodotString
 import kotlin.math.*
 
 class Color: Comparable<Color>, CoreType {
@@ -258,7 +258,7 @@ class Color: Comparable<Color>, CoreType {
         } else if (color.length == 6) {
             alpha = false
         } else {
-            println("ERROR: ${"Invalid Color Code: ".unicode_str()}$p_color")
+            Defs.ERR_PRINT("Invalid Color Code:$p_color")
             return Color()
         }
 
@@ -266,7 +266,7 @@ class Color: Comparable<Color>, CoreType {
         if (alpha) {
             a = _parse_col(color, 0).toInt()
             if (a < 0) {
-                println("ERROR: ${"Invalid Color Code: ".unicode_str()}$p_color")
+                Defs.ERR_PRINT("Invalid Color Code:$p_color")
                 return Color()
             }
         }
@@ -276,7 +276,7 @@ class Color: Comparable<Color>, CoreType {
         val g = _parse_col(color, from + 2).toInt()
         val b = _parse_col(color, from + 4).toInt()
         if (r < 0 || g < 0 || b < 0) {
-            println("ERROR: ${"Invalid Color Code: ".unicode_str()}$p_color")
+            Defs.ERR_PRINT("Invalid Color Code:$p_color")
             return Color()
         }
 
@@ -318,7 +318,6 @@ class Color: Comparable<Color>, CoreType {
 
         return true
     }
-
 
 
     companion object {

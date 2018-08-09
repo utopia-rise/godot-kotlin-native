@@ -6,6 +6,39 @@ compilerOpts = -I../lib/godot_headers
 
 const godot_gdnative_core_api_struct *api;
 
+struct Vector3 {
+    float x;
+    float y;
+    float z;
+};
+
+struct Vector2 {
+    float x;
+    float y;
+};
+
+struct Quat {
+    float x;
+    float y;
+    float z;
+    float w;
+};
+
+struct Color {
+    float r;
+    float g;
+    float b;
+    float a;
+};
+
+struct Basis {
+    struct Vector3 x;
+    struct Vector3 y;
+    struct Vector3 z;
+};
+
+
+
 static void set_api(godot_gdnative_core_api_struct *_api){
     api = _api;
 }
