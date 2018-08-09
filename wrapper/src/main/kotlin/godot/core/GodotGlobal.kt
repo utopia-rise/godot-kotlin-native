@@ -7,7 +7,7 @@ import kotlinx.cinterop.*
 class Godot {
     companion object {
         fun print(message: GodotString) {
-            message.godotString.useContents {
+            message.nativeValue.useContents {
                 godot_print(this.ptr)
             }
         }

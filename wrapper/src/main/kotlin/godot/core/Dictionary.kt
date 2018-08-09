@@ -4,73 +4,50 @@ import kotlinx.cinterop.*
 import godot.*
 
 class Dictionary: CoreType {
-    var godotDictionary = cValue<godot_dictionary> {
-        godot_dictionary_new(this.ptr)
-    }
+    var nativeValue = cValue<godot_dictionary> { godot_dictionary_new(this.ptr) }
 
     constructor()
 
-    constructor(other: Dictionary) {
-        godotDictionary = godotDictionary.copy {
-            val aThis = this
-            other.godotDictionary.useContents {
-                godot_dictionary_new_copy(aThis.ptr, this.ptr)
-            }
-        }
+    constructor(native: CValue<godot_dictionary>) {
+        nativeValue = nativeValue.copy { godot_dictionary_new_copy(this.ptr, native) }
     }
 
-    override fun godotPointer(memScope: MemScope): COpaquePointer {
-        godotDictionary.useContents { return this.ptr }
+    constructor(other: Dictionary) {
+        nativeValue = nativeValue.copy { godot_dictionary_new_copy(this.ptr, other.nativeValue) }
+    }
+
+    override fun getRawMemory(memScope: MemScope): COpaquePointer {
+        return nativeValue.getPointer(memScope)
+    }
+
+    override fun setRawMemory(mem: COpaquePointer) {
+        nativeValue = mem.reinterpret<godot_dictionary>().pointed.readValue()
     }
 
     fun clear(){
-        godotDictionary = godotDictionary.copy { godot_dictionary_clear(this.ptr) }
+        nativeValue = nativeValue.copy { godot_dictionary_clear(this.ptr) }
     }
 
-    fun empty(): Boolean = godotDictionary.useContents { godot_dictionary_empty(this.ptr) }
+    fun empty(): Boolean = godot_dictionary_empty(nativeValue)
 
-    override fun hashCode(): Int = godotDictionary.useContents { godot_dictionary_hash(this.ptr) }
+    override fun hashCode(): Int = godot_dictionary_hash(nativeValue)
 
-    fun size(): Int = godotDictionary.useContents { godot_dictionary_size(this.ptr) }
+    fun size(): Int = godot_dictionary_size(nativeValue)
 
-    fun to_json() : GodotString {
-        val newString = GodotString()
-        newString.godotString = godotDictionary.useContents { godot_dictionary_to_json(this.ptr) }
-        return newString
-    }
+    fun to_json() : GodotString = GodotString(godot_dictionary_to_json(nativeValue))
 
-    fun has_all(keys: GodotArray): Boolean = Utils.useContents(godotDictionary, keys.godotArray){ a, b ->
-        godot_dictionary_has_all(a.ptr, b.ptr)
-    }
+    fun has_all(keys: GodotArray): Boolean = godot_dictionary_has_all(nativeValue, keys.nativeValue)
 
-    fun keys(): GodotArray {
-        val newArray = GodotArray()
-        newArray.godotArray = godotDictionary.useContents { godot_dictionary_keys(this.ptr) }
-        return newArray
-    }
+    fun keys(): GodotArray = GodotArray(godot_dictionary_keys(nativeValue))
 
-    fun values(): GodotArray {
-        val newArray = GodotArray()
-        newArray.godotArray = godotDictionary.useContents { godot_dictionary_values(this.ptr) }
-        return newArray
-    }
+    fun values(): GodotArray = GodotArray(godot_dictionary_values(nativeValue))
 
-    fun erase(key: Variant) = Utils.useContents(godotDictionary, key.godotVariant) { a, b ->
-        godot_dictionary_erase(a.ptr, b.ptr)
-    }
+    fun erase(key: Variant) = godot_dictionary_erase(nativeValue, key.nativeValue)
 
-    fun has(key: Variant): Boolean = Utils.useContents(godotDictionary, key.godotVariant) { a, b ->
-        godot_dictionary_has(a.ptr, b.ptr)
-    }
+    fun has(key: Variant): Boolean = godot_dictionary_has(nativeValue, key.nativeValue)
 
     /* I don't know will this work or not*/
-    fun get(key: Variant) : Variant {
-        val newVariant = Variant()
-        newVariant.godotVariant = Utils.useContents(godotDictionary, key.godotVariant) { a, b ->
-            godot_dictionary_operator_index(a.ptr, b.ptr)!!.pointed.readValue()
-        }
-        return newVariant
-    }
+    fun get(key: Variant) : Variant = Variant(godot_dictionary_operator_index(nativeValue, key.nativeValue)!!.pointed.readValue())
 
 
 }

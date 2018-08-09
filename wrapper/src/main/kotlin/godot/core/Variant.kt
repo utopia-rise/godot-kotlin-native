@@ -3,80 +3,80 @@ package kotlin.godot.core
 import godot.*
 import kotlinx.cinterop.*
 
-class Variant {
-    var godotVariant = cValue<godot_variant> {
-        godot_variant_new_nil(this.ptr)
+class Variant: CoreType {
+    internal var nativeValue = cValue<godot_variant> { godot_variant_new_nil(this.ptr) }
+
+    constructor()
+
+    internal constructor(native: CValue<godot_variant>){
+        nativeValue = nativeValue.copy { godot_variant_new_copy(this.ptr, native) }
+    }
+
+    constructor(other: Variant) {
+        nativeValue = nativeValue.copy { godot_variant_new_copy(this.ptr, other.nativeValue) }
+    }
+
+    override fun getRawMemory(memScope: MemScope): COpaquePointer {
+        return nativeValue.getPointer(memScope)
+    }
+
+    override fun setRawMemory(mem: COpaquePointer) {
+        nativeValue = mem.reinterpret<godot_variant>().pointed.readValue()
     }
 
     //TODO: Other casts + other constructors
 
-    fun booleanize(): Boolean = godotVariant.useContents { godot_variant_booleanize(this.ptr) }
+    fun booleanize(): Boolean = godot_variant_booleanize(nativeValue)
 
-    fun toBoolean(): Boolean = godotVariant.useContents { godot_variant_as_bool(this.ptr) }
+    fun toBoolean(): Boolean = godot_variant_as_bool(nativeValue)
 
     fun toInt(): Int = this.toLong().toInt()
 
-    fun toLong(): Long = godotVariant.useContents { godot_variant_as_int(this.ptr) }
+    fun toLong(): Long = godot_variant_as_int(nativeValue)
 
-    fun toGodotString(): GodotString {
-        val newString = GodotString()
-        newString.godotString = godotVariant.useContents { godot_variant_as_string(this.ptr) }
-        return newString
-    }
+    fun toGodotString(): GodotString = GodotString(godot_variant_as_string(nativeValue))
 
     override fun toString(): String = this.toGodotString().toString()
 
-    fun toDouble(): Double = godotVariant.useContents { godot_variant_as_real(this.ptr) }
+    fun toDouble(): Double = godot_variant_as_real(nativeValue)
 
     fun toFloat(): Float = this.toDouble().toFloat()
 
-    fun toDictionary(): Dictionary {
-        val newDict = Dictionary()
-        newDict.godotDictionary = godotVariant.useContents { godot_variant_as_dictionary(this.ptr) }
-        return newDict
-    }
+    fun toDictionary(): Dictionary = Dictionary(godot_variant_as_dictionary(nativeValue))
 
-    fun toGodotArray(): GodotArray {
-        val newArray = GodotArray()
-        newArray.godotArray = godotVariant.useContents { godot_variant_as_array(this.ptr) }
-        return newArray
-    }
+    fun toGodotArray(): GodotArray = GodotArray(godot_variant_as_array(nativeValue))
 
-    fun getType(): godot_variant_type = godotVariant.useContents { godot_variant_get_type(this.ptr) } //TODO: Normal return type
+    fun toNodePath(): NodePath = NodePath(godot_variant_as_node_path(nativeValue))
 
-    fun call(str: GodotString, args: Variant, count: Int) { //TODO: double pointer
-        //val newVar = Variant()
-        //newVar.godotVariant = Utils.useContents(godotVariant, str.godotString) { a, b ->
-        //    args.godotVariant.useContents {
-        //        godot_variant_call(a.ptr, b.ptr, this.ptr, count, null)
-        //    }
-        //}
-    }
+    fun getType(): Int = godot_variant_get_type(nativeValue).value
 
-    fun hasMethod(method: GodotString): Boolean = Utils.useContents(godotVariant, method.godotString) { a, b ->
-        godot_variant_has_method(a.ptr, b.ptr)
-    }
-
-    fun hasMethod(method: String): Boolean {
-        val godotStr = GodotString(method)
-        return Utils.useContents(godotVariant, godotStr.godotString) { a, b ->
-            godot_variant_has_method(a.ptr, b.ptr)
+    fun call(str: GodotString, args: Array<Variant>): Variant {
+        val newVar = Variant()
+        memScoped {
+            val arr = allocArray<CPointerVar<godot_variant>>(args.size)
+            for((idx,arg) in args.withIndex()){
+                arr[idx] = arg.nativeValue.useContents { this.ptr }
+            }
+            newVar.nativeValue = godot_variant_call(nativeValue, str.nativeValue, arr, args.size, null)
         }
+        return newVar
     }
+
+    fun hasMethod(method: GodotString): Boolean = godot_variant_has_method(nativeValue, method.nativeValue)
+
+    fun hasMethod(method: String): Boolean = godot_variant_has_method(nativeValue, GodotString(method).nativeValue)
 
     override fun equals(other: Any?): Boolean =
-        if(other is Variant) Utils.useContents(godotVariant, other.godotVariant) { a, b ->
-            godot_variant_operator_equal(a.ptr, b.ptr) }
+        if(other is Variant) godot_variant_operator_equal(nativeValue, other.nativeValue)
         else false
 
-    fun hashCompare(other: Variant): Boolean = Utils.useContents(godotVariant, other.godotVariant) { a, b ->
-        godot_variant_hash_compare(a.ptr, b.ptr)
-    }
+    fun hashCompare(other: Variant): Boolean = godot_variant_hash_compare(nativeValue, other.nativeValue)
 
     operator fun compareTo(other: Variant) =
-            if (this == other) 0
-            else if( Utils.useContents(godotVariant, other.godotVariant) { a, b ->
-                        godot_variant_operator_less(a.ptr, b.ptr)
-                    }) -1
-            else 1
+            when {
+                this == other -> 0
+                godot_variant_operator_less(nativeValue, other.nativeValue) -> -1
+                else -> 1
+            }
+
 }
