@@ -159,7 +159,7 @@ class Vector2(var x: Float, var y: Float) : Comparable<Vector2>, CoreType {
         return v;
     }
 
-    fun linear_interpolate(p_b: Vector2, p_t: Float): Vector2 {
+    internal fun linear_interpolate(p_b: Vector2, p_t: Float): Vector2 {
         val res: Vector2 = this
         res.x += (p_t * (p_b.x - x))
         res.y += (p_t * (p_b.y - y))

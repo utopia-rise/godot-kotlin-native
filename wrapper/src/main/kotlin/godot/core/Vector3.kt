@@ -28,7 +28,7 @@ class Vector3(var x: Float, var y: Float, var z: Float) : Comparable<Vector3>, C
         z = arr[2]
     }
 
-    constructor(native: CValue<godot_vector3>) : this() {
+    internal constructor(native: CValue<godot_vector3>) : this() {
         memScoped {
             this@Vector3.setRawMemory(native.ptr)
         }
@@ -221,15 +221,14 @@ class Vector3(var x: Float, var y: Float, var z: Float) : Comparable<Vector3>, C
         return v
     }
 
-    fun vec3_cross(p_a: Vector3, p_b: Vector3): Unit {
-        p_a.cross(p_b)
-    }
-
-
     override fun toString() = "$x, $y, $z"
     //TODO(Do this with godot string)
 }
 
 operator fun Float.times(p_vec: Vector3) =
         p_vec * this
+
+fun vec3_cross(p_a: Vector3, p_b: Vector3): Vector3 =
+        p_a.cross(p_b)
+
 

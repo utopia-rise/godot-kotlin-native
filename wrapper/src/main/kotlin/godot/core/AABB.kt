@@ -1,11 +1,23 @@
 package kotlin.godot.core
 
+<<<<<<< Updated upstream
 import kotlinx.cinterop.*
 
 
 class AABB: CoreType {
     var position: Vector3
     var size: Vector3
+=======
+import godot.godot_aabb
+import godot.godot_basis
+import kotlinx.cinterop.*
+import kotlin.godot.core.Defs.Companion.CMP_EPSILON
+
+class AABB: CoreType {
+
+    lateinit var position: Vector3
+    lateinit var size: Vector3
+>>>>>>> Stashed changes
 
     constructor(p_pos: Vector3, p_size: Vector3) {
         position = p_pos
@@ -15,7 +27,10 @@ class AABB: CoreType {
     constructor() :
             this(Vector3(), Vector3())
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
         return cValuesOf(position[0], position[1], position[2], size[0], size[1], size[2]).getPointer(memScope)
     }
@@ -25,11 +40,28 @@ class AABB: CoreType {
         position[0] = arr[0]
         position[1] = arr[1]
         position[2] = arr[2]
+<<<<<<< Updated upstream
         size[0] = arr[3]
         size[1] = arr[4]
         size[2] = arr[5]
     }
 
+=======
+        size[0]     = arr[3]
+        size[1]     = arr[4]
+        size[2]     = arr[5]
+    }
+
+    internal constructor(native: CValue<godot_aabb>) {
+        memScoped {
+            this@AABB.setRawMemory(native.ptr)
+        }
+    }
+
+    internal constructor(mem: COpaquePointer) {
+        this.setRawMemory(mem)
+    }
+>>>>>>> Stashed changes
 
     fun has_no_area(): Boolean =
             (size.x <= CMP_EPSILON || size.y <= CMP_EPSILON || size.z <= CMP_EPSILON)
@@ -119,7 +151,7 @@ class AABB: CoreType {
         return Vector3()
     }
 
-    fun intersects_convex_shape(p_planes: Plane, p_plane_count: Int): Boolean {
+    fun intersects_convex_shape(p_planes: Array<Plane>, p_plane_count: Int): Boolean {
         val half_extents = size * 0.5f
         val ofs = position + half_extents
 
