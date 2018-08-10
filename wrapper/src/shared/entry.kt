@@ -20,5 +20,4 @@ fun ___godot_wrapper_gdnative_terminate(options: godot_gdnative_terminate_option
 fun ___godot_wrapper_nativescript_init(handle: COpaquePointer) {
     godot_wrapper_nativescript_init(handle)
     main()
-    string_tests()
 }

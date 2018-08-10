@@ -265,7 +265,7 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
         } else if (color.length == 6) {
             alpha = false
         } else {
-            Defs.ERR_PRINT("Invalid Color Code:$p_color")
+            ERR_PRINT("Invalid Color Code:$p_color")
             return Color()
         }
 
@@ -273,7 +273,7 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
         if (alpha) {
             a = _parse_col(color, 0).toInt()
             if (a < 0) {
-                Defs.ERR_PRINT("Invalid Color Code:$p_color")
+                ERR_PRINT("Invalid Color Code:$p_color")
                 return Color()
             }
         }
@@ -283,7 +283,7 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
         val g = _parse_col(color, from + 2).toInt()
         val b = _parse_col(color, from + 4).toInt()
         if (r < 0 || g < 0 || b < 0) {
-            Defs.ERR_PRINT("Invalid Color Code:$p_color")
+            ERR_PRINT("Invalid Color Code:$p_color")
             return Color()
         }
 

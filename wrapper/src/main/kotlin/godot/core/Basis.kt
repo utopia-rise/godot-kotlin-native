@@ -4,9 +4,6 @@ import kotlinx.cinterop.*
 import godot.*
 import kotlin.math.*
 import platform.posix.perror
-import kotlin.godot.core.Defs.Companion.CMP_EPSILON
-import kotlin.godot.core.Defs.Companion.CMP_EPSILON2
-import kotlin.godot.core.Defs.Companion.Math_PI
 
 
 class Basis: CoreType {

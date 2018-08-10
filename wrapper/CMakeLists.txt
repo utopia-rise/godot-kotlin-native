@@ -13,6 +13,7 @@ set(KLIB_NAME godot_wrapper_api)
 set(SHARED_LIB_NAME godot_wrapper)
 
 
+
 if (NOT GODOT_HEADERS_PATH)
     set(GODOT_HEADERS_PATH lib/godot_headers)
 endif()
@@ -25,12 +26,18 @@ cinterop(
 
 konanc_library(
         NAME ${KLIB_NAME}
-        SOURCES src/main/kotlin/godot
+        SOURCES src/main/kotlin
         LIBRARIES ${CINTEROP_LIB_NAME}
 )
 
 konanc_dynamic(
         NAME ${SHARED_LIB_NAME}
-        SOURCES src/main/kotlin/shared
+        SOURCES src/shared
+        LIBRARIES ${CINTEROP_LIB_NAME} ${KLIB_NAME}
+)
+
+konanc_dynamic(
+        NAME ${SHARED_LIB_NAME}_test
+        SOURCES src/shared/entry.kt src/shared/main.kt src/test
         LIBRARIES ${CINTEROP_LIB_NAME} ${KLIB_NAME}
 )

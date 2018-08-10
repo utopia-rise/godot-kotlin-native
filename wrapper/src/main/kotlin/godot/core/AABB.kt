@@ -1,14 +1,9 @@
 package kotlin.godot.core
 
-import kotlinx.cinterop.COpaquePointer
-import kotlinx.cinterop.MemScope
-import kotlin.godot.core.Defs.Companion.CMP_EPSILON
+import kotlinx.cinterop.*
+
 
 class AABB: CoreType {
-    override fun godotPointer(memScope: MemScope): COpaquePointer {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
     var position: Vector3
     var size: Vector3
 
@@ -19,6 +14,22 @@ class AABB: CoreType {
 
     constructor() :
             this(Vector3(), Vector3())
+
+
+    override fun getRawMemory(memScope: MemScope): COpaquePointer {
+        return cValuesOf(position[0], position[1], position[2], size[0], size[1], size[2]).getPointer(memScope)
+    }
+
+    override fun setRawMemory(mem: COpaquePointer) {
+        val arr = mem.reinterpret<FloatVar>()
+        position[0] = arr[0]
+        position[1] = arr[1]
+        position[2] = arr[2]
+        size[0] = arr[3]
+        size[1] = arr[4]
+        size[2] = arr[5]
+    }
+
 
     fun has_no_area(): Boolean =
             (size.x <= CMP_EPSILON || size.y <= CMP_EPSILON || size.z <= CMP_EPSILON)

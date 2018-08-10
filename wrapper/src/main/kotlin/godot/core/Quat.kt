@@ -2,7 +2,6 @@ package kotlin.godot.core
 
 import godot.*
 import kotlinx.cinterop.*
-import kotlin.godot.core.Defs.Companion.CMP_EPSILON
 import kotlin.math.*
 
 class Quat: CoreType {

@@ -2,6 +2,7 @@ package kotlin.godot.core
 
 import godot.*
 import kotlinx.cinterop.*
+import kotlin.godot.Object
 
 class Variant: CoreType {
     internal var nativeValue = cValue<godot_variant> { godot_variant_new_nil(this.ptr) }
@@ -143,6 +144,10 @@ class Variant: CoreType {
 
     fun toInt(): Int = this.toLong().toInt()
 
+    fun toObject(): Object {
+        TODO()
+    }
+
     fun toLong(): Long = godot_variant_as_int(nativeValue)
 
     fun toGodotString(): GodotString = GodotString(godot_variant_as_string(nativeValue))
@@ -182,10 +187,6 @@ class Variant: CoreType {
     fun toVector2(): Vector2 = Vector2(godot_variant_as_vector2(nativeValue))
 
     fun toVector3(): Vector3 = Vector3(godot_variant_as_vector3(nativeValue))
-
-    fun toObject() {
-        TODO()
-    }
 
     fun getType(): Int = godot_variant_get_type(nativeValue).value
 
