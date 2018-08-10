@@ -38,8 +38,8 @@ class PoolColorArray : CoreType {
         }
     }
 
-    fun appendArray(data: GodotArray) {
-        nativeValue = nativeValue.copy { godot_pool_color_array_new_with_array(this.ptr, data.nativeValue) }
+    fun appendArray(data: PoolColorArray) {
+        nativeValue = nativeValue.copy { godot_pool_color_array_append_array(this.ptr, data.nativeValue) }
     }
 
     fun insert(idx: Int, data: Color) {
@@ -52,7 +52,7 @@ class PoolColorArray : CoreType {
         nativeValue = nativeValue.copy { godot_pool_color_array_invert(this.ptr) }
     }
 
-    fun push_back(data: Color) {
+    fun pushBack(data: Color) {
         memScoped {
             nativeValue = nativeValue.copy { godot_pool_color_array_push_back(this.ptr, data.getRawMemory(memScope).reinterpret()) }
         }

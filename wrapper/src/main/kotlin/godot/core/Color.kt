@@ -22,7 +22,7 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
     constructor() :
             this(0f, 0f, 0f, 1f)
 
-    constructor(r: Number, g: Number, b: Number, a: Number) :
+    constructor(r: Number, g: Number, b: Number, a: Number = 1f) :
             this(r.toFloat(), g.toFloat(), b.toFloat(), a.toFloat())
 
     internal constructor(native: CValue<godot_color>) : this() {

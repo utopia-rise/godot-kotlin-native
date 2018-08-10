@@ -32,15 +32,15 @@ class Dictionary: CoreType {
         nativeValue = nativeValue.copy { godot_dictionary_clear(this.ptr) }
     }
 
-    fun empty(): Boolean = godot_dictionary_empty(nativeValue)
+    fun isEmpty(): Boolean = godot_dictionary_empty(nativeValue)
 
     override fun hashCode(): Int = godot_dictionary_hash(nativeValue)
 
     fun size(): Int = godot_dictionary_size(nativeValue)
 
-    fun to_json() : GodotString = GodotString(godot_dictionary_to_json(nativeValue))
+    fun toJson(): GodotString = GodotString(godot_dictionary_to_json(nativeValue))
 
-    fun has_all(keys: GodotArray): Boolean = godot_dictionary_has_all(nativeValue, keys.nativeValue)
+    fun hasAll(keys: GodotArray): Boolean = godot_dictionary_has_all(nativeValue, keys.nativeValue)
 
     fun keys(): GodotArray = GodotArray(godot_dictionary_keys(nativeValue))
 

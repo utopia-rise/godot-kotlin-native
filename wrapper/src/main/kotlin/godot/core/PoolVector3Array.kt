@@ -38,8 +38,8 @@ class PoolVector3Array : CoreType {
         }
     }
 
-    fun appendArray(data: GodotArray) {
-        nativeValue = nativeValue.copy { godot_pool_vector3_array_new_with_array(this.ptr, data.nativeValue) }
+    fun appendArray(data: PoolVector3Array) {
+        nativeValue = nativeValue.copy { godot_pool_vector3_array_append_array(this.ptr, data.nativeValue) }
     }
 
     fun insert(idx: Int, data: Vector3) {
@@ -52,7 +52,7 @@ class PoolVector3Array : CoreType {
         nativeValue = nativeValue.copy { godot_pool_vector3_array_invert(this.ptr) }
     }
 
-    fun push_back(data: Vector3) {
+    fun pushBack(data: Vector3) {
         memScoped {
             nativeValue = nativeValue.copy { godot_pool_vector3_array_push_back(this.ptr, data.getRawMemory(memScope).reinterpret()) }
         }

@@ -36,8 +36,8 @@ class PoolIntArray : CoreType {
         nativeValue = nativeValue.copy { godot_pool_int_array_append(this.ptr, data) }
     }
 
-    fun appendArray(data: GodotArray) {
-        nativeValue = nativeValue.copy { godot_pool_int_array_new_with_array(this.ptr, data.nativeValue) }
+    fun appendArray(data: PoolIntArray) {
+        nativeValue = nativeValue.copy { godot_pool_int_array_append_array(this.ptr, data.nativeValue) }
     }
 
     fun insert(idx: Int, data: Int) {
@@ -48,7 +48,7 @@ class PoolIntArray : CoreType {
         nativeValue = nativeValue.copy { godot_pool_int_array_invert(this.ptr) }
     }
 
-    fun push_back(data: Int) {
+    fun pushBack(data: Int) {
         nativeValue = nativeValue.copy { godot_pool_int_array_push_back(this.ptr, data) }
     }
 

@@ -6,6 +6,8 @@ import kotlin.godot.core.GodotString
 
 class GodotStringTest() {
     fun test() {
+        Godot.print("Testing GodotString")
+        Godot.print("--------------------------------------")
         Godot.print(GodotString("Hello from constructor"))
         Godot.print("Testing constructors for nums")
         Godot.print(GodotString("Scientific: ") + GodotString.numScientific(1234567890.0987654321))
@@ -27,7 +29,7 @@ class GodotStringTest() {
                 else
                     "ERROR")
 
-        Godot.print("Testing begin_with: " +
+        Godot.print("Testing beginWith: " +
                 if(GodotString("begin_with").beginsWith(GodotString("be")) &&
                         GodotString("begin_with").beginsWith(GodotString("begi")) &&
                         GodotString("begin_with").beginsWith(GodotString("begin")) &&
@@ -37,7 +39,7 @@ class GodotStringTest() {
                     "OK"
                 else
                     "ERROR")
-        Godot.print("Testing begin_with_char_array: " +
+        Godot.print("Testing beginWithCharArray: " +
                 if(GodotString("begin_with").beginsWithCharArray("be") &&
                         GodotString("begin_with").beginsWithCharArray("begi") &&
                         GodotString("begin_with").beginsWithCharArray("begin") &&
@@ -65,5 +67,7 @@ class GodotStringTest() {
                     "OK"
                 else
                     "ERROR")
+        Godot.print("--------------------------------------")
+        Godot.print("")
     }
 }

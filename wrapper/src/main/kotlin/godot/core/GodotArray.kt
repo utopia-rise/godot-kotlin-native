@@ -8,7 +8,7 @@ class GodotArray: CoreType {
 
     constructor()
 
-    internal constructor(native: CValue<godot_array>){
+    internal constructor(native: CValue<godot_array>) {
         nativeValue = nativeValue.copy { godot_array_new_copy(this.ptr, native) }
     }
 
@@ -20,6 +20,34 @@ class GodotArray: CoreType {
         nativeValue = nativeValue.copy { godot_array_new_copy(this.ptr, other.nativeValue) }
     }
 
+    constructor(other: PoolByteArray) {
+        nativeValue = nativeValue.copy { godot_array_new_pool_byte_array(this.ptr, other.nativeValue) }
+    }
+
+    constructor(other: PoolIntArray) {
+        nativeValue = nativeValue.copy { godot_array_new_pool_int_array(this.ptr, other.nativeValue) }
+    }
+
+    constructor(other: PoolRealArray) {
+        nativeValue = nativeValue.copy { godot_array_new_pool_real_array(this.ptr, other.nativeValue) }
+    }
+
+    constructor(other: PoolColorArray) {
+        nativeValue = nativeValue.copy { godot_array_new_pool_color_array(this.ptr, other.nativeValue) }
+    }
+
+    constructor(other: PoolVector2Array) {
+        nativeValue = nativeValue.copy { godot_array_new_pool_vector2_array(this.ptr, other.nativeValue) }
+    }
+
+    constructor(other: PoolVector3Array) {
+        nativeValue = nativeValue.copy { godot_array_new_pool_vector3_array(this.ptr, other.nativeValue) }
+    }
+
+    constructor(other: PoolStringArray) {
+        nativeValue = nativeValue.copy { godot_array_new_pool_string_array(this.ptr, other.nativeValue) }
+    }
+
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
         return nativeValue.getPointer(memScope)
     }
@@ -28,8 +56,6 @@ class GodotArray: CoreType {
         nativeValue = mem.reinterpret<godot_array>().pointed.readValue()
     }
 
-
-    //TODO: constructors from Pool*type*Array
 
     fun clear() {
         nativeValue = nativeValue.copy { godot_array_clear(this.ptr) }
@@ -55,14 +81,13 @@ class GodotArray: CoreType {
         nativeValue = nativeValue.copy { godot_array_sort(this.ptr) }
     }
 
-    /* I don't know will this work or not*/
-    fun get(idx: Int): Variant = Variant(godot_array_operator_index(nativeValue, idx)!!.pointed.readValue())
+    operator fun get(idx: Int): Variant = Variant(godot_array_operator_index(nativeValue, idx)!!.pointed.readValue())
 
     fun append(v : Variant) {
         nativeValue = nativeValue.copy { godot_array_append(this.ptr, v.nativeValue) }
     }
 
-    fun count(v: Variant) =  godot_array_count(nativeValue, v.nativeValue)
+    fun count(v: Variant): Int = godot_array_count(nativeValue, v.nativeValue)
 
     fun erase(v : Variant) {
         nativeValue = nativeValue.copy { godot_array_erase(this.ptr, v.nativeValue) }

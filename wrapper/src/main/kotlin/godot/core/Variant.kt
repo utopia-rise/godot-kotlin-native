@@ -9,7 +9,7 @@ class Variant: CoreType {
 
     constructor()
 
-    internal constructor(native: CValue<godot_variant>){
+    internal constructor(native: CValue<godot_variant>) {
         nativeValue = nativeValue.copy { godot_variant_new_copy(this.ptr, native) }
     }
 
@@ -23,6 +23,10 @@ class Variant: CoreType {
 
     constructor(other: Boolean) {
         nativeValue = nativeValue.copy { godot_variant_new_bool(this.ptr, other) }
+    }
+
+    constructor(other: Byte) {
+        nativeValue = nativeValue.copy { godot_variant_new_int(this.ptr, other.toLong()) }
     }
 
     constructor(other: Long) {

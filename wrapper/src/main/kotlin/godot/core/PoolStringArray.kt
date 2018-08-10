@@ -56,11 +56,11 @@ class PoolStringArray : CoreType {
         nativeValue = nativeValue.copy { godot_pool_string_array_invert(this.ptr) }
     }
 
-    fun push_back(data: GodotString) {
+    fun pushBack(data: GodotString) {
         nativeValue = nativeValue.copy { godot_pool_string_array_push_back(this.ptr, data.nativeValue) }
     }
 
-    fun push_back(data: String) {
+    fun pushBack(data: String) {
         nativeValue = nativeValue.copy { godot_pool_string_array_push_back(this.ptr, GodotString(data).nativeValue) }
     }
 
