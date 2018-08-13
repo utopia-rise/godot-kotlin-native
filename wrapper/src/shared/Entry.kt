@@ -1,9 +1,10 @@
 package kotlin.godot.entry
 
 import godot.*
-import kotlin.godot.*
 import konan.internal.CName
 import kotlinx.cinterop.*
+import kotlin.godot.registration.*
+
 import main
 
 
@@ -20,5 +21,7 @@ fun ___godot_wrapper_gdnative_terminate(options: godot_gdnative_terminate_option
 @CName("godot_nativescript_init")
 fun ___godot_wrapper_nativescript_init(handle: COpaquePointer) {
     godot_wrapper_nativescript_init(handle)
+    GodotApiClasses.registerAll()
+    UserDefinedClasses.registerAll()
     main()
 }

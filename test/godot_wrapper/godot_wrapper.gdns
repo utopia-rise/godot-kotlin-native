@@ -4,6 +4,6 @@
 
 [resource]
 
-class_name = "SIMPLE"
+class_name = "TestClass"
 library = ExtResource( 1 )
 

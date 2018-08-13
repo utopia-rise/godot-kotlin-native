@@ -5,14 +5,14 @@ import kotlinx.cinterop.*
 import kotlin.godot.core.CoreType
 
 
-abstract class GodotClass: CoreType {
-    protected lateinit var rawMemory: COpaquePointer
+abstract class GodotObject : CoreType {
+    private lateinit var rawMemory: COpaquePointer
 
 
     internal constructor(mem: COpaquePointer) {
         rawMemory = mem
     }
-    protected constructor(name: String) {
+    constructor(name: String) {
         if (name != "") {
             godot_get_class_constructor(name)?.let {
                 rawMemory = it.reinterpret<CFunction<() -> COpaquePointer>>()()

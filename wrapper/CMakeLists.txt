@@ -4,7 +4,6 @@ project(wrapper Kotlin C)
 
 
 set(CMAKE_EXECUTABLE_SUFFIX "")
-set(CMAKE_SHARED_LIBRARY_PREFIX "lib")
 
 
 
@@ -38,6 +37,6 @@ konanc_dynamic(
 
 konanc_dynamic(
         NAME ${SHARED_LIB_NAME}_test
-        SOURCES src/shared/entry.kt src/shared/main.kt src/test
+        SOURCES src/shared src/test
         LIBRARIES ${CINTEROP_LIB_NAME} ${KLIB_NAME}
 )

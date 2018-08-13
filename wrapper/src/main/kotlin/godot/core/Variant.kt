@@ -13,7 +13,7 @@ class Variant: CoreType {
         nativeValue = nativeValue.copy { godot_variant_new_copy(this.ptr, native) }
     }
 
-    internal constructor(mem: COpaquePointer) {
+    constructor(mem: COpaquePointer) {
         this.setRawMemory(mem)
     }
 
@@ -131,6 +131,12 @@ class Variant: CoreType {
         }
     }
 
+    constructor(other: Object) {
+        memScoped {
+            nativeValue = nativeValue.copy { godot_variant_new_object(this.ptr, other.getRawMemory(memScope)) }
+        }
+    }
+
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
         return nativeValue.getPointer(memScope)
     }
@@ -148,8 +154,9 @@ class Variant: CoreType {
 
     fun toInt(): Int = this.toLong().toInt()
 
-    fun toObject(): Object {
-        TODO()
+    fun <T: Object> toObject(obj: T): T {
+        obj.setRawMemory(godot_variant_as_object(nativeValue)!!)
+        return obj
     }
 
     fun toLong(): Long = godot_variant_as_int(nativeValue)

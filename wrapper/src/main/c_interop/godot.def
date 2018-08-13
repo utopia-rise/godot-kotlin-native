@@ -42,7 +42,7 @@ godot_variant ___godot_wrapper_call_and_get(godot_object *o, void *method_data, 
     typedef void (*ptr)(void*, void*, int, void*);
 
     ptr method = *((ptr *) method_data);
-    godot_variant ret;
+    godot_variant ret = {};
     method((void*) (&ret), user_data, num_args, (void *) args);
 
     return ret;
