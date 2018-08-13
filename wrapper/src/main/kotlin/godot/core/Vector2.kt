@@ -116,19 +116,19 @@ class Vector2(var x: Float, var y: Float) : Comparable<Vector2>, CoreType {
     fun length(): Float =
             sqrt(x * x + y * y)
 
-    fun length_squared(): Float =
+    fun lengthSquared(): Float =
             x * x + y * y
 
-    fun distance_to(p_vector2: Vector2): Float =
+    fun distanceTo(p_vector2: Vector2): Float =
             sqrt((x - p_vector2.x) * (x - p_vector2.x) + (y - p_vector2.y) * (y - p_vector2.y))
 
-    fun distance_squared_to(p_vector2: Vector2): Float =
+    fun distanceSquaredTo(p_vector2: Vector2): Float =
             (x - p_vector2.x) * (x - p_vector2.x) + (y - p_vector2.y) * (y - p_vector2.y)
 
-    fun angle_to(p_vector2: Vector2): Float =
+    fun angleTo(p_vector2: Vector2): Float =
             atan2(cross(p_vector2), dot(p_vector2))
 
-    fun angle_to_point(p_vector2: Vector2): Float =
+    fun angleToPoint(p_vector2: Vector2): Float =
             atan2(y - p_vector2.y, x - p_vector2.x)
 
     fun dot(p_other: Vector2): Float =
@@ -146,7 +146,7 @@ class Vector2(var x: Float, var y: Float) : Comparable<Vector2>, CoreType {
         return v2 * (v1.dot(v2) / v2.dot(v2))
     }
 
-    fun plane_project(p_d: Float, p_vec: Vector2): Vector2 =
+    fun planeProject(p_d: Float, p_vec: Vector2): Vector2 =
             p_vec - this * (dot(p_vec) - p_d)
 
     fun clamped(p_len: Float): Vector2 {
@@ -159,14 +159,14 @@ class Vector2(var x: Float, var y: Float) : Comparable<Vector2>, CoreType {
         return v;
     }
 
-    internal fun linear_interpolate(p_b: Vector2, p_t: Float): Vector2 {
+    internal fun linearInterpolate(p_b: Vector2, p_t: Float): Vector2 {
         val res: Vector2 = this
         res.x += (p_t * (p_b.x - x))
         res.y += (p_t * (p_b.y - y))
         return res
     }
 
-    fun cubic_interpolate(p_b: Vector2, p_pre_a: Vector2, p_post_b: Vector2, p_t: Float): Vector2 {
+    fun cubicInterpolate(p_b: Vector2, p_pre_a: Vector2, p_post_b: Vector2, p_t: Float): Vector2 {
         val p0: Vector2 = p_pre_a
         val p1: Vector2 = this
         val p2: Vector2 = p_b
@@ -194,7 +194,7 @@ class Vector2(var x: Float, var y: Float) : Comparable<Vector2>, CoreType {
     fun angle(): Float =
             atan2(y, x)
 
-    fun set_rotation(p_radians: Float): Unit {
+    fun setRotation(p_radians: Float): Unit {
         x = cos(p_radians)
         y = sin(p_radians)
     }
@@ -204,7 +204,7 @@ class Vector2(var x: Float, var y: Float) : Comparable<Vector2>, CoreType {
 
     fun rotated(p_by: Float): Vector2 {
         var v = Vector2(0f, 0f)
-        v.set_rotation(this.angle() + p_by)
+        v.setRotation(this.angle() + p_by)
         v *= length()
         return v
     }

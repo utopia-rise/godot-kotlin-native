@@ -2,7 +2,6 @@ package kotlin.godot.test
 
 
 fun testAll() {
-    GodotStringTest().test()
     DictionaryTest().test()
     PoolByteArrayTest().test()
     PoolIntArrayTest().test()

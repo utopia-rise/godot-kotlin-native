@@ -1,6 +1,8 @@
 package kotlin.godot.core
 
 import godot.*
+import godot.core.toGDString
+import godot.core.toKString
 import kotlinx.cinterop.*
 
 class PoolStringArray : CoreType {
@@ -32,36 +34,24 @@ class PoolStringArray : CoreType {
         nativeValue = mem.reinterpret<godot_pool_string_array>().pointed.readValue()
     }
 
-    fun append(data: GodotString) {
-        nativeValue = nativeValue.copy { godot_pool_string_array_append(this.ptr, data.nativeValue) }
-    }
-
     fun append(data: String) {
-        nativeValue = nativeValue.copy { godot_pool_string_array_append(this.ptr, GodotString(data).nativeValue) }
+        nativeValue = nativeValue.copy { godot_pool_string_array_append(this.ptr, data.toGDString()) }
     }
 
     fun appendArray(data: GodotArray) {
         nativeValue = nativeValue.copy { godot_pool_string_array_new_with_array(this.ptr, data.nativeValue) }
     }
 
-    fun insert(idx: Int, data: GodotString) {
-        nativeValue = nativeValue.copy { godot_pool_string_array_insert(this.ptr, idx, data.nativeValue) }
-    }
-
     fun insert(idx: Int, data: String) {
-        nativeValue = nativeValue.copy { godot_pool_string_array_insert(this.ptr, idx, GodotString(data).nativeValue) }
+        nativeValue = nativeValue.copy { godot_pool_string_array_insert(this.ptr, idx, data.toGDString()) }
     }
 
     fun invert() {
         nativeValue = nativeValue.copy { godot_pool_string_array_invert(this.ptr) }
     }
 
-    fun pushBack(data: GodotString) {
-        nativeValue = nativeValue.copy { godot_pool_string_array_push_back(this.ptr, data.nativeValue) }
-    }
-
     fun pushBack(data: String) {
-        nativeValue = nativeValue.copy { godot_pool_string_array_push_back(this.ptr, GodotString(data).nativeValue) }
+        nativeValue = nativeValue.copy { godot_pool_string_array_push_back(this.ptr, data.toGDString()) }
     }
 
     fun remove(idx: Int) {
@@ -72,15 +62,11 @@ class PoolStringArray : CoreType {
         nativeValue = nativeValue.copy { godot_pool_string_array_resize(this.ptr, size) }
     }
 
-    fun set(idx: Int, data: GodotString) {
-        nativeValue = nativeValue.copy { godot_pool_string_array_set(this.ptr, idx, data.nativeValue) }
-    }
-
     fun set(idx: Int, data: String) {
-        nativeValue = nativeValue.copy { godot_pool_string_array_set(this.ptr, idx, GodotString(data).nativeValue) }
+        nativeValue = nativeValue.copy { godot_pool_string_array_set(this.ptr, idx, data.toGDString()) }
     }
 
-    operator fun get(idx: Int): GodotString = GodotString(godot_pool_string_array_get(nativeValue, idx))
+    operator fun get(idx: Int): String = godot_pool_string_array_get(nativeValue, idx).toKString()
 
     fun size(): Int = godot_pool_string_array_size(nativeValue)
 }

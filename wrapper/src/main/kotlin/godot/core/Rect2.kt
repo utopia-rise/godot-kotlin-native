@@ -1,7 +1,6 @@
 package kotlin.godot.core
 
 import godot.godot_rect2
-import godot.godot_transform2d
 import kotlinx.cinterop.*
 
 
@@ -42,12 +41,17 @@ class Rect2: CoreType {
         size = p_size
     }
 
-    fun get_pos(): Vector2 = pos
-    fun set_pos(p_pos: Vector2) {pos = p_pos}
-    fun get_size(): Vector2 = size
-    fun set_size(p_size: Vector2) {size = p_size}
+    fun getPos(): Vector2 = pos
+    fun setPos(p_pos: Vector2) {
+        pos = p_pos
+    }
 
-    fun get_area(): Float = size.width * size.height
+    fun getSize(): Vector2 = size
+    fun setSize(p_size: Vector2) {
+        size = p_size
+    }
+
+    fun getArea(): Float = size.width * size.height
 
     fun intersects(p_rect: Rect2): Boolean =
             when {
@@ -63,10 +67,10 @@ class Rect2: CoreType {
                     ((p_rect.pos.x+p_rect.size.x)<(pos.x+size.x)) &&
                     ((p_rect.pos.y+p_rect.size.y)<(pos.y+size.y))
 
-    fun has_no_area(): Boolean =
+    fun hasNoArea(): Boolean =
             size.x<=0 || size.y<=0
 
-    fun has_point(p_point: Vector2): Boolean =
+    fun hasPoint(p_point: Vector2): Boolean =
             when {
                 p_point.x < pos.x           -> false
                 p_point.y < pos.y           -> false
@@ -75,7 +79,7 @@ class Rect2: CoreType {
                 else                        -> true
             }
 
-    fun no_area(): Boolean =
+    fun noArea(): Boolean =
             size.width<=0 || size.height<=0
 
     override fun equals(other: Any?): Boolean =
@@ -95,11 +99,11 @@ class Rect2: CoreType {
 
     fun expand(p_vector: Vector2): Rect2 {
         val r = this
-        r.expand_to(p_vector)
+        r.expandTo(p_vector)
         return r
     }
 
-    fun expand_to(p_vector: Vector2) {
+    fun expandTo(p_vector: Vector2) {
         val begin = pos
         val end = pos + size
 
@@ -123,7 +127,7 @@ class Rect2: CoreType {
     private fun MIN(n1: Float, n2: Float) =
             if (n1 < n2) n1 else n2
 
-    fun distance_to(p_point: Vector2): Float {
+    fun distanceTo(p_point: Vector2): Float {
         var dist = 1e20f
         if (p_point.x < pos.x) {
             dist = MIN(dist,pos.x-p_point.x)
@@ -178,7 +182,7 @@ class Rect2: CoreType {
     override fun toString(): String =
             pos.toString() + ", " + size.toString()
 
-    fun intersects_segment(p_from: Vector2, p_to: Vector2, r_pos: Vector2?, r_normal: Vector2?): Triple<Boolean, Vector2?, Vector2?> {
+    fun intersectsSegment(p_from: Vector2, p_to: Vector2, r_pos: Vector2?, r_normal: Vector2?): Triple<Boolean, Vector2?, Vector2?> {
         var min = 0f
         var max = 1f
         var axis = 0
@@ -234,7 +238,7 @@ class Rect2: CoreType {
         return Triple(true, pos, normal)
     }
 
-    fun intersects_transformed(p_xform: Transform2D, p_rect: Rect2): Boolean {
+    fun intersectsTransformed(p_xform: Transform2D, p_rect: Rect2): Boolean {
         val xf_points = arrayOf(p_xform.xform(p_rect.pos),
                 p_xform.xform(Vector2(p_rect.pos.x+p_rect.size.x,p_rect.pos.y)),
                 p_xform.xform(Vector2(p_rect.pos.x,p_rect.pos.y+p_rect.size.y)),

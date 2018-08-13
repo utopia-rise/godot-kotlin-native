@@ -1,6 +1,5 @@
 package kotlin.godot.core
 
-import godot.godot_plane
 import godot.godot_transform
 import kotlinx.cinterop.*
 
@@ -53,7 +52,7 @@ class Transform: CoreType {
         origin[2] = arr[11]
     }
 
-    fun inverse_xform(t: Transform): Transform {
+    fun inverseXform(t: Transform): Transform {
         val v = t.origin - origin
         return Transform(basis.transpose_xform(t.basis), basis.xform(v))
     }
@@ -78,7 +77,7 @@ class Transform: CoreType {
                     basis[1].dot(p_vector)+origin.y,
                     basis[2].dot(p_vector)+origin.z)
 
-    fun xform_inv(p_vector: Vector3): Vector3 {
+    fun xformInv(p_vector: Vector3): Vector3 {
         val v = p_vector - origin
         return Vector3(
                 (basis[0][0]*v.x ) + ( basis[1][0]*v.y ) + ( basis[2][0]*v.z ),
@@ -99,11 +98,11 @@ class Transform: CoreType {
         return Plane( normal, normal.dot(point) )
     }
 
-    fun xform_inv(p_plane: Plane): Plane {
+    fun xformInv(p_plane: Plane): Plane {
         var point = p_plane.normal * p_plane.d
         var point_dir = point + p_plane.normal
-        point = xform_inv(point)
-        point_dir = xform_inv(point_dir)
+        point = xformInv(point)
+        point_dir = xformInv(point_dir)
 
         val normal = point_dir - point
         normal.normalize()
@@ -119,17 +118,17 @@ class Transform: CoreType {
 
         val new_aabb = AABB()
         new_aabb.position = pos
-        new_aabb.expand_to( pos+x )
-        new_aabb.expand_to( pos+y )
-        new_aabb.expand_to( pos+z )
-        new_aabb.expand_to( pos+x+y )
-        new_aabb.expand_to( pos+x+z )
-        new_aabb.expand_to( pos+y+z )
-        new_aabb.expand_to( pos+x+y+z )
+        new_aabb.expandTo(pos + x)
+        new_aabb.expandTo(pos + y)
+        new_aabb.expandTo(pos + z)
+        new_aabb.expandTo(pos + x + y)
+        new_aabb.expandTo(pos + x + z)
+        new_aabb.expandTo(pos + y + z)
+        new_aabb.expandTo(pos + x + y + z)
         return new_aabb
     }
 
-    fun xform_inv(p_aabb: AABB): AABB {
+    fun xformInv(p_aabb: AABB): AABB {
         val vertices: Array<Vector3> =
                 arrayOf(Vector3(p_aabb.position.x+p_aabb.size.x,	p_aabb.position.y+p_aabb.size.y,	p_aabb.position.z+p_aabb.size.z),
                         Vector3(p_aabb.position.x+p_aabb.size.x,	p_aabb.position.y+p_aabb.size.y,	p_aabb.position.z),
@@ -141,21 +140,21 @@ class Transform: CoreType {
                         Vector3(p_aabb.position.x,	p_aabb.position.y,		p_aabb.position.z))
 
         val ret = AABB()
-        ret.position = xform_inv(vertices[0])
+        ret.position = xformInv(vertices[0])
         for (i in 1..7)
-            ret.expand_to(xform_inv(vertices[i]))
+            ret.expandTo(xformInv(vertices[i]))
 
         return ret
     }
 
-    fun affine_invert() {
+    fun affineInvert() {
         basis.invert()
         origin = basis.xform(-origin)
     }
 
-    fun affine_inverse(): Transform {
+    fun affineInverse(): Transform {
         val ret = this
-        ret.affine_invert()
+        ret.affineInvert()
         return ret
     }
 
@@ -179,17 +178,17 @@ class Transform: CoreType {
     fun rotated(p_axis: Vector3, p_phi: Float): Transform =
             Transform(Basis( p_axis, p_phi ), Vector3()) * this
 
-    fun rotate_basis(p_axis: Vector3, p_phi: Float) {
+    fun rotateBasis(p_axis: Vector3, p_phi: Float) {
         basis.rotate(p_axis, p_phi)
     }
 
-    fun looking_at(p_target: Vector3, p_up: Vector3): Transform {
+    fun lookingAt(p_target: Vector3, p_up: Vector3): Transform {
         val t = this
-        t.set_look_at(origin, p_target, p_up)
+        t.setLookAt(origin, p_target, p_up)
         return t
     }
 
-    fun set_look_at(p_eye: Vector3, p_target: Vector3, p_up: Vector3) {
+    fun setLookAt(p_eye: Vector3, p_target: Vector3, p_up: Vector3) { //TODO: Refactor
         var v_x: Vector3
         var v_y: Vector3
         var v_z: Vector3
@@ -208,7 +207,7 @@ class Transform: CoreType {
         origin = p_eye
     }
 
-    fun interpolate_with(p_transform: Transform, p_c: Float): Transform {
+    fun interpolateWith(p_transform: Transform, p_c: Float): Transform {
         val src_scale = basis.get_scale()
         val src_rot = Quat(basis)
         val src_loc = origin
@@ -219,8 +218,8 @@ class Transform: CoreType {
 
         val dst = Transform()
         dst.basis= Basis(src_rot.slerp(dst_rot,p_c))
-        dst.basis.scale(src_scale.linear_interpolate(dst_scale,p_c))
-        dst.origin=src_loc.linear_interpolate(dst_loc,p_c)
+        dst.basis.scale(src_scale.linearInterpolate(dst_scale, p_c))
+        dst.origin = src_loc.linearInterpolate(dst_loc, p_c)
 
         return dst
     }
@@ -236,7 +235,7 @@ class Transform: CoreType {
         return t
     }
 
-    fun scale_basis(p_scale: Vector3) {
+    fun scaleBasis(p_scale: Vector3) {
         basis.scale(p_scale)
     }
 
@@ -281,8 +280,13 @@ class Transform: CoreType {
         return basis.toString() + " - " + origin.toString()
     }
 
-    fun get_basis(): Basis = basis
-    fun set_basis(p_basis: Basis) {basis = p_basis}
-    fun get_origin(): Vector3 = origin
-    fun set_origin(p_origin: Vector3) {origin = p_origin}
+    fun getBasis(): Basis = basis
+    fun setBasis(p_basis: Basis) {
+        basis = p_basis
+    }
+
+    fun getOrigin(): Vector3 = origin
+    fun setOrigin(p_origin: Vector3) {
+        origin = p_origin
+    }
 }

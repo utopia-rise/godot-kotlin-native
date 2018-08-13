@@ -229,7 +229,7 @@ class Basis: CoreType {
         // FIXME: We eventually need a proper polar decomposition.
         // As a cheap workaround until then, to ensure that R is a proper rotation matrix with determinant +1
         // (such that it can be represented by a Quat or Euler angles), we absorb the sign flip into the scaling matrix.
-        // As such, it works in conjuction with get_rotation().
+        // As such, it works in conjuction with getRotation().
         val det_sign: Float = if (determinant() > 0) 1f else -1f
         return det_sign*Vector3(
                 Vector3(this[0][0],this[1][0],this[2][0]).length(),

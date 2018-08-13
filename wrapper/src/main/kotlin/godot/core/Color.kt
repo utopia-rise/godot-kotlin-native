@@ -2,7 +2,6 @@ package kotlin.godot.core
 
 import godot.*
 import kotlinx.cinterop.*
-import kotlin.godot.core.GodotString
 import kotlin.math.*
 
 class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Comparable<Color>, CoreType {

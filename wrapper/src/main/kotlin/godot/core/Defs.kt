@@ -1,7 +1,6 @@
 package kotlin.godot.core
 
 import platform.posix.perror
-import kotlin.godot.core.GodotString
 import kotlin.godot.core.Godot
 
 

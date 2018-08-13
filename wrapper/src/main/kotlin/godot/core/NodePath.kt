@@ -1,10 +1,12 @@
 package kotlin.godot.core
 
 import godot.*
+import godot.core.toGDString
+import godot.core.toKString
 import kotlinx.cinterop.*
 
 class NodePath : CoreType {
-    internal var nativeValue = cValue<godot_node_path> { godot_node_path_new(this.ptr, GodotString("").nativeValue) }
+    internal var nativeValue = cValue<godot_node_path> { godot_node_path_new(this.ptr, String().toGDString()) }
 
     constructor()
 
@@ -16,16 +18,12 @@ class NodePath : CoreType {
         this.setRawMemory(mem)
     }
 
-    constructor(other: GodotString){
-        nativeValue = nativeValue.copy { godot_node_path_new(this.ptr, other.nativeValue) }
-    }
-
     constructor(other: String){
-        nativeValue = nativeValue.copy { godot_node_path_new(this.ptr, GodotString(other).nativeValue) }
+        nativeValue = nativeValue.copy { godot_node_path_new(this.ptr, other.toGDString()) }
     }
 
     constructor(other: NodePath){
-        nativeValue = nativeValue.copy { godot_node_path_new(this.ptr, other.toGodotString().nativeValue) }
+        nativeValue = nativeValue.copy { godot_node_path_new(this.ptr, other.toString().toGDString()) }
     }
 
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
@@ -36,37 +34,13 @@ class NodePath : CoreType {
         nativeValue = mem.reinterpret<godot_node_path>().pointed.readValue()
     }
 
-    fun toGodotString() : GodotString {
-        val newString = GodotString()
-        newString.nativeValue = godot_node_path_as_string(nativeValue)
-        return newString
-    }
+    override fun toString(): String = godot_node_path_as_string(nativeValue).toKString()
 
-    override fun toString() : String {
-        return this.toGodotString().toString()
-    }
-
-    fun getNameAsGodotString(idx: Int): GodotString{
-        val newString = GodotString()
-        newString.nativeValue = godot_node_path_get_name(nativeValue, idx)
-        return newString
-    }
-
-    fun getNameAsString(idx: Int): String{
-        return this.getNameAsGodotString(idx).toString()
-    }
+    fun getName(idx: Int): String = godot_node_path_get_name(nativeValue, idx).toKString()
 
     fun getNameCount(): Int = godot_node_path_get_name_count(nativeValue)
 
-    fun getSubnameAsGodotString(idx: Int): GodotString{
-        val newString = GodotString()
-        newString.nativeValue = godot_node_path_get_subname(nativeValue, idx)
-        return newString
-    }
-
-    fun getSubnameAsString(idx: Int): String{
-        return this.getSubnameAsGodotString(idx).toString()
-    }
+    fun getSubname(idx: Int): String = godot_node_path_get_subname(nativeValue, idx).toKString()
 
     fun getSubnameCount(): Int = godot_node_path_get_subname_count(nativeValue)
 

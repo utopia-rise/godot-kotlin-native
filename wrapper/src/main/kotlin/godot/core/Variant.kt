@@ -1,6 +1,8 @@
 package kotlin.godot.core
 
 import godot.*
+import godot.core.toGDString
+import godot.core.toKString
 import kotlinx.cinterop.*
 import kotlin.godot.Object
 
@@ -50,11 +52,7 @@ class Variant: CoreType {
     }
 
     constructor(other: String) {
-        nativeValue = nativeValue.copy { godot_variant_new_string(this.ptr, GodotString(other).nativeValue) }
-    }
-
-    constructor(other: GodotString) {
-        nativeValue = nativeValue.copy { godot_variant_new_string(this.ptr, other.nativeValue) }
+        nativeValue = nativeValue.copy { godot_variant_new_string(this.ptr, other.toGDString()) }
     }
 
     constructor(other: GodotArray) {
@@ -131,6 +129,36 @@ class Variant: CoreType {
         }
     }
 
+    constructor(other: AABB) {
+        memScoped {
+            nativeValue = nativeValue.copy { godot_variant_new_aabb(this.ptr, other.getRawMemory(memScope).reinterpret()) }
+        }
+    }
+
+    constructor(other: Transform) {
+        memScoped {
+            nativeValue = nativeValue.copy { godot_variant_new_transform(this.ptr, other.getRawMemory(memScope).reinterpret()) }
+        }
+    }
+
+    constructor(other: Transform2D) {
+        memScoped {
+            nativeValue = nativeValue.copy { godot_variant_new_transform2d(this.ptr, other.getRawMemory(memScope).reinterpret()) }
+        }
+    }
+
+    constructor(other: Rect2) {
+        memScoped {
+            nativeValue = nativeValue.copy { godot_variant_new_rect2(this.ptr, other.getRawMemory(memScope).reinterpret()) }
+        }
+    }
+
+    constructor(other: Plane) {
+        memScoped {
+            nativeValue = nativeValue.copy { godot_variant_new_plane(this.ptr, other.getRawMemory(memScope).reinterpret()) }
+        }
+    }
+
     constructor(other: Object) {
         memScoped {
             nativeValue = nativeValue.copy { godot_variant_new_object(this.ptr, other.getRawMemory(memScope)) }
@@ -145,9 +173,6 @@ class Variant: CoreType {
         nativeValue = mem.reinterpret<godot_variant>().pointed.readValue()
     }
 
-
-    //TODO: Other casts + other constructors
-
     fun booleanize(): Boolean = godot_variant_booleanize(nativeValue)
 
     fun toBoolean(): Boolean = godot_variant_as_bool(nativeValue)
@@ -161,9 +186,7 @@ class Variant: CoreType {
 
     fun toLong(): Long = godot_variant_as_int(nativeValue)
 
-    fun toGodotString(): GodotString = GodotString(godot_variant_as_string(nativeValue))
-
-    fun toKString(): String = this.toGodotString().toString()
+    fun toString(): String = godot_variant_as_string(nativeValue).toKString()
 
     fun toDouble(): Double = godot_variant_as_real(nativeValue)
 
@@ -199,23 +222,31 @@ class Variant: CoreType {
 
     fun toVector3(): Vector3 = Vector3(godot_variant_as_vector3(nativeValue))
 
+    fun toAABB(): AABB = AABB(godot_variant_as_aabb(nativeValue))
+
+    fun toPlane(): Plane = Plane(godot_variant_as_plane(nativeValue))
+
+    fun toRect2(): Rect2 = Rect2(godot_variant_as_rect2(nativeValue))
+
+    fun toTransform(): Transform = Transform(godot_variant_as_transform(nativeValue))
+
+    fun toTransform2D(): Transform2D = Transform2D(godot_variant_as_transform2d(nativeValue))
+
     fun getType(): Int = godot_variant_get_type(nativeValue).value
 
-    fun call(str: GodotString, args: Array<Variant>): Variant {
+    fun call(str: String, args: Array<Variant>): Variant {
         val newVar = Variant()
         memScoped {
             val arr = allocArray<CPointerVar<godot_variant>>(args.size)
             for((idx,arg) in args.withIndex()){
                 arr[idx] = arg.nativeValue.useContents { this.ptr }
             }
-            newVar.nativeValue = godot_variant_call(nativeValue, str.nativeValue, arr, args.size, null)
+            newVar.nativeValue = godot_variant_call(nativeValue, str.toGDString(), arr, args.size, null)
         }
         return newVar
     }
 
-    fun hasMethod(method: GodotString): Boolean = godot_variant_has_method(nativeValue, method.nativeValue)
-
-    fun hasMethod(method: String): Boolean = godot_variant_has_method(nativeValue, GodotString(method).nativeValue)
+    fun hasMethod(method: String): Boolean = godot_variant_has_method(nativeValue, method.toGDString())
 
     override fun equals(other: Any?): Boolean =
         if(other is Variant) godot_variant_operator_equal(nativeValue, other.nativeValue)

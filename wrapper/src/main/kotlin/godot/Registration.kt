@@ -42,5 +42,5 @@ fun <T: Object> prepareInvocation(ret: COpaquePointer?, objRaw: COpaquePointer?,
     }
 }
 fun noMethodToInvoke(name: String, className: String, numArgs: Int) {
-    Godot.print_error("No such method \"$name\" in $className with $numArgs arguments!", name, "", 0) // TODO: ???
+    Godot.printError("No such method \"$name\" in $className with $numArgs arguments!", name, "", 0) // TODO: ???
 }

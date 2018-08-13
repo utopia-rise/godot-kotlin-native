@@ -112,12 +112,12 @@ class Vector3(var x: Float, var y: Float, var z: Float) : Comparable<Vector3>, C
                     (z * b.x) - (x * b.z),
                     (x * b.y) - (y * b.x))
 
-    fun linear_interpolate(p_b: Vector3, p_t: Float): Vector3 =
+    fun linearInterpolate(p_b: Vector3, p_t: Float): Vector3 =
             Vector3(x + (p_t * (p_b.x - x)),
                     y + (p_t * (p_b.y - y)),
                     z + (p_t * (p_b.z - z)))
 
-    fun cubic_interpolate(b: Vector3, pre_a: Vector3, post_b: Vector3, t: Float): Vector3 {
+    fun cubicInterpolate(b: Vector3, pre_a: Vector3, post_b: Vector3, t: Float): Vector3 {
         val p0: Vector3 = pre_a
         val p1: Vector3 = this
         val p2: Vector3 = b
@@ -135,14 +135,14 @@ class Vector3(var x: Float, var y: Float, var z: Float) : Comparable<Vector3>, C
     fun length(): Float =
             sqrt(x * x + y * y + z * z)
 
-    fun length_squared(): Float =
+    fun lengthSquared(): Float =
             x * x + y * y + z * z
 
-    fun distance_squared_to(b: Vector3): Float =
+    fun distanceSquaredTo(b: Vector3): Float =
             (b - this).length()
 
-    fun distance_to(b: Vector3): Float =
-            (b - this).length_squared()
+    fun distanceTo(b: Vector3): Float =
+            (b - this).lengthSquared()
 
     fun dot(b: Vector3): Float =
             x * b.x + y * b.y + z * b.z
@@ -153,7 +153,7 @@ class Vector3(var x: Float, var y: Float, var z: Float) : Comparable<Vector3>, C
     fun inverse(): Vector3 =
             Vector3(1f / x, 1f / y, 1f / z)
 
-    fun max_axis(): Int =
+    fun maxAxis(): Int =
             if (x < y)
                 if (y < z) 2
                 else 1
@@ -161,7 +161,7 @@ class Vector3(var x: Float, var y: Float, var z: Float) : Comparable<Vector3>, C
                 if (x < z) 2
                 else 0
 
-    fun min_axis(): Int =
+    fun minAxis(): Int =
             if (x < y)
                 if (x < z) 0
                 else 2
@@ -228,7 +228,7 @@ class Vector3(var x: Float, var y: Float, var z: Float) : Comparable<Vector3>, C
 operator fun Float.times(p_vec: Vector3) =
         p_vec * this
 
-fun vec3_cross(p_a: Vector3, p_b: Vector3): Vector3 =
+fun vec3Cross(p_a: Vector3, p_b: Vector3): Vector3 =
         p_a.cross(p_b)
 
 

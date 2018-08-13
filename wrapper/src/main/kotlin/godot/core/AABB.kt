@@ -46,20 +46,19 @@ class AABB: CoreType {
     }
 
 
-
-    fun has_no_area(): Boolean =
+    fun hasNoArea(): Boolean =
             (size.x <= CMP_EPSILON || size.y <= CMP_EPSILON || size.z <= CMP_EPSILON)
 
-    fun has_no_surface(): Boolean =
+    fun hasNoSurface(): Boolean =
             (size.x <= CMP_EPSILON && size.y <= CMP_EPSILON && size.z <= CMP_EPSILON)
 
-    fun get_position(): Vector3 = position
-    fun set_position(p_position: Vector3) {
+    fun getPosition(): Vector3 = position
+    fun setPosition(p_position: Vector3) {
         position = p_position
     }
 
-    fun get_size(): Vector3 = size
-    fun set_size(p_size: Vector3) {
+    fun getSize(): Vector3 = size
+    fun setSize(p_size: Vector3) {
         size = p_size
     }
 
@@ -80,7 +79,7 @@ class AABB: CoreType {
         return true
     }
 
-    fun intersects_inclusive(p_aabb: AABB): Boolean {
+    fun intersectsInclusive(p_aabb: AABB): Boolean {
         if (position.x > (p_aabb.position.x + p_aabb.size.x))
             return false
         if ((position.x + size.x) < p_aabb.position.x)
@@ -110,7 +109,7 @@ class AABB: CoreType {
                 (src_max.z > dst_max.z))
     }
 
-    fun get_support(p_normal: Vector3): Vector3 {
+    fun getSupport(p_normal: Vector3): Vector3 {
         val half_extents = size * 0.5f
         val ofs = position + half_extents
 
@@ -121,7 +120,7 @@ class AABB: CoreType {
         ) + ofs
     }
 
-    fun get_endpoint(p_point: Int): Vector3 {
+    fun getEndpoint(p_point: Int): Vector3 {
         when (p_point) {
             0 -> return Vector3(position.x, position.y, position.z);
             1 -> return Vector3(position.x, position.y, position.z + size.z);
@@ -135,7 +134,7 @@ class AABB: CoreType {
         return Vector3()
     }
 
-    fun intersects_convex_shape(p_planes: Array<Plane>, p_plane_count: Int): Boolean {
+    fun intersectsConvexShape(p_planes: Array<Plane>, p_plane_count: Int): Boolean {
         val half_extents = size * 0.5f
         val ofs = position + half_extents
 
@@ -147,13 +146,13 @@ class AABB: CoreType {
                     if (p.normal.z > 0) -half_extents.z else half_extents.z
             )
             point += ofs
-            if (p.is_point_over(point))
+            if (p.isPointOver(point))
                 return false
         }
         return true
     }
 
-    fun has_point(p_point: Vector3): Boolean {
+    fun hasPoint(p_point: Vector3): Boolean {
         if (p_point.x < position.x)
             return false
         if (p_point.y < position.y)
@@ -170,7 +169,7 @@ class AABB: CoreType {
         return true
     }
 
-    fun expand_to(p_vector: Vector3) {
+    fun expandTo(p_vector: Vector3) {
         val begin = position
         val end = position + size
 
@@ -192,16 +191,16 @@ class AABB: CoreType {
         size = end - begin
     }
 
-    fun project_range_in_plane(p_plane: Plane): Pair<Float, Float> {
+    fun projectRangeInPlane(p_plane: Plane): Pair<Float, Float> {
         val half_extents = size * 0.5f
         val center = position + half_extents
 
         val length: Float = p_plane.normal.abs().dot(half_extents)
-        val distance: Float = p_plane.distance_to(center)
+        val distance: Float = p_plane.distanceTo(center)
         return Pair(distance - length, distance + length)
     }
 
-    fun get_longest_axis_size(): Float {
+    fun getLongestAxisSize(): Float {
         var max_size = size.x
         if (size.y > max_size) {
             max_size = size.y
@@ -212,7 +211,7 @@ class AABB: CoreType {
         return max_size
     }
 
-    fun get_shortest_axis_size(): Float {
+    fun getShortestAxisSize(): Float {
         var min_size = size.x
         if (size.y < min_size) {
             min_size = size.y
@@ -225,7 +224,7 @@ class AABB: CoreType {
         return min_size
     }
 
-    fun smits_intersect_rat(from: Vector3, dir: Vector3, t0: Float, t1: Float): Boolean {
+    fun smitsIntersectRat(from: Vector3, dir: Vector3, t0: Float, t1: Float): Boolean {
         val divx = 1f / dir.x
         val divy = 1f / dir.y
         val divz = 1f / dir.z
@@ -274,7 +273,7 @@ class AABB: CoreType {
         return ((tmin < t1) && (tmax > t0))
     }
 
-    fun grow_by(p_amount: Float) {
+    fun growBy(p_amount: Float) {
         position.x -= p_amount
         position.y -= p_amount
         position.z -= p_amount
@@ -283,7 +282,7 @@ class AABB: CoreType {
         size.z += 2f * p_amount
     }
 
-    fun get_area(): Float =
+    fun getArea(): Float =
             size.x * size.y * size.z
 
     override fun equals(other: Any?): Boolean =
@@ -292,7 +291,7 @@ class AABB: CoreType {
                 else -> false
             }
 
-    fun merge_with(p_aabb: AABB) {
+    fun mergeWith(p_aabb: AABB) {
         val beg_1 = position
         val beg_2 = p_aabb.position
         val end_1 = Vector3(size.x, size.y, size.z) + beg_1
@@ -345,7 +344,7 @@ class AABB: CoreType {
         return AABB(min, max - min)
     }
 
-    fun intersects_ray(p_from: Vector3, p_dir: Vector3, r_clip: Vector3?, r_normal: Vector3?): Triple<Boolean, Vector3?, Vector3?> {
+    fun intersectsRay(p_from: Vector3, p_dir: Vector3, r_clip: Vector3?, r_normal: Vector3?): Triple<Boolean, Vector3?, Vector3?> {
         var c1 = Vector3()
         var c2 = Vector3()
         val end = position + size
@@ -387,7 +386,7 @@ class AABB: CoreType {
         return Triple(true, ret1, ret2)
     }
 
-    fun intersects_segment(p_from: Vector3, p_to: Vector3, r_clip: Vector3?, r_normal: Vector3?): Triple<Boolean, Vector3?, Vector3?> {
+    fun intersectsSegment(p_from: Vector3, p_to: Vector3, r_clip: Vector3?, r_normal: Vector3?): Triple<Boolean, Vector3?, Vector3?> {
         var min = 0f
         var max = 0f
         var axis = 0
@@ -447,7 +446,7 @@ class AABB: CoreType {
         return Triple(true, ret1, ret2)
     }
 
-    fun intersects_plane(p_plane: Plane): Boolean {
+    fun intersectsPlane(p_plane: Plane): Boolean {
         val points = arrayOf(Vector3(position.x, position.y, position.z),
                 Vector3(position.x, position.y, position.z + size.z),
                 Vector3(position.x, position.y + size.y, position.z),
@@ -460,7 +459,7 @@ class AABB: CoreType {
         var over = false
         var under = false
         for (i in 0..7) {
-            if (p_plane.distance_to(points[i]) > 0)
+            if (p_plane.distanceTo(points[i]) > 0)
                 over = true
             else
                 under = true
@@ -469,7 +468,7 @@ class AABB: CoreType {
         return under && over
     }
 
-    fun get_longest_axis(): Vector3 {
+    fun getLongestAxis(): Vector3 {
         var axis = Vector3(1f, 0f, 0f)
         var max_size = size.x
 
@@ -486,7 +485,7 @@ class AABB: CoreType {
         return axis
     }
 
-    fun get_longest_axis_index(): Int {
+    fun getLongestAxisIndex(): Int {
         var axis = 0
         var max_size = size.x
 
@@ -503,7 +502,7 @@ class AABB: CoreType {
         return axis
     }
 
-    fun get_shortest_axis(): Vector3 {
+    fun getShortestAxis(): Vector3 {
         var axis = Vector3(1f, 0f, 0f)
         var min_size = size.x
 
@@ -520,7 +519,7 @@ class AABB: CoreType {
         return axis
     }
 
-    fun get_shortest_axis_index(): Int {
+    fun getShortestAxisIndex(): Int {
         var axis = 0
         var max_size = size.x
 
@@ -539,23 +538,23 @@ class AABB: CoreType {
 
     fun merge(p_with: AABB): AABB {
         val aabb = this
-        aabb.merge_with(p_with)
+        aabb.mergeWith(p_with)
         return aabb
     }
 
     fun expand(p_vector: Vector3): AABB {
         val aabb = this
-        aabb.expand_to(p_vector)
+        aabb.expandTo(p_vector)
         return aabb
     }
 
     fun grow(p_by: Float): AABB {
         val aabb = this
-        aabb.grow_by(p_by)
+        aabb.growBy(p_by)
         return aabb
     }
 
-    fun get_edge(p_edge: Int): Pair<Vector3?, Vector3?> {
+    fun getEdge(p_edge: Int): Pair<Vector3?, Vector3?> {
         val r_from: Vector3?
         val r_to: Vector3?
         when (p_edge) {

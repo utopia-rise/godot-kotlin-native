@@ -2,6 +2,7 @@ package kotlin.godot.core
 
 import kotlinx.cinterop.*
 import godot.*
+import godot.core.toKString
 
 class Dictionary: CoreType {
     var nativeValue = cValue<godot_dictionary> { godot_dictionary_new(this.ptr) }
@@ -38,7 +39,7 @@ class Dictionary: CoreType {
 
     fun size(): Int = godot_dictionary_size(nativeValue)
 
-    fun toJson(): GodotString = GodotString(godot_dictionary_to_json(nativeValue))
+    fun toJson(): String = godot_dictionary_to_json(nativeValue).toKString()
 
     fun hasAll(keys: GodotArray): Boolean = godot_dictionary_has_all(nativeValue, keys.nativeValue)
 
@@ -50,7 +51,6 @@ class Dictionary: CoreType {
 
     fun has(key: Variant): Boolean = godot_dictionary_has(nativeValue, key.nativeValue)
 
-    /* I don't know will this work or not*/
     fun get(key: Variant) : Variant = Variant(godot_dictionary_operator_index(nativeValue, key.nativeValue)!!.pointed.readValue())
 
 

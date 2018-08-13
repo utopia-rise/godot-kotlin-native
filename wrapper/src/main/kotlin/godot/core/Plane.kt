@@ -63,15 +63,15 @@ class Plane: CoreType {
         d = arr[3]
     }
 
-    fun set_normal(p_normal: Vector3) {
+    fun setNormal(p_normal: Vector3) {
         this.normal = p_normal
     }
 
-    fun get_normal(): Vector3 =
+    fun getNormal(): Vector3 =
             normal
 
     fun project(p_point: Vector3): Vector3 =
-            p_point - normal * distance_to(p_point)
+            p_point - normal * distanceTo(p_point)
 
     fun normalize() {
         val l = normal.length()
@@ -90,10 +90,10 @@ class Plane: CoreType {
         return p
     }
 
-    fun get_any_point(): Vector3 =
-            get_normal() * d
+    fun getAnyPoint(): Vector3 =
+            getNormal() * d
 
-    fun get_any_perpendicular_normal(): Vector3 {
+    fun getAnyPerpendicularNormal(): Vector3 {
         val p1 = Vector3(1, 0, 0)
         val p2 = Vector3(0, 1, 0)
         var p: Vector3
@@ -109,27 +109,27 @@ class Plane: CoreType {
         return p
     }
 
-    fun intersect_3(p_plane1: Plane, p_plane2: Plane, r_result: Vector3?): Pair<Boolean, Vector3?> {
+    fun intersect3(p_plane1: Plane, p_plane2: Plane, r_result: Vector3?): Pair<Boolean, Vector3?> {
         val p_plane0 = this
         val normal0 = p_plane0.normal
         val normal1 = p_plane1.normal
         val normal2 = p_plane2.normal
 
-        val denom = vec3_cross(normal0, normal1).dot(normal2)
+        val denom = vec3Cross(normal0, normal1).dot(normal2)
 
         if (abs(denom) <= CMP_EPSILON)
             return Pair(false, r_result)
 
         var new_result: Vector3? = null
         if (r_result != null) {
-            new_result = ((vec3_cross(normal1, normal2) * p_plane0.d) +
-                    (vec3_cross(normal2, normal0) * p_plane1.d) +
-                    (vec3_cross(normal0, normal1) * p_plane2.d)) / denom
+            new_result = ((vec3Cross(normal1, normal2) * p_plane0.d) +
+                    (vec3Cross(normal2, normal0) * p_plane1.d) +
+                    (vec3Cross(normal0, normal1) * p_plane2.d)) / denom
         }
         return Pair(true, new_result)
     }
 
-    fun intersects_ray(p_from: Vector3, p_dir: Vector3, p_intersection: Vector3?): Pair<Boolean, Vector3?> {
+    fun intersectsRay(p_from: Vector3, p_dir: Vector3, p_intersection: Vector3?): Pair<Boolean, Vector3?> {
         val segment = p_dir
         val den = normal.dot(segment)
 
@@ -144,7 +144,7 @@ class Plane: CoreType {
         return Pair(true, p_from + segment * (-dist))
     }
 
-    fun intersects_segment(p_begin: Vector3, p_end: Vector3, p_intersection: Vector3?): Pair<Boolean, Vector3?> {
+    fun intersectsSegment(p_begin: Vector3, p_end: Vector3, p_intersection: Vector3?): Pair<Boolean, Vector3?> {
         val segment = p_begin - p_end
         val den = normal.dot(segment)
 
@@ -159,18 +159,18 @@ class Plane: CoreType {
         return Pair(true, p_begin + segment * (-dist))
     }
 
-    fun is_almost_like(p_plane: Plane) =
+    fun isAlmostLike(p_plane: Plane) =
             normal.dot(p_plane.normal) > _PLANE_EQ_DOT_EPSILON && abs(d - p_plane.d) < _PLANE_EQ_D_EPSILON
 
     override fun toString(): String = ""
 
-    fun is_point_over(p_point: Vector3): Boolean =
+    fun isPointOver(p_point: Vector3): Boolean =
             normal.dot(p_point) > d
 
-    fun distance_to(p_point: Vector3): Float =
+    fun distanceTo(p_point: Vector3): Float =
             normal.dot(p_point) - d
 
-    fun has_point(p_point: Vector3, _epsilon: Float): Boolean {
+    fun hasPoint(p_point: Vector3, _epsilon: Float): Boolean {
         val dist = abs(normal.dot(p_point) - d)
         return dist <= _epsilon
     }
