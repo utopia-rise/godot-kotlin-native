@@ -1,6 +1,7 @@
-package kotlin.godot
+package kotlin.godot.entry
 
 import godot.*
+import kotlin.godot.*
 import konan.internal.CName
 import kotlinx.cinterop.*
 import main

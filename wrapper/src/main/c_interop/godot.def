@@ -81,13 +81,13 @@ void *___godot_wrapper_class_instance_func(godot_object *p, void *method_data) {
 }
 
 void ___godot_wrapper_class_destroy_func(godot_object *p, void *method_data, void *data) {
-    typedef void (*ptr)(void);
+    typedef void (*ptr)(void*);
 
     ptr method = (ptr) method_data;
-    method();
+    method(p);
 }
 
-void godot_wrapper_register_class(const char *class_name, const char *base_class_name, void (*constructor)(void*), void (*destructor)(void)) {
+void godot_wrapper_register_class(const char *class_name, const char *base_class_name, void (*constructor)(void*), void (*destructor)(void*)) {
 	godot_instance_create_func create;
 	create.create_func = ___godot_wrapper_class_instance_func;
 	create.method_data = (void *) constructor;

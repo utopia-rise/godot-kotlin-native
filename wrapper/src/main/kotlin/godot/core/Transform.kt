@@ -1,23 +1,9 @@
 package kotlin.godot.core
 
-<<<<<<< Updated upstream
-import kotlinx.cinterop.COpaquePointer
-import kotlinx.cinterop.MemScope
-
-
-open class Transform: CoreType {
-    override fun setRawMemory(mem: COpaquePointer) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun getRawMemory(memScope: MemScope): COpaquePointer {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-=======
 import godot.godot_plane
 import godot.godot_transform
 import kotlinx.cinterop.*
+
 
 class Transform: CoreType {
 
@@ -299,5 +285,4 @@ class Transform: CoreType {
     fun set_basis(p_basis: Basis) {basis = p_basis}
     fun get_origin(): Vector3 = origin
     fun set_origin(p_origin: Vector3) {origin = p_origin}
->>>>>>> Stashed changes
 }

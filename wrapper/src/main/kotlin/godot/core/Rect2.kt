@@ -1,25 +1,9 @@
 package kotlin.godot.core
 
-<<<<<<< Updated upstream
-import kotlinx.cinterop.COpaquePointer
-import kotlinx.cinterop.MemScope
-
-
-open class Rect2: CoreType {
-    constructor()
-    constructor(a: Number, b: Number, c: Number, d: Number)
-
-
-    override fun getRawMemory(memScope: MemScope): COpaquePointer {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun setRawMemory(mem: COpaquePointer) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-=======
 import godot.godot_rect2
 import godot.godot_transform2d
 import kotlinx.cinterop.*
+
 
 class Rect2: CoreType {
 
@@ -372,6 +356,5 @@ class Rect2: CoreType {
 
 
         return true
->>>>>>> Stashed changes
     }
 }

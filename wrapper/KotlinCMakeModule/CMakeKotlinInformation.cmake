@@ -288,7 +288,7 @@ endfunction()
 function(konanc_dynamic)
     prepare_konanc_args(${ARGV})
 
-    set(LIBRARY_OUTPUT ${CMAKE_Kotlin_LIBRARY_DIR}/${KONANC_NAME}.dll)
+    set(LIBRARY_OUTPUT ${CMAKE_Kotlin_LIBRARY_DIR}/${KONANC_NAME}${CMAKE_SHARED_LIBRARY_SUFFIX})
     set(LIBRARY_${KONANC_NAME}_OUTPUT ${LIBRARY_OUTPUT} CACHE PATH "Dynamic library ${KONANC_NAME}" FORCE)
 
     add_model_record("${KONANC_NAME}" LIBRARY "${KONANC_TARGET}" "${KONANC_SOURCES}" "${KONANC_LIBRARIES}" "${LIBRARY_OUTPUT}")

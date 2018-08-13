@@ -1,67 +1,9 @@
 package kotlin.godot.core
 
-<<<<<<< Updated upstream
-import kotlinx.cinterop.COpaquePointer
-import kotlinx.cinterop.MemScope
-
-
-enum class ClockDirection(val id: Int) {
-    ;
-
-    companion object {
-        fun fromInt(value: Int) = values().single { it.id == value }
-    }
-}
-
-class Plane: CoreType {
-
-    class Normal {
-        var x: Float = 0f
-        var y: Float = 0f
-        var z: Float = 0f
-
-        fun abs(): Float {
-            TODO()
-        }
-    }
-
-    val normal = Normal()
-
-
-    fun distance_to(v: Vector3): Float {
-        TODO()
-    }
-    fun is_point_over(v: Vector3): Boolean {
-        TODO()
-    }
-
-
-    override fun setRawMemory(mem: COpaquePointer) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun getRawMemory(memScope: MemScope): COpaquePointer {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-
-    operator fun get(idx: Int): Plane {
-        TODO()
-    }
-}
-
-
-fun Float.dot(v: Vector3): Float {
-    TODO()
-}
-=======
-import godot.godot_basis
 import godot.godot_plane
 import kotlinx.cinterop.*
-import kotlin.godot.core.Defs.Companion.CMP_EPSILON
-import kotlin.godot.core.Defs.Companion._PLANE_EQ_DOT_EPSILON
-import kotlin.godot.core.Defs.Companion._PLANE_EQ_D_EPSILON
 import kotlin.math.abs
+
 
 class Plane: CoreType {
 
@@ -240,5 +182,3 @@ class Plane: CoreType {
         }
     }
 }
-
->>>>>>> Stashed changes

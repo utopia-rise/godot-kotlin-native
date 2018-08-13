@@ -1,20 +1,5 @@
 package kotlin.godot.core
 
-<<<<<<< Updated upstream
-import kotlinx.cinterop.COpaquePointer
-import kotlinx.cinterop.MemScope
-
-
-open class Transform2D: CoreType {
-    override fun setRawMemory(mem: COpaquePointer) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun getRawMemory(memScope: MemScope): COpaquePointer {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-=======
 import godot.godot_transform2d
 import godot.godot_vector2
 import kotlinx.cinterop.*
@@ -23,6 +8,7 @@ import kotlin.math.acos
 import kotlin.math.atan2
 import kotlin.math.cos
 import kotlin.math.sin
+
 
 class Transform2D: CoreType {
     // Warning #1: basis of Transform2D is stored differently from Basis. In terms of elements array, the basis matrix looks like "on paper":
@@ -345,9 +331,4 @@ class Transform2D: CoreType {
 
     override fun toString(): String =
             elements[0].toString() + ", " + elements[1].toString() + ", " + elements[2]
-
-
-
-
->>>>>>> Stashed changes
 }
