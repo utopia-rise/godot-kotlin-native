@@ -186,7 +186,7 @@ class Variant: CoreType {
 
     fun toLong(): Long = godot_variant_as_int(nativeValue)
 
-    fun toString(): String = godot_variant_as_string(nativeValue).toKString()
+    override fun toString(): String = godot_variant_as_string(nativeValue).toKString()
 
     fun toDouble(): Double = godot_variant_as_real(nativeValue)
 
