@@ -2,7 +2,6 @@ package kotlin.godot.core
 
 import godot.godot_transform2d
 import kotlinx.cinterop.*
-import platform.posix.perror
 import kotlin.math.acos
 import kotlin.math.atan2
 import kotlin.math.cos
@@ -47,14 +46,14 @@ class Transform2D: CoreType {
         elements[2][1] = oy.toFloat()
     }
 
-    constructor(p_rot: Number, p_pos: Vector2) {
-        val cr = cos(p_rot.toFloat())
-        val sr = sin(p_rot.toFloat())
+    constructor(rot: Number, pos: Vector2) {
+        val cr = cos(rot.toFloat())
+        val sr = sin(rot.toFloat())
         elements[0][0] = cr
         elements[0][1] = sr
         elements[1][0] = -sr
         elements[1][1] = cr
-        elements[2] = p_pos
+        elements[2] = pos
     }
 
     constructor() {
@@ -81,18 +80,18 @@ class Transform2D: CoreType {
     operator fun get(n: Int): Vector2 =
             elements[n]
 
-    fun getAxis(p_axis: Int) =
-            elements[p_axis]
+    fun getAxis(axis: Int) =
+            elements[axis]
 
-    fun setAxis(p_axis: Int, p_vec: Vector2) {
-        elements[p_axis] = p_vec
+    fun setAxis(axis: Int, vec: Vector2) {
+        elements[axis] = vec
     }
 
     fun getOrigin(): Vector2 =
             elements[2]
 
-    fun setOrigin(p_origin: Vector2) {
-        elements[2] = p_origin
+    fun setOrigin(origin: Vector2) {
+        elements[2] = origin
     }
 
     fun basisXform(v: Vector2): Vector2 =
@@ -104,44 +103,44 @@ class Transform2D: CoreType {
     fun xform(v: Vector2): Vector2 =
             Vector2(tdotx(v), tdoty(v)) + elements[2]
 
-    fun xformInv(p_vec: Vector2): Vector2 {
-        val v = p_vec - elements[2]
+    fun xformInv(vec: Vector2): Vector2 {
+        val v = vec - elements[2]
         return Vector2(elements[0].dot(v), elements[1].dot(v))
     }
 
-    fun xform(p_rect: Rect2): Rect2 {
-        val x = elements[0] * p_rect.size.x
-        val y = elements[1] * p_rect.size.y
-        val pos = xform(p_rect.pos)
+    fun xform(rect: Rect2): Rect2 {
+        val x = elements[0] * rect.size.x
+        val y = elements[1] * rect.size.y
+        val pos = xform(rect.pos)
 
-        val new_rect = Rect2()
-        new_rect.pos = pos
-        new_rect.expandTo(pos + x)
-        new_rect.expandTo(pos + y)
-        new_rect.expandTo(pos + x + y)
-        return new_rect
+        val newRect = Rect2()
+        newRect.pos = pos
+        newRect.expandTo(pos + x)
+        newRect.expandTo(pos + y)
+        newRect.expandTo(pos + x + y)
+        return newRect
     }
 
-    fun setRotationAndScale(p_rot: Float, p_scale: Vector2) {
-        elements[0][0]=cos(p_rot)*p_scale.x
-        elements[1][1]=cos(p_rot)*p_scale.y
-        elements[1][0]=-sin(p_rot)*p_scale.y
-        elements[0][1]=sin(p_rot)*p_scale.x
+    fun setRotationAndScale(rot: Float, scale: Vector2) {
+        elements[0][0]=cos(rot)*scale.x
+        elements[1][1]=cos(rot)*scale.y
+        elements[1][0]=-sin(rot)*scale.y
+        elements[0][1]=sin(rot)*scale.x
     }
 
-    fun xformInv(p_rect: Rect2): Rect2 {
-        val ends = arrayOf(xformInv(p_rect.pos),
-                xformInv(Vector2(p_rect.pos.x, p_rect.pos.y + p_rect.size.y)),
-                xformInv(Vector2(p_rect.pos.x + p_rect.size.x, p_rect.pos.y + p_rect.size.y)),
-                xformInv(Vector2(p_rect.pos.x + p_rect.size.x, p_rect.pos.y)))
+    fun xformInv(rect: Rect2): Rect2 {
+        val ends = arrayOf(xformInv(rect.pos),
+                xformInv(Vector2(rect.pos.x, rect.pos.y + rect.size.y)),
+                xformInv(Vector2(rect.pos.x + rect.size.x, rect.pos.y + rect.size.y)),
+                xformInv(Vector2(rect.pos.x + rect.size.x, rect.pos.y)))
 
-        val new_rect = Rect2()
-        new_rect.pos=ends[0]
-        new_rect.expandTo(ends[1])
-        new_rect.expandTo(ends[2])
-        new_rect.expandTo(ends[3])
+        val newRect = Rect2()
+        newRect.pos=ends[0]
+        newRect.expandTo(ends[1])
+        newRect.expandTo(ends[2])
+        newRect.expandTo(ends[3])
 
-        return new_rect
+        return newRect
     }
 
     fun invert() {
@@ -157,7 +156,10 @@ class Transform2D: CoreType {
 
     fun affineInvert() {
         val det = basisDeterminant()
-        if (det == 0f) { perror("det == 0\n"); return }
+        if (det == 0f) {
+            Godot.printError("determinant == 0", "affineInvert()", "Transform2D.kt", 161)
+            return
+        }
         val idet = - 1f / det
         elements[0][0] = elements[1][1].also { elements[1][1] = elements[0][0] }
         elements[0] *= Vector2(idet,-idet)
@@ -172,9 +174,9 @@ class Transform2D: CoreType {
         return inv
     }
 
-    fun rotate(p_phi: Float) {
-        val new_t = Transform2D(p_phi,Vector2()) * this
-        this.elements = new_t.elements
+    fun rotate(phi: Float) {
+        val transform2D = Transform2D(phi,Vector2()) * this
+        this.elements = transform2D.elements
     }
 
     fun getRotation(): Float {
@@ -186,9 +188,9 @@ class Transform2D: CoreType {
         return atan2(m[0].y, m[0].x)
     }
 
-    fun setRotation(p_rot: Float) {
-        val cr = cos(p_rot)
-        val sr = sin(p_rot)
+    fun setRotation(rot: Float) {
+        val cr = cos(rot)
+        val sr = sin(rot)
         elements[0][0] = cr
         elements[0][1] = sr
         elements[1][0] = -sr
@@ -200,24 +202,24 @@ class Transform2D: CoreType {
         return detSign * Vector2(elements[0].length(), elements[1].length())
     }
 
-    fun scale(p_scale: Vector2) {
-        scaleBasis(p_scale)
-        elements[2] *= p_scale
+    fun scale(scale: Vector2) {
+        scaleBasis(scale)
+        elements[2] *= scale
     }
 
-    fun scaleBasis(p_scale: Vector2) {
-        elements[0][0] *= p_scale.x
-        elements[0][1] *= p_scale.y
-        elements[1][0] *= p_scale.x
-        elements[1][1] *= p_scale.y
+    fun scaleBasis(scale: Vector2) {
+        elements[0][0] *= scale.x
+        elements[0][1] *= scale.y
+        elements[1][0] *= scale.x
+        elements[1][1] *= scale.y
     }
 
-    fun translate(p_translation: Vector2) {
-        elements[2] += basisXform(p_translation)
+    fun translate(translation: Vector2) {
+        elements[2] += basisXform(translation)
     }
 
-    fun translate(p_tx: Float, p_ty: Float) =
-            translate(Vector2(p_tx, p_ty))
+    fun translate(tx: Float, ty: Float) =
+            translate(Vector2(tx, ty))
 
     fun orthonormalize() {
         var x = elements[0]
@@ -259,15 +261,15 @@ class Transform2D: CoreType {
         return new
     }
 
-    fun scaled(p_scale: Vector2): Transform2D {
+    fun scaled(scale: Vector2): Transform2D {
         val copy = this
-        copy.scale(p_scale)
+        copy.scale(scale)
         return copy
     }
 
-    fun basisScaled(p_scale: Vector2): Transform2D {
+    fun basisScaled(scale: Vector2): Transform2D {
         val copy = this
-        copy.scaleBasis(p_scale)
+        copy.scaleBasis(scale)
         return copy
     }
 
@@ -277,30 +279,30 @@ class Transform2D: CoreType {
         return copy
     }
 
-    fun translated(p_offset: Vector2): Transform2D {
+    fun translated(offset: Vector2): Transform2D {
         val copy = this
-        copy.translate(p_offset)
+        copy.translate(offset)
         return copy
     }
 
-    fun rotated(p_phi: Float): Transform2D {
+    fun rotated(phi: Float): Transform2D {
         val copy = this
-        copy.rotate(p_phi)
+        copy.rotate(phi)
         return copy
     }
 
     fun basisDeterminant(): Float =
             elements[0].x * elements[1].y - elements[0].y * elements[1].x
 
-    fun interpolateWith(p_transform: Transform2D, p_c: Float): Transform2D {
+    fun interpolateWith(transform: Transform2D, c: Float): Transform2D {
         val p1 = getOrigin()
-        val p2 = p_transform.getOrigin()
+        val p2 = transform.getOrigin()
 
         val r1 = getRotation()
-        val r2 = p_transform.getRotation()
+        val r2 = transform.getRotation()
 
         val s1 = getScale()
-        val s2 = p_transform.getScale()
+        val s2 = transform.getScale()
 
         val v1 = Vector2(cos(r1), sin(r1))
         val v2 = Vector2(cos(r2), sin(r2))
@@ -316,18 +318,22 @@ class Transform2D: CoreType {
         val v: Vector2
 
         if (dot > 0.9995)
-            v = (Vector2::linearInterpolate)(v1, v2, p_c).normalized()
+            v = (Vector2::linearInterpolate)(v1, v2, c).normalized()
         else {
-            val angle = p_c * acos(dot)
+            val angle = c * acos(dot)
             val v3 = (v2 - v1 * dot).normalized()
             v = v1 * cos(angle) + v3 * sin(angle)
         }
 
-        val res = Transform2D(atan2(v.y, v.x), (Vector2::linearInterpolate)(p1, p2, p_c))
-        res.scaleBasis((Vector2::linearInterpolate)(s1, s2, p_c))
+        val res = Transform2D(atan2(v.y, v.x), (Vector2::linearInterpolate)(p1, p2, c))
+        res.scaleBasis((Vector2::linearInterpolate)(s1, s2, c))
         return res
     }
 
     override fun toString(): String =
             elements[0].toString() + ", " + elements[1].toString() + ", " + elements[2]
+
+    external override fun hashCode(): Int {
+        return java.util.Arrays.hashCode(elements)
+    }
 }

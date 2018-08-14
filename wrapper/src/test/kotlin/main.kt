@@ -10,4 +10,5 @@ fun testAll() {
     PoolVector3ArrayTest().test()
     PoolColorArrayTest().test()
     GodotArrayTest().test()
+    AABBTest().test()
 }

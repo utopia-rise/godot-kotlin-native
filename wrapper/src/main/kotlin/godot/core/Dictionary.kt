@@ -56,4 +56,5 @@ class Dictionary: CoreType {
     fun get(key: Variant) : Variant = Variant(godot_dictionary_operator_index(nativeValue, key.nativeValue)!!.pointed.readValue())
 
 
+
 }

@@ -52,98 +52,76 @@ class AABB: CoreType {
     fun hasNoSurface(): Boolean =
             (size.x <= CMP_EPSILON && size.y <= CMP_EPSILON && size.z <= CMP_EPSILON)
 
-    fun getPosition(): Vector3 = position
-    fun setPosition(p_position: Vector3) {
-        position = p_position
+    fun intersects(other: AABB): Boolean =
+            when {
+                position.x >= (other.position.x + other.size.x) -> false
+                (position.x + size.x) <= other.position.x        -> false
+                position.y >= (other.position.y + other.size.y) -> false
+                (position.y + size.y) <= other.position.y        -> false
+                position.z >= (other.position.z + other.size.z) -> false
+                (position.z + size.z) <= other.position.z        -> false
+                else -> true
+            }
+
+
+    fun intersectsInclusive(other: AABB): Boolean =
+            when {
+                position.x > (other.position.x + other.size.x) -> false
+                (position.x + size.x) < other.position.x        -> false
+                position.y > (other.position.y + other.size.y) -> false
+                (position.y + size.y) < other.position.y        -> false
+                position.z > (other.position.z + other.size.z) -> false
+                (position.z + size.z) < other.position.z        -> false
+                else -> true
+            }
+
+    fun encloses(other: AABB): Boolean {
+        val srcMin = position
+        val srcMax = position + size
+        val dstMin = other.position
+        val dstMax = other.position + other.size
+        return ((srcMin.x <= dstMin.x) &&
+                (srcMax.x > dstMax.x)  &&
+                (srcMin.y <= dstMin.y) &&
+                (srcMax.y > dstMax.y)  &&
+                (srcMin.z <= dstMin.z) &&
+                (srcMax.z > dstMax.z))
     }
 
-    fun getSize(): Vector3 = size
-    fun setSize(p_size: Vector3) {
-        size = p_size
-    }
-
-    fun intersects(p_aabb: AABB): Boolean {
-        if (position.x >= (p_aabb.position.x + p_aabb.size.x))
-            return false
-        if ((position.x + size.x) <= p_aabb.position.x)
-            return false
-        if (position.y >= (p_aabb.position.y + p_aabb.size.y))
-            return false
-        if ((position.y + size.y) <= p_aabb.position.y)
-            return false
-        if (position.z >= (p_aabb.position.z + p_aabb.size.z))
-            return false
-        if ((position.z + size.z) <= p_aabb.position.z)
-            return false
-
-        return true
-    }
-
-    fun intersectsInclusive(p_aabb: AABB): Boolean {
-        if (position.x > (p_aabb.position.x + p_aabb.size.x))
-            return false
-        if ((position.x + size.x) < p_aabb.position.x)
-            return false
-        if (position.y > (p_aabb.position.y + p_aabb.size.y))
-            return false
-        if ((position.y + size.y) < p_aabb.position.y)
-            return false
-        if (position.z > (p_aabb.position.z + p_aabb.size.z))
-            return false
-        if ((position.z + size.z) < p_aabb.position.z)
-            return false
-
-        return true
-    }
-
-    fun encloses(p_aabb: AABB): Boolean {
-        val src_min = position
-        val src_max = position + size
-        val dst_min = p_aabb.position
-        val dst_max = p_aabb.position + p_aabb.size
-        return ((src_min.x <= dst_min.x) &&
-                (src_max.x > dst_max.x) &&
-                (src_min.y <= dst_min.y) &&
-                (src_max.y > dst_max.y) &&
-                (src_min.z <= dst_min.z) &&
-                (src_max.z > dst_max.z))
-    }
-
-    fun getSupport(p_normal: Vector3): Vector3 {
-        val half_extents = size * 0.5f
-        val ofs = position + half_extents
+    fun getSupport(normal: Vector3): Vector3 {
+        val halfExtents = size * 0.5f
+        val ofs = position + halfExtents
 
         return Vector3(
-                if (p_normal.x > 0f) -half_extents.x else half_extents.x,
-                if (p_normal.y > 0f) -half_extents.y else half_extents.y,
-                if (p_normal.z > 0f) -half_extents.z else half_extents.z
+                if (normal.x > 0f) -halfExtents.x else halfExtents.x,
+                if (normal.y > 0f) -halfExtents.y else halfExtents.y,
+                if (normal.z > 0f) -halfExtents.z else halfExtents.z
         ) + ofs
     }
 
-    fun getEndpoint(p_point: Int): Vector3 {
-        when (p_point) {
-            0 -> return Vector3(position.x, position.y, position.z);
-            1 -> return Vector3(position.x, position.y, position.z + size.z);
-            2 -> return Vector3(position.x, position.y + size.y, position.z);
-            3 -> return Vector3(position.x, position.y + size.y, position.z + size.z);
-            4 -> return Vector3(position.x + size.x, position.y, position.z);
-            5 -> return Vector3(position.x + size.x, position.y, position.z + size.z);
-            6 -> return Vector3(position.x + size.x, position.y + size.y, position.z);
-            7 -> return Vector3(position.x + size.x, position.y + size.y, position.z + size.z)
+    fun getEndpoint(point: Int): Vector3 =
+        when (point) {
+            0 -> Vector3(position.x, position.y, position.z)
+            1 -> Vector3(position.x, position.y, position.z + size.z)
+            2 -> Vector3(position.x, position.y + size.y, position.z)
+            3 -> Vector3(position.x, position.y + size.y, position.z + size.z)
+            4 -> Vector3(position.x + size.x, position.y, position.z)
+            5 -> Vector3(position.x + size.x, position.y, position.z + size.z)
+            6 -> Vector3(position.x + size.x, position.y + size.y, position.z)
+            7 -> Vector3(position.x + size.x, position.y + size.y, position.z + size.z)
+            else -> Vector3()
         }
-        return Vector3()
-    }
 
-    fun intersectsConvexShape(p_planes: Array<Plane>, p_plane_count: Int): Boolean {
-        val half_extents = size * 0.5f
-        val ofs = position + half_extents
+    fun intersectsConvexShape(planes: Array<Plane>, planeCount: Int): Boolean {
+        val halfExtents = size * 0.5f
+        val ofs = position + halfExtents
 
-        for (i in 0 until p_plane_count) {
-            val p = p_planes[i]
+        for (i in 0 until planeCount) {
+            val p = planes[i]
             var point = Vector3(
-                    if (p.normal.x > 0) -half_extents.x else half_extents.x,
-                    if (p.normal.y > 0) -half_extents.y else half_extents.y,
-                    if (p.normal.z > 0) -half_extents.z else half_extents.z
+                    if (p.normal.x > 0) -halfExtents.x else halfExtents.x,
+                    if (p.normal.y > 0) -halfExtents.y else halfExtents.y,
+                    if (p.normal.z > 0) -halfExtents.z else halfExtents.z
             )
             point += ofs
             if (p.isPointOver(point))
@@ -152,76 +130,72 @@ class AABB: CoreType {
         return true
     }
 
-    fun hasPoint(p_point: Vector3): Boolean {
-        if (p_point.x < position.x)
-            return false
-        if (p_point.y < position.y)
-            return false
-        if (p_point.z < position.z)
-            return false
-        if (p_point.x > position.x + size.x)
-            return false
-        if (p_point.y > position.y + size.y)
-            return false
-        if (p_point.z > position.z + size.z)
-            return false
+    fun hasPoint(point: Vector3): Boolean =
+            when {
+                point.x < position.x -> false
+                point.y < position.y -> false
+                point.z < position.z -> false
+                point.x > position.x + size.x -> false
+                point.y > position.y + size.y -> false
+                point.z > position.z + size.z -> false
+                else -> true
+            }
 
-        return true
-    }
 
-    fun expandTo(p_vector: Vector3) {
+    fun expandTo(vector: Vector3) {
         val begin = position
         val end = position + size
 
-        if (p_vector.x < begin.x)
-            begin.x = p_vector.x
-        if (p_vector.y < begin.y)
-            begin.y = p_vector.y
-        if (p_vector.z < begin.z)
-            begin.z = p_vector.z
+        if (vector.x < begin.x)
+            begin.x = vector.x
+        if (vector.y < begin.y)
+            begin.y = vector.y
+        if (vector.z < begin.z)
+            begin.z = vector.z
 
-        if (p_vector.x > end.x)
-            end.x = p_vector.x
-        if (p_vector.y > end.y)
-            end.y = p_vector.y
-        if (p_vector.z > end.z)
-            end.z = p_vector.z
+        if (vector.x > end.x)
+            end.x = vector.x
+        if (vector.y > end.y)
+            end.y = vector.y
+        if (vector.z > end.z)
+            end.z = vector.z
 
         position = begin
         size = end - begin
     }
 
-    fun projectRangeInPlane(p_plane: Plane): Pair<Float, Float> {
-        val half_extents = size * 0.5f
-        val center = position + half_extents
+    fun projectRangeInPlane(plane: Plane): Pair<Float, Float> {
+        val halfExtents = size * 0.5f
+        val center = position + halfExtents
 
-        val length: Float = p_plane.normal.abs().dot(half_extents)
-        val distance: Float = p_plane.distanceTo(center)
+        val length: Float = plane.normal.abs().dot(halfExtents)
+        val distance: Float = plane.distanceTo(center)
+
         return Pair(distance - length, distance + length)
     }
 
     fun getLongestAxisSize(): Float {
-        var max_size = size.x
-        if (size.y > max_size) {
-            max_size = size.y
+        var maxSize = size.x
+        if (size.y > maxSize) {
+            maxSize = size.y
         }
-        if (size.z > max_size) {
-            max_size = size.z
+        if (size.z > maxSize) {
+            maxSize = size.z
         }
-        return max_size
+        return maxSize
     }
 
     fun getShortestAxisSize(): Float {
-        var min_size = size.x
-        if (size.y < min_size) {
-            min_size = size.y
+        var minSize = size.x
+        if (size.y < minSize) {
+            minSize = size.y
         }
 
-        if (size.z < min_size) {
-            min_size = size.z
+        if (size.z < minSize) {
+            minSize = size.z
         }
 
-        return min_size
+        return minSize
     }
 
     fun smitsIntersectRat(from: Vector3, dir: Vector3, t0: Float, t1: Float): Boolean {
@@ -273,13 +247,13 @@ class AABB: CoreType {
         return ((tmin < t1) && (tmax > t0))
     }
 
-    fun growBy(p_amount: Float) {
-        position.x -= p_amount
-        position.y -= p_amount
-        position.z -= p_amount
-        size.x += 2f * p_amount
-        size.y += 2f * p_amount
-        size.z += 2f * p_amount
+    fun growBy(amount: Float) {
+        position.x -= amount
+        position.y -= amount
+        position.z -= amount
+        size.x += 2f * amount
+        size.y += 2f * amount
+        size.z += 2f * amount
     }
 
     fun getArea(): Float =
@@ -291,159 +265,127 @@ class AABB: CoreType {
                 else -> false
             }
 
-    fun mergeWith(p_aabb: AABB) {
-        val beg_1 = position
-        val beg_2 = p_aabb.position
-        val end_1 = Vector3(size.x, size.y, size.z) + beg_1
-        val end_2 = Vector3(p_aabb.size.x, p_aabb.size.y, p_aabb.size.z) + beg_2
+    fun mergeWith(other: AABB) {
+        val beg1 = position
+        val beg2 = other.position
+        val end1 = position + size
+        val end2 = other.position + other.size
 
         val min = Vector3()
         val max = Vector3()
 
-        min.x = if (beg_1.x < beg_2.x) beg_1.x else beg_2.x
-        min.y = if (beg_1.y < beg_2.y) beg_1.y else beg_2.y
-        min.z = if (beg_1.z < beg_2.z) beg_1.z else beg_2.z
+        min.x = if (beg1.x < beg2.x) beg1.x else beg2.x
+        min.y = if (beg1.y < beg2.y) beg1.y else beg2.y
+        min.z = if (beg1.z < beg2.z) beg1.z else beg2.z
 
-        max.x = if (end_1.x > end_2.x) end_1.x else end_2.x
-        max.y = if (end_1.y > end_2.y) end_1.y else end_2.y
-        max.z = if (end_1.z > end_2.z) end_1.z else end_2.z
+        max.x = if (end1.x > end2.x) end1.x else end2.x
+        max.y = if (end1.y > end2.y) end1.y else end2.y
+        max.z = if (end1.z > end2.z) end1.z else end2.z
 
         position = min
         size = max - min
     }
 
-    fun intersection(p_aabb: AABB): AABB {
-        val src_min = position
-        val src_max = position + size
-        val dst_min = p_aabb.position
-        val dst_max = p_aabb.position + p_aabb.size
+    fun intersection(other: AABB): AABB {
+        val srcMin = position
+        val srcMax = position + size
+        val dstMin = other.position
+        val dstMax = other.position + other.size
 
         val min = Vector3()
         val max = Vector3()
 
-        if (src_min.x > dst_max.x || src_max.x < dst_min.x)
+        if (srcMin.x > dstMax.x || srcMax.x < dstMin.x)
             return AABB()
         else {
-            min.x = if (src_min.x > dst_min.x) src_min.x else dst_min.x
-            max.x = if (src_max.x < dst_max.x) src_max.x else dst_max.x
-        }
-        if (src_min.y > dst_max.y || src_max.y < dst_min.y)
-            return AABB()
-        else {
-            min.y = if (src_min.y > dst_min.y) src_min.y else dst_min.y
-            max.y = if (src_max.y < dst_max.y) src_max.y else dst_max.y
+            min.x = if (srcMin.x > dstMin.x) srcMin.x else dstMin.x
+            max.x = if (srcMax.x < dstMax.x) srcMax.x else dstMax.x
         }
 
-        if (src_min.z > dst_max.z || src_max.z < dst_min.z)
+        if (srcMin.y > dstMax.y || srcMax.y < dstMin.y)
             return AABB()
         else {
-            min.z = if (src_min.z > dst_min.z) src_min.z else dst_min.z
-            max.z = if (src_max.z < dst_max.z) src_max.z else dst_max.z
+            min.y = if (srcMin.y > dstMin.y) srcMin.y else dstMin.y
+            max.y = if (srcMax.y < dstMax.y) srcMax.y else dstMax.y
+        }
+
+        if (srcMin.z > dstMax.z || srcMax.z < dstMin.z)
+            return AABB()
+        else {
+            min.z = if (srcMin.z > dstMin.z) srcMin.z else dstMin.z
+            max.z = if (srcMax.z < dstMax.z) srcMax.z else dstMax.z
         }
 
         return AABB(min, max - min)
     }
 
-    fun intersectsRay(p_from: Vector3, p_dir: Vector3, r_clip: Vector3?, r_normal: Vector3?): Triple<Boolean, Vector3?, Vector3?> {
+    fun intersectsRay(p_from: Vector3, p_dir: Vector3): Boolean {
         var c1 = Vector3()
         var c2 = Vector3()
         val end = position + size
         var near = (-1e20).toFloat()
         var far = 1e20.toFloat()
-        var axis: Int = 0
 
         for (i in 0 until 3) {
             if (p_dir[i] == 0f) {
                 if ((p_from[i] < position[i]) || (p_from[i] > end[i])) {
-                    return Triple(false, null, null)
+                    return false
                 }
             } else { // ray not parallel to planes in this direction
                 c1[i] = (position[i] - p_from[i]) / p_dir[i]
                 c2[i] = (end[i] - p_from[i]) / p_dir[i]
 
-                if (c1[i] > c2[i]) {
+                if (c1[i] > c2[i])
                     c1 = c2.also { c2 = c1 }
-                }
-                if (c1[i] > near) {
+
+                if (c1[i] > near)
                     near = c1[i]
-                    axis = i
-                }
-                if (c2[i] < far) {
+
+                if (c2[i] < far)
                     far = c2[i]
-                }
-                if ((near > far) || (far < 0)) {
-                    return Triple(false, r_clip, r_normal)
-                }
+
+                if ((near > far) || (far < 0))
+                    return false
             }
         }
-        val ret1: Vector3? = if (r_clip != null) c1 else null
-        val ret2: Vector3?
-        if (r_normal != null) {
-            ret2 = Vector3()
-            ret2[axis] = if (p_dir[axis] != 0f) -1f else 1f
-        } else ret2 = null
-
-        return Triple(true, ret1, ret2)
+        return true
     }
 
-    fun intersectsSegment(p_from: Vector3, p_to: Vector3, r_clip: Vector3?, r_normal: Vector3?): Triple<Boolean, Vector3?, Vector3?> {
+    fun intersectsSegment(p_from: Vector3, p_to: Vector3): Boolean {
         var min = 0f
         var max = 0f
-        var axis = 0
-        var sign = 0f
 
         for (i in 0..2) {
-            val seg_from = p_from[i]
-            val seg_to = p_to[i]
-            val box_begin = position[i]
-            val box_end = box_begin + size[i]
+            val segFrom = p_from[i]
+            val segTo = p_to[i]
+            val boxBegin = position[i]
+            val boxEnd = boxBegin + size[i]
             val cmin: Float
             val cmax: Float
-            val csign: Float
 
-            if (seg_from < seg_to) {
+            if (segFrom < segTo) {
 
-                if (seg_from > box_end || seg_to < box_begin)
-                    return Triple(false, r_clip, r_normal)
-                val length = seg_to - seg_from
-                cmin = if (seg_from < box_begin) ((box_begin - seg_from) / length) else 0f
-                cmax = if (seg_to > box_end) ((box_end - seg_from) / length) else 1f;
-                csign = -1f
+                if (segFrom > boxEnd || segTo < boxBegin)
+                    return false
+                val length = segTo - segFrom
+                cmin = if (segFrom < boxBegin) ((boxBegin - segFrom) / length) else 0f
+                cmax = if (segTo > boxEnd) ((boxEnd - segFrom) / length) else 1f
             } else {
-                if (seg_to > box_end || seg_from < box_begin)
-                    return Triple(false, r_clip, r_normal)
-                val length = seg_to - seg_from;
-                cmin = if (seg_from > box_end) (box_end - seg_from) / length else 0f
-                cmax = if (seg_to < box_begin) (box_begin - seg_from) / length else 1f
-                csign = 1f
+                if (segTo > boxEnd || segFrom < boxBegin)
+                    return false
+                val length = segTo - segFrom
+                cmin = if (segFrom > boxEnd) (boxEnd - segFrom) / length else 0f
+                cmax = if (segTo < boxBegin) (boxBegin - segFrom) / length else 1f
             }
             if (cmin > min) {
                 min = cmin
-                axis = i
-                sign = csign
             }
             if (cmax < max)
                 max = cmax
             if (max < min)
-                return Triple(false, r_clip, r_normal)
+                return false
         }
-
-        val rel = p_to - p_from
-        val ret1: Vector3?
-        val ret2: Vector3?
-
-        if (r_normal != null) {
-            ret2 = Vector3()
-            ret2[axis] = sign
-        } else
-            ret2 = null
-
-        if (r_clip != null)
-            ret1 = p_from + rel * min
-        else
-            ret1 = null
-
-        return Triple(true, ret1, ret2)
+        return true
     }
 
     fun intersectsPlane(p_plane: Plane): Boolean {
@@ -470,16 +412,15 @@ class AABB: CoreType {
 
     fun getLongestAxis(): Vector3 {
         var axis = Vector3(1f, 0f, 0f)
-        var max_size = size.x
+        var maxSize = size.x
 
-        if (size.y > max_size) {
+        if (size.y > maxSize) {
             axis = Vector3(0f, 1f, 0f)
-            max_size = size.y
+            maxSize = size.y
         }
 
-        if (size.z > max_size) {
+        if (size.z > maxSize) {
             axis = Vector3(0f, 0f, 1f)
-            max_size = size.z
         }
 
         return axis
@@ -487,16 +428,15 @@ class AABB: CoreType {
 
     fun getLongestAxisIndex(): Int {
         var axis = 0
-        var max_size = size.x
+        var maxSize = size.x
 
-        if (size.y > max_size) {
+        if (size.y > maxSize) {
             axis = 1
-            max_size = size.y
+            maxSize = size.y
         }
 
-        if (size.z > max_size) {
+        if (size.z > maxSize) {
             axis = 2
-            max_size = size.z
         }
 
         return axis
@@ -504,16 +444,15 @@ class AABB: CoreType {
 
     fun getShortestAxis(): Vector3 {
         var axis = Vector3(1f, 0f, 0f)
-        var min_size = size.x
+        var minSize = size.x
 
-        if (size.y < min_size) {
+        if (size.y < minSize) {
             axis = Vector3(0f, 1f, 0f)
-            min_size = size.y
+            minSize = size.y
         }
 
-        if (size.z < min_size) {
+        if (size.z < minSize) {
             axis = Vector3(0f, 0f, 1f)
-            min_size = size.z
         }
 
         return axis
@@ -521,16 +460,15 @@ class AABB: CoreType {
 
     fun getShortestAxisIndex(): Int {
         var axis = 0
-        var max_size = size.x
+        var maxSize = size.x
 
-        if (size.y < max_size) {
+        if (size.y < maxSize) {
             axis = 1
-            max_size = size.y
+            maxSize = size.y
         }
 
-        if (size.z < max_size) {
+        if (size.z < maxSize) {
             axis = 2
-            max_size = size.z
         }
 
         return axis
@@ -554,66 +492,69 @@ class AABB: CoreType {
         return aabb
     }
 
-    fun getEdge(p_edge: Int): Pair<Vector3?, Vector3?> {
-        val r_from: Vector3?
-        val r_to: Vector3?
+    fun getEdge(p_edge: Int): Pair<Vector3, Vector3> {
+        val from: Vector3
+        val to: Vector3
         when (p_edge) {
             0 -> {
-                r_from = Vector3(position.x + size.x, position.y, position.z)
-                r_to = Vector3(position.x, position.y, position.z)
+                from = Vector3(position.x + size.x, position.y, position.z)
+                to = Vector3(position.x, position.y, position.z)
             }
             1 -> {
-                r_from = Vector3(position.x + size.x, position.y, position.z + size.z)
-                r_to = Vector3(position.x + size.x, position.y, position.z)
+                from = Vector3(position.x + size.x, position.y, position.z + size.z)
+                to = Vector3(position.x + size.x, position.y, position.z)
             }
             2 -> {
-                r_from = Vector3(position.x, position.y, position.z + size.z)
-                r_to = Vector3(position.x + size.x, position.y, position.z + size.z)
+                from = Vector3(position.x, position.y, position.z + size.z)
+                to = Vector3(position.x + size.x, position.y, position.z + size.z)
             }
             3 -> {
-                r_from = Vector3(position.x, position.y, position.z)
-                r_to = Vector3(position.x, position.y, position.z + size.z)
+                from = Vector3(position.x, position.y, position.z)
+                to = Vector3(position.x, position.y, position.z + size.z)
             }
             4 -> {
-                r_from = Vector3(position.x, position.y + size.y, position.z)
-                r_to = Vector3(position.x + size.x, position.y + size.y, position.z)
+                from = Vector3(position.x, position.y + size.y, position.z)
+                to = Vector3(position.x + size.x, position.y + size.y, position.z)
             }
             5 -> {
-                r_from = Vector3(position.x + size.x, position.y + size.y, position.z)
-                r_to = Vector3(position.x + size.x, position.y + size.y, position.z + size.z)
+                from = Vector3(position.x + size.x, position.y + size.y, position.z)
+                to = Vector3(position.x + size.x, position.y + size.y, position.z + size.z)
             }
             6 -> {
-                r_from = Vector3(position.x + size.x, position.y + size.y, position.z + size.z)
-                r_to = Vector3(position.x, position.y + size.y, position.z + size.z)
+                from = Vector3(position.x + size.x, position.y + size.y, position.z + size.z)
+                to = Vector3(position.x, position.y + size.y, position.z + size.z)
             }
             7 -> {
-                r_from = Vector3(position.x, position.y + size.y, position.z + size.z)
-                r_to = Vector3(position.x, position.y + size.y, position.z)
+                from = Vector3(position.x, position.y + size.y, position.z + size.z)
+                to = Vector3(position.x, position.y + size.y, position.z)
             }
             8 -> {
-                r_from = Vector3(position.x, position.y, position.z + size.z)
-                r_to = Vector3(position.x, position.y + size.y, position.z + size.z)
+                from = Vector3(position.x, position.y, position.z + size.z)
+                to = Vector3(position.x, position.y + size.y, position.z + size.z)
             }
             9 -> {
-                r_from = Vector3(position.x, position.y, position.z)
-                r_to = Vector3(position.x, position.y + size.y, position.z)
+                from = Vector3(position.x, position.y, position.z)
+                to = Vector3(position.x, position.y + size.y, position.z)
             }
             10 -> {
-                r_from = Vector3(position.x + size.x, position.y, position.z)
-                r_to = Vector3(position.x + size.x, position.y + size.y, position.z)
+                from = Vector3(position.x + size.x, position.y, position.z)
+                to = Vector3(position.x + size.x, position.y + size.y, position.z)
             }
             11 -> {
-                r_from = Vector3(position.x + size.x, position.y, position.z + size.z)
-                r_to = Vector3(position.x + size.x, position.y + size.y, position.z + size.z)
+                from = Vector3(position.x + size.x, position.y, position.z + size.z)
+                to = Vector3(position.x + size.x, position.y + size.y, position.z + size.z)
             }
-            else -> {
-                r_from = null
-                r_to = null
-            }
+            else -> throw IllegalArgumentException()
         }
-        return Pair(r_from, r_to)
+        return Pair(from, to)
     }
 
     override fun toString(): String =
             "$position - $size"
+
+    external override fun hashCode(): Int {
+        var result = position.hashCode()
+        result = 31 * result + size.hashCode()
+        return result
+    }
 }

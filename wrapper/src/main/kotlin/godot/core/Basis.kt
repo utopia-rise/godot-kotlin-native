@@ -3,7 +3,6 @@ package kotlin.godot.core
 import kotlinx.cinterop.*
 import godot.*
 import kotlin.math.*
-import platform.posix.perror
 
 
 class Basis: CoreType {
@@ -18,48 +17,50 @@ class Basis: CoreType {
         this.z = z
     }
 
-    constructor(p_euler: Vector3) {
-        set_euler(p_euler)
+    constructor(euler: Vector3) {
+        setEuler(euler)
     }
 
-    constructor(p_quat: Quat) {
-        val d = p_quat.length_squared()
+    constructor(quat: Quat) {
+        val d = quat.lengthSquared()
         val s = 2f / d
-        val xs = p_quat.x * s
-        val ys = p_quat.y * s
-        val zs = p_quat.z * s
-        val wx = p_quat.w * xs
-        val wy = p_quat.w * ys
-        val wz = p_quat.w * zs
-        val xx = p_quat.x * xs
-        val xy = p_quat.x * ys
-        val xz = p_quat.x * zs
-        val yy = p_quat.y * ys
-        val yz = p_quat.y * zs
-        val zz = p_quat.z * zs
+        val xs = quat.x * s
+        val ys = quat.y * s
+        val zs = quat.z * s
+        val wx = quat.w * xs
+        val wy = quat.w * ys
+        val wz = quat.w * zs
+        val xx = quat.x * xs
+        val xy = quat.x * ys
+        val xz = quat.x * zs
+        val yy = quat.y * ys
+        val yz = quat.y * zs
+        val zz = quat.z * zs
         set(	1.0f - (yy + zz), xy - wz, xz + wy,
                 xy + wz, 1.0f - (xx + zz), yz - wx,
                 xz - wy, yz + wx, 1.0f - (xx + yy))
     }
 
-    constructor(p_axis: Vector3, p_phi: Float) {
+    constructor(axis: Vector3, phi: Float) {
         // Rotation matrix from axis and angle, see https://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle
-        val axis_sq = Vector3(p_axis.x*p_axis.x,p_axis.y*p_axis.y,p_axis.z*p_axis.z);
+        val axisq = Vector3(axis.x*axis.x,axis.y*axis.y,axis.z*axis.z)
 
-        val cosine: Float = cos(p_phi)
-        val sine: Float = sin(p_phi)
+        val cosine: Float = cos(phi)
+        val sine: Float = sin(phi)
 
-        this[0][0] = axis_sq.x + cosine * ( 1.0f - axis_sq.x )
-        this[0][1] = p_axis.x * p_axis.y * ( 1.0f - cosine ) - p_axis.z * sine
-        this[0][2] = p_axis.z * p_axis.x * ( 1.0f - cosine ) + p_axis.y * sine
+        apply {
+            x[0] = axisq.x + cosine * (1.0f - axisq.x)
+            x[1] = axis.x * axis.y * (1.0f - cosine) - axis.z * sine
+            x[2] = axis.z * axis.x * (1.0f - cosine) + axis.y * sine
 
-        this[1][0] = p_axis.x * p_axis.y * ( 1.0f - cosine ) + p_axis.z * sine
-        this[1][1] = axis_sq.y + cosine  * ( 1.0f - axis_sq.y )
-        this[1][2] = p_axis.y * p_axis.z * ( 1.0f - cosine ) - p_axis.x * sine
+            y[0] = axis.x * axis.y * (1.0f - cosine) + axis.z * sine
+            y[1] = axisq.y + cosine * (1.0f - axisq.y)
+            y[2] = axis.y * axis.z * (1.0f - cosine) - axis.x * sine
 
-        this[2][0] = p_axis.z * p_axis.x * ( 1.0f - cosine ) - p_axis.y * sine
-        this[2][1] = p_axis.y * p_axis.z * ( 1.0f - cosine ) + p_axis.x * sine
-        this[2][2] = axis_sq.z + cosine  * ( 1.0f - axis_sq.z )
+            z[0] = axis.z * axis.x * (1.0f - cosine) - axis.y * sine
+            z[1] = axis.y * axis.z * (1.0f - cosine) + axis.x * sine
+            z[2] = axisq.z + cosine * (1.0f - axisq.z)
+        }
     }
 
     constructor(xx: Number, xy: Number, xz: Number, yx: Number, yy: Number, yz: Number, zx: Number, zy: Number, zz: Number) :
@@ -120,7 +121,7 @@ class Basis: CoreType {
     }
 
 
-    fun invert(): Unit {
+    fun invert() {
         fun cofac(row1: Int, col1: Int, row2: Int, col2: Int) =
                 this[row1][col1] * this[row2][col2] - this[row1][col2] * this[row2][col1]
 
@@ -129,13 +130,12 @@ class Basis: CoreType {
                 cofac(1, 2, 2, 0),
                 cofac(1, 0, 2, 1))
 
-        val det: Float =    this[0][0] * co[0]+
-                            this[0][1] * co[1]+
-                            this[0][2] * co[2]
+        val det: Float =
+                this[0][0] * co[0] + this[0][1] * co[1] + this[0][2] * co[2]
 
 
         if (det == 0f) {
-            perror("det == 0f")
+            Godot.printError("determinant = 0", "invert", "Basis.kt", 139)
             return
         }
 
@@ -145,24 +145,24 @@ class Basis: CoreType {
                 co[2]*s, cofac(0, 1, 2, 0) * s, cofac(0, 0, 1, 1) * s )
     }
 
-    fun isequal_approx(a: Basis, b: Basis): Boolean {
+    fun isEqualApprox(a: Basis, b: Basis): Boolean {
         for (i in 0..2) {
             for (j in 0..2) {
-            if (!(abs(a[i][j]-b[i][j]) < CMP_EPSILON))
+            if (abs(a[i][j]-b[i][j]) >= CMP_EPSILON)
                 return false
             }
         }
         return true
     }
 
-    fun is_orthogonal(): Boolean {
+    fun isOrthogonal(): Boolean {
         val id = Basis()
         val m = this.transposed()
-        return isequal_approx(id, m)
+        return isEqualApprox(id, m)
     }
 
-    fun is_rotation(): Boolean =
-            abs(determinant()-1) < CMP_EPSILON && is_orthogonal()
+    fun isRotation(): Boolean =
+            abs(determinant()-1) < CMP_EPSILON && isOrthogonal()
 
     fun transpose() {
         this[0][1] = this[1][0].also { this[1][0] = this[0][1] }
@@ -187,10 +187,10 @@ class Basis: CoreType {
             this[1][0]*(this[0][1]*this[2][2]-this[2][1]*this[0][2]) +
             this[2][0]*(this[0][1]*this[1][2]-this[1][1]*this[0][2])
 
-    fun get_axis(axis: Int): Vector3 =
+    fun getAxis(axis: Int): Vector3 =
             Vector3(this[0][axis], this[1][axis], this[2][axis])
 
-    fun set_axis(axis: Int, value: Vector3) {
+    fun setAxis(axis: Int, value: Vector3) {
         this[0][axis] = value.x
         this[1][axis] = value.y
         this[2][axis] = value.z
@@ -224,21 +224,21 @@ class Basis: CoreType {
         return b
     }
 
-    fun get_scale(): Vector3 {
+    fun getScale(): Vector3 {
         // We are assuming M = R.S, and performing a polar decomposition to extract R and S.
         // FIXME: We eventually need a proper polar decomposition.
         // As a cheap workaround until then, to ensure that R is a proper rotation matrix with determinant +1
         // (such that it can be represented by a Quat or Euler angles), we absorb the sign flip into the scaling matrix.
         // As such, it works in conjuction with getRotation().
-        val det_sign: Float = if (determinant() > 0) 1f else -1f
-        return det_sign*Vector3(
+        val detSign: Float = if (determinant() > 0) 1f else -1f
+        return detSign*Vector3(
                 Vector3(this[0][0],this[1][0],this[2][0]).length(),
                 Vector3(this[0][1],this[1][1],this[2][1]).length(),
                 Vector3(this[0][2],this[1][2],this[2][2]).length()
         )
     }
 
-    // get_euler_xyz returns a vector containing the Euler angles in the format
+    // getEulerXyz returns a vector containing the Euler angles in the format
     // (a1,a2,a3), where a3 is the angle of the first rotation, and a1 is the last
     // (following the convention they are commonly defined in the literature).
     //
@@ -247,7 +247,7 @@ class Basis: CoreType {
     //
     // And thus, assuming the matrix is a rotation matrix, this function returns
     // the angles in the decomposition R = X(a1).Y(a2).Z(a3) where Z(a) rotates
-    fun get_euler_xyz(): Vector3 {
+    fun getEulerXyz(): Vector3 {
         // Euler angles in XYZ convention.
         // See https://en.wikipedia.org/wiki/Euler_angles#Rotation_matrix
         //
@@ -255,7 +255,7 @@ class Basis: CoreType {
         //        cz*sx*sy+cx*sz  cx*cz-sx*sy*sz -cy*sx
         //       -cx*cz*sy+sx*sz  cz*sx+cx*sy*sz  cx*cy
         val euler = Vector3()
-        if (!is_rotation()) return euler
+        if (!isRotation()) return euler
 
         val sy = this[0][2]
         if (sy < 1f) {
@@ -277,32 +277,30 @@ class Basis: CoreType {
                 euler.z = 0f
             }
         } else {
-            euler.x = atan2(this[0][1], this[1][1]);
+            euler.x = atan2(this[0][1], this[1][1])
             euler.y = Math_PI.toFloat() / 2f
             euler.z = 0f
         }
         return euler
     }
 
-    // set_euler_xyz expects a vector containing the Euler angles in the format
+    // setEulerXyz expects a vector containing the Euler angles in the format
     // (ax,ay,az), where ax is the angle of rotation around x axis,
     // and similar for other axes.
     // The current implementation uses XYZ convention (Z is the first rotation).
-    fun set_euler_xyz(euler: Vector3): Unit {
+    fun setEulerXyz(euler: Vector3): Unit {
 
-        var c: Float
-        var s: Float
+        var c: Float = cos(euler.x)
+        var s: Float = sin(euler.x)
 
-        c = cos(euler.x)
-        s = sin(euler.x)
         val xmat = Basis(1f, 0f, 0f, 0f, c, -s, 0f, s, c)
 
         c = cos(euler.y)
         s = sin(euler.y)
         val ymat = Basis(c, 0f, s, 0f, 1f, 0f, -s, 0f, c)
 
-        c = cos(euler.z);
-        s = sin(euler.z);
+        c = cos(euler.z)
+        s = sin(euler.z)
         val zmat = Basis(c, -s, 0f, s, c, 0f, 0f, 0f, 1f)
 
         //optimizer will optimize away all this anyway
@@ -312,10 +310,10 @@ class Basis: CoreType {
         this.z = ret.z
     }
 
-    // get_euler_yxz returns a vector containing the Euler angles in the YXZ convention,
+    // getEulerYxz returns a vector containing the Euler angles in the YXZ convention,
     // as in first-Z, then-X, last-Y. The angles for X, Y, and Z rotations are returned
     // as the x, y, and z components of a Vector3 respectively.
-    fun get_euler_yxz(): Vector3 {
+    fun getEulerYxz(): Vector3 {
 
         // Euler angles in YXZ convention.
         // See https://en.wikipedia.org/wiki/Euler_angles#Rotation_matrix
@@ -326,14 +324,14 @@ class Basis: CoreType {
 
         val euler = Vector3()
 
-        if (!is_rotation()) return euler
+        if (!isRotation()) return euler
         val m12 = this[1][2]
         if (m12 < 1f) {
             if (m12 > -1f) {
                 // is this a pure X rotation?
                 if (this[1][0] == 0f && this[0][1] == 0f && this[0][2] == 0f && this[2][0] == 0f && this[0][0] == 1f) {
                     // return the simplest form (human friendlier in editor and scripts)
-                    euler.x = atan2(-m12, this[1][1]);
+                    euler.x = atan2(-m12, this[1][1])
                     euler.y = 0f
                     euler.z = 0f
                 } else {
@@ -355,16 +353,14 @@ class Basis: CoreType {
         return euler
     }
 
-    // set_euler_yxz expects a vector containing the Euler angles in the format
+    // setEulerYxz expects a vector containing the Euler angles in the format
     // (ax,ay,az), where ax is the angle of rotation around x axis,
     // and similar for other axes.
     // The current implementation uses YXZ convention (Z is the first rotation).
-    fun set_euler_yxz(euler: Vector3) {
-        var c: Float
-        var s: Float
+    fun setEulerYxz(euler: Vector3) {
+        var c: Float = cos(euler.x)
+        var s: Float = sin(euler.x)
 
-        c = cos(euler.x)
-        s = sin(euler.x)
         val xmat = Basis(1f,0f,0f,0f,c,-s,0f,s,c)
 
         c = cos(euler.y)
@@ -381,8 +377,8 @@ class Basis: CoreType {
         this.z = ret.z
     }
 
-    fun get_euler(): Vector3 = get_euler_yxz()
-    fun set_euler(p_euler: Vector3) = set_euler_yxz(p_euler)
+    fun getEuler(): Vector3 = getEulerYxz()
+    fun setEuler(p_euler: Vector3) = setEulerYxz(p_euler)
 
     fun tdotx(v: Vector3): Float =
             this[0][0] * v[0] + this[1][0] * v[1] + this[2][0] * v[2]
@@ -401,53 +397,53 @@ class Basis: CoreType {
                 else -> throw IllegalArgumentException()
             }
 
-    fun xform(p_vector: Vector3): Vector3 =
+    fun xform(vector: Vector3): Vector3 =
             Vector3(
-                    this[0].dot(p_vector),
-                    this[1].dot(p_vector),
-                    this[2].dot(p_vector)
+                    this[0].dot(vector),
+                    this[1].dot(vector),
+                    this[2].dot(vector)
             )
 
-    fun xform_inv(p_vector: Vector3): Vector3 =
-            Vector3((this[0][0]*p_vector.x ) + ( this[1][0]*p_vector.y ) + ( this[2][0]*p_vector.z ),
-                    (this[0][1]*p_vector.x ) + ( this[1][1]*p_vector.y ) + ( this[2][1]*p_vector.z ),
-                    (this[0][2]*p_vector.x ) + ( this[1][2]*p_vector.y ) + ( this[2][2]*p_vector.z ))
+    fun xformInv(vector: Vector3): Vector3 =
+            Vector3((this[0][0]*vector.x ) + ( this[1][0]*vector.y ) + ( this[2][0]*vector.z ),
+                    (this[0][1]*vector.x ) + ( this[1][1]*vector.y ) + ( this[2][1]*vector.z ),
+                    (this[0][2]*vector.x ) + ( this[1][2]*vector.y ) + ( this[2][2]*vector.z ))
 
-    operator fun times(p_matrix: Basis): Basis =
-            Basis(p_matrix.tdotx(this[0]), p_matrix.tdoty(this[0]), p_matrix.tdotz(this[0]),
-                  p_matrix.tdotx(this[1]), p_matrix.tdoty(this[1]), p_matrix.tdotz(this[1]),
-                  p_matrix.tdotx(this[2]), p_matrix.tdoty(this[2]), p_matrix.tdotz(this[2]))
+    operator fun times(matrix: Basis): Basis =
+            Basis(matrix.tdotx(this[0]), matrix.tdoty(this[0]), matrix.tdotz(this[0]),
+                  matrix.tdotx(this[1]), matrix.tdoty(this[1]), matrix.tdotz(this[1]),
+                  matrix.tdotx(this[2]), matrix.tdoty(this[2]), matrix.tdotz(this[2]))
 
-    operator fun plus(p_matrix: Basis): Basis =
-            Basis(this[0] + p_matrix[0], this[1] + p_matrix[1], this[2] + p_matrix[2])
+    operator fun plus(matrix: Basis): Basis =
+            Basis(this[0] + matrix[0], this[1] + matrix[1], this[2] + matrix[2])
 
-    operator fun minus(p_matrix: Basis): Basis =
-            Basis(this[0] - p_matrix[0], this[1] - p_matrix[1], this[2] - p_matrix[2])
+    operator fun minus(matrix: Basis): Basis =
+            Basis(this[0] - matrix[0], this[1] - matrix[1], this[2] - matrix[2])
 
-    operator fun times(p_val: Float): Basis =
-            Basis(this[0] * p_val, this[1] * p_val, this[2] * p_val)
+    operator fun times(value: Float): Basis =
+            Basis(this[0] * value, this[1] * value, this[2] * value)
 
     override fun toString(): String =
             "${this[0][0]}, ${this[0][1]}, ${this[0][2]}, " +
             "${this[1][0]}, ${this[1][1]}, ${this[1][2]}, " +
             "${this[2][0]}, ${this[2][1]}, ${this[2][2]}"
 
-    fun get_column(i: Int): Vector3 =
+    fun getColumn(i: Int): Vector3 =
             Vector3(this[0][i],this[1][i],this[2][i])
 
-    fun get_row(i: Int): Vector3 =
+    fun getRow(i: Int): Vector3 =
             Vector3(this[i][0],this[i][1],this[i][2])
 
-    fun get_main_diagonal(): Vector3 =
+    fun getMainDiagonal(): Vector3 =
             Vector3(this[0][0],this[1][1],this[2][2])
 
-    fun set_row(i: Int, p_row: Vector3) {
+    fun setRow(i: Int, p_row: Vector3) {
         this[i][0]=p_row.x
         this[i][1]=p_row.y
         this[i][2]=p_row.z
     }
 
-    fun transpose_xform(m: Basis): Basis =
+    fun transposeXform(m: Basis): Basis =
             Basis(this[0].x * m[0].x + this[1].x * m[1].x + this[2].x * m[2].x,
                   this[0].x * m[0].y + this[1].x * m[1].y + this[2].x * m[2].y,
                   this[0].x * m[0].z + this[1].x * m[1].z + this[2].x * m[2].z,
@@ -459,11 +455,14 @@ class Basis: CoreType {
                   this[0].z * m[0].z + this[1].z * m[1].z + this[2].z * m[2].z)
 
     fun orthonormalize() {
-        if (determinant() == 0f) { perror("determiamnt == 0\n"); return }
+        if (determinant() == 0f) {
+            Godot.printError("determinant == 0\n", "orthonormalize()", "Basis.kt", 464)
+            return
+        }
 
-        var x = get_axis(0)
-        var y = get_axis(1)
-        var z = get_axis(2)
+        var x = getAxis(0)
+        var y = getAxis(1)
+        var z = getAxis(2)
 
         x.normalize()
         y = (y-x*(x.dot(y)))
@@ -471,9 +470,9 @@ class Basis: CoreType {
         z = (z-x*(x.dot(z))-y*(y.dot(z)))
         z.normalize()
 
-        set_axis(0,x)
-        set_axis(1,y)
-        set_axis(2,z)
+        setAxis(0,x)
+        setAxis(1,y)
+        setAxis(2,z)
     }
 
     fun orthonormalized(): Basis {
@@ -482,7 +481,7 @@ class Basis: CoreType {
         return b
     }
 
-    fun is_symmetric(): Boolean {
+    fun isSymmetric(): Boolean {
         if (abs(this[0][1] - this[1][0]) > CMP_EPSILON)
             return false
         if (abs(this[0][2] - this[2][0]) > CMP_EPSILON)
@@ -494,23 +493,23 @@ class Basis: CoreType {
     }
 
     fun diagonalize(): Basis {
-        if (!is_symmetric()) return Basis()
+        if (!isSymmetric()) return Basis()
 
-        val ite_max = 1024
-        var off_matrix_norm_2: Float =
+        val iteMax = 1024
+        var offMatrixNorm2: Float =
                 this[0][1] * this[0][1] + this[0][2] * this[0][2] + this[1][2] * this[1][2]
 
-        var ite: Int = 0
-        var acc_rot = Basis()
-        while (off_matrix_norm_2 > CMP_EPSILON2 && ite++ < ite_max) {
-            var el01_2 = this[0][1] * this[0][1]
-            var el02_2 = this[0][2] * this[0][2]
-            var el12_2 = this[1][2] * this[1][2]
+        var ite = 0
+        var accRot = Basis()
+        while (offMatrixNorm2 > CMP_EPSILON2 && ite++ < iteMax) {
+            val el012 = this[0][1] * this[0][1]
+            val el022 = this[0][2] * this[0][2]
+            val el122 = this[1][2] * this[1][2]
             // Find the pivot element
             var i: Int
             var j: Int
-            if (el01_2 > el02_2) {
-                if (el12_2 > el01_2) {
+            if (el012 > el022) {
+                if (el122 > el012) {
                     i = 1
                     j = 2
                 } else {
@@ -518,7 +517,7 @@ class Basis: CoreType {
                     j = 1
                 }
             } else {
-                if (el12_2 > el02_2) {
+                if (el122 > el022) {
                     i = 1
                     j = 2
                 } else {
@@ -543,20 +542,20 @@ class Basis: CoreType {
             rot[j][i] = sin(angle)
 
             // Update the off matrix norm
-            off_matrix_norm_2 -= this[i][j] * this[i][j]
+            offMatrixNorm2 -= this[i][j] * this[i][j]
 
             // Apply the rotation
             val ret = rot * this * rot.transposed()
             this.x = ret.x
             this.y = ret.y
             this.z = ret.z
-            acc_rot = rot * acc_rot
+            accRot = rot * accRot
         }
-        return acc_rot
+        return accRot
     }
 
     companion object {
-        val _ortho_bases: Array<Basis> =
+        val orthoBases: Array<Basis> =
                 arrayOf(Basis(1f, 0f, 0f, 0f, 1f, 0f, 0f, 0f, 1f),
                         Basis(0f, -1f, 0f, 1f, 0f, 0f, 0f, 0f, 1f),
                         Basis(-1f, 0f, 0f, 0f, -1f, 0f, 0f, 0f, 1f),
@@ -583,8 +582,8 @@ class Basis: CoreType {
                         Basis(0f, -1f, 0f, 0f, 0f, -1f, 1f, 0f, 0f))
     }
 
-    fun get_orthogonal_index(): Int {
-        var orth = this
+    fun getOrthogonalIndex(): Int {
+        val orth = this
         for(i in 0..2) {
             for(j in 0..2) {
 
@@ -601,18 +600,27 @@ class Basis: CoreType {
         }
 
         for(i in 0..23) {
-
-            if (_ortho_bases[i]==orth)
+            if (orthoBases[i]==orth)
                 return i
         }
         return 0
     }
 
-    fun set_orthogonal_index(p_index: Int) {
-        if (p_index >= 24) { perror("p_index >= 24"); return }
-        val ret = _ortho_bases[p_index]
+    fun setOrthogonalIndex(index: Int) {
+        if (index >= 24) {
+            Godot.printError("index >= 24", "setOrthogonalIndex($index)", "Basis.kt", 616)
+            return
+        }
+        val ret = orthoBases[index]
         this.x = ret.x
         this.y = ret.y
         this.z = ret.z
+    }
+
+    external override fun hashCode(): Int {
+        var result = x.hashCode()
+        result = 31 * result + y.hashCode()
+        result = 31 * result + z.hashCode()
+        return result
     }
 }

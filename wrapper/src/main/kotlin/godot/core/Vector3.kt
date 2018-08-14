@@ -54,23 +54,23 @@ class Vector3(var x: Float, var y: Float, var z: Float) : Comparable<Vector3>, C
                 else -> throw IndexOutOfBoundsException()
             }
 
-    operator fun plus(p_v: Vector3): Vector3 =
-            Vector3(x + p_v.x, y + p_v.y, z + p_v.z)
+    operator fun plus(vec: Vector3): Vector3 =
+            Vector3(x + vec.x, y + vec.y, z + vec.z)
 
-    operator fun minus(p_v: Vector3): Vector3 =
-            Vector3(x - p_v.x, y - p_v.y, z - p_v.z)
+    operator fun minus(vec: Vector3): Vector3 =
+            Vector3(x - vec.x, y - vec.y, z - vec.z)
 
-    operator fun times(p_v: Vector3): Vector3 =
-            Vector3(x * p_v.x, y * p_v.y, z * p_v.z)
+    operator fun times(vec: Vector3): Vector3 =
+            Vector3(x * vec.x, y * vec.y, z * vec.z)
 
-    operator fun div(p_v: Vector3): Vector3 =
-            Vector3(x / p_v.x, y / p_v.y, z / p_v.z)
+    operator fun div(vec: Vector3): Vector3 =
+            Vector3(x / vec.x, y / vec.y, z / vec.z)
 
-    operator fun times(p_scalar: Float): Vector3 =
-            Vector3(x * p_scalar, y * p_scalar, z * p_scalar)
+    operator fun times(scalar: Float): Vector3 =
+            Vector3(x * scalar, y * scalar, z * scalar)
 
-    operator fun div(p_scalar: Float): Vector3 =
-            Vector3(x / p_scalar, y / p_scalar, z / p_scalar)
+    operator fun div(scalar: Float): Vector3 =
+            Vector3(x / scalar, y / scalar, z / scalar)
 
     operator fun unaryMinus(): Vector3 =
             Vector3(-x, -y, -z)
@@ -112,16 +112,16 @@ class Vector3(var x: Float, var y: Float, var z: Float) : Comparable<Vector3>, C
                     (z * b.x) - (x * b.z),
                     (x * b.y) - (y * b.x))
 
-    fun linearInterpolate(p_b: Vector3, p_t: Float): Vector3 =
-            Vector3(x + (p_t * (p_b.x - x)),
-                    y + (p_t * (p_b.y - y)),
-                    z + (p_t * (p_b.z - z)))
+    fun linearInterpolate(b: Vector3, t: Float): Vector3 =
+            Vector3(x + (t * (b.x - x)),
+                    y + (t * (b.y - y)),
+                    z + (t * (b.z - z)))
 
-    fun cubicInterpolate(b: Vector3, pre_a: Vector3, post_b: Vector3, t: Float): Vector3 {
-        val p0: Vector3 = pre_a
+    fun cubicInterpolate(b: Vector3, pre: Vector3, post: Vector3, t: Float): Vector3 {
+        val p0: Vector3 = pre
         val p1: Vector3 = this
         val p2: Vector3 = b
-        val p3: Vector3 = post_b
+        val p3: Vector3 = post
 
         val t2: Float = t * t
         val t3: Float = t2 * t
@@ -197,8 +197,8 @@ class Vector3(var x: Float, var y: Float, var z: Float) : Comparable<Vector3>, C
         return v
     }
 
-    fun rotate(p_axis: Vector3, p_phi: Float): Unit {
-        val ret = Basis(p_axis, p_phi).xform(this)
+    fun rotate(axis: Vector3, phi: Float): Unit {
+        val ret = Basis(axis, phi).xform(this)
         this.x = ret.x
         this.y = ret.y
         this.z = ret.z
@@ -207,11 +207,11 @@ class Vector3(var x: Float, var y: Float, var z: Float) : Comparable<Vector3>, C
     fun slide(by: Vector3): Vector3 =
             by - this * this.dot(by)
 
-    fun snap(p_val: Float): Unit {
-        if (p_val != 0f) {
-            x = kotlin.math.floor(x / p_val + 0.5f) * p_val
-            y = kotlin.math.floor(y / p_val + 0.5f) * p_val
-            z = kotlin.math.floor(z / p_val + 0.5f) * p_val
+    fun snap(vecal: Float): Unit {
+        if (vecal != 0f) {
+            x = kotlin.math.floor(x / vecal + 0.5f) * vecal
+            y = kotlin.math.floor(y / vecal + 0.5f) * vecal
+            z = kotlin.math.floor(z / vecal + 0.5f) * vecal
         }
     }
 
@@ -222,13 +222,19 @@ class Vector3(var x: Float, var y: Float, var z: Float) : Comparable<Vector3>, C
     }
 
     override fun toString() = "$x, $y, $z"
+    external override fun hashCode(): Int {
+        var result = x.hashCode()
+        result = 31 * result + y.hashCode()
+        result = 31 * result + z.hashCode()
+        return result
+    }
     //TODO(Do this with godot string)
 }
 
-operator fun Float.times(p_vec: Vector3) =
-        p_vec * this
+operator fun Float.times(vecec: Vector3) =
+        vecec * this
 
-fun vec3Cross(p_a: Vector3, p_b: Vector3): Vector3 =
-        p_a.cross(p_b)
+fun vec3Cross(a: Vector3, b: Vector3): Vector3 =
+        a.cross(b)
 
 

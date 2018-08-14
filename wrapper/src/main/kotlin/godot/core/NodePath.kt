@@ -54,6 +54,9 @@ class NodePath : CoreType {
         if(other is NodePath) godot_node_path_operator_equal(nativeValue, other.nativeValue)
         else false
 
+    external override fun hashCode(): Int {
+        return nativeValue.hashCode()
+    }
 
 
 }

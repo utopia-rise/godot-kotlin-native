@@ -1,7 +1,6 @@
 package kotlin.godot.core
 
 import platform.posix.perror
-import kotlin.godot.core.Godot
 
 
 enum class GodotError(val id: Int) {
@@ -68,8 +67,8 @@ const val CMP_EPSILON = 0.00001f
 const val CMP_EPSILON2 = CMP_EPSILON * CMP_EPSILON
 const val Math_PI = 3.14159265358979323846
 
-const val _PLANE_EQ_DOT_EPSILON = 0.999
-const val _PLANE_EQ_D_EPSILON = 0.0001
+const val PLANE_EQ_DOT_EPSILON = 0.999
+const val PLANE_EQ_D_EPSILON = 0.0001
 
 fun ERR_FAIL_V(any: Any?): Any? = any
 fun ERR_PRINT(msg: String) = perror("ERROR: $msg\n")

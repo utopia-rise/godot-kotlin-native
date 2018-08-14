@@ -1,6 +1,5 @@
 package simple.user.pack
 
-import kotlin.godot.GodotObject
 import kotlin.godot.Object
 import kotlin.godot.core.Godot
 

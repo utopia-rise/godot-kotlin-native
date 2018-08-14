@@ -10,6 +10,38 @@ class Quat: CoreType {
     var z: Float = 0f
     var w: Float = 1f
 
+    constructor(basis: Basis) {
+        val trace = basis[0][0] + basis[1][1] + basis[2][2]
+        val temp: FloatArray
+
+        if(trace > 0f) {
+            var s = sqrt(trace + 1f)
+            val temp3 = s * 0.5f
+            s = 0.5f / s
+            temp = floatArrayOf(((basis[2][1] - basis[1][2]) * s),
+                    ((basis[0][2] - basis[2][0]) * s),
+                    ((basis[1][0] - basis[0][1]) * s),
+                    temp3)
+        }
+        else {
+            temp = floatArrayOf(0f,0f,0f,0f)
+            val i = if (basis[0][0] < basis[1][1]) {
+                if (basis[1][1] < basis[2][2]) 2 else 1
+            } else {
+                if (basis[0][0] < basis[2][2]) 2 else 0
+            }
+            val j = (i + 1) % 3
+            val k = (i + 2) % 3
+
+            var s = sqrt(basis[i][i] - basis[j][j] - basis[k][k] + 1.0f)
+            temp[i] = s * 0.5f
+            s = 0.5f / s
+            temp[3] = (basis[k][j] - basis[j][k]) * s
+            temp[j] = (basis[j][i] + basis[i][j]) * s
+            temp[k] = (basis[k][i] + basis[i][k]) * s
+        }
+        Quat(temp[0],temp[1],temp[2],temp[3])
+    }
 
     constructor(x: Number, y: Number, z: Number, w: Number = 1f) {
         this.x = x.toFloat()
@@ -25,10 +57,10 @@ class Quat: CoreType {
         val d: Float = axis.length()
         if (d == 0f) set(0f,0f,0f,0f)
         else {
-            val sin_angle: Float = sin(angle * 0.5f)
-            val cos_angle: Float = cos(angle * 0.5f)
-            val s: Float = sin_angle / d
-            set(axis.x * s, axis.y * s, axis.z * s, cos_angle)
+            val sinAngle: Float = sin(angle * 0.5f)
+            val cosAngle: Float = cos(angle * 0.5f)
+            val s: Float = sinAngle / d
+            set(axis.x * s, axis.y * s, axis.z * s, cosAngle)
         }
     }
 
@@ -76,80 +108,80 @@ class Quat: CoreType {
     }
 
 
-    fun set(p_x: Float, p_y: Float, p_z: Float, p_w: Float) {
-        x = p_x
-        y = p_y
-        z = p_z
-        w = p_w
+    fun set(px: Float, py: Float, pz: Float, pw: Float) {
+        x = px
+        y = py
+        z = pz
+        w = pw
     }
 
-    // set_euler_xyz expects a vector containing the Euler angles in the format
+    // setEulerXyz expects a vector containing the Euler angles in the format
     // (ax,ay,az), where ax is the angle of rotation around x axis,
     // and similar for other axes.
     // This implementation uses XYZ convention (Z is the first rotation).
-    fun set_euler_xyz(p_euler: Vector3): Unit {
-        val half_a1: Float = p_euler.x * 0.5f
-        val half_a2: Float = p_euler.y * 0.5f
-        val half_a3: Float = p_euler.z * 0.5f
+    fun setEulerXyz(p_euler: Vector3) {
+        val half1: Float = p_euler.x * 0.5f
+        val half2: Float = p_euler.y * 0.5f
+        val half3: Float = p_euler.z * 0.5f
 
         // R = X(a1).Y(a2).Z(a3) convention for Euler angles.
         // Conversion to quaternion as listed in https://ntrs.nasa.gov/archive/nasa/casi.ntrs.nasa.gov/19770024290.pdf (page A-2)
         // a3 is the angle of the first rotation, following the notation in this reference.
 
-        val cos_a1: Float = cos(half_a1)
-        val cos_a2: Float = cos(half_a2)
-        val cos_a3: Float = cos(half_a3)
-        val sin_a1: Float = sin(half_a1)
-        val sin_a2: Float = sin(half_a2)
-        val sin_a3: Float = sin(half_a3)
+        val cos1: Float = cos(half1)
+        val cos2: Float = cos(half2)
+        val cos3: Float = cos(half3)
+        val sin1: Float = sin(half1)
+        val sin2: Float = sin(half2)
+        val sin3: Float = sin(half3)
 
-        set(sin_a1 * cos_a2 * sin_a3 + cos_a1 * sin_a2 * cos_a3,
-                sin_a1 * cos_a2 * cos_a3 - cos_a1 * sin_a2 * sin_a3,
-                -sin_a1 * sin_a2 * cos_a3 + cos_a1 * sin_a2 * sin_a3,
-                sin_a1 * sin_a2 * sin_a3 + cos_a1 * cos_a2 * cos_a3)
+        set(sin1 * cos2 * sin3 + cos1 * sin2 * cos3,
+                sin1 * cos2 * cos3 - cos1 * sin2 * sin3,
+                -sin1 * sin2 * cos3 + cos1 * sin2 * sin3,
+                sin1 * sin2 * sin3 + cos1 * cos2 * cos3)
     }
 
-    fun get_euler_xyz(): Vector3 {
+    fun getEulerXyz(): Vector3 {
         val m = Basis(this)
-        return m.get_euler_xyz()
+        return m.getEulerXyz()
     }
 
-    fun set_euler_yxz(p_euler: Vector3): Unit {
-        val half_a1: Float = p_euler.y * 0.5f
-        val half_a2: Float = p_euler.x * 0.5f
-        val half_a3: Float = p_euler.z * 0.5f
+    fun setEulerYxz(p_euler: Vector3): Unit {
+        val half1: Float = p_euler.y * 0.5f
+        val half2: Float = p_euler.x * 0.5f
+        val half3: Float = p_euler.z * 0.5f
 
         // R = X(a1).Y(a2).Z(a3) convention for Euler angles.
         // Conversion to quaternion as listed in https://ntrs.nasa.gov/archive/nasa/casi.ntrs.nasa.gov/19770024290.pdf (page A-2)
         // a3 is the angle of the first rotation, following the notation in this reference.
 
-        val cos_a1: Float = cos(half_a1)
-        val cos_a2: Float = cos(half_a2)
-        val cos_a3: Float = cos(half_a3)
-        val sin_a1: Float = sin(half_a1)
-        val sin_a2: Float = sin(half_a2)
-        val sin_a3: Float = sin(half_a3)
+        val cos1: Float = cos(half1)
+        val cos2: Float = cos(half2)
+        val cos3: Float = cos(half3)
+        val sin1: Float = sin(half1)
+        val sin2: Float = sin(half2)
+        val sin3: Float = sin(half3)
 
-        set(sin_a1 * cos_a2 * sin_a3 + cos_a1 * sin_a2 * cos_a3,
-                sin_a1 * cos_a2 * cos_a3 - cos_a1 * sin_a2 * sin_a3,
-                -sin_a1 * sin_a2 * cos_a3 + cos_a1 * sin_a2 * sin_a3,
-                sin_a1 * sin_a2 * sin_a3 + cos_a1 * cos_a2 * cos_a3)
+        set(sin1 * cos2 * sin3 + cos1 * sin2 * cos3,
+                sin1 * cos2 * cos3 - cos1 * sin2 * sin3,
+                -sin1 * sin2 * cos3 + cos1 * sin2 * sin3,
+                sin1 * sin2 * sin3 + cos1 * cos2 * cos3)
     }
 
-    // get_euler_yxz returns a vector containing the Euler angles in the format
+    // getEulerYxz returns a vector containing the Euler angles in the format
     // (ax,ay,az), where ax is the angle of rotation around x axis,
     // and similar for other axes.
     // This implementation uses YXZ convention (Z is the first rotation).
-    fun get_euler_yxz(): Vector3 {
+    fun getEulerYxz(): Vector3 {
         val m = Basis(this)
-        return m.get_euler_yxz()
+        return m.getEulerYxz()
     }
 
-    fun set_euler(p_euler: Vector3) = set_euler_yxz(p_euler)
-    fun get_euler(): Vector3 = get_euler_yxz()
+    fun setEuler(p_euler: Vector3) = setEulerYxz(p_euler)
+    fun getEuler(): Vector3 = getEulerYxz()
 
     fun length(): Float =
-            sqrt(this.length_squared())
+            sqrt(this.lengthSquared())
 
     fun normalize() {
         x /= this.length()
@@ -189,15 +221,15 @@ class Quat: CoreType {
 
         if ( (1.0 - cosom) > CMP_EPSILON ) {
             // standard case (slerp)
-            omega = acos(cosom);
-            sinom = sin(omega);
-            scale0 = sin((1f - t) * omega) / sinom;
-            scale1 = sin(t * omega) / sinom;
+            omega = acos(cosom)
+            sinom = sin(omega)
+            scale0 = sin((1f - t) * omega) / sinom
+            scale1 = sin(t * omega) / sinom
         } else {
             // "from" and "to" quaternions are very close
             //  ... so we can do a linear interpolation
-            scale0 = 1f - t;
-            scale1 = t;
+            scale0 = 1f - t
+            scale1 = t
         }
         // calculate final values
         return Quat(
@@ -225,20 +257,18 @@ class Quat: CoreType {
                 invFactor * from.w + newFactor * q.w)
     }
 
-    fun cubic_slerp(q: Quat, prep: Quat, postq: Quat, t: Float): Quat {
+    fun cubicSlerp(q: Quat, prep: Quat, postq: Quat, t: Float): Quat {
         val t2: Float = (1f - t) * t * 2
         val sp = this.slerp(q, t)
         val sq = prep.slerpni(postq, t)
         return sp.slerpni(sq, t2)
     }
 
-    class FloatWrapper(f: Float)
+    fun getAxis(): Vector3
+            = Vector3(x / sqrt(1f-w*w), y / sqrt(1f-w*w),z / sqrt(1f-w*w))
 
-    fun get_axis_and_angle(): Pair<Vector3, Float> {
-        val r_angle: Float = 2 * acos(w)
-        val r_axis: Vector3 = Vector3(x / sqrt(1f-w*w), y / sqrt(1f-w*w),z / sqrt(1f-w*w))
-        return Pair(r_axis, r_angle)
-    }
+    fun getAngle(): Float
+            = 2 * acos(w)
 
     operator fun times(v: Vector3) =
             Quat( w * v.x + y * v.z - z * v.y,
@@ -270,8 +300,6 @@ class Quat: CoreType {
             else -> false
         }
 
-
-
     fun xform(v: Vector3): Vector3 {
         var q = this * v
         q *= this.inverse()
@@ -285,40 +313,14 @@ class Quat: CoreType {
     fun dot(q: Quat): Float =
             x * q.x+y * q.y+z * q.z+w * q.w
 
-    fun length_squared(): Float =
+    fun lengthSquared(): Float =
             dot(this)
 
-    constructor(basis: Basis) {
-        val trace = basis[0][0] + basis[1][1] + basis[2][2]
-        val temp: FloatArray
-
-        if(trace > 0f) {
-            var s = sqrt(trace + 1f)
-            var temp3 = s * 0.5f
-            s = 0.5f / s
-            temp = floatArrayOf(((basis[2][1] - basis[1][2]) * s),
-                                ((basis[0][2] - basis[2][0]) * s),
-                                ((basis[1][0] - basis[0][1]) * s),
-                                temp3)
-        }
-        else {
-            temp = floatArrayOf(0f,0f,0f,0f)
-            val i = if (basis[0][0] < basis[1][1]) {
-                if (basis[1][1] < basis[2][2]) 2 else 1
-            } else {
-                if (basis[0][0] < basis[2][2]) 2 else 0
-            }
-            val j = (i + 1) % 3
-            val k = (i + 2) % 3
-
-            var s = sqrt(basis[i][i] - basis[j][j] - basis[k][k] + 1.0f)
-            temp[i] = s * 0.5f
-            s = 0.5f / s
-            temp[3] = (basis[k][j] - basis[j][k]) * s
-            temp[j] = (basis[j][i] + basis[i][j]) * s
-            temp[k] = (basis[k][i] + basis[i][k]) * s
-        }
-        Quat(temp[0],temp[1],temp[2],temp[3])
+    external override fun hashCode(): Int {
+        var result = x.hashCode()
+        result = 31 * result + y.hashCode()
+        result = 31 * result + z.hashCode()
+        result = 31 * result + w.hashCode()
+        return result
     }
-
 }

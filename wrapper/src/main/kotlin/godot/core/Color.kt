@@ -58,7 +58,7 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
                 else -> false
             }
 
-    fun to_32(): Int {
+    fun to32(): Int {
         var c: Int = (a * 255).roundToInt()
         c = c shl 8
         c = c or (r * 255).roundToInt()
@@ -70,7 +70,7 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
         return c
     }
 
-    fun to_ARGB32(): Int {
+    fun toARGB32(): Int {
         var c: Int = (a * 255).roundToInt()
         c = c shl 8
         c = c or (r * 255).roundToInt()
@@ -85,7 +85,7 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
     fun gray(): Float =
             (r + g + b) / 3f
 
-    fun get_h(): Float {
+    fun geth(): Float {
         var min = minOf(r, g)
         min = minOf(min, b)
         var max = maxOf(r, g)
@@ -109,7 +109,7 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
         return h
     }
 
-    fun get_s(): Float {
+    fun gets(): Float {
         var min = minOf(r, g)
         min = minOf(min, b)
         var max = maxOf(r, g)
@@ -119,72 +119,72 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
         return if (max != 0f) delta / max else 0f
     }
 
-    fun get_v(): Float {
+    fun getv(): Float {
         var max = maxOf(r, g)
         max = maxOf(max, b)
         return max
     }
 
-    fun set_hsv(p_h: Float, p_s: Float, p_v: Float, p_alpha: Float): Unit {
+    fun sethsv(h: Float, s: Float, v: Float, alpha: Float) {
         val i: Int
         val f: Float
         val p: Float
         val q: Float
         val t: Float
 
-        a = p_alpha
-        if (p_s == 0f) {
+        a = alpha
+        if (s == 0f) {
             // acp_chromatic (grey)
-            r = p_v
-            g = p_v
-            b = p_v
+            r = v
+            g = v
+            b = v
             return
         }
 
-        var p_h2 = p_h * 6f
-        p_h2 = p_h.rem(6f)
-        i = floor(p_h).toInt()
+        var h2 = h * 6f
+        h2 = h2.rem(6f)
+        i = floor(h).toInt()
 
-        f = p_h2 - i
-        p = p_v * (1 - p_s)
-        q = p_v * (1 - p_s * f)
-        t = p_v * (1 - p_s * (1 - f))
+        f = h2 - i
+        p = v * (1 - s)
+        q = v * (1 - s * f)
+        t = v * (1 - s * (1 - f))
 
         when (i) {
             0 -> { // Red is the dominant color
-                r = p_v
+                r = v
                 g = t
                 b = p
             }
             1 -> { // Green is the dominant color
                 r = q
-                g = p_v
+                g = v
                 b = p
             }
             2 -> {
                 r = p
-                g = p_v
+                g = v
                 b = t
             }
             3 -> { // Blue is the dominant color
                 r = p
                 g = q
-                b = p_v
+                b = v
             }
             4 -> {
                 r = t
                 g = p
-                b = p_v
+                b = v
             }
             else -> { // (5) Red is the dominant color
-                r = p_v
+                r = v
                 g = p
                 b = q
             }
         }
     }
 
-    fun invert(): Unit {
+    fun invert() {
         r = 1f - r
         g = 1f - g
         b = 1f - b
@@ -196,7 +196,7 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
         return c
     }
 
-    fun contrast(): Unit {
+    fun contrast() {
         r = (r + 0.5f).rem(1f)
         g = (g + 0.5f).rem(1f)
         b = (b + 0.5f).rem(1f)
@@ -208,34 +208,34 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
         return c
     }
 
-    fun linear_interpolate(p_b: Color, p_t: Float): Color {
+    fun linearInterpolate(otherColor: Color, t: Float): Color {
         val res = this
-        res.r += (p_t * (p_b.r - r))
-        res.g += (p_t * (p_b.g - g))
-        res.b += (p_t * (p_b.b - b))
-        res.a += (p_t * (p_b.a - a))
+        res.r += (t * (otherColor.r - r))
+        res.g += (t * (otherColor.g - g))
+        res.b += (t * (otherColor.b - b))
+        res.a += (t * (otherColor.a - a))
 
         return res
     }
 
-    fun blend(p_over: Color): Color {
+    fun blend(over: Color): Color {
         val res = Color()
-        val sa = 1f - p_over.a
+        val sa = 1f - over.a
         if (res.a == 0f) {
             return Color(0f, 0f, 0f, 0f)
         } else {
-            res.r = (r * a * sa + p_over.r * p_over.a) / res.a
-            res.g = (g * a * sa + p_over.g * p_over.a) / res.a
-            res.b = (b * a * sa + p_over.b * p_over.a) / res.a
+            res.r = (r * a * sa + over.r * over.a) / res.a
+            res.g = (g * a * sa + over.g * over.a) / res.a
+            res.b = (b * a * sa + over.b * over.a) / res.a
         }
         return res
     }
 
-    fun to_linear(): Color {
-        val new_r = if (r < 0.04045f) r * (1.0f / 12.92f) else ((r + 0.055f) * (1.0f / (1f + 0.055f))).pow(2.4f)
-        val new_g = if (g < 0.04045f) g * (1.0f / 12.92f) else ((g + 0.055f) * (1.0f / (1f + 0.055f))).pow(2.4f)
-        val new_b = if (b < 0.04045f) b * (1.0f / 12.92f) else ((b + 0.055f) * (1.0f / (1f + 0.055f))).pow(2.4f)
-        return Color(new_r, new_g, new_b, a)
+    fun toLinear(): Color {
+        val red = if (r < 0.04045f) r * (1.0f / 12.92f) else ((r + 0.055f) * (1.0f / (1f + 0.055f))).pow(2.4f)
+        val green = if (g < 0.04045f) g * (1.0f / 12.92f) else ((g + 0.055f) * (1.0f / (1f + 0.055f))).pow(2.4f)
+        val blue = if (b < 0.04045f) b * (1.0f / 12.92f) else ((b + 0.055f) * (1.0f / (1f + 0.055f))).pow(2.4f)
+        return Color(red, green, blue, a)
     }
 
     fun hex(p_hex: Int): Color {
@@ -270,7 +270,7 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
 
         var a = 255
         if (alpha) {
-            a = _parse_col(color, 0).toInt()
+            a = parseCol(color, 0).toInt()
             if (a < 0) {
                 ERR_PRINT("Invalid Color Code:$p_color")
                 return Color()
@@ -278,9 +278,9 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
         }
 
         val from = if (alpha) 2 else 0
-        val r = _parse_col(color, from + 0).toInt()
-        val g = _parse_col(color, from + 2).toInt()
-        val b = _parse_col(color, from + 4).toInt()
+        val r = parseCol(color, from + 0).toInt()
+        val g = parseCol(color, from + 2).toInt()
+        val b = parseCol(color, from + 4).toInt()
         if (r < 0 || g < 0 || b < 0) {
             ERR_PRINT("Invalid Color Code:$p_color")
             return Color()
@@ -289,7 +289,7 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
         return Color(r / 255.0f, g / 255.0f, b / 255.0f, a / 255.0f)
     }
 
-    fun html_is_valid(p_color: String): Boolean {
+    fun htmlIsValid(p_color: String): Boolean {
         var color = p_color
         if (color.isEmpty())
             return false
@@ -306,18 +306,18 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
             return false
         }
 
-        var a = 255
+        val a: Int
         if (alpha) {
-            a = _parse_col(color, 0).toInt()
+            a = parseCol(color, 0).toInt()
             if (a < 0) {
                 return false
             }
         }
 
         val from = if (alpha) 2 else 0
-        val r = _parse_col(color, from + 0).toInt()
-        val g = _parse_col(color, from + 2).toInt()
-        val b = _parse_col(color, from + 4).toInt()
+        val r = parseCol(color, from + 0).toInt()
+        val g = parseCol(color, from + 2).toInt()
+        val b = parseCol(color, from + 4).toInt()
         if (r < 0 || g < 0 || b < 0) {
             return false
         }
@@ -327,7 +327,7 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
 
 
     companion object {
-        fun _parse_col(p_str: String, p_ofs: Int): Float {
+        fun parseCol(p_str: String, p_ofs: Int): Float {
             var ig = 0f
             for (i in 0..1) {
                 var v = 0
@@ -351,7 +351,7 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
             return ig
         }
 
-        fun _to_hex(p_val: Float): String {
+        fun toHex(p_val: Float): String {
             var v = (p_val * 255).toInt()
             v = when {
                 v < 0 -> 0
@@ -369,20 +369,20 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
                     c[0] = ('a'.toInt() + lv - 10).toShort()
 
                 v = v shr 4
-                val cs: String = String(charArrayOf(c[0].toChar()))
+                val cs = String(charArrayOf(c[0].toChar()))
                 ret = cs + ret
             }
             return ret
         }
     }
 
-    fun to_html(p_alpha: Boolean): String {
+    fun toHtml(p_alpha: Boolean): String {
         var txt = ""
-        txt += _to_hex(r)
-        txt += _to_hex(g)
-        txt += _to_hex(b)
+        txt += toHex(r)
+        txt += toHex(g)
+        txt += toHex(b)
         if (p_alpha)
-            txt = _to_hex(a) + txt
+            txt = toHex(a) + txt
         return txt
     }
 
@@ -404,6 +404,11 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
     }
 
     override fun toString() = "$r, $g, $b, $a"
-    //TODO(Do this with godot string)
-
+    external override fun hashCode(): Int {
+        var result = r.hashCode()
+        result = 31 * result + g.hashCode()
+        result = 31 * result + b.hashCode()
+        result = 31 * result + a.hashCode()
+        return result
+    }
 }

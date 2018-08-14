@@ -9,9 +9,9 @@ class Transform: CoreType {
     lateinit var basis: Basis
     lateinit var origin: Vector3
 
-    constructor(p_basis: Basis, p_origin: Vector3 = Vector3()) {
-        this.basis = p_basis
-        this.origin = p_origin
+    constructor(basis: Basis, origin: Vector3 = Vector3()) {
+        this.basis = basis
+        this.origin = origin
     }
 
     constructor(xx: Number, xy: Number, xz: Number, yx: Number, yy: Number, yz: Number, zx: Number, zy: Number, zz: Number, tx: Number, ty: Number, tz: Number):
@@ -54,7 +54,7 @@ class Transform: CoreType {
 
     fun inverseXform(t: Transform): Transform {
         val v = t.origin - origin
-        return Transform(basis.transpose_xform(t.basis), basis.xform(v))
+        return Transform(basis.transposeXform(t.basis), basis.xform(v))
     }
 
     fun set(xx: Number, xy: Number, xz: Number, yx: Number, yy: Number, yz: Number, zx: Number, zy: Number, zz: Number, tx: Number, ty: Number, tz: Number) {
@@ -72,13 +72,13 @@ class Transform: CoreType {
         origin[2] = tz.toFloat()
     }
 
-    fun xform(p_vector: Vector3): Vector3 =
-            Vector3(basis[0].dot(p_vector)+origin.x,
-                    basis[1].dot(p_vector)+origin.y,
-                    basis[2].dot(p_vector)+origin.z)
+    fun xform(vector: Vector3): Vector3 =
+            Vector3(basis[0].dot(vector)+origin.x,
+                    basis[1].dot(vector)+origin.y,
+                    basis[2].dot(vector)+origin.z)
 
-    fun xformInv(p_vector: Vector3): Vector3 {
-        val v = p_vector - origin
+    fun xformInv(vector: Vector3): Vector3 {
+        val v = vector - origin
         return Vector3(
                 (basis[0][0]*v.x ) + ( basis[1][0]*v.y ) + ( basis[2][0]*v.z ),
                 (basis[0][1]*v.x ) + ( basis[1][1]*v.y ) + ( basis[2][1]*v.z ),
@@ -86,58 +86,58 @@ class Transform: CoreType {
         )
     }
 
-    fun xform(p_plane: Plane): Plane {
-        var point = p_plane.normal * p_plane.d
-        var point_dir = point + p_plane.normal
+    fun xform(plane: Plane): Plane {
+        var point = plane.normal * plane.d
+        var pointDir = point + plane.normal
         point = xform(point)
-        point_dir = xform(point_dir)
+        pointDir = xform(pointDir)
 
-        val normal = point_dir - point
+        val normal = pointDir - point
         normal.normalize()
 
         return Plane( normal, normal.dot(point) )
     }
 
-    fun xformInv(p_plane: Plane): Plane {
-        var point = p_plane.normal * p_plane.d
-        var point_dir = point + p_plane.normal
+    fun xformInv(plane: Plane): Plane {
+        var point = plane.normal * plane.d
+        var pointDir = point + plane.normal
         point = xformInv(point)
-        point_dir = xformInv(point_dir)
+        pointDir = xformInv(pointDir)
 
-        val normal = point_dir - point
+        val normal = pointDir - point
         normal.normalize()
 
         return Plane( normal, normal.dot(point) )
     }
 
-    fun xform(p_aabb: AABB): AABB {
-        val x = basis.get_axis(0) * p_aabb.size.x
-        val y = basis.get_axis(1) * p_aabb.size.y
-        val z = basis.get_axis(2) * p_aabb.size.z
-        val pos = xform( p_aabb.position )
+    fun xform(aabb: AABB): AABB {
+        val x = basis.getAxis(0) * aabb.size.x
+        val y = basis.getAxis(1) * aabb.size.y
+        val z = basis.getAxis(2) * aabb.size.z
+        val pos = xform( aabb.position )
 
-        val new_aabb = AABB()
-        new_aabb.position = pos
-        new_aabb.expandTo(pos + x)
-        new_aabb.expandTo(pos + y)
-        new_aabb.expandTo(pos + z)
-        new_aabb.expandTo(pos + x + y)
-        new_aabb.expandTo(pos + x + z)
-        new_aabb.expandTo(pos + y + z)
-        new_aabb.expandTo(pos + x + y + z)
-        return new_aabb
+        val newAabb = AABB()
+        newAabb.position = pos
+        newAabb.expandTo(pos + x)
+        newAabb.expandTo(pos + y)
+        newAabb.expandTo(pos + z)
+        newAabb.expandTo(pos + x + y)
+        newAabb.expandTo(pos + x + z)
+        newAabb.expandTo(pos + y + z)
+        newAabb.expandTo(pos + x + y + z)
+        return newAabb
     }
 
-    fun xformInv(p_aabb: AABB): AABB {
+    fun xformInv(aabb: AABB): AABB {
         val vertices: Array<Vector3> =
-                arrayOf(Vector3(p_aabb.position.x+p_aabb.size.x,	p_aabb.position.y+p_aabb.size.y,	p_aabb.position.z+p_aabb.size.z),
-                        Vector3(p_aabb.position.x+p_aabb.size.x,	p_aabb.position.y+p_aabb.size.y,	p_aabb.position.z),
-                        Vector3(p_aabb.position.x+p_aabb.size.x,	p_aabb.position.y,		p_aabb.position.z+p_aabb.size.z),
-                        Vector3(p_aabb.position.x+p_aabb.size.x,	p_aabb.position.y,		p_aabb.position.z),
-                        Vector3(p_aabb.position.x,	p_aabb.position.y+p_aabb.size.y,	p_aabb.position.z+p_aabb.size.z),
-                        Vector3(p_aabb.position.x,	p_aabb.position.y+p_aabb.size.y,	p_aabb.position.z),
-                        Vector3(p_aabb.position.x,	p_aabb.position.y,		p_aabb.position.z+p_aabb.size.z),
-                        Vector3(p_aabb.position.x,	p_aabb.position.y,		p_aabb.position.z))
+                arrayOf(Vector3(aabb.position.x+aabb.size.x,	aabb.position.y+aabb.size.y,	aabb.position.z+aabb.size.z),
+                        Vector3(aabb.position.x+aabb.size.x,	aabb.position.y+aabb.size.y,	aabb.position.z),
+                        Vector3(aabb.position.x+aabb.size.x,	aabb.position.y,		aabb.position.z+aabb.size.z),
+                        Vector3(aabb.position.x+aabb.size.x,	aabb.position.y,		aabb.position.z),
+                        Vector3(aabb.position.x,	aabb.position.y+aabb.size.y,	aabb.position.z+aabb.size.z),
+                        Vector3(aabb.position.x,	aabb.position.y+aabb.size.y,	aabb.position.z),
+                        Vector3(aabb.position.x,	aabb.position.y,		aabb.position.z+aabb.size.z),
+                        Vector3(aabb.position.x,	aabb.position.y,		aabb.position.z))
 
         val ret = AABB()
         ret.position = xformInv(vertices[0])
@@ -169,87 +169,87 @@ class Transform: CoreType {
         return ret
     }
 
-    fun rotate(p_axis: Vector3, p_phi: Float) {
-        val new_t = rotated(p_axis, p_phi)
-        this.basis = new_t.basis
-        this.origin = new_t.origin
+    fun rotate(axis: Vector3, phi: Float) {
+        val t = rotated(axis, phi)
+        this.basis = t.basis
+        this.origin = t.origin
     }
 
-    fun rotated(p_axis: Vector3, p_phi: Float): Transform =
-            Transform(Basis( p_axis, p_phi ), Vector3()) * this
+    fun rotated(axis: Vector3, phi: Float): Transform =
+            Transform(Basis( axis, phi ), Vector3()) * this
 
-    fun rotateBasis(p_axis: Vector3, p_phi: Float) {
-        basis.rotate(p_axis, p_phi)
+    fun rotateBasis(axis: Vector3, phi: Float) {
+        basis.rotate(axis, phi)
     }
 
-    fun lookingAt(p_target: Vector3, p_up: Vector3): Transform {
+    fun lookingAt(target: Vector3, up: Vector3): Transform {
         val t = this
-        t.setLookAt(origin, p_target, p_up)
+        t.setLookAt(origin, target, up)
         return t
     }
 
-    fun setLookAt(p_eye: Vector3, p_target: Vector3, p_up: Vector3) { //TODO: Refactor
-        var v_x: Vector3
-        var v_y: Vector3
-        var v_z: Vector3
+    fun setLookAt(eye: Vector3, target: Vector3, up: Vector3) { //TODO: Refactor
+        var x: Vector3
+        var y: Vector3
+        var z: Vector3
 
-        v_z = p_eye - p_target
-        v_z.normalize()
-        v_y = p_up
-        v_x = v_y.cross(v_z)
-        v_y = v_z.cross(v_x)
-        v_x.normalize()
-        v_y.normalize()
+        z = eye - target
+        z.normalize()
+        y = up
+        x = y.cross(z)
+        y = z.cross(x)
+        x.normalize()
+        y.normalize()
 
-        basis.set_axis(0, v_x)
-        basis.set_axis(1, v_y)
-        basis.set_axis(2, v_z)
-        origin = p_eye
+        basis.setAxis(0, x)
+        basis.setAxis(1, y)
+        basis.setAxis(2, z)
+        origin = eye
     }
 
-    fun interpolateWith(p_transform: Transform, p_c: Float): Transform {
-        val src_scale = basis.get_scale()
-        val src_rot = Quat(basis)
-        val src_loc = origin
+    fun interpolateWith(transform: Transform, c: Float): Transform {
+        val srcScale = basis.getScale()
+        val srcRot = Quat(basis)
+        val srcLoc = origin
 
-        val dst_scale = p_transform.basis.get_scale()
-        val dst_rot = Quat(p_transform.basis)
-        val dst_loc = p_transform.origin
+        val dstScale = transform.basis.getScale()
+        val dstRot = Quat(transform.basis)
+        val dstLoc = transform.origin
 
         val dst = Transform()
-        dst.basis= Basis(src_rot.slerp(dst_rot,p_c))
-        dst.basis.scale(src_scale.linearInterpolate(dst_scale, p_c))
-        dst.origin = src_loc.linearInterpolate(dst_loc, p_c)
+        dst.basis= Basis(srcRot.slerp(dstRot,c))
+        dst.basis.scale(srcScale.linearInterpolate(dstScale, c))
+        dst.origin = srcLoc.linearInterpolate(dstLoc, c)
 
         return dst
     }
 
-    fun scale(p_scale: Vector3) {
-        basis.scale(p_scale)
-        origin *= p_scale
+    fun scale(scale: Vector3) {
+        basis.scale(scale)
+        origin *= scale
     }
 
-    fun scaled(p_scale: Vector3): Transform {
+    fun scaled(scale: Vector3): Transform {
         val t = this
-        t.scale(p_scale)
+        t.scale(scale)
         return t
     }
 
-    fun scaleBasis(p_scale: Vector3) {
-        basis.scale(p_scale)
+    fun scaleBasis(scale: Vector3) {
+        basis.scale(scale)
     }
 
-    fun translate(p_translation: Vector3) {
+    fun translate(translation: Vector3) {
         for (i in 0..2)
-            origin[i] += basis[i].dot(p_translation)
+            origin[i] += basis[i].dot(translation)
     }
 
-    fun translate(p_tx: Float, p_ty: Float, p_tz: Float) =
-            translate(Vector3(p_tx, p_ty, p_tz))
+    fun translate(tx: Float, ty: Float, tz: Float) =
+            translate(Vector3(tx, ty, tz))
 
-    fun translated(p_translation: Vector3): Transform {
+    fun translated(translation: Vector3): Transform {
         val t = this
-        t.translate(p_translation)
+        t.translate(translation)
         return t
     }
 
@@ -269,10 +269,10 @@ class Transform: CoreType {
         }
     }
 
-    operator fun times(p_transform: Transform): Transform {
+    operator fun times(transform: Transform): Transform {
         val t = this
-        t.origin = xform(p_transform.origin)
-        t.basis *= p_transform.basis
+        t.origin = xform(transform.origin)
+        t.basis *= transform.basis
         return t
     }
 
@@ -280,13 +280,9 @@ class Transform: CoreType {
         return basis.toString() + " - " + origin.toString()
     }
 
-    fun getBasis(): Basis = basis
-    fun setBasis(p_basis: Basis) {
-        basis = p_basis
-    }
-
-    fun getOrigin(): Vector3 = origin
-    fun setOrigin(p_origin: Vector3) {
-        origin = p_origin
+    external override fun hashCode(): Int {
+        var result = basis.hashCode()
+        result = 31 * result + origin.hashCode()
+        return result
     }
 }

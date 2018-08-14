@@ -1,11 +1,11 @@
 package kotlin.godot.registration
 
-import godot.*
-import kotlinx.cinterop.*
-import kotlin.godot.*
-import kotlin.godot.core.*
-
+import godot.godot_wrapper_register_class
+import godot.godot_wrapper_register_method
+import kotlinx.cinterop.get
+import kotlinx.cinterop.staticCFunction
 import simple.user.pack.TestClass
+import kotlin.godot.core.Variant
 
 
 class UserDefinedClasses {
