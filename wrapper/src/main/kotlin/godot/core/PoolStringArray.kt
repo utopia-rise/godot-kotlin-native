@@ -6,9 +6,11 @@ import godot.core.toKString
 import kotlinx.cinterop.*
 
 class PoolStringArray : CoreType {
-    internal var nativeValue = cValue<godot_pool_string_array> { godot_pool_string_array_new(this.ptr) }
+    internal var nativeValue = cValue<godot_pool_string_array> {}
 
-    constructor()
+    constructor() {
+        nativeValue = nativeValue.copy { godot_pool_string_array_new(this.ptr) }
+    }
 
     internal constructor(native: CValue<godot_pool_string_array>) {
         nativeValue = nativeValue.copy { godot_pool_string_array_new_copy(this.ptr, native) }

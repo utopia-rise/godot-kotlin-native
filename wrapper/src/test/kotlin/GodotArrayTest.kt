@@ -74,7 +74,7 @@ class GodotArrayTest {
 
         val arr = GodotArray()
         Godot.print("Testing empty & size: " +
-                if (arr.empty() && arr.size() == 0)
+                if (arr.isEmpty() && arr.size() == 0)
                     "OK"
                 else
                     "ERROR")

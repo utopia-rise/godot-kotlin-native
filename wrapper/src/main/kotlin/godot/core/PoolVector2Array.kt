@@ -4,9 +4,11 @@ import godot.*
 import kotlinx.cinterop.*
 
 class PoolVector2Array : CoreType {
-    internal var nativeValue = cValue<godot_pool_vector2_array> { godot_pool_vector2_array_new(this.ptr) }
+    internal var nativeValue = cValue<godot_pool_vector2_array> {}
 
-    constructor()
+    constructor() {
+        nativeValue = nativeValue.copy { godot_pool_vector2_array_new(this.ptr) }
+    }
 
     internal constructor(native: CValue<godot_pool_vector2_array>) {
         nativeValue = nativeValue.copy { godot_pool_vector2_array_new_copy(this.ptr, native) }

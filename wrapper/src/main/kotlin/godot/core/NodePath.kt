@@ -6,9 +6,11 @@ import godot.core.toKString
 import kotlinx.cinterop.*
 
 class NodePath : CoreType {
-    internal var nativeValue = cValue<godot_node_path> { godot_node_path_new(this.ptr, String().toGDString()) }
+    internal var nativeValue = cValue<godot_node_path> {}
 
-    constructor()
+    constructor() {
+        nativeValue = nativeValue.copy { godot_node_path_new(this.ptr, String().toGDString()) }
+    }
 
     internal constructor(native: CValue<godot_node_path>) {
         nativeValue = nativeValue.copy { godot_node_path_new_copy(this.ptr, native) }

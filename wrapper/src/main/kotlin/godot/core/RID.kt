@@ -2,11 +2,20 @@ package kotlin.godot.core
 
 import godot.*
 import kotlinx.cinterop.*
+import kotlin.godot.Object
 
-class RID() : CoreType {
-    internal var nativeValue : CValue<godot_rid> = cValue { godot_rid_new(this.ptr) }
+class RID : CoreType {
+    internal var nativeValue = cValue<godot_rid> {}
 
-    //TODO: Object constructor
+    constructor() {
+        nativeValue = nativeValue.copy { godot_rid_new(this.ptr) }
+    }
+
+    constructor(other: Object) {
+        memScoped {
+            nativeValue = nativeValue.copy { godot_rid_new_with_resource(this.ptr, other.getRawMemory(memScope)) }
+        }
+    }
 
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
         return nativeValue.getPointer(memScope)
@@ -26,7 +35,7 @@ class RID() : CoreType {
         this.setRawMemory(mem)
     }
 
-    fun getRID() : Int = godot_rid_get_id(nativeValue)
+    fun getID(): Int = godot_rid_get_id(nativeValue)
 
     override fun equals(other: Any?): Boolean =
         if(other is RID) godot_rid_operator_equal(nativeValue, other.nativeValue)

@@ -5,9 +5,11 @@ import godot.*
 import godot.core.toKString
 
 class Dictionary: CoreType {
-    var nativeValue = cValue<godot_dictionary> { godot_dictionary_new(this.ptr) }
+    var nativeValue = cValue<godot_dictionary> {}
 
-    constructor()
+    constructor() {
+        nativeValue = nativeValue.copy { godot_dictionary_new(this.ptr) }
+    }
 
     internal constructor(native: CValue<godot_dictionary>) {
         nativeValue = nativeValue.copy { godot_dictionary_new_copy(this.ptr, native) }

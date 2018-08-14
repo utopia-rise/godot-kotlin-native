@@ -2,11 +2,15 @@ package kotlin.godot.core
 
 import kotlinx.cinterop.*
 import godot.*
+import godot.core.toGDString
+import kotlin.godot.Object
 
 class GodotArray: CoreType {
-    internal var nativeValue = cValue<godot_array> { godot_array_new(this.ptr) }
+    internal var nativeValue = cValue<godot_array> {}
 
-    constructor()
+    constructor() {
+        nativeValue = nativeValue.copy { godot_array_new(this.ptr) }
+    }
 
     internal constructor(native: CValue<godot_array>) {
         nativeValue = nativeValue.copy { godot_array_new_copy(this.ptr, native) }
@@ -61,7 +65,7 @@ class GodotArray: CoreType {
         nativeValue = nativeValue.copy { godot_array_clear(this.ptr) }
     }
 
-    fun empty() : Boolean = godot_array_empty(nativeValue)
+    fun isEmpty(): Boolean = godot_array_empty(nativeValue)
 
     override fun hashCode() : Int = godot_array_hash(nativeValue)
 
@@ -121,6 +125,8 @@ class GodotArray: CoreType {
 
     fun rfind(v: Variant, from: Int): Int = godot_array_rfind(nativeValue, v.nativeValue, from)
 
-    fun sortCustom() { } //TODO: Need Object
+    fun sortCustom(obj: Object, func: String) = memScoped {
+        godot_array_sort_custom(nativeValue, obj.getRawMemory(memScope), func.toGDString())
+    }
 
 }
