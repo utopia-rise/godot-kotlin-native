@@ -333,7 +333,4 @@ class Transform2D: CoreType {
     override fun toString(): String =
             elements[0].toString() + ", " + elements[1].toString() + ", " + elements[2]
 
-    external override fun hashCode(): Int {
-        return java.util.Arrays.hashCode(elements)
-    }
 }

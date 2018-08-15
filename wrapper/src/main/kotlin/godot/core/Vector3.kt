@@ -8,10 +8,14 @@ class Vector3(var x: Float, var y: Float, var z: Float) : Comparable<Vector3>, C
     constructor() :
             this(0f, 0f, 0f)
 
-    enum class Axis {
-        AXIS_X,
-        AXIS_Y,
-        AXIS_Z
+    enum class Axis(val id: Int) {
+        AXIS_X(0),
+        AXIS_Y(1),
+        AXIS_Z(2);
+
+        companion object {
+            fun fromInt(value: Int) = values().single { it.id == value }
+        }
     }
 
     constructor(x: Number, y: Number, z: Number) :

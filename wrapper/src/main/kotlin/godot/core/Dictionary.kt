@@ -2,7 +2,7 @@ package kotlin.godot.core
 
 import kotlinx.cinterop.*
 import godot.*
-import godot.core.toKString
+
 
 class Dictionary: CoreType {
     var nativeValue = cValue<godot_dictionary> {}

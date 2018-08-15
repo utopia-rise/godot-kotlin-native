@@ -1,7 +1,8 @@
-package godot.core
+package kotlin.godot.core
 
 import godot.*
 import kotlinx.cinterop.*
+
 
 fun String(mem: COpaquePointer) = mem.reinterpret<godot_string>().pointed.readValue().toKString()
 

@@ -1,10 +1,9 @@
 package kotlin.godot.core
 
 import godot.*
-import godot.core.toGDString
-import godot.core.toKString
 import kotlinx.cinterop.*
 import kotlin.godot.Object
+
 
 class Variant: CoreType {
     internal var nativeValue = cValue<godot_variant> {}
@@ -341,7 +340,7 @@ class Variant: CoreType {
                 else -> 1
             }
 
-    external override fun hashCode(): Int {
+    override fun hashCode(): Int {
         return nativeValue.hashCode()
     }
 

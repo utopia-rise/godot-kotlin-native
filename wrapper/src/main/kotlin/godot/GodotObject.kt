@@ -6,16 +6,17 @@ import kotlin.godot.core.CoreType
 
 
 abstract class GodotObject : CoreType {
-    private lateinit var rawMemory: COpaquePointer
+    protected lateinit var rawMemory: COpaquePointer
 
 
     internal constructor(mem: COpaquePointer) {
         rawMemory = mem
     }
     constructor(name: String) {
-        if (name != "") {
+        if (name != "" && ___godot_wrapper_nativeConstructorInvocation) {
             godot_get_class_constructor(name)?.let {
                 rawMemory = it.reinterpret<CFunction<() -> COpaquePointer>>()()
+                globalObjectPool.add(rawMemory.toLong(), this) // TODO: put destructor somewhere
             }
         }
     }
@@ -28,3 +29,6 @@ abstract class GodotObject : CoreType {
         rawMemory = mem
     }
 }
+
+
+internal var ___godot_wrapper_nativeConstructorInvocation: Boolean = true

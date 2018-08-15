@@ -2,8 +2,8 @@ package kotlin.godot.core
 
 import kotlinx.cinterop.*
 import godot.*
-import godot.core.toGDString
 import kotlin.godot.Object
+
 
 class GodotArray: CoreType {
     internal var nativeValue = cValue<godot_array> {}

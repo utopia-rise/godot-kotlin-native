@@ -1,6 +1,5 @@
 package kotlin.godot.core
 
-import godot.core.toGDString
 import godot.godot_print
 import godot.godot_print_error
 import godot.godot_print_warning

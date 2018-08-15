@@ -1,9 +1,8 @@
 package kotlin.godot.core
 
 import godot.*
-import godot.core.toGDString
-import godot.core.toKString
 import kotlinx.cinterop.*
+
 
 class PoolStringArray : CoreType {
     internal var nativeValue = cValue<godot_pool_string_array> {}

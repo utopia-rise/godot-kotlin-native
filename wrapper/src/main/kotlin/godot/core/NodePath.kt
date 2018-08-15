@@ -1,9 +1,8 @@
 package kotlin.godot.core
 
 import godot.*
-import godot.core.toGDString
-import godot.core.toKString
 import kotlinx.cinterop.*
+
 
 class NodePath : CoreType {
     internal var nativeValue = cValue<godot_node_path> {}
@@ -54,7 +53,7 @@ class NodePath : CoreType {
         if(other is NodePath) godot_node_path_operator_equal(nativeValue, other.nativeValue)
         else false
 
-    external override fun hashCode(): Int {
+    override fun hashCode(): Int {
         return nativeValue.hashCode()
     }
 

@@ -5,7 +5,6 @@ import konan.internal.CName
 import kotlinx.cinterop.*
 import kotlin.godot.registration.*
 
-import main
 
 
 @CName("godot_gdnative_init")
@@ -23,5 +22,7 @@ fun ___godot_wrapper_nativescript_init(handle: COpaquePointer) {
     godot_wrapper_nativescript_init(handle)
     GodotApiClasses.registerAll()
     UserDefinedClasses.registerAll()
-    main()
+
+    // Uncomment to enable testing, use "godot_wrapper_test" build config
+    //testAll()
 }
