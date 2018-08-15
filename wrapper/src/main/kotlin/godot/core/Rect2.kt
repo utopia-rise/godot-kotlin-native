@@ -170,7 +170,7 @@ class Rect2: CoreType {
     override fun toString(): String =
             pos.toString() + ", " + size.toString()
 
-    fun intersectsSegment(from: Vector2, to: Vector2, r_pos: Vector2?, r_normal: Vector2?): Triple<Boolean, Vector2?, Vector2?> {
+    fun intersectsSegment(from: Vector2, to: Vector2, boolPos: Boolean, boolNormal: Boolean): Triple<Boolean, Vector2?, Vector2?> {
         var min = 0f
         var max = 1f
         var axis = 0
@@ -187,14 +187,14 @@ class Rect2: CoreType {
 
             if (segFrom < segTo) {
                 if (segFrom > boxEnd || segTo < boxBegin)
-                    return Triple(false, r_pos, r_normal)
+                    return Triple(false, null, null)
                 val length=segTo-segFrom
                 cmin = if (segFrom < boxBegin) ((boxBegin - segFrom)/length) else 0f
                 cmax = if (segTo > boxEnd) ((boxEnd - segFrom)/length) else 1f
                 csign = -1f
             } else {
                 if (segTo > boxEnd || segFrom < boxBegin)
-                    return Triple(false, r_pos, r_normal)
+                    return Triple(false, null, null)
                 val length = segTo-segFrom
                 cmin = if (segFrom > boxEnd) (boxEnd - segFrom)/length else 0f
                 cmax = if (segTo < boxBegin) (boxBegin - segFrom)/length else 1f
@@ -209,18 +209,18 @@ class Rect2: CoreType {
             if (cmax < max)
                 max = cmax
             if (max < min)
-                return Triple(false, r_pos, r_normal)
+                return Triple(false, null, null)
         }
 
         val rel = to - from
         var normal: Vector2? = null
         var pos: Vector2? = null
-        if (r_normal != null) {
+        if (boolNormal) {
             normal = Vector2()
             normal[axis] = sign
         }
 
-        if (r_pos != null)
+        if (boolPos)
             pos = from + rel * min
 
         return Triple(true, pos, normal)

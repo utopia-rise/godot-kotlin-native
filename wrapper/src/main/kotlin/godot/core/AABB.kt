@@ -319,73 +319,110 @@ class AABB: CoreType {
         return AABB(min, max - min)
     }
 
-    fun intersectsRay(p_from: Vector3, p_dir: Vector3): Boolean {
+    fun intersectsRay(from: Vector3, dir: Vector3, clip: Boolean, normal: Boolean): Triple<Boolean, Vector3?, Vector3?> {
         var c1 = Vector3()
         var c2 = Vector3()
         val end = position + size
         var near = (-1e20).toFloat()
         var far = 1e20.toFloat()
+        var axis = 0
 
         for (i in 0 until 3) {
-            if (p_dir[i] == 0f) {
-                if ((p_from[i] < position[i]) || (p_from[i] > end[i])) {
-                    return false
+            if (dir[i] == 0f) {
+                if ((from[i] < position[i]) || (from[i] > end[i])) {
+                    return Triple(false, null, null)
                 }
             } else { // ray not parallel to planes in this direction
-                c1[i] = (position[i] - p_from[i]) / p_dir[i]
-                c2[i] = (end[i] - p_from[i]) / p_dir[i]
+                c1[i] = (position[i] - from[i]) / dir[i]
+                c2[i] = (end[i] - from[i]) / dir[i]
 
                 if (c1[i] > c2[i])
                     c1 = c2.also { c2 = c1 }
 
-                if (c1[i] > near)
+                if (c1[i] > near) {
                     near = c1[i]
+                    axis = i
+                }
 
                 if (c2[i] < far)
                     far = c2[i]
 
                 if ((near > far) || (far < 0))
-                    return false
+                    return Triple(false, null, null)
             }
         }
-        return true
+
+        var ret1: Vector3? = null
+        var ret2: Vector3? = null
+        if (clip)
+            ret1 = c1
+        if (normal) {
+            ret2 = Vector3()
+            ret2[axis] = if (dir[axis] != 0f) -1f else 1f
+        }
+        return Triple(true, ret1, ret2)
     }
 
-    fun intersectsSegment(p_from: Vector3, p_to: Vector3): Boolean {
+//    fun intersectionRayClip(from: Vector3, dir: Vector3): Vector3 {
+//        var ret = Vector3()
+//
+//    }
+
+    fun intersectsSegment(from: Vector3, to: Vector3, clip: Boolean, normal: Boolean): Triple<Boolean, Vector3?, Vector3?> {
         var min = 0f
         var max = 0f
+        var axis = 0
+        var sign = 0f
 
         for (i in 0..2) {
-            val segFrom = p_from[i]
-            val segTo = p_to[i]
+            val segFrom = from[i]
+            val segTo = to[i]
             val boxBegin = position[i]
             val boxEnd = boxBegin + size[i]
             val cmin: Float
             val cmax: Float
+            val csign: Float
 
             if (segFrom < segTo) {
 
                 if (segFrom > boxEnd || segTo < boxBegin)
-                    return false
+                    return Triple(false, null, null)
                 val length = segTo - segFrom
                 cmin = if (segFrom < boxBegin) ((boxBegin - segFrom) / length) else 0f
                 cmax = if (segTo > boxEnd) ((boxEnd - segFrom) / length) else 1f
+                csign = -1f
             } else {
                 if (segTo > boxEnd || segFrom < boxBegin)
-                    return false
+                    return Triple(false, null, null)
                 val length = segTo - segFrom
                 cmin = if (segFrom > boxEnd) (boxEnd - segFrom) / length else 0f
                 cmax = if (segTo < boxBegin) (boxBegin - segFrom) / length else 1f
+                csign = 1f
             }
             if (cmin > min) {
                 min = cmin
+                axis = i
+                sign = csign
             }
             if (cmax < max)
                 max = cmax
             if (max < min)
-                return false
+                return Triple(false, null, null)
         }
-        return true
+
+        val rel = to - from
+        val ret1: Vector3?
+        val ret2: Vector3?
+        if (normal) {
+            ret2 = Vector3()
+            ret2[axis] = sign
+        } else
+            ret2 = null
+        if (clip)
+            ret1 = from + rel * min
+        else
+            ret1 = null
+        return Triple(true, ret1, ret2)
     }
 
     fun intersectsPlane(p_plane: Plane): Boolean {
