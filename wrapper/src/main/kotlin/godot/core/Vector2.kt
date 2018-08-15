@@ -172,7 +172,6 @@ class Vector2(var x: Float, var y: Float) : Comparable<Vector2>, CoreType {
         val p2: Vector2 = v
         val p3: Vector2 = post
 
-        val t: Float = t
         val t2: Float = t * t
         val t3: Float = t2 * t
 

@@ -135,7 +135,7 @@ class Basis: CoreType {
 
 
         if (det == 0f) {
-            Godot.printError("determinant = 0", "invert", "Basis.kt", 139)
+            Godot.printError("determinant = 0", "invert", "Basis.kt", 138)
             return
         }
 
