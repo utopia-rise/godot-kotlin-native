@@ -376,12 +376,12 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
         }
     }
 
-    fun toHtml(p_alpha: Boolean): String {
+    fun toHtml(alpha: Boolean): String {
         var txt = ""
         txt += toHex(r)
         txt += toHex(g)
         txt += toHex(b)
-        if (p_alpha)
+        if (alpha)
             txt = toHex(a) + txt
         return txt
     }
