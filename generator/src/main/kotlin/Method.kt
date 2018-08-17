@@ -26,7 +26,7 @@ class Method(
         return buildString {
             if (!isVirtual) {
                 appendln("$prefix    private val ${name}MethodBind: CPointer<godot_method_bind> by lazy {")
-                appendln("$prefix        godot_method_bind_get_method(\"${cl.name}\", \"$oldName\")!!")
+                appendln("$prefix        godot_method_bind_get_method(\"${cl.oldName}\", \"$oldName\")!!")
                 appendln("$prefix    }")
             }
 
@@ -46,7 +46,7 @@ class Method(
                 if (arg.type.isEnum())
                     methodArguments.append(".id")
 
-                append("${arg.name}: ${arg.type.removeEnumPrefix()}")
+                append("${arg.name}: ${arg.type.removeEnumPrefix()}${arg.applyDefaultValue()}")
 
                 if (i != arguments.size - 1)
                     append(", ")
@@ -80,12 +80,15 @@ class Method(
                 append(constructICall(methodArguments.toString(), icalls))
                 appendln(suffix)
             } else {
-                if (shouldReturn)
-                    appendln("$prefix        TODO()")
+                if (shouldReturn) {
+                    appendln("$prefix        throw NotImplementedError(\"$oldName is not implemented for ${cl.name}\")")
+                }
             }
 
 
             appendln("$prefix    }")
+            appendln()
+            appendln()
             appendln()
         }
     }

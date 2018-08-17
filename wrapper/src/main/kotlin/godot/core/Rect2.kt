@@ -32,7 +32,7 @@ class Rect2: CoreType {
     }
 
     constructor()
-    constructor(x: Float, y: Float, width: Float, height: Float) {
+    constructor(x: Number, y: Number, width: Number, height: Number) {
         pos = Vector2(x, y)
         size = Vector2(width, height)
     }

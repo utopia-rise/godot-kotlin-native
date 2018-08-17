@@ -6,7 +6,6 @@ fun main(args: Array<String>) {
     val GODOT_API_PATH = "godot_api.json"
     val GENERATED_PATH = "../wrapper/src/main/kotlin/godot/generated/"
 
-
     val text = File(GODOT_API_PATH).readText()
 
     val classes = Klaxon().parseArray<Class>(text)!!
@@ -14,7 +13,7 @@ fun main(args: Array<String>) {
     val icalls = mutableSetOf<ICall>()
 
     for (cl in classes)
-        if (cl.name == "Object" || cl.name == "Node") // FIXME: remove line
+        //if (cl.name == "Object" || cl.name == "Node" || cl.name == "Reference" || cl.name == "Resource" || cl.name == "ResourceLoader") // FIXME: remove line
         cl.generate(GENERATED_PATH, tree, icalls)
 
 
@@ -37,9 +36,10 @@ fun main(args: Array<String>) {
             append(icall.generate())
     })
 
-    /*
+/*
     // Prints all virtual methods with non-Unit result type
     for (cl in classes)
+        if (cl.isInstanciable)
         for (m in cl.methods)
             if (m.isVirtual && m.returnType != "Unit") {
                 var flag = true
@@ -53,5 +53,5 @@ fun main(args: Array<String>) {
                 if (flag)
                     println("${cl.name}: ${m.name} of type ${m.returnType}")
             }
-    */
+*/
 }

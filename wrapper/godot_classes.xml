@@ -1,0 +1,11 @@
+<registerClasses>
+    <class name = "TestClass" extends="Node">
+        <method name = "_ready" />
+        <method name = "_process">
+            <argument type="Float" />
+        </method>
+    </class>
+    <class name = "TestClass2" extends="Node">
+        <method name = "_ready" />
+    </class>
+</registerClasses>

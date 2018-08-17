@@ -1,6 +1,6 @@
 [entry]
 
-Windows.64="res://godot_wrapper/godot_wrapper.dll"
+Windows.64="res://godot_wrapper/sample.dll"
 
 [dependencies]
 

@@ -226,7 +226,7 @@ class Vector3(var x: Float, var y: Float, var z: Float) : Comparable<Vector3>, C
     }
 
     override fun toString() = "$x, $y, $z"
-    external override fun hashCode(): Int {
+    override fun hashCode(): Int {
         var result = x.hashCode()
         result = 31 * result + y.hashCode()
         result = 31 * result + z.hashCode()

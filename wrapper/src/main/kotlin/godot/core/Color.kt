@@ -404,7 +404,7 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
     }
 
     override fun toString() = "$r, $g, $b, $a"
-    external override fun hashCode(): Int {
+    override fun hashCode(): Int {
         var result = r.hashCode()
         result = 31 * result + g.hashCode()
         result = 31 * result + b.hashCode()

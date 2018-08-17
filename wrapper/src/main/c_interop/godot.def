@@ -1,6 +1,5 @@
 package = godot
 headers = gdnative_api_struct.gen.h
-compilerOpts = -I../lib/godot_headers
 
 ---
 
@@ -42,7 +41,8 @@ godot_variant ___godot_wrapper_call_and_get(godot_object *o, void *method_data, 
     typedef void (*ptr)(void*, void*, int, void*);
 
     ptr method = *((ptr *) method_data);
-    godot_variant ret = {};
+    godot_variant ret;
+    godot_variant_new_nil(&ret);
     method((void*) (&ret), user_data, num_args, (void *) args);
 
     return ret;
@@ -72,22 +72,24 @@ void godot_wrapper_register_method(const char *class_name, const char *name, voi
 
 
 void *___godot_wrapper_class_instance_func(godot_object *p, void *method_data) {
-    typedef void (*ptr)(void*);
+    typedef void* (*ptr)(void*);
 
     ptr method = (ptr) method_data;
-    method(p);
+    void *mem = method(p);
 
-    return p;
+    if (mem == NULL)
+        return p;
+    return mem;
 }
 
 void ___godot_wrapper_class_destroy_func(godot_object *p, void *method_data, void *data) {
     typedef void (*ptr)(void*);
 
     ptr method = (ptr) method_data;
-    method(p);
+    method(data);
 }
 
-void godot_wrapper_register_class(const char *class_name, const char *base_class_name, void (*constructor)(void*), void (*destructor)(void*)) {
+void godot_wrapper_register_class(const char *class_name, const char *base_class_name, void* (*constructor)(void*), void (*destructor)(void*)) {
 	godot_instance_create_func create;
 	create.create_func = ___godot_wrapper_class_instance_func;
 	create.method_data = (void *) constructor;

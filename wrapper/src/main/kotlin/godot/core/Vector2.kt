@@ -227,7 +227,7 @@ class Vector2(var x: Float, var y: Float) : Comparable<Vector2>, CoreType {
             this.width / this.height
 
     override fun toString() = "$x, $y"
-    external override fun hashCode(): Int {
+    override fun hashCode(): Int {
         var result = x.hashCode()
         result = 31 * result + y.hashCode()
         return result

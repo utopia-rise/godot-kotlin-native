@@ -173,7 +173,7 @@ class Plane: CoreType {
         }
     }
 
-    external override fun hashCode(): Int {
+    override fun hashCode(): Int {
         var result = normal.hashCode()
         result = 31 * result + d.hashCode()
         return result

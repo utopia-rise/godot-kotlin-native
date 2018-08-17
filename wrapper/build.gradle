@@ -1,0 +1,77 @@
+buildscript {
+    repositories {
+        maven {
+            url 'https://cache-redirector.jetbrains.com/maven-central'
+        }
+        maven {
+            url "https://dl.bintray.com/jetbrains/kotlin-native-dependencies"
+        }
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-native-gradle-plugin:${project.property('konan.plugin.version')}"
+    }
+}
+
+apply plugin: 'konan'
+
+
+konan.targets = ['macbook', 'linux', 'mingw']
+
+
+
+konanArtifacts {
+    interop('godot') {
+        defFile 'src/main/c_interop/godot.def'
+
+        includeDirs 'lib/godot_headers'
+    }
+
+
+    library('Kotlin-Godot') {
+        libraries {
+            artifact 'godot'
+        }
+
+        srcDir 'src/main/kotlin'
+    }
+
+
+    dynamic('sample') {
+        libraries {
+            artifact 'godot'
+            artifact 'Kotlin-Godot'
+        }
+
+        srcDir 'src/shared'
+    }
+}
+
+
+
+
+import org.apache.tools.ant.taskdefs.condition.Os
+
+task removeLocks(type: Exec) {
+    if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+        commandLine 'sudo.cmd', 'cleanup.bat', file('build/konan/libs')
+    }
+}
+/*
+task copyLibsForCMake(type: Copy) {
+    dependsOn konanArtifacts.'godot'
+    dependsOn konanArtifacts.'Kotlin-Godot'
+
+    destinationDir file('cmake-build-debug/CMakeFiles/libs/')
+
+    def platforms = [
+        "mingw_x64"  : [konanTarget: "mingw_x64"]
+    ]
+    platforms.each { name, platform ->
+        from konanArtifacts.'godot'."${platform.konanTarget}".artifact
+        from konanArtifacts.'Kotlin-Godot'."${platform.konanTarget}".artifact
+    }
+}
+*/
+tasks.clean.dependsOn += removeLocks
+//tasks.build.dependsOn += copyLibsForCMake

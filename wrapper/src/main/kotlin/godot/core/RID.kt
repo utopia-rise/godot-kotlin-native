@@ -48,7 +48,7 @@ class RID : CoreType {
                 else -> 1
             }
 
-    external override fun hashCode(): Int {
+    override fun hashCode(): Int {
         return nativeValue.hashCode()
     }
 

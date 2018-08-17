@@ -589,7 +589,7 @@ class AABB: CoreType {
     override fun toString(): String =
             "$position - $size"
 
-    external override fun hashCode(): Int {
+    override fun hashCode(): Int {
         var result = position.hashCode()
         result = 31 * result + size.hashCode()
         return result

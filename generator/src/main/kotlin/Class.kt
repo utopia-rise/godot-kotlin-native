@@ -20,6 +20,8 @@ class Class(
         @Json(name = "enums")
         val enums: List<Enum>
 ) {
+    val oldName: String = name
+
     init {
         name = name.escapeUnderscore()
         baseClass = baseClass.escapeUnderscore()
@@ -67,6 +69,8 @@ class Class(
             appendln()
 
 
+            if (isSingleton)
+                append("    @ThreadLocal") // TODO: remove later, fixed in konan master
             appendln("    companion object {")
             appendln("        // Constants")
             for (constant in constants)

@@ -320,7 +320,9 @@ class Variant: CoreType {
             for((idx,arg) in args.withIndex()){
                 arr[idx] = arg.nativeValue.useContents { this.ptr }
             }
-            newVar.nativeValue = godot_variant_call(nativeValue, str.toGDString(), arr, args.size, null)
+            val error = alloc<godot_variant_call_error>()
+            newVar.nativeValue = godot_variant_call(nativeValue, str.toGDString(), arr, args.size, error.ptr)
+            // TODO: if error is not success printError it
         }
         return newVar
     }
