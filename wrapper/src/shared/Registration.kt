@@ -15,7 +15,7 @@ class UserDefinedClasses {
                     staticCFunction { mem -> constructFromRawMem(mem, TestClassConstructor, TestClassSetRawMem) },
                     staticCFunction { mem -> deconstructFromRawMem<TestClass>(mem) })
             godot_wrapper_register_method("TestClass", "_ready",
-                    staticCFunction { r, o, n, a -> invoke<TestClass>(r, o, n, a) { obj, numArgs, args -> run {
+                    staticCFunction { r, o, n, a -> invoke<TestClass>("_ready", r, o, n, a) { obj, numArgs, args -> run {
                         when (numArgs) {
                             0 -> {
                                 TestClass_readyMethod0(obj)
@@ -28,7 +28,7 @@ class UserDefinedClasses {
                     staticCFunction { mem -> constructFromRawMem(mem, TestClass2Constructor, TestClass2SetRawMem) },
                     staticCFunction { mem -> deconstructFromRawMem<TestClass2>(mem) })
             godot_wrapper_register_method("TestClass2", "_ready",
-                    staticCFunction { r, o, n, a -> invoke<TestClass2>(r, o, n, a) { obj, numArgs, args -> run {
+                    staticCFunction { r, o, n, a -> invoke<TestClass2>("_ready", r, o, n, a) { obj, numArgs, args -> run {
                         when (numArgs) {
                             0 -> {
                                 TestClass2_readyMethod0(obj)

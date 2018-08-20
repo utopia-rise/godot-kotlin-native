@@ -72,6 +72,9 @@ class Class(
             if (isSingleton)
                 append("    @ThreadLocal") // TODO: remove later, fixed in konan master
             appendln("    companion object {")
+
+            append(generateCasts(tree))
+
             appendln("        // Constants")
             for (constant in constants)
                 appendln("        const val ${constant.key}: Int = ${constant.value}")
@@ -101,5 +104,19 @@ class Class(
                 appendln("    }")
             appendln("}")
         })
+    }
+
+
+    private fun generateCasts(tree: Graph<Class>): String {
+        return buildString {
+            var node = tree.nodes.find { it.value.name == name }!!.parent
+
+            while (node != null) {
+                appendln("        infix fun from(other: ${node.value.name}): $name = $name(\"\").apply { setRawMemory(other.rawMemory) }")
+                node = node.parent
+            }
+            appendln()
+            appendln()
+        }
     }
 }

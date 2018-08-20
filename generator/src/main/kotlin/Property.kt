@@ -3,13 +3,19 @@ import com.beust.klaxon.Json
 
 class Property(
         @Json(name = "name")
-        val name: String,
+        var name: String,
         @Json(name = "type")
-        val type: String,
+        var type: String,
         @Json(name = "getter")
-        val getter: String,
+        var getter: String,
         @Json(name = "setter")
-        val setter: String
+        var setter: String
 ) {
+    init {
+        name = name.convertToCamelCase()
+        type = type.convertTypeToKotlin()
 
+        getter = getter.convertToCamelCase()
+        setter = setter.convertToCamelCase()
+    }
 }

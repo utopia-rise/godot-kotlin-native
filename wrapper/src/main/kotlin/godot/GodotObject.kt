@@ -7,11 +7,11 @@ import kotlin.godot.core.Godot
 
 
 abstract class GodotObject : CoreType {
-    protected lateinit var rawMemory: COpaquePointer
+    internal lateinit var rawMemory: COpaquePointer
 
 
     internal constructor(mem: COpaquePointer) {
-        setRawMemory(mem)
+        rawMemory = mem.reinterpret<COpaquePointerVar>().pointed.value!!
     }
     constructor(name: String) {
         if (name != "" && ___godot_wrapper_nativeConstructorInvocation) {
@@ -23,11 +23,11 @@ abstract class GodotObject : CoreType {
     }
 
 
-    override fun getRawMemory(memScope: MemScope): COpaquePointer {
+    final override fun getRawMemory(memScope: MemScope): COpaquePointer {
         return rawMemory
     }
-    override fun setRawMemory(mem: COpaquePointer) {
-        rawMemory = mem.reinterpret<COpaquePointerVar>().pointed.value!!
+    final override fun setRawMemory(mem: COpaquePointer) {
+        rawMemory = mem
     }
 }
 

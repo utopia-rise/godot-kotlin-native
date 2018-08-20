@@ -1,12 +1,8 @@
 package simple.user.pack
 
-import godot.godot_method_bind_get_method
 import kotlinx.cinterop.*
-import kotlin.godot.Node
-import kotlin.godot.ResourceLoader
-import kotlin.godot.core.Godot
-import kotlin.godot.core.Variant
-import kotlin.system.getTimeMillis
+import kotlin.godot.*
+import kotlin.godot.core.*
 
 
 class TestClass : Node() {
@@ -14,10 +10,15 @@ class TestClass : Node() {
         setName("Parent")
         Godot.print("Hello from parent!")
 
-        val child = Node()
-        child.setScript(ResourceLoader.load("res://godot_wrapper/TestClass2.gdns"))
 
-        addChild(child)
+        val res = ResourceLoader.load("res://godot_wrapper/TestClass2.gdns")
+        Godot.print("Loaded: ${res.getPath()}")
+        val script = Script from res
+        Godot.print("Script: ${script.getSourceCode()}")
+
+        /*val child = Node()
+        child.setScript(ResourceLoader.load("res://godot_wrapper/TestClass2.gdns"))
+        addChild(child)*/
     }
 }
 
