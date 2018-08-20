@@ -12,7 +12,11 @@ import kotlin.reflect.*
 inline fun <reified T: GodotObject> constructFromRawMem(mem: COpaquePointer?, cons: KFunction0<T>, setRawMem: KFunction2<T,COpaquePointer,Unit>): COpaquePointer? {
     mem!!.let {
         val obj = rawConstructorInvoke(cons)
-        setRawMem(obj, it)
+        memScoped {
+            val pointer = alloc<COpaquePointerVar>()
+            pointer.value = it
+            setRawMem(obj, pointer.ptr)
+        }
         return StableRef.create(obj).asCPointer()
     }
 }

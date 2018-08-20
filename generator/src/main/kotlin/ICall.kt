@@ -49,9 +49,11 @@ class ICall(
 
 
             if (shouldReturn) {
-                append("        val retVar = alloc<")
-                append(if (isPrimitive) returnType else "COpaquePointer")
-                appendln("Var>()")
+                append("        val retVar = alloc")
+                if (isPrimitive)
+                    appendln("<${returnType}Var>()")
+                else
+                    appendln("Array<ByteVar>(1024)")
             }
 
 
@@ -59,7 +61,13 @@ class ICall(
             for (i in arguments.indices)
                 appendln("        args[$i] = arg$i.getRawMemory(memScope)")
             append("        godot_method_bind_ptrcall(mb, inst, args, ")
-            append(if (shouldReturn) "retVar.ptr" else "null")
+            if (shouldReturn)
+                if (isPrimitive)
+                    append("retVar.ptr")
+                else
+                    append("retVar")
+            else
+                append("null")
             appendln(')')
 
 
@@ -67,7 +75,7 @@ class ICall(
                 if (isPrimitive)
                     appendln("        ret = retVar.value")
                 else
-                    appendln("        ret = $returnType(retVar.value!!)")
+                    appendln("        ret = $returnType(retVar)")
 
 
             appendln("    }")

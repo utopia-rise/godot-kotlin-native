@@ -343,7 +343,7 @@ class Rect2: CoreType {
         return true
     }
 
-    external override fun hashCode(): Int {
+    override fun hashCode(): Int {
         var result = pos.hashCode()
         result = 31 * result + size.hashCode()
         return result

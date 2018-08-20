@@ -11,7 +11,7 @@ abstract class GodotObject : CoreType {
 
 
     internal constructor(mem: COpaquePointer) {
-        rawMemory = mem
+        setRawMemory(mem)
     }
     constructor(name: String) {
         if (name != "" && ___godot_wrapper_nativeConstructorInvocation) {
@@ -27,7 +27,7 @@ abstract class GodotObject : CoreType {
         return rawMemory
     }
     override fun setRawMemory(mem: COpaquePointer) {
-        rawMemory = mem
+        rawMemory = mem.reinterpret<COpaquePointerVar>().pointed.value!!
     }
 }
 

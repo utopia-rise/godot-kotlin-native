@@ -280,7 +280,7 @@ class Transform: CoreType {
         return basis.toString() + " - " + origin.toString()
     }
 
-    external override fun hashCode(): Int {
+    override fun hashCode(): Int {
         var result = basis.hashCode()
         result = 31 * result + origin.hashCode()
         return result

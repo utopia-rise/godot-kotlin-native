@@ -316,7 +316,7 @@ class Quat: CoreType {
     fun lengthSquared(): Float =
             dot(this)
 
-    external override fun hashCode(): Int {
+    override fun hashCode(): Int {
         var result = x.hashCode()
         result = 31 * result + y.hashCode()
         result = 31 * result + z.hashCode()
