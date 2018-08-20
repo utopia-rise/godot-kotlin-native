@@ -26,7 +26,7 @@ class Method(
         return buildString {
             if (!isVirtual) {
                 appendln("$prefix    private val ${name}MethodBind: CPointer<godot_method_bind> by lazy {")
-                appendln("$prefix        godot_method_bind_get_method(\"${cl.oldName}\", \"$oldName\")!!")
+                appendln("$prefix        godot_method_bind_get_method(\"${cl.oldName}\", \"$oldName\") ?: throw NotImplementedError(\"Cannot get method bind for $oldName in ${cl.oldName}\")")
                 appendln("$prefix    }")
             }
 

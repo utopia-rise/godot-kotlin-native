@@ -258,10 +258,7 @@ class Variant: CoreType {
 
     fun toInt(): Int = this.toLong().toInt()
 
-    fun <T: Object> toObject(obj: T): T {
-        obj.setRawMemory(godot_variant_as_object(nativeValue)!!)
-        return obj
-    }
+    fun toObject(): Object = Object("").apply { setRawMemory(godot_variant_as_object(nativeValue) ?: throw NullPointerException("godot_variant_as_object return null for ${this@Variant}")) }
 
     fun toLong(): Long = godot_variant_as_int(nativeValue)
 

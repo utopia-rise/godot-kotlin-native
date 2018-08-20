@@ -11,7 +11,7 @@ abstract class GodotObject : CoreType {
 
 
     internal constructor(mem: COpaquePointer) {
-        rawMemory = mem.reinterpret<COpaquePointerVar>().pointed.value!!
+        rawMemory = mem.reinterpret<COpaquePointerVar>().pointed.value ?: throw NullPointerException("Godot function returned null")
     }
     constructor(name: String) {
         if (name != "" && ___godot_wrapper_nativeConstructorInvocation) {

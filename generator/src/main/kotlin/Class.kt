@@ -84,7 +84,7 @@ class Class(
 
             if (isSingleton) {
                 appendln("        private val rawMemory: COpaquePointer by lazy {")
-                appendln("            godot_global_get_singleton(\"$name\".cstr)!!")
+                appendln("            godot_global_get_singleton(\"$name\".cstr) ?: throw NullPointerException(\"Cannot get singleton instance for class $oldName\")")
                 appendln("        }")
             } else
                 appendln("    }")
@@ -115,6 +115,7 @@ class Class(
                 appendln("        infix fun from(other: ${node.value.name}): $name = $name(\"\").apply { setRawMemory(other.rawMemory) }")
                 node = node.parent
             }
+            appendln("        infix fun from(other: Variant): $name = $name(\"\").apply { setRawMemory(godot_variant_as_object(other.nativeValue) ?: throw NullPointerException(\"godot_variant_as_object return null for \${this@Companion}\")) }")
             appendln()
             appendln()
         }

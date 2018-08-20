@@ -53,7 +53,7 @@ class Dictionary: CoreType {
 
     fun has(key: Variant): Boolean = godot_dictionary_has(nativeValue, key.nativeValue)
 
-    fun get(key: Variant) : Variant = Variant(godot_dictionary_operator_index(nativeValue, key.nativeValue)!!.pointed.readValue())
+    fun get(key: Variant): Variant? = godot_dictionary_operator_index(nativeValue, key.nativeValue)?.pointed?.readValue()?.let { Variant(this) }
 
 
 
