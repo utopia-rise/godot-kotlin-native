@@ -5,9 +5,8 @@ import kotlinx.cinterop.*
 
 
 class Rect2: CoreType {
-
-    lateinit var pos: Vector2
-    lateinit var size: Vector2
+    var pos = Vector2()
+    var size = Vector2()
 
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
         return cValuesOf(pos[0], pos[1], size[0], size[1]).getPointer(memScope)

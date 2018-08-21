@@ -9,13 +9,84 @@ class Property(
         @Json(name = "getter")
         var getter: String,
         @Json(name = "setter")
-        var setter: String
+        var setter: String,
+        @Json(name = "index")
+        val index: Int
 ) {
+    var hasValidGetter: Boolean = false
+    lateinit var validGetter: Method
+
+    var hasValidSetter: Boolean = false
+    lateinit var validSetter: Method
+
     init {
         name = name.convertToCamelCase()
         type = type.convertTypeToKotlin()
 
         getter = getter.convertToCamelCase()
         setter = setter.convertToCamelCase()
+
+        if (name.indexOf("/") != -1 || type.indexOf(",") != -1) // TODO: idk what to do
+            name = ""
+    }
+
+
+    fun applyGetterOrSetter(method: Method) {
+        if (name == "")
+            return
+
+        when (method.name) {
+            getter -> {
+                if (method.returnType == "Unit" || method.arguments.size > 1 || method.isVirtual)
+                    return
+                if (index == -1 && method.arguments.size == 1)
+                    return
+                if (method.arguments.size == 1 && method.arguments[0].type != "Int")
+                    return
+
+                validGetter = method
+                hasValidGetter = true
+                method.isGetterOrSetter = true
+            }
+            setter -> {
+                if (method.returnType != "Unit" || method.arguments.size > 2 || method.isVirtual)
+                    return
+                if (index == -1 && method.arguments.size == 2)
+                    return
+                if (method.arguments.size == 2 && method.arguments[0].type != "Int")
+                    return
+
+                validSetter = method
+                hasValidSetter = true
+                method.isGetterOrSetter = true
+            }
+        }
+    }
+
+
+    fun generate(prefix: String): String {
+        if (name == "")
+            return ""
+        if (!hasValidGetter && !hasValidSetter)
+            return ""
+
+        return buildString {
+            if (index == -1) {
+                appendln("$prefix    ${if (hasValidSetter) "var" else "val"} $name: $type")
+
+                if (hasValidGetter) {
+                    val icall = ICall(validGetter.returnType, validGetter.arguments)
+                    appendln("$prefix        get() = ${icall.name}(${validGetter.name}MethodBind, this.rawMem())")
+                }
+
+                if (hasValidSetter) {
+                    val icall = ICall(validSetter.returnType, validSetter.arguments)
+                    appendln("$prefix        set(value) = ${icall.name}(${validSetter.name}MethodBind, this.rawMem(), value)")
+                }
+
+                appendln()
+                appendln()
+            }
+        }
     }
 }

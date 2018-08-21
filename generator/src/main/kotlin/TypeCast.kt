@@ -72,7 +72,7 @@ fun String.isCoreType(): Boolean {
 
 
 fun String.escapeKotlinReservedNames(): String {
-    val names = listOf("class", "enum", "interface", "in", "var", "val", "Char", "Short", "Boolean", "Int", "Float", "Double", "operator", "object") // TODO: smth more?
+    val names = listOf("class", "enum", "interface", "in", "var", "val", "Char", "Short", "Boolean", "Int", "Long", "Float", "Double", "operator", "object") // TODO: smth more?
 
     if (names.find { s -> s == this } != null)
         return "_" + this
@@ -116,7 +116,7 @@ fun String.convertTypeToKotlin(): String {
         return "Unit"
     if (this == "Array")
         return "GodotArray" // TODO: kotlin arrays?
-    //if (!this.isCoreType() && !this.isEnum() && !this.isPrimitive() && this != "Node" && this != "Reference" && this != "Resource" && this != "ResourceLoader" && this != "SceneTree" && this != "MainLoop" && this != "Script") return "Object" // FIXME: remove line
+    //if (!this.isCoreType() && !this.isEnum() && !this.isPrimitive() && this != "Node" && this != "Reference" && this != "Resource" && this != "ResourceLoader" && this != "SceneTree" && this != "MainLoop" && this != "Script" && this != "Viewport") return "Object" // FIXME: remove line
     return this
 }
 

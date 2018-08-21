@@ -85,7 +85,7 @@ class GodotArray: CoreType {
         nativeValue = nativeValue.copy { godot_array_sort(this.ptr) }
     }
 
-    operator fun get(idx: Int): Variant? = godot_array_operator_index(nativeValue, idx)?.pointed?.readValue()?.let { Variant(this) }
+    operator fun get(idx: Int): Variant? = godot_array_operator_index(nativeValue, idx)?.pointed?.readValue()?.let { Variant(it) }
 
     fun append(v : Variant) {
         nativeValue = nativeValue.copy { godot_array_append(this.ptr, v.nativeValue) }

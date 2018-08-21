@@ -91,7 +91,7 @@ class Variant: CoreType {
     }
 
     internal constructor(native: CValue<godot_variant>) {
-        nativeValue = nativeValue.copy { godot_variant_new_copy(this.ptr, native) }
+        nativeValue = native // nativeValue.copy { godot_variant_new_copy(this.ptr, native) }
     }
 
     constructor(mem: COpaquePointer) {

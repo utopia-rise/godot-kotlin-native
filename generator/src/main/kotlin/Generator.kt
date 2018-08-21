@@ -13,7 +13,7 @@ fun main(args: Array<String>) {
     val icalls = mutableSetOf<ICall>()
 
     for (cl in classes)
-        //if (cl.name == "Object" || cl.name == "Node" || cl.name == "Reference" || cl.name == "Resource" || cl.name == "ResourceLoader" || cl.name == "SceneTree" || cl.name == "MainLoop" || cl.name == "Script") // FIXME: remove line
+        //if (cl.name == "Object" || cl.name == "Node" || cl.name == "Reference" || cl.name == "Resource" || cl.name == "ResourceLoader" || cl.name == "SceneTree" || cl.name == "MainLoop" || cl.name == "Script" || cl.name == "Viewport") // FIXME: remove line
         cl.generate(GENERATED_PATH, tree, icalls)
 
 
@@ -22,7 +22,7 @@ fun main(args: Array<String>) {
     icallsFile.createNewFile()
 
     icallsFile.writeText(buildString {
-        appendln("@file:Suppress(\"unused\", \"ClassName\", \"EnumEntryName\", \"FunctionName\", \"SpellCheckingInspection\", \"PackageDirectoryMismatch\")")
+        appendln("@file:Suppress(\"unused\", \"ClassName\", \"EnumEntryName\", \"FunctionName\", \"SpellCheckingInspection\", \"PackageDirectoryMismatch\", \"RedundantExplicitType\")")
         appendln("package kotlin.godot.icalls")
         appendln()
         appendln("import godot.*")

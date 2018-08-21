@@ -10,10 +10,10 @@ internal interface CoreType {
 
 
 fun Int.getRawMemory(memScope: MemScope): COpaquePointer {
-    return cValuesOf(this).getPointer(memScope)
+    return cValuesOf(this.toLong()).getPointer(memScope)
 }
 fun Float.getRawMemory(memScope: MemScope): COpaquePointer {
-    return cValuesOf(this).getPointer(memScope)
+    return cValuesOf(this.toDouble()).getPointer(memScope)
 }
 fun Boolean.getRawMemory(memScope: MemScope): COpaquePointer {
     return cValuesOf(this.toByte()).getPointer(memScope)

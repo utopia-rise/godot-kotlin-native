@@ -1,7 +1,7 @@
 import com.beust.klaxon.Json
 
 
-class Method(
+open class Method(
         @Json(name = "name")
         var name: String,
         @Json(name = "return_type")
@@ -20,15 +20,19 @@ class Method(
         returnType = returnType.convertTypeToKotlin()
     }
 
+    var isGetterOrSetter: Boolean = false
+
 
 
     fun generate(prefix: String, cl: Class, tree: Graph<Class>, icalls: MutableSet<ICall>): String {
         return buildString {
             if (!isVirtual) {
-                appendln("$prefix    private val ${name}MethodBind: CPointer<godot_method_bind> by lazy {")
-                appendln("$prefix        godot_method_bind_get_method(\"${cl.oldName}\", \"$oldName\") ?: throw NotImplementedError(\"Cannot get method bind for $oldName in ${cl.oldName}\")")
-                appendln("$prefix    }")
+                appendln("$prefix    private val ${name}MethodBind: CPointer<godot_method_bind> by lazy { getMB(\"${cl.oldName}\", \"$oldName\") }")
             }
+
+            // TODO: uncomment to disable method implementation
+            //if (isGetterOrSetter)
+            //    return@buildString
 
 
             append("$prefix    ")
@@ -89,7 +93,6 @@ class Method(
             appendln("$prefix    }")
             appendln()
             appendln()
-            appendln()
         }
     }
 
@@ -97,6 +100,6 @@ class Method(
     private fun constructICall(methodArguments: String, icalls: MutableSet<ICall>): String {
         val icall = ICall(returnType, arguments)
         icalls.add(icall)
-        return "${icall.name}(${name}MethodBind, this.rawMemory$methodArguments)"
+        return "${icall.name}(${name}MethodBind, this.rawMem()$methodArguments)"
     }
 }

@@ -15,6 +15,8 @@ class Class(
         val constants: Map<String, Int>,
         @Json(name = "properties")
         val properties: List<Property>,
+        @Json(name = "signals")
+        val signals: List<Signal>,
         @Json(name = "methods")
         val methods: List<Method>,
         @Json(name = "enums")
@@ -29,6 +31,11 @@ class Class(
 
 
     fun generate(path: String, tree: Graph<Class>, icalls: MutableSet<ICall>) {
+        for (p in properties)
+            for (m in methods)
+                p.applyGetterOrSetter(m)
+
+
         val out = File("$path/$name.kt")
         out.parentFile.mkdirs()
         out.createNewFile()
@@ -41,6 +48,9 @@ class Class(
             appendln("import kotlin.godot.core.*")
             appendln("import kotlin.godot.icalls.*")
             appendln("import kotlinx.cinterop.*")
+            appendln("import kotlin.godot.registration.getMB")
+            appendln("import kotlin.godot.registration.getSingleton")
+            appendln("import kotlin.godot.registration.fromVariant")
             appendln()
             appendln()
             appendln("// NOTE: THIS FILE IS AUTO GENERATED FROM JSON API CONFIG")
@@ -55,6 +65,7 @@ class Class(
                 appendln("constructor() : super(\"$name\")")
             else
                 appendln("private constructor() : super(\"\")")
+            appendln("    constructor(variant: Variant) : super(variant)")
             appendln("    internal constructor(mem: COpaquePointer) : super(mem)")
             appendln("    internal constructor(name: String) : super(name)")
             appendln()
@@ -83,9 +94,8 @@ class Class(
 
 
             if (isSingleton) {
-                appendln("        private val rawMemory: COpaquePointer by lazy {")
-                appendln("            godot_global_get_singleton(\"$name\".cstr) ?: throw NullPointerException(\"Cannot get singleton instance for class $oldName\")")
-                appendln("        }")
+                appendln("        private val rawMemory: COpaquePointer by lazy { getSingleton(\"$name\", \"$oldName\") }")
+                appendln("        private fun rawMem(): COpaquePointer = rawMemory")
             } else
                 appendln("    }")
             appendln()
@@ -93,6 +103,20 @@ class Class(
 
 
             val prefix = if (isSingleton) "    " else ""
+
+
+            appendln("$prefix    // Properties")
+            for (prop in properties)
+                append(prop.generate(prefix))
+            appendln()
+            appendln()
+
+
+            appendln("$prefix    // Signals")
+            for (signal in signals)
+                append(signal.generate(prefix, this@Class, tree, icalls))
+            appendln()
+            appendln()
 
 
             appendln("$prefix    // Methods")
@@ -112,10 +136,10 @@ class Class(
             var node = tree.nodes.find { it.value.name == name }!!.parent
 
             while (node != null) {
-                appendln("        infix fun from(other: ${node.value.name}): $name = $name(\"\").apply { setRawMemory(other.rawMemory) }")
+                appendln("        infix fun from(other: ${node.value.name}): $name = $name(\"\").apply { setRawMemory(other.rawMem()) }")
                 node = node.parent
             }
-            appendln("        infix fun from(other: Variant): $name = $name(\"\").apply { setRawMemory(godot_variant_as_object(other.nativeValue) ?: throw NullPointerException(\"godot_variant_as_object return null for \${this@Companion}\")) }")
+            appendln("        infix fun from(other: Variant): $name = fromVariant($name(\"\"), other)")
             appendln()
             appendln()
         }

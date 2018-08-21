@@ -11,18 +11,26 @@ import kotlin.reflect.*
 import kotlin.system.exitProcess
 
 
+
 inline fun <reified T: GodotObject> constructFromRawMem(mem: COpaquePointer?, cons: KFunction0<T>, setRawMem: KFunction2<T,COpaquePointer,Unit>): COpaquePointer? {
     if (mem == null) {
-        Godot.printError("Invoked object constructor with null as argument", "common constructor", "Registration.kt", 0)
+        Godot.printError("Invoked object constructor with null as argument", "kotlin constructor", "Registration.kt", 0)
         exitProcess(EXIT_FAILURE)
     }
-    val obj = rawConstructorInvoke(cons)
-    setRawMem(obj, mem)
-    return StableRef.create(obj).asCPointer()
+    try {
+        val obj = cons()
+        destroyGodotObject(obj)
+        setRawMem(obj, mem)
+        return StableRef.create(obj).asCPointer()
+    } catch (e: Throwable) {
+        Godot.printError(e.message.toString(), "kotlin constructor", "Registration.kt", 0)
+        e.printStackTrace()
+        exitProcess(EXIT_FAILURE)
+    }
 }
 inline fun <reified T: GodotObject> deconstructFromRawMem(mem: COpaquePointer?) {
     if (mem == null) {
-        Godot.printError("Invoked object destructor with null as argument", "common destructor", "Registration.kt", 0)
+        Godot.printError("Invoked object destructor with null as argument", "kotlin destructor", "Registration.kt", 0)
         exitProcess(EXIT_FAILURE)
     }
     mem.asStableRef<T>().dispose()
@@ -54,9 +62,21 @@ fun noMethodToInvoke(name: String, className: String, numArgs: Int) {
 }
 
 
-fun <T: GodotObject> rawConstructorInvoke(cons: KFunction0<T>): T {
-    ___godot_wrapper_nativeConstructorInvocation = false
-    val obj = cons()
-    ___godot_wrapper_nativeConstructorInvocation = true
+fun destroyGodotObject(obj: GodotObject) {
+    memScoped {
+        godot_object_destroy(obj.getRawMemory(memScope))
+    }
+}
+
+
+internal fun getMB(cl: String, m: String): CPointer<godot_method_bind> {
+    return godot_method_bind_get_method(cl, m) ?: throw NotImplementedError("Cannot get method bind for $m in $cl")
+}
+internal fun getSingleton(cl: String, clOld: String): COpaquePointer {
+    return godot_global_get_singleton(cl.cstr) ?: throw NullPointerException("Cannot get singleton instance for class $clOld")
+}
+internal fun <T: GodotObject> fromVariant(obj: T, other: Variant): T {
+    obj.setRawMemory(godot_variant_as_object(other.nativeValue)
+            ?: throw NullPointerException("godot_variant_as_object return null for $other"))
     return obj
 }
