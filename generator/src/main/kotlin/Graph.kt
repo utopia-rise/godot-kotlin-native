@@ -47,9 +47,6 @@ fun Graph<Class>.doAncestorsHaveMethod(cl: Class, method: Method): Boolean {
         for (m in value.methods)
             if (check(m))
                 return true
-        for (m in value.signals)
-            if (check(m))
-                return true
         return parent?.findMethodInHierarchy() ?: false
     }
     return nodes.find { it.value.name == cl.name }!!.parent!!.findMethodInHierarchy()

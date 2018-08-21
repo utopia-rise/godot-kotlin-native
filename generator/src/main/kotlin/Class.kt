@@ -15,8 +15,6 @@ class Class(
         val constants: Map<String, Int>,
         @Json(name = "properties")
         val properties: List<Property>,
-        @Json(name = "signals")
-        val signals: List<Signal>,
         @Json(name = "methods")
         val methods: List<Method>,
         @Json(name = "enums")
@@ -108,13 +106,6 @@ class Class(
             appendln("$prefix    // Properties")
             for (prop in properties)
                 append(prop.generate(prefix))
-            appendln()
-            appendln()
-
-
-            appendln("$prefix    // Signals")
-            for (signal in signals)
-                append(signal.generate(prefix, this@Class, tree, icalls))
             appendln()
             appendln()
 
