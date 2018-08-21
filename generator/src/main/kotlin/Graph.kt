@@ -51,3 +51,17 @@ fun Graph<Class>.doAncestorsHaveMethod(cl: Class, method: Method): Boolean {
     }
     return nodes.find { it.value.name == cl.name }!!.parent!!.findMethodInHierarchy()
 }
+
+
+fun Graph<Class>.doAncestorsHaveProperty(cl: Class, prop: Property): Boolean {
+    if (cl.baseClass == "")
+        return false
+
+    fun Graph.Node<Class>.findPropertyInHierarchy(): Boolean {
+        for (p in value.properties)
+            if (p.name == prop.name)
+                return true
+        return parent?.findPropertyInHierarchy() ?: false
+    }
+    return nodes.find { it.value.name == cl.name }!!.parent!!.findPropertyInHierarchy()
+}

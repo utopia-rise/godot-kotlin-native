@@ -64,7 +64,7 @@ class Property(
     }
 
 
-    fun generate(prefix: String): String {
+    fun generate(prefix: String, cl: Class, tree: Graph<Class>, icalls: MutableSet<ICall>): String {
         if (name == "")
             return ""
         if (!hasValidGetter && !hasValidSetter)
@@ -72,10 +72,16 @@ class Property(
 
         return buildString {
             if (index == -1) {
-                appendln("$prefix    ${if (hasValidSetter) "var" else "val"} $name: $type")
+                append("$prefix    ")
+                if (tree.doAncestorsHaveProperty(cl, this@Property))
+                    append("override ")
+                else
+                    append("open ")
+                appendln("${if (hasValidSetter) "var" else "val"} $name: $type")
 
                 if (hasValidGetter) {
                     val icall = ICall(type, listOf())
+                    icalls.add(icall)
                     appendln("$prefix        get() = ${icall.name}(${validGetter.name}MethodBind, this.rawMem())")
                 }
                 else
@@ -83,6 +89,7 @@ class Property(
 
                 if (hasValidSetter) {
                     val icall = ICall("Unit", listOf(Argument("value", type)))
+                    icalls.add(icall)
                     appendln("$prefix        set(value) = ${icall.name}(${validSetter.name}MethodBind, this.rawMem(), value)")
                 }
 

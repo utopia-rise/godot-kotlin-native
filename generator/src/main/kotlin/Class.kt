@@ -105,7 +105,7 @@ class Class(
 
             appendln("$prefix    // Properties")
             for (prop in properties)
-                append(prop.generate(prefix))
+                append(prop.generate(prefix, this@Class, tree, icalls))
             appendln()
             appendln()
 
