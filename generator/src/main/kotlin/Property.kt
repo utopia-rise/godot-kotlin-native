@@ -75,12 +75,14 @@ class Property(
                 appendln("$prefix    ${if (hasValidSetter) "var" else "val"} $name: $type")
 
                 if (hasValidGetter) {
-                    val icall = ICall(validGetter.returnType, validGetter.arguments)
+                    val icall = ICall(type, listOf())
                     appendln("$prefix        get() = ${icall.name}(${validGetter.name}MethodBind, this.rawMem())")
                 }
+                else
+                    appendln("$prefix        get() = throw UninitializedPropertyAccessException(\"Cannot access property $name: has no getter\")")
 
                 if (hasValidSetter) {
-                    val icall = ICall(validSetter.returnType, validSetter.arguments)
+                    val icall = ICall("Unit", listOf(Argument("value", type)))
                     appendln("$prefix        set(value) = ${icall.name}(${validSetter.name}MethodBind, this.rawMem(), value)")
                 }
 
