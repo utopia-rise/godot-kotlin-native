@@ -1,11 +1,13 @@
-package kotlin.godot.core
+package godot.core
 
-import godot.godot_plane
+import godot.gdnative.godot_plane
 import kotlinx.cinterop.*
 import kotlin.math.abs
 
 
 class Plane: CoreType {
+    override fun isNull(): Boolean = false // TODO: make me beautiful
+
 
     enum class ClockDirection {
         CLOCKWISE,

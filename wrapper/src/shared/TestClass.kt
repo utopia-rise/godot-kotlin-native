@@ -1,31 +1,28 @@
 package simple.user.pack
 
-import kotlinx.cinterop.*
-import kotlin.godot.*
-import kotlin.godot.core.*
+import godot.*
+import godot.core.*
 
 
 class TestClass : Node() {
+    val child = Node()
+
+    lateinit var childScript: Script
+
+
     override fun _ready() {
-        setName("Parent")
+        name = "Parent"
         Godot.print("Hello from parent!")
 
-
-        val res = ResourceLoader.load("res://godot_wrapper/TestClass2.gdns")
-        Godot.print("Loaded: ${res.getPath()}")
-        val script = Script from res
-        Godot.print("Script: ${script.getSourceCode()}")
-
-        /*val child = Node()
-        child.setScript(ResourceLoader.load("res://godot_wrapper/TestClass2.gdns"))
-        addChild(child)*/
+        child.setScript(childScript)
+        addChild(child)
     }
 }
 
 
 class TestClass2 : Node() {
     override fun _ready() {
-        setName("Child")
+        name = "Child"
         Godot.print("Hello from child!")
     }
 }

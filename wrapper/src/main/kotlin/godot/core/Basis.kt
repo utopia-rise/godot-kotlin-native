@@ -1,11 +1,14 @@
-package kotlin.godot.core
+package godot.core
 
 import kotlinx.cinterop.*
-import godot.*
+import godot.gdnative.*
 import kotlin.math.*
 
 
 class Basis: CoreType {
+    override fun isNull(): Boolean = false // TODO: make me beautiful
+
+
     lateinit var x: Vector3
     lateinit var y: Vector3
     lateinit var z: Vector3

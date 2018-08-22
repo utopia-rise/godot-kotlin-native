@@ -1,10 +1,13 @@
-package kotlin.godot.core
+package godot.core
 
-import godot.*
+import godot.gdnative.*
 import kotlinx.cinterop.*
 import kotlin.math.*
 
 class Vector2(var x: Float, var y: Float) : Comparable<Vector2>, CoreType {
+    override fun isNull(): Boolean = false // TODO: make me beautiful
+
+
     constructor() :
             this(0f, 0f)
 

@@ -1,11 +1,11 @@
-package kotlin.godot
+package godot
 
-import godot.godot_get_class_constructor
+import godot.gdnative.godot_get_class_constructor
 import kotlinx.cinterop.*
-import kotlin.godot.core.CoreType
-import kotlin.godot.core.Godot
-import kotlin.godot.core.Variant
-import kotlin.godot.registration.fromVariant
+import godot.core.CoreType
+import godot.core.Variant
+import godot.registration.nativeConstructorInvocationFlag
+import godot.registration.nonNativeConstructorRawMemory
 
 
 abstract class GodotObject : CoreType {
@@ -13,24 +13,30 @@ abstract class GodotObject : CoreType {
 
 
     internal constructor(mem: COpaquePointer) {
-        rawMemory = mem.reinterpret<COpaquePointerVar>().pointed.value ?: throw NullPointerException("Godot function returned null")
+        rawMemory = mem.reinterpret<COpaquePointerVar>().pointed.value
     }
     internal constructor(variant: Variant) {
-        fromVariant(this, variant)
+        godot.fromVariant(this, variant)
     }
     constructor(name: String) {
-        if (name != "") {
-            godot_get_class_constructor(name)?.let {
-                rawMemory = it.reinterpret<CFunction<() -> COpaquePointer>>()()
-                // TODO: put destructor somewhere
-            } ?: throw NotImplementedError("There is no constructor for class $name in Godot")
+        if (nativeConstructorInvocationFlag) {
+            if (name != "") {
+                godot_get_class_constructor(name)?.let {
+                    rawMemory = it.reinterpret<CFunction<() -> COpaquePointer>>()()
+                    // TODO: put destructor somewhere
+                } ?: throw NotImplementedError("There is no constructor for class $name in Godot")
+            }
+        } else {
+            nativeConstructorInvocationFlag = true
+            rawMemory = nonNativeConstructorRawMemory!!
         }
     }
 
 
     internal fun rawMem(): COpaquePointer {
-        return rawMemory ?: throw NullPointerException("Attempt to use uninitialized object: $this")
+        return rawMemory ?: throw NullPointerException("Attempt to use null object: $this")
     }
+    override fun isNull(): Boolean = rawMemory == null
 
 
     final override fun getRawMemory(memScope: MemScope): COpaquePointer = rawMem()

@@ -7,8 +7,8 @@ set(CMAKE_EXECUTABLE_SUFFIX "")
 
 
 
-set(CINTEROP_LIB_NAME godot)
-set(KLIB_NAME Kotlin-Godot)
+set(CINTEROP_LIB_NAME GDNative)
+set(KLIB_NAME Godot)
 set(SHARED_LIB_NAME sample)
 
 
@@ -22,7 +22,7 @@ endif()
 cinterop(
         NAME ${CINTEROP_LIB_NAME}
         DEF_FILE src/main/c_interop/godot.def
-        COMPILER_OPTS -I${GODOT_HEADERS_PATH}
+        COMPILER_OPTS -I${GODOT_HEADERS_PATH} -I../src/main/c_interop
 )
 
 konanc_library(

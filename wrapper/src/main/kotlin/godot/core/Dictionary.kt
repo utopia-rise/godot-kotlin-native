@@ -1,10 +1,13 @@
-package kotlin.godot.core
+package godot.core
 
 import kotlinx.cinterop.*
-import godot.*
+import godot.gdnative.*
 
 
 class Dictionary: CoreType {
+    override fun isNull(): Boolean = false // TODO: make me beautiful
+
+
     var nativeValue = cValue<godot_dictionary> {}
 
     constructor() {

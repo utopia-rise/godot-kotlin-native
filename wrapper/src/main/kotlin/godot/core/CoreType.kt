@@ -1,4 +1,4 @@
-package kotlin.godot.core
+package godot.core
 
 import kotlinx.cinterop.*
 
@@ -6,6 +6,8 @@ import kotlinx.cinterop.*
 internal interface CoreType {
     fun getRawMemory(memScope: MemScope): COpaquePointer
     fun setRawMemory(mem: COpaquePointer)
+
+    fun isNull(): Boolean
 }
 
 

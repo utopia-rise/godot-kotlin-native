@@ -4,7 +4,7 @@ import java.io.File
 
 fun main(args: Array<String>) {
     val GODOT_API_PATH = "godot_api.json"
-    val GENERATED_PATH = "../wrapper/src/main/kotlin/godot/generated/"
+    val GENERATED_PATH = "../../wrapper/src/main/kotlin/godot/generated/"
 
     val text = File(GODOT_API_PATH).readText()
 
@@ -13,7 +13,7 @@ fun main(args: Array<String>) {
     val icalls = mutableSetOf<ICall>()
 
     for (cl in classes)
-        //if (cl.name == "Object" || cl.name == "Node" || cl.name == "Reference" || cl.name == "Resource" || cl.name == "ResourceLoader" || cl.name == "SceneTree" || cl.name == "MainLoop" || cl.name == "Script" || cl.name == "Viewport") // FIXME: remove line
+        if (cl.name == "Object" || cl.name == "Node" || cl.name == "Reference" || cl.name == "Resource" || cl.name == "ResourceLoader" || cl.name == "SceneTree" || cl.name == "MainLoop" || cl.name == "Script" || cl.name == "Viewport") // FIXME: remove line
         cl.generate(GENERATED_PATH, tree, icalls)
 
 
@@ -23,11 +23,11 @@ fun main(args: Array<String>) {
 
     icallsFile.writeText(buildString {
         appendln("@file:Suppress(\"unused\", \"ClassName\", \"EnumEntryName\", \"FunctionName\", \"SpellCheckingInspection\", \"PackageDirectoryMismatch\", \"RedundantExplicitType\")")
-        appendln("package kotlin.godot.icalls")
+        appendln("package godot.icalls")
         appendln()
+        appendln("import godot.gdnative.*")
+        appendln("import godot.core.*")
         appendln("import godot.*")
-        appendln("import kotlin.godot.*")
-        appendln("import kotlin.godot.core.*")
         appendln("import kotlinx.cinterop.*")
         appendln()
         appendln()

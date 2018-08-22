@@ -1,10 +1,13 @@
-package kotlin.godot.core
+package godot.core
 
-import godot.godot_transform
+import godot.gdnative.godot_transform
 import kotlinx.cinterop.*
 
 
 class Transform: CoreType {
+    override fun isNull(): Boolean = false // TODO: make me beautiful
+
+
 
     lateinit var basis: Basis
     lateinit var origin: Vector3

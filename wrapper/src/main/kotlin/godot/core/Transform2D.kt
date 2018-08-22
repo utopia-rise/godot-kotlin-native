@@ -1,6 +1,6 @@
-package kotlin.godot.core
+package godot.core
 
-import godot.godot_transform2d
+import godot.gdnative.godot_transform2d
 import kotlinx.cinterop.*
 import kotlin.math.acos
 import kotlin.math.atan2
@@ -9,6 +9,9 @@ import kotlin.math.sin
 
 
 class Transform2D: CoreType {
+    override fun isNull(): Boolean = false // TODO: make me beautiful
+
+
     // Warning #1: basis of Transform2D is stored differently from Basis. In terms of elements array, the basis matrix looks like "on paper":
     // M = (elements[0][0] elements[1][0])
     //     (elements[0][1] elements[1][1])

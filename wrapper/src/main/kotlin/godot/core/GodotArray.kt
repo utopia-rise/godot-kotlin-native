@@ -1,11 +1,14 @@
-package kotlin.godot.core
+package godot.core
 
 import kotlinx.cinterop.*
-import godot.*
-import kotlin.godot.Object
+import godot.gdnative.*
+import godot.Object
 
 
 class GodotArray: CoreType {
+    override fun isNull(): Boolean = false // TODO: make me beautiful
+
+
     internal var nativeValue = cValue<godot_array> {}
 
     constructor() {

@@ -1,6 +1,6 @@
-package kotlin.godot.core
+package godot.core
 
-import kotlin.godot.Object
+import godot.Object
 
 
 class Ref<T> {

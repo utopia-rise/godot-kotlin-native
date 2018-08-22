@@ -15,6 +15,8 @@ class Class(
         val constants: Map<String, Int>,
         @Json(name = "properties")
         val properties: List<Property>,
+        @Json(name = "signals")
+        val signals: List<Signal>,
         @Json(name = "methods")
         val methods: List<Method>,
         @Json(name = "enums")
@@ -40,15 +42,12 @@ class Class(
 
         out.writeText(buildString {
             appendln("@file:Suppress(\"unused\", \"ClassName\", \"EnumEntryName\", \"FunctionName\", \"SpellCheckingInspection\", \"PARAMETER_NAME_CHANGED_ON_OVERRIDE\", \"UnusedImport\", \"PackageDirectoryMismatch\")")
-            appendln("package kotlin.godot")
+            appendln("package godot")
             appendln()
-            appendln("import godot.*")
-            appendln("import kotlin.godot.core.*")
-            appendln("import kotlin.godot.icalls.*")
+            appendln("import godot.gdnative.*")
+            appendln("import godot.core.*")
+            appendln("import godot.icalls.*")
             appendln("import kotlinx.cinterop.*")
-            appendln("import kotlin.godot.registration.getMB")
-            appendln("import kotlin.godot.registration.getSingleton")
-            appendln("import kotlin.godot.registration.fromVariant")
             appendln()
             appendln()
             appendln("// NOTE: THIS FILE IS AUTO GENERATED FROM JSON API CONFIG")
@@ -74,6 +73,17 @@ class Class(
             appendln()
             for (enum in enums)
                 enum.generate(this)
+            appendln()
+            appendln()
+
+
+            appendln("    // Signals")
+            appendln("    class Signal {")
+            appendln("        companion object {")
+            for (sig in signals)
+                appendln("            ${sig.generate()}")
+            appendln("        }")
+            appendln("    }")
             appendln()
             appendln()
 

@@ -1,9 +1,12 @@
-package kotlin.godot.core
+package godot.core
 
-import godot.*
+import godot.gdnative.*
 import kotlinx.cinterop.*
 
 class PoolRealArray : CoreType {
+    override fun isNull(): Boolean = false // TODO: make me beautiful
+
+
     internal var nativeValue = cValue<godot_pool_real_array> {}
 
     constructor() {

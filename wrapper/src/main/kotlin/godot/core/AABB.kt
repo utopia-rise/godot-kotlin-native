@@ -1,10 +1,12 @@
-package kotlin.godot.core
+package godot.core
 
-import godot.*
+import godot.gdnative.*
 import kotlinx.cinterop.*
 
 
 class AABB: CoreType {
+    override fun isNull(): Boolean = false // TODO: make me beautiful
+
     lateinit var position: Vector3
     lateinit var size: Vector3
 

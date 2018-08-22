@@ -1,9 +1,12 @@
-package kotlin.godot.core
+package godot.core
 
-import godot.*
+import godot.gdnative.*
 import kotlinx.cinterop.*
 
 class PoolVector2Array : CoreType {
+    override fun isNull(): Boolean = false // TODO: make me beautiful
+
+
     internal var nativeValue = cValue<godot_pool_vector2_array> {}
 
     constructor() {

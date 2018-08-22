@@ -4,6 +4,6 @@
 
 [resource]
 
-class_name = "TestClass2"
+class_name = "simple.user.pack.TestClass2"
 library = ExtResource( 1 )
 

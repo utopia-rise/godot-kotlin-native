@@ -1,4 +1,4 @@
-package kotlin.godot.core
+package godot.core
 
 import kotlinx.cinterop.CStructVar
 import kotlinx.cinterop.CValue

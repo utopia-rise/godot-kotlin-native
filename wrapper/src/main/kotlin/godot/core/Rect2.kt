@@ -1,10 +1,13 @@
-package kotlin.godot.core
+package godot.core
 
-import godot.godot_rect2
+import godot.gdnative.godot_rect2
 import kotlinx.cinterop.*
 
 
 class Rect2: CoreType {
+    override fun isNull(): Boolean = false // TODO: make me beautiful
+
+
     var pos = Vector2()
     var size = Vector2()
 

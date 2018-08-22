@@ -1,10 +1,13 @@
-package kotlin.godot.core
+package godot.core
 
-import godot.*
+import godot.gdnative.*
 import kotlinx.cinterop.*
 import kotlin.math.*
 
 class Quat: CoreType {
+    override fun isNull(): Boolean = false // TODO: make me beautiful
+
+
     var x: Float = 0f
     var y: Float = 0f
     var z: Float = 0f

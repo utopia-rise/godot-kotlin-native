@@ -1,4 +1,4 @@
-package kotlin.godot.core
+package godot.core
 
 import platform.posix.perror
 

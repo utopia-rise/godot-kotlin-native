@@ -1,10 +1,12 @@
-package kotlin.godot.core
+package godot.core
 
-import godot.*
+import godot.gdnative.*
 import kotlinx.cinterop.*
 import kotlin.math.*
 
 class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Comparable<Color>, CoreType {
+    override fun isNull(): Boolean = false // TODO: make me beautiful
+
 
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
         return cValuesOf(r, g, b, a).getPointer(memScope)

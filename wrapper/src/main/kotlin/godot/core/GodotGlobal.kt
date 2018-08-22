@@ -1,8 +1,8 @@
-package kotlin.godot.core
+package godot.core
 
-import godot.godot_print
-import godot.godot_print_error
-import godot.godot_print_warning
+import godot.gdnative.godot_print
+import godot.gdnative.godot_print_error
+import godot.gdnative.godot_print_warning
 
 
 class Godot {

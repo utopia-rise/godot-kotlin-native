@@ -1,11 +1,14 @@
-package kotlin.godot.core
+package godot.core
 
-import godot.*
+import godot.gdnative.*
 import kotlinx.cinterop.*
-import kotlin.godot.Object
+import godot.Object
 
 
 class Variant: CoreType {
+    override fun isNull(): Boolean = false // TODO: make me beautiful
+
+
     internal var nativeValue = cValue<godot_variant> {}
 
     enum class Type(val id: Int) {
@@ -90,7 +93,7 @@ class Variant: CoreType {
         nativeValue = nativeValue.copy { godot_variant_new_nil(this.ptr) }
     }
 
-    internal constructor(native: CValue<godot_variant>) {
+    constructor(native: CValue<godot_variant>) {
         nativeValue = native // nativeValue.copy { godot_variant_new_copy(this.ptr, native) }
     }
 
@@ -308,7 +311,7 @@ class Variant: CoreType {
 
     fun toTransform2D(): Transform2D = Transform2D(godot_variant_as_transform2d(nativeValue))
 
-    fun getType(): Int = godot_variant_get_type(nativeValue).value
+    fun getType(): Variant.Type = Type.fromInt(godot_variant_get_type(nativeValue).value)
 
     fun call(str: String, args: Array<Variant>): Variant {
         val newVar = Variant()
