@@ -3,6 +3,7 @@
 
 
 #include <gdnative_api_struct.gen.h>
+#include <string.h>
 
 
 const godot_gdnative_core_api_struct *api = NULL;
@@ -93,7 +94,7 @@ void ___godot_wrapper_property_set_func(godot_object *object, void *method_data,
     method(user_data, (void *) value);
 }
 
-void godot_wrapper_register_property(const char *className,
+void godot_wrapper_register_property(const char *class_name,
         const char *name,
         void (*getter)(void*, void*),
         void (*setter)(void*, void*),
@@ -130,9 +131,41 @@ void godot_wrapper_register_property(const char *className,
     get_func.free_func   = api->godot_free;
     get_func.get_func    = ___godot_wrapper_property_get_func;
 
-    nativescript_api->godot_nativescript_register_property(nativescript_handle, className, name, &attr, set_func, get_func);
+    nativescript_api->godot_nativescript_register_property(nativescript_handle, class_name, name, &attr, set_func, get_func);
 }
 
+
+
+
+
+void godot_wrapper_register_signal(const char *class_name,
+        godot_string name,
+        int num_args,
+        godot_signal_argument *args,
+        int num_default_args,
+        godot_variant *default_args)
+{
+    godot_signal signal = {};
+    signal.name = name;
+    signal.num_args = num_args;
+    signal.num_default_args = num_default_args;
+
+    if (num_args != 0) {
+        signal.args = (godot_signal_argument*) api->godot_alloc(sizeof(godot_signal_argument) * num_args);
+        memcpy((void *) signal.args, (void *) args, sizeof(godot_signal_argument) * num_args);
+    }
+    if (num_default_args != 0) {
+        signal.default_args = (godot_variant*) api->godot_alloc(sizeof(godot_variant) * num_default_args);
+        memcpy((void *) signal.default_args, (void *) default_args, sizeof(godot_variant) * num_default_args);
+    }
+
+    nativescript_api->godot_nativescript_register_signal(nativescript_handle, class_name, &signal);
+
+    if(signal.args)
+        api->godot_free(signal.args);
+    if(signal.default_args)
+        api->godot_free(signal.default_args);
+}
 
 
 

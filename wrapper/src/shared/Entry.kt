@@ -31,6 +31,12 @@ fun NativeScriptInit(handle: COpaquePointer) {
     registerMethod("simple.user.pack.TestClass", "_ready", udcBridge2())
     registerClass("simple.user.pack.TestClass2", "Node", udcBridge3(), udcBridge4())
     registerMethod("simple.user.pack.TestClass2", "_ready", udcBridge5())
+
+
+    registerSignal("simple.user.pack.TestClass", "test",
+            arrayOf("argument1" to Variant.Type.COLOR,
+                    "argument2" to Variant.Type.TRANSFORM2D),
+            arrayOf())
 }
 
 

@@ -4,9 +4,9 @@ import godot.core.Godot
 import godot.core.Variant
 import godot.core.toGDString
 import godot.gdnative.*
-import kotlinx.cinterop.CFunction
-import kotlinx.cinterop.COpaquePointer
-import kotlinx.cinterop.CPointer
+import kotlinx.cinterop.*
+import platform.posix.memcpy
+import platform.posix.memset
 
 
 fun registerClass(cl: String, base: String,
@@ -26,15 +26,15 @@ fun registerMethod(cl: String, m: String,
 
 
 fun registerProperty(cl: String,
-                     n: String,
-                     e: Boolean,
-                     g: CPointer<CFunction<(COpaquePointer?,COpaquePointer?) -> Unit>>,
-                     s: CPointer<CFunction<(COpaquePointer?,COpaquePointer?) -> Unit>>,
-                     dv: Variant,
-                     r: godot_method_rpc_mode = godot_method_rpc_mode.GODOT_METHOD_RPC_MODE_DISABLED,
-                     uu: godot_property_usage_flags = GODOT_PROPERTY_USAGE_NOEDITOR,
-                     hh: godot_property_hint = godot_property_hint.GODOT_PROPERTY_HINT_NONE,
-                     hss: String = "")
+                      n: String,
+                      e: Boolean,
+                      g: CPointer<CFunction<(COpaquePointer?,COpaquePointer?) -> Unit>>,
+                      s: CPointer<CFunction<(COpaquePointer?,COpaquePointer?) -> Unit>>,
+                      dv: Variant,
+                      r: godot_method_rpc_mode = godot_method_rpc_mode.GODOT_METHOD_RPC_MODE_DISABLED,
+                      uu: godot_property_usage_flags = GODOT_PROPERTY_USAGE_NOEDITOR,
+                      hh: godot_property_hint = godot_property_hint.GODOT_PROPERTY_HINT_NONE,
+                      hss: String = "")
 {
     var u = uu or GODOT_PROPERTY_USAGE_SCRIPT_VARIABLE
     var h = hh
@@ -53,4 +53,27 @@ fun registerProperty(cl: String,
         }
     }
     godot_wrapper_register_property(cl, n, g, s, dv.nativeValue, dv.getType().id, r, u, h, hs.toGDString())
+}
+
+
+
+fun registerSignal(cl: String,
+                     n: String,
+                     a: Array<Pair<String, Variant.Type>> = arrayOf(),
+                     da: Array<Variant> = arrayOf())
+{
+    memScoped {
+        val args = allocArray<godot_signal_argument>(a.size)
+        memset(args, 0, sizeOf<godot_signal_argument>() * a.size)
+        val defaultArgs = allocArray<godot_variant>(da.size)
+
+        for ((i,arg) in a.withIndex()) {
+            memcpy(args[i].name.ptr, arg.first.toGDString().getPointer(memScope), sizeOf<godot_string>())
+            args[i].type = arg.second.id
+        }
+        for ((i,arg) in da.withIndex())
+            memcpy(defaultArgs[i].ptr, arg.nativeValue.getPointer(memScope), sizeOf<godot_variant>())
+
+        godot_wrapper_register_signal(cl, n.toGDString(), a.size, args, da.size, defaultArgs)
+    }
 }
