@@ -16,7 +16,8 @@ open class Method(
     private val oldName: String = name
 
     init {
-        name = name.convertToCamelCase()
+        if (!isVirtual)
+            name = name.convertToCamelCase()
         returnType = returnType.convertTypeToKotlin()
     }
 
@@ -46,14 +47,22 @@ open class Method(
 
             val methodArguments = StringBuilder()
             for ((i, arg) in arguments.withIndex()) {
-                methodArguments.append(", ${arg.name}")
+                if (i != 0 || !hasVarargs)
+                    methodArguments.append(", ")
+                methodArguments.append(arg.name)
+
                 if (arg.type.isEnum())
                     methodArguments.append(".id")
 
                 append("${arg.name}: ${arg.type.removeEnumPrefix()}${arg.applyDefaultValue()}")
 
-                if (i != arguments.size - 1)
+                if (i != arguments.size - 1 || hasVarargs)
                     append(", ")
+            }
+            if (hasVarargs) {
+                if (!methodArguments.isEmpty())
+                    methodArguments.append(", ")
+                append("vararg __var_args: Any?")
             }
 
 
@@ -66,7 +75,6 @@ open class Method(
             appendln(" {")
 
 
-            // TODO: check virtuals, getters and setters
             if (!isVirtual) {
                 append("$prefix        ")
 
@@ -79,11 +87,13 @@ open class Method(
                         append("${returnType.removeEnumPrefix()}.fromInt(")
                         suffix = ")"
                     }
+                    else if (hasVarargs && returnType != "Variant")
+                        append("$returnType from ")
                 }
 
                 append(constructICall(methodArguments.toString(), icalls))
                 appendln(suffix)
-            } else {
+            } else {// TODO: add varargs and virtual methods
                 if (shouldReturn) {
                     appendln("$prefix        throw NotImplementedError(\"$oldName is not implemented for ${cl.name}\")")
                 }
@@ -98,6 +108,9 @@ open class Method(
 
 
     private fun constructICall(methodArguments: String, icalls: MutableSet<ICall>): String {
+        if (hasVarargs)
+            return "_icall_varargs(${name}MethodBind, this.rawMem(), arrayOf($methodArguments*__var_args))"
+
         val icall = ICall(returnType, arguments)
         icalls.add(icall)
         return "${icall.name}(${name}MethodBind, this.rawMem()$methodArguments)"

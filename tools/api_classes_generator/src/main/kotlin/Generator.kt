@@ -32,6 +32,22 @@ fun main(args: Array<String>) {
         appendln()
         appendln()
 
+
+        appendln("""
+internal fun _icall_varargs(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arguments: Array<*>): Variant {
+    memScoped {
+        val args = allocArray<CPointerVar<godot_variant>>(arguments.size)
+        for ((i,arg) in arguments.withIndex())
+            args[i] = Variant(arg).nativeValue.ptr
+        val result = godot_method_bind_call(mb, inst, args, arguments.size, null)
+        for (i in arguments.indices)
+            godot_variant_destroy(args[i])
+        return Variant(result)
+    }
+}
+
+        """.trimIndent())
+
         for (icall in icalls)
             append(icall.generate())
     })

@@ -83,7 +83,7 @@ inline fun <reified T: godot.GodotObject> set(name: String, cl: String, objRaw: 
         return
     }
     val obj = objRaw.asStableRef<T>().get()
-    val value = Variant(v.reinterpret<godot_variant>().pointed.readValue())
+    val value = Variant(v)
     try {
         shedule(obj, value)
     }

@@ -33,10 +33,8 @@ fun NativeScriptInit(handle: COpaquePointer) {
     registerMethod("simple.user.pack.TestClass2", "_ready", udcBridge5())
 
 
-    registerSignal("simple.user.pack.TestClass", "test",
-            arrayOf("argument1" to Variant.Type.COLOR,
-                    "argument2" to Variant.Type.TRANSFORM2D),
-            arrayOf())
+    registerMethod("simple.user.pack.TestClass", "_on_test", udcBridge9())
+    registerSignal("simple.user.pack.TestClass", "test")
 }
 
 
@@ -94,4 +92,17 @@ private fun udcBrigde7(): CPointer<CFunction<(COpaquePointer?,COpaquePointer?) -
 }
 private fun udcBridge8(): Variant {
     return Variant(ResourceLoader.load("res://godot_wrapper/TestClass2.gdns"))
+}
+
+
+
+private fun udcBridge9(): CPointer<CFunction<(COpaquePointer?,COpaquePointer?,Int,COpaquePointer?) -> Unit>> {
+    return staticCFunction { r, o, n, a -> invoke<simple.user.pack.TestClass>("_on_test", r, o, n, a) { obj, numArgs, args -> run {
+        when (numArgs) {
+            0 -> {
+                obj._on_test()
+            }
+            else -> noMethodToInvoke("_on_test", "simple.user.pack.TestClass", numArgs)
+        }
+        return@run null }}}
 }

@@ -44,12 +44,14 @@ fun registerProperty(cl: String,
         u = u or GODOT_PROPERTY_USAGE_EDITOR
 
         if (dv.getType() == Variant.Type.OBJECT) {
-            val isResource = dv.call("is_class", arrayOf(Variant("Resource"))).toBoolean()
-
-            if (isResource) {
+            val res = Variant("Resource")
+            val result = dv.call("is_class", arrayOf(res))
+            if (result.toBoolean()) {
                 h = godot_property_hint.byValue(hh.value or godot_property_hint.GODOT_PROPERTY_HINT_RESOURCE_TYPE.value)
                 hs = dv.call("get_class", arrayOf()).toString()
             }
+            res.dispose()
+            result.dispose()
         }
     }
     godot_wrapper_register_property(cl, n, g, s, dv.nativeValue, dv.getType().id, r, u, h, hs.toGDString())

@@ -16,7 +16,7 @@ class GodotArray: CoreType {
     }
 
     internal constructor(native: CValue<godot_array>) {
-        nativeValue = nativeValue.copy { godot_array_new_copy(this.ptr, native) }
+        nativeValue = native//Value.copy { godot_array_new_copy(this.ptr, native) }
     }
 
     internal constructor(mem: COpaquePointer) {
@@ -25,6 +25,10 @@ class GodotArray: CoreType {
 
     constructor(other: GodotArray) {
         nativeValue = nativeValue.copy { godot_array_new_copy(this.ptr, other.nativeValue) }
+    }
+
+    constructor(other: Array<*>) : this() {
+        //nativeValue = nativeValue.copy { godot_array_new_copy(this.ptr, other.nativeValue) }
     }
 
     constructor(other: PoolByteArray) {
@@ -84,19 +88,23 @@ class GodotArray: CoreType {
         nativeValue = nativeValue.copy { godot_array_resize(this.ptr, size) }
     }
 
-    fun sort(){
+    fun sort() {
         nativeValue = nativeValue.copy { godot_array_sort(this.ptr) }
     }
 
     operator fun get(idx: Int): Variant? = godot_array_operator_index(nativeValue, idx)?.pointed?.readValue()?.let { Variant(it) }
 
-    fun append(v : Variant) {
+    fun append(v: Any?) {
+        append(Variant(v))
+    }
+
+    fun append(v: Variant) {
         nativeValue = nativeValue.copy { godot_array_append(this.ptr, v.nativeValue) }
     }
 
     fun count(v: Variant): Int = godot_array_count(nativeValue, v.nativeValue)
 
-    fun erase(v : Variant) {
+    fun erase(v: Variant) {
         nativeValue = nativeValue.copy { godot_array_erase(this.ptr, v.nativeValue) }
     }
 
@@ -108,7 +116,7 @@ class GodotArray: CoreType {
 
     fun findLast(v: Variant) = godot_array_find_last(nativeValue, v.nativeValue)
 
-    fun has(v: Variant) =  godot_array_has(nativeValue, v.nativeValue)
+    fun has(v: Variant) = godot_array_has(nativeValue, v.nativeValue)
 
     fun insert(pos: Int, v : Variant) {
         nativeValue = nativeValue.copy { godot_array_insert(this.ptr, pos, v.nativeValue) }
@@ -130,6 +138,14 @@ class GodotArray: CoreType {
 
     fun sortCustom(obj: Object, func: String) = memScoped {
         godot_array_sort_custom(nativeValue, obj.getRawMemory(memScope), func.toGDString())
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other)
+            return true
+        if (other !is GodotArray)
+            return false
+        return this.hashCode() == other.hashCode()
     }
 
 }
