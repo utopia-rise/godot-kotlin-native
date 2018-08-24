@@ -73,10 +73,11 @@ class Property(
         return buildString {
             if (index == -1) {
                 append("$prefix    ")
-                if (tree.doAncestorsHaveProperty(cl, this@Property))
-                    append("override ")
-                else
-                    append("open ")
+                if (!cl.isSingleton)
+                    if (tree.doAncestorsHaveProperty(cl, this@Property))
+                        append("override ")
+                    else
+                        append("open ")
                 appendln("${if (hasValidSetter) "var" else "val"} $name: $type")
 
                 if (hasValidGetter) {

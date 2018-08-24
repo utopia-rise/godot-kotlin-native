@@ -1,6 +1,7 @@
-package kotlin
+package godot.tests
 
-import kotlin.godot.core.*
+import godot.core.*
+
 
 class GodotArrayTest {
     fun test() {

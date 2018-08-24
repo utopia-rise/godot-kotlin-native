@@ -1,8 +1,9 @@
-package kotlin
+package godot.tests
 
-import kotlin.godot.core.Basis
-import kotlin.godot.core.Godot
-import kotlin.godot.core.Vector3
+import godot.core.Basis
+import godot.core.Godot
+import godot.core.Vector3
+
 
 class BasisTest {
     fun test() {

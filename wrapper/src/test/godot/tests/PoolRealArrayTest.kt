@@ -1,81 +1,82 @@
-package kotlin
+package godot.tests
 
-import kotlin.godot.core.*
+import godot.core.*
 
-class PoolVector2ArrayTest {
+
+class PoolRealArrayTest {
     fun test() {
-        Godot.print("Testing PoolVector2Array")
+        Godot.print("Testing PoolRealArray")
         Godot.print("--------------------------------------")
         val arr = GodotArray()
-        arr.pushBack(Variant(Vector2(10, 10)))
-        arr.pushBack(Variant(Vector2(0.5, 1.7)))
-        val poolFromArray = PoolVector2Array(arr)
+        arr.pushBack(Variant(32443.34f))
+        arr.pushBack(Variant(65555.65f))
+        val poolFromArray = PoolRealArray(arr)
         Godot.print("Testing constructor with GodotArray arg: " +
-                if (poolFromArray[0] == Vector2(10, 10) && poolFromArray[1] == Vector2(0.5, 1.7) && poolFromArray.size() == 2)
+                if (poolFromArray[0] == 32443.34f && poolFromArray[1] == 65555.65f && poolFromArray.size() == 2)
                     "OK"
                 else
                     "ERROR")
-        val copy = PoolVector2Array(poolFromArray)
+        val copy = PoolRealArray(poolFromArray)
         Godot.print("Testing copy constructor: " +
-                if (copy[0] == Vector2(10, 10) && copy[1] == Vector2(0.5, 1.7) && copy.size() == 2)
+                if (copy[0] == 32443.34f && copy[1] == 65555.65f && copy.size() == 2)
                     "OK"
                 else
                     "ERROR")
-        val pool = PoolVector2Array()
+        val pool = PoolRealArray()
         Godot.print("Testing size: " +
                 if (pool.size() == 0)
                     "OK"
                 else
                     "ERROR")
-        pool.pushBack(Vector2(22, 10))
+        pool.pushBack(128000f)
         Godot.print("Testing pushBack: " +
                 if (pool.size() == 1)
                     "OK"
                 else
                     "ERROR")
         Godot.print("Testing get: " +
-                if (pool[0] == Vector2(22, 10))
+                if (pool[0] == 128000f)
                     "OK"
                 else
                     "ERROR")
-        pool.pushBack(Vector2(0.003, 100))
+        pool.pushBack(127456.3435f)
         pool.invert()
         Godot.print("Testing invert: " +
-                if (pool[0] == Vector2(0.003, 100) && pool.size() == 2)
+                if (pool[0] == 127456.3435f && pool.size() == 2)
                     "OK"
                 else
                     "ERROR")
-        pool.append(Vector2(3, 10.5))
+        pool.append(234245676.3f)
         Godot.print("Testing append: " +
-                if (pool[2] == Vector2(3, 10.5) && pool.size() == 3)
+                if (pool[2] == 234245676.3f && pool.size() == 3)
                     "OK"
                 else
                     "ERROR")
-        pool.insert(2, Vector2(9, 50.5))
+        pool.insert(2, 84457.3f)
         Godot.print("Testing insert: " +
-                if (pool[2] == Vector2(9, 50.5) && pool[3] == Vector2(3, 10.5) && pool.size() == 4)
+                if (pool[2] == 84457.3f && pool[3] == 234245676.3f && pool.size() == 4)
                     "OK"
                 else
                     "ERROR")
-        val otherPool = PoolVector2Array()
-        otherPool.pushBack(Vector2(90, 500.5))
-        otherPool.pushBack(Vector2(59, 550.5))
+        val otherPool = PoolRealArray()
+        otherPool.pushBack(99f)
+        otherPool.pushBack(5675754.67f)
         pool.appendArray(otherPool)
         Godot.print("Testing appendArray: " +
-                if (pool[4] == Vector2(90, 500.5) && pool[5] == Vector2(59, 550.5) && pool.size() == 6)
+                if (pool[4] == 99f && pool[5] == 5675754.67f && pool.size() == 6)
                     "OK"
                 else
                     "ERROR")
         pool.remove(0)
         Godot.print("Testing remove: " +
-                if (pool[0] == Vector2(22, 10) && pool.size() == 5)
+                if (pool[0] == 128000f && pool.size() == 5)
                     "OK"
                 else
                     "ERROR")
 
         pool.resize(2)
         Godot.print("Testing resize: " +
-                if (pool[0] == Vector2(22, 10) && pool.size() == 2)
+                if (pool[0] == 128000f && pool.size() == 2)
                     "OK"
                 else
                     "ERROR")

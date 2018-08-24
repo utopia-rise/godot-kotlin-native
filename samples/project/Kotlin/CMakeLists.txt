@@ -19,3 +19,12 @@ konanc_dynamic(
         SOURCES src/main/kotlin
         LIBRARIES GDNative Godot
 )
+
+
+set(LIB_DESTINATION_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../project)
+
+
+add_custom_target(MoveDllToProjectDir
+        DEPENDS samples)
+add_custom_command(TARGET MoveDllToProjectDir
+        COMMAND ${CMAKE_COMMAND} -E rename ${LIBRARY_samples_OUTPUT} ${LIB_DESTINATION_PATH}/samples${CMAKE_SHARED_LIBRARY_SUFFIX})
