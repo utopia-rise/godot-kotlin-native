@@ -186,6 +186,37 @@ macro(prepare_konanc_args)
     endforeach (folder ${KONANC_SOURCES})
 endmacro()
 
+macro(prepare_klib_args)
+    cmake_parse_arguments(
+            KLIB
+            ""
+            "NAME;TARGET"
+            "PATH;LIBRARIES"
+            ${ARGN}
+    )
+
+    if (NOT KLIB_NAME)
+        message(FATAL_ERROR "You must provide a name")
+    endif ()
+
+    if (NOT KLIB_PATH)
+        message(FATAL_ERROR "You must provide path to library file")
+    endif ()
+
+    if (NOT KLIB_TARGET)
+        if (APPLE)
+            set(KLIB_TARGET macbook)
+        elseif (UNIX)
+            set(KLIB_TARGET linux)
+        elseif (WIN32)
+            set(KLIB_TARGET mingw_x64)
+        else ()
+            message(FATAL_ERROR "Unsupported host target")
+        endif ()
+    endif ()
+
+endmacro()
+
 function(konanc_executable)
     prepare_konanc_args(${ARGV})
 
@@ -379,12 +410,22 @@ function(konanc_library_search LIB_NAME INCLUDE_FILE)
     set(${UPPER_LIB_NAME}_INCLUDE_DIR ${${UPPER_LIB_NAME}_INCLUDE_DIR} PARENT_SCOPE)
 endfunction()
 
-function(klib NAME LIBRARY_PATH)
-    set(LIBRARY_${NAME}_OUTPUT ${LIBRARY_PATH} CACHE PATH "Library ${NAME}" FORCE)
+function(klib)
+    prepare_klib_args(${ARGV})
 
-    add_custom_target(${NAME}
-            DEPENDS ${LIBRARY_PATH})
-    add_custom_command(TARGET ${NAME}
+    set(LIBRARY_OUTPUT ${CMAKE_Kotlin_LIBRARY_DIR}/${KLIB_NAME}.klib)
+    set(LIBRARY_${KLIB_NAME}_OUTPUT ${LIBRARY_OUTPUT} CACHE PATH "Library ${KLIB_NAME}" FORCE)
+
+    add_model_record("${KLIB_NAME}" LIBRARY "${KLIB_TARGET}" "${KLIB_PATH}" "${KLIB_LIBRARIES}" "${LIBRARY_OUTPUT}")
+    add_custom_target(${KLIB_NAME}
+            DEPENDS ${KLIB_PATH})
+    add_custom_command(TARGET ${KLIB_NAME}
             PRE_BUILD
-            COMMAND ${CMAKE_COMMAND} -E copy ${LIBRARY_PATH} ${CMAKE_Kotlin_LIBRARY_DIR}/${NAME}.klib)
+            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/${KLIB_PATH} ${LIBRARY_OUTPUT})
+
+    foreach (KLIB_LIBRARY ${KLIB_LIBRARIES})
+        add_dependencies(${KLIB_NAME} ${KLIB_LIBRARY})
+    endforeach ()
+
+    set_target_properties(${KONANC_NAME} PROPERTIES LINKER_LANGUAGE Kotlin)
 endfunction()

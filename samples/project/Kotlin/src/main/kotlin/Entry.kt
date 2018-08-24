@@ -247,7 +247,7 @@ private fun udcBrigde23(): CPointer<CFunction<(COpaquePointer?,COpaquePointer?) 
     }}
 }
 private fun udcBridge24(): Variant {
-    return Variant(obj.health)
+    return Variant(2)
 }
 
 

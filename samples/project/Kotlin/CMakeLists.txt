@@ -3,9 +3,16 @@ set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/KotlinCMakeModule)
 project(samples Kotlin)
 
 
+klib(
+        NAME GDNative
+        PATH lib/GDNative.klib
+)
 
-klib(GDNative ${CMAKE_CURRENT_BINARY_DIR}/../lib/GDNative.klib)
-klib(Godot ${CMAKE_CURRENT_BINARY_DIR}/../lib/Godot.klib)
+klib(
+        NAME Godot
+        PATH lib/Godot.klib
+        LIBRARIES GDNative
+)
 
 konanc_dynamic(
         NAME samples
