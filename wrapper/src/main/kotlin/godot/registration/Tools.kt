@@ -4,8 +4,7 @@ import godot.gdnative.godot_variant
 import kotlinx.cinterop.*
 import platform.posix.EXIT_FAILURE
 import platform.posix.memcpy
-import godot.GodotObject
-import godot.core.Godot
+import godot.core.GD
 import godot.core.Variant
 import kotlin.reflect.KFunction0
 import kotlin.system.exitProcess
@@ -17,7 +16,7 @@ import kotlin.system.exitProcess
 
 fun <T: godot.GodotObject> constructFromRawMem(mem: COpaquePointer?, cons: KFunction0<T>): COpaquePointer? {
     if (mem == null) {
-        Godot.printError("Invoked object constructor with null as argument", "kotlin constructor", "Entry.kt", 0)
+        GD.printError("Invoked object constructor with null as argument", "kotlin constructor", "Entry.kt", 0)
         exitProcess(EXIT_FAILURE)
     }
     try {
@@ -26,7 +25,7 @@ fun <T: godot.GodotObject> constructFromRawMem(mem: COpaquePointer?, cons: KFunc
         val obj = cons()
         return StableRef.create(obj).asCPointer()
     } catch (e: Throwable) {
-        Godot.printError(e.message.toString(), "kotlin constructor", "Entry.kt", 0)
+        GD.printError(e.message.toString(), "kotlin constructor", "Entry.kt", 0)
         e.printStackTrace()
         exitProcess(EXIT_FAILURE)
     }
@@ -35,7 +34,7 @@ fun <T: godot.GodotObject> constructFromRawMem(mem: COpaquePointer?, cons: KFunc
 
 inline fun <reified T: godot.GodotObject> deconstructFromRawMem(mem: COpaquePointer?) {
     if (mem == null) {
-        Godot.printError("Invoked object destructor with null as argument", "kotlin destructor", "Entry.kt", 0)
+        GD.printError("Invoked object destructor with null as argument", "kotlin destructor", "Entry.kt", 0)
         exitProcess(EXIT_FAILURE)
     }
     mem.asStableRef<T>().dispose()
@@ -46,7 +45,7 @@ inline fun <reified T: godot.GodotObject> deconstructFromRawMem(mem: COpaquePoin
 
 inline fun <reified T: godot.GodotObject> invoke(name: String, ret: COpaquePointer?, objRaw: COpaquePointer?, numArgs: Int, args: COpaquePointer?, shedule: (T, Int, CPointer<COpaquePointerVar>?) -> Variant?) {
     if (objRaw == null) {
-        Godot.printError("Invoked method $name for null object", "$name invocation", "Entry.kt", 0)
+        GD.printError("Invoked method $name for null object", "$name invocation", "Entry.kt", 0)
         exitProcess(EXIT_FAILURE)
     }
     val obj = objRaw.asStableRef<T>().get()
@@ -60,13 +59,13 @@ inline fun <reified T: godot.GodotObject> invoke(name: String, ret: COpaquePoint
         }
     }
     catch (e: Throwable) {
-        Godot.printError(e.message.toString(), name, obj.toString(), 0)
+        GD.printError(e.message.toString(), name, obj.toString(), 0)
         e.printStackTrace()
         exitProcess(EXIT_FAILURE)
     }
 }
 fun noMethodToInvoke(name: String, className: String, numArgs: Int) {
-    Godot.printError("No such method \"$name\" in $className with $numArgs arguments!", name, "", 0) // TODO: ???
+    GD.printError("No such method \"$name\" in $className with $numArgs arguments!", name, "", 0) // TODO: ???
     exitProcess(EXIT_FAILURE)
 }
 
@@ -75,11 +74,11 @@ fun noMethodToInvoke(name: String, className: String, numArgs: Int) {
 
 inline fun <reified T: godot.GodotObject> set(name: String, cl: String, objRaw: COpaquePointer?, v: COpaquePointer?, shedule: (T, Variant) -> Unit) {
     if (objRaw == null) {
-        Godot.printError("Invoked $name setter for null of $cl", "$name setter", "Entry.kt", 0)
+        GD.printError("Invoked $name setter for null of $cl", "$name setter", "Entry.kt", 0)
         exitProcess(EXIT_FAILURE)
     }
     if (v == null) {
-        Godot.printWarning("Invoked setter for $name in $cl with null as param", "$name setter", "Entry.kt", 0)
+        GD.printWarning("Invoked setter for $name in $cl with null as param", "$name setter", "Entry.kt", 0)
         return
     }
     val obj = objRaw.asStableRef<T>().get()
@@ -88,7 +87,7 @@ inline fun <reified T: godot.GodotObject> set(name: String, cl: String, objRaw: 
         shedule(obj, value)
     }
     catch (e: Throwable) {
-        Godot.printError(e.message.toString(), "$name setter", obj.toString(), 0)
+        GD.printError(e.message.toString(), "$name setter", obj.toString(), 0)
         e.printStackTrace()
         exitProcess(EXIT_FAILURE)
     }
@@ -97,7 +96,7 @@ inline fun <reified T: godot.GodotObject> set(name: String, cl: String, objRaw: 
 
 inline fun <reified T: godot.GodotObject> get(name: String, cl: String, objRaw: COpaquePointer?, ret: COpaquePointer?, shedule: (T) -> Variant?) {
     if (objRaw == null) {
-        Godot.printError("Invoked $name getter for null of $cl", "$name getter", "Entry.kt", 0)
+        GD.printError("Invoked $name getter for null of $cl", "$name getter", "Entry.kt", 0)
         exitProcess(EXIT_FAILURE)
     }
     val obj = objRaw.asStableRef<T>().get()
@@ -110,7 +109,7 @@ inline fun <reified T: godot.GodotObject> get(name: String, cl: String, objRaw: 
         }
     }
     catch (e: Throwable) {
-        Godot.printError(e.message.toString(), "$name getter", obj.toString(), 0)
+        GD.printError(e.message.toString(), "$name getter", obj.toString(), 0)
         e.printStackTrace()
         exitProcess(EXIT_FAILURE)
     }

@@ -16,14 +16,17 @@ class TestClass : Node() {
 
     override fun _ready() {
         name = "Parent"
-        Godot.print("Hello from parent!")
+        GD.print("Hello from parent!")
 
         child.setScript(childScript)
         addChild(child)
     }
 
-    fun _on_test() {
-        Godot.print("\"test\" emitted!")
+    fun _on_test(arr: GDArray) {
+        GD.print("\"test\" emitted!")
+
+        for ((i,arg) in arr.withIndex())
+            GD.print("$i: $arg")
     }
 }
 
@@ -31,8 +34,9 @@ class TestClass : Node() {
 class TestClass2 : Node() {
     override fun _ready() {
         name = "Child"
-        Godot.print("Hello from child!")
+        GD.print("Hello from child!")
 
-        getParent().emitSignal("test")
+        val arr = godotArrayOf(1, "Sanya", Color(1, 0, 0))
+        getParent().emitSignal("test", arr)
     }
 }

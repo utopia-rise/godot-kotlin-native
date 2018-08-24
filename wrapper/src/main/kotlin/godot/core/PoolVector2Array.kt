@@ -25,7 +25,7 @@ class PoolVector2Array : CoreType {
         nativeValue = nativeValue.copy { godot_pool_vector2_array_new_copy(this.ptr, other.nativeValue) }
     }
 
-    constructor(other: GodotArray) {
+    constructor(other: GDArray) {
         nativeValue = nativeValue.copy { godot_pool_vector2_array_new_with_array(this.ptr, other.nativeValue) }
     }
 

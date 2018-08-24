@@ -5,30 +5,36 @@ import godot.gdnative.*
 import godot.Object
 
 
-class GodotArray: CoreType {
+class GDArray: CoreType { // FIXME: .copy
     override fun isNull(): Boolean = false // TODO: make me beautiful
 
 
     internal var nativeValue = cValue<godot_array> {}
 
-    constructor() {
-        nativeValue = nativeValue.copy { godot_array_new(this.ptr) }
-    }
 
     internal constructor(native: CValue<godot_array>) {
-        nativeValue = native//Value.copy { godot_array_new_copy(this.ptr, native) }
+        nativeValue = native
     }
 
     internal constructor(mem: COpaquePointer) {
         this.setRawMemory(mem)
     }
 
-    constructor(other: GodotArray) {
+
+    constructor(size: Int = 0, init: (Int) -> Variant = { Variant() }) {
+        nativeValue = nativeValue.copy { godot_array_new(this.ptr) }
+
+        for (i in 0 until size)
+            append(init(i))
+    }
+
+    constructor(other: GDArray) {
         nativeValue = nativeValue.copy { godot_array_new_copy(this.ptr, other.nativeValue) }
     }
 
     constructor(other: Array<*>) : this() {
-        //nativeValue = nativeValue.copy { godot_array_new_copy(this.ptr, other.nativeValue) }
+        for (arg in other)
+            append(Variant from arg)
     }
 
     constructor(other: PoolByteArray) {
@@ -68,6 +74,39 @@ class GodotArray: CoreType {
     }
 
 
+    fun toKotlinArray(): Array<Variant> {
+        return Array(this.size()) { i -> this[i]!! }
+    }
+
+
+
+    operator fun iterator(): Iterator<Variant> = object: Iterator<Variant> {
+        var idx: Int = 0
+        val size = this@GDArray.size()
+
+        override fun next(): Variant = this@GDArray[idx++]!!
+        override fun hasNext(): Boolean = idx < size
+    }
+
+    fun withIndex(): Iterator<Pair<Int,Variant>> = object: Iterator<Pair<Int,Variant>> {
+        var idx: Int = 0
+        val size = this@GDArray.size()
+
+        override fun next(): Pair<Int,Variant> = idx to this@GDArray[idx++]!!
+        override fun hasNext(): Boolean = idx < size
+    }
+
+    val indices: Iterator<Int>
+        get() = object: Iterator<Int> {
+            var idx: Int = 0
+            var size: Int = this@GDArray.size()
+
+            override fun next(): Int = idx++
+            override fun hasNext(): Boolean = idx < size
+        }
+
+
+
     fun clear() {
         nativeValue = nativeValue.copy { godot_array_clear(this.ptr) }
     }
@@ -93,10 +132,6 @@ class GodotArray: CoreType {
     }
 
     operator fun get(idx: Int): Variant? = godot_array_operator_index(nativeValue, idx)?.pointed?.readValue()?.let { Variant(it) }
-
-    fun append(v: Any?) {
-        append(Variant(v))
-    }
 
     fun append(v: Variant) {
         nativeValue = nativeValue.copy { godot_array_append(this.ptr, v.nativeValue) }
@@ -143,9 +178,12 @@ class GodotArray: CoreType {
     override fun equals(other: Any?): Boolean {
         if (this === other)
             return true
-        if (other !is GodotArray)
+        if (other !is GDArray)
             return false
         return this.hashCode() == other.hashCode()
     }
-
 }
+
+
+fun Array<*>.toGDArray(): GDArray = GDArray(this)
+fun godotArrayOf(vararg params: Any?): GDArray = GDArray(params)

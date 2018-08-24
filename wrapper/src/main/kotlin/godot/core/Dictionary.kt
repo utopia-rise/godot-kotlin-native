@@ -46,11 +46,11 @@ class Dictionary: CoreType {
 
     fun toJson(): String = godot_dictionary_to_json(nativeValue).toKString()
 
-    fun hasAll(keys: GodotArray): Boolean = godot_dictionary_has_all(nativeValue, keys.nativeValue)
+    fun hasAll(keys: GDArray): Boolean = godot_dictionary_has_all(nativeValue, keys.nativeValue)
 
-    fun keys(): GodotArray = GodotArray(godot_dictionary_keys(nativeValue))
+    fun keys(): GDArray = GDArray(godot_dictionary_keys(nativeValue))
 
-    fun values(): GodotArray = GodotArray(godot_dictionary_values(nativeValue))
+    fun values(): GDArray = GDArray(godot_dictionary_values(nativeValue))
 
     fun erase(key: Variant) = godot_dictionary_erase(nativeValue, key.nativeValue)
 

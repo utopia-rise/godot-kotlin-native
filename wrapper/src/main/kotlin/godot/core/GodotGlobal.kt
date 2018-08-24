@@ -5,7 +5,7 @@ import godot.gdnative.godot_print_error
 import godot.gdnative.godot_print_warning
 
 
-class Godot {
+class GD {
     companion object {
         fun print(message: String){
             godot_print(message.toGDString())

@@ -4,12 +4,12 @@ import kotlin.godot.core.*
 
 class GodotArrayTest {
     fun test() {
-        Godot.print("Testing GodotArray")
+        Godot.print("Testing GDArray")
         Godot.print("--------------------------------------")
         val pool = PoolByteArray()
         pool.pushBack(10.toByte())
         pool.pushBack(20.toByte())
-        val byteArr = GodotArray(pool)
+        val byteArr = GDArray(pool)
         Godot.print("Testing constructor with PoolByteArray arg: " +
                 if (byteArr[0] == Variant(10.toByte()) && byteArr[1] == Variant(20.toByte())
                         && byteArr.size() == 2)
@@ -20,7 +20,7 @@ class GodotArrayTest {
         val intPool = PoolIntArray()
         intPool.pushBack(10)
         intPool.pushBack(20)
-        val intArr = GodotArray(intPool)
+        val intArr = GDArray(intPool)
         Godot.print("Testing constructor with PoolIntArray arg: " +
                 if (intArr[0] == Variant(10) && intArr[1] == Variant(20)
                         && intArr.size() == 2)
@@ -31,7 +31,7 @@ class GodotArrayTest {
         val realPool = PoolRealArray()
         realPool.pushBack(10.45f)
         realPool.pushBack(20.86f)
-        val realArr = GodotArray(realPool)
+        val realArr = GDArray(realPool)
         Godot.print("Testing constructor with PoolRealArray arg: " +
                 if (realArr[0] == Variant(10.45f) && realArr[1] == Variant(20.86f)
                         && realArr.size() == 2)
@@ -42,7 +42,7 @@ class GodotArrayTest {
         val colorPool = PoolColorArray()
         colorPool.pushBack(Color(10, 10, 10))
         colorPool.pushBack(Color(10.45, 56.4, 10.23))
-        val colorArr = GodotArray(colorPool)
+        val colorArr = GDArray(colorPool)
         Godot.print("Testing constructor with PoolColorArray arg: " +
                 if (colorArr[0] == Variant(Color(10, 10, 10)) && colorArr[1] == Variant(Color(10.45, 56.4, 10.23))
                         && colorArr.size() == 2)
@@ -53,7 +53,7 @@ class GodotArrayTest {
         val vec2Pool = PoolVector2Array()
         vec2Pool.pushBack(Vector2(10, 10))
         vec2Pool.pushBack(Vector2(10.45, 56.4))
-        val vec2Arr = GodotArray(vec2Pool)
+        val vec2Arr = GDArray(vec2Pool)
         Godot.print("Testing constructor with PoolVector2Array arg: " +
                 if (vec2Arr[0] == Variant(Vector2(10, 10)) && vec2Arr[1] == Variant(Vector2(10.45, 56.4))
                         && vec2Arr.size() == 2)
@@ -64,7 +64,7 @@ class GodotArrayTest {
         val vec3Pool = PoolVector3Array()
         vec3Pool.pushBack(Vector3(10, 10, 10))
         vec3Pool.pushBack(Vector3(10.45, 56.4, 10.23))
-        val vec3Arr = GodotArray(vec3Pool)
+        val vec3Arr = GDArray(vec3Pool)
         Godot.print("Testing constructor with PoolVector3Array arg: " +
                 if (vec3Arr[0] == Variant(Vector3(10, 10, 10)) && vec3Arr[1] == Variant(Vector3(10.45, 56.4, 10.23))
                         && vec3Arr.size() == 2)
@@ -72,7 +72,7 @@ class GodotArrayTest {
                 else
                     "ERROR")
 
-        val arr = GodotArray()
+        val arr = GDArray()
         Godot.print("Testing empty & size: " +
                 if (arr.isEmpty() && arr.size() == 0)
                     "OK"

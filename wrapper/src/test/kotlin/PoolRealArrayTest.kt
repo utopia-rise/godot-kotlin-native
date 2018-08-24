@@ -6,11 +6,11 @@ class PoolRealArrayTest {
     fun test() {
         Godot.print("Testing PoolRealArray")
         Godot.print("--------------------------------------")
-        val arr = GodotArray()
+        val arr = GDArray()
         arr.pushBack(Variant(32443.34f))
         arr.pushBack(Variant(65555.65f))
         val poolFromArray = PoolRealArray(arr)
-        Godot.print("Testing constructor with GodotArray arg: " +
+        Godot.print("Testing constructor with GDArray arg: " +
                 if (poolFromArray[0] == 32443.34f && poolFromArray[1] == 65555.65f && poolFromArray.size() == 2)
                     "OK"
                 else

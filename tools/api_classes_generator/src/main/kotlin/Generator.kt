@@ -38,7 +38,7 @@ internal fun _icall_varargs(mb: CPointer<godot_method_bind>, inst: COpaquePointe
     memScoped {
         val args = allocArray<CPointerVar<godot_variant>>(arguments.size)
         for ((i,arg) in arguments.withIndex())
-            args[i] = Variant(arg).nativeValue.ptr
+            args[i] = Variant.from(arg).nativeValue.ptr
         val result = godot_method_bind_call(mb, inst, args, arguments.size, null)
         for (i in arguments.indices)
             godot_variant_destroy(args[i])

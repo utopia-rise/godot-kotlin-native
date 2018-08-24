@@ -26,7 +26,7 @@ class PoolStringArray : CoreType {
         nativeValue = nativeValue.copy { godot_pool_string_array_new_copy(this.ptr, other.nativeValue) }
     }
 
-    constructor(other: GodotArray) {
+    constructor(other: GDArray) {
         nativeValue = nativeValue.copy { godot_pool_string_array_new_with_array(this.ptr, other.nativeValue) }
     }
 
@@ -42,7 +42,7 @@ class PoolStringArray : CoreType {
         nativeValue = nativeValue.copy { godot_pool_string_array_append(this.ptr, data.toGDString()) }
     }
 
-    fun appendArray(data: GodotArray) {
+    fun appendArray(data: GDArray) {
         nativeValue = nativeValue.copy { godot_pool_string_array_new_with_array(this.ptr, data.nativeValue) }
     }
 

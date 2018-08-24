@@ -6,11 +6,11 @@ class PoolVector2ArrayTest {
     fun test() {
         Godot.print("Testing PoolVector2Array")
         Godot.print("--------------------------------------")
-        val arr = GodotArray()
+        val arr = GDArray()
         arr.pushBack(Variant(Vector2(10, 10)))
         arr.pushBack(Variant(Vector2(0.5, 1.7)))
         val poolFromArray = PoolVector2Array(arr)
-        Godot.print("Testing constructor with GodotArray arg: " +
+        Godot.print("Testing constructor with GDArray arg: " +
                 if (poolFromArray[0] == Vector2(10, 10) && poolFromArray[1] == Vector2(0.5, 1.7) && poolFromArray.size() == 2)
                     "OK"
                 else

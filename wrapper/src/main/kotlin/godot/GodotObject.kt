@@ -24,7 +24,7 @@ abstract class GodotObject : CoreType {
                 godot_get_class_constructor(name)?.let {
                     rawMemory = it.reinterpret<CFunction<() -> COpaquePointer>>()()
                     // TODO: put destructor somewhere
-                } ?: throw NotImplementedError("There is no constructor for class $name in Godot")
+                } ?: throw NotImplementedError("There is no constructor for class $name in GD")
             }
         } else {
             nativeConstructorInvocationFlag = true

@@ -6,11 +6,11 @@ class PoolByteArrayTest {
     fun test() {
         Godot.print("Testing PoolByteArray")
         Godot.print("--------------------------------------")
-        val arr = GodotArray()
+        val arr = GDArray()
         arr.pushBack(Variant(1.toByte()))
         arr.pushBack(Variant(2.toByte()))
         val poolFromArray = PoolByteArray(arr)
-        Godot.print("Testing constructor with GodotArray arg: " +
+        Godot.print("Testing constructor with GDArray arg: " +
                 if (poolFromArray[0] == 1.toByte() && poolFromArray[1] == 2.toByte() && poolFromArray.size() == 2)
                     "OK"
                 else

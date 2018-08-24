@@ -26,7 +26,7 @@ class PoolByteArray : CoreType {
         nativeValue = nativeValue.copy { godot_pool_byte_array_new_copy(this.ptr, other.nativeValue) }
     }
 
-    constructor(other: GodotArray) {
+    constructor(other: GDArray) {
         nativeValue = nativeValue.copy { godot_pool_byte_array_new_with_array(this.ptr, other.nativeValue) }
     }
 

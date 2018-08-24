@@ -34,7 +34,7 @@ fun NativeScriptInit(handle: COpaquePointer) {
 
 
     registerMethod("simple.user.pack.TestClass", "_on_test", udcBridge9())
-    registerSignal("simple.user.pack.TestClass", "test")
+    registerSignal("simple.user.pack.TestClass", "test", arrayOf("arg" to Variant.Type.ARRAY))
 }
 
 
@@ -99,8 +99,10 @@ private fun udcBridge8(): Variant {
 private fun udcBridge9(): CPointer<CFunction<(COpaquePointer?,COpaquePointer?,Int,COpaquePointer?) -> Unit>> {
     return staticCFunction { r, o, n, a -> invoke<simple.user.pack.TestClass>("_on_test", r, o, n, a) { obj, numArgs, args -> run {
         when (numArgs) {
-            0 -> {
-                obj._on_test()
+            1 -> {
+                args!!
+                val arg0 = Variant(args[0]!!).toGDArray()
+                obj._on_test(arg0)
             }
             else -> noMethodToInvoke("_on_test", "simple.user.pack.TestClass", numArgs)
         }

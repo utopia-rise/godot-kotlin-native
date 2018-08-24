@@ -1,6 +1,5 @@
 package godot.registration
 
-import godot.core.Godot
 import godot.core.Variant
 import godot.core.toGDString
 import godot.gdnative.*

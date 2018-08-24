@@ -40,7 +40,7 @@ fun String.isPrimitive(): Boolean {
 
 fun String.isCoreType(): Boolean {
     val coreTypes = listOf(//"Array", // TODO: kotlin arrays?
-            "GodotArray",
+            "GDArray",
             "Basis",
             "Color",
             "Dictionary",
@@ -115,7 +115,7 @@ fun String.convertTypeToKotlin(): String {
     if (this == "void")
         return "Unit"
     if (this == "Array")
-        return "GodotArray" // TODO: kotlin arrays?
+        return "GDArray" // TODO: kotlin arrays?
     //if (!this.isCoreType() && !this.isEnum() && !this.isPrimitive() && this != "Node" && this != "Reference" && this != "Resource" && this != "ResourceLoader" && this != "SceneTree" && this != "MainLoop" && this != "Script" && this != "Viewport") return "Object" // FIXME: remove line
     return this
 }

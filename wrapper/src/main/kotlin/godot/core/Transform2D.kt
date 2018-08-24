@@ -160,7 +160,7 @@ class Transform2D: CoreType {
     fun affineInvert() {
         val det = basisDeterminant()
         if (det == 0f) {
-            Godot.printError("determinant == 0", "affineInvert()", "Transform2D.kt", 161)
+            GD.printError("determinant == 0", "affineInvert()", "Transform2D.kt", 161)
             return
         }
         val idet = - 1f / det

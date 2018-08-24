@@ -88,61 +88,202 @@ class Variant: CoreType { // FIXME: redundant .copy
 
     internal var nativeValue = cValue<godot_variant> {}
 
-    constructor():
-            this(null)
 
-    constructor(value: Any?) {
-        if (value is CValue<*>) {
-            nativeValue = value as? CValue<godot_variant> ?: cValue {}
-            return
-        }
-        if (value is CPointer<*>) {
-            this.setRawMemory(value)
-            return
-        }
+    constructor() {
+        nativeValue = nativeValue.copy { godot_variant_new_nil(this.ptr) }
+    }
 
-        nativeValue = nativeValue.copy {
-            when (value) {
-                null -> godot_variant_new_nil(this@copy.ptr)
-                is Variant -> godot_variant_new_copy(this@copy.ptr, value.nativeValue)
-                is Boolean -> godot_variant_new_bool(this@copy.ptr, value)
-                is Byte -> godot_variant_new_int(this@copy.ptr, value.toLong())
-                is Long -> godot_variant_new_int(this@copy.ptr, value)
-                is Int -> godot_variant_new_int(this@copy.ptr, value.toLong())
-                is Short -> godot_variant_new_int(this@copy.ptr, value.toLong())
-                is Float -> godot_variant_new_real(this@copy.ptr, value.toDouble())
-                is Double -> godot_variant_new_real(this@copy.ptr, value)
-                is String -> godot_variant_new_string(this@copy.ptr, value.toGDString())
-                is GodotArray -> godot_variant_new_array(this@copy.ptr, value.nativeValue)
-                is PoolByteArray -> godot_variant_new_pool_byte_array(this@copy.ptr, value.nativeValue)
-                is PoolIntArray -> godot_variant_new_pool_int_array(this@copy.ptr, value.nativeValue)
-                is PoolColorArray -> godot_variant_new_pool_color_array(this@copy.ptr, value.nativeValue)
-                is PoolRealArray -> godot_variant_new_pool_real_array(this@copy.ptr, value.nativeValue)
-                is PoolStringArray -> godot_variant_new_pool_string_array(this@copy.ptr, value.nativeValue)
-                is PoolVector2Array -> godot_variant_new_pool_vector2_array(this@copy.ptr, value.nativeValue)
-                is PoolVector3Array -> godot_variant_new_pool_vector3_array(this@copy.ptr, value.nativeValue)
-                is RID -> godot_variant_new_rid(this@copy.ptr, value.nativeValue)
-                is Dictionary -> godot_variant_new_dictionary(this@copy.ptr, value.nativeValue)
-                is NodePath -> godot_variant_new_node_path(this@copy.ptr, value.nativeValue)
-                is Basis -> memScoped { godot_variant_new_basis(this@copy.ptr, value.getRawMemory(memScope).reinterpret()) }
-                is Color -> memScoped { godot_variant_new_pool_color_array(this@copy.ptr, value.getRawMemory(memScope).reinterpret()) }
-                is Vector2 -> memScoped { godot_variant_new_vector2(this@copy.ptr, value.getRawMemory(memScope).reinterpret()) }
-                is Vector3 -> memScoped { godot_variant_new_vector3(this@copy.ptr, value.getRawMemory(memScope).reinterpret()) }
-                is Quat -> memScoped { godot_variant_new_quat(this@copy.ptr, value.getRawMemory(memScope).reinterpret()) }
-                is AABB -> memScoped { godot_variant_new_aabb(this@copy.ptr, value.getRawMemory(memScope).reinterpret()) }
-                is Transform -> memScoped { godot_variant_new_transform(this@copy.ptr, value.getRawMemory(memScope).reinterpret()) }
-                is Transform2D -> memScoped { godot_variant_new_transform2d(this@copy.ptr, value.getRawMemory(memScope).reinterpret()) }
-                is Rect2 -> memScoped { godot_variant_new_rect2(this@copy.ptr, value.getRawMemory(memScope).reinterpret()) }
-                is Plane -> memScoped { godot_variant_new_plane(this@copy.ptr, value.getRawMemory(memScope).reinterpret()) }
-                is Object -> memScoped { godot_variant_new_object(this@copy.ptr, value.getRawMemory(memScope)) }
-                else -> throw TypeCastException("Cannot create Variant from $value")
-            }
+    constructor(native: CValue<godot_variant>) {
+        nativeValue = native
+    }
+
+    constructor(mem: COpaquePointer) {
+        this.setRawMemory(mem)
+    }
+
+    constructor(other: Variant) {
+        nativeValue = nativeValue.copy { godot_variant_new_copy(this.ptr, other.nativeValue) }
+    }
+
+    constructor(other: Boolean) {
+        nativeValue = nativeValue.copy { godot_variant_new_bool(this.ptr, other) }
+    }
+
+    constructor(other: Byte) {
+        nativeValue = nativeValue.copy { godot_variant_new_int(this.ptr, other.toLong()) }
+    }
+
+    constructor(other: Long) {
+        nativeValue = nativeValue.copy { godot_variant_new_int(this.ptr, other) }
+    }
+
+    constructor(other: Int) {
+        nativeValue = nativeValue.copy { godot_variant_new_int(this.ptr, other.toLong()) }
+    }
+
+    constructor(other: Short) {
+        nativeValue = nativeValue.copy { godot_variant_new_int(this.ptr, other.toLong()) }
+    }
+
+    constructor(other: Float) {
+        nativeValue = nativeValue.copy { godot_variant_new_real(this.ptr, other.toDouble()) }
+    }
+
+    constructor(other: Double) {
+        nativeValue = nativeValue.copy { godot_variant_new_real(this.ptr, other) }
+    }
+
+    constructor(other: String) {
+        nativeValue = nativeValue.copy { godot_variant_new_string(this.ptr, other.toGDString()) }
+    }
+
+    constructor(other: GDArray) {
+        nativeValue = nativeValue.copy { godot_variant_new_array(this.ptr, other.nativeValue) }
+    }
+
+    constructor(other: PoolByteArray) {
+        nativeValue = nativeValue.copy { godot_variant_new_pool_byte_array(this.ptr, other.nativeValue) }
+    }
+
+    constructor(other: PoolIntArray) {
+        nativeValue = nativeValue.copy { godot_variant_new_pool_int_array(this.ptr, other.nativeValue) }
+    }
+
+    constructor(other: PoolColorArray) {
+        nativeValue = nativeValue.copy { godot_variant_new_pool_color_array(this.ptr, other.nativeValue) }
+    }
+
+    constructor(other: PoolRealArray) {
+        nativeValue = nativeValue.copy { godot_variant_new_pool_real_array(this.ptr, other.nativeValue) }
+    }
+
+    constructor(other: PoolStringArray) {
+        nativeValue = nativeValue.copy { godot_variant_new_pool_string_array(this.ptr, other.nativeValue) }
+    }
+
+    constructor(other: PoolVector2Array) {
+        nativeValue = nativeValue.copy { godot_variant_new_pool_vector2_array(this.ptr, other.nativeValue) }
+    }
+
+    constructor(other: PoolVector3Array) {
+        nativeValue = nativeValue.copy { godot_variant_new_pool_vector3_array(this.ptr, other.nativeValue) }
+    }
+
+    constructor(other: RID) {
+        nativeValue = nativeValue.copy { godot_variant_new_rid(this.ptr, other.nativeValue) }
+    }
+
+    constructor(other: Dictionary) {
+        nativeValue = nativeValue.copy { godot_variant_new_dictionary(this.ptr, other.nativeValue) }
+    }
+
+    constructor(other: NodePath) {
+        nativeValue = nativeValue.copy { godot_variant_new_node_path(this.ptr, other.nativeValue) }
+    }
+
+    constructor(other: Basis) {
+        memScoped {
+            nativeValue = nativeValue.copy { godot_variant_new_rid(this.ptr, other.getRawMemory(memScope).reinterpret()) }
+        }
+    }
+
+    constructor(other: Color) {
+        memScoped {
+            nativeValue = nativeValue.copy { godot_variant_new_color(this.ptr, other.getRawMemory(memScope).reinterpret()) }
+        }
+    }
+
+    constructor(other: Vector2) {
+        memScoped {
+            nativeValue = nativeValue.copy { godot_variant_new_vector2(this.ptr, other.getRawMemory(memScope).reinterpret()) }
+        }
+    }
+
+    constructor(other: Vector3) {
+        memScoped {
+            nativeValue = nativeValue.copy { godot_variant_new_vector3(this.ptr, other.getRawMemory(memScope).reinterpret()) }
+        }
+    }
+
+    constructor(other: Quat) {
+        memScoped {
+            nativeValue = nativeValue.copy { godot_variant_new_quat(this.ptr, other.getRawMemory(memScope).reinterpret()) }
+        }
+    }
+
+    constructor(other: AABB) {
+        memScoped {
+            nativeValue = nativeValue.copy { godot_variant_new_aabb(this.ptr, other.getRawMemory(memScope).reinterpret()) }
+        }
+    }
+
+    constructor(other: Transform) {
+        memScoped {
+            nativeValue = nativeValue.copy { godot_variant_new_transform(this.ptr, other.getRawMemory(memScope).reinterpret()) }
+        }
+    }
+
+    constructor(other: Transform2D) {
+        memScoped {
+            nativeValue = nativeValue.copy { godot_variant_new_transform2d(this.ptr, other.getRawMemory(memScope).reinterpret()) }
+        }
+    }
+
+    constructor(other: Rect2) {
+        memScoped {
+            nativeValue = nativeValue.copy { godot_variant_new_rect2(this.ptr, other.getRawMemory(memScope).reinterpret()) }
+        }
+    }
+
+    constructor(other: Plane) {
+        memScoped {
+            nativeValue = nativeValue.copy { godot_variant_new_plane(this.ptr, other.getRawMemory(memScope).reinterpret()) }
+        }
+    }
+
+    constructor(other: Object) {
+        memScoped {
+            nativeValue = nativeValue.copy { godot_variant_new_object(this.ptr, other.getRawMemory(memScope)) }
         }
     }
 
 
     companion object {
-        infix fun from(value: Any?): Variant = Variant(value)
+        infix fun from(value: Any?): Variant = when (value) {
+                null -> Variant()
+                is Variant -> Variant(value)
+                is Boolean -> Variant(value)
+                is Byte -> Variant(value)
+                is Long -> Variant(value)
+                is Int -> Variant(value)
+                is Short -> Variant(value)
+                is Float -> Variant(value)
+                is Double -> Variant(value)
+                is String -> Variant(value)
+                is GDArray -> Variant(value)
+                is PoolByteArray -> Variant(value)
+                is PoolIntArray -> Variant(value)
+                is PoolColorArray -> Variant(value)
+                is PoolRealArray -> Variant(value)
+                is PoolStringArray -> Variant(value)
+                is PoolVector2Array -> Variant(value)
+                is PoolVector3Array -> Variant(value)
+                is RID -> Variant(value)
+                is Dictionary -> Variant(value)
+                is NodePath -> Variant(value)
+                is Basis -> Variant(value)
+                is Color -> Variant(value)
+                is Vector2 -> Variant(value)
+                is Vector3 -> Variant(value)
+                is Quat -> Variant(value)
+                is AABB -> Variant(value)
+                is Transform -> Variant(value)
+                is Transform2D -> Variant(value)
+                is Rect2 -> Variant(value)
+                is Plane -> Variant(value)
+                is Object -> Variant(value)
+                else -> throw TypeCastException("Cannot create Variant from $value")
+            }
     }
 
 
@@ -178,7 +319,7 @@ class Variant: CoreType { // FIXME: redundant .copy
 
     fun toDictionary(): Dictionary = Dictionary(godot_variant_as_dictionary(nativeValue))
 
-    fun toGodotArray(): GodotArray = GodotArray(godot_variant_as_array(nativeValue))
+    fun toGDArray(): GDArray = GDArray(godot_variant_as_array(nativeValue))
 
     fun toNodePath(): NodePath = NodePath(godot_variant_as_node_path(nativeValue))
 
