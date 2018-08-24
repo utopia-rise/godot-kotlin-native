@@ -1,10 +1,12 @@
 [entry]
 
-Windows.64="res://godot_wrapper/sample.dll"
+Windows.64="res://samples.dll"
+Windows.32="res://samples.dll"
 
 [dependencies]
 
 Windows.64=[  ]
+Windows.32=[  ]
 
 [general]
 

@@ -9,7 +9,6 @@ set(CMAKE_EXECUTABLE_SUFFIX "")
 
 set(CINTEROP_LIB_NAME GDNative)
 set(KLIB_NAME Godot)
-set(SHARED_LIB_NAME sample)
 
 
 
@@ -32,13 +31,7 @@ konanc_library(
 )
 
 konanc_dynamic(
-        NAME ${SHARED_LIB_NAME}
-        SOURCES src/shared
-        LIBRARIES ${CINTEROP_LIB_NAME} ${KLIB_NAME}
-)
-
-konanc_dynamic(
-        NAME ${SHARED_LIB_NAME}_test
-        SOURCES src/shared src/test
+        NAME wrapper_test
+        SOURCES src/test
         LIBRARIES ${CINTEROP_LIB_NAME} ${KLIB_NAME}
 )
