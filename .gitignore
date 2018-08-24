@@ -1,9 +1,19 @@
+# Remove me later
+samples/project/Kotlin/lib/*
+
+
+# Auto-generated files
+**/generated/**
+
+
+# Platform-specific binaries
 *.dll
 *.so
 
 
-**/generated/**
-
+# Godot hashes
+**/.import/**
+*.import
 
 
 

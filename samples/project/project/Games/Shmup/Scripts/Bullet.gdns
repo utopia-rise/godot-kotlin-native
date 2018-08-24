@@ -1,0 +1,10 @@
+[gd_resource type="NativeScript" load_steps=2 format=2]
+
+[ext_resource path="res://Samples.gdnlib" type="GDNativeLibrary" id=1]
+
+[resource]
+
+resource_name = "Bullet"
+class_name = "shmup.Bullet"
+library = ExtResource( 1 )
+

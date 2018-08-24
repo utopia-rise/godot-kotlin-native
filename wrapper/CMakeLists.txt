@@ -9,7 +9,8 @@ set(CMAKE_EXECUTABLE_SUFFIX "")
 
 set(CINTEROP_LIB_NAME GDNative)
 set(KLIB_NAME Godot)
-set(SHARED_LIB_NAME sample)
+
+set(SAMPLES_LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../samples/project/Kotlin/lib)
 
 
 
@@ -22,7 +23,7 @@ endif()
 cinterop(
         NAME ${CINTEROP_LIB_NAME}
         DEF_FILE src/main/c_interop/godot.def
-        COMPILER_OPTS -I${GODOT_HEADERS_PATH} -I../src/main/c_interop
+        COMPILER_OPTS -I${GODOT_HEADERS_PATH} -I${CMAKE_CURRENT_SOURCE_DIR}/src/main/c_interop
 )
 
 konanc_library(
@@ -31,14 +32,17 @@ konanc_library(
         LIBRARIES ${CINTEROP_LIB_NAME}
 )
 
-konanc_dynamic(
-        NAME ${SHARED_LIB_NAME}
-        SOURCES src/shared
-        LIBRARIES ${CINTEROP_LIB_NAME} ${KLIB_NAME}
-)
+
+
+add_custom_target(CopyLibsToSamples
+        DEPENDS ${CINTEROP_LIB_NAME} ${KLIB_NAME})
+add_custom_command(TARGET CopyLibsToSamples
+        COMMAND ${CMAKE_COMMAND} -E copy ${LIBRARY_${CINTEROP_LIB_NAME}_OUTPUT} ${SAMPLES_LIB_DIR}
+        COMMAND ${CMAKE_COMMAND} -E copy ${LIBRARY_${KLIB_NAME}_OUTPUT} ${SAMPLES_LIB_DIR})
+
 
 konanc_dynamic(
-        NAME ${SHARED_LIB_NAME}_test
-        SOURCES src/shared src/test
+        NAME tests
+        SOURCES src/test
         LIBRARIES ${CINTEROP_LIB_NAME} ${KLIB_NAME}
 )
