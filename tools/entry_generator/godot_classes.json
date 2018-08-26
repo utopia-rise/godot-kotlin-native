@@ -1,0 +1,14 @@
+{
+    "registerClasses": [
+        {
+            "name": "TestClass2",
+            "extends": "Node",
+            "methods": [
+                {
+                    "name": "_process",
+                    "arguments": [ "Float" ]
+                }
+            ]
+        }
+    ]
+}

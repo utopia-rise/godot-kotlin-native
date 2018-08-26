@@ -1,0 +1,13 @@
+<registerClasses>
+    <class name="TestClass" extends="Node">
+        <method name="_ready" />
+        <method name="_process">
+            <argument type="Float" />
+        </method>
+        <property name="test" type="Int" defaultValue="42"/>
+        <signal name="Sanya" />
+        <signal name="Sanya2">
+            <argument name="arg" type="Array" />
+        </signal>
+    </class>
+</registerClasses>
