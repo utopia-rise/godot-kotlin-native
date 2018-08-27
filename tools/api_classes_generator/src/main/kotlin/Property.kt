@@ -26,8 +26,13 @@ class Property(
         getter = getter.convertToCamelCase()
         setter = setter.convertToCamelCase()
 
-        if (name.indexOf("/") != -1 || type.indexOf(",") != -1) // TODO: idk what to do
-            name = ""
+        if (name.indexOf("/") != -1)
+            name = "`$name`"
+
+        // There are property with multiple types, and it's all Materials, so
+        // Godot's developer should make more strict API
+        if (type.indexOf(",") != -1)
+            type = "Material"
     }
 
 
@@ -65,38 +70,53 @@ class Property(
 
 
     fun generate(prefix: String, cl: Class, tree: Graph<Class>, icalls: MutableSet<ICall>): String {
-        if (name == "")
-            return ""
         if (!hasValidGetter && !hasValidSetter)
             return ""
 
+        // Sorry for this, CPUParticles has "scale" property overrides ancestor's "scale", but mismatches type
+        if (cl.name == "CPUParticles" && name == "scale")
+            name = "_scale"
+
+
         return buildString {
-            if (index == -1) {
-                append("$prefix    ")
-                if (!cl.isSingleton)
-                    if (tree.doAncestorsHaveProperty(cl, this@Property))
-                        append("override ")
-                    else
-                        append("open ")
-                appendln("${if (hasValidSetter) "var" else "val"} $name: $type")
-
-                if (hasValidGetter) {
-                    val icall = ICall(type, listOf())
-                    icalls.add(icall)
-                    appendln("$prefix        get() = ${icall.name}(${validGetter.name}MethodBind, this.rawMem())")
-                }
+            append("$prefix    ")
+            if (!cl.isSingleton)
+                if (tree.doAncestorsHaveProperty(cl, this@Property))
+                    append("override ")
                 else
-                    appendln("$prefix        get() = throw UninitializedPropertyAccessException(\"Cannot access property $name: has no getter\")")
+                    append("open ")
+            appendln("${if (hasValidSetter) "var" else "val"} $name: $type")
 
-                if (hasValidSetter) {
-                    val icall = ICall("Unit", listOf(Argument("value", type)))
-                    icalls.add(icall)
-                    appendln("$prefix        set(value) = ${icall.name}(${validSetter.name}MethodBind, this.rawMem(), value)")
-                }
+            if (hasValidGetter) {
+                val icall = if (index != -1)
+                    ICall(type, listOf(Argument("idx", "Int")))
+                else
+                    ICall(type, listOf())
 
-                appendln()
-                appendln()
+                icalls.add(icall)
+                append("$prefix        get() = ${icall.name}(${validGetter.name}MethodBind, this.rawMem()")
+                if (index != -1)
+                    append(", $index")
+                appendln(')')
             }
+            else
+                appendln("$prefix        get() = throw UninitializedPropertyAccessException(\"Cannot access property $name: has no getter\")")
+
+            if (hasValidSetter) {
+                val icall = if (index != -1)
+                    ICall("Unit", listOf(Argument("idx", "Int"), Argument("value", type)))
+                else
+                    ICall("Unit", listOf(Argument("value", type)))
+
+                icalls.add(icall)
+                append("$prefix        set(value) = ${icall.name}(${validSetter.name}MethodBind, this.rawMem()")
+                if (index != -1)
+                    append(", $index")
+                appendln(", value)")
+            }
+
+            appendln()
+            appendln()
         }
     }
 }

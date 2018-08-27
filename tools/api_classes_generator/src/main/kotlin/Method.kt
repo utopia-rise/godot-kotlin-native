@@ -31,7 +31,7 @@ open class Method(
                 appendln("$prefix    private val ${name}MethodBind: CPointer<godot_method_bind> by lazy { getMB(\"${cl.oldName}\", \"$oldName\") }")
             }
 
-            // TODO: uncomment to disable method implementation
+            // Uncomment to disable method implementation generation
             //if (isGetterOrSetter)
             //    return@buildString
 
