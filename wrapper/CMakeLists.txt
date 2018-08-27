@@ -10,8 +10,6 @@ set(CMAKE_EXECUTABLE_SUFFIX "")
 set(CINTEROP_LIB_NAME GDNative)
 set(KLIB_NAME Godot)
 
-set(SAMPLES_LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../samples/project/Kotlin/lib)
-
 
 
 if (NOT GODOT_HEADERS_PATH)
@@ -34,15 +32,20 @@ konanc_library(
 
 
 
-add_custom_target(CopyLibsToSamples
-        DEPENDS ${CINTEROP_LIB_NAME} ${KLIB_NAME})
-add_custom_command(TARGET CopyLibsToSamples
-        COMMAND ${CMAKE_COMMAND} -E copy ${LIBRARY_${CINTEROP_LIB_NAME}_OUTPUT} ${SAMPLES_LIB_DIR}
-        COMMAND ${CMAKE_COMMAND} -E copy ${LIBRARY_${KLIB_NAME}_OUTPUT} ${SAMPLES_LIB_DIR})
-
-
 konanc_dynamic(
         NAME tests
         SOURCES src/test
         LIBRARIES ${CINTEROP_LIB_NAME} ${KLIB_NAME}
 )
+
+
+
+
+set(SAMPLES_LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../samples/project/Kotlin/GodotCMakeModule/lib)
+
+
+add_custom_target(CopyLibsToSamples
+        DEPENDS ${CINTEROP_LIB_NAME} ${KLIB_NAME})
+add_custom_command(TARGET CopyLibsToSamples
+        COMMAND ${CMAKE_COMMAND} -E copy ${LIBRARY_${CINTEROP_LIB_NAME}_OUTPUT} ${SAMPLES_LIB_DIR}/${CINTEROP_LIB_NAME}.klib
+        COMMAND ${CMAKE_COMMAND} -E copy ${LIBRARY_${KLIB_NAME}_OUTPUT} ${SAMPLES_LIB_DIR}/${KLIB_NAME}.klib)

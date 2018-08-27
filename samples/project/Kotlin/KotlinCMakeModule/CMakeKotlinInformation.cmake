@@ -421,7 +421,7 @@ function(klib)
             DEPENDS ${KLIB_PATH})
     add_custom_command(TARGET ${KLIB_NAME}
             PRE_BUILD
-            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/${KLIB_PATH} ${LIBRARY_OUTPUT})
+            COMMAND ${CMAKE_COMMAND} -E copy ${KLIB_PATH} ${LIBRARY_OUTPUT})
 
     foreach (KLIB_LIBRARY ${KLIB_LIBRARIES})
         add_dependencies(${KLIB_NAME} ${KLIB_LIBRARY})

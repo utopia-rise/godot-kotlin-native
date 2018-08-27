@@ -38,6 +38,7 @@ fun NativeScriptInit(handle: COpaquePointer) {
     registerSignal("TestClass", "Sanya")
     registerSignal("TestClass", "Sanya2",
              arrayOf("arg" to Variant.Type.OBJECT))
+    registerClass("TestClass3", "TestClass", udcBridge10(), udcBridge11())
 }
 
 
@@ -47,6 +48,8 @@ private fun udcBinding0Constructor(): TestClass2 = TestClass2()
 private val udcBinding0 = ::udcBinding0Constructor
 private fun udcBinding1Constructor(): TestClass = TestClass()
 private val udcBinding1 = ::udcBinding1Constructor
+private fun udcBinding2Constructor(): TestClass3 = TestClass3()
+private val udcBinding2 = ::udcBinding2Constructor
 
 
 
@@ -107,9 +110,15 @@ private fun udcBridge7(): CPointer<CFunction<(COpaquePointer?,COpaquePointer?) -
 }
 private fun udcBridge8(): CPointer<CFunction<(COpaquePointer?,COpaquePointer?) -> Unit>> {
     return staticCFunction { o, v -> set<TestClass>("test", "TestClass", o, v) {
-        obj, value -> obj.test = Variant(value).toInt()
+        obj, value -> obj.test = value.toInt()
     }}
 }
 private fun udcBridge9(): Variant {
     return Variant(42)
+}
+private fun udcBridge10(): CPointer<CFunction<(COpaquePointer?) -> COpaquePointer?>> {
+    return staticCFunction { mem -> constructFromRawMem(mem, udcBinding2) }
+}
+private fun udcBridge11(): CPointer<CFunction<(COpaquePointer?) -> Unit>> {
+    return staticCFunction { mem -> deconstructFromRawMem<TestClass3>(mem) }
 }

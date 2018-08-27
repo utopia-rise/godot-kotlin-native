@@ -10,4 +10,5 @@
             <argument name="arg" type="Array" />
         </signal>
     </class>
+    <class name="TestClass3" extends="TestClass" />
 </registerClasses>

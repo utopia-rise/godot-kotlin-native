@@ -5,6 +5,6 @@
 [resource]
 
 resource_name = "Camera"
-class_name = "shmup.mCamera"
+class_name = "stages.shmup.Camera"
 library = ExtResource( 1 )
 

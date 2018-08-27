@@ -5,6 +5,6 @@
 [resource]
 
 resource_name = "Player"
-class_name = "shmup.Player"
+class_name = "stages.shmup.Player"
 library = ExtResource( 1 )
 

@@ -10,7 +10,7 @@ class Property(
         val type: String,
         @Json(name = "defaultValue")
         val defaultValue: String,
-        @Json(name = "type")
+        @Json(name = "export")
         val export: Boolean = true
 ) {
     fun generate(className: String, bridges: MutableList<String>): String {

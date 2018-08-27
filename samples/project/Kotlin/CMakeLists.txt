@@ -1,23 +1,20 @@
 cmake_minimum_required(VERSION 3.8)
+
+# Kotlin compiler
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/KotlinCMakeModule)
+
+# Godot files
+set(GODOT_CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/GodotCMakeModule)
+include(${GODOT_CMAKE_MODULE_PATH}/CMakeGodot.cmake)
+
+
 project(samples Kotlin)
 
 
-klib(
-        NAME GDNative
-        PATH lib/GDNative.klib
-)
-
-klib(
-        NAME Godot
-        PATH lib/Godot.klib
-        LIBRARIES GDNative
-)
-
-konanc_dynamic(
+godot_library(
         NAME samples
         SOURCES src/main/kotlin
-        LIBRARIES GDNative Godot
+        CONFIGS src/main/kotlin/Games/shmup/classes.json
 )
 
 

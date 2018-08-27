@@ -20,7 +20,7 @@ class Method(
                 appendln("                args!!")
 
                 for ((i,arg) in arguments.withIndex()) {
-                    appendln( "                val arg$i = ${arg.castFromVariant("args[$i]!!")}")
+                    appendln( "                val arg$i = ${arg.castFromRawMemory("args[$i]!!")}")
 
                     if (i != 0)
                         argumentsSequence.append(", ")
