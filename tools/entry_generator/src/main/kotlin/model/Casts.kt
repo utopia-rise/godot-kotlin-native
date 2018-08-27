@@ -44,11 +44,7 @@ fun String.isCoreType(): Boolean {
 
 
 fun String.castFromRawMemory(value: String): String {
-    if (this == "Variant")
-        return "Variant($value)"
-    if (this.isCoreType() || this.isPrimitive())
-        return "Variant($value).to$this()"
-    return "$this($value)"
+    return this.castFromVariant("Variant($value)")
 }
 
 
