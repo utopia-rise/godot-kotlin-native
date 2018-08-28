@@ -4,6 +4,7 @@ samples/project/Kotlin/GodotCMakeModule/lib/*
 
 # Auto-generated files
 **/generated/**
+samples/project/Kotlin/output/*
 
 
 # Platform-specific binaries

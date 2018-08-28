@@ -14,14 +14,7 @@ project(samples Kotlin)
 godot_library(
         NAME samples
         SOURCES src/main/kotlin
+        OUTPUT_DIR output
+        LIBRARY_PATH res://Samples.gdnlib
         CONFIGS src/main/kotlin/Games/shmup/classes.json
 )
-
-
-set(LIB_DESTINATION_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../project)
-
-
-add_custom_target(MoveDllToProjectDir
-        DEPENDS samples)
-add_custom_command(TARGET MoveDllToProjectDir
-        COMMAND ${CMAKE_COMMAND} -E rename ${LIBRARY_samples_OUTPUT} ${LIB_DESTINATION_PATH}/samples${CMAKE_SHARED_LIBRARY_SUFFIX})
