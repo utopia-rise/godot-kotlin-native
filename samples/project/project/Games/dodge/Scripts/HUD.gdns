@@ -4,6 +4,6 @@
 
 [resource]
 
-resource_name = "Bullet"
-class_name = "godot.samples.games.shmup.Bullet"
+resource_name = "HUD"
+class_name = "godot.samples.games.dodge.HUD"
 library = ExtResource( 1 )

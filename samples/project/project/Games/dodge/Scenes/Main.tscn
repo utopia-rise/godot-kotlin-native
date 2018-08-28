@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Games/Dodge/Scripts/Main.gdns" type="Script" id=1]
+[ext_resource path="res://Games/Dodge/Scenes/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Games/Dodge/Scenes/HUD.tscn" type="PackedScene" id=3]
+
+[sub_resource type="Curve2D" id=1]
+
+bake_interval = 5.0
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, -1.16479, 1.00003, 0, 0, 0, 0, 481.368, -0.026062, 0, 0, 0, 0, 479.791, 719.401, 0, 0, 0, 0, -1.26733, 719.401, 0, 0, 0, 0, -1.16479, 1.00003 )
+}
+
+[node name="Main" type="Node" index="0"]
+
+script = ExtResource( 1 )
+
+[node name="Player" parent="." index="0" instance=ExtResource( 2 )]
+
+[node name="MobTimer" type="Timer" parent="." index="1"]
+
+process_mode = 1
+wait_time = 0.5
+one_shot = false
+autostart = false
+
+[node name="ScoreTimer" type="Timer" parent="." index="2"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
+[node name="StartTimer" type="Timer" parent="." index="3"]
+
+process_mode = 1
+wait_time = 2.0
+one_shot = true
+autostart = false
+
+[node name="StartPosition" type="Position2D" parent="." index="4"]
+
+position = Vector2( 253.509, 407.312 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="MobPath" type="Path2D" parent="." index="5"]
+
+self_modulate = Color( 0.5, 0.6, 1, 0.7 )
+position = Vector2( -48.7802, -46.6483 )
+scale = Vector2( 1.21622, 1.13841 )
+curve = SubResource( 1 )
+
+[node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath" index="0"]
+
+position = Vector2( -1.16479, 1.00003 )
+rotation = -0.00212645
+offset = 0.0
+h_offset = 0.0
+v_offset = 0.0
+rotate = true
+cubic_interp = true
+loop = true
+lookahead = 4.0
+_sections_unfolded = [ "Transform" ]
+
+[node name="HUD" parent="." index="6" instance=ExtResource( 3 )]
+
+

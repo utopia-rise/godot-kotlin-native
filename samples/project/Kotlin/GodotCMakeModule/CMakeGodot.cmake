@@ -69,7 +69,8 @@ function(godot_library)
                 OUTPUT ${OUTPUT_BINARY}
                 DEPENDS ${GODOT_NAME}
                 PRE_LINK
-                COMMAND ${CMAKE_COMMAND} -E copy ${LIBRARY_${GODOT_NAME}_OUTPUT} ${OUTPUT_BINARY}
+                COMMAND ${CMAKE_COMMAND} -E remove ${OUTPUT_BINARY}
+                COMMAND ${CMAKE_COMMAND} -E rename ${LIBRARY_${GODOT_NAME}_OUTPUT} ${OUTPUT_BINARY}
         )
         add_custom_target(${GODOT_NAME}.output
                 DEPENDS ${OUTPUT_BINARY}

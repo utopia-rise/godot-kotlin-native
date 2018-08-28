@@ -80,7 +80,7 @@ fun main(args: Array<String>) {
             libPath = "res://$libPath"
 
         for (cl in classes.classes) {
-            val out = File("$outputDir/Scripts/${cl.packageName}/${cl.name}.gdns")
+            val out = File("$outputDir/${cl.packageName}/${cl.name}.gdns")
             out.parentFile.mkdirs()
             out.createNewFile()
 

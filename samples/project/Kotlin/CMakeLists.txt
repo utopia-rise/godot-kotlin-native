@@ -14,7 +14,9 @@ project(samples Kotlin)
 godot_library(
         NAME samples
         SOURCES src/main/kotlin
-        OUTPUT_DIR output
-        LIBRARY_PATH res://Samples.gdnlib
-        CONFIGS src/main/kotlin/Games/shmup/classes.json src/main/kotlin/games/dodge/classes.json
+        OUTPUT_DIR ../project
+        LIBRARY_PATH samples.gdnlib
+        CONFIGS
+            src/main/kotlin/godot/samples/games/shmup/classes.json
+            src/main/kotlin/godot/samples/games/dodge/classes.json
 )

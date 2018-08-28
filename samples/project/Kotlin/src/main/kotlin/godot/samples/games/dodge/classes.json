@@ -1,0 +1,128 @@
+{
+    "package": "Games/Dodge/Scripts",
+
+    "registerClasses": [
+        {
+            "name": "Player",
+            "class": "godot.samples.games.dodge.Player",
+            "extends": "Area2D",
+            "methods": [
+                {
+                    "name": "_ready"
+                },
+                {
+                    "name": "_process",
+                    "arguments": ["Float"]
+                },
+                {
+                    "name": "_on_Player_body_entered",
+                    "arguments": ["Object"]
+                },
+                {
+                    "name": "start",
+                    "arguments": ["Vector2"]
+                }
+            ],
+            "properties": [
+                {
+                    "name": "speed",
+                    "type": "Int",
+                    "defaultValue": "400"
+                }
+            ],
+            "signals": [
+                {
+                    "name": "hit"
+                }
+            ]
+        },
+        {
+            "name": "Main",
+            "class": "godot.samples.games.dodge.Main",
+            "extends": "Node",
+            "methods": [
+                {
+                    "name": "_ready"
+                },
+                {
+                    "name": "gameOver"
+                },
+                {
+                    "name": "newGame"
+                },
+                {
+                    "name": "_onStartTimerTimeout"
+                },
+                {
+                    "name": "_onScoreTimerTimeout"
+                },
+                {
+                    "name": "_onMobTimerTimeout"
+                }
+            ]
+        },
+        {
+            "name": "HUD",
+            "class": "godot.samples.games.dodge.HUD",
+            "extends": "CanvasLayer",
+            "methods": [
+                {
+                    "name": "_ready"
+                },
+                {
+                    "name": "showMessage",
+                    "arguments": ["String"]
+                },
+                {
+                    "name": "showMenu"
+                },
+                {
+                    "name": "showGameOver"
+                },
+                {
+                    "name": "updateScore",
+                    "arguments": ["Int"]
+                },
+                {
+                    "name": "_onMessageTimerTimeout"
+                },
+                {
+                    "name": "_onGameOverTimerTimeout"
+                },
+                {
+                    "name": "_onStartButtonPressed"
+                }
+            ],
+            "signals": [
+                {
+                    "name": "startGame"
+                }
+            ]
+        },
+        {
+            "name": "Mob",
+            "class": "godot.samples.games.dodge.Mob",
+            "extends": "RigidBody2D",
+            "methods": [
+                {
+                    "name": "_ready"
+                },
+                {
+                    "name": "_on_VisibilityNotifier2D_screen_exited"
+                }
+            ],
+            "properties": [
+                {
+                    "name": "minSpeed",
+                    "type": "Int",
+                    "defaultValue": "150"
+                },
+                {
+                    "name": "maxSpeed",
+                    "type": "Int",
+                    "defaultValue": "250"
+                }
+            ]
+        }
+    ]
+}
