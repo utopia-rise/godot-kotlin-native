@@ -1,3 +1,4 @@
+@file:Suppress("unused", "MemberVisibilityCanBePrivate")
 package godot.core
 
 import godot.gdnative.godot_transform
@@ -5,12 +6,12 @@ import kotlinx.cinterop.*
 
 
 class Transform: CoreType {
-    override fun isNull(): Boolean = false // TODO: make me beautiful
+    var basis: Basis
+    var origin: Vector3
 
 
-
-    lateinit var basis: Basis
-    lateinit var origin: Vector3
+    constructor():
+            this(Basis())
 
     constructor(basis: Basis, origin: Vector3 = Vector3()) {
         this.basis = basis
@@ -20,15 +21,20 @@ class Transform: CoreType {
     constructor(xx: Number, xy: Number, xz: Number, yx: Number, yy: Number, yz: Number, zx: Number, zy: Number, zz: Number, tx: Number, ty: Number, tz: Number):
             this(Basis(Vector3(xx,xy,xz), Vector3(yx,yy,yz), Vector3(zx,zy,zz)), Vector3(tx,ty,tz))
 
-    constructor()
+
 
     internal constructor(native: CValue<godot_transform>) {
+        basis = Basis()
+        origin = Vector3()
+
         memScoped {
             this@Transform.setRawMemory(native.ptr)
         }
     }
-
     internal constructor(mem: COpaquePointer) {
+        basis = Basis()
+        origin = Vector3()
+
         this.setRawMemory(mem)
     }
 
@@ -38,7 +44,6 @@ class Transform: CoreType {
                 basis[1][1],basis[1][2],basis[2][0],basis[2][1],
                 basis[2][2], origin[0], origin[1], origin[2]).getPointer(memScope)
     }
-
     override fun setRawMemory(mem: COpaquePointer) {
         val arr = mem.reinterpret<FloatVar>()
         basis[0][0] = arr[0]
@@ -54,6 +59,8 @@ class Transform: CoreType {
         origin[1] = arr[10]
         origin[2] = arr[11]
     }
+
+
 
     fun inverseXform(t: Transform): Transform {
         val v = t.origin - origin
@@ -192,13 +199,11 @@ class Transform: CoreType {
     }
 
     fun setLookAt(eye: Vector3, target: Vector3, up: Vector3) { //TODO: Refactor
-        var x: Vector3
-        var y: Vector3
-        var z: Vector3
+        val x: Vector3
+        var y = up
+        val z = eye - target
 
-        z = eye - target
         z.normalize()
-        y = up
         x = y.cross(z)
         y = z.cross(x)
         x.normalize()

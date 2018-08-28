@@ -1,3 +1,4 @@
+@file:Suppress("unused", "MemberVisibilityCanBePrivate")
 package godot.core
 
 import godot.gdnative.*
@@ -5,13 +6,11 @@ import kotlinx.cinterop.*
 import kotlin.math.*
 
 class Quat: CoreType {
-    override fun isNull(): Boolean = false // TODO: make me beautiful
-
-
     var x: Float = 0f
     var y: Float = 0f
     var z: Float = 0f
     var w: Float = 1f
+
 
     constructor(basis: Basis) {
         val trace = basis[0][0] + basis[1][1] + basis[2][2]
@@ -87,11 +86,19 @@ class Quat: CoreType {
     }
 
 
+    internal constructor(native: CValue<godot_quat>) : this() {
+        memScoped {
+            this@Quat.setRawMemory(native.ptr)
+        }
+    }
+    internal constructor(mem: COpaquePointer) {
+        this.setRawMemory(mem)
+    }
+
 
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
         return cValuesOf(x, y, z, w).getPointer(memScope)
     }
-
     override fun setRawMemory(mem: COpaquePointer) {
         val arr = mem.reinterpret<FloatVar>()
         x = arr[0]
@@ -100,15 +107,6 @@ class Quat: CoreType {
         w = arr[3]
     }
 
-    internal constructor(native: CValue<godot_quat>) : this() {
-        memScoped {
-            this@Quat.setRawMemory(native.ptr)
-        }
-    }
-
-    internal constructor(mem: COpaquePointer) {
-        this.setRawMemory(mem)
-    }
 
 
     fun set(px: Float, py: Float, pz: Float, pw: Float) {
@@ -149,7 +147,7 @@ class Quat: CoreType {
         return m.getEulerXyz()
     }
 
-    fun setEulerYxz(p_euler: Vector3): Unit {
+    fun setEulerYxz(p_euler: Vector3) {
         val half1: Float = p_euler.y * 0.5f
         val half2: Float = p_euler.x * 0.5f
         val half3: Float = p_euler.z * 0.5f

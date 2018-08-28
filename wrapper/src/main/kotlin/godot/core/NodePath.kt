@@ -1,3 +1,4 @@
+@file:Suppress("unused", "MemberVisibilityCanBePrivate")
 package godot.core
 
 import godot.gdnative.*
@@ -5,39 +6,35 @@ import kotlinx.cinterop.*
 
 
 class NodePath : CoreType {
-    override fun isNull(): Boolean = false // TODO: make me beautiful
-
-
-
     internal var nativeValue = cValue<godot_node_path> {}
+
 
     constructor() {
         nativeValue = nativeValue.copy { godot_node_path_new(this.ptr, String().toGDString()) }
     }
-
-    internal constructor(native: CValue<godot_node_path>) {
-        nativeValue = nativeValue.copy { godot_node_path_new_copy(this.ptr, native) }
-    }
-
-    internal constructor(mem: COpaquePointer) {
-        this.setRawMemory(mem)
-    }
-
     constructor(other: String){
         nativeValue = nativeValue.copy { godot_node_path_new(this.ptr, other.toGDString()) }
     }
-
     constructor(other: NodePath){
         nativeValue = nativeValue.copy { godot_node_path_new(this.ptr, other.toString().toGDString()) }
     }
 
+
+    internal constructor(native: CValue<godot_node_path>) {
+        nativeValue = nativeValue.copy { godot_node_path_new_copy(this.ptr, native) }
+    }
+    internal constructor(mem: COpaquePointer) {
+        this.setRawMemory(mem)
+    }
+
+
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
         return nativeValue.getPointer(memScope)
     }
-
     override fun setRawMemory(mem: COpaquePointer) {
         nativeValue = mem.reinterpret<godot_node_path>().pointed.readValue()
     }
+
 
     override fun toString(): String = godot_node_path_as_string(nativeValue).toKString()
 

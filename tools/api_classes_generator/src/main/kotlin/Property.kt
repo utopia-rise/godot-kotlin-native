@@ -94,7 +94,7 @@ class Property(
                     ICall(type, listOf())
 
                 icalls.add(icall)
-                append("$prefix        get() = ${icall.name}(${validGetter.name}MethodBind, this.rawMem()")
+                append("$prefix        get() = ${icall.name}(${validGetter.name}MethodBind, this.rawMemory")
                 if (index != -1)
                     append(", $index")
                 appendln(')')
@@ -109,10 +109,24 @@ class Property(
                     ICall("Unit", listOf(Argument("value", type)))
 
                 icalls.add(icall)
-                append("$prefix        set(value) = ${icall.name}(${validSetter.name}MethodBind, this.rawMem()")
+                append("$prefix        set(value) = ${icall.name}(${validSetter.name}MethodBind, this.rawMemory")
                 if (index != -1)
                     append(", $index")
                 appendln(", value)")
+
+
+                if (type.isCoreTypeAdaptedForKotlin()) {
+                    append("$prefix    ")
+                    if (!cl.isSingleton)
+                        if (tree.doAncestorsHaveProperty(cl, this@Property))
+                            append("override ")
+                        else
+                            append("open ")
+                    appendln("fun $name(shedule: ($type) -> Unit): $type = $name.apply {")
+                    appendln("$prefix        shedule(this)")
+                    appendln("$prefix        $name = this")
+                    appendln("$prefix    }")
+                }
             }
 
             appendln()

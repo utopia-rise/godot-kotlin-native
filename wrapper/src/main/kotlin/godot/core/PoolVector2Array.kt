@@ -1,24 +1,15 @@
+@file:Suppress("unused", "MemberVisibilityCanBePrivate")
 package godot.core
 
 import godot.gdnative.*
 import kotlinx.cinterop.*
 
 class PoolVector2Array : CoreType {
-    override fun isNull(): Boolean = false // TODO: make me beautiful
-
-
     internal var nativeValue = cValue<godot_pool_vector2_array> {}
+
 
     constructor() {
         nativeValue = nativeValue.copy { godot_pool_vector2_array_new(this.ptr) }
-    }
-
-    internal constructor(native: CValue<godot_pool_vector2_array>) {
-        nativeValue = nativeValue.copy { godot_pool_vector2_array_new_copy(this.ptr, native) }
-    }
-
-    internal constructor(mem: COpaquePointer) {
-        this.setRawMemory(mem)
     }
 
     constructor(other: PoolVector2Array) {
@@ -29,13 +20,23 @@ class PoolVector2Array : CoreType {
         nativeValue = nativeValue.copy { godot_pool_vector2_array_new_with_array(this.ptr, other.nativeValue) }
     }
 
+
+    internal constructor(native: CValue<godot_pool_vector2_array>) {
+        nativeValue = nativeValue.copy { godot_pool_vector2_array_new_copy(this.ptr, native) }
+    }
+    internal constructor(mem: COpaquePointer) {
+        this.setRawMemory(mem)
+    }
+
+
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
         return nativeValue.getPointer(memScope)
     }
-
     override fun setRawMemory(mem: COpaquePointer) {
         nativeValue = mem.reinterpret<godot_pool_vector2_array>().pointed.readValue()
     }
+
+
 
     fun append(data: Vector2) {
         memScoped {

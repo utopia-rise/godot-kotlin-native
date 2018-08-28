@@ -1,3 +1,4 @@
+@file:Suppress("unused", "MemberVisibilityCanBePrivate")
 package godot.core
 
 import godot.gdnative.*
@@ -287,19 +288,19 @@ class Variant: CoreType { // FIXME: redundant .copy
     }
 
 
+    override fun getRawMemory(memScope: MemScope): COpaquePointer {
+        return nativeValue.getPointer(memScope)
+    }
+    override fun setRawMemory(mem: COpaquePointer) {
+        nativeValue = mem.reinterpret<godot_variant>().pointed.readValue()
+    }
+
+
     fun dispose() {
         godot_variant_destroy(nativeValue)
         nativeValue = cValue {}
     }
 
-
-    override fun getRawMemory(memScope: MemScope): COpaquePointer {
-        return nativeValue.getPointer(memScope)
-    }
-
-    override fun setRawMemory(mem: COpaquePointer) {
-        nativeValue = mem.reinterpret<godot_variant>().pointed.readValue()
-    }
 
     fun booleanize(): Boolean = godot_variant_booleanize(nativeValue)
 
@@ -362,12 +363,17 @@ class Variant: CoreType { // FIXME: redundant .copy
     fun call(str: String, args: Array<Variant>): Variant {
         memScoped {
             val arr = allocArray<CPointerVar<godot_variant>>(args.size)
-            for((idx,arg) in args.withIndex()){
+
+            for ((idx,arg) in args.withIndex()){
                 arr[idx] = arg.nativeValue.useContents { this.ptr }
             }
+
             val error = alloc<godot_variant_call_error>()
+
             val result = Variant(godot_variant_call(nativeValue, str.toGDString(), arr, args.size, error.ptr))
-            // TODO: if error is not success printError it
+            if (error.error != godot_variant_call_error_error.GODOT_CALL_ERROR_CALL_OK)
+                throw IllegalStateException("Variant-call \"$str\" returned with error ${error.error}: argument ${error.argument}, expected ${error.expected}")
+
             return result
         }
     }
@@ -390,6 +396,4 @@ class Variant: CoreType { // FIXME: redundant .copy
     override fun hashCode(): Int {
         return nativeValue.hashCode()
     }
-
-    override fun isNull(): Boolean = false // TODO: make me beautiful
 }

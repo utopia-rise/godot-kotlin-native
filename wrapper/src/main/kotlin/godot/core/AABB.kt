@@ -1,3 +1,4 @@
+@file:Suppress("unused", "MemberVisibilityCanBePrivate")
 package godot.core
 
 import godot.gdnative.*
@@ -5,10 +6,8 @@ import kotlinx.cinterop.*
 
 
 class AABB: CoreType {
-    override fun isNull(): Boolean = false // TODO: make me beautiful
-
-    lateinit var position: Vector3
-    lateinit var size: Vector3
+    var position: Vector3
+    var size: Vector3
 
 
     constructor(p_pos: Vector3, p_size: Vector3) {
@@ -22,12 +21,18 @@ class AABB: CoreType {
 
 
     internal constructor(native: CValue<godot_aabb>) {
+        position = Vector3()
+        size = Vector3()
+
         memScoped {
             this@AABB.setRawMemory(native.ptr)
         }
     }
 
     internal constructor(mem: COpaquePointer) {
+        position = Vector3()
+        size = Vector3()
+
         this.setRawMemory(mem)
     }
 
@@ -420,10 +425,10 @@ class AABB: CoreType {
             ret2[axis] = sign
         } else
             ret2 = null
-        if (clip)
-            ret1 = from + rel * min
+        ret1 = if (clip)
+            from + rel * min
         else
-            ret1 = null
+            null
         return Triple(true, ret1, ret2)
     }
 

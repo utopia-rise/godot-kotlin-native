@@ -101,10 +101,9 @@ class Class(
             appendln()
 
 
-            if (isSingleton) {
+            if (isSingleton)
                 appendln("        private val rawMemory: COpaquePointer by lazy { getSingleton(\"$name\", \"$oldName\") }")
-                appendln("        private fun rawMem(): COpaquePointer = rawMemory")
-            } else
+            else
                 appendln("    }")
             appendln()
             appendln()
@@ -137,7 +136,7 @@ class Class(
             var node = tree.nodes.find { it.value.name == name }!!.parent
 
             while (node != null) {
-                appendln("        infix fun from(other: ${node.value.name}): $name = $name(\"\").apply { setRawMemory(other.rawMem()) }")
+                appendln("        infix fun from(other: ${node.value.name}): $name = $name(\"\").apply { setRawMemory(other.rawMemory) }")
                 node = node.parent
             }
             appendln("        infix fun from(other: Variant): $name = fromVariant($name(\"\"), other)")

@@ -7,7 +7,7 @@ internal interface CoreType {
     fun getRawMemory(memScope: MemScope): COpaquePointer
     fun setRawMemory(mem: COpaquePointer)
 
-    fun isNull(): Boolean
+    fun isNull(): Boolean = false
 }
 
 

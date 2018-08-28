@@ -9,38 +9,39 @@ import godot.registration.nonNativeConstructorRawMemory
 
 
 abstract class GodotObject : CoreType {
-    internal var rawMemory: COpaquePointer? = null
+    private var godotCoreMemory: COpaquePointer? = null
 
 
     internal constructor(mem: COpaquePointer) {
-        rawMemory = mem.reinterpret<COpaquePointerVar>().pointed.value
+        godotCoreMemory = mem.reinterpret<COpaquePointerVar>().pointed.value
     }
     internal constructor(variant: Variant) {
         godot.fromVariant(this, variant)
     }
-    constructor(name: String) {
+    internal constructor(name: String) {
         if (nativeConstructorInvocationFlag) {
             if (name != "") {
                 godot_get_class_constructor(name)?.let {
-                    rawMemory = it.reinterpret<CFunction<() -> COpaquePointer>>()()
+                    godotCoreMemory = it.reinterpret<CFunction<() -> COpaquePointer>>()()
                     // TODO: put destructor somewhere
                 } ?: throw NotImplementedError("There is no constructor for class $name in GD")
             }
         } else {
             nativeConstructorInvocationFlag = true
-            rawMemory = nonNativeConstructorRawMemory!!
+            godotCoreMemory = nonNativeConstructorRawMemory!!
         }
     }
 
 
-    internal fun rawMem(): COpaquePointer {
-        return rawMemory ?: throw NullPointerException("Attempt to use null object: $this")
-    }
-    override fun isNull(): Boolean = rawMemory == null
+    override fun isNull(): Boolean = godotCoreMemory == null
 
 
-    final override fun getRawMemory(memScope: MemScope): COpaquePointer = rawMem()
+    internal val rawMemory: COpaquePointer
+        get() = godotCoreMemory ?: throw NullPointerException("Attempt to use null object: $this")
+
+
+    final override fun getRawMemory(memScope: MemScope): COpaquePointer = rawMemory
     final override fun setRawMemory(mem: COpaquePointer) {
-        rawMemory = mem
+        godotCoreMemory = mem
     }
 }

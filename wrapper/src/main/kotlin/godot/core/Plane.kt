@@ -1,3 +1,4 @@
+@file:Suppress("unused", "MemberVisibilityCanBePrivate")
 package godot.core
 
 import godot.gdnative.godot_plane
@@ -6,16 +7,14 @@ import kotlin.math.abs
 
 
 class Plane: CoreType {
-    override fun isNull(): Boolean = false // TODO: make me beautiful
-
-
     enum class ClockDirection {
         CLOCKWISE,
         COUNTERCLOCKWISE
     }
 
-    lateinit var normal: Vector3
+    var normal: Vector3
     var d: Float = 0f
+
 
     constructor(normal: Vector3, d: Number) {
         this.normal = normal
@@ -28,10 +27,10 @@ class Plane: CoreType {
     }
 
     constructor(point1: Vector3, point2: Vector3, point3: Vector3, dir: ClockDirection) {
-        if (dir == ClockDirection.CLOCKWISE)
-            normal = (point1 - point3).cross(point1 - point2)
+        normal = if (dir == ClockDirection.CLOCKWISE)
+            (point1 - point3).cross(point1 - point2)
         else
-            normal = (point1 - point2).cross(point1 - point3)
+            (point1 - point2).cross(point1 - point3)
 
         normal.normalize()
         d = normal.dot(point1)
@@ -43,13 +42,16 @@ class Plane: CoreType {
     constructor() :
             this(Vector3(0,0,0), 0)
 
+
+
     internal constructor(native: CValue<godot_plane>) {
+        normal = Vector3()
         memScoped {
             this@Plane.setRawMemory(native.ptr)
         }
     }
-
     internal constructor(mem: COpaquePointer) {
+        normal = Vector3()
         this.setRawMemory(mem)
     }
 
@@ -57,7 +59,6 @@ class Plane: CoreType {
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
         return cValuesOf(normal[0], normal[1], normal[2], d).getPointer(memScope)
     }
-
     override fun setRawMemory(mem: COpaquePointer) {
         val arr = mem.reinterpret<FloatVar>()
         normal[0] = arr[0]
@@ -65,6 +66,8 @@ class Plane: CoreType {
         normal[2] = arr[2]
         d = arr[3]
     }
+
+
 
     fun project(point: Vector3): Vector3 =
             point - normal * distanceTo(point)
@@ -92,12 +95,8 @@ class Plane: CoreType {
     fun getAnyPerpendicularNormal(): Vector3 {
         val p1 = Vector3(1, 0, 0)
         val p2 = Vector3(0, 1, 0)
-        var p: Vector3
 
-        if (abs(normal.dot(p1)) > 0.99)
-            p = p2
-        else
-            p = p1
+        var p= if (abs(normal.dot(p1)) > 0.99) p2 else p1
 
         p -= normal * normal.dot(p)
         p.normalize()

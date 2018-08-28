@@ -1,16 +1,12 @@
+@file:Suppress("unused", "MemberVisibilityCanBePrivate")
 package godot.core
 
 import kotlin.math.sqrt
 import godot.gdnative.*
 import kotlinx.cinterop.*
 
+
 class Vector3(var x: Float, var y: Float, var z: Float) : Comparable<Vector3>, CoreType {
-    override fun isNull(): Boolean = false // TODO: make me beautiful
-
-
-    constructor() :
-            this(0f, 0f, 0f)
-
     enum class Axis(val id: Int) {
         AXIS_X(0),
         AXIS_Y(1),
@@ -21,13 +17,27 @@ class Vector3(var x: Float, var y: Float, var z: Float) : Comparable<Vector3>, C
         }
     }
 
+
+    constructor() :
+            this(0f, 0f, 0f)
+
     constructor(x: Number, y: Number, z: Number) :
             this(x.toFloat(), y.toFloat(), z.toFloat())
+
+
+    internal constructor(native: CValue<godot_vector3>) : this() {
+        memScoped {
+            this@Vector3.setRawMemory(native.ptr)
+        }
+    }
+    internal constructor(mem: COpaquePointer) : this() {
+        this.setRawMemory(mem)
+    }
+
 
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
         return cValuesOf(x, y, z).getPointer(memScope)
     }
-
     override fun setRawMemory(mem: COpaquePointer) {
         val arr = mem.reinterpret<FloatVar>()
         x = arr[0]
@@ -35,15 +45,7 @@ class Vector3(var x: Float, var y: Float, var z: Float) : Comparable<Vector3>, C
         z = arr[2]
     }
 
-    internal constructor(native: CValue<godot_vector3>) : this() {
-        memScoped {
-            this@Vector3.setRawMemory(native.ptr)
-        }
-    }
 
-    internal constructor(mem: COpaquePointer) : this() {
-        this.setRawMemory(mem)
-    }
 
     operator fun get(n: Int): Float =
             when (n) {
@@ -176,7 +178,7 @@ class Vector3(var x: Float, var y: Float, var z: Float) : Comparable<Vector3>, C
                 if (y < z) 1
                 else 2
 
-    fun normalize(): Unit {
+    fun normalize() {
         val l: Float = this.length()
         if (l == 0f) {
             x = 0f
@@ -204,7 +206,7 @@ class Vector3(var x: Float, var y: Float, var z: Float) : Comparable<Vector3>, C
         return v
     }
 
-    fun rotate(axis: Vector3, phi: Float): Unit {
+    fun rotate(axis: Vector3, phi: Float) {
         val ret = Basis(axis, phi).xform(this)
         this.x = ret.x
         this.y = ret.y
@@ -214,7 +216,7 @@ class Vector3(var x: Float, var y: Float, var z: Float) : Comparable<Vector3>, C
     fun slide(by: Vector3): Vector3 =
             by - this * this.dot(by)
 
-    fun snap(vecal: Float): Unit {
+    fun snap(vecal: Float) {
         if (vecal != 0f) {
             x = kotlin.math.floor(x / vecal + 0.5f) * vecal
             y = kotlin.math.floor(y / vecal + 0.5f) * vecal
@@ -228,14 +230,9 @@ class Vector3(var x: Float, var y: Float, var z: Float) : Comparable<Vector3>, C
         return v
     }
 
+
     override fun toString() = "$x, $y, $z"
-    override fun hashCode(): Int {
-        var result = x.hashCode()
-        result = 31 * result + y.hashCode()
-        result = 31 * result + z.hashCode()
-        return result
-    }
-    //TODO(Do this with godot string)
+    override fun hashCode(): Int = this.toString().hashCode()
 }
 
 operator fun Float.times(vecec: Vector3) =

@@ -1,3 +1,4 @@
+@file:Suppress("unused", "MemberVisibilityCanBePrivate")
 package godot.core
 
 import godot.gdnative.godot_transform2d
@@ -9,9 +10,6 @@ import kotlin.math.sin
 
 
 class Transform2D: CoreType {
-    override fun isNull(): Boolean = false // TODO: make me beautiful
-
-
     // Warning #1: basis of Transform2D is stored differently from Basis. In terms of elements array, the basis matrix looks like "on paper":
     // M = (elements[0][0] elements[1][0])
     //     (elements[0][1] elements[1][1])
@@ -26,19 +24,6 @@ class Transform2D: CoreType {
     var elements: Array<Vector2> =
             arrayOf(Vector2(), Vector2(), Vector2())
 
-    override fun getRawMemory(memScope: MemScope): COpaquePointer {
-        return cValuesOf(elements[0][0], elements[0][1], elements[1][0], elements[1][1], elements[2][0], elements[2][1]).getPointer(memScope)
-    }
-
-    override fun setRawMemory(mem: COpaquePointer) {
-        val arr = mem.reinterpret<FloatVar>()
-        elements[0][0] = arr[0]
-        elements[0][1] = arr[1]
-        elements[1][0] = arr[2]
-        elements[1][1] = arr[3]
-        elements[2][0] = arr[4]
-        elements[2][1] = arr[5]
-    }
 
     constructor(xx: Number, xy: Number, yx: Number, yy: Number, ox: Number, oy: Number) {
         elements[0][0] = xx.toFloat()
@@ -64,15 +49,31 @@ class Transform2D: CoreType {
         elements[1][1] = 1f
     }
 
+
     internal constructor(native: CValue<godot_transform2d>) {
         memScoped {
             this@Transform2D.setRawMemory(native.ptr)
         }
     }
-
     internal constructor(mem: COpaquePointer) {
         this.setRawMemory(mem)
     }
+
+
+    override fun getRawMemory(memScope: MemScope): COpaquePointer {
+        return cValuesOf(elements[0][0], elements[0][1], elements[1][0], elements[1][1], elements[2][0], elements[2][1]).getPointer(memScope)
+    }
+    override fun setRawMemory(mem: COpaquePointer) {
+        val arr = mem.reinterpret<FloatVar>()
+        elements[0][0] = arr[0]
+        elements[0][1] = arr[1]
+        elements[1][0] = arr[2]
+        elements[1][1] = arr[3]
+        elements[2][0] = arr[4]
+        elements[2][1] = arr[5]
+    }
+
+
 
     fun tdotx(v: Vector2): Float =
             elements[0][0] * v.x + elements[1][0] * v.y
@@ -225,7 +226,7 @@ class Transform2D: CoreType {
             translate(Vector2(tx, ty))
 
     fun orthonormalize() {
-        var x = elements[0]
+        val x = elements[0]
         var y = elements[1]
 
         x.normalize()
@@ -311,21 +312,18 @@ class Transform2D: CoreType {
         val v2 = Vector2(cos(r2), sin(r2))
 
         var dot = v1.dot(v2)
-        dot =   if (dot < -1f)
-                    -1f
-                else
-                    if (dot > 1f)
-                        1f
-                    else
-                        dot
-        val v: Vector2
+        dot = when {
+            dot < -1f -> -1f
+            dot > 1f -> 1f
+            else -> dot
+        }
 
-        if (dot > 0.9995)
-            v = (Vector2::linearInterpolate)(v1, v2, c).normalized()
+        val v = if (dot > 0.9995)
+            (Vector2::linearInterpolate)(v1, v2, c).normalized()
         else {
             val angle = c * acos(dot)
             val v3 = (v2 - v1 * dot).normalized()
-            v = v1 * cos(angle) + v3 * sin(angle)
+            v1 * cos(angle) + v3 * sin(angle)
         }
 
         val res = Transform2D(atan2(v.y, v.x), (Vector2::linearInterpolate)(p1, p2, c))
@@ -333,7 +331,9 @@ class Transform2D: CoreType {
         return res
     }
 
+
     override fun toString(): String =
             elements[0].toString() + ", " + elements[1].toString() + ", " + elements[2]
 
+    override fun hashCode(): Int = this.toString().hashCode()
 }

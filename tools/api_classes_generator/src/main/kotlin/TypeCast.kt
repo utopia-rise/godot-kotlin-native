@@ -38,6 +38,11 @@ fun String.isPrimitive(): Boolean {
     return primitives.find { s -> s == this } != null
 }
 
+fun String.isCoreTypeAdaptedForKotlin(): Boolean {
+    val types = listOf("AABB", "Basis", "Color", "Plane", "Quat", "Rect2", "Transform", "Transform2D", "Vector2", "Vector3")
+    return types.find { s -> s == this } != null
+}
+
 fun String.isCoreType(): Boolean {
     val coreTypes = listOf(//"Array", // TODO: kotlin arrays?
             "GDArray",

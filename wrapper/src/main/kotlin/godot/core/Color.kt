@@ -1,3 +1,4 @@
+@file:Suppress("unused", "MemberVisibilityCanBePrivate")
 package godot.core
 
 import godot.gdnative.*
@@ -5,7 +6,22 @@ import kotlinx.cinterop.*
 import kotlin.math.*
 
 class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Comparable<Color>, CoreType {
-    override fun isNull(): Boolean = false // TODO: make me beautiful
+    constructor() :
+            this(0f, 0f, 0f, 1f)
+
+    constructor(r: Number, g: Number, b: Number, a: Number = 1f) :
+            this(r.toFloat(), g.toFloat(), b.toFloat(), a.toFloat())
+
+
+
+    internal constructor(native: CValue<godot_color>) : this() {
+        memScoped {
+            this@Color.setRawMemory(native.ptr)
+        }
+    }
+    internal constructor(mem: COpaquePointer) : this() {
+        this.setRawMemory(mem)
+    }
 
 
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
@@ -20,21 +36,7 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
         a = arr[3]
     }
 
-    constructor() :
-            this(0f, 0f, 0f, 1f)
 
-    constructor(r: Number, g: Number, b: Number, a: Number = 1f) :
-            this(r.toFloat(), g.toFloat(), b.toFloat(), a.toFloat())
-
-    internal constructor(native: CValue<godot_color>) : this() {
-        memScoped {
-            this@Color.setRawMemory(native.ptr)
-        }
-    }
-
-    internal constructor(mem: COpaquePointer) : this() {
-        this.setRawMemory(mem)
-    }
 
     operator fun get(n: Int): Float =
             when (n) {
@@ -96,13 +98,11 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
         val delta = max - min
         if (delta == 0f) return 0f
 
-        var h: Float
-        if (r == max)
-            h = (g - b) / delta         // between yellow & magenta
-        else if (g == max)
-            h = 2 + (b - r) / delta     // between cyan & yellow
-        else
-            h = 4 + (r - g) / delta     // between magenta & cyan
+        var h = when {
+            r == max -> (g - b) / delta         // between yellow & magenta
+            g == max -> 2 + (b - r) / delta     // between cyan & yellow
+            else -> 4 + (r - g) / delta         // between magenta & cyan
+        }
 
         h /= 6f
         if (h < 0)
@@ -128,9 +128,9 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
     }
 
     fun sethsv(h: Float, s: Float, v: Float, alpha: Float) {
-        val i: Int
+        val i = floor(h).toInt()
         val f: Float
-        val p: Float
+        val p = v * (1 - s)
         val q: Float
         val t: Float
 
@@ -145,10 +145,8 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
 
         var h2 = h * 6f
         h2 = h2.rem(6f)
-        i = floor(h).toInt()
 
         f = h2 - i
-        p = v * (1 - s)
         q = v * (1 - s * f)
         t = v * (1 - s * (1 - f))
 
@@ -252,30 +250,24 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
         return Color(r, g, b, a)
     }
 
-    fun html(p_color: String): Color {
+    fun html(p_color: String): Color? {
         var color = p_color
         if (color.isEmpty())
             return Color()
         if (color[0] == '#')
             color = color.substring(1, color.length - 1)
 
-        var alpha = false
-
-        if (color.length == 8) {
-            alpha = true
-        } else if (color.length == 6) {
-            alpha = false
-        } else {
-            ERR_PRINT("Invalid Color Code:$p_color")
-            return Color()
+        val alpha = when {
+            color.length == 8 -> true
+            color.length == 6 -> false
+            else -> return null
         }
 
         var a = 255
         if (alpha) {
             a = parseCol(color, 0).toInt()
             if (a < 0) {
-                ERR_PRINT("Invalid Color Code:$p_color")
-                return Color()
+                return null
             }
         }
 
@@ -284,8 +276,7 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
         val g = parseCol(color, from + 2).toInt()
         val b = parseCol(color, from + 4).toInt()
         if (r < 0 || g < 0 || b < 0) {
-            ERR_PRINT("Invalid Color Code:$p_color")
-            return Color()
+            return null
         }
 
         return Color(r / 255.0f, g / 255.0f, b / 255.0f, a / 255.0f)
@@ -298,14 +289,10 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
         if (color[0] == '#')
             color = color.substring(1, color.length - 1)
 
-        var alpha = false
-
-        if (color.length == 8) {
-            alpha = true
-        } else if (color.length == 6) {
-            alpha = false
-        } else {
-            return false
+        val alpha = when {
+            color.length == 8 -> true
+            color.length == 6 -> false
+            else -> return false
         }
 
         val a: Int
@@ -332,23 +319,26 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
         fun parseCol(p_str: String, p_ofs: Int): Float {
             var ig = 0f
             for (i in 0..1) {
-                var v = 0
+                var v: Int
                 val c: Char = p_str[i + p_ofs]
 
-                if (c in '0'..'9')
-                    v = c.toInt() - '0'.toInt()
-                else if (c in 'a'..'f') {
-                    v = c.toInt() - 'a'.toInt()
-                    v += 10
-                } else if (c in 'A'..'F') {
-                    v = c.toInt() - 'A'.toInt()
-                    v += 10
-                } else return -1f
+                when (c) {
+                    in '0'..'9' -> v = c.toInt() - '0'.toInt()
+                    in 'a'..'f' -> {
+                        v = c.toInt() - 'a'.toInt()
+                        v += 10
+                    }
+                    in 'A'..'F' -> {
+                        v = c.toInt() - 'A'.toInt()
+                        v += 10
+                    }
+                    else -> return -1f
+                }
 
-                if (i == 0)
-                    ig += v * 16
+                ig += if (i == 0)
+                    v * 16
                 else
-                    ig += v
+                    v
             }
             return ig
         }
@@ -389,20 +379,23 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
     }
 
     override fun compareTo(other: Color): Int {
-        if (r == other.r) {
-            if (g == other.g) {
-                if (b == other.b) {
-                    return when {
+        return when {
+            r == other.r -> when {
+                g == other.g -> when {
+                    b == other.b -> when {
                         a < other.a -> -1
                         a == other.a -> 0
                         else -> 1
                     }
-                } else
-                    return if (b < other.b) -1 else 1
-            } else
-                return if (g < other.g) -1 else 1
-        } else
-            return if (r < other.r) -1 else 1
+                    b < other.b -> -1
+                    else -> 1
+                }
+                g < other.g -> -1
+                else -> 1
+            }
+            r < other.r -> -1
+            else -> 1
+        }
     }
 
     override fun toString() = "$r, $g, $b, $a"

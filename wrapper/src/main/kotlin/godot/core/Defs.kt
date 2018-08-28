@@ -1,6 +1,5 @@
+@file:Suppress("unused", "MemberVisibilityCanBePrivate")
 package godot.core
-
-import platform.posix.perror
 
 
 enum class GodotError(val id: Int) {
@@ -10,7 +9,7 @@ enum class GodotError(val id: Int) {
     ERR_UNCONFIGURED(3), ///< The object being used hasnt been properly set up yet
     ERR_UNAUTHORIZED(4), ///< Missing credentials for requested resource
     ERR_PARAMETER_RANGE_ERROR(5), ///< Parameter given out of range (5)
-    ERR_OUT_OF_MEMORY(6), ///< Out of rawMemory
+    ERR_OUT_OF_MEMORY(6), ///< Out of memory
     ERR_FILE_NOT_FOUND(7),
     ERR_FILE_BAD_DRIVE(8),
     ERR_FILE_BAD_PATH(9),
@@ -69,6 +68,3 @@ const val Math_PI = 3.14159265358979323846
 
 const val PLANE_EQ_DOT_EPSILON = 0.999
 const val PLANE_EQ_D_EPSILON = 0.0001
-
-fun ERR_FAIL_V(any: Any?): Any? = any
-fun ERR_PRINT(msg: String) = perror("ERROR: $msg\n")

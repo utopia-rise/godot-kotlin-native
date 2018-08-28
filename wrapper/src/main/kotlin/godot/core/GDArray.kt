@@ -1,3 +1,4 @@
+@file:Suppress("unused", "MemberVisibilityCanBePrivate")
 package godot.core
 
 import kotlinx.cinterop.*
@@ -6,9 +7,6 @@ import godot.Object
 
 
 class GDArray: CoreType { // FIXME: .copy
-    override fun isNull(): Boolean = false // TODO: make me beautiful
-
-
     internal var nativeValue = cValue<godot_array> {}
 
 
@@ -65,6 +63,8 @@ class GDArray: CoreType { // FIXME: .copy
         nativeValue = nativeValue.copy { godot_array_new_pool_string_array(this.ptr, other.nativeValue) }
     }
 
+
+
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
         return nativeValue.getPointer(memScope)
     }
@@ -72,6 +72,7 @@ class GDArray: CoreType { // FIXME: .copy
     override fun setRawMemory(mem: COpaquePointer) {
         nativeValue = mem.reinterpret<godot_array>().pointed.readValue()
     }
+
 
 
     fun toKotlinArray(): Array<Variant> {
@@ -174,6 +175,7 @@ class GDArray: CoreType { // FIXME: .copy
     fun sortCustom(obj: Object, func: String) = memScoped {
         godot_array_sort_custom(nativeValue, obj.getRawMemory(memScope), func.toGDString())
     }
+
 
     override fun equals(other: Any?): Boolean {
         if (this === other)

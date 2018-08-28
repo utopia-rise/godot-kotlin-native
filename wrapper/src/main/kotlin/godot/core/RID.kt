@@ -1,3 +1,4 @@
+@file:Suppress("unused", "MemberVisibilityCanBePrivate")
 package godot.core
 
 import godot.gdnative.*
@@ -5,10 +6,8 @@ import kotlinx.cinterop.*
 import godot.Object
 
 class RID : CoreType {
-    override fun isNull(): Boolean = false // TODO: make me beautiful
-
-
     internal var nativeValue = cValue<godot_rid> {}
+
 
     constructor() {
         nativeValue = nativeValue.copy { godot_rid_new(this.ptr) }
@@ -20,23 +19,25 @@ class RID : CoreType {
         }
     }
 
-    override fun getRawMemory(memScope: MemScope): COpaquePointer {
-        return nativeValue.getPointer(memScope)
-    }
-
-    override fun setRawMemory(mem: COpaquePointer) {
-        nativeValue = mem.reinterpret<godot_rid>().pointed.readValue()
-    }
 
     internal constructor(native: CValue<godot_rid>) : this() {
         memScoped {
             this@RID.setRawMemory(native.ptr)
         }
     }
-
     internal constructor(mem: COpaquePointer) : this() {
         this.setRawMemory(mem)
     }
+
+
+    override fun getRawMemory(memScope: MemScope): COpaquePointer {
+        return nativeValue.getPointer(memScope)
+    }
+    override fun setRawMemory(mem: COpaquePointer) {
+        nativeValue = mem.reinterpret<godot_rid>().pointed.readValue()
+    }
+
+
 
     fun getID(): Int = godot_rid_get_id(nativeValue)
 

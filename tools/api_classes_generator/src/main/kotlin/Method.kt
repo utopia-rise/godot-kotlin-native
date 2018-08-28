@@ -109,10 +109,10 @@ open class Method(
 
     private fun constructICall(methodArguments: String, icalls: MutableSet<ICall>): String {
         if (hasVarargs)
-            return "_icall_varargs(${name}MethodBind, this.rawMem(), arrayOf($methodArguments*__var_args))"
+            return "_icall_varargs(${name}MethodBind, this.rawMemory, arrayOf($methodArguments*__var_args))"
 
         val icall = ICall(returnType, arguments)
         icalls.add(icall)
-        return "${icall.name}(${name}MethodBind, this.rawMem()$methodArguments)"
+        return "${icall.name}(${name}MethodBind, this.rawMemory$methodArguments)"
     }
 }

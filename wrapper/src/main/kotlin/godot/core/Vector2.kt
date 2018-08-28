@@ -1,13 +1,12 @@
+@file:Suppress("unused", "MemberVisibilityCanBePrivate")
 package godot.core
 
 import godot.gdnative.*
 import kotlinx.cinterop.*
 import kotlin.math.*
 
+
 class Vector2(var x: Float, var y: Float) : Comparable<Vector2>, CoreType {
-    override fun isNull(): Boolean = false // TODO: make me beautiful
-
-
     constructor() :
             this(0f, 0f)
 
@@ -15,25 +14,26 @@ class Vector2(var x: Float, var y: Float) : Comparable<Vector2>, CoreType {
             this(x.toFloat(), y.toFloat())
 
 
+    internal constructor(native: CValue<godot_vector2>) : this(0f, 0f) {
+        memScoped {
+            this@Vector2.setRawMemory(native.ptr)
+        }
+    }
+    internal constructor(mem: COpaquePointer) : this() {
+        this.setRawMemory(mem)
+    }
+
+
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
         return cValuesOf(x, y).getPointer(memScope)
     }
-
     override fun setRawMemory(mem: COpaquePointer) {
         val arr = mem.reinterpret<FloatVar>()
         x = arr[0]
         y = arr[1]
     }
 
-    internal constructor(native: CValue<godot_vector2>) : this(0f, 0f) {
-        memScoped {
-            this@Vector2.setRawMemory(native.ptr)
-        }
-    }
 
-    internal constructor(mem: COpaquePointer) : this() {
-        this.setRawMemory(mem)
-    }
 
     var width: Float
         get() = x
@@ -45,6 +45,7 @@ class Vector2(var x: Float, var y: Float) : Comparable<Vector2>, CoreType {
         set(value) {
             y = value
         }
+
 
     operator fun get(idx: Int): Float =
             when (idx) {
@@ -59,6 +60,7 @@ class Vector2(var x: Float, var y: Float) : Comparable<Vector2>, CoreType {
                 1 -> y = f
                 else -> throw IndexOutOfBoundsException()
             }
+
 
     operator fun plus(v: Vector2): Vector2 =
             Vector2(x + v.x, y + v.y)
@@ -81,6 +83,7 @@ class Vector2(var x: Float, var y: Float) : Comparable<Vector2>, CoreType {
     operator fun unaryMinus(): Vector2 =
             Vector2(-x, -y)
 
+
     override fun equals(other: Any?): Boolean =
             when (other) {
                 is Vector2 -> (x == other.x && y == other.y)
@@ -101,7 +104,7 @@ class Vector2(var x: Float, var y: Float) : Comparable<Vector2>, CoreType {
                 }
             }
 
-    fun normalize(): Unit {
+    fun normalize() {
         var l: Float = x * x + y * y
         if (l != 0f) {
             l = sqrt(l)
@@ -193,7 +196,7 @@ class Vector2(var x: Float, var y: Float) : Comparable<Vector2>, CoreType {
     fun angle(): Float =
             atan2(y, x)
 
-    fun setRotation(radians: Float): Unit {
+    fun setRotation(radians: Float) {
         x = cos(radians)
         y = sin(radians)
     }
@@ -228,12 +231,10 @@ class Vector2(var x: Float, var y: Float) : Comparable<Vector2>, CoreType {
     fun aspect(): Float =
             this.width / this.height
 
+
+
     override fun toString() = "$x, $y"
-    override fun hashCode(): Int {
-        var result = x.hashCode()
-        result = 31 * result + y.hashCode()
-        return result
-    }
+    override fun hashCode(): Int = this.toString().hashCode()
 }
 
 operator fun Float.times(vec: Vector2): Vector2 =

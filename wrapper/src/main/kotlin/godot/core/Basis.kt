@@ -1,3 +1,4 @@
+@file:Suppress("unused", "MemberVisibilityCanBePrivate")
 package godot.core
 
 import kotlinx.cinterop.*
@@ -6,9 +7,6 @@ import kotlin.math.*
 
 
 class Basis: CoreType {
-    override fun isNull(): Boolean = false // TODO: make me beautiful
-
-
     lateinit var x: Vector3
     lateinit var y: Vector3
     lateinit var z: Vector3
@@ -25,6 +23,10 @@ class Basis: CoreType {
     }
 
     constructor(quat: Quat) {
+        x = Vector3()
+        y = Vector3()
+        z = Vector3()
+
         val d = quat.lengthSquared()
         val s = 2f / d
         val xs = quat.x * s
@@ -45,6 +47,10 @@ class Basis: CoreType {
     }
 
     constructor(axis: Vector3, phi: Float) {
+        x = Vector3()
+        y = Vector3()
+        z = Vector3()
+
         // Rotation matrix from axis and angle, see https://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle
         val axisq = Vector3(axis.x*axis.x,axis.y*axis.y,axis.z*axis.z)
 
@@ -72,15 +78,25 @@ class Basis: CoreType {
     constructor():
             this(1f,0f, 0f, 0f, 1f, 0f, 0f, 0f, 1f)
 
+
+
     internal constructor(native: CValue<godot_basis>) {
+        x = Vector3()
+        y = Vector3()
+        z = Vector3()
+
         memScoped {
             this@Basis.setRawMemory(native.ptr)
         }
     }
-
     internal constructor(mem: COpaquePointer) {
+        x = Vector3()
+        y = Vector3()
+        z = Vector3()
+
         this.setRawMemory(mem)
     }
+
 
 
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
@@ -291,7 +307,7 @@ class Basis: CoreType {
     // (ax,ay,az), where ax is the angle of rotation around x axis,
     // and similar for other axes.
     // The current implementation uses XYZ convention (Z is the first rotation).
-    fun setEulerXyz(euler: Vector3): Unit {
+    fun setEulerXyz(euler: Vector3) {
 
         var c: Float = cos(euler.x)
         var s: Float = sin(euler.x)
@@ -375,6 +391,7 @@ class Basis: CoreType {
         val zmat = Basis(c,-s,0f,s,c,0f,0f,0f,1f)
 
         val ret = ymat * xmat * zmat
+
         this.x = ret.x
         this.y = ret.y
         this.z = ret.z
@@ -463,7 +480,7 @@ class Basis: CoreType {
             return
         }
 
-        var x = getAxis(0)
+        val x = getAxis(0)
         var y = getAxis(1)
         var z = getAxis(2)
 
@@ -530,11 +547,10 @@ class Basis: CoreType {
             }
 
             // Compute the rotation angle
-            var angle: Float
-            if (abs(this[j][j] - this[i][i]) < CMP_EPSILON) {
-                angle = Math_PI.toFloat() / 4f
+            val angle = if (abs(this[j][j] - this[i][i]) < CMP_EPSILON) {
+                Math_PI.toFloat() / 4f
             } else {
-                angle = 0.5f * atan(2 * this[i][j] / (this[j][j] - this[i][i]))
+                0.5f * atan(2 * this[i][j] / (this[j][j] - this[i][i]))
             }
 
             // Compute the rotation matrix
@@ -589,23 +605,20 @@ class Basis: CoreType {
         val orth = this
         for(i in 0..2) {
             for(j in 0..2) {
-
                 var v = orth[i][j]
-                if (v>0.5f)
-                    v=1.0f
-                else if (v<-0.5)
-                    v=-1.0f
-                else
-                    v=0f
-
-                orth[i][j]=v
+                v = when {
+                    v > 0.5f -> 1.0f
+                    v < -0.5f -> -1.0f
+                    else -> 0f
+                }
+                orth[i][j] = v
             }
         }
 
-        for(i in 0..23) {
+        for(i in 0..23)
             if (orthoBases[i]==orth)
                 return i
-        }
+
         return 0
     }
 

@@ -1,20 +1,43 @@
+@file:Suppress("unused", "MemberVisibilityCanBePrivate")
 package godot.core
 
 import godot.gdnative.godot_rect2
 import kotlinx.cinterop.*
+import kotlin.math.max
+import kotlin.math.min
 
 
 class Rect2: CoreType {
-    override fun isNull(): Boolean = false // TODO: make me beautiful
-
-
     var pos = Vector2()
     var size = Vector2()
+
+
+    constructor()
+
+    constructor(x: Number, y: Number, width: Number, height: Number) {
+        pos = Vector2(x, y)
+        size = Vector2(width, height)
+    }
+
+    constructor(pos: Vector2, size: Vector2) {
+        this.pos = pos
+        this.size = size
+    }
+
+
+    internal constructor(native: CValue<godot_rect2>) {
+        memScoped {
+            this@Rect2.setRawMemory(native.ptr)
+        }
+    }
+    internal constructor(mem: COpaquePointer) {
+        this.setRawMemory(mem)
+    }
+
 
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
         return cValuesOf(pos[0], pos[1], size[0], size[1]).getPointer(memScope)
     }
-
     override fun setRawMemory(mem: COpaquePointer) {
         val arr = mem.reinterpret<FloatVar>()
         pos[0] = arr[0]
@@ -23,25 +46,7 @@ class Rect2: CoreType {
         size[1] = arr[3]
     }
 
-    internal constructor(native: CValue<godot_rect2>) {
-        memScoped {
-            this@Rect2.setRawMemory(native.ptr)
-        }
-    }
 
-    internal constructor(mem: COpaquePointer) {
-        this.setRawMemory(mem)
-    }
-
-    constructor()
-    constructor(x: Number, y: Number, width: Number, height: Number) {
-        pos = Vector2(x, y)
-        size = Vector2(width, height)
-    }
-    constructor(pos: Vector2, size: Vector2) {
-        this.pos = pos
-        this.size = size
-    }
 
     fun getArea(): Float = size.width * size.height
 
@@ -113,25 +118,20 @@ class Rect2: CoreType {
         size = end-begin
     }
 
-    private fun MAX(n1: Float, n2: Float) =
-            if (n1 > n2) n1 else n2
-
-    private fun MIN(n1: Float, n2: Float) =
-            if (n1 < n2) n1 else n2
 
     fun distanceTo(point: Vector2): Float {
         var dist = 1e20f
         if (point.x < pos.x) {
-            dist = MIN(dist,pos.x-point.x)
+            dist = min(dist,pos.x-point.x)
         }
         if (point.y < pos.y) {
-            dist = MIN(dist,pos.y-point.y)
+            dist = min(dist,pos.y-point.y)
         }
         if (point.x >= (pos.x+size.x) ) {
-            dist=MIN(point.x-(pos.x+size.x),dist)
+            dist= min(point.x-(pos.x+size.x),dist)
         }
         if (point.y >= (pos.y+size.y) ) {
-            dist=MIN(point.y-(pos.y+size.y),dist)
+            dist= min(point.y-(pos.y+size.y),dist)
         }
         return if (dist==1e20f)
             0f
@@ -143,26 +143,26 @@ class Rect2: CoreType {
         if (!intersects(rect))
             return Rect2()
 
-        rect.pos.x = MAX( rect.pos.x , pos.x )
-        rect.pos.y = MAX( rect.pos.y , pos.y )
+        rect.pos.x = max( rect.pos.x , pos.x )
+        rect.pos.y = max( rect.pos.y , pos.y )
 
         val rectEnd = rect.pos+rect.size
         val end = pos+size
 
-        rect.size.x = MIN(rectEnd.x,end.x) - rect.pos.x
-        rect.size.y = MIN(rectEnd.y,end.y) - rect.pos.y
+        rect.size.x = min(rectEnd.x,end.x) - rect.pos.x
+        rect.size.y = min(rectEnd.y,end.y) - rect.pos.y
 
         return rect
     }
 
     fun merge(rect: Rect2): Rect2 {
 
-        rect.pos.x=MIN( rect.pos.x , pos.x )
-        rect.pos.y=MIN( rect.pos.y , pos.y )
+        rect.pos.x= min( rect.pos.x , pos.x )
+        rect.pos.y= min( rect.pos.y , pos.y )
 
 
-        rect.size.x = MAX( rect.pos.x+rect.size.x , pos.x+size.x )
-        rect.size.y = MAX( rect.pos.y+rect.size.y , pos.y+size.y )
+        rect.size.x = max( rect.pos.x+rect.size.x , pos.x+size.x )
+        rect.size.y = max( rect.pos.y+rect.size.y , pos.y+size.y )
 
         rect.size = rect.size - rect.pos //make relative again
 
@@ -279,31 +279,31 @@ class Rect2: CoreType {
         var mina = maxa
 
         var dp = xform.elements[0].dot(xfPoints2[1])
-        maxa=MAX(dp,maxa)
-        mina=MIN(dp,mina)
+        maxa= max(dp,maxa)
+        mina= min(dp,mina)
 
         dp = xform.elements[0].dot(xfPoints2[2])
-        maxa=MAX(dp,maxa)
-        mina=MIN(dp,mina)
+        maxa= max(dp,maxa)
+        mina= min(dp,mina)
 
         dp = xform.elements[0].dot(xfPoints2[3])
-        maxa=MAX(dp,maxa)
-        mina=MIN(dp,mina)
+        maxa= max(dp,maxa)
+        mina= min(dp,mina)
 
         var maxb=xform.elements[0].dot(xfPoints[0])
         var minb=maxb
 
         dp = xform.elements[0].dot(xfPoints[1])
-        maxb=MAX(dp,maxb)
-        minb=MIN(dp,minb)
+        maxb= max(dp,maxb)
+        minb= min(dp,minb)
 
         dp = xform.elements[0].dot(xfPoints[2])
-        maxb=MAX(dp,maxb)
-        minb=MIN(dp,minb)
+        maxb= max(dp,maxb)
+        minb= min(dp,minb)
 
         dp = xform.elements[0].dot(xfPoints[3])
-        maxb=MAX(dp,maxb)
-        minb=MIN(dp,minb)
+        maxb= max(dp,maxb)
+        minb= min(dp,minb)
 
 
         if ( mina > maxb || minb > maxa )
@@ -313,31 +313,31 @@ class Rect2: CoreType {
         mina=maxa
 
         dp = xform.elements[1].dot(xfPoints2[1])
-        maxa=MAX(dp,maxa)
-        mina=MIN(dp,mina)
+        maxa= max(dp,maxa)
+        mina= min(dp,mina)
 
         dp = xform.elements[1].dot(xfPoints2[2])
-        maxa=MAX(dp,maxa)
-        mina=MIN(dp,mina)
+        maxa= max(dp,maxa)
+        mina= min(dp,mina)
 
         dp = xform.elements[1].dot(xfPoints2[3])
-        maxa=MAX(dp,maxa)
-        mina=MIN(dp,mina)
+        maxa= max(dp,maxa)
+        mina= min(dp,mina)
 
         maxb=xform.elements[1].dot(xfPoints[0])
         minb=maxb
 
         dp = xform.elements[1].dot(xfPoints[1])
-        maxb=MAX(dp,maxb)
-        minb=MIN(dp,minb)
+        maxb= max(dp,maxb)
+        minb= min(dp,minb)
 
         dp = xform.elements[1].dot(xfPoints[2])
-        maxb=MAX(dp,maxb)
-        minb=MIN(dp,minb)
+        maxb= max(dp,maxb)
+        minb= min(dp,minb)
 
         dp = xform.elements[1].dot(xfPoints[3])
-        maxb=MAX(dp,maxb)
-        minb=MIN(dp,minb)
+        maxb= max(dp,maxb)
+        minb= min(dp,minb)
 
         if ( mina > maxb || minb > maxa )
             return false
