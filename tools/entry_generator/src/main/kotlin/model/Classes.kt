@@ -5,10 +5,21 @@ import com.beust.klaxon.Json
 
 class Classes(
         @Json(name = "registerClasses")
-        val classes: List<Class>
+        val classes: List<Class>,
+        @Json(name = "package")
+        var packageName: String = ""
 ) {
     lateinit var bridges: MutableList<String>
     lateinit var bindings: MutableList<String>
+
+    init {
+        if (packageName != "") {
+            packageName = packageName.replace('.', '/')
+
+            for (cl in classes)
+                cl.packageName = packageName
+        }
+    }
 
 
     fun generate(): String {
@@ -83,8 +94,10 @@ fun List<Classes>.unite(): Classes {
     val classes = mutableListOf<Class>()
     for (cls in this)
         for (cl in cls.classes) {
-            if (classes.find { clazz -> clazz.name == cl.name } != null)
-                error("Classes cannot duplicate! Multiple ${cl.name}")
+            if (classes.find { clazz ->
+                        clazz.classPath == cl.classPath || "${clazz.packageName}/${clazz.name}" == "${cl.packageName}/${cl.name}"
+                    } != null)
+                error("Classes cannot duplicate! Multiple ${cl.packageName}/${cl.name} (${cl.classPath})")
             classes.add(cl)
         }
     return Classes(classes)

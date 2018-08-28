@@ -1,7 +1,10 @@
 {
+    "package": "Games/Shmup/Scripts",
+
     "registerClasses": [
         {
-            "name": "stages.shmup.Player",
+            "name": "Player",
+            "class": "stages.shmup.Player",
             "extends": "KinematicBody2D",
             "methods": [
                 {
@@ -14,7 +17,8 @@
             ]
         },
         {
-            "name": "stages.shmup.Bullet",
+            "name": "Bullet",
+            "class": "stages.shmup.Bullet",
             "extends": "Area2D",
             "methods": [
                 {
@@ -24,7 +28,8 @@
             ]
         },
         {
-            "name": "stages.shmup.Enemy",
+            "name": "Enemy",
+            "class": "stages.shmup.Enemy",
             "extends": "Area2D",
             "methods": [
                 {
@@ -44,7 +49,8 @@
             ]
         },
         {
-            "name": "stages.shmup.EnemyPath",
+            "name": "EnemyPath",
+            "class": "stages.shmup.EnemyPath",
             "extends": "Path2D",
             "methods": [
                 {
@@ -53,7 +59,8 @@
             ]
         },
         {
-            "name": "stages.shmup.Stage",
+            "name": "Stage",
+            "class": "stages.shmup.Stage",
             "extends": "Node",
             "methods": [
                 {
@@ -66,7 +73,8 @@
             ]
         },
         {
-            "name": "stages.shmup.Camera",
+            "name": "Camera",
+            "class": "stages.shmup.Camera",
             "extends": "Camera2D",
             "methods": [
                 {

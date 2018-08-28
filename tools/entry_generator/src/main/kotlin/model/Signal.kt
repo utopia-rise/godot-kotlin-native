@@ -37,6 +37,19 @@ class Signal(
                 }
                 append(')')
             }
+            if (defaultValues.isNotEmpty()) {
+                appendln(',')
+                append("             arrayOf(")
+
+                for ((i,arg) in defaultValues.withIndex()) {
+                    if (i != 0) {
+                        appendln(',')
+                        append("                     ")
+                    }
+                    append("Variant($arg)")
+                }
+                append(')')
+            }
 
             append(')')
         }

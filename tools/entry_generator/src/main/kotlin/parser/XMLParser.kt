@@ -24,13 +24,14 @@ class XMLParser : Parser {
     private fun parseClass(elem: Element): Class {
         val name = elem.criticalValue("name")
         val parent = elem.value("extends", "Object")
+        val classPath = elem.value("class", name)
         val tool = elem.value("tool").toBoolean() // no NPE here (should be)
 
         val methods = elem.parseNodes("method") { parseMethod(it) }
         val properties = elem.parseNodes("property") { parseProperty(it) }
         val signals = elem.parseNodes("signal") { parseSignal(it) }
 
-        return Class(name, parent, tool, methods, properties, signals)
+        return Class(name, parent, classPath, tool, methods, properties, signals)
     }
 
 

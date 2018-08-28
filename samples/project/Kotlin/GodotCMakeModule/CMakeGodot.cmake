@@ -47,6 +47,7 @@ function(godot_library)
 
     add_custom_command(
             OUTPUT ${GODOT_CMAKE_MODULE_PATH}/Entry.kt
+            DEPENDS ${GODOT_CONFIGS_FULL_PATHES}
             PRE_BUILD
             COMMAND java -jar "${GODOT_CMAKE_MODULE_PATH}/entry_generator.jar" ${GODOT_CONFIGS_FULL_PATHES}
             -o "${GODOT_CMAKE_MODULE_PATH}/Entry.kt"

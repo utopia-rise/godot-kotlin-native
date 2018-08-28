@@ -8,6 +8,8 @@ class Class(
         val name: String,
         @Json(name = "extends")
         val parent: String = "Object",
+        @Json(name = "class")
+        val classPath: String = name,
         @Json(name = "tool")
         val isToolClass: Boolean = false,
         @Json(name = "methods")
@@ -17,12 +19,15 @@ class Class(
         @Json(name = "signals")
         val signals: List<Signal> = listOf()
 ) {
+    var packageName = ""
+
+
     fun generate(bindings: MutableList<String>, bridges: MutableList<String>): String {
         val bindID = bindings.size
         val bridgeID = bridges.size
 
         bindings.add("""
-private fun udcBinding${bindID}Constructor(): $name = $name()
+private fun udcBinding${bindID}Constructor(): $classPath = $classPath()
 private val udcBinding$bindID = ::udcBinding${bindID}Constructor
     """.trimIndent())
 
@@ -33,11 +38,11 @@ private fun udcBridge$bridgeID(): CPointer<CFunction<(COpaquePointer?) -> COpaqu
     """.trimIndent())
         bridges.add("""
 private fun udcBridge${bridgeID + 1}(): CPointer<CFunction<(COpaquePointer?) -> Unit>> {
-    return staticCFunction { mem -> deconstructFromRawMem<$name>(mem) }
+    return staticCFunction { mem -> deconstructFromRawMem<$classPath>(mem) }
 }
     """.trimIndent())
 
-        return "    registerClass(\"$name\", \"$parent\", udcBridge$bridgeID(), udcBridge${bridgeID + 1}())"
+        return "    registerClass(\"$classPath\", \"$parent\", udcBridge$bridgeID(), udcBridge${bridgeID + 1}())"
     }
 
 
@@ -53,7 +58,7 @@ private fun udcBridge${bridgeID + 1}(): CPointer<CFunction<(COpaquePointer?) -> 
                 val bridgeID = bridges.size
                 val bridge = StringBuilder().append("""
 private fun udcBridge$bridgeID(): CPointer<CFunction<(COpaquePointer?, COpaquePointer?, Int, COpaquePointer?) -> Unit>> {
-    return staticCFunction { r, o, n, a -> invoke<$name>("${m.name}", r, o, n, a) { obj, numArgs, args -> run {
+    return staticCFunction { r, o, n, a -> invoke<$classPath>("${m.name}", r, o, n, a) { obj, numArgs, args -> run {
         when (numArgs) {
 
             """.trimIndent())
@@ -62,7 +67,7 @@ private fun udcBridge$bridgeID(): CPointer<CFunction<(COpaquePointer?, COpaquePo
                 val paramsCount = mutableListOf<Int>()
                 for (method in methods.filter { method -> m.name == method.name }) {
                     if (paramsCount.find { i -> i == method.arguments.size } != null)
-                        error("Method ${m.name} in $name has multiple declarations with ${method.arguments.size} parameters.")
+                        error("Method ${m.name} in $classPath has multiple declarations with ${method.arguments.size} parameters.")
                     paramsCount.add(method.arguments.size)
 
                     bridge.append(method.generate())
@@ -71,14 +76,14 @@ private fun udcBridge$bridgeID(): CPointer<CFunction<(COpaquePointer?, COpaquePo
 
 
                 bridge.append("""
-            else -> noMethodToInvoke("${m.name}", "$name", numArgs)
+            else -> noMethodToInvoke("${m.name}", "$classPath", numArgs)
         }
         return@run null }}
     }
 }
             """.trimIndent())
                 bridges.add(bridge.toString())
-                appendln("    registerMethod(\"$name\", \"${m.name}\", udcBridge$bridgeID())")
+                appendln("    registerMethod(\"$classPath\", \"${m.name}\", udcBridge$bridgeID())")
 
                 generated.add(m.name)
             }
@@ -91,7 +96,7 @@ private fun udcBridge$bridgeID(): CPointer<CFunction<(COpaquePointer?, COpaquePo
     fun generateProperties(bridges: MutableList<String>): String {
         return buildString {
             for (p in properties)
-                appendln(p.generate(name, bridges))
+                appendln(p.generate(classPath, bridges))
         }
     }
 
@@ -99,7 +104,7 @@ private fun udcBridge$bridgeID(): CPointer<CFunction<(COpaquePointer?, COpaquePo
     fun generateSignals(): String {
         return buildString {
             for (s in signals)
-                appendln(s.generate(name))
+                appendln(s.generate(classPath))
         }
     }
 }
