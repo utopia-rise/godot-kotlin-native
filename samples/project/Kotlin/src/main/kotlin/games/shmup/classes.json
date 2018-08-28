@@ -1,0 +1,91 @@
+{
+    "package": "Games/Shmup/Scripts",
+
+    "registerClasses": [
+        {
+            "name": "Player",
+            "class": "stages.shmup.Player",
+            "extends": "KinematicBody2D",
+            "methods": [
+                {
+                    "name": "_ready"
+                },
+                {
+                    "name": "_process",
+                    "arguments": ["Float"]
+                }
+            ]
+        },
+        {
+            "name": "Bullet",
+            "class": "stages.shmup.Bullet",
+            "extends": "Area2D",
+            "methods": [
+                {
+                    "name": "_process",
+                    "arguments": ["Float"]
+                }
+            ]
+        },
+        {
+            "name": "Enemy",
+            "class": "stages.shmup.Enemy",
+            "extends": "Area2D",
+            "methods": [
+                {
+                    "name": "_ready"
+                },
+                {
+                    "name": "_process",
+                    "arguments": ["Float"]
+                }
+            ],
+            "properties": [
+                {
+                    "name": "health",
+                    "type": "Int",
+                    "defaultValue": "2"
+                }
+            ]
+        },
+        {
+            "name": "EnemyPath",
+            "class": "stages.shmup.EnemyPath",
+            "extends": "Path2D",
+            "methods": [
+                {
+                    "name": "_ready"
+                }
+            ]
+        },
+        {
+            "name": "Stage",
+            "class": "stages.shmup.Stage",
+            "extends": "Node",
+            "methods": [
+                {
+                    "name": "_ready"
+                },
+                {
+                    "name": "_process",
+                    "arguments": ["Float"]
+                }
+            ]
+        },
+        {
+            "name": "Camera",
+            "class": "stages.shmup.Camera",
+            "extends": "Camera2D",
+            "methods": [
+                {
+                    "name": "_process",
+                    "arguments": ["Float"]
+                },
+                {
+                    "name": "shake",
+                    "arguments": ["Double","Double","Double"]
+                }
+            ]
+        }
+    ]
+}
