@@ -6,24 +6,17 @@ import kotlin.math.PI
 import kotlin.random.Random
 
 class Main: Node() {
-//    lateinit var player: Node
     lateinit var mobTimer: Timer
     lateinit var scoreTimer: Timer
     lateinit var startTimer: Timer
     lateinit var startPosition: Position2D
     lateinit var mobPath: Path2D
     lateinit var mobSpawnLocation: PathFollow2D
-//    lateinit var hud: Node
-    lateinit var MobScene: PackedScene
+    lateinit var mobScene: PackedScene
     var score = 0
 
     override fun _ready() {
-//        val Hud = PackedScene from ResourceLoader.load("res://HUD.tscn")
-//        hud = Hud.instance()
-        MobScene = PackedScene from ResourceLoader.load("res://Games/Dodge/Scenes/Mob.tscn")
-
-//        val Player = PackedScene from ResourceLoader.load("res://Player.tscn")
-//        player = Player.instance()
+        mobScene = PackedScene from ResourceLoader.load("res://Games/dodge/Scenes/Mob.tscn")
 
         mobTimer = Timer from getNode(NodePath("MobTimer"))
         scoreTimer = Timer from getNode(NodePath("ScoreTimer"))
@@ -32,10 +25,6 @@ class Main: Node() {
         mobPath = Path2D from getNode(NodePath("MobPath"))
         mobSpawnLocation = PathFollow2D from getNode(NodePath("MobPath/MobSpawnLocation"))
 
-//        addChild(player)
-//        addChild(hud)
-//        player.setName("Player")
-//        hud.setName("HUD")
 
         startTimer.connect("timeout", this, "_onStartTimerTimeout")
         scoreTimer.connect("timeout", this, "_onScoreTimerTimeout")
@@ -51,7 +40,9 @@ class Main: Node() {
     }
 
     fun newGame() {
+        getTree().callGroup("enemies", "free")
         score = 0
+
         val arr = GDArray()
         arr.pushBack(Variant(startPosition.position))
         getNode(NodePath("Player")).callv("start", arr)
@@ -80,17 +71,16 @@ class Main: Node() {
 
     fun _onMobTimerTimeout() {
         mobSpawnLocation.setOffset(Random.nextInt().toFloat())
-        val mob = RigidBody2D from MobScene.instance()
+        val mob = RigidBody2D from mobScene.instance()
         addChild(mob)
-        var direction = (mobSpawnLocation.rotation.toDouble() + PI/2).toFloat()
+        var direction = mobSpawnLocation.rotation + (PI/2).toFloat()
         mob.position = mobSpawnLocation.position
 
         fun ClosedRange<Int>.random() =
                 Random.nextInt(endInclusive - start) + start
 
-        direction += ((-PI/4 * 100000).toInt()..(PI/4  * 100000).toInt()).random().toFloat() / 100000f
+        direction += (((-PI)/4 * 100000).toInt()..(PI/4 * 100000).toInt()).random().toFloat() / 100000f
         mob.rotation = direction
         mob.setLinearVelocity(Vector2((mob.get("minSpeed").toInt()..mob.get("maxSpeed").toInt()).random(), 0).rotated(direction))
-//        GD.print(mob.getPropertyList().toKotlinArray().toString())
     }
 }

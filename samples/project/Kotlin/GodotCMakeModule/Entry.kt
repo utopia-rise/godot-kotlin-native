@@ -75,6 +75,25 @@ fun NativeScriptInit(handle: COpaquePointer) {
     registerMethod("godot.samples.games.dodge.Mob", "_on_VisibilityNotifier2D_screen_exited", udcBridge55())
     registerProperty("godot.samples.games.dodge.Mob", "minSpeed", true, udcBridge56(), udcBridge57(), udcBridge58())
     registerProperty("godot.samples.games.dodge.Mob", "maxSpeed", true, udcBridge59(), udcBridge60(), udcBridge61())
+    registerClass("godot.samples.games.catchBall.Player", "KinematicBody", udcBridge62(), udcBridge63())
+    registerMethod("godot.samples.games.catchBall.Player", "_process", udcBridge64())
+    registerProperty("godot.samples.games.catchBall.Player", "speed", true, udcBridge65(), udcBridge66(), udcBridge67())
+    registerClass("godot.samples.games.catchBall.Ball", "RigidBody", udcBridge68(), udcBridge69())
+    registerMethod("godot.samples.games.catchBall.Ball", "_ready", udcBridge70())
+    registerClass("godot.samples.games.catchBall.BounceOff", "Area", udcBridge71(), udcBridge72())
+    registerMethod("godot.samples.games.catchBall.BounceOff", "_process", udcBridge73())
+    registerClass("godot.samples.games.catchBall.End", "Area", udcBridge74(), udcBridge75())
+    registerMethod("godot.samples.games.catchBall.End", "_process", udcBridge76())
+    registerClass("godot.samples.games.main.MainScreen", "Node", udcBridge77(), udcBridge78())
+    registerMethod("godot.samples.games.main.MainScreen", "_ready", udcBridge79())
+    registerMethod("godot.samples.games.main.MainScreen", "_onChooseGameButtonPressed", udcBridge80())
+    registerMethod("godot.samples.games.main.MainScreen", "_onQuitButtonPressed", udcBridge81())
+    registerClass("godot.samples.games.main.ChooseGameScreen", "Node", udcBridge82(), udcBridge83())
+    registerMethod("godot.samples.games.main.ChooseGameScreen", "_ready", udcBridge84())
+    registerMethod("godot.samples.games.main.ChooseGameScreen", "_onPlayDodgeButtonPressed", udcBridge85())
+    registerMethod("godot.samples.games.main.ChooseGameScreen", "_onPlayShmupButtonPressed", udcBridge86())
+    registerMethod("godot.samples.games.main.ChooseGameScreen", "_onBackButtonPressed", udcBridge87())
+    registerMethod("godot.samples.games.main.ChooseGameScreen", "_onPlayCatchBallButtonPressed", udcBridge88())
 }
 
 
@@ -100,6 +119,18 @@ private fun udcBinding8Constructor(): godot.samples.games.dodge.HUD = godot.samp
 private val udcBinding8 = ::udcBinding8Constructor
 private fun udcBinding9Constructor(): godot.samples.games.dodge.Mob = godot.samples.games.dodge.Mob()
 private val udcBinding9 = ::udcBinding9Constructor
+private fun udcBinding10Constructor(): godot.samples.games.catchBall.Player = godot.samples.games.catchBall.Player()
+private val udcBinding10 = ::udcBinding10Constructor
+private fun udcBinding11Constructor(): godot.samples.games.catchBall.Ball = godot.samples.games.catchBall.Ball()
+private val udcBinding11 = ::udcBinding11Constructor
+private fun udcBinding12Constructor(): godot.samples.games.catchBall.BounceOff = godot.samples.games.catchBall.BounceOff()
+private val udcBinding12 = ::udcBinding12Constructor
+private fun udcBinding13Constructor(): godot.samples.games.catchBall.End = godot.samples.games.catchBall.End()
+private val udcBinding13 = ::udcBinding13Constructor
+private fun udcBinding14Constructor(): godot.samples.games.main.MainScreen = godot.samples.games.main.MainScreen()
+private val udcBinding14 = ::udcBinding14Constructor
+private fun udcBinding15Constructor(): godot.samples.games.main.ChooseGameScreen = godot.samples.games.main.ChooseGameScreen()
+private val udcBinding15 = ::udcBinding15Constructor
 
 
 
@@ -569,4 +600,191 @@ private fun udcBridge60(): CPointer<CFunction<(COpaquePointer?,COpaquePointer?) 
 }
 private fun udcBridge61(): Variant {
     return Variant(250)
+}
+private fun udcBridge62(): CPointer<CFunction<(COpaquePointer?) -> COpaquePointer?>> {
+    return staticCFunction { mem -> constructFromRawMem(mem, udcBinding10) }
+}
+private fun udcBridge63(): CPointer<CFunction<(COpaquePointer?) -> Unit>> {
+    return staticCFunction { mem -> deconstructFromRawMem<godot.samples.games.catchBall.Player>(mem) }
+}
+private fun udcBridge64(): CPointer<CFunction<(COpaquePointer?, COpaquePointer?, Int, COpaquePointer?) -> Unit>> {
+    return staticCFunction { r, o, n, a -> invoke<godot.samples.games.catchBall.Player>("_process", r, o, n, a) { obj, numArgs, args -> run {
+        when (numArgs) {
+            1 -> {
+                args!!
+                val arg0 = Variant(args[0]!!).toFloat()
+                obj._process(arg0)
+            }
+            else -> noMethodToInvoke("_process", "godot.samples.games.catchBall.Player", numArgs)
+        }
+        return@run null }}
+    }
+}
+private fun udcBridge65(): CPointer<CFunction<(COpaquePointer?,COpaquePointer?) -> Unit>> {
+    return staticCFunction { o, r -> get<godot.samples.games.catchBall.Player>("speed", "godot.samples.games.catchBall.Player", o, r) {
+        obj -> Variant(obj.speed)
+    }}
+}
+private fun udcBridge66(): CPointer<CFunction<(COpaquePointer?,COpaquePointer?) -> Unit>> {
+    return staticCFunction { o, v -> set<godot.samples.games.catchBall.Player>("speed", "godot.samples.games.catchBall.Player", o, v) {
+        obj, value -> obj.speed = value.toInt()
+    }}
+}
+private fun udcBridge67(): Variant {
+    return Variant(6)
+}
+private fun udcBridge68(): CPointer<CFunction<(COpaquePointer?) -> COpaquePointer?>> {
+    return staticCFunction { mem -> constructFromRawMem(mem, udcBinding11) }
+}
+private fun udcBridge69(): CPointer<CFunction<(COpaquePointer?) -> Unit>> {
+    return staticCFunction { mem -> deconstructFromRawMem<godot.samples.games.catchBall.Ball>(mem) }
+}
+private fun udcBridge70(): CPointer<CFunction<(COpaquePointer?, COpaquePointer?, Int, COpaquePointer?) -> Unit>> {
+    return staticCFunction { r, o, n, a -> invoke<godot.samples.games.catchBall.Ball>("_ready", r, o, n, a) { obj, numArgs, args -> run {
+        when (numArgs) {
+            0 -> {
+                obj._ready()
+            }
+            else -> noMethodToInvoke("_ready", "godot.samples.games.catchBall.Ball", numArgs)
+        }
+        return@run null }}
+    }
+}
+private fun udcBridge71(): CPointer<CFunction<(COpaquePointer?) -> COpaquePointer?>> {
+    return staticCFunction { mem -> constructFromRawMem(mem, udcBinding12) }
+}
+private fun udcBridge72(): CPointer<CFunction<(COpaquePointer?) -> Unit>> {
+    return staticCFunction { mem -> deconstructFromRawMem<godot.samples.games.catchBall.BounceOff>(mem) }
+}
+private fun udcBridge73(): CPointer<CFunction<(COpaquePointer?, COpaquePointer?, Int, COpaquePointer?) -> Unit>> {
+    return staticCFunction { r, o, n, a -> invoke<godot.samples.games.catchBall.BounceOff>("_process", r, o, n, a) { obj, numArgs, args -> run {
+        when (numArgs) {
+            1 -> {
+                args!!
+                val arg0 = Variant(args[0]!!).toFloat()
+                obj._process(arg0)
+            }
+            else -> noMethodToInvoke("_process", "godot.samples.games.catchBall.BounceOff", numArgs)
+        }
+        return@run null }}
+    }
+}
+private fun udcBridge74(): CPointer<CFunction<(COpaquePointer?) -> COpaquePointer?>> {
+    return staticCFunction { mem -> constructFromRawMem(mem, udcBinding13) }
+}
+private fun udcBridge75(): CPointer<CFunction<(COpaquePointer?) -> Unit>> {
+    return staticCFunction { mem -> deconstructFromRawMem<godot.samples.games.catchBall.End>(mem) }
+}
+private fun udcBridge76(): CPointer<CFunction<(COpaquePointer?, COpaquePointer?, Int, COpaquePointer?) -> Unit>> {
+    return staticCFunction { r, o, n, a -> invoke<godot.samples.games.catchBall.End>("_process", r, o, n, a) { obj, numArgs, args -> run {
+        when (numArgs) {
+            1 -> {
+                args!!
+                val arg0 = Variant(args[0]!!).toFloat()
+                obj._process(arg0)
+            }
+            else -> noMethodToInvoke("_process", "godot.samples.games.catchBall.End", numArgs)
+        }
+        return@run null }}
+    }
+}
+private fun udcBridge77(): CPointer<CFunction<(COpaquePointer?) -> COpaquePointer?>> {
+    return staticCFunction { mem -> constructFromRawMem(mem, udcBinding14) }
+}
+private fun udcBridge78(): CPointer<CFunction<(COpaquePointer?) -> Unit>> {
+    return staticCFunction { mem -> deconstructFromRawMem<godot.samples.games.main.MainScreen>(mem) }
+}
+private fun udcBridge79(): CPointer<CFunction<(COpaquePointer?, COpaquePointer?, Int, COpaquePointer?) -> Unit>> {
+    return staticCFunction { r, o, n, a -> invoke<godot.samples.games.main.MainScreen>("_ready", r, o, n, a) { obj, numArgs, args -> run {
+        when (numArgs) {
+            0 -> {
+                obj._ready()
+            }
+            else -> noMethodToInvoke("_ready", "godot.samples.games.main.MainScreen", numArgs)
+        }
+        return@run null }}
+    }
+}
+private fun udcBridge80(): CPointer<CFunction<(COpaquePointer?, COpaquePointer?, Int, COpaquePointer?) -> Unit>> {
+    return staticCFunction { r, o, n, a -> invoke<godot.samples.games.main.MainScreen>("_onChooseGameButtonPressed", r, o, n, a) { obj, numArgs, args -> run {
+        when (numArgs) {
+            0 -> {
+                obj._onChooseGameButtonPressed()
+            }
+            else -> noMethodToInvoke("_onChooseGameButtonPressed", "godot.samples.games.main.MainScreen", numArgs)
+        }
+        return@run null }}
+    }
+}
+private fun udcBridge81(): CPointer<CFunction<(COpaquePointer?, COpaquePointer?, Int, COpaquePointer?) -> Unit>> {
+    return staticCFunction { r, o, n, a -> invoke<godot.samples.games.main.MainScreen>("_onQuitButtonPressed", r, o, n, a) { obj, numArgs, args -> run {
+        when (numArgs) {
+            0 -> {
+                obj._onQuitButtonPressed()
+            }
+            else -> noMethodToInvoke("_onQuitButtonPressed", "godot.samples.games.main.MainScreen", numArgs)
+        }
+        return@run null }}
+    }
+}
+private fun udcBridge82(): CPointer<CFunction<(COpaquePointer?) -> COpaquePointer?>> {
+    return staticCFunction { mem -> constructFromRawMem(mem, udcBinding15) }
+}
+private fun udcBridge83(): CPointer<CFunction<(COpaquePointer?) -> Unit>> {
+    return staticCFunction { mem -> deconstructFromRawMem<godot.samples.games.main.ChooseGameScreen>(mem) }
+}
+private fun udcBridge84(): CPointer<CFunction<(COpaquePointer?, COpaquePointer?, Int, COpaquePointer?) -> Unit>> {
+    return staticCFunction { r, o, n, a -> invoke<godot.samples.games.main.ChooseGameScreen>("_ready", r, o, n, a) { obj, numArgs, args -> run {
+        when (numArgs) {
+            0 -> {
+                obj._ready()
+            }
+            else -> noMethodToInvoke("_ready", "godot.samples.games.main.ChooseGameScreen", numArgs)
+        }
+        return@run null }}
+    }
+}
+private fun udcBridge85(): CPointer<CFunction<(COpaquePointer?, COpaquePointer?, Int, COpaquePointer?) -> Unit>> {
+    return staticCFunction { r, o, n, a -> invoke<godot.samples.games.main.ChooseGameScreen>("_onPlayDodgeButtonPressed", r, o, n, a) { obj, numArgs, args -> run {
+        when (numArgs) {
+            0 -> {
+                obj._onPlayDodgeButtonPressed()
+            }
+            else -> noMethodToInvoke("_onPlayDodgeButtonPressed", "godot.samples.games.main.ChooseGameScreen", numArgs)
+        }
+        return@run null }}
+    }
+}
+private fun udcBridge86(): CPointer<CFunction<(COpaquePointer?, COpaquePointer?, Int, COpaquePointer?) -> Unit>> {
+    return staticCFunction { r, o, n, a -> invoke<godot.samples.games.main.ChooseGameScreen>("_onPlayShmupButtonPressed", r, o, n, a) { obj, numArgs, args -> run {
+        when (numArgs) {
+            0 -> {
+                obj._onPlayShmupButtonPressed()
+            }
+            else -> noMethodToInvoke("_onPlayShmupButtonPressed", "godot.samples.games.main.ChooseGameScreen", numArgs)
+        }
+        return@run null }}
+    }
+}
+private fun udcBridge87(): CPointer<CFunction<(COpaquePointer?, COpaquePointer?, Int, COpaquePointer?) -> Unit>> {
+    return staticCFunction { r, o, n, a -> invoke<godot.samples.games.main.ChooseGameScreen>("_onBackButtonPressed", r, o, n, a) { obj, numArgs, args -> run {
+        when (numArgs) {
+            0 -> {
+                obj._onBackButtonPressed()
+            }
+            else -> noMethodToInvoke("_onBackButtonPressed", "godot.samples.games.main.ChooseGameScreen", numArgs)
+        }
+        return@run null }}
+    }
+}
+private fun udcBridge88(): CPointer<CFunction<(COpaquePointer?, COpaquePointer?, Int, COpaquePointer?) -> Unit>> {
+    return staticCFunction { r, o, n, a -> invoke<godot.samples.games.main.ChooseGameScreen>("_onPlayCatchBallButtonPressed", r, o, n, a) { obj, numArgs, args -> run {
+        when (numArgs) {
+            0 -> {
+                obj._onPlayCatchBallButtonPressed()
+            }
+            else -> noMethodToInvoke("_onPlayCatchBallButtonPressed", "godot.samples.games.main.ChooseGameScreen", numArgs)
+        }
+        return@run null }}
+    }
 }

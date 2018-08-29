@@ -8,19 +8,21 @@
 
 bake_interval = 5.0
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, -1.16479, 1.00003, 0, 0, 0, 0, 481.368, -0.026062, 0, 0, 0, 0, 479.791, 719.401, 0, 0, 0, 0, -1.26733, 719.401, 0, 0, 0, 0, -1.16479, 1.00003 )
+"points": PoolVector2Array( 0, 0, 0, 0, 1.00525, 0.552567, 0, 0, 0, 0, 1920.32, -2.52325, 0, 0, 0, 0, 1917.24, 1080.17, 0, 0, 0, 0, -0.0200195, 1079.14, 0, 0, 0, 0, 1.00525, 0.552567 )
 }
 
-[node name="Main" type="Node" index="0"]
+[node name="Main" type="Node"]
 
 script = ExtResource( 1 )
 
 [node name="Player" parent="." index="0" instance=ExtResource( 2 )]
 
+position = Vector2( 293.866, 161.355 )
+
 [node name="MobTimer" type="Timer" parent="." index="1"]
 
 process_mode = 1
-wait_time = 0.5
+wait_time = 0.2
 one_shot = false
 autostart = false
 
@@ -38,22 +40,17 @@ wait_time = 2.0
 one_shot = true
 autostart = false
 
-[node name="StartPosition" type="Position2D" parent="." index="4"]
-
-position = Vector2( 253.509, 407.312 )
-_sections_unfolded = [ "Transform" ]
+[node name="HUD" parent="." index="4" instance=ExtResource( 3 )]
 
 [node name="MobPath" type="Path2D" parent="." index="5"]
 
 self_modulate = Color( 0.5, 0.6, 1, 0.7 )
-position = Vector2( -48.7802, -46.6483 )
-scale = Vector2( 1.21622, 1.13841 )
 curve = SubResource( 1 )
 
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath" index="0"]
 
-position = Vector2( -1.16479, 1.00003 )
-rotation = -0.00212645
+position = Vector2( 1.00525, 0.552567 )
+rotation = -0.00160257
 offset = 0.0
 h_offset = 0.0
 v_offset = 0.0
@@ -61,8 +58,10 @@ rotate = true
 cubic_interp = true
 loop = true
 lookahead = 4.0
-_sections_unfolded = [ "Transform" ]
 
-[node name="HUD" parent="." index="6" instance=ExtResource( 3 )]
+[node name="StartPosition" type="Position2D" parent="." index="6"]
+
+position = Vector2( 1020, 480 )
+_sections_unfolded = [ "Transform" ]
 
 

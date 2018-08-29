@@ -14,6 +14,7 @@ class Mob: RigidBody2D() {
     lateinit var visibilityNotifier2D: VisibilityNotifier2D
 
     override fun _ready() {
+        addToGroup("enemies")
         animatedSprite = AnimatedSprite from getNode(NodePath("AnimatedSprite"))
         visibilityNotifier2D = VisibilityNotifier2D from getNode(NodePath("VisibilityNotifier"))
 

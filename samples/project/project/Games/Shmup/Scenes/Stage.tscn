@@ -2,8 +2,8 @@
 
 [ext_resource path="res://Games/Shmup/Scripts/Stage.gdns" type="Script" id=1]
 [ext_resource path="res://Games/Shmup/Scripts/Camera.gdns" type="Script" id=2]
-[ext_resource path="res://Games/Shmup/Art/Background.png" type="Texture" id=3]
-[ext_resource path="res://Games/Shmup/Art/Bars.png" type="Texture" id=4]
+[ext_resource path="res://Games/Shmup/Sprites/Background.png" type="Texture" id=3]
+[ext_resource path="res://Games/Shmup/Sprites/Bars.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 

@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Games/Dodge/Scripts/Mob.gdns" type="Script" id=1]
-[ext_resource path="res://Games/Dodge/Sprites/enemyWalking_1.png" type="Texture" id=2]
-[ext_resource path="res://Games/Dodge/Sprites/enemyWalking_2.png" type="Texture" id=3]
-[ext_resource path="res://Games/Dodge/Sprites/enemySwimming_1.png" type="Texture" id=4]
-[ext_resource path="res://Games/Dodge/Sprites/enemySwimming_2.png" type="Texture" id=5]
+[ext_resource path="res://Games/Dodge/Sprites/enemySwimming_1.png" type="Texture" id=2]
+[ext_resource path="res://Games/Dodge/Sprites/enemySwimming_2.png" type="Texture" id=3]
+[ext_resource path="res://Games/Dodge/Sprites/enemyWalking_1.png" type="Texture" id=4]
+[ext_resource path="res://Games/Dodge/Sprites/enemyWalking_2.png" type="Texture" id=5]
 [ext_resource path="res://Games/Dodge/Sprites/enemyFlyingAlt_1.png" type="Texture" id=6]
 [ext_resource path="res://Games/Dodge/Sprites/enemyFlyingAlt_2.png" type="Texture" id=7]
 
@@ -13,12 +13,12 @@
 animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
 "loop": true,
-"name": "walk",
+"name": "swim",
 "speed": 4.0
 }, {
 "frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
 "loop": true,
-"name": "swim",
+"name": "walk",
 "speed": 4.0
 }, {
 "frames": [ ExtResource( 6 ), ExtResource( 7 ) ],
@@ -28,14 +28,14 @@ animations = [ {
 } ]
 _sections_unfolded = [ "Resource" ]
 
-[node name="RigidBody2D" type="RigidBody2D" index="0"]
+[node name="RigidBody2D" type="RigidBody2D"]
 
 input_pickable = false
 collision_layer = 1
 collision_mask = 0
 mode = 0
-mass = 1.0
-friction = 1.0
+mass = 1.02041e-005
+friction = 0.0
 bounce = 0.0
 gravity_scale = 0.0
 custom_integrator = false
@@ -45,11 +45,11 @@ contact_monitor = false
 sleeping = false
 can_sleep = true
 linear_velocity = Vector2( 0, 0 )
-linear_damp = -1.0
+linear_damp = 0.0
 angular_velocity = 0.0
 angular_damp = -1.0
 script = ExtResource( 1 )
-_sections_unfolded = [ "Collision" ]
+_sections_unfolded = [ "Angular", "Collision", "Linear" ]
 minSpeed = 150
 maxSpeed = 250
 
