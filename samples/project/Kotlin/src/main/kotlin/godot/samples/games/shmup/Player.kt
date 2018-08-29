@@ -11,12 +11,10 @@ class Player: KinematicBody2D() {
     val speed = 600
     var screensize: Vector2 = Vector2()
     lateinit var Bullet: PackedScene
-    lateinit var bullet: NativeScript
 
     override fun _ready() {
         screensize = getViewportRect().size
         Bullet = PackedScene from ResourceLoader.load("res://Games/Shmup/Scenes/Bullet.tscn")
-        bullet = NativeScript from ResourceLoader.load("res://Games/Shmup/Scripts/Bullet.gdns")
     }
 
     override fun _process(delta: Float) {

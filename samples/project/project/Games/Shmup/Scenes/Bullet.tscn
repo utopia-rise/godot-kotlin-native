@@ -9,7 +9,7 @@
 custom_solver_bias = 0.0
 radius = 10.0
 
-[node name="Bullet" type="Area2D"]
+[node name="Bullet" type="Area2D" index="0"]
 
 position = Vector2( 29.2335, 28.0139 )
 scale = Vector2( 1.22356, 1.18544 )

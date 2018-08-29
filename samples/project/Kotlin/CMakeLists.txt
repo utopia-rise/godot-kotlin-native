@@ -19,4 +19,5 @@ godot_library(
         CONFIGS
             src/main/kotlin/godot/samples/games/shmup/classes.json
             src/main/kotlin/godot/samples/games/dodge/classes.json
+            src/main/kotlin/godot/samples/games/catchBall/classes.json
 )

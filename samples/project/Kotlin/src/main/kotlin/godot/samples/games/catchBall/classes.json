@@ -1,0 +1,60 @@
+{
+  "package": "Games/CatchBall/Scripts",
+
+  "registerClasses":[
+    {
+      "name": "Player",
+      "class": "godot.samples.games.catchBall.Player",
+      "extends": "KinematicBody",
+      "methods": [
+        {
+          "name": "_process",
+          "arguments": ["Float"]
+        }
+      ],
+      "properties": [
+        {
+          "name": "speed",
+          "type": "Int",
+          "defaultValue": "6"
+        }
+      ]
+    },
+    {
+      "name": "Ball",
+      "class": "godot.samples.games.catchBall.Ball",
+      "extends": "RigidBody",
+      "methods": [
+        {
+          "name": "_ready"
+        }
+      ]
+    },
+    {
+      "name": "BounceOff",
+      "class": "godot.samples.games.catchBall.BounceOff",
+      "extends": "Area",
+      "methods": [
+        {
+          "name": "_process",
+          "arguments": [
+            "Float"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "End",
+      "class": "godot.samples.games.catchBall.End",
+      "extends": "Area",
+      "methods": [
+        {
+          "name": "_process",
+          "arguments": [
+            "Float"
+          ]
+        }
+      ]
+    }
+  ]
+}

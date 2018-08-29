@@ -3,7 +3,6 @@
 [ext_resource path="res://Games/Shmup/Scripts/Player.gdns" type="Script" id=1]
 [ext_resource path="res://Games/Shmup/Sprites/Player.png" type="Texture" id=2]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0

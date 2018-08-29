@@ -1,0 +1,70 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Games/CatchBall/Scripts/Ball.gd" type="Script" id=1]
+
+[sub_resource type="SphereShape" id=1]
+
+radius = 0.5
+
+[sub_resource type="SphereMesh" id=2]
+
+custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
+radius = 0.5
+height = 1.0
+radial_segments = 64
+rings = 32
+is_hemisphere = false
+
+[node name="Ball" type="RigidBody"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5516, 0.0543607 )
+input_ray_pickable = true
+input_capture_on_drag = false
+collision_layer = 1
+collision_mask = 1
+mode = 0
+mass = 1.0
+friction = 1.0
+bounce = 0.99
+gravity_scale = 1.0
+custom_integrator = false
+continuous_cd = false
+contacts_reported = 0
+contact_monitor = false
+sleeping = false
+can_sleep = true
+axis_lock_linear_x = false
+axis_lock_linear_y = false
+axis_lock_linear_z = false
+axis_lock_angular_x = false
+axis_lock_angular_y = false
+axis_lock_angular_z = false
+linear_velocity = Vector3( 10, 0, 4 )
+linear_damp = -1.0
+angular_velocity = Vector3( 0, 0, 0 )
+angular_damp = -1.0
+script = ExtResource( 1 )
+_sections_unfolded = [ "Collision", "Linear", "Transform" ]
+
+[node name="CollisionShape" type="CollisionShape" parent="." index="0"]
+
+shape = SubResource( 1 )
+disabled = false
+
+[node name="MeshInstance" type="MeshInstance" parent="." index="1"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0018065, 0 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 2 )
+skeleton = NodePath("..")
+material/0 = null
+
+
