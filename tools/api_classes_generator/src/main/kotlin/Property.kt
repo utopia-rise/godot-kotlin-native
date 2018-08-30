@@ -46,7 +46,7 @@ class Property(
                     return
                 if (index == -1 && method.arguments.size == 1)
                     return
-                if (method.arguments.size == 1 && method.arguments[0].type != "Int")
+                if (method.arguments.size == 1 && method.arguments[0].type != "Long")
                     return
 
                 validGetter = method
@@ -58,7 +58,7 @@ class Property(
                     return
                 if (index == -1 && method.arguments.size == 2)
                     return
-                if (method.arguments.size == 2 && method.arguments[0].type != "Int")
+                if (method.arguments.size == 2 && method.arguments[0].type != "Long")
                     return
 
                 validSetter = method
@@ -89,7 +89,7 @@ class Property(
 
             if (hasValidGetter) {
                 val icall = if (index != -1)
-                    ICall(type, listOf(Argument("idx", "Int")))
+                    ICall(type, listOf(Argument("idx", "Long")))
                 else
                     ICall(type, listOf())
 
@@ -104,7 +104,7 @@ class Property(
 
             if (hasValidSetter) {
                 val icall = if (index != -1)
-                    ICall("Unit", listOf(Argument("idx", "Int"), Argument("value", type)))
+                    ICall("Unit", listOf(Argument("idx", "Long"), Argument("value", type)))
                 else
                     ICall("Unit", listOf(Argument("value", type)))
 

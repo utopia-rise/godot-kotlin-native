@@ -37,6 +37,9 @@
           },
           {
             "name": "_onPlayCatchBallButtonPressed"
+          },
+          {
+            "name": "_onPlayFastFinishButtonPressed"
           }
         ]
       }

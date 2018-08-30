@@ -37,24 +37,24 @@ class PoolRealArray : CoreType {
     }
 
 
-    fun append(data: Float) {
-        nativeValue = nativeValue.copy { godot_pool_real_array_append(this.ptr, data) }
+    fun append(data: Double) {
+        nativeValue = nativeValue.copy { godot_pool_real_array_append(this.ptr, data.toFloat()) }
     }
 
     fun appendArray(data: PoolRealArray) {
         nativeValue = nativeValue.copy { godot_pool_real_array_append_array(this.ptr, data.nativeValue) }
     }
 
-    fun insert(idx: Int, data: Float) {
-        nativeValue = nativeValue.copy { godot_pool_real_array_insert(this.ptr, idx, data) }
+    fun insert(idx: Int, data: Double) {
+        nativeValue = nativeValue.copy { godot_pool_real_array_insert(this.ptr, idx, data.toFloat()) }
     }
 
     fun invert() {
         nativeValue = nativeValue.copy { godot_pool_real_array_invert(this.ptr) }
     }
 
-    fun pushBack(data: Float) {
-        nativeValue = nativeValue.copy { godot_pool_real_array_push_back(this.ptr, data) }
+    fun pushBack(data: Double) {
+        nativeValue = nativeValue.copy { godot_pool_real_array_push_back(this.ptr, data.toFloat()) }
     }
 
     fun remove(idx: Int) {
@@ -65,11 +65,11 @@ class PoolRealArray : CoreType {
         nativeValue = nativeValue.copy { godot_pool_real_array_resize(this.ptr, size) }
     }
 
-    fun set(idx: Int, data: Float) {
-        nativeValue = nativeValue.copy { godot_pool_real_array_set(this.ptr, idx, data) }
+    fun set(idx: Int, data: Double) {
+        nativeValue = nativeValue.copy { godot_pool_real_array_set(this.ptr, idx, data.toFloat()) }
     }
 
-    operator fun get(idx: Int): Float = godot_pool_real_array_get(nativeValue, idx)
+    operator fun get(idx: Int): Double = godot_pool_real_array_get(nativeValue, idx).toDouble()
 
     fun size(): Int = godot_pool_real_array_size(nativeValue)
 }

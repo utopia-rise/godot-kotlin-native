@@ -28,7 +28,7 @@ class Argument(
             return " = " + when (type) {
                 "Color", "Variant" -> "$type($defaultValue)"
                 "Boolean" -> defaultValue.toLowerCase()
-                "Float" -> intToFloat(defaultValue)
+                "Double" -> intToFloat(defaultValue)
                 "Vector2", "Vector3", "Rect2" -> "$type$defaultValue"
                 "Transform", "Transform2D", "GDArray", "RID", "PoolVector2Array", "PoolStringArray", "PoolVector3Array", "PoolColorArray", "PoolIntArray", "PoolRealArray", "PoolByteArray" -> "$type()"
                 "String" -> "\"$defaultValue\""
@@ -40,8 +40,8 @@ class Argument(
 
 
     private fun intToFloat(defaultValue: String): String {
-        //if (defaultValue.indexOf('.') == -1)
-            return "${defaultValue}f"
-        //return defaultValue
+        if (defaultValue.indexOf('.') != -1)
+            return "${defaultValue}"
+        return defaultValue + ".0"
     }
 }

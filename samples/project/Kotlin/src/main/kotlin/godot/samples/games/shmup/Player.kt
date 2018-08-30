@@ -8,7 +8,7 @@ import godot.core.Vector2
 class Player: KinematicBody2D() {
     var shootTime = 0
     var shooting = false
-    val speed = 600
+    var speed = 600.0
     var screensize: Vector2 = Vector2()
     lateinit var Bullet: PackedScene
 
@@ -17,12 +17,12 @@ class Player: KinematicBody2D() {
         Bullet = PackedScene from ResourceLoader.load("res://Games/Shmup/Scenes/Bullet.tscn")
     }
 
-    override fun _process(delta: Float) {
+    override fun _process(delta: Double) {
         move(delta)
         shooting()
     }
 
-    fun move(delta: Float) {
+    fun move(delta: Double) {
         var velocity = Vector2()
 
         if (Input.isActionPressed("ui_right"))
@@ -35,7 +35,7 @@ class Player: KinematicBody2D() {
             velocity.y -= 1
 
         if (velocity.length() > 0) {
-            velocity = velocity.normalized() * speed.toFloat()
+            velocity = velocity.normalized() * speed
             moveAndCollide(velocity * delta)
         }
     }

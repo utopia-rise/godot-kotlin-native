@@ -110,7 +110,7 @@ bounce = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D3" index="0"]
 
-position = Vector2( 0, 11.7565 )
+position = Vector2( -1.16269, 835.652 )
 scale = Vector2( 1, 1.90435 )
 shape = SubResource( 3 )
 

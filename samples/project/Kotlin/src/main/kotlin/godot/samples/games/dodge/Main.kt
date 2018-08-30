@@ -70,16 +70,15 @@ class Main: Node() {
     }
 
     fun _onMobTimerTimeout() {
-        mobSpawnLocation.setOffset(Random.nextInt().toFloat())
+        mobSpawnLocation.setOffset(Random.nextInt().toDouble())
         val mob = RigidBody2D from mobScene.instance()
         addChild(mob)
-        var direction = mobSpawnLocation.rotation + (PI/2).toFloat()
+        var direction = (mobSpawnLocation.rotation.toDouble() + PI/2).toDouble()
         mob.position = mobSpawnLocation.position
 
         fun ClosedRange<Int>.random() =
                 Random.nextInt(endInclusive - start) + start
-
-        direction += (((-PI)/4 * 100000).toInt()..(PI/4 * 100000).toInt()).random().toFloat() / 100000f
+        direction += ((-PI/4 * 100000).toInt()..(PI/4  * 100000).toInt()).random().toDouble() / 100000
         mob.rotation = direction
         mob.setLinearVelocity(Vector2((mob.get("minSpeed").toInt()..mob.get("maxSpeed").toInt()).random(), 0).rotated(direction))
     }

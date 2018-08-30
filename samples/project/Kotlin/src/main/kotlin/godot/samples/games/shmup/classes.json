@@ -12,7 +12,14 @@
                 },
                 {
                     "name": "_process",
-                    "arguments": ["Float"]
+                    "arguments": ["Double"]
+                }
+            ],
+            "properties": [
+                {
+                    "name": "speed",
+                    "type": "Double",
+                    "defaultValue": "10"
                 }
             ]
         },
@@ -23,7 +30,7 @@
             "methods": [
                 {
                     "name": "_process",
-                    "arguments": ["Float"]
+                    "arguments": ["Double"]
                 }
             ]
         },
@@ -37,7 +44,7 @@
                 },
                 {
                     "name": "_process",
-                    "arguments": ["Float"]
+                    "arguments": ["Double"]
                 }
             ],
             "properties": [
@@ -68,7 +75,7 @@
                 },
                 {
                     "name": "_process",
-                    "arguments": ["Float"]
+                    "arguments": ["Double"]
                 }
             ]
         },
@@ -79,7 +86,7 @@
             "methods": [
                 {
                     "name": "_process",
-                    "arguments": ["Float"]
+                    "arguments": ["Double"]
                 },
                 {
                     "name": "shake",

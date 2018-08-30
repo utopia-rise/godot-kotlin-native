@@ -26,17 +26,17 @@ class Transform2D: CoreType {
 
 
     constructor(xx: Number, xy: Number, yx: Number, yy: Number, ox: Number, oy: Number) {
-        elements[0][0] = xx.toFloat()
-        elements[0][1] = xy.toFloat()
-        elements[1][0] = yx.toFloat()
-        elements[1][1] = yy.toFloat()
-        elements[2][0] = ox.toFloat()
-        elements[2][1] = oy.toFloat()
+        elements[0][0] = xx.toDouble()
+        elements[0][1] = xy.toDouble()
+        elements[1][0] = yx.toDouble()
+        elements[1][1] = yy.toDouble()
+        elements[2][0] = ox.toDouble()
+        elements[2][1] = oy.toDouble()
     }
 
     constructor(rot: Number, pos: Vector2) {
-        val cr = cos(rot.toFloat())
-        val sr = sin(rot.toFloat())
+        val cr = cos(rot.toDouble())
+        val sr = sin(rot.toDouble())
         elements[0][0] = cr
         elements[0][1] = sr
         elements[1][0] = -sr
@@ -45,8 +45,8 @@ class Transform2D: CoreType {
     }
 
     constructor() {
-        elements[0][0] = 1f
-        elements[1][1] = 1f
+        elements[0][0] = 1.0
+        elements[1][1] = 1.0
     }
 
 
@@ -61,24 +61,25 @@ class Transform2D: CoreType {
 
 
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
-        return cValuesOf(elements[0][0], elements[0][1], elements[1][0], elements[1][1], elements[2][0], elements[2][1]).getPointer(memScope)
+        return cValuesOf(elements[0][0].toFloat(), elements[0][1].toFloat(), elements[1][0].toFloat(), 
+                         elements[1][1].toFloat(), elements[2][0].toFloat(), elements[2][1].toFloat()).getPointer(memScope)
     }
     override fun setRawMemory(mem: COpaquePointer) {
         val arr = mem.reinterpret<FloatVar>()
-        elements[0][0] = arr[0]
-        elements[0][1] = arr[1]
-        elements[1][0] = arr[2]
-        elements[1][1] = arr[3]
-        elements[2][0] = arr[4]
-        elements[2][1] = arr[5]
+        elements[0][0] = arr[0].toDouble()
+        elements[0][1] = arr[1].toDouble()
+        elements[1][0] = arr[2].toDouble()
+        elements[1][1] = arr[3].toDouble()
+        elements[2][0] = arr[4].toDouble()
+        elements[2][1] = arr[5].toDouble()
     }
 
 
 
-    fun tdotx(v: Vector2): Float =
+    fun tdotx(v: Vector2): Double =
             elements[0][0] * v.x + elements[1][0] * v.y
 
-    fun tdoty(v: Vector2): Float =
+    fun tdoty(v: Vector2): Double =
             elements[0][1] * v.x + elements[1][1] * v.y
 
     operator fun get(n: Int): Vector2 =
@@ -125,7 +126,7 @@ class Transform2D: CoreType {
         return newRect
     }
 
-    fun setRotationAndScale(rot: Float, scale: Vector2) {
+    fun setRotationAndScale(rot: Double, scale: Vector2) {
         elements[0][0]=cos(rot)*scale.x
         elements[1][1]=cos(rot)*scale.y
         elements[1][0]=-sin(rot)*scale.y
@@ -160,11 +161,11 @@ class Transform2D: CoreType {
 
     fun affineInvert() {
         val det = basisDeterminant()
-        if (det == 0f) {
+        if (det == 0.0) {
             GD.printError("determinant == 0", "affineInvert()", "Transform2D.kt", 161)
             return
         }
-        val idet = - 1f / det
+        val idet = - 1.0 / det
         elements[0][0] = elements[1][1].also { elements[1][1] = elements[0][0] }
         elements[0] *= Vector2(idet,-idet)
         elements[1] *= Vector2(-idet,idet)
@@ -178,12 +179,12 @@ class Transform2D: CoreType {
         return inv
     }
 
-    fun rotate(phi: Float) {
+    fun rotate(phi: Double) {
         val transform2D = Transform2D(phi,Vector2()) * this
         this.elements = transform2D.elements
     }
 
-    fun getRotation(): Float {
+    fun getRotation(): Double {
         val det = basisDeterminant()
         val m = orthonormalized()
         if (det < 0) {
@@ -192,7 +193,7 @@ class Transform2D: CoreType {
         return atan2(m[0].y, m[0].x)
     }
 
-    fun setRotation(rot: Float) {
+    fun setRotation(rot: Double) {
         val cr = cos(rot)
         val sr = sin(rot)
         elements[0][0] = cr
@@ -202,7 +203,7 @@ class Transform2D: CoreType {
     }
 
     fun getScale(): Vector2 {
-        val detSign: Float = if (basisDeterminant() > 0f) 1f else -1f
+        val detSign: Double = if (basisDeterminant() > 0.0) 1.0 else -1.0
         return detSign * Vector2(elements[0].length(), elements[1].length())
     }
 
@@ -222,7 +223,7 @@ class Transform2D: CoreType {
         elements[2] += basisXform(translation)
     }
 
-    fun translate(tx: Float, ty: Float) =
+    fun translate(tx: Double, ty: Double) =
             translate(Vector2(tx, ty))
 
     fun orthonormalize() {
@@ -289,16 +290,16 @@ class Transform2D: CoreType {
         return copy
     }
 
-    fun rotated(phi: Float): Transform2D {
+    fun rotated(phi: Double): Transform2D {
         val copy = this
         copy.rotate(phi)
         return copy
     }
 
-    fun basisDeterminant(): Float =
+    fun basisDeterminant(): Double =
             elements[0].x * elements[1].y - elements[0].y * elements[1].x
 
-    fun interpolateWith(transform: Transform2D, c: Float): Transform2D {
+    fun interpolateWith(transform: Transform2D, c: Double): Transform2D {
         val p1 = getOrigin()
         val p2 = transform.getOrigin()
 
@@ -313,8 +314,8 @@ class Transform2D: CoreType {
 
         var dot = v1.dot(v2)
         dot = when {
-            dot < -1f -> -1f
-            dot > 1f -> 1f
+            dot < -1.0 -> -1.0
+            dot > 1.0 -> 1.0
             else -> dot
         }
 

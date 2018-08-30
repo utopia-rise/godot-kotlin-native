@@ -7,7 +7,7 @@ import godot.Object
 
 
 class Variant: CoreType { // FIXME: redundant .copy
-    enum class Type(val id: Int) {
+    enum class Type(val id: Long) {
         NIL(0),
 
         BOOL(1),
@@ -43,11 +43,11 @@ class Variant: CoreType { // FIXME: redundant .copy
         VARIANT_MAX(27);
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
-    enum class Operator(val id: Int) {
+    enum class Operator(val id: Long) {
         OP_EQUAL(0),
         OP_NOT_EQUAL(1),
         OP_LESS(2),
@@ -80,7 +80,7 @@ class Variant: CoreType { // FIXME: redundant .copy
         OP_MAX(25);
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
 
     }
@@ -126,12 +126,12 @@ class Variant: CoreType { // FIXME: redundant .copy
         nativeValue = nativeValue.copy { godot_variant_new_int(this.ptr, other.toLong()) }
     }
 
-    constructor(other: Float) {
-        nativeValue = nativeValue.copy { godot_variant_new_real(this.ptr, other.toDouble()) }
-    }
-
     constructor(other: Double) {
         nativeValue = nativeValue.copy { godot_variant_new_real(this.ptr, other) }
+    }
+
+    constructor(other: Float) {
+        nativeValue = nativeValue.copy { godot_variant_new_real(this.ptr, other.toDouble()) }
     }
 
     constructor(other: String) {
@@ -314,9 +314,9 @@ class Variant: CoreType { // FIXME: redundant .copy
 
     override fun toString(): String = godot_variant_as_string(nativeValue).toKString()
 
-    fun toDouble(): Double = godot_variant_as_real(nativeValue)
-
     fun toFloat(): Float = this.toDouble().toFloat()
+
+    fun toDouble(): Double = godot_variant_as_real(nativeValue)
 
     fun toDictionary(): Dictionary = Dictionary(godot_variant_as_dictionary(nativeValue))
 
@@ -358,7 +358,7 @@ class Variant: CoreType { // FIXME: redundant .copy
 
     fun toTransform2D(): Transform2D = Transform2D(godot_variant_as_transform2d(nativeValue))
 
-    fun getType(): Variant.Type = Type.fromInt(godot_variant_get_type(nativeValue).value)
+    fun getType(): Variant.Type = Type.fromInt(godot_variant_get_type(nativeValue).value.toLong())
 
     fun call(str: String, args: Array<Variant>): Variant {
         memScoped {

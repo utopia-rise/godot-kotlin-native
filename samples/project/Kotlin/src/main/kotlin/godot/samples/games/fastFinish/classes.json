@@ -1,0 +1,37 @@
+{
+  "package": "Games/FastFinish/Scripts",
+
+  "registerClasses":[
+    {
+      "name": "Player",
+      "class": "godot.samples.games.fastFinish.Player",
+      "extends": "Area2D",
+      "methods": [
+        {
+          "name": "_ready"
+        },
+        {
+          "name": "_process",
+          "arguments": ["Double"]
+        }
+      ],
+      "properties": [
+        {
+          "name": "speed",
+          "type": "Int",
+          "defaultValue": "15"
+        }
+      ]
+    },
+    {
+      "name": "Stage",
+      "class": "godot.samples.games.fastFinish.Stage",
+      "extends": "Node",
+      "methods": [
+        {
+          "name": "_ready"
+        }
+      ]
+    }
+  ]
+}

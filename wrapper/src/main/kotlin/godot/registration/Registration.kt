@@ -53,7 +53,7 @@ fun registerProperty(cl: String,
             result.dispose()
         }
     }
-    godot_wrapper_register_property(cl, n, g, s, dv.nativeValue, dv.getType().id, r, u, h, hs.toGDString())
+    godot_wrapper_register_property(cl, n, g, s, dv.nativeValue, dv.getType().id.toInt(), r, u, h, hs.toGDString())
 }
 
 
@@ -70,7 +70,7 @@ fun registerSignal(cl: String,
 
         for ((i,arg) in a.withIndex()) {
             memcpy(args[i].name.ptr, arg.first.toGDString().getPointer(memScope), sizeOf<godot_string>())
-            args[i].type = arg.second.id
+            args[i].type = arg.second.id.toInt()
         }
         for ((i,arg) in da.withIndex())
             memcpy(defaultArgs[i].ptr, arg.nativeValue.getPointer(memScope), sizeOf<godot_variant>())

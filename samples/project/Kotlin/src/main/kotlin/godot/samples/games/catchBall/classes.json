@@ -9,13 +9,13 @@
       "methods": [
         {
           "name": "_process",
-          "arguments": ["Float"]
+          "arguments": ["Double"]
         }
       ],
       "properties": [
         {
           "name": "speed",
-          "type": "Int",
+          "type": "Double",
           "defaultValue": "6"
         }
       ]
@@ -38,7 +38,7 @@
         {
           "name": "_process",
           "arguments": [
-            "Float"
+            "Double"
           ]
         }
       ]
@@ -51,7 +51,7 @@
         {
           "name": "_process",
           "arguments": [
-            "Float"
+            "Double"
           ]
         }
       ]

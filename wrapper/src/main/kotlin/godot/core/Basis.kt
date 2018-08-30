@@ -28,7 +28,7 @@ class Basis: CoreType {
         z = Vector3()
 
         val d = quat.lengthSquared()
-        val s = 2f / d
+        val s = 2.0 / d
         val xs = quat.x * s
         val ys = quat.y * s
         val zs = quat.z * s
@@ -41,12 +41,12 @@ class Basis: CoreType {
         val yy = quat.y * ys
         val yz = quat.y * zs
         val zz = quat.z * zs
-        set(	1.0f - (yy + zz), xy - wz, xz + wy,
-                xy + wz, 1.0f - (xx + zz), yz - wx,
-                xz - wy, yz + wx, 1.0f - (xx + yy))
+        set(	1.0 - (yy + zz), xy - wz, xz + wy,
+                xy + wz, 1.0 - (xx + zz), yz - wx,
+                xz - wy, yz + wx, 1.0 - (xx + yy))
     }
 
-    constructor(axis: Vector3, phi: Float) {
+    constructor(axis: Vector3, phi: Double) {
         x = Vector3()
         y = Vector3()
         z = Vector3()
@@ -54,21 +54,21 @@ class Basis: CoreType {
         // Rotation matrix from axis and angle, see https://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle
         val axisq = Vector3(axis.x*axis.x,axis.y*axis.y,axis.z*axis.z)
 
-        val cosine: Float = cos(phi)
-        val sine: Float = sin(phi)
+        val cosine: Double = cos(phi)
+        val sine: Double = sin(phi)
 
         apply {
-            x[0] = axisq.x + cosine * (1.0f - axisq.x)
-            x[1] = axis.x * axis.y * (1.0f - cosine) - axis.z * sine
-            x[2] = axis.z * axis.x * (1.0f - cosine) + axis.y * sine
+            x[0] = axisq.x + cosine * (1.0 - axisq.x)
+            x[1] = axis.x * axis.y * (1.0 - cosine) - axis.z * sine
+            x[2] = axis.z * axis.x * (1.0 - cosine) + axis.y * sine
 
-            y[0] = axis.x * axis.y * (1.0f - cosine) + axis.z * sine
-            y[1] = axisq.y + cosine * (1.0f - axisq.y)
-            y[2] = axis.y * axis.z * (1.0f - cosine) - axis.x * sine
+            y[0] = axis.x * axis.y * (1.0 - cosine) + axis.z * sine
+            y[1] = axisq.y + cosine * (1.0 - axisq.y)
+            y[2] = axis.y * axis.z * (1.0 - cosine) - axis.x * sine
 
-            z[0] = axis.z * axis.x * (1.0f - cosine) - axis.y * sine
-            z[1] = axis.y * axis.z * (1.0f - cosine) + axis.x * sine
-            z[2] = axisq.z + cosine * (1.0f - axisq.z)
+            z[0] = axis.z * axis.x * (1.0 - cosine) - axis.y * sine
+            z[1] = axis.y * axis.z * (1.0 - cosine) + axis.x * sine
+            z[2] = axisq.z + cosine * (1.0 - axisq.z)
         }
     }
 
@@ -76,7 +76,7 @@ class Basis: CoreType {
             this(Vector3(xx,xy,xz), Vector3(yx,yy,yz), Vector3(zx,zy,zz))
 
     constructor():
-            this(1f,0f, 0f, 0f, 1f, 0f, 0f, 0f, 1f)
+            this(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0)
 
 
 
@@ -100,20 +100,22 @@ class Basis: CoreType {
 
 
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
-        return cValuesOf(x[0], x[1], x[2], y[0], y[1], y[2], z[0], z[1], z[2]).getPointer(memScope)
+        return cValuesOf(x[0].toFloat(), x[1].toFloat(), x[2].toFloat(),
+                         y[0].toFloat(), y[1].toFloat(), y[2].toFloat(),
+                         z[0].toFloat(), z[1].toFloat(), z[2].toFloat()).getPointer(memScope)
     }
 
     override fun setRawMemory(mem: COpaquePointer) {
         val arr = mem.reinterpret<FloatVar>()
-        x[0] = arr[0]
-        x[1] = arr[1]
-        x[2] = arr[2]
-        y[0] = arr[3]
-        y[1] = arr[4]
-        y[2] = arr[5]
-        z[0] = arr[6]
-        z[1] = arr[7]
-        z[2] = arr[8]
+        x[0] = arr[0].toDouble()
+        x[1] = arr[1].toDouble()
+        x[2] = arr[2].toDouble()
+        y[0] = arr[3].toDouble()
+        y[1] = arr[4].toDouble()
+        y[2] = arr[5].toDouble()
+        z[0] = arr[6].toDouble()
+        z[1] = arr[7].toDouble()
+        z[2] = arr[8].toDouble()
     }
 
     
@@ -133,7 +135,7 @@ class Basis: CoreType {
                 else -> throw IndexOutOfBoundsException()
             }
 
-    fun set(xx: Float, xy: Float, xz:Float, yx:Float, yy:Float, yz:Float, zx:Float, zy:Float, zz:Float) {
+    fun set(xx: Double, xy: Double, xz:Double, yx:Double, yy:Double, yz:Double, zx:Double, zy:Double, zz:Double) {
         x[0] = xx; x[1] = xy; x[2] = xz
         y[0] = yx; y[1] = yy; y[2] = yz
         z[0] = zx; z[1] = zy; z[2] = zz
@@ -144,21 +146,21 @@ class Basis: CoreType {
         fun cofac(row1: Int, col1: Int, row2: Int, col2: Int) =
                 this[row1][col1] * this[row2][col2] - this[row1][col2] * this[row2][col1]
 
-        val co: FloatArray = floatArrayOf(
+        val co: DoubleArray = doubleArrayOf(
                 cofac(1, 1, 2, 2),
                 cofac(1, 2, 2, 0),
                 cofac(1, 0, 2, 1))
 
-        val det: Float =
+        val det: Double =
                 this[0][0] * co[0] + this[0][1] * co[1] + this[0][2] * co[2]
 
 
-        if (det == 0f) {
+        if (det == 0.0) {
             GD.printError("determinant = 0", "invert", "Basis.kt", 138)
             return
         }
 
-        val s = 1f / det
+        val s = 1.0 / det
         set(    co[0]*s, cofac(0, 2, 2, 1) * s, cofac(0, 1, 1, 2) * s,
                 co[1]*s, cofac(0, 0, 2, 2) * s, cofac(0, 2, 1, 0) * s,
                 co[2]*s, cofac(0, 1, 2, 0) * s, cofac(0, 0, 1, 1) * s )
@@ -201,7 +203,7 @@ class Basis: CoreType {
         return b
     }
 
-    fun determinant() : Float =
+    fun determinant() : Double =
             this[0][0]*(this[1][1]*this[2][2]-this[2][1]*this[1][2]) -
             this[1][0]*(this[0][1]*this[2][2]-this[2][1]*this[0][2]) +
             this[2][0]*(this[0][1]*this[1][2]-this[1][1]*this[0][2])
@@ -215,14 +217,14 @@ class Basis: CoreType {
         this[2][axis] = value.z
     }
 
-    fun rotate(axis: Vector3, phi: Float) {
+    fun rotate(axis: Vector3, phi: Double) {
         val ret = rotated(axis, phi)
         this.x = ret.x
         this.y = ret.y
         this.z = ret.z
     }
 
-    fun rotated(axis: Vector3, phi: Float): Basis =
+    fun rotated(axis: Vector3, phi: Double): Basis =
             Basis(axis, phi) * this
 
     fun scale(scale: Vector3) {
@@ -249,7 +251,7 @@ class Basis: CoreType {
         // As a cheap workaround until then, to ensure that R is a proper rotation matrix with determinant +1
         // (such that it can be represented by a Quat or Euler angles), we absorb the sign flip into the scaling matrix.
         // As such, it works in conjuction with getRotation().
-        val detSign: Float = if (determinant() > 0) 1f else -1f
+        val detSign: Double = if (determinant() > 0) 1.0 else -1.0
         return detSign*Vector3(
                 Vector3(this[0][0],this[1][0],this[2][0]).length(),
                 Vector3(this[0][1],this[1][1],this[2][1]).length(),
@@ -277,14 +279,14 @@ class Basis: CoreType {
         if (!isRotation()) return euler
 
         val sy = this[0][2]
-        if (sy < 1f) {
-            if (sy > -1f) {
+        if (sy < 1.0) {
+            if (sy > -1.0) {
                 // is this a pure Y rotation?
-                if (this[1][0] == 0f && this[0][1] == 0f && this[1][2] == 0f && this[2][1] == 0f && this[1][1] == 1f) {
+                if (this[1][0] == 0.0 && this[0][1] == 0.0 && this[1][2] == 0.0 && this[2][1] == 0.0 && this[1][1] == 1.0) {
                     // return the simplest form (human friendlier in editor and scripts)
-                    euler.x = 0f
+                    euler.x = 0.0
                     euler.y = atan2(this[0][2], this[0][0])
-                    euler.z = 0f
+                    euler.z = 0.0
                 } else {
                     euler.x = atan2(-this[1][2], this[2][2])
                     euler.y = asin(sy)
@@ -292,13 +294,13 @@ class Basis: CoreType {
                 }
             } else {
                 euler.x = -atan2(this[0][1], this[1][1])
-                euler.y = (-Math_PI).toFloat() / 2f
-                euler.z = 0f
+                euler.y = (-Math_PI).toDouble() / 2.0
+                euler.z = 0.0
             }
         } else {
             euler.x = atan2(this[0][1], this[1][1])
-            euler.y = Math_PI.toFloat() / 2f
-            euler.z = 0f
+            euler.y = Math_PI.toDouble() / 2.0
+            euler.z = 0.0
         }
         return euler
     }
@@ -309,18 +311,18 @@ class Basis: CoreType {
     // The current implementation uses XYZ convention (Z is the first rotation).
     fun setEulerXyz(euler: Vector3) {
 
-        var c: Float = cos(euler.x)
-        var s: Float = sin(euler.x)
+        var c: Double = cos(euler.x)
+        var s: Double = sin(euler.x)
 
-        val xmat = Basis(1f, 0f, 0f, 0f, c, -s, 0f, s, c)
+        val xmat = Basis(1.0, 0.0, 0.0, 0.0, c, -s, 0.0, s, c)
 
         c = cos(euler.y)
         s = sin(euler.y)
-        val ymat = Basis(c, 0f, s, 0f, 1f, 0f, -s, 0f, c)
+        val ymat = Basis(c, 0.0, s, 0.0, 1.0, 0.0, -s, 0.0, c)
 
         c = cos(euler.z)
         s = sin(euler.z)
-        val zmat = Basis(c, -s, 0f, s, c, 0f, 0f, 0f, 1f)
+        val zmat = Basis(c, -s, 0.0, s, c, 0.0, 0.0, 0.0, 1.0)
 
         //optimizer will optimize away all this anyway
         val ret = xmat * (ymat * zmat)
@@ -345,28 +347,28 @@ class Basis: CoreType {
 
         if (!isRotation()) return euler
         val m12 = this[1][2]
-        if (m12 < 1f) {
-            if (m12 > -1f) {
+        if (m12 < 1.0) {
+            if (m12 > -1.0) {
                 // is this a pure X rotation?
-                if (this[1][0] == 0f && this[0][1] == 0f && this[0][2] == 0f && this[2][0] == 0f && this[0][0] == 1f) {
+                if (this[1][0] == 0.0 && this[0][1] == 0.0 && this[0][2] == 0.0 && this[2][0] == 0.0 && this[0][0] == 1.0) {
                     // return the simplest form (human friendlier in editor and scripts)
                     euler.x = atan2(-m12, this[1][1])
-                    euler.y = 0f
-                    euler.z = 0f
+                    euler.y = 0.0
+                    euler.z = 0.0
                 } else {
                     euler.x = asin(-m12)
                     euler.y = atan2(this[0][2], this[2][2])
                     euler.z = atan2(this[1][0], this[1][1])
                 }
             } else { // m12 == -1
-                euler.x = Math_PI.toFloat() * 0.5f
+                euler.x = Math_PI.toDouble() * 0.5
                 euler.y = -atan2(-this[0][1], this[0][0])
-                euler.z = 0f
+                euler.z = 0.0
             }
         } else { // m12 == 1
-            euler.x = (-Math_PI).toFloat() * 0.5f
+            euler.x = (-Math_PI).toDouble() * 0.5
             euler.y = -atan2(-this[0][1], this[0][0])
-            euler.z = 0f
+            euler.z = 0.0
         }
 
         return euler
@@ -377,18 +379,18 @@ class Basis: CoreType {
     // and similar for other axes.
     // The current implementation uses YXZ convention (Z is the first rotation).
     fun setEulerYxz(euler: Vector3) {
-        var c: Float = cos(euler.x)
-        var s: Float = sin(euler.x)
+        var c: Double = cos(euler.x)
+        var s: Double = sin(euler.x)
 
-        val xmat = Basis(1f,0f,0f,0f,c,-s,0f,s,c)
+        val xmat = Basis(1.0, 0.0, 0.0, 0.0, c, -s, 0.0, s, c)
 
         c = cos(euler.y)
         s = sin(euler.y)
-        val ymat = Basis(c,0f,s,0f,1f,0f,-s,0f,c)
+        val ymat = Basis(c, 0.0,s, 0.0, 1.0, 0.0, -s, 0.0, c)
 
         c = cos(euler.z)
         s = sin(euler.z)
-        val zmat = Basis(c,-s,0f,s,c,0f,0f,0f,1f)
+        val zmat = Basis(c, -s, 0.0, s, c, 0.0, 0.0, 0.0, 1.0)
 
         val ret = ymat * xmat * zmat
 
@@ -400,13 +402,13 @@ class Basis: CoreType {
     fun getEuler(): Vector3 = getEulerYxz()
     fun setEuler(p_euler: Vector3) = setEulerYxz(p_euler)
 
-    fun tdotx(v: Vector3): Float =
+    fun tdotx(v: Vector3): Double =
             this[0][0] * v[0] + this[1][0] * v[1] + this[2][0] * v[2]
 
-    fun tdoty(v: Vector3): Float =
+    fun tdoty(v: Vector3): Double =
             this[0][1] * v[0] + this[1][1] * v[1] + this[2][1] * v[2]
 
-    fun tdotz(v: Vector3): Float =
+    fun tdotz(v: Vector3): Double =
             this[0][2] * v[0] + this[1][2] * v[1] + this[2][2] * v[2]
 
     override fun equals(other: Any?): Boolean =
@@ -440,7 +442,7 @@ class Basis: CoreType {
     operator fun minus(matrix: Basis): Basis =
             Basis(this[0] - matrix[0], this[1] - matrix[1], this[2] - matrix[2])
 
-    operator fun times(value: Float): Basis =
+    operator fun times(value: Double): Basis =
             Basis(this[0] * value, this[1] * value, this[2] * value)
 
     override fun toString(): String =
@@ -475,7 +477,7 @@ class Basis: CoreType {
                   this[0].z * m[0].z + this[1].z * m[1].z + this[2].z * m[2].z)
 
     fun orthonormalize() {
-        if (determinant() == 0f) {
+        if (determinant() == 0.0) {
             GD.printError("determinant == 0\n", "orthonormalize()", "Basis.kt", 464)
             return
         }
@@ -516,7 +518,7 @@ class Basis: CoreType {
         if (!isSymmetric()) return Basis()
 
         val iteMax = 1024
-        var offMatrixNorm2: Float =
+        var offMatrixNorm2: Double =
                 this[0][1] * this[0][1] + this[0][2] * this[0][2] + this[1][2] * this[1][2]
 
         var ite = 0
@@ -548,9 +550,9 @@ class Basis: CoreType {
 
             // Compute the rotation angle
             val angle = if (abs(this[j][j] - this[i][i]) < CMP_EPSILON) {
-                Math_PI.toFloat() / 4f
+                Math_PI.toDouble() / 4.0
             } else {
-                0.5f * atan(2 * this[i][j] / (this[j][j] - this[i][i]))
+                0.5 * atan(2 * this[i][j] / (this[j][j] - this[i][i]))
             }
 
             // Compute the rotation matrix
@@ -575,30 +577,30 @@ class Basis: CoreType {
 
     companion object {
         val orthoBases: Array<Basis> =
-                arrayOf(Basis(1f, 0f, 0f, 0f, 1f, 0f, 0f, 0f, 1f),
-                        Basis(0f, -1f, 0f, 1f, 0f, 0f, 0f, 0f, 1f),
-                        Basis(-1f, 0f, 0f, 0f, -1f, 0f, 0f, 0f, 1f),
-                        Basis(0f, 1f, 0f, -1f, 0f, 0f, 0f, 0f, 1f),
-                        Basis(1f, 0f, 0f, 0f, 0f, -1f, 0f, 1f, 0f),
-                        Basis(0f, 0f, 1f, 1f, 0f, 0f, 0f, 1f, 0f),
-                        Basis(-1f, 0f, 0f, 0f, 0f, 1f, 0f, 1f, 0f),
-                        Basis(0f, 0f, -1f, -1f, 0f, 0f, 0f, 1f, 0f),
-                        Basis(1f, 0f, 0f, 0f, -1f, 0f, 0f, 0f, -1f),
-                        Basis(0f, 1f, 0f, 1f, 0f, 0f, 0f, 0f, -1f),
-                        Basis(-1f, 0f, 0f, 0f, 1f, 0f, 0f, 0f, -1f),
-                        Basis(0f, -1f, 0f, -1f, 0f, 0f, 0f, 0f, -1f),
-                        Basis(1f, 0f, 0f, 0f, 0f, 1f, 0f, -1f, 0f),
-                        Basis(0f, 0f, -1f, 1f, 0f, 0f, 0f, -1f, 0f),
-                        Basis(-1f, 0f, 0f, 0f, 0f, -1f, 0f, -1f, 0f),
-                        Basis(0f, 0f, 1f, -1f, 0f, 0f, 0f, -1f, 0f),
-                        Basis(0f, 0f, 1f, 0f, 1f, 0f, -1f, 0f, 0f),
-                        Basis(0f, -1f, 0f, 0f, 0f, 1f, -1f, 0f, 0f),
-                        Basis(0f, 0f, -1f, 0f, -1f, 0f, -1f, 0f, 0f),
-                        Basis(0f, 1f, 0f, 0f, 0f, -1f, -1f, 0f, 0f),
-                        Basis(0f, 0f, 1f, 0f, -1f, 0f, 1f, 0f, 0f),
-                        Basis(0f, 1f, 0f, 0f, 0f, 1f, 1f, 0f, 0f),
-                        Basis(0f, 0f, -1f, 0f, 1f, 0f, 1f, 0f, 0f),
-                        Basis(0f, -1f, 0f, 0f, 0f, -1f, 1f, 0f, 0f))
+                arrayOf(Basis(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0),
+                        Basis(0.0, -1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0),
+                        Basis(-1.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, 1.0),
+                        Basis(0.0, 1.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, 1.0),
+                        Basis(1.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 1.0, 0.0),
+                        Basis(0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0),
+                        Basis(-1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0),
+                        Basis(0.0, 0.0, -1.0, -1.0, 0.0, 0.0, 0.0, 1.0, 0.0),
+                        Basis(1.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, 0.0, -1.0),
+                        Basis(0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, -1.0),
+                        Basis(-1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, -1.0),
+                        Basis(0.0, -1.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, -1.0),
+                        Basis(1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, -1.0, 0.0),
+                        Basis(0.0, 0.0, -1.0, 1.0, 0.0, 0.0, 0.0, -1.0, 0.0),
+                        Basis(-1.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, -1.0, 0.0),
+                        Basis(0.0, 0.0, 1.0, -1.0, 0.0, 0.0, 0.0, -1.0, 0.0),
+                        Basis(0.0, 0.0, 1.0, 0.0, 1.0, 0.0, -1.0, 0.0, 0.0),
+                        Basis(0.0, -1.0, 0.0, 0.0, 0.0, 1.0, -1.0, 0.0, 0.0),
+                        Basis(0.0, 0.0, -1.0, 0.0, -1.0, 0.0, -1.0, 0.0, 0.0),
+                        Basis(0.0, 1.0, 0.0, 0.0, 0.0, -1.0, -1.0, 0.0, 0.0),
+                        Basis(0.0, 0.0, 1.0, 0.0, -1.0, 0.0, 1.0, 0.0, 0.0),
+                        Basis(0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0),
+                        Basis(0.0, 0.0, -1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0),
+                        Basis(0.0, -1.0, 0.0, 0.0, 0.0, -1.0, 1.0, 0.0, 0.0))
     }
 
     fun getOrthogonalIndex(): Int {
@@ -607,9 +609,9 @@ class Basis: CoreType {
             for(j in 0..2) {
                 var v = orth[i][j]
                 v = when {
-                    v > 0.5f -> 1.0f
-                    v < -0.5f -> -1.0f
-                    else -> 0f
+                    v > 0.5 -> 1.0
+                    v < -0.5 -> -1.0
+                    else -> 0.0
                 }
                 orth[i][j] = v
             }

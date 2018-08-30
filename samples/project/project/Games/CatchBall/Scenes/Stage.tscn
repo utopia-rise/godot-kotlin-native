@@ -50,7 +50,7 @@ subdivide_width = 0
 subdivide_height = 0
 subdivide_depth = 0
 
-[node name="Stage" type="Node" index="0"]
+[node name="Stage" type="Node"]
 
 [node name="Ball" type="RigidBody" parent="." index="0"]
 
@@ -313,7 +313,7 @@ spot_angle = 45.0
 spot_angle_attenuation = 1.0
 _sections_unfolded = [ "Light", "Shadow", "Spot", "Transform" ]
 
-[node name="KinematicBody" type="KinematicBody" parent="." index="8"]
+[node name="Player" type="KinematicBody" parent="." index="8"]
 
 input_ray_pickable = false
 input_capture_on_drag = false
@@ -330,7 +330,7 @@ script = ExtResource( 2 )
 _sections_unfolded = [ "Axis Lock", "Collision", "Transform", "collision" ]
 speed = 6
 
-[node name="Area" type="Area" parent="KinematicBody" index="0"]
+[node name="Area" type="Area" parent="Player" index="0"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.51405, 0 )
 input_ray_pickable = false
@@ -356,13 +356,13 @@ reverb_bus_uniformity = 0.0
 script = ExtResource( 3 )
 _sections_unfolded = [ "Collision" ]
 
-[node name="CollisionShape" type="CollisionShape" parent="KinematicBody/Area" index="0"]
+[node name="CollisionShape" type="CollisionShape" parent="Player/Area" index="0"]
 
 transform = Transform( 1, 0, 0, 0, 0.147706, 0, 0, 0, 1, 0, 0, 0 )
 shape = SubResource( 5 )
 disabled = false
 
-[node name="Area2" type="Area" parent="KinematicBody" index="1"]
+[node name="Area2" type="Area" parent="Player" index="1"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.162459, 0 )
 input_ray_pickable = false
@@ -388,42 +388,42 @@ reverb_bus_uniformity = 0.0
 script = ExtResource( 4 )
 _sections_unfolded = [ "Collision", "Transform" ]
 
-[node name="CollisionShape" type="CollisionShape" parent="KinematicBody/Area2" index="0"]
+[node name="CollisionShape" type="CollisionShape" parent="Player/Area2" index="0"]
 
 transform = Transform( 1, 0, 0, 0, 0.125222, 0, 0, 0, 1, 0, -0.24148, 0 )
 shape = SubResource( 6 )
 disabled = false
 _sections_unfolded = [ "Transform" ]
 
-[node name="CollisionShape" type="CollisionShape" parent="KinematicBody" index="2"]
+[node name="CollisionShape" type="CollisionShape" parent="Player" index="2"]
 
 transform = Transform( 10, 0, 0, 0, 5, 0, 0, 0, 15, 11, -5, 0 )
 shape = SubResource( 7 )
 disabled = false
 _sections_unfolded = [ "Transform" ]
 
-[node name="CollisionShape2" type="CollisionShape" parent="KinematicBody" index="3"]
+[node name="CollisionShape2" type="CollisionShape" parent="Player" index="3"]
 
 transform = Transform( 10, 0, 0, 0, 5, 0, 0, 0, 15, -11, -5, 0 )
 shape = SubResource( 7 )
 disabled = false
 _sections_unfolded = [ "Transform" ]
 
-[node name="CollisionShape3" type="CollisionShape" parent="KinematicBody" index="4"]
+[node name="CollisionShape3" type="CollisionShape" parent="Player" index="4"]
 
 transform = Transform( -4.37114e-007, 0, -15, 0, 5, 0, 10, 0, -6.55671e-007, 0, -5, 11 )
 shape = SubResource( 7 )
 disabled = false
 _sections_unfolded = [ "Transform" ]
 
-[node name="CollisionShape4" type="CollisionShape" parent="KinematicBody" index="5"]
+[node name="CollisionShape4" type="CollisionShape" parent="Player" index="5"]
 
 transform = Transform( -4.37114e-007, 0, -15, 0, 5, 0, 10, 0, -6.55671e-007, 0, -5, -11 )
 shape = SubResource( 7 )
 disabled = false
 _sections_unfolded = [ "Transform" ]
 
-[node name="MeshInstance" type="MeshInstance" parent="KinematicBody" index="6"]
+[node name="MeshInstance" type="MeshInstance" parent="Player" index="6"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -5, 0 )
 layers = 1
@@ -440,7 +440,7 @@ skeleton = NodePath("..")
 material/0 = null
 _sections_unfolded = [ "Geometry", "Transform" ]
 
-[node name="MeshInstance2" type="MeshInstance" parent="KinematicBody" index="7"]
+[node name="MeshInstance2" type="MeshInstance" parent="Player" index="7"]
 
 transform = Transform( -4.37114e-008, 0, -1, 0, 1, 0, 1, 0, -4.37114e-008, 0, -5, 11 )
 layers = 1
@@ -457,7 +457,7 @@ skeleton = NodePath("..")
 material/0 = null
 _sections_unfolded = [ "Transform" ]
 
-[node name="MeshInstance3" type="MeshInstance" parent="KinematicBody" index="8"]
+[node name="MeshInstance3" type="MeshInstance" parent="Player" index="8"]
 
 transform = Transform( -4.37114e-008, 0, 1, 0, 1, 0, -1, 0, -4.37114e-008, 0, -5, -11 )
 layers = 1
@@ -474,7 +474,7 @@ skeleton = NodePath("..")
 material/0 = null
 _sections_unfolded = [ "Transform" ]
 
-[node name="MeshInstance4" type="MeshInstance" parent="KinematicBody" index="9"]
+[node name="MeshInstance4" type="MeshInstance" parent="Player" index="9"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11, -5, 0 )
 layers = 1

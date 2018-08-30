@@ -36,19 +36,19 @@ class Rect2: CoreType {
 
 
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
-        return cValuesOf(pos[0], pos[1], size[0], size[1]).getPointer(memScope)
+        return cValuesOf(pos[0].toFloat(), pos[1].toFloat(), size[0].toFloat(), size[1].toFloat()).getPointer(memScope)
     }
     override fun setRawMemory(mem: COpaquePointer) {
         val arr = mem.reinterpret<FloatVar>()
-        pos[0] = arr[0]
-        pos[1] = arr[1]
-        size[0] = arr[2]
-        size[1] = arr[3]
+        pos[0] = arr[0].toDouble()
+        pos[1] = arr[1].toDouble()
+        size[0] = arr[2].toDouble()
+        size[1] = arr[3].toDouble()
     }
 
 
 
-    fun getArea(): Float = size.width * size.height
+    fun getArea(): Double = size.width * size.height
 
     fun intersects(rect: Rect2): Boolean =
             when {
@@ -85,7 +85,7 @@ class Rect2: CoreType {
                 else     -> false
             }
 
-    fun grow(by: Float): Rect2 {
+    fun grow(by: Double): Rect2 {
         val g = this
         g.pos.x -= by
         g.pos.y -= by
@@ -119,8 +119,8 @@ class Rect2: CoreType {
     }
 
 
-    fun distanceTo(point: Vector2): Float {
-        var dist = 1e20f
+    fun distanceTo(point: Vector2): Double {
+        var dist = 1e20
         if (point.x < pos.x) {
             dist = min(dist,pos.x-point.x)
         }
@@ -133,8 +133,8 @@ class Rect2: CoreType {
         if (point.y >= (pos.y+size.y) ) {
             dist= min(point.y-(pos.y+size.y),dist)
         }
-        return if (dist==1e20f)
-            0f
+        return if (dist==1e20)
+            0.0
         else
             dist
     }
@@ -173,34 +173,34 @@ class Rect2: CoreType {
             pos.toString() + ", " + size.toString()
 
     fun intersectsSegment(from: Vector2, to: Vector2, boolPos: Boolean, boolNormal: Boolean): Triple<Boolean, Vector2?, Vector2?> {
-        var min = 0f
-        var max = 1f
+        var min = 0.0
+        var max = 1.0
         var axis = 0
-        var sign = 0f
+        var sign = 0.0
 
         for (i in 0..1) {
             val segFrom = from[i]
             val segTo = to[i]
             val boxBegin = pos[i]
             val boxEnd = boxBegin + size[i]
-            val cmin: Float
-            val cmax: Float
-            val csign: Float
+            val cmin: Double
+            val cmax: Double
+            val csign: Double
 
             if (segFrom < segTo) {
                 if (segFrom > boxEnd || segTo < boxBegin)
                     return Triple(false, null, null)
                 val length=segTo-segFrom
-                cmin = if (segFrom < boxBegin) ((boxBegin - segFrom)/length) else 0f
-                cmax = if (segTo > boxEnd) ((boxEnd - segFrom)/length) else 1f
-                csign = -1f
+                cmin = if (segFrom < boxBegin) ((boxBegin - segFrom)/length) else 0.0
+                cmax = if (segTo > boxEnd) ((boxEnd - segFrom)/length) else 1.0
+                csign = -1.0
             } else {
                 if (segTo > boxEnd || segFrom < boxBegin)
                     return Triple(false, null, null)
                 val length = segTo-segFrom
-                cmin = if (segFrom > boxEnd) (boxEnd - segFrom)/length else 0f
-                cmax = if (segTo < boxBegin) (boxBegin - segFrom)/length else 1f
-                csign = 1f
+                cmin = if (segFrom > boxEnd) (boxEnd - segFrom)/length else 0.0
+                cmax = if (segTo < boxBegin) (boxBegin - segFrom)/length else 1.0
+                csign = 1.0
             }
 
             if (cmin > min) {

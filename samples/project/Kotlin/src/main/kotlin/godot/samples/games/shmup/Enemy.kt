@@ -15,7 +15,7 @@ class Enemy: Area2D() {
         camera = getTree().getRoot().getNode(NodePath("Stage/Camera2D"))
     }
 
-    override fun _process(delta: Float) {
+    override fun _process(delta: Double) {
         checkCollisions()
     }
 

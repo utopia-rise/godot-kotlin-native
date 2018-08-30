@@ -6,23 +6,23 @@ import godot.gdnative.*
 import kotlinx.cinterop.*
 
 
-class Vector3(var x: Float, var y: Float, var z: Float) : Comparable<Vector3>, CoreType {
-    enum class Axis(val id: Int) {
+class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>, CoreType {
+    enum class Axis(val id: Long) {
         AXIS_X(0),
         AXIS_Y(1),
         AXIS_Z(2);
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
 
     constructor() :
-            this(0f, 0f, 0f)
+            this(0.0, 0.0, 0.0)
 
     constructor(x: Number, y: Number, z: Number) :
-            this(x.toFloat(), y.toFloat(), z.toFloat())
+            this(x.toDouble(), y.toDouble(), z.toDouble())
 
 
     internal constructor(native: CValue<godot_vector3>) : this() {
@@ -36,18 +36,18 @@ class Vector3(var x: Float, var y: Float, var z: Float) : Comparable<Vector3>, C
 
 
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
-        return cValuesOf(x, y, z).getPointer(memScope)
+        return cValuesOf(x.toFloat(), y.toFloat(), z.toFloat()).getPointer(memScope)
     }
     override fun setRawMemory(mem: COpaquePointer) {
         val arr = mem.reinterpret<FloatVar>()
-        x = arr[0]
-        y = arr[1]
-        z = arr[2]
+        x = arr[0].toDouble()
+        y = arr[1].toDouble()
+        z = arr[2].toDouble()
     }
 
 
 
-    operator fun get(n: Int): Float =
+    operator fun get(n: Int): Double =
             when (n) {
                 0 -> x
                 1 -> y
@@ -55,7 +55,7 @@ class Vector3(var x: Float, var y: Float, var z: Float) : Comparable<Vector3>, C
                 else -> throw IndexOutOfBoundsException()
             }
 
-    operator fun set(n: Int, f: Float): Unit =
+    operator fun set(n: Int, f: Double): Unit =
             when (n) {
                 0 -> x = f
                 1 -> y = f
@@ -75,10 +75,10 @@ class Vector3(var x: Float, var y: Float, var z: Float) : Comparable<Vector3>, C
     operator fun div(vec: Vector3): Vector3 =
             Vector3(x / vec.x, y / vec.y, z / vec.z)
 
-    operator fun times(scalar: Float): Vector3 =
+    operator fun times(scalar: Double): Vector3 =
             Vector3(x * scalar, y * scalar, z * scalar)
 
-    operator fun div(scalar: Float): Vector3 =
+    operator fun div(scalar: Double): Vector3 =
             Vector3(x / scalar, y / scalar, z / scalar)
 
     operator fun unaryMinus(): Vector3 =
@@ -121,46 +121,46 @@ class Vector3(var x: Float, var y: Float, var z: Float) : Comparable<Vector3>, C
                     (z * b.x) - (x * b.z),
                     (x * b.y) - (y * b.x))
 
-    fun linearInterpolate(b: Vector3, t: Float): Vector3 =
+    fun linearInterpolate(b: Vector3, t: Double): Vector3 =
             Vector3(x + (t * (b.x - x)),
                     y + (t * (b.y - y)),
                     z + (t * (b.z - z)))
 
-    fun cubicInterpolate(b: Vector3, pre: Vector3, post: Vector3, t: Float): Vector3 {
+    fun cubicInterpolate(b: Vector3, pre: Vector3, post: Vector3, t: Double): Vector3 {
         val p0: Vector3 = pre
         val p1: Vector3 = this
         val p2: Vector3 = b
         val p3: Vector3 = post
 
-        val t2: Float = t * t
-        val t3: Float = t2 * t
+        val t2: Double = t * t
+        val t3: Double = t2 * t
 
-        return ((p1 * 2.0f) +
+        return ((p1 * 2.0) +
                 (-p0 + p2) * t +
-                (p0 * 2.0f - p1 * 5.0f + p2 * 4f - p3) * t2 +
-                (-p0 + p1 * 3.0f - p2 * 3.0f + p3) * t3) * 0.5f
+                (p0 * 2.0 - p1 * 5.0 + p2 * 4.0 - p3) * t2 +
+                (-p0 + p1 * 3.0 - p2 * 3.0 + p3) * t3) * 0.5
     }
 
-    fun length(): Float =
+    fun length(): Double =
             sqrt(x * x + y * y + z * z)
 
-    fun lengthSquared(): Float =
+    fun lengthSquared(): Double =
             x * x + y * y + z * z
 
-    fun distanceSquaredTo(b: Vector3): Float =
+    fun distanceSquaredTo(b: Vector3): Double =
             (b - this).length()
 
-    fun distanceTo(b: Vector3): Float =
+    fun distanceTo(b: Vector3): Double =
             (b - this).lengthSquared()
 
-    fun dot(b: Vector3): Float =
+    fun dot(b: Vector3): Double =
             x * b.x + y * b.y + z * b.z
 
     fun floor(): Vector3 =
             Vector3(kotlin.math.floor(x), kotlin.math.floor(y), kotlin.math.floor(z))
 
     fun inverse(): Vector3 =
-            Vector3(1f / x, 1f / y, 1f / z)
+            Vector3(1.0 / x, 1.0 / y, 1.0 / z)
 
     fun maxAxis(): Int =
             if (x < y)
@@ -179,11 +179,11 @@ class Vector3(var x: Float, var y: Float, var z: Float) : Comparable<Vector3>, C
                 else 2
 
     fun normalize() {
-        val l: Float = this.length()
-        if (l == 0f) {
-            x = 0f
-            y = 0f
-            z = 0f
+        val l: Double = this.length()
+        if (l == 0.0) {
+            x = 0.0
+            y = 0.0
+            z = 0.0
         } else {
             x /= l
             y /= l
@@ -198,15 +198,15 @@ class Vector3(var x: Float, var y: Float, var z: Float) : Comparable<Vector3>, C
     }
 
     fun reflect(by: Vector3): Vector3 =
-            by - this * this.dot(by) * 2f
+            by - this * this.dot(by) * 2.0
 
-    fun rotated(axis: Vector3, phi: Float): Vector3 {
+    fun rotated(axis: Vector3, phi: Double): Vector3 {
         val v = this
         v.rotate(axis, phi)
         return v
     }
 
-    fun rotate(axis: Vector3, phi: Float) {
+    fun rotate(axis: Vector3, phi: Double) {
         val ret = Basis(axis, phi).xform(this)
         this.x = ret.x
         this.y = ret.y
@@ -216,15 +216,15 @@ class Vector3(var x: Float, var y: Float, var z: Float) : Comparable<Vector3>, C
     fun slide(by: Vector3): Vector3 =
             by - this * this.dot(by)
 
-    fun snap(vecal: Float) {
-        if (vecal != 0f) {
-            x = kotlin.math.floor(x / vecal + 0.5f) * vecal
-            y = kotlin.math.floor(y / vecal + 0.5f) * vecal
-            z = kotlin.math.floor(z / vecal + 0.5f) * vecal
+    fun snap(vecal: Double) {
+        if (vecal != 0.0) {
+            x = kotlin.math.floor(x / vecal + 0.5) * vecal
+            y = kotlin.math.floor(y / vecal + 0.5) * vecal
+            z = kotlin.math.floor(z / vecal + 0.5) * vecal
         }
     }
 
-    fun snapped(by: Float): Vector3 {
+    fun snapped(by: Double): Vector3 {
         val v: Vector3 = this
         v.snap(by)
         return v
@@ -235,7 +235,7 @@ class Vector3(var x: Float, var y: Float, var z: Float) : Comparable<Vector3>, C
     override fun hashCode(): Int = this.toString().hashCode()
 }
 
-operator fun Float.times(vecec: Vector3) =
+operator fun Double.times(vecec: Vector3) =
         vecec * this
 
 fun vec3Cross(a: Vector3, b: Vector3): Vector3 =

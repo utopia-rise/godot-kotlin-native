@@ -12,7 +12,7 @@
                 },
                 {
                     "name": "_process",
-                    "arguments": ["Float"]
+                    "arguments": ["Double"]
                 },
                 {
                     "name": "_on_Player_body_entered",

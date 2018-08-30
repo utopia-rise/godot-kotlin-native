@@ -14,10 +14,10 @@ class Camera: Camera2D() {
     var previousY = 0.0
     var lastOffset = Vector2(0, 0)
 
-    override fun _process(delta: Float) {
+    override fun _process(delta: Double) {
         if (timer == 0.0){
-            if(offset.length() > 1f)
-                offset /= 4f
+            if(offset.length() > 1.0)
+                offset /= 4.0
             else
                 offset = Vector2()
             return

@@ -40,24 +40,24 @@ class Transform: CoreType {
 
 
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
-        return cValuesOf(basis[0][0], basis[0][1], basis[0][2], basis[1][0],
-                basis[1][1],basis[1][2],basis[2][0],basis[2][1],
-                basis[2][2], origin[0], origin[1], origin[2]).getPointer(memScope)
+        return cValuesOf(basis[0][0].toFloat(), basis[0][1].toFloat(), basis[0][2].toFloat(), basis[1][0].toFloat(),
+                basis[1][1].toFloat(), basis[1][2].toFloat(), basis[2][0].toFloat(), basis[2][1].toFloat(),
+                basis[2][2].toFloat(), origin[0].toFloat(), origin[1].toFloat(), origin[2].toFloat()).getPointer(memScope)
     }
     override fun setRawMemory(mem: COpaquePointer) {
         val arr = mem.reinterpret<FloatVar>()
-        basis[0][0] = arr[0]
-        basis[0][1] = arr[1]
-        basis[0][2] = arr[2]
-        basis[1][0] = arr[3]
-        basis[1][1] = arr[4]
-        basis[1][2] = arr[5]
-        basis[2][0] = arr[6]
-        basis[2][1] = arr[7]
-        basis[2][2] = arr[8]
-        origin[0] = arr[9]
-        origin[1] = arr[10]
-        origin[2] = arr[11]
+        basis[0][0] = arr[0].toDouble()
+        basis[0][1] = arr[1].toDouble()
+        basis[0][2] = arr[2].toDouble()
+        basis[1][0] = arr[3].toDouble()
+        basis[1][1] = arr[4].toDouble()
+        basis[1][2] = arr[5].toDouble()
+        basis[2][0] = arr[6].toDouble()
+        basis[2][1] = arr[7].toDouble()
+        basis[2][2] = arr[8].toDouble()
+        origin[0] = arr[9].toDouble()
+        origin[1] = arr[10].toDouble()
+        origin[2] = arr[11].toDouble()
     }
 
 
@@ -68,18 +68,18 @@ class Transform: CoreType {
     }
 
     fun set(xx: Number, xy: Number, xz: Number, yx: Number, yy: Number, yz: Number, zx: Number, zy: Number, zz: Number, tx: Number, ty: Number, tz: Number) {
-        basis[0][0] = xx.toFloat()
-        basis[0][1] = xy.toFloat()
-        basis[0][2] = xz.toFloat()
-        basis[1][0] = yx.toFloat()
-        basis[1][1] = yy.toFloat()
-        basis[1][2] = yz.toFloat()
-        basis[2][0] = zx.toFloat()
-        basis[2][1] = zy.toFloat()
-        basis[2][2] = zz.toFloat()
-        origin[0] = tx.toFloat()
-        origin[1] = ty.toFloat()
-        origin[2] = tz.toFloat()
+        basis[0][0] = xx.toDouble()
+        basis[0][1] = xy.toDouble()
+        basis[0][2] = xz.toDouble()
+        basis[1][0] = yx.toDouble()
+        basis[1][1] = yy.toDouble()
+        basis[1][2] = yz.toDouble()
+        basis[2][0] = zx.toDouble()
+        basis[2][1] = zy.toDouble()
+        basis[2][2] = zz.toDouble()
+        origin[0] = tx.toDouble()
+        origin[1] = ty.toDouble()
+        origin[2] = tz.toDouble()
     }
 
     fun xform(vector: Vector3): Vector3 =
@@ -179,16 +179,16 @@ class Transform: CoreType {
         return ret
     }
 
-    fun rotate(axis: Vector3, phi: Float) {
+    fun rotate(axis: Vector3, phi: Double) {
         val t = rotated(axis, phi)
         this.basis = t.basis
         this.origin = t.origin
     }
 
-    fun rotated(axis: Vector3, phi: Float): Transform =
+    fun rotated(axis: Vector3, phi: Double): Transform =
             Transform(Basis( axis, phi ), Vector3()) * this
 
-    fun rotateBasis(axis: Vector3, phi: Float) {
+    fun rotateBasis(axis: Vector3, phi: Double) {
         basis.rotate(axis, phi)
     }
 
@@ -215,7 +215,7 @@ class Transform: CoreType {
         origin = eye
     }
 
-    fun interpolateWith(transform: Transform, c: Float): Transform {
+    fun interpolateWith(transform: Transform, c: Double): Transform {
         val srcScale = basis.getScale()
         val srcRot = Quat(basis)
         val srcLoc = origin
@@ -252,7 +252,7 @@ class Transform: CoreType {
             origin[i] += basis[i].dot(translation)
     }
 
-    fun translate(tx: Float, ty: Float, tz: Float) =
+    fun translate(tx: Double, ty: Double, tz: Double) =
             translate(Vector3(tx, ty, tz))
 
     fun translated(translation: Vector3): Transform {

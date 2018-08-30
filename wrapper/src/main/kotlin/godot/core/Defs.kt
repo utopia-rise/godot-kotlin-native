@@ -2,7 +2,7 @@
 package godot.core
 
 
-enum class GodotError(val id: Int) {
+enum class GodotError(val id: Long) {
     OK(0),
     FAILED(1), ///< Generic fail error
     ERR_UNAVAILABLE(2), ///< What is requested is unsupported/unavailable
@@ -57,12 +57,12 @@ enum class GodotError(val id: Int) {
     ;
 
     companion object {
-        fun fromInt(value: Int) = values().single { it.id == value }
+        fun fromInt(value: Long) = values().single { it.id == value }
     }
 }
 
 
-const val CMP_EPSILON = 0.00001f
+const val CMP_EPSILON = 0.00001
 const val CMP_EPSILON2 = CMP_EPSILON * CMP_EPSILON
 const val Math_PI = 3.14159265358979323846
 

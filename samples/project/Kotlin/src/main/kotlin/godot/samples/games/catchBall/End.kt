@@ -5,9 +5,9 @@ import godot.core.*
 
 class End: Area() {
 
-    override fun _process(delta: Float) {
-        val arr = getOverlappingBodies()
-        if(arr.size() > 0)
+    override fun _process(delta: Double) {
+        if(getOverlappingBodies().size() == 1)
             GD.print("END")
+            setProcess(false)
     }
 }

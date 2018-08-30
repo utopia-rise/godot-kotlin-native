@@ -19,7 +19,7 @@ class Stage: Node() {
         addChild(player)
     }
 
-    override fun _process(delta: Float) {
+    override fun _process(delta: Double) {
         respawnTime++
         val count = getTree().getNodesInGroup("enemies").size()
         if(respawnTime > 30 && count < 4) {

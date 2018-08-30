@@ -34,7 +34,7 @@ fun String.isEnum(): Boolean {
 }
 
 fun String.isPrimitive(): Boolean {
-    val primitives = listOf("Int", "Float", "Boolean", "Unit")
+    val primitives = listOf("Long", "Double", "Boolean", "Unit")
     return primitives.find { s -> s == this } != null
 }
 
@@ -112,9 +112,9 @@ fun String.convertToCamelCase(): String {
 
 fun String.convertTypeToKotlin(): String {
     if (this == "int")
-        return "Int"
+        return "Long"
     if (this == "float")
-        return "Float"
+        return "Double"
     if (this == "bool")
         return "Boolean"
     if (this == "void")
@@ -127,7 +127,7 @@ fun String.convertTypeToKotlin(): String {
 
 fun String.convertTypeForICalls(): String {
     if (this.isEnum())
-        return "Int"
+        return "Long"
     if (this.isPrimitive() || this.isCoreType())
         return this
     return "Object"
@@ -136,8 +136,8 @@ fun String.convertTypeForICalls(): String {
 
 
 fun String.defaultValue(): String = when (this) {
-    "Int" -> "0"
-    "Float" -> "0f"
+    "Long" -> "0"
+    "Double" -> "0.0"
     "Boolean" -> "false"
-    else -> "null"
+    else -> "null" // TODO: throw
 }

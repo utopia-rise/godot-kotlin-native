@@ -13,12 +13,12 @@ class Plane: CoreType {
     }
 
     var normal: Vector3
-    var d: Float = 0f
+    var d: Double = 0.0
 
 
     constructor(normal: Vector3, d: Number) {
         this.normal = normal
-        this.d = d.toFloat()
+        this.d = d.toDouble()
     }
 
     constructor(point: Vector3, normal: Vector3) {
@@ -57,14 +57,14 @@ class Plane: CoreType {
 
 
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
-        return cValuesOf(normal[0], normal[1], normal[2], d).getPointer(memScope)
+        return cValuesOf(normal[0].toFloat(), normal[1].toFloat(), normal[2].toFloat(), d.toFloat()).getPointer(memScope)
     }
     override fun setRawMemory(mem: COpaquePointer) {
         val arr = mem.reinterpret<FloatVar>()
-        normal[0] = arr[0]
-        normal[1] = arr[1]
-        normal[2] = arr[2]
-        d = arr[3]
+        normal[0] = arr[0].toDouble()
+        normal[1] = arr[1].toDouble()
+        normal[2] = arr[2].toDouble()
+        d = arr[3].toDouble()
     }
 
 
@@ -74,9 +74,9 @@ class Plane: CoreType {
 
     fun normalize() {
         val l = normal.length()
-        if (l == 0f) {
+        if (l == 0.0) {
             this.normal = Vector3()
-            this.d = 0f
+            this.d = 0.0
             return
         }
         normal /= l
@@ -159,10 +159,10 @@ class Plane: CoreType {
     fun isPointOver(point: Vector3): Boolean =
             normal.dot(point) > d
 
-    fun distanceTo(point: Vector3): Float =
+    fun distanceTo(point: Vector3): Double =
             normal.dot(point) - d
 
-    fun hasPoint(point: Vector3, epsilon: Float): Boolean {
+    fun hasPoint(point: Vector3, epsilon: Double): Boolean {
         val dist = abs(normal.dot(point) - d)
         return dist <= epsilon
     }

@@ -39,17 +39,18 @@ class AABB: CoreType {
 
 
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
-        return cValuesOf(position[0], position[1], position[2], size[0], size[1], size[2]).getPointer(memScope)
+        return cValuesOf(position[0].toFloat(), position[1].toFloat(), position[2].toFloat(),
+                         size[0].toFloat(), size[1].toFloat(), size[2].toFloat()).getPointer(memScope)
     }
 
     override fun setRawMemory(mem: COpaquePointer) {
         val arr = mem.reinterpret<FloatVar>()
-        position[0] = arr[0]
-        position[1] = arr[1]
-        position[2] = arr[2]
-        size[0] = arr[3]
-        size[1] = arr[4]
-        size[2] = arr[5]
+        position[0] = arr[0].toDouble()
+        position[1] = arr[1].toDouble()
+        position[2] = arr[2].toDouble()
+        size[0] = arr[3].toDouble()
+        size[1] = arr[4].toDouble()
+        size[2] = arr[5].toDouble()
     }
 
 
@@ -96,13 +97,13 @@ class AABB: CoreType {
     }
 
     fun getSupport(normal: Vector3): Vector3 {
-        val halfExtents = size * 0.5f
+        val halfExtents = size * 0.5
         val ofs = position + halfExtents
 
         return Vector3(
-                if (normal.x > 0f) -halfExtents.x else halfExtents.x,
-                if (normal.y > 0f) -halfExtents.y else halfExtents.y,
-                if (normal.z > 0f) -halfExtents.z else halfExtents.z
+                if (normal.x > 0.0) -halfExtents.x else halfExtents.x,
+                if (normal.y > 0.0) -halfExtents.y else halfExtents.y,
+                if (normal.z > 0.0) -halfExtents.z else halfExtents.z
         ) + ofs
     }
 
@@ -120,7 +121,7 @@ class AABB: CoreType {
         }
 
     fun intersectsConvexShape(planes: Array<Plane>, planeCount: Int): Boolean {
-        val halfExtents = size * 0.5f
+        val halfExtents = size * 0.5
         val ofs = position + halfExtents
 
         for (i in 0 until planeCount) {
@@ -171,17 +172,17 @@ class AABB: CoreType {
         size = end - begin
     }
 
-    fun projectRangeInPlane(plane: Plane): Pair<Float, Float> {
-        val halfExtents = size * 0.5f
+    fun projectRangeInPlane(plane: Plane): Pair<Double, Double> {
+        val halfExtents = size * 0.5
         val center = position + halfExtents
 
-        val length: Float = plane.normal.abs().dot(halfExtents)
-        val distance: Float = plane.distanceTo(center)
+        val length: Double = plane.normal.abs().dot(halfExtents)
+        val distance: Double = plane.distanceTo(center)
 
         return Pair(distance - length, distance + length)
     }
 
-    fun getLongestAxisSize(): Float {
+    fun getLongestAxisSize(): Double {
         var maxSize = size.x
         if (size.y > maxSize) {
             maxSize = size.y
@@ -192,7 +193,7 @@ class AABB: CoreType {
         return maxSize
     }
 
-    fun getShortestAxisSize(): Float {
+    fun getShortestAxisSize(): Double {
         var minSize = size.x
         if (size.y < minSize) {
             minSize = size.y
@@ -205,18 +206,18 @@ class AABB: CoreType {
         return minSize
     }
 
-    fun smitsIntersectRat(from: Vector3, dir: Vector3, t0: Float, t1: Float): Boolean {
-        val divx = 1f / dir.x
-        val divy = 1f / dir.y
-        val divz = 1f / dir.z
+    fun smitsIntersectRat(from: Vector3, dir: Vector3, t0: Double, t1: Double): Boolean {
+        val divx = 1.0 / dir.x
+        val divy = 1.0 / dir.y
+        val divz = 1.0 / dir.z
 
         val upbound = position + size
-        var tmin: Float
-        var tmax: Float
-        val tymin: Float
-        val tymax: Float
-        val tzmin: Float
-        val tzmax: Float
+        var tmin: Double
+        var tmax: Double
+        val tymin: Double
+        val tymax: Double
+        val tzmin: Double
+        val tzmax: Double
 
         if (dir.x >= 0) {
             tmin = (position.x - from.x) * divx
@@ -254,16 +255,16 @@ class AABB: CoreType {
         return ((tmin < t1) && (tmax > t0))
     }
 
-    fun growBy(amount: Float) {
+    fun growBy(amount: Double) {
         position.x -= amount
         position.y -= amount
         position.z -= amount
-        size.x += 2f * amount
-        size.y += 2f * amount
-        size.z += 2f * amount
+        size.x += 2.0 * amount
+        size.y += 2.0 * amount
+        size.z += 2.0 * amount
     }
 
-    fun getArea(): Float =
+    fun getArea(): Double =
             size.x * size.y * size.z
 
     override fun equals(other: Any?): Boolean =
@@ -330,12 +331,12 @@ class AABB: CoreType {
         var c1 = Vector3()
         var c2 = Vector3()
         val end = position + size
-        var near = (-1e20).toFloat()
-        var far = 1e20.toFloat()
+        var near = (-1e20).toDouble()
+        var far = 1e20.toDouble()
         var axis = 0
 
         for (i in 0 until 3) {
-            if (dir[i] == 0f) {
+            if (dir[i] == 0.0) {
                 if ((from[i] < position[i]) || (from[i] > end[i])) {
                     return Triple(false, null, null)
                 }
@@ -365,7 +366,7 @@ class AABB: CoreType {
             ret1 = c1
         if (normal) {
             ret2 = Vector3()
-            ret2[axis] = if (dir[axis] != 0f) -1f else 1f
+            ret2[axis] = if (dir[axis] != 0.0) -1.0 else 1.0
         }
         return Triple(true, ret1, ret2)
     }
@@ -376,35 +377,35 @@ class AABB: CoreType {
 //    }
 
     fun intersectsSegment(from: Vector3, to: Vector3, clip: Boolean, normal: Boolean): Triple<Boolean, Vector3?, Vector3?> {
-        var min = 0f
-        var max = 0f
+        var min = 0.0
+        var max = 0.0
         var axis = 0
-        var sign = 0f
+        var sign = 0.0
 
         for (i in 0..2) {
             val segFrom = from[i]
             val segTo = to[i]
             val boxBegin = position[i]
             val boxEnd = boxBegin + size[i]
-            val cmin: Float
-            val cmax: Float
-            val csign: Float
+            val cmin: Double
+            val cmax: Double
+            val csign: Double
 
             if (segFrom < segTo) {
 
                 if (segFrom > boxEnd || segTo < boxBegin)
                     return Triple(false, null, null)
                 val length = segTo - segFrom
-                cmin = if (segFrom < boxBegin) ((boxBegin - segFrom) / length) else 0f
-                cmax = if (segTo > boxEnd) ((boxEnd - segFrom) / length) else 1f
-                csign = -1f
+                cmin = if (segFrom < boxBegin) ((boxBegin - segFrom) / length) else 0.0
+                cmax = if (segTo > boxEnd) ((boxEnd - segFrom) / length) else 1.0
+                csign = -1.0
             } else {
                 if (segTo > boxEnd || segFrom < boxBegin)
                     return Triple(false, null, null)
                 val length = segTo - segFrom
-                cmin = if (segFrom > boxEnd) (boxEnd - segFrom) / length else 0f
-                cmax = if (segTo < boxBegin) (boxBegin - segFrom) / length else 1f
-                csign = 1f
+                cmin = if (segFrom > boxEnd) (boxEnd - segFrom) / length else 0.0
+                cmax = if (segTo < boxBegin) (boxBegin - segFrom) / length else 1.0
+                csign = 1.0
             }
             if (cmin > min) {
                 min = cmin
@@ -455,16 +456,16 @@ class AABB: CoreType {
     }
 
     fun getLongestAxis(): Vector3 {
-        var axis = Vector3(1f, 0f, 0f)
+        var axis = Vector3(1.0, 0.0, 0.0)
         var maxSize = size.x
 
         if (size.y > maxSize) {
-            axis = Vector3(0f, 1f, 0f)
+            axis = Vector3(0.0, 1.0, 0.0)
             maxSize = size.y
         }
 
         if (size.z > maxSize) {
-            axis = Vector3(0f, 0f, 1f)
+            axis = Vector3(0.0, 0.0, 1.0)
         }
 
         return axis
@@ -487,16 +488,16 @@ class AABB: CoreType {
     }
 
     fun getShortestAxis(): Vector3 {
-        var axis = Vector3(1f, 0f, 0f)
+        var axis = Vector3(1.0, 0.0, 0.0)
         var minSize = size.x
 
         if (size.y < minSize) {
-            axis = Vector3(0f, 1f, 0f)
+            axis = Vector3(0.0, 1.0, 0.0)
             minSize = size.y
         }
 
         if (size.z < minSize) {
-            axis = Vector3(0f, 0f, 1f)
+            axis = Vector3(0.0, 0.0, 1.0)
         }
 
         return axis
@@ -530,7 +531,7 @@ class AABB: CoreType {
         return aabb
     }
 
-    fun grow(p_by: Float): AABB {
+    fun grow(p_by: Double): AABB {
         val aabb = this
         aabb.growBy(p_by)
         return aabb

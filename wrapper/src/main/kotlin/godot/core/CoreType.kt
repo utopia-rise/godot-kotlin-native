@@ -11,11 +11,11 @@ internal interface CoreType {
 }
 
 
-fun Int.getRawMemory(memScope: MemScope): COpaquePointer {
-    return cValuesOf(this.toLong()).getPointer(memScope)
+fun Long.getRawMemory(memScope: MemScope): COpaquePointer {
+    return cValuesOf(this).getPointer(memScope)
 }
-fun Float.getRawMemory(memScope: MemScope): COpaquePointer {
-    return cValuesOf(this.toDouble()).getPointer(memScope)
+fun Double.getRawMemory(memScope: MemScope): COpaquePointer {
+    return cValuesOf(this).getPointer(memScope)
 }
 fun Boolean.getRawMemory(memScope: MemScope): COpaquePointer {
     return cValuesOf(this.toByte()).getPointer(memScope)

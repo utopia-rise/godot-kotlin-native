@@ -6,7 +6,7 @@ class ICall(
 
     init {
         if (returnType.isEnum())
-            returnType = "Int"
+            returnType = "Long"
 
         name = buildString {
             append("_icall_$returnType")

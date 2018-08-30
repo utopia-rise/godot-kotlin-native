@@ -12,6 +12,6 @@ class Ball: RigidBody() {
                 Random.nextInt(endInclusive - start) + start
 
         Random.seed = getTimeNanos()
-        linearVelocity = Vector3((-70..70).random().toFloat() / 10f , 0, (-70..70).random().toFloat() / 10f)
+        linearVelocity = Vector3((-70..70).random().toDouble() / 10 , 0, (-70..70).random().toDouble() / 10)
     }
 }

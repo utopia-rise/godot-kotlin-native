@@ -5,12 +5,12 @@ import godot.gdnative.*
 import kotlinx.cinterop.*
 import kotlin.math.*
 
-class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Comparable<Color>, CoreType {
+class Color(var r: Double, var g: Double, var b: Double, var a: Double = 1.0) : Comparable<Color>, CoreType {
     constructor() :
-            this(0f, 0f, 0f, 1f)
+            this(0.0, 0.0, 0.0, 1.0)
 
-    constructor(r: Number, g: Number, b: Number, a: Number = 1f) :
-            this(r.toFloat(), g.toFloat(), b.toFloat(), a.toFloat())
+    constructor(r: Number, g: Number, b: Number, a: Number = 1.0) :
+            this(r.toDouble(), g.toDouble(), b.toDouble(), a.toDouble())
 
 
 
@@ -25,20 +25,20 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
 
 
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
-        return cValuesOf(r, g, b, a).getPointer(memScope)
+        return cValuesOf(r.toFloat(), g.toFloat(), b.toFloat(), a.toFloat()).getPointer(memScope)
     }
 
     override fun setRawMemory(mem: COpaquePointer) {
         val arr = mem.reinterpret<FloatVar>()
-        r = arr[0]
-        g = arr[1]
-        b = arr[2]
-        a = arr[3]
+        r = arr[0].toDouble()
+        g = arr[1].toDouble()
+        b = arr[2].toDouble()
+        a = arr[3].toDouble()
     }
 
 
 
-    operator fun get(n: Int): Float =
+    operator fun get(n: Int): Double =
             when (n) {
                 0 -> r
                 1 -> g
@@ -47,7 +47,7 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
                 else -> throw IndexOutOfBoundsException()
             }
 
-    operator fun set(n: Int, f: Float): Unit =
+    operator fun set(n: Int, f: Double): Unit =
             when (n) {
                 0 -> r = f
                 1 -> g = f
@@ -86,17 +86,17 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
         return c
     }
 
-    fun gray(): Float =
-            (r + g + b) / 3f
+    fun gray(): Double =
+            (r + g + b) / 3.0
 
-    fun geth(): Float {
+    fun geth(): Double {
         var min = minOf(r, g)
         min = minOf(min, b)
         var max = maxOf(r, g)
         max = maxOf(max, b)
 
         val delta = max - min
-        if (delta == 0f) return 0f
+        if (delta == 0.0) return 0.0
 
         var h = when {
             r == max -> (g - b) / delta         // between yellow & magenta
@@ -104,38 +104,38 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
             else -> 4 + (r - g) / delta         // between magenta & cyan
         }
 
-        h /= 6f
+        h /= 6.0
         if (h < 0)
-            h += 1f
+            h += 1.0
 
         return h
     }
 
-    fun gets(): Float {
+    fun gets(): Double {
         var min = minOf(r, g)
         min = minOf(min, b)
         var max = maxOf(r, g)
         max = maxOf(max, b)
 
         val delta = max - min
-        return if (max != 0f) delta / max else 0f
+        return if (max != 0.0) delta / max else 0.0
     }
 
-    fun getv(): Float {
+    fun getv(): Double {
         var max = maxOf(r, g)
         max = maxOf(max, b)
         return max
     }
 
-    fun sethsv(h: Float, s: Float, v: Float, alpha: Float) {
+    fun sethsv(h: Double, s: Double, v: Double, alpha: Double) {
         val i = floor(h).toInt()
-        val f: Float
+        val f: Double
         val p = v * (1 - s)
-        val q: Float
-        val t: Float
+        val q: Double
+        val t: Double
 
         a = alpha
-        if (s == 0f) {
+        if (s == 0.0) {
             // acp_chromatic (grey)
             r = v
             g = v
@@ -143,8 +143,8 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
             return
         }
 
-        var h2 = h * 6f
-        h2 = h2.rem(6f)
+        var h2 = h * 6.0
+        h2 = h2.rem(6.0)
 
         f = h2 - i
         q = v * (1 - s * f)
@@ -185,9 +185,9 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
     }
 
     fun invert() {
-        r = 1f - r
-        g = 1f - g
-        b = 1f - b
+        r = 1.0 - r
+        g = 1.0 - g
+        b = 1.0 - b
     }
 
     fun inverted(): Color {
@@ -197,9 +197,9 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
     }
 
     fun contrast() {
-        r = (r + 0.5f).rem(1f)
-        g = (g + 0.5f).rem(1f)
-        b = (b + 0.5f).rem(1f)
+        r = (r + 0.5).rem(1.0)
+        g = (g + 0.5).rem(1.0)
+        b = (b + 0.5).rem(1.0)
     }
 
     fun contrasted(): Color {
@@ -208,7 +208,7 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
         return c
     }
 
-    fun linearInterpolate(otherColor: Color, t: Float): Color {
+    fun linearInterpolate(otherColor: Color, t: Double): Color {
         val res = this
         res.r += (t * (otherColor.r - r))
         res.g += (t * (otherColor.g - g))
@@ -220,9 +220,9 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
 
     fun blend(over: Color): Color {
         val res = Color()
-        val sa = 1f - over.a
-        if (res.a == 0f) {
-            return Color(0f, 0f, 0f, 0f)
+        val sa = 1.0 - over.a
+        if (res.a == 0.0) {
+            return Color(0.0, 0.0, 0.0, 0.0)
         } else {
             res.r = (r * a * sa + over.r * over.a) / res.a
             res.g = (g * a * sa + over.g * over.a) / res.a
@@ -232,20 +232,20 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
     }
 
     fun toLinear(): Color {
-        val red = if (r < 0.04045f) r * (1.0f / 12.92f) else ((r + 0.055f) * (1.0f / (1f + 0.055f))).pow(2.4f)
-        val green = if (g < 0.04045f) g * (1.0f / 12.92f) else ((g + 0.055f) * (1.0f / (1f + 0.055f))).pow(2.4f)
-        val blue = if (b < 0.04045f) b * (1.0f / 12.92f) else ((b + 0.055f) * (1.0f / (1f + 0.055f))).pow(2.4f)
+        val red = if (r < 0.04045) r * (1.0 / 12.92) else ((r + 0.055) * (1.0 / (1.0 + 0.055))).pow(2.4)
+        val green = if (g < 0.04045) g * (1.0 / 12.92) else ((g + 0.055) * (1.0 / (1.0 + 0.055))).pow(2.4)
+        val blue = if (b < 0.04045) b * (1.0 / 12.92) else ((b + 0.055) * (1.0 / (1.0 + 0.055))).pow(2.4)
         return Color(red, green, blue, a)
     }
 
     fun hex(p_hex: Int): Color {
-        val a: Float = (p_hex and 0xFF) / 255f
+        val a: Double = (p_hex and 0xFF) / 255.0
         var hex = p_hex shr 8
-        val b: Float = (hex and 0xFF) / 255f
+        val b: Double = (hex and 0xFF) / 255.0
         hex = hex shr 8
-        val g: Float = (hex and 0xFF) / 255f
+        val g: Double = (hex and 0xFF) / 255.0
         hex = hex shr 8
-        val r: Float = (hex and 0xFF) / 255f
+        val r: Double = (hex and 0xFF) / 255.0
 
         return Color(r, g, b, a)
     }
@@ -279,7 +279,7 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
             return null
         }
 
-        return Color(r / 255.0f, g / 255.0f, b / 255.0f, a / 255.0f)
+        return Color(r / 255.0, g / 255.0, b / 255.0, a / 255.0)
     }
 
     fun htmlIsValid(p_color: String): Boolean {
@@ -316,8 +316,8 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
 
 
     companion object {
-        fun parseCol(p_str: String, p_ofs: Int): Float {
-            var ig = 0f
+        fun parseCol(p_str: String, p_ofs: Int): Double {
+            var ig = 0.0
             for (i in 0..1) {
                 var v: Int
                 val c: Char = p_str[i + p_ofs]
@@ -332,7 +332,7 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
                         v = c.toInt() - 'A'.toInt()
                         v += 10
                     }
-                    else -> return -1f
+                    else -> return -1.0
                 }
 
                 ig += if (i == 0)
@@ -343,7 +343,7 @@ class Color(var r: Float, var g: Float, var b: Float, var a: Float = 1f) : Compa
             return ig
         }
 
-        fun toHex(p_val: Float): String {
+        fun toHex(p_val: Double): String {
             var v = (p_val * 255).toInt()
             v = when {
                 v < 0 -> 0
