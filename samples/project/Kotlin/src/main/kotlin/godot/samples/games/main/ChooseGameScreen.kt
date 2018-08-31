@@ -12,17 +12,21 @@ class ChooseGameScreen: Node() {
     lateinit var playFastFinishButton: Button
 
     override fun _ready() {
-        playDodgeButton = Button from getNode(NodePath("MenuButtons/PlayDodgeButton"))
-        playShmupButton = Button from getNode(NodePath("MenuButtons/PlayShmupButton"))
-        playCatchBallButton = Button from getNode(NodePath("MenuButtons/PlayCatchBallButton"))
-        playFastFinishButton = Button from getNode(NodePath("MenuButtons/PlayFastFinishButton"))
-        backButton = Button from getNode(NodePath("MenuButtons/BackButton"))
-
-        playDodgeButton.connect("pressed", this, "_onPlayDodgeButtonPressed")
-        playShmupButton.connect("pressed", this, "_onPlayShmupButtonPressed")
-        playCatchBallButton.connect("pressed", this, "_onPlayCatchBallButtonPressed")
-        playFastFinishButton.connect("pressed", this, "_onPlayFastFinishButtonPressed")
-        backButton.connect("pressed", this, "_onBackButtonPressed")
+        playDodgeButton = (Button from getNode(NodePath("MenuButtons/PlayDodgeButton"))).apply {
+            connect("pressed", this@ChooseGameScreen, "_onPlayDodgeButtonPressed")
+        }
+        playShmupButton = (Button from getNode(NodePath("MenuButtons/PlayShmupButton"))).apply {
+            connect("pressed", this@ChooseGameScreen, "_onPlayShmupButtonPressed")
+        }
+        playCatchBallButton = (Button from getNode(NodePath("MenuButtons/PlayCatchBallButton"))).apply {
+            connect("pressed", this@ChooseGameScreen, "_onPlayCatchBallButtonPressed")
+        }
+        playFastFinishButton = (Button from getNode(NodePath("MenuButtons/PlayFastFinishButton"))).apply {
+            connect("pressed", this@ChooseGameScreen, "_onPlayFastFinishButtonPressed")
+        }
+        backButton = (Button from getNode(NodePath("MenuButtons/BackButton"))).apply {
+            connect("pressed", this@ChooseGameScreen, "_onBackButtonPressed")
+        }
     }
 
     fun _onPlayDodgeButtonPressed() {

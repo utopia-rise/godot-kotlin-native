@@ -17,17 +17,19 @@ class HUD: CanvasLayer() {
     override fun _ready() {
         messageLabel = Label from getNode(NodePath("MessageLabel"))
         scoreLabel = Label from getNode(NodePath("ScoreLabel"))
-        startButton = Button from getNode(NodePath("StartButton"))
-        messageTimer = Timer from getNode(NodePath("MessageTimer"))
+        startButton = (Button from getNode(NodePath("StartButton"))).apply {
+            connect("pressed", this@HUD, "_onStartButtonPressed")
+        }
+        messageTimer = (Timer from getNode(NodePath("MessageTimer"))).apply {
+            connect("pressed", this@HUD, "_onStartButtonPressed")
+        }
         waitingTimer = Timer from getNode(NodePath("WaitingTimer"))
-        gameOverTimer = Timer from getNode(NodePath("GameOverTimer"))
+        gameOverTimer = (Timer from getNode(NodePath("GameOverTimer"))).apply {
+            connect("timeout", this@HUD, "_onGameOverTimerTimeout")
+        }
 
         addUserSignal("startGame")
         connect("startGame", getParent(), "newGame")
-
-        startButton.connect("pressed", this, "_onStartButtonPressed")
-        messageTimer.connect("timeout", this, "_onMessageTimerTimeout")
-        gameOverTimer.connect("timeout", this, "_onGameOverTimerTimeout")
     }
 
     fun showMessage(text: String) {

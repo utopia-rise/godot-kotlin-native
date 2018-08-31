@@ -29,9 +29,10 @@ class Stage: Node() {
     }
 
     fun loadEnemy() {
-        val newPath = EnemyPath.instance()
         val newEnemy = Enemy.instance()
-        newPath.getNode(NodePath("PathFollow2D")).addChild(newEnemy)
+        val newPath = EnemyPath.instance().apply {
+            getNode(NodePath("PathFollow2D")).addChild(newEnemy)
+        }
         addChild(newPath)
     }
 

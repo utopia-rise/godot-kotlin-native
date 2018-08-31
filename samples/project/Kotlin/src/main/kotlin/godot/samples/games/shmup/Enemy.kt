@@ -26,11 +26,12 @@ class Enemy: Area2D() {
             if (bullet.instanceHas(obj)){
                 health--
                 if (health == 0){
-                    val args = godotArrayOf(Variant(0.2), Variant(30), Variant(3))
+                    (AudioStreamPlayer2D from getTree().getRoot().getNode(NodePath("Stage/Explosion"))).play()
+                    val args = godotArrayOf(0.2, 30, 3)
                     camera.callv("shake", args)
                     getParent().getParent().queueFree()
                 } else {
-                    val args = godotArrayOf(Variant(0.15), Variant(5), Variant(2))
+                    val args = godotArrayOf(0.15, 5, 2)
                     camera.callv("shake", args)
                 }
                 obj.queueFree()

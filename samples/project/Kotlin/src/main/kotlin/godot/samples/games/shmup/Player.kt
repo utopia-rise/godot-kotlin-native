@@ -48,6 +48,7 @@ class Player: KinematicBody2D() {
             val notifier = VisibilityNotifier2D().apply {
                 connect("screen_exited", bul, "queue_free")
             }
+            (AudioStreamPlayer2D from getNode(NodePath("Shoot"))).play()
             bul.addChild(notifier)
             getParent().addChild(bul)
         }

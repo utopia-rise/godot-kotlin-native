@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Games/Shmup/Scripts/Stage.gdns" type="Script" id=1]
 [ext_resource path="res://Games/Shmup/Scripts/Camera.gdns" type="Script" id=2]
 [ext_resource path="res://Games/Shmup/Sprites/Background.png" type="Texture" id=3]
 [ext_resource path="res://Games/Shmup/Sprites/Bars.png" type="Texture" id=4]
+[ext_resource path="res://Games/Shmup/Sounds/explosion.wav" type="AudioStream" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -25,7 +26,7 @@ extents = Vector2( 32.4839, 10 )
 custom_solver_bias = 0.0
 extents = Vector2( 34.4411, 32.3271 )
 
-[node name="Stage" type="Node"]
+[node name="Stage" type="Node" index="0"]
 
 script = ExtResource( 1 )
 
@@ -146,5 +147,17 @@ scale = Vector2( 1, 1.0688 )
 z_index = 1
 texture = ExtResource( 4 )
 _sections_unfolded = [ "Z Index" ]
+
+[node name="Explosion" type="AudioStreamPlayer2D" parent="." index="7"]
+
+position = Vector2( 239.163, 625.434 )
+stream = ExtResource( 5 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
 
 

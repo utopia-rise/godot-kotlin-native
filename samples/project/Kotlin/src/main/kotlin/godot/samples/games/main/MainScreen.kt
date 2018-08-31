@@ -9,11 +9,12 @@ class MainScreen: Node() {
     lateinit var quitButton: Button
 
     override fun _ready() {
-        chooseGameButton = Button from getNode(NodePath("MenuButtons/ChooseGameButton"))
-        quitButton = Button from getNode(NodePath("MenuButtons/QuitButton"))
-
-        chooseGameButton.connect("pressed", this, "_onChooseGameButtonPressed")
-        quitButton.connect("pressed", this, "_onQuitButtonPressed")
+        chooseGameButton = (Button from getNode(NodePath("MenuButtons/ChooseGameButton"))).apply {
+            connect("pressed", this@MainScreen, "_onChooseGameButtonPressed")
+        }
+        quitButton = (Button from getNode(NodePath("MenuButtons/QuitButton"))).apply {
+            connect("pressed", this@MainScreen, "_onQuitButtonPressed")
+        }
     }
 
     fun _onChooseGameButtonPressed() {
