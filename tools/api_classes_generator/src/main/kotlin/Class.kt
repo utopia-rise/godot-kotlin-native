@@ -96,7 +96,7 @@ class Class(
 
             appendln("        // Constants")
             for (constant in constants)
-                appendln("        const val ${constant.key}: Int = ${constant.value}")
+                appendln("        const val ${constant.key}: Long = ${constant.value}")
             appendln()
             appendln()
 
