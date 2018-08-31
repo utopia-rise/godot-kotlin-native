@@ -4,7 +4,7 @@ import java.io.File
 
 fun main(args: Array<String>) {
     val GODOT_API_PATH = "godot_api.json"
-    val GENERATED_PATH = "../../wrapper/src/main/kotlin/godot/generated/"
+    val GENERATED_PATH = "../../wrapper/src/main/kotlin/g/"///godot/generated/"
 
     val text = File(GODOT_API_PATH).readText()
 
@@ -12,9 +12,9 @@ fun main(args: Array<String>) {
     val tree = classes.buildTree()
     val icalls = mutableSetOf<ICall>()
 
-    for (cl in classes)
+    for ((i,cl) in classes.withIndex())
         //if (cl.name == "Object" || cl.name == "Node" || cl.name == "Reference" || cl.name == "Resource" || cl.name == "ResourceLoader" || cl.name == "SceneTree" || cl.name == "MainLoop" || cl.name == "Script" || cl.name == "Viewport") // FIXME: remove line
-        cl.generate(GENERATED_PATH, tree, icalls)
+        cl.generate(GENERATED_PATH, tree, icalls, i)
 
 
     val icallsFile = File("$GENERATED_PATH/__icalls.kt")

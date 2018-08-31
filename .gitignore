@@ -3,7 +3,7 @@ samples/project/Kotlin/GodotCMakeModule/lib/*
 
 
 # Auto-generated files
-**/generated/**
+**/g/**
 samples/project/Kotlin/output/*
 
 

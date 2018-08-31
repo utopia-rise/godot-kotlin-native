@@ -26,8 +26,7 @@ class Property(
         getter = getter.convertToCamelCase()
         setter = setter.convertToCamelCase()
 
-        if (name.indexOf("/") != -1)
-            name = "`$name`"
+        name = name.replace('/', '_')
 
         // There are property with multiple types, and it's all Materials, so
         // Godot's developer should make more strict API
