@@ -24,20 +24,28 @@ class Camera: Camera2D() {
         }
 
         lastShookTimer += delta
+
         while (lastShookTimer >= periodInMs ){
             lastShookTimer -= periodInMs
             val intensity = amplitude * (1 - ((duration - timer) / duration))
+
             val newX = ((rand().toDouble() / 10000) % 2) - 1
             val xComponent = intensity * (previousX + (delta * (newX - previousX)))
+
             val newY = ((rand().toDouble() / 10000) % 2) - 1
             val yComponent = intensity * (previousY + (delta * (newY - previousY)))
+
             previousX = newX
             previousY = newY
+
             val newOffset = Vector2(xComponent, yComponent)
+
             offset -= lastOffset + newOffset
             lastOffset = newOffset
         }
+
         timer -= delta
+
         if (timer <= 0.0) {
             timer = 0.0
             offset -= lastOffset
@@ -47,11 +55,15 @@ class Camera: Camera2D() {
     fun shake(duration: Double, frequency: Double, amplitude: Double){
         this.duration = duration
         timer = duration
+
         periodInMs = 1.0 / frequency
+
         this.amplitude = amplitude
+
         previousX = ((rand().toDouble() / 10000) % 2) - 1
         previousY = ((rand().toDouble() / 10000) % 2) - 1
+
         offset -= lastOffset
-        lastOffset = Vector2(0, 0)
+        lastOffset = Vector2()
     }
 }

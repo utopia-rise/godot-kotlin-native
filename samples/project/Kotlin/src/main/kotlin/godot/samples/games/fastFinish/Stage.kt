@@ -9,9 +9,10 @@ class Stage: Node() {
     lateinit var background: Sprite
 
     override fun _ready() {
-        background = Sprite()
-        background.texture = Texture from ResourceLoader.load("res://Games/FastFinish/Sprites/Background.png")
-        background.position = Vector2(968, 537)
+        background = Sprite().apply {
+            texture = Texture from ResourceLoader.load("res://Games/FastFinish/Sprites/Background.png")
+            position = Vector2(968, 537)
+        }
         addChild(background)
         path = Path2D from (PackedScene from ResourceLoader.load("res://Games/FastFinish/Scenes/PlayerPath.tscn")).instance()
         player = Player()

@@ -9,11 +9,9 @@ class Player: KinematicBody2D() {
     var shootTime = 0
     var shooting = false
     var speed = 600.0
-    var screensize: Vector2 = Vector2()
     lateinit var Bullet: PackedScene
 
     override fun _ready() {
-        screensize = getViewportRect().size
         Bullet = PackedScene from ResourceLoader.load("res://Games/Shmup/Scenes/Bullet.tscn")
     }
 
@@ -44,15 +42,18 @@ class Player: KinematicBody2D() {
         if (Input.isActionPressed("ui_accept") && !shooting){
             shooting = true
             shootTime = 0
-            val bul = Area2D from Bullet.instance()
-            bul.position = position
-            val notifier = VisibilityNotifier2D()
-            notifier.connect("screen_exited", bul, "queue_free")
+            val bul = (Area2D from Bullet.instance()).apply {
+                position = this@Player.position
+            }
+            val notifier = VisibilityNotifier2D().apply {
+                connect("screen_exited", bul, "queue_free")
+            }
             bul.addChild(notifier)
             getParent().addChild(bul)
         }
         else
             shootTime++
+
         if (shootTime > 8)
             shooting = false
     }

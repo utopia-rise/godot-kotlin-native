@@ -21,18 +21,14 @@ class Player: KinematicBody() {
 
         if (velocity.length() > 0) {
             velocity = velocity.normalized() * speed
+
             if(translation.x + velocity.x * delta < 4.0 &&
-                    translation.x + velocity.x * delta > -4.0) {
-                val tmp = translation
-                tmp.x = translation.x + velocity.x * delta
-                translation = tmp
-            }
+                    translation.x + velocity.x * delta > -4.0)
+                translation { it.x += velocity.x * delta }
+
             if (translation.z + velocity.z * delta < 4.0 &&
-                    translation.z + velocity.z * delta > -4.0) {
-                val tmp = translation
-                tmp.z = translation.z + velocity.z * delta
-                translation = tmp
-            }
+                    translation.z + velocity.z * delta > -4.0)
+                translation { it.z += velocity.z * delta }
         }
     }
 }

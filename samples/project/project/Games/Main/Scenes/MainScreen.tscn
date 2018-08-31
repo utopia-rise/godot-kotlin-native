@@ -19,7 +19,7 @@ use_filter = false
 font_data = ExtResource( 2 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[node name="MainScreen" type="Node"]
+[node name="MainScreen" type="Node" index="0"]
 
 script = ExtResource( 1 )
 

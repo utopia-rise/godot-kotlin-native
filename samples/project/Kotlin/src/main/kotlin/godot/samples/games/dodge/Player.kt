@@ -26,6 +26,7 @@ class Player: Area2D() {
 
     override fun _process(delta: Double) {
         var velocity = Vector2()
+
         if (Input.isActionPressed("ui_right"))
             velocity.x += 1
         if (Input.isActionPressed("ui_left"))
@@ -34,6 +35,7 @@ class Player: Area2D() {
             velocity.y -= 1
         if (Input.isActionPressed("ui_down"))
             velocity.y += 1
+
         if (velocity.length() != 0.0) {
             velocity = velocity.normalized() * speed.toDouble()
             playerSprite.play()
@@ -42,8 +44,10 @@ class Player: Area2D() {
             playerSprite.stop()
 
         position += velocity * delta
+
         if (position.x < 0) position.x = 0.0
         else if (position.x > screensize.x) position.x = screensize.x
+
         if (position.y < 0) position.y = 0.0
         else if (position.y > screensize.y) position.y = screensize.y
 

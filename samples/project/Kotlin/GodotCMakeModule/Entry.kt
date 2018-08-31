@@ -99,9 +99,8 @@ fun NativeScriptInit(handle: COpaquePointer) {
     registerClass("godot.samples.games.fastFinish.Player", "Area2D", udcBridge93(), udcBridge94())
     registerMethod("godot.samples.games.fastFinish.Player", "_ready", udcBridge95())
     registerMethod("godot.samples.games.fastFinish.Player", "_process", udcBridge96())
-    registerProperty("godot.samples.games.fastFinish.Player", "speed", true, udcBridge97(), udcBridge98(), udcBridge99())
-    registerClass("godot.samples.games.fastFinish.Stage", "Node", udcBridge100(), udcBridge101())
-    registerMethod("godot.samples.games.fastFinish.Stage", "_ready", udcBridge102())
+    registerClass("godot.samples.games.fastFinish.Stage", "Node", udcBridge97(), udcBridge98())
+    registerMethod("godot.samples.games.fastFinish.Stage", "_ready", udcBridge99())
 }
 
 
@@ -854,26 +853,13 @@ private fun udcBridge96(): CPointer<CFunction<(COpaquePointer?, COpaquePointer?,
         return@run null }}
     }
 }
-private fun udcBridge97(): CPointer<CFunction<(COpaquePointer?,COpaquePointer?) -> Unit>> {
-    return staticCFunction { o, r -> get<godot.samples.games.fastFinish.Player>("speed", "godot.samples.games.fastFinish.Player", o, r) {
-        obj -> Variant(obj.speed)
-    }}
-}
-private fun udcBridge98(): CPointer<CFunction<(COpaquePointer?,COpaquePointer?) -> Unit>> {
-    return staticCFunction { o, v -> set<godot.samples.games.fastFinish.Player>("speed", "godot.samples.games.fastFinish.Player", o, v) {
-        obj, value -> obj.speed = value.toInt()
-    }}
-}
-private fun udcBridge99(): Variant {
-    return Variant(15)
-}
-private fun udcBridge100(): CPointer<CFunction<(COpaquePointer?) -> COpaquePointer?>> {
+private fun udcBridge97(): CPointer<CFunction<(COpaquePointer?) -> COpaquePointer?>> {
     return staticCFunction { mem -> constructFromRawMem(mem, udcBinding17) }
 }
-private fun udcBridge101(): CPointer<CFunction<(COpaquePointer?) -> Unit>> {
+private fun udcBridge98(): CPointer<CFunction<(COpaquePointer?) -> Unit>> {
     return staticCFunction { mem -> deconstructFromRawMem<godot.samples.games.fastFinish.Stage>(mem) }
 }
-private fun udcBridge102(): CPointer<CFunction<(COpaquePointer?, COpaquePointer?, Int, COpaquePointer?) -> Unit>> {
+private fun udcBridge99(): CPointer<CFunction<(COpaquePointer?, COpaquePointer?, Int, COpaquePointer?) -> Unit>> {
     return staticCFunction { r, o, n, a -> invoke<godot.samples.games.fastFinish.Stage>("_ready", r, o, n, a) { obj, numArgs, args -> run {
         when (numArgs) {
             0 -> {

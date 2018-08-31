@@ -18,17 +18,18 @@ class Main: Node() {
     override fun _ready() {
         mobScene = PackedScene from ResourceLoader.load("res://Games/dodge/Scenes/Mob.tscn")
 
-        mobTimer = Timer from getNode(NodePath("MobTimer"))
-        scoreTimer = Timer from getNode(NodePath("ScoreTimer"))
-        startTimer = Timer from getNode(NodePath("StartTimer"))
+        mobTimer = (Timer from getNode(NodePath("MobTimer"))).apply {
+            connect("timeout", this@Main, "_onMobTimerTimeout")
+        }
+        scoreTimer = (Timer from getNode(NodePath("ScoreTimer"))).apply {
+            connect("timeout", this@Main, "_onScoreTimerTimeout")
+        }
+        startTimer = (Timer from getNode(NodePath("StartTimer"))).apply {
+            connect("timeout", this@Main, "_onStartTimerTimeout")
+        }
         startPosition = Position2D from getNode(NodePath("StartPosition"))
         mobPath = Path2D from getNode(NodePath("MobPath"))
         mobSpawnLocation = PathFollow2D from getNode(NodePath("MobPath/MobSpawnLocation"))
-
-
-        startTimer.connect("timeout", this, "_onStartTimerTimeout")
-        scoreTimer.connect("timeout", this, "_onScoreTimerTimeout")
-        mobTimer.connect("timeout", this, "_onMobTimerTimeout")
 
         getNode(NodePath("HUD")).callv("showMenu", GDArray())
     }
@@ -43,18 +44,12 @@ class Main: Node() {
         getTree().callGroup("enemies", "free")
         score = 0
 
-        val arr = GDArray()
-        arr.pushBack(Variant(startPosition.position))
-        getNode(NodePath("Player")).callv("start", arr)
+        getNode(NodePath("Player")).callv("start", godotArrayOf(startPosition.position))
         startTimer.start()
-        arr.popBack()
 
-        arr.pushBack(Variant(score))
-        getNode(NodePath("HUD")).callv("updateScore", arr)
-        arr.popBack()
+        getNode(NodePath("HUD")).callv("updateScore", godotArrayOf(score))
 
-        arr.pushBack(Variant("Get ready!"))
-        getNode(NodePath("HUD")).callv("showMessage", arr)
+        getNode(NodePath("HUD")).callv("showMessage", godotArrayOf("Get ready!"))
     }
 
     fun _onStartTimerTimeout() {
@@ -64,16 +59,14 @@ class Main: Node() {
 
     fun _onScoreTimerTimeout() {
         score += 1
-        val arr = GDArray()
-        arr.pushBack(Variant(score))
-        getNode(NodePath("HUD")).callv("updateScore", arr)
+        getNode(NodePath("HUD")).callv("updateScore", godotArrayOf(score))
     }
 
     fun _onMobTimerTimeout() {
         mobSpawnLocation.setOffset(Random.nextInt().toDouble())
         val mob = RigidBody2D from mobScene.instance()
         addChild(mob)
-        var direction = (mobSpawnLocation.rotation.toDouble() + PI/2).toDouble()
+        var direction = (mobSpawnLocation.rotation + PI/2)
         mob.position = mobSpawnLocation.position
 
         fun ClosedRange<Int>.random() =

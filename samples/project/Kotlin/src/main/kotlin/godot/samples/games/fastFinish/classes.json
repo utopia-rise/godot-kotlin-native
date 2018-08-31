@@ -14,13 +14,6 @@
           "name": "_process",
           "arguments": ["Double"]
         }
-      ],
-      "properties": [
-        {
-          "name": "speed",
-          "type": "Int",
-          "defaultValue": "15"
-        }
       ]
     },
     {
