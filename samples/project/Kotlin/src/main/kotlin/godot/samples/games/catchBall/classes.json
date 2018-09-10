@@ -3,6 +3,17 @@
 
   "registerClasses":[
     {
+      "name": "Main",
+      "class": "godot.samples.games.catchBall.Main",
+      "extends": "Node",
+      "methods": [
+        {
+          "name": "_unhandled_input",
+          "arguments": ["InputEvent"]
+        }
+      ]
+    },
+    {
       "name": "Player",
       "class": "godot.samples.games.catchBall.Player",
       "extends": "KinematicBody",

@@ -3,13 +3,12 @@
 [ext_resource path="res://Games/Shmup/Scripts/Bullet.gdns" type="Script" id=1]
 [ext_resource path="res://Games/Shmup/Sprites/bullet.png" type="Texture" id=2]
 
-
 [sub_resource type="CircleShape2D" id=1]
 
 custom_solver_bias = 0.0
 radius = 10.0
 
-[node name="Bullet" type="Area2D" index="0"]
+[node name="Bullet" type="Area2D"]
 
 position = Vector2( 29.2335, 28.0139 )
 scale = Vector2( 1.22356, 1.18544 )

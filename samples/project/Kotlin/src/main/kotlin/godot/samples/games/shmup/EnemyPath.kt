@@ -10,7 +10,7 @@ class EnemyPath: Path2D() {
     override fun _ready() {
         val follow = getNode(NodePath("PathFollow2D"))
         val tween = Tween().apply {
-            interpolateProperty(follow, NodePath("unit_offset"), Variant(0), Variant(1), 6.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+            interpolateProperty(follow, NodePath("unit_offset"), Variant(0), Variant(1), 6.0, Tween.TRANS_LINEAR.toLong(), Tween.EASE_IN_OUT.toLong())
             setRepeat(true)
             start()
         }

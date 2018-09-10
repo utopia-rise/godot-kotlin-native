@@ -138,7 +138,7 @@ class Vector2(var x: Double, var y: Double) : Comparable<Vector2>, CoreType {
             atan2(y - vector2.y, x - vector2.x)
 
     fun dot(other: Vector2): Double =
-            x * other.y + y * other.x
+            x * other.x + y * other.y
 
     fun cross(other: Vector2): Double =
             x * other.y - y * other.x
@@ -188,10 +188,19 @@ class Vector2(var x: Double, var y: Double) : Comparable<Vector2>, CoreType {
     }
 
     fun slide(vec: Vector2): Vector2 =
-            vec - this * this.dot(vec)
+            this - vec * this.dot(vec)
 
-    fun reflect(vec: Vector2): Vector2 =
-            vec - this * this.dot(vec) * 2.0
+    fun reflect(vec: Vector2): Vector2 {
+//        val vecSub = vec
+//        vecSub.y = -vecSub.y
+        return vec * this.dot(vec) * 2.0 - this
+        //0,1
+        //100,300
+        // -> 100,-300
+    }
+
+    fun bounce(vec: Vector2): Vector2 =
+    		-reflect(vec)
 
     fun angle(): Double =
             atan2(y, x)

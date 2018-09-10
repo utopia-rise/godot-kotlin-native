@@ -23,6 +23,10 @@
       "methods": [
         {
           "name": "_ready"
+        },
+        {
+          "name": "_unhandled_input",
+          "arguments": ["InputEvent"]
         }
       ]
     }

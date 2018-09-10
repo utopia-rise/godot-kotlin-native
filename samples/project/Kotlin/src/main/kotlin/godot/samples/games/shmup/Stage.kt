@@ -36,4 +36,9 @@ class Stage: Node() {
         addChild(newPath)
     }
 
+    override fun _unhandled_input(event: InputEvent) {
+        if (event.isActionPressed("ui_cancel")) {
+            getTree().changeScene("res://Games/Main/Scenes/ChooseGameScreen.tscn")
+        }
+    }
 }

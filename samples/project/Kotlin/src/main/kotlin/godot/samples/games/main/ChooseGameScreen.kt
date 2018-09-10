@@ -6,6 +6,7 @@ import godot.core.NodePath
 class ChooseGameScreen: Node() {
 
     lateinit var playDodgeButton: Button
+    lateinit var playPongButton: Button
     lateinit var playShmupButton: Button
     lateinit var backButton: Button
     lateinit var playCatchBallButton: Button
@@ -14,6 +15,9 @@ class ChooseGameScreen: Node() {
     override fun _ready() {
         playDodgeButton = (Button from getNode(NodePath("MenuButtons/PlayDodgeButton"))).apply {
             connect("pressed", this@ChooseGameScreen, "_onPlayDodgeButtonPressed")
+        }
+        playPongButton = (Button from getNode(NodePath("MenuButtons/PlayPongButton"))).apply {
+            connect("pressed", this@ChooseGameScreen, "_onPlayPongButtonPressed")
         }
         playShmupButton = (Button from getNode(NodePath("MenuButtons/PlayShmupButton"))).apply {
             connect("pressed", this@ChooseGameScreen, "_onPlayShmupButtonPressed")
@@ -43,6 +47,10 @@ class ChooseGameScreen: Node() {
 
     fun _onPlayFastFinishButtonPressed() {
         getTree().changeScene("res://Games/FastFinish/Scenes/Stage.tscn")
+    }
+
+    fun _onPlayPongButtonPressed() {
+        getTree().changeScene("res://Games/Pong/Scenes/Main.tscn")
     }
 
     fun _onBackButtonPressed() {

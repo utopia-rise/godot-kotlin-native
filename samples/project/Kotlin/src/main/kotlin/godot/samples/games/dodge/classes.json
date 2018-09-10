@@ -39,10 +39,14 @@
         {
             "name": "Main",
             "class": "godot.samples.games.dodge.Main",
-            "extends": "Node",
+            "extends": "GameStage",
             "methods": [
                 {
                     "name": "_ready"
+                },
+                {
+                    "name": "_unhandled_input",
+                    "arguments": ["InputEvent"]
                 },
                 {
                     "name": "gameOver"

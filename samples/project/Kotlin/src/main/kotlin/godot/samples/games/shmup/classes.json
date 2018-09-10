@@ -71,6 +71,10 @@
             "extends": "Node",
             "methods": [
                 {
+                    "name": "_unhandled_input",
+                    "arguments": ["InputEvent"]
+                },
+                {
                     "name": "_ready"
                 },
                 {

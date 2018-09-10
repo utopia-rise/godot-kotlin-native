@@ -1,0 +1,87 @@
+{
+  "package": "Games/Pong/Scripts",
+  "registerClasses": [
+    {
+      "name": "Player",
+      "class": "godot.samples.games.pong.Player",
+      "extends": "KinematicBody2D",
+      "methods": [
+        {
+          "name": "_physics_process",
+          "arguments": ["Double"]
+        }
+      ],
+      "properties": [
+        {
+          "name": "speed",
+          "type": "Int",
+          "defaultValue": "400"
+        }
+      ]
+    },
+    {
+      "name": "Enemy",
+      "class": "godot.samples.games.pong.Enemy",
+      "extends": "KinematicBody2D",
+      "methods": [
+        {
+          "name": "_physics_process",
+          "arguments": ["Double"]
+        }
+      ],
+      "properties": [
+        {
+          "name": "speed",
+          "type": "Int",
+          "defaultValue": "400"
+        }
+      ]
+    },
+    {
+      "name": "Ball",
+      "class": "godot.samples.games.pong.Ball",
+      "extends": "KinematicBody2D",
+      "methods": [
+        {
+          "name": "_physics_process",
+          "arguments": ["Double"]
+        },
+        {
+          "name": "_ready"
+        }
+      ],
+      "properties": [
+        {
+          "name": "xVel",
+          "type": "Int",
+          "defaultValue": "300"
+        },
+        {
+          "name": "yVel",
+          "type": "Int",
+          "defaultValue": "300"
+        }
+      ]
+    },
+    {
+      "name": "Main",
+      "class": "godot.samples.games.pong.Main",
+      "extends": "Node",
+      "methods": [
+        {
+          "name": "_unhandled_input",
+          "arguments": ["InputEvent"]
+        },
+        {
+          "name": "_ready"
+        },
+        {
+          "name": "_on_VisibilityNotifier2D_screen_exited"
+        },
+        {
+          "name": "startGame"
+        }
+      ]
+    }
+  ]
+}

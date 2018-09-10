@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Games/Main/Scripts/ChooseGameScreen.gdns" type="Script" id=1]
 [ext_resource path="res://Games/dodge/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=2]
@@ -13,21 +13,13 @@ _sections_unfolded = [ "Font", "Settings" ]
 
 [sub_resource type="DynamicFont" id=2]
 
-size = 46
-use_mipmaps = true
-use_filter = true
-font_data = ExtResource( 2 )
-_sections_unfolded = [ "Font", "Settings" ]
-
-[sub_resource type="DynamicFont" id=3]
-
 size = 64
 use_mipmaps = false
 use_filter = false
 font_data = ExtResource( 2 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=3]
 
 size = 64
 use_mipmaps = false
@@ -45,10 +37,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -240.0
-margin_top = -680.0
-margin_right = 242.0
-margin_bottom = -42.0
+margin_left = -241.0
+margin_top = -850.0
+margin_right = 241.0
+margin_bottom = -50.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -57,7 +49,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 custom_constants/separation = 60
 alignment = 0
-_sections_unfolded = [ "custom_constants" ]
+_sections_unfolded = [ "Margin", "custom_constants" ]
 
 [node name="PlayDodgeButton" type="Button" parent="MenuButtons" index="0"]
 
@@ -84,7 +76,7 @@ flat = false
 align = 1
 _sections_unfolded = [ "Size Flags", "custom_fonts" ]
 
-[node name="PlayShmupButton" type="Button" parent="MenuButtons" index="1"]
+[node name="PlayPongButton" type="Button" parent="MenuButtons" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -92,7 +84,59 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 144.0
 margin_right = 482.0
-margin_bottom = 206.0
+margin_bottom = 228.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Pong"
+flat = false
+align = 1
+_sections_unfolded = [ "Size Flags", "custom_fonts" ]
+
+[node name="PlayShmupButton" type="Button" parent="MenuButtons" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 288.0
+margin_right = 482.0
+margin_bottom = 372.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 1 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Shoot'emUp"
+flat = false
+align = 1
+_sections_unfolded = [ "Size Flags", "custom_fonts" ]
+
+[node name="PlayCatchBallButton" type="Button" parent="MenuButtons" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 432.0
+margin_right = 482.0
+margin_bottom = 516.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -105,46 +149,20 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-text = "Shoot'em Up"
-flat = false
-align = 1
-_sections_unfolded = [ "Size Flags", "custom_fonts" ]
-
-[node name="PlayCatchBallButton" type="Button" parent="MenuButtons" index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_top = 266.0
-margin_right = 482.0
-margin_bottom = 350.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 3
-custom_fonts/font = SubResource( 3 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "Catch ball"
 flat = false
 align = 1
 _sections_unfolded = [ "Size Flags", "custom_fonts" ]
 
-[node name="PlayFastFinishButton" type="Button" parent="MenuButtons" index="3"]
+[node name="PlayFastFinishButton" type="Button" parent="MenuButtons" index="4"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 410.0
+margin_top = 576.0
 margin_right = 482.0
-margin_bottom = 494.0
+margin_bottom = 660.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -152,7 +170,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -162,15 +180,15 @@ flat = false
 align = 1
 _sections_unfolded = [ "Size Flags", "custom_fonts" ]
 
-[node name="BackButton" type="Button" parent="MenuButtons" index="4"]
+[node name="BackButton" type="Button" parent="MenuButtons" index="5"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 554.0
+margin_top = 720.0
 margin_right = 482.0
-margin_bottom = 638.0
+margin_bottom = 804.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -178,7 +196,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 3 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null

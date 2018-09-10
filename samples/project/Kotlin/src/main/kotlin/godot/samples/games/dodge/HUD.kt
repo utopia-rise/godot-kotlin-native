@@ -21,7 +21,7 @@ class HUD: CanvasLayer() {
             connect("pressed", this@HUD, "_onStartButtonPressed")
         }
         messageTimer = (Timer from getNode(NodePath("MessageTimer"))).apply {
-            connect("pressed", this@HUD, "_onStartButtonPressed")
+            connect("timeout", this@HUD, "_onMessageTimerTimeout")
         }
         waitingTimer = Timer from getNode(NodePath("WaitingTimer"))
         gameOverTimer = (Timer from getNode(NodePath("GameOverTimer"))).apply {

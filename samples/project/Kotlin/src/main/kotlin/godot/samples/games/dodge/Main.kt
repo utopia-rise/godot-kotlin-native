@@ -75,4 +75,10 @@ class Main: Node() {
         mob.rotation = direction
         mob.setLinearVelocity(Vector2((mob.get("minSpeed").toInt()..mob.get("maxSpeed").toInt()).random(), 0).rotated(direction))
     }
+
+    override fun _unhandled_input(event: InputEvent) {
+        if (event.isActionPressed("ui_cancel")) {
+            getTree().changeScene("res://Games/Main/Scenes/ChooseGameScreen.tscn")
+        }
+    }
 }

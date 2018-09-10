@@ -30,6 +30,9 @@
             "name": "_onPlayDodgeButtonPressed"
           },
           {
+            "name": "_onPlayPongButtonPressed"
+          },
+          {
             "name": "_onPlayShmupButtonPressed"
           },
           {

@@ -1,0 +1,56 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
+
+[node name="Stage" type="Node" index="0"]
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="." index="0"]
+
+position = Vector2( 958.853, 385.122 )
+scale = Vector2( 13.9974, 2.12786 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+_sections_unfolded = [ "collision" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D" index="0"]
+
+position = Vector2( -1.28482, -50.6301 )
+scale = Vector2( 2.90424, 3.03527 )
+shape = SubResource( 1 )
+
+[node name="RigidBody2D" type="RigidBody2D" parent="." index="1"]
+
+position = Vector2( 1179.77, 844.991 )
+scale = Vector2( 9.35823, 7.05376 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+mode = 0
+mass = 1.0
+friction = 1.0
+bounce = 0.0
+gravity_scale = 1.0
+custom_integrator = false
+continuous_cd = 0
+contacts_reported = 0
+contact_monitor = false
+sleeping = false
+can_sleep = true
+linear_velocity = Vector2( 0, 0 )
+linear_damp = -1.0
+angular_velocity = 0.0
+angular_damp = -1.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D" index="0"]
+
+position = Vector2( -21.5325, 0.247837 )
+scale = Vector2( 0.998221, 0.549721 )
+build_mode = 0
+polygon = PoolVector2Array( -3.4716, -33.0874, -15.0457, 34.8655, 12.1313, 33.4267 )
+
+

@@ -19,4 +19,10 @@ class Stage: Node() {
         path.getNode(NodePath("PathFollow2D")).addChild(player)
         addChild(path)
     }
+
+    override fun _unhandled_input(event: InputEvent) {
+        if (event.isActionPressed("ui_cancel")) {
+            getTree().changeScene("res://Games/Main/Scenes/ChooseGameScreen.tscn")
+        }
+    }
 }
