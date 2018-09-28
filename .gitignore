@@ -1,12 +1,3 @@
-# Platform-specific libraries
-samples/project/Kotlin/GodotCMakeModule/lib/*
-
-
-# Auto-generated files
-**/g/**
-samples/project/Kotlin/output/*
-
-
 # Platform-specific binaries
 *.dll
 *.so

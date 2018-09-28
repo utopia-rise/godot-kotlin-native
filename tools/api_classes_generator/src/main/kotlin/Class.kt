@@ -30,13 +30,13 @@ class Class(
     }
 
 
-    fun generate(path: String, tree: Graph<Class>, icalls: MutableSet<ICall>, id: Int) {
+    fun generate(path: String, tree: Graph<Class>, icalls: MutableSet<ICall>) {
         for (p in properties)
             for (m in methods)
                 p.applyGetterOrSetter(m)
 
 
-        val out = File("$path/$id.kt")
+        val out = File("$path/$name.kt")
         out.parentFile.mkdirs()
         out.createNewFile()
 

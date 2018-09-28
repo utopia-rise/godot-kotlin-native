@@ -358,7 +358,7 @@ class Variant: CoreType { // FIXME: redundant .copy
 
     fun toTransform2D(): Transform2D = Transform2D(godot_variant_as_transform2d(nativeValue))
 
-    fun getType(): Variant.Type = Type.fromInt(godot_variant_get_type(nativeValue).value)
+    fun getType(): Variant.Type = Type.fromInt(godot_variant_get_type(nativeValue).value.toInt())
 
     fun call(str: String, args: Array<Variant>): Variant {
         memScoped {

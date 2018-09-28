@@ -54,7 +54,7 @@ inline fun <reified T: godot.GodotObject> invoke(name: String, ret: COpaquePoint
         shedule(obj, numArgs, arguments)?.let {
             memScoped {
                 val dest = ret!!.reinterpret<godot_variant>() // assert 'cause ret is always not null
-                memcpy(dest, it.getRawMemory(memScope), sizeOf<godot_variant>())
+                memcpy(dest, it.getRawMemory(memScope), sizeOf<godot_variant>().toULong())
             }
         }
     }
@@ -104,7 +104,7 @@ inline fun <reified T: godot.GodotObject> get(name: String, cl: String, objRaw: 
         shedule(obj)?.let {
             memScoped {
                 val dest = ret!!.reinterpret<godot_variant>() // assert 'cause ret is always not null
-                memcpy(dest, it.getRawMemory(memScope), sizeOf<godot_variant>())
+                memcpy(dest, it.getRawMemory(memScope), sizeOf<godot_variant>().toULong())
             }
         }
     }
