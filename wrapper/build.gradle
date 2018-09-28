@@ -17,6 +17,19 @@ repositories {
 }
 
 apply plugin: 'kotlin-multiplatform'
+apply plugin: 'maven-publish'
+
+
+group = 'org.jetbrains.kotlin'
+version = '1.0.0'
+
+publishing {
+    repositories {
+        maven {
+            url = '../localRepository'
+        }
+    }
+}
 
 
 kotlin {

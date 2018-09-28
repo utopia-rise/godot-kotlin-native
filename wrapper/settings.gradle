@@ -1,1 +1,2 @@
-rootProject.name = "wrapper"
+rootProject.name = "kotlin-godot-libraries"
+enableFeaturePreview('GRADLE_METADATA')
