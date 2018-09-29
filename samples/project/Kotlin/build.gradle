@@ -1,6 +1,7 @@
 buildscript {
-    ext.kotlin_version = '1.3.20-dev-518'
+    ext.kotlin_version = '1.3.20-dev-586'
     repositories {
+        maven { url '../../../local_repo' } // TODO: publish online
         mavenLocal()
         jcenter()
         maven { url 'https://dl.bintray.com/kotlin/kotlin-dev' }
@@ -11,23 +12,22 @@ buildscript {
 }
 
 repositories {
+    maven { url '../../../local_repo' } // TODO: publish online
     mavenLocal()
     jcenter()
     maven { url 'https://dl.bintray.com/kotlin/kotlin-dev' }
-    mavenLocal() // TODO: remove later
 }
 
 apply plugin: 'kotlin-multiplatform'
-//id 'kotlin-godot:0.1'
 
 
 kotlin {
     sourceSets {
         configure([macosMain, linuxMain, windowsMain]) {
-            kotlin.srcDirs 'src/main/kotlin'
             dependencies {
-                
+                implementation 'org.jetbrains.kotlin:kotlin-godot-libraries:1.0.0'
             }
+            kotlin.srcDirs 'src/main/kotlin'
         }
     }
     targets {
@@ -39,27 +39,3 @@ kotlin {
         }
     }
 }
-
-/*
-tasks {
-    val samplesLibsPath = file("../samples/project/Kotlin/lib/")
-
-
-    "copyLibsToSamples"(Copy::class) {
-        dependsOn(konanArtifacts["GDNative"])
-        dependsOn(konanArtifacts["Godot"])
-
-        outputs.upToDateWhen { false }
-
-
-        for (target in konan.targets) {
-            konanArtifacts["GDNative"].findByTarget(target)?.let {
-                from(it.artifact)
-            }
-            konanArtifacts["Godot"].findByTarget(target)?.let {
-                from(it.artifact)
-            }
-        }
-        into(samplesLibsPath)
-    }
-}*/

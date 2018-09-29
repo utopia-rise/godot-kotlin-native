@@ -1,0 +1,78 @@
+{
+  "formatVersion": "0.4",
+  "component": {
+    "group": "org.jetbrains.kotlin",
+    "module": "kotlin-godot-libraries",
+    "version": "1.0.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "4.10.2",
+      "buildId": "st64rfmho5asznkgl4ngpp7cka"
+    }
+  },
+  "variants": [
+    {
+      "name": "linux-api",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "linux_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../kotlin-godot-libraries-linux/1.0.0/kotlin-godot-libraries-linux-1.0.0.module",
+        "group": "org.jetbrains.kotlin",
+        "module": "kotlin-godot-libraries-linux",
+        "version": "1.0.0"
+      }
+    },
+    {
+      "name": "macos-api",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "macos_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../kotlin-godot-libraries-macos/1.0.0/kotlin-godot-libraries-macos-1.0.0.module",
+        "group": "org.jetbrains.kotlin",
+        "module": "kotlin-godot-libraries-macos",
+        "version": "1.0.0"
+      }
+    },
+    {
+      "name": "metadata-api",
+      "attributes": {
+        "artifactType": "jar",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.platform.type": "common"
+      },
+      "available-at": {
+        "url": "../../kotlin-godot-libraries-metadata/1.0.0/kotlin-godot-libraries-metadata-1.0.0.module",
+        "group": "org.jetbrains.kotlin",
+        "module": "kotlin-godot-libraries-metadata",
+        "version": "1.0.0"
+      }
+    },
+    {
+      "name": "windows-api",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "mingw_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../kotlin-godot-libraries-windows/1.0.0/kotlin-godot-libraries-windows-1.0.0.module",
+        "group": "org.jetbrains.kotlin",
+        "module": "kotlin-godot-libraries-windows",
+        "version": "1.0.0"
+      }
+    }
+  ]
+}

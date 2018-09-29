@@ -1,53 +1,49 @@
-buildscript {
-    ext.kotlin_version = '1.3.20-dev-518'
-    repositories {
-        mavenLocal()
-        jcenter()
-        maven { url 'https://dl.bintray.com/kotlin/kotlin-dev' }
-    }
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
+plugins {
+    id 'java-gradle-plugin'
+    id 'maven-publish'
+    id 'org.jetbrains.kotlin.jvm' version '1.2.71'
 }
-
-repositories {
-    mavenLocal()
-    jcenter()
-    maven { url 'https://dl.bintray.com/kotlin/kotlin-dev' }
-}
-
-apply plugin: 'kotlin-multiplatform'
-apply plugin: 'maven-publish'
 
 
 group = 'org.jetbrains.kotlin'
 version = '1.0.0'
 
 
+gradlePlugin {
+    plugins {
+        register("kotlin-godot") {
+            id = "kotlin-godot"
+            implementationClass = "plugin.KotlinGodotPlugin"
+        }
+    }
+}
+
 publishing {
     repositories {
         maven {
-            url = '../../localRepository'
+            url = '../../local_repo'
         }
     }
 }
 
 
-kotlin {
-    sourceSets {
-        configure([macosMain, linuxMain]) {
-            kotlin.srcDirs 'src/main/kotlin'
-        }
-        
-        windowsMain {
-            dependencies {
-                implementation 'org.jetbrains.kotlin:kotlin-godot-libraries:1.0.0'
-            }
-        }
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+    maven { url 'https://dl.bintray.com/kotlin/kotlin-dev' }
+}
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    implementation "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.20-dev-556"
+}
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
-    targets {
-        fromPreset(presets.mingwX64, 'windows')
-        fromPreset(presets.linuxX64, 'linux')
-        fromPreset(presets.macosX64, 'macos')
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 }
