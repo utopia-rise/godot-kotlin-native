@@ -39,7 +39,7 @@ class PoolByteArray : CoreType {
 
 
 
-    fun append(data: Byte) {
+    fun append(data: UByte) {
         nativeValue = nativeValue.copy { godot_pool_byte_array_append(this.ptr, data) }
     }
 
@@ -47,7 +47,7 @@ class PoolByteArray : CoreType {
         nativeValue = nativeValue.copy { godot_pool_byte_array_append_array(this.ptr, data.nativeValue) }
     }
 
-    fun insert(idx: Int, data: Byte) {
+    fun insert(idx: Int, data: UByte) {
         nativeValue = nativeValue.copy { godot_pool_byte_array_insert(this.ptr, idx, data) }
     }
 
@@ -55,7 +55,7 @@ class PoolByteArray : CoreType {
         nativeValue = nativeValue.copy { godot_pool_byte_array_invert(this.ptr) }
     }
 
-    fun pushBack(data: Byte) {
+    fun pushBack(data: UByte) {
         nativeValue = nativeValue.copy { godot_pool_byte_array_push_back(this.ptr, data) }
     }
 
@@ -67,11 +67,11 @@ class PoolByteArray : CoreType {
         nativeValue = nativeValue.copy { godot_pool_byte_array_resize(this.ptr, size) }
     }
 
-    fun set(idx: Int, data: Byte) {
+    fun set(idx: Int, data: UByte) {
         nativeValue = nativeValue.copy { godot_pool_byte_array_set(this.ptr, idx, data) }
     }
 
-    operator fun get(idx: Int): Byte = godot_pool_byte_array_get(nativeValue, idx)
+    operator fun get(idx: Int): UByte = godot_pool_byte_array_get(nativeValue, idx)
 
     fun size(): Int = godot_pool_byte_array_size(nativeValue)
 }

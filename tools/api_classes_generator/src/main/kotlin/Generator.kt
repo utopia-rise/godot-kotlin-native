@@ -12,7 +12,7 @@ fun main(args: Array<String>) {
     val tree = classes.buildTree()
     val icalls = mutableSetOf<ICall>()
 
-    for (cl in classes)
+    for ((i,cl) in classes.withIndex())
         //if (cl.name == "Object" || cl.name == "Node" || cl.name == "Reference" || cl.name == "Resource" || cl.name == "ResourceLoader" || cl.name == "SceneTree" || cl.name == "MainLoop" || cl.name == "Script" || cl.name == "Viewport") // FIXME: remove line
         cl.generate(GENERATED_PATH, tree, icalls)
 

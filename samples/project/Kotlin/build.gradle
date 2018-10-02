@@ -1,0 +1,48 @@
+buildscript {
+    repositories {
+        maven { url '../../../local_repo' } // TODO: publish online
+        mavenLocal()
+        jcenter()
+        maven { url 'https://dl.bintray.com/kotlin/kotlin-dev' }
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-godot:1.0.0"
+    }
+}
+
+repositories {
+    maven { url '../../../local_repo' } // TODO: publish online
+    mavenLocal()
+    jcenter()
+    maven { url 'https://dl.bintray.com/kotlin/kotlin-dev' }
+}
+
+apply plugin: 'kotlin-godot'
+
+
+kotlin {
+    sourceSets {
+        configureGodot([macosMain, linuxMain, windowsMain]) {
+            sourceSet {
+                kotlin.srcDirs 'src/main/kotlin'
+            }
+            
+            libraryPath 'samples.gdnlib'
+            generateGDNS '../project'
+            
+            configs 'src/main/kotlin/godot/samples/games/shmup/classes.json',
+                    'src/main/kotlin/godot/samples/games/dodge/classes.json'
+        }
+    }
+    targets {
+        fromPreset(presets.godotMingwX64, 'windows')
+        fromPreset(presets.godotLinuxX64, 'linux')
+        fromPreset(presets.godotMacosX64, 'macos')
+        configure([macos, linux, windows]) {
+            compilations.all {
+                buildTypes = [DEBUG]
+            }
+            //compilations.main.extraOpts('-Xdisable=devirtualization')
+        }
+    }
+}

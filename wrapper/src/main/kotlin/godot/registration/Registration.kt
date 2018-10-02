@@ -65,15 +65,15 @@ fun registerSignal(cl: String,
 {
     memScoped {
         val args = allocArray<godot_signal_argument>(a.size)
-        memset(args, 0, sizeOf<godot_signal_argument>() * a.size)
+        memset(args, 0, sizeOf<godot_signal_argument>().toULong() * a.size.toULong())
         val defaultArgs = allocArray<godot_variant>(da.size)
 
         for ((i,arg) in a.withIndex()) {
-            memcpy(args[i].name.ptr, arg.first.toGDString().getPointer(memScope), sizeOf<godot_string>())
+            memcpy(args[i].name.ptr, arg.first.toGDString().getPointer(memScope), sizeOf<godot_string>().toULong())
             args[i].type = arg.second.id.toInt()
         }
         for ((i,arg) in da.withIndex())
-            memcpy(defaultArgs[i].ptr, arg.nativeValue.getPointer(memScope), sizeOf<godot_variant>())
+            memcpy(defaultArgs[i].ptr, arg.nativeValue.getPointer(memScope), sizeOf<godot_variant>().toULong())
 
         godot_wrapper_register_signal(cl, n.toGDString(), a.size, args, da.size, defaultArgs)
     }
