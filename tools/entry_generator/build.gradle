@@ -1,23 +1,26 @@
 plugins {
+    id 'java-library'
+    id 'application'
     id 'org.jetbrains.kotlin.jvm' version '1.2.71'
-    id "com.github.johnrengelman.shadow" version "2.0.4"
 }
 
-version '1.0-SNAPSHOT'
+
+version '1.0.0'
+
 
 repositories {
     mavenCentral()
     jcenter()
 }
-
+configurations {
+    extraLibs
+}
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     implementation 'com.beust:klaxon:3.0.1'
+    extraLibs 'com.beust:klaxon:3.0.1'
 }
 
-apply plugin: 'kotlin'
-apply plugin: 'java-library'
-//apply plugin: 'application'
 
 compileKotlin {
     kotlinOptions.jvmTarget = "1.8"
@@ -25,11 +28,33 @@ compileKotlin {
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
+mainClassName = 'MainKt'
 /*
-mainClassName = 'GeneratorKt'
 defaultTasks 'run'
 
 run {
     args 'godot_classes.json', 'godot_classes.xml', '-o', 'Entry.kt'
 }
 */
+
+
+jar {
+    from {
+        configurations.extraLibs.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+
+task copyToPluginDir(type: Copy) {
+    dependsOn jar
+
+    jar.getOutputs().each {
+        it.getFiles().each {
+            from it
+            into '../gradle_plugin/lib'
+        }
+    }
+}
+build {
+    dependsOn copyToPluginDir
+}

@@ -49,7 +49,7 @@ kotlin {
                     includeDirs 'lib/godot_headers', 'src/main/c_interop'
                 }
             }
-            compilations.main.extraOpts('-Xdisable=devirtualization')
+            //compilations.main.extraOpts('-Xdisable=devirtualization')
         }
     }
 }

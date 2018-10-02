@@ -28,7 +28,7 @@ class Classes(
 @file:Suppress("PackageDirectoryMismatch", "FunctionName", "UNUSED_ANONYMOUS_PARAMETER")
 package kotlin.godot.entry
 
-import konan.internal.CName
+import kotlin.native.CName
 import kotlinx.cinterop.*
 import godot.gdnative.*
 import godot.core.*
