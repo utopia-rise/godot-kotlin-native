@@ -19,24 +19,24 @@ open class CSGPolygon : CSGPrimitive {
 
     // Enums 
 
-    enum class PathRotation(val id: Int) {
+    enum class PathRotation(val id: Long) {
         PATH_ROTATION_POLYGON(0),
         PATH_ROTATION_PATH(1),
         PATH_ROTATION_PATH_FOLLOW(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class Mode(val id: Int) {
+    enum class Mode(val id: Long) {
         MODE_DEPTH(0),
         MODE_SPIN(1),
         MODE_PATH(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -59,12 +59,12 @@ open class CSGPolygon : CSGPrimitive {
 
 
         // Constants
-        const val MODE_DEPTH: Int = 0
-        const val MODE_SPIN: Int = 1
-        const val MODE_PATH: Int = 2
-        const val PATH_ROTATION_POLYGON: Int = 0
-        const val PATH_ROTATION_PATH: Int = 1
-        const val PATH_ROTATION_PATH_FOLLOW: Int = 2
+        const val MODE_DEPTH: Long = 0
+        const val MODE_SPIN: Long = 1
+        const val MODE_PATH: Long = 2
+        const val PATH_ROTATION_POLYGON: Long = 0
+        const val PATH_ROTATION_PATH: Long = 1
+        const val PATH_ROTATION_PATH_FOLLOW: Long = 2
 
 
     }
@@ -76,24 +76,24 @@ open class CSGPolygon : CSGPrimitive {
         set(value) = _icall_Unit_PoolVector2Array(setPolygonMethodBind, this.rawMemory, value)
 
 
-    open var mode: Int
-        get() = _icall_Int(getModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setModeMethodBind, this.rawMemory, value)
+    open var mode: Long
+        get() = _icall_Long(getModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setModeMethodBind, this.rawMemory, value)
 
 
-    open var depth: Float
-        get() = _icall_Float(getDepthMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setDepthMethodBind, this.rawMemory, value)
+    open var depth: Double
+        get() = _icall_Double(getDepthMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setDepthMethodBind, this.rawMemory, value)
 
 
-    open var spinDegrees: Float
-        get() = _icall_Float(getSpinDegreesMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setSpinDegreesMethodBind, this.rawMemory, value)
+    open var spinDegrees: Double
+        get() = _icall_Double(getSpinDegreesMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setSpinDegreesMethodBind, this.rawMemory, value)
 
 
-    open var spinSides: Int
-        get() = _icall_Int(getSpinSidesMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setSpinSidesMethodBind, this.rawMemory, value)
+    open var spinSides: Long
+        get() = _icall_Long(getSpinSidesMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setSpinSidesMethodBind, this.rawMemory, value)
 
 
     open var pathNode: NodePath
@@ -101,14 +101,14 @@ open class CSGPolygon : CSGPrimitive {
         set(value) = _icall_Unit_NodePath(setPathNodeMethodBind, this.rawMemory, value)
 
 
-    open var pathInterval: Float
-        get() = _icall_Float(getPathIntervalMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setPathIntervalMethodBind, this.rawMemory, value)
+    open var pathInterval: Double
+        get() = _icall_Double(getPathIntervalMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setPathIntervalMethodBind, this.rawMemory, value)
 
 
-    open var pathRotation: Int
-        get() = _icall_Int(getPathRotationMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setPathRotationMethodBind, this.rawMemory, value)
+    open var pathRotation: Long
+        get() = _icall_Long(getPathRotationMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setPathRotationMethodBind, this.rawMemory, value)
 
 
     open var smoothFaces: Boolean
@@ -137,50 +137,50 @@ open class CSGPolygon : CSGPrimitive {
 
 
     private val setModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("CSGPolygon", "set_mode") }
-    open fun setMode(mode: Int) {
-        _icall_Unit_Int(setModeMethodBind, this.rawMemory, mode)
+    open fun setMode(mode: Long) {
+        _icall_Unit_Long(setModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("CSGPolygon", "get_mode") }
     open fun getMode(): CSGPolygon.Mode {
-        return CSGPolygon.Mode.fromInt(_icall_Int(getModeMethodBind, this.rawMemory))
+        return CSGPolygon.Mode.fromInt(_icall_Long(getModeMethodBind, this.rawMemory))
     }
 
 
     private val setDepthMethodBind: CPointer<godot_method_bind> by lazy { getMB("CSGPolygon", "set_depth") }
-    open fun setDepth(depth: Float) {
-        _icall_Unit_Float(setDepthMethodBind, this.rawMemory, depth)
+    open fun setDepth(depth: Double) {
+        _icall_Unit_Double(setDepthMethodBind, this.rawMemory, depth)
     }
 
 
     private val getDepthMethodBind: CPointer<godot_method_bind> by lazy { getMB("CSGPolygon", "get_depth") }
-    open fun getDepth(): Float {
-        return _icall_Float(getDepthMethodBind, this.rawMemory)
+    open fun getDepth(): Double {
+        return _icall_Double(getDepthMethodBind, this.rawMemory)
     }
 
 
     private val setSpinDegreesMethodBind: CPointer<godot_method_bind> by lazy { getMB("CSGPolygon", "set_spin_degrees") }
-    open fun setSpinDegrees(degrees: Float) {
-        _icall_Unit_Float(setSpinDegreesMethodBind, this.rawMemory, degrees)
+    open fun setSpinDegrees(degrees: Double) {
+        _icall_Unit_Double(setSpinDegreesMethodBind, this.rawMemory, degrees)
     }
 
 
     private val getSpinDegreesMethodBind: CPointer<godot_method_bind> by lazy { getMB("CSGPolygon", "get_spin_degrees") }
-    open fun getSpinDegrees(): Float {
-        return _icall_Float(getSpinDegreesMethodBind, this.rawMemory)
+    open fun getSpinDegrees(): Double {
+        return _icall_Double(getSpinDegreesMethodBind, this.rawMemory)
     }
 
 
     private val setSpinSidesMethodBind: CPointer<godot_method_bind> by lazy { getMB("CSGPolygon", "set_spin_sides") }
-    open fun setSpinSides(spinSides: Int) {
-        _icall_Unit_Int(setSpinSidesMethodBind, this.rawMemory, spinSides)
+    open fun setSpinSides(spinSides: Long) {
+        _icall_Unit_Long(setSpinSidesMethodBind, this.rawMemory, spinSides)
     }
 
 
     private val getSpinSidesMethodBind: CPointer<godot_method_bind> by lazy { getMB("CSGPolygon", "get_spin_sides") }
-    open fun getSpinSides(): Int {
-        return _icall_Int(getSpinSidesMethodBind, this.rawMemory)
+    open fun getSpinSides(): Long {
+        return _icall_Long(getSpinSidesMethodBind, this.rawMemory)
     }
 
 
@@ -197,26 +197,26 @@ open class CSGPolygon : CSGPrimitive {
 
 
     private val setPathIntervalMethodBind: CPointer<godot_method_bind> by lazy { getMB("CSGPolygon", "set_path_interval") }
-    open fun setPathInterval(distance: Float) {
-        _icall_Unit_Float(setPathIntervalMethodBind, this.rawMemory, distance)
+    open fun setPathInterval(distance: Double) {
+        _icall_Unit_Double(setPathIntervalMethodBind, this.rawMemory, distance)
     }
 
 
     private val getPathIntervalMethodBind: CPointer<godot_method_bind> by lazy { getMB("CSGPolygon", "get_path_interval") }
-    open fun getPathInterval(): Float {
-        return _icall_Float(getPathIntervalMethodBind, this.rawMemory)
+    open fun getPathInterval(): Double {
+        return _icall_Double(getPathIntervalMethodBind, this.rawMemory)
     }
 
 
     private val setPathRotationMethodBind: CPointer<godot_method_bind> by lazy { getMB("CSGPolygon", "set_path_rotation") }
-    open fun setPathRotation(mode: Int) {
-        _icall_Unit_Int(setPathRotationMethodBind, this.rawMemory, mode)
+    open fun setPathRotation(mode: Long) {
+        _icall_Unit_Long(setPathRotationMethodBind, this.rawMemory, mode)
     }
 
 
     private val getPathRotationMethodBind: CPointer<godot_method_bind> by lazy { getMB("CSGPolygon", "get_path_rotation") }
     open fun getPathRotation(): CSGPolygon.PathRotation {
-        return CSGPolygon.PathRotation.fromInt(_icall_Int(getPathRotationMethodBind, this.rawMemory))
+        return CSGPolygon.PathRotation.fromInt(_icall_Long(getPathRotationMethodBind, this.rawMemory))
     }
 
 

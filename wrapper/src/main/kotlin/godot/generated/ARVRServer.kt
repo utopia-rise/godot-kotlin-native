@@ -19,17 +19,17 @@ open class ARVRServer : Object {
 
     // Enums 
 
-    enum class RotationMode(val id: Int) {
+    enum class RotationMode(val id: Long) {
         RESET_FULL_ROTATION(0),
         RESET_BUT_KEEP_TILT(1),
         DONT_RESET_ROTATION(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class TrackerType(val id: Int) {
+    enum class TrackerType(val id: Long) {
         TRACKER_CONTROLLER(1),
         TRACKER_BASESTATION(2),
         TRACKER_ANCHOR(4),
@@ -39,7 +39,7 @@ open class ARVRServer : Object {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -61,24 +61,24 @@ open class ARVRServer : Object {
 
 
         // Constants
-        const val TRACKER_CONTROLLER: Int = 1
-        const val TRACKER_BASESTATION: Int = 2
-        const val TRACKER_ANCHOR: Int = 4
-        const val TRACKER_ANY_KNOWN: Int = 127
-        const val TRACKER_UNKNOWN: Int = 128
-        const val TRACKER_ANY: Int = 255
-        const val RESET_FULL_ROTATION: Int = 0
-        const val RESET_BUT_KEEP_TILT: Int = 1
-        const val DONT_RESET_ROTATION: Int = 2
+        const val TRACKER_CONTROLLER: Long = 1
+        const val TRACKER_BASESTATION: Long = 2
+        const val TRACKER_ANCHOR: Long = 4
+        const val TRACKER_ANY_KNOWN: Long = 127
+        const val TRACKER_UNKNOWN: Long = 128
+        const val TRACKER_ANY: Long = 255
+        const val RESET_FULL_ROTATION: Long = 0
+        const val RESET_BUT_KEEP_TILT: Long = 1
+        const val DONT_RESET_ROTATION: Long = 2
 
 
         private val rawMemory: COpaquePointer by lazy { getSingleton("ARVRServer", "ARVRServer") }
 
 
         // Properties
-        var worldScale: Float
-            get() = _icall_Float(getWorldScaleMethodBind, this.rawMemory)
-            set(value) = _icall_Unit_Float(setWorldScaleMethodBind, this.rawMemory, value)
+        var worldScale: Double
+            get() = _icall_Double(getWorldScaleMethodBind, this.rawMemory)
+            set(value) = _icall_Unit_Double(setWorldScaleMethodBind, this.rawMemory, value)
 
 
         var primaryInterface: Object
@@ -90,14 +90,14 @@ open class ARVRServer : Object {
 
         // Methods
         private val getWorldScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("ARVRServer", "get_world_scale") }
-        fun getWorldScale(): Float {
-            return _icall_Float(getWorldScaleMethodBind, this.rawMemory)
+        fun getWorldScale(): Double {
+            return _icall_Double(getWorldScaleMethodBind, this.rawMemory)
         }
 
 
         private val setWorldScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("ARVRServer", "set_world_scale") }
-        fun setWorldScale(arg0: Float) {
-            _icall_Unit_Float(setWorldScaleMethodBind, this.rawMemory, arg0)
+        fun setWorldScale(arg0: Double) {
+            _icall_Unit_Double(setWorldScaleMethodBind, this.rawMemory, arg0)
         }
 
 
@@ -108,8 +108,8 @@ open class ARVRServer : Object {
 
 
         private val centerOnHmdMethodBind: CPointer<godot_method_bind> by lazy { getMB("ARVRServer", "center_on_hmd") }
-        fun centerOnHmd(rotationMode: Int, keepHeight: Boolean) {
-            _icall_Unit_Int_Boolean(centerOnHmdMethodBind, this.rawMemory, rotationMode, keepHeight)
+        fun centerOnHmd(rotationMode: Long, keepHeight: Boolean) {
+            _icall_Unit_Long_Boolean(centerOnHmdMethodBind, this.rawMemory, rotationMode, keepHeight)
         }
 
 
@@ -120,14 +120,14 @@ open class ARVRServer : Object {
 
 
         private val getInterfaceCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("ARVRServer", "get_interface_count") }
-        fun getInterfaceCount(): Int {
-            return _icall_Int(getInterfaceCountMethodBind, this.rawMemory)
+        fun getInterfaceCount(): Long {
+            return _icall_Long(getInterfaceCountMethodBind, this.rawMemory)
         }
 
 
         private val getInterfaceMethodBind: CPointer<godot_method_bind> by lazy { getMB("ARVRServer", "get_interface") }
-        fun getInterface(idx: Int): ARVRInterface {
-            return _icall_ARVRInterface_Int(getInterfaceMethodBind, this.rawMemory, idx)
+        fun getInterface(idx: Long): ARVRInterface {
+            return _icall_ARVRInterface_Long(getInterfaceMethodBind, this.rawMemory, idx)
         }
 
 
@@ -144,14 +144,14 @@ open class ARVRServer : Object {
 
 
         private val getTrackerCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("ARVRServer", "get_tracker_count") }
-        fun getTrackerCount(): Int {
-            return _icall_Int(getTrackerCountMethodBind, this.rawMemory)
+        fun getTrackerCount(): Long {
+            return _icall_Long(getTrackerCountMethodBind, this.rawMemory)
         }
 
 
         private val getTrackerMethodBind: CPointer<godot_method_bind> by lazy { getMB("ARVRServer", "get_tracker") }
-        fun getTracker(idx: Int): ARVRPositionalTracker {
-            return _icall_ARVRPositionalTracker_Int(getTrackerMethodBind, this.rawMemory, idx)
+        fun getTracker(idx: Long): ARVRPositionalTracker {
+            return _icall_ARVRPositionalTracker_Long(getTrackerMethodBind, this.rawMemory, idx)
         }
 
 
@@ -168,20 +168,20 @@ open class ARVRServer : Object {
 
 
         private val getLastProcessUsecMethodBind: CPointer<godot_method_bind> by lazy { getMB("ARVRServer", "get_last_process_usec") }
-        fun getLastProcessUsec(): Int {
-            return _icall_Int(getLastProcessUsecMethodBind, this.rawMemory)
+        fun getLastProcessUsec(): Long {
+            return _icall_Long(getLastProcessUsecMethodBind, this.rawMemory)
         }
 
 
         private val getLastCommitUsecMethodBind: CPointer<godot_method_bind> by lazy { getMB("ARVRServer", "get_last_commit_usec") }
-        fun getLastCommitUsec(): Int {
-            return _icall_Int(getLastCommitUsecMethodBind, this.rawMemory)
+        fun getLastCommitUsec(): Long {
+            return _icall_Long(getLastCommitUsecMethodBind, this.rawMemory)
         }
 
 
         private val getLastFrameUsecMethodBind: CPointer<godot_method_bind> by lazy { getMB("ARVRServer", "get_last_frame_usec") }
-        fun getLastFrameUsec(): Int {
-            return _icall_Int(getLastFrameUsecMethodBind, this.rawMemory)
+        fun getLastFrameUsec(): Long {
+            return _icall_Long(getLastFrameUsecMethodBind, this.rawMemory)
         }
 
 

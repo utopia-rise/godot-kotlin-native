@@ -331,7 +331,7 @@ axis_lock_angular_z = true
 collision/safe_margin = 0.001
 script = ExtResource( 3 )
 _sections_unfolded = [ "Axis Lock", "Collision", "Transform", "collision" ]
-speed = null
+speed = 6
 
 [node name="Area" type="Area" parent="Player" index="0"]
 

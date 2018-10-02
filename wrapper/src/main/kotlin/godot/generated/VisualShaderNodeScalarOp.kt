@@ -19,7 +19,7 @@ open class VisualShaderNodeScalarOp : VisualShaderNode {
 
     // Enums 
 
-    enum class Operator(val id: Int) {
+    enum class Operator(val id: Long) {
         OP_ADD(0),
         OP_SUB(1),
         OP_MUL(2),
@@ -32,7 +32,7 @@ open class VisualShaderNodeScalarOp : VisualShaderNode {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -53,38 +53,38 @@ open class VisualShaderNodeScalarOp : VisualShaderNode {
 
 
         // Constants
-        const val OP_ADD: Int = 0
-        const val OP_SUB: Int = 1
-        const val OP_MUL: Int = 2
-        const val OP_DIV: Int = 3
-        const val OP_MOD: Int = 4
-        const val OP_POW: Int = 5
-        const val OP_MAX: Int = 6
-        const val OP_MIN: Int = 7
-        const val OP_ATAN2: Int = 8
+        const val OP_ADD: Long = 0
+        const val OP_SUB: Long = 1
+        const val OP_MUL: Long = 2
+        const val OP_DIV: Long = 3
+        const val OP_MOD: Long = 4
+        const val OP_POW: Long = 5
+        const val OP_MAX: Long = 6
+        const val OP_MIN: Long = 7
+        const val OP_ATAN2: Long = 8
 
 
     }
 
 
     // Properties
-    open var operator: Int
-        get() = _icall_Int(getOperatorMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setOperatorMethodBind, this.rawMemory, value)
+    open var operator: Long
+        get() = _icall_Long(getOperatorMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setOperatorMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setOperatorMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualShaderNodeScalarOp", "set_operator") }
-    open fun setOperator(op: Int) {
-        _icall_Unit_Int(setOperatorMethodBind, this.rawMemory, op)
+    open fun setOperator(op: Long) {
+        _icall_Unit_Long(setOperatorMethodBind, this.rawMemory, op)
     }
 
 
     private val getOperatorMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualShaderNodeScalarOp", "get_operator") }
     open fun getOperator(): VisualShaderNodeScalarOp.Operator {
-        return VisualShaderNodeScalarOp.Operator.fromInt(_icall_Int(getOperatorMethodBind, this.rawMemory))
+        return VisualShaderNodeScalarOp.Operator.fromInt(_icall_Long(getOperatorMethodBind, this.rawMemory))
     }
 
 

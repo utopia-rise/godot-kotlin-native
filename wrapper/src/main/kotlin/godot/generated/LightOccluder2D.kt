@@ -48,9 +48,9 @@ open class LightOccluder2D : Node2D {
         set(value) = _icall_Unit_Object(setOccluderPolygonMethodBind, this.rawMemory, value)
 
 
-    override var lightMask: Int
-        get() = _icall_Int(getOccluderLightMaskMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setOccluderLightMaskMethodBind, this.rawMemory, value)
+    override var lightMask: Long
+        get() = _icall_Long(getOccluderLightMaskMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setOccluderLightMaskMethodBind, this.rawMemory, value)
 
 
 
@@ -69,14 +69,14 @@ open class LightOccluder2D : Node2D {
 
 
     private val setOccluderLightMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("LightOccluder2D", "set_occluder_light_mask") }
-    open fun setOccluderLightMask(mask: Int) {
-        _icall_Unit_Int(setOccluderLightMaskMethodBind, this.rawMemory, mask)
+    open fun setOccluderLightMask(mask: Long) {
+        _icall_Unit_Long(setOccluderLightMaskMethodBind, this.rawMemory, mask)
     }
 
 
     private val getOccluderLightMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("LightOccluder2D", "get_occluder_light_mask") }
-    open fun getOccluderLightMask(): Int {
-        return _icall_Int(getOccluderLightMaskMethodBind, this.rawMemory)
+    open fun getOccluderLightMask(): Long {
+        return _icall_Long(getOccluderLightMaskMethodBind, this.rawMemory)
     }
 
 

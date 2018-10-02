@@ -43,57 +43,57 @@ open class AudioEffectStereoEnhance : AudioEffect {
 
 
     // Properties
-    open var panPullout: Float
-        get() = _icall_Float(getPanPulloutMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setPanPulloutMethodBind, this.rawMemory, value)
+    open var panPullout: Double
+        get() = _icall_Double(getPanPulloutMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setPanPulloutMethodBind, this.rawMemory, value)
 
 
-    open var timePulloutMs: Float
-        get() = _icall_Float(getTimePulloutMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setTimePulloutMethodBind, this.rawMemory, value)
+    open var timePulloutMs: Double
+        get() = _icall_Double(getTimePulloutMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setTimePulloutMethodBind, this.rawMemory, value)
 
 
-    open var surround: Float
-        get() = _icall_Float(getSurroundMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setSurroundMethodBind, this.rawMemory, value)
+    open var surround: Double
+        get() = _icall_Double(getSurroundMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setSurroundMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setPanPulloutMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectStereoEnhance", "set_pan_pullout") }
-    open fun setPanPullout(amount: Float) {
-        _icall_Unit_Float(setPanPulloutMethodBind, this.rawMemory, amount)
+    open fun setPanPullout(amount: Double) {
+        _icall_Unit_Double(setPanPulloutMethodBind, this.rawMemory, amount)
     }
 
 
     private val getPanPulloutMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectStereoEnhance", "get_pan_pullout") }
-    open fun getPanPullout(): Float {
-        return _icall_Float(getPanPulloutMethodBind, this.rawMemory)
+    open fun getPanPullout(): Double {
+        return _icall_Double(getPanPulloutMethodBind, this.rawMemory)
     }
 
 
     private val setTimePulloutMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectStereoEnhance", "set_time_pullout") }
-    open fun setTimePullout(amount: Float) {
-        _icall_Unit_Float(setTimePulloutMethodBind, this.rawMemory, amount)
+    open fun setTimePullout(amount: Double) {
+        _icall_Unit_Double(setTimePulloutMethodBind, this.rawMemory, amount)
     }
 
 
     private val getTimePulloutMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectStereoEnhance", "get_time_pullout") }
-    open fun getTimePullout(): Float {
-        return _icall_Float(getTimePulloutMethodBind, this.rawMemory)
+    open fun getTimePullout(): Double {
+        return _icall_Double(getTimePulloutMethodBind, this.rawMemory)
     }
 
 
     private val setSurroundMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectStereoEnhance", "set_surround") }
-    open fun setSurround(amount: Float) {
-        _icall_Unit_Float(setSurroundMethodBind, this.rawMemory, amount)
+    open fun setSurround(amount: Double) {
+        _icall_Unit_Double(setSurroundMethodBind, this.rawMemory, amount)
     }
 
 
     private val getSurroundMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectStereoEnhance", "get_surround") }
-    open fun getSurround(): Float {
-        return _icall_Float(getSurroundMethodBind, this.rawMemory)
+    open fun getSurround(): Double {
+        return _icall_Double(getSurroundMethodBind, this.rawMemory)
     }
 
 

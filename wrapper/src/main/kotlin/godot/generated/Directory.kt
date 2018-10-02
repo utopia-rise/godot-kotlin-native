@@ -46,13 +46,13 @@ open class Directory : Reference {
     // Methods
     private val openMethodBind: CPointer<godot_method_bind> by lazy { getMB("_Directory", "open") }
     open fun open(path: String): GodotError {
-        return GodotError.fromInt(_icall_Int_String(openMethodBind, this.rawMemory, path))
+        return GodotError.fromInt(_icall_Long_String(openMethodBind, this.rawMemory, path))
     }
 
 
     private val listDirBeginMethodBind: CPointer<godot_method_bind> by lazy { getMB("_Directory", "list_dir_begin") }
     open fun listDirBegin(skipNavigational: Boolean = false, skipHidden: Boolean = false): GodotError {
-        return GodotError.fromInt(_icall_Int_Boolean_Boolean(listDirBeginMethodBind, this.rawMemory, skipNavigational, skipHidden))
+        return GodotError.fromInt(_icall_Long_Boolean_Boolean(listDirBeginMethodBind, this.rawMemory, skipNavigational, skipHidden))
     }
 
 
@@ -75,26 +75,26 @@ open class Directory : Reference {
 
 
     private val getDriveCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("_Directory", "get_drive_count") }
-    open fun getDriveCount(): Int {
-        return _icall_Int(getDriveCountMethodBind, this.rawMemory)
+    open fun getDriveCount(): Long {
+        return _icall_Long(getDriveCountMethodBind, this.rawMemory)
     }
 
 
     private val getDriveMethodBind: CPointer<godot_method_bind> by lazy { getMB("_Directory", "get_drive") }
-    open fun getDrive(idx: Int): String {
-        return _icall_String_Int(getDriveMethodBind, this.rawMemory, idx)
+    open fun getDrive(idx: Long): String {
+        return _icall_String_Long(getDriveMethodBind, this.rawMemory, idx)
     }
 
 
     private val getCurrentDriveMethodBind: CPointer<godot_method_bind> by lazy { getMB("_Directory", "get_current_drive") }
-    open fun getCurrentDrive(): Int {
-        return _icall_Int(getCurrentDriveMethodBind, this.rawMemory)
+    open fun getCurrentDrive(): Long {
+        return _icall_Long(getCurrentDriveMethodBind, this.rawMemory)
     }
 
 
     private val changeDirMethodBind: CPointer<godot_method_bind> by lazy { getMB("_Directory", "change_dir") }
     open fun changeDir(todir: String): GodotError {
-        return GodotError.fromInt(_icall_Int_String(changeDirMethodBind, this.rawMemory, todir))
+        return GodotError.fromInt(_icall_Long_String(changeDirMethodBind, this.rawMemory, todir))
     }
 
 
@@ -106,13 +106,13 @@ open class Directory : Reference {
 
     private val makeDirMethodBind: CPointer<godot_method_bind> by lazy { getMB("_Directory", "make_dir") }
     open fun makeDir(path: String): GodotError {
-        return GodotError.fromInt(_icall_Int_String(makeDirMethodBind, this.rawMemory, path))
+        return GodotError.fromInt(_icall_Long_String(makeDirMethodBind, this.rawMemory, path))
     }
 
 
     private val makeDirRecursiveMethodBind: CPointer<godot_method_bind> by lazy { getMB("_Directory", "make_dir_recursive") }
     open fun makeDirRecursive(path: String): GodotError {
-        return GodotError.fromInt(_icall_Int_String(makeDirRecursiveMethodBind, this.rawMemory, path))
+        return GodotError.fromInt(_icall_Long_String(makeDirRecursiveMethodBind, this.rawMemory, path))
     }
 
 
@@ -129,26 +129,26 @@ open class Directory : Reference {
 
 
     private val getSpaceLeftMethodBind: CPointer<godot_method_bind> by lazy { getMB("_Directory", "get_space_left") }
-    open fun getSpaceLeft(): Int {
-        return _icall_Int(getSpaceLeftMethodBind, this.rawMemory)
+    open fun getSpaceLeft(): Long {
+        return _icall_Long(getSpaceLeftMethodBind, this.rawMemory)
     }
 
 
     private val copyMethodBind: CPointer<godot_method_bind> by lazy { getMB("_Directory", "copy") }
     open fun copy(from: String, to: String): GodotError {
-        return GodotError.fromInt(_icall_Int_String_String(copyMethodBind, this.rawMemory, from, to))
+        return GodotError.fromInt(_icall_Long_String_String(copyMethodBind, this.rawMemory, from, to))
     }
 
 
     private val renameMethodBind: CPointer<godot_method_bind> by lazy { getMB("_Directory", "rename") }
     open fun rename(from: String, to: String): GodotError {
-        return GodotError.fromInt(_icall_Int_String_String(renameMethodBind, this.rawMemory, from, to))
+        return GodotError.fromInt(_icall_Long_String_String(renameMethodBind, this.rawMemory, from, to))
     }
 
 
     private val removeMethodBind: CPointer<godot_method_bind> by lazy { getMB("_Directory", "remove") }
     open fun remove(path: String): GodotError {
-        return GodotError.fromInt(_icall_Int_String(removeMethodBind, this.rawMemory, path))
+        return GodotError.fromInt(_icall_Long_String(removeMethodBind, this.rawMemory, path))
     }
 
 

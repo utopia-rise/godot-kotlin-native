@@ -52,7 +52,7 @@ open class Mutex : Reference {
 
     private val tryLockMethodBind: CPointer<godot_method_bind> by lazy { getMB("_Mutex", "try_lock") }
     open fun tryLock(): GodotError {
-        return GodotError.fromInt(_icall_Int(tryLockMethodBind, this.rawMemory))
+        return GodotError.fromInt(_icall_Long(tryLockMethodBind, this.rawMemory))
     }
 
 

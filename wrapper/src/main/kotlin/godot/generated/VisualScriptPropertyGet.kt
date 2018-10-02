@@ -19,14 +19,14 @@ open class VisualScriptPropertyGet : VisualScriptNode {
 
     // Enums 
 
-    enum class CallMode(val id: Int) {
+    enum class CallMode(val id: Long) {
         CALL_MODE_SELF(0),
         CALL_MODE_NODE_PATH(1),
         CALL_MODE_INSTANCE(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -47,18 +47,18 @@ open class VisualScriptPropertyGet : VisualScriptNode {
 
 
         // Constants
-        const val CALL_MODE_SELF: Int = 0
-        const val CALL_MODE_NODE_PATH: Int = 1
-        const val CALL_MODE_INSTANCE: Int = 2
+        const val CALL_MODE_SELF: Long = 0
+        const val CALL_MODE_NODE_PATH: Long = 1
+        const val CALL_MODE_INSTANCE: Long = 2
 
 
     }
 
 
     // Properties
-    open var setMode: Int
-        get() = _icall_Int(getCallModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setCallModeMethodBind, this.rawMemory, value)
+    open var setMode: Long
+        get() = _icall_Long(getCallModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setCallModeMethodBind, this.rawMemory, value)
 
 
     open var baseType: String
@@ -71,9 +71,9 @@ open class VisualScriptPropertyGet : VisualScriptNode {
         set(value) = _icall_Unit_String(setBaseScriptMethodBind, this.rawMemory, value)
 
 
-    open var basicType: Int
-        get() = _icall_Int(getBasicTypeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setBasicTypeMethodBind, this.rawMemory, value)
+    open var basicType: Long
+        get() = _icall_Long(getBasicTypeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setBasicTypeMethodBind, this.rawMemory, value)
 
 
     open var nodePath: NodePath
@@ -119,18 +119,18 @@ open class VisualScriptPropertyGet : VisualScriptNode {
 
 
     private val setBasicTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptPropertyGet", "set_basic_type") }
-    open fun setBasicType(basicType: Int) {
-        _icall_Unit_Int(setBasicTypeMethodBind, this.rawMemory, basicType)
+    open fun setBasicType(basicType: Long) {
+        _icall_Unit_Long(setBasicTypeMethodBind, this.rawMemory, basicType)
     }
 
 
     private val getBasicTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptPropertyGet", "get_basic_type") }
     open fun getBasicType(): Variant.Type {
-        return Variant.Type.fromInt(_icall_Int(getBasicTypeMethodBind, this.rawMemory))
+        return Variant.Type.fromInt(_icall_Long(getBasicTypeMethodBind, this.rawMemory))
     }
 
 
-    open fun _set_type_cache(typeCache: Int) {
+    open fun _set_type_cache(typeCache: Long) {
     }
 
 
@@ -152,14 +152,14 @@ open class VisualScriptPropertyGet : VisualScriptNode {
 
 
     private val setCallModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptPropertyGet", "set_call_mode") }
-    open fun setCallMode(mode: Int) {
-        _icall_Unit_Int(setCallModeMethodBind, this.rawMemory, mode)
+    open fun setCallMode(mode: Long) {
+        _icall_Unit_Long(setCallModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getCallModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptPropertyGet", "get_call_mode") }
     open fun getCallMode(): VisualScriptPropertyGet.CallMode {
-        return VisualScriptPropertyGet.CallMode.fromInt(_icall_Int(getCallModeMethodBind, this.rawMemory))
+        return VisualScriptPropertyGet.CallMode.fromInt(_icall_Long(getCallModeMethodBind, this.rawMemory))
     }
 
 

@@ -19,26 +19,26 @@ open class Control : CanvasItem {
 
     // Enums 
 
-    enum class Anchor(val id: Int) {
+    enum class Anchor(val id: Long) {
         ANCHOR_BEGIN(0),
         ANCHOR_END(1),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class FocusMode(val id: Int) {
+    enum class FocusMode(val id: Long) {
         FOCUS_NONE(0),
         FOCUS_CLICK(1),
         FOCUS_ALL(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class LayoutPresetMode(val id: Int) {
+    enum class LayoutPresetMode(val id: Long) {
         PRESET_MODE_MINSIZE(0),
         PRESET_MODE_KEEP_WIDTH(1),
         PRESET_MODE_KEEP_HEIGHT(2),
@@ -46,20 +46,20 @@ open class Control : CanvasItem {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class MouseFilter(val id: Int) {
+    enum class MouseFilter(val id: Long) {
         MOUSE_FILTER_STOP(0),
         MOUSE_FILTER_PASS(1),
         MOUSE_FILTER_IGNORE(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class CursorShape(val id: Int) {
+    enum class CursorShape(val id: Long) {
         CURSOR_ARROW(0),
         CURSOR_IBEAM(1),
         CURSOR_POINTING_HAND(2),
@@ -80,20 +80,20 @@ open class Control : CanvasItem {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class GrowDirection(val id: Int) {
+    enum class GrowDirection(val id: Long) {
         GROW_DIRECTION_BEGIN(0),
         GROW_DIRECTION_END(1),
         GROW_DIRECTION_BOTH(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class SizeFlags(val id: Int) {
+    enum class SizeFlags(val id: Long) {
         SIZE_FILL(1),
         SIZE_EXPAND(2),
         SIZE_EXPAND_FILL(3),
@@ -102,10 +102,10 @@ open class Control : CanvasItem {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class LayoutPreset(val id: Int) {
+    enum class LayoutPreset(val id: Long) {
         PRESET_TOP_LEFT(0),
         PRESET_TOP_RIGHT(1),
         PRESET_BOTTOM_LEFT(2),
@@ -125,7 +125,7 @@ open class Control : CanvasItem {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -154,118 +154,118 @@ open class Control : CanvasItem {
 
 
         // Constants
-        const val FOCUS_NONE: Int = 0
-        const val FOCUS_CLICK: Int = 1
-        const val FOCUS_ALL: Int = 2
-        const val NOTIFICATION_RESIZED: Int = 40
-        const val NOTIFICATION_MOUSE_ENTER: Int = 41
-        const val NOTIFICATION_MOUSE_EXIT: Int = 42
-        const val NOTIFICATION_FOCUS_ENTER: Int = 43
-        const val NOTIFICATION_FOCUS_EXIT: Int = 44
-        const val NOTIFICATION_THEME_CHANGED: Int = 45
-        const val NOTIFICATION_MODAL_CLOSE: Int = 46
-        const val NOTIFICATION_SCROLL_BEGIN: Int = 47
-        const val NOTIFICATION_SCROLL_END: Int = 48
-        const val CURSOR_ARROW: Int = 0
-        const val CURSOR_IBEAM: Int = 1
-        const val CURSOR_POINTING_HAND: Int = 2
-        const val CURSOR_CROSS: Int = 3
-        const val CURSOR_WAIT: Int = 4
-        const val CURSOR_BUSY: Int = 5
-        const val CURSOR_DRAG: Int = 6
-        const val CURSOR_CAN_DROP: Int = 7
-        const val CURSOR_FORBIDDEN: Int = 8
-        const val CURSOR_VSIZE: Int = 9
-        const val CURSOR_HSIZE: Int = 10
-        const val CURSOR_BDIAGSIZE: Int = 11
-        const val CURSOR_FDIAGSIZE: Int = 12
-        const val CURSOR_MOVE: Int = 13
-        const val CURSOR_VSPLIT: Int = 14
-        const val CURSOR_HSPLIT: Int = 15
-        const val CURSOR_HELP: Int = 16
-        const val PRESET_TOP_LEFT: Int = 0
-        const val PRESET_TOP_RIGHT: Int = 1
-        const val PRESET_BOTTOM_LEFT: Int = 2
-        const val PRESET_BOTTOM_RIGHT: Int = 3
-        const val PRESET_CENTER_LEFT: Int = 4
-        const val PRESET_CENTER_TOP: Int = 5
-        const val PRESET_CENTER_RIGHT: Int = 6
-        const val PRESET_CENTER_BOTTOM: Int = 7
-        const val PRESET_CENTER: Int = 8
-        const val PRESET_LEFT_WIDE: Int = 9
-        const val PRESET_TOP_WIDE: Int = 10
-        const val PRESET_RIGHT_WIDE: Int = 11
-        const val PRESET_BOTTOM_WIDE: Int = 12
-        const val PRESET_VCENTER_WIDE: Int = 13
-        const val PRESET_HCENTER_WIDE: Int = 14
-        const val PRESET_WIDE: Int = 15
-        const val PRESET_MODE_MINSIZE: Int = 0
-        const val PRESET_MODE_KEEP_WIDTH: Int = 1
-        const val PRESET_MODE_KEEP_HEIGHT: Int = 2
-        const val PRESET_MODE_KEEP_SIZE: Int = 3
-        const val SIZE_FILL: Int = 1
-        const val SIZE_EXPAND: Int = 2
-        const val SIZE_EXPAND_FILL: Int = 3
-        const val SIZE_SHRINK_CENTER: Int = 4
-        const val SIZE_SHRINK_END: Int = 8
-        const val MOUSE_FILTER_STOP: Int = 0
-        const val MOUSE_FILTER_PASS: Int = 1
-        const val MOUSE_FILTER_IGNORE: Int = 2
-        const val GROW_DIRECTION_BEGIN: Int = 0
-        const val GROW_DIRECTION_END: Int = 1
-        const val GROW_DIRECTION_BOTH: Int = 2
-        const val ANCHOR_BEGIN: Int = 0
-        const val ANCHOR_END: Int = 1
+        const val FOCUS_NONE: Long = 0
+        const val FOCUS_CLICK: Long = 1
+        const val FOCUS_ALL: Long = 2
+        const val NOTIFICATION_RESIZED: Long = 40
+        const val NOTIFICATION_MOUSE_ENTER: Long = 41
+        const val NOTIFICATION_MOUSE_EXIT: Long = 42
+        const val NOTIFICATION_FOCUS_ENTER: Long = 43
+        const val NOTIFICATION_FOCUS_EXIT: Long = 44
+        const val NOTIFICATION_THEME_CHANGED: Long = 45
+        const val NOTIFICATION_MODAL_CLOSE: Long = 46
+        const val NOTIFICATION_SCROLL_BEGIN: Long = 47
+        const val NOTIFICATION_SCROLL_END: Long = 48
+        const val CURSOR_ARROW: Long = 0
+        const val CURSOR_IBEAM: Long = 1
+        const val CURSOR_POINTING_HAND: Long = 2
+        const val CURSOR_CROSS: Long = 3
+        const val CURSOR_WAIT: Long = 4
+        const val CURSOR_BUSY: Long = 5
+        const val CURSOR_DRAG: Long = 6
+        const val CURSOR_CAN_DROP: Long = 7
+        const val CURSOR_FORBIDDEN: Long = 8
+        const val CURSOR_VSIZE: Long = 9
+        const val CURSOR_HSIZE: Long = 10
+        const val CURSOR_BDIAGSIZE: Long = 11
+        const val CURSOR_FDIAGSIZE: Long = 12
+        const val CURSOR_MOVE: Long = 13
+        const val CURSOR_VSPLIT: Long = 14
+        const val CURSOR_HSPLIT: Long = 15
+        const val CURSOR_HELP: Long = 16
+        const val PRESET_TOP_LEFT: Long = 0
+        const val PRESET_TOP_RIGHT: Long = 1
+        const val PRESET_BOTTOM_LEFT: Long = 2
+        const val PRESET_BOTTOM_RIGHT: Long = 3
+        const val PRESET_CENTER_LEFT: Long = 4
+        const val PRESET_CENTER_TOP: Long = 5
+        const val PRESET_CENTER_RIGHT: Long = 6
+        const val PRESET_CENTER_BOTTOM: Long = 7
+        const val PRESET_CENTER: Long = 8
+        const val PRESET_LEFT_WIDE: Long = 9
+        const val PRESET_TOP_WIDE: Long = 10
+        const val PRESET_RIGHT_WIDE: Long = 11
+        const val PRESET_BOTTOM_WIDE: Long = 12
+        const val PRESET_VCENTER_WIDE: Long = 13
+        const val PRESET_HCENTER_WIDE: Long = 14
+        const val PRESET_WIDE: Long = 15
+        const val PRESET_MODE_MINSIZE: Long = 0
+        const val PRESET_MODE_KEEP_WIDTH: Long = 1
+        const val PRESET_MODE_KEEP_HEIGHT: Long = 2
+        const val PRESET_MODE_KEEP_SIZE: Long = 3
+        const val SIZE_FILL: Long = 1
+        const val SIZE_EXPAND: Long = 2
+        const val SIZE_EXPAND_FILL: Long = 3
+        const val SIZE_SHRINK_CENTER: Long = 4
+        const val SIZE_SHRINK_END: Long = 8
+        const val MOUSE_FILTER_STOP: Long = 0
+        const val MOUSE_FILTER_PASS: Long = 1
+        const val MOUSE_FILTER_IGNORE: Long = 2
+        const val GROW_DIRECTION_BEGIN: Long = 0
+        const val GROW_DIRECTION_END: Long = 1
+        const val GROW_DIRECTION_BOTH: Long = 2
+        const val ANCHOR_BEGIN: Long = 0
+        const val ANCHOR_END: Long = 1
 
 
     }
 
 
     // Properties
-    open val anchorLeft: Float
-        get() = _icall_Float_Int(getAnchorMethodBind, this.rawMemory, 0)
+    open val anchorLeft: Double
+        get() = _icall_Double_Long(getAnchorMethodBind, this.rawMemory, 0)
 
 
-    open val anchorTop: Float
-        get() = _icall_Float_Int(getAnchorMethodBind, this.rawMemory, 1)
+    open val anchorTop: Double
+        get() = _icall_Double_Long(getAnchorMethodBind, this.rawMemory, 1)
 
 
-    open val anchorRight: Float
-        get() = _icall_Float_Int(getAnchorMethodBind, this.rawMemory, 2)
+    open val anchorRight: Double
+        get() = _icall_Double_Long(getAnchorMethodBind, this.rawMemory, 2)
 
 
-    open val anchorBottom: Float
-        get() = _icall_Float_Int(getAnchorMethodBind, this.rawMemory, 3)
+    open val anchorBottom: Double
+        get() = _icall_Double_Long(getAnchorMethodBind, this.rawMemory, 3)
 
 
-    open var marginLeft: Int
-        get() = _icall_Int_Int(getMarginMethodBind, this.rawMemory, 0)
-        set(value) = _icall_Unit_Int_Int(setMarginMethodBind, this.rawMemory, 0, value)
+    open var marginLeft: Long
+        get() = _icall_Long_Long(getMarginMethodBind, this.rawMemory, 0)
+        set(value) = _icall_Unit_Long_Long(setMarginMethodBind, this.rawMemory, 0, value)
 
 
-    open var marginTop: Int
-        get() = _icall_Int_Int(getMarginMethodBind, this.rawMemory, 1)
-        set(value) = _icall_Unit_Int_Int(setMarginMethodBind, this.rawMemory, 1, value)
+    open var marginTop: Long
+        get() = _icall_Long_Long(getMarginMethodBind, this.rawMemory, 1)
+        set(value) = _icall_Unit_Long_Long(setMarginMethodBind, this.rawMemory, 1, value)
 
 
-    open var marginRight: Int
-        get() = _icall_Int_Int(getMarginMethodBind, this.rawMemory, 2)
-        set(value) = _icall_Unit_Int_Int(setMarginMethodBind, this.rawMemory, 2, value)
+    open var marginRight: Long
+        get() = _icall_Long_Long(getMarginMethodBind, this.rawMemory, 2)
+        set(value) = _icall_Unit_Long_Long(setMarginMethodBind, this.rawMemory, 2, value)
 
 
-    open var marginBottom: Int
-        get() = _icall_Int_Int(getMarginMethodBind, this.rawMemory, 3)
-        set(value) = _icall_Unit_Int_Int(setMarginMethodBind, this.rawMemory, 3, value)
+    open var marginBottom: Long
+        get() = _icall_Long_Long(getMarginMethodBind, this.rawMemory, 3)
+        set(value) = _icall_Unit_Long_Long(setMarginMethodBind, this.rawMemory, 3, value)
 
 
-    open var growHorizontal: Int
-        get() = _icall_Int(getHGrowDirectionMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setHGrowDirectionMethodBind, this.rawMemory, value)
+    open var growHorizontal: Long
+        get() = _icall_Long(getHGrowDirectionMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setHGrowDirectionMethodBind, this.rawMemory, value)
 
 
-    open var growVertical: Int
-        get() = _icall_Int(getVGrowDirectionMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setVGrowDirectionMethodBind, this.rawMemory, value)
+    open var growVertical: Long
+        get() = _icall_Long(getVGrowDirectionMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setVGrowDirectionMethodBind, this.rawMemory, value)
 
 
     open var rectPosition: Vector2
@@ -304,9 +304,9 @@ open class Control : CanvasItem {
     }
 
 
-    open var rectRotation: Float
-        get() = _icall_Float(getRotationDegreesMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setRotationDegreesMethodBind, this.rawMemory, value)
+    open var rectRotation: Double
+        get() = _icall_Double(getRotationDegreesMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setRotationDegreesMethodBind, this.rawMemory, value)
 
 
     open var rectScale: Vector2
@@ -338,23 +338,23 @@ open class Control : CanvasItem {
 
 
     open var focusNeighbourLeft: NodePath
-        get() = _icall_NodePath_Int(getFocusNeighbourMethodBind, this.rawMemory, 0)
-        set(value) = _icall_Unit_Int_NodePath(setFocusNeighbourMethodBind, this.rawMemory, 0, value)
+        get() = _icall_NodePath_Long(getFocusNeighbourMethodBind, this.rawMemory, 0)
+        set(value) = _icall_Unit_Long_NodePath(setFocusNeighbourMethodBind, this.rawMemory, 0, value)
 
 
     open var focusNeighbourTop: NodePath
-        get() = _icall_NodePath_Int(getFocusNeighbourMethodBind, this.rawMemory, 1)
-        set(value) = _icall_Unit_Int_NodePath(setFocusNeighbourMethodBind, this.rawMemory, 1, value)
+        get() = _icall_NodePath_Long(getFocusNeighbourMethodBind, this.rawMemory, 1)
+        set(value) = _icall_Unit_Long_NodePath(setFocusNeighbourMethodBind, this.rawMemory, 1, value)
 
 
     open var focusNeighbourRight: NodePath
-        get() = _icall_NodePath_Int(getFocusNeighbourMethodBind, this.rawMemory, 2)
-        set(value) = _icall_Unit_Int_NodePath(setFocusNeighbourMethodBind, this.rawMemory, 2, value)
+        get() = _icall_NodePath_Long(getFocusNeighbourMethodBind, this.rawMemory, 2)
+        set(value) = _icall_Unit_Long_NodePath(setFocusNeighbourMethodBind, this.rawMemory, 2, value)
 
 
     open var focusNeighbourBottom: NodePath
-        get() = _icall_NodePath_Int(getFocusNeighbourMethodBind, this.rawMemory, 3)
-        set(value) = _icall_Unit_Int_NodePath(setFocusNeighbourMethodBind, this.rawMemory, 3, value)
+        get() = _icall_NodePath_Long(getFocusNeighbourMethodBind, this.rawMemory, 3)
+        set(value) = _icall_Unit_Long_NodePath(setFocusNeighbourMethodBind, this.rawMemory, 3, value)
 
 
     open var focusNext: NodePath
@@ -367,34 +367,34 @@ open class Control : CanvasItem {
         set(value) = _icall_Unit_NodePath(setFocusPreviousMethodBind, this.rawMemory, value)
 
 
-    open var focusMode: Int
-        get() = _icall_Int(getFocusModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setFocusModeMethodBind, this.rawMemory, value)
+    open var focusMode: Long
+        get() = _icall_Long(getFocusModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setFocusModeMethodBind, this.rawMemory, value)
 
 
-    open var mouseFilter: Int
-        get() = _icall_Int(getMouseFilterMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setMouseFilterMethodBind, this.rawMemory, value)
+    open var mouseFilter: Long
+        get() = _icall_Long(getMouseFilterMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setMouseFilterMethodBind, this.rawMemory, value)
 
 
-    open var mouseDefaultCursorShape: Int
-        get() = _icall_Int(getDefaultCursorShapeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setDefaultCursorShapeMethodBind, this.rawMemory, value)
+    open var mouseDefaultCursorShape: Long
+        get() = _icall_Long(getDefaultCursorShapeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setDefaultCursorShapeMethodBind, this.rawMemory, value)
 
 
-    open var sizeFlagsHorizontal: Int
-        get() = _icall_Int(getHSizeFlagsMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setHSizeFlagsMethodBind, this.rawMemory, value)
+    open var sizeFlagsHorizontal: Long
+        get() = _icall_Long(getHSizeFlagsMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setHSizeFlagsMethodBind, this.rawMemory, value)
 
 
-    open var sizeFlagsVertical: Int
-        get() = _icall_Int(getVSizeFlagsMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setVSizeFlagsMethodBind, this.rawMemory, value)
+    open var sizeFlagsVertical: Long
+        get() = _icall_Long(getVSizeFlagsMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setVSizeFlagsMethodBind, this.rawMemory, value)
 
 
-    open var sizeFlagsStretchRatio: Float
-        get() = _icall_Float(getStretchRatioMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setStretchRatioMethodBind, this.rawMemory, value)
+    open var sizeFlagsStretchRatio: Double
+        get() = _icall_Double(getStretchRatioMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setStretchRatioMethodBind, this.rawMemory, value)
 
 
     open var theme: Theme
@@ -460,48 +460,48 @@ open class Control : CanvasItem {
 
 
     private val setAnchorsPresetMethodBind: CPointer<godot_method_bind> by lazy { getMB("Control", "set_anchors_preset") }
-    open fun setAnchorsPreset(preset: Int, keepMargin: Boolean = false) {
-        _icall_Unit_Int_Boolean(setAnchorsPresetMethodBind, this.rawMemory, preset, keepMargin)
+    open fun setAnchorsPreset(preset: Long, keepMargin: Boolean = false) {
+        _icall_Unit_Long_Boolean(setAnchorsPresetMethodBind, this.rawMemory, preset, keepMargin)
     }
 
 
     private val setMarginsPresetMethodBind: CPointer<godot_method_bind> by lazy { getMB("Control", "set_margins_preset") }
-    open fun setMarginsPreset(preset: Int, resizeMode: Int = 0, margin: Int = 0) {
-        _icall_Unit_Int_Int_Int(setMarginsPresetMethodBind, this.rawMemory, preset, resizeMode, margin)
+    open fun setMarginsPreset(preset: Long, resizeMode: Long = 0, margin: Long = 0) {
+        _icall_Unit_Long_Long_Long(setMarginsPresetMethodBind, this.rawMemory, preset, resizeMode, margin)
     }
 
 
     private val setAnchorsAndMarginsPresetMethodBind: CPointer<godot_method_bind> by lazy { getMB("Control", "set_anchors_and_margins_preset") }
-    open fun setAnchorsAndMarginsPreset(preset: Int, resizeMode: Int = 0, margin: Int = 0) {
-        _icall_Unit_Int_Int_Int(setAnchorsAndMarginsPresetMethodBind, this.rawMemory, preset, resizeMode, margin)
+    open fun setAnchorsAndMarginsPreset(preset: Long, resizeMode: Long = 0, margin: Long = 0) {
+        _icall_Unit_Long_Long_Long(setAnchorsAndMarginsPresetMethodBind, this.rawMemory, preset, resizeMode, margin)
     }
 
 
     private val setAnchorMethodBind: CPointer<godot_method_bind> by lazy { getMB("Control", "set_anchor") }
-    open fun setAnchor(margin: Int, anchor: Float, keepMargin: Boolean = false, pushOppositeAnchor: Boolean = true) {
-        _icall_Unit_Int_Float_Boolean_Boolean(setAnchorMethodBind, this.rawMemory, margin, anchor, keepMargin, pushOppositeAnchor)
+    open fun setAnchor(margin: Long, anchor: Double, keepMargin: Boolean = false, pushOppositeAnchor: Boolean = true) {
+        _icall_Unit_Long_Double_Boolean_Boolean(setAnchorMethodBind, this.rawMemory, margin, anchor, keepMargin, pushOppositeAnchor)
     }
 
 
-    open fun _set_anchor(margin: Int, anchor: Float) {
+    open fun _set_anchor(margin: Long, anchor: Double) {
     }
 
 
     private val getAnchorMethodBind: CPointer<godot_method_bind> by lazy { getMB("Control", "get_anchor") }
-    open fun getAnchor(margin: Int): Float {
-        return _icall_Float_Int(getAnchorMethodBind, this.rawMemory, margin)
+    open fun getAnchor(margin: Long): Double {
+        return _icall_Double_Long(getAnchorMethodBind, this.rawMemory, margin)
     }
 
 
     private val setMarginMethodBind: CPointer<godot_method_bind> by lazy { getMB("Control", "set_margin") }
-    open fun setMargin(margin: Int, offset: Float) {
-        _icall_Unit_Int_Float(setMarginMethodBind, this.rawMemory, margin, offset)
+    open fun setMargin(margin: Long, offset: Double) {
+        _icall_Unit_Long_Double(setMarginMethodBind, this.rawMemory, margin, offset)
     }
 
 
     private val setAnchorAndMarginMethodBind: CPointer<godot_method_bind> by lazy { getMB("Control", "set_anchor_and_margin") }
-    open fun setAnchorAndMargin(margin: Int, anchor: Float, offset: Float, pushOppositeAnchor: Boolean = false) {
-        _icall_Unit_Int_Float_Float_Boolean(setAnchorAndMarginMethodBind, this.rawMemory, margin, anchor, offset, pushOppositeAnchor)
+    open fun setAnchorAndMargin(margin: Long, anchor: Double, offset: Double, pushOppositeAnchor: Boolean = false) {
+        _icall_Unit_Long_Double_Double_Boolean(setAnchorAndMarginMethodBind, this.rawMemory, margin, anchor, offset, pushOppositeAnchor)
     }
 
 
@@ -542,14 +542,14 @@ open class Control : CanvasItem {
 
 
     private val setRotationMethodBind: CPointer<godot_method_bind> by lazy { getMB("Control", "set_rotation") }
-    open fun setRotation(radians: Float) {
-        _icall_Unit_Float(setRotationMethodBind, this.rawMemory, radians)
+    open fun setRotation(radians: Double) {
+        _icall_Unit_Double(setRotationMethodBind, this.rawMemory, radians)
     }
 
 
     private val setRotationDegreesMethodBind: CPointer<godot_method_bind> by lazy { getMB("Control", "set_rotation_degrees") }
-    open fun setRotationDegrees(degrees: Float) {
-        _icall_Unit_Float(setRotationDegreesMethodBind, this.rawMemory, degrees)
+    open fun setRotationDegrees(degrees: Double) {
+        _icall_Unit_Double(setRotationDegreesMethodBind, this.rawMemory, degrees)
     }
 
 
@@ -566,8 +566,8 @@ open class Control : CanvasItem {
 
 
     private val getMarginMethodBind: CPointer<godot_method_bind> by lazy { getMB("Control", "get_margin") }
-    open fun getMargin(margin: Int): Float {
-        return _icall_Float_Int(getMarginMethodBind, this.rawMemory, margin)
+    open fun getMargin(margin: Long): Double {
+        return _icall_Double_Long(getMarginMethodBind, this.rawMemory, margin)
     }
 
 
@@ -596,14 +596,14 @@ open class Control : CanvasItem {
 
 
     private val getRotationMethodBind: CPointer<godot_method_bind> by lazy { getMB("Control", "get_rotation") }
-    open fun getRotation(): Float {
-        return _icall_Float(getRotationMethodBind, this.rawMemory)
+    open fun getRotation(): Double {
+        return _icall_Double(getRotationMethodBind, this.rawMemory)
     }
 
 
     private val getRotationDegreesMethodBind: CPointer<godot_method_bind> by lazy { getMB("Control", "get_rotation_degrees") }
-    open fun getRotationDegrees(): Float {
-        return _icall_Float(getRotationDegreesMethodBind, this.rawMemory)
+    open fun getRotationDegrees(): Double {
+        return _icall_Double(getRotationDegreesMethodBind, this.rawMemory)
     }
 
 
@@ -656,14 +656,14 @@ open class Control : CanvasItem {
 
 
     private val setFocusModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Control", "set_focus_mode") }
-    open fun setFocusMode(mode: Int) {
-        _icall_Unit_Int(setFocusModeMethodBind, this.rawMemory, mode)
+    open fun setFocusMode(mode: Long) {
+        _icall_Unit_Long(setFocusModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getFocusModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Control", "get_focus_mode") }
     open fun getFocusMode(): Control.FocusMode {
-        return Control.FocusMode.fromInt(_icall_Int(getFocusModeMethodBind, this.rawMemory))
+        return Control.FocusMode.fromInt(_icall_Long(getFocusModeMethodBind, this.rawMemory))
     }
 
 
@@ -692,38 +692,38 @@ open class Control : CanvasItem {
 
 
     private val setHSizeFlagsMethodBind: CPointer<godot_method_bind> by lazy { getMB("Control", "set_h_size_flags") }
-    open fun setHSizeFlags(flags: Int) {
-        _icall_Unit_Int(setHSizeFlagsMethodBind, this.rawMemory, flags)
+    open fun setHSizeFlags(flags: Long) {
+        _icall_Unit_Long(setHSizeFlagsMethodBind, this.rawMemory, flags)
     }
 
 
     private val getHSizeFlagsMethodBind: CPointer<godot_method_bind> by lazy { getMB("Control", "get_h_size_flags") }
-    open fun getHSizeFlags(): Int {
-        return _icall_Int(getHSizeFlagsMethodBind, this.rawMemory)
+    open fun getHSizeFlags(): Long {
+        return _icall_Long(getHSizeFlagsMethodBind, this.rawMemory)
     }
 
 
     private val setStretchRatioMethodBind: CPointer<godot_method_bind> by lazy { getMB("Control", "set_stretch_ratio") }
-    open fun setStretchRatio(ratio: Float) {
-        _icall_Unit_Float(setStretchRatioMethodBind, this.rawMemory, ratio)
+    open fun setStretchRatio(ratio: Double) {
+        _icall_Unit_Double(setStretchRatioMethodBind, this.rawMemory, ratio)
     }
 
 
     private val getStretchRatioMethodBind: CPointer<godot_method_bind> by lazy { getMB("Control", "get_stretch_ratio") }
-    open fun getStretchRatio(): Float {
-        return _icall_Float(getStretchRatioMethodBind, this.rawMemory)
+    open fun getStretchRatio(): Double {
+        return _icall_Double(getStretchRatioMethodBind, this.rawMemory)
     }
 
 
     private val setVSizeFlagsMethodBind: CPointer<godot_method_bind> by lazy { getMB("Control", "set_v_size_flags") }
-    open fun setVSizeFlags(flags: Int) {
-        _icall_Unit_Int(setVSizeFlagsMethodBind, this.rawMemory, flags)
+    open fun setVSizeFlags(flags: Long) {
+        _icall_Unit_Long(setVSizeFlagsMethodBind, this.rawMemory, flags)
     }
 
 
     private val getVSizeFlagsMethodBind: CPointer<godot_method_bind> by lazy { getMB("Control", "get_v_size_flags") }
-    open fun getVSizeFlags(): Int {
-        return _icall_Int(getVSizeFlagsMethodBind, this.rawMemory)
+    open fun getVSizeFlags(): Long {
+        return _icall_Long(getVSizeFlagsMethodBind, this.rawMemory)
     }
 
 
@@ -770,8 +770,8 @@ open class Control : CanvasItem {
 
 
     private val addConstantOverrideMethodBind: CPointer<godot_method_bind> by lazy { getMB("Control", "add_constant_override") }
-    open fun addConstantOverride(name: String, constant: Int) {
-        _icall_Unit_String_Int(addConstantOverrideMethodBind, this.rawMemory, name, constant)
+    open fun addConstantOverride(name: String, constant: Long) {
+        _icall_Unit_String_Long(addConstantOverrideMethodBind, this.rawMemory, name, constant)
     }
 
 
@@ -800,8 +800,8 @@ open class Control : CanvasItem {
 
 
     private val getConstantMethodBind: CPointer<godot_method_bind> by lazy { getMB("Control", "get_constant") }
-    open fun getConstant(name: String, type: String = ""): Int {
-        return _icall_Int_String_String(getConstantMethodBind, this.rawMemory, name, type)
+    open fun getConstant(name: String, type: String = ""): Long {
+        return _icall_Long_String_String(getConstantMethodBind, this.rawMemory, name, type)
     }
 
 
@@ -878,26 +878,26 @@ open class Control : CanvasItem {
 
 
     private val setHGrowDirectionMethodBind: CPointer<godot_method_bind> by lazy { getMB("Control", "set_h_grow_direction") }
-    open fun setHGrowDirection(direction: Int) {
-        _icall_Unit_Int(setHGrowDirectionMethodBind, this.rawMemory, direction)
+    open fun setHGrowDirection(direction: Long) {
+        _icall_Unit_Long(setHGrowDirectionMethodBind, this.rawMemory, direction)
     }
 
 
     private val getHGrowDirectionMethodBind: CPointer<godot_method_bind> by lazy { getMB("Control", "get_h_grow_direction") }
     open fun getHGrowDirection(): Control.GrowDirection {
-        return Control.GrowDirection.fromInt(_icall_Int(getHGrowDirectionMethodBind, this.rawMemory))
+        return Control.GrowDirection.fromInt(_icall_Long(getHGrowDirectionMethodBind, this.rawMemory))
     }
 
 
     private val setVGrowDirectionMethodBind: CPointer<godot_method_bind> by lazy { getMB("Control", "set_v_grow_direction") }
-    open fun setVGrowDirection(direction: Int) {
-        _icall_Unit_Int(setVGrowDirectionMethodBind, this.rawMemory, direction)
+    open fun setVGrowDirection(direction: Long) {
+        _icall_Unit_Long(setVGrowDirectionMethodBind, this.rawMemory, direction)
     }
 
 
     private val getVGrowDirectionMethodBind: CPointer<godot_method_bind> by lazy { getMB("Control", "get_v_grow_direction") }
     open fun getVGrowDirection(): Control.GrowDirection {
-        return Control.GrowDirection.fromInt(_icall_Int(getVGrowDirectionMethodBind, this.rawMemory))
+        return Control.GrowDirection.fromInt(_icall_Long(getVGrowDirectionMethodBind, this.rawMemory))
     }
 
 
@@ -919,32 +919,32 @@ open class Control : CanvasItem {
 
 
     private val setDefaultCursorShapeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Control", "set_default_cursor_shape") }
-    open fun setDefaultCursorShape(shape: Int) {
-        _icall_Unit_Int(setDefaultCursorShapeMethodBind, this.rawMemory, shape)
+    open fun setDefaultCursorShape(shape: Long) {
+        _icall_Unit_Long(setDefaultCursorShapeMethodBind, this.rawMemory, shape)
     }
 
 
     private val getDefaultCursorShapeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Control", "get_default_cursor_shape") }
     open fun getDefaultCursorShape(): Control.CursorShape {
-        return Control.CursorShape.fromInt(_icall_Int(getDefaultCursorShapeMethodBind, this.rawMemory))
+        return Control.CursorShape.fromInt(_icall_Long(getDefaultCursorShapeMethodBind, this.rawMemory))
     }
 
 
     private val getCursorShapeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Control", "get_cursor_shape") }
     open fun getCursorShape(position: Vector2 = Vector2(0, 0)): Control.CursorShape {
-        return Control.CursorShape.fromInt(_icall_Int_Vector2(getCursorShapeMethodBind, this.rawMemory, position))
+        return Control.CursorShape.fromInt(_icall_Long_Vector2(getCursorShapeMethodBind, this.rawMemory, position))
     }
 
 
     private val setFocusNeighbourMethodBind: CPointer<godot_method_bind> by lazy { getMB("Control", "set_focus_neighbour") }
-    open fun setFocusNeighbour(margin: Int, neighbour: NodePath) {
-        _icall_Unit_Int_NodePath(setFocusNeighbourMethodBind, this.rawMemory, margin, neighbour)
+    open fun setFocusNeighbour(margin: Long, neighbour: NodePath) {
+        _icall_Unit_Long_NodePath(setFocusNeighbourMethodBind, this.rawMemory, margin, neighbour)
     }
 
 
     private val getFocusNeighbourMethodBind: CPointer<godot_method_bind> by lazy { getMB("Control", "get_focus_neighbour") }
-    open fun getFocusNeighbour(margin: Int): NodePath {
-        return _icall_NodePath_Int(getFocusNeighbourMethodBind, this.rawMemory, margin)
+    open fun getFocusNeighbour(margin: Long): NodePath {
+        return _icall_NodePath_Long(getFocusNeighbourMethodBind, this.rawMemory, margin)
     }
 
 
@@ -979,14 +979,14 @@ open class Control : CanvasItem {
 
 
     private val setMouseFilterMethodBind: CPointer<godot_method_bind> by lazy { getMB("Control", "set_mouse_filter") }
-    open fun setMouseFilter(filter: Int) {
-        _icall_Unit_Int(setMouseFilterMethodBind, this.rawMemory, filter)
+    open fun setMouseFilter(filter: Long) {
+        _icall_Unit_Long(setMouseFilterMethodBind, this.rawMemory, filter)
     }
 
 
     private val getMouseFilterMethodBind: CPointer<godot_method_bind> by lazy { getMB("Control", "get_mouse_filter") }
     open fun getMouseFilter(): Control.MouseFilter {
-        return Control.MouseFilter.fromInt(_icall_Int(getMouseFilterMethodBind, this.rawMemory))
+        return Control.MouseFilter.fromInt(_icall_Long(getMouseFilterMethodBind, this.rawMemory))
     }
 
 

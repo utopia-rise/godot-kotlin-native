@@ -49,21 +49,21 @@ open class EditorSpatialGizmo : SpatialGizmo {
     }
 
 
-    open fun get_handle_name(index: Int): String {
+    open fun get_handle_name(index: Long): String {
         throw NotImplementedError("get_handle_name is not implemented for EditorSpatialGizmo")
     }
 
 
-    open fun get_handle_value(index: Int): Variant {
+    open fun get_handle_value(index: Long): Variant {
         throw NotImplementedError("get_handle_value is not implemented for EditorSpatialGizmo")
     }
 
 
-    open fun set_handle(index: Int, camera: Camera, point: Vector2) {
+    open fun set_handle(index: Long, camera: Camera, point: Vector2) {
     }
 
 
-    open fun commit_handle(index: Int, restore: Variant, cancel: Boolean) {
+    open fun commit_handle(index: Long, restore: Variant, cancel: Boolean) {
     }
 
 
@@ -92,8 +92,8 @@ open class EditorSpatialGizmo : SpatialGizmo {
 
 
     private val addUnscaledBillboardMethodBind: CPointer<godot_method_bind> by lazy { getMB("EditorSpatialGizmo", "add_unscaled_billboard") }
-    open fun addUnscaledBillboard(material: Material, defaultScale: Float = 1f) {
-        _icall_Unit_Object_Float(addUnscaledBillboardMethodBind, this.rawMemory, material, defaultScale)
+    open fun addUnscaledBillboard(material: Material, defaultScale: Double = 1.0) {
+        _icall_Unit_Object_Double(addUnscaledBillboardMethodBind, this.rawMemory, material, defaultScale)
     }
 
 

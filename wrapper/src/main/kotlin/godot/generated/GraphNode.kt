@@ -19,14 +19,14 @@ open class GraphNode : Container {
 
     // Enums 
 
-    enum class Overlay(val id: Int) {
+    enum class Overlay(val id: Long) {
         OVERLAY_DISABLED(0),
         OVERLAY_BREAKPOINT(1),
         OVERLAY_POSITION(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -53,9 +53,9 @@ open class GraphNode : Container {
 
 
         // Constants
-        const val OVERLAY_DISABLED: Int = 0
-        const val OVERLAY_BREAKPOINT: Int = 1
-        const val OVERLAY_POSITION: Int = 2
+        const val OVERLAY_DISABLED: Long = 0
+        const val OVERLAY_BREAKPOINT: Long = 1
+        const val OVERLAY_POSITION: Long = 2
 
 
     }
@@ -96,9 +96,9 @@ open class GraphNode : Container {
         set(value) = _icall_Unit_Boolean(setCommentMethodBind, this.rawMemory, value)
 
 
-    open var overlay: Int
-        get() = _icall_Int(getOverlayMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setOverlayMethodBind, this.rawMemory, value)
+    open var overlay: Long
+        get() = _icall_Long(getOverlayMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setOverlayMethodBind, this.rawMemory, value)
 
 
 
@@ -121,14 +121,14 @@ open class GraphNode : Container {
 
 
     private val setSlotMethodBind: CPointer<godot_method_bind> by lazy { getMB("GraphNode", "set_slot") }
-    open fun setSlot(idx: Int, enableLeft: Boolean, typeLeft: Int, colorLeft: Color, enableRight: Boolean, typeRight: Int, colorRight: Color, customLeft: Texture, customRight: Texture) {
-        _icall_Unit_Int_Boolean_Int_Color_Boolean_Int_Color_Object_Object(setSlotMethodBind, this.rawMemory, idx, enableLeft, typeLeft, colorLeft, enableRight, typeRight, colorRight, customLeft, customRight)
+    open fun setSlot(idx: Long, enableLeft: Boolean, typeLeft: Long, colorLeft: Color, enableRight: Boolean, typeRight: Long, colorRight: Color, customLeft: Texture, customRight: Texture) {
+        _icall_Unit_Long_Boolean_Long_Color_Boolean_Long_Color_Object_Object(setSlotMethodBind, this.rawMemory, idx, enableLeft, typeLeft, colorLeft, enableRight, typeRight, colorRight, customLeft, customRight)
     }
 
 
     private val clearSlotMethodBind: CPointer<godot_method_bind> by lazy { getMB("GraphNode", "clear_slot") }
-    open fun clearSlot(idx: Int) {
-        _icall_Unit_Int(clearSlotMethodBind, this.rawMemory, idx)
+    open fun clearSlot(idx: Long) {
+        _icall_Unit_Long(clearSlotMethodBind, this.rawMemory, idx)
     }
 
 
@@ -139,38 +139,38 @@ open class GraphNode : Container {
 
 
     private val isSlotEnabledLeftMethodBind: CPointer<godot_method_bind> by lazy { getMB("GraphNode", "is_slot_enabled_left") }
-    open fun isSlotEnabledLeft(idx: Int): Boolean {
-        return _icall_Boolean_Int(isSlotEnabledLeftMethodBind, this.rawMemory, idx)
+    open fun isSlotEnabledLeft(idx: Long): Boolean {
+        return _icall_Boolean_Long(isSlotEnabledLeftMethodBind, this.rawMemory, idx)
     }
 
 
     private val getSlotTypeLeftMethodBind: CPointer<godot_method_bind> by lazy { getMB("GraphNode", "get_slot_type_left") }
-    open fun getSlotTypeLeft(idx: Int): Int {
-        return _icall_Int_Int(getSlotTypeLeftMethodBind, this.rawMemory, idx)
+    open fun getSlotTypeLeft(idx: Long): Long {
+        return _icall_Long_Long(getSlotTypeLeftMethodBind, this.rawMemory, idx)
     }
 
 
     private val getSlotColorLeftMethodBind: CPointer<godot_method_bind> by lazy { getMB("GraphNode", "get_slot_color_left") }
-    open fun getSlotColorLeft(idx: Int): Color {
-        return _icall_Color_Int(getSlotColorLeftMethodBind, this.rawMemory, idx)
+    open fun getSlotColorLeft(idx: Long): Color {
+        return _icall_Color_Long(getSlotColorLeftMethodBind, this.rawMemory, idx)
     }
 
 
     private val isSlotEnabledRightMethodBind: CPointer<godot_method_bind> by lazy { getMB("GraphNode", "is_slot_enabled_right") }
-    open fun isSlotEnabledRight(idx: Int): Boolean {
-        return _icall_Boolean_Int(isSlotEnabledRightMethodBind, this.rawMemory, idx)
+    open fun isSlotEnabledRight(idx: Long): Boolean {
+        return _icall_Boolean_Long(isSlotEnabledRightMethodBind, this.rawMemory, idx)
     }
 
 
     private val getSlotTypeRightMethodBind: CPointer<godot_method_bind> by lazy { getMB("GraphNode", "get_slot_type_right") }
-    open fun getSlotTypeRight(idx: Int): Int {
-        return _icall_Int_Int(getSlotTypeRightMethodBind, this.rawMemory, idx)
+    open fun getSlotTypeRight(idx: Long): Long {
+        return _icall_Long_Long(getSlotTypeRightMethodBind, this.rawMemory, idx)
     }
 
 
     private val getSlotColorRightMethodBind: CPointer<godot_method_bind> by lazy { getMB("GraphNode", "get_slot_color_right") }
-    open fun getSlotColorRight(idx: Int): Color {
-        return _icall_Color_Int(getSlotColorRightMethodBind, this.rawMemory, idx)
+    open fun getSlotColorRight(idx: Long): Color {
+        return _icall_Color_Long(getSlotColorRightMethodBind, this.rawMemory, idx)
     }
 
 
@@ -223,50 +223,50 @@ open class GraphNode : Container {
 
 
     private val getConnectionOutputCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("GraphNode", "get_connection_output_count") }
-    open fun getConnectionOutputCount(): Int {
-        return _icall_Int(getConnectionOutputCountMethodBind, this.rawMemory)
+    open fun getConnectionOutputCount(): Long {
+        return _icall_Long(getConnectionOutputCountMethodBind, this.rawMemory)
     }
 
 
     private val getConnectionInputCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("GraphNode", "get_connection_input_count") }
-    open fun getConnectionInputCount(): Int {
-        return _icall_Int(getConnectionInputCountMethodBind, this.rawMemory)
+    open fun getConnectionInputCount(): Long {
+        return _icall_Long(getConnectionInputCountMethodBind, this.rawMemory)
     }
 
 
     private val getConnectionOutputPositionMethodBind: CPointer<godot_method_bind> by lazy { getMB("GraphNode", "get_connection_output_position") }
-    open fun getConnectionOutputPosition(idx: Int): Vector2 {
-        return _icall_Vector2_Int(getConnectionOutputPositionMethodBind, this.rawMemory, idx)
+    open fun getConnectionOutputPosition(idx: Long): Vector2 {
+        return _icall_Vector2_Long(getConnectionOutputPositionMethodBind, this.rawMemory, idx)
     }
 
 
     private val getConnectionOutputTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("GraphNode", "get_connection_output_type") }
-    open fun getConnectionOutputType(idx: Int): Int {
-        return _icall_Int_Int(getConnectionOutputTypeMethodBind, this.rawMemory, idx)
+    open fun getConnectionOutputType(idx: Long): Long {
+        return _icall_Long_Long(getConnectionOutputTypeMethodBind, this.rawMemory, idx)
     }
 
 
     private val getConnectionOutputColorMethodBind: CPointer<godot_method_bind> by lazy { getMB("GraphNode", "get_connection_output_color") }
-    open fun getConnectionOutputColor(idx: Int): Color {
-        return _icall_Color_Int(getConnectionOutputColorMethodBind, this.rawMemory, idx)
+    open fun getConnectionOutputColor(idx: Long): Color {
+        return _icall_Color_Long(getConnectionOutputColorMethodBind, this.rawMemory, idx)
     }
 
 
     private val getConnectionInputPositionMethodBind: CPointer<godot_method_bind> by lazy { getMB("GraphNode", "get_connection_input_position") }
-    open fun getConnectionInputPosition(idx: Int): Vector2 {
-        return _icall_Vector2_Int(getConnectionInputPositionMethodBind, this.rawMemory, idx)
+    open fun getConnectionInputPosition(idx: Long): Vector2 {
+        return _icall_Vector2_Long(getConnectionInputPositionMethodBind, this.rawMemory, idx)
     }
 
 
     private val getConnectionInputTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("GraphNode", "get_connection_input_type") }
-    open fun getConnectionInputType(idx: Int): Int {
-        return _icall_Int_Int(getConnectionInputTypeMethodBind, this.rawMemory, idx)
+    open fun getConnectionInputType(idx: Long): Long {
+        return _icall_Long_Long(getConnectionInputTypeMethodBind, this.rawMemory, idx)
     }
 
 
     private val getConnectionInputColorMethodBind: CPointer<godot_method_bind> by lazy { getMB("GraphNode", "get_connection_input_color") }
-    open fun getConnectionInputColor(idx: Int): Color {
-        return _icall_Color_Int(getConnectionInputColorMethodBind, this.rawMemory, idx)
+    open fun getConnectionInputColor(idx: Long): Color {
+        return _icall_Color_Long(getConnectionInputColorMethodBind, this.rawMemory, idx)
     }
 
 
@@ -283,14 +283,14 @@ open class GraphNode : Container {
 
 
     private val setOverlayMethodBind: CPointer<godot_method_bind> by lazy { getMB("GraphNode", "set_overlay") }
-    open fun setOverlay(overlay: Int) {
-        _icall_Unit_Int(setOverlayMethodBind, this.rawMemory, overlay)
+    open fun setOverlay(overlay: Long) {
+        _icall_Unit_Long(setOverlayMethodBind, this.rawMemory, overlay)
     }
 
 
     private val getOverlayMethodBind: CPointer<godot_method_bind> by lazy { getMB("GraphNode", "get_overlay") }
     open fun getOverlay(): GraphNode.Overlay {
-        return GraphNode.Overlay.fromInt(_icall_Int(getOverlayMethodBind, this.rawMemory))
+        return GraphNode.Overlay.fromInt(_icall_Long(getOverlayMethodBind, this.rawMemory))
     }
 
 

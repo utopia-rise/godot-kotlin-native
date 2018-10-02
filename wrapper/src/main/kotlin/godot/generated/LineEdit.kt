@@ -19,7 +19,7 @@ open class LineEdit : Control {
 
     // Enums 
 
-    enum class Align(val id: Int) {
+    enum class Align(val id: Long) {
         ALIGN_LEFT(0),
         ALIGN_CENTER(1),
         ALIGN_RIGHT(2),
@@ -27,10 +27,10 @@ open class LineEdit : Control {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class MenuItems(val id: Int) {
+    enum class MenuItems(val id: Long) {
         MENU_CUT(0),
         MENU_COPY(1),
         MENU_PASTE(2),
@@ -42,7 +42,7 @@ open class LineEdit : Control {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -65,18 +65,18 @@ open class LineEdit : Control {
 
 
         // Constants
-        const val ALIGN_LEFT: Int = 0
-        const val ALIGN_CENTER: Int = 1
-        const val ALIGN_RIGHT: Int = 2
-        const val ALIGN_FILL: Int = 3
-        const val MENU_CUT: Int = 0
-        const val MENU_COPY: Int = 1
-        const val MENU_PASTE: Int = 2
-        const val MENU_CLEAR: Int = 3
-        const val MENU_SELECT_ALL: Int = 4
-        const val MENU_UNDO: Int = 5
-        const val MENU_REDO: Int = 6
-        const val MENU_MAX: Int = 7
+        const val ALIGN_LEFT: Long = 0
+        const val ALIGN_CENTER: Long = 1
+        const val ALIGN_RIGHT: Long = 2
+        const val ALIGN_FILL: Long = 3
+        const val MENU_CUT: Long = 0
+        const val MENU_COPY: Long = 1
+        const val MENU_PASTE: Long = 2
+        const val MENU_CLEAR: Long = 3
+        const val MENU_SELECT_ALL: Long = 4
+        const val MENU_UNDO: Long = 5
+        const val MENU_REDO: Long = 6
+        const val MENU_MAX: Long = 7
 
 
     }
@@ -88,14 +88,14 @@ open class LineEdit : Control {
         set(value) = _icall_Unit_String(setTextMethodBind, this.rawMemory, value)
 
 
-    open var align: Int
-        get() = _icall_Int(getAlignMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setAlignMethodBind, this.rawMemory, value)
+    open var align: Long
+        get() = _icall_Long(getAlignMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setAlignMethodBind, this.rawMemory, value)
 
 
-    open var maxLength: Int
-        get() = _icall_Int(getMaxLengthMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setMaxLengthMethodBind, this.rawMemory, value)
+    open var maxLength: Long
+        get() = _icall_Long(getMaxLengthMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setMaxLengthMethodBind, this.rawMemory, value)
 
 
     open var editable: Boolean
@@ -128,9 +128,9 @@ open class LineEdit : Control {
         set(value) = _icall_Unit_String(setPlaceholderMethodBind, this.rawMemory, value)
 
 
-    open var placeholderAlpha: Float
-        get() = _icall_Float(getPlaceholderAlphaMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setPlaceholderAlphaMethodBind, this.rawMemory, value)
+    open var placeholderAlpha: Double
+        get() = _icall_Double(getPlaceholderAlphaMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setPlaceholderAlphaMethodBind, this.rawMemory, value)
 
 
     open var caretBlink: Boolean
@@ -138,14 +138,14 @@ open class LineEdit : Control {
         set(value) = _icall_Unit_Boolean(cursorSetBlinkEnabledMethodBind, this.rawMemory, value)
 
 
-    open var caretBlinkSpeed: Float
-        get() = _icall_Float(cursorGetBlinkSpeedMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(cursorSetBlinkSpeedMethodBind, this.rawMemory, value)
+    open var caretBlinkSpeed: Double
+        get() = _icall_Double(cursorGetBlinkSpeedMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(cursorSetBlinkSpeedMethodBind, this.rawMemory, value)
 
 
-    open var caretPosition: Int
-        get() = _icall_Int(getCursorPositionMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setCursorPositionMethodBind, this.rawMemory, value)
+    open var caretPosition: Long
+        get() = _icall_Long(getCursorPositionMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setCursorPositionMethodBind, this.rawMemory, value)
 
 
 
@@ -164,14 +164,14 @@ open class LineEdit : Control {
 
 
     private val setAlignMethodBind: CPointer<godot_method_bind> by lazy { getMB("LineEdit", "set_align") }
-    open fun setAlign(align: Int) {
-        _icall_Unit_Int(setAlignMethodBind, this.rawMemory, align)
+    open fun setAlign(align: Long) {
+        _icall_Unit_Long(setAlignMethodBind, this.rawMemory, align)
     }
 
 
     private val getAlignMethodBind: CPointer<godot_method_bind> by lazy { getMB("LineEdit", "get_align") }
     open fun getAlign(): LineEdit.Align {
-        return LineEdit.Align.fromInt(_icall_Int(getAlignMethodBind, this.rawMemory))
+        return LineEdit.Align.fromInt(_icall_Long(getAlignMethodBind, this.rawMemory))
     }
 
 
@@ -186,8 +186,8 @@ open class LineEdit : Control {
 
 
     private val selectMethodBind: CPointer<godot_method_bind> by lazy { getMB("LineEdit", "select") }
-    open fun select(from: Int = 0, to: Int = -1) {
-        _icall_Unit_Int_Int(selectMethodBind, this.rawMemory, from, to)
+    open fun select(from: Long = 0, to: Long = -1) {
+        _icall_Unit_Long_Long(selectMethodBind, this.rawMemory, from, to)
     }
 
 
@@ -228,26 +228,26 @@ open class LineEdit : Control {
 
 
     private val setPlaceholderAlphaMethodBind: CPointer<godot_method_bind> by lazy { getMB("LineEdit", "set_placeholder_alpha") }
-    open fun setPlaceholderAlpha(alpha: Float) {
-        _icall_Unit_Float(setPlaceholderAlphaMethodBind, this.rawMemory, alpha)
+    open fun setPlaceholderAlpha(alpha: Double) {
+        _icall_Unit_Double(setPlaceholderAlphaMethodBind, this.rawMemory, alpha)
     }
 
 
     private val getPlaceholderAlphaMethodBind: CPointer<godot_method_bind> by lazy { getMB("LineEdit", "get_placeholder_alpha") }
-    open fun getPlaceholderAlpha(): Float {
-        return _icall_Float(getPlaceholderAlphaMethodBind, this.rawMemory)
+    open fun getPlaceholderAlpha(): Double {
+        return _icall_Double(getPlaceholderAlphaMethodBind, this.rawMemory)
     }
 
 
     private val setCursorPositionMethodBind: CPointer<godot_method_bind> by lazy { getMB("LineEdit", "set_cursor_position") }
-    open fun setCursorPosition(position: Int) {
-        _icall_Unit_Int(setCursorPositionMethodBind, this.rawMemory, position)
+    open fun setCursorPosition(position: Long) {
+        _icall_Unit_Long(setCursorPositionMethodBind, this.rawMemory, position)
     }
 
 
     private val getCursorPositionMethodBind: CPointer<godot_method_bind> by lazy { getMB("LineEdit", "get_cursor_position") }
-    open fun getCursorPosition(): Int {
-        return _icall_Int(getCursorPositionMethodBind, this.rawMemory)
+    open fun getCursorPosition(): Long {
+        return _icall_Long(getCursorPositionMethodBind, this.rawMemory)
     }
 
 
@@ -276,26 +276,26 @@ open class LineEdit : Control {
 
 
     private val cursorSetBlinkSpeedMethodBind: CPointer<godot_method_bind> by lazy { getMB("LineEdit", "cursor_set_blink_speed") }
-    open fun cursorSetBlinkSpeed(blinkSpeed: Float) {
-        _icall_Unit_Float(cursorSetBlinkSpeedMethodBind, this.rawMemory, blinkSpeed)
+    open fun cursorSetBlinkSpeed(blinkSpeed: Double) {
+        _icall_Unit_Double(cursorSetBlinkSpeedMethodBind, this.rawMemory, blinkSpeed)
     }
 
 
     private val cursorGetBlinkSpeedMethodBind: CPointer<godot_method_bind> by lazy { getMB("LineEdit", "cursor_get_blink_speed") }
-    open fun cursorGetBlinkSpeed(): Float {
-        return _icall_Float(cursorGetBlinkSpeedMethodBind, this.rawMemory)
+    open fun cursorGetBlinkSpeed(): Double {
+        return _icall_Double(cursorGetBlinkSpeedMethodBind, this.rawMemory)
     }
 
 
     private val setMaxLengthMethodBind: CPointer<godot_method_bind> by lazy { getMB("LineEdit", "set_max_length") }
-    open fun setMaxLength(chars: Int) {
-        _icall_Unit_Int(setMaxLengthMethodBind, this.rawMemory, chars)
+    open fun setMaxLength(chars: Long) {
+        _icall_Unit_Long(setMaxLengthMethodBind, this.rawMemory, chars)
     }
 
 
     private val getMaxLengthMethodBind: CPointer<godot_method_bind> by lazy { getMB("LineEdit", "get_max_length") }
-    open fun getMaxLength(): Int {
-        return _icall_Int(getMaxLengthMethodBind, this.rawMemory)
+    open fun getMaxLength(): Long {
+        return _icall_Long(getMaxLengthMethodBind, this.rawMemory)
     }
 
 
@@ -342,8 +342,8 @@ open class LineEdit : Control {
 
 
     private val menuOptionMethodBind: CPointer<godot_method_bind> by lazy { getMB("LineEdit", "menu_option") }
-    open fun menuOption(option: Int) {
-        _icall_Unit_Int(menuOptionMethodBind, this.rawMemory, option)
+    open fun menuOption(option: Long) {
+        _icall_Unit_Long(menuOptionMethodBind, this.rawMemory, option)
     }
 
 

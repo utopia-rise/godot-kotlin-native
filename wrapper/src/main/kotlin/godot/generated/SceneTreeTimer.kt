@@ -42,23 +42,23 @@ open class SceneTreeTimer : Reference {
 
 
     // Properties
-    open var timeLeft: Float
-        get() = _icall_Float(getTimeLeftMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setTimeLeftMethodBind, this.rawMemory, value)
+    open var timeLeft: Double
+        get() = _icall_Double(getTimeLeftMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setTimeLeftMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setTimeLeftMethodBind: CPointer<godot_method_bind> by lazy { getMB("SceneTreeTimer", "set_time_left") }
-    open fun setTimeLeft(time: Float) {
-        _icall_Unit_Float(setTimeLeftMethodBind, this.rawMemory, time)
+    open fun setTimeLeft(time: Double) {
+        _icall_Unit_Double(setTimeLeftMethodBind, this.rawMemory, time)
     }
 
 
     private val getTimeLeftMethodBind: CPointer<godot_method_bind> by lazy { getMB("SceneTreeTimer", "get_time_left") }
-    open fun getTimeLeft(): Float {
-        return _icall_Float(getTimeLeftMethodBind, this.rawMemory)
+    open fun getTimeLeft(): Double {
+        return _icall_Double(getTimeLeftMethodBind, this.rawMemory)
     }
 
 

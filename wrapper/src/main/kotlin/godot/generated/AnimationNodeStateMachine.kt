@@ -96,32 +96,32 @@ open class AnimationNodeStateMachine : AnimationRootNode {
 
 
     private val getTransitionMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationNodeStateMachine", "get_transition") }
-    open fun getTransition(idx: Int): AnimationNodeStateMachineTransition {
-        return _icall_AnimationNodeStateMachineTransition_Int(getTransitionMethodBind, this.rawMemory, idx)
+    open fun getTransition(idx: Long): AnimationNodeStateMachineTransition {
+        return _icall_AnimationNodeStateMachineTransition_Long(getTransitionMethodBind, this.rawMemory, idx)
     }
 
 
     private val getTransitionFromMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationNodeStateMachine", "get_transition_from") }
-    open fun getTransitionFrom(idx: Int): String {
-        return _icall_String_Int(getTransitionFromMethodBind, this.rawMemory, idx)
+    open fun getTransitionFrom(idx: Long): String {
+        return _icall_String_Long(getTransitionFromMethodBind, this.rawMemory, idx)
     }
 
 
     private val getTransitionToMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationNodeStateMachine", "get_transition_to") }
-    open fun getTransitionTo(idx: Int): String {
-        return _icall_String_Int(getTransitionToMethodBind, this.rawMemory, idx)
+    open fun getTransitionTo(idx: Long): String {
+        return _icall_String_Long(getTransitionToMethodBind, this.rawMemory, idx)
     }
 
 
     private val getTransitionCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationNodeStateMachine", "get_transition_count") }
-    open fun getTransitionCount(): Int {
-        return _icall_Int(getTransitionCountMethodBind, this.rawMemory)
+    open fun getTransitionCount(): Long {
+        return _icall_Long(getTransitionCountMethodBind, this.rawMemory)
     }
 
 
     private val removeTransitionByIndexMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationNodeStateMachine", "remove_transition_by_index") }
-    open fun removeTransitionByIndex(idx: Int) {
-        _icall_Unit_Int(removeTransitionByIndexMethodBind, this.rawMemory, idx)
+    open fun removeTransitionByIndex(idx: Long) {
+        _icall_Unit_Long(removeTransitionByIndexMethodBind, this.rawMemory, idx)
     }
 
 

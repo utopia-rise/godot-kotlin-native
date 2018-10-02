@@ -19,14 +19,14 @@ open class AudioStreamPlayer : Node {
 
     // Enums 
 
-    enum class MixTarget(val id: Int) {
+    enum class MixTarget(val id: Long) {
         MIX_TARGET_STEREO(0),
         MIX_TARGET_SURROUND(1),
         MIX_TARGET_CENTER(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -46,9 +46,9 @@ open class AudioStreamPlayer : Node {
 
 
         // Constants
-        const val MIX_TARGET_STEREO: Int = 0
-        const val MIX_TARGET_SURROUND: Int = 1
-        const val MIX_TARGET_CENTER: Int = 2
+        const val MIX_TARGET_STEREO: Long = 0
+        const val MIX_TARGET_SURROUND: Long = 1
+        const val MIX_TARGET_CENTER: Long = 2
 
 
     }
@@ -60,14 +60,14 @@ open class AudioStreamPlayer : Node {
         set(value) = _icall_Unit_Object(setStreamMethodBind, this.rawMemory, value)
 
 
-    open var volumeDb: Float
-        get() = _icall_Float(getVolumeDbMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setVolumeDbMethodBind, this.rawMemory, value)
+    open var volumeDb: Double
+        get() = _icall_Double(getVolumeDbMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setVolumeDbMethodBind, this.rawMemory, value)
 
 
-    open var pitchScale: Float
-        get() = _icall_Float(getPitchScaleMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setPitchScaleMethodBind, this.rawMemory, value)
+    open var pitchScale: Double
+        get() = _icall_Double(getPitchScaleMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setPitchScaleMethodBind, this.rawMemory, value)
 
 
     open val playing: Boolean
@@ -84,9 +84,9 @@ open class AudioStreamPlayer : Node {
         set(value) = _icall_Unit_Boolean(setStreamPausedMethodBind, this.rawMemory, value)
 
 
-    open var mixTarget: Int
-        get() = _icall_Int(getMixTargetMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setMixTargetMethodBind, this.rawMemory, value)
+    open var mixTarget: Long
+        get() = _icall_Long(getMixTargetMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setMixTargetMethodBind, this.rawMemory, value)
 
 
     open var bus: String
@@ -110,38 +110,38 @@ open class AudioStreamPlayer : Node {
 
 
     private val setVolumeDbMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer", "set_volume_db") }
-    open fun setVolumeDb(volumeDb: Float) {
-        _icall_Unit_Float(setVolumeDbMethodBind, this.rawMemory, volumeDb)
+    open fun setVolumeDb(volumeDb: Double) {
+        _icall_Unit_Double(setVolumeDbMethodBind, this.rawMemory, volumeDb)
     }
 
 
     private val getVolumeDbMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer", "get_volume_db") }
-    open fun getVolumeDb(): Float {
-        return _icall_Float(getVolumeDbMethodBind, this.rawMemory)
+    open fun getVolumeDb(): Double {
+        return _icall_Double(getVolumeDbMethodBind, this.rawMemory)
     }
 
 
     private val setPitchScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer", "set_pitch_scale") }
-    open fun setPitchScale(pitchScale: Float) {
-        _icall_Unit_Float(setPitchScaleMethodBind, this.rawMemory, pitchScale)
+    open fun setPitchScale(pitchScale: Double) {
+        _icall_Unit_Double(setPitchScaleMethodBind, this.rawMemory, pitchScale)
     }
 
 
     private val getPitchScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer", "get_pitch_scale") }
-    open fun getPitchScale(): Float {
-        return _icall_Float(getPitchScaleMethodBind, this.rawMemory)
+    open fun getPitchScale(): Double {
+        return _icall_Double(getPitchScaleMethodBind, this.rawMemory)
     }
 
 
     private val playMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer", "play") }
-    open fun play(fromPosition: Float = 0f) {
-        _icall_Unit_Float(playMethodBind, this.rawMemory, fromPosition)
+    open fun play(fromPosition: Double = 0.0) {
+        _icall_Unit_Double(playMethodBind, this.rawMemory, fromPosition)
     }
 
 
     private val seekMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer", "seek") }
-    open fun seek(toPosition: Float) {
-        _icall_Unit_Float(seekMethodBind, this.rawMemory, toPosition)
+    open fun seek(toPosition: Double) {
+        _icall_Unit_Double(seekMethodBind, this.rawMemory, toPosition)
     }
 
 
@@ -158,8 +158,8 @@ open class AudioStreamPlayer : Node {
 
 
     private val getPlaybackPositionMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer", "get_playback_position") }
-    open fun getPlaybackPosition(): Float {
-        return _icall_Float(getPlaybackPositionMethodBind, this.rawMemory)
+    open fun getPlaybackPosition(): Double {
+        return _icall_Double(getPlaybackPositionMethodBind, this.rawMemory)
     }
 
 
@@ -188,14 +188,14 @@ open class AudioStreamPlayer : Node {
 
 
     private val setMixTargetMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer", "set_mix_target") }
-    open fun setMixTarget(mixTarget: Int) {
-        _icall_Unit_Int(setMixTargetMethodBind, this.rawMemory, mixTarget)
+    open fun setMixTarget(mixTarget: Long) {
+        _icall_Unit_Long(setMixTargetMethodBind, this.rawMemory, mixTarget)
     }
 
 
     private val getMixTargetMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer", "get_mix_target") }
     open fun getMixTarget(): AudioStreamPlayer.MixTarget {
-        return AudioStreamPlayer.MixTarget.fromInt(_icall_Int(getMixTargetMethodBind, this.rawMemory))
+        return AudioStreamPlayer.MixTarget.fromInt(_icall_Long(getMixTargetMethodBind, this.rawMemory))
     }
 
 

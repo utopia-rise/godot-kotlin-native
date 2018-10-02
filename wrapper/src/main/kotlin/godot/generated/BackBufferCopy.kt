@@ -19,14 +19,14 @@ open class BackBufferCopy : Node2D {
 
     // Enums 
 
-    enum class CopyMode(val id: Int) {
+    enum class CopyMode(val id: Long) {
         COPY_MODE_DISABLED(0),
         COPY_MODE_RECT(1),
         COPY_MODE_VIEWPORT(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -47,18 +47,18 @@ open class BackBufferCopy : Node2D {
 
 
         // Constants
-        const val COPY_MODE_DISABLED: Int = 0
-        const val COPY_MODE_RECT: Int = 1
-        const val COPY_MODE_VIEWPORT: Int = 2
+        const val COPY_MODE_DISABLED: Long = 0
+        const val COPY_MODE_RECT: Long = 1
+        const val COPY_MODE_VIEWPORT: Long = 2
 
 
     }
 
 
     // Properties
-    open var copyMode: Int
-        get() = _icall_Int(getCopyModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setCopyModeMethodBind, this.rawMemory, value)
+    open var copyMode: Long
+        get() = _icall_Long(getCopyModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setCopyModeMethodBind, this.rawMemory, value)
 
 
     open var rect: Rect2
@@ -86,14 +86,14 @@ open class BackBufferCopy : Node2D {
 
 
     private val setCopyModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("BackBufferCopy", "set_copy_mode") }
-    open fun setCopyMode(copyMode: Int) {
-        _icall_Unit_Int(setCopyModeMethodBind, this.rawMemory, copyMode)
+    open fun setCopyMode(copyMode: Long) {
+        _icall_Unit_Long(setCopyModeMethodBind, this.rawMemory, copyMode)
     }
 
 
     private val getCopyModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("BackBufferCopy", "get_copy_mode") }
     open fun getCopyMode(): BackBufferCopy.CopyMode {
-        return BackBufferCopy.CopyMode.fromInt(_icall_Int(getCopyModeMethodBind, this.rawMemory))
+        return BackBufferCopy.CopyMode.fromInt(_icall_Long(getCopyModeMethodBind, this.rawMemory))
     }
 
 

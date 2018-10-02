@@ -19,7 +19,7 @@ open class ResourceSaver : Object {
 
     // Enums 
 
-    enum class SaverFlags(val id: Int) {
+    enum class SaverFlags(val id: Long) {
         FLAG_RELATIVE_PATHS(1),
         FLAG_BUNDLE_RESOURCES(2),
         FLAG_CHANGE_PATH(4),
@@ -29,7 +29,7 @@ open class ResourceSaver : Object {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -47,12 +47,12 @@ open class ResourceSaver : Object {
 
 
         // Constants
-        const val FLAG_RELATIVE_PATHS: Int = 1
-        const val FLAG_BUNDLE_RESOURCES: Int = 2
-        const val FLAG_CHANGE_PATH: Int = 4
-        const val FLAG_OMIT_EDITOR_PROPERTIES: Int = 8
-        const val FLAG_SAVE_BIG_ENDIAN: Int = 16
-        const val FLAG_COMPRESS: Int = 32
+        const val FLAG_RELATIVE_PATHS: Long = 1
+        const val FLAG_BUNDLE_RESOURCES: Long = 2
+        const val FLAG_CHANGE_PATH: Long = 4
+        const val FLAG_OMIT_EDITOR_PROPERTIES: Long = 8
+        const val FLAG_SAVE_BIG_ENDIAN: Long = 16
+        const val FLAG_COMPRESS: Long = 32
 
 
         private val rawMemory: COpaquePointer by lazy { getSingleton("ResourceSaver", "_ResourceSaver") }
@@ -63,8 +63,8 @@ open class ResourceSaver : Object {
 
         // Methods
         private val saveMethodBind: CPointer<godot_method_bind> by lazy { getMB("_ResourceSaver", "save") }
-        fun save(path: String, resource: Resource, flags: Int = 0): GodotError {
-            return GodotError.fromInt(_icall_Int_String_Object_Int(saveMethodBind, this.rawMemory, path, resource, flags))
+        fun save(path: String, resource: Resource, flags: Long = 0): GodotError {
+            return GodotError.fromInt(_icall_Long_String_Object_Long(saveMethodBind, this.rawMemory, path, resource, flags))
         }
 
 

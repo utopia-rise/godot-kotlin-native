@@ -42,9 +42,9 @@ open class VisualInstance : Spatial {
 
 
     // Properties
-    open var layers: Int
-        get() = _icall_Int(getLayerMaskMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setLayerMaskMethodBind, this.rawMemory, value)
+    open var layers: Long
+        get() = _icall_Long(getLayerMaskMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setLayerMaskMethodBind, this.rawMemory, value)
 
 
 
@@ -62,14 +62,14 @@ open class VisualInstance : Spatial {
 
 
     private val setLayerMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualInstance", "set_layer_mask") }
-    open fun setLayerMask(mask: Int) {
-        _icall_Unit_Int(setLayerMaskMethodBind, this.rawMemory, mask)
+    open fun setLayerMask(mask: Long) {
+        _icall_Unit_Long(setLayerMaskMethodBind, this.rawMemory, mask)
     }
 
 
     private val getLayerMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualInstance", "get_layer_mask") }
-    open fun getLayerMask(): Int {
-        return _icall_Int(getLayerMaskMethodBind, this.rawMemory)
+    open fun getLayerMask(): Long {
+        return _icall_Long(getLayerMaskMethodBind, this.rawMemory)
     }
 
 

@@ -19,14 +19,14 @@ open class CSGShape : VisualInstance {
 
     // Enums 
 
-    enum class Operation(val id: Int) {
+    enum class Operation(val id: Long) {
         OPERATION_UNION(0),
         OPERATION_INTERSECTION(1),
         OPERATION_SUBTRACTION(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -47,18 +47,18 @@ open class CSGShape : VisualInstance {
 
 
         // Constants
-        const val OPERATION_UNION: Int = 0
-        const val OPERATION_INTERSECTION: Int = 1
-        const val OPERATION_SUBTRACTION: Int = 2
+        const val OPERATION_UNION: Long = 0
+        const val OPERATION_INTERSECTION: Long = 1
+        const val OPERATION_SUBTRACTION: Long = 2
 
 
     }
 
 
     // Properties
-    open var operation: Int
-        get() = _icall_Int(getOperationMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setOperationMethodBind, this.rawMemory, value)
+    open var operation: Long
+        get() = _icall_Long(getOperationMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setOperationMethodBind, this.rawMemory, value)
 
 
     open var useCollision: Boolean
@@ -66,9 +66,9 @@ open class CSGShape : VisualInstance {
         set(value) = _icall_Unit_Boolean(setUseCollisionMethodBind, this.rawMemory, value)
 
 
-    open var snap: Float
-        get() = _icall_Float(getSnapMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setSnapMethodBind, this.rawMemory, value)
+    open var snap: Double
+        get() = _icall_Double(getSnapMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setSnapMethodBind, this.rawMemory, value)
 
 
 
@@ -85,14 +85,14 @@ open class CSGShape : VisualInstance {
 
 
     private val setOperationMethodBind: CPointer<godot_method_bind> by lazy { getMB("CSGShape", "set_operation") }
-    open fun setOperation(operation: Int) {
-        _icall_Unit_Int(setOperationMethodBind, this.rawMemory, operation)
+    open fun setOperation(operation: Long) {
+        _icall_Unit_Long(setOperationMethodBind, this.rawMemory, operation)
     }
 
 
     private val getOperationMethodBind: CPointer<godot_method_bind> by lazy { getMB("CSGShape", "get_operation") }
     open fun getOperation(): CSGShape.Operation {
-        return CSGShape.Operation.fromInt(_icall_Int(getOperationMethodBind, this.rawMemory))
+        return CSGShape.Operation.fromInt(_icall_Long(getOperationMethodBind, this.rawMemory))
     }
 
 
@@ -109,14 +109,14 @@ open class CSGShape : VisualInstance {
 
 
     private val setSnapMethodBind: CPointer<godot_method_bind> by lazy { getMB("CSGShape", "set_snap") }
-    open fun setSnap(snap: Float) {
-        _icall_Unit_Float(setSnapMethodBind, this.rawMemory, snap)
+    open fun setSnap(snap: Double) {
+        _icall_Unit_Double(setSnapMethodBind, this.rawMemory, snap)
     }
 
 
     private val getSnapMethodBind: CPointer<godot_method_bind> by lazy { getMB("CSGShape", "get_snap") }
-    open fun getSnap(): Float {
-        return _icall_Float(getSnapMethodBind, this.rawMemory)
+    open fun getSnap(): Double {
+        return _icall_Double(getSnapMethodBind, this.rawMemory)
     }
 
 

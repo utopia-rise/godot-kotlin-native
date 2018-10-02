@@ -55,14 +55,14 @@ open class Skeleton2D : Node2D {
 
 
     private val getBoneCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("Skeleton2D", "get_bone_count") }
-    open fun getBoneCount(): Int {
-        return _icall_Int(getBoneCountMethodBind, this.rawMemory)
+    open fun getBoneCount(): Long {
+        return _icall_Long(getBoneCountMethodBind, this.rawMemory)
     }
 
 
     private val getBoneMethodBind: CPointer<godot_method_bind> by lazy { getMB("Skeleton2D", "get_bone") }
-    open fun getBone(arg0: Int): Bone2D {
-        return _icall_Bone2D_Int(getBoneMethodBind, this.rawMemory, arg0)
+    open fun getBone(arg0: Long): Bone2D {
+        return _icall_Bone2D_Long(getBoneMethodBind, this.rawMemory, arg0)
     }
 
 

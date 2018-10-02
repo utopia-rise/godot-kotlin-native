@@ -19,14 +19,14 @@ open class PackedScene : Resource {
 
     // Enums 
 
-    enum class GenEditState(val id: Int) {
+    enum class GenEditState(val id: Long) {
         GEN_EDIT_STATE_DISABLED(0),
         GEN_EDIT_STATE_INSTANCE(1),
         GEN_EDIT_STATE_MAIN(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -46,9 +46,9 @@ open class PackedScene : Resource {
 
 
         // Constants
-        const val GEN_EDIT_STATE_DISABLED: Int = 0
-        const val GEN_EDIT_STATE_INSTANCE: Int = 1
-        const val GEN_EDIT_STATE_MAIN: Int = 2
+        const val GEN_EDIT_STATE_DISABLED: Long = 0
+        const val GEN_EDIT_STATE_INSTANCE: Long = 1
+        const val GEN_EDIT_STATE_MAIN: Long = 2
 
 
     }
@@ -60,13 +60,13 @@ open class PackedScene : Resource {
     // Methods
     private val packMethodBind: CPointer<godot_method_bind> by lazy { getMB("PackedScene", "pack") }
     open fun pack(path: Object): GodotError {
-        return GodotError.fromInt(_icall_Int_Object(packMethodBind, this.rawMemory, path))
+        return GodotError.fromInt(_icall_Long_Object(packMethodBind, this.rawMemory, path))
     }
 
 
     private val instanceMethodBind: CPointer<godot_method_bind> by lazy { getMB("PackedScene", "instance") }
-    open fun instance(editState: Int = 0): Node {
-        return _icall_Node_Int(instanceMethodBind, this.rawMemory, editState)
+    open fun instance(editState: Long = 0): Node {
+        return _icall_Node_Long(instanceMethodBind, this.rawMemory, editState)
     }
 
 

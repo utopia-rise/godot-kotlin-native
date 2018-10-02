@@ -19,14 +19,14 @@ open class AnimationNodeStateMachineTransition : Resource {
 
     // Enums 
 
-    enum class SwitchMode(val id: Int) {
+    enum class SwitchMode(val id: Long) {
         SWITCH_MODE_IMMEDIATE(0),
         SWITCH_MODE_SYNC(1),
         SWITCH_MODE_AT_END(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -46,18 +46,18 @@ open class AnimationNodeStateMachineTransition : Resource {
 
 
         // Constants
-        const val SWITCH_MODE_IMMEDIATE: Int = 0
-        const val SWITCH_MODE_SYNC: Int = 1
-        const val SWITCH_MODE_AT_END: Int = 2
+        const val SWITCH_MODE_IMMEDIATE: Long = 0
+        const val SWITCH_MODE_SYNC: Long = 1
+        const val SWITCH_MODE_AT_END: Long = 2
 
 
     }
 
 
     // Properties
-    open var switchMode: Int
-        get() = _icall_Int(getSwitchModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setSwitchModeMethodBind, this.rawMemory, value)
+    open var switchMode: Long
+        get() = _icall_Long(getSwitchModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setSwitchModeMethodBind, this.rawMemory, value)
 
 
     open var autoAdvance: Boolean
@@ -65,14 +65,14 @@ open class AnimationNodeStateMachineTransition : Resource {
         set(value) = _icall_Unit_Boolean(setAutoAdvanceMethodBind, this.rawMemory, value)
 
 
-    open var xfadeTime: Float
-        get() = _icall_Float(getXfadeTimeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setXfadeTimeMethodBind, this.rawMemory, value)
+    open var xfadeTime: Double
+        get() = _icall_Double(getXfadeTimeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setXfadeTimeMethodBind, this.rawMemory, value)
 
 
-    open var priority: Int
-        get() = _icall_Int(getPriorityMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setPriorityMethodBind, this.rawMemory, value)
+    open var priority: Long
+        get() = _icall_Long(getPriorityMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setPriorityMethodBind, this.rawMemory, value)
 
 
     open var disabled: Boolean
@@ -84,14 +84,14 @@ open class AnimationNodeStateMachineTransition : Resource {
 
     // Methods
     private val setSwitchModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationNodeStateMachineTransition", "set_switch_mode") }
-    open fun setSwitchMode(mode: Int) {
-        _icall_Unit_Int(setSwitchModeMethodBind, this.rawMemory, mode)
+    open fun setSwitchMode(mode: Long) {
+        _icall_Unit_Long(setSwitchModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getSwitchModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationNodeStateMachineTransition", "get_switch_mode") }
     open fun getSwitchMode(): AnimationNodeStateMachineTransition.SwitchMode {
-        return AnimationNodeStateMachineTransition.SwitchMode.fromInt(_icall_Int(getSwitchModeMethodBind, this.rawMemory))
+        return AnimationNodeStateMachineTransition.SwitchMode.fromInt(_icall_Long(getSwitchModeMethodBind, this.rawMemory))
     }
 
 
@@ -108,14 +108,14 @@ open class AnimationNodeStateMachineTransition : Resource {
 
 
     private val setXfadeTimeMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationNodeStateMachineTransition", "set_xfade_time") }
-    open fun setXfadeTime(secs: Float) {
-        _icall_Unit_Float(setXfadeTimeMethodBind, this.rawMemory, secs)
+    open fun setXfadeTime(secs: Double) {
+        _icall_Unit_Double(setXfadeTimeMethodBind, this.rawMemory, secs)
     }
 
 
     private val getXfadeTimeMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationNodeStateMachineTransition", "get_xfade_time") }
-    open fun getXfadeTime(): Float {
-        return _icall_Float(getXfadeTimeMethodBind, this.rawMemory)
+    open fun getXfadeTime(): Double {
+        return _icall_Double(getXfadeTimeMethodBind, this.rawMemory)
     }
 
 
@@ -132,14 +132,14 @@ open class AnimationNodeStateMachineTransition : Resource {
 
 
     private val setPriorityMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationNodeStateMachineTransition", "set_priority") }
-    open fun setPriority(priority: Int) {
-        _icall_Unit_Int(setPriorityMethodBind, this.rawMemory, priority)
+    open fun setPriority(priority: Long) {
+        _icall_Unit_Long(setPriorityMethodBind, this.rawMemory, priority)
     }
 
 
     private val getPriorityMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationNodeStateMachineTransition", "get_priority") }
-    open fun getPriority(): Int {
-        return _icall_Int(getPriorityMethodBind, this.rawMemory)
+    open fun getPriority(): Long {
+        return _icall_Long(getPriorityMethodBind, this.rawMemory)
     }
 
 

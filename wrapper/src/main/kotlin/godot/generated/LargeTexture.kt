@@ -47,20 +47,20 @@ open class LargeTexture : Texture {
 
     // Methods
     private val addPieceMethodBind: CPointer<godot_method_bind> by lazy { getMB("LargeTexture", "add_piece") }
-    open fun addPiece(ofs: Vector2, texture: Texture): Int {
-        return _icall_Int_Vector2_Object(addPieceMethodBind, this.rawMemory, ofs, texture)
+    open fun addPiece(ofs: Vector2, texture: Texture): Long {
+        return _icall_Long_Vector2_Object(addPieceMethodBind, this.rawMemory, ofs, texture)
     }
 
 
     private val setPieceOffsetMethodBind: CPointer<godot_method_bind> by lazy { getMB("LargeTexture", "set_piece_offset") }
-    open fun setPieceOffset(idx: Int, ofs: Vector2) {
-        _icall_Unit_Int_Vector2(setPieceOffsetMethodBind, this.rawMemory, idx, ofs)
+    open fun setPieceOffset(idx: Long, ofs: Vector2) {
+        _icall_Unit_Long_Vector2(setPieceOffsetMethodBind, this.rawMemory, idx, ofs)
     }
 
 
     private val setPieceTextureMethodBind: CPointer<godot_method_bind> by lazy { getMB("LargeTexture", "set_piece_texture") }
-    open fun setPieceTexture(idx: Int, texture: Texture) {
-        _icall_Unit_Int_Object(setPieceTextureMethodBind, this.rawMemory, idx, texture)
+    open fun setPieceTexture(idx: Long, texture: Texture) {
+        _icall_Unit_Long_Object(setPieceTextureMethodBind, this.rawMemory, idx, texture)
     }
 
 
@@ -77,20 +77,20 @@ open class LargeTexture : Texture {
 
 
     private val getPieceCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("LargeTexture", "get_piece_count") }
-    open fun getPieceCount(): Int {
-        return _icall_Int(getPieceCountMethodBind, this.rawMemory)
+    open fun getPieceCount(): Long {
+        return _icall_Long(getPieceCountMethodBind, this.rawMemory)
     }
 
 
     private val getPieceOffsetMethodBind: CPointer<godot_method_bind> by lazy { getMB("LargeTexture", "get_piece_offset") }
-    open fun getPieceOffset(idx: Int): Vector2 {
-        return _icall_Vector2_Int(getPieceOffsetMethodBind, this.rawMemory, idx)
+    open fun getPieceOffset(idx: Long): Vector2 {
+        return _icall_Vector2_Long(getPieceOffsetMethodBind, this.rawMemory, idx)
     }
 
 
     private val getPieceTextureMethodBind: CPointer<godot_method_bind> by lazy { getMB("LargeTexture", "get_piece_texture") }
-    open fun getPieceTexture(idx: Int): Texture {
-        return _icall_Texture_Int(getPieceTextureMethodBind, this.rawMemory, idx)
+    open fun getPieceTexture(idx: Long): Texture {
+        return _icall_Texture_Long(getPieceTextureMethodBind, this.rawMemory, idx)
     }
 
 

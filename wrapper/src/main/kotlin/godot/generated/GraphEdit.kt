@@ -67,9 +67,9 @@ open class GraphEdit : Control {
     }
 
 
-    open var snapDistance: Int
-        get() = _icall_Int(getSnapMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setSnapMethodBind, this.rawMemory, value)
+    open var snapDistance: Long
+        get() = _icall_Long(getSnapMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setSnapMethodBind, this.rawMemory, value)
 
 
     open var useSnap: Boolean
@@ -77,35 +77,35 @@ open class GraphEdit : Control {
         set(value) = _icall_Unit_Boolean(setUseSnapMethodBind, this.rawMemory, value)
 
 
-    open var zoom: Float
-        get() = _icall_Float(getZoomMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setZoomMethodBind, this.rawMemory, value)
+    open var zoom: Double
+        get() = _icall_Double(getZoomMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setZoomMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val connectNodeMethodBind: CPointer<godot_method_bind> by lazy { getMB("GraphEdit", "connect_node") }
-    open fun connectNode(from: String, fromPort: Int, to: String, toPort: Int): GodotError {
-        return GodotError.fromInt(_icall_Int_String_Int_String_Int(connectNodeMethodBind, this.rawMemory, from, fromPort, to, toPort))
+    open fun connectNode(from: String, fromPort: Long, to: String, toPort: Long): GodotError {
+        return GodotError.fromInt(_icall_Long_String_Long_String_Long(connectNodeMethodBind, this.rawMemory, from, fromPort, to, toPort))
     }
 
 
     private val isNodeConnectedMethodBind: CPointer<godot_method_bind> by lazy { getMB("GraphEdit", "is_node_connected") }
-    open fun isNodeConnected(from: String, fromPort: Int, to: String, toPort: Int): Boolean {
-        return _icall_Boolean_String_Int_String_Int(isNodeConnectedMethodBind, this.rawMemory, from, fromPort, to, toPort)
+    open fun isNodeConnected(from: String, fromPort: Long, to: String, toPort: Long): Boolean {
+        return _icall_Boolean_String_Long_String_Long(isNodeConnectedMethodBind, this.rawMemory, from, fromPort, to, toPort)
     }
 
 
     private val disconnectNodeMethodBind: CPointer<godot_method_bind> by lazy { getMB("GraphEdit", "disconnect_node") }
-    open fun disconnectNode(from: String, fromPort: Int, to: String, toPort: Int) {
-        _icall_Unit_String_Int_String_Int(disconnectNodeMethodBind, this.rawMemory, from, fromPort, to, toPort)
+    open fun disconnectNode(from: String, fromPort: Long, to: String, toPort: Long) {
+        _icall_Unit_String_Long_String_Long(disconnectNodeMethodBind, this.rawMemory, from, fromPort, to, toPort)
     }
 
 
     private val setConnectionActivityMethodBind: CPointer<godot_method_bind> by lazy { getMB("GraphEdit", "set_connection_activity") }
-    open fun setConnectionActivity(from: String, fromPort: Int, to: String, toPort: Int, amount: Float) {
-        _icall_Unit_String_Int_String_Int_Float(setConnectionActivityMethodBind, this.rawMemory, from, fromPort, to, toPort, amount)
+    open fun setConnectionActivity(from: String, fromPort: Long, to: String, toPort: Long, amount: Double) {
+        _icall_Unit_String_Long_String_Long_Double(setConnectionActivityMethodBind, this.rawMemory, from, fromPort, to, toPort, amount)
     }
 
 
@@ -134,68 +134,68 @@ open class GraphEdit : Control {
 
 
     private val addValidRightDisconnectTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("GraphEdit", "add_valid_right_disconnect_type") }
-    open fun addValidRightDisconnectType(type: Int) {
-        _icall_Unit_Int(addValidRightDisconnectTypeMethodBind, this.rawMemory, type)
+    open fun addValidRightDisconnectType(type: Long) {
+        _icall_Unit_Long(addValidRightDisconnectTypeMethodBind, this.rawMemory, type)
     }
 
 
     private val removeValidRightDisconnectTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("GraphEdit", "remove_valid_right_disconnect_type") }
-    open fun removeValidRightDisconnectType(type: Int) {
-        _icall_Unit_Int(removeValidRightDisconnectTypeMethodBind, this.rawMemory, type)
+    open fun removeValidRightDisconnectType(type: Long) {
+        _icall_Unit_Long(removeValidRightDisconnectTypeMethodBind, this.rawMemory, type)
     }
 
 
     private val addValidLeftDisconnectTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("GraphEdit", "add_valid_left_disconnect_type") }
-    open fun addValidLeftDisconnectType(type: Int) {
-        _icall_Unit_Int(addValidLeftDisconnectTypeMethodBind, this.rawMemory, type)
+    open fun addValidLeftDisconnectType(type: Long) {
+        _icall_Unit_Long(addValidLeftDisconnectTypeMethodBind, this.rawMemory, type)
     }
 
 
     private val removeValidLeftDisconnectTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("GraphEdit", "remove_valid_left_disconnect_type") }
-    open fun removeValidLeftDisconnectType(type: Int) {
-        _icall_Unit_Int(removeValidLeftDisconnectTypeMethodBind, this.rawMemory, type)
+    open fun removeValidLeftDisconnectType(type: Long) {
+        _icall_Unit_Long(removeValidLeftDisconnectTypeMethodBind, this.rawMemory, type)
     }
 
 
     private val addValidConnectionTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("GraphEdit", "add_valid_connection_type") }
-    open fun addValidConnectionType(fromType: Int, toType: Int) {
-        _icall_Unit_Int_Int(addValidConnectionTypeMethodBind, this.rawMemory, fromType, toType)
+    open fun addValidConnectionType(fromType: Long, toType: Long) {
+        _icall_Unit_Long_Long(addValidConnectionTypeMethodBind, this.rawMemory, fromType, toType)
     }
 
 
     private val removeValidConnectionTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("GraphEdit", "remove_valid_connection_type") }
-    open fun removeValidConnectionType(fromType: Int, toType: Int) {
-        _icall_Unit_Int_Int(removeValidConnectionTypeMethodBind, this.rawMemory, fromType, toType)
+    open fun removeValidConnectionType(fromType: Long, toType: Long) {
+        _icall_Unit_Long_Long(removeValidConnectionTypeMethodBind, this.rawMemory, fromType, toType)
     }
 
 
     private val isValidConnectionTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("GraphEdit", "is_valid_connection_type") }
-    open fun isValidConnectionType(fromType: Int, toType: Int): Boolean {
-        return _icall_Boolean_Int_Int(isValidConnectionTypeMethodBind, this.rawMemory, fromType, toType)
+    open fun isValidConnectionType(fromType: Long, toType: Long): Boolean {
+        return _icall_Boolean_Long_Long(isValidConnectionTypeMethodBind, this.rawMemory, fromType, toType)
     }
 
 
     private val setZoomMethodBind: CPointer<godot_method_bind> by lazy { getMB("GraphEdit", "set_zoom") }
-    open fun setZoom(pZoom: Float) {
-        _icall_Unit_Float(setZoomMethodBind, this.rawMemory, pZoom)
+    open fun setZoom(pZoom: Double) {
+        _icall_Unit_Double(setZoomMethodBind, this.rawMemory, pZoom)
     }
 
 
     private val getZoomMethodBind: CPointer<godot_method_bind> by lazy { getMB("GraphEdit", "get_zoom") }
-    open fun getZoom(): Float {
-        return _icall_Float(getZoomMethodBind, this.rawMemory)
+    open fun getZoom(): Double {
+        return _icall_Double(getZoomMethodBind, this.rawMemory)
     }
 
 
     private val setSnapMethodBind: CPointer<godot_method_bind> by lazy { getMB("GraphEdit", "set_snap") }
-    open fun setSnap(pixels: Int) {
-        _icall_Unit_Int(setSnapMethodBind, this.rawMemory, pixels)
+    open fun setSnap(pixels: Long) {
+        _icall_Unit_Long(setSnapMethodBind, this.rawMemory, pixels)
     }
 
 
     private val getSnapMethodBind: CPointer<godot_method_bind> by lazy { getMB("GraphEdit", "get_snap") }
-    open fun getSnap(): Int {
-        return _icall_Int(getSnapMethodBind, this.rawMemory)
+    open fun getSnap(): Long {
+        return _icall_Long(getSnapMethodBind, this.rawMemory)
     }
 
 
@@ -239,7 +239,7 @@ open class GraphEdit : Control {
     }
 
 
-    open fun _scroll_moved(arg0: Float) {
+    open fun _scroll_moved(arg0: Double) {
     }
 
 
@@ -259,7 +259,7 @@ open class GraphEdit : Control {
     }
 
 
-    open fun _snap_value_changed(arg0: Float) {
+    open fun _snap_value_changed(arg0: Double) {
     }
 
 

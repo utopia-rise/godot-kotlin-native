@@ -43,34 +43,34 @@ open class AudioEffectCompressor : AudioEffect {
 
 
     // Properties
-    open var threshold: Float
-        get() = _icall_Float(getThresholdMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setThresholdMethodBind, this.rawMemory, value)
+    open var threshold: Double
+        get() = _icall_Double(getThresholdMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setThresholdMethodBind, this.rawMemory, value)
 
 
-    open var ratio: Float
-        get() = _icall_Float(getRatioMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setRatioMethodBind, this.rawMemory, value)
+    open var ratio: Double
+        get() = _icall_Double(getRatioMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setRatioMethodBind, this.rawMemory, value)
 
 
-    open var gain: Float
-        get() = _icall_Float(getGainMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setGainMethodBind, this.rawMemory, value)
+    open var gain: Double
+        get() = _icall_Double(getGainMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setGainMethodBind, this.rawMemory, value)
 
 
-    open var attackUs: Float
-        get() = _icall_Float(getAttackUsMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setAttackUsMethodBind, this.rawMemory, value)
+    open var attackUs: Double
+        get() = _icall_Double(getAttackUsMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setAttackUsMethodBind, this.rawMemory, value)
 
 
-    open var releaseMs: Float
-        get() = _icall_Float(getReleaseMsMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setReleaseMsMethodBind, this.rawMemory, value)
+    open var releaseMs: Double
+        get() = _icall_Double(getReleaseMsMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setReleaseMsMethodBind, this.rawMemory, value)
 
 
-    open var mix: Float
-        get() = _icall_Float(getMixMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setMixMethodBind, this.rawMemory, value)
+    open var mix: Double
+        get() = _icall_Double(getMixMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setMixMethodBind, this.rawMemory, value)
 
 
     open var sidechain: String
@@ -82,74 +82,74 @@ open class AudioEffectCompressor : AudioEffect {
 
     // Methods
     private val setThresholdMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectCompressor", "set_threshold") }
-    open fun setThreshold(threshold: Float) {
-        _icall_Unit_Float(setThresholdMethodBind, this.rawMemory, threshold)
+    open fun setThreshold(threshold: Double) {
+        _icall_Unit_Double(setThresholdMethodBind, this.rawMemory, threshold)
     }
 
 
     private val getThresholdMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectCompressor", "get_threshold") }
-    open fun getThreshold(): Float {
-        return _icall_Float(getThresholdMethodBind, this.rawMemory)
+    open fun getThreshold(): Double {
+        return _icall_Double(getThresholdMethodBind, this.rawMemory)
     }
 
 
     private val setRatioMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectCompressor", "set_ratio") }
-    open fun setRatio(ratio: Float) {
-        _icall_Unit_Float(setRatioMethodBind, this.rawMemory, ratio)
+    open fun setRatio(ratio: Double) {
+        _icall_Unit_Double(setRatioMethodBind, this.rawMemory, ratio)
     }
 
 
     private val getRatioMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectCompressor", "get_ratio") }
-    open fun getRatio(): Float {
-        return _icall_Float(getRatioMethodBind, this.rawMemory)
+    open fun getRatio(): Double {
+        return _icall_Double(getRatioMethodBind, this.rawMemory)
     }
 
 
     private val setGainMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectCompressor", "set_gain") }
-    open fun setGain(gain: Float) {
-        _icall_Unit_Float(setGainMethodBind, this.rawMemory, gain)
+    open fun setGain(gain: Double) {
+        _icall_Unit_Double(setGainMethodBind, this.rawMemory, gain)
     }
 
 
     private val getGainMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectCompressor", "get_gain") }
-    open fun getGain(): Float {
-        return _icall_Float(getGainMethodBind, this.rawMemory)
+    open fun getGain(): Double {
+        return _icall_Double(getGainMethodBind, this.rawMemory)
     }
 
 
     private val setAttackUsMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectCompressor", "set_attack_us") }
-    open fun setAttackUs(attackUs: Float) {
-        _icall_Unit_Float(setAttackUsMethodBind, this.rawMemory, attackUs)
+    open fun setAttackUs(attackUs: Double) {
+        _icall_Unit_Double(setAttackUsMethodBind, this.rawMemory, attackUs)
     }
 
 
     private val getAttackUsMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectCompressor", "get_attack_us") }
-    open fun getAttackUs(): Float {
-        return _icall_Float(getAttackUsMethodBind, this.rawMemory)
+    open fun getAttackUs(): Double {
+        return _icall_Double(getAttackUsMethodBind, this.rawMemory)
     }
 
 
     private val setReleaseMsMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectCompressor", "set_release_ms") }
-    open fun setReleaseMs(releaseMs: Float) {
-        _icall_Unit_Float(setReleaseMsMethodBind, this.rawMemory, releaseMs)
+    open fun setReleaseMs(releaseMs: Double) {
+        _icall_Unit_Double(setReleaseMsMethodBind, this.rawMemory, releaseMs)
     }
 
 
     private val getReleaseMsMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectCompressor", "get_release_ms") }
-    open fun getReleaseMs(): Float {
-        return _icall_Float(getReleaseMsMethodBind, this.rawMemory)
+    open fun getReleaseMs(): Double {
+        return _icall_Double(getReleaseMsMethodBind, this.rawMemory)
     }
 
 
     private val setMixMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectCompressor", "set_mix") }
-    open fun setMix(mix: Float) {
-        _icall_Unit_Float(setMixMethodBind, this.rawMemory, mix)
+    open fun setMix(mix: Double) {
+        _icall_Unit_Double(setMixMethodBind, this.rawMemory, mix)
     }
 
 
     private val getMixMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectCompressor", "get_mix") }
-    open fun getMix(): Float {
-        return _icall_Float(getMixMethodBind, this.rawMemory)
+    open fun getMix(): Double {
+        return _icall_Double(getMixMethodBind, this.rawMemory)
     }
 
 

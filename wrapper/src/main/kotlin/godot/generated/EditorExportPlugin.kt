@@ -48,7 +48,7 @@ open class EditorExportPlugin : Reference {
     }
 
 
-    open fun _export_begin(features: PoolStringArray, isDebug: Boolean, path: String, flags: Int) {
+    open fun _export_begin(features: PoolStringArray, isDebug: Boolean, path: String, flags: Long) {
     }
 
 

@@ -54,19 +54,19 @@ open class StaticBody2D : PhysicsBody2D {
     }
 
 
-    open var constantAngularVelocity: Float
-        get() = _icall_Float(getConstantAngularVelocityMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setConstantAngularVelocityMethodBind, this.rawMemory, value)
+    open var constantAngularVelocity: Double
+        get() = _icall_Double(getConstantAngularVelocityMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setConstantAngularVelocityMethodBind, this.rawMemory, value)
 
 
-    open var friction: Float
-        get() = _icall_Float(getFrictionMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setFrictionMethodBind, this.rawMemory, value)
+    open var friction: Double
+        get() = _icall_Double(getFrictionMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setFrictionMethodBind, this.rawMemory, value)
 
 
-    open var bounce: Float
-        get() = _icall_Float(getBounceMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setBounceMethodBind, this.rawMemory, value)
+    open var bounce: Double
+        get() = _icall_Double(getBounceMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setBounceMethodBind, this.rawMemory, value)
 
 
 
@@ -79,8 +79,8 @@ open class StaticBody2D : PhysicsBody2D {
 
 
     private val setConstantAngularVelocityMethodBind: CPointer<godot_method_bind> by lazy { getMB("StaticBody2D", "set_constant_angular_velocity") }
-    open fun setConstantAngularVelocity(vel: Float) {
-        _icall_Unit_Float(setConstantAngularVelocityMethodBind, this.rawMemory, vel)
+    open fun setConstantAngularVelocity(vel: Double) {
+        _icall_Unit_Double(setConstantAngularVelocityMethodBind, this.rawMemory, vel)
     }
 
 
@@ -91,32 +91,32 @@ open class StaticBody2D : PhysicsBody2D {
 
 
     private val getConstantAngularVelocityMethodBind: CPointer<godot_method_bind> by lazy { getMB("StaticBody2D", "get_constant_angular_velocity") }
-    open fun getConstantAngularVelocity(): Float {
-        return _icall_Float(getConstantAngularVelocityMethodBind, this.rawMemory)
+    open fun getConstantAngularVelocity(): Double {
+        return _icall_Double(getConstantAngularVelocityMethodBind, this.rawMemory)
     }
 
 
     private val setFrictionMethodBind: CPointer<godot_method_bind> by lazy { getMB("StaticBody2D", "set_friction") }
-    open fun setFriction(friction: Float) {
-        _icall_Unit_Float(setFrictionMethodBind, this.rawMemory, friction)
+    open fun setFriction(friction: Double) {
+        _icall_Unit_Double(setFrictionMethodBind, this.rawMemory, friction)
     }
 
 
     private val getFrictionMethodBind: CPointer<godot_method_bind> by lazy { getMB("StaticBody2D", "get_friction") }
-    open fun getFriction(): Float {
-        return _icall_Float(getFrictionMethodBind, this.rawMemory)
+    open fun getFriction(): Double {
+        return _icall_Double(getFrictionMethodBind, this.rawMemory)
     }
 
 
     private val setBounceMethodBind: CPointer<godot_method_bind> by lazy { getMB("StaticBody2D", "set_bounce") }
-    open fun setBounce(bounce: Float) {
-        _icall_Unit_Float(setBounceMethodBind, this.rawMemory, bounce)
+    open fun setBounce(bounce: Double) {
+        _icall_Unit_Double(setBounceMethodBind, this.rawMemory, bounce)
     }
 
 
     private val getBounceMethodBind: CPointer<godot_method_bind> by lazy { getMB("StaticBody2D", "get_bounce") }
-    open fun getBounce(): Float {
-        return _icall_Float(getBounceMethodBind, this.rawMemory)
+    open fun getBounce(): Double {
+        return _icall_Double(getBounceMethodBind, this.rawMemory)
     }
 
 

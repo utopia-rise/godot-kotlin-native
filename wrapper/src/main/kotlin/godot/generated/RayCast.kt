@@ -61,9 +61,9 @@ open class RayCast : Spatial {
     }
 
 
-    open var collisionMask: Int
-        get() = _icall_Int(getCollisionMaskMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setCollisionMaskMethodBind, this.rawMemory, value)
+    open var collisionMask: Long
+        get() = _icall_Long(getCollisionMaskMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setCollisionMaskMethodBind, this.rawMemory, value)
 
 
 
@@ -112,8 +112,8 @@ open class RayCast : Spatial {
 
 
     private val getColliderShapeMethodBind: CPointer<godot_method_bind> by lazy { getMB("RayCast", "get_collider_shape") }
-    open fun getColliderShape(): Int {
-        return _icall_Int(getColliderShapeMethodBind, this.rawMemory)
+    open fun getColliderShape(): Long {
+        return _icall_Long(getColliderShapeMethodBind, this.rawMemory)
     }
 
 
@@ -160,26 +160,26 @@ open class RayCast : Spatial {
 
 
     private val setCollisionMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("RayCast", "set_collision_mask") }
-    open fun setCollisionMask(mask: Int) {
-        _icall_Unit_Int(setCollisionMaskMethodBind, this.rawMemory, mask)
+    open fun setCollisionMask(mask: Long) {
+        _icall_Unit_Long(setCollisionMaskMethodBind, this.rawMemory, mask)
     }
 
 
     private val getCollisionMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("RayCast", "get_collision_mask") }
-    open fun getCollisionMask(): Int {
-        return _icall_Int(getCollisionMaskMethodBind, this.rawMemory)
+    open fun getCollisionMask(): Long {
+        return _icall_Long(getCollisionMaskMethodBind, this.rawMemory)
     }
 
 
     private val setCollisionMaskBitMethodBind: CPointer<godot_method_bind> by lazy { getMB("RayCast", "set_collision_mask_bit") }
-    open fun setCollisionMaskBit(bit: Int, value: Boolean) {
-        _icall_Unit_Int_Boolean(setCollisionMaskBitMethodBind, this.rawMemory, bit, value)
+    open fun setCollisionMaskBit(bit: Long, value: Boolean) {
+        _icall_Unit_Long_Boolean(setCollisionMaskBitMethodBind, this.rawMemory, bit, value)
     }
 
 
     private val getCollisionMaskBitMethodBind: CPointer<godot_method_bind> by lazy { getMB("RayCast", "get_collision_mask_bit") }
-    open fun getCollisionMaskBit(bit: Int): Boolean {
-        return _icall_Boolean_Int(getCollisionMaskBitMethodBind, this.rawMemory, bit)
+    open fun getCollisionMaskBit(bit: Long): Boolean {
+        return _icall_Boolean_Long(getCollisionMaskBitMethodBind, this.rawMemory, bit)
     }
 
 

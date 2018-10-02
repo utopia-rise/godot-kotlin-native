@@ -19,7 +19,7 @@ open class FileDialog : ConfirmationDialog {
 
     // Enums 
 
-    enum class Mode(val id: Int) {
+    enum class Mode(val id: Long) {
         MODE_OPEN_FILE(0),
         MODE_OPEN_FILES(1),
         MODE_OPEN_DIR(2),
@@ -28,17 +28,17 @@ open class FileDialog : ConfirmationDialog {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class Access(val id: Int) {
+    enum class Access(val id: Long) {
         ACCESS_RESOURCES(0),
         ACCESS_USERDATA(1),
         ACCESS_FILESYSTEM(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -66,14 +66,14 @@ open class FileDialog : ConfirmationDialog {
 
 
         // Constants
-        const val MODE_OPEN_FILE: Int = 0
-        const val MODE_OPEN_FILES: Int = 1
-        const val MODE_OPEN_DIR: Int = 2
-        const val MODE_OPEN_ANY: Int = 3
-        const val MODE_SAVE_FILE: Int = 4
-        const val ACCESS_RESOURCES: Int = 0
-        const val ACCESS_USERDATA: Int = 1
-        const val ACCESS_FILESYSTEM: Int = 2
+        const val MODE_OPEN_FILE: Long = 0
+        const val MODE_OPEN_FILES: Long = 1
+        const val MODE_OPEN_DIR: Long = 2
+        const val MODE_OPEN_ANY: Long = 3
+        const val MODE_SAVE_FILE: Long = 4
+        const val ACCESS_RESOURCES: Long = 0
+        const val ACCESS_USERDATA: Long = 1
+        const val ACCESS_FILESYSTEM: Long = 2
 
 
     }
@@ -85,14 +85,14 @@ open class FileDialog : ConfirmationDialog {
         set(value) = _icall_Unit_Boolean(setModeOverridesTitleMethodBind, this.rawMemory, value)
 
 
-    open var mode: Int
-        get() = _icall_Int(getModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setModeMethodBind, this.rawMemory, value)
+    open var mode: Long
+        get() = _icall_Long(getModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setModeMethodBind, this.rawMemory, value)
 
 
-    open var access: Int
-        get() = _icall_Int(getAccessMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setAccessMethodBind, this.rawMemory, value)
+    open var access: Long
+        get() = _icall_Long(getAccessMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setAccessMethodBind, this.rawMemory, value)
 
 
     open var filters: PoolStringArray
@@ -151,7 +151,7 @@ open class FileDialog : ConfirmationDialog {
     }
 
 
-    open fun _filter_selected(arg0: Int) {
+    open fun _filter_selected(arg0: Long) {
     }
 
 
@@ -232,14 +232,14 @@ open class FileDialog : ConfirmationDialog {
 
 
     private val setModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("FileDialog", "set_mode") }
-    open fun setMode(mode: Int) {
-        _icall_Unit_Int(setModeMethodBind, this.rawMemory, mode)
+    open fun setMode(mode: Long) {
+        _icall_Unit_Long(setModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("FileDialog", "get_mode") }
     open fun getMode(): FileDialog.Mode {
-        return FileDialog.Mode.fromInt(_icall_Int(getModeMethodBind, this.rawMemory))
+        return FileDialog.Mode.fromInt(_icall_Long(getModeMethodBind, this.rawMemory))
     }
 
 
@@ -256,14 +256,14 @@ open class FileDialog : ConfirmationDialog {
 
 
     private val setAccessMethodBind: CPointer<godot_method_bind> by lazy { getMB("FileDialog", "set_access") }
-    open fun setAccess(access: Int) {
-        _icall_Unit_Int(setAccessMethodBind, this.rawMemory, access)
+    open fun setAccess(access: Long) {
+        _icall_Unit_Long(setAccessMethodBind, this.rawMemory, access)
     }
 
 
     private val getAccessMethodBind: CPointer<godot_method_bind> by lazy { getMB("FileDialog", "get_access") }
     open fun getAccess(): FileDialog.Access {
-        return FileDialog.Access.fromInt(_icall_Int(getAccessMethodBind, this.rawMemory))
+        return FileDialog.Access.fromInt(_icall_Long(getAccessMethodBind, this.rawMemory))
     }
 
 
@@ -279,7 +279,7 @@ open class FileDialog : ConfirmationDialog {
     }
 
 
-    open fun _select_drive(arg0: Int) {
+    open fun _select_drive(arg0: Long) {
     }
 
 

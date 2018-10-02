@@ -38,7 +38,7 @@ open class Container : Control {
 
 
         // Constants
-        const val NOTIFICATION_SORT_CHILDREN: Int = 50
+        const val NOTIFICATION_SORT_CHILDREN: Long = 50
 
 
     }

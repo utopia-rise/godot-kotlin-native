@@ -43,9 +43,9 @@ open class CurveTexture : Texture {
 
 
     // Properties
-    open var width: Int
+    open var width: Long
         get() = throw UninitializedPropertyAccessException("Cannot access property width: has no getter")
-        set(value) = _icall_Unit_Int(setWidthMethodBind, this.rawMemory, value)
+        set(value) = _icall_Unit_Long(setWidthMethodBind, this.rawMemory, value)
 
 
     open var curve: Curve
@@ -57,8 +57,8 @@ open class CurveTexture : Texture {
 
     // Methods
     private val setWidthMethodBind: CPointer<godot_method_bind> by lazy { getMB("CurveTexture", "set_width") }
-    open fun setWidth(width: Int) {
-        _icall_Unit_Int(setWidthMethodBind, this.rawMemory, width)
+    open fun setWidth(width: Long) {
+        _icall_Unit_Long(setWidthMethodBind, this.rawMemory, width)
     }
 
 

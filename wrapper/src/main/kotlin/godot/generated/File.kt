@@ -19,7 +19,7 @@ open class File : Reference {
 
     // Enums 
 
-    enum class CompressionMode(val id: Int) {
+    enum class CompressionMode(val id: Long) {
         COMPRESSION_FASTLZ(0),
         COMPRESSION_DEFLATE(1),
         COMPRESSION_ZSTD(2),
@@ -27,10 +27,10 @@ open class File : Reference {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class ModeFlags(val id: Int) {
+    enum class ModeFlags(val id: Long) {
         READ(1),
         WRITE(2),
         READ_WRITE(3),
@@ -38,7 +38,7 @@ open class File : Reference {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -57,14 +57,14 @@ open class File : Reference {
 
 
         // Constants
-        const val READ: Int = 1
-        const val WRITE: Int = 2
-        const val READ_WRITE: Int = 3
-        const val WRITE_READ: Int = 7
-        const val COMPRESSION_FASTLZ: Int = 0
-        const val COMPRESSION_DEFLATE: Int = 1
-        const val COMPRESSION_ZSTD: Int = 2
-        const val COMPRESSION_GZIP: Int = 3
+        const val READ: Long = 1
+        const val WRITE: Long = 2
+        const val READ_WRITE: Long = 3
+        const val WRITE_READ: Long = 7
+        const val COMPRESSION_FASTLZ: Long = 0
+        const val COMPRESSION_DEFLATE: Long = 1
+        const val COMPRESSION_ZSTD: Long = 2
+        const val COMPRESSION_GZIP: Long = 3
 
 
     }
@@ -80,26 +80,26 @@ open class File : Reference {
 
     // Methods
     private val openEncryptedMethodBind: CPointer<godot_method_bind> by lazy { getMB("_File", "open_encrypted") }
-    open fun openEncrypted(path: String, modeFlags: Int, key: PoolByteArray): GodotError {
-        return GodotError.fromInt(_icall_Int_String_Int_PoolByteArray(openEncryptedMethodBind, this.rawMemory, path, modeFlags, key))
+    open fun openEncrypted(path: String, modeFlags: Long, key: PoolByteArray): GodotError {
+        return GodotError.fromInt(_icall_Long_String_Long_PoolByteArray(openEncryptedMethodBind, this.rawMemory, path, modeFlags, key))
     }
 
 
     private val openEncryptedWithPassMethodBind: CPointer<godot_method_bind> by lazy { getMB("_File", "open_encrypted_with_pass") }
-    open fun openEncryptedWithPass(path: String, modeFlags: Int, pass: String): GodotError {
-        return GodotError.fromInt(_icall_Int_String_Int_String(openEncryptedWithPassMethodBind, this.rawMemory, path, modeFlags, pass))
+    open fun openEncryptedWithPass(path: String, modeFlags: Long, pass: String): GodotError {
+        return GodotError.fromInt(_icall_Long_String_Long_String(openEncryptedWithPassMethodBind, this.rawMemory, path, modeFlags, pass))
     }
 
 
     private val openCompressedMethodBind: CPointer<godot_method_bind> by lazy { getMB("_File", "open_compressed") }
-    open fun openCompressed(path: String, modeFlags: Int, compressionMode: Int = 0): GodotError {
-        return GodotError.fromInt(_icall_Int_String_Int_Int(openCompressedMethodBind, this.rawMemory, path, modeFlags, compressionMode))
+    open fun openCompressed(path: String, modeFlags: Long, compressionMode: Long = 0): GodotError {
+        return GodotError.fromInt(_icall_Long_String_Long_Long(openCompressedMethodBind, this.rawMemory, path, modeFlags, compressionMode))
     }
 
 
     private val openMethodBind: CPointer<godot_method_bind> by lazy { getMB("_File", "open") }
-    open fun open(path: String, flags: Int): GodotError {
-        return GodotError.fromInt(_icall_Int_String_Int(openMethodBind, this.rawMemory, path, flags))
+    open fun open(path: String, flags: Long): GodotError {
+        return GodotError.fromInt(_icall_Long_String_Long(openMethodBind, this.rawMemory, path, flags))
     }
 
 
@@ -128,26 +128,26 @@ open class File : Reference {
 
 
     private val seekMethodBind: CPointer<godot_method_bind> by lazy { getMB("_File", "seek") }
-    open fun seek(position: Int) {
-        _icall_Unit_Int(seekMethodBind, this.rawMemory, position)
+    open fun seek(position: Long) {
+        _icall_Unit_Long(seekMethodBind, this.rawMemory, position)
     }
 
 
     private val seekEndMethodBind: CPointer<godot_method_bind> by lazy { getMB("_File", "seek_end") }
-    open fun seekEnd(position: Int = 0) {
-        _icall_Unit_Int(seekEndMethodBind, this.rawMemory, position)
+    open fun seekEnd(position: Long = 0) {
+        _icall_Unit_Long(seekEndMethodBind, this.rawMemory, position)
     }
 
 
     private val getPositionMethodBind: CPointer<godot_method_bind> by lazy { getMB("_File", "get_position") }
-    open fun getPosition(): Int {
-        return _icall_Int(getPositionMethodBind, this.rawMemory)
+    open fun getPosition(): Long {
+        return _icall_Long(getPositionMethodBind, this.rawMemory)
     }
 
 
     private val getLenMethodBind: CPointer<godot_method_bind> by lazy { getMB("_File", "get_len") }
-    open fun getLen(): Int {
-        return _icall_Int(getLenMethodBind, this.rawMemory)
+    open fun getLen(): Long {
+        return _icall_Long(getLenMethodBind, this.rawMemory)
     }
 
 
@@ -158,50 +158,50 @@ open class File : Reference {
 
 
     private val get8MethodBind: CPointer<godot_method_bind> by lazy { getMB("_File", "get_8") }
-    open fun get8(): Int {
-        return _icall_Int(get8MethodBind, this.rawMemory)
+    open fun get8(): Long {
+        return _icall_Long(get8MethodBind, this.rawMemory)
     }
 
 
     private val get16MethodBind: CPointer<godot_method_bind> by lazy { getMB("_File", "get_16") }
-    open fun get16(): Int {
-        return _icall_Int(get16MethodBind, this.rawMemory)
+    open fun get16(): Long {
+        return _icall_Long(get16MethodBind, this.rawMemory)
     }
 
 
     private val get32MethodBind: CPointer<godot_method_bind> by lazy { getMB("_File", "get_32") }
-    open fun get32(): Int {
-        return _icall_Int(get32MethodBind, this.rawMemory)
+    open fun get32(): Long {
+        return _icall_Long(get32MethodBind, this.rawMemory)
     }
 
 
     private val get64MethodBind: CPointer<godot_method_bind> by lazy { getMB("_File", "get_64") }
-    open fun get64(): Int {
-        return _icall_Int(get64MethodBind, this.rawMemory)
+    open fun get64(): Long {
+        return _icall_Long(get64MethodBind, this.rawMemory)
     }
 
 
     private val getFloatMethodBind: CPointer<godot_method_bind> by lazy { getMB("_File", "get_float") }
-    open fun getFloat(): Float {
-        return _icall_Float(getFloatMethodBind, this.rawMemory)
+    open fun getFloat(): Double {
+        return _icall_Double(getFloatMethodBind, this.rawMemory)
     }
 
 
     private val getDoubleMethodBind: CPointer<godot_method_bind> by lazy { getMB("_File", "get_double") }
-    open fun getDouble(): Float {
-        return _icall_Float(getDoubleMethodBind, this.rawMemory)
+    open fun getDouble(): Double {
+        return _icall_Double(getDoubleMethodBind, this.rawMemory)
     }
 
 
     private val getRealMethodBind: CPointer<godot_method_bind> by lazy { getMB("_File", "get_real") }
-    open fun getReal(): Float {
-        return _icall_Float(getRealMethodBind, this.rawMemory)
+    open fun getReal(): Double {
+        return _icall_Double(getRealMethodBind, this.rawMemory)
     }
 
 
     private val getBufferMethodBind: CPointer<godot_method_bind> by lazy { getMB("_File", "get_buffer") }
-    open fun getBuffer(len: Int): PoolByteArray {
-        return _icall_PoolByteArray_Int(getBufferMethodBind, this.rawMemory, len)
+    open fun getBuffer(len: Long): PoolByteArray {
+        return _icall_PoolByteArray_Long(getBufferMethodBind, this.rawMemory, len)
     }
 
 
@@ -243,7 +243,7 @@ open class File : Reference {
 
     private val getErrorMethodBind: CPointer<godot_method_bind> by lazy { getMB("_File", "get_error") }
     open fun getError(): GodotError {
-        return GodotError.fromInt(_icall_Int(getErrorMethodBind, this.rawMemory))
+        return GodotError.fromInt(_icall_Long(getErrorMethodBind, this.rawMemory))
     }
 
 
@@ -260,44 +260,44 @@ open class File : Reference {
 
 
     private val store8MethodBind: CPointer<godot_method_bind> by lazy { getMB("_File", "store_8") }
-    open fun store8(value: Int) {
-        _icall_Unit_Int(store8MethodBind, this.rawMemory, value)
+    open fun store8(value: Long) {
+        _icall_Unit_Long(store8MethodBind, this.rawMemory, value)
     }
 
 
     private val store16MethodBind: CPointer<godot_method_bind> by lazy { getMB("_File", "store_16") }
-    open fun store16(value: Int) {
-        _icall_Unit_Int(store16MethodBind, this.rawMemory, value)
+    open fun store16(value: Long) {
+        _icall_Unit_Long(store16MethodBind, this.rawMemory, value)
     }
 
 
     private val store32MethodBind: CPointer<godot_method_bind> by lazy { getMB("_File", "store_32") }
-    open fun store32(value: Int) {
-        _icall_Unit_Int(store32MethodBind, this.rawMemory, value)
+    open fun store32(value: Long) {
+        _icall_Unit_Long(store32MethodBind, this.rawMemory, value)
     }
 
 
     private val store64MethodBind: CPointer<godot_method_bind> by lazy { getMB("_File", "store_64") }
-    open fun store64(value: Int) {
-        _icall_Unit_Int(store64MethodBind, this.rawMemory, value)
+    open fun store64(value: Long) {
+        _icall_Unit_Long(store64MethodBind, this.rawMemory, value)
     }
 
 
     private val storeFloatMethodBind: CPointer<godot_method_bind> by lazy { getMB("_File", "store_float") }
-    open fun storeFloat(value: Float) {
-        _icall_Unit_Float(storeFloatMethodBind, this.rawMemory, value)
+    open fun storeFloat(value: Double) {
+        _icall_Unit_Double(storeFloatMethodBind, this.rawMemory, value)
     }
 
 
     private val storeDoubleMethodBind: CPointer<godot_method_bind> by lazy { getMB("_File", "store_double") }
-    open fun storeDouble(value: Float) {
-        _icall_Unit_Float(storeDoubleMethodBind, this.rawMemory, value)
+    open fun storeDouble(value: Double) {
+        _icall_Unit_Double(storeDoubleMethodBind, this.rawMemory, value)
     }
 
 
     private val storeRealMethodBind: CPointer<godot_method_bind> by lazy { getMB("_File", "store_real") }
-    open fun storeReal(value: Float) {
-        _icall_Unit_Float(storeRealMethodBind, this.rawMemory, value)
+    open fun storeReal(value: Double) {
+        _icall_Unit_Double(storeRealMethodBind, this.rawMemory, value)
     }
 
 
@@ -344,8 +344,8 @@ open class File : Reference {
 
 
     private val getModifiedTimeMethodBind: CPointer<godot_method_bind> by lazy { getMB("_File", "get_modified_time") }
-    open fun getModifiedTime(file: String): Int {
-        return _icall_Int_String(getModifiedTimeMethodBind, this.rawMemory, file)
+    open fun getModifiedTime(file: String): Long {
+        return _icall_Long_String(getModifiedTimeMethodBind, this.rawMemory, file)
     }
 
 

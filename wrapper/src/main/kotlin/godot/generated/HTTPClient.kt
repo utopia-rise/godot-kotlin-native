@@ -19,7 +19,7 @@ open class HTTPClient : Reference {
 
     // Enums 
 
-    enum class Status(val id: Int) {
+    enum class Status(val id: Long) {
         STATUS_DISCONNECTED(0),
         STATUS_RESOLVING(1),
         STATUS_CANT_RESOLVE(2),
@@ -33,10 +33,10 @@ open class HTTPClient : Reference {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class Method(val id: Int) {
+    enum class Method(val id: Long) {
         METHOD_GET(0),
         METHOD_HEAD(1),
         METHOD_POST(2),
@@ -50,10 +50,10 @@ open class HTTPClient : Reference {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class ResponseCode(val id: Int) {
+    enum class ResponseCode(val id: Long) {
         RESPONSE_CONTINUE(100),
         RESPONSE_SWITCHING_PROTOCOLS(101),
         RESPONSE_PROCESSING(102),
@@ -118,7 +118,7 @@ open class HTTPClient : Reference {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -137,87 +137,87 @@ open class HTTPClient : Reference {
 
 
         // Constants
-        const val METHOD_GET: Int = 0
-        const val METHOD_HEAD: Int = 1
-        const val METHOD_POST: Int = 2
-        const val METHOD_PUT: Int = 3
-        const val METHOD_DELETE: Int = 4
-        const val METHOD_OPTIONS: Int = 5
-        const val METHOD_TRACE: Int = 6
-        const val METHOD_CONNECT: Int = 7
-        const val METHOD_PATCH: Int = 8
-        const val METHOD_MAX: Int = 9
-        const val STATUS_DISCONNECTED: Int = 0
-        const val STATUS_RESOLVING: Int = 1
-        const val STATUS_CANT_RESOLVE: Int = 2
-        const val STATUS_CONNECTING: Int = 3
-        const val STATUS_CANT_CONNECT: Int = 4
-        const val STATUS_CONNECTED: Int = 5
-        const val STATUS_REQUESTING: Int = 6
-        const val STATUS_BODY: Int = 7
-        const val STATUS_CONNECTION_ERROR: Int = 8
-        const val STATUS_SSL_HANDSHAKE_ERROR: Int = 9
-        const val RESPONSE_CONTINUE: Int = 100
-        const val RESPONSE_SWITCHING_PROTOCOLS: Int = 101
-        const val RESPONSE_PROCESSING: Int = 102
-        const val RESPONSE_OK: Int = 200
-        const val RESPONSE_CREATED: Int = 201
-        const val RESPONSE_ACCEPTED: Int = 202
-        const val RESPONSE_NON_AUTHORITATIVE_INFORMATION: Int = 203
-        const val RESPONSE_NO_CONTENT: Int = 204
-        const val RESPONSE_RESET_CONTENT: Int = 205
-        const val RESPONSE_PARTIAL_CONTENT: Int = 206
-        const val RESPONSE_MULTI_STATUS: Int = 207
-        const val RESPONSE_ALREADY_REPORTED: Int = 208
-        const val RESPONSE_IM_USED: Int = 226
-        const val RESPONSE_MULTIPLE_CHOICES: Int = 300
-        const val RESPONSE_MOVED_PERMANENTLY: Int = 301
-        const val RESPONSE_FOUND: Int = 302
-        const val RESPONSE_SEE_OTHER: Int = 303
-        const val RESPONSE_NOT_MODIFIED: Int = 304
-        const val RESPONSE_USE_PROXY: Int = 305
-        const val RESPONSE_SWITCH_PROXY: Int = 306
-        const val RESPONSE_TEMPORARY_REDIRECT: Int = 307
-        const val RESPONSE_PERMANENT_REDIRECT: Int = 308
-        const val RESPONSE_BAD_REQUEST: Int = 400
-        const val RESPONSE_UNAUTHORIZED: Int = 401
-        const val RESPONSE_PAYMENT_REQUIRED: Int = 402
-        const val RESPONSE_FORBIDDEN: Int = 403
-        const val RESPONSE_NOT_FOUND: Int = 404
-        const val RESPONSE_METHOD_NOT_ALLOWED: Int = 405
-        const val RESPONSE_NOT_ACCEPTABLE: Int = 406
-        const val RESPONSE_PROXY_AUTHENTICATION_REQUIRED: Int = 407
-        const val RESPONSE_REQUEST_TIMEOUT: Int = 408
-        const val RESPONSE_CONFLICT: Int = 409
-        const val RESPONSE_GONE: Int = 410
-        const val RESPONSE_LENGTH_REQUIRED: Int = 411
-        const val RESPONSE_PRECONDITION_FAILED: Int = 412
-        const val RESPONSE_REQUEST_ENTITY_TOO_LARGE: Int = 413
-        const val RESPONSE_REQUEST_URI_TOO_LONG: Int = 414
-        const val RESPONSE_UNSUPPORTED_MEDIA_TYPE: Int = 415
-        const val RESPONSE_REQUESTED_RANGE_NOT_SATISFIABLE: Int = 416
-        const val RESPONSE_EXPECTATION_FAILED: Int = 417
-        const val RESPONSE_IM_A_TEAPOT: Int = 418
-        const val RESPONSE_MISDIRECTED_REQUEST: Int = 421
-        const val RESPONSE_UNPROCESSABLE_ENTITY: Int = 422
-        const val RESPONSE_LOCKED: Int = 423
-        const val RESPONSE_FAILED_DEPENDENCY: Int = 424
-        const val RESPONSE_UPGRADE_REQUIRED: Int = 426
-        const val RESPONSE_PRECONDITION_REQUIRED: Int = 428
-        const val RESPONSE_TOO_MANY_REQUESTS: Int = 429
-        const val RESPONSE_REQUEST_HEADER_FIELDS_TOO_LARGE: Int = 431
-        const val RESPONSE_UNAVAILABLE_FOR_LEGAL_REASONS: Int = 451
-        const val RESPONSE_INTERNAL_SERVER_ERROR: Int = 500
-        const val RESPONSE_NOT_IMPLEMENTED: Int = 501
-        const val RESPONSE_BAD_GATEWAY: Int = 502
-        const val RESPONSE_SERVICE_UNAVAILABLE: Int = 503
-        const val RESPONSE_GATEWAY_TIMEOUT: Int = 504
-        const val RESPONSE_HTTP_VERSION_NOT_SUPPORTED: Int = 505
-        const val RESPONSE_VARIANT_ALSO_NEGOTIATES: Int = 506
-        const val RESPONSE_INSUFFICIENT_STORAGE: Int = 507
-        const val RESPONSE_LOOP_DETECTED: Int = 508
-        const val RESPONSE_NOT_EXTENDED: Int = 510
-        const val RESPONSE_NETWORK_AUTH_REQUIRED: Int = 511
+        const val METHOD_GET: Long = 0
+        const val METHOD_HEAD: Long = 1
+        const val METHOD_POST: Long = 2
+        const val METHOD_PUT: Long = 3
+        const val METHOD_DELETE: Long = 4
+        const val METHOD_OPTIONS: Long = 5
+        const val METHOD_TRACE: Long = 6
+        const val METHOD_CONNECT: Long = 7
+        const val METHOD_PATCH: Long = 8
+        const val METHOD_MAX: Long = 9
+        const val STATUS_DISCONNECTED: Long = 0
+        const val STATUS_RESOLVING: Long = 1
+        const val STATUS_CANT_RESOLVE: Long = 2
+        const val STATUS_CONNECTING: Long = 3
+        const val STATUS_CANT_CONNECT: Long = 4
+        const val STATUS_CONNECTED: Long = 5
+        const val STATUS_REQUESTING: Long = 6
+        const val STATUS_BODY: Long = 7
+        const val STATUS_CONNECTION_ERROR: Long = 8
+        const val STATUS_SSL_HANDSHAKE_ERROR: Long = 9
+        const val RESPONSE_CONTINUE: Long = 100
+        const val RESPONSE_SWITCHING_PROTOCOLS: Long = 101
+        const val RESPONSE_PROCESSING: Long = 102
+        const val RESPONSE_OK: Long = 200
+        const val RESPONSE_CREATED: Long = 201
+        const val RESPONSE_ACCEPTED: Long = 202
+        const val RESPONSE_NON_AUTHORITATIVE_INFORMATION: Long = 203
+        const val RESPONSE_NO_CONTENT: Long = 204
+        const val RESPONSE_RESET_CONTENT: Long = 205
+        const val RESPONSE_PARTIAL_CONTENT: Long = 206
+        const val RESPONSE_MULTI_STATUS: Long = 207
+        const val RESPONSE_ALREADY_REPORTED: Long = 208
+        const val RESPONSE_IM_USED: Long = 226
+        const val RESPONSE_MULTIPLE_CHOICES: Long = 300
+        const val RESPONSE_MOVED_PERMANENTLY: Long = 301
+        const val RESPONSE_FOUND: Long = 302
+        const val RESPONSE_SEE_OTHER: Long = 303
+        const val RESPONSE_NOT_MODIFIED: Long = 304
+        const val RESPONSE_USE_PROXY: Long = 305
+        const val RESPONSE_SWITCH_PROXY: Long = 306
+        const val RESPONSE_TEMPORARY_REDIRECT: Long = 307
+        const val RESPONSE_PERMANENT_REDIRECT: Long = 308
+        const val RESPONSE_BAD_REQUEST: Long = 400
+        const val RESPONSE_UNAUTHORIZED: Long = 401
+        const val RESPONSE_PAYMENT_REQUIRED: Long = 402
+        const val RESPONSE_FORBIDDEN: Long = 403
+        const val RESPONSE_NOT_FOUND: Long = 404
+        const val RESPONSE_METHOD_NOT_ALLOWED: Long = 405
+        const val RESPONSE_NOT_ACCEPTABLE: Long = 406
+        const val RESPONSE_PROXY_AUTHENTICATION_REQUIRED: Long = 407
+        const val RESPONSE_REQUEST_TIMEOUT: Long = 408
+        const val RESPONSE_CONFLICT: Long = 409
+        const val RESPONSE_GONE: Long = 410
+        const val RESPONSE_LENGTH_REQUIRED: Long = 411
+        const val RESPONSE_PRECONDITION_FAILED: Long = 412
+        const val RESPONSE_REQUEST_ENTITY_TOO_LARGE: Long = 413
+        const val RESPONSE_REQUEST_URI_TOO_LONG: Long = 414
+        const val RESPONSE_UNSUPPORTED_MEDIA_TYPE: Long = 415
+        const val RESPONSE_REQUESTED_RANGE_NOT_SATISFIABLE: Long = 416
+        const val RESPONSE_EXPECTATION_FAILED: Long = 417
+        const val RESPONSE_IM_A_TEAPOT: Long = 418
+        const val RESPONSE_MISDIRECTED_REQUEST: Long = 421
+        const val RESPONSE_UNPROCESSABLE_ENTITY: Long = 422
+        const val RESPONSE_LOCKED: Long = 423
+        const val RESPONSE_FAILED_DEPENDENCY: Long = 424
+        const val RESPONSE_UPGRADE_REQUIRED: Long = 426
+        const val RESPONSE_PRECONDITION_REQUIRED: Long = 428
+        const val RESPONSE_TOO_MANY_REQUESTS: Long = 429
+        const val RESPONSE_REQUEST_HEADER_FIELDS_TOO_LARGE: Long = 431
+        const val RESPONSE_UNAVAILABLE_FOR_LEGAL_REASONS: Long = 451
+        const val RESPONSE_INTERNAL_SERVER_ERROR: Long = 500
+        const val RESPONSE_NOT_IMPLEMENTED: Long = 501
+        const val RESPONSE_BAD_GATEWAY: Long = 502
+        const val RESPONSE_SERVICE_UNAVAILABLE: Long = 503
+        const val RESPONSE_GATEWAY_TIMEOUT: Long = 504
+        const val RESPONSE_HTTP_VERSION_NOT_SUPPORTED: Long = 505
+        const val RESPONSE_VARIANT_ALSO_NEGOTIATES: Long = 506
+        const val RESPONSE_INSUFFICIENT_STORAGE: Long = 507
+        const val RESPONSE_LOOP_DETECTED: Long = 508
+        const val RESPONSE_NOT_EXTENDED: Long = 510
+        const val RESPONSE_NETWORK_AUTH_REQUIRED: Long = 511
 
 
     }
@@ -238,8 +238,8 @@ open class HTTPClient : Reference {
 
     // Methods
     private val connectToHostMethodBind: CPointer<godot_method_bind> by lazy { getMB("HTTPClient", "connect_to_host") }
-    open fun connectToHost(host: String, port: Int = -1, useSsl: Boolean = false, verifyHost: Boolean = true): GodotError {
-        return GodotError.fromInt(_icall_Int_String_Int_Boolean_Boolean(connectToHostMethodBind, this.rawMemory, host, port, useSsl, verifyHost))
+    open fun connectToHost(host: String, port: Long = -1, useSsl: Boolean = false, verifyHost: Boolean = true): GodotError {
+        return GodotError.fromInt(_icall_Long_String_Long_Boolean_Boolean(connectToHostMethodBind, this.rawMemory, host, port, useSsl, verifyHost))
     }
 
 
@@ -256,14 +256,14 @@ open class HTTPClient : Reference {
 
 
     private val requestRawMethodBind: CPointer<godot_method_bind> by lazy { getMB("HTTPClient", "request_raw") }
-    open fun requestRaw(method: Int, url: String, headers: PoolStringArray, body: PoolByteArray): GodotError {
-        return GodotError.fromInt(_icall_Int_Int_String_PoolStringArray_PoolByteArray(requestRawMethodBind, this.rawMemory, method, url, headers, body))
+    open fun requestRaw(method: Long, url: String, headers: PoolStringArray, body: PoolByteArray): GodotError {
+        return GodotError.fromInt(_icall_Long_Long_String_PoolStringArray_PoolByteArray(requestRawMethodBind, this.rawMemory, method, url, headers, body))
     }
 
 
     private val requestMethodBind: CPointer<godot_method_bind> by lazy { getMB("HTTPClient", "request") }
-    open fun request(method: Int, url: String, headers: PoolStringArray, body: String = ""): GodotError {
-        return GodotError.fromInt(_icall_Int_Int_String_PoolStringArray_String(requestMethodBind, this.rawMemory, method, url, headers, body))
+    open fun request(method: Long, url: String, headers: PoolStringArray, body: String = ""): GodotError {
+        return GodotError.fromInt(_icall_Long_Long_String_PoolStringArray_String(requestMethodBind, this.rawMemory, method, url, headers, body))
     }
 
 
@@ -286,8 +286,8 @@ open class HTTPClient : Reference {
 
 
     private val getResponseCodeMethodBind: CPointer<godot_method_bind> by lazy { getMB("HTTPClient", "get_response_code") }
-    open fun getResponseCode(): Int {
-        return _icall_Int(getResponseCodeMethodBind, this.rawMemory)
+    open fun getResponseCode(): Long {
+        return _icall_Long(getResponseCodeMethodBind, this.rawMemory)
     }
 
 
@@ -304,8 +304,8 @@ open class HTTPClient : Reference {
 
 
     private val getResponseBodyLengthMethodBind: CPointer<godot_method_bind> by lazy { getMB("HTTPClient", "get_response_body_length") }
-    open fun getResponseBodyLength(): Int {
-        return _icall_Int(getResponseBodyLengthMethodBind, this.rawMemory)
+    open fun getResponseBodyLength(): Long {
+        return _icall_Long(getResponseBodyLengthMethodBind, this.rawMemory)
     }
 
 
@@ -316,8 +316,8 @@ open class HTTPClient : Reference {
 
 
     private val setReadChunkSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("HTTPClient", "set_read_chunk_size") }
-    open fun setReadChunkSize(bytes: Int) {
-        _icall_Unit_Int(setReadChunkSizeMethodBind, this.rawMemory, bytes)
+    open fun setReadChunkSize(bytes: Long) {
+        _icall_Unit_Long(setReadChunkSizeMethodBind, this.rawMemory, bytes)
     }
 
 
@@ -335,13 +335,13 @@ open class HTTPClient : Reference {
 
     private val getStatusMethodBind: CPointer<godot_method_bind> by lazy { getMB("HTTPClient", "get_status") }
     open fun getStatus(): HTTPClient.Status {
-        return HTTPClient.Status.fromInt(_icall_Int(getStatusMethodBind, this.rawMemory))
+        return HTTPClient.Status.fromInt(_icall_Long(getStatusMethodBind, this.rawMemory))
     }
 
 
     private val pollMethodBind: CPointer<godot_method_bind> by lazy { getMB("HTTPClient", "poll") }
     open fun poll(): GodotError {
-        return GodotError.fromInt(_icall_Int(pollMethodBind, this.rawMemory))
+        return GodotError.fromInt(_icall_Long(pollMethodBind, this.rawMemory))
     }
 
 

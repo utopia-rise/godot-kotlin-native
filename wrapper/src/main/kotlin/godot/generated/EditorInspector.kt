@@ -87,7 +87,7 @@ open class EditorInspector : ScrollContainer {
     }
 
 
-    open fun _property_selected(arg0: String, arg1: Int) {
+    open fun _property_selected(arg0: String, arg1: Long) {
     }
 
 
@@ -95,7 +95,7 @@ open class EditorInspector : ScrollContainer {
     }
 
 
-    open fun _object_id_selected(arg0: String, arg1: Int) {
+    open fun _object_id_selected(arg0: String, arg1: Long) {
     }
 
 

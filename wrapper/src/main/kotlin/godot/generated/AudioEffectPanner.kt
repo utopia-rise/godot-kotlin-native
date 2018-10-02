@@ -43,23 +43,23 @@ open class AudioEffectPanner : AudioEffect {
 
 
     // Properties
-    open var pan: Float
-        get() = _icall_Float(getPanMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setPanMethodBind, this.rawMemory, value)
+    open var pan: Double
+        get() = _icall_Double(getPanMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setPanMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setPanMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectPanner", "set_pan") }
-    open fun setPan(cpanume: Float) {
-        _icall_Unit_Float(setPanMethodBind, this.rawMemory, cpanume)
+    open fun setPan(cpanume: Double) {
+        _icall_Unit_Double(setPanMethodBind, this.rawMemory, cpanume)
     }
 
 
     private val getPanMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectPanner", "get_pan") }
-    open fun getPan(): Float {
-        return _icall_Float(getPanMethodBind, this.rawMemory)
+    open fun getPan(): Double {
+        return _icall_Double(getPanMethodBind, this.rawMemory)
     }
 
 

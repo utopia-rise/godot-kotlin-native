@@ -19,7 +19,7 @@ open class Performance : Object {
 
     // Enums 
 
-    enum class Monitor(val id: Int) {
+    enum class Monitor(val id: Long) {
         TIME_FPS(0),
         TIME_PROCESS(1),
         TIME_PHYSICS_PROCESS(2),
@@ -52,7 +52,7 @@ open class Performance : Object {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -70,35 +70,35 @@ open class Performance : Object {
 
 
         // Constants
-        const val TIME_FPS: Int = 0
-        const val TIME_PROCESS: Int = 1
-        const val TIME_PHYSICS_PROCESS: Int = 2
-        const val MEMORY_STATIC: Int = 3
-        const val MEMORY_DYNAMIC: Int = 4
-        const val MEMORY_STATIC_MAX: Int = 5
-        const val MEMORY_DYNAMIC_MAX: Int = 6
-        const val MEMORY_MESSAGE_BUFFER_MAX: Int = 7
-        const val OBJECT_COUNT: Int = 8
-        const val OBJECT_RESOURCE_COUNT: Int = 9
-        const val OBJECT_NODE_COUNT: Int = 10
-        const val RENDER_OBJECTS_IN_FRAME: Int = 11
-        const val RENDER_VERTICES_IN_FRAME: Int = 12
-        const val RENDER_MATERIAL_CHANGES_IN_FRAME: Int = 13
-        const val RENDER_SHADER_CHANGES_IN_FRAME: Int = 14
-        const val RENDER_SURFACE_CHANGES_IN_FRAME: Int = 15
-        const val RENDER_DRAW_CALLS_IN_FRAME: Int = 16
-        const val RENDER_VIDEO_MEM_USED: Int = 17
-        const val RENDER_TEXTURE_MEM_USED: Int = 18
-        const val RENDER_VERTEX_MEM_USED: Int = 19
-        const val RENDER_USAGE_VIDEO_MEM_TOTAL: Int = 20
-        const val PHYSICS_2D_ACTIVE_OBJECTS: Int = 21
-        const val PHYSICS_2D_COLLISION_PAIRS: Int = 22
-        const val PHYSICS_2D_ISLAND_COUNT: Int = 23
-        const val PHYSICS_3D_ACTIVE_OBJECTS: Int = 24
-        const val PHYSICS_3D_COLLISION_PAIRS: Int = 25
-        const val PHYSICS_3D_ISLAND_COUNT: Int = 26
-        const val AUDIO_OUTPUT_LATENCY: Int = 27
-        const val MONITOR_MAX: Int = 28
+        const val TIME_FPS: Long = 0
+        const val TIME_PROCESS: Long = 1
+        const val TIME_PHYSICS_PROCESS: Long = 2
+        const val MEMORY_STATIC: Long = 3
+        const val MEMORY_DYNAMIC: Long = 4
+        const val MEMORY_STATIC_MAX: Long = 5
+        const val MEMORY_DYNAMIC_MAX: Long = 6
+        const val MEMORY_MESSAGE_BUFFER_MAX: Long = 7
+        const val OBJECT_COUNT: Long = 8
+        const val OBJECT_RESOURCE_COUNT: Long = 9
+        const val OBJECT_NODE_COUNT: Long = 10
+        const val RENDER_OBJECTS_IN_FRAME: Long = 11
+        const val RENDER_VERTICES_IN_FRAME: Long = 12
+        const val RENDER_MATERIAL_CHANGES_IN_FRAME: Long = 13
+        const val RENDER_SHADER_CHANGES_IN_FRAME: Long = 14
+        const val RENDER_SURFACE_CHANGES_IN_FRAME: Long = 15
+        const val RENDER_DRAW_CALLS_IN_FRAME: Long = 16
+        const val RENDER_VIDEO_MEM_USED: Long = 17
+        const val RENDER_TEXTURE_MEM_USED: Long = 18
+        const val RENDER_VERTEX_MEM_USED: Long = 19
+        const val RENDER_USAGE_VIDEO_MEM_TOTAL: Long = 20
+        const val PHYSICS_2D_ACTIVE_OBJECTS: Long = 21
+        const val PHYSICS_2D_COLLISION_PAIRS: Long = 22
+        const val PHYSICS_2D_ISLAND_COUNT: Long = 23
+        const val PHYSICS_3D_ACTIVE_OBJECTS: Long = 24
+        const val PHYSICS_3D_COLLISION_PAIRS: Long = 25
+        const val PHYSICS_3D_ISLAND_COUNT: Long = 26
+        const val AUDIO_OUTPUT_LATENCY: Long = 27
+        const val MONITOR_MAX: Long = 28
 
 
         private val rawMemory: COpaquePointer by lazy { getSingleton("Performance", "Performance") }
@@ -109,8 +109,8 @@ open class Performance : Object {
 
         // Methods
         private val getMonitorMethodBind: CPointer<godot_method_bind> by lazy { getMB("Performance", "get_monitor") }
-        fun getMonitor(monitor: Int): Float {
-            return _icall_Float_Int(getMonitorMethodBind, this.rawMemory, monitor)
+        fun getMonitor(monitor: Long): Double {
+            return _icall_Double_Long(getMonitorMethodBind, this.rawMemory, monitor)
         }
 
 

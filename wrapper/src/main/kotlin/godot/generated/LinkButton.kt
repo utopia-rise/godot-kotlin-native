@@ -19,14 +19,14 @@ open class LinkButton : BaseButton {
 
     // Enums 
 
-    enum class UnderlineMode(val id: Int) {
+    enum class UnderlineMode(val id: Long) {
         UNDERLINE_MODE_ALWAYS(0),
         UNDERLINE_MODE_ON_HOVER(1),
         UNDERLINE_MODE_NEVER(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -48,9 +48,9 @@ open class LinkButton : BaseButton {
 
 
         // Constants
-        const val UNDERLINE_MODE_ALWAYS: Int = 0
-        const val UNDERLINE_MODE_ON_HOVER: Int = 1
-        const val UNDERLINE_MODE_NEVER: Int = 2
+        const val UNDERLINE_MODE_ALWAYS: Long = 0
+        const val UNDERLINE_MODE_ON_HOVER: Long = 1
+        const val UNDERLINE_MODE_NEVER: Long = 2
 
 
     }
@@ -62,9 +62,9 @@ open class LinkButton : BaseButton {
         set(value) = _icall_Unit_String(setTextMethodBind, this.rawMemory, value)
 
 
-    open var underline: Int
-        get() = _icall_Int(getUnderlineModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setUnderlineModeMethodBind, this.rawMemory, value)
+    open var underline: Long
+        get() = _icall_Long(getUnderlineModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setUnderlineModeMethodBind, this.rawMemory, value)
 
 
 
@@ -83,14 +83,14 @@ open class LinkButton : BaseButton {
 
 
     private val setUnderlineModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("LinkButton", "set_underline_mode") }
-    open fun setUnderlineMode(underlineMode: Int) {
-        _icall_Unit_Int(setUnderlineModeMethodBind, this.rawMemory, underlineMode)
+    open fun setUnderlineMode(underlineMode: Long) {
+        _icall_Unit_Long(setUnderlineModeMethodBind, this.rawMemory, underlineMode)
     }
 
 
     private val getUnderlineModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("LinkButton", "get_underline_mode") }
     open fun getUnderlineMode(): LinkButton.UnderlineMode {
-        return LinkButton.UnderlineMode.fromInt(_icall_Int(getUnderlineModeMethodBind, this.rawMemory))
+        return LinkButton.UnderlineMode.fromInt(_icall_Long(getUnderlineModeMethodBind, this.rawMemory))
     }
 
 

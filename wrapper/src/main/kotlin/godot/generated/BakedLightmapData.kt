@@ -60,14 +60,14 @@ open class BakedLightmapData : Resource {
     }
 
 
-    open var cellSubdiv: Int
-        get() = _icall_Int(getCellSubdivMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setCellSubdivMethodBind, this.rawMemory, value)
+    open var cellSubdiv: Long
+        get() = _icall_Long(getCellSubdivMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setCellSubdivMethodBind, this.rawMemory, value)
 
 
-    open var energy: Float
-        get() = _icall_Float(getEnergyMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setEnergyMethodBind, this.rawMemory, value)
+    open var energy: Double
+        get() = _icall_Double(getEnergyMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setEnergyMethodBind, this.rawMemory, value)
 
 
     open var octree: PoolByteArray
@@ -112,14 +112,14 @@ open class BakedLightmapData : Resource {
 
 
     private val setCellSubdivMethodBind: CPointer<godot_method_bind> by lazy { getMB("BakedLightmapData", "set_cell_subdiv") }
-    open fun setCellSubdiv(cellSubdiv: Int) {
-        _icall_Unit_Int(setCellSubdivMethodBind, this.rawMemory, cellSubdiv)
+    open fun setCellSubdiv(cellSubdiv: Long) {
+        _icall_Unit_Long(setCellSubdivMethodBind, this.rawMemory, cellSubdiv)
     }
 
 
     private val getCellSubdivMethodBind: CPointer<godot_method_bind> by lazy { getMB("BakedLightmapData", "get_cell_subdiv") }
-    open fun getCellSubdiv(): Int {
-        return _icall_Int(getCellSubdivMethodBind, this.rawMemory)
+    open fun getCellSubdiv(): Long {
+        return _icall_Long(getCellSubdivMethodBind, this.rawMemory)
     }
 
 
@@ -136,38 +136,38 @@ open class BakedLightmapData : Resource {
 
 
     private val setEnergyMethodBind: CPointer<godot_method_bind> by lazy { getMB("BakedLightmapData", "set_energy") }
-    open fun setEnergy(energy: Float) {
-        _icall_Unit_Float(setEnergyMethodBind, this.rawMemory, energy)
+    open fun setEnergy(energy: Double) {
+        _icall_Unit_Double(setEnergyMethodBind, this.rawMemory, energy)
     }
 
 
     private val getEnergyMethodBind: CPointer<godot_method_bind> by lazy { getMB("BakedLightmapData", "get_energy") }
-    open fun getEnergy(): Float {
-        return _icall_Float(getEnergyMethodBind, this.rawMemory)
+    open fun getEnergy(): Double {
+        return _icall_Double(getEnergyMethodBind, this.rawMemory)
     }
 
 
     private val addUserMethodBind: CPointer<godot_method_bind> by lazy { getMB("BakedLightmapData", "add_user") }
-    open fun addUser(path: NodePath, lightmap: Texture, instance: Int) {
-        _icall_Unit_NodePath_Object_Int(addUserMethodBind, this.rawMemory, path, lightmap, instance)
+    open fun addUser(path: NodePath, lightmap: Texture, instance: Long) {
+        _icall_Unit_NodePath_Object_Long(addUserMethodBind, this.rawMemory, path, lightmap, instance)
     }
 
 
     private val getUserCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("BakedLightmapData", "get_user_count") }
-    open fun getUserCount(): Int {
-        return _icall_Int(getUserCountMethodBind, this.rawMemory)
+    open fun getUserCount(): Long {
+        return _icall_Long(getUserCountMethodBind, this.rawMemory)
     }
 
 
     private val getUserPathMethodBind: CPointer<godot_method_bind> by lazy { getMB("BakedLightmapData", "get_user_path") }
-    open fun getUserPath(userIdx: Int): NodePath {
-        return _icall_NodePath_Int(getUserPathMethodBind, this.rawMemory, userIdx)
+    open fun getUserPath(userIdx: Long): NodePath {
+        return _icall_NodePath_Long(getUserPathMethodBind, this.rawMemory, userIdx)
     }
 
 
     private val getUserLightmapMethodBind: CPointer<godot_method_bind> by lazy { getMB("BakedLightmapData", "get_user_lightmap") }
-    open fun getUserLightmap(userIdx: Int): Texture {
-        return _icall_Texture_Int(getUserLightmapMethodBind, this.rawMemory, userIdx)
+    open fun getUserLightmap(userIdx: Long): Texture {
+        return _icall_Texture_Long(getUserLightmapMethodBind, this.rawMemory, userIdx)
     }
 
 

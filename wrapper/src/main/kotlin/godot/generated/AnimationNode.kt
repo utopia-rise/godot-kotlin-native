@@ -19,7 +19,7 @@ open class AnimationNode : Resource {
 
     // Enums 
 
-    enum class FilterAction(val id: Int) {
+    enum class FilterAction(val id: Long) {
         FILTER_IGNORE(0),
         FILTER_PASS(1),
         FILTER_STOP(2),
@@ -27,7 +27,7 @@ open class AnimationNode : Resource {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -48,10 +48,10 @@ open class AnimationNode : Resource {
 
 
         // Constants
-        const val FILTER_IGNORE: Int = 0
-        const val FILTER_PASS: Int = 1
-        const val FILTER_STOP: Int = 2
-        const val FILTER_BLEND: Int = 3
+        const val FILTER_IGNORE: Long = 0
+        const val FILTER_PASS: Long = 1
+        const val FILTER_STOP: Long = 2
+        const val FILTER_BLEND: Long = 3
 
 
     }
@@ -66,7 +66,7 @@ open class AnimationNode : Resource {
 
 
     // Methods
-    open fun process(time: Float, seek: Boolean) {
+    open fun process(time: Double, seek: Boolean) {
     }
 
 
@@ -85,26 +85,26 @@ open class AnimationNode : Resource {
 
 
     private val getInputCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationNode", "get_input_count") }
-    open fun getInputCount(): Int {
-        return _icall_Int(getInputCountMethodBind, this.rawMemory)
+    open fun getInputCount(): Long {
+        return _icall_Long(getInputCountMethodBind, this.rawMemory)
     }
 
 
     private val getInputNameMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationNode", "get_input_name") }
-    open fun getInputName(input: Int): String {
-        return _icall_String_Int(getInputNameMethodBind, this.rawMemory, input)
+    open fun getInputName(input: Long): String {
+        return _icall_String_Long(getInputNameMethodBind, this.rawMemory, input)
     }
 
 
     private val getInputConnectionMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationNode", "get_input_connection") }
-    open fun getInputConnection(input: Int): String {
-        return _icall_String_Int(getInputConnectionMethodBind, this.rawMemory, input)
+    open fun getInputConnection(input: Long): String {
+        return _icall_String_Long(getInputConnectionMethodBind, this.rawMemory, input)
     }
 
 
     private val getInputActivityMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationNode", "get_input_activity") }
-    open fun getInputActivity(input: Int): Float {
-        return _icall_Float_Int(getInputActivityMethodBind, this.rawMemory, input)
+    open fun getInputActivity(input: Long): Double {
+        return _icall_Double_Long(getInputActivityMethodBind, this.rawMemory, input)
     }
 
 
@@ -115,8 +115,8 @@ open class AnimationNode : Resource {
 
 
     private val removeInputMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationNode", "remove_input") }
-    open fun removeInput(index: Int) {
-        _icall_Unit_Int(removeInputMethodBind, this.rawMemory, index)
+    open fun removeInput(index: Long) {
+        _icall_Unit_Long(removeInputMethodBind, this.rawMemory, index)
     }
 
 
@@ -166,20 +166,20 @@ open class AnimationNode : Resource {
 
 
     private val blendAnimationMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationNode", "blend_animation") }
-    open fun blendAnimation(animation: String, time: Float, delta: Float, seeked: Boolean, blend: Float) {
-        _icall_Unit_String_Float_Float_Boolean_Float(blendAnimationMethodBind, this.rawMemory, animation, time, delta, seeked, blend)
+    open fun blendAnimation(animation: String, time: Double, delta: Double, seeked: Boolean, blend: Double) {
+        _icall_Unit_String_Double_Double_Boolean_Double(blendAnimationMethodBind, this.rawMemory, animation, time, delta, seeked, blend)
     }
 
 
     private val blendNodeMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationNode", "blend_node") }
-    open fun blendNode(node: AnimationNode, time: Float, seek: Boolean, blend: Float, filter: Int = 0, optimize: Boolean = true): Float {
-        return _icall_Float_Object_Float_Boolean_Float_Int_Boolean(blendNodeMethodBind, this.rawMemory, node, time, seek, blend, filter, optimize)
+    open fun blendNode(node: AnimationNode, time: Double, seek: Boolean, blend: Double, filter: Long = 0, optimize: Boolean = true): Double {
+        return _icall_Double_Object_Double_Boolean_Double_Long_Boolean(blendNodeMethodBind, this.rawMemory, node, time, seek, blend, filter, optimize)
     }
 
 
     private val blendInputMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationNode", "blend_input") }
-    open fun blendInput(inputIndex: Int, time: Float, seek: Boolean, blend: Float, filter: Int = 0, optimize: Boolean = true): Float {
-        return _icall_Float_Int_Float_Boolean_Float_Int_Boolean(blendInputMethodBind, this.rawMemory, inputIndex, time, seek, blend, filter, optimize)
+    open fun blendInput(inputIndex: Long, time: Double, seek: Boolean, blend: Double, filter: Long = 0, optimize: Boolean = true): Double {
+        return _icall_Double_Long_Double_Boolean_Double_Long_Boolean(blendInputMethodBind, this.rawMemory, inputIndex, time, seek, blend, filter, optimize)
     }
 
 

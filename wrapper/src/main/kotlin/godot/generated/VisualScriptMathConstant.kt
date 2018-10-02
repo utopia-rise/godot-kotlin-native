@@ -19,7 +19,7 @@ open class VisualScriptMathConstant : VisualScriptNode {
 
     // Enums 
 
-    enum class MathConstant(val id: Int) {
+    enum class MathConstant(val id: Long) {
         MATH_CONSTANT_ONE(0),
         MATH_CONSTANT_PI(1),
         MATH_CONSTANT_HALF_PI(2),
@@ -32,7 +32,7 @@ open class VisualScriptMathConstant : VisualScriptNode {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -53,38 +53,38 @@ open class VisualScriptMathConstant : VisualScriptNode {
 
 
         // Constants
-        const val MATH_CONSTANT_ONE: Int = 0
-        const val MATH_CONSTANT_PI: Int = 1
-        const val MATH_CONSTANT_HALF_PI: Int = 2
-        const val MATH_CONSTANT_TAU: Int = 3
-        const val MATH_CONSTANT_E: Int = 4
-        const val MATH_CONSTANT_SQRT2: Int = 5
-        const val MATH_CONSTANT_INF: Int = 6
-        const val MATH_CONSTANT_NAN: Int = 7
-        const val MATH_CONSTANT_MAX: Int = 8
+        const val MATH_CONSTANT_ONE: Long = 0
+        const val MATH_CONSTANT_PI: Long = 1
+        const val MATH_CONSTANT_HALF_PI: Long = 2
+        const val MATH_CONSTANT_TAU: Long = 3
+        const val MATH_CONSTANT_E: Long = 4
+        const val MATH_CONSTANT_SQRT2: Long = 5
+        const val MATH_CONSTANT_INF: Long = 6
+        const val MATH_CONSTANT_NAN: Long = 7
+        const val MATH_CONSTANT_MAX: Long = 8
 
 
     }
 
 
     // Properties
-    open var constant: Int
-        get() = _icall_Int(getMathConstantMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setMathConstantMethodBind, this.rawMemory, value)
+    open var constant: Long
+        get() = _icall_Long(getMathConstantMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setMathConstantMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setMathConstantMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptMathConstant", "set_math_constant") }
-    open fun setMathConstant(which: Int) {
-        _icall_Unit_Int(setMathConstantMethodBind, this.rawMemory, which)
+    open fun setMathConstant(which: Long) {
+        _icall_Unit_Long(setMathConstantMethodBind, this.rawMemory, which)
     }
 
 
     private val getMathConstantMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptMathConstant", "get_math_constant") }
     open fun getMathConstant(): VisualScriptMathConstant.MathConstant {
-        return VisualScriptMathConstant.MathConstant.fromInt(_icall_Int(getMathConstantMethodBind, this.rawMemory))
+        return VisualScriptMathConstant.MathConstant.fromInt(_icall_Long(getMathConstantMethodBind, this.rawMemory))
     }
 
 

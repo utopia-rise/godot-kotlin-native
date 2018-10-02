@@ -43,14 +43,14 @@ open class BitmapFont : Font {
 
 
     // Properties
-    open var height: Float
+    open var height: Double
         get() = throw UninitializedPropertyAccessException("Cannot access property height: has no getter")
-        set(value) = _icall_Unit_Float(setHeightMethodBind, this.rawMemory, value)
+        set(value) = _icall_Unit_Double(setHeightMethodBind, this.rawMemory, value)
 
 
-    open var ascent: Float
+    open var ascent: Double
         get() = throw UninitializedPropertyAccessException("Cannot access property ascent: has no getter")
-        set(value) = _icall_Unit_Float(setAscentMethodBind, this.rawMemory, value)
+        set(value) = _icall_Unit_Double(setAscentMethodBind, this.rawMemory, value)
 
 
     open var distanceField: Boolean
@@ -68,31 +68,31 @@ open class BitmapFont : Font {
     // Methods
     private val createFromFntMethodBind: CPointer<godot_method_bind> by lazy { getMB("BitmapFont", "create_from_fnt") }
     open fun createFromFnt(path: String): GodotError {
-        return GodotError.fromInt(_icall_Int_String(createFromFntMethodBind, this.rawMemory, path))
+        return GodotError.fromInt(_icall_Long_String(createFromFntMethodBind, this.rawMemory, path))
     }
 
 
     private val setHeightMethodBind: CPointer<godot_method_bind> by lazy { getMB("BitmapFont", "set_height") }
-    open fun setHeight(px: Float) {
-        _icall_Unit_Float(setHeightMethodBind, this.rawMemory, px)
+    open fun setHeight(px: Double) {
+        _icall_Unit_Double(setHeightMethodBind, this.rawMemory, px)
     }
 
 
     private val setAscentMethodBind: CPointer<godot_method_bind> by lazy { getMB("BitmapFont", "set_ascent") }
-    open fun setAscent(px: Float) {
-        _icall_Unit_Float(setAscentMethodBind, this.rawMemory, px)
+    open fun setAscent(px: Double) {
+        _icall_Unit_Double(setAscentMethodBind, this.rawMemory, px)
     }
 
 
     private val addKerningPairMethodBind: CPointer<godot_method_bind> by lazy { getMB("BitmapFont", "add_kerning_pair") }
-    open fun addKerningPair(charA: Int, charB: Int, kerning: Int) {
-        _icall_Unit_Int_Int_Int(addKerningPairMethodBind, this.rawMemory, charA, charB, kerning)
+    open fun addKerningPair(charA: Long, charB: Long, kerning: Long) {
+        _icall_Unit_Long_Long_Long(addKerningPairMethodBind, this.rawMemory, charA, charB, kerning)
     }
 
 
     private val getKerningPairMethodBind: CPointer<godot_method_bind> by lazy { getMB("BitmapFont", "get_kerning_pair") }
-    open fun getKerningPair(charA: Int, charB: Int): Int {
-        return _icall_Int_Int_Int(getKerningPairMethodBind, this.rawMemory, charA, charB)
+    open fun getKerningPair(charA: Long, charB: Long): Long {
+        return _icall_Long_Long_Long(getKerningPairMethodBind, this.rawMemory, charA, charB)
     }
 
 
@@ -103,26 +103,26 @@ open class BitmapFont : Font {
 
 
     private val addCharMethodBind: CPointer<godot_method_bind> by lazy { getMB("BitmapFont", "add_char") }
-    open fun addChar(character: Int, texture: Int, rect: Rect2, align: Vector2 = Vector2(0, 0), advance: Float = -1f) {
-        _icall_Unit_Int_Int_Rect2_Vector2_Float(addCharMethodBind, this.rawMemory, character, texture, rect, align, advance)
+    open fun addChar(character: Long, texture: Long, rect: Rect2, align: Vector2 = Vector2(0, 0), advance: Double = -1.0) {
+        _icall_Unit_Long_Long_Rect2_Vector2_Double(addCharMethodBind, this.rawMemory, character, texture, rect, align, advance)
     }
 
 
     private val getTextureCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("BitmapFont", "get_texture_count") }
-    open fun getTextureCount(): Int {
-        return _icall_Int(getTextureCountMethodBind, this.rawMemory)
+    open fun getTextureCount(): Long {
+        return _icall_Long(getTextureCountMethodBind, this.rawMemory)
     }
 
 
     private val getTextureMethodBind: CPointer<godot_method_bind> by lazy { getMB("BitmapFont", "get_texture") }
-    open fun getTexture(idx: Int): Texture {
-        return _icall_Texture_Int(getTextureMethodBind, this.rawMemory, idx)
+    open fun getTexture(idx: Long): Texture {
+        return _icall_Texture_Long(getTextureMethodBind, this.rawMemory, idx)
     }
 
 
     private val getCharSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("BitmapFont", "get_char_size") }
-    open fun getCharSize(char: Int, next: Int = 0): Vector2 {
-        return _icall_Vector2_Int_Int(getCharSizeMethodBind, this.rawMemory, char, next)
+    open fun getCharSize(char: Long, next: Long = 0): Vector2 {
+        return _icall_Vector2_Long_Long(getCharSizeMethodBind, this.rawMemory, char, next)
     }
 
 

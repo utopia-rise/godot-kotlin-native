@@ -19,14 +19,14 @@ open class ImageTexture : Texture {
 
     // Enums 
 
-    enum class Storage(val id: Int) {
+    enum class Storage(val id: Long) {
         STORAGE_RAW(0),
         STORAGE_COMPRESS_LOSSY(1),
         STORAGE_COMPRESS_LOSSLESS(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -47,49 +47,49 @@ open class ImageTexture : Texture {
 
 
         // Constants
-        const val STORAGE_RAW: Int = 0
-        const val STORAGE_COMPRESS_LOSSY: Int = 1
-        const val STORAGE_COMPRESS_LOSSLESS: Int = 2
+        const val STORAGE_RAW: Long = 0
+        const val STORAGE_COMPRESS_LOSSY: Long = 1
+        const val STORAGE_COMPRESS_LOSSLESS: Long = 2
 
 
     }
 
 
     // Properties
-    open var storage: Int
-        get() = _icall_Int(getStorageMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setStorageMethodBind, this.rawMemory, value)
+    open var storage: Long
+        get() = _icall_Long(getStorageMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setStorageMethodBind, this.rawMemory, value)
 
 
-    open var lossyQuality: Float
-        get() = _icall_Float(getLossyStorageQualityMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setLossyStorageQualityMethodBind, this.rawMemory, value)
+    open var lossyQuality: Double
+        get() = _icall_Double(getLossyStorageQualityMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setLossyStorageQualityMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val createMethodBind: CPointer<godot_method_bind> by lazy { getMB("ImageTexture", "create") }
-    open fun create(width: Int, height: Int, format: Int, flags: Int = 7) {
-        _icall_Unit_Int_Int_Int_Int(createMethodBind, this.rawMemory, width, height, format, flags)
+    open fun create(width: Long, height: Long, format: Long, flags: Long = 7) {
+        _icall_Unit_Long_Long_Long_Long(createMethodBind, this.rawMemory, width, height, format, flags)
     }
 
 
     private val createFromImageMethodBind: CPointer<godot_method_bind> by lazy { getMB("ImageTexture", "create_from_image") }
-    open fun createFromImage(image: Image, flags: Int = 7) {
-        _icall_Unit_Object_Int(createFromImageMethodBind, this.rawMemory, image, flags)
+    open fun createFromImage(image: Image, flags: Long = 7) {
+        _icall_Unit_Object_Long(createFromImageMethodBind, this.rawMemory, image, flags)
     }
 
 
     private val getFormatMethodBind: CPointer<godot_method_bind> by lazy { getMB("ImageTexture", "get_format") }
     open fun getFormat(): Image.Format {
-        return Image.Format.fromInt(_icall_Int(getFormatMethodBind, this.rawMemory))
+        return Image.Format.fromInt(_icall_Long(getFormatMethodBind, this.rawMemory))
     }
 
 
     private val loadMethodBind: CPointer<godot_method_bind> by lazy { getMB("ImageTexture", "load") }
     open fun load(path: String): GodotError {
-        return GodotError.fromInt(_icall_Int_String(loadMethodBind, this.rawMemory, path))
+        return GodotError.fromInt(_icall_Long_String(loadMethodBind, this.rawMemory, path))
     }
 
 
@@ -100,26 +100,26 @@ open class ImageTexture : Texture {
 
 
     private val setStorageMethodBind: CPointer<godot_method_bind> by lazy { getMB("ImageTexture", "set_storage") }
-    open fun setStorage(mode: Int) {
-        _icall_Unit_Int(setStorageMethodBind, this.rawMemory, mode)
+    open fun setStorage(mode: Long) {
+        _icall_Unit_Long(setStorageMethodBind, this.rawMemory, mode)
     }
 
 
     private val getStorageMethodBind: CPointer<godot_method_bind> by lazy { getMB("ImageTexture", "get_storage") }
     open fun getStorage(): ImageTexture.Storage {
-        return ImageTexture.Storage.fromInt(_icall_Int(getStorageMethodBind, this.rawMemory))
+        return ImageTexture.Storage.fromInt(_icall_Long(getStorageMethodBind, this.rawMemory))
     }
 
 
     private val setLossyStorageQualityMethodBind: CPointer<godot_method_bind> by lazy { getMB("ImageTexture", "set_lossy_storage_quality") }
-    open fun setLossyStorageQuality(quality: Float) {
-        _icall_Unit_Float(setLossyStorageQualityMethodBind, this.rawMemory, quality)
+    open fun setLossyStorageQuality(quality: Double) {
+        _icall_Unit_Double(setLossyStorageQualityMethodBind, this.rawMemory, quality)
     }
 
 
     private val getLossyStorageQualityMethodBind: CPointer<godot_method_bind> by lazy { getMB("ImageTexture", "get_lossy_storage_quality") }
-    open fun getLossyStorageQuality(): Float {
-        return _icall_Float(getLossyStorageQualityMethodBind, this.rawMemory)
+    open fun getLossyStorageQuality(): Double {
+        return _icall_Double(getLossyStorageQualityMethodBind, this.rawMemory)
     }
 
 

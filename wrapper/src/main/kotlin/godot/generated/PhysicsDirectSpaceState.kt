@@ -44,14 +44,14 @@ open class PhysicsDirectSpaceState : Object {
 
     // Methods
     private val intersectRayMethodBind: CPointer<godot_method_bind> by lazy { getMB("PhysicsDirectSpaceState", "intersect_ray") }
-    open fun intersectRay(from: Vector3, to: Vector3, exclude: GDArray = GDArray(), collisionLayer: Int = 2147483647): Dictionary {
-        return _icall_Dictionary_Vector3_Vector3_GDArray_Int(intersectRayMethodBind, this.rawMemory, from, to, exclude, collisionLayer)
+    open fun intersectRay(from: Vector3, to: Vector3, exclude: GDArray = GDArray(), collisionLayer: Long = 2147483647): Dictionary {
+        return _icall_Dictionary_Vector3_Vector3_GDArray_Long(intersectRayMethodBind, this.rawMemory, from, to, exclude, collisionLayer)
     }
 
 
     private val intersectShapeMethodBind: CPointer<godot_method_bind> by lazy { getMB("PhysicsDirectSpaceState", "intersect_shape") }
-    open fun intersectShape(shape: PhysicsShapeQueryParameters, maxResults: Int = 32): GDArray {
-        return _icall_GDArray_Object_Int(intersectShapeMethodBind, this.rawMemory, shape, maxResults)
+    open fun intersectShape(shape: PhysicsShapeQueryParameters, maxResults: Long = 32): GDArray {
+        return _icall_GDArray_Object_Long(intersectShapeMethodBind, this.rawMemory, shape, maxResults)
     }
 
 
@@ -62,8 +62,8 @@ open class PhysicsDirectSpaceState : Object {
 
 
     private val collideShapeMethodBind: CPointer<godot_method_bind> by lazy { getMB("PhysicsDirectSpaceState", "collide_shape") }
-    open fun collideShape(shape: PhysicsShapeQueryParameters, maxResults: Int = 32): GDArray {
-        return _icall_GDArray_Object_Int(collideShapeMethodBind, this.rawMemory, shape, maxResults)
+    open fun collideShape(shape: PhysicsShapeQueryParameters, maxResults: Long = 32): GDArray {
+        return _icall_GDArray_Object_Long(collideShapeMethodBind, this.rawMemory, shape, maxResults)
     }
 
 

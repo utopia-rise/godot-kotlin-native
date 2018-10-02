@@ -43,9 +43,9 @@ open class VisualScriptConstant : VisualScriptNode {
 
 
     // Properties
-    open var type: Int
-        get() = _icall_Int(getConstantTypeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setConstantTypeMethodBind, this.rawMemory, value)
+    open var type: Long
+        get() = _icall_Long(getConstantTypeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setConstantTypeMethodBind, this.rawMemory, value)
 
 
     open var value: Variant
@@ -57,14 +57,14 @@ open class VisualScriptConstant : VisualScriptNode {
 
     // Methods
     private val setConstantTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptConstant", "set_constant_type") }
-    open fun setConstantType(type: Int) {
-        _icall_Unit_Int(setConstantTypeMethodBind, this.rawMemory, type)
+    open fun setConstantType(type: Long) {
+        _icall_Unit_Long(setConstantTypeMethodBind, this.rawMemory, type)
     }
 
 
     private val getConstantTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptConstant", "get_constant_type") }
     open fun getConstantType(): Variant.Type {
-        return Variant.Type.fromInt(_icall_Int(getConstantTypeMethodBind, this.rawMemory))
+        return Variant.Type.fromInt(_icall_Long(getConstantTypeMethodBind, this.rawMemory))
     }
 
 

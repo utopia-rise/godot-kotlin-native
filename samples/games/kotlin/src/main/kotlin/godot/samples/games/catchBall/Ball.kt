@@ -3,6 +3,7 @@ package godot.samples.games.catchBall
 import godot.*
 import godot.core.*
 import kotlin.random.Random
+import kotlin.random.seed
 import kotlin.system.getTimeNanos
 
 class Ball: RigidBody() {

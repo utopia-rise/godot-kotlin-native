@@ -43,9 +43,9 @@ open class RayShape2D : Shape2D {
 
 
     // Properties
-    open var length: Float
-        get() = _icall_Float(getLengthMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setLengthMethodBind, this.rawMemory, value)
+    open var length: Double
+        get() = _icall_Double(getLengthMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setLengthMethodBind, this.rawMemory, value)
 
 
     open var slipsOnSlope: Boolean
@@ -57,14 +57,14 @@ open class RayShape2D : Shape2D {
 
     // Methods
     private val setLengthMethodBind: CPointer<godot_method_bind> by lazy { getMB("RayShape2D", "set_length") }
-    open fun setLength(length: Float) {
-        _icall_Unit_Float(setLengthMethodBind, this.rawMemory, length)
+    open fun setLength(length: Double) {
+        _icall_Unit_Double(setLengthMethodBind, this.rawMemory, length)
     }
 
 
     private val getLengthMethodBind: CPointer<godot_method_bind> by lazy { getMB("RayShape2D", "get_length") }
-    open fun getLength(): Float {
-        return _icall_Float(getLengthMethodBind, this.rawMemory)
+    open fun getLength(): Double {
+        return _icall_Double(getLengthMethodBind, this.rawMemory)
     }
 
 

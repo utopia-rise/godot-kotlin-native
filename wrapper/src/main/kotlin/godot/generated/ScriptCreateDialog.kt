@@ -59,7 +59,7 @@ open class ScriptCreateDialog : ConfirmationDialog {
     }
 
 
-    open fun _lang_changed(arg0: Int) {
+    open fun _lang_changed(arg0: Long) {
     }
 
 
@@ -83,7 +83,7 @@ open class ScriptCreateDialog : ConfirmationDialog {
     }
 
 
-    open fun _template_changed(arg0: Int) {
+    open fun _template_changed(arg0: Long) {
     }
 
 

@@ -19,7 +19,7 @@ open class IP : Object {
 
     // Enums 
 
-    enum class ResolverStatus(val id: Int) {
+    enum class ResolverStatus(val id: Long) {
         RESOLVER_STATUS_NONE(0),
         RESOLVER_STATUS_WAITING(1),
         RESOLVER_STATUS_DONE(2),
@@ -27,10 +27,10 @@ open class IP : Object {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class Type(val id: Int) {
+    enum class Type(val id: Long) {
         TYPE_NONE(0),
         TYPE_IPV4(1),
         TYPE_IPV6(2),
@@ -38,7 +38,7 @@ open class IP : Object {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -56,16 +56,16 @@ open class IP : Object {
 
 
         // Constants
-        const val RESOLVER_STATUS_NONE: Int = 0
-        const val RESOLVER_STATUS_WAITING: Int = 1
-        const val RESOLVER_STATUS_DONE: Int = 2
-        const val RESOLVER_STATUS_ERROR: Int = 3
-        const val RESOLVER_MAX_QUERIES: Int = 32
-        const val RESOLVER_INVALID_ID: Int = -1
-        const val TYPE_NONE: Int = 0
-        const val TYPE_IPV4: Int = 1
-        const val TYPE_IPV6: Int = 2
-        const val TYPE_ANY: Int = 3
+        const val RESOLVER_STATUS_NONE: Long = 0
+        const val RESOLVER_STATUS_WAITING: Long = 1
+        const val RESOLVER_STATUS_DONE: Long = 2
+        const val RESOLVER_STATUS_ERROR: Long = 3
+        const val RESOLVER_MAX_QUERIES: Long = 32
+        const val RESOLVER_INVALID_ID: Long = -1
+        const val TYPE_NONE: Long = 0
+        const val TYPE_IPV4: Long = 1
+        const val TYPE_IPV6: Long = 2
+        const val TYPE_ANY: Long = 3
 
 
         private val rawMemory: COpaquePointer by lazy { getSingleton("IP", "IP") }
@@ -76,32 +76,32 @@ open class IP : Object {
 
         // Methods
         private val resolveHostnameMethodBind: CPointer<godot_method_bind> by lazy { getMB("IP", "resolve_hostname") }
-        fun resolveHostname(host: String, ipType: Int = 3): String {
-            return _icall_String_String_Int(resolveHostnameMethodBind, this.rawMemory, host, ipType)
+        fun resolveHostname(host: String, ipType: Long = 3): String {
+            return _icall_String_String_Long(resolveHostnameMethodBind, this.rawMemory, host, ipType)
         }
 
 
         private val resolveHostnameQueueItemMethodBind: CPointer<godot_method_bind> by lazy { getMB("IP", "resolve_hostname_queue_item") }
-        fun resolveHostnameQueueItem(host: String, ipType: Int = 3): Int {
-            return _icall_Int_String_Int(resolveHostnameQueueItemMethodBind, this.rawMemory, host, ipType)
+        fun resolveHostnameQueueItem(host: String, ipType: Long = 3): Long {
+            return _icall_Long_String_Long(resolveHostnameQueueItemMethodBind, this.rawMemory, host, ipType)
         }
 
 
         private val getResolveItemStatusMethodBind: CPointer<godot_method_bind> by lazy { getMB("IP", "get_resolve_item_status") }
-        fun getResolveItemStatus(id: Int): IP.ResolverStatus {
-            return IP.ResolverStatus.fromInt(_icall_Int_Int(getResolveItemStatusMethodBind, this.rawMemory, id))
+        fun getResolveItemStatus(id: Long): IP.ResolverStatus {
+            return IP.ResolverStatus.fromInt(_icall_Long_Long(getResolveItemStatusMethodBind, this.rawMemory, id))
         }
 
 
         private val getResolveItemAddressMethodBind: CPointer<godot_method_bind> by lazy { getMB("IP", "get_resolve_item_address") }
-        fun getResolveItemAddress(id: Int): String {
-            return _icall_String_Int(getResolveItemAddressMethodBind, this.rawMemory, id)
+        fun getResolveItemAddress(id: Long): String {
+            return _icall_String_Long(getResolveItemAddressMethodBind, this.rawMemory, id)
         }
 
 
         private val eraseResolveItemMethodBind: CPointer<godot_method_bind> by lazy { getMB("IP", "erase_resolve_item") }
-        fun eraseResolveItem(id: Int) {
-            _icall_Unit_Int(eraseResolveItemMethodBind, this.rawMemory, id)
+        fun eraseResolveItem(id: Long) {
+            _icall_Unit_Long(eraseResolveItemMethodBind, this.rawMemory, id)
         }
 
 

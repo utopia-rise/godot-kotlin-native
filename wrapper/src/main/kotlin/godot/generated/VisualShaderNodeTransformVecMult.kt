@@ -19,7 +19,7 @@ open class VisualShaderNodeTransformVecMult : VisualShaderNode {
 
     // Enums 
 
-    enum class Operator(val id: Int) {
+    enum class Operator(val id: Long) {
         OP_AxB(0),
         OP_BxA(1),
         OP_3x3_AxB(2),
@@ -27,7 +27,7 @@ open class VisualShaderNodeTransformVecMult : VisualShaderNode {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -48,33 +48,33 @@ open class VisualShaderNodeTransformVecMult : VisualShaderNode {
 
 
         // Constants
-        const val OP_AxB: Int = 0
-        const val OP_BxA: Int = 1
-        const val OP_3x3_AxB: Int = 2
-        const val OP_3x3_BxA: Int = 3
+        const val OP_AxB: Long = 0
+        const val OP_BxA: Long = 1
+        const val OP_3x3_AxB: Long = 2
+        const val OP_3x3_BxA: Long = 3
 
 
     }
 
 
     // Properties
-    open var operator: Int
-        get() = _icall_Int(getOperatorMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setOperatorMethodBind, this.rawMemory, value)
+    open var operator: Long
+        get() = _icall_Long(getOperatorMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setOperatorMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setOperatorMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualShaderNodeTransformVecMult", "set_operator") }
-    open fun setOperator(op: Int) {
-        _icall_Unit_Int(setOperatorMethodBind, this.rawMemory, op)
+    open fun setOperator(op: Long) {
+        _icall_Unit_Long(setOperatorMethodBind, this.rawMemory, op)
     }
 
 
     private val getOperatorMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualShaderNodeTransformVecMult", "get_operator") }
     open fun getOperator(): VisualShaderNodeTransformVecMult.Operator {
-        return VisualShaderNodeTransformVecMult.Operator.fromInt(_icall_Int(getOperatorMethodBind, this.rawMemory))
+        return VisualShaderNodeTransformVecMult.Operator.fromInt(_icall_Long(getOperatorMethodBind, this.rawMemory))
     }
 
 

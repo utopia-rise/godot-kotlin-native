@@ -43,9 +43,9 @@ open class VisualScriptBasicTypeConstant : VisualScriptNode {
 
 
     // Properties
-    open var basicType: Int
-        get() = _icall_Int(getBasicTypeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setBasicTypeMethodBind, this.rawMemory, value)
+    open var basicType: Long
+        get() = _icall_Long(getBasicTypeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setBasicTypeMethodBind, this.rawMemory, value)
 
 
     open var constant: String
@@ -57,14 +57,14 @@ open class VisualScriptBasicTypeConstant : VisualScriptNode {
 
     // Methods
     private val setBasicTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptBasicTypeConstant", "set_basic_type") }
-    open fun setBasicType(name: Int) {
-        _icall_Unit_Int(setBasicTypeMethodBind, this.rawMemory, name)
+    open fun setBasicType(name: Long) {
+        _icall_Unit_Long(setBasicTypeMethodBind, this.rawMemory, name)
     }
 
 
     private val getBasicTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptBasicTypeConstant", "get_basic_type") }
     open fun getBasicType(): Variant.Type {
-        return Variant.Type.fromInt(_icall_Int(getBasicTypeMethodBind, this.rawMemory))
+        return Variant.Type.fromInt(_icall_Long(getBasicTypeMethodBind, this.rawMemory))
     }
 
 

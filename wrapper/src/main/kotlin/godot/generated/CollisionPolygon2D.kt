@@ -19,13 +19,13 @@ open class CollisionPolygon2D : Node2D {
 
     // Enums 
 
-    enum class BuildMode(val id: Int) {
+    enum class BuildMode(val id: Long) {
         BUILD_SOLIDS(0),
         BUILD_SEGMENTS(1),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -46,17 +46,17 @@ open class CollisionPolygon2D : Node2D {
 
 
         // Constants
-        const val BUILD_SOLIDS: Int = 0
-        const val BUILD_SEGMENTS: Int = 1
+        const val BUILD_SOLIDS: Long = 0
+        const val BUILD_SEGMENTS: Long = 1
 
 
     }
 
 
     // Properties
-    open var buildMode: Int
-        get() = _icall_Int(getBuildModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setBuildModeMethodBind, this.rawMemory, value)
+    open var buildMode: Long
+        get() = _icall_Long(getBuildModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setBuildModeMethodBind, this.rawMemory, value)
 
 
     open var polygon: PoolVector2Array
@@ -90,14 +90,14 @@ open class CollisionPolygon2D : Node2D {
 
 
     private val setBuildModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("CollisionPolygon2D", "set_build_mode") }
-    open fun setBuildMode(buildMode: Int) {
-        _icall_Unit_Int(setBuildModeMethodBind, this.rawMemory, buildMode)
+    open fun setBuildMode(buildMode: Long) {
+        _icall_Unit_Long(setBuildModeMethodBind, this.rawMemory, buildMode)
     }
 
 
     private val getBuildModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("CollisionPolygon2D", "get_build_mode") }
     open fun getBuildMode(): CollisionPolygon2D.BuildMode {
-        return CollisionPolygon2D.BuildMode.fromInt(_icall_Int(getBuildModeMethodBind, this.rawMemory))
+        return CollisionPolygon2D.BuildMode.fromInt(_icall_Long(getBuildModeMethodBind, this.rawMemory))
     }
 
 

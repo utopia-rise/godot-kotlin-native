@@ -19,7 +19,7 @@ open class MultiplayerAPI : Reference {
 
     // Enums 
 
-    enum class RPCMode(val id: Int) {
+    enum class RPCMode(val id: Long) {
         RPC_MODE_DISABLED(0),
         RPC_MODE_REMOTE(1),
         RPC_MODE_SYNC(2),
@@ -31,7 +31,7 @@ open class MultiplayerAPI : Reference {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -56,14 +56,14 @@ open class MultiplayerAPI : Reference {
 
 
         // Constants
-        const val RPC_MODE_DISABLED: Int = 0
-        const val RPC_MODE_REMOTE: Int = 1
-        const val RPC_MODE_SYNC: Int = 2
-        const val RPC_MODE_MASTER: Int = 3
-        const val RPC_MODE_SLAVE: Int = 4
-        const val RPC_MODE_REMOTESYNC: Int = 5
-        const val RPC_MODE_MASTERSYNC: Int = 6
-        const val RPC_MODE_SLAVESYNC: Int = 7
+        const val RPC_MODE_DISABLED: Long = 0
+        const val RPC_MODE_REMOTE: Long = 1
+        const val RPC_MODE_SYNC: Long = 2
+        const val RPC_MODE_MASTER: Long = 3
+        const val RPC_MODE_SLAVE: Long = 4
+        const val RPC_MODE_REMOTESYNC: Long = 5
+        const val RPC_MODE_MASTERSYNC: Long = 6
+        const val RPC_MODE_SLAVESYNC: Long = 7
 
 
     }
@@ -90,8 +90,8 @@ open class MultiplayerAPI : Reference {
 
 
     private val sendBytesMethodBind: CPointer<godot_method_bind> by lazy { getMB("MultiplayerAPI", "send_bytes") }
-    open fun sendBytes(bytes: PoolByteArray, id: Int = 0, arg2: Int = 2): GodotError {
-        return GodotError.fromInt(_icall_Int_PoolByteArray_Int_Int(sendBytesMethodBind, this.rawMemory, bytes, id, arg2))
+    open fun sendBytes(bytes: PoolByteArray, id: Long = 0, arg2: Long = 2): GodotError {
+        return GodotError.fromInt(_icall_Long_PoolByteArray_Long_Long(sendBytesMethodBind, this.rawMemory, bytes, id, arg2))
     }
 
 
@@ -108,8 +108,8 @@ open class MultiplayerAPI : Reference {
 
 
     private val getNetworkUniqueIdMethodBind: CPointer<godot_method_bind> by lazy { getMB("MultiplayerAPI", "get_network_unique_id") }
-    open fun getNetworkUniqueId(): Int {
-        return _icall_Int(getNetworkUniqueIdMethodBind, this.rawMemory)
+    open fun getNetworkUniqueId(): Long {
+        return _icall_Long(getNetworkUniqueIdMethodBind, this.rawMemory)
     }
 
 
@@ -120,16 +120,16 @@ open class MultiplayerAPI : Reference {
 
 
     private val getRpcSenderIdMethodBind: CPointer<godot_method_bind> by lazy { getMB("MultiplayerAPI", "get_rpc_sender_id") }
-    open fun getRpcSenderId(): Int {
-        return _icall_Int(getRpcSenderIdMethodBind, this.rawMemory)
+    open fun getRpcSenderId(): Long {
+        return _icall_Long(getRpcSenderIdMethodBind, this.rawMemory)
     }
 
 
-    open fun _add_peer(id: Int) {
+    open fun _add_peer(id: Long) {
     }
 
 
-    open fun _del_peer(id: Int) {
+    open fun _del_peer(id: Long) {
     }
 
 

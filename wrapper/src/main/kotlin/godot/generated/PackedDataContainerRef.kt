@@ -45,8 +45,8 @@ open class PackedDataContainerRef : Reference {
 
     // Methods
     private val sizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("PackedDataContainerRef", "size") }
-    open fun size(): Int {
-        return _icall_Int(sizeMethodBind, this.rawMemory)
+    open fun size(): Long {
+        return _icall_Long(sizeMethodBind, this.rawMemory)
     }
 
 

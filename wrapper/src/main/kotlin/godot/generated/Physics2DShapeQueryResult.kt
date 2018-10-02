@@ -45,32 +45,32 @@ open class Physics2DShapeQueryResult : Reference {
 
     // Methods
     private val getResultCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DShapeQueryResult", "get_result_count") }
-    open fun getResultCount(): Int {
-        return _icall_Int(getResultCountMethodBind, this.rawMemory)
+    open fun getResultCount(): Long {
+        return _icall_Long(getResultCountMethodBind, this.rawMemory)
     }
 
 
     private val getResultRidMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DShapeQueryResult", "get_result_rid") }
-    open fun getResultRid(idx: Int): RID {
-        return _icall_RID_Int(getResultRidMethodBind, this.rawMemory, idx)
+    open fun getResultRid(idx: Long): RID {
+        return _icall_RID_Long(getResultRidMethodBind, this.rawMemory, idx)
     }
 
 
     private val getResultObjectIdMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DShapeQueryResult", "get_result_object_id") }
-    open fun getResultObjectId(idx: Int): Int {
-        return _icall_Int_Int(getResultObjectIdMethodBind, this.rawMemory, idx)
+    open fun getResultObjectId(idx: Long): Long {
+        return _icall_Long_Long(getResultObjectIdMethodBind, this.rawMemory, idx)
     }
 
 
     private val getResultObjectMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DShapeQueryResult", "get_result_object") }
-    open fun getResultObject(idx: Int): Object {
-        return _icall_Object_Int(getResultObjectMethodBind, this.rawMemory, idx)
+    open fun getResultObject(idx: Long): Object {
+        return _icall_Object_Long(getResultObjectMethodBind, this.rawMemory, idx)
     }
 
 
     private val getResultObjectShapeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DShapeQueryResult", "get_result_object_shape") }
-    open fun getResultObjectShape(idx: Int): Int {
-        return _icall_Int_Int(getResultObjectShapeMethodBind, this.rawMemory, idx)
+    open fun getResultObjectShape(idx: Long): Long {
+        return _icall_Long_Long(getResultObjectShapeMethodBind, this.rawMemory, idx)
     }
 
 

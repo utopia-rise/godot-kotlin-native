@@ -52,25 +52,25 @@ open class RegEx : Reference {
 
     private val compileMethodBind: CPointer<godot_method_bind> by lazy { getMB("RegEx", "compile") }
     open fun compile(pattern: String): GodotError {
-        return GodotError.fromInt(_icall_Int_String(compileMethodBind, this.rawMemory, pattern))
+        return GodotError.fromInt(_icall_Long_String(compileMethodBind, this.rawMemory, pattern))
     }
 
 
     private val searchMethodBind: CPointer<godot_method_bind> by lazy { getMB("RegEx", "search") }
-    open fun search(subject: String, offset: Int = 0, end: Int = -1): RegExMatch {
-        return _icall_RegExMatch_String_Int_Int(searchMethodBind, this.rawMemory, subject, offset, end)
+    open fun search(subject: String, offset: Long = 0, end: Long = -1): RegExMatch {
+        return _icall_RegExMatch_String_Long_Long(searchMethodBind, this.rawMemory, subject, offset, end)
     }
 
 
     private val searchAllMethodBind: CPointer<godot_method_bind> by lazy { getMB("RegEx", "search_all") }
-    open fun searchAll(subject: String, offset: Int = 0, end: Int = -1): GDArray {
-        return _icall_GDArray_String_Int_Int(searchAllMethodBind, this.rawMemory, subject, offset, end)
+    open fun searchAll(subject: String, offset: Long = 0, end: Long = -1): GDArray {
+        return _icall_GDArray_String_Long_Long(searchAllMethodBind, this.rawMemory, subject, offset, end)
     }
 
 
     private val subMethodBind: CPointer<godot_method_bind> by lazy { getMB("RegEx", "sub") }
-    open fun sub(subject: String, replacement: String, all: Boolean = false, offset: Int = 0, end: Int = -1): String {
-        return _icall_String_String_String_Boolean_Int_Int(subMethodBind, this.rawMemory, subject, replacement, all, offset, end)
+    open fun sub(subject: String, replacement: String, all: Boolean = false, offset: Long = 0, end: Long = -1): String {
+        return _icall_String_String_String_Boolean_Long_Long(subMethodBind, this.rawMemory, subject, replacement, all, offset, end)
     }
 
 
@@ -87,8 +87,8 @@ open class RegEx : Reference {
 
 
     private val getGroupCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("RegEx", "get_group_count") }
-    open fun getGroupCount(): Int {
-        return _icall_Int(getGroupCountMethodBind, this.rawMemory)
+    open fun getGroupCount(): Long {
+        return _icall_Long(getGroupCountMethodBind, this.rawMemory)
     }
 
 

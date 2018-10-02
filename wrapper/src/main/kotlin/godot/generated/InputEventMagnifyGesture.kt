@@ -45,23 +45,23 @@ open class InputEventMagnifyGesture : InputEventGesture {
 
 
     // Properties
-    open var factor: Float
-        get() = _icall_Float(getFactorMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setFactorMethodBind, this.rawMemory, value)
+    open var factor: Double
+        get() = _icall_Double(getFactorMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setFactorMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setFactorMethodBind: CPointer<godot_method_bind> by lazy { getMB("InputEventMagnifyGesture", "set_factor") }
-    open fun setFactor(factor: Float) {
-        _icall_Unit_Float(setFactorMethodBind, this.rawMemory, factor)
+    open fun setFactor(factor: Double) {
+        _icall_Unit_Double(setFactorMethodBind, this.rawMemory, factor)
     }
 
 
     private val getFactorMethodBind: CPointer<godot_method_bind> by lazy { getMB("InputEventMagnifyGesture", "get_factor") }
-    open fun getFactor(): Float {
-        return _icall_Float(getFactorMethodBind, this.rawMemory)
+    open fun getFactor(): Double {
+        return _icall_Double(getFactorMethodBind, this.rawMemory)
     }
 
 

@@ -39,8 +39,8 @@ open class Popup : Control {
 
 
         // Constants
-        const val NOTIFICATION_POST_POPUP: Int = 80
-        const val NOTIFICATION_POPUP_HIDE: Int = 81
+        const val NOTIFICATION_POST_POPUP: Long = 80
+        const val NOTIFICATION_POPUP_HIDE: Long = 81
 
 
     }
@@ -62,8 +62,8 @@ open class Popup : Control {
 
 
     private val popupCenteredRatioMethodBind: CPointer<godot_method_bind> by lazy { getMB("Popup", "popup_centered_ratio") }
-    open fun popupCenteredRatio(ratio: Float = 0.75f) {
-        _icall_Unit_Float(popupCenteredRatioMethodBind, this.rawMemory, ratio)
+    open fun popupCenteredRatio(ratio: Double = 0.75) {
+        _icall_Unit_Double(popupCenteredRatioMethodBind, this.rawMemory, ratio)
     }
 
 

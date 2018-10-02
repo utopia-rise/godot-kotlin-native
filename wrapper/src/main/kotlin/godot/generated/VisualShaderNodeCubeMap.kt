@@ -19,14 +19,14 @@ open class VisualShaderNodeCubeMap : VisualShaderNode {
 
     // Enums 
 
-    enum class TextureType(val id: Int) {
+    enum class TextureType(val id: Long) {
         TYPE_DATA(0),
         TYPE_COLOR(1),
         TYPE_NORMALMAP(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -47,9 +47,9 @@ open class VisualShaderNodeCubeMap : VisualShaderNode {
 
 
         // Constants
-        const val TYPE_DATA: Int = 0
-        const val TYPE_COLOR: Int = 1
-        const val TYPE_NORMALMAP: Int = 2
+        const val TYPE_DATA: Long = 0
+        const val TYPE_COLOR: Long = 1
+        const val TYPE_NORMALMAP: Long = 2
 
 
     }
@@ -61,9 +61,9 @@ open class VisualShaderNodeCubeMap : VisualShaderNode {
         set(value) = _icall_Unit_Object(setCubeMapMethodBind, this.rawMemory, value)
 
 
-    open var textureType: Int
-        get() = _icall_Int(getTextureTypeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setTextureTypeMethodBind, this.rawMemory, value)
+    open var textureType: Long
+        get() = _icall_Long(getTextureTypeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setTextureTypeMethodBind, this.rawMemory, value)
 
 
 
@@ -82,14 +82,14 @@ open class VisualShaderNodeCubeMap : VisualShaderNode {
 
 
     private val setTextureTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualShaderNodeCubeMap", "set_texture_type") }
-    open fun setTextureType(value: Int) {
-        _icall_Unit_Int(setTextureTypeMethodBind, this.rawMemory, value)
+    open fun setTextureType(value: Long) {
+        _icall_Unit_Long(setTextureTypeMethodBind, this.rawMemory, value)
     }
 
 
     private val getTextureTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualShaderNodeCubeMap", "get_texture_type") }
     open fun getTextureType(): VisualShaderNodeCubeMap.TextureType {
-        return VisualShaderNodeCubeMap.TextureType.fromInt(_icall_Int(getTextureTypeMethodBind, this.rawMemory))
+        return VisualShaderNodeCubeMap.TextureType.fromInt(_icall_Long(getTextureTypeMethodBind, this.rawMemory))
     }
 
 

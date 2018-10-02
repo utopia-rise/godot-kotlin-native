@@ -44,29 +44,29 @@ open class GridContainer : Container {
 
 
     // Properties
-    open var columns: Int
-        get() = _icall_Int(getColumnsMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setColumnsMethodBind, this.rawMemory, value)
+    open var columns: Long
+        get() = _icall_Long(getColumnsMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setColumnsMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setColumnsMethodBind: CPointer<godot_method_bind> by lazy { getMB("GridContainer", "set_columns") }
-    open fun setColumns(columns: Int) {
-        _icall_Unit_Int(setColumnsMethodBind, this.rawMemory, columns)
+    open fun setColumns(columns: Long) {
+        _icall_Unit_Long(setColumnsMethodBind, this.rawMemory, columns)
     }
 
 
     private val getColumnsMethodBind: CPointer<godot_method_bind> by lazy { getMB("GridContainer", "get_columns") }
-    open fun getColumns(): Int {
-        return _icall_Int(getColumnsMethodBind, this.rawMemory)
+    open fun getColumns(): Long {
+        return _icall_Long(getColumnsMethodBind, this.rawMemory)
     }
 
 
     private val getChildControlAtCellMethodBind: CPointer<godot_method_bind> by lazy { getMB("GridContainer", "get_child_control_at_cell") }
-    open fun getChildControlAtCell(row: Int, column: Int): Control {
-        return _icall_Control_Int_Int(getChildControlAtCellMethodBind, this.rawMemory, row, column)
+    open fun getChildControlAtCell(row: Long, column: Long): Control {
+        return _icall_Control_Long_Long(getChildControlAtCellMethodBind, this.rawMemory, row, column)
     }
 
 

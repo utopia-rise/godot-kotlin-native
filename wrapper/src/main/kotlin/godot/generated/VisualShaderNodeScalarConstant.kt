@@ -43,23 +43,23 @@ open class VisualShaderNodeScalarConstant : VisualShaderNode {
 
 
     // Properties
-    open var constant: Float
-        get() = _icall_Float(getConstantMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setConstantMethodBind, this.rawMemory, value)
+    open var constant: Double
+        get() = _icall_Double(getConstantMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setConstantMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setConstantMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualShaderNodeScalarConstant", "set_constant") }
-    open fun setConstant(value: Float) {
-        _icall_Unit_Float(setConstantMethodBind, this.rawMemory, value)
+    open fun setConstant(value: Double) {
+        _icall_Unit_Double(setConstantMethodBind, this.rawMemory, value)
     }
 
 
     private val getConstantMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualShaderNodeScalarConstant", "get_constant") }
-    open fun getConstant(): Float {
-        return _icall_Float(getConstantMethodBind, this.rawMemory)
+    open fun getConstant(): Double {
+        return _icall_Double(getConstantMethodBind, this.rawMemory)
     }
 
 

@@ -19,13 +19,13 @@ open class Timer : Node {
 
     // Enums 
 
-    enum class TimerProcessMode(val id: Int) {
+    enum class TimerProcessMode(val id: Long) {
         TIMER_PROCESS_PHYSICS(0),
         TIMER_PROCESS_IDLE(1),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -45,22 +45,22 @@ open class Timer : Node {
 
 
         // Constants
-        const val TIMER_PROCESS_PHYSICS: Int = 0
-        const val TIMER_PROCESS_IDLE: Int = 1
+        const val TIMER_PROCESS_PHYSICS: Long = 0
+        const val TIMER_PROCESS_IDLE: Long = 1
 
 
     }
 
 
     // Properties
-    open var processMode: Int
-        get() = _icall_Int(getTimerProcessModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setTimerProcessModeMethodBind, this.rawMemory, value)
+    open var processMode: Long
+        get() = _icall_Long(getTimerProcessModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setTimerProcessModeMethodBind, this.rawMemory, value)
 
 
-    open var waitTime: Float
-        get() = _icall_Float(getWaitTimeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setWaitTimeMethodBind, this.rawMemory, value)
+    open var waitTime: Double
+        get() = _icall_Double(getWaitTimeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setWaitTimeMethodBind, this.rawMemory, value)
 
 
     open var oneShot: Boolean
@@ -78,22 +78,22 @@ open class Timer : Node {
         set(value) = _icall_Unit_Boolean(setPausedMethodBind, this.rawMemory, value)
 
 
-    open val timeLeft: Float
-        get() = _icall_Float(getTimeLeftMethodBind, this.rawMemory)
+    open val timeLeft: Double
+        get() = _icall_Double(getTimeLeftMethodBind, this.rawMemory)
 
 
 
 
     // Methods
     private val setWaitTimeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Timer", "set_wait_time") }
-    open fun setWaitTime(timeSec: Float) {
-        _icall_Unit_Float(setWaitTimeMethodBind, this.rawMemory, timeSec)
+    open fun setWaitTime(timeSec: Double) {
+        _icall_Unit_Double(setWaitTimeMethodBind, this.rawMemory, timeSec)
     }
 
 
     private val getWaitTimeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Timer", "get_wait_time") }
-    open fun getWaitTime(): Float {
-        return _icall_Float(getWaitTimeMethodBind, this.rawMemory)
+    open fun getWaitTime(): Double {
+        return _icall_Double(getWaitTimeMethodBind, this.rawMemory)
     }
 
 
@@ -122,8 +122,8 @@ open class Timer : Node {
 
 
     private val startMethodBind: CPointer<godot_method_bind> by lazy { getMB("Timer", "start") }
-    open fun start(timeSec: Float = -1f) {
-        _icall_Unit_Float(startMethodBind, this.rawMemory, timeSec)
+    open fun start(timeSec: Double = -1.0) {
+        _icall_Unit_Double(startMethodBind, this.rawMemory, timeSec)
     }
 
 
@@ -152,20 +152,20 @@ open class Timer : Node {
 
 
     private val getTimeLeftMethodBind: CPointer<godot_method_bind> by lazy { getMB("Timer", "get_time_left") }
-    open fun getTimeLeft(): Float {
-        return _icall_Float(getTimeLeftMethodBind, this.rawMemory)
+    open fun getTimeLeft(): Double {
+        return _icall_Double(getTimeLeftMethodBind, this.rawMemory)
     }
 
 
     private val setTimerProcessModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Timer", "set_timer_process_mode") }
-    open fun setTimerProcessMode(mode: Int) {
-        _icall_Unit_Int(setTimerProcessModeMethodBind, this.rawMemory, mode)
+    open fun setTimerProcessMode(mode: Long) {
+        _icall_Unit_Long(setTimerProcessModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getTimerProcessModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Timer", "get_timer_process_mode") }
     open fun getTimerProcessMode(): Timer.TimerProcessMode {
-        return Timer.TimerProcessMode.fromInt(_icall_Int(getTimerProcessModeMethodBind, this.rawMemory))
+        return Timer.TimerProcessMode.fromInt(_icall_Long(getTimerProcessModeMethodBind, this.rawMemory))
     }
 
 

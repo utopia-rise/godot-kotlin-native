@@ -19,14 +19,14 @@ open class VisualScriptYieldSignal : VisualScriptNode {
 
     // Enums 
 
-    enum class CallMode(val id: Int) {
+    enum class CallMode(val id: Long) {
         CALL_MODE_SELF(0),
         CALL_MODE_NODE_PATH(1),
         CALL_MODE_INSTANCE(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -47,18 +47,18 @@ open class VisualScriptYieldSignal : VisualScriptNode {
 
 
         // Constants
-        const val CALL_MODE_SELF: Int = 0
-        const val CALL_MODE_NODE_PATH: Int = 1
-        const val CALL_MODE_INSTANCE: Int = 2
+        const val CALL_MODE_SELF: Long = 0
+        const val CALL_MODE_NODE_PATH: Long = 1
+        const val CALL_MODE_INSTANCE: Long = 2
 
 
     }
 
 
     // Properties
-    open var callMode: Int
-        get() = _icall_Int(getCallModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setCallModeMethodBind, this.rawMemory, value)
+    open var callMode: Long
+        get() = _icall_Long(getCallModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setCallModeMethodBind, this.rawMemory, value)
 
 
     open var baseType: String
@@ -104,14 +104,14 @@ open class VisualScriptYieldSignal : VisualScriptNode {
 
 
     private val setCallModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptYieldSignal", "set_call_mode") }
-    open fun setCallMode(mode: Int) {
-        _icall_Unit_Int(setCallModeMethodBind, this.rawMemory, mode)
+    open fun setCallMode(mode: Long) {
+        _icall_Unit_Long(setCallModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getCallModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptYieldSignal", "get_call_mode") }
     open fun getCallMode(): VisualScriptYieldSignal.CallMode {
-        return VisualScriptYieldSignal.CallMode.fromInt(_icall_Int(getCallModeMethodBind, this.rawMemory))
+        return VisualScriptYieldSignal.CallMode.fromInt(_icall_Long(getCallModeMethodBind, this.rawMemory))
     }
 
 

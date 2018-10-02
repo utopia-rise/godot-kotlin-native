@@ -19,16 +19,16 @@ open class EditorFileDialog : ConfirmationDialog {
 
     // Enums 
 
-    enum class DisplayMode(val id: Int) {
+    enum class DisplayMode(val id: Long) {
         DISPLAY_THUMBNAILS(0),
         DISPLAY_LIST(1),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class Mode(val id: Int) {
+    enum class Mode(val id: Long) {
         MODE_OPEN_FILE(0),
         MODE_OPEN_FILES(1),
         MODE_OPEN_DIR(2),
@@ -37,17 +37,17 @@ open class EditorFileDialog : ConfirmationDialog {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class Access(val id: Int) {
+    enum class Access(val id: Long) {
         ACCESS_RESOURCES(0),
         ACCESS_USERDATA(1),
         ACCESS_FILESYSTEM(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -75,35 +75,35 @@ open class EditorFileDialog : ConfirmationDialog {
 
 
         // Constants
-        const val MODE_OPEN_FILE: Int = 0
-        const val MODE_OPEN_FILES: Int = 1
-        const val MODE_OPEN_DIR: Int = 2
-        const val MODE_OPEN_ANY: Int = 3
-        const val MODE_SAVE_FILE: Int = 4
-        const val ACCESS_RESOURCES: Int = 0
-        const val ACCESS_USERDATA: Int = 1
-        const val ACCESS_FILESYSTEM: Int = 2
-        const val DISPLAY_THUMBNAILS: Int = 0
-        const val DISPLAY_LIST: Int = 1
+        const val MODE_OPEN_FILE: Long = 0
+        const val MODE_OPEN_FILES: Long = 1
+        const val MODE_OPEN_DIR: Long = 2
+        const val MODE_OPEN_ANY: Long = 3
+        const val MODE_SAVE_FILE: Long = 4
+        const val ACCESS_RESOURCES: Long = 0
+        const val ACCESS_USERDATA: Long = 1
+        const val ACCESS_FILESYSTEM: Long = 2
+        const val DISPLAY_THUMBNAILS: Long = 0
+        const val DISPLAY_LIST: Long = 1
 
 
     }
 
 
     // Properties
-    open var access: Int
-        get() = _icall_Int(getAccessMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setAccessMethodBind, this.rawMemory, value)
+    open var access: Long
+        get() = _icall_Long(getAccessMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setAccessMethodBind, this.rawMemory, value)
 
 
-    open var displayMode: Int
-        get() = _icall_Int(getDisplayModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setDisplayModeMethodBind, this.rawMemory, value)
+    open var displayMode: Long
+        get() = _icall_Long(getDisplayModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setDisplayModeMethodBind, this.rawMemory, value)
 
 
-    open var mode: Int
-        get() = _icall_Int(getModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setModeMethodBind, this.rawMemory, value)
+    open var mode: Long
+        get() = _icall_Long(getModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setModeMethodBind, this.rawMemory, value)
 
 
     open var currentDir: String
@@ -138,11 +138,11 @@ open class EditorFileDialog : ConfirmationDialog {
     }
 
 
-    open fun _item_selected(arg0: Int) {
+    open fun _item_selected(arg0: Long) {
     }
 
 
-    open fun _multi_selected(arg0: Int, arg1: Boolean) {
+    open fun _multi_selected(arg0: Long, arg1: Boolean) {
     }
 
 
@@ -150,7 +150,7 @@ open class EditorFileDialog : ConfirmationDialog {
     }
 
 
-    open fun _item_list_item_rmb_selected(arg0: Int, arg1: Vector2) {
+    open fun _item_list_item_rmb_selected(arg0: Long, arg1: Vector2) {
     }
 
 
@@ -158,11 +158,11 @@ open class EditorFileDialog : ConfirmationDialog {
     }
 
 
-    open fun _item_menu_id_pressed(arg0: Int) {
+    open fun _item_menu_id_pressed(arg0: Long) {
     }
 
 
-    open fun _item_db_selected(arg0: Int) {
+    open fun _item_db_selected(arg0: Long) {
     }
 
 
@@ -182,7 +182,7 @@ open class EditorFileDialog : ConfirmationDialog {
     }
 
 
-    open fun _filter_selected(arg0: Int) {
+    open fun _filter_selected(arg0: Long) {
     }
 
 
@@ -239,14 +239,14 @@ open class EditorFileDialog : ConfirmationDialog {
 
 
     private val setModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("EditorFileDialog", "set_mode") }
-    open fun setMode(mode: Int) {
-        _icall_Unit_Int(setModeMethodBind, this.rawMemory, mode)
+    open fun setMode(mode: Long) {
+        _icall_Unit_Long(setModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("EditorFileDialog", "get_mode") }
     open fun getMode(): EditorFileDialog.Mode {
-        return EditorFileDialog.Mode.fromInt(_icall_Int(getModeMethodBind, this.rawMemory))
+        return EditorFileDialog.Mode.fromInt(_icall_Long(getModeMethodBind, this.rawMemory))
     }
 
 
@@ -257,14 +257,14 @@ open class EditorFileDialog : ConfirmationDialog {
 
 
     private val setAccessMethodBind: CPointer<godot_method_bind> by lazy { getMB("EditorFileDialog", "set_access") }
-    open fun setAccess(access: Int) {
-        _icall_Unit_Int(setAccessMethodBind, this.rawMemory, access)
+    open fun setAccess(access: Long) {
+        _icall_Unit_Long(setAccessMethodBind, this.rawMemory, access)
     }
 
 
     private val getAccessMethodBind: CPointer<godot_method_bind> by lazy { getMB("EditorFileDialog", "get_access") }
     open fun getAccess(): EditorFileDialog.Access {
-        return EditorFileDialog.Access.fromInt(_icall_Int(getAccessMethodBind, this.rawMemory))
+        return EditorFileDialog.Access.fromInt(_icall_Long(getAccessMethodBind, this.rawMemory))
     }
 
 
@@ -280,7 +280,7 @@ open class EditorFileDialog : ConfirmationDialog {
     }
 
 
-    open fun _select_drive(arg0: Int) {
+    open fun _select_drive(arg0: Long) {
     }
 
 
@@ -305,14 +305,14 @@ open class EditorFileDialog : ConfirmationDialog {
 
 
     private val setDisplayModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("EditorFileDialog", "set_display_mode") }
-    open fun setDisplayMode(mode: Int) {
-        _icall_Unit_Int(setDisplayModeMethodBind, this.rawMemory, mode)
+    open fun setDisplayMode(mode: Long) {
+        _icall_Unit_Long(setDisplayModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getDisplayModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("EditorFileDialog", "get_display_mode") }
     open fun getDisplayMode(): EditorFileDialog.DisplayMode {
-        return EditorFileDialog.DisplayMode.fromInt(_icall_Int(getDisplayModeMethodBind, this.rawMemory))
+        return EditorFileDialog.DisplayMode.fromInt(_icall_Long(getDisplayModeMethodBind, this.rawMemory))
     }
 
 
@@ -332,7 +332,7 @@ open class EditorFileDialog : ConfirmationDialog {
     }
 
 
-    open fun _recent_selected(arg0: Int) {
+    open fun _recent_selected(arg0: Long) {
     }
 
 
@@ -352,7 +352,7 @@ open class EditorFileDialog : ConfirmationDialog {
     }
 
 
-    open fun _favorite_selected(arg0: Int) {
+    open fun _favorite_selected(arg0: Long) {
     }
 
 

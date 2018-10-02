@@ -48,23 +48,23 @@ open class VisualScriptReturn : VisualScriptNode {
         set(value) = _icall_Unit_Boolean(setEnableReturnValueMethodBind, this.rawMemory, value)
 
 
-    open var returnType: Int
-        get() = _icall_Int(getReturnTypeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setReturnTypeMethodBind, this.rawMemory, value)
+    open var returnType: Long
+        get() = _icall_Long(getReturnTypeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setReturnTypeMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setReturnTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptReturn", "set_return_type") }
-    open fun setReturnType(type: Int) {
-        _icall_Unit_Int(setReturnTypeMethodBind, this.rawMemory, type)
+    open fun setReturnType(type: Long) {
+        _icall_Unit_Long(setReturnTypeMethodBind, this.rawMemory, type)
     }
 
 
     private val getReturnTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptReturn", "get_return_type") }
     open fun getReturnType(): Variant.Type {
-        return Variant.Type.fromInt(_icall_Int(getReturnTypeMethodBind, this.rawMemory))
+        return Variant.Type.fromInt(_icall_Long(getReturnTypeMethodBind, this.rawMemory))
     }
 
 

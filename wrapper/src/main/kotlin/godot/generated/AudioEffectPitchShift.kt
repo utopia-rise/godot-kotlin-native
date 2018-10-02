@@ -43,23 +43,23 @@ open class AudioEffectPitchShift : AudioEffect {
 
 
     // Properties
-    open var pitchScale: Float
-        get() = _icall_Float(getPitchScaleMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setPitchScaleMethodBind, this.rawMemory, value)
+    open var pitchScale: Double
+        get() = _icall_Double(getPitchScaleMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setPitchScaleMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setPitchScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectPitchShift", "set_pitch_scale") }
-    open fun setPitchScale(rate: Float) {
-        _icall_Unit_Float(setPitchScaleMethodBind, this.rawMemory, rate)
+    open fun setPitchScale(rate: Double) {
+        _icall_Unit_Double(setPitchScaleMethodBind, this.rawMemory, rate)
     }
 
 
     private val getPitchScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectPitchShift", "get_pitch_scale") }
-    open fun getPitchScale(): Float {
-        return _icall_Float(getPitchScaleMethodBind, this.rawMemory)
+    open fun getPitchScale(): Double {
+        return _icall_Double(getPitchScaleMethodBind, this.rawMemory)
     }
 
 

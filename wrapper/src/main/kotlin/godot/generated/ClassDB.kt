@@ -117,7 +117,7 @@ open class ClassDB : Object {
 
         private val classSetPropertyMethodBind: CPointer<godot_method_bind> by lazy { getMB("_ClassDB", "class_set_property") }
         fun classSetProperty(_object: Object, property: String, value: Variant): GodotError {
-            return GodotError.fromInt(_icall_Int_Object_String_Variant(classSetPropertyMethodBind, this.rawMemory, _object, property, value))
+            return GodotError.fromInt(_icall_Long_Object_String_Variant(classSetPropertyMethodBind, this.rawMemory, _object, property, value))
         }
 
 
@@ -146,8 +146,8 @@ open class ClassDB : Object {
 
 
         private val classGetIntegerConstantMethodBind: CPointer<godot_method_bind> by lazy { getMB("_ClassDB", "class_get_integer_constant") }
-        fun classGetIntegerConstant(_class: String, name: String): Int {
-            return _icall_Int_String_String(classGetIntegerConstantMethodBind, this.rawMemory, _class, name)
+        fun classGetIntegerConstant(_class: String, name: String): Long {
+            return _icall_Long_String_String(classGetIntegerConstantMethodBind, this.rawMemory, _class, name)
         }
 
 

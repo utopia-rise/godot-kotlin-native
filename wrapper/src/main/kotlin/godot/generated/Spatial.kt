@@ -36,10 +36,10 @@ open class Spatial : Node {
 
 
         // Constants
-        const val NOTIFICATION_TRANSFORM_CHANGED: Int = 29
-        const val NOTIFICATION_ENTER_WORLD: Int = 41
-        const val NOTIFICATION_EXIT_WORLD: Int = 42
-        const val NOTIFICATION_VISIBILITY_CHANGED: Int = 43
+        const val NOTIFICATION_TRANSFORM_CHANGED: Long = 29
+        const val NOTIFICATION_ENTER_WORLD: Long = 41
+        const val NOTIFICATION_EXIT_WORLD: Long = 42
+        const val NOTIFICATION_VISIBILITY_CHANGED: Long = 43
 
 
     }
@@ -292,14 +292,14 @@ open class Spatial : Node {
 
 
     private val rotateMethodBind: CPointer<godot_method_bind> by lazy { getMB("Spatial", "rotate") }
-    open fun rotate(axis: Vector3, angle: Float) {
-        _icall_Unit_Vector3_Float(rotateMethodBind, this.rawMemory, axis, angle)
+    open fun rotate(axis: Vector3, angle: Double) {
+        _icall_Unit_Vector3_Double(rotateMethodBind, this.rawMemory, axis, angle)
     }
 
 
     private val globalRotateMethodBind: CPointer<godot_method_bind> by lazy { getMB("Spatial", "global_rotate") }
-    open fun globalRotate(axis: Vector3, angle: Float) {
-        _icall_Unit_Vector3_Float(globalRotateMethodBind, this.rawMemory, axis, angle)
+    open fun globalRotate(axis: Vector3, angle: Double) {
+        _icall_Unit_Vector3_Double(globalRotateMethodBind, this.rawMemory, axis, angle)
     }
 
 
@@ -316,8 +316,8 @@ open class Spatial : Node {
 
 
     private val rotateObjectLocalMethodBind: CPointer<godot_method_bind> by lazy { getMB("Spatial", "rotate_object_local") }
-    open fun rotateObjectLocal(axis: Vector3, angle: Float) {
-        _icall_Unit_Vector3_Float(rotateObjectLocalMethodBind, this.rawMemory, axis, angle)
+    open fun rotateObjectLocal(axis: Vector3, angle: Double) {
+        _icall_Unit_Vector3_Double(rotateObjectLocalMethodBind, this.rawMemory, axis, angle)
     }
 
 
@@ -334,20 +334,20 @@ open class Spatial : Node {
 
 
     private val rotateXMethodBind: CPointer<godot_method_bind> by lazy { getMB("Spatial", "rotate_x") }
-    open fun rotateX(angle: Float) {
-        _icall_Unit_Float(rotateXMethodBind, this.rawMemory, angle)
+    open fun rotateX(angle: Double) {
+        _icall_Unit_Double(rotateXMethodBind, this.rawMemory, angle)
     }
 
 
     private val rotateYMethodBind: CPointer<godot_method_bind> by lazy { getMB("Spatial", "rotate_y") }
-    open fun rotateY(angle: Float) {
-        _icall_Unit_Float(rotateYMethodBind, this.rawMemory, angle)
+    open fun rotateY(angle: Double) {
+        _icall_Unit_Double(rotateYMethodBind, this.rawMemory, angle)
     }
 
 
     private val rotateZMethodBind: CPointer<godot_method_bind> by lazy { getMB("Spatial", "rotate_z") }
-    open fun rotateZ(angle: Float) {
-        _icall_Unit_Float(rotateZMethodBind, this.rawMemory, angle)
+    open fun rotateZ(angle: Double) {
+        _icall_Unit_Double(rotateZMethodBind, this.rawMemory, angle)
     }
 
 

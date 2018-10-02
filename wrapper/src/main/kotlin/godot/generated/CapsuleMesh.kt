@@ -44,74 +44,74 @@ open class CapsuleMesh : PrimitiveMesh {
 
 
     // Properties
-    open var radius: Float
-        get() = _icall_Float(getRadiusMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setRadiusMethodBind, this.rawMemory, value)
+    open var radius: Double
+        get() = _icall_Double(getRadiusMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setRadiusMethodBind, this.rawMemory, value)
 
 
-    open var midHeight: Float
-        get() = _icall_Float(getMidHeightMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setMidHeightMethodBind, this.rawMemory, value)
+    open var midHeight: Double
+        get() = _icall_Double(getMidHeightMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setMidHeightMethodBind, this.rawMemory, value)
 
 
-    open var radialSegments: Int
-        get() = _icall_Int(getRadialSegmentsMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setRadialSegmentsMethodBind, this.rawMemory, value)
+    open var radialSegments: Long
+        get() = _icall_Long(getRadialSegmentsMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setRadialSegmentsMethodBind, this.rawMemory, value)
 
 
-    open var rings: Int
-        get() = _icall_Int(getRingsMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setRingsMethodBind, this.rawMemory, value)
+    open var rings: Long
+        get() = _icall_Long(getRingsMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setRingsMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setRadiusMethodBind: CPointer<godot_method_bind> by lazy { getMB("CapsuleMesh", "set_radius") }
-    open fun setRadius(radius: Float) {
-        _icall_Unit_Float(setRadiusMethodBind, this.rawMemory, radius)
+    open fun setRadius(radius: Double) {
+        _icall_Unit_Double(setRadiusMethodBind, this.rawMemory, radius)
     }
 
 
     private val getRadiusMethodBind: CPointer<godot_method_bind> by lazy { getMB("CapsuleMesh", "get_radius") }
-    open fun getRadius(): Float {
-        return _icall_Float(getRadiusMethodBind, this.rawMemory)
+    open fun getRadius(): Double {
+        return _icall_Double(getRadiusMethodBind, this.rawMemory)
     }
 
 
     private val setMidHeightMethodBind: CPointer<godot_method_bind> by lazy { getMB("CapsuleMesh", "set_mid_height") }
-    open fun setMidHeight(midHeight: Float) {
-        _icall_Unit_Float(setMidHeightMethodBind, this.rawMemory, midHeight)
+    open fun setMidHeight(midHeight: Double) {
+        _icall_Unit_Double(setMidHeightMethodBind, this.rawMemory, midHeight)
     }
 
 
     private val getMidHeightMethodBind: CPointer<godot_method_bind> by lazy { getMB("CapsuleMesh", "get_mid_height") }
-    open fun getMidHeight(): Float {
-        return _icall_Float(getMidHeightMethodBind, this.rawMemory)
+    open fun getMidHeight(): Double {
+        return _icall_Double(getMidHeightMethodBind, this.rawMemory)
     }
 
 
     private val setRadialSegmentsMethodBind: CPointer<godot_method_bind> by lazy { getMB("CapsuleMesh", "set_radial_segments") }
-    open fun setRadialSegments(segments: Int) {
-        _icall_Unit_Int(setRadialSegmentsMethodBind, this.rawMemory, segments)
+    open fun setRadialSegments(segments: Long) {
+        _icall_Unit_Long(setRadialSegmentsMethodBind, this.rawMemory, segments)
     }
 
 
     private val getRadialSegmentsMethodBind: CPointer<godot_method_bind> by lazy { getMB("CapsuleMesh", "get_radial_segments") }
-    open fun getRadialSegments(): Int {
-        return _icall_Int(getRadialSegmentsMethodBind, this.rawMemory)
+    open fun getRadialSegments(): Long {
+        return _icall_Long(getRadialSegmentsMethodBind, this.rawMemory)
     }
 
 
     private val setRingsMethodBind: CPointer<godot_method_bind> by lazy { getMB("CapsuleMesh", "set_rings") }
-    open fun setRings(rings: Int) {
-        _icall_Unit_Int(setRingsMethodBind, this.rawMemory, rings)
+    open fun setRings(rings: Long) {
+        _icall_Unit_Long(setRingsMethodBind, this.rawMemory, rings)
     }
 
 
     private val getRingsMethodBind: CPointer<godot_method_bind> by lazy { getMB("CapsuleMesh", "get_rings") }
-    open fun getRings(): Int {
-        return _icall_Int(getRingsMethodBind, this.rawMemory)
+    open fun getRings(): Long {
+        return _icall_Long(getRingsMethodBind, this.rawMemory)
     }
 
 

@@ -19,33 +19,33 @@ open class AudioStreamPlayer3D : Spatial {
 
     // Enums 
 
-    enum class AttenuationModel(val id: Int) {
+    enum class AttenuationModel(val id: Long) {
         ATTENUATION_INVERSE_DISTANCE(0),
         ATTENUATION_INVERSE_SQUARE_DISTANCE(1),
         ATTENUATION_LOGARITHMIC(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class OutOfRangeMode(val id: Int) {
+    enum class OutOfRangeMode(val id: Long) {
         OUT_OF_RANGE_MIX(0),
         OUT_OF_RANGE_PAUSE(1),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class DopplerTracking(val id: Int) {
+    enum class DopplerTracking(val id: Long) {
         DOPPLER_TRACKING_DISABLED(0),
         DOPPLER_TRACKING_IDLE_STEP(1),
         DOPPLER_TRACKING_PHYSICS_STEP(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -66,14 +66,14 @@ open class AudioStreamPlayer3D : Spatial {
 
 
         // Constants
-        const val ATTENUATION_INVERSE_DISTANCE: Int = 0
-        const val ATTENUATION_INVERSE_SQUARE_DISTANCE: Int = 1
-        const val ATTENUATION_LOGARITHMIC: Int = 2
-        const val OUT_OF_RANGE_MIX: Int = 0
-        const val OUT_OF_RANGE_PAUSE: Int = 1
-        const val DOPPLER_TRACKING_DISABLED: Int = 0
-        const val DOPPLER_TRACKING_IDLE_STEP: Int = 1
-        const val DOPPLER_TRACKING_PHYSICS_STEP: Int = 2
+        const val ATTENUATION_INVERSE_DISTANCE: Long = 0
+        const val ATTENUATION_INVERSE_SQUARE_DISTANCE: Long = 1
+        const val ATTENUATION_LOGARITHMIC: Long = 2
+        const val OUT_OF_RANGE_MIX: Long = 0
+        const val OUT_OF_RANGE_PAUSE: Long = 1
+        const val DOPPLER_TRACKING_DISABLED: Long = 0
+        const val DOPPLER_TRACKING_IDLE_STEP: Long = 1
+        const val DOPPLER_TRACKING_PHYSICS_STEP: Long = 2
 
 
     }
@@ -85,29 +85,29 @@ open class AudioStreamPlayer3D : Spatial {
         set(value) = _icall_Unit_Object(setStreamMethodBind, this.rawMemory, value)
 
 
-    open var attenuationModel: Int
-        get() = _icall_Int(getAttenuationModelMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setAttenuationModelMethodBind, this.rawMemory, value)
+    open var attenuationModel: Long
+        get() = _icall_Long(getAttenuationModelMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setAttenuationModelMethodBind, this.rawMemory, value)
 
 
-    open var unitDb: Float
-        get() = _icall_Float(getUnitDbMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setUnitDbMethodBind, this.rawMemory, value)
+    open var unitDb: Double
+        get() = _icall_Double(getUnitDbMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setUnitDbMethodBind, this.rawMemory, value)
 
 
-    open var unitSize: Float
-        get() = _icall_Float(getUnitSizeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setUnitSizeMethodBind, this.rawMemory, value)
+    open var unitSize: Double
+        get() = _icall_Double(getUnitSizeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setUnitSizeMethodBind, this.rawMemory, value)
 
 
-    open var maxDb: Float
-        get() = _icall_Float(getMaxDbMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setMaxDbMethodBind, this.rawMemory, value)
+    open var maxDb: Double
+        get() = _icall_Double(getMaxDbMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setMaxDbMethodBind, this.rawMemory, value)
 
 
-    open var pitchScale: Float
-        get() = _icall_Float(getPitchScaleMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setPitchScaleMethodBind, this.rawMemory, value)
+    open var pitchScale: Double
+        get() = _icall_Double(getPitchScaleMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setPitchScaleMethodBind, this.rawMemory, value)
 
 
     open val playing: Boolean
@@ -124,14 +124,14 @@ open class AudioStreamPlayer3D : Spatial {
         set(value) = _icall_Unit_Boolean(setStreamPausedMethodBind, this.rawMemory, value)
 
 
-    open var maxDistance: Float
-        get() = _icall_Float(getMaxDistanceMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setMaxDistanceMethodBind, this.rawMemory, value)
+    open var maxDistance: Double
+        get() = _icall_Double(getMaxDistanceMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setMaxDistanceMethodBind, this.rawMemory, value)
 
 
-    open var outOfRangeMode: Int
-        get() = _icall_Int(getOutOfRangeModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setOutOfRangeModeMethodBind, this.rawMemory, value)
+    open var outOfRangeMode: Long
+        get() = _icall_Long(getOutOfRangeModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setOutOfRangeModeMethodBind, this.rawMemory, value)
 
 
     open var bus: String
@@ -139,9 +139,9 @@ open class AudioStreamPlayer3D : Spatial {
         set(value) = _icall_Unit_String(setBusMethodBind, this.rawMemory, value)
 
 
-    open var areaMask: Int
-        get() = _icall_Int(getAreaMaskMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setAreaMaskMethodBind, this.rawMemory, value)
+    open var areaMask: Long
+        get() = _icall_Long(getAreaMaskMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setAreaMaskMethodBind, this.rawMemory, value)
 
 
     open var emissionAngleEnabled: Boolean
@@ -149,29 +149,29 @@ open class AudioStreamPlayer3D : Spatial {
         set(value) = _icall_Unit_Boolean(setEmissionAngleEnabledMethodBind, this.rawMemory, value)
 
 
-    open var emissionAngleDegrees: Float
-        get() = _icall_Float(getEmissionAngleMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setEmissionAngleMethodBind, this.rawMemory, value)
+    open var emissionAngleDegrees: Double
+        get() = _icall_Double(getEmissionAngleMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setEmissionAngleMethodBind, this.rawMemory, value)
 
 
-    open var emissionAngleFilterAttenuationDb: Float
-        get() = _icall_Float(getEmissionAngleFilterAttenuationDbMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setEmissionAngleFilterAttenuationDbMethodBind, this.rawMemory, value)
+    open var emissionAngleFilterAttenuationDb: Double
+        get() = _icall_Double(getEmissionAngleFilterAttenuationDbMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setEmissionAngleFilterAttenuationDbMethodBind, this.rawMemory, value)
 
 
-    open var attenuationFilterCutoffHz: Float
-        get() = _icall_Float(getAttenuationFilterCutoffHzMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setAttenuationFilterCutoffHzMethodBind, this.rawMemory, value)
+    open var attenuationFilterCutoffHz: Double
+        get() = _icall_Double(getAttenuationFilterCutoffHzMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setAttenuationFilterCutoffHzMethodBind, this.rawMemory, value)
 
 
-    open var attenuationFilterDb: Float
-        get() = _icall_Float(getAttenuationFilterDbMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setAttenuationFilterDbMethodBind, this.rawMemory, value)
+    open var attenuationFilterDb: Double
+        get() = _icall_Double(getAttenuationFilterDbMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setAttenuationFilterDbMethodBind, this.rawMemory, value)
 
 
-    open var dopplerTracking: Int
-        get() = _icall_Int(getDopplerTrackingMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setDopplerTrackingMethodBind, this.rawMemory, value)
+    open var dopplerTracking: Long
+        get() = _icall_Long(getDopplerTrackingMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setDopplerTrackingMethodBind, this.rawMemory, value)
 
 
 
@@ -190,62 +190,62 @@ open class AudioStreamPlayer3D : Spatial {
 
 
     private val setUnitDbMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer3D", "set_unit_db") }
-    open fun setUnitDb(unitDb: Float) {
-        _icall_Unit_Float(setUnitDbMethodBind, this.rawMemory, unitDb)
+    open fun setUnitDb(unitDb: Double) {
+        _icall_Unit_Double(setUnitDbMethodBind, this.rawMemory, unitDb)
     }
 
 
     private val getUnitDbMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer3D", "get_unit_db") }
-    open fun getUnitDb(): Float {
-        return _icall_Float(getUnitDbMethodBind, this.rawMemory)
+    open fun getUnitDb(): Double {
+        return _icall_Double(getUnitDbMethodBind, this.rawMemory)
     }
 
 
     private val setUnitSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer3D", "set_unit_size") }
-    open fun setUnitSize(unitSize: Float) {
-        _icall_Unit_Float(setUnitSizeMethodBind, this.rawMemory, unitSize)
+    open fun setUnitSize(unitSize: Double) {
+        _icall_Unit_Double(setUnitSizeMethodBind, this.rawMemory, unitSize)
     }
 
 
     private val getUnitSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer3D", "get_unit_size") }
-    open fun getUnitSize(): Float {
-        return _icall_Float(getUnitSizeMethodBind, this.rawMemory)
+    open fun getUnitSize(): Double {
+        return _icall_Double(getUnitSizeMethodBind, this.rawMemory)
     }
 
 
     private val setMaxDbMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer3D", "set_max_db") }
-    open fun setMaxDb(maxDb: Float) {
-        _icall_Unit_Float(setMaxDbMethodBind, this.rawMemory, maxDb)
+    open fun setMaxDb(maxDb: Double) {
+        _icall_Unit_Double(setMaxDbMethodBind, this.rawMemory, maxDb)
     }
 
 
     private val getMaxDbMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer3D", "get_max_db") }
-    open fun getMaxDb(): Float {
-        return _icall_Float(getMaxDbMethodBind, this.rawMemory)
+    open fun getMaxDb(): Double {
+        return _icall_Double(getMaxDbMethodBind, this.rawMemory)
     }
 
 
     private val setPitchScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer3D", "set_pitch_scale") }
-    open fun setPitchScale(pitchScale: Float) {
-        _icall_Unit_Float(setPitchScaleMethodBind, this.rawMemory, pitchScale)
+    open fun setPitchScale(pitchScale: Double) {
+        _icall_Unit_Double(setPitchScaleMethodBind, this.rawMemory, pitchScale)
     }
 
 
     private val getPitchScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer3D", "get_pitch_scale") }
-    open fun getPitchScale(): Float {
-        return _icall_Float(getPitchScaleMethodBind, this.rawMemory)
+    open fun getPitchScale(): Double {
+        return _icall_Double(getPitchScaleMethodBind, this.rawMemory)
     }
 
 
     private val playMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer3D", "play") }
-    open fun play(fromPosition: Float = 0f) {
-        _icall_Unit_Float(playMethodBind, this.rawMemory, fromPosition)
+    open fun play(fromPosition: Double = 0.0) {
+        _icall_Unit_Double(playMethodBind, this.rawMemory, fromPosition)
     }
 
 
     private val seekMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer3D", "seek") }
-    open fun seek(toPosition: Float) {
-        _icall_Unit_Float(seekMethodBind, this.rawMemory, toPosition)
+    open fun seek(toPosition: Double) {
+        _icall_Unit_Double(seekMethodBind, this.rawMemory, toPosition)
     }
 
 
@@ -262,8 +262,8 @@ open class AudioStreamPlayer3D : Spatial {
 
 
     private val getPlaybackPositionMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer3D", "get_playback_position") }
-    open fun getPlaybackPosition(): Float {
-        return _icall_Float(getPlaybackPositionMethodBind, this.rawMemory)
+    open fun getPlaybackPosition(): Double {
+        return _icall_Double(getPlaybackPositionMethodBind, this.rawMemory)
     }
 
 
@@ -301,38 +301,38 @@ open class AudioStreamPlayer3D : Spatial {
 
 
     private val setMaxDistanceMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer3D", "set_max_distance") }
-    open fun setMaxDistance(metres: Float) {
-        _icall_Unit_Float(setMaxDistanceMethodBind, this.rawMemory, metres)
+    open fun setMaxDistance(metres: Double) {
+        _icall_Unit_Double(setMaxDistanceMethodBind, this.rawMemory, metres)
     }
 
 
     private val getMaxDistanceMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer3D", "get_max_distance") }
-    open fun getMaxDistance(): Float {
-        return _icall_Float(getMaxDistanceMethodBind, this.rawMemory)
+    open fun getMaxDistance(): Double {
+        return _icall_Double(getMaxDistanceMethodBind, this.rawMemory)
     }
 
 
     private val setAreaMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer3D", "set_area_mask") }
-    open fun setAreaMask(mask: Int) {
-        _icall_Unit_Int(setAreaMaskMethodBind, this.rawMemory, mask)
+    open fun setAreaMask(mask: Long) {
+        _icall_Unit_Long(setAreaMaskMethodBind, this.rawMemory, mask)
     }
 
 
     private val getAreaMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer3D", "get_area_mask") }
-    open fun getAreaMask(): Int {
-        return _icall_Int(getAreaMaskMethodBind, this.rawMemory)
+    open fun getAreaMask(): Long {
+        return _icall_Long(getAreaMaskMethodBind, this.rawMemory)
     }
 
 
     private val setEmissionAngleMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer3D", "set_emission_angle") }
-    open fun setEmissionAngle(degrees: Float) {
-        _icall_Unit_Float(setEmissionAngleMethodBind, this.rawMemory, degrees)
+    open fun setEmissionAngle(degrees: Double) {
+        _icall_Unit_Double(setEmissionAngleMethodBind, this.rawMemory, degrees)
     }
 
 
     private val getEmissionAngleMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer3D", "get_emission_angle") }
-    open fun getEmissionAngle(): Float {
-        return _icall_Float(getEmissionAngleMethodBind, this.rawMemory)
+    open fun getEmissionAngle(): Double {
+        return _icall_Double(getEmissionAngleMethodBind, this.rawMemory)
     }
 
 
@@ -349,74 +349,74 @@ open class AudioStreamPlayer3D : Spatial {
 
 
     private val setEmissionAngleFilterAttenuationDbMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer3D", "set_emission_angle_filter_attenuation_db") }
-    open fun setEmissionAngleFilterAttenuationDb(db: Float) {
-        _icall_Unit_Float(setEmissionAngleFilterAttenuationDbMethodBind, this.rawMemory, db)
+    open fun setEmissionAngleFilterAttenuationDb(db: Double) {
+        _icall_Unit_Double(setEmissionAngleFilterAttenuationDbMethodBind, this.rawMemory, db)
     }
 
 
     private val getEmissionAngleFilterAttenuationDbMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer3D", "get_emission_angle_filter_attenuation_db") }
-    open fun getEmissionAngleFilterAttenuationDb(): Float {
-        return _icall_Float(getEmissionAngleFilterAttenuationDbMethodBind, this.rawMemory)
+    open fun getEmissionAngleFilterAttenuationDb(): Double {
+        return _icall_Double(getEmissionAngleFilterAttenuationDbMethodBind, this.rawMemory)
     }
 
 
     private val setAttenuationFilterCutoffHzMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer3D", "set_attenuation_filter_cutoff_hz") }
-    open fun setAttenuationFilterCutoffHz(degrees: Float) {
-        _icall_Unit_Float(setAttenuationFilterCutoffHzMethodBind, this.rawMemory, degrees)
+    open fun setAttenuationFilterCutoffHz(degrees: Double) {
+        _icall_Unit_Double(setAttenuationFilterCutoffHzMethodBind, this.rawMemory, degrees)
     }
 
 
     private val getAttenuationFilterCutoffHzMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer3D", "get_attenuation_filter_cutoff_hz") }
-    open fun getAttenuationFilterCutoffHz(): Float {
-        return _icall_Float(getAttenuationFilterCutoffHzMethodBind, this.rawMemory)
+    open fun getAttenuationFilterCutoffHz(): Double {
+        return _icall_Double(getAttenuationFilterCutoffHzMethodBind, this.rawMemory)
     }
 
 
     private val setAttenuationFilterDbMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer3D", "set_attenuation_filter_db") }
-    open fun setAttenuationFilterDb(db: Float) {
-        _icall_Unit_Float(setAttenuationFilterDbMethodBind, this.rawMemory, db)
+    open fun setAttenuationFilterDb(db: Double) {
+        _icall_Unit_Double(setAttenuationFilterDbMethodBind, this.rawMemory, db)
     }
 
 
     private val getAttenuationFilterDbMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer3D", "get_attenuation_filter_db") }
-    open fun getAttenuationFilterDb(): Float {
-        return _icall_Float(getAttenuationFilterDbMethodBind, this.rawMemory)
+    open fun getAttenuationFilterDb(): Double {
+        return _icall_Double(getAttenuationFilterDbMethodBind, this.rawMemory)
     }
 
 
     private val setAttenuationModelMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer3D", "set_attenuation_model") }
-    open fun setAttenuationModel(model: Int) {
-        _icall_Unit_Int(setAttenuationModelMethodBind, this.rawMemory, model)
+    open fun setAttenuationModel(model: Long) {
+        _icall_Unit_Long(setAttenuationModelMethodBind, this.rawMemory, model)
     }
 
 
     private val getAttenuationModelMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer3D", "get_attenuation_model") }
     open fun getAttenuationModel(): AudioStreamPlayer3D.AttenuationModel {
-        return AudioStreamPlayer3D.AttenuationModel.fromInt(_icall_Int(getAttenuationModelMethodBind, this.rawMemory))
+        return AudioStreamPlayer3D.AttenuationModel.fromInt(_icall_Long(getAttenuationModelMethodBind, this.rawMemory))
     }
 
 
     private val setOutOfRangeModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer3D", "set_out_of_range_mode") }
-    open fun setOutOfRangeMode(mode: Int) {
-        _icall_Unit_Int(setOutOfRangeModeMethodBind, this.rawMemory, mode)
+    open fun setOutOfRangeMode(mode: Long) {
+        _icall_Unit_Long(setOutOfRangeModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getOutOfRangeModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer3D", "get_out_of_range_mode") }
     open fun getOutOfRangeMode(): AudioStreamPlayer3D.OutOfRangeMode {
-        return AudioStreamPlayer3D.OutOfRangeMode.fromInt(_icall_Int(getOutOfRangeModeMethodBind, this.rawMemory))
+        return AudioStreamPlayer3D.OutOfRangeMode.fromInt(_icall_Long(getOutOfRangeModeMethodBind, this.rawMemory))
     }
 
 
     private val setDopplerTrackingMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer3D", "set_doppler_tracking") }
-    open fun setDopplerTracking(mode: Int) {
-        _icall_Unit_Int(setDopplerTrackingMethodBind, this.rawMemory, mode)
+    open fun setDopplerTracking(mode: Long) {
+        _icall_Unit_Long(setDopplerTrackingMethodBind, this.rawMemory, mode)
     }
 
 
     private val getDopplerTrackingMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer3D", "get_doppler_tracking") }
     open fun getDopplerTracking(): AudioStreamPlayer3D.DopplerTracking {
-        return AudioStreamPlayer3D.DopplerTracking.fromInt(_icall_Int(getDopplerTrackingMethodBind, this.rawMemory))
+        return AudioStreamPlayer3D.DopplerTracking.fromInt(_icall_Long(getDopplerTrackingMethodBind, this.rawMemory))
     }
 
 

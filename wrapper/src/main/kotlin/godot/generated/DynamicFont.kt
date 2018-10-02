@@ -19,7 +19,7 @@ open class DynamicFont : Font {
 
     // Enums 
 
-    enum class SpacingType(val id: Int) {
+    enum class SpacingType(val id: Long) {
         SPACING_TOP(0),
         SPACING_BOTTOM(1),
         SPACING_CHAR(2),
@@ -27,7 +27,7 @@ open class DynamicFont : Font {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -48,24 +48,24 @@ open class DynamicFont : Font {
 
 
         // Constants
-        const val SPACING_TOP: Int = 0
-        const val SPACING_BOTTOM: Int = 1
-        const val SPACING_CHAR: Int = 2
-        const val SPACING_SPACE: Int = 3
+        const val SPACING_TOP: Long = 0
+        const val SPACING_BOTTOM: Long = 1
+        const val SPACING_CHAR: Long = 2
+        const val SPACING_SPACE: Long = 3
 
 
     }
 
 
     // Properties
-    open var size: Int
-        get() = _icall_Int(getSizeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setSizeMethodBind, this.rawMemory, value)
+    open var size: Long
+        get() = _icall_Long(getSizeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setSizeMethodBind, this.rawMemory, value)
 
 
-    open var outlineSize: Int
-        get() = _icall_Int(getOutlineSizeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setOutlineSizeMethodBind, this.rawMemory, value)
+    open var outlineSize: Long
+        get() = _icall_Long(getOutlineSizeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setOutlineSizeMethodBind, this.rawMemory, value)
 
 
     open var outlineColor: Color
@@ -87,24 +87,24 @@ open class DynamicFont : Font {
         set(value) = _icall_Unit_Boolean(setUseFilterMethodBind, this.rawMemory, value)
 
 
-    open var extraSpacingTop: Int
-        get() = _icall_Int_Int(getSpacingMethodBind, this.rawMemory, 0)
-        set(value) = _icall_Unit_Int_Int(setSpacingMethodBind, this.rawMemory, 0, value)
+    open var extraSpacingTop: Long
+        get() = _icall_Long_Long(getSpacingMethodBind, this.rawMemory, 0)
+        set(value) = _icall_Unit_Long_Long(setSpacingMethodBind, this.rawMemory, 0, value)
 
 
-    open var extraSpacingBottom: Int
-        get() = _icall_Int_Int(getSpacingMethodBind, this.rawMemory, 1)
-        set(value) = _icall_Unit_Int_Int(setSpacingMethodBind, this.rawMemory, 1, value)
+    open var extraSpacingBottom: Long
+        get() = _icall_Long_Long(getSpacingMethodBind, this.rawMemory, 1)
+        set(value) = _icall_Unit_Long_Long(setSpacingMethodBind, this.rawMemory, 1, value)
 
 
-    open var extraSpacingChar: Int
-        get() = _icall_Int_Int(getSpacingMethodBind, this.rawMemory, 2)
-        set(value) = _icall_Unit_Int_Int(setSpacingMethodBind, this.rawMemory, 2, value)
+    open var extraSpacingChar: Long
+        get() = _icall_Long_Long(getSpacingMethodBind, this.rawMemory, 2)
+        set(value) = _icall_Unit_Long_Long(setSpacingMethodBind, this.rawMemory, 2, value)
 
 
-    open var extraSpacingSpace: Int
-        get() = _icall_Int_Int(getSpacingMethodBind, this.rawMemory, 3)
-        set(value) = _icall_Unit_Int_Int(setSpacingMethodBind, this.rawMemory, 3, value)
+    open var extraSpacingSpace: Long
+        get() = _icall_Long_Long(getSpacingMethodBind, this.rawMemory, 3)
+        set(value) = _icall_Unit_Long_Long(setSpacingMethodBind, this.rawMemory, 3, value)
 
 
     open var fontData: DynamicFontData
@@ -128,26 +128,26 @@ open class DynamicFont : Font {
 
 
     private val setSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("DynamicFont", "set_size") }
-    open fun setSize(data: Int) {
-        _icall_Unit_Int(setSizeMethodBind, this.rawMemory, data)
+    open fun setSize(data: Long) {
+        _icall_Unit_Long(setSizeMethodBind, this.rawMemory, data)
     }
 
 
     private val getSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("DynamicFont", "get_size") }
-    open fun getSize(): Int {
-        return _icall_Int(getSizeMethodBind, this.rawMemory)
+    open fun getSize(): Long {
+        return _icall_Long(getSizeMethodBind, this.rawMemory)
     }
 
 
     private val setOutlineSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("DynamicFont", "set_outline_size") }
-    open fun setOutlineSize(size: Int) {
-        _icall_Unit_Int(setOutlineSizeMethodBind, this.rawMemory, size)
+    open fun setOutlineSize(size: Long) {
+        _icall_Unit_Long(setOutlineSizeMethodBind, this.rawMemory, size)
     }
 
 
     private val getOutlineSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("DynamicFont", "get_outline_size") }
-    open fun getOutlineSize(): Int {
-        return _icall_Int(getOutlineSizeMethodBind, this.rawMemory)
+    open fun getOutlineSize(): Long {
+        return _icall_Long(getOutlineSizeMethodBind, this.rawMemory)
     }
 
 
@@ -188,14 +188,14 @@ open class DynamicFont : Font {
 
 
     private val setSpacingMethodBind: CPointer<godot_method_bind> by lazy { getMB("DynamicFont", "set_spacing") }
-    open fun setSpacing(type: Int, value: Int) {
-        _icall_Unit_Int_Int(setSpacingMethodBind, this.rawMemory, type, value)
+    open fun setSpacing(type: Long, value: Long) {
+        _icall_Unit_Long_Long(setSpacingMethodBind, this.rawMemory, type, value)
     }
 
 
     private val getSpacingMethodBind: CPointer<godot_method_bind> by lazy { getMB("DynamicFont", "get_spacing") }
-    open fun getSpacing(type: Int): Int {
-        return _icall_Int_Int(getSpacingMethodBind, this.rawMemory, type)
+    open fun getSpacing(type: Long): Long {
+        return _icall_Long_Long(getSpacingMethodBind, this.rawMemory, type)
     }
 
 
@@ -206,26 +206,26 @@ open class DynamicFont : Font {
 
 
     private val setFallbackMethodBind: CPointer<godot_method_bind> by lazy { getMB("DynamicFont", "set_fallback") }
-    open fun setFallback(idx: Int, data: DynamicFontData) {
-        _icall_Unit_Int_Object(setFallbackMethodBind, this.rawMemory, idx, data)
+    open fun setFallback(idx: Long, data: DynamicFontData) {
+        _icall_Unit_Long_Object(setFallbackMethodBind, this.rawMemory, idx, data)
     }
 
 
     private val getFallbackMethodBind: CPointer<godot_method_bind> by lazy { getMB("DynamicFont", "get_fallback") }
-    open fun getFallback(idx: Int): DynamicFontData {
-        return _icall_DynamicFontData_Int(getFallbackMethodBind, this.rawMemory, idx)
+    open fun getFallback(idx: Long): DynamicFontData {
+        return _icall_DynamicFontData_Long(getFallbackMethodBind, this.rawMemory, idx)
     }
 
 
     private val removeFallbackMethodBind: CPointer<godot_method_bind> by lazy { getMB("DynamicFont", "remove_fallback") }
-    open fun removeFallback(idx: Int) {
-        _icall_Unit_Int(removeFallbackMethodBind, this.rawMemory, idx)
+    open fun removeFallback(idx: Long) {
+        _icall_Unit_Long(removeFallbackMethodBind, this.rawMemory, idx)
     }
 
 
     private val getFallbackCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("DynamicFont", "get_fallback_count") }
-    open fun getFallbackCount(): Int {
-        return _icall_Int(getFallbackCountMethodBind, this.rawMemory)
+    open fun getFallbackCount(): Long {
+        return _icall_Long(getFallbackCountMethodBind, this.rawMemory)
     }
 
 

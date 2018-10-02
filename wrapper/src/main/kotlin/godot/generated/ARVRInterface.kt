@@ -19,7 +19,7 @@ open class ARVRInterface : Reference {
 
     // Enums 
 
-    enum class Tracking_status(val id: Int) {
+    enum class Tracking_status(val id: Long) {
         ARVR_NORMAL_TRACKING(0),
         ARVR_EXCESSIVE_MOTION(1),
         ARVR_INSUFFICIENT_FEATURES(2),
@@ -28,20 +28,20 @@ open class ARVRInterface : Reference {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class Eyes(val id: Int) {
+    enum class Eyes(val id: Long) {
         EYE_MONO(0),
         EYE_LEFT(1),
         EYE_RIGHT(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class Capabilities(val id: Int) {
+    enum class Capabilities(val id: Long) {
         ARVR_NONE(0),
         ARVR_MONO(1),
         ARVR_STEREO(2),
@@ -50,7 +50,7 @@ open class ARVRInterface : Reference {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -69,19 +69,19 @@ open class ARVRInterface : Reference {
 
 
         // Constants
-        const val ARVR_NONE: Int = 0
-        const val ARVR_MONO: Int = 1
-        const val ARVR_STEREO: Int = 2
-        const val ARVR_AR: Int = 4
-        const val ARVR_EXTERNAL: Int = 8
-        const val EYE_MONO: Int = 0
-        const val EYE_LEFT: Int = 1
-        const val EYE_RIGHT: Int = 2
-        const val ARVR_NORMAL_TRACKING: Int = 0
-        const val ARVR_EXCESSIVE_MOTION: Int = 1
-        const val ARVR_INSUFFICIENT_FEATURES: Int = 2
-        const val ARVR_UNKNOWN_TRACKING: Int = 3
-        const val ARVR_NOT_TRACKING: Int = 4
+        const val ARVR_NONE: Long = 0
+        const val ARVR_MONO: Long = 1
+        const val ARVR_STEREO: Long = 2
+        const val ARVR_AR: Long = 4
+        const val ARVR_EXTERNAL: Long = 8
+        const val EYE_MONO: Long = 0
+        const val EYE_LEFT: Long = 1
+        const val EYE_RIGHT: Long = 2
+        const val ARVR_NORMAL_TRACKING: Long = 0
+        const val ARVR_EXCESSIVE_MOTION: Long = 1
+        const val ARVR_INSUFFICIENT_FEATURES: Long = 2
+        const val ARVR_UNKNOWN_TRACKING: Long = 3
+        const val ARVR_NOT_TRACKING: Long = 4
 
 
     }
@@ -113,8 +113,8 @@ open class ARVRInterface : Reference {
 
 
     private val getCapabilitiesMethodBind: CPointer<godot_method_bind> by lazy { getMB("ARVRInterface", "get_capabilities") }
-    open fun getCapabilities(): Int {
-        return _icall_Int(getCapabilitiesMethodBind, this.rawMemory)
+    open fun getCapabilities(): Long {
+        return _icall_Long(getCapabilitiesMethodBind, this.rawMemory)
     }
 
 
@@ -156,7 +156,7 @@ open class ARVRInterface : Reference {
 
     private val getTrackingStatusMethodBind: CPointer<godot_method_bind> by lazy { getMB("ARVRInterface", "get_tracking_status") }
     open fun getTrackingStatus(): ARVRInterface.Tracking_status {
-        return ARVRInterface.Tracking_status.fromInt(_icall_Int(getTrackingStatusMethodBind, this.rawMemory))
+        return ARVRInterface.Tracking_status.fromInt(_icall_Long(getTrackingStatusMethodBind, this.rawMemory))
     }
 
 

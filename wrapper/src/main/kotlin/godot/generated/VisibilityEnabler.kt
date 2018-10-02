@@ -19,14 +19,14 @@ open class VisibilityEnabler : VisibilityNotifier {
 
     // Enums 
 
-    enum class Enabler(val id: Int) {
+    enum class Enabler(val id: Long) {
         ENABLER_PAUSE_ANIMATIONS(0),
         ENABLER_FREEZE_BODIES(1),
         ENABLER_MAX(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -47,9 +47,9 @@ open class VisibilityEnabler : VisibilityNotifier {
 
 
         // Constants
-        const val ENABLER_PAUSE_ANIMATIONS: Int = 0
-        const val ENABLER_FREEZE_BODIES: Int = 1
-        const val ENABLER_MAX: Int = 2
+        const val ENABLER_PAUSE_ANIMATIONS: Long = 0
+        const val ENABLER_FREEZE_BODIES: Long = 1
+        const val ENABLER_MAX: Long = 2
 
 
     }
@@ -57,27 +57,27 @@ open class VisibilityEnabler : VisibilityNotifier {
 
     // Properties
     open var pauseAnimations: Boolean
-        get() = _icall_Boolean_Int(isEnablerEnabledMethodBind, this.rawMemory, 0)
-        set(value) = _icall_Unit_Int_Boolean(setEnablerMethodBind, this.rawMemory, 0, value)
+        get() = _icall_Boolean_Long(isEnablerEnabledMethodBind, this.rawMemory, 0)
+        set(value) = _icall_Unit_Long_Boolean(setEnablerMethodBind, this.rawMemory, 0, value)
 
 
     open var freezeBodies: Boolean
-        get() = _icall_Boolean_Int(isEnablerEnabledMethodBind, this.rawMemory, 1)
-        set(value) = _icall_Unit_Int_Boolean(setEnablerMethodBind, this.rawMemory, 1, value)
+        get() = _icall_Boolean_Long(isEnablerEnabledMethodBind, this.rawMemory, 1)
+        set(value) = _icall_Unit_Long_Boolean(setEnablerMethodBind, this.rawMemory, 1, value)
 
 
 
 
     // Methods
     private val setEnablerMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisibilityEnabler", "set_enabler") }
-    open fun setEnabler(enabler: Int, enabled: Boolean) {
-        _icall_Unit_Int_Boolean(setEnablerMethodBind, this.rawMemory, enabler, enabled)
+    open fun setEnabler(enabler: Long, enabled: Boolean) {
+        _icall_Unit_Long_Boolean(setEnablerMethodBind, this.rawMemory, enabler, enabled)
     }
 
 
     private val isEnablerEnabledMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisibilityEnabler", "is_enabler_enabled") }
-    open fun isEnablerEnabled(enabler: Int): Boolean {
-        return _icall_Boolean_Int(isEnablerEnabledMethodBind, this.rawMemory, enabler)
+    open fun isEnablerEnabled(enabler: Long): Boolean {
+        return _icall_Boolean_Long(isEnablerEnabledMethodBind, this.rawMemory, enabler)
     }
 
 

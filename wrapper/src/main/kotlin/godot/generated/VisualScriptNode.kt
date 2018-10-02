@@ -53,14 +53,14 @@ open class VisualScriptNode : Resource {
 
 
     private val setDefaultInputValueMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptNode", "set_default_input_value") }
-    open fun setDefaultInputValue(portIdx: Int, value: Variant) {
-        _icall_Unit_Int_Variant(setDefaultInputValueMethodBind, this.rawMemory, portIdx, value)
+    open fun setDefaultInputValue(portIdx: Long, value: Variant) {
+        _icall_Unit_Long_Variant(setDefaultInputValueMethodBind, this.rawMemory, portIdx, value)
     }
 
 
     private val getDefaultInputValueMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptNode", "get_default_input_value") }
-    open fun getDefaultInputValue(portIdx: Int): Variant {
-        return _icall_Variant_Int(getDefaultInputValueMethodBind, this.rawMemory, portIdx)
+    open fun getDefaultInputValue(portIdx: Long): Variant {
+        return _icall_Variant_Long(getDefaultInputValueMethodBind, this.rawMemory, portIdx)
     }
 
 

@@ -43,9 +43,9 @@ open class VisualScriptConstructor : VisualScriptNode {
 
 
     // Properties
-    open var type: Int
-        get() = _icall_Int(getConstructorTypeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setConstructorTypeMethodBind, this.rawMemory, value)
+    open var type: Long
+        get() = _icall_Long(getConstructorTypeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setConstructorTypeMethodBind, this.rawMemory, value)
 
 
     open var constructor: Dictionary
@@ -57,14 +57,14 @@ open class VisualScriptConstructor : VisualScriptNode {
 
     // Methods
     private val setConstructorTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptConstructor", "set_constructor_type") }
-    open fun setConstructorType(type: Int) {
-        _icall_Unit_Int(setConstructorTypeMethodBind, this.rawMemory, type)
+    open fun setConstructorType(type: Long) {
+        _icall_Unit_Long(setConstructorTypeMethodBind, this.rawMemory, type)
     }
 
 
     private val getConstructorTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptConstructor", "get_constructor_type") }
     open fun getConstructorType(): Variant.Type {
-        return Variant.Type.fromInt(_icall_Int(getConstructorTypeMethodBind, this.rawMemory))
+        return Variant.Type.fromInt(_icall_Long(getConstructorTypeMethodBind, this.rawMemory))
     }
 
 

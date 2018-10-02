@@ -19,7 +19,7 @@ open class SpriteBase3D : GeometryInstance {
 
     // Enums 
 
-    enum class DrawFlags(val id: Int) {
+    enum class DrawFlags(val id: Long) {
         FLAG_TRANSPARENT(0),
         FLAG_SHADED(1),
         FLAG_DOUBLE_SIDED(2),
@@ -27,17 +27,17 @@ open class SpriteBase3D : GeometryInstance {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class AlphaCutMode(val id: Int) {
+    enum class AlphaCutMode(val id: Long) {
         ALPHA_CUT_DISABLED(0),
         ALPHA_CUT_DISCARD(1),
         ALPHA_CUT_OPAQUE_PREPASS(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -59,13 +59,13 @@ open class SpriteBase3D : GeometryInstance {
 
 
         // Constants
-        const val FLAG_TRANSPARENT: Int = 0
-        const val FLAG_SHADED: Int = 1
-        const val FLAG_DOUBLE_SIDED: Int = 2
-        const val FLAG_MAX: Int = 3
-        const val ALPHA_CUT_DISABLED: Int = 0
-        const val ALPHA_CUT_DISCARD: Int = 1
-        const val ALPHA_CUT_OPAQUE_PREPASS: Int = 2
+        const val FLAG_TRANSPARENT: Long = 0
+        const val FLAG_SHADED: Long = 1
+        const val FLAG_DOUBLE_SIDED: Long = 2
+        const val FLAG_MAX: Long = 3
+        const val ALPHA_CUT_DISABLED: Long = 0
+        const val ALPHA_CUT_DISCARD: Long = 1
+        const val ALPHA_CUT_OPAQUE_PREPASS: Long = 2
 
 
     }
@@ -105,39 +105,39 @@ open class SpriteBase3D : GeometryInstance {
     }
 
 
-    open var opacity: Float
-        get() = _icall_Float(getOpacityMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setOpacityMethodBind, this.rawMemory, value)
+    open var opacity: Double
+        get() = _icall_Double(getOpacityMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setOpacityMethodBind, this.rawMemory, value)
 
 
-    open var pixelSize: Float
-        get() = _icall_Float(getPixelSizeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setPixelSizeMethodBind, this.rawMemory, value)
+    open var pixelSize: Double
+        get() = _icall_Double(getPixelSizeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setPixelSizeMethodBind, this.rawMemory, value)
 
 
-    open var axis: Int
-        get() = _icall_Int(getAxisMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setAxisMethodBind, this.rawMemory, value)
+    open var axis: Long
+        get() = _icall_Long(getAxisMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setAxisMethodBind, this.rawMemory, value)
 
 
     open var transparent: Boolean
-        get() = _icall_Boolean_Int(getDrawFlagMethodBind, this.rawMemory, 0)
-        set(value) = _icall_Unit_Int_Boolean(setDrawFlagMethodBind, this.rawMemory, 0, value)
+        get() = _icall_Boolean_Long(getDrawFlagMethodBind, this.rawMemory, 0)
+        set(value) = _icall_Unit_Long_Boolean(setDrawFlagMethodBind, this.rawMemory, 0, value)
 
 
     open var shaded: Boolean
-        get() = _icall_Boolean_Int(getDrawFlagMethodBind, this.rawMemory, 1)
-        set(value) = _icall_Unit_Int_Boolean(setDrawFlagMethodBind, this.rawMemory, 1, value)
+        get() = _icall_Boolean_Long(getDrawFlagMethodBind, this.rawMemory, 1)
+        set(value) = _icall_Unit_Long_Boolean(setDrawFlagMethodBind, this.rawMemory, 1, value)
 
 
     open var doubleSided: Boolean
-        get() = _icall_Boolean_Int(getDrawFlagMethodBind, this.rawMemory, 2)
-        set(value) = _icall_Unit_Int_Boolean(setDrawFlagMethodBind, this.rawMemory, 2, value)
+        get() = _icall_Boolean_Long(getDrawFlagMethodBind, this.rawMemory, 2)
+        set(value) = _icall_Unit_Long_Boolean(setDrawFlagMethodBind, this.rawMemory, 2, value)
 
 
-    open var alphaCut: Int
-        get() = _icall_Int(getAlphaCutModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setAlphaCutModeMethodBind, this.rawMemory, value)
+    open var alphaCut: Long
+        get() = _icall_Long(getAlphaCutModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setAlphaCutModeMethodBind, this.rawMemory, value)
 
 
 
@@ -204,62 +204,62 @@ open class SpriteBase3D : GeometryInstance {
 
 
     private val setOpacityMethodBind: CPointer<godot_method_bind> by lazy { getMB("SpriteBase3D", "set_opacity") }
-    open fun setOpacity(opacity: Float) {
-        _icall_Unit_Float(setOpacityMethodBind, this.rawMemory, opacity)
+    open fun setOpacity(opacity: Double) {
+        _icall_Unit_Double(setOpacityMethodBind, this.rawMemory, opacity)
     }
 
 
     private val getOpacityMethodBind: CPointer<godot_method_bind> by lazy { getMB("SpriteBase3D", "get_opacity") }
-    open fun getOpacity(): Float {
-        return _icall_Float(getOpacityMethodBind, this.rawMemory)
+    open fun getOpacity(): Double {
+        return _icall_Double(getOpacityMethodBind, this.rawMemory)
     }
 
 
     private val setPixelSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("SpriteBase3D", "set_pixel_size") }
-    open fun setPixelSize(pixelSize: Float) {
-        _icall_Unit_Float(setPixelSizeMethodBind, this.rawMemory, pixelSize)
+    open fun setPixelSize(pixelSize: Double) {
+        _icall_Unit_Double(setPixelSizeMethodBind, this.rawMemory, pixelSize)
     }
 
 
     private val getPixelSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("SpriteBase3D", "get_pixel_size") }
-    open fun getPixelSize(): Float {
-        return _icall_Float(getPixelSizeMethodBind, this.rawMemory)
+    open fun getPixelSize(): Double {
+        return _icall_Double(getPixelSizeMethodBind, this.rawMemory)
     }
 
 
     private val setAxisMethodBind: CPointer<godot_method_bind> by lazy { getMB("SpriteBase3D", "set_axis") }
-    open fun setAxis(axis: Int) {
-        _icall_Unit_Int(setAxisMethodBind, this.rawMemory, axis)
+    open fun setAxis(axis: Long) {
+        _icall_Unit_Long(setAxisMethodBind, this.rawMemory, axis)
     }
 
 
     private val getAxisMethodBind: CPointer<godot_method_bind> by lazy { getMB("SpriteBase3D", "get_axis") }
     open fun getAxis(): Vector3.Axis {
-        return Vector3.Axis.fromInt(_icall_Int(getAxisMethodBind, this.rawMemory))
+        return Vector3.Axis.fromInt(_icall_Long(getAxisMethodBind, this.rawMemory))
     }
 
 
     private val setDrawFlagMethodBind: CPointer<godot_method_bind> by lazy { getMB("SpriteBase3D", "set_draw_flag") }
-    open fun setDrawFlag(flag: Int, enabled: Boolean) {
-        _icall_Unit_Int_Boolean(setDrawFlagMethodBind, this.rawMemory, flag, enabled)
+    open fun setDrawFlag(flag: Long, enabled: Boolean) {
+        _icall_Unit_Long_Boolean(setDrawFlagMethodBind, this.rawMemory, flag, enabled)
     }
 
 
     private val getDrawFlagMethodBind: CPointer<godot_method_bind> by lazy { getMB("SpriteBase3D", "get_draw_flag") }
-    open fun getDrawFlag(flag: Int): Boolean {
-        return _icall_Boolean_Int(getDrawFlagMethodBind, this.rawMemory, flag)
+    open fun getDrawFlag(flag: Long): Boolean {
+        return _icall_Boolean_Long(getDrawFlagMethodBind, this.rawMemory, flag)
     }
 
 
     private val setAlphaCutModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("SpriteBase3D", "set_alpha_cut_mode") }
-    open fun setAlphaCutMode(mode: Int) {
-        _icall_Unit_Int(setAlphaCutModeMethodBind, this.rawMemory, mode)
+    open fun setAlphaCutMode(mode: Long) {
+        _icall_Unit_Long(setAlphaCutModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getAlphaCutModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("SpriteBase3D", "get_alpha_cut_mode") }
     open fun getAlphaCutMode(): SpriteBase3D.AlphaCutMode {
-        return SpriteBase3D.AlphaCutMode.fromInt(_icall_Int(getAlphaCutModeMethodBind, this.rawMemory))
+        return SpriteBase3D.AlphaCutMode.fromInt(_icall_Long(getAlphaCutModeMethodBind, this.rawMemory))
     }
 
 

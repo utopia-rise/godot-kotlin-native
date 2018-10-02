@@ -52,19 +52,19 @@ open class StyleBoxLine : StyleBox {
     }
 
 
-    open var growBegin: Float
-        get() = _icall_Float(getGrowBeginMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setGrowBeginMethodBind, this.rawMemory, value)
+    open var growBegin: Double
+        get() = _icall_Double(getGrowBeginMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setGrowBeginMethodBind, this.rawMemory, value)
 
 
-    open var growEnd: Float
-        get() = _icall_Float(getGrowEndMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setGrowEndMethodBind, this.rawMemory, value)
+    open var growEnd: Double
+        get() = _icall_Double(getGrowEndMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setGrowEndMethodBind, this.rawMemory, value)
 
 
-    open var thickness: Int
-        get() = _icall_Int(getThicknessMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setThicknessMethodBind, this.rawMemory, value)
+    open var thickness: Long
+        get() = _icall_Long(getThicknessMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setThicknessMethodBind, this.rawMemory, value)
 
 
     open var vertical: Boolean
@@ -88,38 +88,38 @@ open class StyleBoxLine : StyleBox {
 
 
     private val setThicknessMethodBind: CPointer<godot_method_bind> by lazy { getMB("StyleBoxLine", "set_thickness") }
-    open fun setThickness(thickness: Int) {
-        _icall_Unit_Int(setThicknessMethodBind, this.rawMemory, thickness)
+    open fun setThickness(thickness: Long) {
+        _icall_Unit_Long(setThicknessMethodBind, this.rawMemory, thickness)
     }
 
 
     private val getThicknessMethodBind: CPointer<godot_method_bind> by lazy { getMB("StyleBoxLine", "get_thickness") }
-    open fun getThickness(): Int {
-        return _icall_Int(getThicknessMethodBind, this.rawMemory)
+    open fun getThickness(): Long {
+        return _icall_Long(getThicknessMethodBind, this.rawMemory)
     }
 
 
     private val setGrowBeginMethodBind: CPointer<godot_method_bind> by lazy { getMB("StyleBoxLine", "set_grow_begin") }
-    open fun setGrowBegin(offset: Float) {
-        _icall_Unit_Float(setGrowBeginMethodBind, this.rawMemory, offset)
+    open fun setGrowBegin(offset: Double) {
+        _icall_Unit_Double(setGrowBeginMethodBind, this.rawMemory, offset)
     }
 
 
     private val getGrowBeginMethodBind: CPointer<godot_method_bind> by lazy { getMB("StyleBoxLine", "get_grow_begin") }
-    open fun getGrowBegin(): Float {
-        return _icall_Float(getGrowBeginMethodBind, this.rawMemory)
+    open fun getGrowBegin(): Double {
+        return _icall_Double(getGrowBeginMethodBind, this.rawMemory)
     }
 
 
     private val setGrowEndMethodBind: CPointer<godot_method_bind> by lazy { getMB("StyleBoxLine", "set_grow_end") }
-    open fun setGrowEnd(offset: Float) {
-        _icall_Unit_Float(setGrowEndMethodBind, this.rawMemory, offset)
+    open fun setGrowEnd(offset: Double) {
+        _icall_Unit_Double(setGrowEndMethodBind, this.rawMemory, offset)
     }
 
 
     private val getGrowEndMethodBind: CPointer<godot_method_bind> by lazy { getMB("StyleBoxLine", "get_grow_end") }
-    open fun getGrowEnd(): Float {
-        return _icall_Float(getGrowEndMethodBind, this.rawMemory)
+    open fun getGrowEnd(): Double {
+        return _icall_Double(getGrowEndMethodBind, this.rawMemory)
     }
 
 

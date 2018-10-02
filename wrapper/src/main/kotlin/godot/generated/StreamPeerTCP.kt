@@ -19,7 +19,7 @@ open class StreamPeerTCP : StreamPeer {
 
     // Enums 
 
-    enum class Status(val id: Int) {
+    enum class Status(val id: Long) {
         STATUS_NONE(0),
         STATUS_CONNECTING(1),
         STATUS_CONNECTED(2),
@@ -27,7 +27,7 @@ open class StreamPeerTCP : StreamPeer {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -47,10 +47,10 @@ open class StreamPeerTCP : StreamPeer {
 
 
         // Constants
-        const val STATUS_NONE: Int = 0
-        const val STATUS_CONNECTING: Int = 1
-        const val STATUS_CONNECTED: Int = 2
-        const val STATUS_ERROR: Int = 3
+        const val STATUS_NONE: Long = 0
+        const val STATUS_CONNECTING: Long = 1
+        const val STATUS_CONNECTED: Long = 2
+        const val STATUS_ERROR: Long = 3
 
 
     }
@@ -61,8 +61,8 @@ open class StreamPeerTCP : StreamPeer {
 
     // Methods
     private val connectToHostMethodBind: CPointer<godot_method_bind> by lazy { getMB("StreamPeerTCP", "connect_to_host") }
-    open fun connectToHost(host: String, port: Int): GodotError {
-        return GodotError.fromInt(_icall_Int_String_Int(connectToHostMethodBind, this.rawMemory, host, port))
+    open fun connectToHost(host: String, port: Long): GodotError {
+        return GodotError.fromInt(_icall_Long_String_Long(connectToHostMethodBind, this.rawMemory, host, port))
     }
 
 
@@ -74,7 +74,7 @@ open class StreamPeerTCP : StreamPeer {
 
     private val getStatusMethodBind: CPointer<godot_method_bind> by lazy { getMB("StreamPeerTCP", "get_status") }
     open fun getStatus(): StreamPeerTCP.Status {
-        return StreamPeerTCP.Status.fromInt(_icall_Int(getStatusMethodBind, this.rawMemory))
+        return StreamPeerTCP.Status.fromInt(_icall_Long(getStatusMethodBind, this.rawMemory))
     }
 
 
@@ -85,8 +85,8 @@ open class StreamPeerTCP : StreamPeer {
 
 
     private val getConnectedPortMethodBind: CPointer<godot_method_bind> by lazy { getMB("StreamPeerTCP", "get_connected_port") }
-    open fun getConnectedPort(): Int {
-        return _icall_Int(getConnectedPortMethodBind, this.rawMemory)
+    open fun getConnectedPort(): Long {
+        return _icall_Long(getConnectedPortMethodBind, this.rawMemory)
     }
 
 

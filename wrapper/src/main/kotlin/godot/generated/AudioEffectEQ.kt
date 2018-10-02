@@ -47,20 +47,20 @@ open class AudioEffectEQ : AudioEffect {
 
     // Methods
     private val setBandGainDbMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectEQ", "set_band_gain_db") }
-    open fun setBandGainDb(bandIdx: Int, volumeDb: Float) {
-        _icall_Unit_Int_Float(setBandGainDbMethodBind, this.rawMemory, bandIdx, volumeDb)
+    open fun setBandGainDb(bandIdx: Long, volumeDb: Double) {
+        _icall_Unit_Long_Double(setBandGainDbMethodBind, this.rawMemory, bandIdx, volumeDb)
     }
 
 
     private val getBandGainDbMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectEQ", "get_band_gain_db") }
-    open fun getBandGainDb(bandIdx: Int): Float {
-        return _icall_Float_Int(getBandGainDbMethodBind, this.rawMemory, bandIdx)
+    open fun getBandGainDb(bandIdx: Long): Double {
+        return _icall_Double_Long(getBandGainDbMethodBind, this.rawMemory, bandIdx)
     }
 
 
     private val getBandCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectEQ", "get_band_count") }
-    open fun getBandCount(): Int {
-        return _icall_Int(getBandCountMethodBind, this.rawMemory)
+    open fun getBandCount(): Long {
+        return _icall_Long(getBandCountMethodBind, this.rawMemory)
     }
 
 

@@ -19,7 +19,7 @@ open class Area : CollisionObject {
 
     // Enums 
 
-    enum class SpaceOverride(val id: Int) {
+    enum class SpaceOverride(val id: Long) {
         SPACE_OVERRIDE_DISABLED(0),
         SPACE_OVERRIDE_COMBINE(1),
         SPACE_OVERRIDE_COMBINE_REPLACE(2),
@@ -28,7 +28,7 @@ open class Area : CollisionObject {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -57,20 +57,20 @@ open class Area : CollisionObject {
 
 
         // Constants
-        const val SPACE_OVERRIDE_DISABLED: Int = 0
-        const val SPACE_OVERRIDE_COMBINE: Int = 1
-        const val SPACE_OVERRIDE_COMBINE_REPLACE: Int = 2
-        const val SPACE_OVERRIDE_REPLACE: Int = 3
-        const val SPACE_OVERRIDE_REPLACE_COMBINE: Int = 4
+        const val SPACE_OVERRIDE_DISABLED: Long = 0
+        const val SPACE_OVERRIDE_COMBINE: Long = 1
+        const val SPACE_OVERRIDE_COMBINE_REPLACE: Long = 2
+        const val SPACE_OVERRIDE_REPLACE: Long = 3
+        const val SPACE_OVERRIDE_REPLACE_COMBINE: Long = 4
 
 
     }
 
 
     // Properties
-    open var spaceOverride: Int
-        get() = _icall_Int(getSpaceOverrideModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setSpaceOverrideModeMethodBind, this.rawMemory, value)
+    open var spaceOverride: Long
+        get() = _icall_Long(getSpaceOverrideModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setSpaceOverrideModeMethodBind, this.rawMemory, value)
 
 
     open var gravityPoint: Boolean
@@ -78,9 +78,9 @@ open class Area : CollisionObject {
         set(value) = _icall_Unit_Boolean(setGravityIsPointMethodBind, this.rawMemory, value)
 
 
-    open var gravityDistanceScale: Float
-        get() = _icall_Float(getGravityDistanceScaleMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setGravityDistanceScaleMethodBind, this.rawMemory, value)
+    open var gravityDistanceScale: Double
+        get() = _icall_Double(getGravityDistanceScaleMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setGravityDistanceScaleMethodBind, this.rawMemory, value)
 
 
     open var gravityVec: Vector3
@@ -92,24 +92,24 @@ open class Area : CollisionObject {
     }
 
 
-    open var gravity: Float
-        get() = _icall_Float(getGravityMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setGravityMethodBind, this.rawMemory, value)
+    open var gravity: Double
+        get() = _icall_Double(getGravityMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setGravityMethodBind, this.rawMemory, value)
 
 
-    open var linearDamp: Float
-        get() = _icall_Float(getLinearDampMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setLinearDampMethodBind, this.rawMemory, value)
+    open var linearDamp: Double
+        get() = _icall_Double(getLinearDampMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setLinearDampMethodBind, this.rawMemory, value)
 
 
-    open var angularDamp: Float
-        get() = _icall_Float(getAngularDampMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setAngularDampMethodBind, this.rawMemory, value)
+    open var angularDamp: Double
+        get() = _icall_Double(getAngularDampMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setAngularDampMethodBind, this.rawMemory, value)
 
 
-    open var priority: Int
-        get() = _icall_Int(getPriorityMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setPriorityMethodBind, this.rawMemory, value)
+    open var priority: Long
+        get() = _icall_Long(getPriorityMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setPriorityMethodBind, this.rawMemory, value)
 
 
     open var monitoring: Boolean
@@ -122,14 +122,14 @@ open class Area : CollisionObject {
         set(value) = _icall_Unit_Boolean(setMonitorableMethodBind, this.rawMemory, value)
 
 
-    open var collisionLayer: Int
-        get() = _icall_Int(getCollisionLayerMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setCollisionLayerMethodBind, this.rawMemory, value)
+    open var collisionLayer: Long
+        get() = _icall_Long(getCollisionLayerMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setCollisionLayerMethodBind, this.rawMemory, value)
 
 
-    open var collisionMask: Int
-        get() = _icall_Int(getCollisionMaskMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setCollisionMaskMethodBind, this.rawMemory, value)
+    open var collisionMask: Long
+        get() = _icall_Long(getCollisionMaskMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setCollisionMaskMethodBind, this.rawMemory, value)
 
 
     open var audioBusOverride: Boolean
@@ -152,44 +152,44 @@ open class Area : CollisionObject {
         set(value) = _icall_Unit_String(setReverbBusMethodBind, this.rawMemory, value)
 
 
-    open var reverbBusAmount: Float
-        get() = _icall_Float(getReverbAmountMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setReverbAmountMethodBind, this.rawMemory, value)
+    open var reverbBusAmount: Double
+        get() = _icall_Double(getReverbAmountMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setReverbAmountMethodBind, this.rawMemory, value)
 
 
-    open var reverbBusUniformity: Float
-        get() = _icall_Float(getReverbUniformityMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setReverbUniformityMethodBind, this.rawMemory, value)
+    open var reverbBusUniformity: Double
+        get() = _icall_Double(getReverbUniformityMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setReverbUniformityMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
-    open fun _body_enter_tree(id: Int) {
+    open fun _body_enter_tree(id: Long) {
     }
 
 
-    open fun _body_exit_tree(id: Int) {
+    open fun _body_exit_tree(id: Long) {
     }
 
 
-    open fun _area_enter_tree(id: Int) {
+    open fun _area_enter_tree(id: Long) {
     }
 
 
-    open fun _area_exit_tree(id: Int) {
+    open fun _area_exit_tree(id: Long) {
     }
 
 
     private val setSpaceOverrideModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Area", "set_space_override_mode") }
-    open fun setSpaceOverrideMode(enable: Int) {
-        _icall_Unit_Int(setSpaceOverrideModeMethodBind, this.rawMemory, enable)
+    open fun setSpaceOverrideMode(enable: Long) {
+        _icall_Unit_Long(setSpaceOverrideModeMethodBind, this.rawMemory, enable)
     }
 
 
     private val getSpaceOverrideModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Area", "get_space_override_mode") }
     open fun getSpaceOverrideMode(): Area.SpaceOverride {
-        return Area.SpaceOverride.fromInt(_icall_Int(getSpaceOverrideModeMethodBind, this.rawMemory))
+        return Area.SpaceOverride.fromInt(_icall_Long(getSpaceOverrideModeMethodBind, this.rawMemory))
     }
 
 
@@ -206,14 +206,14 @@ open class Area : CollisionObject {
 
 
     private val setGravityDistanceScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("Area", "set_gravity_distance_scale") }
-    open fun setGravityDistanceScale(distanceScale: Float) {
-        _icall_Unit_Float(setGravityDistanceScaleMethodBind, this.rawMemory, distanceScale)
+    open fun setGravityDistanceScale(distanceScale: Double) {
+        _icall_Unit_Double(setGravityDistanceScaleMethodBind, this.rawMemory, distanceScale)
     }
 
 
     private val getGravityDistanceScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("Area", "get_gravity_distance_scale") }
-    open fun getGravityDistanceScale(): Float {
-        return _icall_Float(getGravityDistanceScaleMethodBind, this.rawMemory)
+    open fun getGravityDistanceScale(): Double {
+        return _icall_Double(getGravityDistanceScaleMethodBind, this.rawMemory)
     }
 
 
@@ -230,98 +230,98 @@ open class Area : CollisionObject {
 
 
     private val setGravityMethodBind: CPointer<godot_method_bind> by lazy { getMB("Area", "set_gravity") }
-    open fun setGravity(gravity: Float) {
-        _icall_Unit_Float(setGravityMethodBind, this.rawMemory, gravity)
+    open fun setGravity(gravity: Double) {
+        _icall_Unit_Double(setGravityMethodBind, this.rawMemory, gravity)
     }
 
 
     private val getGravityMethodBind: CPointer<godot_method_bind> by lazy { getMB("Area", "get_gravity") }
-    open fun getGravity(): Float {
-        return _icall_Float(getGravityMethodBind, this.rawMemory)
+    open fun getGravity(): Double {
+        return _icall_Double(getGravityMethodBind, this.rawMemory)
     }
 
 
     private val setAngularDampMethodBind: CPointer<godot_method_bind> by lazy { getMB("Area", "set_angular_damp") }
-    open fun setAngularDamp(angularDamp: Float) {
-        _icall_Unit_Float(setAngularDampMethodBind, this.rawMemory, angularDamp)
+    open fun setAngularDamp(angularDamp: Double) {
+        _icall_Unit_Double(setAngularDampMethodBind, this.rawMemory, angularDamp)
     }
 
 
     private val getAngularDampMethodBind: CPointer<godot_method_bind> by lazy { getMB("Area", "get_angular_damp") }
-    open fun getAngularDamp(): Float {
-        return _icall_Float(getAngularDampMethodBind, this.rawMemory)
+    open fun getAngularDamp(): Double {
+        return _icall_Double(getAngularDampMethodBind, this.rawMemory)
     }
 
 
     private val setLinearDampMethodBind: CPointer<godot_method_bind> by lazy { getMB("Area", "set_linear_damp") }
-    open fun setLinearDamp(linearDamp: Float) {
-        _icall_Unit_Float(setLinearDampMethodBind, this.rawMemory, linearDamp)
+    open fun setLinearDamp(linearDamp: Double) {
+        _icall_Unit_Double(setLinearDampMethodBind, this.rawMemory, linearDamp)
     }
 
 
     private val getLinearDampMethodBind: CPointer<godot_method_bind> by lazy { getMB("Area", "get_linear_damp") }
-    open fun getLinearDamp(): Float {
-        return _icall_Float(getLinearDampMethodBind, this.rawMemory)
+    open fun getLinearDamp(): Double {
+        return _icall_Double(getLinearDampMethodBind, this.rawMemory)
     }
 
 
     private val setPriorityMethodBind: CPointer<godot_method_bind> by lazy { getMB("Area", "set_priority") }
-    open fun setPriority(priority: Float) {
-        _icall_Unit_Float(setPriorityMethodBind, this.rawMemory, priority)
+    open fun setPriority(priority: Double) {
+        _icall_Unit_Double(setPriorityMethodBind, this.rawMemory, priority)
     }
 
 
     private val getPriorityMethodBind: CPointer<godot_method_bind> by lazy { getMB("Area", "get_priority") }
-    open fun getPriority(): Float {
-        return _icall_Float(getPriorityMethodBind, this.rawMemory)
+    open fun getPriority(): Double {
+        return _icall_Double(getPriorityMethodBind, this.rawMemory)
     }
 
 
     private val setCollisionMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("Area", "set_collision_mask") }
-    open fun setCollisionMask(collisionMask: Int) {
-        _icall_Unit_Int(setCollisionMaskMethodBind, this.rawMemory, collisionMask)
+    open fun setCollisionMask(collisionMask: Long) {
+        _icall_Unit_Long(setCollisionMaskMethodBind, this.rawMemory, collisionMask)
     }
 
 
     private val getCollisionMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("Area", "get_collision_mask") }
-    open fun getCollisionMask(): Int {
-        return _icall_Int(getCollisionMaskMethodBind, this.rawMemory)
+    open fun getCollisionMask(): Long {
+        return _icall_Long(getCollisionMaskMethodBind, this.rawMemory)
     }
 
 
     private val setCollisionLayerMethodBind: CPointer<godot_method_bind> by lazy { getMB("Area", "set_collision_layer") }
-    open fun setCollisionLayer(collisionLayer: Int) {
-        _icall_Unit_Int(setCollisionLayerMethodBind, this.rawMemory, collisionLayer)
+    open fun setCollisionLayer(collisionLayer: Long) {
+        _icall_Unit_Long(setCollisionLayerMethodBind, this.rawMemory, collisionLayer)
     }
 
 
     private val getCollisionLayerMethodBind: CPointer<godot_method_bind> by lazy { getMB("Area", "get_collision_layer") }
-    open fun getCollisionLayer(): Int {
-        return _icall_Int(getCollisionLayerMethodBind, this.rawMemory)
+    open fun getCollisionLayer(): Long {
+        return _icall_Long(getCollisionLayerMethodBind, this.rawMemory)
     }
 
 
     private val setCollisionMaskBitMethodBind: CPointer<godot_method_bind> by lazy { getMB("Area", "set_collision_mask_bit") }
-    open fun setCollisionMaskBit(bit: Int, value: Boolean) {
-        _icall_Unit_Int_Boolean(setCollisionMaskBitMethodBind, this.rawMemory, bit, value)
+    open fun setCollisionMaskBit(bit: Long, value: Boolean) {
+        _icall_Unit_Long_Boolean(setCollisionMaskBitMethodBind, this.rawMemory, bit, value)
     }
 
 
     private val getCollisionMaskBitMethodBind: CPointer<godot_method_bind> by lazy { getMB("Area", "get_collision_mask_bit") }
-    open fun getCollisionMaskBit(bit: Int): Boolean {
-        return _icall_Boolean_Int(getCollisionMaskBitMethodBind, this.rawMemory, bit)
+    open fun getCollisionMaskBit(bit: Long): Boolean {
+        return _icall_Boolean_Long(getCollisionMaskBitMethodBind, this.rawMemory, bit)
     }
 
 
     private val setCollisionLayerBitMethodBind: CPointer<godot_method_bind> by lazy { getMB("Area", "set_collision_layer_bit") }
-    open fun setCollisionLayerBit(bit: Int, value: Boolean) {
-        _icall_Unit_Int_Boolean(setCollisionLayerBitMethodBind, this.rawMemory, bit, value)
+    open fun setCollisionLayerBit(bit: Long, value: Boolean) {
+        _icall_Unit_Long_Boolean(setCollisionLayerBitMethodBind, this.rawMemory, bit, value)
     }
 
 
     private val getCollisionLayerBitMethodBind: CPointer<godot_method_bind> by lazy { getMB("Area", "get_collision_layer_bit") }
-    open fun getCollisionLayerBit(bit: Int): Boolean {
-        return _icall_Boolean_Int(getCollisionLayerBitMethodBind, this.rawMemory, bit)
+    open fun getCollisionLayerBit(bit: Long): Boolean {
+        return _icall_Boolean_Long(getCollisionLayerBitMethodBind, this.rawMemory, bit)
     }
 
 
@@ -373,11 +373,11 @@ open class Area : CollisionObject {
     }
 
 
-    open fun _body_inout(arg0: Int, arg1: RID, arg2: Int, arg3: Int, arg4: Int) {
+    open fun _body_inout(arg0: Long, arg1: RID, arg2: Long, arg3: Long, arg4: Long) {
     }
 
 
-    open fun _area_inout(arg0: Int, arg1: RID, arg2: Int, arg3: Int, arg4: Int) {
+    open fun _area_inout(arg0: Long, arg1: RID, arg2: Long, arg3: Long, arg4: Long) {
     }
 
 
@@ -430,26 +430,26 @@ open class Area : CollisionObject {
 
 
     private val setReverbAmountMethodBind: CPointer<godot_method_bind> by lazy { getMB("Area", "set_reverb_amount") }
-    open fun setReverbAmount(amount: Float) {
-        _icall_Unit_Float(setReverbAmountMethodBind, this.rawMemory, amount)
+    open fun setReverbAmount(amount: Double) {
+        _icall_Unit_Double(setReverbAmountMethodBind, this.rawMemory, amount)
     }
 
 
     private val getReverbAmountMethodBind: CPointer<godot_method_bind> by lazy { getMB("Area", "get_reverb_amount") }
-    open fun getReverbAmount(): Float {
-        return _icall_Float(getReverbAmountMethodBind, this.rawMemory)
+    open fun getReverbAmount(): Double {
+        return _icall_Double(getReverbAmountMethodBind, this.rawMemory)
     }
 
 
     private val setReverbUniformityMethodBind: CPointer<godot_method_bind> by lazy { getMB("Area", "set_reverb_uniformity") }
-    open fun setReverbUniformity(amount: Float) {
-        _icall_Unit_Float(setReverbUniformityMethodBind, this.rawMemory, amount)
+    open fun setReverbUniformity(amount: Double) {
+        _icall_Unit_Double(setReverbUniformityMethodBind, this.rawMemory, amount)
     }
 
 
     private val getReverbUniformityMethodBind: CPointer<godot_method_bind> by lazy { getMB("Area", "get_reverb_uniformity") }
-    open fun getReverbUniformity(): Float {
-        return _icall_Float(getReverbUniformityMethodBind, this.rawMemory)
+    open fun getReverbUniformity(): Double {
+        return _icall_Double(getReverbUniformityMethodBind, this.rawMemory)
     }
 
 

@@ -19,22 +19,22 @@ open class OmniLight : Light {
 
     // Enums 
 
-    enum class ShadowMode(val id: Int) {
+    enum class ShadowMode(val id: Long) {
         SHADOW_DUAL_PARABOLOID(0),
         SHADOW_CUBE(1),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class ShadowDetail(val id: Int) {
+    enum class ShadowDetail(val id: Long) {
         SHADOW_DETAIL_VERTICAL(0),
         SHADOW_DETAIL_HORIZONTAL(1),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -56,50 +56,50 @@ open class OmniLight : Light {
 
 
         // Constants
-        const val SHADOW_DUAL_PARABOLOID: Int = 0
-        const val SHADOW_CUBE: Int = 1
-        const val SHADOW_DETAIL_VERTICAL: Int = 0
-        const val SHADOW_DETAIL_HORIZONTAL: Int = 1
+        const val SHADOW_DUAL_PARABOLOID: Long = 0
+        const val SHADOW_CUBE: Long = 1
+        const val SHADOW_DETAIL_VERTICAL: Long = 0
+        const val SHADOW_DETAIL_HORIZONTAL: Long = 1
 
 
     }
 
 
     // Properties
-    open var omniShadowMode: Int
-        get() = _icall_Int(getShadowModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setShadowModeMethodBind, this.rawMemory, value)
+    open var omniShadowMode: Long
+        get() = _icall_Long(getShadowModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setShadowModeMethodBind, this.rawMemory, value)
 
 
-    open var omniShadowDetail: Int
-        get() = _icall_Int(getShadowDetailMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setShadowDetailMethodBind, this.rawMemory, value)
+    open var omniShadowDetail: Long
+        get() = _icall_Long(getShadowDetailMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setShadowDetailMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setShadowModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("OmniLight", "set_shadow_mode") }
-    open fun setShadowMode(mode: Int) {
-        _icall_Unit_Int(setShadowModeMethodBind, this.rawMemory, mode)
+    open fun setShadowMode(mode: Long) {
+        _icall_Unit_Long(setShadowModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getShadowModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("OmniLight", "get_shadow_mode") }
     open fun getShadowMode(): OmniLight.ShadowMode {
-        return OmniLight.ShadowMode.fromInt(_icall_Int(getShadowModeMethodBind, this.rawMemory))
+        return OmniLight.ShadowMode.fromInt(_icall_Long(getShadowModeMethodBind, this.rawMemory))
     }
 
 
     private val setShadowDetailMethodBind: CPointer<godot_method_bind> by lazy { getMB("OmniLight", "set_shadow_detail") }
-    open fun setShadowDetail(detail: Int) {
-        _icall_Unit_Int(setShadowDetailMethodBind, this.rawMemory, detail)
+    open fun setShadowDetail(detail: Long) {
+        _icall_Unit_Long(setShadowDetailMethodBind, this.rawMemory, detail)
     }
 
 
     private val getShadowDetailMethodBind: CPointer<godot_method_bind> by lazy { getMB("OmniLight", "get_shadow_detail") }
     open fun getShadowDetail(): OmniLight.ShadowDetail {
-        return OmniLight.ShadowDetail.fromInt(_icall_Int(getShadowDetailMethodBind, this.rawMemory))
+        return OmniLight.ShadowDetail.fromInt(_icall_Long(getShadowDetailMethodBind, this.rawMemory))
     }
 
 

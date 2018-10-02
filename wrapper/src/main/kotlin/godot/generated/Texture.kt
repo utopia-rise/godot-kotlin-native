@@ -19,7 +19,7 @@ open class Texture : Resource {
 
     // Enums 
 
-    enum class Flags(val id: Int) {
+    enum class Flags(val id: Long) {
         FLAG_MIPMAPS(1),
         FLAG_REPEAT(2),
         FLAG_FILTER(4),
@@ -31,7 +31,7 @@ open class Texture : Resource {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -51,37 +51,37 @@ open class Texture : Resource {
 
 
         // Constants
-        const val FLAGS_DEFAULT: Int = 7
-        const val FLAG_MIPMAPS: Int = 1
-        const val FLAG_REPEAT: Int = 2
-        const val FLAG_FILTER: Int = 4
-        const val FLAG_ANISOTROPIC_FILTER: Int = 8
-        const val FLAG_CONVERT_TO_LINEAR: Int = 16
-        const val FLAG_MIRRORED_REPEAT: Int = 32
-        const val FLAG_VIDEO_SURFACE: Int = 4096
+        const val FLAGS_DEFAULT: Long = 7
+        const val FLAG_MIPMAPS: Long = 1
+        const val FLAG_REPEAT: Long = 2
+        const val FLAG_FILTER: Long = 4
+        const val FLAG_ANISOTROPIC_FILTER: Long = 8
+        const val FLAG_CONVERT_TO_LINEAR: Long = 16
+        const val FLAG_MIRRORED_REPEAT: Long = 32
+        const val FLAG_VIDEO_SURFACE: Long = 4096
 
 
     }
 
 
     // Properties
-    open var flags: Int
-        get() = _icall_Int(getFlagsMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setFlagsMethodBind, this.rawMemory, value)
+    open var flags: Long
+        get() = _icall_Long(getFlagsMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setFlagsMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val getWidthMethodBind: CPointer<godot_method_bind> by lazy { getMB("Texture", "get_width") }
-    open fun getWidth(): Int {
-        return _icall_Int(getWidthMethodBind, this.rawMemory)
+    open fun getWidth(): Long {
+        return _icall_Long(getWidthMethodBind, this.rawMemory)
     }
 
 
     private val getHeightMethodBind: CPointer<godot_method_bind> by lazy { getMB("Texture", "get_height") }
-    open fun getHeight(): Int {
-        return _icall_Int(getHeightMethodBind, this.rawMemory)
+    open fun getHeight(): Long {
+        return _icall_Long(getHeightMethodBind, this.rawMemory)
     }
 
 
@@ -98,14 +98,14 @@ open class Texture : Resource {
 
 
     private val setFlagsMethodBind: CPointer<godot_method_bind> by lazy { getMB("Texture", "set_flags") }
-    open fun setFlags(flags: Int) {
-        _icall_Unit_Int(setFlagsMethodBind, this.rawMemory, flags)
+    open fun setFlags(flags: Long) {
+        _icall_Unit_Long(setFlagsMethodBind, this.rawMemory, flags)
     }
 
 
     private val getFlagsMethodBind: CPointer<godot_method_bind> by lazy { getMB("Texture", "get_flags") }
-    open fun getFlags(): Int {
-        return _icall_Int(getFlagsMethodBind, this.rawMemory)
+    open fun getFlags(): Long {
+        return _icall_Long(getFlagsMethodBind, this.rawMemory)
     }
 
 

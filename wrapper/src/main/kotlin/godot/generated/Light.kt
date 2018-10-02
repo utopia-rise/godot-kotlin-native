@@ -19,17 +19,17 @@ open class Light : VisualInstance {
 
     // Enums 
 
-    enum class BakeMode(val id: Int) {
+    enum class BakeMode(val id: Long) {
         BAKE_DISABLED(0),
         BAKE_INDIRECT(1),
         BAKE_ALL(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class Param(val id: Int) {
+    enum class Param(val id: Long) {
         PARAM_ENERGY(0),
         PARAM_INDIRECT_ENERGY(1),
         PARAM_SPECULAR(2),
@@ -49,7 +49,7 @@ open class Light : VisualInstance {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -70,25 +70,25 @@ open class Light : VisualInstance {
 
 
         // Constants
-        const val PARAM_ENERGY: Int = 0
-        const val PARAM_INDIRECT_ENERGY: Int = 1
-        const val PARAM_SPECULAR: Int = 2
-        const val PARAM_RANGE: Int = 3
-        const val PARAM_ATTENUATION: Int = 4
-        const val PARAM_SPOT_ANGLE: Int = 5
-        const val PARAM_SPOT_ATTENUATION: Int = 6
-        const val PARAM_CONTACT_SHADOW_SIZE: Int = 7
-        const val PARAM_SHADOW_MAX_DISTANCE: Int = 8
-        const val PARAM_SHADOW_SPLIT_1_OFFSET: Int = 9
-        const val PARAM_SHADOW_SPLIT_2_OFFSET: Int = 10
-        const val PARAM_SHADOW_SPLIT_3_OFFSET: Int = 11
-        const val PARAM_SHADOW_NORMAL_BIAS: Int = 12
-        const val PARAM_SHADOW_BIAS: Int = 13
-        const val PARAM_SHADOW_BIAS_SPLIT_SCALE: Int = 14
-        const val PARAM_MAX: Int = 15
-        const val BAKE_DISABLED: Int = 0
-        const val BAKE_INDIRECT: Int = 1
-        const val BAKE_ALL: Int = 2
+        const val PARAM_ENERGY: Long = 0
+        const val PARAM_INDIRECT_ENERGY: Long = 1
+        const val PARAM_SPECULAR: Long = 2
+        const val PARAM_RANGE: Long = 3
+        const val PARAM_ATTENUATION: Long = 4
+        const val PARAM_SPOT_ANGLE: Long = 5
+        const val PARAM_SPOT_ATTENUATION: Long = 6
+        const val PARAM_CONTACT_SHADOW_SIZE: Long = 7
+        const val PARAM_SHADOW_MAX_DISTANCE: Long = 8
+        const val PARAM_SHADOW_SPLIT_1_OFFSET: Long = 9
+        const val PARAM_SHADOW_SPLIT_2_OFFSET: Long = 10
+        const val PARAM_SHADOW_SPLIT_3_OFFSET: Long = 11
+        const val PARAM_SHADOW_NORMAL_BIAS: Long = 12
+        const val PARAM_SHADOW_BIAS: Long = 13
+        const val PARAM_SHADOW_BIAS_SPLIT_SCALE: Long = 14
+        const val PARAM_MAX: Long = 15
+        const val BAKE_DISABLED: Long = 0
+        const val BAKE_INDIRECT: Long = 1
+        const val BAKE_ALL: Long = 2
 
 
     }
@@ -104,14 +104,14 @@ open class Light : VisualInstance {
     }
 
 
-    open var lightEnergy: Float
-        get() = _icall_Float_Int(getParamMethodBind, this.rawMemory, 0)
-        set(value) = _icall_Unit_Int_Float(setParamMethodBind, this.rawMemory, 0, value)
+    open var lightEnergy: Double
+        get() = _icall_Double_Long(getParamMethodBind, this.rawMemory, 0)
+        set(value) = _icall_Unit_Long_Double(setParamMethodBind, this.rawMemory, 0, value)
 
 
-    open var lightIndirectEnergy: Float
-        get() = _icall_Float_Int(getParamMethodBind, this.rawMemory, 1)
-        set(value) = _icall_Unit_Int_Float(setParamMethodBind, this.rawMemory, 1, value)
+    open var lightIndirectEnergy: Double
+        get() = _icall_Double_Long(getParamMethodBind, this.rawMemory, 1)
+        set(value) = _icall_Unit_Long_Double(setParamMethodBind, this.rawMemory, 1, value)
 
 
     open var lightNegative: Boolean
@@ -119,19 +119,19 @@ open class Light : VisualInstance {
         set(value) = _icall_Unit_Boolean(setNegativeMethodBind, this.rawMemory, value)
 
 
-    open var lightSpecular: Float
-        get() = _icall_Float_Int(getParamMethodBind, this.rawMemory, 2)
-        set(value) = _icall_Unit_Int_Float(setParamMethodBind, this.rawMemory, 2, value)
+    open var lightSpecular: Double
+        get() = _icall_Double_Long(getParamMethodBind, this.rawMemory, 2)
+        set(value) = _icall_Unit_Long_Double(setParamMethodBind, this.rawMemory, 2, value)
 
 
-    open var lightBakeMode: Int
-        get() = _icall_Int(getBakeModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setBakeModeMethodBind, this.rawMemory, value)
+    open var lightBakeMode: Long
+        get() = _icall_Long(getBakeModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setBakeModeMethodBind, this.rawMemory, value)
 
 
-    open var lightCullMask: Int
-        get() = _icall_Int(getCullMaskMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setCullMaskMethodBind, this.rawMemory, value)
+    open var lightCullMask: Long
+        get() = _icall_Long(getCullMaskMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setCullMaskMethodBind, this.rawMemory, value)
 
 
     open var shadowEnabled: Boolean
@@ -148,14 +148,14 @@ open class Light : VisualInstance {
     }
 
 
-    open var shadowBias: Float
-        get() = _icall_Float_Int(getParamMethodBind, this.rawMemory, 13)
-        set(value) = _icall_Unit_Int_Float(setParamMethodBind, this.rawMemory, 13, value)
+    open var shadowBias: Double
+        get() = _icall_Double_Long(getParamMethodBind, this.rawMemory, 13)
+        set(value) = _icall_Unit_Long_Double(setParamMethodBind, this.rawMemory, 13, value)
 
 
-    open var shadowContact: Float
-        get() = _icall_Float_Int(getParamMethodBind, this.rawMemory, 7)
-        set(value) = _icall_Unit_Int_Float(setParamMethodBind, this.rawMemory, 7, value)
+    open var shadowContact: Double
+        get() = _icall_Double_Long(getParamMethodBind, this.rawMemory, 7)
+        set(value) = _icall_Unit_Long_Double(setParamMethodBind, this.rawMemory, 7, value)
 
 
     open var shadowReverseCullFace: Boolean
@@ -184,14 +184,14 @@ open class Light : VisualInstance {
 
 
     private val setParamMethodBind: CPointer<godot_method_bind> by lazy { getMB("Light", "set_param") }
-    open fun setParam(param: Int, value: Float) {
-        _icall_Unit_Int_Float(setParamMethodBind, this.rawMemory, param, value)
+    open fun setParam(param: Long, value: Double) {
+        _icall_Unit_Long_Double(setParamMethodBind, this.rawMemory, param, value)
     }
 
 
     private val getParamMethodBind: CPointer<godot_method_bind> by lazy { getMB("Light", "get_param") }
-    open fun getParam(param: Int): Float {
-        return _icall_Float_Int(getParamMethodBind, this.rawMemory, param)
+    open fun getParam(param: Long): Double {
+        return _icall_Double_Long(getParamMethodBind, this.rawMemory, param)
     }
 
 
@@ -220,14 +220,14 @@ open class Light : VisualInstance {
 
 
     private val setCullMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("Light", "set_cull_mask") }
-    open fun setCullMask(cullMask: Int) {
-        _icall_Unit_Int(setCullMaskMethodBind, this.rawMemory, cullMask)
+    open fun setCullMask(cullMask: Long) {
+        _icall_Unit_Long(setCullMaskMethodBind, this.rawMemory, cullMask)
     }
 
 
     private val getCullMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("Light", "get_cull_mask") }
-    open fun getCullMask(): Int {
-        return _icall_Int(getCullMaskMethodBind, this.rawMemory)
+    open fun getCullMask(): Long {
+        return _icall_Long(getCullMaskMethodBind, this.rawMemory)
     }
 
 
@@ -268,14 +268,14 @@ open class Light : VisualInstance {
 
 
     private val setBakeModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Light", "set_bake_mode") }
-    open fun setBakeMode(bakeMode: Int) {
-        _icall_Unit_Int(setBakeModeMethodBind, this.rawMemory, bakeMode)
+    open fun setBakeMode(bakeMode: Long) {
+        _icall_Unit_Long(setBakeModeMethodBind, this.rawMemory, bakeMode)
     }
 
 
     private val getBakeModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Light", "get_bake_mode") }
     open fun getBakeMode(): Light.BakeMode {
-        return Light.BakeMode.fromInt(_icall_Int(getBakeModeMethodBind, this.rawMemory))
+        return Light.BakeMode.fromInt(_icall_Long(getBakeModeMethodBind, this.rawMemory))
     }
 
 

@@ -87,8 +87,8 @@ open class Translation : Resource {
 
 
     private val getMessageCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("Translation", "get_message_count") }
-    open fun getMessageCount(): Int {
-        return _icall_Int(getMessageCountMethodBind, this.rawMemory)
+    open fun getMessageCount(): Long {
+        return _icall_Long(getMessageCountMethodBind, this.rawMemory)
     }
 
 

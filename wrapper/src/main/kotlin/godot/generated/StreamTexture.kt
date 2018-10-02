@@ -52,7 +52,7 @@ open class StreamTexture : Texture {
     // Methods
     private val loadMethodBind: CPointer<godot_method_bind> by lazy { getMB("StreamTexture", "load") }
     open fun load(path: String): GodotError {
-        return GodotError.fromInt(_icall_Int_String(loadMethodBind, this.rawMemory, path))
+        return GodotError.fromInt(_icall_Long_String(loadMethodBind, this.rawMemory, path))
     }
 
 

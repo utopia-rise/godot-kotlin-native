@@ -52,8 +52,8 @@ open class BitMap : Resource {
 
 
     private val createFromImageAlphaMethodBind: CPointer<godot_method_bind> by lazy { getMB("BitMap", "create_from_image_alpha") }
-    open fun createFromImageAlpha(image: Image, threshold: Float = 0.1f) {
-        _icall_Unit_Object_Float(createFromImageAlphaMethodBind, this.rawMemory, image, threshold)
+    open fun createFromImageAlpha(image: Image, threshold: Double = 0.1) {
+        _icall_Unit_Object_Double(createFromImageAlphaMethodBind, this.rawMemory, image, threshold)
     }
 
 
@@ -76,8 +76,8 @@ open class BitMap : Resource {
 
 
     private val getTrueBitCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("BitMap", "get_true_bit_count") }
-    open fun getTrueBitCount(): Int {
-        return _icall_Int(getTrueBitCountMethodBind, this.rawMemory)
+    open fun getTrueBitCount(): Long {
+        return _icall_Long(getTrueBitCountMethodBind, this.rawMemory)
     }
 
 

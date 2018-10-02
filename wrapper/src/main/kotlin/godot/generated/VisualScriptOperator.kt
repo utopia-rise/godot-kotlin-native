@@ -43,40 +43,40 @@ open class VisualScriptOperator : VisualScriptNode {
 
 
     // Properties
-    open var operator: Int
-        get() = _icall_Int(getOperatorMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setOperatorMethodBind, this.rawMemory, value)
+    open var operator: Long
+        get() = _icall_Long(getOperatorMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setOperatorMethodBind, this.rawMemory, value)
 
 
-    open var type: Int
-        get() = _icall_Int(getTypedMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setTypedMethodBind, this.rawMemory, value)
+    open var type: Long
+        get() = _icall_Long(getTypedMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setTypedMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setOperatorMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptOperator", "set_operator") }
-    open fun setOperator(op: Int) {
-        _icall_Unit_Int(setOperatorMethodBind, this.rawMemory, op)
+    open fun setOperator(op: Long) {
+        _icall_Unit_Long(setOperatorMethodBind, this.rawMemory, op)
     }
 
 
     private val getOperatorMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptOperator", "get_operator") }
     open fun getOperator(): Variant.Operator {
-        return Variant.Operator.fromInt(_icall_Int(getOperatorMethodBind, this.rawMemory))
+        return Variant.Operator.fromInt(_icall_Long(getOperatorMethodBind, this.rawMemory))
     }
 
 
     private val setTypedMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptOperator", "set_typed") }
-    open fun setTyped(type: Int) {
-        _icall_Unit_Int(setTypedMethodBind, this.rawMemory, type)
+    open fun setTyped(type: Long) {
+        _icall_Unit_Long(setTypedMethodBind, this.rawMemory, type)
     }
 
 
     private val getTypedMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptOperator", "get_typed") }
     open fun getTyped(): Variant.Type {
-        return Variant.Type.fromInt(_icall_Int(getTypedMethodBind, this.rawMemory))
+        return Variant.Type.fromInt(_icall_Long(getTypedMethodBind, this.rawMemory))
     }
 
 

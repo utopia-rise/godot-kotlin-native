@@ -123,8 +123,8 @@ open class EditorInterface : Node {
 
 
     private val makeMeshPreviewsMethodBind: CPointer<godot_method_bind> by lazy { getMB("EditorInterface", "make_mesh_previews") }
-    open fun makeMeshPreviews(meshes: GDArray, previewSize: Int): GDArray {
-        return _icall_GDArray_GDArray_Int(makeMeshPreviewsMethodBind, this.rawMemory, meshes, previewSize)
+    open fun makeMeshPreviews(meshes: GDArray, previewSize: Long): GDArray {
+        return _icall_GDArray_GDArray_Long(makeMeshPreviewsMethodBind, this.rawMemory, meshes, previewSize)
     }
 
 
@@ -154,7 +154,7 @@ open class EditorInterface : Node {
 
     private val saveSceneMethodBind: CPointer<godot_method_bind> by lazy { getMB("EditorInterface", "save_scene") }
     open fun saveScene(): GodotError {
-        return GodotError.fromInt(_icall_Int(saveSceneMethodBind, this.rawMemory))
+        return GodotError.fromInt(_icall_Long(saveSceneMethodBind, this.rawMemory))
     }
 
 

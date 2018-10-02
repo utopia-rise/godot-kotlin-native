@@ -44,23 +44,23 @@ open class PinJoint2D : Joint2D {
 
 
     // Properties
-    open var softness: Float
-        get() = _icall_Float(getSoftnessMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setSoftnessMethodBind, this.rawMemory, value)
+    open var softness: Double
+        get() = _icall_Double(getSoftnessMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setSoftnessMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setSoftnessMethodBind: CPointer<godot_method_bind> by lazy { getMB("PinJoint2D", "set_softness") }
-    open fun setSoftness(softness: Float) {
-        _icall_Unit_Float(setSoftnessMethodBind, this.rawMemory, softness)
+    open fun setSoftness(softness: Double) {
+        _icall_Unit_Double(setSoftnessMethodBind, this.rawMemory, softness)
     }
 
 
     private val getSoftnessMethodBind: CPointer<godot_method_bind> by lazy { getMB("PinJoint2D", "get_softness") }
-    open fun getSoftness(): Float {
-        return _icall_Float(getSoftnessMethodBind, this.rawMemory)
+    open fun getSoftness(): Double {
+        return _icall_Double(getSoftnessMethodBind, this.rawMemory)
     }
 
 

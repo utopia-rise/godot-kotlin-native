@@ -51,14 +51,14 @@ open class Node2D : CanvasItem {
     }
 
 
-    open var rotation: Float
-        get() = _icall_Float(getRotationMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setRotationMethodBind, this.rawMemory, value)
+    open var rotation: Double
+        get() = _icall_Double(getRotationMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setRotationMethodBind, this.rawMemory, value)
 
 
-    open var rotationDegrees: Float
-        get() = _icall_Float(getRotationDegreesMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setRotationDegreesMethodBind, this.rawMemory, value)
+    open var rotationDegrees: Double
+        get() = _icall_Double(getRotationDegreesMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setRotationDegreesMethodBind, this.rawMemory, value)
 
 
     open var scale: Vector2
@@ -88,14 +88,14 @@ open class Node2D : CanvasItem {
     }
 
 
-    open var globalRotation: Float
-        get() = _icall_Float(getGlobalRotationMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setGlobalRotationMethodBind, this.rawMemory, value)
+    open var globalRotation: Double
+        get() = _icall_Double(getGlobalRotationMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setGlobalRotationMethodBind, this.rawMemory, value)
 
 
-    open var globalRotationDegrees: Float
-        get() = _icall_Float(getGlobalRotationDegreesMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setGlobalRotationDegreesMethodBind, this.rawMemory, value)
+    open var globalRotationDegrees: Double
+        get() = _icall_Double(getGlobalRotationDegreesMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setGlobalRotationDegreesMethodBind, this.rawMemory, value)
 
 
     open var globalScale: Vector2
@@ -116,9 +116,9 @@ open class Node2D : CanvasItem {
     }
 
 
-    open var zIndex: Int
-        get() = _icall_Int(getZIndexMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setZIndexMethodBind, this.rawMemory, value)
+    open var zIndex: Long
+        get() = _icall_Long(getZIndexMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setZIndexMethodBind, this.rawMemory, value)
 
 
     open var zAsRelative: Boolean
@@ -136,14 +136,14 @@ open class Node2D : CanvasItem {
 
 
     private val setRotationMethodBind: CPointer<godot_method_bind> by lazy { getMB("Node2D", "set_rotation") }
-    open fun setRotation(radians: Float) {
-        _icall_Unit_Float(setRotationMethodBind, this.rawMemory, radians)
+    open fun setRotation(radians: Double) {
+        _icall_Unit_Double(setRotationMethodBind, this.rawMemory, radians)
     }
 
 
     private val setRotationDegreesMethodBind: CPointer<godot_method_bind> by lazy { getMB("Node2D", "set_rotation_degrees") }
-    open fun setRotationDegrees(degrees: Float) {
-        _icall_Unit_Float(setRotationDegreesMethodBind, this.rawMemory, degrees)
+    open fun setRotationDegrees(degrees: Double) {
+        _icall_Unit_Double(setRotationDegreesMethodBind, this.rawMemory, degrees)
     }
 
 
@@ -160,14 +160,14 @@ open class Node2D : CanvasItem {
 
 
     private val getRotationMethodBind: CPointer<godot_method_bind> by lazy { getMB("Node2D", "get_rotation") }
-    open fun getRotation(): Float {
-        return _icall_Float(getRotationMethodBind, this.rawMemory)
+    open fun getRotation(): Double {
+        return _icall_Double(getRotationMethodBind, this.rawMemory)
     }
 
 
     private val getRotationDegreesMethodBind: CPointer<godot_method_bind> by lazy { getMB("Node2D", "get_rotation_degrees") }
-    open fun getRotationDegrees(): Float {
-        return _icall_Float(getRotationDegreesMethodBind, this.rawMemory)
+    open fun getRotationDegrees(): Double {
+        return _icall_Double(getRotationDegreesMethodBind, this.rawMemory)
     }
 
 
@@ -178,20 +178,20 @@ open class Node2D : CanvasItem {
 
 
     private val rotateMethodBind: CPointer<godot_method_bind> by lazy { getMB("Node2D", "rotate") }
-    open fun rotate(radians: Float) {
-        _icall_Unit_Float(rotateMethodBind, this.rawMemory, radians)
+    open fun rotate(radians: Double) {
+        _icall_Unit_Double(rotateMethodBind, this.rawMemory, radians)
     }
 
 
     private val moveLocalXMethodBind: CPointer<godot_method_bind> by lazy { getMB("Node2D", "move_local_x") }
-    open fun moveLocalX(delta: Float, scaled: Boolean = false) {
-        _icall_Unit_Float_Boolean(moveLocalXMethodBind, this.rawMemory, delta, scaled)
+    open fun moveLocalX(delta: Double, scaled: Boolean = false) {
+        _icall_Unit_Double_Boolean(moveLocalXMethodBind, this.rawMemory, delta, scaled)
     }
 
 
     private val moveLocalYMethodBind: CPointer<godot_method_bind> by lazy { getMB("Node2D", "move_local_y") }
-    open fun moveLocalY(delta: Float, scaled: Boolean = false) {
-        _icall_Unit_Float_Boolean(moveLocalYMethodBind, this.rawMemory, delta, scaled)
+    open fun moveLocalY(delta: Double, scaled: Boolean = false) {
+        _icall_Unit_Double_Boolean(moveLocalYMethodBind, this.rawMemory, delta, scaled)
     }
 
 
@@ -226,26 +226,26 @@ open class Node2D : CanvasItem {
 
 
     private val setGlobalRotationMethodBind: CPointer<godot_method_bind> by lazy { getMB("Node2D", "set_global_rotation") }
-    open fun setGlobalRotation(radians: Float) {
-        _icall_Unit_Float(setGlobalRotationMethodBind, this.rawMemory, radians)
+    open fun setGlobalRotation(radians: Double) {
+        _icall_Unit_Double(setGlobalRotationMethodBind, this.rawMemory, radians)
     }
 
 
     private val getGlobalRotationMethodBind: CPointer<godot_method_bind> by lazy { getMB("Node2D", "get_global_rotation") }
-    open fun getGlobalRotation(): Float {
-        return _icall_Float(getGlobalRotationMethodBind, this.rawMemory)
+    open fun getGlobalRotation(): Double {
+        return _icall_Double(getGlobalRotationMethodBind, this.rawMemory)
     }
 
 
     private val setGlobalRotationDegreesMethodBind: CPointer<godot_method_bind> by lazy { getMB("Node2D", "set_global_rotation_degrees") }
-    open fun setGlobalRotationDegrees(degrees: Float) {
-        _icall_Unit_Float(setGlobalRotationDegreesMethodBind, this.rawMemory, degrees)
+    open fun setGlobalRotationDegrees(degrees: Double) {
+        _icall_Unit_Double(setGlobalRotationDegreesMethodBind, this.rawMemory, degrees)
     }
 
 
     private val getGlobalRotationDegreesMethodBind: CPointer<godot_method_bind> by lazy { getMB("Node2D", "get_global_rotation_degrees") }
-    open fun getGlobalRotationDegrees(): Float {
-        return _icall_Float(getGlobalRotationDegreesMethodBind, this.rawMemory)
+    open fun getGlobalRotationDegrees(): Double {
+        return _icall_Double(getGlobalRotationDegreesMethodBind, this.rawMemory)
     }
 
 
@@ -280,8 +280,8 @@ open class Node2D : CanvasItem {
 
 
     private val getAngleToMethodBind: CPointer<godot_method_bind> by lazy { getMB("Node2D", "get_angle_to") }
-    open fun getAngleTo(point: Vector2): Float {
-        return _icall_Float_Vector2(getAngleToMethodBind, this.rawMemory, point)
+    open fun getAngleTo(point: Vector2): Double {
+        return _icall_Double_Vector2(getAngleToMethodBind, this.rawMemory, point)
     }
 
 
@@ -298,14 +298,14 @@ open class Node2D : CanvasItem {
 
 
     private val setZIndexMethodBind: CPointer<godot_method_bind> by lazy { getMB("Node2D", "set_z_index") }
-    open fun setZIndex(zIndex: Int) {
-        _icall_Unit_Int(setZIndexMethodBind, this.rawMemory, zIndex)
+    open fun setZIndex(zIndex: Long) {
+        _icall_Unit_Long(setZIndexMethodBind, this.rawMemory, zIndex)
     }
 
 
     private val getZIndexMethodBind: CPointer<godot_method_bind> by lazy { getMB("Node2D", "get_z_index") }
-    open fun getZIndex(): Int {
-        return _icall_Int(getZIndexMethodBind, this.rawMemory)
+    open fun getZIndex(): Long {
+        return _icall_Long(getZIndexMethodBind, this.rawMemory)
     }
 
 

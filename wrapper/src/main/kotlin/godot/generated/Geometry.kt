@@ -50,20 +50,20 @@ open class Geometry : Object {
 
 
         private val buildCylinderPlanesMethodBind: CPointer<godot_method_bind> by lazy { getMB("_Geometry", "build_cylinder_planes") }
-        fun buildCylinderPlanes(radius: Float, height: Float, sides: Int, axis: Int = 2): GDArray {
-            return _icall_GDArray_Float_Float_Int_Int(buildCylinderPlanesMethodBind, this.rawMemory, radius, height, sides, axis)
+        fun buildCylinderPlanes(radius: Double, height: Double, sides: Long, axis: Long = 2): GDArray {
+            return _icall_GDArray_Double_Double_Long_Long(buildCylinderPlanesMethodBind, this.rawMemory, radius, height, sides, axis)
         }
 
 
         private val buildCapsulePlanesMethodBind: CPointer<godot_method_bind> by lazy { getMB("_Geometry", "build_capsule_planes") }
-        fun buildCapsulePlanes(radius: Float, height: Float, sides: Int, lats: Int, axis: Int = 2): GDArray {
-            return _icall_GDArray_Float_Float_Int_Int_Int(buildCapsulePlanesMethodBind, this.rawMemory, radius, height, sides, lats, axis)
+        fun buildCapsulePlanes(radius: Double, height: Double, sides: Long, lats: Long, axis: Long = 2): GDArray {
+            return _icall_GDArray_Double_Double_Long_Long_Long(buildCapsulePlanesMethodBind, this.rawMemory, radius, height, sides, lats, axis)
         }
 
 
         private val segmentIntersectsCircleMethodBind: CPointer<godot_method_bind> by lazy { getMB("_Geometry", "segment_intersects_circle") }
-        fun segmentIntersectsCircle(segmentFrom: Vector2, segmentTo: Vector2, circlePosition: Vector2, circleRadius: Float): Float {
-            return _icall_Float_Vector2_Vector2_Vector2_Float(segmentIntersectsCircleMethodBind, this.rawMemory, segmentFrom, segmentTo, circlePosition, circleRadius)
+        fun segmentIntersectsCircle(segmentFrom: Vector2, segmentTo: Vector2, circlePosition: Vector2, circleRadius: Double): Double {
+            return _icall_Double_Vector2_Vector2_Vector2_Double(segmentIntersectsCircleMethodBind, this.rawMemory, segmentFrom, segmentTo, circlePosition, circleRadius)
         }
 
 
@@ -116,8 +116,8 @@ open class Geometry : Object {
 
 
         private val getUv84NormalBitMethodBind: CPointer<godot_method_bind> by lazy { getMB("_Geometry", "get_uv84_normal_bit") }
-        fun getUv84NormalBit(normal: Vector3): Int {
-            return _icall_Int_Vector3(getUv84NormalBitMethodBind, this.rawMemory, normal)
+        fun getUv84NormalBit(normal: Vector3): Long {
+            return _icall_Long_Vector3(getUv84NormalBitMethodBind, this.rawMemory, normal)
         }
 
 
@@ -134,14 +134,14 @@ open class Geometry : Object {
 
 
         private val segmentIntersectsSphereMethodBind: CPointer<godot_method_bind> by lazy { getMB("_Geometry", "segment_intersects_sphere") }
-        fun segmentIntersectsSphere(from: Vector3, to: Vector3, spherePosition: Vector3, sphereRadius: Float): PoolVector3Array {
-            return _icall_PoolVector3Array_Vector3_Vector3_Vector3_Float(segmentIntersectsSphereMethodBind, this.rawMemory, from, to, spherePosition, sphereRadius)
+        fun segmentIntersectsSphere(from: Vector3, to: Vector3, spherePosition: Vector3, sphereRadius: Double): PoolVector3Array {
+            return _icall_PoolVector3Array_Vector3_Vector3_Vector3_Double(segmentIntersectsSphereMethodBind, this.rawMemory, from, to, spherePosition, sphereRadius)
         }
 
 
         private val segmentIntersectsCylinderMethodBind: CPointer<godot_method_bind> by lazy { getMB("_Geometry", "segment_intersects_cylinder") }
-        fun segmentIntersectsCylinder(from: Vector3, to: Vector3, height: Float, radius: Float): PoolVector3Array {
-            return _icall_PoolVector3Array_Vector3_Vector3_Float_Float(segmentIntersectsCylinderMethodBind, this.rawMemory, from, to, height, radius)
+        fun segmentIntersectsCylinder(from: Vector3, to: Vector3, height: Double, radius: Double): PoolVector3Array {
+            return _icall_PoolVector3Array_Vector3_Vector3_Double_Double(segmentIntersectsCylinderMethodBind, this.rawMemory, from, to, height, radius)
         }
 
 

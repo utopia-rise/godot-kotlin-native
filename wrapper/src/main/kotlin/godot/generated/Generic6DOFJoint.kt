@@ -19,7 +19,7 @@ open class Generic6DOFJoint : Joint {
 
     // Enums 
 
-    enum class Param(val id: Int) {
+    enum class Param(val id: Long) {
         PARAM_LINEAR_LOWER_LIMIT(0),
         PARAM_LINEAR_UPPER_LIMIT(1),
         PARAM_LINEAR_LIMIT_SOFTNESS(2),
@@ -40,10 +40,10 @@ open class Generic6DOFJoint : Joint {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class Flag(val id: Int) {
+    enum class Flag(val id: Long) {
         FLAG_ENABLE_LINEAR_LIMIT(0),
         FLAG_ENABLE_ANGULAR_LIMIT(1),
         FLAG_ENABLE_MOTOR(2),
@@ -52,7 +52,7 @@ open class Generic6DOFJoint : Joint {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -73,28 +73,28 @@ open class Generic6DOFJoint : Joint {
 
 
         // Constants
-        const val PARAM_LINEAR_LOWER_LIMIT: Int = 0
-        const val PARAM_LINEAR_UPPER_LIMIT: Int = 1
-        const val PARAM_LINEAR_LIMIT_SOFTNESS: Int = 2
-        const val PARAM_LINEAR_RESTITUTION: Int = 3
-        const val PARAM_LINEAR_DAMPING: Int = 4
-        const val PARAM_LINEAR_MOTOR_TARGET_VELOCITY: Int = 5
-        const val PARAM_LINEAR_MOTOR_FORCE_LIMIT: Int = 6
-        const val PARAM_ANGULAR_LOWER_LIMIT: Int = 7
-        const val PARAM_ANGULAR_UPPER_LIMIT: Int = 8
-        const val PARAM_ANGULAR_LIMIT_SOFTNESS: Int = 9
-        const val PARAM_ANGULAR_DAMPING: Int = 10
-        const val PARAM_ANGULAR_RESTITUTION: Int = 11
-        const val PARAM_ANGULAR_FORCE_LIMIT: Int = 12
-        const val PARAM_ANGULAR_ERP: Int = 13
-        const val PARAM_ANGULAR_MOTOR_TARGET_VELOCITY: Int = 14
-        const val PARAM_ANGULAR_MOTOR_FORCE_LIMIT: Int = 15
-        const val PARAM_MAX: Int = 16
-        const val FLAG_ENABLE_LINEAR_LIMIT: Int = 0
-        const val FLAG_ENABLE_ANGULAR_LIMIT: Int = 1
-        const val FLAG_ENABLE_MOTOR: Int = 2
-        const val FLAG_ENABLE_LINEAR_MOTOR: Int = 3
-        const val FLAG_MAX: Int = 4
+        const val PARAM_LINEAR_LOWER_LIMIT: Long = 0
+        const val PARAM_LINEAR_UPPER_LIMIT: Long = 1
+        const val PARAM_LINEAR_LIMIT_SOFTNESS: Long = 2
+        const val PARAM_LINEAR_RESTITUTION: Long = 3
+        const val PARAM_LINEAR_DAMPING: Long = 4
+        const val PARAM_LINEAR_MOTOR_TARGET_VELOCITY: Long = 5
+        const val PARAM_LINEAR_MOTOR_FORCE_LIMIT: Long = 6
+        const val PARAM_ANGULAR_LOWER_LIMIT: Long = 7
+        const val PARAM_ANGULAR_UPPER_LIMIT: Long = 8
+        const val PARAM_ANGULAR_LIMIT_SOFTNESS: Long = 9
+        const val PARAM_ANGULAR_DAMPING: Long = 10
+        const val PARAM_ANGULAR_RESTITUTION: Long = 11
+        const val PARAM_ANGULAR_FORCE_LIMIT: Long = 12
+        const val PARAM_ANGULAR_ERP: Long = 13
+        const val PARAM_ANGULAR_MOTOR_TARGET_VELOCITY: Long = 14
+        const val PARAM_ANGULAR_MOTOR_FORCE_LIMIT: Long = 15
+        const val PARAM_MAX: Long = 16
+        const val FLAG_ENABLE_LINEAR_LIMIT: Long = 0
+        const val FLAG_ENABLE_ANGULAR_LIMIT: Long = 1
+        const val FLAG_ENABLE_MOTOR: Long = 2
+        const val FLAG_ENABLE_LINEAR_MOTOR: Long = 3
+        const val FLAG_MAX: Long = 4
 
 
     }
@@ -102,401 +102,401 @@ open class Generic6DOFJoint : Joint {
 
     // Properties
     open var linearLimitX_enabled: Boolean
-        get() = _icall_Boolean_Int(getFlagXMethodBind, this.rawMemory, 0)
-        set(value) = _icall_Unit_Int_Boolean(setFlagXMethodBind, this.rawMemory, 0, value)
+        get() = _icall_Boolean_Long(getFlagXMethodBind, this.rawMemory, 0)
+        set(value) = _icall_Unit_Long_Boolean(setFlagXMethodBind, this.rawMemory, 0, value)
 
 
-    open var linearLimitX_upperDistance: Float
-        get() = _icall_Float_Int(getParamXMethodBind, this.rawMemory, 1)
-        set(value) = _icall_Unit_Int_Float(setParamXMethodBind, this.rawMemory, 1, value)
+    open var linearLimitX_upperDistance: Double
+        get() = _icall_Double_Long(getParamXMethodBind, this.rawMemory, 1)
+        set(value) = _icall_Unit_Long_Double(setParamXMethodBind, this.rawMemory, 1, value)
 
 
-    open var linearLimitX_lowerDistance: Float
-        get() = _icall_Float_Int(getParamXMethodBind, this.rawMemory, 0)
-        set(value) = _icall_Unit_Int_Float(setParamXMethodBind, this.rawMemory, 0, value)
+    open var linearLimitX_lowerDistance: Double
+        get() = _icall_Double_Long(getParamXMethodBind, this.rawMemory, 0)
+        set(value) = _icall_Unit_Long_Double(setParamXMethodBind, this.rawMemory, 0, value)
 
 
-    open var linearLimitX_softness: Float
-        get() = _icall_Float_Int(getParamXMethodBind, this.rawMemory, 2)
-        set(value) = _icall_Unit_Int_Float(setParamXMethodBind, this.rawMemory, 2, value)
+    open var linearLimitX_softness: Double
+        get() = _icall_Double_Long(getParamXMethodBind, this.rawMemory, 2)
+        set(value) = _icall_Unit_Long_Double(setParamXMethodBind, this.rawMemory, 2, value)
 
 
-    open var linearLimitX_restitution: Float
-        get() = _icall_Float_Int(getParamXMethodBind, this.rawMemory, 3)
-        set(value) = _icall_Unit_Int_Float(setParamXMethodBind, this.rawMemory, 3, value)
+    open var linearLimitX_restitution: Double
+        get() = _icall_Double_Long(getParamXMethodBind, this.rawMemory, 3)
+        set(value) = _icall_Unit_Long_Double(setParamXMethodBind, this.rawMemory, 3, value)
 
 
-    open var linearLimitX_damping: Float
-        get() = _icall_Float_Int(getParamXMethodBind, this.rawMemory, 4)
-        set(value) = _icall_Unit_Int_Float(setParamXMethodBind, this.rawMemory, 4, value)
+    open var linearLimitX_damping: Double
+        get() = _icall_Double_Long(getParamXMethodBind, this.rawMemory, 4)
+        set(value) = _icall_Unit_Long_Double(setParamXMethodBind, this.rawMemory, 4, value)
 
 
     open var linearMotorX_enabled: Boolean
-        get() = _icall_Boolean_Int(getFlagXMethodBind, this.rawMemory, 3)
-        set(value) = _icall_Unit_Int_Boolean(setFlagXMethodBind, this.rawMemory, 3, value)
+        get() = _icall_Boolean_Long(getFlagXMethodBind, this.rawMemory, 3)
+        set(value) = _icall_Unit_Long_Boolean(setFlagXMethodBind, this.rawMemory, 3, value)
 
 
-    open var linearMotorX_targetVelocity: Float
-        get() = _icall_Float_Int(getParamXMethodBind, this.rawMemory, 5)
-        set(value) = _icall_Unit_Int_Float(setParamXMethodBind, this.rawMemory, 5, value)
+    open var linearMotorX_targetVelocity: Double
+        get() = _icall_Double_Long(getParamXMethodBind, this.rawMemory, 5)
+        set(value) = _icall_Unit_Long_Double(setParamXMethodBind, this.rawMemory, 5, value)
 
 
-    open var linearMotorX_forceLimit: Float
-        get() = _icall_Float_Int(getParamXMethodBind, this.rawMemory, 6)
-        set(value) = _icall_Unit_Int_Float(setParamXMethodBind, this.rawMemory, 6, value)
+    open var linearMotorX_forceLimit: Double
+        get() = _icall_Double_Long(getParamXMethodBind, this.rawMemory, 6)
+        set(value) = _icall_Unit_Long_Double(setParamXMethodBind, this.rawMemory, 6, value)
 
 
     open var angularLimitX_enabled: Boolean
-        get() = _icall_Boolean_Int(getFlagXMethodBind, this.rawMemory, 1)
-        set(value) = _icall_Unit_Int_Boolean(setFlagXMethodBind, this.rawMemory, 1, value)
+        get() = _icall_Boolean_Long(getFlagXMethodBind, this.rawMemory, 1)
+        set(value) = _icall_Unit_Long_Boolean(setFlagXMethodBind, this.rawMemory, 1, value)
 
 
-    open var angularLimitX_softness: Float
-        get() = _icall_Float_Int(getParamXMethodBind, this.rawMemory, 9)
-        set(value) = _icall_Unit_Int_Float(setParamXMethodBind, this.rawMemory, 9, value)
+    open var angularLimitX_softness: Double
+        get() = _icall_Double_Long(getParamXMethodBind, this.rawMemory, 9)
+        set(value) = _icall_Unit_Long_Double(setParamXMethodBind, this.rawMemory, 9, value)
 
 
-    open var angularLimitX_restitution: Float
-        get() = _icall_Float_Int(getParamXMethodBind, this.rawMemory, 11)
-        set(value) = _icall_Unit_Int_Float(setParamXMethodBind, this.rawMemory, 11, value)
+    open var angularLimitX_restitution: Double
+        get() = _icall_Double_Long(getParamXMethodBind, this.rawMemory, 11)
+        set(value) = _icall_Unit_Long_Double(setParamXMethodBind, this.rawMemory, 11, value)
 
 
-    open var angularLimitX_damping: Float
-        get() = _icall_Float_Int(getParamXMethodBind, this.rawMemory, 10)
-        set(value) = _icall_Unit_Int_Float(setParamXMethodBind, this.rawMemory, 10, value)
+    open var angularLimitX_damping: Double
+        get() = _icall_Double_Long(getParamXMethodBind, this.rawMemory, 10)
+        set(value) = _icall_Unit_Long_Double(setParamXMethodBind, this.rawMemory, 10, value)
 
 
-    open var angularLimitX_forceLimit: Float
-        get() = _icall_Float_Int(getParamXMethodBind, this.rawMemory, 12)
-        set(value) = _icall_Unit_Int_Float(setParamXMethodBind, this.rawMemory, 12, value)
+    open var angularLimitX_forceLimit: Double
+        get() = _icall_Double_Long(getParamXMethodBind, this.rawMemory, 12)
+        set(value) = _icall_Unit_Long_Double(setParamXMethodBind, this.rawMemory, 12, value)
 
 
-    open var angularLimitX_erp: Float
-        get() = _icall_Float_Int(getParamXMethodBind, this.rawMemory, 13)
-        set(value) = _icall_Unit_Int_Float(setParamXMethodBind, this.rawMemory, 13, value)
+    open var angularLimitX_erp: Double
+        get() = _icall_Double_Long(getParamXMethodBind, this.rawMemory, 13)
+        set(value) = _icall_Unit_Long_Double(setParamXMethodBind, this.rawMemory, 13, value)
 
 
     open var angularMotorX_enabled: Boolean
-        get() = _icall_Boolean_Int(getFlagXMethodBind, this.rawMemory, 2)
-        set(value) = _icall_Unit_Int_Boolean(setFlagXMethodBind, this.rawMemory, 2, value)
+        get() = _icall_Boolean_Long(getFlagXMethodBind, this.rawMemory, 2)
+        set(value) = _icall_Unit_Long_Boolean(setFlagXMethodBind, this.rawMemory, 2, value)
 
 
-    open var angularMotorX_targetVelocity: Float
-        get() = _icall_Float_Int(getParamXMethodBind, this.rawMemory, 14)
-        set(value) = _icall_Unit_Int_Float(setParamXMethodBind, this.rawMemory, 14, value)
+    open var angularMotorX_targetVelocity: Double
+        get() = _icall_Double_Long(getParamXMethodBind, this.rawMemory, 14)
+        set(value) = _icall_Unit_Long_Double(setParamXMethodBind, this.rawMemory, 14, value)
 
 
-    open var angularMotorX_forceLimit: Float
-        get() = _icall_Float_Int(getParamXMethodBind, this.rawMemory, 15)
-        set(value) = _icall_Unit_Int_Float(setParamXMethodBind, this.rawMemory, 15, value)
+    open var angularMotorX_forceLimit: Double
+        get() = _icall_Double_Long(getParamXMethodBind, this.rawMemory, 15)
+        set(value) = _icall_Unit_Long_Double(setParamXMethodBind, this.rawMemory, 15, value)
 
 
     open var linearLimitY_enabled: Boolean
-        get() = _icall_Boolean_Int(getFlagYMethodBind, this.rawMemory, 0)
-        set(value) = _icall_Unit_Int_Boolean(setFlagYMethodBind, this.rawMemory, 0, value)
+        get() = _icall_Boolean_Long(getFlagYMethodBind, this.rawMemory, 0)
+        set(value) = _icall_Unit_Long_Boolean(setFlagYMethodBind, this.rawMemory, 0, value)
 
 
-    open var linearLimitY_upperDistance: Float
-        get() = _icall_Float_Int(getParamYMethodBind, this.rawMemory, 1)
-        set(value) = _icall_Unit_Int_Float(setParamYMethodBind, this.rawMemory, 1, value)
+    open var linearLimitY_upperDistance: Double
+        get() = _icall_Double_Long(getParamYMethodBind, this.rawMemory, 1)
+        set(value) = _icall_Unit_Long_Double(setParamYMethodBind, this.rawMemory, 1, value)
 
 
-    open var linearLimitY_lowerDistance: Float
-        get() = _icall_Float_Int(getParamYMethodBind, this.rawMemory, 0)
-        set(value) = _icall_Unit_Int_Float(setParamYMethodBind, this.rawMemory, 0, value)
+    open var linearLimitY_lowerDistance: Double
+        get() = _icall_Double_Long(getParamYMethodBind, this.rawMemory, 0)
+        set(value) = _icall_Unit_Long_Double(setParamYMethodBind, this.rawMemory, 0, value)
 
 
-    open var linearLimitY_softness: Float
-        get() = _icall_Float_Int(getParamYMethodBind, this.rawMemory, 2)
-        set(value) = _icall_Unit_Int_Float(setParamYMethodBind, this.rawMemory, 2, value)
+    open var linearLimitY_softness: Double
+        get() = _icall_Double_Long(getParamYMethodBind, this.rawMemory, 2)
+        set(value) = _icall_Unit_Long_Double(setParamYMethodBind, this.rawMemory, 2, value)
 
 
-    open var linearLimitY_restitution: Float
-        get() = _icall_Float_Int(getParamYMethodBind, this.rawMemory, 3)
-        set(value) = _icall_Unit_Int_Float(setParamYMethodBind, this.rawMemory, 3, value)
+    open var linearLimitY_restitution: Double
+        get() = _icall_Double_Long(getParamYMethodBind, this.rawMemory, 3)
+        set(value) = _icall_Unit_Long_Double(setParamYMethodBind, this.rawMemory, 3, value)
 
 
-    open var linearLimitY_damping: Float
-        get() = _icall_Float_Int(getParamYMethodBind, this.rawMemory, 4)
-        set(value) = _icall_Unit_Int_Float(setParamYMethodBind, this.rawMemory, 4, value)
+    open var linearLimitY_damping: Double
+        get() = _icall_Double_Long(getParamYMethodBind, this.rawMemory, 4)
+        set(value) = _icall_Unit_Long_Double(setParamYMethodBind, this.rawMemory, 4, value)
 
 
     open var linearMotorY_enabled: Boolean
-        get() = _icall_Boolean_Int(getFlagYMethodBind, this.rawMemory, 3)
-        set(value) = _icall_Unit_Int_Boolean(setFlagYMethodBind, this.rawMemory, 3, value)
+        get() = _icall_Boolean_Long(getFlagYMethodBind, this.rawMemory, 3)
+        set(value) = _icall_Unit_Long_Boolean(setFlagYMethodBind, this.rawMemory, 3, value)
 
 
-    open var linearMotorY_targetVelocity: Float
-        get() = _icall_Float_Int(getParamYMethodBind, this.rawMemory, 5)
-        set(value) = _icall_Unit_Int_Float(setParamYMethodBind, this.rawMemory, 5, value)
+    open var linearMotorY_targetVelocity: Double
+        get() = _icall_Double_Long(getParamYMethodBind, this.rawMemory, 5)
+        set(value) = _icall_Unit_Long_Double(setParamYMethodBind, this.rawMemory, 5, value)
 
 
-    open var linearMotorY_forceLimit: Float
-        get() = _icall_Float_Int(getParamYMethodBind, this.rawMemory, 6)
-        set(value) = _icall_Unit_Int_Float(setParamYMethodBind, this.rawMemory, 6, value)
+    open var linearMotorY_forceLimit: Double
+        get() = _icall_Double_Long(getParamYMethodBind, this.rawMemory, 6)
+        set(value) = _icall_Unit_Long_Double(setParamYMethodBind, this.rawMemory, 6, value)
 
 
     open var angularLimitY_enabled: Boolean
-        get() = _icall_Boolean_Int(getFlagYMethodBind, this.rawMemory, 1)
-        set(value) = _icall_Unit_Int_Boolean(setFlagYMethodBind, this.rawMemory, 1, value)
+        get() = _icall_Boolean_Long(getFlagYMethodBind, this.rawMemory, 1)
+        set(value) = _icall_Unit_Long_Boolean(setFlagYMethodBind, this.rawMemory, 1, value)
 
 
-    open var angularLimitY_softness: Float
-        get() = _icall_Float_Int(getParamYMethodBind, this.rawMemory, 9)
-        set(value) = _icall_Unit_Int_Float(setParamYMethodBind, this.rawMemory, 9, value)
+    open var angularLimitY_softness: Double
+        get() = _icall_Double_Long(getParamYMethodBind, this.rawMemory, 9)
+        set(value) = _icall_Unit_Long_Double(setParamYMethodBind, this.rawMemory, 9, value)
 
 
-    open var angularLimitY_restitution: Float
-        get() = _icall_Float_Int(getParamYMethodBind, this.rawMemory, 11)
-        set(value) = _icall_Unit_Int_Float(setParamYMethodBind, this.rawMemory, 11, value)
+    open var angularLimitY_restitution: Double
+        get() = _icall_Double_Long(getParamYMethodBind, this.rawMemory, 11)
+        set(value) = _icall_Unit_Long_Double(setParamYMethodBind, this.rawMemory, 11, value)
 
 
-    open var angularLimitY_damping: Float
-        get() = _icall_Float_Int(getParamYMethodBind, this.rawMemory, 10)
-        set(value) = _icall_Unit_Int_Float(setParamYMethodBind, this.rawMemory, 10, value)
+    open var angularLimitY_damping: Double
+        get() = _icall_Double_Long(getParamYMethodBind, this.rawMemory, 10)
+        set(value) = _icall_Unit_Long_Double(setParamYMethodBind, this.rawMemory, 10, value)
 
 
-    open var angularLimitY_forceLimit: Float
-        get() = _icall_Float_Int(getParamYMethodBind, this.rawMemory, 12)
-        set(value) = _icall_Unit_Int_Float(setParamYMethodBind, this.rawMemory, 12, value)
+    open var angularLimitY_forceLimit: Double
+        get() = _icall_Double_Long(getParamYMethodBind, this.rawMemory, 12)
+        set(value) = _icall_Unit_Long_Double(setParamYMethodBind, this.rawMemory, 12, value)
 
 
-    open var angularLimitY_erp: Float
-        get() = _icall_Float_Int(getParamYMethodBind, this.rawMemory, 13)
-        set(value) = _icall_Unit_Int_Float(setParamYMethodBind, this.rawMemory, 13, value)
+    open var angularLimitY_erp: Double
+        get() = _icall_Double_Long(getParamYMethodBind, this.rawMemory, 13)
+        set(value) = _icall_Unit_Long_Double(setParamYMethodBind, this.rawMemory, 13, value)
 
 
     open var angularMotorY_enabled: Boolean
-        get() = _icall_Boolean_Int(getFlagYMethodBind, this.rawMemory, 2)
-        set(value) = _icall_Unit_Int_Boolean(setFlagYMethodBind, this.rawMemory, 2, value)
+        get() = _icall_Boolean_Long(getFlagYMethodBind, this.rawMemory, 2)
+        set(value) = _icall_Unit_Long_Boolean(setFlagYMethodBind, this.rawMemory, 2, value)
 
 
-    open var angularMotorY_targetVelocity: Float
-        get() = _icall_Float_Int(getParamYMethodBind, this.rawMemory, 14)
-        set(value) = _icall_Unit_Int_Float(setParamYMethodBind, this.rawMemory, 14, value)
+    open var angularMotorY_targetVelocity: Double
+        get() = _icall_Double_Long(getParamYMethodBind, this.rawMemory, 14)
+        set(value) = _icall_Unit_Long_Double(setParamYMethodBind, this.rawMemory, 14, value)
 
 
-    open var angularMotorY_forceLimit: Float
-        get() = _icall_Float_Int(getParamYMethodBind, this.rawMemory, 15)
-        set(value) = _icall_Unit_Int_Float(setParamYMethodBind, this.rawMemory, 15, value)
+    open var angularMotorY_forceLimit: Double
+        get() = _icall_Double_Long(getParamYMethodBind, this.rawMemory, 15)
+        set(value) = _icall_Unit_Long_Double(setParamYMethodBind, this.rawMemory, 15, value)
 
 
     open var linearLimitZ_enabled: Boolean
-        get() = _icall_Boolean_Int(getFlagZMethodBind, this.rawMemory, 0)
-        set(value) = _icall_Unit_Int_Boolean(setFlagZMethodBind, this.rawMemory, 0, value)
+        get() = _icall_Boolean_Long(getFlagZMethodBind, this.rawMemory, 0)
+        set(value) = _icall_Unit_Long_Boolean(setFlagZMethodBind, this.rawMemory, 0, value)
 
 
-    open var linearLimitZ_upperDistance: Float
-        get() = _icall_Float_Int(getParamZMethodBind, this.rawMemory, 1)
-        set(value) = _icall_Unit_Int_Float(setParamZMethodBind, this.rawMemory, 1, value)
+    open var linearLimitZ_upperDistance: Double
+        get() = _icall_Double_Long(getParamZMethodBind, this.rawMemory, 1)
+        set(value) = _icall_Unit_Long_Double(setParamZMethodBind, this.rawMemory, 1, value)
 
 
-    open var linearLimitZ_lowerDistance: Float
-        get() = _icall_Float_Int(getParamZMethodBind, this.rawMemory, 0)
-        set(value) = _icall_Unit_Int_Float(setParamZMethodBind, this.rawMemory, 0, value)
+    open var linearLimitZ_lowerDistance: Double
+        get() = _icall_Double_Long(getParamZMethodBind, this.rawMemory, 0)
+        set(value) = _icall_Unit_Long_Double(setParamZMethodBind, this.rawMemory, 0, value)
 
 
-    open var linearLimitZ_softness: Float
-        get() = _icall_Float_Int(getParamZMethodBind, this.rawMemory, 2)
-        set(value) = _icall_Unit_Int_Float(setParamZMethodBind, this.rawMemory, 2, value)
+    open var linearLimitZ_softness: Double
+        get() = _icall_Double_Long(getParamZMethodBind, this.rawMemory, 2)
+        set(value) = _icall_Unit_Long_Double(setParamZMethodBind, this.rawMemory, 2, value)
 
 
-    open var linearLimitZ_restitution: Float
-        get() = _icall_Float_Int(getParamZMethodBind, this.rawMemory, 3)
-        set(value) = _icall_Unit_Int_Float(setParamZMethodBind, this.rawMemory, 3, value)
+    open var linearLimitZ_restitution: Double
+        get() = _icall_Double_Long(getParamZMethodBind, this.rawMemory, 3)
+        set(value) = _icall_Unit_Long_Double(setParamZMethodBind, this.rawMemory, 3, value)
 
 
-    open var linearLimitZ_damping: Float
-        get() = _icall_Float_Int(getParamZMethodBind, this.rawMemory, 4)
-        set(value) = _icall_Unit_Int_Float(setParamZMethodBind, this.rawMemory, 4, value)
+    open var linearLimitZ_damping: Double
+        get() = _icall_Double_Long(getParamZMethodBind, this.rawMemory, 4)
+        set(value) = _icall_Unit_Long_Double(setParamZMethodBind, this.rawMemory, 4, value)
 
 
     open var linearMotorZ_enabled: Boolean
-        get() = _icall_Boolean_Int(getFlagZMethodBind, this.rawMemory, 3)
-        set(value) = _icall_Unit_Int_Boolean(setFlagZMethodBind, this.rawMemory, 3, value)
+        get() = _icall_Boolean_Long(getFlagZMethodBind, this.rawMemory, 3)
+        set(value) = _icall_Unit_Long_Boolean(setFlagZMethodBind, this.rawMemory, 3, value)
 
 
-    open var linearMotorZ_targetVelocity: Float
-        get() = _icall_Float_Int(getParamZMethodBind, this.rawMemory, 5)
-        set(value) = _icall_Unit_Int_Float(setParamZMethodBind, this.rawMemory, 5, value)
+    open var linearMotorZ_targetVelocity: Double
+        get() = _icall_Double_Long(getParamZMethodBind, this.rawMemory, 5)
+        set(value) = _icall_Unit_Long_Double(setParamZMethodBind, this.rawMemory, 5, value)
 
 
-    open var linearMotorZ_forceLimit: Float
-        get() = _icall_Float_Int(getParamZMethodBind, this.rawMemory, 6)
-        set(value) = _icall_Unit_Int_Float(setParamZMethodBind, this.rawMemory, 6, value)
+    open var linearMotorZ_forceLimit: Double
+        get() = _icall_Double_Long(getParamZMethodBind, this.rawMemory, 6)
+        set(value) = _icall_Unit_Long_Double(setParamZMethodBind, this.rawMemory, 6, value)
 
 
     open var angularLimitZ_enabled: Boolean
-        get() = _icall_Boolean_Int(getFlagZMethodBind, this.rawMemory, 1)
-        set(value) = _icall_Unit_Int_Boolean(setFlagZMethodBind, this.rawMemory, 1, value)
+        get() = _icall_Boolean_Long(getFlagZMethodBind, this.rawMemory, 1)
+        set(value) = _icall_Unit_Long_Boolean(setFlagZMethodBind, this.rawMemory, 1, value)
 
 
-    open var angularLimitZ_softness: Float
-        get() = _icall_Float_Int(getParamZMethodBind, this.rawMemory, 9)
-        set(value) = _icall_Unit_Int_Float(setParamZMethodBind, this.rawMemory, 9, value)
+    open var angularLimitZ_softness: Double
+        get() = _icall_Double_Long(getParamZMethodBind, this.rawMemory, 9)
+        set(value) = _icall_Unit_Long_Double(setParamZMethodBind, this.rawMemory, 9, value)
 
 
-    open var angularLimitZ_restitution: Float
-        get() = _icall_Float_Int(getParamZMethodBind, this.rawMemory, 11)
-        set(value) = _icall_Unit_Int_Float(setParamZMethodBind, this.rawMemory, 11, value)
+    open var angularLimitZ_restitution: Double
+        get() = _icall_Double_Long(getParamZMethodBind, this.rawMemory, 11)
+        set(value) = _icall_Unit_Long_Double(setParamZMethodBind, this.rawMemory, 11, value)
 
 
-    open var angularLimitZ_damping: Float
-        get() = _icall_Float_Int(getParamZMethodBind, this.rawMemory, 10)
-        set(value) = _icall_Unit_Int_Float(setParamZMethodBind, this.rawMemory, 10, value)
+    open var angularLimitZ_damping: Double
+        get() = _icall_Double_Long(getParamZMethodBind, this.rawMemory, 10)
+        set(value) = _icall_Unit_Long_Double(setParamZMethodBind, this.rawMemory, 10, value)
 
 
-    open var angularLimitZ_forceLimit: Float
-        get() = _icall_Float_Int(getParamZMethodBind, this.rawMemory, 12)
-        set(value) = _icall_Unit_Int_Float(setParamZMethodBind, this.rawMemory, 12, value)
+    open var angularLimitZ_forceLimit: Double
+        get() = _icall_Double_Long(getParamZMethodBind, this.rawMemory, 12)
+        set(value) = _icall_Unit_Long_Double(setParamZMethodBind, this.rawMemory, 12, value)
 
 
-    open var angularLimitZ_erp: Float
-        get() = _icall_Float_Int(getParamZMethodBind, this.rawMemory, 13)
-        set(value) = _icall_Unit_Int_Float(setParamZMethodBind, this.rawMemory, 13, value)
+    open var angularLimitZ_erp: Double
+        get() = _icall_Double_Long(getParamZMethodBind, this.rawMemory, 13)
+        set(value) = _icall_Unit_Long_Double(setParamZMethodBind, this.rawMemory, 13, value)
 
 
     open var angularMotorZ_enabled: Boolean
-        get() = _icall_Boolean_Int(getFlagZMethodBind, this.rawMemory, 2)
-        set(value) = _icall_Unit_Int_Boolean(setFlagZMethodBind, this.rawMemory, 2, value)
+        get() = _icall_Boolean_Long(getFlagZMethodBind, this.rawMemory, 2)
+        set(value) = _icall_Unit_Long_Boolean(setFlagZMethodBind, this.rawMemory, 2, value)
 
 
-    open var angularMotorZ_targetVelocity: Float
-        get() = _icall_Float_Int(getParamZMethodBind, this.rawMemory, 14)
-        set(value) = _icall_Unit_Int_Float(setParamZMethodBind, this.rawMemory, 14, value)
+    open var angularMotorZ_targetVelocity: Double
+        get() = _icall_Double_Long(getParamZMethodBind, this.rawMemory, 14)
+        set(value) = _icall_Unit_Long_Double(setParamZMethodBind, this.rawMemory, 14, value)
 
 
-    open var angularMotorZ_forceLimit: Float
-        get() = _icall_Float_Int(getParamZMethodBind, this.rawMemory, 15)
-        set(value) = _icall_Unit_Int_Float(setParamZMethodBind, this.rawMemory, 15, value)
+    open var angularMotorZ_forceLimit: Double
+        get() = _icall_Double_Long(getParamZMethodBind, this.rawMemory, 15)
+        set(value) = _icall_Unit_Long_Double(setParamZMethodBind, this.rawMemory, 15, value)
 
 
 
 
     // Methods
-    open fun _set_angular_hi_limit_x(angle: Float) {
+    open fun _set_angular_hi_limit_x(angle: Double) {
     }
 
 
-    open fun _get_angular_hi_limit_x(): Float {
+    open fun _get_angular_hi_limit_x(): Double {
         throw NotImplementedError("_get_angular_hi_limit_x is not implemented for Generic6DOFJoint")
     }
 
 
-    open fun _set_angular_lo_limit_x(angle: Float) {
+    open fun _set_angular_lo_limit_x(angle: Double) {
     }
 
 
-    open fun _get_angular_lo_limit_x(): Float {
+    open fun _get_angular_lo_limit_x(): Double {
         throw NotImplementedError("_get_angular_lo_limit_x is not implemented for Generic6DOFJoint")
     }
 
 
-    open fun _set_angular_hi_limit_y(angle: Float) {
+    open fun _set_angular_hi_limit_y(angle: Double) {
     }
 
 
-    open fun _get_angular_hi_limit_y(): Float {
+    open fun _get_angular_hi_limit_y(): Double {
         throw NotImplementedError("_get_angular_hi_limit_y is not implemented for Generic6DOFJoint")
     }
 
 
-    open fun _set_angular_lo_limit_y(angle: Float) {
+    open fun _set_angular_lo_limit_y(angle: Double) {
     }
 
 
-    open fun _get_angular_lo_limit_y(): Float {
+    open fun _get_angular_lo_limit_y(): Double {
         throw NotImplementedError("_get_angular_lo_limit_y is not implemented for Generic6DOFJoint")
     }
 
 
-    open fun _set_angular_hi_limit_z(angle: Float) {
+    open fun _set_angular_hi_limit_z(angle: Double) {
     }
 
 
-    open fun _get_angular_hi_limit_z(): Float {
+    open fun _get_angular_hi_limit_z(): Double {
         throw NotImplementedError("_get_angular_hi_limit_z is not implemented for Generic6DOFJoint")
     }
 
 
-    open fun _set_angular_lo_limit_z(angle: Float) {
+    open fun _set_angular_lo_limit_z(angle: Double) {
     }
 
 
-    open fun _get_angular_lo_limit_z(): Float {
+    open fun _get_angular_lo_limit_z(): Double {
         throw NotImplementedError("_get_angular_lo_limit_z is not implemented for Generic6DOFJoint")
     }
 
 
     private val setParamXMethodBind: CPointer<godot_method_bind> by lazy { getMB("Generic6DOFJoint", "set_param_x") }
-    open fun setParamX(param: Int, value: Float) {
-        _icall_Unit_Int_Float(setParamXMethodBind, this.rawMemory, param, value)
+    open fun setParamX(param: Long, value: Double) {
+        _icall_Unit_Long_Double(setParamXMethodBind, this.rawMemory, param, value)
     }
 
 
     private val getParamXMethodBind: CPointer<godot_method_bind> by lazy { getMB("Generic6DOFJoint", "get_param_x") }
-    open fun getParamX(param: Int): Float {
-        return _icall_Float_Int(getParamXMethodBind, this.rawMemory, param)
+    open fun getParamX(param: Long): Double {
+        return _icall_Double_Long(getParamXMethodBind, this.rawMemory, param)
     }
 
 
     private val setParamYMethodBind: CPointer<godot_method_bind> by lazy { getMB("Generic6DOFJoint", "set_param_y") }
-    open fun setParamY(param: Int, value: Float) {
-        _icall_Unit_Int_Float(setParamYMethodBind, this.rawMemory, param, value)
+    open fun setParamY(param: Long, value: Double) {
+        _icall_Unit_Long_Double(setParamYMethodBind, this.rawMemory, param, value)
     }
 
 
     private val getParamYMethodBind: CPointer<godot_method_bind> by lazy { getMB("Generic6DOFJoint", "get_param_y") }
-    open fun getParamY(param: Int): Float {
-        return _icall_Float_Int(getParamYMethodBind, this.rawMemory, param)
+    open fun getParamY(param: Long): Double {
+        return _icall_Double_Long(getParamYMethodBind, this.rawMemory, param)
     }
 
 
     private val setParamZMethodBind: CPointer<godot_method_bind> by lazy { getMB("Generic6DOFJoint", "set_param_z") }
-    open fun setParamZ(param: Int, value: Float) {
-        _icall_Unit_Int_Float(setParamZMethodBind, this.rawMemory, param, value)
+    open fun setParamZ(param: Long, value: Double) {
+        _icall_Unit_Long_Double(setParamZMethodBind, this.rawMemory, param, value)
     }
 
 
     private val getParamZMethodBind: CPointer<godot_method_bind> by lazy { getMB("Generic6DOFJoint", "get_param_z") }
-    open fun getParamZ(param: Int): Float {
-        return _icall_Float_Int(getParamZMethodBind, this.rawMemory, param)
+    open fun getParamZ(param: Long): Double {
+        return _icall_Double_Long(getParamZMethodBind, this.rawMemory, param)
     }
 
 
     private val setFlagXMethodBind: CPointer<godot_method_bind> by lazy { getMB("Generic6DOFJoint", "set_flag_x") }
-    open fun setFlagX(flag: Int, value: Boolean) {
-        _icall_Unit_Int_Boolean(setFlagXMethodBind, this.rawMemory, flag, value)
+    open fun setFlagX(flag: Long, value: Boolean) {
+        _icall_Unit_Long_Boolean(setFlagXMethodBind, this.rawMemory, flag, value)
     }
 
 
     private val getFlagXMethodBind: CPointer<godot_method_bind> by lazy { getMB("Generic6DOFJoint", "get_flag_x") }
-    open fun getFlagX(flag: Int): Boolean {
-        return _icall_Boolean_Int(getFlagXMethodBind, this.rawMemory, flag)
+    open fun getFlagX(flag: Long): Boolean {
+        return _icall_Boolean_Long(getFlagXMethodBind, this.rawMemory, flag)
     }
 
 
     private val setFlagYMethodBind: CPointer<godot_method_bind> by lazy { getMB("Generic6DOFJoint", "set_flag_y") }
-    open fun setFlagY(flag: Int, value: Boolean) {
-        _icall_Unit_Int_Boolean(setFlagYMethodBind, this.rawMemory, flag, value)
+    open fun setFlagY(flag: Long, value: Boolean) {
+        _icall_Unit_Long_Boolean(setFlagYMethodBind, this.rawMemory, flag, value)
     }
 
 
     private val getFlagYMethodBind: CPointer<godot_method_bind> by lazy { getMB("Generic6DOFJoint", "get_flag_y") }
-    open fun getFlagY(flag: Int): Boolean {
-        return _icall_Boolean_Int(getFlagYMethodBind, this.rawMemory, flag)
+    open fun getFlagY(flag: Long): Boolean {
+        return _icall_Boolean_Long(getFlagYMethodBind, this.rawMemory, flag)
     }
 
 
     private val setFlagZMethodBind: CPointer<godot_method_bind> by lazy { getMB("Generic6DOFJoint", "set_flag_z") }
-    open fun setFlagZ(flag: Int, value: Boolean) {
-        _icall_Unit_Int_Boolean(setFlagZMethodBind, this.rawMemory, flag, value)
+    open fun setFlagZ(flag: Long, value: Boolean) {
+        _icall_Unit_Long_Boolean(setFlagZMethodBind, this.rawMemory, flag, value)
     }
 
 
     private val getFlagZMethodBind: CPointer<godot_method_bind> by lazy { getMB("Generic6DOFJoint", "get_flag_z") }
-    open fun getFlagZ(flag: Int): Boolean {
-        return _icall_Boolean_Int(getFlagZMethodBind, this.rawMemory, flag)
+    open fun getFlagZ(flag: Long): Boolean {
+        return _icall_Boolean_Long(getFlagZMethodBind, this.rawMemory, flag)
     }
 
 

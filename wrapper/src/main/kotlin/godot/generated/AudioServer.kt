@@ -19,14 +19,14 @@ open class AudioServer : Object {
 
     // Enums 
 
-    enum class SpeakerMode(val id: Int) {
+    enum class SpeakerMode(val id: Long) {
         SPEAKER_MODE_STEREO(0),
         SPEAKER_SURROUND_51(2),
         SPEAKER_SURROUND_71(3),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -45,9 +45,9 @@ open class AudioServer : Object {
 
 
         // Constants
-        const val SPEAKER_MODE_STEREO: Int = 0
-        const val SPEAKER_SURROUND_51: Int = 2
-        const val SPEAKER_SURROUND_71: Int = 3
+        const val SPEAKER_MODE_STEREO: Long = 0
+        const val SPEAKER_SURROUND_51: Long = 2
+        const val SPEAKER_SURROUND_71: Long = 3
 
 
         private val rawMemory: COpaquePointer by lazy { getSingleton("AudioServer", "AudioServer") }
@@ -58,164 +58,164 @@ open class AudioServer : Object {
 
         // Methods
         private val setBusCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioServer", "set_bus_count") }
-        fun setBusCount(amount: Int) {
-            _icall_Unit_Int(setBusCountMethodBind, this.rawMemory, amount)
+        fun setBusCount(amount: Long) {
+            _icall_Unit_Long(setBusCountMethodBind, this.rawMemory, amount)
         }
 
 
         private val getBusCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioServer", "get_bus_count") }
-        fun getBusCount(): Int {
-            return _icall_Int(getBusCountMethodBind, this.rawMemory)
+        fun getBusCount(): Long {
+            return _icall_Long(getBusCountMethodBind, this.rawMemory)
         }
 
 
         private val removeBusMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioServer", "remove_bus") }
-        fun removeBus(index: Int) {
-            _icall_Unit_Int(removeBusMethodBind, this.rawMemory, index)
+        fun removeBus(index: Long) {
+            _icall_Unit_Long(removeBusMethodBind, this.rawMemory, index)
         }
 
 
         private val addBusMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioServer", "add_bus") }
-        fun addBus(atPosition: Int = -1) {
-            _icall_Unit_Int(addBusMethodBind, this.rawMemory, atPosition)
+        fun addBus(atPosition: Long = -1) {
+            _icall_Unit_Long(addBusMethodBind, this.rawMemory, atPosition)
         }
 
 
         private val moveBusMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioServer", "move_bus") }
-        fun moveBus(index: Int, toIndex: Int) {
-            _icall_Unit_Int_Int(moveBusMethodBind, this.rawMemory, index, toIndex)
+        fun moveBus(index: Long, toIndex: Long) {
+            _icall_Unit_Long_Long(moveBusMethodBind, this.rawMemory, index, toIndex)
         }
 
 
         private val setBusNameMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioServer", "set_bus_name") }
-        fun setBusName(busIdx: Int, name: String) {
-            _icall_Unit_Int_String(setBusNameMethodBind, this.rawMemory, busIdx, name)
+        fun setBusName(busIdx: Long, name: String) {
+            _icall_Unit_Long_String(setBusNameMethodBind, this.rawMemory, busIdx, name)
         }
 
 
         private val getBusNameMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioServer", "get_bus_name") }
-        fun getBusName(busIdx: Int): String {
-            return _icall_String_Int(getBusNameMethodBind, this.rawMemory, busIdx)
+        fun getBusName(busIdx: Long): String {
+            return _icall_String_Long(getBusNameMethodBind, this.rawMemory, busIdx)
         }
 
 
         private val getBusIndexMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioServer", "get_bus_index") }
-        fun getBusIndex(busName: String): Int {
-            return _icall_Int_String(getBusIndexMethodBind, this.rawMemory, busName)
+        fun getBusIndex(busName: String): Long {
+            return _icall_Long_String(getBusIndexMethodBind, this.rawMemory, busName)
         }
 
 
         private val setBusVolumeDbMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioServer", "set_bus_volume_db") }
-        fun setBusVolumeDb(busIdx: Int, volumeDb: Float) {
-            _icall_Unit_Int_Float(setBusVolumeDbMethodBind, this.rawMemory, busIdx, volumeDb)
+        fun setBusVolumeDb(busIdx: Long, volumeDb: Double) {
+            _icall_Unit_Long_Double(setBusVolumeDbMethodBind, this.rawMemory, busIdx, volumeDb)
         }
 
 
         private val getBusVolumeDbMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioServer", "get_bus_volume_db") }
-        fun getBusVolumeDb(busIdx: Int): Float {
-            return _icall_Float_Int(getBusVolumeDbMethodBind, this.rawMemory, busIdx)
+        fun getBusVolumeDb(busIdx: Long): Double {
+            return _icall_Double_Long(getBusVolumeDbMethodBind, this.rawMemory, busIdx)
         }
 
 
         private val setBusSendMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioServer", "set_bus_send") }
-        fun setBusSend(busIdx: Int, send: String) {
-            _icall_Unit_Int_String(setBusSendMethodBind, this.rawMemory, busIdx, send)
+        fun setBusSend(busIdx: Long, send: String) {
+            _icall_Unit_Long_String(setBusSendMethodBind, this.rawMemory, busIdx, send)
         }
 
 
         private val getBusSendMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioServer", "get_bus_send") }
-        fun getBusSend(busIdx: Int): String {
-            return _icall_String_Int(getBusSendMethodBind, this.rawMemory, busIdx)
+        fun getBusSend(busIdx: Long): String {
+            return _icall_String_Long(getBusSendMethodBind, this.rawMemory, busIdx)
         }
 
 
         private val setBusSoloMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioServer", "set_bus_solo") }
-        fun setBusSolo(busIdx: Int, enable: Boolean) {
-            _icall_Unit_Int_Boolean(setBusSoloMethodBind, this.rawMemory, busIdx, enable)
+        fun setBusSolo(busIdx: Long, enable: Boolean) {
+            _icall_Unit_Long_Boolean(setBusSoloMethodBind, this.rawMemory, busIdx, enable)
         }
 
 
         private val isBusSoloMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioServer", "is_bus_solo") }
-        fun isBusSolo(busIdx: Int): Boolean {
-            return _icall_Boolean_Int(isBusSoloMethodBind, this.rawMemory, busIdx)
+        fun isBusSolo(busIdx: Long): Boolean {
+            return _icall_Boolean_Long(isBusSoloMethodBind, this.rawMemory, busIdx)
         }
 
 
         private val setBusMuteMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioServer", "set_bus_mute") }
-        fun setBusMute(busIdx: Int, enable: Boolean) {
-            _icall_Unit_Int_Boolean(setBusMuteMethodBind, this.rawMemory, busIdx, enable)
+        fun setBusMute(busIdx: Long, enable: Boolean) {
+            _icall_Unit_Long_Boolean(setBusMuteMethodBind, this.rawMemory, busIdx, enable)
         }
 
 
         private val isBusMuteMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioServer", "is_bus_mute") }
-        fun isBusMute(busIdx: Int): Boolean {
-            return _icall_Boolean_Int(isBusMuteMethodBind, this.rawMemory, busIdx)
+        fun isBusMute(busIdx: Long): Boolean {
+            return _icall_Boolean_Long(isBusMuteMethodBind, this.rawMemory, busIdx)
         }
 
 
         private val setBusBypassEffectsMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioServer", "set_bus_bypass_effects") }
-        fun setBusBypassEffects(busIdx: Int, enable: Boolean) {
-            _icall_Unit_Int_Boolean(setBusBypassEffectsMethodBind, this.rawMemory, busIdx, enable)
+        fun setBusBypassEffects(busIdx: Long, enable: Boolean) {
+            _icall_Unit_Long_Boolean(setBusBypassEffectsMethodBind, this.rawMemory, busIdx, enable)
         }
 
 
         private val isBusBypassingEffectsMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioServer", "is_bus_bypassing_effects") }
-        fun isBusBypassingEffects(busIdx: Int): Boolean {
-            return _icall_Boolean_Int(isBusBypassingEffectsMethodBind, this.rawMemory, busIdx)
+        fun isBusBypassingEffects(busIdx: Long): Boolean {
+            return _icall_Boolean_Long(isBusBypassingEffectsMethodBind, this.rawMemory, busIdx)
         }
 
 
         private val addBusEffectMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioServer", "add_bus_effect") }
-        fun addBusEffect(busIdx: Int, effect: AudioEffect, atPosition: Int = -1) {
-            _icall_Unit_Int_Object_Int(addBusEffectMethodBind, this.rawMemory, busIdx, effect, atPosition)
+        fun addBusEffect(busIdx: Long, effect: AudioEffect, atPosition: Long = -1) {
+            _icall_Unit_Long_Object_Long(addBusEffectMethodBind, this.rawMemory, busIdx, effect, atPosition)
         }
 
 
         private val removeBusEffectMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioServer", "remove_bus_effect") }
-        fun removeBusEffect(busIdx: Int, effectIdx: Int) {
-            _icall_Unit_Int_Int(removeBusEffectMethodBind, this.rawMemory, busIdx, effectIdx)
+        fun removeBusEffect(busIdx: Long, effectIdx: Long) {
+            _icall_Unit_Long_Long(removeBusEffectMethodBind, this.rawMemory, busIdx, effectIdx)
         }
 
 
         private val getBusEffectCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioServer", "get_bus_effect_count") }
-        fun getBusEffectCount(busIdx: Int): Int {
-            return _icall_Int_Int(getBusEffectCountMethodBind, this.rawMemory, busIdx)
+        fun getBusEffectCount(busIdx: Long): Long {
+            return _icall_Long_Long(getBusEffectCountMethodBind, this.rawMemory, busIdx)
         }
 
 
         private val getBusEffectMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioServer", "get_bus_effect") }
-        fun getBusEffect(busIdx: Int, effectIdx: Int): AudioEffect {
-            return _icall_AudioEffect_Int_Int(getBusEffectMethodBind, this.rawMemory, busIdx, effectIdx)
+        fun getBusEffect(busIdx: Long, effectIdx: Long): AudioEffect {
+            return _icall_AudioEffect_Long_Long(getBusEffectMethodBind, this.rawMemory, busIdx, effectIdx)
         }
 
 
         private val swapBusEffectsMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioServer", "swap_bus_effects") }
-        fun swapBusEffects(busIdx: Int, effectIdx: Int, byEffectIdx: Int) {
-            _icall_Unit_Int_Int_Int(swapBusEffectsMethodBind, this.rawMemory, busIdx, effectIdx, byEffectIdx)
+        fun swapBusEffects(busIdx: Long, effectIdx: Long, byEffectIdx: Long) {
+            _icall_Unit_Long_Long_Long(swapBusEffectsMethodBind, this.rawMemory, busIdx, effectIdx, byEffectIdx)
         }
 
 
         private val setBusEffectEnabledMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioServer", "set_bus_effect_enabled") }
-        fun setBusEffectEnabled(busIdx: Int, effectIdx: Int, enabled: Boolean) {
-            _icall_Unit_Int_Int_Boolean(setBusEffectEnabledMethodBind, this.rawMemory, busIdx, effectIdx, enabled)
+        fun setBusEffectEnabled(busIdx: Long, effectIdx: Long, enabled: Boolean) {
+            _icall_Unit_Long_Long_Boolean(setBusEffectEnabledMethodBind, this.rawMemory, busIdx, effectIdx, enabled)
         }
 
 
         private val isBusEffectEnabledMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioServer", "is_bus_effect_enabled") }
-        fun isBusEffectEnabled(busIdx: Int, effectIdx: Int): Boolean {
-            return _icall_Boolean_Int_Int(isBusEffectEnabledMethodBind, this.rawMemory, busIdx, effectIdx)
+        fun isBusEffectEnabled(busIdx: Long, effectIdx: Long): Boolean {
+            return _icall_Boolean_Long_Long(isBusEffectEnabledMethodBind, this.rawMemory, busIdx, effectIdx)
         }
 
 
         private val getBusPeakVolumeLeftDbMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioServer", "get_bus_peak_volume_left_db") }
-        fun getBusPeakVolumeLeftDb(busIdx: Int, channel: Int): Float {
-            return _icall_Float_Int_Int(getBusPeakVolumeLeftDbMethodBind, this.rawMemory, busIdx, channel)
+        fun getBusPeakVolumeLeftDb(busIdx: Long, channel: Long): Double {
+            return _icall_Double_Long_Long(getBusPeakVolumeLeftDbMethodBind, this.rawMemory, busIdx, channel)
         }
 
 
         private val getBusPeakVolumeRightDbMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioServer", "get_bus_peak_volume_right_db") }
-        fun getBusPeakVolumeRightDb(busIdx: Int, channel: Int): Float {
-            return _icall_Float_Int_Int(getBusPeakVolumeRightDbMethodBind, this.rawMemory, busIdx, channel)
+        fun getBusPeakVolumeRightDb(busIdx: Long, channel: Long): Double {
+            return _icall_Double_Long_Long(getBusPeakVolumeRightDbMethodBind, this.rawMemory, busIdx, channel)
         }
 
 
@@ -233,13 +233,13 @@ open class AudioServer : Object {
 
         private val getSpeakerModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioServer", "get_speaker_mode") }
         fun getSpeakerMode(): AudioServer.SpeakerMode {
-            return AudioServer.SpeakerMode.fromInt(_icall_Int(getSpeakerModeMethodBind, this.rawMemory))
+            return AudioServer.SpeakerMode.fromInt(_icall_Long(getSpeakerModeMethodBind, this.rawMemory))
         }
 
 
         private val getMixRateMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioServer", "get_mix_rate") }
-        fun getMixRate(): Float {
-            return _icall_Float(getMixRateMethodBind, this.rawMemory)
+        fun getMixRate(): Double {
+            return _icall_Double(getMixRateMethodBind, this.rawMemory)
         }
 
 

@@ -57,8 +57,8 @@ open class WebSocketServer : WebSocketMultiplayerPeer {
 
 
     private val listenMethodBind: CPointer<godot_method_bind> by lazy { getMB("WebSocketServer", "listen") }
-    open fun listen(port: Int, protocols: PoolStringArray = PoolStringArray(), gdMpApi: Boolean = false): GodotError {
-        return GodotError.fromInt(_icall_Int_Int_PoolStringArray_Boolean(listenMethodBind, this.rawMemory, port, protocols, gdMpApi))
+    open fun listen(port: Long, protocols: PoolStringArray = PoolStringArray(), gdMpApi: Boolean = false): GodotError {
+        return GodotError.fromInt(_icall_Long_Long_PoolStringArray_Boolean(listenMethodBind, this.rawMemory, port, protocols, gdMpApi))
     }
 
 
@@ -69,26 +69,26 @@ open class WebSocketServer : WebSocketMultiplayerPeer {
 
 
     private val hasPeerMethodBind: CPointer<godot_method_bind> by lazy { getMB("WebSocketServer", "has_peer") }
-    open fun hasPeer(id: Int): Boolean {
-        return _icall_Boolean_Int(hasPeerMethodBind, this.rawMemory, id)
+    open fun hasPeer(id: Long): Boolean {
+        return _icall_Boolean_Long(hasPeerMethodBind, this.rawMemory, id)
     }
 
 
     private val getPeerAddressMethodBind: CPointer<godot_method_bind> by lazy { getMB("WebSocketServer", "get_peer_address") }
-    open fun getPeerAddress(id: Int): String {
-        return _icall_String_Int(getPeerAddressMethodBind, this.rawMemory, id)
+    open fun getPeerAddress(id: Long): String {
+        return _icall_String_Long(getPeerAddressMethodBind, this.rawMemory, id)
     }
 
 
     private val getPeerPortMethodBind: CPointer<godot_method_bind> by lazy { getMB("WebSocketServer", "get_peer_port") }
-    open fun getPeerPort(id: Int): Int {
-        return _icall_Int_Int(getPeerPortMethodBind, this.rawMemory, id)
+    open fun getPeerPort(id: Long): Long {
+        return _icall_Long_Long(getPeerPortMethodBind, this.rawMemory, id)
     }
 
 
     private val disconnectPeerMethodBind: CPointer<godot_method_bind> by lazy { getMB("WebSocketServer", "disconnect_peer") }
-    open fun disconnectPeer(id: Int) {
-        _icall_Unit_Int(disconnectPeerMethodBind, this.rawMemory, id)
+    open fun disconnectPeer(id: Long) {
+        _icall_Unit_Long(disconnectPeerMethodBind, this.rawMemory, id)
     }
 
 

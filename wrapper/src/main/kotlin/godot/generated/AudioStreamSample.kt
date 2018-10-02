@@ -19,24 +19,24 @@ open class AudioStreamSample : AudioStream {
 
     // Enums 
 
-    enum class LoopMode(val id: Int) {
+    enum class LoopMode(val id: Long) {
         LOOP_DISABLED(0),
         LOOP_FORWARD(1),
         LOOP_PING_PONG(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class Format(val id: Int) {
+    enum class Format(val id: Long) {
         FORMAT_8_BITS(0),
         FORMAT_16_BITS(1),
         FORMAT_IMA_ADPCM(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -57,12 +57,12 @@ open class AudioStreamSample : AudioStream {
 
 
         // Constants
-        const val FORMAT_8_BITS: Int = 0
-        const val FORMAT_16_BITS: Int = 1
-        const val FORMAT_IMA_ADPCM: Int = 2
-        const val LOOP_DISABLED: Int = 0
-        const val LOOP_FORWARD: Int = 1
-        const val LOOP_PING_PONG: Int = 2
+        const val FORMAT_8_BITS: Long = 0
+        const val FORMAT_16_BITS: Long = 1
+        const val FORMAT_IMA_ADPCM: Long = 2
+        const val LOOP_DISABLED: Long = 0
+        const val LOOP_FORWARD: Long = 1
+        const val LOOP_PING_PONG: Long = 2
 
 
     }
@@ -74,29 +74,29 @@ open class AudioStreamSample : AudioStream {
         set(value) = _icall_Unit_PoolByteArray(setDataMethodBind, this.rawMemory, value)
 
 
-    open var format: Int
-        get() = _icall_Int(getFormatMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setFormatMethodBind, this.rawMemory, value)
+    open var format: Long
+        get() = _icall_Long(getFormatMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setFormatMethodBind, this.rawMemory, value)
 
 
-    open var loopMode: Int
-        get() = _icall_Int(getLoopModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setLoopModeMethodBind, this.rawMemory, value)
+    open var loopMode: Long
+        get() = _icall_Long(getLoopModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setLoopModeMethodBind, this.rawMemory, value)
 
 
-    open var loopBegin: Int
-        get() = _icall_Int(getLoopBeginMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setLoopBeginMethodBind, this.rawMemory, value)
+    open var loopBegin: Long
+        get() = _icall_Long(getLoopBeginMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setLoopBeginMethodBind, this.rawMemory, value)
 
 
-    open var loopEnd: Int
-        get() = _icall_Int(getLoopEndMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setLoopEndMethodBind, this.rawMemory, value)
+    open var loopEnd: Long
+        get() = _icall_Long(getLoopEndMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setLoopEndMethodBind, this.rawMemory, value)
 
 
-    open var mixRate: Int
-        get() = _icall_Int(getMixRateMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setMixRateMethodBind, this.rawMemory, value)
+    open var mixRate: Long
+        get() = _icall_Long(getMixRateMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setMixRateMethodBind, this.rawMemory, value)
 
 
     open var stereo: Boolean
@@ -120,62 +120,62 @@ open class AudioStreamSample : AudioStream {
 
 
     private val setFormatMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamSample", "set_format") }
-    open fun setFormat(format: Int) {
-        _icall_Unit_Int(setFormatMethodBind, this.rawMemory, format)
+    open fun setFormat(format: Long) {
+        _icall_Unit_Long(setFormatMethodBind, this.rawMemory, format)
     }
 
 
     private val getFormatMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamSample", "get_format") }
     open fun getFormat(): AudioStreamSample.Format {
-        return AudioStreamSample.Format.fromInt(_icall_Int(getFormatMethodBind, this.rawMemory))
+        return AudioStreamSample.Format.fromInt(_icall_Long(getFormatMethodBind, this.rawMemory))
     }
 
 
     private val setLoopModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamSample", "set_loop_mode") }
-    open fun setLoopMode(loopMode: Int) {
-        _icall_Unit_Int(setLoopModeMethodBind, this.rawMemory, loopMode)
+    open fun setLoopMode(loopMode: Long) {
+        _icall_Unit_Long(setLoopModeMethodBind, this.rawMemory, loopMode)
     }
 
 
     private val getLoopModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamSample", "get_loop_mode") }
     open fun getLoopMode(): AudioStreamSample.LoopMode {
-        return AudioStreamSample.LoopMode.fromInt(_icall_Int(getLoopModeMethodBind, this.rawMemory))
+        return AudioStreamSample.LoopMode.fromInt(_icall_Long(getLoopModeMethodBind, this.rawMemory))
     }
 
 
     private val setLoopBeginMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamSample", "set_loop_begin") }
-    open fun setLoopBegin(loopBegin: Int) {
-        _icall_Unit_Int(setLoopBeginMethodBind, this.rawMemory, loopBegin)
+    open fun setLoopBegin(loopBegin: Long) {
+        _icall_Unit_Long(setLoopBeginMethodBind, this.rawMemory, loopBegin)
     }
 
 
     private val getLoopBeginMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamSample", "get_loop_begin") }
-    open fun getLoopBegin(): Int {
-        return _icall_Int(getLoopBeginMethodBind, this.rawMemory)
+    open fun getLoopBegin(): Long {
+        return _icall_Long(getLoopBeginMethodBind, this.rawMemory)
     }
 
 
     private val setLoopEndMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamSample", "set_loop_end") }
-    open fun setLoopEnd(loopEnd: Int) {
-        _icall_Unit_Int(setLoopEndMethodBind, this.rawMemory, loopEnd)
+    open fun setLoopEnd(loopEnd: Long) {
+        _icall_Unit_Long(setLoopEndMethodBind, this.rawMemory, loopEnd)
     }
 
 
     private val getLoopEndMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamSample", "get_loop_end") }
-    open fun getLoopEnd(): Int {
-        return _icall_Int(getLoopEndMethodBind, this.rawMemory)
+    open fun getLoopEnd(): Long {
+        return _icall_Long(getLoopEndMethodBind, this.rawMemory)
     }
 
 
     private val setMixRateMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamSample", "set_mix_rate") }
-    open fun setMixRate(mixRate: Int) {
-        _icall_Unit_Int(setMixRateMethodBind, this.rawMemory, mixRate)
+    open fun setMixRate(mixRate: Long) {
+        _icall_Unit_Long(setMixRateMethodBind, this.rawMemory, mixRate)
     }
 
 
     private val getMixRateMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamSample", "get_mix_rate") }
-    open fun getMixRate(): Int {
-        return _icall_Int(getMixRateMethodBind, this.rawMemory)
+    open fun getMixRate(): Long {
+        return _icall_Long(getMixRateMethodBind, this.rawMemory)
     }
 
 

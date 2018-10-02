@@ -46,26 +46,26 @@ open class Font : Resource {
 
     // Methods
     private val drawMethodBind: CPointer<godot_method_bind> by lazy { getMB("Font", "draw") }
-    open fun draw(canvasItem: RID, position: Vector2, string: String, modulate: Color = Color(1,1,1,1), clipW: Int = -1, outlineModulate: Color = Color(1,1,1,1)) {
-        _icall_Unit_RID_Vector2_String_Color_Int_Color(drawMethodBind, this.rawMemory, canvasItem, position, string, modulate, clipW, outlineModulate)
+    open fun draw(canvasItem: RID, position: Vector2, string: String, modulate: Color = Color(1,1,1,1), clipW: Long = -1, outlineModulate: Color = Color(1,1,1,1)) {
+        _icall_Unit_RID_Vector2_String_Color_Long_Color(drawMethodBind, this.rawMemory, canvasItem, position, string, modulate, clipW, outlineModulate)
     }
 
 
     private val getAscentMethodBind: CPointer<godot_method_bind> by lazy { getMB("Font", "get_ascent") }
-    open fun getAscent(): Float {
-        return _icall_Float(getAscentMethodBind, this.rawMemory)
+    open fun getAscent(): Double {
+        return _icall_Double(getAscentMethodBind, this.rawMemory)
     }
 
 
     private val getDescentMethodBind: CPointer<godot_method_bind> by lazy { getMB("Font", "get_descent") }
-    open fun getDescent(): Float {
-        return _icall_Float(getDescentMethodBind, this.rawMemory)
+    open fun getDescent(): Double {
+        return _icall_Double(getDescentMethodBind, this.rawMemory)
     }
 
 
     private val getHeightMethodBind: CPointer<godot_method_bind> by lazy { getMB("Font", "get_height") }
-    open fun getHeight(): Float {
-        return _icall_Float(getHeightMethodBind, this.rawMemory)
+    open fun getHeight(): Double {
+        return _icall_Double(getHeightMethodBind, this.rawMemory)
     }
 
 
@@ -88,8 +88,8 @@ open class Font : Resource {
 
 
     private val drawCharMethodBind: CPointer<godot_method_bind> by lazy { getMB("Font", "draw_char") }
-    open fun drawChar(canvasItem: RID, position: Vector2, char: Int, next: Int = -1, modulate: Color = Color(1,1,1,1), outline: Boolean = false): Float {
-        return _icall_Float_RID_Vector2_Int_Int_Color_Boolean(drawCharMethodBind, this.rawMemory, canvasItem, position, char, next, modulate, outline)
+    open fun drawChar(canvasItem: RID, position: Vector2, char: Long, next: Long = -1, modulate: Color = Color(1,1,1,1), outline: Boolean = false): Double {
+        return _icall_Double_RID_Vector2_Long_Long_Color_Boolean(drawCharMethodBind, this.rawMemory, canvasItem, position, char, next, modulate, outline)
     }
 
 

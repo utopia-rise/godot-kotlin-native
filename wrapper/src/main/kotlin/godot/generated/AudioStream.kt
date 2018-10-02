@@ -46,8 +46,8 @@ open class AudioStream : Resource {
 
     // Methods
     private val getLengthMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStream", "get_length") }
-    open fun getLength(): Float {
-        return _icall_Float(getLengthMethodBind, this.rawMemory)
+    open fun getLength(): Double {
+        return _icall_Double(getLengthMethodBind, this.rawMemory)
     }
 
 

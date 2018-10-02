@@ -45,34 +45,34 @@ open class Range : Control {
 
 
     // Properties
-    open var minValue: Float
-        get() = _icall_Float(getMinMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setMinMethodBind, this.rawMemory, value)
+    open var minValue: Double
+        get() = _icall_Double(getMinMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setMinMethodBind, this.rawMemory, value)
 
 
-    open var maxValue: Float
-        get() = _icall_Float(getMaxMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setMaxMethodBind, this.rawMemory, value)
+    open var maxValue: Double
+        get() = _icall_Double(getMaxMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setMaxMethodBind, this.rawMemory, value)
 
 
-    open var step: Float
-        get() = _icall_Float(getStepMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setStepMethodBind, this.rawMemory, value)
+    open var step: Double
+        get() = _icall_Double(getStepMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setStepMethodBind, this.rawMemory, value)
 
 
-    open var page: Float
-        get() = _icall_Float(getPageMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setPageMethodBind, this.rawMemory, value)
+    open var page: Double
+        get() = _icall_Double(getPageMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setPageMethodBind, this.rawMemory, value)
 
 
-    open var value: Float
-        get() = _icall_Float(getValueMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setValueMethodBind, this.rawMemory, value)
+    open var value: Double
+        get() = _icall_Double(getValueMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setValueMethodBind, this.rawMemory, value)
 
 
-    open var ratio: Float
-        get() = _icall_Float(getAsRatioMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setAsRatioMethodBind, this.rawMemory, value)
+    open var ratio: Double
+        get() = _icall_Double(getAsRatioMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setAsRatioMethodBind, this.rawMemory, value)
 
 
     open var expEdit: Boolean
@@ -85,88 +85,88 @@ open class Range : Control {
         set(value) = _icall_Unit_Boolean(setUseRoundedValuesMethodBind, this.rawMemory, value)
 
 
-    open var allowGreater: Float
-        get() = _icall_Float(isGreaterAllowedMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setAllowGreaterMethodBind, this.rawMemory, value)
+    open var allowGreater: Double
+        get() = _icall_Double(isGreaterAllowedMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setAllowGreaterMethodBind, this.rawMemory, value)
 
 
-    open var allowLesser: Float
-        get() = _icall_Float(isLesserAllowedMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setAllowLesserMethodBind, this.rawMemory, value)
+    open var allowLesser: Double
+        get() = _icall_Double(isLesserAllowedMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setAllowLesserMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val getValueMethodBind: CPointer<godot_method_bind> by lazy { getMB("Range", "get_value") }
-    open fun getValue(): Float {
-        return _icall_Float(getValueMethodBind, this.rawMemory)
+    open fun getValue(): Double {
+        return _icall_Double(getValueMethodBind, this.rawMemory)
     }
 
 
     private val getMinMethodBind: CPointer<godot_method_bind> by lazy { getMB("Range", "get_min") }
-    open fun getMin(): Float {
-        return _icall_Float(getMinMethodBind, this.rawMemory)
+    open fun getMin(): Double {
+        return _icall_Double(getMinMethodBind, this.rawMemory)
     }
 
 
     private val getMaxMethodBind: CPointer<godot_method_bind> by lazy { getMB("Range", "get_max") }
-    open fun getMax(): Float {
-        return _icall_Float(getMaxMethodBind, this.rawMemory)
+    open fun getMax(): Double {
+        return _icall_Double(getMaxMethodBind, this.rawMemory)
     }
 
 
     private val getStepMethodBind: CPointer<godot_method_bind> by lazy { getMB("Range", "get_step") }
-    open fun getStep(): Float {
-        return _icall_Float(getStepMethodBind, this.rawMemory)
+    open fun getStep(): Double {
+        return _icall_Double(getStepMethodBind, this.rawMemory)
     }
 
 
     private val getPageMethodBind: CPointer<godot_method_bind> by lazy { getMB("Range", "get_page") }
-    open fun getPage(): Float {
-        return _icall_Float(getPageMethodBind, this.rawMemory)
+    open fun getPage(): Double {
+        return _icall_Double(getPageMethodBind, this.rawMemory)
     }
 
 
     private val getAsRatioMethodBind: CPointer<godot_method_bind> by lazy { getMB("Range", "get_as_ratio") }
-    open fun getAsRatio(): Float {
-        return _icall_Float(getAsRatioMethodBind, this.rawMemory)
+    open fun getAsRatio(): Double {
+        return _icall_Double(getAsRatioMethodBind, this.rawMemory)
     }
 
 
     private val setValueMethodBind: CPointer<godot_method_bind> by lazy { getMB("Range", "set_value") }
-    open fun setValue(value: Float) {
-        _icall_Unit_Float(setValueMethodBind, this.rawMemory, value)
+    open fun setValue(value: Double) {
+        _icall_Unit_Double(setValueMethodBind, this.rawMemory, value)
     }
 
 
     private val setMinMethodBind: CPointer<godot_method_bind> by lazy { getMB("Range", "set_min") }
-    open fun setMin(minimum: Float) {
-        _icall_Unit_Float(setMinMethodBind, this.rawMemory, minimum)
+    open fun setMin(minimum: Double) {
+        _icall_Unit_Double(setMinMethodBind, this.rawMemory, minimum)
     }
 
 
     private val setMaxMethodBind: CPointer<godot_method_bind> by lazy { getMB("Range", "set_max") }
-    open fun setMax(maximum: Float) {
-        _icall_Unit_Float(setMaxMethodBind, this.rawMemory, maximum)
+    open fun setMax(maximum: Double) {
+        _icall_Unit_Double(setMaxMethodBind, this.rawMemory, maximum)
     }
 
 
     private val setStepMethodBind: CPointer<godot_method_bind> by lazy { getMB("Range", "set_step") }
-    open fun setStep(step: Float) {
-        _icall_Unit_Float(setStepMethodBind, this.rawMemory, step)
+    open fun setStep(step: Double) {
+        _icall_Unit_Double(setStepMethodBind, this.rawMemory, step)
     }
 
 
     private val setPageMethodBind: CPointer<godot_method_bind> by lazy { getMB("Range", "set_page") }
-    open fun setPage(pagesize: Float) {
-        _icall_Unit_Float(setPageMethodBind, this.rawMemory, pagesize)
+    open fun setPage(pagesize: Double) {
+        _icall_Unit_Double(setPageMethodBind, this.rawMemory, pagesize)
     }
 
 
     private val setAsRatioMethodBind: CPointer<godot_method_bind> by lazy { getMB("Range", "set_as_ratio") }
-    open fun setAsRatio(value: Float) {
-        _icall_Unit_Float(setAsRatioMethodBind, this.rawMemory, value)
+    open fun setAsRatio(value: Double) {
+        _icall_Unit_Double(setAsRatioMethodBind, this.rawMemory, value)
     }
 
 

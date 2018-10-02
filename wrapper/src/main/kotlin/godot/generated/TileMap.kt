@@ -19,34 +19,34 @@ open class TileMap : Node2D {
 
     // Enums 
 
-    enum class Mode(val id: Int) {
+    enum class Mode(val id: Long) {
         MODE_SQUARE(0),
         MODE_ISOMETRIC(1),
         MODE_CUSTOM(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class TileOrigin(val id: Int) {
+    enum class TileOrigin(val id: Long) {
         TILE_ORIGIN_TOP_LEFT(0),
         TILE_ORIGIN_CENTER(1),
         TILE_ORIGIN_BOTTOM_LEFT(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class HalfOffset(val id: Int) {
+    enum class HalfOffset(val id: Long) {
         HALF_OFFSET_X(0),
         HALF_OFFSET_Y(1),
         HALF_OFFSET_DISABLED(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -68,25 +68,25 @@ open class TileMap : Node2D {
 
 
         // Constants
-        const val INVALID_CELL: Int = -1
-        const val MODE_SQUARE: Int = 0
-        const val MODE_ISOMETRIC: Int = 1
-        const val MODE_CUSTOM: Int = 2
-        const val HALF_OFFSET_X: Int = 0
-        const val HALF_OFFSET_Y: Int = 1
-        const val HALF_OFFSET_DISABLED: Int = 2
-        const val TILE_ORIGIN_TOP_LEFT: Int = 0
-        const val TILE_ORIGIN_CENTER: Int = 1
-        const val TILE_ORIGIN_BOTTOM_LEFT: Int = 2
+        const val INVALID_CELL: Long = -1
+        const val MODE_SQUARE: Long = 0
+        const val MODE_ISOMETRIC: Long = 1
+        const val MODE_CUSTOM: Long = 2
+        const val HALF_OFFSET_X: Long = 0
+        const val HALF_OFFSET_Y: Long = 1
+        const val HALF_OFFSET_DISABLED: Long = 2
+        const val TILE_ORIGIN_TOP_LEFT: Long = 0
+        const val TILE_ORIGIN_CENTER: Long = 1
+        const val TILE_ORIGIN_BOTTOM_LEFT: Long = 2
 
 
     }
 
 
     // Properties
-    open var mode: Int
-        get() = _icall_Int(getModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setModeMethodBind, this.rawMemory, value)
+    open var mode: Long
+        get() = _icall_Long(getModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setModeMethodBind, this.rawMemory, value)
 
 
     open var tileSet: TileSet
@@ -103,9 +103,9 @@ open class TileMap : Node2D {
     }
 
 
-    open var cellQuadrantSize: Int
-        get() = _icall_Int(getQuadrantSizeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setQuadrantSizeMethodBind, this.rawMemory, value)
+    open var cellQuadrantSize: Long
+        get() = _icall_Long(getQuadrantSizeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setQuadrantSizeMethodBind, this.rawMemory, value)
 
 
     open var cellCustomTransform: Transform2D
@@ -117,14 +117,14 @@ open class TileMap : Node2D {
     }
 
 
-    open var cellHalfOffset: Int
-        get() = _icall_Int(getHalfOffsetMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setHalfOffsetMethodBind, this.rawMemory, value)
+    open var cellHalfOffset: Long
+        get() = _icall_Long(getHalfOffsetMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setHalfOffsetMethodBind, this.rawMemory, value)
 
 
-    open var cellTileOrigin: Int
-        get() = _icall_Int(getTileOriginMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setTileOriginMethodBind, this.rawMemory, value)
+    open var cellTileOrigin: Long
+        get() = _icall_Long(getTileOriginMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setTileOriginMethodBind, this.rawMemory, value)
 
 
     open var cellYSort: Boolean
@@ -142,29 +142,29 @@ open class TileMap : Node2D {
         set(value) = _icall_Unit_Boolean(setCollisionUseKinematicMethodBind, this.rawMemory, value)
 
 
-    open var collisionFriction: Float
-        get() = _icall_Float(getCollisionFrictionMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setCollisionFrictionMethodBind, this.rawMemory, value)
+    open var collisionFriction: Double
+        get() = _icall_Double(getCollisionFrictionMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setCollisionFrictionMethodBind, this.rawMemory, value)
 
 
-    open var collisionBounce: Float
-        get() = _icall_Float(getCollisionBounceMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setCollisionBounceMethodBind, this.rawMemory, value)
+    open var collisionBounce: Double
+        get() = _icall_Double(getCollisionBounceMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setCollisionBounceMethodBind, this.rawMemory, value)
 
 
-    open var collisionLayer: Int
-        get() = _icall_Int(getCollisionLayerMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setCollisionLayerMethodBind, this.rawMemory, value)
+    open var collisionLayer: Long
+        get() = _icall_Long(getCollisionLayerMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setCollisionLayerMethodBind, this.rawMemory, value)
 
 
-    open var collisionMask: Int
-        get() = _icall_Int(getCollisionMaskMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setCollisionMaskMethodBind, this.rawMemory, value)
+    open var collisionMask: Long
+        get() = _icall_Long(getCollisionMaskMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setCollisionMaskMethodBind, this.rawMemory, value)
 
 
-    open var occluderLightMask: Int
-        get() = _icall_Int(getOccluderLightMaskMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setOccluderLightMaskMethodBind, this.rawMemory, value)
+    open var occluderLightMask: Long
+        get() = _icall_Long(getOccluderLightMaskMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setOccluderLightMaskMethodBind, this.rawMemory, value)
 
 
 
@@ -183,26 +183,26 @@ open class TileMap : Node2D {
 
 
     private val setModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("TileMap", "set_mode") }
-    open fun setMode(mode: Int) {
-        _icall_Unit_Int(setModeMethodBind, this.rawMemory, mode)
+    open fun setMode(mode: Long) {
+        _icall_Unit_Long(setModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("TileMap", "get_mode") }
     open fun getMode(): TileMap.Mode {
-        return TileMap.Mode.fromInt(_icall_Int(getModeMethodBind, this.rawMemory))
+        return TileMap.Mode.fromInt(_icall_Long(getModeMethodBind, this.rawMemory))
     }
 
 
     private val setHalfOffsetMethodBind: CPointer<godot_method_bind> by lazy { getMB("TileMap", "set_half_offset") }
-    open fun setHalfOffset(halfOffset: Int) {
-        _icall_Unit_Int(setHalfOffsetMethodBind, this.rawMemory, halfOffset)
+    open fun setHalfOffset(halfOffset: Long) {
+        _icall_Unit_Long(setHalfOffsetMethodBind, this.rawMemory, halfOffset)
     }
 
 
     private val getHalfOffsetMethodBind: CPointer<godot_method_bind> by lazy { getMB("TileMap", "get_half_offset") }
     open fun getHalfOffset(): TileMap.HalfOffset {
-        return TileMap.HalfOffset.fromInt(_icall_Int(getHalfOffsetMethodBind, this.rawMemory))
+        return TileMap.HalfOffset.fromInt(_icall_Long(getHalfOffsetMethodBind, this.rawMemory))
     }
 
 
@@ -230,36 +230,36 @@ open class TileMap : Node2D {
     }
 
 
-    open fun _set_old_cell_size(size: Int) {
+    open fun _set_old_cell_size(size: Long) {
     }
 
 
-    open fun _get_old_cell_size(): Int {
+    open fun _get_old_cell_size(): Long {
         throw NotImplementedError("_get_old_cell_size is not implemented for TileMap")
     }
 
 
     private val setQuadrantSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("TileMap", "set_quadrant_size") }
-    open fun setQuadrantSize(size: Int) {
-        _icall_Unit_Int(setQuadrantSizeMethodBind, this.rawMemory, size)
+    open fun setQuadrantSize(size: Long) {
+        _icall_Unit_Long(setQuadrantSizeMethodBind, this.rawMemory, size)
     }
 
 
     private val getQuadrantSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("TileMap", "get_quadrant_size") }
-    open fun getQuadrantSize(): Int {
-        return _icall_Int(getQuadrantSizeMethodBind, this.rawMemory)
+    open fun getQuadrantSize(): Long {
+        return _icall_Long(getQuadrantSizeMethodBind, this.rawMemory)
     }
 
 
     private val setTileOriginMethodBind: CPointer<godot_method_bind> by lazy { getMB("TileMap", "set_tile_origin") }
-    open fun setTileOrigin(origin: Int) {
-        _icall_Unit_Int(setTileOriginMethodBind, this.rawMemory, origin)
+    open fun setTileOrigin(origin: Long) {
+        _icall_Unit_Long(setTileOriginMethodBind, this.rawMemory, origin)
     }
 
 
     private val getTileOriginMethodBind: CPointer<godot_method_bind> by lazy { getMB("TileMap", "get_tile_origin") }
     open fun getTileOrigin(): TileMap.TileOrigin {
-        return TileMap.TileOrigin.fromInt(_icall_Int(getTileOriginMethodBind, this.rawMemory))
+        return TileMap.TileOrigin.fromInt(_icall_Long(getTileOriginMethodBind, this.rawMemory))
     }
 
 
@@ -300,98 +300,98 @@ open class TileMap : Node2D {
 
 
     private val setCollisionLayerMethodBind: CPointer<godot_method_bind> by lazy { getMB("TileMap", "set_collision_layer") }
-    open fun setCollisionLayer(layer: Int) {
-        _icall_Unit_Int(setCollisionLayerMethodBind, this.rawMemory, layer)
+    open fun setCollisionLayer(layer: Long) {
+        _icall_Unit_Long(setCollisionLayerMethodBind, this.rawMemory, layer)
     }
 
 
     private val getCollisionLayerMethodBind: CPointer<godot_method_bind> by lazy { getMB("TileMap", "get_collision_layer") }
-    open fun getCollisionLayer(): Int {
-        return _icall_Int(getCollisionLayerMethodBind, this.rawMemory)
+    open fun getCollisionLayer(): Long {
+        return _icall_Long(getCollisionLayerMethodBind, this.rawMemory)
     }
 
 
     private val setCollisionMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("TileMap", "set_collision_mask") }
-    open fun setCollisionMask(mask: Int) {
-        _icall_Unit_Int(setCollisionMaskMethodBind, this.rawMemory, mask)
+    open fun setCollisionMask(mask: Long) {
+        _icall_Unit_Long(setCollisionMaskMethodBind, this.rawMemory, mask)
     }
 
 
     private val getCollisionMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("TileMap", "get_collision_mask") }
-    open fun getCollisionMask(): Int {
-        return _icall_Int(getCollisionMaskMethodBind, this.rawMemory)
+    open fun getCollisionMask(): Long {
+        return _icall_Long(getCollisionMaskMethodBind, this.rawMemory)
     }
 
 
     private val setCollisionLayerBitMethodBind: CPointer<godot_method_bind> by lazy { getMB("TileMap", "set_collision_layer_bit") }
-    open fun setCollisionLayerBit(bit: Int, value: Boolean) {
-        _icall_Unit_Int_Boolean(setCollisionLayerBitMethodBind, this.rawMemory, bit, value)
+    open fun setCollisionLayerBit(bit: Long, value: Boolean) {
+        _icall_Unit_Long_Boolean(setCollisionLayerBitMethodBind, this.rawMemory, bit, value)
     }
 
 
     private val getCollisionLayerBitMethodBind: CPointer<godot_method_bind> by lazy { getMB("TileMap", "get_collision_layer_bit") }
-    open fun getCollisionLayerBit(bit: Int): Boolean {
-        return _icall_Boolean_Int(getCollisionLayerBitMethodBind, this.rawMemory, bit)
+    open fun getCollisionLayerBit(bit: Long): Boolean {
+        return _icall_Boolean_Long(getCollisionLayerBitMethodBind, this.rawMemory, bit)
     }
 
 
     private val setCollisionMaskBitMethodBind: CPointer<godot_method_bind> by lazy { getMB("TileMap", "set_collision_mask_bit") }
-    open fun setCollisionMaskBit(bit: Int, value: Boolean) {
-        _icall_Unit_Int_Boolean(setCollisionMaskBitMethodBind, this.rawMemory, bit, value)
+    open fun setCollisionMaskBit(bit: Long, value: Boolean) {
+        _icall_Unit_Long_Boolean(setCollisionMaskBitMethodBind, this.rawMemory, bit, value)
     }
 
 
     private val getCollisionMaskBitMethodBind: CPointer<godot_method_bind> by lazy { getMB("TileMap", "get_collision_mask_bit") }
-    open fun getCollisionMaskBit(bit: Int): Boolean {
-        return _icall_Boolean_Int(getCollisionMaskBitMethodBind, this.rawMemory, bit)
+    open fun getCollisionMaskBit(bit: Long): Boolean {
+        return _icall_Boolean_Long(getCollisionMaskBitMethodBind, this.rawMemory, bit)
     }
 
 
     private val setCollisionFrictionMethodBind: CPointer<godot_method_bind> by lazy { getMB("TileMap", "set_collision_friction") }
-    open fun setCollisionFriction(value: Float) {
-        _icall_Unit_Float(setCollisionFrictionMethodBind, this.rawMemory, value)
+    open fun setCollisionFriction(value: Double) {
+        _icall_Unit_Double(setCollisionFrictionMethodBind, this.rawMemory, value)
     }
 
 
     private val getCollisionFrictionMethodBind: CPointer<godot_method_bind> by lazy { getMB("TileMap", "get_collision_friction") }
-    open fun getCollisionFriction(): Float {
-        return _icall_Float(getCollisionFrictionMethodBind, this.rawMemory)
+    open fun getCollisionFriction(): Double {
+        return _icall_Double(getCollisionFrictionMethodBind, this.rawMemory)
     }
 
 
     private val setCollisionBounceMethodBind: CPointer<godot_method_bind> by lazy { getMB("TileMap", "set_collision_bounce") }
-    open fun setCollisionBounce(value: Float) {
-        _icall_Unit_Float(setCollisionBounceMethodBind, this.rawMemory, value)
+    open fun setCollisionBounce(value: Double) {
+        _icall_Unit_Double(setCollisionBounceMethodBind, this.rawMemory, value)
     }
 
 
     private val getCollisionBounceMethodBind: CPointer<godot_method_bind> by lazy { getMB("TileMap", "get_collision_bounce") }
-    open fun getCollisionBounce(): Float {
-        return _icall_Float(getCollisionBounceMethodBind, this.rawMemory)
+    open fun getCollisionBounce(): Double {
+        return _icall_Double(getCollisionBounceMethodBind, this.rawMemory)
     }
 
 
     private val setOccluderLightMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("TileMap", "set_occluder_light_mask") }
-    open fun setOccluderLightMask(mask: Int) {
-        _icall_Unit_Int(setOccluderLightMaskMethodBind, this.rawMemory, mask)
+    open fun setOccluderLightMask(mask: Long) {
+        _icall_Unit_Long(setOccluderLightMaskMethodBind, this.rawMemory, mask)
     }
 
 
     private val getOccluderLightMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("TileMap", "get_occluder_light_mask") }
-    open fun getOccluderLightMask(): Int {
-        return _icall_Int(getOccluderLightMaskMethodBind, this.rawMemory)
+    open fun getOccluderLightMask(): Long {
+        return _icall_Long(getOccluderLightMaskMethodBind, this.rawMemory)
     }
 
 
     private val setCellMethodBind: CPointer<godot_method_bind> by lazy { getMB("TileMap", "set_cell") }
-    open fun setCell(x: Int, y: Int, tile: Int, flipX: Boolean = false, flipY: Boolean = false, transpose: Boolean = false, autotileCoord: Vector2 = Vector2(0, 0)) {
-        _icall_Unit_Int_Int_Int_Boolean_Boolean_Boolean_Vector2(setCellMethodBind, this.rawMemory, x, y, tile, flipX, flipY, transpose, autotileCoord)
+    open fun setCell(x: Long, y: Long, tile: Long, flipX: Boolean = false, flipY: Boolean = false, transpose: Boolean = false, autotileCoord: Vector2 = Vector2(0, 0)) {
+        _icall_Unit_Long_Long_Long_Boolean_Boolean_Boolean_Vector2(setCellMethodBind, this.rawMemory, x, y, tile, flipX, flipY, transpose, autotileCoord)
     }
 
 
     private val setCellvMethodBind: CPointer<godot_method_bind> by lazy { getMB("TileMap", "set_cellv") }
-    open fun setCellv(position: Vector2, tile: Int, flipX: Boolean = false, flipY: Boolean = false, transpose: Boolean = false) {
-        _icall_Unit_Vector2_Int_Boolean_Boolean_Boolean(setCellvMethodBind, this.rawMemory, position, tile, flipX, flipY, transpose)
+    open fun setCellv(position: Vector2, tile: Long, flipX: Boolean = false, flipY: Boolean = false, transpose: Boolean = false) {
+        _icall_Unit_Vector2_Long_Boolean_Boolean_Boolean(setCellvMethodBind, this.rawMemory, position, tile, flipX, flipY, transpose)
     }
 
 
@@ -402,32 +402,32 @@ open class TileMap : Node2D {
 
 
     private val getCellMethodBind: CPointer<godot_method_bind> by lazy { getMB("TileMap", "get_cell") }
-    open fun getCell(x: Int, y: Int): Int {
-        return _icall_Int_Int_Int(getCellMethodBind, this.rawMemory, x, y)
+    open fun getCell(x: Long, y: Long): Long {
+        return _icall_Long_Long_Long(getCellMethodBind, this.rawMemory, x, y)
     }
 
 
     private val getCellvMethodBind: CPointer<godot_method_bind> by lazy { getMB("TileMap", "get_cellv") }
-    open fun getCellv(position: Vector2): Int {
-        return _icall_Int_Vector2(getCellvMethodBind, this.rawMemory, position)
+    open fun getCellv(position: Vector2): Long {
+        return _icall_Long_Vector2(getCellvMethodBind, this.rawMemory, position)
     }
 
 
     private val isCellXFlippedMethodBind: CPointer<godot_method_bind> by lazy { getMB("TileMap", "is_cell_x_flipped") }
-    open fun isCellXFlipped(x: Int, y: Int): Boolean {
-        return _icall_Boolean_Int_Int(isCellXFlippedMethodBind, this.rawMemory, x, y)
+    open fun isCellXFlipped(x: Long, y: Long): Boolean {
+        return _icall_Boolean_Long_Long(isCellXFlippedMethodBind, this.rawMemory, x, y)
     }
 
 
     private val isCellYFlippedMethodBind: CPointer<godot_method_bind> by lazy { getMB("TileMap", "is_cell_y_flipped") }
-    open fun isCellYFlipped(x: Int, y: Int): Boolean {
-        return _icall_Boolean_Int_Int(isCellYFlippedMethodBind, this.rawMemory, x, y)
+    open fun isCellYFlipped(x: Long, y: Long): Boolean {
+        return _icall_Boolean_Long_Long(isCellYFlippedMethodBind, this.rawMemory, x, y)
     }
 
 
     private val isCellTransposedMethodBind: CPointer<godot_method_bind> by lazy { getMB("TileMap", "is_cell_transposed") }
-    open fun isCellTransposed(x: Int, y: Int): Boolean {
-        return _icall_Boolean_Int_Int(isCellTransposedMethodBind, this.rawMemory, x, y)
+    open fun isCellTransposed(x: Long, y: Long): Boolean {
+        return _icall_Boolean_Long_Long(isCellTransposedMethodBind, this.rawMemory, x, y)
     }
 
 
@@ -450,8 +450,8 @@ open class TileMap : Node2D {
 
 
     private val getUsedCellsByIdMethodBind: CPointer<godot_method_bind> by lazy { getMB("TileMap", "get_used_cells_by_id") }
-    open fun getUsedCellsById(id: Int): GDArray {
-        return _icall_GDArray_Int(getUsedCellsByIdMethodBind, this.rawMemory, id)
+    open fun getUsedCellsById(id: Long): GDArray {
+        return _icall_GDArray_Long(getUsedCellsByIdMethodBind, this.rawMemory, id)
     }
 
 

@@ -56,9 +56,9 @@ open class AnimatedSprite3D : SpriteBase3D {
         set(value) = _icall_Unit_String(setAnimationMethodBind, this.rawMemory, value)
 
 
-    open var frame: Int
-        get() = _icall_Int(getFrameMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setFrameMethodBind, this.rawMemory, value)
+    open var frame: Long
+        get() = _icall_Long(getFrameMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setFrameMethodBind, this.rawMemory, value)
 
 
 
@@ -116,14 +116,14 @@ open class AnimatedSprite3D : SpriteBase3D {
 
 
     private val setFrameMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimatedSprite3D", "set_frame") }
-    open fun setFrame(frame: Int) {
-        _icall_Unit_Int(setFrameMethodBind, this.rawMemory, frame)
+    open fun setFrame(frame: Long) {
+        _icall_Unit_Long(setFrameMethodBind, this.rawMemory, frame)
     }
 
 
     private val getFrameMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimatedSprite3D", "get_frame") }
-    open fun getFrame(): Int {
-        return _icall_Int(getFrameMethodBind, this.rawMemory)
+    open fun getFrame(): Long {
+        return _icall_Long(getFrameMethodBind, this.rawMemory)
     }
 
 

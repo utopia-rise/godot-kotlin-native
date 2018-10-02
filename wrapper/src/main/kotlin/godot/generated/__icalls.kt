@@ -19,10 +19,10 @@ internal fun _icall_varargs(mb: CPointer<godot_method_bind>, inst: COpaquePointe
     }
 }
 
-internal fun _icall_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer): Int {
-    var ret: Int = 0
+internal fun _icall_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(0)
         godot_method_bind_ptrcall(mb, inst, args, retVar.ptr)
         ret = retVar.value
@@ -30,7 +30,7 @@ internal fun _icall_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer): 
     return ret
 }
 
-internal fun _icall_Unit_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int) {
+internal fun _icall_Unit_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(1)
         args[0] = arg0.getRawMemory(memScope)
@@ -136,7 +136,7 @@ internal fun _icall_GDArray(mb: CPointer<godot_method_bind>, inst: COpaquePointe
     return ret
 }
 
-internal fun _icall_Node_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): Node {
+internal fun _icall_Node_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): Node {
     lateinit var ret: Node
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -254,7 +254,7 @@ internal fun _icall_Boolean_String(mb: CPointer<godot_method_bind>, inst: COpaqu
     return ret
 }
 
-internal fun _icall_Unit_Object_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Int) {
+internal fun _icall_Unit_Object_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Long) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
@@ -280,10 +280,10 @@ internal fun _icall_Unit_String_GDArray_Boolean(mb: CPointer<godot_method_bind>,
     }
 }
 
-internal fun _icall_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer): Float {
-    var ret: Float = 0f
+internal fun _icall_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer): Double {
+    var ret: Double = 0.0
     memScoped {
-        val retVar = alloc<FloatVar>()
+        val retVar = alloc<DoubleVar>()
         val args = allocArray<COpaquePointerVar>(0)
         godot_method_bind_ptrcall(mb, inst, args, retVar.ptr)
         ret = retVar.value
@@ -313,7 +313,7 @@ internal fun _icall_Viewport(mb: CPointer<godot_method_bind>, inst: COpaquePoint
     return ret
 }
 
-internal fun _icall_Unit_Int_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Boolean) {
+internal fun _icall_Unit_Long_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Boolean) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
@@ -322,7 +322,7 @@ internal fun _icall_Unit_Int_Boolean(mb: CPointer<godot_method_bind>, inst: COpa
     }
 }
 
-internal fun _icall_Unit_String_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Int) {
+internal fun _icall_Unit_String_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Long) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
@@ -340,7 +340,7 @@ internal fun _icall_Unit_String_Variant(mb: CPointer<godot_method_bind>, inst: C
     }
 }
 
-internal fun _icall_Unit_Int_String_Variant(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: String, arg2: Variant) {
+internal fun _icall_Unit_Long_String_Variant(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: String, arg2: Variant) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -369,7 +369,7 @@ internal fun _icall_Unit_PoolVector2Array(mb: CPointer<godot_method_bind>, inst:
     }
 }
 
-internal fun _icall_Unit_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Float) {
+internal fun _icall_Unit_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Double) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(1)
         args[0] = arg0.getRawMemory(memScope)
@@ -377,7 +377,7 @@ internal fun _icall_Unit_Float(mb: CPointer<godot_method_bind>, inst: COpaquePoi
     }
 }
 
-internal fun _icall_Unit_Vector2_Vector2_Vector2_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector2, arg1: Vector2, arg2: Vector2, arg3: Int) {
+internal fun _icall_Unit_Vector2_Vector2_Vector2_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector2, arg1: Vector2, arg2: Vector2, arg3: Long) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(4)
         args[0] = arg0.getRawMemory(memScope)
@@ -388,7 +388,7 @@ internal fun _icall_Unit_Vector2_Vector2_Vector2_Int(mb: CPointer<godot_method_b
     }
 }
 
-internal fun _icall_Unit_Int_Vector2(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Vector2) {
+internal fun _icall_Unit_Long_Vector2(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Vector2) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
@@ -397,7 +397,7 @@ internal fun _icall_Unit_Int_Vector2(mb: CPointer<godot_method_bind>, inst: COpa
     }
 }
 
-internal fun _icall_Vector2_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): Vector2 {
+internal fun _icall_Vector2_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): Vector2 {
     lateinit var ret: Vector2
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -409,7 +409,7 @@ internal fun _icall_Vector2_Int(mb: CPointer<godot_method_bind>, inst: COpaquePo
     return ret
 }
 
-internal fun _icall_Vector2_Int_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Float): Vector2 {
+internal fun _icall_Vector2_Long_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Double): Vector2 {
     lateinit var ret: Vector2
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -422,7 +422,7 @@ internal fun _icall_Vector2_Int_Float(mb: CPointer<godot_method_bind>, inst: COp
     return ret
 }
 
-internal fun _icall_Vector2_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Float): Vector2 {
+internal fun _icall_Vector2_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Double): Vector2 {
     lateinit var ret: Vector2
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -434,7 +434,7 @@ internal fun _icall_Vector2_Float(mb: CPointer<godot_method_bind>, inst: COpaque
     return ret
 }
 
-internal fun _icall_Vector2_Float_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Float, arg1: Boolean): Vector2 {
+internal fun _icall_Vector2_Double_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Double, arg1: Boolean): Vector2 {
     lateinit var ret: Vector2
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -459,10 +459,10 @@ internal fun _icall_Vector2_Vector2(mb: CPointer<godot_method_bind>, inst: COpaq
     return ret
 }
 
-internal fun _icall_Float_Vector2(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector2): Float {
-    var ret: Float = 0f
+internal fun _icall_Double_Vector2(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector2): Double {
+    var ret: Double = 0.0
     memScoped {
-        val retVar = alloc<FloatVar>()
+        val retVar = alloc<DoubleVar>()
         val args = allocArray<COpaquePointerVar>(1)
         args[0] = arg0.getRawMemory(memScope)
         godot_method_bind_ptrcall(mb, inst, args, retVar.ptr)
@@ -471,7 +471,7 @@ internal fun _icall_Float_Vector2(mb: CPointer<godot_method_bind>, inst: COpaque
     return ret
 }
 
-internal fun _icall_PoolVector2Array_Int_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Float): PoolVector2Array {
+internal fun _icall_PoolVector2Array_Long_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Double): PoolVector2Array {
     lateinit var ret: PoolVector2Array
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -495,10 +495,10 @@ internal fun _icall_Curve2D(mb: CPointer<godot_method_bind>, inst: COpaquePointe
     return ret
 }
 
-internal fun _icall_Int_Object_Transform2D_Object(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Transform2D, arg2: Object): Int {
-    var ret: Int = 0
+internal fun _icall_Long_Object_Transform2D_Object(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Transform2D, arg2: Object): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -509,7 +509,7 @@ internal fun _icall_Int_Object_Transform2D_Object(mb: CPointer<godot_method_bind
     return ret
 }
 
-internal fun _icall_Unit_Int_Transform2D(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Transform2D) {
+internal fun _icall_Unit_Long_Transform2D(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Transform2D) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
@@ -571,7 +571,7 @@ internal fun _icall_Unit_PoolIntArray(mb: CPointer<godot_method_bind>, inst: COp
     }
 }
 
-internal fun _icall_PoolIntArray_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): PoolIntArray {
+internal fun _icall_PoolIntArray_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): PoolIntArray {
     lateinit var ret: PoolIntArray
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -583,7 +583,7 @@ internal fun _icall_PoolIntArray_Int(mb: CPointer<godot_method_bind>, inst: COpa
     return ret
 }
 
-internal fun _icall_Unit_PoolVector2Array_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: PoolVector2Array, arg1: Int) {
+internal fun _icall_Unit_PoolVector2Array_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: PoolVector2Array, arg1: Long) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
@@ -592,7 +592,7 @@ internal fun _icall_Unit_PoolVector2Array_Int(mb: CPointer<godot_method_bind>, i
     }
 }
 
-internal fun _icall_Unit_Int_PoolVector2Array(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: PoolVector2Array) {
+internal fun _icall_Unit_Long_PoolVector2Array(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: PoolVector2Array) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
@@ -601,7 +601,7 @@ internal fun _icall_Unit_Int_PoolVector2Array(mb: CPointer<godot_method_bind>, i
     }
 }
 
-internal fun _icall_PoolVector2Array_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): PoolVector2Array {
+internal fun _icall_PoolVector2Array_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): PoolVector2Array {
     lateinit var ret: PoolVector2Array
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -624,7 +624,7 @@ internal fun _icall_NavigationPolygon(mb: CPointer<godot_method_bind>, inst: COp
     return ret
 }
 
-internal fun _icall_String_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): String {
+internal fun _icall_String_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): String {
     lateinit var ret: String
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -636,7 +636,7 @@ internal fun _icall_String_Int(mb: CPointer<godot_method_bind>, inst: COpaquePoi
     return ret
 }
 
-internal fun _icall_NodePath_Int_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Boolean): NodePath {
+internal fun _icall_NodePath_Long_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Boolean): NodePath {
     lateinit var ret: NodePath
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -649,7 +649,7 @@ internal fun _icall_NodePath_Int_Boolean(mb: CPointer<godot_method_bind>, inst: 
     return ret
 }
 
-internal fun _icall_NodePath_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): NodePath {
+internal fun _icall_NodePath_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): NodePath {
     lateinit var ret: NodePath
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -661,7 +661,7 @@ internal fun _icall_NodePath_Int(mb: CPointer<godot_method_bind>, inst: COpaqueP
     return ret
 }
 
-internal fun _icall_Boolean_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): Boolean {
+internal fun _icall_Boolean_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): Boolean {
     var ret: Boolean = false
     memScoped {
         val retVar = alloc<BooleanVar>()
@@ -673,7 +673,7 @@ internal fun _icall_Boolean_Int(mb: CPointer<godot_method_bind>, inst: COpaquePo
     return ret
 }
 
-internal fun _icall_PackedScene_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): PackedScene {
+internal fun _icall_PackedScene_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): PackedScene {
     lateinit var ret: PackedScene
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -685,7 +685,7 @@ internal fun _icall_PackedScene_Int(mb: CPointer<godot_method_bind>, inst: COpaq
     return ret
 }
 
-internal fun _icall_PoolStringArray_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): PoolStringArray {
+internal fun _icall_PoolStringArray_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): PoolStringArray {
     lateinit var ret: PoolStringArray
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -697,10 +697,10 @@ internal fun _icall_PoolStringArray_Int(mb: CPointer<godot_method_bind>, inst: C
     return ret
 }
 
-internal fun _icall_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): Int {
-    var ret: Int = 0
+internal fun _icall_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(1)
         args[0] = arg0.getRawMemory(memScope)
         godot_method_bind_ptrcall(mb, inst, args, retVar.ptr)
@@ -709,7 +709,7 @@ internal fun _icall_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointe
     return ret
 }
 
-internal fun _icall_String_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int): String {
+internal fun _icall_String_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long): String {
     lateinit var ret: String
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -722,7 +722,7 @@ internal fun _icall_String_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaqu
     return ret
 }
 
-internal fun _icall_Variant_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int): Variant {
+internal fun _icall_Variant_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long): Variant {
     lateinit var ret: Variant
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -735,7 +735,7 @@ internal fun _icall_Variant_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaq
     return ret
 }
 
-internal fun _icall_GDArray_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): GDArray {
+internal fun _icall_GDArray_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): GDArray {
     lateinit var ret: GDArray
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -747,10 +747,10 @@ internal fun _icall_GDArray_Int(mb: CPointer<godot_method_bind>, inst: COpaquePo
     return ret
 }
 
-internal fun _icall_Int_Object(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object): Int {
-    var ret: Int = 0
+internal fun _icall_Long_Object(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(1)
         args[0] = arg0.getRawMemory(memScope)
         godot_method_bind_ptrcall(mb, inst, args, retVar.ptr)
@@ -781,7 +781,7 @@ internal fun _icall_NetworkedMultiplayerPeer(mb: CPointer<godot_method_bind>, in
     return ret
 }
 
-internal fun _icall_SceneTreeTimer_Float_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Float, arg1: Boolean): SceneTreeTimer {
+internal fun _icall_SceneTreeTimer_Double_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Double, arg1: Boolean): SceneTreeTimer {
     lateinit var ret: SceneTreeTimer
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -794,7 +794,7 @@ internal fun _icall_SceneTreeTimer_Float_Boolean(mb: CPointer<godot_method_bind>
     return ret
 }
 
-internal fun _icall_Unit_Int_Int_Vector2_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int, arg2: Vector2, arg3: Float) {
+internal fun _icall_Unit_Long_Long_Vector2_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long, arg2: Vector2, arg3: Double) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(4)
         args[0] = arg0.getRawMemory(memScope)
@@ -805,7 +805,7 @@ internal fun _icall_Unit_Int_Int_Vector2_Float(mb: CPointer<godot_method_bind>, 
     }
 }
 
-internal fun _icall_Unit_Int_String_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: String, arg2: Int) {
+internal fun _icall_Unit_Long_String_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: String, arg2: Long) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -815,7 +815,7 @@ internal fun _icall_Unit_Int_String_Int(mb: CPointer<godot_method_bind>, inst: C
     }
 }
 
-internal fun _icall_Unit_Int_String_String_Variant(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: String, arg2: String, arg3: Variant) {
+internal fun _icall_Unit_Long_String_String_Variant(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: String, arg2: String, arg3: Variant) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(4)
         args[0] = arg0.getRawMemory(memScope)
@@ -848,10 +848,10 @@ internal fun _icall_GDArray_String(mb: CPointer<godot_method_bind>, inst: COpaqu
     return ret
 }
 
-internal fun _icall_Int_String(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String): Int {
-    var ret: Int = 0
+internal fun _icall_Long_String(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(1)
         args[0] = arg0.getRawMemory(memScope)
         godot_method_bind_ptrcall(mb, inst, args, retVar.ptr)
@@ -871,7 +871,7 @@ internal fun _icall_PoolIntArray(mb: CPointer<godot_method_bind>, inst: COpaqueP
     return ret
 }
 
-internal fun _icall_Unit_Int_Object(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Object) {
+internal fun _icall_Unit_Long_Object(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Object) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
@@ -1060,7 +1060,7 @@ internal fun _icall_Unit_Object_Boolean_RID(mb: CPointer<godot_method_bind>, ins
     }
 }
 
-internal fun _icall_Unit_Object_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Float) {
+internal fun _icall_Unit_Object_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Double) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
@@ -1125,7 +1125,7 @@ internal fun _icall_String_String(mb: CPointer<godot_method_bind>, inst: COpaque
     return ret
 }
 
-internal fun _icall_EditorFileSystemDirectory_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): EditorFileSystemDirectory {
+internal fun _icall_EditorFileSystemDirectory_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): EditorFileSystemDirectory {
     lateinit var ret: EditorFileSystemDirectory
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -1260,7 +1260,7 @@ internal fun _icall_EditorFileSystem(mb: CPointer<godot_method_bind>, inst: COpa
     return ret
 }
 
-internal fun _icall_GDArray_GDArray_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: GDArray, arg1: Int): GDArray {
+internal fun _icall_GDArray_GDArray_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: GDArray, arg1: Long): GDArray {
     lateinit var ret: GDArray
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -1292,7 +1292,7 @@ internal fun _icall_Unit_String_PoolByteArray_Boolean(mb: CPointer<godot_method_
     }
 }
 
-internal fun _icall_Node_String_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Int, arg2: Int): Node {
+internal fun _icall_Node_String_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Long, arg2: Long): Node {
     lateinit var ret: Node
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -1306,7 +1306,7 @@ internal fun _icall_Node_String_Int_Int(mb: CPointer<godot_method_bind>, inst: C
     return ret
 }
 
-internal fun _icall_Animation_String_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Int, arg2: Int): Animation {
+internal fun _icall_Animation_String_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Long, arg2: Long): Animation {
     lateinit var ret: Animation
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -1365,7 +1365,7 @@ internal fun _icall_RID(mb: CPointer<godot_method_bind>, inst: COpaquePointer): 
     return ret
 }
 
-internal fun _icall_RID_Object_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Int): RID {
+internal fun _icall_RID_Object_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Long): RID {
     lateinit var ret: RID
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -1378,7 +1378,7 @@ internal fun _icall_RID_Object_Int(mb: CPointer<godot_method_bind>, inst: COpaqu
     return ret
 }
 
-internal fun _icall_Unit_RID_Int_Int_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Int, arg2: Int, arg3: Int, arg4: Int) {
+internal fun _icall_Unit_RID_Long_Long_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Long, arg2: Long, arg3: Long, arg4: Long) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(5)
         args[0] = arg0.getRawMemory(memScope)
@@ -1390,7 +1390,7 @@ internal fun _icall_Unit_RID_Int_Int_Int_Int(mb: CPointer<godot_method_bind>, in
     }
 }
 
-internal fun _icall_Unit_RID_Object_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Object, arg2: Int) {
+internal fun _icall_Unit_RID_Object_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Object, arg2: Long) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -1400,7 +1400,7 @@ internal fun _icall_Unit_RID_Object_Int(mb: CPointer<godot_method_bind>, inst: C
     }
 }
 
-internal fun _icall_Unit_RID_Object_Int_Int_Int_Int_Int_Int_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Object, arg2: Int, arg3: Int, arg4: Int, arg5: Int, arg6: Int, arg7: Int, arg8: Int, arg9: Int) {
+internal fun _icall_Unit_RID_Object_Long_Long_Long_Long_Long_Long_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Object, arg2: Long, arg3: Long, arg4: Long, arg5: Long, arg6: Long, arg7: Long, arg8: Long, arg9: Long) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(10)
         args[0] = arg0.getRawMemory(memScope)
@@ -1417,7 +1417,7 @@ internal fun _icall_Unit_RID_Object_Int_Int_Int_Int_Int_Int_Int_Int(mb: CPointer
     }
 }
 
-internal fun _icall_Image_RID_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Int): Image {
+internal fun _icall_Image_RID_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Long): Image {
     lateinit var ret: Image
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -1430,7 +1430,7 @@ internal fun _icall_Image_RID_Int(mb: CPointer<godot_method_bind>, inst: COpaque
     return ret
 }
 
-internal fun _icall_Unit_RID_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Int) {
+internal fun _icall_Unit_RID_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Long) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
@@ -1439,10 +1439,10 @@ internal fun _icall_Unit_RID_Int(mb: CPointer<godot_method_bind>, inst: COpaqueP
     }
 }
 
-internal fun _icall_Int_RID(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID): Int {
-    var ret: Int = 0
+internal fun _icall_Long_RID(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(1)
         args[0] = arg0.getRawMemory(memScope)
         godot_method_bind_ptrcall(mb, inst, args, retVar.ptr)
@@ -1451,7 +1451,7 @@ internal fun _icall_Int_RID(mb: CPointer<godot_method_bind>, inst: COpaquePointe
     return ret
 }
 
-internal fun _icall_Unit_RID_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Int, arg2: Int) {
+internal fun _icall_Unit_RID_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Long, arg2: Long) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -1482,7 +1482,7 @@ internal fun _icall_String_RID(mb: CPointer<godot_method_bind>, inst: COpaquePoi
     return ret
 }
 
-internal fun _icall_Unit_RID_RID_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: RID, arg2: Int) {
+internal fun _icall_Unit_RID_RID_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: RID, arg2: Long) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -1571,7 +1571,7 @@ internal fun _icall_Variant_RID_String(mb: CPointer<godot_method_bind>, inst: CO
     return ret
 }
 
-internal fun _icall_Unit_RID_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Float) {
+internal fun _icall_Unit_RID_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Double) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
@@ -1580,7 +1580,7 @@ internal fun _icall_Unit_RID_Float(mb: CPointer<godot_method_bind>, inst: COpaqu
     }
 }
 
-internal fun _icall_Unit_RID_Int_GDArray_GDArray_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Int, arg2: GDArray, arg3: GDArray, arg4: Int) {
+internal fun _icall_Unit_RID_Long_GDArray_GDArray_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Long, arg2: GDArray, arg3: GDArray, arg4: Long) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(5)
         args[0] = arg0.getRawMemory(memScope)
@@ -1592,7 +1592,7 @@ internal fun _icall_Unit_RID_Int_GDArray_GDArray_Int(mb: CPointer<godot_method_b
     }
 }
 
-internal fun _icall_Unit_RID_Int_RID(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Int, arg2: RID) {
+internal fun _icall_Unit_RID_Long_RID(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Long, arg2: RID) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -1602,7 +1602,7 @@ internal fun _icall_Unit_RID_Int_RID(mb: CPointer<godot_method_bind>, inst: COpa
     }
 }
 
-internal fun _icall_RID_RID_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Int): RID {
+internal fun _icall_RID_RID_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Long): RID {
     lateinit var ret: RID
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -1615,10 +1615,10 @@ internal fun _icall_RID_RID_Int(mb: CPointer<godot_method_bind>, inst: COpaquePo
     return ret
 }
 
-internal fun _icall_Int_RID_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Int): Int {
-    var ret: Int = 0
+internal fun _icall_Long_RID_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Long): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -1628,7 +1628,7 @@ internal fun _icall_Int_RID_Int(mb: CPointer<godot_method_bind>, inst: COpaquePo
     return ret
 }
 
-internal fun _icall_PoolByteArray_RID_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Int): PoolByteArray {
+internal fun _icall_PoolByteArray_RID_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Long): PoolByteArray {
     lateinit var ret: PoolByteArray
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -1641,7 +1641,7 @@ internal fun _icall_PoolByteArray_RID_Int(mb: CPointer<godot_method_bind>, inst:
     return ret
 }
 
-internal fun _icall_GDArray_RID_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Int): GDArray {
+internal fun _icall_GDArray_RID_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Long): GDArray {
     lateinit var ret: GDArray
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -1654,7 +1654,7 @@ internal fun _icall_GDArray_RID_Int(mb: CPointer<godot_method_bind>, inst: COpaq
     return ret
 }
 
-internal fun _icall_AABB_RID_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Int): AABB {
+internal fun _icall_AABB_RID_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Long): AABB {
     lateinit var ret: AABB
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -1696,7 +1696,7 @@ internal fun _icall_Unit_RID(mb: CPointer<godot_method_bind>, inst: COpaquePoint
     }
 }
 
-internal fun _icall_Unit_RID_Int_Transform(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Int, arg2: Transform) {
+internal fun _icall_Unit_RID_Long_Transform(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Long, arg2: Transform) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -1706,7 +1706,7 @@ internal fun _icall_Unit_RID_Int_Transform(mb: CPointer<godot_method_bind>, inst
     }
 }
 
-internal fun _icall_Unit_RID_Int_Transform2D(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Int, arg2: Transform2D) {
+internal fun _icall_Unit_RID_Long_Transform2D(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Long, arg2: Transform2D) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -1716,7 +1716,7 @@ internal fun _icall_Unit_RID_Int_Transform2D(mb: CPointer<godot_method_bind>, in
     }
 }
 
-internal fun _icall_Unit_RID_Int_Color(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Int, arg2: Color) {
+internal fun _icall_Unit_RID_Long_Color(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Long, arg2: Color) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -1726,7 +1726,7 @@ internal fun _icall_Unit_RID_Int_Color(mb: CPointer<godot_method_bind>, inst: CO
     }
 }
 
-internal fun _icall_Transform_RID_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Int): Transform {
+internal fun _icall_Transform_RID_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Long): Transform {
     lateinit var ret: Transform
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -1739,7 +1739,7 @@ internal fun _icall_Transform_RID_Int(mb: CPointer<godot_method_bind>, inst: COp
     return ret
 }
 
-internal fun _icall_Transform2D_RID_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Int): Transform2D {
+internal fun _icall_Transform2D_RID_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Long): Transform2D {
     lateinit var ret: Transform2D
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -1752,7 +1752,7 @@ internal fun _icall_Transform2D_RID_Int(mb: CPointer<godot_method_bind>, inst: C
     return ret
 }
 
-internal fun _icall_Color_RID_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Int): Color {
+internal fun _icall_Color_RID_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Long): Color {
     lateinit var ret: Color
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -1810,7 +1810,7 @@ internal fun _icall_Unit_RID_Color(mb: CPointer<godot_method_bind>, inst: COpaqu
     }
 }
 
-internal fun _icall_Unit_RID_Int_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Int, arg2: Boolean) {
+internal fun _icall_Unit_RID_Long_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Long, arg2: Boolean) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -1820,7 +1820,7 @@ internal fun _icall_Unit_RID_Int_Boolean(mb: CPointer<godot_method_bind>, inst: 
     }
 }
 
-internal fun _icall_Unit_RID_Int_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Int, arg2: Float) {
+internal fun _icall_Unit_RID_Long_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Long, arg2: Double) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -1839,10 +1839,10 @@ internal fun _icall_Unit_RID_Boolean(mb: CPointer<godot_method_bind>, inst: COpa
     }
 }
 
-internal fun _icall_Float_RID(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID): Float {
-    var ret: Float = 0f
+internal fun _icall_Double_RID(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID): Double {
+    var ret: Double = 0.0
     memScoped {
-        val retVar = alloc<FloatVar>()
+        val retVar = alloc<DoubleVar>()
         val args = allocArray<COpaquePointerVar>(1)
         args[0] = arg0.getRawMemory(memScope)
         godot_method_bind_ptrcall(mb, inst, args, retVar.ptr)
@@ -1926,7 +1926,7 @@ internal fun _icall_PoolByteArray_RID(mb: CPointer<godot_method_bind>, inst: COp
     return ret
 }
 
-internal fun _icall_Unit_RID_Float_Float_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Float, arg2: Float, arg3: Float) {
+internal fun _icall_Unit_RID_Double_Double_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Double, arg2: Double, arg3: Double) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(4)
         args[0] = arg0.getRawMemory(memScope)
@@ -1937,7 +1937,7 @@ internal fun _icall_Unit_RID_Float_Float_Float(mb: CPointer<godot_method_bind>, 
     }
 }
 
-internal fun _icall_Unit_RID_Rect2_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Rect2, arg2: Int) {
+internal fun _icall_Unit_RID_Rect2_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Rect2, arg2: Long) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -1966,7 +1966,7 @@ internal fun _icall_Unit_RID_Transform2D(mb: CPointer<godot_method_bind>, inst: 
     }
 }
 
-internal fun _icall_Unit_RID_Color_Float_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Color, arg2: Float, arg3: Float) {
+internal fun _icall_Unit_RID_Color_Double_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Color, arg2: Double, arg3: Double) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(4)
         args[0] = arg0.getRawMemory(memScope)
@@ -1977,7 +1977,7 @@ internal fun _icall_Unit_RID_Color_Float_Float(mb: CPointer<godot_method_bind>, 
     }
 }
 
-internal fun _icall_Unit_RID_Boolean_Float_Float_Float_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Boolean, arg2: Float, arg3: Float, arg4: Float, arg5: Int) {
+internal fun _icall_Unit_RID_Boolean_Double_Double_Double_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Boolean, arg2: Double, arg3: Double, arg4: Double, arg5: Long) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(6)
         args[0] = arg0.getRawMemory(memScope)
@@ -1990,7 +1990,7 @@ internal fun _icall_Unit_RID_Boolean_Float_Float_Float_Int(mb: CPointer<godot_me
     }
 }
 
-internal fun _icall_Unit_RID_Boolean_Int_Float_Float_Float_Int_Float_Float_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Boolean, arg2: Int, arg3: Float, arg4: Float, arg5: Float, arg6: Int, arg7: Float, arg8: Float, arg9: Boolean) {
+internal fun _icall_Unit_RID_Boolean_Long_Double_Double_Double_Long_Double_Double_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Boolean, arg2: Long, arg3: Double, arg4: Double, arg5: Double, arg6: Long, arg7: Double, arg8: Double, arg9: Boolean) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(10)
         args[0] = arg0.getRawMemory(memScope)
@@ -2007,7 +2007,7 @@ internal fun _icall_Unit_RID_Boolean_Int_Float_Float_Float_Int_Float_Float_Boole
     }
 }
 
-internal fun _icall_Unit_RID_Int_Float_Float_Boolean_Float_Float_Float_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Int, arg2: Float, arg3: Float, arg4: Boolean, arg5: Float, arg6: Float, arg7: Float, arg8: Float) {
+internal fun _icall_Unit_RID_Long_Double_Double_Boolean_Double_Double_Double_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Long, arg2: Double, arg3: Double, arg4: Boolean, arg5: Double, arg6: Double, arg7: Double, arg8: Double) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(9)
         args[0] = arg0.getRawMemory(memScope)
@@ -2023,7 +2023,7 @@ internal fun _icall_Unit_RID_Int_Float_Float_Boolean_Float_Float_Float_Float(mb:
     }
 }
 
-internal fun _icall_Unit_RID_Boolean_Float_Float_Float_RID(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Boolean, arg2: Float, arg3: Float, arg4: Float, arg5: RID) {
+internal fun _icall_Unit_RID_Boolean_Double_Double_Double_RID(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Boolean, arg2: Double, arg3: Double, arg4: Double, arg5: RID) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(6)
         args[0] = arg0.getRawMemory(memScope)
@@ -2036,7 +2036,7 @@ internal fun _icall_Unit_RID_Boolean_Float_Float_Float_RID(mb: CPointer<godot_me
     }
 }
 
-internal fun _icall_Unit_RID_Boolean_Int_Float_Float_Float_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Boolean, arg2: Int, arg3: Float, arg4: Float, arg5: Float, arg6: Boolean) {
+internal fun _icall_Unit_RID_Boolean_Long_Double_Double_Double_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Boolean, arg2: Long, arg3: Double, arg4: Double, arg5: Double, arg6: Boolean) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(7)
         args[0] = arg0.getRawMemory(memScope)
@@ -2050,7 +2050,7 @@ internal fun _icall_Unit_RID_Boolean_Int_Float_Float_Float_Boolean(mb: CPointer<
     }
 }
 
-internal fun _icall_Unit_RID_Boolean_Float_Float_Float_Float_Float_Float_Float_Color_Int_Int_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Boolean, arg2: Float, arg3: Float, arg4: Float, arg5: Float, arg6: Float, arg7: Float, arg8: Float, arg9: Color, arg10: Int, arg11: Int, arg12: Float) {
+internal fun _icall_Unit_RID_Boolean_Double_Double_Double_Double_Double_Double_Double_Color_Long_Long_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Boolean, arg2: Double, arg3: Double, arg4: Double, arg5: Double, arg6: Double, arg7: Double, arg8: Double, arg9: Color, arg10: Long, arg11: Long, arg12: Double) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(13)
         args[0] = arg0.getRawMemory(memScope)
@@ -2070,7 +2070,7 @@ internal fun _icall_Unit_RID_Boolean_Float_Float_Float_Float_Float_Float_Float_C
     }
 }
 
-internal fun _icall_Unit_RID_Boolean_Color_Color_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Boolean, arg2: Color, arg3: Color, arg4: Float) {
+internal fun _icall_Unit_RID_Boolean_Color_Color_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Boolean, arg2: Color, arg3: Color, arg4: Double) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(5)
         args[0] = arg0.getRawMemory(memScope)
@@ -2082,7 +2082,7 @@ internal fun _icall_Unit_RID_Boolean_Color_Color_Float(mb: CPointer<godot_method
     }
 }
 
-internal fun _icall_Unit_RID_Boolean_Float_Float_Boolean_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Boolean, arg2: Float, arg3: Float, arg4: Boolean, arg5: Float) {
+internal fun _icall_Unit_RID_Boolean_Double_Double_Boolean_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Boolean, arg2: Double, arg3: Double, arg4: Boolean, arg5: Double) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(6)
         args[0] = arg0.getRawMemory(memScope)
@@ -2095,7 +2095,7 @@ internal fun _icall_Unit_RID_Boolean_Float_Float_Boolean_Float(mb: CPointer<godo
     }
 }
 
-internal fun _icall_Unit_RID_Boolean_Float_Float_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Boolean, arg2: Float, arg3: Float, arg4: Float) {
+internal fun _icall_Unit_RID_Boolean_Double_Double_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Boolean, arg2: Double, arg3: Double, arg4: Double) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(5)
         args[0] = arg0.getRawMemory(memScope)
@@ -2130,7 +2130,7 @@ internal fun _icall_Unit_RID_RID_RID(mb: CPointer<godot_method_bind>, inst: COpa
     }
 }
 
-internal fun _icall_Unit_RID_Float_Float_Float_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Float, arg2: Float, arg3: Float, arg4: Float) {
+internal fun _icall_Unit_RID_Double_Double_Double_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Double, arg2: Double, arg3: Double, arg4: Double) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(5)
         args[0] = arg0.getRawMemory(memScope)
@@ -2202,7 +2202,7 @@ internal fun _icall_Unit_RID_Boolean_Rect2(mb: CPointer<godot_method_bind>, inst
     }
 }
 
-internal fun _icall_Unit_RID_Vector2_Vector2_Color_Float_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Vector2, arg2: Vector2, arg3: Color, arg4: Float, arg5: Boolean) {
+internal fun _icall_Unit_RID_Vector2_Vector2_Color_Double_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Vector2, arg2: Vector2, arg3: Color, arg4: Double, arg5: Boolean) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(6)
         args[0] = arg0.getRawMemory(memScope)
@@ -2215,7 +2215,7 @@ internal fun _icall_Unit_RID_Vector2_Vector2_Color_Float_Boolean(mb: CPointer<go
     }
 }
 
-internal fun _icall_Unit_RID_PoolVector2Array_PoolColorArray_Float_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: PoolVector2Array, arg2: PoolColorArray, arg3: Float, arg4: Boolean) {
+internal fun _icall_Unit_RID_PoolVector2Array_PoolColorArray_Double_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: PoolVector2Array, arg2: PoolColorArray, arg3: Double, arg4: Boolean) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(5)
         args[0] = arg0.getRawMemory(memScope)
@@ -2237,7 +2237,7 @@ internal fun _icall_Unit_RID_Rect2_Color(mb: CPointer<godot_method_bind>, inst: 
     }
 }
 
-internal fun _icall_Unit_RID_Vector2_Float_Color(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Vector2, arg2: Float, arg3: Color) {
+internal fun _icall_Unit_RID_Vector2_Double_Color(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Vector2, arg2: Double, arg3: Color) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(4)
         args[0] = arg0.getRawMemory(memScope)
@@ -2277,7 +2277,7 @@ internal fun _icall_Unit_RID_Rect2_RID_Rect2_Color_Boolean_RID_Boolean(mb: CPoin
     }
 }
 
-internal fun _icall_Unit_RID_Rect2_Rect2_RID_Vector2_Vector2_Int_Int_Boolean_Color_RID(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Rect2, arg2: Rect2, arg3: RID, arg4: Vector2, arg5: Vector2, arg6: Int, arg7: Int, arg8: Boolean, arg9: Color, arg10: RID) {
+internal fun _icall_Unit_RID_Rect2_Rect2_RID_Vector2_Vector2_Long_Long_Boolean_Color_RID(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Rect2, arg2: Rect2, arg3: RID, arg4: Vector2, arg5: Vector2, arg6: Long, arg7: Long, arg8: Boolean, arg9: Color, arg10: RID) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(11)
         args[0] = arg0.getRawMemory(memScope)
@@ -2295,7 +2295,7 @@ internal fun _icall_Unit_RID_Rect2_Rect2_RID_Vector2_Vector2_Int_Int_Boolean_Col
     }
 }
 
-internal fun _icall_Unit_RID_PoolVector2Array_PoolColorArray_PoolVector2Array_RID_Float_RID(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: PoolVector2Array, arg2: PoolColorArray, arg3: PoolVector2Array, arg4: RID, arg5: Float, arg6: RID) {
+internal fun _icall_Unit_RID_PoolVector2Array_PoolColorArray_PoolVector2Array_RID_Double_RID(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: PoolVector2Array, arg2: PoolColorArray, arg3: PoolVector2Array, arg4: RID, arg5: Double, arg6: RID) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(7)
         args[0] = arg0.getRawMemory(memScope)
@@ -2323,7 +2323,7 @@ internal fun _icall_Unit_RID_PoolVector2Array_PoolColorArray_PoolVector2Array_RI
     }
 }
 
-internal fun _icall_Unit_RID_PoolIntArray_PoolVector2Array_PoolColorArray_PoolVector2Array_PoolIntArray_PoolRealArray_RID_Int_RID(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: PoolIntArray, arg2: PoolVector2Array, arg3: PoolColorArray, arg4: PoolVector2Array, arg5: PoolIntArray, arg6: PoolRealArray, arg7: RID, arg8: Int, arg9: RID) {
+internal fun _icall_Unit_RID_PoolIntArray_PoolVector2Array_PoolColorArray_PoolVector2Array_PoolIntArray_PoolRealArray_RID_Long_RID(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: PoolIntArray, arg2: PoolVector2Array, arg3: PoolColorArray, arg4: PoolVector2Array, arg5: PoolIntArray, arg6: PoolRealArray, arg7: RID, arg8: Long, arg9: RID) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(10)
         args[0] = arg0.getRawMemory(memScope)
@@ -2351,7 +2351,7 @@ internal fun _icall_Unit_RID_RID_RID_RID(mb: CPointer<godot_method_bind>, inst: 
     }
 }
 
-internal fun _icall_Unit_RID_RID_RID_RID_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: RID, arg2: RID, arg3: RID, arg4: Int, arg5: Int) {
+internal fun _icall_Unit_RID_RID_RID_RID_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: RID, arg2: RID, arg3: RID, arg4: Long, arg5: Long) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(6)
         args[0] = arg0.getRawMemory(memScope)
@@ -2383,7 +2383,7 @@ internal fun _icall_Unit_RID_PoolVector2Array(mb: CPointer<godot_method_bind>, i
     }
 }
 
-internal fun _icall_Unit_Int_Int_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int, arg2: Int, arg3: Int) {
+internal fun _icall_Unit_Long_Long_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long, arg2: Long, arg3: Long) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(4)
         args[0] = arg0.getRawMemory(memScope)
@@ -2404,7 +2404,7 @@ internal fun _icall_Unit_Object_String_Variant(mb: CPointer<godot_method_bind>, 
     }
 }
 
-internal fun _icall_RID_Int_Int_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int, arg2: Float): RID {
+internal fun _icall_RID_Long_Long_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long, arg2: Double): RID {
     lateinit var ret: RID
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -2436,7 +2436,7 @@ internal fun _icall_Unit_Color(mb: CPointer<godot_method_bind>, inst: COpaquePoi
     }
 }
 
-internal fun _icall_Unit_Object_String_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: String, arg2: Int) {
+internal fun _icall_Unit_Object_String_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: String, arg2: Long) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -2446,7 +2446,7 @@ internal fun _icall_Unit_Object_String_Int(mb: CPointer<godot_method_bind>, inst
     }
 }
 
-internal fun _icall_Unit_Int_String(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: String) {
+internal fun _icall_Unit_Long_String(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: String) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
@@ -2455,7 +2455,7 @@ internal fun _icall_Unit_Int_String(mb: CPointer<godot_method_bind>, inst: COpaq
     }
 }
 
-internal fun _icall_Unit_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int) {
+internal fun _icall_Unit_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
@@ -2464,7 +2464,7 @@ internal fun _icall_Unit_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaqueP
     }
 }
 
-internal fun _icall_Unit_Int_Variant(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Variant) {
+internal fun _icall_Unit_Long_Variant(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Variant) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
@@ -2473,7 +2473,7 @@ internal fun _icall_Unit_Int_Variant(mb: CPointer<godot_method_bind>, inst: COpa
     }
 }
 
-internal fun _icall_Texture_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): Texture {
+internal fun _icall_Texture_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): Texture {
     lateinit var ret: Texture
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -2485,7 +2485,7 @@ internal fun _icall_Texture_Int(mb: CPointer<godot_method_bind>, inst: COpaquePo
     return ret
 }
 
-internal fun _icall_Variant_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): Variant {
+internal fun _icall_Variant_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): Variant {
     lateinit var ret: Variant
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -2571,7 +2571,7 @@ internal fun _icall_Unit_Variant(mb: CPointer<godot_method_bind>, inst: COpaqueP
     }
 }
 
-internal fun _icall_Unit_Int_Boolean_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Boolean, arg2: Int) {
+internal fun _icall_Unit_Long_Boolean_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Boolean, arg2: Long) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -2685,7 +2685,7 @@ internal fun _icall_World(mb: CPointer<godot_method_bind>, inst: COpaquePointer)
     return ret
 }
 
-internal fun _icall_Unit_Vector3_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector3, arg1: Float) {
+internal fun _icall_Unit_Vector3_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector3, arg1: Double) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
@@ -2725,7 +2725,7 @@ internal fun _icall_Vector3_Vector3(mb: CPointer<godot_method_bind>, inst: COpaq
     return ret
 }
 
-internal fun _icall_Transform_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): Transform {
+internal fun _icall_Transform_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): Transform {
     lateinit var ret: Transform
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -2737,7 +2737,7 @@ internal fun _icall_Transform_Int(mb: CPointer<godot_method_bind>, inst: COpaque
     return ret
 }
 
-internal fun _icall_Unit_Int_Transform(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Transform) {
+internal fun _icall_Unit_Long_Transform(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Transform) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
@@ -2762,10 +2762,10 @@ internal fun _icall_Unit_NodePath(mb: CPointer<godot_method_bind>, inst: COpaque
     }
 }
 
-internal fun _icall_Int_String_Object(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Object): Int {
-    var ret: Int = 0
+internal fun _icall_Long_String_Object(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Object): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -2787,7 +2787,7 @@ internal fun _icall_Animation_String(mb: CPointer<godot_method_bind>, inst: COpa
     return ret
 }
 
-internal fun _icall_Unit_String_String_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: String, arg2: Float) {
+internal fun _icall_Unit_String_String_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: String, arg2: Double) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -2797,10 +2797,10 @@ internal fun _icall_Unit_String_String_Float(mb: CPointer<godot_method_bind>, in
     }
 }
 
-internal fun _icall_Float_String_String(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: String): Float {
-    var ret: Float = 0f
+internal fun _icall_Double_String_String(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: String): Double {
+    var ret: Double = 0.0
     memScoped {
-        val retVar = alloc<FloatVar>()
+        val retVar = alloc<DoubleVar>()
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -2810,7 +2810,7 @@ internal fun _icall_Float_String_String(mb: CPointer<godot_method_bind>, inst: C
     return ret
 }
 
-internal fun _icall_Unit_String_Float_Float_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Float, arg2: Float, arg3: Boolean) {
+internal fun _icall_Unit_String_Double_Double_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Double, arg2: Double, arg3: Boolean) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(4)
         args[0] = arg0.getRawMemory(memScope)
@@ -2821,7 +2821,7 @@ internal fun _icall_Unit_String_Float_Float_Boolean(mb: CPointer<godot_method_bi
     }
 }
 
-internal fun _icall_Unit_String_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Float) {
+internal fun _icall_Unit_String_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Double) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
@@ -2842,7 +2842,7 @@ internal fun _icall_String_Object(mb: CPointer<godot_method_bind>, inst: COpaque
     return ret
 }
 
-internal fun _icall_Unit_Float_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Float, arg1: Boolean) {
+internal fun _icall_Unit_Double_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Double, arg1: Boolean) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
@@ -2864,7 +2864,7 @@ internal fun _icall_Boolean_Object_String(mb: CPointer<godot_method_bind>, inst:
     return ret
 }
 
-internal fun _icall_Boolean_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Float): Boolean {
+internal fun _icall_Boolean_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Double): Boolean {
     var ret: Boolean = false
     memScoped {
         val retVar = alloc<BooleanVar>()
@@ -2876,7 +2876,7 @@ internal fun _icall_Boolean_Float(mb: CPointer<godot_method_bind>, inst: COpaque
     return ret
 }
 
-internal fun _icall_Boolean_Object_NodePath_Variant_Variant_Float_Int_Int_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: NodePath, arg2: Variant, arg3: Variant, arg4: Float, arg5: Int, arg6: Int, arg7: Float): Boolean {
+internal fun _icall_Boolean_Object_NodePath_Variant_Variant_Double_Long_Long_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: NodePath, arg2: Variant, arg3: Variant, arg4: Double, arg5: Long, arg6: Long, arg7: Double): Boolean {
     var ret: Boolean = false
     memScoped {
         val retVar = alloc<BooleanVar>()
@@ -2895,7 +2895,7 @@ internal fun _icall_Boolean_Object_NodePath_Variant_Variant_Float_Int_Int_Float(
     return ret
 }
 
-internal fun _icall_Boolean_Object_String_Variant_Variant_Float_Int_Int_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: String, arg2: Variant, arg3: Variant, arg4: Float, arg5: Int, arg6: Int, arg7: Float): Boolean {
+internal fun _icall_Boolean_Object_String_Variant_Variant_Double_Long_Long_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: String, arg2: Variant, arg3: Variant, arg4: Double, arg5: Long, arg6: Long, arg7: Double): Boolean {
     var ret: Boolean = false
     memScoped {
         val retVar = alloc<BooleanVar>()
@@ -2914,7 +2914,7 @@ internal fun _icall_Boolean_Object_String_Variant_Variant_Float_Int_Int_Float(mb
     return ret
 }
 
-internal fun _icall_Boolean_Object_Float_String_Variant_Variant_Variant_Variant_Variant(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Float, arg2: String, arg3: Variant, arg4: Variant, arg5: Variant, arg6: Variant, arg7: Variant): Boolean {
+internal fun _icall_Boolean_Object_Double_String_Variant_Variant_Variant_Variant_Variant(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Double, arg2: String, arg3: Variant, arg4: Variant, arg5: Variant, arg6: Variant, arg7: Variant): Boolean {
     var ret: Boolean = false
     memScoped {
         val retVar = alloc<BooleanVar>()
@@ -2933,7 +2933,7 @@ internal fun _icall_Boolean_Object_Float_String_Variant_Variant_Variant_Variant_
     return ret
 }
 
-internal fun _icall_Boolean_Object_NodePath_Variant_Object_NodePath_Float_Int_Int_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: NodePath, arg2: Variant, arg3: Object, arg4: NodePath, arg5: Float, arg6: Int, arg7: Int, arg8: Float): Boolean {
+internal fun _icall_Boolean_Object_NodePath_Variant_Object_NodePath_Double_Long_Long_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: NodePath, arg2: Variant, arg3: Object, arg4: NodePath, arg5: Double, arg6: Long, arg7: Long, arg8: Double): Boolean {
     var ret: Boolean = false
     memScoped {
         val retVar = alloc<BooleanVar>()
@@ -2953,7 +2953,7 @@ internal fun _icall_Boolean_Object_NodePath_Variant_Object_NodePath_Float_Int_In
     return ret
 }
 
-internal fun _icall_Boolean_Object_String_Variant_Object_String_Float_Int_Int_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: String, arg2: Variant, arg3: Object, arg4: String, arg5: Float, arg6: Int, arg7: Int, arg8: Float): Boolean {
+internal fun _icall_Boolean_Object_String_Variant_Object_String_Double_Long_Long_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: String, arg2: Variant, arg3: Object, arg4: String, arg5: Double, arg6: Long, arg7: Long, arg8: Double): Boolean {
     var ret: Boolean = false
     memScoped {
         val retVar = alloc<BooleanVar>()
@@ -2973,7 +2973,7 @@ internal fun _icall_Boolean_Object_String_Variant_Object_String_Float_Int_Int_Fl
     return ret
 }
 
-internal fun _icall_Boolean_Object_NodePath_Object_NodePath_Variant_Float_Int_Int_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: NodePath, arg2: Object, arg3: NodePath, arg4: Variant, arg5: Float, arg6: Int, arg7: Int, arg8: Float): Boolean {
+internal fun _icall_Boolean_Object_NodePath_Object_NodePath_Variant_Double_Long_Long_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: NodePath, arg2: Object, arg3: NodePath, arg4: Variant, arg5: Double, arg6: Long, arg7: Long, arg8: Double): Boolean {
     var ret: Boolean = false
     memScoped {
         val retVar = alloc<BooleanVar>()
@@ -2993,7 +2993,7 @@ internal fun _icall_Boolean_Object_NodePath_Object_NodePath_Variant_Float_Int_In
     return ret
 }
 
-internal fun _icall_Boolean_Object_String_Object_String_Variant_Float_Int_Int_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: String, arg2: Object, arg3: String, arg4: Variant, arg5: Float, arg6: Int, arg7: Int, arg8: Float): Boolean {
+internal fun _icall_Boolean_Object_String_Object_String_Variant_Double_Long_Long_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: String, arg2: Object, arg3: String, arg4: Variant, arg5: Double, arg6: Long, arg7: Long, arg8: Double): Boolean {
     var ret: Boolean = false
     memScoped {
         val retVar = alloc<BooleanVar>()
@@ -3082,7 +3082,7 @@ internal fun _icall_Boolean_Vector3(mb: CPointer<godot_method_bind>, inst: COpaq
     return ret
 }
 
-internal fun _icall_Unit_Float_Float_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Float, arg1: Float, arg2: Float) {
+internal fun _icall_Unit_Double_Double_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Double, arg1: Double, arg2: Double) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -3103,10 +3103,10 @@ internal fun _icall_Sky(mb: CPointer<godot_method_bind>, inst: COpaquePointer): 
     return ret
 }
 
-internal fun _icall_Float_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): Float {
-    var ret: Float = 0f
+internal fun _icall_Double_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): Double {
+    var ret: Double = 0.0
     memScoped {
-        val retVar = alloc<FloatVar>()
+        val retVar = alloc<DoubleVar>()
         val args = allocArray<COpaquePointerVar>(1)
         args[0] = arg0.getRawMemory(memScope)
         godot_method_bind_ptrcall(mb, inst, args, retVar.ptr)
@@ -3137,7 +3137,7 @@ internal fun _icall_Mesh(mb: CPointer<godot_method_bind>, inst: COpaquePointer):
     return ret
 }
 
-internal fun _icall_Material_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): Material {
+internal fun _icall_Material_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): Material {
     lateinit var ret: Material
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -3179,7 +3179,7 @@ internal fun _icall_Shape(mb: CPointer<godot_method_bind>, inst: COpaquePointer)
     return ret
 }
 
-internal fun _icall_Mesh_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Float): Mesh {
+internal fun _icall_Mesh_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Double): Mesh {
     lateinit var ret: Mesh
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -3210,7 +3210,7 @@ internal fun _icall_Unit_Plane(mb: CPointer<godot_method_bind>, inst: COpaquePoi
     }
 }
 
-internal fun _icall_Unit_Int_Int_Float_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int, arg2: Float, arg3: Boolean) {
+internal fun _icall_Unit_Long_Long_Double_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long, arg2: Double, arg3: Boolean) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(4)
         args[0] = arg0.getRawMemory(memScope)
@@ -3251,10 +3251,10 @@ internal fun _icall_SpriteFrames(mb: CPointer<godot_method_bind>, inst: COpaqueP
     return ret
 }
 
-internal fun _icall_Float_String(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String): Float {
-    var ret: Float = 0f
+internal fun _icall_Double_String(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String): Double {
+    var ret: Double = 0.0
     memScoped {
-        val retVar = alloc<FloatVar>()
+        val retVar = alloc<DoubleVar>()
         val args = allocArray<COpaquePointerVar>(1)
         args[0] = arg0.getRawMemory(memScope)
         godot_method_bind_ptrcall(mb, inst, args, retVar.ptr)
@@ -3263,7 +3263,7 @@ internal fun _icall_Float_String(mb: CPointer<godot_method_bind>, inst: COpaqueP
     return ret
 }
 
-internal fun _icall_Unit_String_Object_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Object, arg2: Int) {
+internal fun _icall_Unit_String_Object_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Object, arg2: Long) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -3273,7 +3273,7 @@ internal fun _icall_Unit_String_Object_Int(mb: CPointer<godot_method_bind>, inst
     }
 }
 
-internal fun _icall_Texture_String_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Int): Texture {
+internal fun _icall_Texture_String_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Long): Texture {
     lateinit var ret: Texture
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -3286,7 +3286,7 @@ internal fun _icall_Texture_String_Int(mb: CPointer<godot_method_bind>, inst: CO
     return ret
 }
 
-internal fun _icall_Unit_String_Int_Object(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Int, arg2: Object) {
+internal fun _icall_Unit_String_Long_Object(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Long, arg2: Object) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -3296,7 +3296,7 @@ internal fun _icall_Unit_String_Int_Object(mb: CPointer<godot_method_bind>, inst
     }
 }
 
-internal fun _icall_Unit_Int_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Float) {
+internal fun _icall_Unit_Long_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Double) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
@@ -3335,10 +3335,10 @@ internal fun _icall_BakedLightmapData(mb: CPointer<godot_method_bind>, inst: COp
     return ret
 }
 
-internal fun _icall_Int_Object_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Boolean): Int {
-    var ret: Int = 0
+internal fun _icall_Long_Object_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Boolean): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -3367,7 +3367,7 @@ internal fun _icall_Unit_PoolByteArray(mb: CPointer<godot_method_bind>, inst: CO
     }
 }
 
-internal fun _icall_Unit_NodePath_Object_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: NodePath, arg1: Object, arg2: Int) {
+internal fun _icall_Unit_NodePath_Object_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: NodePath, arg1: Object, arg2: Long) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -3377,10 +3377,10 @@ internal fun _icall_Unit_NodePath_Object_Int(mb: CPointer<godot_method_bind>, in
     }
 }
 
-internal fun _icall_Int_String_String(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: String): Int {
-    var ret: Int = 0
+internal fun _icall_Long_String_String(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: String): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -3390,7 +3390,7 @@ internal fun _icall_Int_String_String(mb: CPointer<godot_method_bind>, inst: COp
     return ret
 }
 
-internal fun _icall_String_String_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Int): String {
+internal fun _icall_String_String_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Long): String {
     lateinit var ret: String
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -3434,7 +3434,7 @@ internal fun _icall_Vector2_String(mb: CPointer<godot_method_bind>, inst: COpaqu
     return ret
 }
 
-internal fun _icall_Unit_String_Int_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Int, arg2: Boolean) {
+internal fun _icall_Unit_String_Long_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Long, arg2: Boolean) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -3444,7 +3444,7 @@ internal fun _icall_Unit_String_Int_Boolean(mb: CPointer<godot_method_bind>, ins
     }
 }
 
-internal fun _icall_Boolean_String_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Int): Boolean {
+internal fun _icall_Boolean_String_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Long): Boolean {
     var ret: Boolean = false
     memScoped {
         val retVar = alloc<BooleanVar>()
@@ -3457,10 +3457,10 @@ internal fun _icall_Boolean_String_Int(mb: CPointer<godot_method_bind>, inst: CO
     return ret
 }
 
-internal fun _icall_Int_String_String_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: String, arg2: Int): Int {
-    var ret: Int = 0
+internal fun _icall_Long_String_String_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: String, arg2: Long): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -3471,7 +3471,7 @@ internal fun _icall_Int_String_String_Int(mb: CPointer<godot_method_bind>, inst:
     return ret
 }
 
-internal fun _icall_Boolean_String_String_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: String, arg2: Int): Boolean {
+internal fun _icall_Boolean_String_String_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: String, arg2: Long): Boolean {
     var ret: Boolean = false
     memScoped {
         val retVar = alloc<BooleanVar>()
@@ -3485,7 +3485,7 @@ internal fun _icall_Boolean_String_String_Int(mb: CPointer<godot_method_bind>, i
     return ret
 }
 
-internal fun _icall_Mesh_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): Mesh {
+internal fun _icall_Mesh_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): Mesh {
     lateinit var ret: Mesh
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -3516,7 +3516,7 @@ internal fun _icall_Unit_PoolColorArray(mb: CPointer<godot_method_bind>, inst: C
     }
 }
 
-internal fun _icall_Curve_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): Curve {
+internal fun _icall_Curve_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): Curve {
     lateinit var ret: Curve
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -3550,7 +3550,7 @@ internal fun _icall_Gradient(mb: CPointer<godot_method_bind>, inst: COpaquePoint
     return ret
 }
 
-internal fun _icall_Boolean_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int): Boolean {
+internal fun _icall_Boolean_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long): Boolean {
     var ret: Boolean = false
     memScoped {
         val retVar = alloc<BooleanVar>()
@@ -3563,7 +3563,7 @@ internal fun _icall_Boolean_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaq
     return ret
 }
 
-internal fun _icall_Unit_Int_Boolean_String_String(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Boolean, arg2: String, arg3: String) {
+internal fun _icall_Unit_Long_Boolean_String_String(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Boolean, arg2: String, arg3: String) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(4)
         args[0] = arg0.getRawMemory(memScope)
@@ -3574,10 +3574,10 @@ internal fun _icall_Unit_Int_Boolean_String_String(mb: CPointer<godot_method_bin
     }
 }
 
-internal fun _icall_Float_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int): Float {
-    var ret: Float = 0f
+internal fun _icall_Double_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long): Double {
+    var ret: Double = 0.0
     memScoped {
-        val retVar = alloc<FloatVar>()
+        val retVar = alloc<DoubleVar>()
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -3587,7 +3587,7 @@ internal fun _icall_Float_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaque
     return ret
 }
 
-internal fun _icall_Unit_Int_Float_Float_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Float, arg2: Float, arg3: Float) {
+internal fun _icall_Unit_Long_Double_Double_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Double, arg2: Double, arg3: Double) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(4)
         args[0] = arg0.getRawMemory(memScope)
@@ -3598,7 +3598,7 @@ internal fun _icall_Unit_Int_Float_Float_Float(mb: CPointer<godot_method_bind>, 
     }
 }
 
-internal fun _icall_Unit_Object_Int_Vector2(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Int, arg2: Vector2) {
+internal fun _icall_Unit_Object_Long_Vector2(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Long, arg2: Vector2) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -3608,7 +3608,7 @@ internal fun _icall_Unit_Object_Int_Vector2(mb: CPointer<godot_method_bind>, ins
     }
 }
 
-internal fun _icall_Unit_Int_Object_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Object, arg2: Int) {
+internal fun _icall_Unit_Long_Object_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Object, arg2: Long) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -3618,7 +3618,7 @@ internal fun _icall_Unit_Int_Object_Int(mb: CPointer<godot_method_bind>, inst: C
     }
 }
 
-internal fun _icall_AudioEffect_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int): AudioEffect {
+internal fun _icall_AudioEffect_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long): AudioEffect {
     lateinit var ret: AudioEffect
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -3631,7 +3631,7 @@ internal fun _icall_AudioEffect_Int_Int(mb: CPointer<godot_method_bind>, inst: C
     return ret
 }
 
-internal fun _icall_Unit_Int_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int, arg2: Int) {
+internal fun _icall_Unit_Long_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long, arg2: Long) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -3641,7 +3641,7 @@ internal fun _icall_Unit_Int_Int_Int(mb: CPointer<godot_method_bind>, inst: COpa
     }
 }
 
-internal fun _icall_Unit_Int_Int_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int, arg2: Boolean) {
+internal fun _icall_Unit_Long_Long_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long, arg2: Boolean) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -3662,7 +3662,7 @@ internal fun _icall_AudioBusLayout(mb: CPointer<godot_method_bind>, inst: COpaqu
     return ret
 }
 
-internal fun _icall_ARVRInterface_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): ARVRInterface {
+internal fun _icall_ARVRInterface_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): ARVRInterface {
     lateinit var ret: ARVRInterface
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -3686,7 +3686,7 @@ internal fun _icall_ARVRInterface_String(mb: CPointer<godot_method_bind>, inst: 
     return ret
 }
 
-internal fun _icall_ARVRPositionalTracker_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): ARVRPositionalTracker {
+internal fun _icall_ARVRPositionalTracker_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): ARVRPositionalTracker {
     lateinit var ret: ARVRPositionalTracker
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -3709,7 +3709,7 @@ internal fun _icall_ARVRInterface(mb: CPointer<godot_method_bind>, inst: COpaque
     return ret
 }
 
-internal fun _icall_RID_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): RID {
+internal fun _icall_RID_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): RID {
     lateinit var ret: RID
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -3742,10 +3742,10 @@ internal fun _icall_Variant_RID(mb: CPointer<godot_method_bind>, inst: COpaquePo
     return ret
 }
 
-internal fun _icall_Float_RID_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Int): Float {
-    var ret: Float = 0f
+internal fun _icall_Double_RID_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Long): Double {
+    var ret: Double = 0.0
     memScoped {
-        val retVar = alloc<FloatVar>()
+        val retVar = alloc<DoubleVar>()
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -3777,7 +3777,7 @@ internal fun _icall_Unit_RID_RID_Transform(mb: CPointer<godot_method_bind>, inst
     }
 }
 
-internal fun _icall_Unit_RID_Int_Variant(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Int, arg2: Variant) {
+internal fun _icall_Unit_RID_Long_Variant(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Long, arg2: Variant) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -3787,7 +3787,7 @@ internal fun _icall_Unit_RID_Int_Variant(mb: CPointer<godot_method_bind>, inst: 
     }
 }
 
-internal fun _icall_Variant_RID_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Int): Variant {
+internal fun _icall_Variant_RID_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Long): Variant {
     lateinit var ret: Variant
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -3810,7 +3810,7 @@ internal fun _icall_Unit_RID_Object_String(mb: CPointer<godot_method_bind>, inst
     }
 }
 
-internal fun _icall_RID_Int_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Boolean): RID {
+internal fun _icall_RID_Long_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Boolean): RID {
     lateinit var ret: RID
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -3833,7 +3833,7 @@ internal fun _icall_Unit_RID_Vector3_Vector3(mb: CPointer<godot_method_bind>, in
     }
 }
 
-internal fun _icall_Boolean_RID_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Int): Boolean {
+internal fun _icall_Boolean_RID_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Long): Boolean {
     var ret: Boolean = false
     memScoped {
         val retVar = alloc<BooleanVar>()
@@ -3911,7 +3911,7 @@ internal fun _icall_RID_RID_Transform_RID_Transform(mb: CPointer<godot_method_bi
     return ret
 }
 
-internal fun _icall_Unit_RID_Int_Int_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Int, arg2: Int, arg3: Float) {
+internal fun _icall_Unit_RID_Long_Long_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Long, arg2: Long, arg3: Double) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(4)
         args[0] = arg0.getRawMemory(memScope)
@@ -3922,10 +3922,10 @@ internal fun _icall_Unit_RID_Int_Int_Float(mb: CPointer<godot_method_bind>, inst
     }
 }
 
-internal fun _icall_Float_RID_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Int, arg2: Int): Float {
-    var ret: Float = 0f
+internal fun _icall_Double_RID_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Long, arg2: Long): Double {
+    var ret: Double = 0.0
     memScoped {
-        val retVar = alloc<FloatVar>()
+        val retVar = alloc<DoubleVar>()
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -3936,7 +3936,7 @@ internal fun _icall_Float_RID_Int_Int(mb: CPointer<godot_method_bind>, inst: COp
     return ret
 }
 
-internal fun _icall_Unit_RID_Int_Int_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Int, arg2: Int, arg3: Boolean) {
+internal fun _icall_Unit_RID_Long_Long_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Long, arg2: Long, arg3: Boolean) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(4)
         args[0] = arg0.getRawMemory(memScope)
@@ -3947,7 +3947,7 @@ internal fun _icall_Unit_RID_Int_Int_Boolean(mb: CPointer<godot_method_bind>, in
     }
 }
 
-internal fun _icall_Boolean_RID_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Int, arg2: Int): Boolean {
+internal fun _icall_Boolean_RID_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Long, arg2: Long): Boolean {
     var ret: Boolean = false
     memScoped {
         val retVar = alloc<BooleanVar>()
@@ -3995,7 +3995,7 @@ internal fun _icall_Unit_RID_Vector2_Vector2(mb: CPointer<godot_method_bind>, in
     }
 }
 
-internal fun _icall_Boolean_RID_Transform2D_Vector2_Boolean_Float_Object(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Transform2D, arg2: Vector2, arg3: Boolean, arg4: Float, arg5: Object): Boolean {
+internal fun _icall_Boolean_RID_Transform2D_Vector2_Boolean_Double_Object(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Transform2D, arg2: Vector2, arg3: Boolean, arg4: Double, arg5: Object): Boolean {
     var ret: Boolean = false
     memScoped {
         val retVar = alloc<BooleanVar>()
@@ -4122,7 +4122,7 @@ internal fun _icall_Unit_Transform2D(mb: CPointer<godot_method_bind>, inst: COpa
     }
 }
 
-internal fun _icall_Object_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): Object {
+internal fun _icall_Object_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): Object {
     lateinit var ret: Object
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -4145,7 +4145,7 @@ internal fun _icall_Physics2DDirectSpaceState(mb: CPointer<godot_method_bind>, i
     return ret
 }
 
-internal fun _icall_GDArray_Vector2_Int_GDArray_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector2, arg1: Int, arg2: GDArray, arg3: Int): GDArray {
+internal fun _icall_GDArray_Vector2_Long_GDArray_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector2, arg1: Long, arg2: GDArray, arg3: Long): GDArray {
     lateinit var ret: GDArray
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -4160,7 +4160,7 @@ internal fun _icall_GDArray_Vector2_Int_GDArray_Int(mb: CPointer<godot_method_bi
     return ret
 }
 
-internal fun _icall_Dictionary_Vector2_Vector2_GDArray_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector2, arg1: Vector2, arg2: GDArray, arg3: Int): Dictionary {
+internal fun _icall_Dictionary_Vector2_Vector2_GDArray_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector2, arg1: Vector2, arg2: GDArray, arg3: Long): Dictionary {
     lateinit var ret: Dictionary
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -4175,7 +4175,7 @@ internal fun _icall_Dictionary_Vector2_Vector2_GDArray_Int(mb: CPointer<godot_me
     return ret
 }
 
-internal fun _icall_GDArray_Object_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Int): GDArray {
+internal fun _icall_GDArray_Object_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Long): GDArray {
     lateinit var ret: GDArray
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -4212,7 +4212,7 @@ internal fun _icall_Dictionary_Object(mb: CPointer<godot_method_bind>, inst: COp
     return ret
 }
 
-internal fun _icall_Vector3_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): Vector3 {
+internal fun _icall_Vector3_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): Vector3 {
     lateinit var ret: Vector3
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -4235,7 +4235,7 @@ internal fun _icall_PhysicsDirectSpaceState(mb: CPointer<godot_method_bind>, ins
     return ret
 }
 
-internal fun _icall_Dictionary_Vector3_Vector3_GDArray_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector3, arg1: Vector3, arg2: GDArray, arg3: Int): Dictionary {
+internal fun _icall_Dictionary_Vector3_Vector3_GDArray_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector3, arg1: Vector3, arg2: GDArray, arg3: Long): Dictionary {
     lateinit var ret: Dictionary
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -4317,10 +4317,10 @@ internal fun _icall_Variant_String_GDArray(mb: CPointer<godot_method_bind>, inst
     return ret
 }
 
-internal fun _icall_Int_String_Object_String_GDArray_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Object, arg2: String, arg3: GDArray, arg4: Int): Int {
-    var ret: Int = 0
+internal fun _icall_Long_String_Object_String_GDArray_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Object, arg2: String, arg3: GDArray, arg4: Long): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(5)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -4369,10 +4369,10 @@ internal fun _icall_Resource_Boolean(mb: CPointer<godot_method_bind>, inst: COpa
     return ret
 }
 
-internal fun _icall_Int_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Boolean): Int {
-    var ret: Int = 0
+internal fun _icall_Long_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Boolean): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(1)
         args[0] = arg0.getRawMemory(memScope)
         godot_method_bind_ptrcall(mb, inst, args, retVar.ptr)
@@ -4381,7 +4381,7 @@ internal fun _icall_Int_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePo
     return ret
 }
 
-internal fun _icall_Unit_Int_Int_Boolean_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int, arg2: Boolean, arg3: Int) {
+internal fun _icall_Unit_Long_Long_Boolean_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long, arg2: Boolean, arg3: Long) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(4)
         args[0] = arg0.getRawMemory(memScope)
@@ -4392,7 +4392,7 @@ internal fun _icall_Unit_Int_Int_Boolean_Int(mb: CPointer<godot_method_bind>, in
     }
 }
 
-internal fun _icall_Unit_Int_Int_Boolean_Int_PoolByteArray(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int, arg2: Boolean, arg3: Int, arg4: PoolByteArray) {
+internal fun _icall_Unit_Long_Long_Boolean_Long_PoolByteArray(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long, arg2: Boolean, arg3: Long, arg4: PoolByteArray) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(5)
         args[0] = arg0.getRawMemory(memScope)
@@ -4404,10 +4404,10 @@ internal fun _icall_Unit_Int_Int_Boolean_Int_PoolByteArray(mb: CPointer<godot_me
     }
 }
 
-internal fun _icall_Int_Int_Int_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int, arg2: Float): Int {
-    var ret: Int = 0
+internal fun _icall_Long_Long_Long_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long, arg2: Double): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -4474,7 +4474,7 @@ internal fun _icall_Color_Vector2(mb: CPointer<godot_method_bind>, inst: COpaque
     return ret
 }
 
-internal fun _icall_Color_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int): Color {
+internal fun _icall_Color_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long): Color {
     lateinit var ret: Color
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -4496,7 +4496,7 @@ internal fun _icall_Unit_Vector2_Color(mb: CPointer<godot_method_bind>, inst: CO
     }
 }
 
-internal fun _icall_Unit_Int_Int_Color(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int, arg2: Color) {
+internal fun _icall_Unit_Long_Long_Color(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long, arg2: Color) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -4506,10 +4506,10 @@ internal fun _icall_Unit_Int_Int_Color(mb: CPointer<godot_method_bind>, inst: CO
     }
 }
 
-internal fun _icall_Int_PoolByteArray(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: PoolByteArray): Int {
-    var ret: Int = 0
+internal fun _icall_Long_PoolByteArray(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: PoolByteArray): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(1)
         args[0] = arg0.getRawMemory(memScope)
         godot_method_bind_ptrcall(mb, inst, args, retVar.ptr)
@@ -4554,10 +4554,10 @@ internal fun _icall_StreamPeerBuffer(mb: CPointer<godot_method_bind>, inst: COpa
     return ret
 }
 
-internal fun _icall_Int_String_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Int): Int {
-    var ret: Int = 0
+internal fun _icall_Long_String_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Long): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -4567,10 +4567,10 @@ internal fun _icall_Int_String_Int(mb: CPointer<godot_method_bind>, inst: COpaqu
     return ret
 }
 
-internal fun _icall_Int_Int_String(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: String): Int {
-    var ret: Int = 0
+internal fun _icall_Long_Long_String(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: String): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -4591,10 +4591,10 @@ internal fun _icall_StreamPeerTCP(mb: CPointer<godot_method_bind>, inst: COpaque
     return ret
 }
 
-internal fun _icall_Int_Variant(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Variant): Int {
-    var ret: Int = 0
+internal fun _icall_Long_Variant(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Variant): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(1)
         args[0] = arg0.getRawMemory(memScope)
         godot_method_bind_ptrcall(mb, inst, args, retVar.ptr)
@@ -4603,10 +4603,10 @@ internal fun _icall_Int_Variant(mb: CPointer<godot_method_bind>, inst: COpaquePo
     return ret
 }
 
-internal fun _icall_Int_Int_String_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: String, arg2: Int): Int {
-    var ret: Int = 0
+internal fun _icall_Long_Long_String_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: String, arg2: Long): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -4617,10 +4617,10 @@ internal fun _icall_Int_Int_String_Int(mb: CPointer<godot_method_bind>, inst: CO
     return ret
 }
 
-internal fun _icall_Int_Object_Boolean_String(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Boolean, arg2: String): Int {
-    var ret: Int = 0
+internal fun _icall_Long_Object_Boolean_String(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Boolean, arg2: String): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -4642,10 +4642,10 @@ internal fun _icall_StreamPeer(mb: CPointer<godot_method_bind>, inst: COpaquePoi
     return ret
 }
 
-internal fun _icall_Int_PoolByteArray_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: PoolByteArray, arg1: Int, arg2: Int): Int {
-    var ret: Int = 0
+internal fun _icall_Long_PoolByteArray_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: PoolByteArray, arg1: Long, arg2: Long): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -4656,10 +4656,10 @@ internal fun _icall_Int_PoolByteArray_Int_Int(mb: CPointer<godot_method_bind>, i
     return ret
 }
 
-internal fun _icall_Int_String_Int_Boolean_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Int, arg2: Boolean, arg3: Boolean): Int {
-    var ret: Int = 0
+internal fun _icall_Long_String_Long_Boolean_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Long, arg2: Boolean, arg3: Boolean): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(4)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -4671,10 +4671,10 @@ internal fun _icall_Int_String_Int_Boolean_Boolean(mb: CPointer<godot_method_bin
     return ret
 }
 
-internal fun _icall_Int_Int_String_PoolStringArray_PoolByteArray(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: String, arg2: PoolStringArray, arg3: PoolByteArray): Int {
-    var ret: Int = 0
+internal fun _icall_Long_Long_String_PoolStringArray_PoolByteArray(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: String, arg2: PoolStringArray, arg3: PoolByteArray): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(4)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -4686,10 +4686,10 @@ internal fun _icall_Int_Int_String_PoolStringArray_PoolByteArray(mb: CPointer<go
     return ret
 }
 
-internal fun _icall_Int_Int_String_PoolStringArray_String(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: String, arg2: PoolStringArray, arg3: String): Int {
-    var ret: Int = 0
+internal fun _icall_Long_Long_String_PoolStringArray_String(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: String, arg2: PoolStringArray, arg3: String): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(4)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -4735,10 +4735,10 @@ internal fun _icall_Resource(mb: CPointer<godot_method_bind>, inst: COpaquePoint
     return ret
 }
 
-internal fun _icall_Int_String_Int_PoolByteArray(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Int, arg2: PoolByteArray): Int {
-    var ret: Int = 0
+internal fun _icall_Long_String_Long_PoolByteArray(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Long, arg2: PoolByteArray): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -4749,10 +4749,10 @@ internal fun _icall_Int_String_Int_PoolByteArray(mb: CPointer<godot_method_bind>
     return ret
 }
 
-internal fun _icall_Int_String_Int_String(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Int, arg2: String): Int {
-    var ret: Int = 0
+internal fun _icall_Long_String_Long_String(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Long, arg2: String): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -4763,10 +4763,10 @@ internal fun _icall_Int_String_Int_String(mb: CPointer<godot_method_bind>, inst:
     return ret
 }
 
-internal fun _icall_Int_String_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Int, arg2: Int): Int {
-    var ret: Int = 0
+internal fun _icall_Long_String_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Long, arg2: Long): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -4777,7 +4777,7 @@ internal fun _icall_Int_String_Int_Int(mb: CPointer<godot_method_bind>, inst: CO
     return ret
 }
 
-internal fun _icall_PoolByteArray_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): PoolByteArray {
+internal fun _icall_PoolByteArray_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): PoolByteArray {
     lateinit var ret: PoolByteArray
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -4801,10 +4801,10 @@ internal fun _icall_PoolStringArray_String(mb: CPointer<godot_method_bind>, inst
     return ret
 }
 
-internal fun _icall_Int_Boolean_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Boolean, arg1: Boolean): Int {
-    var ret: Int = 0
+internal fun _icall_Long_Boolean_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Boolean, arg1: Boolean): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -4814,10 +4814,10 @@ internal fun _icall_Int_Boolean_Boolean(mb: CPointer<godot_method_bind>, inst: C
     return ret
 }
 
-internal fun _icall_Int_Object_String_Variant_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: String, arg2: Variant, arg3: Int): Int {
-    var ret: Int = 0
+internal fun _icall_Long_Object_String_Variant_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: String, arg2: Variant, arg3: Long): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(4)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -4842,7 +4842,7 @@ internal fun _icall_Boolean_String_String(mb: CPointer<godot_method_bind>, inst:
     return ret
 }
 
-internal fun _icall_Unit_Int_Vector3_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Vector3, arg2: Float) {
+internal fun _icall_Unit_Long_Vector3_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Vector3, arg2: Double) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -4852,7 +4852,7 @@ internal fun _icall_Unit_Int_Vector3_Float(mb: CPointer<godot_method_bind>, inst
     }
 }
 
-internal fun _icall_Unit_Int_Vector3(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Vector3) {
+internal fun _icall_Unit_Long_Vector3(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Vector3) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
@@ -4861,10 +4861,10 @@ internal fun _icall_Unit_Int_Vector3(mb: CPointer<godot_method_bind>, inst: COpa
     }
 }
 
-internal fun _icall_Int_Vector3(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector3): Int {
-    var ret: Int = 0
+internal fun _icall_Long_Vector3(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector3): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(1)
         args[0] = arg0.getRawMemory(memScope)
         godot_method_bind_ptrcall(mb, inst, args, retVar.ptr)
@@ -4873,7 +4873,7 @@ internal fun _icall_Int_Vector3(mb: CPointer<godot_method_bind>, inst: COpaquePo
     return ret
 }
 
-internal fun _icall_PoolVector3Array_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int): PoolVector3Array {
+internal fun _icall_PoolVector3Array_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long): PoolVector3Array {
     lateinit var ret: PoolVector3Array
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -4886,7 +4886,7 @@ internal fun _icall_PoolVector3Array_Int_Int(mb: CPointer<godot_method_bind>, in
     return ret
 }
 
-internal fun _icall_PoolIntArray_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int): PoolIntArray {
+internal fun _icall_PoolIntArray_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long): PoolIntArray {
     lateinit var ret: PoolIntArray
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -4911,7 +4911,7 @@ internal fun _icall_GDArray_Vector3(mb: CPointer<godot_method_bind>, inst: COpaq
     return ret
 }
 
-internal fun _icall_GDArray_Float_Float_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Float, arg1: Float, arg2: Int, arg3: Int): GDArray {
+internal fun _icall_GDArray_Double_Double_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Double, arg1: Double, arg2: Long, arg3: Long): GDArray {
     lateinit var ret: GDArray
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -4926,7 +4926,7 @@ internal fun _icall_GDArray_Float_Float_Int_Int(mb: CPointer<godot_method_bind>,
     return ret
 }
 
-internal fun _icall_GDArray_Float_Float_Int_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Float, arg1: Float, arg2: Int, arg3: Int, arg4: Int): GDArray {
+internal fun _icall_GDArray_Double_Double_Long_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Double, arg1: Double, arg2: Long, arg3: Long, arg4: Long): GDArray {
     lateinit var ret: GDArray
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -4942,10 +4942,10 @@ internal fun _icall_GDArray_Float_Float_Int_Int_Int(mb: CPointer<godot_method_bi
     return ret
 }
 
-internal fun _icall_Float_Vector2_Vector2_Vector2_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector2, arg1: Vector2, arg2: Vector2, arg3: Float): Float {
-    var ret: Float = 0f
+internal fun _icall_Double_Vector2_Vector2_Vector2_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector2, arg1: Vector2, arg2: Vector2, arg3: Double): Double {
+    var ret: Double = 0.0
     memScoped {
-        val retVar = alloc<FloatVar>()
+        val retVar = alloc<DoubleVar>()
         val args = allocArray<COpaquePointerVar>(4)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -5046,7 +5046,7 @@ internal fun _icall_Variant_Vector3_Vector3_Vector3_Vector3_Vector3(mb: CPointer
     return ret
 }
 
-internal fun _icall_PoolVector3Array_Vector3_Vector3_Vector3_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector3, arg1: Vector3, arg2: Vector3, arg3: Float): PoolVector3Array {
+internal fun _icall_PoolVector3Array_Vector3_Vector3_Vector3_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector3, arg1: Vector3, arg2: Vector3, arg3: Double): PoolVector3Array {
     lateinit var ret: PoolVector3Array
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -5061,7 +5061,7 @@ internal fun _icall_PoolVector3Array_Vector3_Vector3_Vector3_Float(mb: CPointer<
     return ret
 }
 
-internal fun _icall_PoolVector3Array_Vector3_Vector3_Float_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector3, arg1: Vector3, arg2: Float, arg3: Float): PoolVector3Array {
+internal fun _icall_PoolVector3Array_Vector3_Vector3_Double_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector3, arg1: Vector3, arg2: Double, arg3: Double): PoolVector3Array {
     lateinit var ret: PoolVector3Array
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -5181,10 +5181,10 @@ internal fun _icall_Resource_String_String_Boolean(mb: CPointer<godot_method_bin
     return ret
 }
 
-internal fun _icall_Int_String_Object_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Object, arg2: Int): Int {
-    var ret: Int = 0
+internal fun _icall_Long_String_Object_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Object, arg2: Long): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -5207,10 +5207,10 @@ internal fun _icall_PoolStringArray_Object(mb: CPointer<godot_method_bind>, inst
     return ret
 }
 
-internal fun _icall_Int_String_PoolStringArray_Boolean_GDArray(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: PoolStringArray, arg2: Boolean, arg3: GDArray): Int {
-    var ret: Int = 0
+internal fun _icall_Long_String_PoolStringArray_Boolean_GDArray(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: PoolStringArray, arg2: Boolean, arg3: GDArray): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(4)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -5234,7 +5234,7 @@ internal fun _icall_Dictionary_Boolean(mb: CPointer<godot_method_bind>, inst: CO
     return ret
 }
 
-internal fun _icall_Dictionary_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): Dictionary {
+internal fun _icall_Dictionary_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): Dictionary {
     lateinit var ret: Dictionary
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -5246,10 +5246,10 @@ internal fun _icall_Dictionary_Int(mb: CPointer<godot_method_bind>, inst: COpaqu
     return ret
 }
 
-internal fun _icall_Int_Dictionary(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Dictionary): Int {
-    var ret: Int = 0
+internal fun _icall_Long_Dictionary(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Dictionary): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(1)
         args[0] = arg0.getRawMemory(memScope)
         godot_method_bind_ptrcall(mb, inst, args, retVar.ptr)
@@ -5258,10 +5258,10 @@ internal fun _icall_Int_Dictionary(mb: CPointer<godot_method_bind>, inst: COpaqu
     return ret
 }
 
-internal fun _icall_Int_String_Float_String_String(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Float, arg2: String, arg3: String): Int {
-    var ret: Int = 0
+internal fun _icall_Long_String_Double_String_String(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Double, arg2: String, arg3: String): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(4)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -5335,10 +5335,10 @@ internal fun _icall_Variant_Object_String(mb: CPointer<godot_method_bind>, inst:
     return ret
 }
 
-internal fun _icall_Int_Object_String_Variant(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: String, arg2: Variant): Int {
-    var ret: Int = 0
+internal fun _icall_Long_Object_String_Variant(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: String, arg2: Variant): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -5546,10 +5546,10 @@ internal fun _icall_Unit_RID_Rect2_Rect2_Color_Boolean_Object_Boolean(mb: CPoint
     }
 }
 
-internal fun _icall_Int_String_PoolStringArray_Boolean_Int_String(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: PoolStringArray, arg2: Boolean, arg3: Int, arg4: String): Int {
-    var ret: Int = 0
+internal fun _icall_Long_String_PoolStringArray_Boolean_Long_String(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: PoolStringArray, arg2: Boolean, arg3: Long, arg4: String): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(5)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -5562,7 +5562,7 @@ internal fun _icall_Int_String_PoolStringArray_Boolean_Int_String(mb: CPointer<g
     return ret
 }
 
-internal fun _icall_Unit_Vector2_Vector2_Color_Float_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector2, arg1: Vector2, arg2: Color, arg3: Float, arg4: Boolean) {
+internal fun _icall_Unit_Vector2_Vector2_Color_Double_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector2, arg1: Vector2, arg2: Color, arg3: Double, arg4: Boolean) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(5)
         args[0] = arg0.getRawMemory(memScope)
@@ -5574,7 +5574,7 @@ internal fun _icall_Unit_Vector2_Vector2_Color_Float_Boolean(mb: CPointer<godot_
     }
 }
 
-internal fun _icall_Unit_PoolVector2Array_Color_Float_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: PoolVector2Array, arg1: Color, arg2: Float, arg3: Boolean) {
+internal fun _icall_Unit_PoolVector2Array_Color_Double_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: PoolVector2Array, arg1: Color, arg2: Double, arg3: Boolean) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(4)
         args[0] = arg0.getRawMemory(memScope)
@@ -5585,7 +5585,7 @@ internal fun _icall_Unit_PoolVector2Array_Color_Float_Boolean(mb: CPointer<godot
     }
 }
 
-internal fun _icall_Unit_PoolVector2Array_PoolColorArray_Float_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: PoolVector2Array, arg1: PoolColorArray, arg2: Float, arg3: Boolean) {
+internal fun _icall_Unit_PoolVector2Array_PoolColorArray_Double_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: PoolVector2Array, arg1: PoolColorArray, arg2: Double, arg3: Boolean) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(4)
         args[0] = arg0.getRawMemory(memScope)
@@ -5606,7 +5606,7 @@ internal fun _icall_Unit_Rect2_Color_Boolean(mb: CPointer<godot_method_bind>, in
     }
 }
 
-internal fun _icall_Unit_Vector2_Float_Color(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector2, arg1: Float, arg2: Color) {
+internal fun _icall_Unit_Vector2_Double_Color(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector2, arg1: Double, arg2: Color) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -5663,7 +5663,7 @@ internal fun _icall_Unit_Object_Rect2(mb: CPointer<godot_method_bind>, inst: COp
     }
 }
 
-internal fun _icall_Unit_PoolVector2Array_PoolColorArray_PoolVector2Array_Object_Float_Object(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: PoolVector2Array, arg1: PoolColorArray, arg2: PoolVector2Array, arg3: Object, arg4: Float, arg5: Object) {
+internal fun _icall_Unit_PoolVector2Array_PoolColorArray_PoolVector2Array_Object_Double_Object(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: PoolVector2Array, arg1: PoolColorArray, arg2: PoolVector2Array, arg3: Object, arg4: Double, arg5: Object) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(6)
         args[0] = arg0.getRawMemory(memScope)
@@ -5702,7 +5702,7 @@ internal fun _icall_Unit_PoolVector2Array_Color_PoolVector2Array_Object_Object_B
     }
 }
 
-internal fun _icall_Unit_Object_Vector2_String_Color_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Vector2, arg2: String, arg3: Color, arg4: Int) {
+internal fun _icall_Unit_Object_Vector2_String_Color_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Vector2, arg2: String, arg3: Color, arg4: Long) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(5)
         args[0] = arg0.getRawMemory(memScope)
@@ -5714,10 +5714,10 @@ internal fun _icall_Unit_Object_Vector2_String_Color_Int(mb: CPointer<godot_meth
     }
 }
 
-internal fun _icall_Float_Object_Vector2_String_String_Color(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Vector2, arg2: String, arg3: String, arg4: Color): Float {
-    var ret: Float = 0f
+internal fun _icall_Double_Object_Vector2_String_String_Color(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Vector2, arg2: String, arg3: String, arg4: Color): Double {
+    var ret: Double = 0.0
     memScoped {
-        val retVar = alloc<FloatVar>()
+        val retVar = alloc<DoubleVar>()
         val args = allocArray<COpaquePointerVar>(5)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -5740,7 +5740,7 @@ internal fun _icall_Unit_Object_Object_Object(mb: CPointer<godot_method_bind>, i
     }
 }
 
-internal fun _icall_Unit_Vector2_Float_Vector2(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector2, arg1: Float, arg2: Vector2) {
+internal fun _icall_Unit_Vector2_Double_Vector2(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector2, arg1: Double, arg2: Vector2) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -5797,7 +5797,7 @@ internal fun _icall_BaseButton(mb: CPointer<godot_method_bind>, inst: COpaquePoi
     return ret
 }
 
-internal fun _icall_Unit_Int_NodePath(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: NodePath) {
+internal fun _icall_Unit_Long_NodePath(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: NodePath) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
@@ -5817,7 +5817,7 @@ internal fun _icall_Theme(mb: CPointer<godot_method_bind>, inst: COpaquePointer)
     return ret
 }
 
-internal fun _icall_Unit_Int_Float_Boolean_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Float, arg2: Boolean, arg3: Boolean) {
+internal fun _icall_Unit_Long_Double_Boolean_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Double, arg2: Boolean, arg3: Boolean) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(4)
         args[0] = arg0.getRawMemory(memScope)
@@ -5828,7 +5828,7 @@ internal fun _icall_Unit_Int_Float_Boolean_Boolean(mb: CPointer<godot_method_bin
     }
 }
 
-internal fun _icall_Unit_Int_Float_Float_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Float, arg2: Float, arg3: Boolean) {
+internal fun _icall_Unit_Long_Double_Double_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Double, arg2: Double, arg3: Boolean) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(4)
         args[0] = arg0.getRawMemory(memScope)
@@ -5912,10 +5912,10 @@ internal fun _icall_String_Vector2(mb: CPointer<godot_method_bind>, inst: COpaqu
     return ret
 }
 
-internal fun _icall_Int_Vector2(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector2): Int {
-    var ret: Int = 0
+internal fun _icall_Long_Vector2(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector2): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(1)
         args[0] = arg0.getRawMemory(memScope)
         godot_method_bind_ptrcall(mb, inst, args, retVar.ptr)
@@ -5964,7 +5964,7 @@ internal fun _icall_Unit_String_String_Color(mb: CPointer<godot_method_bind>, in
     }
 }
 
-internal fun _icall_Unit_String_String_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: String, arg2: Int) {
+internal fun _icall_Unit_String_String_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: String, arg2: Long) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -6007,7 +6007,7 @@ internal fun _icall_InputEvent(mb: CPointer<godot_method_bind>, inst: COpaquePoi
     return ret
 }
 
-internal fun _icall_Control_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): Control {
+internal fun _icall_Control_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): Control {
     lateinit var ret: Control
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -6030,7 +6030,7 @@ internal fun _icall_Popup(mb: CPointer<godot_method_bind>, inst: COpaquePointer)
     return ret
 }
 
-internal fun _icall_Rect2_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): Rect2 {
+internal fun _icall_Rect2_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): Rect2 {
     lateinit var ret: Rect2
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -6083,7 +6083,7 @@ internal fun _icall_Unit_Rect2_Boolean(mb: CPointer<godot_method_bind>, inst: CO
     }
 }
 
-internal fun _icall_Control_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int): Control {
+internal fun _icall_Control_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long): Control {
     lateinit var ret: Control
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -6107,7 +6107,7 @@ internal fun _icall_HScrollBar(mb: CPointer<godot_method_bind>, inst: COpaquePoi
     return ret
 }
 
-internal fun _icall_Unit_Int_Boolean_Int_Color_Boolean_Int_Color_Object_Object(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Boolean, arg2: Int, arg3: Color, arg4: Boolean, arg5: Int, arg6: Color, arg7: Object, arg8: Object) {
+internal fun _icall_Unit_Long_Boolean_Long_Color_Boolean_Long_Color_Object_Object(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Boolean, arg2: Long, arg3: Color, arg4: Boolean, arg5: Long, arg6: Color, arg7: Object, arg8: Object) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(9)
         args[0] = arg0.getRawMemory(memScope)
@@ -6123,7 +6123,7 @@ internal fun _icall_Unit_Int_Boolean_Int_Color_Boolean_Int_Color_Object_Object(m
     }
 }
 
-internal fun _icall_Color_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): Color {
+internal fun _icall_Color_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): Color {
     lateinit var ret: Color
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -6135,10 +6135,10 @@ internal fun _icall_Color_Int(mb: CPointer<godot_method_bind>, inst: COpaquePoin
     return ret
 }
 
-internal fun _icall_Int_String_Int_String_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Int, arg2: String, arg3: Int): Int {
-    var ret: Int = 0
+internal fun _icall_Long_String_Long_String_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Long, arg2: String, arg3: Long): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(4)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -6150,7 +6150,7 @@ internal fun _icall_Int_String_Int_String_Int(mb: CPointer<godot_method_bind>, i
     return ret
 }
 
-internal fun _icall_Boolean_String_Int_String_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Int, arg2: String, arg3: Int): Boolean {
+internal fun _icall_Boolean_String_Long_String_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Long, arg2: String, arg3: Long): Boolean {
     var ret: Boolean = false
     memScoped {
         val retVar = alloc<BooleanVar>()
@@ -6165,7 +6165,7 @@ internal fun _icall_Boolean_String_Int_String_Int(mb: CPointer<godot_method_bind
     return ret
 }
 
-internal fun _icall_Unit_String_Int_String_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Int, arg2: String, arg3: Int) {
+internal fun _icall_Unit_String_Long_String_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Long, arg2: String, arg3: Long) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(4)
         args[0] = arg0.getRawMemory(memScope)
@@ -6176,7 +6176,7 @@ internal fun _icall_Unit_String_Int_String_Int(mb: CPointer<godot_method_bind>, 
     }
 }
 
-internal fun _icall_Unit_String_Int_String_Int_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Int, arg2: String, arg3: Int, arg4: Float) {
+internal fun _icall_Unit_String_Long_String_Long_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Long, arg2: String, arg3: Long, arg4: Double) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(5)
         args[0] = arg0.getRawMemory(memScope)
@@ -6209,7 +6209,7 @@ internal fun _icall_Unit_String_Object_Boolean(mb: CPointer<godot_method_bind>, 
     }
 }
 
-internal fun _icall_Unit_Int_Rect2(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Rect2) {
+internal fun _icall_Unit_Long_Rect2(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Rect2) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
@@ -6218,7 +6218,7 @@ internal fun _icall_Unit_Int_Rect2(mb: CPointer<godot_method_bind>, inst: COpaqu
     }
 }
 
-internal fun _icall_Unit_Int_Color(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Color) {
+internal fun _icall_Unit_Long_Color(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Color) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
@@ -6227,10 +6227,10 @@ internal fun _icall_Unit_Int_Color(mb: CPointer<godot_method_bind>, inst: COpaqu
     }
 }
 
-internal fun _icall_Int_Vector2_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector2, arg1: Boolean): Int {
-    var ret: Int = 0
+internal fun _icall_Long_Vector2_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector2, arg1: Boolean): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -6299,7 +6299,7 @@ internal fun _icall_Button_String(mb: CPointer<godot_method_bind>, inst: COpaque
     return ret
 }
 
-internal fun _icall_Unit_Object_String_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: String, arg2: Int, arg3: Int) {
+internal fun _icall_Unit_Object_String_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: String, arg2: Long, arg3: Long) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(4)
         args[0] = arg0.getRawMemory(memScope)
@@ -6310,7 +6310,7 @@ internal fun _icall_Unit_Object_String_Int_Int(mb: CPointer<godot_method_bind>, 
     }
 }
 
-internal fun _icall_Unit_String_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Int, arg2: Int) {
+internal fun _icall_Unit_String_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Long, arg2: Long) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -6320,7 +6320,7 @@ internal fun _icall_Unit_String_Int_Int(mb: CPointer<godot_method_bind>, inst: C
     }
 }
 
-internal fun _icall_Unit_Object_Object_Int_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Object, arg2: Int, arg3: Boolean) {
+internal fun _icall_Unit_Object_Object_Long_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Object, arg2: Long, arg3: Boolean) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(4)
         args[0] = arg0.getRawMemory(memScope)
@@ -6331,7 +6331,7 @@ internal fun _icall_Unit_Object_Object_Int_Boolean(mb: CPointer<godot_method_bin
     }
 }
 
-internal fun _icall_Unit_Object_Int_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Int, arg2: Boolean) {
+internal fun _icall_Unit_Object_Long_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Long, arg2: Boolean) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -6341,7 +6341,7 @@ internal fun _icall_Unit_Object_Int_Boolean(mb: CPointer<godot_method_bind>, ins
     }
 }
 
-internal fun _icall_Unit_Int_Object_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Object, arg2: Boolean) {
+internal fun _icall_Unit_Long_Object_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Object, arg2: Boolean) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -6351,7 +6351,7 @@ internal fun _icall_Unit_Int_Object_Boolean(mb: CPointer<godot_method_bind>, ins
     }
 }
 
-internal fun _icall_ShortCut_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): ShortCut {
+internal fun _icall_ShortCut_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): ShortCut {
     lateinit var ret: ShortCut
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -6363,7 +6363,7 @@ internal fun _icall_ShortCut_Int(mb: CPointer<godot_method_bind>, inst: COpaqueP
     return ret
 }
 
-internal fun _icall_Object_Object_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Int): Object {
+internal fun _icall_Object_Object_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Long): Object {
     lateinit var ret: Object
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -6399,7 +6399,7 @@ internal fun _icall_TreeItem_Object(mb: CPointer<godot_method_bind>, inst: COpaq
     return ret
 }
 
-internal fun _icall_Rect2_Object_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Int): Rect2 {
+internal fun _icall_Rect2_Object_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Long): Rect2 {
     lateinit var ret: Rect2
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -6424,7 +6424,7 @@ internal fun _icall_TreeItem_Vector2(mb: CPointer<godot_method_bind>, inst: COpa
     return ret
 }
 
-internal fun _icall_Unit_Int_Boolean_Boolean_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Boolean, arg2: Boolean, arg3: Int) {
+internal fun _icall_Unit_Long_Boolean_Boolean_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Boolean, arg2: Boolean, arg3: Long) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(4)
         args[0] = arg0.getRawMemory(memScope)
@@ -6435,7 +6435,7 @@ internal fun _icall_Unit_Int_Boolean_Boolean_Int(mb: CPointer<godot_method_bind>
     }
 }
 
-internal fun _icall_PoolIntArray_String_Int_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Int, arg2: Int, arg3: Int): PoolIntArray {
+internal fun _icall_PoolIntArray_String_Long_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Long, arg2: Long, arg3: Long): PoolIntArray {
     lateinit var ret: PoolIntArray
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -6473,7 +6473,7 @@ internal fun _icall_Unit_String_String_Color_Boolean(mb: CPointer<godot_method_b
     }
 }
 
-internal fun _icall_Unit_Int_Float_Float_Float_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Float, arg2: Float, arg3: Float, arg4: Boolean) {
+internal fun _icall_Unit_Long_Double_Double_Double_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Double, arg2: Double, arg3: Double, arg4: Boolean) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(5)
         args[0] = arg0.getRawMemory(memScope)
@@ -6485,7 +6485,7 @@ internal fun _icall_Unit_Int_Float_Float_Float_Boolean(mb: CPointer<godot_method
     }
 }
 
-internal fun _icall_Unit_Int_Object_String(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Object, arg2: String) {
+internal fun _icall_Unit_Long_Object_String(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Object, arg2: String) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -6495,7 +6495,7 @@ internal fun _icall_Unit_Int_Object_String(mb: CPointer<godot_method_bind>, inst
     }
 }
 
-internal fun _icall_Unit_Int_Color_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Color, arg2: Boolean) {
+internal fun _icall_Unit_Long_Color_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Color, arg2: Boolean) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -6505,7 +6505,7 @@ internal fun _icall_Unit_Int_Color_Boolean(mb: CPointer<godot_method_bind>, inst
     }
 }
 
-internal fun _icall_Unit_Int_Object_Int_Boolean_String(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Object, arg2: Int, arg3: Boolean, arg4: String) {
+internal fun _icall_Unit_Long_Object_Long_Boolean_String(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Object, arg2: Long, arg3: Boolean, arg4: String) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(5)
         args[0] = arg0.getRawMemory(memScope)
@@ -6517,7 +6517,7 @@ internal fun _icall_Unit_Int_Object_Int_Boolean_String(mb: CPointer<godot_method
     }
 }
 
-internal fun _icall_Texture_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int): Texture {
+internal fun _icall_Texture_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long): Texture {
     lateinit var ret: Texture
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -6530,7 +6530,7 @@ internal fun _icall_Texture_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaq
     return ret
 }
 
-internal fun _icall_Unit_Int_Int_Object(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int, arg2: Object) {
+internal fun _icall_Unit_Long_Long_Object(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long, arg2: Object) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -6540,10 +6540,10 @@ internal fun _icall_Unit_Int_Int_Object(mb: CPointer<godot_method_bind>, inst: C
     }
 }
 
-internal fun _icall_Int_Vector2_Float_Float_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector2, arg1: Float, arg2: Float, arg3: Int, arg4: Int): Int {
-    var ret: Int = 0
+internal fun _icall_Long_Vector2_Double_Double_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector2, arg1: Double, arg2: Double, arg3: Long, arg4: Long): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(5)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -6556,10 +6556,10 @@ internal fun _icall_Int_Vector2_Float_Float_Int_Int(mb: CPointer<godot_method_bi
     return ret
 }
 
-internal fun _icall_Int_Int_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Float): Int {
-    var ret: Int = 0
+internal fun _icall_Long_Long_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Double): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -6569,10 +6569,10 @@ internal fun _icall_Int_Int_Float(mb: CPointer<godot_method_bind>, inst: COpaque
     return ret
 }
 
-internal fun _icall_Float_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Float): Float {
-    var ret: Float = 0f
+internal fun _icall_Double_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Double): Double {
+    var ret: Double = 0.0
     memScoped {
-        val retVar = alloc<FloatVar>()
+        val retVar = alloc<DoubleVar>()
         val args = allocArray<COpaquePointerVar>(1)
         args[0] = arg0.getRawMemory(memScope)
         godot_method_bind_ptrcall(mb, inst, args, retVar.ptr)
@@ -6592,10 +6592,10 @@ internal fun _icall_NavigationMesh(mb: CPointer<godot_method_bind>, inst: COpaqu
     return ret
 }
 
-internal fun _icall_Int_Object_Transform_Object(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Transform, arg2: Object): Int {
-    var ret: Int = 0
+internal fun _icall_Long_Object_Transform_Object(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Transform, arg2: Object): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -6677,7 +6677,7 @@ internal fun _icall_Unit_NodePath_Boolean(mb: CPointer<godot_method_bind>, inst:
     }
 }
 
-internal fun _icall_Unit_String_Float_Float_Boolean_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Float, arg2: Float, arg3: Boolean, arg4: Float) {
+internal fun _icall_Unit_String_Double_Double_Boolean_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Double, arg2: Double, arg3: Boolean, arg4: Double) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(5)
         args[0] = arg0.getRawMemory(memScope)
@@ -6689,10 +6689,10 @@ internal fun _icall_Unit_String_Float_Float_Boolean_Float(mb: CPointer<godot_met
     }
 }
 
-internal fun _icall_Float_Object_Float_Boolean_Float_Int_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Float, arg2: Boolean, arg3: Float, arg4: Int, arg5: Boolean): Float {
-    var ret: Float = 0f
+internal fun _icall_Double_Object_Double_Boolean_Double_Long_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Double, arg2: Boolean, arg3: Double, arg4: Long, arg5: Boolean): Double {
+    var ret: Double = 0.0
     memScoped {
-        val retVar = alloc<FloatVar>()
+        val retVar = alloc<DoubleVar>()
         val args = allocArray<COpaquePointerVar>(6)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -6706,10 +6706,10 @@ internal fun _icall_Float_Object_Float_Boolean_Float_Int_Boolean(mb: CPointer<go
     return ret
 }
 
-internal fun _icall_Float_Int_Float_Boolean_Float_Int_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Float, arg2: Boolean, arg3: Float, arg4: Int, arg5: Boolean): Float {
-    var ret: Float = 0f
+internal fun _icall_Double_Long_Double_Boolean_Double_Long_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Double, arg2: Boolean, arg3: Double, arg4: Long, arg5: Boolean): Double {
+    var ret: Double = 0.0
     memScoped {
-        val retVar = alloc<FloatVar>()
+        val retVar = alloc<DoubleVar>()
         val args = allocArray<COpaquePointerVar>(6)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -6746,7 +6746,7 @@ internal fun _icall_AnimationNode_String(mb: CPointer<godot_method_bind>, inst: 
     return ret
 }
 
-internal fun _icall_Unit_String_Int_String(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Int, arg2: String) {
+internal fun _icall_Unit_String_Long_String(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Long, arg2: String) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -6756,7 +6756,7 @@ internal fun _icall_Unit_String_Int_String(mb: CPointer<godot_method_bind>, inst
     }
 }
 
-internal fun _icall_AnimationRootNode_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): AnimationRootNode {
+internal fun _icall_AnimationRootNode_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): AnimationRootNode {
     lateinit var ret: AnimationRootNode
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -6768,7 +6768,7 @@ internal fun _icall_AnimationRootNode_Int(mb: CPointer<godot_method_bind>, inst:
     return ret
 }
 
-internal fun _icall_Unit_Object_Float_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Float, arg2: Int) {
+internal fun _icall_Unit_Object_Double_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Double, arg2: Long) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -6778,7 +6778,7 @@ internal fun _icall_Unit_Object_Float_Int(mb: CPointer<godot_method_bind>, inst:
     }
 }
 
-internal fun _icall_Unit_Object_Vector2_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Vector2, arg2: Int) {
+internal fun _icall_Unit_Object_Vector2_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Vector2, arg2: Long) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -6788,10 +6788,10 @@ internal fun _icall_Unit_Object_Vector2_Int(mb: CPointer<godot_method_bind>, ins
     }
 }
 
-internal fun _icall_Int_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int): Int {
-    var ret: Int = 0
+internal fun _icall_Long_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -6801,7 +6801,7 @@ internal fun _icall_Int_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePo
     return ret
 }
 
-internal fun _icall_AnimationNodeStateMachineTransition_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): AnimationNodeStateMachineTransition {
+internal fun _icall_AnimationNodeStateMachineTransition_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): AnimationNodeStateMachineTransition {
     lateinit var ret: AnimationNodeStateMachineTransition
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -6813,7 +6813,7 @@ internal fun _icall_AnimationNodeStateMachineTransition_Int(mb: CPointer<godot_m
     return ret
 }
 
-internal fun _icall_Shape_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int): Shape {
+internal fun _icall_Shape_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long): Shape {
     lateinit var ret: Shape
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -6839,7 +6839,7 @@ internal fun _icall_KinematicCollision_Vector3_Boolean(mb: CPointer<godot_method
     return ret
 }
 
-internal fun _icall_Vector3_Vector3_Vector3_Float_Int_Float_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector3, arg1: Vector3, arg2: Float, arg3: Int, arg4: Float, arg5: Boolean): Vector3 {
+internal fun _icall_Vector3_Vector3_Vector3_Double_Long_Double_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector3, arg1: Vector3, arg2: Double, arg3: Long, arg4: Double, arg5: Boolean): Vector3 {
     lateinit var ret: Vector3
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -6870,7 +6870,7 @@ internal fun _icall_Boolean_Transform_Vector3_Boolean(mb: CPointer<godot_method_
     return ret
 }
 
-internal fun _icall_KinematicCollision_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): KinematicCollision {
+internal fun _icall_KinematicCollision_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): KinematicCollision {
     lateinit var ret: KinematicCollision
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -6893,7 +6893,7 @@ internal fun _icall_MultiMesh(mb: CPointer<godot_method_bind>, inst: COpaquePoin
     return ret
 }
 
-internal fun _icall_Unit_Vector3_Vector3_Vector3_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector3, arg1: Vector3, arg2: Vector3, arg3: Int) {
+internal fun _icall_Unit_Vector3_Vector3_Vector3_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector3, arg1: Vector3, arg2: Vector3, arg3: Long) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(4)
         args[0] = arg0.getRawMemory(memScope)
@@ -6904,7 +6904,7 @@ internal fun _icall_Unit_Vector3_Vector3_Vector3_Int(mb: CPointer<godot_method_b
     }
 }
 
-internal fun _icall_Vector3_Int_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Float): Vector3 {
+internal fun _icall_Vector3_Long_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Double): Vector3 {
     lateinit var ret: Vector3
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -6917,7 +6917,7 @@ internal fun _icall_Vector3_Int_Float(mb: CPointer<godot_method_bind>, inst: COp
     return ret
 }
 
-internal fun _icall_Vector3_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Float): Vector3 {
+internal fun _icall_Vector3_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Double): Vector3 {
     lateinit var ret: Vector3
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -6929,7 +6929,7 @@ internal fun _icall_Vector3_Float(mb: CPointer<godot_method_bind>, inst: COpaque
     return ret
 }
 
-internal fun _icall_Vector3_Float_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Float, arg1: Boolean): Vector3 {
+internal fun _icall_Vector3_Double_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Double, arg1: Boolean): Vector3 {
     lateinit var ret: Vector3
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -6953,10 +6953,10 @@ internal fun _icall_PoolRealArray(mb: CPointer<godot_method_bind>, inst: COpaque
     return ret
 }
 
-internal fun _icall_Float_Vector3(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector3): Float {
-    var ret: Float = 0f
+internal fun _icall_Double_Vector3(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector3): Double {
+    var ret: Double = 0.0
     memScoped {
-        val retVar = alloc<FloatVar>()
+        val retVar = alloc<DoubleVar>()
         val args = allocArray<COpaquePointerVar>(1)
         args[0] = arg0.getRawMemory(memScope)
         godot_method_bind_ptrcall(mb, inst, args, retVar.ptr)
@@ -6965,7 +6965,7 @@ internal fun _icall_Float_Vector3(mb: CPointer<godot_method_bind>, inst: COpaque
     return ret
 }
 
-internal fun _icall_PoolVector3Array_Int_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Float): PoolVector3Array {
+internal fun _icall_PoolVector3Array_Long_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Double): PoolVector3Array {
     lateinit var ret: PoolVector3Array
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -6989,7 +6989,7 @@ internal fun _icall_Curve3D(mb: CPointer<godot_method_bind>, inst: COpaquePointe
     return ret
 }
 
-internal fun _icall_Unit_Int_GDArray(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: GDArray) {
+internal fun _icall_Unit_Long_GDArray(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: GDArray) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
@@ -6998,7 +6998,7 @@ internal fun _icall_Unit_Int_GDArray(mb: CPointer<godot_method_bind>, inst: COpa
     }
 }
 
-internal fun _icall_NavigationMesh_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): NavigationMesh {
+internal fun _icall_NavigationMesh_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): NavigationMesh {
     lateinit var ret: NavigationMesh
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -7022,7 +7022,7 @@ internal fun _icall_Texture_String(mb: CPointer<godot_method_bind>, inst: COpaqu
     return ret
 }
 
-internal fun _icall_Unit_Int_Object_Vector2_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Object, arg2: Vector2, arg3: Int) {
+internal fun _icall_Unit_Long_Object_Vector2_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Object, arg2: Vector2, arg3: Long) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(4)
         args[0] = arg0.getRawMemory(memScope)
@@ -7033,7 +7033,7 @@ internal fun _icall_Unit_Int_Object_Vector2_Int(mb: CPointer<godot_method_bind>,
     }
 }
 
-internal fun _icall_Unit_Int_Int_Vector2(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int, arg2: Vector2) {
+internal fun _icall_Unit_Long_Long_Vector2(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long, arg2: Vector2) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -7043,7 +7043,7 @@ internal fun _icall_Unit_Int_Int_Vector2(mb: CPointer<godot_method_bind>, inst: 
     }
 }
 
-internal fun _icall_Vector2_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int): Vector2 {
+internal fun _icall_Vector2_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long): Vector2 {
     lateinit var ret: Vector2
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -7056,7 +7056,7 @@ internal fun _icall_Vector2_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaq
     return ret
 }
 
-internal fun _icall_VisualShaderNode_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int): VisualShaderNode {
+internal fun _icall_VisualShaderNode_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long): VisualShaderNode {
     lateinit var ret: VisualShaderNode
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -7069,7 +7069,7 @@ internal fun _icall_VisualShaderNode_Int_Int(mb: CPointer<godot_method_bind>, in
     return ret
 }
 
-internal fun _icall_Boolean_Int_Int_Int_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int, arg2: Int, arg3: Int, arg4: Int): Boolean {
+internal fun _icall_Boolean_Long_Long_Long_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long, arg2: Long, arg3: Long, arg4: Long): Boolean {
     var ret: Boolean = false
     memScoped {
         val retVar = alloc<BooleanVar>()
@@ -7085,10 +7085,10 @@ internal fun _icall_Boolean_Int_Int_Int_Int_Int(mb: CPointer<godot_method_bind>,
     return ret
 }
 
-internal fun _icall_Int_Int_Int_Int_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int, arg2: Int, arg3: Int, arg4: Int): Int {
-    var ret: Int = 0
+internal fun _icall_Long_Long_Long_Long_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long, arg2: Long, arg3: Long, arg4: Long): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(5)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -7101,7 +7101,7 @@ internal fun _icall_Int_Int_Int_Int_Int_Int(mb: CPointer<godot_method_bind>, ins
     return ret
 }
 
-internal fun _icall_Unit_Int_Int_Int_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int, arg2: Int, arg3: Int, arg4: Int) {
+internal fun _icall_Unit_Long_Long_Long_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long, arg2: Long, arg3: Long, arg4: Long) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(5)
         args[0] = arg0.getRawMemory(memScope)
@@ -7124,7 +7124,7 @@ internal fun _icall_CubeMap(mb: CPointer<godot_method_bind>, inst: COpaquePointe
     return ret
 }
 
-internal fun _icall_Image_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): Image {
+internal fun _icall_Image_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): Image {
     lateinit var ret: Image
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -7155,7 +7155,7 @@ internal fun _icall_Unit_PoolRealArray(mb: CPointer<godot_method_bind>, inst: CO
     }
 }
 
-internal fun _icall_Unit_Float_Color(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Float, arg1: Color) {
+internal fun _icall_Unit_Double_Color(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Double, arg1: Color) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
@@ -7164,7 +7164,7 @@ internal fun _icall_Unit_Float_Color(mb: CPointer<godot_method_bind>, inst: COpa
     }
 }
 
-internal fun _icall_Color_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Float): Color {
+internal fun _icall_Color_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Double): Color {
     lateinit var ret: Color
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -7176,7 +7176,7 @@ internal fun _icall_Color_Float(mb: CPointer<godot_method_bind>, inst: COpaquePo
     return ret
 }
 
-internal fun _icall_Transform2D_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): Transform2D {
+internal fun _icall_Transform2D_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): Transform2D {
     lateinit var ret: Transform2D
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -7188,7 +7188,7 @@ internal fun _icall_Transform2D_Int(mb: CPointer<godot_method_bind>, inst: COpaq
     return ret
 }
 
-internal fun _icall_Shape2D_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int): Shape2D {
+internal fun _icall_Shape2D_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long): Shape2D {
     lateinit var ret: Shape2D
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -7210,7 +7210,7 @@ internal fun _icall_Unit_Vector2_Vector2(mb: CPointer<godot_method_bind>, inst: 
     }
 }
 
-internal fun _icall_Boolean_Vector2_Boolean_Float_Object(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector2, arg1: Boolean, arg2: Float, arg3: Object): Boolean {
+internal fun _icall_Boolean_Vector2_Boolean_Double_Object(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector2, arg1: Boolean, arg2: Double, arg3: Object): Boolean {
     var ret: Boolean = false
     memScoped {
         val retVar = alloc<BooleanVar>()
@@ -7240,7 +7240,7 @@ internal fun _icall_KinematicCollision2D_Vector2_Boolean_Boolean_Boolean(mb: CPo
     return ret
 }
 
-internal fun _icall_Vector2_Vector2_Vector2_Boolean_Float_Int_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector2, arg1: Vector2, arg2: Boolean, arg3: Float, arg4: Int, arg5: Float): Vector2 {
+internal fun _icall_Vector2_Vector2_Vector2_Boolean_Double_Long_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector2, arg1: Vector2, arg2: Boolean, arg3: Double, arg4: Long, arg5: Double): Vector2 {
     lateinit var ret: Vector2
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -7257,7 +7257,7 @@ internal fun _icall_Vector2_Vector2_Vector2_Boolean_Float_Int_Float(mb: CPointer
     return ret
 }
 
-internal fun _icall_Vector2_Vector2_Vector2_Vector2_Boolean_Float_Int_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector2, arg1: Vector2, arg2: Vector2, arg3: Boolean, arg4: Float, arg5: Int, arg6: Float): Vector2 {
+internal fun _icall_Vector2_Vector2_Vector2_Vector2_Boolean_Double_Long_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector2, arg1: Vector2, arg2: Vector2, arg3: Boolean, arg4: Double, arg5: Long, arg6: Double): Vector2 {
     lateinit var ret: Vector2
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -7289,7 +7289,7 @@ internal fun _icall_Boolean_Transform2D_Vector2_Boolean(mb: CPointer<godot_metho
     return ret
 }
 
-internal fun _icall_KinematicCollision2D_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): KinematicCollision2D {
+internal fun _icall_KinematicCollision2D_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): KinematicCollision2D {
     lateinit var ret: KinematicCollision2D
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -7381,7 +7381,7 @@ internal fun _icall_Unit_NodePath_PoolRealArray(mb: CPointer<godot_method_bind>,
     }
 }
 
-internal fun _icall_PoolRealArray_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): PoolRealArray {
+internal fun _icall_PoolRealArray_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): PoolRealArray {
     lateinit var ret: PoolRealArray
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -7393,7 +7393,7 @@ internal fun _icall_PoolRealArray_Int(mb: CPointer<godot_method_bind>, inst: COp
     return ret
 }
 
-internal fun _icall_Unit_Int_PoolRealArray(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: PoolRealArray) {
+internal fun _icall_Unit_Long_PoolRealArray(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: PoolRealArray) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
@@ -7402,7 +7402,7 @@ internal fun _icall_Unit_Int_PoolRealArray(mb: CPointer<godot_method_bind>, inst
     }
 }
 
-internal fun _icall_Bone2D_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): Bone2D {
+internal fun _icall_Bone2D_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): Bone2D {
     lateinit var ret: Bone2D
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -7425,7 +7425,7 @@ internal fun _icall_OccluderPolygon2D(mb: CPointer<godot_method_bind>, inst: COp
     return ret
 }
 
-internal fun _icall_ShaderMaterial_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): ShaderMaterial {
+internal fun _icall_ShaderMaterial_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): ShaderMaterial {
     lateinit var ret: ShaderMaterial
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -7437,7 +7437,7 @@ internal fun _icall_ShaderMaterial_Int(mb: CPointer<godot_method_bind>, inst: CO
     return ret
 }
 
-internal fun _icall_Unit_Int_Int_Transform2D(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int, arg2: Transform2D) {
+internal fun _icall_Unit_Long_Long_Transform2D(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long, arg2: Transform2D) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -7447,7 +7447,7 @@ internal fun _icall_Unit_Int_Int_Transform2D(mb: CPointer<godot_method_bind>, in
     }
 }
 
-internal fun _icall_Transform2D_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int): Transform2D {
+internal fun _icall_Transform2D_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long): Transform2D {
     lateinit var ret: Transform2D
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -7460,7 +7460,7 @@ internal fun _icall_Transform2D_Int_Int(mb: CPointer<godot_method_bind>, inst: C
     return ret
 }
 
-internal fun _icall_Unit_Int_Object_Transform2D_Boolean_Vector2(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Object, arg2: Transform2D, arg3: Boolean, arg4: Vector2) {
+internal fun _icall_Unit_Long_Object_Transform2D_Boolean_Vector2(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Object, arg2: Transform2D, arg3: Boolean, arg4: Vector2) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(5)
         args[0] = arg0.getRawMemory(memScope)
@@ -7472,7 +7472,7 @@ internal fun _icall_Unit_Int_Object_Transform2D_Boolean_Vector2(mb: CPointer<god
     }
 }
 
-internal fun _icall_NavigationPolygon_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): NavigationPolygon {
+internal fun _icall_NavigationPolygon_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): NavigationPolygon {
     lateinit var ret: NavigationPolygon
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -7484,7 +7484,7 @@ internal fun _icall_NavigationPolygon_Int(mb: CPointer<godot_method_bind>, inst:
     return ret
 }
 
-internal fun _icall_OccluderPolygon2D_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): OccluderPolygon2D {
+internal fun _icall_OccluderPolygon2D_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): OccluderPolygon2D {
     lateinit var ret: OccluderPolygon2D
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -7507,7 +7507,7 @@ internal fun _icall_TileSet(mb: CPointer<godot_method_bind>, inst: COpaquePointe
     return ret
 }
 
-internal fun _icall_Unit_Int_Int_Int_Boolean_Boolean_Boolean_Vector2(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int, arg2: Int, arg3: Boolean, arg4: Boolean, arg5: Boolean, arg6: Vector2) {
+internal fun _icall_Unit_Long_Long_Long_Boolean_Boolean_Boolean_Vector2(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long, arg2: Long, arg3: Boolean, arg4: Boolean, arg5: Boolean, arg6: Vector2) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(7)
         args[0] = arg0.getRawMemory(memScope)
@@ -7521,7 +7521,7 @@ internal fun _icall_Unit_Int_Int_Int_Boolean_Boolean_Boolean_Vector2(mb: CPointe
     }
 }
 
-internal fun _icall_Unit_Vector2_Int_Boolean_Boolean_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector2, arg1: Int, arg2: Boolean, arg3: Boolean, arg4: Boolean) {
+internal fun _icall_Unit_Vector2_Long_Boolean_Boolean_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector2, arg1: Long, arg2: Boolean, arg3: Boolean, arg4: Boolean) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(5)
         args[0] = arg0.getRawMemory(memScope)
@@ -7555,7 +7555,7 @@ internal fun _icall_Vector2_Vector2_Boolean(mb: CPointer<godot_method_bind>, ins
     return ret
 }
 
-internal fun _icall_Unit_Int_GDArray_GDArray_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: GDArray, arg2: GDArray, arg3: Int) {
+internal fun _icall_Unit_Long_GDArray_GDArray_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: GDArray, arg2: GDArray, arg3: Long) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(4)
         args[0] = arg0.getRawMemory(memScope)
@@ -7566,7 +7566,7 @@ internal fun _icall_Unit_Int_GDArray_GDArray_Int(mb: CPointer<godot_method_bind>
     }
 }
 
-internal fun _icall_Unit_Int_Int_PoolByteArray(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int, arg2: PoolByteArray) {
+internal fun _icall_Unit_Long_Long_PoolByteArray(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long, arg2: PoolByteArray) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -7576,10 +7576,10 @@ internal fun _icall_Unit_Int_Int_PoolByteArray(mb: CPointer<godot_method_bind>, 
     }
 }
 
-internal fun _icall_Int_Transform_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Transform, arg1: Float): Int {
-    var ret: Int = 0
+internal fun _icall_Long_Transform_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Transform, arg1: Double): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -7600,7 +7600,7 @@ internal fun _icall_CurveTexture(mb: CPointer<godot_method_bind>, inst: COpaqueP
     return ret
 }
 
-internal fun _icall_CurveTexture_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): CurveTexture {
+internal fun _icall_CurveTexture_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): CurveTexture {
     lateinit var ret: CurveTexture
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -7636,7 +7636,7 @@ internal fun _icall_Unit_PoolVector3Array_PoolVector2Array_PoolColorArray_PoolVe
     }
 }
 
-internal fun _icall_Unit_Object_Int_Transform(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Int, arg2: Transform) {
+internal fun _icall_Unit_Object_Long_Transform(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Long, arg2: Transform) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -7646,7 +7646,7 @@ internal fun _icall_Unit_Object_Int_Transform(mb: CPointer<godot_method_bind>, i
     }
 }
 
-internal fun _icall_ArrayMesh_Object_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Int): ArrayMesh {
+internal fun _icall_ArrayMesh_Object_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Long): ArrayMesh {
     lateinit var ret: ArrayMesh
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -7659,10 +7659,10 @@ internal fun _icall_ArrayMesh_Object_Int(mb: CPointer<godot_method_bind>, inst: 
     return ret
 }
 
-internal fun _icall_Int_Object_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Int): Int {
-    var ret: Int = 0
+internal fun _icall_Long_Object_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Object, arg1: Long): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -7672,7 +7672,7 @@ internal fun _icall_Int_Object_Int(mb: CPointer<godot_method_bind>, inst: COpaqu
     return ret
 }
 
-internal fun _icall_Unit_Int_Plane(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Plane) {
+internal fun _icall_Unit_Long_Plane(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Plane) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
@@ -7681,7 +7681,7 @@ internal fun _icall_Unit_Int_Plane(mb: CPointer<godot_method_bind>, inst: COpaqu
     }
 }
 
-internal fun _icall_Plane_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): Plane {
+internal fun _icall_Plane_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): Plane {
     lateinit var ret: Plane
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -7693,7 +7693,7 @@ internal fun _icall_Plane_Int(mb: CPointer<godot_method_bind>, inst: COpaquePoin
     return ret
 }
 
-internal fun _icall_Unit_Int_PoolIntArray(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: PoolIntArray) {
+internal fun _icall_Unit_Long_PoolIntArray(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: PoolIntArray) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
@@ -7702,10 +7702,10 @@ internal fun _icall_Unit_Int_PoolIntArray(mb: CPointer<godot_method_bind>, inst:
     }
 }
 
-internal fun _icall_Int_Vector2_Object(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector2, arg1: Object): Int {
-    var ret: Int = 0
+internal fun _icall_Long_Vector2_Object(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Vector2, arg1: Object): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -7715,10 +7715,10 @@ internal fun _icall_Int_Vector2_Object(mb: CPointer<godot_method_bind>, inst: CO
     return ret
 }
 
-internal fun _icall_Int_NodePath(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: NodePath): Int {
-    var ret: Int = 0
+internal fun _icall_Long_NodePath(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: NodePath): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(1)
         args[0] = arg0.getRawMemory(memScope)
         godot_method_bind_ptrcall(mb, inst, args, retVar.ptr)
@@ -7727,10 +7727,10 @@ internal fun _icall_Int_NodePath(mb: CPointer<godot_method_bind>, inst: COpaqueP
     return ret
 }
 
-internal fun _icall_Int_Int_Float_Vector3_Quat_Vector3(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Float, arg2: Vector3, arg3: Quat, arg4: Vector3): Int {
-    var ret: Int = 0
+internal fun _icall_Long_Long_Double_Vector3_Quat_Vector3(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Double, arg2: Vector3, arg3: Quat, arg4: Vector3): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(5)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -7743,7 +7743,7 @@ internal fun _icall_Int_Int_Float_Vector3_Quat_Vector3(mb: CPointer<godot_method
     return ret
 }
 
-internal fun _icall_Unit_Int_Float_Variant_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Float, arg2: Variant, arg3: Float) {
+internal fun _icall_Unit_Long_Double_Variant_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Double, arg2: Variant, arg3: Double) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(4)
         args[0] = arg0.getRawMemory(memScope)
@@ -7754,7 +7754,7 @@ internal fun _icall_Unit_Int_Float_Variant_Float(mb: CPointer<godot_method_bind>
     }
 }
 
-internal fun _icall_Unit_Int_Int_Variant(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int, arg2: Variant) {
+internal fun _icall_Unit_Long_Long_Variant(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long, arg2: Variant) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -7764,7 +7764,7 @@ internal fun _icall_Unit_Int_Int_Variant(mb: CPointer<godot_method_bind>, inst: 
     }
 }
 
-internal fun _icall_Unit_Int_Int_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int, arg2: Float) {
+internal fun _icall_Unit_Long_Long_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long, arg2: Double) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -7774,10 +7774,10 @@ internal fun _icall_Unit_Int_Int_Float(mb: CPointer<godot_method_bind>, inst: CO
     }
 }
 
-internal fun _icall_Int_Int_Float_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Float, arg2: Boolean): Int {
-    var ret: Int = 0
+internal fun _icall_Long_Long_Double_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Double, arg2: Boolean): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -7788,7 +7788,7 @@ internal fun _icall_Int_Int_Float_Boolean(mb: CPointer<godot_method_bind>, inst:
     return ret
 }
 
-internal fun _icall_GDArray_Int_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Float): GDArray {
+internal fun _icall_GDArray_Long_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Double): GDArray {
     lateinit var ret: GDArray
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -7801,7 +7801,7 @@ internal fun _icall_GDArray_Int_Float(mb: CPointer<godot_method_bind>, inst: COp
     return ret
 }
 
-internal fun _icall_PoolIntArray_Int_Float_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Float, arg2: Float): PoolIntArray {
+internal fun _icall_PoolIntArray_Long_Double_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Double, arg2: Double): PoolIntArray {
     lateinit var ret: PoolIntArray
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -7815,7 +7815,7 @@ internal fun _icall_PoolIntArray_Int_Float_Float(mb: CPointer<godot_method_bind>
     return ret
 }
 
-internal fun _icall_GDArray_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int): GDArray {
+internal fun _icall_GDArray_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long): GDArray {
     lateinit var ret: GDArray
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -7828,10 +7828,10 @@ internal fun _icall_GDArray_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaq
     return ret
 }
 
-internal fun _icall_Int_Int_Float_Float_Vector2_Vector2(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Float, arg2: Float, arg3: Vector2, arg4: Vector2): Int {
-    var ret: Int = 0
+internal fun _icall_Long_Long_Double_Double_Vector2_Vector2(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Double, arg2: Double, arg3: Vector2, arg4: Vector2): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(5)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -7844,10 +7844,10 @@ internal fun _icall_Int_Int_Float_Float_Vector2_Vector2(mb: CPointer<godot_metho
     return ret
 }
 
-internal fun _icall_Float_Int_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Float): Float {
-    var ret: Float = 0f
+internal fun _icall_Double_Long_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Double): Double {
+    var ret: Double = 0.0
     memScoped {
-        val retVar = alloc<FloatVar>()
+        val retVar = alloc<DoubleVar>()
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -7857,10 +7857,10 @@ internal fun _icall_Float_Int_Float(mb: CPointer<godot_method_bind>, inst: COpaq
     return ret
 }
 
-internal fun _icall_Int_Int_Float_Object_Float_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Float, arg2: Object, arg3: Float, arg4: Float): Int {
-    var ret: Int = 0
+internal fun _icall_Long_Long_Double_Object_Double_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Double, arg2: Object, arg3: Double, arg4: Double): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(5)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -7873,7 +7873,7 @@ internal fun _icall_Int_Int_Float_Object_Float_Float(mb: CPointer<godot_method_b
     return ret
 }
 
-internal fun _icall_Resource_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int): Resource {
+internal fun _icall_Resource_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long): Resource {
     lateinit var ret: Resource
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -7886,10 +7886,10 @@ internal fun _icall_Resource_Int_Int(mb: CPointer<godot_method_bind>, inst: COpa
     return ret
 }
 
-internal fun _icall_Int_Int_Float_String(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Float, arg2: String): Int {
-    var ret: Int = 0
+internal fun _icall_Long_Long_Double_String(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Double, arg2: String): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -7900,7 +7900,7 @@ internal fun _icall_Int_Int_Float_String(mb: CPointer<godot_method_bind>, inst: 
     return ret
 }
 
-internal fun _icall_Unit_Int_Int_String(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int, arg2: String) {
+internal fun _icall_Unit_Long_Long_String(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long, arg2: String) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -7910,7 +7910,7 @@ internal fun _icall_Unit_Int_Int_String(mb: CPointer<godot_method_bind>, inst: C
     }
 }
 
-internal fun _icall_Unit_RID_Vector2_String_Color_Int_Color(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Vector2, arg2: String, arg3: Color, arg4: Int, arg5: Color) {
+internal fun _icall_Unit_RID_Vector2_String_Color_Long_Color(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Vector2, arg2: String, arg3: Color, arg4: Long, arg5: Color) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(6)
         args[0] = arg0.getRawMemory(memScope)
@@ -7923,10 +7923,10 @@ internal fun _icall_Unit_RID_Vector2_String_Color_Int_Color(mb: CPointer<godot_m
     }
 }
 
-internal fun _icall_Float_RID_Vector2_Int_Int_Color_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Vector2, arg2: Int, arg3: Int, arg4: Color, arg5: Boolean): Float {
-    var ret: Float = 0f
+internal fun _icall_Double_RID_Vector2_Long_Long_Color_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: RID, arg1: Vector2, arg2: Long, arg3: Long, arg4: Color, arg5: Boolean): Double {
+    var ret: Double = 0.0
     memScoped {
-        val retVar = alloc<FloatVar>()
+        val retVar = alloc<DoubleVar>()
         val args = allocArray<COpaquePointerVar>(6)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -7951,7 +7951,7 @@ internal fun _icall_BitmapFont(mb: CPointer<godot_method_bind>, inst: COpaquePoi
     return ret
 }
 
-internal fun _icall_Unit_Int_Int_Rect2_Vector2_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int, arg2: Rect2, arg3: Vector2, arg4: Float) {
+internal fun _icall_Unit_Long_Long_Rect2_Vector2_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long, arg2: Rect2, arg3: Vector2, arg4: Double) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(5)
         args[0] = arg0.getRawMemory(memScope)
@@ -7974,7 +7974,7 @@ internal fun _icall_DynamicFontData(mb: CPointer<godot_method_bind>, inst: COpaq
     return ret
 }
 
-internal fun _icall_DynamicFontData_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): DynamicFontData {
+internal fun _icall_DynamicFontData_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): DynamicFontData {
     lateinit var ret: DynamicFontData
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -8008,7 +8008,7 @@ internal fun _icall_Unit_RID_Rect2(mb: CPointer<godot_method_bind>, inst: COpaqu
     }
 }
 
-internal fun _icall_Unit_Float_Float_Float_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Float, arg1: Float, arg2: Float, arg3: Float) {
+internal fun _icall_Unit_Double_Double_Double_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Double, arg1: Double, arg2: Double, arg3: Double) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(4)
         args[0] = arg0.getRawMemory(memScope)
@@ -8041,10 +8041,10 @@ internal fun _icall_PoolVector2Array_Vector2_Vector2(mb: CPointer<godot_method_b
     return ret
 }
 
-internal fun _icall_Int_Int_Int_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int, arg2: Int, arg3: Int): Int {
-    var ret: Int = 0
+internal fun _icall_Long_Long_Long_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long, arg2: Long, arg3: Long): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(4)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -8056,10 +8056,10 @@ internal fun _icall_Int_Int_Int_Int_Int(mb: CPointer<godot_method_bind>, inst: C
     return ret
 }
 
-internal fun _icall_Int_String_Int_Int_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Int, arg2: Int, arg3: Int, arg4: Int): Int {
-    var ret: Int = 0
+internal fun _icall_Long_String_Long_Long_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Long, arg2: Long, arg3: Long, arg4: Long): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(5)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -8143,10 +8143,10 @@ internal fun _icall_MeshLibrary(mb: CPointer<godot_method_bind>, inst: COpaquePo
     return ret
 }
 
-internal fun _icall_Int_Int_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int, arg2: Int): Int {
-    var ret: Int = 0
+internal fun _icall_Long_Long_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long, arg2: Long): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -8157,7 +8157,7 @@ internal fun _icall_Int_Int_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaq
     return ret
 }
 
-internal fun _icall_Vector3_Int_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int, arg2: Int): Vector3 {
+internal fun _icall_Vector3_Long_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long, arg2: Long): Vector3 {
     lateinit var ret: Vector3
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -8171,7 +8171,7 @@ internal fun _icall_Vector3_Int_Int_Int(mb: CPointer<godot_method_bind>, inst: C
     return ret
 }
 
-internal fun _icall_Unit_Boolean_Boolean_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Boolean, arg1: Boolean, arg2: Int, arg3: Int) {
+internal fun _icall_Unit_Boolean_Boolean_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Boolean, arg1: Boolean, arg2: Long, arg3: Long) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(4)
         args[0] = arg0.getRawMemory(memScope)
@@ -8182,7 +8182,7 @@ internal fun _icall_Unit_Boolean_Boolean_Int_Int(mb: CPointer<godot_method_bind>
     }
 }
 
-internal fun _icall_Unit_Boolean_Float(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Boolean, arg1: Float) {
+internal fun _icall_Unit_Boolean_Double(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Boolean, arg1: Double) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(2)
         args[0] = arg0.getRawMemory(memScope)
@@ -8191,7 +8191,7 @@ internal fun _icall_Unit_Boolean_Float(mb: CPointer<godot_method_bind>, inst: CO
     }
 }
 
-internal fun _icall_RegExMatch_String_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Int, arg2: Int): RegExMatch {
+internal fun _icall_RegExMatch_String_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Long, arg2: Long): RegExMatch {
     lateinit var ret: RegExMatch
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -8205,7 +8205,7 @@ internal fun _icall_RegExMatch_String_Int_Int(mb: CPointer<godot_method_bind>, i
     return ret
 }
 
-internal fun _icall_GDArray_String_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Int, arg2: Int): GDArray {
+internal fun _icall_GDArray_String_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Long, arg2: Long): GDArray {
     lateinit var ret: GDArray
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -8219,7 +8219,7 @@ internal fun _icall_GDArray_String_Int_Int(mb: CPointer<godot_method_bind>, inst
     return ret
 }
 
-internal fun _icall_String_String_String_Boolean_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: String, arg2: Boolean, arg3: Int, arg4: Int): String {
+internal fun _icall_String_String_String_Boolean_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: String, arg2: Boolean, arg3: Long, arg4: Long): String {
     lateinit var ret: String
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -8235,7 +8235,7 @@ internal fun _icall_String_String_String_Boolean_Int_Int(mb: CPointer<godot_meth
     return ret
 }
 
-internal fun _icall_UPNPDevice_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): UPNPDevice {
+internal fun _icall_UPNPDevice_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): UPNPDevice {
     lateinit var ret: UPNPDevice
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -8258,10 +8258,10 @@ internal fun _icall_UPNPDevice(mb: CPointer<godot_method_bind>, inst: COpaquePoi
     return ret
 }
 
-internal fun _icall_Int_Int_Int_String(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int, arg2: String): Int {
-    var ret: Int = 0
+internal fun _icall_Long_Long_Long_String(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long, arg2: String): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -8272,10 +8272,10 @@ internal fun _icall_Int_Int_Int_String(mb: CPointer<godot_method_bind>, inst: CO
     return ret
 }
 
-internal fun _icall_Int_Int_Int_String_String_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: Int, arg2: String, arg3: String, arg4: Int): Int {
-    var ret: Int = 0
+internal fun _icall_Long_Long_Long_String_String_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: Long, arg2: String, arg3: String, arg4: Long): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(5)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -8288,7 +8288,7 @@ internal fun _icall_Int_Int_Int_String_String_Int(mb: CPointer<godot_method_bind
     return ret
 }
 
-internal fun _icall_Unit_String_Int_Object_Vector2(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Int, arg2: Object, arg3: Vector2) {
+internal fun _icall_Unit_String_Long_Object_Vector2(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Long, arg2: Object, arg3: Vector2) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(4)
         args[0] = arg0.getRawMemory(memScope)
@@ -8299,7 +8299,7 @@ internal fun _icall_Unit_String_Int_Object_Vector2(mb: CPointer<godot_method_bin
     }
 }
 
-internal fun _icall_VisualScriptNode_String_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Int): VisualScriptNode {
+internal fun _icall_VisualScriptNode_String_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Long): VisualScriptNode {
     lateinit var ret: VisualScriptNode
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -8312,7 +8312,7 @@ internal fun _icall_VisualScriptNode_String_Int(mb: CPointer<godot_method_bind>,
     return ret
 }
 
-internal fun _icall_Unit_String_Int_Vector2(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Int, arg2: Vector2) {
+internal fun _icall_Unit_String_Long_Vector2(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Long, arg2: Vector2) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
@@ -8322,7 +8322,7 @@ internal fun _icall_Unit_String_Int_Vector2(mb: CPointer<godot_method_bind>, ins
     }
 }
 
-internal fun _icall_Vector2_String_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Int): Vector2 {
+internal fun _icall_Vector2_String_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Long): Vector2 {
     lateinit var ret: Vector2
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -8335,7 +8335,7 @@ internal fun _icall_Vector2_String_Int(mb: CPointer<godot_method_bind>, inst: CO
     return ret
 }
 
-internal fun _icall_Unit_String_Int_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Int, arg2: Int, arg3: Int) {
+internal fun _icall_Unit_String_Long_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Long, arg2: Long, arg3: Long) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(4)
         args[0] = arg0.getRawMemory(memScope)
@@ -8346,7 +8346,7 @@ internal fun _icall_Unit_String_Int_Int_Int(mb: CPointer<godot_method_bind>, ins
     }
 }
 
-internal fun _icall_Boolean_String_Int_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Int, arg2: Int, arg3: Int): Boolean {
+internal fun _icall_Boolean_String_Long_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Long, arg2: Long, arg3: Long): Boolean {
     var ret: Boolean = false
     memScoped {
         val retVar = alloc<BooleanVar>()
@@ -8361,7 +8361,7 @@ internal fun _icall_Boolean_String_Int_Int_Int(mb: CPointer<godot_method_bind>, 
     return ret
 }
 
-internal fun _icall_Unit_String_Int_Int_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Int, arg2: Int, arg3: Int, arg4: Int) {
+internal fun _icall_Unit_String_Long_Long_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Long, arg2: Long, arg3: Long, arg4: Long) {
     memScoped {
         val args = allocArray<COpaquePointerVar>(5)
         args[0] = arg0.getRawMemory(memScope)
@@ -8373,7 +8373,7 @@ internal fun _icall_Unit_String_Int_Int_Int_Int(mb: CPointer<godot_method_bind>,
     }
 }
 
-internal fun _icall_Boolean_String_Int_Int_Int_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Int, arg2: Int, arg3: Int, arg4: Int): Boolean {
+internal fun _icall_Boolean_String_Long_Long_Long_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: Long, arg2: Long, arg3: Long, arg4: Long): Boolean {
     var ret: Boolean = false
     memScoped {
         val retVar = alloc<BooleanVar>()
@@ -8443,7 +8443,7 @@ internal fun _icall_Variant_GDArray(mb: CPointer<godot_method_bind>, inst: COpaq
     return ret
 }
 
-internal fun _icall_WebSocketPeer_Int(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int): WebSocketPeer {
+internal fun _icall_WebSocketPeer_Long(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long): WebSocketPeer {
     lateinit var ret: WebSocketPeer
     memScoped {
         val retVar = allocArray<ByteVar>(1024)
@@ -8455,10 +8455,10 @@ internal fun _icall_WebSocketPeer_Int(mb: CPointer<godot_method_bind>, inst: COp
     return ret
 }
 
-internal fun _icall_Int_Int_PoolStringArray_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Int, arg1: PoolStringArray, arg2: Boolean): Int {
-    var ret: Int = 0
+internal fun _icall_Long_Long_PoolStringArray_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: Long, arg1: PoolStringArray, arg2: Boolean): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)
@@ -8469,10 +8469,10 @@ internal fun _icall_Int_Int_PoolStringArray_Boolean(mb: CPointer<godot_method_bi
     return ret
 }
 
-internal fun _icall_Int_String_PoolStringArray_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: PoolStringArray, arg2: Boolean): Int {
-    var ret: Int = 0
+internal fun _icall_Long_String_PoolStringArray_Boolean(mb: CPointer<godot_method_bind>, inst: COpaquePointer, arg0: String, arg1: PoolStringArray, arg2: Boolean): Long {
+    var ret: Long = 0
     memScoped {
-        val retVar = alloc<IntVar>()
+        val retVar = alloc<LongVar>()
         val args = allocArray<COpaquePointerVar>(3)
         args[0] = arg0.getRawMemory(memScope)
         args[1] = arg1.getRawMemory(memScope)

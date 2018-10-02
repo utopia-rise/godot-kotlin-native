@@ -43,23 +43,23 @@ open class AudioEffectAmplify : AudioEffect {
 
 
     // Properties
-    open var volumeDb: Float
-        get() = _icall_Float(getVolumeDbMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setVolumeDbMethodBind, this.rawMemory, value)
+    open var volumeDb: Double
+        get() = _icall_Double(getVolumeDbMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setVolumeDbMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setVolumeDbMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectAmplify", "set_volume_db") }
-    open fun setVolumeDb(volume: Float) {
-        _icall_Unit_Float(setVolumeDbMethodBind, this.rawMemory, volume)
+    open fun setVolumeDb(volume: Double) {
+        _icall_Unit_Double(setVolumeDbMethodBind, this.rawMemory, volume)
     }
 
 
     private val getVolumeDbMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectAmplify", "get_volume_db") }
-    open fun getVolumeDb(): Float {
-        return _icall_Float(getVolumeDbMethodBind, this.rawMemory)
+    open fun getVolumeDb(): Double {
+        return _icall_Double(getVolumeDbMethodBind, this.rawMemory)
     }
 
 

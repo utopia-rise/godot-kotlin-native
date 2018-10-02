@@ -19,14 +19,14 @@ open class NinePatchRect : Control {
 
     // Enums 
 
-    enum class AxisStretchMode(val id: Int) {
+    enum class AxisStretchMode(val id: Long) {
         AXIS_STRETCH_MODE_STRETCH(0),
         AXIS_STRETCH_MODE_TILE(1),
         AXIS_STRETCH_MODE_TILE_FIT(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -48,9 +48,9 @@ open class NinePatchRect : Control {
 
 
         // Constants
-        const val AXIS_STRETCH_MODE_STRETCH: Int = 0
-        const val AXIS_STRETCH_MODE_TILE: Int = 1
-        const val AXIS_STRETCH_MODE_TILE_FIT: Int = 2
+        const val AXIS_STRETCH_MODE_STRETCH: Long = 0
+        const val AXIS_STRETCH_MODE_TILE: Long = 1
+        const val AXIS_STRETCH_MODE_TILE_FIT: Long = 2
 
 
     }
@@ -76,34 +76,34 @@ open class NinePatchRect : Control {
     }
 
 
-    open var patchMarginLeft: Int
-        get() = _icall_Int_Int(getPatchMarginMethodBind, this.rawMemory, 0)
-        set(value) = _icall_Unit_Int_Int(setPatchMarginMethodBind, this.rawMemory, 0, value)
+    open var patchMarginLeft: Long
+        get() = _icall_Long_Long(getPatchMarginMethodBind, this.rawMemory, 0)
+        set(value) = _icall_Unit_Long_Long(setPatchMarginMethodBind, this.rawMemory, 0, value)
 
 
-    open var patchMarginTop: Int
-        get() = _icall_Int_Int(getPatchMarginMethodBind, this.rawMemory, 1)
-        set(value) = _icall_Unit_Int_Int(setPatchMarginMethodBind, this.rawMemory, 1, value)
+    open var patchMarginTop: Long
+        get() = _icall_Long_Long(getPatchMarginMethodBind, this.rawMemory, 1)
+        set(value) = _icall_Unit_Long_Long(setPatchMarginMethodBind, this.rawMemory, 1, value)
 
 
-    open var patchMarginRight: Int
-        get() = _icall_Int_Int(getPatchMarginMethodBind, this.rawMemory, 2)
-        set(value) = _icall_Unit_Int_Int(setPatchMarginMethodBind, this.rawMemory, 2, value)
+    open var patchMarginRight: Long
+        get() = _icall_Long_Long(getPatchMarginMethodBind, this.rawMemory, 2)
+        set(value) = _icall_Unit_Long_Long(setPatchMarginMethodBind, this.rawMemory, 2, value)
 
 
-    open var patchMarginBottom: Int
-        get() = _icall_Int_Int(getPatchMarginMethodBind, this.rawMemory, 3)
-        set(value) = _icall_Unit_Int_Int(setPatchMarginMethodBind, this.rawMemory, 3, value)
+    open var patchMarginBottom: Long
+        get() = _icall_Long_Long(getPatchMarginMethodBind, this.rawMemory, 3)
+        set(value) = _icall_Unit_Long_Long(setPatchMarginMethodBind, this.rawMemory, 3, value)
 
 
-    open var axisStretchHorizontal: Int
-        get() = _icall_Int(getHAxisStretchModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setHAxisStretchModeMethodBind, this.rawMemory, value)
+    open var axisStretchHorizontal: Long
+        get() = _icall_Long(getHAxisStretchModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setHAxisStretchModeMethodBind, this.rawMemory, value)
 
 
-    open var axisStretchVertical: Int
-        get() = _icall_Int(getVAxisStretchModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setVAxisStretchModeMethodBind, this.rawMemory, value)
+    open var axisStretchVertical: Long
+        get() = _icall_Long(getVAxisStretchModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setVAxisStretchModeMethodBind, this.rawMemory, value)
 
 
 
@@ -122,14 +122,14 @@ open class NinePatchRect : Control {
 
 
     private val setPatchMarginMethodBind: CPointer<godot_method_bind> by lazy { getMB("NinePatchRect", "set_patch_margin") }
-    open fun setPatchMargin(margin: Int, value: Int) {
-        _icall_Unit_Int_Int(setPatchMarginMethodBind, this.rawMemory, margin, value)
+    open fun setPatchMargin(margin: Long, value: Long) {
+        _icall_Unit_Long_Long(setPatchMarginMethodBind, this.rawMemory, margin, value)
     }
 
 
     private val getPatchMarginMethodBind: CPointer<godot_method_bind> by lazy { getMB("NinePatchRect", "get_patch_margin") }
-    open fun getPatchMargin(margin: Int): Int {
-        return _icall_Int_Int(getPatchMarginMethodBind, this.rawMemory, margin)
+    open fun getPatchMargin(margin: Long): Long {
+        return _icall_Long_Long(getPatchMarginMethodBind, this.rawMemory, margin)
     }
 
 
@@ -158,26 +158,26 @@ open class NinePatchRect : Control {
 
 
     private val setHAxisStretchModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("NinePatchRect", "set_h_axis_stretch_mode") }
-    open fun setHAxisStretchMode(mode: Int) {
-        _icall_Unit_Int(setHAxisStretchModeMethodBind, this.rawMemory, mode)
+    open fun setHAxisStretchMode(mode: Long) {
+        _icall_Unit_Long(setHAxisStretchModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getHAxisStretchModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("NinePatchRect", "get_h_axis_stretch_mode") }
     open fun getHAxisStretchMode(): NinePatchRect.AxisStretchMode {
-        return NinePatchRect.AxisStretchMode.fromInt(_icall_Int(getHAxisStretchModeMethodBind, this.rawMemory))
+        return NinePatchRect.AxisStretchMode.fromInt(_icall_Long(getHAxisStretchModeMethodBind, this.rawMemory))
     }
 
 
     private val setVAxisStretchModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("NinePatchRect", "set_v_axis_stretch_mode") }
-    open fun setVAxisStretchMode(mode: Int) {
-        _icall_Unit_Int(setVAxisStretchModeMethodBind, this.rawMemory, mode)
+    open fun setVAxisStretchMode(mode: Long) {
+        _icall_Unit_Long(setVAxisStretchModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getVAxisStretchModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("NinePatchRect", "get_v_axis_stretch_mode") }
     open fun getVAxisStretchMode(): NinePatchRect.AxisStretchMode {
-        return NinePatchRect.AxisStretchMode.fromInt(_icall_Int(getVAxisStretchModeMethodBind, this.rawMemory))
+        return NinePatchRect.AxisStretchMode.fromInt(_icall_Long(getVAxisStretchModeMethodBind, this.rawMemory))
     }
 
 

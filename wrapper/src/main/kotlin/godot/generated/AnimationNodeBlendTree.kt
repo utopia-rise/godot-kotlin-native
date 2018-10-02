@@ -38,12 +38,12 @@ open class AnimationNodeBlendTree : AnimationRootNode {
 
 
         // Constants
-        const val CONNECTION_OK: Int = 0
-        const val CONNECTION_ERROR_NO_INPUT: Int = 1
-        const val CONNECTION_ERROR_NO_INPUT_INDEX: Int = 2
-        const val CONNECTION_ERROR_NO_OUTPUT: Int = 3
-        const val CONNECTION_ERROR_SAME_NODE: Int = 4
-        const val CONNECTION_ERROR_CONNECTION_EXISTS: Int = 5
+        const val CONNECTION_OK: Long = 0
+        const val CONNECTION_ERROR_NO_INPUT: Long = 1
+        const val CONNECTION_ERROR_NO_INPUT_INDEX: Long = 2
+        const val CONNECTION_ERROR_NO_OUTPUT: Long = 3
+        const val CONNECTION_ERROR_SAME_NODE: Long = 4
+        const val CONNECTION_ERROR_CONNECTION_EXISTS: Long = 5
 
 
     }
@@ -93,14 +93,14 @@ open class AnimationNodeBlendTree : AnimationRootNode {
 
 
     private val connectNodeMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationNodeBlendTree", "connect_node") }
-    open fun connectNode(inputNode: String, inputIndex: Int, outputNode: String) {
-        _icall_Unit_String_Int_String(connectNodeMethodBind, this.rawMemory, inputNode, inputIndex, outputNode)
+    open fun connectNode(inputNode: String, inputIndex: Long, outputNode: String) {
+        _icall_Unit_String_Long_String(connectNodeMethodBind, this.rawMemory, inputNode, inputIndex, outputNode)
     }
 
 
     private val disconnectNodeMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationNodeBlendTree", "disconnect_node") }
-    open fun disconnectNode(inputNode: String, inputIndex: Int) {
-        _icall_Unit_String_Int(disconnectNodeMethodBind, this.rawMemory, inputNode, inputIndex)
+    open fun disconnectNode(inputNode: String, inputIndex: Long) {
+        _icall_Unit_String_Long(disconnectNodeMethodBind, this.rawMemory, inputNode, inputIndex)
     }
 
 

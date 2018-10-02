@@ -36,7 +36,7 @@ open class GridMap : Spatial {
 
 
         // Constants
-        const val INVALID_CELL_ITEM: Int = -1
+        const val INVALID_CELL_ITEM: Long = -1
 
 
     }
@@ -57,9 +57,9 @@ open class GridMap : Spatial {
     }
 
 
-    open var cellOctantSize: Int
-        get() = _icall_Int(getOctantSizeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setOctantSizeMethodBind, this.rawMemory, value)
+    open var cellOctantSize: Long
+        get() = _icall_Long(getOctantSizeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setOctantSizeMethodBind, this.rawMemory, value)
 
 
     open var cellCenterX: Boolean
@@ -77,69 +77,69 @@ open class GridMap : Spatial {
         set(value) = _icall_Unit_Boolean(setCenterZMethodBind, this.rawMemory, value)
 
 
-    open var cellScale: Float
-        get() = _icall_Float(getCellScaleMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setCellScaleMethodBind, this.rawMemory, value)
+    open var cellScale: Double
+        get() = _icall_Double(getCellScaleMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setCellScaleMethodBind, this.rawMemory, value)
 
 
-    open var collisionLayer: Int
-        get() = _icall_Int(getCollisionLayerMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setCollisionLayerMethodBind, this.rawMemory, value)
+    open var collisionLayer: Long
+        get() = _icall_Long(getCollisionLayerMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setCollisionLayerMethodBind, this.rawMemory, value)
 
 
-    open var collisionMask: Int
-        get() = _icall_Int(getCollisionMaskMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setCollisionMaskMethodBind, this.rawMemory, value)
+    open var collisionMask: Long
+        get() = _icall_Long(getCollisionMaskMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setCollisionMaskMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setCollisionLayerMethodBind: CPointer<godot_method_bind> by lazy { getMB("GridMap", "set_collision_layer") }
-    open fun setCollisionLayer(layer: Int) {
-        _icall_Unit_Int(setCollisionLayerMethodBind, this.rawMemory, layer)
+    open fun setCollisionLayer(layer: Long) {
+        _icall_Unit_Long(setCollisionLayerMethodBind, this.rawMemory, layer)
     }
 
 
     private val getCollisionLayerMethodBind: CPointer<godot_method_bind> by lazy { getMB("GridMap", "get_collision_layer") }
-    open fun getCollisionLayer(): Int {
-        return _icall_Int(getCollisionLayerMethodBind, this.rawMemory)
+    open fun getCollisionLayer(): Long {
+        return _icall_Long(getCollisionLayerMethodBind, this.rawMemory)
     }
 
 
     private val setCollisionMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("GridMap", "set_collision_mask") }
-    open fun setCollisionMask(mask: Int) {
-        _icall_Unit_Int(setCollisionMaskMethodBind, this.rawMemory, mask)
+    open fun setCollisionMask(mask: Long) {
+        _icall_Unit_Long(setCollisionMaskMethodBind, this.rawMemory, mask)
     }
 
 
     private val getCollisionMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("GridMap", "get_collision_mask") }
-    open fun getCollisionMask(): Int {
-        return _icall_Int(getCollisionMaskMethodBind, this.rawMemory)
+    open fun getCollisionMask(): Long {
+        return _icall_Long(getCollisionMaskMethodBind, this.rawMemory)
     }
 
 
     private val setCollisionMaskBitMethodBind: CPointer<godot_method_bind> by lazy { getMB("GridMap", "set_collision_mask_bit") }
-    open fun setCollisionMaskBit(bit: Int, value: Boolean) {
-        _icall_Unit_Int_Boolean(setCollisionMaskBitMethodBind, this.rawMemory, bit, value)
+    open fun setCollisionMaskBit(bit: Long, value: Boolean) {
+        _icall_Unit_Long_Boolean(setCollisionMaskBitMethodBind, this.rawMemory, bit, value)
     }
 
 
     private val getCollisionMaskBitMethodBind: CPointer<godot_method_bind> by lazy { getMB("GridMap", "get_collision_mask_bit") }
-    open fun getCollisionMaskBit(bit: Int): Boolean {
-        return _icall_Boolean_Int(getCollisionMaskBitMethodBind, this.rawMemory, bit)
+    open fun getCollisionMaskBit(bit: Long): Boolean {
+        return _icall_Boolean_Long(getCollisionMaskBitMethodBind, this.rawMemory, bit)
     }
 
 
     private val setCollisionLayerBitMethodBind: CPointer<godot_method_bind> by lazy { getMB("GridMap", "set_collision_layer_bit") }
-    open fun setCollisionLayerBit(bit: Int, value: Boolean) {
-        _icall_Unit_Int_Boolean(setCollisionLayerBitMethodBind, this.rawMemory, bit, value)
+    open fun setCollisionLayerBit(bit: Long, value: Boolean) {
+        _icall_Unit_Long_Boolean(setCollisionLayerBitMethodBind, this.rawMemory, bit, value)
     }
 
 
     private val getCollisionLayerBitMethodBind: CPointer<godot_method_bind> by lazy { getMB("GridMap", "get_collision_layer_bit") }
-    open fun getCollisionLayerBit(bit: Int): Boolean {
-        return _icall_Boolean_Int(getCollisionLayerBitMethodBind, this.rawMemory, bit)
+    open fun getCollisionLayerBit(bit: Long): Boolean {
+        return _icall_Boolean_Long(getCollisionLayerBitMethodBind, this.rawMemory, bit)
     }
 
 
@@ -168,44 +168,44 @@ open class GridMap : Spatial {
 
 
     private val setCellScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("GridMap", "set_cell_scale") }
-    open fun setCellScale(scale: Float) {
-        _icall_Unit_Float(setCellScaleMethodBind, this.rawMemory, scale)
+    open fun setCellScale(scale: Double) {
+        _icall_Unit_Double(setCellScaleMethodBind, this.rawMemory, scale)
     }
 
 
     private val getCellScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("GridMap", "get_cell_scale") }
-    open fun getCellScale(): Float {
-        return _icall_Float(getCellScaleMethodBind, this.rawMemory)
+    open fun getCellScale(): Double {
+        return _icall_Double(getCellScaleMethodBind, this.rawMemory)
     }
 
 
     private val setOctantSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("GridMap", "set_octant_size") }
-    open fun setOctantSize(size: Int) {
-        _icall_Unit_Int(setOctantSizeMethodBind, this.rawMemory, size)
+    open fun setOctantSize(size: Long) {
+        _icall_Unit_Long(setOctantSizeMethodBind, this.rawMemory, size)
     }
 
 
     private val getOctantSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("GridMap", "get_octant_size") }
-    open fun getOctantSize(): Int {
-        return _icall_Int(getOctantSizeMethodBind, this.rawMemory)
+    open fun getOctantSize(): Long {
+        return _icall_Long(getOctantSizeMethodBind, this.rawMemory)
     }
 
 
     private val setCellItemMethodBind: CPointer<godot_method_bind> by lazy { getMB("GridMap", "set_cell_item") }
-    open fun setCellItem(x: Int, y: Int, z: Int, item: Int, orientation: Int = 0) {
-        _icall_Unit_Int_Int_Int_Int_Int(setCellItemMethodBind, this.rawMemory, x, y, z, item, orientation)
+    open fun setCellItem(x: Long, y: Long, z: Long, item: Long, orientation: Long = 0) {
+        _icall_Unit_Long_Long_Long_Long_Long(setCellItemMethodBind, this.rawMemory, x, y, z, item, orientation)
     }
 
 
     private val getCellItemMethodBind: CPointer<godot_method_bind> by lazy { getMB("GridMap", "get_cell_item") }
-    open fun getCellItem(x: Int, y: Int, z: Int): Int {
-        return _icall_Int_Int_Int_Int(getCellItemMethodBind, this.rawMemory, x, y, z)
+    open fun getCellItem(x: Long, y: Long, z: Long): Long {
+        return _icall_Long_Long_Long_Long(getCellItemMethodBind, this.rawMemory, x, y, z)
     }
 
 
     private val getCellItemOrientationMethodBind: CPointer<godot_method_bind> by lazy { getMB("GridMap", "get_cell_item_orientation") }
-    open fun getCellItemOrientation(x: Int, y: Int, z: Int): Int {
-        return _icall_Int_Int_Int_Int(getCellItemOrientationMethodBind, this.rawMemory, x, y, z)
+    open fun getCellItemOrientation(x: Long, y: Long, z: Long): Long {
+        return _icall_Long_Long_Long_Long(getCellItemOrientationMethodBind, this.rawMemory, x, y, z)
     }
 
 
@@ -216,8 +216,8 @@ open class GridMap : Spatial {
 
 
     private val mapToWorldMethodBind: CPointer<godot_method_bind> by lazy { getMB("GridMap", "map_to_world") }
-    open fun mapToWorld(x: Int, y: Int, z: Int): Vector3 {
-        return _icall_Vector3_Int_Int_Int(mapToWorldMethodBind, this.rawMemory, x, y, z)
+    open fun mapToWorld(x: Long, y: Long, z: Long): Vector3 {
+        return _icall_Vector3_Long_Long_Long(mapToWorldMethodBind, this.rawMemory, x, y, z)
     }
 
 
@@ -268,8 +268,8 @@ open class GridMap : Spatial {
 
 
     private val setClipMethodBind: CPointer<godot_method_bind> by lazy { getMB("GridMap", "set_clip") }
-    open fun setClip(enabled: Boolean, clipabove: Boolean = true, floor: Int = 0, axis: Int = 0) {
-        _icall_Unit_Boolean_Boolean_Int_Int(setClipMethodBind, this.rawMemory, enabled, clipabove, floor, axis)
+    open fun setClip(enabled: Boolean, clipabove: Boolean = true, floor: Long = 0, axis: Long = 0) {
+        _icall_Unit_Boolean_Boolean_Long_Long(setClipMethodBind, this.rawMemory, enabled, clipabove, floor, axis)
     }
 
 
@@ -298,8 +298,8 @@ open class GridMap : Spatial {
 
 
     private val getBakeMeshInstanceMethodBind: CPointer<godot_method_bind> by lazy { getMB("GridMap", "get_bake_mesh_instance") }
-    open fun getBakeMeshInstance(idx: Int): RID {
-        return _icall_RID_Int(getBakeMeshInstanceMethodBind, this.rawMemory, idx)
+    open fun getBakeMeshInstance(idx: Long): RID {
+        return _icall_RID_Long(getBakeMeshInstanceMethodBind, this.rawMemory, idx)
     }
 
 
@@ -310,8 +310,8 @@ open class GridMap : Spatial {
 
 
     private val makeBakedMeshesMethodBind: CPointer<godot_method_bind> by lazy { getMB("GridMap", "make_baked_meshes") }
-    open fun makeBakedMeshes(genLightmapUv: Boolean = false, lightmapUvTexelSize: Float = 0.1f) {
-        _icall_Unit_Boolean_Float(makeBakedMeshesMethodBind, this.rawMemory, genLightmapUv, lightmapUvTexelSize)
+    open fun makeBakedMeshes(genLightmapUv: Boolean = false, lightmapUvTexelSize: Double = 0.1) {
+        _icall_Unit_Boolean_Double(makeBakedMeshesMethodBind, this.rawMemory, genLightmapUv, lightmapUvTexelSize)
     }
 
 

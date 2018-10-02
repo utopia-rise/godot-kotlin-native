@@ -34,17 +34,17 @@ open class MainLoop : Object {
 
 
         // Constants
-        const val NOTIFICATION_WM_MOUSE_ENTER: Int = 2
-        const val NOTIFICATION_WM_MOUSE_EXIT: Int = 3
-        const val NOTIFICATION_WM_FOCUS_IN: Int = 4
-        const val NOTIFICATION_WM_FOCUS_OUT: Int = 5
-        const val NOTIFICATION_WM_QUIT_REQUEST: Int = 6
-        const val NOTIFICATION_WM_GO_BACK_REQUEST: Int = 7
-        const val NOTIFICATION_WM_UNFOCUS_REQUEST: Int = 8
-        const val NOTIFICATION_OS_MEMORY_WARNING: Int = 9
-        const val NOTIFICATION_TRANSLATION_CHANGED: Int = 90
-        const val NOTIFICATION_WM_ABOUT: Int = 91
-        const val NOTIFICATION_CRASH: Int = 92
+        const val NOTIFICATION_WM_MOUSE_ENTER: Long = 2
+        const val NOTIFICATION_WM_MOUSE_EXIT: Long = 3
+        const val NOTIFICATION_WM_FOCUS_IN: Long = 4
+        const val NOTIFICATION_WM_FOCUS_OUT: Long = 5
+        const val NOTIFICATION_WM_QUIT_REQUEST: Long = 6
+        const val NOTIFICATION_WM_GO_BACK_REQUEST: Long = 7
+        const val NOTIFICATION_WM_UNFOCUS_REQUEST: Long = 8
+        const val NOTIFICATION_OS_MEMORY_WARNING: Long = 9
+        const val NOTIFICATION_TRANSLATION_CHANGED: Long = 90
+        const val NOTIFICATION_WM_ABOUT: Long = 91
+        const val NOTIFICATION_CRASH: Long = 92
 
 
     }
@@ -66,15 +66,15 @@ open class MainLoop : Object {
     }
 
 
-    open fun _iteration(delta: Float) {
+    open fun _iteration(delta: Double) {
     }
 
 
-    open fun _idle(delta: Float) {
+    open fun _idle(delta: Double) {
     }
 
 
-    open fun _drop_files(files: PoolStringArray, screen: Int) {
+    open fun _drop_files(files: PoolStringArray, screen: Long) {
     }
 
 
@@ -101,14 +101,14 @@ open class MainLoop : Object {
 
 
     private val iterationMethodBind: CPointer<godot_method_bind> by lazy { getMB("MainLoop", "iteration") }
-    open fun iteration(delta: Float): Boolean {
-        return _icall_Boolean_Float(iterationMethodBind, this.rawMemory, delta)
+    open fun iteration(delta: Double): Boolean {
+        return _icall_Boolean_Double(iterationMethodBind, this.rawMemory, delta)
     }
 
 
     private val idleMethodBind: CPointer<godot_method_bind> by lazy { getMB("MainLoop", "idle") }
-    open fun idle(delta: Float): Boolean {
-        return _icall_Boolean_Float(idleMethodBind, this.rawMemory, delta)
+    open fun idle(delta: Double): Boolean {
+        return _icall_Boolean_Double(idleMethodBind, this.rawMemory, delta)
     }
 
 

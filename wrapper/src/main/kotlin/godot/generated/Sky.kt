@@ -19,7 +19,7 @@ open class Sky : Resource {
 
     // Enums 
 
-    enum class RadianceSize(val id: Int) {
+    enum class RadianceSize(val id: Long) {
         RADIANCE_SIZE_32(0),
         RADIANCE_SIZE_64(1),
         RADIANCE_SIZE_128(2),
@@ -31,7 +31,7 @@ open class Sky : Resource {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -51,37 +51,37 @@ open class Sky : Resource {
 
 
         // Constants
-        const val RADIANCE_SIZE_32: Int = 0
-        const val RADIANCE_SIZE_64: Int = 1
-        const val RADIANCE_SIZE_128: Int = 2
-        const val RADIANCE_SIZE_256: Int = 3
-        const val RADIANCE_SIZE_512: Int = 4
-        const val RADIANCE_SIZE_1024: Int = 5
-        const val RADIANCE_SIZE_2048: Int = 6
-        const val RADIANCE_SIZE_MAX: Int = 7
+        const val RADIANCE_SIZE_32: Long = 0
+        const val RADIANCE_SIZE_64: Long = 1
+        const val RADIANCE_SIZE_128: Long = 2
+        const val RADIANCE_SIZE_256: Long = 3
+        const val RADIANCE_SIZE_512: Long = 4
+        const val RADIANCE_SIZE_1024: Long = 5
+        const val RADIANCE_SIZE_2048: Long = 6
+        const val RADIANCE_SIZE_MAX: Long = 7
 
 
     }
 
 
     // Properties
-    open var radianceSize: Int
-        get() = _icall_Int(getRadianceSizeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setRadianceSizeMethodBind, this.rawMemory, value)
+    open var radianceSize: Long
+        get() = _icall_Long(getRadianceSizeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setRadianceSizeMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setRadianceSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Sky", "set_radiance_size") }
-    open fun setRadianceSize(size: Int) {
-        _icall_Unit_Int(setRadianceSizeMethodBind, this.rawMemory, size)
+    open fun setRadianceSize(size: Long) {
+        _icall_Unit_Long(setRadianceSizeMethodBind, this.rawMemory, size)
     }
 
 
     private val getRadianceSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Sky", "get_radiance_size") }
     open fun getRadianceSize(): Sky.RadianceSize {
-        return Sky.RadianceSize.fromInt(_icall_Int(getRadianceSizeMethodBind, this.rawMemory))
+        return Sky.RadianceSize.fromInt(_icall_Long(getRadianceSizeMethodBind, this.rawMemory))
     }
 
 

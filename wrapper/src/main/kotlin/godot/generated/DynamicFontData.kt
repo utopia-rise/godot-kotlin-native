@@ -19,14 +19,14 @@ open class DynamicFontData : Resource {
 
     // Enums 
 
-    enum class Hinting(val id: Int) {
+    enum class Hinting(val id: Long) {
         HINTING_NONE(0),
         HINTING_LIGHT(1),
         HINTING_NORMAL(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -46,18 +46,18 @@ open class DynamicFontData : Resource {
 
 
         // Constants
-        const val HINTING_NONE: Int = 0
-        const val HINTING_LIGHT: Int = 1
-        const val HINTING_NORMAL: Int = 2
+        const val HINTING_NONE: Long = 0
+        const val HINTING_LIGHT: Long = 1
+        const val HINTING_NORMAL: Long = 2
 
 
     }
 
 
     // Properties
-    open var hinting: Int
-        get() = _icall_Int(getHintingMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setHintingMethodBind, this.rawMemory, value)
+    open var hinting: Long
+        get() = _icall_Long(getHintingMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setHintingMethodBind, this.rawMemory, value)
 
 
     open var fontPath: String
@@ -81,14 +81,14 @@ open class DynamicFontData : Resource {
 
 
     private val setHintingMethodBind: CPointer<godot_method_bind> by lazy { getMB("DynamicFontData", "set_hinting") }
-    open fun setHinting(mode: Int) {
-        _icall_Unit_Int(setHintingMethodBind, this.rawMemory, mode)
+    open fun setHinting(mode: Long) {
+        _icall_Unit_Long(setHintingMethodBind, this.rawMemory, mode)
     }
 
 
     private val getHintingMethodBind: CPointer<godot_method_bind> by lazy { getMB("DynamicFontData", "get_hinting") }
     open fun getHinting(): DynamicFontData.Hinting {
-        return DynamicFontData.Hinting.fromInt(_icall_Int(getHintingMethodBind, this.rawMemory))
+        return DynamicFontData.Hinting.fromInt(_icall_Long(getHintingMethodBind, this.rawMemory))
     }
 
 

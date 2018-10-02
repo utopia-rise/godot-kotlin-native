@@ -52,9 +52,9 @@ open class LineShape2D : Shape2D {
     }
 
 
-    open var d: Float
-        get() = _icall_Float(getDMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setDMethodBind, this.rawMemory, value)
+    open var d: Double
+        get() = _icall_Double(getDMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setDMethodBind, this.rawMemory, value)
 
 
 
@@ -73,14 +73,14 @@ open class LineShape2D : Shape2D {
 
 
     private val setDMethodBind: CPointer<godot_method_bind> by lazy { getMB("LineShape2D", "set_d") }
-    open fun setD(d: Float) {
-        _icall_Unit_Float(setDMethodBind, this.rawMemory, d)
+    open fun setD(d: Double) {
+        _icall_Unit_Double(setDMethodBind, this.rawMemory, d)
     }
 
 
     private val getDMethodBind: CPointer<godot_method_bind> by lazy { getMB("LineShape2D", "get_d") }
-    open fun getD(): Float {
-        return _icall_Float(getDMethodBind, this.rawMemory)
+    open fun getD(): Double {
+        return _icall_Double(getDMethodBind, this.rawMemory)
     }
 
 

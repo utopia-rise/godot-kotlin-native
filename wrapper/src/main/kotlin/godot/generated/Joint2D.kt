@@ -53,9 +53,9 @@ open class Joint2D : Node2D {
         set(value) = _icall_Unit_NodePath(setNodeBMethodBind, this.rawMemory, value)
 
 
-    open var bias: Float
-        get() = _icall_Float(getBiasMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setBiasMethodBind, this.rawMemory, value)
+    open var bias: Double
+        get() = _icall_Double(getBiasMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setBiasMethodBind, this.rawMemory, value)
 
 
     open var disableCollision: Boolean
@@ -91,14 +91,14 @@ open class Joint2D : Node2D {
 
 
     private val setBiasMethodBind: CPointer<godot_method_bind> by lazy { getMB("Joint2D", "set_bias") }
-    open fun setBias(bias: Float) {
-        _icall_Unit_Float(setBiasMethodBind, this.rawMemory, bias)
+    open fun setBias(bias: Double) {
+        _icall_Unit_Double(setBiasMethodBind, this.rawMemory, bias)
     }
 
 
     private val getBiasMethodBind: CPointer<godot_method_bind> by lazy { getMB("Joint2D", "get_bias") }
-    open fun getBias(): Float {
-        return _icall_Float(getBiasMethodBind, this.rawMemory)
+    open fun getBias(): Double {
+        return _icall_Double(getBiasMethodBind, this.rawMemory)
     }
 
 

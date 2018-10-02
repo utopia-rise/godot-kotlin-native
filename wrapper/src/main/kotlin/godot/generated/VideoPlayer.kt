@@ -44,9 +44,9 @@ open class VideoPlayer : Control {
 
 
     // Properties
-    open var audioTrack: Int
-        get() = _icall_Int(getAudioTrackMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setAudioTrackMethodBind, this.rawMemory, value)
+    open var audioTrack: Long
+        get() = _icall_Long(getAudioTrackMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setAudioTrackMethodBind, this.rawMemory, value)
 
 
     open var stream: VideoStream
@@ -54,14 +54,14 @@ open class VideoPlayer : Control {
         set(value) = _icall_Unit_Object(setStreamMethodBind, this.rawMemory, value)
 
 
-    open var volumeDb: Float
-        get() = _icall_Float(getVolumeDbMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setVolumeDbMethodBind, this.rawMemory, value)
+    open var volumeDb: Double
+        get() = _icall_Double(getVolumeDbMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setVolumeDbMethodBind, this.rawMemory, value)
 
 
-    open var volume: Float
-        get() = _icall_Float(getVolumeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setVolumeMethodBind, this.rawMemory, value)
+    open var volume: Double
+        get() = _icall_Double(getVolumeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setVolumeMethodBind, this.rawMemory, value)
 
 
     open var autoplay: Boolean
@@ -79,14 +79,14 @@ open class VideoPlayer : Control {
         set(value) = _icall_Unit_Boolean(setExpandMethodBind, this.rawMemory, value)
 
 
-    open var bufferingMsec: Int
-        get() = _icall_Int(getBufferingMsecMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setBufferingMsecMethodBind, this.rawMemory, value)
+    open var bufferingMsec: Long
+        get() = _icall_Long(getBufferingMsecMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setBufferingMsecMethodBind, this.rawMemory, value)
 
 
-    open var streamPosition: Float
-        get() = _icall_Float(getStreamPositionMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setStreamPositionMethodBind, this.rawMemory, value)
+    open var streamPosition: Double
+        get() = _icall_Double(getStreamPositionMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setStreamPositionMethodBind, this.rawMemory, value)
 
 
     open var bus: String
@@ -140,38 +140,38 @@ open class VideoPlayer : Control {
 
 
     private val setVolumeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VideoPlayer", "set_volume") }
-    open fun setVolume(volume: Float) {
-        _icall_Unit_Float(setVolumeMethodBind, this.rawMemory, volume)
+    open fun setVolume(volume: Double) {
+        _icall_Unit_Double(setVolumeMethodBind, this.rawMemory, volume)
     }
 
 
     private val getVolumeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VideoPlayer", "get_volume") }
-    open fun getVolume(): Float {
-        return _icall_Float(getVolumeMethodBind, this.rawMemory)
+    open fun getVolume(): Double {
+        return _icall_Double(getVolumeMethodBind, this.rawMemory)
     }
 
 
     private val setVolumeDbMethodBind: CPointer<godot_method_bind> by lazy { getMB("VideoPlayer", "set_volume_db") }
-    open fun setVolumeDb(db: Float) {
-        _icall_Unit_Float(setVolumeDbMethodBind, this.rawMemory, db)
+    open fun setVolumeDb(db: Double) {
+        _icall_Unit_Double(setVolumeDbMethodBind, this.rawMemory, db)
     }
 
 
     private val getVolumeDbMethodBind: CPointer<godot_method_bind> by lazy { getMB("VideoPlayer", "get_volume_db") }
-    open fun getVolumeDb(): Float {
-        return _icall_Float(getVolumeDbMethodBind, this.rawMemory)
+    open fun getVolumeDb(): Double {
+        return _icall_Double(getVolumeDbMethodBind, this.rawMemory)
     }
 
 
     private val setAudioTrackMethodBind: CPointer<godot_method_bind> by lazy { getMB("VideoPlayer", "set_audio_track") }
-    open fun setAudioTrack(track: Int) {
-        _icall_Unit_Int(setAudioTrackMethodBind, this.rawMemory, track)
+    open fun setAudioTrack(track: Long) {
+        _icall_Unit_Long(setAudioTrackMethodBind, this.rawMemory, track)
     }
 
 
     private val getAudioTrackMethodBind: CPointer<godot_method_bind> by lazy { getMB("VideoPlayer", "get_audio_track") }
-    open fun getAudioTrack(): Int {
-        return _icall_Int(getAudioTrackMethodBind, this.rawMemory)
+    open fun getAudioTrack(): Long {
+        return _icall_Long(getAudioTrackMethodBind, this.rawMemory)
     }
 
 
@@ -182,14 +182,14 @@ open class VideoPlayer : Control {
 
 
     private val setStreamPositionMethodBind: CPointer<godot_method_bind> by lazy { getMB("VideoPlayer", "set_stream_position") }
-    open fun setStreamPosition(position: Float) {
-        _icall_Unit_Float(setStreamPositionMethodBind, this.rawMemory, position)
+    open fun setStreamPosition(position: Double) {
+        _icall_Unit_Double(setStreamPositionMethodBind, this.rawMemory, position)
     }
 
 
     private val getStreamPositionMethodBind: CPointer<godot_method_bind> by lazy { getMB("VideoPlayer", "get_stream_position") }
-    open fun getStreamPosition(): Float {
-        return _icall_Float(getStreamPositionMethodBind, this.rawMemory)
+    open fun getStreamPosition(): Double {
+        return _icall_Double(getStreamPositionMethodBind, this.rawMemory)
     }
 
 
@@ -218,14 +218,14 @@ open class VideoPlayer : Control {
 
 
     private val setBufferingMsecMethodBind: CPointer<godot_method_bind> by lazy { getMB("VideoPlayer", "set_buffering_msec") }
-    open fun setBufferingMsec(msec: Int) {
-        _icall_Unit_Int(setBufferingMsecMethodBind, this.rawMemory, msec)
+    open fun setBufferingMsec(msec: Long) {
+        _icall_Unit_Long(setBufferingMsecMethodBind, this.rawMemory, msec)
     }
 
 
     private val getBufferingMsecMethodBind: CPointer<godot_method_bind> by lazy { getMB("VideoPlayer", "get_buffering_msec") }
-    open fun getBufferingMsec(): Int {
-        return _icall_Int(getBufferingMsecMethodBind, this.rawMemory)
+    open fun getBufferingMsec(): Long {
+        return _icall_Long(getBufferingMsecMethodBind, this.rawMemory)
     }
 
 

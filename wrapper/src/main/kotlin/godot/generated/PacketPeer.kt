@@ -57,7 +57,7 @@ open class PacketPeer : Reference {
 
     private val putVarMethodBind: CPointer<godot_method_bind> by lazy { getMB("PacketPeer", "put_var") }
     open fun putVar(_var: Variant): GodotError {
-        return GodotError.fromInt(_icall_Int_Variant(putVarMethodBind, this.rawMemory, _var))
+        return GodotError.fromInt(_icall_Long_Variant(putVarMethodBind, this.rawMemory, _var))
     }
 
 
@@ -69,19 +69,19 @@ open class PacketPeer : Reference {
 
     private val putPacketMethodBind: CPointer<godot_method_bind> by lazy { getMB("PacketPeer", "put_packet") }
     open fun putPacket(buffer: PoolByteArray): GodotError {
-        return GodotError.fromInt(_icall_Int_PoolByteArray(putPacketMethodBind, this.rawMemory, buffer))
+        return GodotError.fromInt(_icall_Long_PoolByteArray(putPacketMethodBind, this.rawMemory, buffer))
     }
 
 
     private val getPacketErrorMethodBind: CPointer<godot_method_bind> by lazy { getMB("PacketPeer", "get_packet_error") }
     open fun getPacketError(): GodotError {
-        return GodotError.fromInt(_icall_Int(getPacketErrorMethodBind, this.rawMemory))
+        return GodotError.fromInt(_icall_Long(getPacketErrorMethodBind, this.rawMemory))
     }
 
 
     private val getAvailablePacketCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("PacketPeer", "get_available_packet_count") }
-    open fun getAvailablePacketCount(): Int {
-        return _icall_Int(getAvailablePacketCountMethodBind, this.rawMemory)
+    open fun getAvailablePacketCount(): Long {
+        return _icall_Long(getAvailablePacketCountMethodBind, this.rawMemory)
     }
 
 

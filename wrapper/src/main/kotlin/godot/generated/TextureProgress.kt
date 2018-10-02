@@ -19,7 +19,7 @@ open class TextureProgress : Range {
 
     // Enums 
 
-    enum class FillMode(val id: Int) {
+    enum class FillMode(val id: Long) {
         FILL_LEFT_TO_RIGHT(0),
         FILL_RIGHT_TO_LEFT(1),
         FILL_TOP_TO_BOTTOM(2),
@@ -29,7 +29,7 @@ open class TextureProgress : Range {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -51,12 +51,12 @@ open class TextureProgress : Range {
 
 
         // Constants
-        const val FILL_LEFT_TO_RIGHT: Int = 0
-        const val FILL_RIGHT_TO_LEFT: Int = 1
-        const val FILL_TOP_TO_BOTTOM: Int = 2
-        const val FILL_BOTTOM_TO_TOP: Int = 3
-        const val FILL_CLOCKWISE: Int = 4
-        const val FILL_COUNTER_CLOCKWISE: Int = 5
+        const val FILL_LEFT_TO_RIGHT: Long = 0
+        const val FILL_RIGHT_TO_LEFT: Long = 1
+        const val FILL_TOP_TO_BOTTOM: Long = 2
+        const val FILL_BOTTOM_TO_TOP: Long = 3
+        const val FILL_CLOCKWISE: Long = 4
+        const val FILL_COUNTER_CLOCKWISE: Long = 5
 
 
     }
@@ -78,9 +78,9 @@ open class TextureProgress : Range {
         set(value) = _icall_Unit_Object(setProgressTextureMethodBind, this.rawMemory, value)
 
 
-    open var fillMode: Int
-        get() = _icall_Int(getFillModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setFillModeMethodBind, this.rawMemory, value)
+    open var fillMode: Long
+        get() = _icall_Long(getFillModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setFillModeMethodBind, this.rawMemory, value)
 
 
     open var tintUnder: Color
@@ -110,14 +110,14 @@ open class TextureProgress : Range {
     }
 
 
-    open var radialInitialAngle: Float
-        get() = _icall_Float(getRadialInitialAngleMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setRadialInitialAngleMethodBind, this.rawMemory, value)
+    open var radialInitialAngle: Double
+        get() = _icall_Double(getRadialInitialAngleMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setRadialInitialAngleMethodBind, this.rawMemory, value)
 
 
-    open var radialFillDegrees: Float
-        get() = _icall_Float(getFillDegreesMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setFillDegreesMethodBind, this.rawMemory, value)
+    open var radialFillDegrees: Double
+        get() = _icall_Double(getFillDegreesMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setFillDegreesMethodBind, this.rawMemory, value)
 
 
     open var radialCenterOffset: Vector2
@@ -134,24 +134,24 @@ open class TextureProgress : Range {
         set(value) = _icall_Unit_Boolean(setNinePatchStretchMethodBind, this.rawMemory, value)
 
 
-    open var stretchMarginLeft: Int
-        get() = _icall_Int_Int(getStretchMarginMethodBind, this.rawMemory, 0)
-        set(value) = _icall_Unit_Int_Int(setStretchMarginMethodBind, this.rawMemory, 0, value)
+    open var stretchMarginLeft: Long
+        get() = _icall_Long_Long(getStretchMarginMethodBind, this.rawMemory, 0)
+        set(value) = _icall_Unit_Long_Long(setStretchMarginMethodBind, this.rawMemory, 0, value)
 
 
-    open var stretchMarginTop: Int
-        get() = _icall_Int_Int(getStretchMarginMethodBind, this.rawMemory, 1)
-        set(value) = _icall_Unit_Int_Int(setStretchMarginMethodBind, this.rawMemory, 1, value)
+    open var stretchMarginTop: Long
+        get() = _icall_Long_Long(getStretchMarginMethodBind, this.rawMemory, 1)
+        set(value) = _icall_Unit_Long_Long(setStretchMarginMethodBind, this.rawMemory, 1, value)
 
 
-    open var stretchMarginRight: Int
-        get() = _icall_Int_Int(getStretchMarginMethodBind, this.rawMemory, 2)
-        set(value) = _icall_Unit_Int_Int(setStretchMarginMethodBind, this.rawMemory, 2, value)
+    open var stretchMarginRight: Long
+        get() = _icall_Long_Long(getStretchMarginMethodBind, this.rawMemory, 2)
+        set(value) = _icall_Unit_Long_Long(setStretchMarginMethodBind, this.rawMemory, 2, value)
 
 
-    open var stretchMarginBottom: Int
-        get() = _icall_Int_Int(getStretchMarginMethodBind, this.rawMemory, 3)
-        set(value) = _icall_Unit_Int_Int(setStretchMarginMethodBind, this.rawMemory, 3, value)
+    open var stretchMarginBottom: Long
+        get() = _icall_Long_Long(getStretchMarginMethodBind, this.rawMemory, 3)
+        set(value) = _icall_Unit_Long_Long(setStretchMarginMethodBind, this.rawMemory, 3, value)
 
 
 
@@ -194,14 +194,14 @@ open class TextureProgress : Range {
 
 
     private val setFillModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("TextureProgress", "set_fill_mode") }
-    open fun setFillMode(mode: Int) {
-        _icall_Unit_Int(setFillModeMethodBind, this.rawMemory, mode)
+    open fun setFillMode(mode: Long) {
+        _icall_Unit_Long(setFillModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getFillModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("TextureProgress", "get_fill_mode") }
-    open fun getFillMode(): Int {
-        return _icall_Int(getFillModeMethodBind, this.rawMemory)
+    open fun getFillMode(): Long {
+        return _icall_Long(getFillModeMethodBind, this.rawMemory)
     }
 
 
@@ -242,14 +242,14 @@ open class TextureProgress : Range {
 
 
     private val setRadialInitialAngleMethodBind: CPointer<godot_method_bind> by lazy { getMB("TextureProgress", "set_radial_initial_angle") }
-    open fun setRadialInitialAngle(mode: Float) {
-        _icall_Unit_Float(setRadialInitialAngleMethodBind, this.rawMemory, mode)
+    open fun setRadialInitialAngle(mode: Double) {
+        _icall_Unit_Double(setRadialInitialAngleMethodBind, this.rawMemory, mode)
     }
 
 
     private val getRadialInitialAngleMethodBind: CPointer<godot_method_bind> by lazy { getMB("TextureProgress", "get_radial_initial_angle") }
-    open fun getRadialInitialAngle(): Float {
-        return _icall_Float(getRadialInitialAngleMethodBind, this.rawMemory)
+    open fun getRadialInitialAngle(): Double {
+        return _icall_Double(getRadialInitialAngleMethodBind, this.rawMemory)
     }
 
 
@@ -266,26 +266,26 @@ open class TextureProgress : Range {
 
 
     private val setFillDegreesMethodBind: CPointer<godot_method_bind> by lazy { getMB("TextureProgress", "set_fill_degrees") }
-    open fun setFillDegrees(mode: Float) {
-        _icall_Unit_Float(setFillDegreesMethodBind, this.rawMemory, mode)
+    open fun setFillDegrees(mode: Double) {
+        _icall_Unit_Double(setFillDegreesMethodBind, this.rawMemory, mode)
     }
 
 
     private val getFillDegreesMethodBind: CPointer<godot_method_bind> by lazy { getMB("TextureProgress", "get_fill_degrees") }
-    open fun getFillDegrees(): Float {
-        return _icall_Float(getFillDegreesMethodBind, this.rawMemory)
+    open fun getFillDegrees(): Double {
+        return _icall_Double(getFillDegreesMethodBind, this.rawMemory)
     }
 
 
     private val setStretchMarginMethodBind: CPointer<godot_method_bind> by lazy { getMB("TextureProgress", "set_stretch_margin") }
-    open fun setStretchMargin(margin: Int, value: Int) {
-        _icall_Unit_Int_Int(setStretchMarginMethodBind, this.rawMemory, margin, value)
+    open fun setStretchMargin(margin: Long, value: Long) {
+        _icall_Unit_Long_Long(setStretchMarginMethodBind, this.rawMemory, margin, value)
     }
 
 
     private val getStretchMarginMethodBind: CPointer<godot_method_bind> by lazy { getMB("TextureProgress", "get_stretch_margin") }
-    open fun getStretchMargin(margin: Int): Int {
-        return _icall_Int_Int(getStretchMarginMethodBind, this.rawMemory, margin)
+    open fun getStretchMargin(margin: Long): Long {
+        return _icall_Long_Long(getStretchMarginMethodBind, this.rawMemory, margin)
     }
 
 

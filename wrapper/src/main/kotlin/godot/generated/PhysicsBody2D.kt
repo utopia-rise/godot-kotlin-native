@@ -44,72 +44,72 @@ open class PhysicsBody2D : CollisionObject2D {
 
 
     // Properties
-    open var collisionLayer: Int
-        get() = _icall_Int(getCollisionLayerMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setCollisionLayerMethodBind, this.rawMemory, value)
+    open var collisionLayer: Long
+        get() = _icall_Long(getCollisionLayerMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setCollisionLayerMethodBind, this.rawMemory, value)
 
 
-    open var collisionMask: Int
-        get() = _icall_Int(getCollisionMaskMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setCollisionMaskMethodBind, this.rawMemory, value)
+    open var collisionMask: Long
+        get() = _icall_Long(getCollisionMaskMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setCollisionMaskMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setCollisionLayerMethodBind: CPointer<godot_method_bind> by lazy { getMB("PhysicsBody2D", "set_collision_layer") }
-    open fun setCollisionLayer(layer: Int) {
-        _icall_Unit_Int(setCollisionLayerMethodBind, this.rawMemory, layer)
+    open fun setCollisionLayer(layer: Long) {
+        _icall_Unit_Long(setCollisionLayerMethodBind, this.rawMemory, layer)
     }
 
 
     private val getCollisionLayerMethodBind: CPointer<godot_method_bind> by lazy { getMB("PhysicsBody2D", "get_collision_layer") }
-    open fun getCollisionLayer(): Int {
-        return _icall_Int(getCollisionLayerMethodBind, this.rawMemory)
+    open fun getCollisionLayer(): Long {
+        return _icall_Long(getCollisionLayerMethodBind, this.rawMemory)
     }
 
 
     private val setCollisionMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("PhysicsBody2D", "set_collision_mask") }
-    open fun setCollisionMask(mask: Int) {
-        _icall_Unit_Int(setCollisionMaskMethodBind, this.rawMemory, mask)
+    open fun setCollisionMask(mask: Long) {
+        _icall_Unit_Long(setCollisionMaskMethodBind, this.rawMemory, mask)
     }
 
 
     private val getCollisionMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("PhysicsBody2D", "get_collision_mask") }
-    open fun getCollisionMask(): Int {
-        return _icall_Int(getCollisionMaskMethodBind, this.rawMemory)
+    open fun getCollisionMask(): Long {
+        return _icall_Long(getCollisionMaskMethodBind, this.rawMemory)
     }
 
 
     private val setCollisionMaskBitMethodBind: CPointer<godot_method_bind> by lazy { getMB("PhysicsBody2D", "set_collision_mask_bit") }
-    open fun setCollisionMaskBit(bit: Int, value: Boolean) {
-        _icall_Unit_Int_Boolean(setCollisionMaskBitMethodBind, this.rawMemory, bit, value)
+    open fun setCollisionMaskBit(bit: Long, value: Boolean) {
+        _icall_Unit_Long_Boolean(setCollisionMaskBitMethodBind, this.rawMemory, bit, value)
     }
 
 
     private val getCollisionMaskBitMethodBind: CPointer<godot_method_bind> by lazy { getMB("PhysicsBody2D", "get_collision_mask_bit") }
-    open fun getCollisionMaskBit(bit: Int): Boolean {
-        return _icall_Boolean_Int(getCollisionMaskBitMethodBind, this.rawMemory, bit)
+    open fun getCollisionMaskBit(bit: Long): Boolean {
+        return _icall_Boolean_Long(getCollisionMaskBitMethodBind, this.rawMemory, bit)
     }
 
 
     private val setCollisionLayerBitMethodBind: CPointer<godot_method_bind> by lazy { getMB("PhysicsBody2D", "set_collision_layer_bit") }
-    open fun setCollisionLayerBit(bit: Int, value: Boolean) {
-        _icall_Unit_Int_Boolean(setCollisionLayerBitMethodBind, this.rawMemory, bit, value)
+    open fun setCollisionLayerBit(bit: Long, value: Boolean) {
+        _icall_Unit_Long_Boolean(setCollisionLayerBitMethodBind, this.rawMemory, bit, value)
     }
 
 
     private val getCollisionLayerBitMethodBind: CPointer<godot_method_bind> by lazy { getMB("PhysicsBody2D", "get_collision_layer_bit") }
-    open fun getCollisionLayerBit(bit: Int): Boolean {
-        return _icall_Boolean_Int(getCollisionLayerBitMethodBind, this.rawMemory, bit)
+    open fun getCollisionLayerBit(bit: Long): Boolean {
+        return _icall_Boolean_Long(getCollisionLayerBitMethodBind, this.rawMemory, bit)
     }
 
 
-    open fun _set_layers(mask: Int) {
+    open fun _set_layers(mask: Long) {
     }
 
 
-    open fun _get_layers(): Int {
+    open fun _get_layers(): Long {
         throw NotImplementedError("_get_layers is not implemented for PhysicsBody2D")
     }
 

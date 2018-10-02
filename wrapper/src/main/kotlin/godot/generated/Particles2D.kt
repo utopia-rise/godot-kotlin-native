@@ -19,13 +19,13 @@ open class Particles2D : Node2D {
 
     // Enums 
 
-    enum class DrawOrder(val id: Int) {
+    enum class DrawOrder(val id: Long) {
         DRAW_ORDER_INDEX(0),
         DRAW_ORDER_LIFETIME(1),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -46,8 +46,8 @@ open class Particles2D : Node2D {
 
 
         // Constants
-        const val DRAW_ORDER_INDEX: Int = 0
-        const val DRAW_ORDER_LIFETIME: Int = 1
+        const val DRAW_ORDER_INDEX: Long = 0
+        const val DRAW_ORDER_LIFETIME: Long = 1
 
 
     }
@@ -59,14 +59,14 @@ open class Particles2D : Node2D {
         set(value) = _icall_Unit_Boolean(setEmittingMethodBind, this.rawMemory, value)
 
 
-    open var amount: Int
-        get() = _icall_Int(getAmountMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setAmountMethodBind, this.rawMemory, value)
+    open var amount: Long
+        get() = _icall_Long(getAmountMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setAmountMethodBind, this.rawMemory, value)
 
 
-    open var lifetime: Float
-        get() = _icall_Float(getLifetimeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setLifetimeMethodBind, this.rawMemory, value)
+    open var lifetime: Double
+        get() = _icall_Double(getLifetimeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setLifetimeMethodBind, this.rawMemory, value)
 
 
     open var oneShot: Boolean
@@ -74,29 +74,29 @@ open class Particles2D : Node2D {
         set(value) = _icall_Unit_Boolean(setOneShotMethodBind, this.rawMemory, value)
 
 
-    open var preprocess: Float
-        get() = _icall_Float(getPreProcessTimeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setPreProcessTimeMethodBind, this.rawMemory, value)
+    open var preprocess: Double
+        get() = _icall_Double(getPreProcessTimeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setPreProcessTimeMethodBind, this.rawMemory, value)
 
 
-    open var speedScale: Float
-        get() = _icall_Float(getSpeedScaleMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setSpeedScaleMethodBind, this.rawMemory, value)
+    open var speedScale: Double
+        get() = _icall_Double(getSpeedScaleMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setSpeedScaleMethodBind, this.rawMemory, value)
 
 
-    open var explosiveness: Float
-        get() = _icall_Float(getExplosivenessRatioMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setExplosivenessRatioMethodBind, this.rawMemory, value)
+    open var explosiveness: Double
+        get() = _icall_Double(getExplosivenessRatioMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setExplosivenessRatioMethodBind, this.rawMemory, value)
 
 
-    open var randomness: Float
-        get() = _icall_Float(getRandomnessRatioMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setRandomnessRatioMethodBind, this.rawMemory, value)
+    open var randomness: Double
+        get() = _icall_Double(getRandomnessRatioMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setRandomnessRatioMethodBind, this.rawMemory, value)
 
 
-    open var fixedFps: Int
-        get() = _icall_Int(getFixedFpsMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setFixedFpsMethodBind, this.rawMemory, value)
+    open var fixedFps: Long
+        get() = _icall_Long(getFixedFpsMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setFixedFpsMethodBind, this.rawMemory, value)
 
 
     open var fractDelta: Boolean
@@ -118,9 +118,9 @@ open class Particles2D : Node2D {
         set(value) = _icall_Unit_Boolean(setUseLocalCoordinatesMethodBind, this.rawMemory, value)
 
 
-    open var drawOrder: Int
-        get() = _icall_Int(getDrawOrderMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setDrawOrderMethodBind, this.rawMemory, value)
+    open var drawOrder: Long
+        get() = _icall_Long(getDrawOrderMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setDrawOrderMethodBind, this.rawMemory, value)
 
 
     open var processMaterial: Material
@@ -138,14 +138,14 @@ open class Particles2D : Node2D {
         set(value) = _icall_Unit_Object(setNormalMapMethodBind, this.rawMemory, value)
 
 
-    open var hFrames: Int
-        get() = _icall_Int(getHFramesMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setHFramesMethodBind, this.rawMemory, value)
+    open var hFrames: Long
+        get() = _icall_Long(getHFramesMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setHFramesMethodBind, this.rawMemory, value)
 
 
-    open var vFrames: Int
-        get() = _icall_Int(getVFramesMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setVFramesMethodBind, this.rawMemory, value)
+    open var vFrames: Long
+        get() = _icall_Long(getVFramesMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setVFramesMethodBind, this.rawMemory, value)
 
 
 
@@ -158,14 +158,14 @@ open class Particles2D : Node2D {
 
 
     private val setAmountMethodBind: CPointer<godot_method_bind> by lazy { getMB("Particles2D", "set_amount") }
-    open fun setAmount(amount: Int) {
-        _icall_Unit_Int(setAmountMethodBind, this.rawMemory, amount)
+    open fun setAmount(amount: Long) {
+        _icall_Unit_Long(setAmountMethodBind, this.rawMemory, amount)
     }
 
 
     private val setLifetimeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Particles2D", "set_lifetime") }
-    open fun setLifetime(secs: Float) {
-        _icall_Unit_Float(setLifetimeMethodBind, this.rawMemory, secs)
+    open fun setLifetime(secs: Double) {
+        _icall_Unit_Double(setLifetimeMethodBind, this.rawMemory, secs)
     }
 
 
@@ -176,20 +176,20 @@ open class Particles2D : Node2D {
 
 
     private val setPreProcessTimeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Particles2D", "set_pre_process_time") }
-    open fun setPreProcessTime(secs: Float) {
-        _icall_Unit_Float(setPreProcessTimeMethodBind, this.rawMemory, secs)
+    open fun setPreProcessTime(secs: Double) {
+        _icall_Unit_Double(setPreProcessTimeMethodBind, this.rawMemory, secs)
     }
 
 
     private val setExplosivenessRatioMethodBind: CPointer<godot_method_bind> by lazy { getMB("Particles2D", "set_explosiveness_ratio") }
-    open fun setExplosivenessRatio(ratio: Float) {
-        _icall_Unit_Float(setExplosivenessRatioMethodBind, this.rawMemory, ratio)
+    open fun setExplosivenessRatio(ratio: Double) {
+        _icall_Unit_Double(setExplosivenessRatioMethodBind, this.rawMemory, ratio)
     }
 
 
     private val setRandomnessRatioMethodBind: CPointer<godot_method_bind> by lazy { getMB("Particles2D", "set_randomness_ratio") }
-    open fun setRandomnessRatio(ratio: Float) {
-        _icall_Unit_Float(setRandomnessRatioMethodBind, this.rawMemory, ratio)
+    open fun setRandomnessRatio(ratio: Double) {
+        _icall_Unit_Double(setRandomnessRatioMethodBind, this.rawMemory, ratio)
     }
 
 
@@ -206,8 +206,8 @@ open class Particles2D : Node2D {
 
 
     private val setFixedFpsMethodBind: CPointer<godot_method_bind> by lazy { getMB("Particles2D", "set_fixed_fps") }
-    open fun setFixedFps(fps: Int) {
-        _icall_Unit_Int(setFixedFpsMethodBind, this.rawMemory, fps)
+    open fun setFixedFps(fps: Long) {
+        _icall_Unit_Long(setFixedFpsMethodBind, this.rawMemory, fps)
     }
 
 
@@ -224,8 +224,8 @@ open class Particles2D : Node2D {
 
 
     private val setSpeedScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("Particles2D", "set_speed_scale") }
-    open fun setSpeedScale(scale: Float) {
-        _icall_Unit_Float(setSpeedScaleMethodBind, this.rawMemory, scale)
+    open fun setSpeedScale(scale: Double) {
+        _icall_Unit_Double(setSpeedScaleMethodBind, this.rawMemory, scale)
     }
 
 
@@ -236,14 +236,14 @@ open class Particles2D : Node2D {
 
 
     private val getAmountMethodBind: CPointer<godot_method_bind> by lazy { getMB("Particles2D", "get_amount") }
-    open fun getAmount(): Int {
-        return _icall_Int(getAmountMethodBind, this.rawMemory)
+    open fun getAmount(): Long {
+        return _icall_Long(getAmountMethodBind, this.rawMemory)
     }
 
 
     private val getLifetimeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Particles2D", "get_lifetime") }
-    open fun getLifetime(): Float {
-        return _icall_Float(getLifetimeMethodBind, this.rawMemory)
+    open fun getLifetime(): Double {
+        return _icall_Double(getLifetimeMethodBind, this.rawMemory)
     }
 
 
@@ -254,20 +254,20 @@ open class Particles2D : Node2D {
 
 
     private val getPreProcessTimeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Particles2D", "get_pre_process_time") }
-    open fun getPreProcessTime(): Float {
-        return _icall_Float(getPreProcessTimeMethodBind, this.rawMemory)
+    open fun getPreProcessTime(): Double {
+        return _icall_Double(getPreProcessTimeMethodBind, this.rawMemory)
     }
 
 
     private val getExplosivenessRatioMethodBind: CPointer<godot_method_bind> by lazy { getMB("Particles2D", "get_explosiveness_ratio") }
-    open fun getExplosivenessRatio(): Float {
-        return _icall_Float(getExplosivenessRatioMethodBind, this.rawMemory)
+    open fun getExplosivenessRatio(): Double {
+        return _icall_Double(getExplosivenessRatioMethodBind, this.rawMemory)
     }
 
 
     private val getRandomnessRatioMethodBind: CPointer<godot_method_bind> by lazy { getMB("Particles2D", "get_randomness_ratio") }
-    open fun getRandomnessRatio(): Float {
-        return _icall_Float(getRandomnessRatioMethodBind, this.rawMemory)
+    open fun getRandomnessRatio(): Double {
+        return _icall_Double(getRandomnessRatioMethodBind, this.rawMemory)
     }
 
 
@@ -284,8 +284,8 @@ open class Particles2D : Node2D {
 
 
     private val getFixedFpsMethodBind: CPointer<godot_method_bind> by lazy { getMB("Particles2D", "get_fixed_fps") }
-    open fun getFixedFps(): Int {
-        return _icall_Int(getFixedFpsMethodBind, this.rawMemory)
+    open fun getFixedFps(): Long {
+        return _icall_Long(getFixedFpsMethodBind, this.rawMemory)
     }
 
 
@@ -302,20 +302,20 @@ open class Particles2D : Node2D {
 
 
     private val getSpeedScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("Particles2D", "get_speed_scale") }
-    open fun getSpeedScale(): Float {
-        return _icall_Float(getSpeedScaleMethodBind, this.rawMemory)
+    open fun getSpeedScale(): Double {
+        return _icall_Double(getSpeedScaleMethodBind, this.rawMemory)
     }
 
 
     private val setDrawOrderMethodBind: CPointer<godot_method_bind> by lazy { getMB("Particles2D", "set_draw_order") }
-    open fun setDrawOrder(order: Int) {
-        _icall_Unit_Int(setDrawOrderMethodBind, this.rawMemory, order)
+    open fun setDrawOrder(order: Long) {
+        _icall_Unit_Long(setDrawOrderMethodBind, this.rawMemory, order)
     }
 
 
     private val getDrawOrderMethodBind: CPointer<godot_method_bind> by lazy { getMB("Particles2D", "get_draw_order") }
     open fun getDrawOrder(): Particles2D.DrawOrder {
-        return Particles2D.DrawOrder.fromInt(_icall_Int(getDrawOrderMethodBind, this.rawMemory))
+        return Particles2D.DrawOrder.fromInt(_icall_Long(getDrawOrderMethodBind, this.rawMemory))
     }
 
 
@@ -350,26 +350,26 @@ open class Particles2D : Node2D {
 
 
     private val setVFramesMethodBind: CPointer<godot_method_bind> by lazy { getMB("Particles2D", "set_v_frames") }
-    open fun setVFrames(frames: Int) {
-        _icall_Unit_Int(setVFramesMethodBind, this.rawMemory, frames)
+    open fun setVFrames(frames: Long) {
+        _icall_Unit_Long(setVFramesMethodBind, this.rawMemory, frames)
     }
 
 
     private val getVFramesMethodBind: CPointer<godot_method_bind> by lazy { getMB("Particles2D", "get_v_frames") }
-    open fun getVFrames(): Int {
-        return _icall_Int(getVFramesMethodBind, this.rawMemory)
+    open fun getVFrames(): Long {
+        return _icall_Long(getVFramesMethodBind, this.rawMemory)
     }
 
 
     private val setHFramesMethodBind: CPointer<godot_method_bind> by lazy { getMB("Particles2D", "set_h_frames") }
-    open fun setHFrames(frames: Int) {
-        _icall_Unit_Int(setHFramesMethodBind, this.rawMemory, frames)
+    open fun setHFrames(frames: Long) {
+        _icall_Unit_Long(setHFramesMethodBind, this.rawMemory, frames)
     }
 
 
     private val getHFramesMethodBind: CPointer<godot_method_bind> by lazy { getMB("Particles2D", "get_h_frames") }
-    open fun getHFrames(): Int {
-        return _icall_Int(getHFramesMethodBind, this.rawMemory)
+    open fun getHFrames(): Long {
+        return _icall_Long(getHFramesMethodBind, this.rawMemory)
     }
 
 

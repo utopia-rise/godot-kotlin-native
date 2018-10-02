@@ -44,40 +44,40 @@ open class GrooveJoint2D : Joint2D {
 
 
     // Properties
-    open var length: Float
-        get() = _icall_Float(getLengthMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setLengthMethodBind, this.rawMemory, value)
+    open var length: Double
+        get() = _icall_Double(getLengthMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setLengthMethodBind, this.rawMemory, value)
 
 
-    open var initialOffset: Float
-        get() = _icall_Float(getInitialOffsetMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setInitialOffsetMethodBind, this.rawMemory, value)
+    open var initialOffset: Double
+        get() = _icall_Double(getInitialOffsetMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setInitialOffsetMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setLengthMethodBind: CPointer<godot_method_bind> by lazy { getMB("GrooveJoint2D", "set_length") }
-    open fun setLength(length: Float) {
-        _icall_Unit_Float(setLengthMethodBind, this.rawMemory, length)
+    open fun setLength(length: Double) {
+        _icall_Unit_Double(setLengthMethodBind, this.rawMemory, length)
     }
 
 
     private val getLengthMethodBind: CPointer<godot_method_bind> by lazy { getMB("GrooveJoint2D", "get_length") }
-    open fun getLength(): Float {
-        return _icall_Float(getLengthMethodBind, this.rawMemory)
+    open fun getLength(): Double {
+        return _icall_Double(getLengthMethodBind, this.rawMemory)
     }
 
 
     private val setInitialOffsetMethodBind: CPointer<godot_method_bind> by lazy { getMB("GrooveJoint2D", "set_initial_offset") }
-    open fun setInitialOffset(offset: Float) {
-        _icall_Unit_Float(setInitialOffsetMethodBind, this.rawMemory, offset)
+    open fun setInitialOffset(offset: Double) {
+        _icall_Unit_Double(setInitialOffsetMethodBind, this.rawMemory, offset)
     }
 
 
     private val getInitialOffsetMethodBind: CPointer<godot_method_bind> by lazy { getMB("GrooveJoint2D", "get_initial_offset") }
-    open fun getInitialOffset(): Float {
-        return _icall_Float(getInitialOffsetMethodBind, this.rawMemory)
+    open fun getInitialOffset(): Double {
+        return _icall_Double(getInitialOffsetMethodBind, this.rawMemory)
     }
 
 

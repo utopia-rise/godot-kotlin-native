@@ -56,50 +56,50 @@ open class Gradient : Resource {
 
     // Methods
     private val addPointMethodBind: CPointer<godot_method_bind> by lazy { getMB("Gradient", "add_point") }
-    open fun addPoint(offset: Float, color: Color) {
-        _icall_Unit_Float_Color(addPointMethodBind, this.rawMemory, offset, color)
+    open fun addPoint(offset: Double, color: Color) {
+        _icall_Unit_Double_Color(addPointMethodBind, this.rawMemory, offset, color)
     }
 
 
     private val removePointMethodBind: CPointer<godot_method_bind> by lazy { getMB("Gradient", "remove_point") }
-    open fun removePoint(offset: Int) {
-        _icall_Unit_Int(removePointMethodBind, this.rawMemory, offset)
+    open fun removePoint(offset: Long) {
+        _icall_Unit_Long(removePointMethodBind, this.rawMemory, offset)
     }
 
 
     private val setOffsetMethodBind: CPointer<godot_method_bind> by lazy { getMB("Gradient", "set_offset") }
-    open fun setOffset(point: Int, offset: Float) {
-        _icall_Unit_Int_Float(setOffsetMethodBind, this.rawMemory, point, offset)
+    open fun setOffset(point: Long, offset: Double) {
+        _icall_Unit_Long_Double(setOffsetMethodBind, this.rawMemory, point, offset)
     }
 
 
     private val getOffsetMethodBind: CPointer<godot_method_bind> by lazy { getMB("Gradient", "get_offset") }
-    open fun getOffset(point: Int): Float {
-        return _icall_Float_Int(getOffsetMethodBind, this.rawMemory, point)
+    open fun getOffset(point: Long): Double {
+        return _icall_Double_Long(getOffsetMethodBind, this.rawMemory, point)
     }
 
 
     private val setColorMethodBind: CPointer<godot_method_bind> by lazy { getMB("Gradient", "set_color") }
-    open fun setColor(point: Int, color: Color) {
-        _icall_Unit_Int_Color(setColorMethodBind, this.rawMemory, point, color)
+    open fun setColor(point: Long, color: Color) {
+        _icall_Unit_Long_Color(setColorMethodBind, this.rawMemory, point, color)
     }
 
 
     private val getColorMethodBind: CPointer<godot_method_bind> by lazy { getMB("Gradient", "get_color") }
-    open fun getColor(point: Int): Color {
-        return _icall_Color_Int(getColorMethodBind, this.rawMemory, point)
+    open fun getColor(point: Long): Color {
+        return _icall_Color_Long(getColorMethodBind, this.rawMemory, point)
     }
 
 
     private val interpolateMethodBind: CPointer<godot_method_bind> by lazy { getMB("Gradient", "interpolate") }
-    open fun interpolate(offset: Float): Color {
-        return _icall_Color_Float(interpolateMethodBind, this.rawMemory, offset)
+    open fun interpolate(offset: Double): Color {
+        return _icall_Color_Double(interpolateMethodBind, this.rawMemory, offset)
     }
 
 
     private val getPointCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("Gradient", "get_point_count") }
-    open fun getPointCount(): Int {
-        return _icall_Int(getPointCountMethodBind, this.rawMemory)
+    open fun getPointCount(): Long {
+        return _icall_Long(getPointCountMethodBind, this.rawMemory)
     }
 
 

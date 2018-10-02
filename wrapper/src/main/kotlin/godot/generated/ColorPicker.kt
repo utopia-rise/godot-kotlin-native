@@ -127,7 +127,7 @@ open class ColorPicker : BoxContainer {
     }
 
 
-    open fun _value_changed(arg0: Float) {
+    open fun _value_changed(arg0: Double) {
     }
 
 
@@ -155,7 +155,7 @@ open class ColorPicker : BoxContainer {
     }
 
 
-    open fun _hsv_draw(arg0: Int, arg1: Object) {
+    open fun _hsv_draw(arg0: Long, arg1: Object) {
     }
 
 

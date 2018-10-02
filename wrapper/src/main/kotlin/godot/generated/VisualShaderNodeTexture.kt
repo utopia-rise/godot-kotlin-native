@@ -19,17 +19,17 @@ open class VisualShaderNodeTexture : VisualShaderNode {
 
     // Enums 
 
-    enum class TextureType(val id: Int) {
+    enum class TextureType(val id: Long) {
         TYPE_DATA(0),
         TYPE_COLOR(1),
         TYPE_NORMALMAP(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class Source(val id: Int) {
+    enum class Source(val id: Long) {
         SOURCE_TEXTURE(0),
         SOURCE_SCREEN(1),
         SOURCE_2D_TEXTURE(2),
@@ -37,7 +37,7 @@ open class VisualShaderNodeTexture : VisualShaderNode {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -58,22 +58,22 @@ open class VisualShaderNodeTexture : VisualShaderNode {
 
 
         // Constants
-        const val SOURCE_TEXTURE: Int = 0
-        const val SOURCE_SCREEN: Int = 1
-        const val SOURCE_2D_TEXTURE: Int = 2
-        const val SOURCE_2D_NORMAL: Int = 3
-        const val TYPE_DATA: Int = 0
-        const val TYPE_COLOR: Int = 1
-        const val TYPE_NORMALMAP: Int = 2
+        const val SOURCE_TEXTURE: Long = 0
+        const val SOURCE_SCREEN: Long = 1
+        const val SOURCE_2D_TEXTURE: Long = 2
+        const val SOURCE_2D_NORMAL: Long = 3
+        const val TYPE_DATA: Long = 0
+        const val TYPE_COLOR: Long = 1
+        const val TYPE_NORMALMAP: Long = 2
 
 
     }
 
 
     // Properties
-    open var source: Int
-        get() = _icall_Int(getSourceMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setSourceMethodBind, this.rawMemory, value)
+    open var source: Long
+        get() = _icall_Long(getSourceMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setSourceMethodBind, this.rawMemory, value)
 
 
     open var texture: Texture
@@ -81,23 +81,23 @@ open class VisualShaderNodeTexture : VisualShaderNode {
         set(value) = _icall_Unit_Object(setTextureMethodBind, this.rawMemory, value)
 
 
-    open var textureType: Int
-        get() = _icall_Int(getTextureTypeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setTextureTypeMethodBind, this.rawMemory, value)
+    open var textureType: Long
+        get() = _icall_Long(getTextureTypeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setTextureTypeMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setSourceMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualShaderNodeTexture", "set_source") }
-    open fun setSource(value: Int) {
-        _icall_Unit_Int(setSourceMethodBind, this.rawMemory, value)
+    open fun setSource(value: Long) {
+        _icall_Unit_Long(setSourceMethodBind, this.rawMemory, value)
     }
 
 
     private val getSourceMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualShaderNodeTexture", "get_source") }
     open fun getSource(): VisualShaderNodeTexture.Source {
-        return VisualShaderNodeTexture.Source.fromInt(_icall_Int(getSourceMethodBind, this.rawMemory))
+        return VisualShaderNodeTexture.Source.fromInt(_icall_Long(getSourceMethodBind, this.rawMemory))
     }
 
 
@@ -114,14 +114,14 @@ open class VisualShaderNodeTexture : VisualShaderNode {
 
 
     private val setTextureTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualShaderNodeTexture", "set_texture_type") }
-    open fun setTextureType(value: Int) {
-        _icall_Unit_Int(setTextureTypeMethodBind, this.rawMemory, value)
+    open fun setTextureType(value: Long) {
+        _icall_Unit_Long(setTextureTypeMethodBind, this.rawMemory, value)
     }
 
 
     private val getTextureTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualShaderNodeTexture", "get_texture_type") }
     open fun getTextureType(): VisualShaderNodeTexture.TextureType {
-        return VisualShaderNodeTexture.TextureType.fromInt(_icall_Int(getTextureTypeMethodBind, this.rawMemory))
+        return VisualShaderNodeTexture.TextureType.fromInt(_icall_Long(getTextureTypeMethodBind, this.rawMemory))
     }
 
 

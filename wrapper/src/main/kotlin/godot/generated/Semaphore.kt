@@ -46,13 +46,13 @@ open class Semaphore : Reference {
     // Methods
     private val waitMethodBind: CPointer<godot_method_bind> by lazy { getMB("_Semaphore", "wait") }
     open fun wait(): GodotError {
-        return GodotError.fromInt(_icall_Int(waitMethodBind, this.rawMemory))
+        return GodotError.fromInt(_icall_Long(waitMethodBind, this.rawMemory))
     }
 
 
     private val postMethodBind: CPointer<godot_method_bind> by lazy { getMB("_Semaphore", "post") }
     open fun post(): GodotError {
-        return GodotError.fromInt(_icall_Int(postMethodBind, this.rawMemory))
+        return GodotError.fromInt(_icall_Long(postMethodBind, this.rawMemory))
     }
 
 

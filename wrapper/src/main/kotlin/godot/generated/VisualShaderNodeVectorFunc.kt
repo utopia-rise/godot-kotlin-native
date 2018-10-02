@@ -19,7 +19,7 @@ open class VisualShaderNodeVectorFunc : VisualShaderNode {
 
     // Enums 
 
-    enum class Function(val id: Int) {
+    enum class Function(val id: Long) {
         FUNC_NORMALIZE(0),
         FUNC_SATURATE(1),
         FUNC_NEGATE(2),
@@ -29,7 +29,7 @@ open class VisualShaderNodeVectorFunc : VisualShaderNode {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -50,35 +50,35 @@ open class VisualShaderNodeVectorFunc : VisualShaderNode {
 
 
         // Constants
-        const val FUNC_NORMALIZE: Int = 0
-        const val FUNC_SATURATE: Int = 1
-        const val FUNC_NEGATE: Int = 2
-        const val FUNC_RECIPROCAL: Int = 3
-        const val FUNC_RGB2HSV: Int = 4
-        const val FUNC_HSV2RGB: Int = 5
+        const val FUNC_NORMALIZE: Long = 0
+        const val FUNC_SATURATE: Long = 1
+        const val FUNC_NEGATE: Long = 2
+        const val FUNC_RECIPROCAL: Long = 3
+        const val FUNC_RGB2HSV: Long = 4
+        const val FUNC_HSV2RGB: Long = 5
 
 
     }
 
 
     // Properties
-    open var function: Int
-        get() = _icall_Int(getFunctionMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setFunctionMethodBind, this.rawMemory, value)
+    open var function: Long
+        get() = _icall_Long(getFunctionMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setFunctionMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setFunctionMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualShaderNodeVectorFunc", "set_function") }
-    open fun setFunction(func: Int) {
-        _icall_Unit_Int(setFunctionMethodBind, this.rawMemory, func)
+    open fun setFunction(func: Long) {
+        _icall_Unit_Long(setFunctionMethodBind, this.rawMemory, func)
     }
 
 
     private val getFunctionMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualShaderNodeVectorFunc", "get_function") }
     open fun getFunction(): VisualShaderNodeVectorFunc.Function {
-        return VisualShaderNodeVectorFunc.Function.fromInt(_icall_Int(getFunctionMethodBind, this.rawMemory))
+        return VisualShaderNodeVectorFunc.Function.fromInt(_icall_Long(getFunctionMethodBind, this.rawMemory))
     }
 
 

@@ -19,13 +19,13 @@ open class AnimationNodeOneShot : AnimationNode {
 
     // Enums 
 
-    enum class MixMode(val id: Int) {
+    enum class MixMode(val id: Long) {
         MIX_MODE_BLEND(0),
         MIX_MODE_ADD(1),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -46,22 +46,22 @@ open class AnimationNodeOneShot : AnimationNode {
 
 
         // Constants
-        const val MIX_MODE_BLEND: Int = 0
-        const val MIX_MODE_ADD: Int = 1
+        const val MIX_MODE_BLEND: Long = 0
+        const val MIX_MODE_ADD: Long = 1
 
 
     }
 
 
     // Properties
-    open var fadeinTime: Float
-        get() = _icall_Float(getFadeinTimeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setFadeinTimeMethodBind, this.rawMemory, value)
+    open var fadeinTime: Double
+        get() = _icall_Double(getFadeinTimeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setFadeinTimeMethodBind, this.rawMemory, value)
 
 
-    open var fadeoutTime: Float
-        get() = _icall_Float(getFadeoutTimeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setFadeoutTimeMethodBind, this.rawMemory, value)
+    open var fadeoutTime: Double
+        get() = _icall_Double(getFadeoutTimeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setFadeoutTimeMethodBind, this.rawMemory, value)
 
 
     open var autorestart: Boolean
@@ -69,14 +69,14 @@ open class AnimationNodeOneShot : AnimationNode {
         set(value) = _icall_Unit_Boolean(setAutorestartMethodBind, this.rawMemory, value)
 
 
-    open var autorestartDelay: Float
-        get() = _icall_Float(getAutorestartDelayMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setAutorestartDelayMethodBind, this.rawMemory, value)
+    open var autorestartDelay: Double
+        get() = _icall_Double(getAutorestartDelayMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setAutorestartDelayMethodBind, this.rawMemory, value)
 
 
-    open var autorestartRandomDelay: Float
-        get() = _icall_Float(getAutorestartRandomDelayMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setAutorestartRandomDelayMethodBind, this.rawMemory, value)
+    open var autorestartRandomDelay: Double
+        get() = _icall_Double(getAutorestartRandomDelayMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setAutorestartRandomDelayMethodBind, this.rawMemory, value)
 
 
     open var sync: Boolean
@@ -88,26 +88,26 @@ open class AnimationNodeOneShot : AnimationNode {
 
     // Methods
     private val setFadeinTimeMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationNodeOneShot", "set_fadein_time") }
-    open fun setFadeinTime(time: Float) {
-        _icall_Unit_Float(setFadeinTimeMethodBind, this.rawMemory, time)
+    open fun setFadeinTime(time: Double) {
+        _icall_Unit_Double(setFadeinTimeMethodBind, this.rawMemory, time)
     }
 
 
     private val getFadeinTimeMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationNodeOneShot", "get_fadein_time") }
-    open fun getFadeinTime(): Float {
-        return _icall_Float(getFadeinTimeMethodBind, this.rawMemory)
+    open fun getFadeinTime(): Double {
+        return _icall_Double(getFadeinTimeMethodBind, this.rawMemory)
     }
 
 
     private val setFadeoutTimeMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationNodeOneShot", "set_fadeout_time") }
-    open fun setFadeoutTime(time: Float) {
-        _icall_Unit_Float(setFadeoutTimeMethodBind, this.rawMemory, time)
+    open fun setFadeoutTime(time: Double) {
+        _icall_Unit_Double(setFadeoutTimeMethodBind, this.rawMemory, time)
     }
 
 
     private val getFadeoutTimeMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationNodeOneShot", "get_fadeout_time") }
-    open fun getFadeoutTime(): Float {
-        return _icall_Float(getFadeoutTimeMethodBind, this.rawMemory)
+    open fun getFadeoutTime(): Double {
+        return _icall_Double(getFadeoutTimeMethodBind, this.rawMemory)
     }
 
 
@@ -124,38 +124,38 @@ open class AnimationNodeOneShot : AnimationNode {
 
 
     private val setAutorestartDelayMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationNodeOneShot", "set_autorestart_delay") }
-    open fun setAutorestartDelay(enable: Float) {
-        _icall_Unit_Float(setAutorestartDelayMethodBind, this.rawMemory, enable)
+    open fun setAutorestartDelay(enable: Double) {
+        _icall_Unit_Double(setAutorestartDelayMethodBind, this.rawMemory, enable)
     }
 
 
     private val getAutorestartDelayMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationNodeOneShot", "get_autorestart_delay") }
-    open fun getAutorestartDelay(): Float {
-        return _icall_Float(getAutorestartDelayMethodBind, this.rawMemory)
+    open fun getAutorestartDelay(): Double {
+        return _icall_Double(getAutorestartDelayMethodBind, this.rawMemory)
     }
 
 
     private val setAutorestartRandomDelayMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationNodeOneShot", "set_autorestart_random_delay") }
-    open fun setAutorestartRandomDelay(enable: Float) {
-        _icall_Unit_Float(setAutorestartRandomDelayMethodBind, this.rawMemory, enable)
+    open fun setAutorestartRandomDelay(enable: Double) {
+        _icall_Unit_Double(setAutorestartRandomDelayMethodBind, this.rawMemory, enable)
     }
 
 
     private val getAutorestartRandomDelayMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationNodeOneShot", "get_autorestart_random_delay") }
-    open fun getAutorestartRandomDelay(): Float {
-        return _icall_Float(getAutorestartRandomDelayMethodBind, this.rawMemory)
+    open fun getAutorestartRandomDelay(): Double {
+        return _icall_Double(getAutorestartRandomDelayMethodBind, this.rawMemory)
     }
 
 
     private val setMixModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationNodeOneShot", "set_mix_mode") }
-    open fun setMixMode(mode: Int) {
-        _icall_Unit_Int(setMixModeMethodBind, this.rawMemory, mode)
+    open fun setMixMode(mode: Long) {
+        _icall_Unit_Long(setMixModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getMixModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationNodeOneShot", "get_mix_mode") }
     open fun getMixMode(): AnimationNodeOneShot.MixMode {
-        return AnimationNodeOneShot.MixMode.fromInt(_icall_Int(getMixModeMethodBind, this.rawMemory))
+        return AnimationNodeOneShot.MixMode.fromInt(_icall_Long(getMixModeMethodBind, this.rawMemory))
     }
 
 

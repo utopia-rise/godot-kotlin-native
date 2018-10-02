@@ -48,8 +48,8 @@ open class WebSocketMultiplayerPeer : NetworkedMultiplayerPeer {
 
     // Methods
     private val getPeerMethodBind: CPointer<godot_method_bind> by lazy { getMB("WebSocketMultiplayerPeer", "get_peer") }
-    open fun getPeer(peerId: Int): WebSocketPeer {
-        return _icall_WebSocketPeer_Int(getPeerMethodBind, this.rawMemory, peerId)
+    open fun getPeer(peerId: Long): WebSocketPeer {
+        return _icall_WebSocketPeer_Long(getPeerMethodBind, this.rawMemory, peerId)
     }
 
 

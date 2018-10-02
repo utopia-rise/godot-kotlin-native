@@ -47,7 +47,7 @@ open class VisualScript : Script {
 
 
     // Methods
-    open fun _node_ports_changed(arg0: Int) {
+    open fun _node_ports_changed(arg0: Long) {
     }
 
 
@@ -88,80 +88,80 @@ open class VisualScript : Script {
 
 
     private val addNodeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScript", "add_node") }
-    open fun addNode(func: String, id: Int, node: VisualScriptNode, position: Vector2 = Vector2(0, 0)) {
-        _icall_Unit_String_Int_Object_Vector2(addNodeMethodBind, this.rawMemory, func, id, node, position)
+    open fun addNode(func: String, id: Long, node: VisualScriptNode, position: Vector2 = Vector2(0, 0)) {
+        _icall_Unit_String_Long_Object_Vector2(addNodeMethodBind, this.rawMemory, func, id, node, position)
     }
 
 
     private val removeNodeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScript", "remove_node") }
-    open fun removeNode(func: String, id: Int) {
-        _icall_Unit_String_Int(removeNodeMethodBind, this.rawMemory, func, id)
+    open fun removeNode(func: String, id: Long) {
+        _icall_Unit_String_Long(removeNodeMethodBind, this.rawMemory, func, id)
     }
 
 
     private val getFunctionNodeIdMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScript", "get_function_node_id") }
-    open fun getFunctionNodeId(name: String): Int {
-        return _icall_Int_String(getFunctionNodeIdMethodBind, this.rawMemory, name)
+    open fun getFunctionNodeId(name: String): Long {
+        return _icall_Long_String(getFunctionNodeIdMethodBind, this.rawMemory, name)
     }
 
 
     private val getNodeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScript", "get_node") }
-    open fun getNode(func: String, id: Int): VisualScriptNode {
-        return _icall_VisualScriptNode_String_Int(getNodeMethodBind, this.rawMemory, func, id)
+    open fun getNode(func: String, id: Long): VisualScriptNode {
+        return _icall_VisualScriptNode_String_Long(getNodeMethodBind, this.rawMemory, func, id)
     }
 
 
     private val hasNodeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScript", "has_node") }
-    open fun hasNode(func: String, id: Int): Boolean {
-        return _icall_Boolean_String_Int(hasNodeMethodBind, this.rawMemory, func, id)
+    open fun hasNode(func: String, id: Long): Boolean {
+        return _icall_Boolean_String_Long(hasNodeMethodBind, this.rawMemory, func, id)
     }
 
 
     private val setNodePositionMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScript", "set_node_position") }
-    open fun setNodePosition(func: String, id: Int, position: Vector2) {
-        _icall_Unit_String_Int_Vector2(setNodePositionMethodBind, this.rawMemory, func, id, position)
+    open fun setNodePosition(func: String, id: Long, position: Vector2) {
+        _icall_Unit_String_Long_Vector2(setNodePositionMethodBind, this.rawMemory, func, id, position)
     }
 
 
     private val getNodePositionMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScript", "get_node_position") }
-    open fun getNodePosition(func: String, id: Int): Vector2 {
-        return _icall_Vector2_String_Int(getNodePositionMethodBind, this.rawMemory, func, id)
+    open fun getNodePosition(func: String, id: Long): Vector2 {
+        return _icall_Vector2_String_Long(getNodePositionMethodBind, this.rawMemory, func, id)
     }
 
 
     private val sequenceConnectMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScript", "sequence_connect") }
-    open fun sequenceConnect(func: String, fromNode: Int, fromOutput: Int, toNode: Int) {
-        _icall_Unit_String_Int_Int_Int(sequenceConnectMethodBind, this.rawMemory, func, fromNode, fromOutput, toNode)
+    open fun sequenceConnect(func: String, fromNode: Long, fromOutput: Long, toNode: Long) {
+        _icall_Unit_String_Long_Long_Long(sequenceConnectMethodBind, this.rawMemory, func, fromNode, fromOutput, toNode)
     }
 
 
     private val sequenceDisconnectMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScript", "sequence_disconnect") }
-    open fun sequenceDisconnect(func: String, fromNode: Int, fromOutput: Int, toNode: Int) {
-        _icall_Unit_String_Int_Int_Int(sequenceDisconnectMethodBind, this.rawMemory, func, fromNode, fromOutput, toNode)
+    open fun sequenceDisconnect(func: String, fromNode: Long, fromOutput: Long, toNode: Long) {
+        _icall_Unit_String_Long_Long_Long(sequenceDisconnectMethodBind, this.rawMemory, func, fromNode, fromOutput, toNode)
     }
 
 
     private val hasSequenceConnectionMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScript", "has_sequence_connection") }
-    open fun hasSequenceConnection(func: String, fromNode: Int, fromOutput: Int, toNode: Int): Boolean {
-        return _icall_Boolean_String_Int_Int_Int(hasSequenceConnectionMethodBind, this.rawMemory, func, fromNode, fromOutput, toNode)
+    open fun hasSequenceConnection(func: String, fromNode: Long, fromOutput: Long, toNode: Long): Boolean {
+        return _icall_Boolean_String_Long_Long_Long(hasSequenceConnectionMethodBind, this.rawMemory, func, fromNode, fromOutput, toNode)
     }
 
 
     private val dataConnectMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScript", "data_connect") }
-    open fun dataConnect(func: String, fromNode: Int, fromPort: Int, toNode: Int, toPort: Int) {
-        _icall_Unit_String_Int_Int_Int_Int(dataConnectMethodBind, this.rawMemory, func, fromNode, fromPort, toNode, toPort)
+    open fun dataConnect(func: String, fromNode: Long, fromPort: Long, toNode: Long, toPort: Long) {
+        _icall_Unit_String_Long_Long_Long_Long(dataConnectMethodBind, this.rawMemory, func, fromNode, fromPort, toNode, toPort)
     }
 
 
     private val dataDisconnectMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScript", "data_disconnect") }
-    open fun dataDisconnect(func: String, fromNode: Int, fromPort: Int, toNode: Int, toPort: Int) {
-        _icall_Unit_String_Int_Int_Int_Int(dataDisconnectMethodBind, this.rawMemory, func, fromNode, fromPort, toNode, toPort)
+    open fun dataDisconnect(func: String, fromNode: Long, fromPort: Long, toNode: Long, toPort: Long) {
+        _icall_Unit_String_Long_Long_Long_Long(dataDisconnectMethodBind, this.rawMemory, func, fromNode, fromPort, toNode, toPort)
     }
 
 
     private val hasDataConnectionMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScript", "has_data_connection") }
-    open fun hasDataConnection(func: String, fromNode: Int, fromPort: Int, toNode: Int, toPort: Int): Boolean {
-        return _icall_Boolean_String_Int_Int_Int_Int(hasDataConnectionMethodBind, this.rawMemory, func, fromNode, fromPort, toNode, toPort)
+    open fun hasDataConnection(func: String, fromNode: Long, fromPort: Long, toNode: Long, toPort: Long): Boolean {
+        return _icall_Boolean_String_Long_Long_Long_Long(hasDataConnectionMethodBind, this.rawMemory, func, fromNode, fromPort, toNode, toPort)
     }
 
 
@@ -238,50 +238,50 @@ open class VisualScript : Script {
 
 
     private val customSignalAddArgumentMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScript", "custom_signal_add_argument") }
-    open fun customSignalAddArgument(name: String, type: Int, argname: String, index: Int = -1) {
-        _icall_Unit_String_Int_String_Int(customSignalAddArgumentMethodBind, this.rawMemory, name, type, argname, index)
+    open fun customSignalAddArgument(name: String, type: Long, argname: String, index: Long = -1) {
+        _icall_Unit_String_Long_String_Long(customSignalAddArgumentMethodBind, this.rawMemory, name, type, argname, index)
     }
 
 
     private val customSignalSetArgumentTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScript", "custom_signal_set_argument_type") }
-    open fun customSignalSetArgumentType(name: String, argidx: Int, type: Int) {
-        _icall_Unit_String_Int_Int(customSignalSetArgumentTypeMethodBind, this.rawMemory, name, argidx, type)
+    open fun customSignalSetArgumentType(name: String, argidx: Long, type: Long) {
+        _icall_Unit_String_Long_Long(customSignalSetArgumentTypeMethodBind, this.rawMemory, name, argidx, type)
     }
 
 
     private val customSignalGetArgumentTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScript", "custom_signal_get_argument_type") }
-    open fun customSignalGetArgumentType(name: String, argidx: Int): Variant.Type {
-        return Variant.Type.fromInt(_icall_Int_String_Int(customSignalGetArgumentTypeMethodBind, this.rawMemory, name, argidx))
+    open fun customSignalGetArgumentType(name: String, argidx: Long): Variant.Type {
+        return Variant.Type.fromInt(_icall_Long_String_Long(customSignalGetArgumentTypeMethodBind, this.rawMemory, name, argidx))
     }
 
 
     private val customSignalSetArgumentNameMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScript", "custom_signal_set_argument_name") }
-    open fun customSignalSetArgumentName(name: String, argidx: Int, argname: String) {
-        _icall_Unit_String_Int_String(customSignalSetArgumentNameMethodBind, this.rawMemory, name, argidx, argname)
+    open fun customSignalSetArgumentName(name: String, argidx: Long, argname: String) {
+        _icall_Unit_String_Long_String(customSignalSetArgumentNameMethodBind, this.rawMemory, name, argidx, argname)
     }
 
 
     private val customSignalGetArgumentNameMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScript", "custom_signal_get_argument_name") }
-    open fun customSignalGetArgumentName(name: String, argidx: Int): String {
-        return _icall_String_String_Int(customSignalGetArgumentNameMethodBind, this.rawMemory, name, argidx)
+    open fun customSignalGetArgumentName(name: String, argidx: Long): String {
+        return _icall_String_String_Long(customSignalGetArgumentNameMethodBind, this.rawMemory, name, argidx)
     }
 
 
     private val customSignalRemoveArgumentMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScript", "custom_signal_remove_argument") }
-    open fun customSignalRemoveArgument(name: String, argidx: Int) {
-        _icall_Unit_String_Int(customSignalRemoveArgumentMethodBind, this.rawMemory, name, argidx)
+    open fun customSignalRemoveArgument(name: String, argidx: Long) {
+        _icall_Unit_String_Long(customSignalRemoveArgumentMethodBind, this.rawMemory, name, argidx)
     }
 
 
     private val customSignalGetArgumentCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScript", "custom_signal_get_argument_count") }
-    open fun customSignalGetArgumentCount(name: String): Int {
-        return _icall_Int_String(customSignalGetArgumentCountMethodBind, this.rawMemory, name)
+    open fun customSignalGetArgumentCount(name: String): Long {
+        return _icall_Long_String(customSignalGetArgumentCountMethodBind, this.rawMemory, name)
     }
 
 
     private val customSignalSwapArgumentMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScript", "custom_signal_swap_argument") }
-    open fun customSignalSwapArgument(name: String, argidx: Int, withidx: Int) {
-        _icall_Unit_String_Int_Int(customSignalSwapArgumentMethodBind, this.rawMemory, name, argidx, withidx)
+    open fun customSignalSwapArgument(name: String, argidx: Long, withidx: Long) {
+        _icall_Unit_String_Long_Long(customSignalSwapArgumentMethodBind, this.rawMemory, name, argidx, withidx)
     }
 
 

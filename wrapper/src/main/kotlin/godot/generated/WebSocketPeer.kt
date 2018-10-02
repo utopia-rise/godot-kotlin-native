@@ -19,13 +19,13 @@ open class WebSocketPeer : PacketPeer {
 
     // Enums 
 
-    enum class WriteMode(val id: Int) {
+    enum class WriteMode(val id: Long) {
         WRITE_MODE_TEXT(0),
         WRITE_MODE_BINARY(1),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -45,8 +45,8 @@ open class WebSocketPeer : PacketPeer {
 
 
         // Constants
-        const val WRITE_MODE_TEXT: Int = 0
-        const val WRITE_MODE_BINARY: Int = 1
+        const val WRITE_MODE_TEXT: Long = 0
+        const val WRITE_MODE_BINARY: Long = 1
 
 
     }
@@ -58,13 +58,13 @@ open class WebSocketPeer : PacketPeer {
     // Methods
     private val getWriteModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("WebSocketPeer", "get_write_mode") }
     open fun getWriteMode(): WebSocketPeer.WriteMode {
-        return WebSocketPeer.WriteMode.fromInt(_icall_Int(getWriteModeMethodBind, this.rawMemory))
+        return WebSocketPeer.WriteMode.fromInt(_icall_Long(getWriteModeMethodBind, this.rawMemory))
     }
 
 
     private val setWriteModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("WebSocketPeer", "set_write_mode") }
-    open fun setWriteMode(mode: Int) {
-        _icall_Unit_Int(setWriteModeMethodBind, this.rawMemory, mode)
+    open fun setWriteMode(mode: Long) {
+        _icall_Unit_Long(setWriteModeMethodBind, this.rawMemory, mode)
     }
 
 
@@ -93,8 +93,8 @@ open class WebSocketPeer : PacketPeer {
 
 
     private val getConnectedPortMethodBind: CPointer<godot_method_bind> by lazy { getMB("WebSocketPeer", "get_connected_port") }
-    open fun getConnectedPort(): Int {
-        return _icall_Int(getConnectedPortMethodBind, this.rawMemory)
+    open fun getConnectedPort(): Long {
+        return _icall_Long(getConnectedPortMethodBind, this.rawMemory)
     }
 
 

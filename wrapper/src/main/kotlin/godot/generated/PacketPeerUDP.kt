@@ -46,8 +46,8 @@ open class PacketPeerUDP : PacketPeer {
 
     // Methods
     private val listenMethodBind: CPointer<godot_method_bind> by lazy { getMB("PacketPeerUDP", "listen") }
-    open fun listen(port: Int, bindAddress: String = "*", recvBufSize: Int = 65536): GodotError {
-        return GodotError.fromInt(_icall_Int_Int_String_Int(listenMethodBind, this.rawMemory, port, bindAddress, recvBufSize))
+    open fun listen(port: Long, bindAddress: String = "*", recvBufSize: Long = 65536): GodotError {
+        return GodotError.fromInt(_icall_Long_Long_String_Long(listenMethodBind, this.rawMemory, port, bindAddress, recvBufSize))
     }
 
 
@@ -59,7 +59,7 @@ open class PacketPeerUDP : PacketPeer {
 
     private val waitMethodBind: CPointer<godot_method_bind> by lazy { getMB("PacketPeerUDP", "wait") }
     open fun wait(): GodotError {
-        return GodotError.fromInt(_icall_Int(waitMethodBind, this.rawMemory))
+        return GodotError.fromInt(_icall_Long(waitMethodBind, this.rawMemory))
     }
 
 
@@ -76,14 +76,14 @@ open class PacketPeerUDP : PacketPeer {
 
 
     private val getPacketPortMethodBind: CPointer<godot_method_bind> by lazy { getMB("PacketPeerUDP", "get_packet_port") }
-    open fun getPacketPort(): Int {
-        return _icall_Int(getPacketPortMethodBind, this.rawMemory)
+    open fun getPacketPort(): Long {
+        return _icall_Long(getPacketPortMethodBind, this.rawMemory)
     }
 
 
     private val setDestAddressMethodBind: CPointer<godot_method_bind> by lazy { getMB("PacketPeerUDP", "set_dest_address") }
-    open fun setDestAddress(host: String, port: Int): GodotError {
-        return GodotError.fromInt(_icall_Int_String_Int(setDestAddressMethodBind, this.rawMemory, host, port))
+    open fun setDestAddress(host: String, port: Long): GodotError {
+        return GodotError.fromInt(_icall_Long_String_Long(setDestAddressMethodBind, this.rawMemory, host, port))
     }
 
 

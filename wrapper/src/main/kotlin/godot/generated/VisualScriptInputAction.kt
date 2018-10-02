@@ -19,7 +19,7 @@ open class VisualScriptInputAction : VisualScriptNode {
 
     // Enums 
 
-    enum class Mode(val id: Int) {
+    enum class Mode(val id: Long) {
         MODE_PRESSED(0),
         MODE_RELEASED(1),
         MODE_JUST_PRESSED(2),
@@ -27,7 +27,7 @@ open class VisualScriptInputAction : VisualScriptNode {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -48,10 +48,10 @@ open class VisualScriptInputAction : VisualScriptNode {
 
 
         // Constants
-        const val MODE_PRESSED: Int = 0
-        const val MODE_RELEASED: Int = 1
-        const val MODE_JUST_PRESSED: Int = 2
-        const val MODE_JUST_RELEASED: Int = 3
+        const val MODE_PRESSED: Long = 0
+        const val MODE_RELEASED: Long = 1
+        const val MODE_JUST_PRESSED: Long = 2
+        const val MODE_JUST_RELEASED: Long = 3
 
 
     }
@@ -63,9 +63,9 @@ open class VisualScriptInputAction : VisualScriptNode {
         set(value) = _icall_Unit_String(setActionNameMethodBind, this.rawMemory, value)
 
 
-    open var mode: Int
-        get() = _icall_Int(getActionModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setActionModeMethodBind, this.rawMemory, value)
+    open var mode: Long
+        get() = _icall_Long(getActionModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setActionModeMethodBind, this.rawMemory, value)
 
 
 
@@ -84,14 +84,14 @@ open class VisualScriptInputAction : VisualScriptNode {
 
 
     private val setActionModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptInputAction", "set_action_mode") }
-    open fun setActionMode(mode: Int) {
-        _icall_Unit_Int(setActionModeMethodBind, this.rawMemory, mode)
+    open fun setActionMode(mode: Long) {
+        _icall_Unit_Long(setActionModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getActionModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptInputAction", "get_action_mode") }
     open fun getActionMode(): VisualScriptInputAction.Mode {
-        return VisualScriptInputAction.Mode.fromInt(_icall_Int(getActionModeMethodBind, this.rawMemory))
+        return VisualScriptInputAction.Mode.fromInt(_icall_Long(getActionModeMethodBind, this.rawMemory))
     }
 
 

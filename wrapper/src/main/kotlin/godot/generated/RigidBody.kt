@@ -19,7 +19,7 @@ open class RigidBody : PhysicsBody {
 
     // Enums 
 
-    enum class Mode(val id: Int) {
+    enum class Mode(val id: Long) {
         MODE_RIGID(0),
         MODE_STATIC(1),
         MODE_CHARACTER(2),
@@ -27,7 +27,7 @@ open class RigidBody : PhysicsBody {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -54,44 +54,44 @@ open class RigidBody : PhysicsBody {
 
 
         // Constants
-        const val MODE_RIGID: Int = 0
-        const val MODE_STATIC: Int = 1
-        const val MODE_CHARACTER: Int = 2
-        const val MODE_KINEMATIC: Int = 3
+        const val MODE_RIGID: Long = 0
+        const val MODE_STATIC: Long = 1
+        const val MODE_CHARACTER: Long = 2
+        const val MODE_KINEMATIC: Long = 3
 
 
     }
 
 
     // Properties
-    open var mode: Int
-        get() = _icall_Int(getModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setModeMethodBind, this.rawMemory, value)
+    open var mode: Long
+        get() = _icall_Long(getModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setModeMethodBind, this.rawMemory, value)
 
 
-    open var mass: Float
-        get() = _icall_Float(getMassMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setMassMethodBind, this.rawMemory, value)
+    open var mass: Double
+        get() = _icall_Double(getMassMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setMassMethodBind, this.rawMemory, value)
 
 
-    open var weight: Float
-        get() = _icall_Float(getWeightMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setWeightMethodBind, this.rawMemory, value)
+    open var weight: Double
+        get() = _icall_Double(getWeightMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setWeightMethodBind, this.rawMemory, value)
 
 
-    open var friction: Float
-        get() = _icall_Float(getFrictionMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setFrictionMethodBind, this.rawMemory, value)
+    open var friction: Double
+        get() = _icall_Double(getFrictionMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setFrictionMethodBind, this.rawMemory, value)
 
 
-    open var bounce: Float
-        get() = _icall_Float(getBounceMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setBounceMethodBind, this.rawMemory, value)
+    open var bounce: Double
+        get() = _icall_Double(getBounceMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setBounceMethodBind, this.rawMemory, value)
 
 
-    open var gravityScale: Float
-        get() = _icall_Float(getGravityScaleMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setGravityScaleMethodBind, this.rawMemory, value)
+    open var gravityScale: Double
+        get() = _icall_Double(getGravityScaleMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setGravityScaleMethodBind, this.rawMemory, value)
 
 
     open var customIntegrator: Boolean
@@ -104,9 +104,9 @@ open class RigidBody : PhysicsBody {
         set(value) = _icall_Unit_Boolean(setUseContinuousCollisionDetectionMethodBind, this.rawMemory, value)
 
 
-    open var contactsReported: Int
-        get() = _icall_Int(getMaxContactsReportedMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setMaxContactsReportedMethodBind, this.rawMemory, value)
+    open var contactsReported: Long
+        get() = _icall_Long(getMaxContactsReportedMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setMaxContactsReportedMethodBind, this.rawMemory, value)
 
 
     open var contactMonitor: Boolean
@@ -125,33 +125,33 @@ open class RigidBody : PhysicsBody {
 
 
     open var axisLockLinearX: Boolean
-        get() = _icall_Boolean_Int(getAxisLockMethodBind, this.rawMemory, 1)
-        set(value) = _icall_Unit_Int_Boolean(setAxisLockMethodBind, this.rawMemory, 1, value)
+        get() = _icall_Boolean_Long(getAxisLockMethodBind, this.rawMemory, 1)
+        set(value) = _icall_Unit_Long_Boolean(setAxisLockMethodBind, this.rawMemory, 1, value)
 
 
     open var axisLockLinearY: Boolean
-        get() = _icall_Boolean_Int(getAxisLockMethodBind, this.rawMemory, 2)
-        set(value) = _icall_Unit_Int_Boolean(setAxisLockMethodBind, this.rawMemory, 2, value)
+        get() = _icall_Boolean_Long(getAxisLockMethodBind, this.rawMemory, 2)
+        set(value) = _icall_Unit_Long_Boolean(setAxisLockMethodBind, this.rawMemory, 2, value)
 
 
     open var axisLockLinearZ: Boolean
-        get() = _icall_Boolean_Int(getAxisLockMethodBind, this.rawMemory, 4)
-        set(value) = _icall_Unit_Int_Boolean(setAxisLockMethodBind, this.rawMemory, 4, value)
+        get() = _icall_Boolean_Long(getAxisLockMethodBind, this.rawMemory, 4)
+        set(value) = _icall_Unit_Long_Boolean(setAxisLockMethodBind, this.rawMemory, 4, value)
 
 
     open var axisLockAngularX: Boolean
-        get() = _icall_Boolean_Int(getAxisLockMethodBind, this.rawMemory, 8)
-        set(value) = _icall_Unit_Int_Boolean(setAxisLockMethodBind, this.rawMemory, 8, value)
+        get() = _icall_Boolean_Long(getAxisLockMethodBind, this.rawMemory, 8)
+        set(value) = _icall_Unit_Long_Boolean(setAxisLockMethodBind, this.rawMemory, 8, value)
 
 
     open var axisLockAngularY: Boolean
-        get() = _icall_Boolean_Int(getAxisLockMethodBind, this.rawMemory, 16)
-        set(value) = _icall_Unit_Int_Boolean(setAxisLockMethodBind, this.rawMemory, 16, value)
+        get() = _icall_Boolean_Long(getAxisLockMethodBind, this.rawMemory, 16)
+        set(value) = _icall_Unit_Long_Boolean(setAxisLockMethodBind, this.rawMemory, 16, value)
 
 
     open var axisLockAngularZ: Boolean
-        get() = _icall_Boolean_Int(getAxisLockMethodBind, this.rawMemory, 32)
-        set(value) = _icall_Unit_Int_Boolean(setAxisLockMethodBind, this.rawMemory, 32, value)
+        get() = _icall_Boolean_Long(getAxisLockMethodBind, this.rawMemory, 32)
+        set(value) = _icall_Unit_Long_Boolean(setAxisLockMethodBind, this.rawMemory, 32, value)
 
 
     open var linearVelocity: Vector3
@@ -163,9 +163,9 @@ open class RigidBody : PhysicsBody {
     }
 
 
-    open var linearDamp: Float
-        get() = _icall_Float(getLinearDampMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setLinearDampMethodBind, this.rawMemory, value)
+    open var linearDamp: Double
+        get() = _icall_Double(getLinearDampMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setLinearDampMethodBind, this.rawMemory, value)
 
 
     open var angularVelocity: Vector3
@@ -177,9 +177,9 @@ open class RigidBody : PhysicsBody {
     }
 
 
-    open var angularDamp: Float
-        get() = _icall_Float(getAngularDampMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setAngularDampMethodBind, this.rawMemory, value)
+    open var angularDamp: Double
+        get() = _icall_Double(getAngularDampMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setAngularDampMethodBind, this.rawMemory, value)
 
 
 
@@ -190,62 +190,62 @@ open class RigidBody : PhysicsBody {
 
 
     private val setModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody", "set_mode") }
-    open fun setMode(mode: Int) {
-        _icall_Unit_Int(setModeMethodBind, this.rawMemory, mode)
+    open fun setMode(mode: Long) {
+        _icall_Unit_Long(setModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody", "get_mode") }
     open fun getMode(): RigidBody.Mode {
-        return RigidBody.Mode.fromInt(_icall_Int(getModeMethodBind, this.rawMemory))
+        return RigidBody.Mode.fromInt(_icall_Long(getModeMethodBind, this.rawMemory))
     }
 
 
     private val setMassMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody", "set_mass") }
-    open fun setMass(mass: Float) {
-        _icall_Unit_Float(setMassMethodBind, this.rawMemory, mass)
+    open fun setMass(mass: Double) {
+        _icall_Unit_Double(setMassMethodBind, this.rawMemory, mass)
     }
 
 
     private val getMassMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody", "get_mass") }
-    open fun getMass(): Float {
-        return _icall_Float(getMassMethodBind, this.rawMemory)
+    open fun getMass(): Double {
+        return _icall_Double(getMassMethodBind, this.rawMemory)
     }
 
 
     private val setWeightMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody", "set_weight") }
-    open fun setWeight(weight: Float) {
-        _icall_Unit_Float(setWeightMethodBind, this.rawMemory, weight)
+    open fun setWeight(weight: Double) {
+        _icall_Unit_Double(setWeightMethodBind, this.rawMemory, weight)
     }
 
 
     private val getWeightMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody", "get_weight") }
-    open fun getWeight(): Float {
-        return _icall_Float(getWeightMethodBind, this.rawMemory)
+    open fun getWeight(): Double {
+        return _icall_Double(getWeightMethodBind, this.rawMemory)
     }
 
 
     private val setFrictionMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody", "set_friction") }
-    open fun setFriction(friction: Float) {
-        _icall_Unit_Float(setFrictionMethodBind, this.rawMemory, friction)
+    open fun setFriction(friction: Double) {
+        _icall_Unit_Double(setFrictionMethodBind, this.rawMemory, friction)
     }
 
 
     private val getFrictionMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody", "get_friction") }
-    open fun getFriction(): Float {
-        return _icall_Float(getFrictionMethodBind, this.rawMemory)
+    open fun getFriction(): Double {
+        return _icall_Double(getFrictionMethodBind, this.rawMemory)
     }
 
 
     private val setBounceMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody", "set_bounce") }
-    open fun setBounce(bounce: Float) {
-        _icall_Unit_Float(setBounceMethodBind, this.rawMemory, bounce)
+    open fun setBounce(bounce: Double) {
+        _icall_Unit_Double(setBounceMethodBind, this.rawMemory, bounce)
     }
 
 
     private val getBounceMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody", "get_bounce") }
-    open fun getBounce(): Float {
-        return _icall_Float(getBounceMethodBind, this.rawMemory)
+    open fun getBounce(): Double {
+        return _icall_Double(getBounceMethodBind, this.rawMemory)
     }
 
 
@@ -274,50 +274,50 @@ open class RigidBody : PhysicsBody {
 
 
     private val setGravityScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody", "set_gravity_scale") }
-    open fun setGravityScale(gravityScale: Float) {
-        _icall_Unit_Float(setGravityScaleMethodBind, this.rawMemory, gravityScale)
+    open fun setGravityScale(gravityScale: Double) {
+        _icall_Unit_Double(setGravityScaleMethodBind, this.rawMemory, gravityScale)
     }
 
 
     private val getGravityScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody", "get_gravity_scale") }
-    open fun getGravityScale(): Float {
-        return _icall_Float(getGravityScaleMethodBind, this.rawMemory)
+    open fun getGravityScale(): Double {
+        return _icall_Double(getGravityScaleMethodBind, this.rawMemory)
     }
 
 
     private val setLinearDampMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody", "set_linear_damp") }
-    open fun setLinearDamp(linearDamp: Float) {
-        _icall_Unit_Float(setLinearDampMethodBind, this.rawMemory, linearDamp)
+    open fun setLinearDamp(linearDamp: Double) {
+        _icall_Unit_Double(setLinearDampMethodBind, this.rawMemory, linearDamp)
     }
 
 
     private val getLinearDampMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody", "get_linear_damp") }
-    open fun getLinearDamp(): Float {
-        return _icall_Float(getLinearDampMethodBind, this.rawMemory)
+    open fun getLinearDamp(): Double {
+        return _icall_Double(getLinearDampMethodBind, this.rawMemory)
     }
 
 
     private val setAngularDampMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody", "set_angular_damp") }
-    open fun setAngularDamp(angularDamp: Float) {
-        _icall_Unit_Float(setAngularDampMethodBind, this.rawMemory, angularDamp)
+    open fun setAngularDamp(angularDamp: Double) {
+        _icall_Unit_Double(setAngularDampMethodBind, this.rawMemory, angularDamp)
     }
 
 
     private val getAngularDampMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody", "get_angular_damp") }
-    open fun getAngularDamp(): Float {
-        return _icall_Float(getAngularDampMethodBind, this.rawMemory)
+    open fun getAngularDamp(): Double {
+        return _icall_Double(getAngularDampMethodBind, this.rawMemory)
     }
 
 
     private val setMaxContactsReportedMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody", "set_max_contacts_reported") }
-    open fun setMaxContactsReported(amount: Int) {
-        _icall_Unit_Int(setMaxContactsReportedMethodBind, this.rawMemory, amount)
+    open fun setMaxContactsReported(amount: Long) {
+        _icall_Unit_Long(setMaxContactsReportedMethodBind, this.rawMemory, amount)
     }
 
 
     private val getMaxContactsReportedMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody", "get_max_contacts_reported") }
-    open fun getMaxContactsReported(): Int {
-        return _icall_Int(getMaxContactsReportedMethodBind, this.rawMemory)
+    open fun getMaxContactsReported(): Long {
+        return _icall_Long(getMaxContactsReportedMethodBind, this.rawMemory)
     }
 
 
@@ -403,23 +403,23 @@ open class RigidBody : PhysicsBody {
     }
 
 
-    open fun _body_enter_tree(arg0: Int) {
+    open fun _body_enter_tree(arg0: Long) {
     }
 
 
-    open fun _body_exit_tree(arg0: Int) {
+    open fun _body_exit_tree(arg0: Long) {
     }
 
 
     private val setAxisLockMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody", "set_axis_lock") }
-    open fun setAxisLock(axis: Int, lock: Boolean) {
-        _icall_Unit_Int_Boolean(setAxisLockMethodBind, this.rawMemory, axis, lock)
+    open fun setAxisLock(axis: Long, lock: Boolean) {
+        _icall_Unit_Long_Boolean(setAxisLockMethodBind, this.rawMemory, axis, lock)
     }
 
 
     private val getAxisLockMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody", "get_axis_lock") }
-    open fun getAxisLock(axis: Int): Boolean {
-        return _icall_Boolean_Int(getAxisLockMethodBind, this.rawMemory, axis)
+    open fun getAxisLock(axis: Long): Boolean {
+        return _icall_Boolean_Long(getAxisLockMethodBind, this.rawMemory, axis)
     }
 
 

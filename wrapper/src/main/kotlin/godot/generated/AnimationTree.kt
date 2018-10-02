@@ -19,13 +19,13 @@ open class AnimationTree : Node {
 
     // Enums 
 
-    enum class AnimationProcessMode(val id: Int) {
+    enum class AnimationProcessMode(val id: Long) {
         ANIMATION_PROCESS_PHYSICS(0),
         ANIMATION_PROCESS_IDLE(1),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -44,8 +44,8 @@ open class AnimationTree : Node {
 
 
         // Constants
-        const val ANIMATION_PROCESS_PHYSICS: Int = 0
-        const val ANIMATION_PROCESS_IDLE: Int = 1
+        const val ANIMATION_PROCESS_PHYSICS: Long = 0
+        const val ANIMATION_PROCESS_IDLE: Long = 1
 
 
     }
@@ -67,9 +67,9 @@ open class AnimationTree : Node {
         set(value) = _icall_Unit_Boolean(setActiveMethodBind, this.rawMemory, value)
 
 
-    open var processMode: Int
-        get() = _icall_Int(getProcessModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setProcessModeMethodBind, this.rawMemory, value)
+    open var processMode: Long
+        get() = _icall_Long(getProcessModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setProcessModeMethodBind, this.rawMemory, value)
 
 
     open var rootMotionTrack: NodePath
@@ -105,14 +105,14 @@ open class AnimationTree : Node {
 
 
     private val setProcessModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationTree", "set_process_mode") }
-    open fun setProcessMode(mode: Int) {
-        _icall_Unit_Int(setProcessModeMethodBind, this.rawMemory, mode)
+    open fun setProcessMode(mode: Long) {
+        _icall_Unit_Long(setProcessModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getProcessModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationTree", "get_process_mode") }
     open fun getProcessMode(): AnimationTree.AnimationProcessMode {
-        return AnimationTree.AnimationProcessMode.fromInt(_icall_Int(getProcessModeMethodBind, this.rawMemory))
+        return AnimationTree.AnimationProcessMode.fromInt(_icall_Long(getProcessModeMethodBind, this.rawMemory))
     }
 
 

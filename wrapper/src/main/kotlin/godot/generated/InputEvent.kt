@@ -42,23 +42,23 @@ open class InputEvent : Resource {
 
 
     // Properties
-    open var device: Int
-        get() = _icall_Int(getDeviceMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setDeviceMethodBind, this.rawMemory, value)
+    open var device: Long
+        get() = _icall_Long(getDeviceMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setDeviceMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setDeviceMethodBind: CPointer<godot_method_bind> by lazy { getMB("InputEvent", "set_device") }
-    open fun setDevice(device: Int) {
-        _icall_Unit_Int(setDeviceMethodBind, this.rawMemory, device)
+    open fun setDevice(device: Long) {
+        _icall_Unit_Long(setDeviceMethodBind, this.rawMemory, device)
     }
 
 
     private val getDeviceMethodBind: CPointer<godot_method_bind> by lazy { getMB("InputEvent", "get_device") }
-    open fun getDevice(): Int {
-        return _icall_Int(getDeviceMethodBind, this.rawMemory)
+    open fun getDevice(): Long {
+        return _icall_Long(getDeviceMethodBind, this.rawMemory)
     }
 
 
@@ -81,8 +81,8 @@ open class InputEvent : Resource {
 
 
     private val getActionStrengthMethodBind: CPointer<godot_method_bind> by lazy { getMB("InputEvent", "get_action_strength") }
-    open fun getActionStrength(action: String): Float {
-        return _icall_Float_String(getActionStrengthMethodBind, this.rawMemory, action)
+    open fun getActionStrength(action: String): Double {
+        return _icall_Double_String(getActionStrengthMethodBind, this.rawMemory, action)
     }
 
 

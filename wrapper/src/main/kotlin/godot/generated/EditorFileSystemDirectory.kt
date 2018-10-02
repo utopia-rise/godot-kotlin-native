@@ -44,56 +44,56 @@ open class EditorFileSystemDirectory : Object {
 
     // Methods
     private val getSubdirCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("EditorFileSystemDirectory", "get_subdir_count") }
-    open fun getSubdirCount(): Int {
-        return _icall_Int(getSubdirCountMethodBind, this.rawMemory)
+    open fun getSubdirCount(): Long {
+        return _icall_Long(getSubdirCountMethodBind, this.rawMemory)
     }
 
 
     private val getSubdirMethodBind: CPointer<godot_method_bind> by lazy { getMB("EditorFileSystemDirectory", "get_subdir") }
-    open fun getSubdir(idx: Int): EditorFileSystemDirectory {
-        return _icall_EditorFileSystemDirectory_Int(getSubdirMethodBind, this.rawMemory, idx)
+    open fun getSubdir(idx: Long): EditorFileSystemDirectory {
+        return _icall_EditorFileSystemDirectory_Long(getSubdirMethodBind, this.rawMemory, idx)
     }
 
 
     private val getFileCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("EditorFileSystemDirectory", "get_file_count") }
-    open fun getFileCount(): Int {
-        return _icall_Int(getFileCountMethodBind, this.rawMemory)
+    open fun getFileCount(): Long {
+        return _icall_Long(getFileCountMethodBind, this.rawMemory)
     }
 
 
     private val getFileMethodBind: CPointer<godot_method_bind> by lazy { getMB("EditorFileSystemDirectory", "get_file") }
-    open fun getFile(idx: Int): String {
-        return _icall_String_Int(getFileMethodBind, this.rawMemory, idx)
+    open fun getFile(idx: Long): String {
+        return _icall_String_Long(getFileMethodBind, this.rawMemory, idx)
     }
 
 
     private val getFilePathMethodBind: CPointer<godot_method_bind> by lazy { getMB("EditorFileSystemDirectory", "get_file_path") }
-    open fun getFilePath(idx: Int): String {
-        return _icall_String_Int(getFilePathMethodBind, this.rawMemory, idx)
+    open fun getFilePath(idx: Long): String {
+        return _icall_String_Long(getFilePathMethodBind, this.rawMemory, idx)
     }
 
 
     private val getFileTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("EditorFileSystemDirectory", "get_file_type") }
-    open fun getFileType(idx: Int): String {
-        return _icall_String_Int(getFileTypeMethodBind, this.rawMemory, idx)
+    open fun getFileType(idx: Long): String {
+        return _icall_String_Long(getFileTypeMethodBind, this.rawMemory, idx)
     }
 
 
     private val getFileScriptClassNameMethodBind: CPointer<godot_method_bind> by lazy { getMB("EditorFileSystemDirectory", "get_file_script_class_name") }
-    open fun getFileScriptClassName(idx: Int): String {
-        return _icall_String_Int(getFileScriptClassNameMethodBind, this.rawMemory, idx)
+    open fun getFileScriptClassName(idx: Long): String {
+        return _icall_String_Long(getFileScriptClassNameMethodBind, this.rawMemory, idx)
     }
 
 
     private val getFileScriptClassExtendsMethodBind: CPointer<godot_method_bind> by lazy { getMB("EditorFileSystemDirectory", "get_file_script_class_extends") }
-    open fun getFileScriptClassExtends(idx: Int): String {
-        return _icall_String_Int(getFileScriptClassExtendsMethodBind, this.rawMemory, idx)
+    open fun getFileScriptClassExtends(idx: Long): String {
+        return _icall_String_Long(getFileScriptClassExtendsMethodBind, this.rawMemory, idx)
     }
 
 
     private val getFileImportIsValidMethodBind: CPointer<godot_method_bind> by lazy { getMB("EditorFileSystemDirectory", "get_file_import_is_valid") }
-    open fun getFileImportIsValid(idx: Int): Boolean {
-        return _icall_Boolean_Int(getFileImportIsValidMethodBind, this.rawMemory, idx)
+    open fun getFileImportIsValid(idx: Long): Boolean {
+        return _icall_Boolean_Long(getFileImportIsValidMethodBind, this.rawMemory, idx)
     }
 
 
@@ -116,14 +116,14 @@ open class EditorFileSystemDirectory : Object {
 
 
     private val findFileIndexMethodBind: CPointer<godot_method_bind> by lazy { getMB("EditorFileSystemDirectory", "find_file_index") }
-    open fun findFileIndex(name: String): Int {
-        return _icall_Int_String(findFileIndexMethodBind, this.rawMemory, name)
+    open fun findFileIndex(name: String): Long {
+        return _icall_Long_String(findFileIndexMethodBind, this.rawMemory, name)
     }
 
 
     private val findDirIndexMethodBind: CPointer<godot_method_bind> by lazy { getMB("EditorFileSystemDirectory", "find_dir_index") }
-    open fun findDirIndex(name: String): Int {
-        return _icall_Int_String(findDirIndexMethodBind, this.rawMemory, name)
+    open fun findDirIndex(name: String): Long {
+        return _icall_Long_String(findDirIndexMethodBind, this.rawMemory, name)
     }
 
 

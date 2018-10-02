@@ -51,9 +51,9 @@ open class GIProbeData : Resource {
     }
 
 
-    open var cellSize: Float
-        get() = _icall_Float(getCellSizeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setCellSizeMethodBind, this.rawMemory, value)
+    open var cellSize: Double
+        get() = _icall_Double(getCellSizeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setCellSizeMethodBind, this.rawMemory, value)
 
 
     open var toCellXform: Transform
@@ -70,29 +70,29 @@ open class GIProbeData : Resource {
         set(value) = _icall_Unit_PoolIntArray(setDynamicDataMethodBind, this.rawMemory, value)
 
 
-    open var dynamicRange: Int
-        get() = _icall_Int(getDynamicRangeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setDynamicRangeMethodBind, this.rawMemory, value)
+    open var dynamicRange: Long
+        get() = _icall_Long(getDynamicRangeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setDynamicRangeMethodBind, this.rawMemory, value)
 
 
-    open var energy: Float
-        get() = _icall_Float(getEnergyMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setEnergyMethodBind, this.rawMemory, value)
+    open var energy: Double
+        get() = _icall_Double(getEnergyMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setEnergyMethodBind, this.rawMemory, value)
 
 
-    open var bias: Float
-        get() = _icall_Float(getBiasMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setBiasMethodBind, this.rawMemory, value)
+    open var bias: Double
+        get() = _icall_Double(getBiasMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setBiasMethodBind, this.rawMemory, value)
 
 
-    open var normalBias: Float
-        get() = _icall_Float(getNormalBiasMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setNormalBiasMethodBind, this.rawMemory, value)
+    open var normalBias: Double
+        get() = _icall_Double(getNormalBiasMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setNormalBiasMethodBind, this.rawMemory, value)
 
 
-    open var propagation: Float
-        get() = _icall_Float(getPropagationMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setPropagationMethodBind, this.rawMemory, value)
+    open var propagation: Double
+        get() = _icall_Double(getPropagationMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setPropagationMethodBind, this.rawMemory, value)
 
 
     open var interior: Boolean
@@ -121,14 +121,14 @@ open class GIProbeData : Resource {
 
 
     private val setCellSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("GIProbeData", "set_cell_size") }
-    open fun setCellSize(cellSize: Float) {
-        _icall_Unit_Float(setCellSizeMethodBind, this.rawMemory, cellSize)
+    open fun setCellSize(cellSize: Double) {
+        _icall_Unit_Double(setCellSizeMethodBind, this.rawMemory, cellSize)
     }
 
 
     private val getCellSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("GIProbeData", "get_cell_size") }
-    open fun getCellSize(): Float {
-        return _icall_Float(getCellSizeMethodBind, this.rawMemory)
+    open fun getCellSize(): Double {
+        return _icall_Double(getCellSizeMethodBind, this.rawMemory)
     }
 
 
@@ -157,62 +157,62 @@ open class GIProbeData : Resource {
 
 
     private val setDynamicRangeMethodBind: CPointer<godot_method_bind> by lazy { getMB("GIProbeData", "set_dynamic_range") }
-    open fun setDynamicRange(dynamicRange: Int) {
-        _icall_Unit_Int(setDynamicRangeMethodBind, this.rawMemory, dynamicRange)
+    open fun setDynamicRange(dynamicRange: Long) {
+        _icall_Unit_Long(setDynamicRangeMethodBind, this.rawMemory, dynamicRange)
     }
 
 
     private val getDynamicRangeMethodBind: CPointer<godot_method_bind> by lazy { getMB("GIProbeData", "get_dynamic_range") }
-    open fun getDynamicRange(): Int {
-        return _icall_Int(getDynamicRangeMethodBind, this.rawMemory)
+    open fun getDynamicRange(): Long {
+        return _icall_Long(getDynamicRangeMethodBind, this.rawMemory)
     }
 
 
     private val setEnergyMethodBind: CPointer<godot_method_bind> by lazy { getMB("GIProbeData", "set_energy") }
-    open fun setEnergy(energy: Float) {
-        _icall_Unit_Float(setEnergyMethodBind, this.rawMemory, energy)
+    open fun setEnergy(energy: Double) {
+        _icall_Unit_Double(setEnergyMethodBind, this.rawMemory, energy)
     }
 
 
     private val getEnergyMethodBind: CPointer<godot_method_bind> by lazy { getMB("GIProbeData", "get_energy") }
-    open fun getEnergy(): Float {
-        return _icall_Float(getEnergyMethodBind, this.rawMemory)
+    open fun getEnergy(): Double {
+        return _icall_Double(getEnergyMethodBind, this.rawMemory)
     }
 
 
     private val setBiasMethodBind: CPointer<godot_method_bind> by lazy { getMB("GIProbeData", "set_bias") }
-    open fun setBias(bias: Float) {
-        _icall_Unit_Float(setBiasMethodBind, this.rawMemory, bias)
+    open fun setBias(bias: Double) {
+        _icall_Unit_Double(setBiasMethodBind, this.rawMemory, bias)
     }
 
 
     private val getBiasMethodBind: CPointer<godot_method_bind> by lazy { getMB("GIProbeData", "get_bias") }
-    open fun getBias(): Float {
-        return _icall_Float(getBiasMethodBind, this.rawMemory)
+    open fun getBias(): Double {
+        return _icall_Double(getBiasMethodBind, this.rawMemory)
     }
 
 
     private val setNormalBiasMethodBind: CPointer<godot_method_bind> by lazy { getMB("GIProbeData", "set_normal_bias") }
-    open fun setNormalBias(bias: Float) {
-        _icall_Unit_Float(setNormalBiasMethodBind, this.rawMemory, bias)
+    open fun setNormalBias(bias: Double) {
+        _icall_Unit_Double(setNormalBiasMethodBind, this.rawMemory, bias)
     }
 
 
     private val getNormalBiasMethodBind: CPointer<godot_method_bind> by lazy { getMB("GIProbeData", "get_normal_bias") }
-    open fun getNormalBias(): Float {
-        return _icall_Float(getNormalBiasMethodBind, this.rawMemory)
+    open fun getNormalBias(): Double {
+        return _icall_Double(getNormalBiasMethodBind, this.rawMemory)
     }
 
 
     private val setPropagationMethodBind: CPointer<godot_method_bind> by lazy { getMB("GIProbeData", "set_propagation") }
-    open fun setPropagation(propagation: Float) {
-        _icall_Unit_Float(setPropagationMethodBind, this.rawMemory, propagation)
+    open fun setPropagation(propagation: Double) {
+        _icall_Unit_Double(setPropagationMethodBind, this.rawMemory, propagation)
     }
 
 
     private val getPropagationMethodBind: CPointer<godot_method_bind> by lazy { getMB("GIProbeData", "get_propagation") }
-    open fun getPropagation(): Float {
-        return _icall_Float(getPropagationMethodBind, this.rawMemory)
+    open fun getPropagation(): Double {
+        return _icall_Double(getPropagationMethodBind, this.rawMemory)
     }
 
 

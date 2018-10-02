@@ -19,7 +19,7 @@ open class RigidBody2D : PhysicsBody2D {
 
     // Enums 
 
-    enum class Mode(val id: Int) {
+    enum class Mode(val id: Long) {
         MODE_RIGID(0),
         MODE_STATIC(1),
         MODE_CHARACTER(2),
@@ -27,17 +27,17 @@ open class RigidBody2D : PhysicsBody2D {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class CCDMode(val id: Int) {
+    enum class CCDMode(val id: Long) {
         CCD_MODE_DISABLED(0),
         CCD_MODE_CAST_RAY(1),
         CCD_MODE_CAST_SHAPE(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -65,52 +65,52 @@ open class RigidBody2D : PhysicsBody2D {
 
 
         // Constants
-        const val MODE_RIGID: Int = 0
-        const val MODE_STATIC: Int = 1
-        const val MODE_CHARACTER: Int = 2
-        const val MODE_KINEMATIC: Int = 3
-        const val CCD_MODE_DISABLED: Int = 0
-        const val CCD_MODE_CAST_RAY: Int = 1
-        const val CCD_MODE_CAST_SHAPE: Int = 2
+        const val MODE_RIGID: Long = 0
+        const val MODE_STATIC: Long = 1
+        const val MODE_CHARACTER: Long = 2
+        const val MODE_KINEMATIC: Long = 3
+        const val CCD_MODE_DISABLED: Long = 0
+        const val CCD_MODE_CAST_RAY: Long = 1
+        const val CCD_MODE_CAST_SHAPE: Long = 2
 
 
     }
 
 
     // Properties
-    open var mode: Int
-        get() = _icall_Int(getModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setModeMethodBind, this.rawMemory, value)
+    open var mode: Long
+        get() = _icall_Long(getModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setModeMethodBind, this.rawMemory, value)
 
 
-    open var mass: Float
-        get() = _icall_Float(getMassMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setMassMethodBind, this.rawMemory, value)
+    open var mass: Double
+        get() = _icall_Double(getMassMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setMassMethodBind, this.rawMemory, value)
 
 
-    open var inertia: Float
-        get() = _icall_Float(getInertiaMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setInertiaMethodBind, this.rawMemory, value)
+    open var inertia: Double
+        get() = _icall_Double(getInertiaMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setInertiaMethodBind, this.rawMemory, value)
 
 
-    open var weight: Float
-        get() = _icall_Float(getWeightMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setWeightMethodBind, this.rawMemory, value)
+    open var weight: Double
+        get() = _icall_Double(getWeightMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setWeightMethodBind, this.rawMemory, value)
 
 
-    open var friction: Float
-        get() = _icall_Float(getFrictionMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setFrictionMethodBind, this.rawMemory, value)
+    open var friction: Double
+        get() = _icall_Double(getFrictionMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setFrictionMethodBind, this.rawMemory, value)
 
 
-    open var bounce: Float
-        get() = _icall_Float(getBounceMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setBounceMethodBind, this.rawMemory, value)
+    open var bounce: Double
+        get() = _icall_Double(getBounceMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setBounceMethodBind, this.rawMemory, value)
 
 
-    open var gravityScale: Float
-        get() = _icall_Float(getGravityScaleMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setGravityScaleMethodBind, this.rawMemory, value)
+    open var gravityScale: Double
+        get() = _icall_Double(getGravityScaleMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setGravityScaleMethodBind, this.rawMemory, value)
 
 
     open var customIntegrator: Boolean
@@ -118,14 +118,14 @@ open class RigidBody2D : PhysicsBody2D {
         set(value) = _icall_Unit_Boolean(setUseCustomIntegratorMethodBind, this.rawMemory, value)
 
 
-    open var continuousCd: Int
-        get() = _icall_Int(getContinuousCollisionDetectionModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setContinuousCollisionDetectionModeMethodBind, this.rawMemory, value)
+    open var continuousCd: Long
+        get() = _icall_Long(getContinuousCollisionDetectionModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setContinuousCollisionDetectionModeMethodBind, this.rawMemory, value)
 
 
-    open var contactsReported: Int
-        get() = _icall_Int(getMaxContactsReportedMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setMaxContactsReportedMethodBind, this.rawMemory, value)
+    open var contactsReported: Long
+        get() = _icall_Long(getMaxContactsReportedMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setMaxContactsReportedMethodBind, this.rawMemory, value)
 
 
     open var contactMonitor: Boolean
@@ -152,19 +152,19 @@ open class RigidBody2D : PhysicsBody2D {
     }
 
 
-    open var linearDamp: Float
-        get() = _icall_Float(getLinearDampMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setLinearDampMethodBind, this.rawMemory, value)
+    open var linearDamp: Double
+        get() = _icall_Double(getLinearDampMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setLinearDampMethodBind, this.rawMemory, value)
 
 
-    open var angularVelocity: Float
-        get() = _icall_Float(getAngularVelocityMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setAngularVelocityMethodBind, this.rawMemory, value)
+    open var angularVelocity: Double
+        get() = _icall_Double(getAngularVelocityMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setAngularVelocityMethodBind, this.rawMemory, value)
 
 
-    open var angularDamp: Float
-        get() = _icall_Float(getAngularDampMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setAngularDampMethodBind, this.rawMemory, value)
+    open var angularDamp: Double
+        get() = _icall_Double(getAngularDampMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setAngularDampMethodBind, this.rawMemory, value)
 
 
     open var appliedForce: Vector2
@@ -176,9 +176,9 @@ open class RigidBody2D : PhysicsBody2D {
     }
 
 
-    open var appliedTorque: Float
-        get() = _icall_Float(getAppliedTorqueMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setAppliedTorqueMethodBind, this.rawMemory, value)
+    open var appliedTorque: Double
+        get() = _icall_Double(getAppliedTorqueMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setAppliedTorqueMethodBind, this.rawMemory, value)
 
 
 
@@ -189,110 +189,110 @@ open class RigidBody2D : PhysicsBody2D {
 
 
     private val setModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody2D", "set_mode") }
-    open fun setMode(mode: Int) {
-        _icall_Unit_Int(setModeMethodBind, this.rawMemory, mode)
+    open fun setMode(mode: Long) {
+        _icall_Unit_Long(setModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody2D", "get_mode") }
     open fun getMode(): RigidBody2D.Mode {
-        return RigidBody2D.Mode.fromInt(_icall_Int(getModeMethodBind, this.rawMemory))
+        return RigidBody2D.Mode.fromInt(_icall_Long(getModeMethodBind, this.rawMemory))
     }
 
 
     private val setMassMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody2D", "set_mass") }
-    open fun setMass(mass: Float) {
-        _icall_Unit_Float(setMassMethodBind, this.rawMemory, mass)
+    open fun setMass(mass: Double) {
+        _icall_Unit_Double(setMassMethodBind, this.rawMemory, mass)
     }
 
 
     private val getMassMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody2D", "get_mass") }
-    open fun getMass(): Float {
-        return _icall_Float(getMassMethodBind, this.rawMemory)
+    open fun getMass(): Double {
+        return _icall_Double(getMassMethodBind, this.rawMemory)
     }
 
 
     private val getInertiaMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody2D", "get_inertia") }
-    open fun getInertia(): Float {
-        return _icall_Float(getInertiaMethodBind, this.rawMemory)
+    open fun getInertia(): Double {
+        return _icall_Double(getInertiaMethodBind, this.rawMemory)
     }
 
 
     private val setInertiaMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody2D", "set_inertia") }
-    open fun setInertia(inertia: Float) {
-        _icall_Unit_Float(setInertiaMethodBind, this.rawMemory, inertia)
+    open fun setInertia(inertia: Double) {
+        _icall_Unit_Double(setInertiaMethodBind, this.rawMemory, inertia)
     }
 
 
     private val setWeightMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody2D", "set_weight") }
-    open fun setWeight(weight: Float) {
-        _icall_Unit_Float(setWeightMethodBind, this.rawMemory, weight)
+    open fun setWeight(weight: Double) {
+        _icall_Unit_Double(setWeightMethodBind, this.rawMemory, weight)
     }
 
 
     private val getWeightMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody2D", "get_weight") }
-    open fun getWeight(): Float {
-        return _icall_Float(getWeightMethodBind, this.rawMemory)
+    open fun getWeight(): Double {
+        return _icall_Double(getWeightMethodBind, this.rawMemory)
     }
 
 
     private val setFrictionMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody2D", "set_friction") }
-    open fun setFriction(friction: Float) {
-        _icall_Unit_Float(setFrictionMethodBind, this.rawMemory, friction)
+    open fun setFriction(friction: Double) {
+        _icall_Unit_Double(setFrictionMethodBind, this.rawMemory, friction)
     }
 
 
     private val getFrictionMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody2D", "get_friction") }
-    open fun getFriction(): Float {
-        return _icall_Float(getFrictionMethodBind, this.rawMemory)
+    open fun getFriction(): Double {
+        return _icall_Double(getFrictionMethodBind, this.rawMemory)
     }
 
 
     private val setBounceMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody2D", "set_bounce") }
-    open fun setBounce(bounce: Float) {
-        _icall_Unit_Float(setBounceMethodBind, this.rawMemory, bounce)
+    open fun setBounce(bounce: Double) {
+        _icall_Unit_Double(setBounceMethodBind, this.rawMemory, bounce)
     }
 
 
     private val getBounceMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody2D", "get_bounce") }
-    open fun getBounce(): Float {
-        return _icall_Float(getBounceMethodBind, this.rawMemory)
+    open fun getBounce(): Double {
+        return _icall_Double(getBounceMethodBind, this.rawMemory)
     }
 
 
     private val setGravityScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody2D", "set_gravity_scale") }
-    open fun setGravityScale(gravityScale: Float) {
-        _icall_Unit_Float(setGravityScaleMethodBind, this.rawMemory, gravityScale)
+    open fun setGravityScale(gravityScale: Double) {
+        _icall_Unit_Double(setGravityScaleMethodBind, this.rawMemory, gravityScale)
     }
 
 
     private val getGravityScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody2D", "get_gravity_scale") }
-    open fun getGravityScale(): Float {
-        return _icall_Float(getGravityScaleMethodBind, this.rawMemory)
+    open fun getGravityScale(): Double {
+        return _icall_Double(getGravityScaleMethodBind, this.rawMemory)
     }
 
 
     private val setLinearDampMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody2D", "set_linear_damp") }
-    open fun setLinearDamp(linearDamp: Float) {
-        _icall_Unit_Float(setLinearDampMethodBind, this.rawMemory, linearDamp)
+    open fun setLinearDamp(linearDamp: Double) {
+        _icall_Unit_Double(setLinearDampMethodBind, this.rawMemory, linearDamp)
     }
 
 
     private val getLinearDampMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody2D", "get_linear_damp") }
-    open fun getLinearDamp(): Float {
-        return _icall_Float(getLinearDampMethodBind, this.rawMemory)
+    open fun getLinearDamp(): Double {
+        return _icall_Double(getLinearDampMethodBind, this.rawMemory)
     }
 
 
     private val setAngularDampMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody2D", "set_angular_damp") }
-    open fun setAngularDamp(angularDamp: Float) {
-        _icall_Unit_Float(setAngularDampMethodBind, this.rawMemory, angularDamp)
+    open fun setAngularDamp(angularDamp: Double) {
+        _icall_Unit_Double(setAngularDampMethodBind, this.rawMemory, angularDamp)
     }
 
 
     private val getAngularDampMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody2D", "get_angular_damp") }
-    open fun getAngularDamp(): Float {
-        return _icall_Float(getAngularDampMethodBind, this.rawMemory)
+    open fun getAngularDamp(): Double {
+        return _icall_Double(getAngularDampMethodBind, this.rawMemory)
     }
 
 
@@ -309,26 +309,26 @@ open class RigidBody2D : PhysicsBody2D {
 
 
     private val setAngularVelocityMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody2D", "set_angular_velocity") }
-    open fun setAngularVelocity(angularVelocity: Float) {
-        _icall_Unit_Float(setAngularVelocityMethodBind, this.rawMemory, angularVelocity)
+    open fun setAngularVelocity(angularVelocity: Double) {
+        _icall_Unit_Double(setAngularVelocityMethodBind, this.rawMemory, angularVelocity)
     }
 
 
     private val getAngularVelocityMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody2D", "get_angular_velocity") }
-    open fun getAngularVelocity(): Float {
-        return _icall_Float(getAngularVelocityMethodBind, this.rawMemory)
+    open fun getAngularVelocity(): Double {
+        return _icall_Double(getAngularVelocityMethodBind, this.rawMemory)
     }
 
 
     private val setMaxContactsReportedMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody2D", "set_max_contacts_reported") }
-    open fun setMaxContactsReported(amount: Int) {
-        _icall_Unit_Int(setMaxContactsReportedMethodBind, this.rawMemory, amount)
+    open fun setMaxContactsReported(amount: Long) {
+        _icall_Unit_Long(setMaxContactsReportedMethodBind, this.rawMemory, amount)
     }
 
 
     private val getMaxContactsReportedMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody2D", "get_max_contacts_reported") }
-    open fun getMaxContactsReported(): Int {
-        return _icall_Int(getMaxContactsReportedMethodBind, this.rawMemory)
+    open fun getMaxContactsReported(): Long {
+        return _icall_Long(getMaxContactsReportedMethodBind, this.rawMemory)
     }
 
 
@@ -357,14 +357,14 @@ open class RigidBody2D : PhysicsBody2D {
 
 
     private val setContinuousCollisionDetectionModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody2D", "set_continuous_collision_detection_mode") }
-    open fun setContinuousCollisionDetectionMode(mode: Int) {
-        _icall_Unit_Int(setContinuousCollisionDetectionModeMethodBind, this.rawMemory, mode)
+    open fun setContinuousCollisionDetectionMode(mode: Long) {
+        _icall_Unit_Long(setContinuousCollisionDetectionModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getContinuousCollisionDetectionModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody2D", "get_continuous_collision_detection_mode") }
     open fun getContinuousCollisionDetectionMode(): RigidBody2D.CCDMode {
-        return RigidBody2D.CCDMode.fromInt(_icall_Int(getContinuousCollisionDetectionModeMethodBind, this.rawMemory))
+        return RigidBody2D.CCDMode.fromInt(_icall_Long(getContinuousCollisionDetectionModeMethodBind, this.rawMemory))
     }
 
 
@@ -393,14 +393,14 @@ open class RigidBody2D : PhysicsBody2D {
 
 
     private val setAppliedTorqueMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody2D", "set_applied_torque") }
-    open fun setAppliedTorque(torque: Float) {
-        _icall_Unit_Float(setAppliedTorqueMethodBind, this.rawMemory, torque)
+    open fun setAppliedTorque(torque: Double) {
+        _icall_Unit_Double(setAppliedTorqueMethodBind, this.rawMemory, torque)
     }
 
 
     private val getAppliedTorqueMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody2D", "get_applied_torque") }
-    open fun getAppliedTorque(): Float {
-        return _icall_Float(getAppliedTorqueMethodBind, this.rawMemory)
+    open fun getAppliedTorque(): Double {
+        return _icall_Double(getAppliedTorqueMethodBind, this.rawMemory)
     }
 
 
@@ -435,8 +435,8 @@ open class RigidBody2D : PhysicsBody2D {
 
 
     private val testMotionMethodBind: CPointer<godot_method_bind> by lazy { getMB("RigidBody2D", "test_motion") }
-    open fun testMotion(motion: Vector2, infiniteInertia: Boolean = true, margin: Float = 0.08f, result: Physics2DTestMotionResult): Boolean {
-        return _icall_Boolean_Vector2_Boolean_Float_Object(testMotionMethodBind, this.rawMemory, motion, infiniteInertia, margin, result)
+    open fun testMotion(motion: Vector2, infiniteInertia: Boolean = true, margin: Double = 0.08, result: Physics2DTestMotionResult): Boolean {
+        return _icall_Boolean_Vector2_Boolean_Double_Object(testMotionMethodBind, this.rawMemory, motion, infiniteInertia, margin, result)
     }
 
 
@@ -444,11 +444,11 @@ open class RigidBody2D : PhysicsBody2D {
     }
 
 
-    open fun _body_enter_tree(arg0: Int) {
+    open fun _body_enter_tree(arg0: Long) {
     }
 
 
-    open fun _body_exit_tree(arg0: Int) {
+    open fun _body_exit_tree(arg0: Long) {
     }
 
 

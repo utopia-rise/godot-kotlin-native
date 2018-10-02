@@ -19,7 +19,7 @@ open class SceneTree : MainLoop {
 
     // Enums 
 
-    enum class StretchAspect(val id: Int) {
+    enum class StretchAspect(val id: Long) {
         STRETCH_ASPECT_IGNORE(0),
         STRETCH_ASPECT_KEEP(1),
         STRETCH_ASPECT_KEEP_WIDTH(2),
@@ -28,10 +28,10 @@ open class SceneTree : MainLoop {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class GroupCallFlags(val id: Int) {
+    enum class GroupCallFlags(val id: Long) {
         GROUP_CALL_DEFAULT(0),
         GROUP_CALL_REVERSE(1),
         GROUP_CALL_REALTIME(2),
@@ -39,17 +39,17 @@ open class SceneTree : MainLoop {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class StretchMode(val id: Int) {
+    enum class StretchMode(val id: Long) {
         STRETCH_MODE_DISABLED(0),
         STRETCH_MODE_2D(1),
         STRETCH_MODE_VIEWPORT(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -81,18 +81,18 @@ open class SceneTree : MainLoop {
 
 
         // Constants
-        const val GROUP_CALL_DEFAULT: Int = 0
-        const val GROUP_CALL_REVERSE: Int = 1
-        const val GROUP_CALL_REALTIME: Int = 2
-        const val GROUP_CALL_UNIQUE: Int = 4
-        const val STRETCH_MODE_DISABLED: Int = 0
-        const val STRETCH_MODE_2D: Int = 1
-        const val STRETCH_MODE_VIEWPORT: Int = 2
-        const val STRETCH_ASPECT_IGNORE: Int = 0
-        const val STRETCH_ASPECT_KEEP: Int = 1
-        const val STRETCH_ASPECT_KEEP_WIDTH: Int = 2
-        const val STRETCH_ASPECT_KEEP_HEIGHT: Int = 3
-        const val STRETCH_ASPECT_EXPAND: Int = 4
+        const val GROUP_CALL_DEFAULT: Long = 0
+        const val GROUP_CALL_REVERSE: Long = 1
+        const val GROUP_CALL_REALTIME: Long = 2
+        const val GROUP_CALL_UNIQUE: Long = 4
+        const val STRETCH_MODE_DISABLED: Long = 0
+        const val STRETCH_MODE_2D: Long = 1
+        const val STRETCH_MODE_VIEWPORT: Long = 2
+        const val STRETCH_ASPECT_IGNORE: Long = 0
+        const val STRETCH_ASPECT_KEEP: Long = 1
+        const val STRETCH_ASPECT_KEEP_WIDTH: Long = 2
+        const val STRETCH_ASPECT_KEEP_HEIGHT: Long = 3
+        const val STRETCH_ASPECT_EXPAND: Long = 4
 
 
     }
@@ -241,20 +241,20 @@ open class SceneTree : MainLoop {
 
 
     private val createTimerMethodBind: CPointer<godot_method_bind> by lazy { getMB("SceneTree", "create_timer") }
-    open fun createTimer(timeSec: Float, pauseModeProcess: Boolean = true): SceneTreeTimer {
-        return _icall_SceneTreeTimer_Float_Boolean(createTimerMethodBind, this.rawMemory, timeSec, pauseModeProcess)
+    open fun createTimer(timeSec: Double, pauseModeProcess: Boolean = true): SceneTreeTimer {
+        return _icall_SceneTreeTimer_Double_Boolean(createTimerMethodBind, this.rawMemory, timeSec, pauseModeProcess)
     }
 
 
     private val getNodeCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("SceneTree", "get_node_count") }
-    open fun getNodeCount(): Int {
-        return _icall_Int(getNodeCountMethodBind, this.rawMemory)
+    open fun getNodeCount(): Long {
+        return _icall_Long(getNodeCountMethodBind, this.rawMemory)
     }
 
 
     private val getFrameMethodBind: CPointer<godot_method_bind> by lazy { getMB("SceneTree", "get_frame") }
-    open fun getFrame(): Int {
-        return _icall_Int(getFrameMethodBind, this.rawMemory)
+    open fun getFrame(): Long {
+        return _icall_Long(getFrameMethodBind, this.rawMemory)
     }
 
 
@@ -265,8 +265,8 @@ open class SceneTree : MainLoop {
 
 
     private val setScreenStretchMethodBind: CPointer<godot_method_bind> by lazy { getMB("SceneTree", "set_screen_stretch") }
-    open fun setScreenStretch(mode: Int, aspect: Int, minsize: Vector2, shrink: Float = 1f) {
-        _icall_Unit_Int_Int_Vector2_Float(setScreenStretchMethodBind, this.rawMemory, mode, aspect, minsize, shrink)
+    open fun setScreenStretch(mode: Long, aspect: Long, minsize: Vector2, shrink: Double = 1.0) {
+        _icall_Unit_Long_Long_Vector2_Double(setScreenStretchMethodBind, this.rawMemory, mode, aspect, minsize, shrink)
     }
 
 
@@ -277,20 +277,20 @@ open class SceneTree : MainLoop {
 
 
     private val callGroupFlagsMethodBind: CPointer<godot_method_bind> by lazy { getMB("SceneTree", "call_group_flags") }
-    open fun callGroupFlags(flags: Int, group: String, method: String, vararg __var_args: Any?): Variant {
+    open fun callGroupFlags(flags: Long, group: String, method: String, vararg __var_args: Any?): Variant {
         return _icall_varargs(callGroupFlagsMethodBind, this.rawMemory, arrayOf(flags, group, method, *__var_args))
     }
 
 
     private val notifyGroupFlagsMethodBind: CPointer<godot_method_bind> by lazy { getMB("SceneTree", "notify_group_flags") }
-    open fun notifyGroupFlags(callFlags: Int, group: String, notification: Int) {
-        _icall_Unit_Int_String_Int(notifyGroupFlagsMethodBind, this.rawMemory, callFlags, group, notification)
+    open fun notifyGroupFlags(callFlags: Long, group: String, notification: Long) {
+        _icall_Unit_Long_String_Long(notifyGroupFlagsMethodBind, this.rawMemory, callFlags, group, notification)
     }
 
 
     private val setGroupFlagsMethodBind: CPointer<godot_method_bind> by lazy { getMB("SceneTree", "set_group_flags") }
-    open fun setGroupFlags(callFlags: Int, group: String, property: String, value: Variant) {
-        _icall_Unit_Int_String_String_Variant(setGroupFlagsMethodBind, this.rawMemory, callFlags, group, property, value)
+    open fun setGroupFlags(callFlags: Long, group: String, property: String, value: Variant) {
+        _icall_Unit_Long_String_String_Variant(setGroupFlagsMethodBind, this.rawMemory, callFlags, group, property, value)
     }
 
 
@@ -301,8 +301,8 @@ open class SceneTree : MainLoop {
 
 
     private val notifyGroupMethodBind: CPointer<godot_method_bind> by lazy { getMB("SceneTree", "notify_group") }
-    open fun notifyGroup(group: String, notification: Int) {
-        _icall_Unit_String_Int(notifyGroupMethodBind, this.rawMemory, group, notification)
+    open fun notifyGroup(group: String, notification: Long) {
+        _icall_Unit_String_Long(notifyGroupMethodBind, this.rawMemory, group, notification)
     }
 
 
@@ -332,19 +332,19 @@ open class SceneTree : MainLoop {
 
     private val changeSceneMethodBind: CPointer<godot_method_bind> by lazy { getMB("SceneTree", "change_scene") }
     open fun changeScene(path: String): GodotError {
-        return GodotError.fromInt(_icall_Int_String(changeSceneMethodBind, this.rawMemory, path))
+        return GodotError.fromInt(_icall_Long_String(changeSceneMethodBind, this.rawMemory, path))
     }
 
 
     private val changeSceneToMethodBind: CPointer<godot_method_bind> by lazy { getMB("SceneTree", "change_scene_to") }
     open fun changeSceneTo(packedScene: PackedScene): GodotError {
-        return GodotError.fromInt(_icall_Int_Object(changeSceneToMethodBind, this.rawMemory, packedScene))
+        return GodotError.fromInt(_icall_Long_Object(changeSceneToMethodBind, this.rawMemory, packedScene))
     }
 
 
     private val reloadCurrentSceneMethodBind: CPointer<godot_method_bind> by lazy { getMB("SceneTree", "reload_current_scene") }
     open fun reloadCurrentScene(): GodotError {
-        return GodotError.fromInt(_icall_Int(reloadCurrentSceneMethodBind, this.rawMemory))
+        return GodotError.fromInt(_icall_Long(reloadCurrentSceneMethodBind, this.rawMemory))
     }
 
 
@@ -407,14 +407,14 @@ open class SceneTree : MainLoop {
 
 
     private val getNetworkUniqueIdMethodBind: CPointer<godot_method_bind> by lazy { getMB("SceneTree", "get_network_unique_id") }
-    open fun getNetworkUniqueId(): Int {
-        return _icall_Int(getNetworkUniqueIdMethodBind, this.rawMemory)
+    open fun getNetworkUniqueId(): Long {
+        return _icall_Long(getNetworkUniqueIdMethodBind, this.rawMemory)
     }
 
 
     private val getRpcSenderIdMethodBind: CPointer<godot_method_bind> by lazy { getMB("SceneTree", "get_rpc_sender_id") }
-    open fun getRpcSenderId(): Int {
-        return _icall_Int(getRpcSenderIdMethodBind, this.rawMemory)
+    open fun getRpcSenderId(): Long {
+        return _icall_Long(getRpcSenderIdMethodBind, this.rawMemory)
     }
 
 
@@ -430,11 +430,11 @@ open class SceneTree : MainLoop {
     }
 
 
-    open fun _network_peer_connected(arg0: Int) {
+    open fun _network_peer_connected(arg0: Long) {
     }
 
 
-    open fun _network_peer_disconnected(arg0: Int) {
+    open fun _network_peer_disconnected(arg0: Long) {
     }
 
 

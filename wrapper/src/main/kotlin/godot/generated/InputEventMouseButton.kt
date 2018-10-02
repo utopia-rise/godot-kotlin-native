@@ -45,14 +45,14 @@ open class InputEventMouseButton : InputEventMouse {
 
 
     // Properties
-    open var factor: Float
-        get() = _icall_Float(getFactorMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setFactorMethodBind, this.rawMemory, value)
+    open var factor: Double
+        get() = _icall_Double(getFactorMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setFactorMethodBind, this.rawMemory, value)
 
 
-    open var buttonIndex: Int
-        get() = _icall_Int(getButtonIndexMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setButtonIndexMethodBind, this.rawMemory, value)
+    open var buttonIndex: Long
+        get() = _icall_Long(getButtonIndexMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setButtonIndexMethodBind, this.rawMemory, value)
 
 
     open var pressed: Boolean
@@ -69,26 +69,26 @@ open class InputEventMouseButton : InputEventMouse {
 
     // Methods
     private val setFactorMethodBind: CPointer<godot_method_bind> by lazy { getMB("InputEventMouseButton", "set_factor") }
-    open fun setFactor(factor: Float) {
-        _icall_Unit_Float(setFactorMethodBind, this.rawMemory, factor)
+    open fun setFactor(factor: Double) {
+        _icall_Unit_Double(setFactorMethodBind, this.rawMemory, factor)
     }
 
 
     private val getFactorMethodBind: CPointer<godot_method_bind> by lazy { getMB("InputEventMouseButton", "get_factor") }
-    open fun getFactor(): Float {
-        return _icall_Float(getFactorMethodBind, this.rawMemory)
+    open fun getFactor(): Double {
+        return _icall_Double(getFactorMethodBind, this.rawMemory)
     }
 
 
     private val setButtonIndexMethodBind: CPointer<godot_method_bind> by lazy { getMB("InputEventMouseButton", "set_button_index") }
-    open fun setButtonIndex(buttonIndex: Int) {
-        _icall_Unit_Int(setButtonIndexMethodBind, this.rawMemory, buttonIndex)
+    open fun setButtonIndex(buttonIndex: Long) {
+        _icall_Unit_Long(setButtonIndexMethodBind, this.rawMemory, buttonIndex)
     }
 
 
     private val getButtonIndexMethodBind: CPointer<godot_method_bind> by lazy { getMB("InputEventMouseButton", "get_button_index") }
-    open fun getButtonIndex(): Int {
-        return _icall_Int(getButtonIndexMethodBind, this.rawMemory)
+    open fun getButtonIndex(): Long {
+        return _icall_Long(getButtonIndexMethodBind, this.rawMemory)
     }
 
 

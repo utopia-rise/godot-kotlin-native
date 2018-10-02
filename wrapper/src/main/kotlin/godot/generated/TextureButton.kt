@@ -19,7 +19,7 @@ open class TextureButton : BaseButton {
 
     // Enums 
 
-    enum class StretchMode(val id: Int) {
+    enum class StretchMode(val id: Long) {
         STRETCH_SCALE(0),
         STRETCH_TILE(1),
         STRETCH_KEEP(2),
@@ -30,7 +30,7 @@ open class TextureButton : BaseButton {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -52,13 +52,13 @@ open class TextureButton : BaseButton {
 
 
         // Constants
-        const val STRETCH_SCALE: Int = 0
-        const val STRETCH_TILE: Int = 1
-        const val STRETCH_KEEP: Int = 2
-        const val STRETCH_KEEP_CENTERED: Int = 3
-        const val STRETCH_KEEP_ASPECT: Int = 4
-        const val STRETCH_KEEP_ASPECT_CENTERED: Int = 5
-        const val STRETCH_KEEP_ASPECT_COVERED: Int = 6
+        const val STRETCH_SCALE: Long = 0
+        const val STRETCH_TILE: Long = 1
+        const val STRETCH_KEEP: Long = 2
+        const val STRETCH_KEEP_CENTERED: Long = 3
+        const val STRETCH_KEEP_ASPECT: Long = 4
+        const val STRETCH_KEEP_ASPECT_CENTERED: Long = 5
+        const val STRETCH_KEEP_ASPECT_COVERED: Long = 6
 
 
     }
@@ -100,9 +100,9 @@ open class TextureButton : BaseButton {
         set(value) = _icall_Unit_Boolean(setExpandMethodBind, this.rawMemory, value)
 
 
-    open var stretchMode: Int
-        get() = _icall_Int(getStretchModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setStretchModeMethodBind, this.rawMemory, value)
+    open var stretchMode: Long
+        get() = _icall_Long(getStretchModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setStretchModeMethodBind, this.rawMemory, value)
 
 
 
@@ -151,8 +151,8 @@ open class TextureButton : BaseButton {
 
 
     private val setStretchModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("TextureButton", "set_stretch_mode") }
-    open fun setStretchMode(pMode: Int) {
-        _icall_Unit_Int(setStretchModeMethodBind, this.rawMemory, pMode)
+    open fun setStretchMode(pMode: Long) {
+        _icall_Unit_Long(setStretchModeMethodBind, this.rawMemory, pMode)
     }
 
 
@@ -200,7 +200,7 @@ open class TextureButton : BaseButton {
 
     private val getStretchModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("TextureButton", "get_stretch_mode") }
     open fun getStretchMode(): TextureButton.StretchMode {
-        return TextureButton.StretchMode.fromInt(_icall_Int(getStretchModeMethodBind, this.rawMemory))
+        return TextureButton.StretchMode.fromInt(_icall_Long(getStretchModeMethodBind, this.rawMemory))
     }
 
 

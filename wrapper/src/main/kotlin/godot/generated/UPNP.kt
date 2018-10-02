@@ -19,7 +19,7 @@ open class UPNP : Reference {
 
     // Enums 
 
-    enum class UPNPResult(val id: Int) {
+    enum class UPNPResult(val id: Long) {
         UPNP_RESULT_SUCCESS(0),
         UPNP_RESULT_NOT_AUTHORIZED(1),
         UPNP_RESULT_PORT_MAPPING_NOT_FOUND(2),
@@ -52,7 +52,7 @@ open class UPNP : Reference {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -71,35 +71,35 @@ open class UPNP : Reference {
 
 
         // Constants
-        const val UPNP_RESULT_SUCCESS: Int = 0
-        const val UPNP_RESULT_NOT_AUTHORIZED: Int = 1
-        const val UPNP_RESULT_PORT_MAPPING_NOT_FOUND: Int = 2
-        const val UPNP_RESULT_INCONSISTENT_PARAMETERS: Int = 3
-        const val UPNP_RESULT_NO_SUCH_ENTRY_IN_ARRAY: Int = 4
-        const val UPNP_RESULT_ACTION_FAILED: Int = 5
-        const val UPNP_RESULT_SRC_IP_WILDCARD_NOT_PERMITTED: Int = 6
-        const val UPNP_RESULT_EXT_PORT_WILDCARD_NOT_PERMITTED: Int = 7
-        const val UPNP_RESULT_INT_PORT_WILDCARD_NOT_PERMITTED: Int = 8
-        const val UPNP_RESULT_REMOTE_HOST_MUST_BE_WILDCARD: Int = 9
-        const val UPNP_RESULT_EXT_PORT_MUST_BE_WILDCARD: Int = 10
-        const val UPNP_RESULT_NO_PORT_MAPS_AVAILABLE: Int = 11
-        const val UPNP_RESULT_CONFLICT_WITH_OTHER_MECHANISM: Int = 12
-        const val UPNP_RESULT_CONFLICT_WITH_OTHER_MAPPING: Int = 13
-        const val UPNP_RESULT_SAME_PORT_VALUES_REQUIRED: Int = 14
-        const val UPNP_RESULT_ONLY_PERMANENT_LEASE_SUPPORTED: Int = 15
-        const val UPNP_RESULT_INVALID_GATEWAY: Int = 16
-        const val UPNP_RESULT_INVALID_PORT: Int = 17
-        const val UPNP_RESULT_INVALID_PROTOCOL: Int = 18
-        const val UPNP_RESULT_INVALID_DURATION: Int = 19
-        const val UPNP_RESULT_INVALID_ARGS: Int = 20
-        const val UPNP_RESULT_INVALID_RESPONSE: Int = 21
-        const val UPNP_RESULT_INVALID_PARAM: Int = 22
-        const val UPNP_RESULT_HTTP_ERROR: Int = 23
-        const val UPNP_RESULT_SOCKET_ERROR: Int = 24
-        const val UPNP_RESULT_MEM_ALLOC_ERROR: Int = 25
-        const val UPNP_RESULT_NO_GATEWAY: Int = 26
-        const val UPNP_RESULT_NO_DEVICES: Int = 27
-        const val UPNP_RESULT_UNKNOWN_ERROR: Int = 28
+        const val UPNP_RESULT_SUCCESS: Long = 0
+        const val UPNP_RESULT_NOT_AUTHORIZED: Long = 1
+        const val UPNP_RESULT_PORT_MAPPING_NOT_FOUND: Long = 2
+        const val UPNP_RESULT_INCONSISTENT_PARAMETERS: Long = 3
+        const val UPNP_RESULT_NO_SUCH_ENTRY_IN_ARRAY: Long = 4
+        const val UPNP_RESULT_ACTION_FAILED: Long = 5
+        const val UPNP_RESULT_SRC_IP_WILDCARD_NOT_PERMITTED: Long = 6
+        const val UPNP_RESULT_EXT_PORT_WILDCARD_NOT_PERMITTED: Long = 7
+        const val UPNP_RESULT_INT_PORT_WILDCARD_NOT_PERMITTED: Long = 8
+        const val UPNP_RESULT_REMOTE_HOST_MUST_BE_WILDCARD: Long = 9
+        const val UPNP_RESULT_EXT_PORT_MUST_BE_WILDCARD: Long = 10
+        const val UPNP_RESULT_NO_PORT_MAPS_AVAILABLE: Long = 11
+        const val UPNP_RESULT_CONFLICT_WITH_OTHER_MECHANISM: Long = 12
+        const val UPNP_RESULT_CONFLICT_WITH_OTHER_MAPPING: Long = 13
+        const val UPNP_RESULT_SAME_PORT_VALUES_REQUIRED: Long = 14
+        const val UPNP_RESULT_ONLY_PERMANENT_LEASE_SUPPORTED: Long = 15
+        const val UPNP_RESULT_INVALID_GATEWAY: Long = 16
+        const val UPNP_RESULT_INVALID_PORT: Long = 17
+        const val UPNP_RESULT_INVALID_PROTOCOL: Long = 18
+        const val UPNP_RESULT_INVALID_DURATION: Long = 19
+        const val UPNP_RESULT_INVALID_ARGS: Long = 20
+        const val UPNP_RESULT_INVALID_RESPONSE: Long = 21
+        const val UPNP_RESULT_INVALID_PARAM: Long = 22
+        const val UPNP_RESULT_HTTP_ERROR: Long = 23
+        const val UPNP_RESULT_SOCKET_ERROR: Long = 24
+        const val UPNP_RESULT_MEM_ALLOC_ERROR: Long = 25
+        const val UPNP_RESULT_NO_GATEWAY: Long = 26
+        const val UPNP_RESULT_NO_DEVICES: Long = 27
+        const val UPNP_RESULT_UNKNOWN_ERROR: Long = 28
 
 
     }
@@ -111,9 +111,9 @@ open class UPNP : Reference {
         set(value) = _icall_Unit_String(setDiscoverMulticastIfMethodBind, this.rawMemory, value)
 
 
-    open var discoverLocalPort: Int
-        get() = _icall_Int(getDiscoverLocalPortMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setDiscoverLocalPortMethodBind, this.rawMemory, value)
+    open var discoverLocalPort: Long
+        get() = _icall_Long(getDiscoverLocalPortMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setDiscoverLocalPortMethodBind, this.rawMemory, value)
 
 
     open var discoverIpv6: Boolean
@@ -125,14 +125,14 @@ open class UPNP : Reference {
 
     // Methods
     private val getDeviceCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("UPNP", "get_device_count") }
-    open fun getDeviceCount(): Int {
-        return _icall_Int(getDeviceCountMethodBind, this.rawMemory)
+    open fun getDeviceCount(): Long {
+        return _icall_Long(getDeviceCountMethodBind, this.rawMemory)
     }
 
 
     private val getDeviceMethodBind: CPointer<godot_method_bind> by lazy { getMB("UPNP", "get_device") }
-    open fun getDevice(index: Int): UPNPDevice {
-        return _icall_UPNPDevice_Int(getDeviceMethodBind, this.rawMemory, index)
+    open fun getDevice(index: Long): UPNPDevice {
+        return _icall_UPNPDevice_Long(getDeviceMethodBind, this.rawMemory, index)
     }
 
 
@@ -143,14 +143,14 @@ open class UPNP : Reference {
 
 
     private val setDeviceMethodBind: CPointer<godot_method_bind> by lazy { getMB("UPNP", "set_device") }
-    open fun setDevice(index: Int, device: UPNPDevice) {
-        _icall_Unit_Int_Object(setDeviceMethodBind, this.rawMemory, index, device)
+    open fun setDevice(index: Long, device: UPNPDevice) {
+        _icall_Unit_Long_Object(setDeviceMethodBind, this.rawMemory, index, device)
     }
 
 
     private val removeDeviceMethodBind: CPointer<godot_method_bind> by lazy { getMB("UPNP", "remove_device") }
-    open fun removeDevice(index: Int) {
-        _icall_Unit_Int(removeDeviceMethodBind, this.rawMemory, index)
+    open fun removeDevice(index: Long) {
+        _icall_Unit_Long(removeDeviceMethodBind, this.rawMemory, index)
     }
 
 
@@ -167,8 +167,8 @@ open class UPNP : Reference {
 
 
     private val discoverMethodBind: CPointer<godot_method_bind> by lazy { getMB("UPNP", "discover") }
-    open fun discover(timeout: Int = 2000, ttl: Int = 2, deviceFilter: String = "InternetGatewayDevice"): Int {
-        return _icall_Int_Int_Int_String(discoverMethodBind, this.rawMemory, timeout, ttl, deviceFilter)
+    open fun discover(timeout: Long = 2000, ttl: Long = 2, deviceFilter: String = "InternetGatewayDevice"): Long {
+        return _icall_Long_Long_Long_String(discoverMethodBind, this.rawMemory, timeout, ttl, deviceFilter)
     }
 
 
@@ -179,14 +179,14 @@ open class UPNP : Reference {
 
 
     private val addPortMappingMethodBind: CPointer<godot_method_bind> by lazy { getMB("UPNP", "add_port_mapping") }
-    open fun addPortMapping(port: Int, portInternal: Int = 0, desc: String = "", proto: String = "UDP", duration: Int = 0): Int {
-        return _icall_Int_Int_Int_String_String_Int(addPortMappingMethodBind, this.rawMemory, port, portInternal, desc, proto, duration)
+    open fun addPortMapping(port: Long, portInternal: Long = 0, desc: String = "", proto: String = "UDP", duration: Long = 0): Long {
+        return _icall_Long_Long_Long_String_String_Long(addPortMappingMethodBind, this.rawMemory, port, portInternal, desc, proto, duration)
     }
 
 
     private val deletePortMappingMethodBind: CPointer<godot_method_bind> by lazy { getMB("UPNP", "delete_port_mapping") }
-    open fun deletePortMapping(port: Int, proto: String = "UDP"): Int {
-        return _icall_Int_Int_String(deletePortMappingMethodBind, this.rawMemory, port, proto)
+    open fun deletePortMapping(port: Long, proto: String = "UDP"): Long {
+        return _icall_Long_Long_String(deletePortMappingMethodBind, this.rawMemory, port, proto)
     }
 
 
@@ -203,14 +203,14 @@ open class UPNP : Reference {
 
 
     private val setDiscoverLocalPortMethodBind: CPointer<godot_method_bind> by lazy { getMB("UPNP", "set_discover_local_port") }
-    open fun setDiscoverLocalPort(port: Int) {
-        _icall_Unit_Int(setDiscoverLocalPortMethodBind, this.rawMemory, port)
+    open fun setDiscoverLocalPort(port: Long) {
+        _icall_Unit_Long(setDiscoverLocalPortMethodBind, this.rawMemory, port)
     }
 
 
     private val getDiscoverLocalPortMethodBind: CPointer<godot_method_bind> by lazy { getMB("UPNP", "get_discover_local_port") }
-    open fun getDiscoverLocalPort(): Int {
-        return _icall_Int(getDiscoverLocalPortMethodBind, this.rawMemory)
+    open fun getDiscoverLocalPort(): Long {
+        return _icall_Long(getDiscoverLocalPortMethodBind, this.rawMemory)
     }
 
 

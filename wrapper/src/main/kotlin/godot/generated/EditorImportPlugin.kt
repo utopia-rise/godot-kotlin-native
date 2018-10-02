@@ -54,12 +54,12 @@ open class EditorImportPlugin : Reference {
     }
 
 
-    open fun get_preset_count(): Int {
+    open fun get_preset_count(): Long {
         throw NotImplementedError("get_preset_count is not implemented for EditorImportPlugin")
     }
 
 
-    open fun get_preset_name(preset: Int): String {
+    open fun get_preset_name(preset: Long): String {
         throw NotImplementedError("get_preset_name is not implemented for EditorImportPlugin")
     }
 
@@ -69,7 +69,7 @@ open class EditorImportPlugin : Reference {
     }
 
 
-    open fun get_import_options(preset: Int): GDArray {
+    open fun get_import_options(preset: Long): GDArray {
         throw NotImplementedError("get_import_options is not implemented for EditorImportPlugin")
     }
 
@@ -84,12 +84,12 @@ open class EditorImportPlugin : Reference {
     }
 
 
-    open fun get_priority(): Float {
+    open fun get_priority(): Double {
         throw NotImplementedError("get_priority is not implemented for EditorImportPlugin")
     }
 
 
-    open fun get_import_order(): Int {
+    open fun get_import_order(): Long {
         throw NotImplementedError("get_import_order is not implemented for EditorImportPlugin")
     }
 
@@ -99,7 +99,7 @@ open class EditorImportPlugin : Reference {
     }
 
 
-    open fun import(sourceFile: String, savePath: String, options: Dictionary, rPlatformVariants: GDArray, rGenFiles: GDArray): Int {
+    open fun import(sourceFile: String, savePath: String, options: Dictionary, rPlatformVariants: GDArray, rGenFiles: GDArray): Long {
         throw NotImplementedError("import is not implemented for EditorImportPlugin")
     }
 

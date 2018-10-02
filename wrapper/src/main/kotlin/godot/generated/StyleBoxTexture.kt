@@ -19,14 +19,14 @@ open class StyleBoxTexture : StyleBox {
 
     // Enums 
 
-    enum class AxisStretchMode(val id: Int) {
+    enum class AxisStretchMode(val id: Long) {
         AXIS_STRETCH_MODE_STRETCH(0),
         AXIS_STRETCH_MODE_TILE(1),
         AXIS_STRETCH_MODE_TILE_FIT(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -48,9 +48,9 @@ open class StyleBoxTexture : StyleBox {
 
 
         // Constants
-        const val AXIS_STRETCH_MODE_STRETCH: Int = 0
-        const val AXIS_STRETCH_MODE_TILE: Int = 1
-        const val AXIS_STRETCH_MODE_TILE_FIT: Int = 2
+        const val AXIS_STRETCH_MODE_STRETCH: Long = 0
+        const val AXIS_STRETCH_MODE_TILE: Long = 1
+        const val AXIS_STRETCH_MODE_TILE_FIT: Long = 2
 
 
     }
@@ -76,54 +76,54 @@ open class StyleBoxTexture : StyleBox {
     }
 
 
-    open var marginLeft: Float
-        get() = _icall_Float_Int(getMarginSizeMethodBind, this.rawMemory, 0)
-        set(value) = _icall_Unit_Int_Float(setMarginSizeMethodBind, this.rawMemory, 0, value)
+    open var marginLeft: Double
+        get() = _icall_Double_Long(getMarginSizeMethodBind, this.rawMemory, 0)
+        set(value) = _icall_Unit_Long_Double(setMarginSizeMethodBind, this.rawMemory, 0, value)
 
 
-    open var marginRight: Float
-        get() = _icall_Float_Int(getMarginSizeMethodBind, this.rawMemory, 2)
-        set(value) = _icall_Unit_Int_Float(setMarginSizeMethodBind, this.rawMemory, 2, value)
+    open var marginRight: Double
+        get() = _icall_Double_Long(getMarginSizeMethodBind, this.rawMemory, 2)
+        set(value) = _icall_Unit_Long_Double(setMarginSizeMethodBind, this.rawMemory, 2, value)
 
 
-    open var marginTop: Float
-        get() = _icall_Float_Int(getMarginSizeMethodBind, this.rawMemory, 1)
-        set(value) = _icall_Unit_Int_Float(setMarginSizeMethodBind, this.rawMemory, 1, value)
+    open var marginTop: Double
+        get() = _icall_Double_Long(getMarginSizeMethodBind, this.rawMemory, 1)
+        set(value) = _icall_Unit_Long_Double(setMarginSizeMethodBind, this.rawMemory, 1, value)
 
 
-    open var marginBottom: Float
-        get() = _icall_Float_Int(getMarginSizeMethodBind, this.rawMemory, 3)
-        set(value) = _icall_Unit_Int_Float(setMarginSizeMethodBind, this.rawMemory, 3, value)
+    open var marginBottom: Double
+        get() = _icall_Double_Long(getMarginSizeMethodBind, this.rawMemory, 3)
+        set(value) = _icall_Unit_Long_Double(setMarginSizeMethodBind, this.rawMemory, 3, value)
 
 
-    open var expandMarginLeft: Float
-        get() = _icall_Float_Int(getExpandMarginSizeMethodBind, this.rawMemory, 0)
-        set(value) = _icall_Unit_Int_Float(setExpandMarginSizeMethodBind, this.rawMemory, 0, value)
+    open var expandMarginLeft: Double
+        get() = _icall_Double_Long(getExpandMarginSizeMethodBind, this.rawMemory, 0)
+        set(value) = _icall_Unit_Long_Double(setExpandMarginSizeMethodBind, this.rawMemory, 0, value)
 
 
-    open var expandMarginRight: Float
-        get() = _icall_Float_Int(getExpandMarginSizeMethodBind, this.rawMemory, 2)
-        set(value) = _icall_Unit_Int_Float(setExpandMarginSizeMethodBind, this.rawMemory, 2, value)
+    open var expandMarginRight: Double
+        get() = _icall_Double_Long(getExpandMarginSizeMethodBind, this.rawMemory, 2)
+        set(value) = _icall_Unit_Long_Double(setExpandMarginSizeMethodBind, this.rawMemory, 2, value)
 
 
-    open var expandMarginTop: Float
-        get() = _icall_Float_Int(getExpandMarginSizeMethodBind, this.rawMemory, 1)
-        set(value) = _icall_Unit_Int_Float(setExpandMarginSizeMethodBind, this.rawMemory, 1, value)
+    open var expandMarginTop: Double
+        get() = _icall_Double_Long(getExpandMarginSizeMethodBind, this.rawMemory, 1)
+        set(value) = _icall_Unit_Long_Double(setExpandMarginSizeMethodBind, this.rawMemory, 1, value)
 
 
-    open var expandMarginBottom: Float
-        get() = _icall_Float_Int(getExpandMarginSizeMethodBind, this.rawMemory, 3)
-        set(value) = _icall_Unit_Int_Float(setExpandMarginSizeMethodBind, this.rawMemory, 3, value)
+    open var expandMarginBottom: Double
+        get() = _icall_Double_Long(getExpandMarginSizeMethodBind, this.rawMemory, 3)
+        set(value) = _icall_Unit_Long_Double(setExpandMarginSizeMethodBind, this.rawMemory, 3, value)
 
 
-    open var axisStretchHorizontal: Int
-        get() = _icall_Int(getHAxisStretchModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setHAxisStretchModeMethodBind, this.rawMemory, value)
+    open var axisStretchHorizontal: Long
+        get() = _icall_Long(getHAxisStretchModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setHAxisStretchModeMethodBind, this.rawMemory, value)
 
 
-    open var axisStretchVertical: Int
-        get() = _icall_Int(getVAxisStretchModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setVAxisStretchModeMethodBind, this.rawMemory, value)
+    open var axisStretchVertical: Long
+        get() = _icall_Long(getVAxisStretchModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setVAxisStretchModeMethodBind, this.rawMemory, value)
 
 
     open var modulateColor: Color
@@ -168,38 +168,38 @@ open class StyleBoxTexture : StyleBox {
 
 
     private val setMarginSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("StyleBoxTexture", "set_margin_size") }
-    open fun setMarginSize(margin: Int, size: Float) {
-        _icall_Unit_Int_Float(setMarginSizeMethodBind, this.rawMemory, margin, size)
+    open fun setMarginSize(margin: Long, size: Double) {
+        _icall_Unit_Long_Double(setMarginSizeMethodBind, this.rawMemory, margin, size)
     }
 
 
     private val getMarginSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("StyleBoxTexture", "get_margin_size") }
-    open fun getMarginSize(margin: Int): Float {
-        return _icall_Float_Int(getMarginSizeMethodBind, this.rawMemory, margin)
+    open fun getMarginSize(margin: Long): Double {
+        return _icall_Double_Long(getMarginSizeMethodBind, this.rawMemory, margin)
     }
 
 
     private val setExpandMarginSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("StyleBoxTexture", "set_expand_margin_size") }
-    open fun setExpandMarginSize(margin: Int, size: Float) {
-        _icall_Unit_Int_Float(setExpandMarginSizeMethodBind, this.rawMemory, margin, size)
+    open fun setExpandMarginSize(margin: Long, size: Double) {
+        _icall_Unit_Long_Double(setExpandMarginSizeMethodBind, this.rawMemory, margin, size)
     }
 
 
     private val setExpandMarginAllMethodBind: CPointer<godot_method_bind> by lazy { getMB("StyleBoxTexture", "set_expand_margin_all") }
-    open fun setExpandMarginAll(size: Float) {
-        _icall_Unit_Float(setExpandMarginAllMethodBind, this.rawMemory, size)
+    open fun setExpandMarginAll(size: Double) {
+        _icall_Unit_Double(setExpandMarginAllMethodBind, this.rawMemory, size)
     }
 
 
     private val setExpandMarginIndividualMethodBind: CPointer<godot_method_bind> by lazy { getMB("StyleBoxTexture", "set_expand_margin_individual") }
-    open fun setExpandMarginIndividual(sizeLeft: Float, sizeTop: Float, sizeRight: Float, sizeBottom: Float) {
-        _icall_Unit_Float_Float_Float_Float(setExpandMarginIndividualMethodBind, this.rawMemory, sizeLeft, sizeTop, sizeRight, sizeBottom)
+    open fun setExpandMarginIndividual(sizeLeft: Double, sizeTop: Double, sizeRight: Double, sizeBottom: Double) {
+        _icall_Unit_Double_Double_Double_Double(setExpandMarginIndividualMethodBind, this.rawMemory, sizeLeft, sizeTop, sizeRight, sizeBottom)
     }
 
 
     private val getExpandMarginSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("StyleBoxTexture", "get_expand_margin_size") }
-    open fun getExpandMarginSize(margin: Int): Float {
-        return _icall_Float_Int(getExpandMarginSizeMethodBind, this.rawMemory, margin)
+    open fun getExpandMarginSize(margin: Long): Double {
+        return _icall_Double_Long(getExpandMarginSizeMethodBind, this.rawMemory, margin)
     }
 
 
@@ -240,26 +240,26 @@ open class StyleBoxTexture : StyleBox {
 
 
     private val setHAxisStretchModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("StyleBoxTexture", "set_h_axis_stretch_mode") }
-    open fun setHAxisStretchMode(mode: Int) {
-        _icall_Unit_Int(setHAxisStretchModeMethodBind, this.rawMemory, mode)
+    open fun setHAxisStretchMode(mode: Long) {
+        _icall_Unit_Long(setHAxisStretchModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getHAxisStretchModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("StyleBoxTexture", "get_h_axis_stretch_mode") }
     open fun getHAxisStretchMode(): StyleBoxTexture.AxisStretchMode {
-        return StyleBoxTexture.AxisStretchMode.fromInt(_icall_Int(getHAxisStretchModeMethodBind, this.rawMemory))
+        return StyleBoxTexture.AxisStretchMode.fromInt(_icall_Long(getHAxisStretchModeMethodBind, this.rawMemory))
     }
 
 
     private val setVAxisStretchModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("StyleBoxTexture", "set_v_axis_stretch_mode") }
-    open fun setVAxisStretchMode(mode: Int) {
-        _icall_Unit_Int(setVAxisStretchModeMethodBind, this.rawMemory, mode)
+    open fun setVAxisStretchMode(mode: Long) {
+        _icall_Unit_Long(setVAxisStretchModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getVAxisStretchModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("StyleBoxTexture", "get_v_axis_stretch_mode") }
     open fun getVAxisStretchMode(): StyleBoxTexture.AxisStretchMode {
-        return StyleBoxTexture.AxisStretchMode.fromInt(_icall_Int(getVAxisStretchModeMethodBind, this.rawMemory))
+        return StyleBoxTexture.AxisStretchMode.fromInt(_icall_Long(getVAxisStretchModeMethodBind, this.rawMemory))
     }
 
 

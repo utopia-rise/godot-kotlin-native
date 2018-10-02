@@ -82,14 +82,14 @@ open class MeshInstance : GeometryInstance {
 
 
     private val setSurfaceMaterialMethodBind: CPointer<godot_method_bind> by lazy { getMB("MeshInstance", "set_surface_material") }
-    open fun setSurfaceMaterial(surface: Int, material: Material) {
-        _icall_Unit_Int_Object(setSurfaceMaterialMethodBind, this.rawMemory, surface, material)
+    open fun setSurfaceMaterial(surface: Long, material: Material) {
+        _icall_Unit_Long_Object(setSurfaceMaterialMethodBind, this.rawMemory, surface, material)
     }
 
 
     private val getSurfaceMaterialMethodBind: CPointer<godot_method_bind> by lazy { getMB("MeshInstance", "get_surface_material") }
-    open fun getSurfaceMaterial(surface: Int): Material {
-        return _icall_Material_Int(getSurfaceMaterialMethodBind, this.rawMemory, surface)
+    open fun getSurfaceMaterial(surface: Long): Material {
+        return _icall_Material_Long(getSurfaceMaterialMethodBind, this.rawMemory, surface)
     }
 
 

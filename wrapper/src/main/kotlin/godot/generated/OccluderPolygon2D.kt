@@ -19,14 +19,14 @@ open class OccluderPolygon2D : Resource {
 
     // Enums 
 
-    enum class CullMode(val id: Int) {
+    enum class CullMode(val id: Long) {
         CULL_DISABLED(0),
         CULL_CLOCKWISE(1),
         CULL_COUNTER_CLOCKWISE(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -46,9 +46,9 @@ open class OccluderPolygon2D : Resource {
 
 
         // Constants
-        const val CULL_DISABLED: Int = 0
-        const val CULL_CLOCKWISE: Int = 1
-        const val CULL_COUNTER_CLOCKWISE: Int = 2
+        const val CULL_DISABLED: Long = 0
+        const val CULL_CLOCKWISE: Long = 1
+        const val CULL_COUNTER_CLOCKWISE: Long = 2
 
 
     }
@@ -60,9 +60,9 @@ open class OccluderPolygon2D : Resource {
         set(value) = _icall_Unit_Boolean(setClosedMethodBind, this.rawMemory, value)
 
 
-    open var cullMode: Int
-        get() = _icall_Int(getCullModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setCullModeMethodBind, this.rawMemory, value)
+    open var cullMode: Long
+        get() = _icall_Long(getCullModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setCullModeMethodBind, this.rawMemory, value)
 
 
     open var polygon: PoolVector2Array
@@ -86,14 +86,14 @@ open class OccluderPolygon2D : Resource {
 
 
     private val setCullModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("OccluderPolygon2D", "set_cull_mode") }
-    open fun setCullMode(cullMode: Int) {
-        _icall_Unit_Int(setCullModeMethodBind, this.rawMemory, cullMode)
+    open fun setCullMode(cullMode: Long) {
+        _icall_Unit_Long(setCullModeMethodBind, this.rawMemory, cullMode)
     }
 
 
     private val getCullModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("OccluderPolygon2D", "get_cull_mode") }
     open fun getCullMode(): OccluderPolygon2D.CullMode {
-        return OccluderPolygon2D.CullMode.fromInt(_icall_Int(getCullModeMethodBind, this.rawMemory))
+        return OccluderPolygon2D.CullMode.fromInt(_icall_Long(getCullModeMethodBind, this.rawMemory))
     }
 
 

@@ -19,7 +19,7 @@ open class VisualScriptFunctionCall : VisualScriptNode {
 
     // Enums 
 
-    enum class RPCCallMode(val id: Int) {
+    enum class RPCCallMode(val id: Long) {
         RPC_DISABLED(0),
         RPC_RELIABLE(1),
         RPC_UNRELIABLE(2),
@@ -28,10 +28,10 @@ open class VisualScriptFunctionCall : VisualScriptNode {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class CallMode(val id: Int) {
+    enum class CallMode(val id: Long) {
         CALL_MODE_SELF(0),
         CALL_MODE_NODE_PATH(1),
         CALL_MODE_INSTANCE(2),
@@ -40,7 +40,7 @@ open class VisualScriptFunctionCall : VisualScriptNode {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -61,25 +61,25 @@ open class VisualScriptFunctionCall : VisualScriptNode {
 
 
         // Constants
-        const val CALL_MODE_SELF: Int = 0
-        const val CALL_MODE_NODE_PATH: Int = 1
-        const val CALL_MODE_INSTANCE: Int = 2
-        const val CALL_MODE_BASIC_TYPE: Int = 3
-        const val CALL_MODE_SINGLETON: Int = 4
-        const val RPC_DISABLED: Int = 0
-        const val RPC_RELIABLE: Int = 1
-        const val RPC_UNRELIABLE: Int = 2
-        const val RPC_RELIABLE_TO_ID: Int = 3
-        const val RPC_UNRELIABLE_TO_ID: Int = 4
+        const val CALL_MODE_SELF: Long = 0
+        const val CALL_MODE_NODE_PATH: Long = 1
+        const val CALL_MODE_INSTANCE: Long = 2
+        const val CALL_MODE_BASIC_TYPE: Long = 3
+        const val CALL_MODE_SINGLETON: Long = 4
+        const val RPC_DISABLED: Long = 0
+        const val RPC_RELIABLE: Long = 1
+        const val RPC_UNRELIABLE: Long = 2
+        const val RPC_RELIABLE_TO_ID: Long = 3
+        const val RPC_UNRELIABLE_TO_ID: Long = 4
 
 
     }
 
 
     // Properties
-    open var callMode: Int
-        get() = _icall_Int(getCallModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setCallModeMethodBind, this.rawMemory, value)
+    open var callMode: Long
+        get() = _icall_Long(getCallModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setCallModeMethodBind, this.rawMemory, value)
 
 
     open var baseType: String
@@ -97,9 +97,9 @@ open class VisualScriptFunctionCall : VisualScriptNode {
         set(value) = _icall_Unit_String(setSingletonMethodBind, this.rawMemory, value)
 
 
-    open var basicType: Int
-        get() = _icall_Int(getBasicTypeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setBasicTypeMethodBind, this.rawMemory, value)
+    open var basicType: Long
+        get() = _icall_Long(getBasicTypeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setBasicTypeMethodBind, this.rawMemory, value)
 
 
     open var nodePath: NodePath
@@ -112,9 +112,9 @@ open class VisualScriptFunctionCall : VisualScriptNode {
         set(value) = _icall_Unit_String(setFunctionMethodBind, this.rawMemory, value)
 
 
-    open var useDefaultArgs: Int
-        get() = _icall_Int(getUseDefaultArgsMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setUseDefaultArgsMethodBind, this.rawMemory, value)
+    open var useDefaultArgs: Long
+        get() = _icall_Long(getUseDefaultArgsMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setUseDefaultArgsMethodBind, this.rawMemory, value)
 
 
     open var validate: Boolean
@@ -122,9 +122,9 @@ open class VisualScriptFunctionCall : VisualScriptNode {
         set(value) = _icall_Unit_Boolean(setValidateMethodBind, this.rawMemory, value)
 
 
-    open var rpcCallMode: Int
-        get() = _icall_Int(getRpcCallModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setRpcCallModeMethodBind, this.rawMemory, value)
+    open var rpcCallMode: Long
+        get() = _icall_Long(getRpcCallModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setRpcCallModeMethodBind, this.rawMemory, value)
 
 
 
@@ -155,14 +155,14 @@ open class VisualScriptFunctionCall : VisualScriptNode {
 
 
     private val setBasicTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptFunctionCall", "set_basic_type") }
-    open fun setBasicType(basicType: Int) {
-        _icall_Unit_Int(setBasicTypeMethodBind, this.rawMemory, basicType)
+    open fun setBasicType(basicType: Long) {
+        _icall_Unit_Long(setBasicTypeMethodBind, this.rawMemory, basicType)
     }
 
 
     private val getBasicTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptFunctionCall", "get_basic_type") }
     open fun getBasicType(): Variant.Type {
-        return Variant.Type.fromInt(_icall_Int(getBasicTypeMethodBind, this.rawMemory))
+        return Variant.Type.fromInt(_icall_Long(getBasicTypeMethodBind, this.rawMemory))
     }
 
 
@@ -191,14 +191,14 @@ open class VisualScriptFunctionCall : VisualScriptNode {
 
 
     private val setCallModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptFunctionCall", "set_call_mode") }
-    open fun setCallMode(mode: Int) {
-        _icall_Unit_Int(setCallModeMethodBind, this.rawMemory, mode)
+    open fun setCallMode(mode: Long) {
+        _icall_Unit_Long(setCallModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getCallModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptFunctionCall", "get_call_mode") }
     open fun getCallMode(): VisualScriptFunctionCall.CallMode {
-        return VisualScriptFunctionCall.CallMode.fromInt(_icall_Int(getCallModeMethodBind, this.rawMemory))
+        return VisualScriptFunctionCall.CallMode.fromInt(_icall_Long(getCallModeMethodBind, this.rawMemory))
     }
 
 
@@ -215,14 +215,14 @@ open class VisualScriptFunctionCall : VisualScriptNode {
 
 
     private val setUseDefaultArgsMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptFunctionCall", "set_use_default_args") }
-    open fun setUseDefaultArgs(amount: Int) {
-        _icall_Unit_Int(setUseDefaultArgsMethodBind, this.rawMemory, amount)
+    open fun setUseDefaultArgs(amount: Long) {
+        _icall_Unit_Long(setUseDefaultArgsMethodBind, this.rawMemory, amount)
     }
 
 
     private val getUseDefaultArgsMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptFunctionCall", "get_use_default_args") }
-    open fun getUseDefaultArgs(): Int {
-        return _icall_Int(getUseDefaultArgsMethodBind, this.rawMemory)
+    open fun getUseDefaultArgs(): Long {
+        return _icall_Long(getUseDefaultArgsMethodBind, this.rawMemory)
     }
 
 
@@ -236,14 +236,14 @@ open class VisualScriptFunctionCall : VisualScriptNode {
 
 
     private val setRpcCallModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptFunctionCall", "set_rpc_call_mode") }
-    open fun setRpcCallMode(mode: Int) {
-        _icall_Unit_Int(setRpcCallModeMethodBind, this.rawMemory, mode)
+    open fun setRpcCallMode(mode: Long) {
+        _icall_Unit_Long(setRpcCallModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getRpcCallModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptFunctionCall", "get_rpc_call_mode") }
     open fun getRpcCallMode(): VisualScriptFunctionCall.RPCCallMode {
-        return VisualScriptFunctionCall.RPCCallMode.fromInt(_icall_Int(getRpcCallModeMethodBind, this.rawMemory))
+        return VisualScriptFunctionCall.RPCCallMode.fromInt(_icall_Long(getRpcCallModeMethodBind, this.rawMemory))
     }
 
 

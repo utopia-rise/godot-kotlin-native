@@ -45,86 +45,86 @@ open class Engine : Object {
             set(value) = _icall_Unit_Boolean(setEditorHintMethodBind, this.rawMemory, value)
 
 
-        var iterationsPerSecond: Int
-            get() = _icall_Int(getIterationsPerSecondMethodBind, this.rawMemory)
-            set(value) = _icall_Unit_Int(setIterationsPerSecondMethodBind, this.rawMemory, value)
+        var iterationsPerSecond: Long
+            get() = _icall_Long(getIterationsPerSecondMethodBind, this.rawMemory)
+            set(value) = _icall_Unit_Long(setIterationsPerSecondMethodBind, this.rawMemory, value)
 
 
-        var targetFps: Int
-            get() = _icall_Int(getTargetFpsMethodBind, this.rawMemory)
-            set(value) = _icall_Unit_Int(setTargetFpsMethodBind, this.rawMemory, value)
+        var targetFps: Long
+            get() = _icall_Long(getTargetFpsMethodBind, this.rawMemory)
+            set(value) = _icall_Unit_Long(setTargetFpsMethodBind, this.rawMemory, value)
 
 
-        var timeScale: Float
-            get() = _icall_Float(getTimeScaleMethodBind, this.rawMemory)
-            set(value) = _icall_Unit_Float(setTimeScaleMethodBind, this.rawMemory, value)
+        var timeScale: Double
+            get() = _icall_Double(getTimeScaleMethodBind, this.rawMemory)
+            set(value) = _icall_Unit_Double(setTimeScaleMethodBind, this.rawMemory, value)
 
 
-        var physicsJitterFix: Float
-            get() = _icall_Float(getPhysicsJitterFixMethodBind, this.rawMemory)
-            set(value) = _icall_Unit_Float(setPhysicsJitterFixMethodBind, this.rawMemory, value)
+        var physicsJitterFix: Double
+            get() = _icall_Double(getPhysicsJitterFixMethodBind, this.rawMemory)
+            set(value) = _icall_Unit_Double(setPhysicsJitterFixMethodBind, this.rawMemory, value)
 
 
 
 
         // Methods
         private val setIterationsPerSecondMethodBind: CPointer<godot_method_bind> by lazy { getMB("_Engine", "set_iterations_per_second") }
-        fun setIterationsPerSecond(iterationsPerSecond: Int) {
-            _icall_Unit_Int(setIterationsPerSecondMethodBind, this.rawMemory, iterationsPerSecond)
+        fun setIterationsPerSecond(iterationsPerSecond: Long) {
+            _icall_Unit_Long(setIterationsPerSecondMethodBind, this.rawMemory, iterationsPerSecond)
         }
 
 
         private val getIterationsPerSecondMethodBind: CPointer<godot_method_bind> by lazy { getMB("_Engine", "get_iterations_per_second") }
-        fun getIterationsPerSecond(): Int {
-            return _icall_Int(getIterationsPerSecondMethodBind, this.rawMemory)
+        fun getIterationsPerSecond(): Long {
+            return _icall_Long(getIterationsPerSecondMethodBind, this.rawMemory)
         }
 
 
         private val setPhysicsJitterFixMethodBind: CPointer<godot_method_bind> by lazy { getMB("_Engine", "set_physics_jitter_fix") }
-        fun setPhysicsJitterFix(physicsJitterFix: Float) {
-            _icall_Unit_Float(setPhysicsJitterFixMethodBind, this.rawMemory, physicsJitterFix)
+        fun setPhysicsJitterFix(physicsJitterFix: Double) {
+            _icall_Unit_Double(setPhysicsJitterFixMethodBind, this.rawMemory, physicsJitterFix)
         }
 
 
         private val getPhysicsJitterFixMethodBind: CPointer<godot_method_bind> by lazy { getMB("_Engine", "get_physics_jitter_fix") }
-        fun getPhysicsJitterFix(): Float {
-            return _icall_Float(getPhysicsJitterFixMethodBind, this.rawMemory)
+        fun getPhysicsJitterFix(): Double {
+            return _icall_Double(getPhysicsJitterFixMethodBind, this.rawMemory)
         }
 
 
         private val setTargetFpsMethodBind: CPointer<godot_method_bind> by lazy { getMB("_Engine", "set_target_fps") }
-        fun setTargetFps(targetFps: Int) {
-            _icall_Unit_Int(setTargetFpsMethodBind, this.rawMemory, targetFps)
+        fun setTargetFps(targetFps: Long) {
+            _icall_Unit_Long(setTargetFpsMethodBind, this.rawMemory, targetFps)
         }
 
 
         private val getTargetFpsMethodBind: CPointer<godot_method_bind> by lazy { getMB("_Engine", "get_target_fps") }
-        fun getTargetFps(): Int {
-            return _icall_Int(getTargetFpsMethodBind, this.rawMemory)
+        fun getTargetFps(): Long {
+            return _icall_Long(getTargetFpsMethodBind, this.rawMemory)
         }
 
 
         private val setTimeScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("_Engine", "set_time_scale") }
-        fun setTimeScale(timeScale: Float) {
-            _icall_Unit_Float(setTimeScaleMethodBind, this.rawMemory, timeScale)
+        fun setTimeScale(timeScale: Double) {
+            _icall_Unit_Double(setTimeScaleMethodBind, this.rawMemory, timeScale)
         }
 
 
         private val getTimeScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("_Engine", "get_time_scale") }
-        fun getTimeScale(): Float {
-            return _icall_Float(getTimeScaleMethodBind, this.rawMemory)
+        fun getTimeScale(): Double {
+            return _icall_Double(getTimeScaleMethodBind, this.rawMemory)
         }
 
 
         private val getFramesDrawnMethodBind: CPointer<godot_method_bind> by lazy { getMB("_Engine", "get_frames_drawn") }
-        fun getFramesDrawn(): Int {
-            return _icall_Int(getFramesDrawnMethodBind, this.rawMemory)
+        fun getFramesDrawn(): Long {
+            return _icall_Long(getFramesDrawnMethodBind, this.rawMemory)
         }
 
 
         private val getFramesPerSecondMethodBind: CPointer<godot_method_bind> by lazy { getMB("_Engine", "get_frames_per_second") }
-        fun getFramesPerSecond(): Float {
-            return _icall_Float(getFramesPerSecondMethodBind, this.rawMemory)
+        fun getFramesPerSecond(): Double {
+            return _icall_Double(getFramesPerSecondMethodBind, this.rawMemory)
         }
 
 

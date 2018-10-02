@@ -19,7 +19,7 @@ open class RichTextLabel : Control {
 
     // Enums 
 
-    enum class Align(val id: Int) {
+    enum class Align(val id: Long) {
         ALIGN_LEFT(0),
         ALIGN_CENTER(1),
         ALIGN_RIGHT(2),
@@ -27,20 +27,20 @@ open class RichTextLabel : Control {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class ListType(val id: Int) {
+    enum class ListType(val id: Long) {
         LIST_NUMBERS(0),
         LIST_LETTERS(1),
         LIST_DOTS(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class ItemType(val id: Int) {
+    enum class ItemType(val id: Long) {
         ITEM_FRAME(0),
         ITEM_TEXT(1),
         ITEM_IMAGE(2),
@@ -56,7 +56,7 @@ open class RichTextLabel : Control {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -80,25 +80,25 @@ open class RichTextLabel : Control {
 
 
         // Constants
-        const val ALIGN_LEFT: Int = 0
-        const val ALIGN_CENTER: Int = 1
-        const val ALIGN_RIGHT: Int = 2
-        const val ALIGN_FILL: Int = 3
-        const val LIST_NUMBERS: Int = 0
-        const val LIST_LETTERS: Int = 1
-        const val LIST_DOTS: Int = 2
-        const val ITEM_FRAME: Int = 0
-        const val ITEM_TEXT: Int = 1
-        const val ITEM_IMAGE: Int = 2
-        const val ITEM_NEWLINE: Int = 3
-        const val ITEM_FONT: Int = 4
-        const val ITEM_COLOR: Int = 5
-        const val ITEM_UNDERLINE: Int = 6
-        const val ITEM_ALIGN: Int = 7
-        const val ITEM_INDENT: Int = 8
-        const val ITEM_LIST: Int = 9
-        const val ITEM_TABLE: Int = 10
-        const val ITEM_META: Int = 11
+        const val ALIGN_LEFT: Long = 0
+        const val ALIGN_CENTER: Long = 1
+        const val ALIGN_RIGHT: Long = 2
+        const val ALIGN_FILL: Long = 3
+        const val LIST_NUMBERS: Long = 0
+        const val LIST_LETTERS: Long = 1
+        const val LIST_DOTS: Long = 2
+        const val ITEM_FRAME: Long = 0
+        const val ITEM_TEXT: Long = 1
+        const val ITEM_IMAGE: Long = 2
+        const val ITEM_NEWLINE: Long = 3
+        const val ITEM_FONT: Long = 4
+        const val ITEM_COLOR: Long = 5
+        const val ITEM_UNDERLINE: Long = 6
+        const val ITEM_ALIGN: Long = 7
+        const val ITEM_INDENT: Long = 8
+        const val ITEM_LIST: Long = 9
+        const val ITEM_TABLE: Long = 10
+        const val ITEM_META: Long = 11
 
 
     }
@@ -115,14 +115,14 @@ open class RichTextLabel : Control {
         set(value) = _icall_Unit_String(setBbcodeMethodBind, this.rawMemory, value)
 
 
-    open var visibleCharacters: Int
-        get() = _icall_Int(getVisibleCharactersMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setVisibleCharactersMethodBind, this.rawMemory, value)
+    open var visibleCharacters: Long
+        get() = _icall_Long(getVisibleCharactersMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setVisibleCharactersMethodBind, this.rawMemory, value)
 
 
-    open var percentVisible: Float
-        get() = _icall_Float(getPercentVisibleMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setPercentVisibleMethodBind, this.rawMemory, value)
+    open var percentVisible: Double
+        get() = _icall_Double(getPercentVisibleMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setPercentVisibleMethodBind, this.rawMemory, value)
 
 
     open var metaUnderlined: Boolean
@@ -130,9 +130,9 @@ open class RichTextLabel : Control {
         set(value) = _icall_Unit_Boolean(setMetaUnderlineMethodBind, this.rawMemory, value)
 
 
-    open var tabSize: Int
-        get() = _icall_Int(getTabSizeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setTabSizeMethodBind, this.rawMemory, value)
+    open var tabSize: Long
+        get() = _icall_Long(getTabSizeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setTabSizeMethodBind, this.rawMemory, value)
 
 
     open var text: String
@@ -167,7 +167,7 @@ open class RichTextLabel : Control {
     }
 
 
-    open fun _scroll_changed(arg0: Float) {
+    open fun _scroll_changed(arg0: Double) {
     }
 
 
@@ -202,8 +202,8 @@ open class RichTextLabel : Control {
 
 
     private val removeLineMethodBind: CPointer<godot_method_bind> by lazy { getMB("RichTextLabel", "remove_line") }
-    open fun removeLine(line: Int): Boolean {
-        return _icall_Boolean_Int(removeLineMethodBind, this.rawMemory, line)
+    open fun removeLine(line: Long): Boolean {
+        return _icall_Boolean_Long(removeLineMethodBind, this.rawMemory, line)
     }
 
 
@@ -220,20 +220,20 @@ open class RichTextLabel : Control {
 
 
     private val pushAlignMethodBind: CPointer<godot_method_bind> by lazy { getMB("RichTextLabel", "push_align") }
-    open fun pushAlign(align: Int) {
-        _icall_Unit_Int(pushAlignMethodBind, this.rawMemory, align)
+    open fun pushAlign(align: Long) {
+        _icall_Unit_Long(pushAlignMethodBind, this.rawMemory, align)
     }
 
 
     private val pushIndentMethodBind: CPointer<godot_method_bind> by lazy { getMB("RichTextLabel", "push_indent") }
-    open fun pushIndent(level: Int) {
-        _icall_Unit_Int(pushIndentMethodBind, this.rawMemory, level)
+    open fun pushIndent(level: Long) {
+        _icall_Unit_Long(pushIndentMethodBind, this.rawMemory, level)
     }
 
 
     private val pushListMethodBind: CPointer<godot_method_bind> by lazy { getMB("RichTextLabel", "push_list") }
-    open fun pushList(type: Int) {
-        _icall_Unit_Int(pushListMethodBind, this.rawMemory, type)
+    open fun pushList(type: Long) {
+        _icall_Unit_Long(pushListMethodBind, this.rawMemory, type)
     }
 
 
@@ -250,14 +250,14 @@ open class RichTextLabel : Control {
 
 
     private val pushTableMethodBind: CPointer<godot_method_bind> by lazy { getMB("RichTextLabel", "push_table") }
-    open fun pushTable(columns: Int) {
-        _icall_Unit_Int(pushTableMethodBind, this.rawMemory, columns)
+    open fun pushTable(columns: Long) {
+        _icall_Unit_Long(pushTableMethodBind, this.rawMemory, columns)
     }
 
 
     private val setTableColumnExpandMethodBind: CPointer<godot_method_bind> by lazy { getMB("RichTextLabel", "set_table_column_expand") }
-    open fun setTableColumnExpand(column: Int, expand: Boolean, ratio: Int) {
-        _icall_Unit_Int_Boolean_Int(setTableColumnExpandMethodBind, this.rawMemory, column, expand, ratio)
+    open fun setTableColumnExpand(column: Long, expand: Boolean, ratio: Long) {
+        _icall_Unit_Long_Boolean_Long(setTableColumnExpandMethodBind, this.rawMemory, column, expand, ratio)
     }
 
 
@@ -334,20 +334,20 @@ open class RichTextLabel : Control {
 
 
     private val scrollToLineMethodBind: CPointer<godot_method_bind> by lazy { getMB("RichTextLabel", "scroll_to_line") }
-    open fun scrollToLine(line: Int) {
-        _icall_Unit_Int(scrollToLineMethodBind, this.rawMemory, line)
+    open fun scrollToLine(line: Long) {
+        _icall_Unit_Long(scrollToLineMethodBind, this.rawMemory, line)
     }
 
 
     private val setTabSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("RichTextLabel", "set_tab_size") }
-    open fun setTabSize(spaces: Int) {
-        _icall_Unit_Int(setTabSizeMethodBind, this.rawMemory, spaces)
+    open fun setTabSize(spaces: Long) {
+        _icall_Unit_Long(setTabSizeMethodBind, this.rawMemory, spaces)
     }
 
 
     private val getTabSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("RichTextLabel", "get_tab_size") }
-    open fun getTabSize(): Int {
-        return _icall_Int(getTabSizeMethodBind, this.rawMemory)
+    open fun getTabSize(): Long {
+        return _icall_Long(getTabSizeMethodBind, this.rawMemory)
     }
 
 
@@ -365,13 +365,13 @@ open class RichTextLabel : Control {
 
     private val parseBbcodeMethodBind: CPointer<godot_method_bind> by lazy { getMB("RichTextLabel", "parse_bbcode") }
     open fun parseBbcode(bbcode: String): GodotError {
-        return GodotError.fromInt(_icall_Int_String(parseBbcodeMethodBind, this.rawMemory, bbcode))
+        return GodotError.fromInt(_icall_Long_String(parseBbcodeMethodBind, this.rawMemory, bbcode))
     }
 
 
     private val appendBbcodeMethodBind: CPointer<godot_method_bind> by lazy { getMB("RichTextLabel", "append_bbcode") }
     open fun appendBbcode(bbcode: String): GodotError {
-        return GodotError.fromInt(_icall_Int_String(appendBbcodeMethodBind, this.rawMemory, bbcode))
+        return GodotError.fromInt(_icall_Long_String(appendBbcodeMethodBind, this.rawMemory, bbcode))
     }
 
 
@@ -388,32 +388,32 @@ open class RichTextLabel : Control {
 
 
     private val setVisibleCharactersMethodBind: CPointer<godot_method_bind> by lazy { getMB("RichTextLabel", "set_visible_characters") }
-    open fun setVisibleCharacters(amount: Int) {
-        _icall_Unit_Int(setVisibleCharactersMethodBind, this.rawMemory, amount)
+    open fun setVisibleCharacters(amount: Long) {
+        _icall_Unit_Long(setVisibleCharactersMethodBind, this.rawMemory, amount)
     }
 
 
     private val getVisibleCharactersMethodBind: CPointer<godot_method_bind> by lazy { getMB("RichTextLabel", "get_visible_characters") }
-    open fun getVisibleCharacters(): Int {
-        return _icall_Int(getVisibleCharactersMethodBind, this.rawMemory)
+    open fun getVisibleCharacters(): Long {
+        return _icall_Long(getVisibleCharactersMethodBind, this.rawMemory)
     }
 
 
     private val setPercentVisibleMethodBind: CPointer<godot_method_bind> by lazy { getMB("RichTextLabel", "set_percent_visible") }
-    open fun setPercentVisible(percentVisible: Float) {
-        _icall_Unit_Float(setPercentVisibleMethodBind, this.rawMemory, percentVisible)
+    open fun setPercentVisible(percentVisible: Double) {
+        _icall_Unit_Double(setPercentVisibleMethodBind, this.rawMemory, percentVisible)
     }
 
 
     private val getPercentVisibleMethodBind: CPointer<godot_method_bind> by lazy { getMB("RichTextLabel", "get_percent_visible") }
-    open fun getPercentVisible(): Float {
-        return _icall_Float(getPercentVisibleMethodBind, this.rawMemory)
+    open fun getPercentVisible(): Double {
+        return _icall_Double(getPercentVisibleMethodBind, this.rawMemory)
     }
 
 
     private val getTotalCharacterCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("RichTextLabel", "get_total_character_count") }
-    open fun getTotalCharacterCount(): Int {
-        return _icall_Int(getTotalCharacterCountMethodBind, this.rawMemory)
+    open fun getTotalCharacterCount(): Long {
+        return _icall_Long(getTotalCharacterCountMethodBind, this.rawMemory)
     }
 
 
@@ -430,20 +430,20 @@ open class RichTextLabel : Control {
 
 
     private val getLineCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("RichTextLabel", "get_line_count") }
-    open fun getLineCount(): Int {
-        return _icall_Int(getLineCountMethodBind, this.rawMemory)
+    open fun getLineCount(): Long {
+        return _icall_Long(getLineCountMethodBind, this.rawMemory)
     }
 
 
     private val getVisibleLineCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("RichTextLabel", "get_visible_line_count") }
-    open fun getVisibleLineCount(): Int {
-        return _icall_Int(getVisibleLineCountMethodBind, this.rawMemory)
+    open fun getVisibleLineCount(): Long {
+        return _icall_Long(getVisibleLineCountMethodBind, this.rawMemory)
     }
 
 
     private val getContentHeightMethodBind: CPointer<godot_method_bind> by lazy { getMB("RichTextLabel", "get_content_height") }
-    open fun getContentHeight(): Int {
-        return _icall_Int(getContentHeightMethodBind, this.rawMemory)
+    open fun getContentHeight(): Long {
+        return _icall_Long(getContentHeightMethodBind, this.rawMemory)
     }
 
 

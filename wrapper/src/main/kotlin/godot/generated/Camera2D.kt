@@ -19,13 +19,13 @@ open class Camera2D : Node2D {
 
     // Enums 
 
-    enum class AnchorMode(val id: Int) {
+    enum class AnchorMode(val id: Long) {
         ANCHOR_MODE_FIXED_TOP_LEFT(0),
         ANCHOR_MODE_DRAG_CENTER(1),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -46,8 +46,8 @@ open class Camera2D : Node2D {
 
 
         // Constants
-        const val ANCHOR_MODE_FIXED_TOP_LEFT: Int = 0
-        const val ANCHOR_MODE_DRAG_CENTER: Int = 1
+        const val ANCHOR_MODE_FIXED_TOP_LEFT: Long = 0
+        const val ANCHOR_MODE_DRAG_CENTER: Long = 1
 
 
     }
@@ -63,9 +63,9 @@ open class Camera2D : Node2D {
     }
 
 
-    open var anchorMode: Int
-        get() = _icall_Int(getAnchorModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setAnchorModeMethodBind, this.rawMemory, value)
+    open var anchorMode: Long
+        get() = _icall_Long(getAnchorModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setAnchorModeMethodBind, this.rawMemory, value)
 
 
     open var rotating: Boolean
@@ -91,24 +91,24 @@ open class Camera2D : Node2D {
         set(value) = _icall_Unit_Object(setCustomViewportMethodBind, this.rawMemory, value)
 
 
-    open var limitLeft: Int
-        get() = _icall_Int_Int(getLimitMethodBind, this.rawMemory, 0)
-        set(value) = _icall_Unit_Int_Int(setLimitMethodBind, this.rawMemory, 0, value)
+    open var limitLeft: Long
+        get() = _icall_Long_Long(getLimitMethodBind, this.rawMemory, 0)
+        set(value) = _icall_Unit_Long_Long(setLimitMethodBind, this.rawMemory, 0, value)
 
 
-    open var limitTop: Int
-        get() = _icall_Int_Int(getLimitMethodBind, this.rawMemory, 1)
-        set(value) = _icall_Unit_Int_Int(setLimitMethodBind, this.rawMemory, 1, value)
+    open var limitTop: Long
+        get() = _icall_Long_Long(getLimitMethodBind, this.rawMemory, 1)
+        set(value) = _icall_Unit_Long_Long(setLimitMethodBind, this.rawMemory, 1, value)
 
 
-    open var limitRight: Int
-        get() = _icall_Int_Int(getLimitMethodBind, this.rawMemory, 2)
-        set(value) = _icall_Unit_Int_Int(setLimitMethodBind, this.rawMemory, 2, value)
+    open var limitRight: Long
+        get() = _icall_Long_Long(getLimitMethodBind, this.rawMemory, 2)
+        set(value) = _icall_Unit_Long_Long(setLimitMethodBind, this.rawMemory, 2, value)
 
 
-    open var limitBottom: Int
-        get() = _icall_Int_Int(getLimitMethodBind, this.rawMemory, 3)
-        set(value) = _icall_Unit_Int_Int(setLimitMethodBind, this.rawMemory, 3, value)
+    open var limitBottom: Long
+        get() = _icall_Long_Long(getLimitMethodBind, this.rawMemory, 3)
+        set(value) = _icall_Unit_Long_Long(setLimitMethodBind, this.rawMemory, 3, value)
 
 
     open var limitSmoothed: Boolean
@@ -131,39 +131,39 @@ open class Camera2D : Node2D {
         set(value) = _icall_Unit_Boolean(setEnableFollowSmoothingMethodBind, this.rawMemory, value)
 
 
-    open var smoothingSpeed: Float
-        get() = _icall_Float(getFollowSmoothingMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setFollowSmoothingMethodBind, this.rawMemory, value)
+    open var smoothingSpeed: Double
+        get() = _icall_Double(getFollowSmoothingMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setFollowSmoothingMethodBind, this.rawMemory, value)
 
 
-    open var offsetV: Float
-        get() = _icall_Float(getVOffsetMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setVOffsetMethodBind, this.rawMemory, value)
+    open var offsetV: Double
+        get() = _icall_Double(getVOffsetMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setVOffsetMethodBind, this.rawMemory, value)
 
 
-    open var offsetH: Float
-        get() = _icall_Float(getHOffsetMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setHOffsetMethodBind, this.rawMemory, value)
+    open var offsetH: Double
+        get() = _icall_Double(getHOffsetMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setHOffsetMethodBind, this.rawMemory, value)
 
 
-    open var dragMarginLeft: Float
-        get() = _icall_Float_Int(getDragMarginMethodBind, this.rawMemory, 0)
-        set(value) = _icall_Unit_Int_Float(setDragMarginMethodBind, this.rawMemory, 0, value)
+    open var dragMarginLeft: Double
+        get() = _icall_Double_Long(getDragMarginMethodBind, this.rawMemory, 0)
+        set(value) = _icall_Unit_Long_Double(setDragMarginMethodBind, this.rawMemory, 0, value)
 
 
-    open var dragMarginTop: Float
-        get() = _icall_Float_Int(getDragMarginMethodBind, this.rawMemory, 1)
-        set(value) = _icall_Unit_Int_Float(setDragMarginMethodBind, this.rawMemory, 1, value)
+    open var dragMarginTop: Double
+        get() = _icall_Double_Long(getDragMarginMethodBind, this.rawMemory, 1)
+        set(value) = _icall_Unit_Long_Double(setDragMarginMethodBind, this.rawMemory, 1, value)
 
 
-    open var dragMarginRight: Float
-        get() = _icall_Float_Int(getDragMarginMethodBind, this.rawMemory, 2)
-        set(value) = _icall_Unit_Int_Float(setDragMarginMethodBind, this.rawMemory, 2, value)
+    open var dragMarginRight: Double
+        get() = _icall_Double_Long(getDragMarginMethodBind, this.rawMemory, 2)
+        set(value) = _icall_Unit_Long_Double(setDragMarginMethodBind, this.rawMemory, 2, value)
 
 
-    open var dragMarginBottom: Float
-        get() = _icall_Float_Int(getDragMarginMethodBind, this.rawMemory, 3)
-        set(value) = _icall_Unit_Int_Float(setDragMarginMethodBind, this.rawMemory, 3, value)
+    open var dragMarginBottom: Double
+        get() = _icall_Double_Long(getDragMarginMethodBind, this.rawMemory, 3)
+        set(value) = _icall_Unit_Long_Double(setDragMarginMethodBind, this.rawMemory, 3, value)
 
 
     open var editorDrawScreen: Boolean
@@ -197,14 +197,14 @@ open class Camera2D : Node2D {
 
 
     private val setAnchorModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Camera2D", "set_anchor_mode") }
-    open fun setAnchorMode(anchorMode: Int) {
-        _icall_Unit_Int(setAnchorModeMethodBind, this.rawMemory, anchorMode)
+    open fun setAnchorMode(anchorMode: Long) {
+        _icall_Unit_Long(setAnchorModeMethodBind, this.rawMemory, anchorMode)
     }
 
 
     private val getAnchorModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Camera2D", "get_anchor_mode") }
     open fun getAnchorMode(): Camera2D.AnchorMode {
-        return Camera2D.AnchorMode.fromInt(_icall_Int(getAnchorModeMethodBind, this.rawMemory))
+        return Camera2D.AnchorMode.fromInt(_icall_Long(getAnchorModeMethodBind, this.rawMemory))
     }
 
 
@@ -251,14 +251,14 @@ open class Camera2D : Node2D {
 
 
     private val setLimitMethodBind: CPointer<godot_method_bind> by lazy { getMB("Camera2D", "set_limit") }
-    open fun setLimit(margin: Int, limit: Int) {
-        _icall_Unit_Int_Int(setLimitMethodBind, this.rawMemory, margin, limit)
+    open fun setLimit(margin: Long, limit: Long) {
+        _icall_Unit_Long_Long(setLimitMethodBind, this.rawMemory, margin, limit)
     }
 
 
     private val getLimitMethodBind: CPointer<godot_method_bind> by lazy { getMB("Camera2D", "get_limit") }
-    open fun getLimit(margin: Int): Int {
-        return _icall_Int_Int(getLimitMethodBind, this.rawMemory, margin)
+    open fun getLimit(margin: Long): Long {
+        return _icall_Long_Long(getLimitMethodBind, this.rawMemory, margin)
     }
 
 
@@ -299,38 +299,38 @@ open class Camera2D : Node2D {
 
 
     private val setVOffsetMethodBind: CPointer<godot_method_bind> by lazy { getMB("Camera2D", "set_v_offset") }
-    open fun setVOffset(ofs: Float) {
-        _icall_Unit_Float(setVOffsetMethodBind, this.rawMemory, ofs)
+    open fun setVOffset(ofs: Double) {
+        _icall_Unit_Double(setVOffsetMethodBind, this.rawMemory, ofs)
     }
 
 
     private val getVOffsetMethodBind: CPointer<godot_method_bind> by lazy { getMB("Camera2D", "get_v_offset") }
-    open fun getVOffset(): Float {
-        return _icall_Float(getVOffsetMethodBind, this.rawMemory)
+    open fun getVOffset(): Double {
+        return _icall_Double(getVOffsetMethodBind, this.rawMemory)
     }
 
 
     private val setHOffsetMethodBind: CPointer<godot_method_bind> by lazy { getMB("Camera2D", "set_h_offset") }
-    open fun setHOffset(ofs: Float) {
-        _icall_Unit_Float(setHOffsetMethodBind, this.rawMemory, ofs)
+    open fun setHOffset(ofs: Double) {
+        _icall_Unit_Double(setHOffsetMethodBind, this.rawMemory, ofs)
     }
 
 
     private val getHOffsetMethodBind: CPointer<godot_method_bind> by lazy { getMB("Camera2D", "get_h_offset") }
-    open fun getHOffset(): Float {
-        return _icall_Float(getHOffsetMethodBind, this.rawMemory)
+    open fun getHOffset(): Double {
+        return _icall_Double(getHOffsetMethodBind, this.rawMemory)
     }
 
 
     private val setDragMarginMethodBind: CPointer<godot_method_bind> by lazy { getMB("Camera2D", "set_drag_margin") }
-    open fun setDragMargin(margin: Int, dragMargin: Float) {
-        _icall_Unit_Int_Float(setDragMarginMethodBind, this.rawMemory, margin, dragMargin)
+    open fun setDragMargin(margin: Long, dragMargin: Double) {
+        _icall_Unit_Long_Double(setDragMarginMethodBind, this.rawMemory, margin, dragMargin)
     }
 
 
     private val getDragMarginMethodBind: CPointer<godot_method_bind> by lazy { getMB("Camera2D", "get_drag_margin") }
-    open fun getDragMargin(margin: Int): Float {
-        return _icall_Float_Int(getDragMarginMethodBind, this.rawMemory, margin)
+    open fun getDragMargin(margin: Long): Double {
+        return _icall_Double_Long(getDragMarginMethodBind, this.rawMemory, margin)
     }
 
 
@@ -371,14 +371,14 @@ open class Camera2D : Node2D {
 
 
     private val setFollowSmoothingMethodBind: CPointer<godot_method_bind> by lazy { getMB("Camera2D", "set_follow_smoothing") }
-    open fun setFollowSmoothing(followSmoothing: Float) {
-        _icall_Unit_Float(setFollowSmoothingMethodBind, this.rawMemory, followSmoothing)
+    open fun setFollowSmoothing(followSmoothing: Double) {
+        _icall_Unit_Double(setFollowSmoothingMethodBind, this.rawMemory, followSmoothing)
     }
 
 
     private val getFollowSmoothingMethodBind: CPointer<godot_method_bind> by lazy { getMB("Camera2D", "get_follow_smoothing") }
-    open fun getFollowSmoothing(): Float {
-        return _icall_Float(getFollowSmoothingMethodBind, this.rawMemory)
+    open fun getFollowSmoothing(): Double {
+        return _icall_Double(getFollowSmoothingMethodBind, this.rawMemory)
     }
 
 
@@ -412,7 +412,7 @@ open class Camera2D : Node2D {
     }
 
 
-    open fun _set_old_smoothing(followSmoothing: Float) {
+    open fun _set_old_smoothing(followSmoothing: Double) {
     }
 
 

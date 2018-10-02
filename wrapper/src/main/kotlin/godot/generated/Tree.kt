@@ -19,24 +19,24 @@ open class Tree : Control {
 
     // Enums 
 
-    enum class SelectMode(val id: Int) {
+    enum class SelectMode(val id: Long) {
         SELECT_SINGLE(0),
         SELECT_ROW(1),
         SELECT_MULTI(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class DropModeFlags(val id: Int) {
+    enum class DropModeFlags(val id: Long) {
         DROP_MODE_DISABLED(0),
         DROP_MODE_ON_ITEM(1),
         DROP_MODE_INBETWEEN(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -72,21 +72,21 @@ open class Tree : Control {
 
 
         // Constants
-        const val SELECT_SINGLE: Int = 0
-        const val SELECT_ROW: Int = 1
-        const val SELECT_MULTI: Int = 2
-        const val DROP_MODE_DISABLED: Int = 0
-        const val DROP_MODE_ON_ITEM: Int = 1
-        const val DROP_MODE_INBETWEEN: Int = 2
+        const val SELECT_SINGLE: Long = 0
+        const val SELECT_ROW: Long = 1
+        const val SELECT_MULTI: Long = 2
+        const val DROP_MODE_DISABLED: Long = 0
+        const val DROP_MODE_ON_ITEM: Long = 1
+        const val DROP_MODE_INBETWEEN: Long = 2
 
 
     }
 
 
     // Properties
-    open var columns: Int
-        get() = _icall_Int(getColumnsMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setColumnsMethodBind, this.rawMemory, value)
+    open var columns: Long
+        get() = _icall_Long(getColumnsMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setColumnsMethodBind, this.rawMemory, value)
 
 
     open var allowReselect: Boolean
@@ -109,14 +109,14 @@ open class Tree : Control {
         set(value) = _icall_Unit_Boolean(setHideRootMethodBind, this.rawMemory, value)
 
 
-    open var dropModeFlags: Int
-        get() = _icall_Int(getDropModeFlagsMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setDropModeFlagsMethodBind, this.rawMemory, value)
+    open var dropModeFlags: Long
+        get() = _icall_Long(getDropModeFlagsMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setDropModeFlagsMethodBind, this.rawMemory, value)
 
 
-    open var selectMode: Int
-        get() = _icall_Int(getSelectModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setSelectModeMethodBind, this.rawMemory, value)
+    open var selectMode: Long
+        get() = _icall_Long(getSelectModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setSelectModeMethodBind, this.rawMemory, value)
 
 
 
@@ -130,7 +130,7 @@ open class Tree : Control {
     }
 
 
-    open fun _popup_select(arg0: Int) {
+    open fun _popup_select(arg0: Long) {
     }
 
 
@@ -142,11 +142,11 @@ open class Tree : Control {
     }
 
 
-    open fun _value_editor_changed(arg0: Float) {
+    open fun _value_editor_changed(arg0: Double) {
     }
 
 
-    open fun _scroll_moved(arg0: Float) {
+    open fun _scroll_moved(arg0: Double) {
     }
 
 
@@ -157,8 +157,8 @@ open class Tree : Control {
 
 
     private val createItemMethodBind: CPointer<godot_method_bind> by lazy { getMB("Tree", "create_item") }
-    open fun createItem(parent: Object, idx: Int = -1): Object {
-        return _icall_Object_Object_Int(createItemMethodBind, this.rawMemory, parent, idx)
+    open fun createItem(parent: Object, idx: Long = -1): Object {
+        return _icall_Object_Object_Long(createItemMethodBind, this.rawMemory, parent, idx)
     }
 
 
@@ -169,20 +169,20 @@ open class Tree : Control {
 
 
     private val setColumnMinWidthMethodBind: CPointer<godot_method_bind> by lazy { getMB("Tree", "set_column_min_width") }
-    open fun setColumnMinWidth(column: Int, minWidth: Int) {
-        _icall_Unit_Int_Int(setColumnMinWidthMethodBind, this.rawMemory, column, minWidth)
+    open fun setColumnMinWidth(column: Long, minWidth: Long) {
+        _icall_Unit_Long_Long(setColumnMinWidthMethodBind, this.rawMemory, column, minWidth)
     }
 
 
     private val setColumnExpandMethodBind: CPointer<godot_method_bind> by lazy { getMB("Tree", "set_column_expand") }
-    open fun setColumnExpand(column: Int, expand: Boolean) {
-        _icall_Unit_Int_Boolean(setColumnExpandMethodBind, this.rawMemory, column, expand)
+    open fun setColumnExpand(column: Long, expand: Boolean) {
+        _icall_Unit_Long_Boolean(setColumnExpandMethodBind, this.rawMemory, column, expand)
     }
 
 
     private val getColumnWidthMethodBind: CPointer<godot_method_bind> by lazy { getMB("Tree", "get_column_width") }
-    open fun getColumnWidth(column: Int): Int {
-        return _icall_Int_Int(getColumnWidthMethodBind, this.rawMemory, column)
+    open fun getColumnWidth(column: Long): Long {
+        return _icall_Long_Long(getColumnWidthMethodBind, this.rawMemory, column)
     }
 
 
@@ -211,38 +211,38 @@ open class Tree : Control {
 
 
     private val getSelectedColumnMethodBind: CPointer<godot_method_bind> by lazy { getMB("Tree", "get_selected_column") }
-    open fun getSelectedColumn(): Int {
-        return _icall_Int(getSelectedColumnMethodBind, this.rawMemory)
+    open fun getSelectedColumn(): Long {
+        return _icall_Long(getSelectedColumnMethodBind, this.rawMemory)
     }
 
 
     private val getPressedButtonMethodBind: CPointer<godot_method_bind> by lazy { getMB("Tree", "get_pressed_button") }
-    open fun getPressedButton(): Int {
-        return _icall_Int(getPressedButtonMethodBind, this.rawMemory)
+    open fun getPressedButton(): Long {
+        return _icall_Long(getPressedButtonMethodBind, this.rawMemory)
     }
 
 
     private val setSelectModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Tree", "set_select_mode") }
-    open fun setSelectMode(mode: Int) {
-        _icall_Unit_Int(setSelectModeMethodBind, this.rawMemory, mode)
+    open fun setSelectMode(mode: Long) {
+        _icall_Unit_Long(setSelectModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getSelectModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Tree", "get_select_mode") }
     open fun getSelectMode(): Tree.SelectMode {
-        return Tree.SelectMode.fromInt(_icall_Int(getSelectModeMethodBind, this.rawMemory))
+        return Tree.SelectMode.fromInt(_icall_Long(getSelectModeMethodBind, this.rawMemory))
     }
 
 
     private val setColumnsMethodBind: CPointer<godot_method_bind> by lazy { getMB("Tree", "set_columns") }
-    open fun setColumns(amount: Int) {
-        _icall_Unit_Int(setColumnsMethodBind, this.rawMemory, amount)
+    open fun setColumns(amount: Long) {
+        _icall_Unit_Long(setColumnsMethodBind, this.rawMemory, amount)
     }
 
 
     private val getColumnsMethodBind: CPointer<godot_method_bind> by lazy { getMB("Tree", "get_columns") }
-    open fun getColumns(): Int {
-        return _icall_Int(getColumnsMethodBind, this.rawMemory)
+    open fun getColumns(): Long {
+        return _icall_Long(getColumnsMethodBind, this.rawMemory)
     }
 
 
@@ -253,8 +253,8 @@ open class Tree : Control {
 
 
     private val getEditedColumnMethodBind: CPointer<godot_method_bind> by lazy { getMB("Tree", "get_edited_column") }
-    open fun getEditedColumn(): Int {
-        return _icall_Int(getEditedColumnMethodBind, this.rawMemory)
+    open fun getEditedColumn(): Long {
+        return _icall_Long(getEditedColumnMethodBind, this.rawMemory)
     }
 
 
@@ -265,8 +265,8 @@ open class Tree : Control {
 
 
     private val getItemAreaRectMethodBind: CPointer<godot_method_bind> by lazy { getMB("Tree", "get_item_area_rect") }
-    open fun getItemAreaRect(item: Object, column: Int = -1): Rect2 {
-        return _icall_Rect2_Object_Int(getItemAreaRectMethodBind, this.rawMemory, item, column)
+    open fun getItemAreaRect(item: Object, column: Long = -1): Rect2 {
+        return _icall_Rect2_Object_Long(getItemAreaRectMethodBind, this.rawMemory, item, column)
     }
 
 
@@ -277,14 +277,14 @@ open class Tree : Control {
 
 
     private val getColumnAtPositionMethodBind: CPointer<godot_method_bind> by lazy { getMB("Tree", "get_column_at_position") }
-    open fun getColumnAtPosition(position: Vector2): Int {
-        return _icall_Int_Vector2(getColumnAtPositionMethodBind, this.rawMemory, position)
+    open fun getColumnAtPosition(position: Vector2): Long {
+        return _icall_Long_Vector2(getColumnAtPositionMethodBind, this.rawMemory, position)
     }
 
 
     private val getDropSectionAtPositionMethodBind: CPointer<godot_method_bind> by lazy { getMB("Tree", "get_drop_section_at_position") }
-    open fun getDropSectionAtPosition(position: Vector2): Int {
-        return _icall_Int_Vector2(getDropSectionAtPositionMethodBind, this.rawMemory, position)
+    open fun getDropSectionAtPosition(position: Vector2): Long {
+        return _icall_Long_Vector2(getDropSectionAtPositionMethodBind, this.rawMemory, position)
     }
 
 
@@ -307,14 +307,14 @@ open class Tree : Control {
 
 
     private val setColumnTitleMethodBind: CPointer<godot_method_bind> by lazy { getMB("Tree", "set_column_title") }
-    open fun setColumnTitle(column: Int, title: String) {
-        _icall_Unit_Int_String(setColumnTitleMethodBind, this.rawMemory, column, title)
+    open fun setColumnTitle(column: Long, title: String) {
+        _icall_Unit_Long_String(setColumnTitleMethodBind, this.rawMemory, column, title)
     }
 
 
     private val getColumnTitleMethodBind: CPointer<godot_method_bind> by lazy { getMB("Tree", "get_column_title") }
-    open fun getColumnTitle(column: Int): String {
-        return _icall_String_Int(getColumnTitleMethodBind, this.rawMemory, column)
+    open fun getColumnTitle(column: Long): String {
+        return _icall_String_Long(getColumnTitleMethodBind, this.rawMemory, column)
     }
 
 
@@ -337,14 +337,14 @@ open class Tree : Control {
 
 
     private val setDropModeFlagsMethodBind: CPointer<godot_method_bind> by lazy { getMB("Tree", "set_drop_mode_flags") }
-    open fun setDropModeFlags(flags: Int) {
-        _icall_Unit_Int(setDropModeFlagsMethodBind, this.rawMemory, flags)
+    open fun setDropModeFlags(flags: Long) {
+        _icall_Unit_Long(setDropModeFlagsMethodBind, this.rawMemory, flags)
     }
 
 
     private val getDropModeFlagsMethodBind: CPointer<godot_method_bind> by lazy { getMB("Tree", "get_drop_mode_flags") }
-    open fun getDropModeFlags(): Int {
-        return _icall_Int(getDropModeFlagsMethodBind, this.rawMemory)
+    open fun getDropModeFlags(): Long {
+        return _icall_Long(getDropModeFlagsMethodBind, this.rawMemory)
     }
 
 

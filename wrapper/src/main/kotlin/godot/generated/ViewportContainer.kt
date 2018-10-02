@@ -49,9 +49,9 @@ open class ViewportContainer : Container {
         set(value) = _icall_Unit_Boolean(setStretchMethodBind, this.rawMemory, value)
 
 
-    open var stretchShrink: Int
-        get() = _icall_Int(getStretchShrinkMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setStretchShrinkMethodBind, this.rawMemory, value)
+    open var stretchShrink: Long
+        get() = _icall_Long(getStretchShrinkMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setStretchShrinkMethodBind, this.rawMemory, value)
 
 
 
@@ -74,14 +74,14 @@ open class ViewportContainer : Container {
 
 
     private val setStretchShrinkMethodBind: CPointer<godot_method_bind> by lazy { getMB("ViewportContainer", "set_stretch_shrink") }
-    open fun setStretchShrink(amount: Int) {
-        _icall_Unit_Int(setStretchShrinkMethodBind, this.rawMemory, amount)
+    open fun setStretchShrink(amount: Long) {
+        _icall_Unit_Long(setStretchShrinkMethodBind, this.rawMemory, amount)
     }
 
 
     private val getStretchShrinkMethodBind: CPointer<godot_method_bind> by lazy { getMB("ViewportContainer", "get_stretch_shrink") }
-    open fun getStretchShrink(): Int {
-        return _icall_Int(getStretchShrinkMethodBind, this.rawMemory)
+    open fun getStretchShrink(): Long {
+        return _icall_Long(getStretchShrinkMethodBind, this.rawMemory)
     }
 
 

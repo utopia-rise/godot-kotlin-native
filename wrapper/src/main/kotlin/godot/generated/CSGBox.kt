@@ -45,19 +45,19 @@ open class CSGBox : CSGPrimitive {
 
 
     // Properties
-    open var width: Float
-        get() = _icall_Float(getWidthMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setWidthMethodBind, this.rawMemory, value)
+    open var width: Double
+        get() = _icall_Double(getWidthMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setWidthMethodBind, this.rawMemory, value)
 
 
-    open var height: Float
-        get() = _icall_Float(getHeightMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setHeightMethodBind, this.rawMemory, value)
+    open var height: Double
+        get() = _icall_Double(getHeightMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setHeightMethodBind, this.rawMemory, value)
 
 
-    open var depth: Float
-        get() = _icall_Float(getDepthMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setDepthMethodBind, this.rawMemory, value)
+    open var depth: Double
+        get() = _icall_Double(getDepthMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setDepthMethodBind, this.rawMemory, value)
 
 
     open var material: Material
@@ -69,38 +69,38 @@ open class CSGBox : CSGPrimitive {
 
     // Methods
     private val setWidthMethodBind: CPointer<godot_method_bind> by lazy { getMB("CSGBox", "set_width") }
-    open fun setWidth(width: Float) {
-        _icall_Unit_Float(setWidthMethodBind, this.rawMemory, width)
+    open fun setWidth(width: Double) {
+        _icall_Unit_Double(setWidthMethodBind, this.rawMemory, width)
     }
 
 
     private val getWidthMethodBind: CPointer<godot_method_bind> by lazy { getMB("CSGBox", "get_width") }
-    open fun getWidth(): Float {
-        return _icall_Float(getWidthMethodBind, this.rawMemory)
+    open fun getWidth(): Double {
+        return _icall_Double(getWidthMethodBind, this.rawMemory)
     }
 
 
     private val setHeightMethodBind: CPointer<godot_method_bind> by lazy { getMB("CSGBox", "set_height") }
-    open fun setHeight(height: Float) {
-        _icall_Unit_Float(setHeightMethodBind, this.rawMemory, height)
+    open fun setHeight(height: Double) {
+        _icall_Unit_Double(setHeightMethodBind, this.rawMemory, height)
     }
 
 
     private val getHeightMethodBind: CPointer<godot_method_bind> by lazy { getMB("CSGBox", "get_height") }
-    open fun getHeight(): Float {
-        return _icall_Float(getHeightMethodBind, this.rawMemory)
+    open fun getHeight(): Double {
+        return _icall_Double(getHeightMethodBind, this.rawMemory)
     }
 
 
     private val setDepthMethodBind: CPointer<godot_method_bind> by lazy { getMB("CSGBox", "set_depth") }
-    open fun setDepth(depth: Float) {
-        _icall_Unit_Float(setDepthMethodBind, this.rawMemory, depth)
+    open fun setDepth(depth: Double) {
+        _icall_Unit_Double(setDepthMethodBind, this.rawMemory, depth)
     }
 
 
     private val getDepthMethodBind: CPointer<godot_method_bind> by lazy { getMB("CSGBox", "get_depth") }
-    open fun getDepth(): Float {
-        return _icall_Float(getDepthMethodBind, this.rawMemory)
+    open fun getDepth(): Double {
+        return _icall_Double(getDepthMethodBind, this.rawMemory)
     }
 
 

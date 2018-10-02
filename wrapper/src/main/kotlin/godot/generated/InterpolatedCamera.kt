@@ -48,9 +48,9 @@ open class InterpolatedCamera : Camera {
         set(value) = _icall_Unit_NodePath(setTargetPathMethodBind, this.rawMemory, value)
 
 
-    open var speed: Float
-        get() = _icall_Float(getSpeedMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setSpeedMethodBind, this.rawMemory, value)
+    open var speed: Double
+        get() = _icall_Double(getSpeedMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setSpeedMethodBind, this.rawMemory, value)
 
 
     open var enabled: Boolean
@@ -80,14 +80,14 @@ open class InterpolatedCamera : Camera {
 
 
     private val setSpeedMethodBind: CPointer<godot_method_bind> by lazy { getMB("InterpolatedCamera", "set_speed") }
-    open fun setSpeed(speed: Float) {
-        _icall_Unit_Float(setSpeedMethodBind, this.rawMemory, speed)
+    open fun setSpeed(speed: Double) {
+        _icall_Unit_Double(setSpeedMethodBind, this.rawMemory, speed)
     }
 
 
     private val getSpeedMethodBind: CPointer<godot_method_bind> by lazy { getMB("InterpolatedCamera", "get_speed") }
-    open fun getSpeed(): Float {
-        return _icall_Float(getSpeedMethodBind, this.rawMemory)
+    open fun getSpeed(): Double {
+        return _icall_Double(getSpeedMethodBind, this.rawMemory)
     }
 
 

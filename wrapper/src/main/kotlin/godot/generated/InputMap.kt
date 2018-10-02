@@ -56,8 +56,8 @@ open class InputMap : Object {
 
 
         private val addActionMethodBind: CPointer<godot_method_bind> by lazy { getMB("InputMap", "add_action") }
-        fun addAction(action: String, deadzone: Float = 0.5f) {
-            _icall_Unit_String_Float(addActionMethodBind, this.rawMemory, action, deadzone)
+        fun addAction(action: String, deadzone: Double = 0.5) {
+            _icall_Unit_String_Double(addActionMethodBind, this.rawMemory, action, deadzone)
         }
 
 
@@ -68,8 +68,8 @@ open class InputMap : Object {
 
 
         private val actionSetDeadzoneMethodBind: CPointer<godot_method_bind> by lazy { getMB("InputMap", "action_set_deadzone") }
-        fun actionSetDeadzone(deadzone: String, arg1: Float) {
-            _icall_Unit_String_Float(actionSetDeadzoneMethodBind, this.rawMemory, deadzone, arg1)
+        fun actionSetDeadzone(deadzone: String, arg1: Double) {
+            _icall_Unit_String_Double(actionSetDeadzoneMethodBind, this.rawMemory, deadzone, arg1)
         }
 
 

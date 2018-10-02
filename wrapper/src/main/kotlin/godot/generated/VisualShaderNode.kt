@@ -43,35 +43,35 @@ open class VisualShaderNode : Resource {
 
 
     // Properties
-    open var outputPortForPreview: Int
-        get() = _icall_Int(getOutputPortForPreviewMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setOutputPortForPreviewMethodBind, this.rawMemory, value)
+    open var outputPortForPreview: Long
+        get() = _icall_Long(getOutputPortForPreviewMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setOutputPortForPreviewMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setOutputPortForPreviewMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualShaderNode", "set_output_port_for_preview") }
-    open fun setOutputPortForPreview(port: Int) {
-        _icall_Unit_Int(setOutputPortForPreviewMethodBind, this.rawMemory, port)
+    open fun setOutputPortForPreview(port: Long) {
+        _icall_Unit_Long(setOutputPortForPreviewMethodBind, this.rawMemory, port)
     }
 
 
     private val getOutputPortForPreviewMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualShaderNode", "get_output_port_for_preview") }
-    open fun getOutputPortForPreview(): Int {
-        return _icall_Int(getOutputPortForPreviewMethodBind, this.rawMemory)
+    open fun getOutputPortForPreview(): Long {
+        return _icall_Long(getOutputPortForPreviewMethodBind, this.rawMemory)
     }
 
 
     private val setInputPortDefaultValueMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualShaderNode", "set_input_port_default_value") }
-    open fun setInputPortDefaultValue(port: Int, value: Variant) {
-        _icall_Unit_Int_Variant(setInputPortDefaultValueMethodBind, this.rawMemory, port, value)
+    open fun setInputPortDefaultValue(port: Long, value: Variant) {
+        _icall_Unit_Long_Variant(setInputPortDefaultValueMethodBind, this.rawMemory, port, value)
     }
 
 
     private val getInputPortDefaultValueMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualShaderNode", "get_input_port_default_value") }
-    open fun getInputPortDefaultValue(port: Int): Variant {
-        return _icall_Variant_Int(getInputPortDefaultValueMethodBind, this.rawMemory, port)
+    open fun getInputPortDefaultValue(port: Long): Variant {
+        return _icall_Variant_Long(getInputPortDefaultValueMethodBind, this.rawMemory, port)
     }
 
 

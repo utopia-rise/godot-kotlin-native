@@ -49,14 +49,14 @@ open class AudioStreamPlayer2D : Node2D {
         set(value) = _icall_Unit_Object(setStreamMethodBind, this.rawMemory, value)
 
 
-    open var volumeDb: Float
-        get() = _icall_Float(getVolumeDbMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setVolumeDbMethodBind, this.rawMemory, value)
+    open var volumeDb: Double
+        get() = _icall_Double(getVolumeDbMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setVolumeDbMethodBind, this.rawMemory, value)
 
 
-    open var pitchScale: Float
-        get() = _icall_Float(getPitchScaleMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setPitchScaleMethodBind, this.rawMemory, value)
+    open var pitchScale: Double
+        get() = _icall_Double(getPitchScaleMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setPitchScaleMethodBind, this.rawMemory, value)
 
 
     open val playing: Boolean
@@ -73,14 +73,14 @@ open class AudioStreamPlayer2D : Node2D {
         set(value) = _icall_Unit_Boolean(setStreamPausedMethodBind, this.rawMemory, value)
 
 
-    open var maxDistance: Float
-        get() = _icall_Float(getMaxDistanceMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setMaxDistanceMethodBind, this.rawMemory, value)
+    open var maxDistance: Double
+        get() = _icall_Double(getMaxDistanceMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setMaxDistanceMethodBind, this.rawMemory, value)
 
 
-    open var attenuation: Float
-        get() = _icall_Float(getAttenuationMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setAttenuationMethodBind, this.rawMemory, value)
+    open var attenuation: Double
+        get() = _icall_Double(getAttenuationMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setAttenuationMethodBind, this.rawMemory, value)
 
 
     open var bus: String
@@ -88,9 +88,9 @@ open class AudioStreamPlayer2D : Node2D {
         set(value) = _icall_Unit_String(setBusMethodBind, this.rawMemory, value)
 
 
-    open var areaMask: Int
-        get() = _icall_Int(getAreaMaskMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setAreaMaskMethodBind, this.rawMemory, value)
+    open var areaMask: Long
+        get() = _icall_Long(getAreaMaskMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setAreaMaskMethodBind, this.rawMemory, value)
 
 
 
@@ -109,38 +109,38 @@ open class AudioStreamPlayer2D : Node2D {
 
 
     private val setVolumeDbMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer2D", "set_volume_db") }
-    open fun setVolumeDb(volumeDb: Float) {
-        _icall_Unit_Float(setVolumeDbMethodBind, this.rawMemory, volumeDb)
+    open fun setVolumeDb(volumeDb: Double) {
+        _icall_Unit_Double(setVolumeDbMethodBind, this.rawMemory, volumeDb)
     }
 
 
     private val getVolumeDbMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer2D", "get_volume_db") }
-    open fun getVolumeDb(): Float {
-        return _icall_Float(getVolumeDbMethodBind, this.rawMemory)
+    open fun getVolumeDb(): Double {
+        return _icall_Double(getVolumeDbMethodBind, this.rawMemory)
     }
 
 
     private val setPitchScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer2D", "set_pitch_scale") }
-    open fun setPitchScale(pitchScale: Float) {
-        _icall_Unit_Float(setPitchScaleMethodBind, this.rawMemory, pitchScale)
+    open fun setPitchScale(pitchScale: Double) {
+        _icall_Unit_Double(setPitchScaleMethodBind, this.rawMemory, pitchScale)
     }
 
 
     private val getPitchScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer2D", "get_pitch_scale") }
-    open fun getPitchScale(): Float {
-        return _icall_Float(getPitchScaleMethodBind, this.rawMemory)
+    open fun getPitchScale(): Double {
+        return _icall_Double(getPitchScaleMethodBind, this.rawMemory)
     }
 
 
     private val playMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer2D", "play") }
-    open fun play(fromPosition: Float = 0f) {
-        _icall_Unit_Float(playMethodBind, this.rawMemory, fromPosition)
+    open fun play(fromPosition: Double = 0.0) {
+        _icall_Unit_Double(playMethodBind, this.rawMemory, fromPosition)
     }
 
 
     private val seekMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer2D", "seek") }
-    open fun seek(toPosition: Float) {
-        _icall_Unit_Float(seekMethodBind, this.rawMemory, toPosition)
+    open fun seek(toPosition: Double) {
+        _icall_Unit_Double(seekMethodBind, this.rawMemory, toPosition)
     }
 
 
@@ -157,8 +157,8 @@ open class AudioStreamPlayer2D : Node2D {
 
 
     private val getPlaybackPositionMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer2D", "get_playback_position") }
-    open fun getPlaybackPosition(): Float {
-        return _icall_Float(getPlaybackPositionMethodBind, this.rawMemory)
+    open fun getPlaybackPosition(): Double {
+        return _icall_Double(getPlaybackPositionMethodBind, this.rawMemory)
     }
 
 
@@ -196,38 +196,38 @@ open class AudioStreamPlayer2D : Node2D {
 
 
     private val setMaxDistanceMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer2D", "set_max_distance") }
-    open fun setMaxDistance(pixels: Float) {
-        _icall_Unit_Float(setMaxDistanceMethodBind, this.rawMemory, pixels)
+    open fun setMaxDistance(pixels: Double) {
+        _icall_Unit_Double(setMaxDistanceMethodBind, this.rawMemory, pixels)
     }
 
 
     private val getMaxDistanceMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer2D", "get_max_distance") }
-    open fun getMaxDistance(): Float {
-        return _icall_Float(getMaxDistanceMethodBind, this.rawMemory)
+    open fun getMaxDistance(): Double {
+        return _icall_Double(getMaxDistanceMethodBind, this.rawMemory)
     }
 
 
     private val setAttenuationMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer2D", "set_attenuation") }
-    open fun setAttenuation(curve: Float) {
-        _icall_Unit_Float(setAttenuationMethodBind, this.rawMemory, curve)
+    open fun setAttenuation(curve: Double) {
+        _icall_Unit_Double(setAttenuationMethodBind, this.rawMemory, curve)
     }
 
 
     private val getAttenuationMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer2D", "get_attenuation") }
-    open fun getAttenuation(): Float {
-        return _icall_Float(getAttenuationMethodBind, this.rawMemory)
+    open fun getAttenuation(): Double {
+        return _icall_Double(getAttenuationMethodBind, this.rawMemory)
     }
 
 
     private val setAreaMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer2D", "set_area_mask") }
-    open fun setAreaMask(mask: Int) {
-        _icall_Unit_Int(setAreaMaskMethodBind, this.rawMemory, mask)
+    open fun setAreaMask(mask: Long) {
+        _icall_Unit_Long(setAreaMaskMethodBind, this.rawMemory, mask)
     }
 
 
     private val getAreaMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamPlayer2D", "get_area_mask") }
-    open fun getAreaMask(): Int {
-        return _icall_Int(getAreaMaskMethodBind, this.rawMemory)
+    open fun getAreaMask(): Long {
+        return _icall_Long(getAreaMaskMethodBind, this.rawMemory)
     }
 
 

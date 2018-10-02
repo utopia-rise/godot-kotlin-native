@@ -52,9 +52,9 @@ open class Bone2D : Node2D {
     }
 
 
-    open var defaultLength: Float
-        get() = _icall_Float(getDefaultLengthMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setDefaultLengthMethodBind, this.rawMemory, value)
+    open var defaultLength: Double
+        get() = _icall_Double(getDefaultLengthMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setDefaultLengthMethodBind, this.rawMemory, value)
 
 
 
@@ -85,20 +85,20 @@ open class Bone2D : Node2D {
 
 
     private val getIndexInSkeletonMethodBind: CPointer<godot_method_bind> by lazy { getMB("Bone2D", "get_index_in_skeleton") }
-    open fun getIndexInSkeleton(): Int {
-        return _icall_Int(getIndexInSkeletonMethodBind, this.rawMemory)
+    open fun getIndexInSkeleton(): Long {
+        return _icall_Long(getIndexInSkeletonMethodBind, this.rawMemory)
     }
 
 
     private val setDefaultLengthMethodBind: CPointer<godot_method_bind> by lazy { getMB("Bone2D", "set_default_length") }
-    open fun setDefaultLength(defaultLength: Float) {
-        _icall_Unit_Float(setDefaultLengthMethodBind, this.rawMemory, defaultLength)
+    open fun setDefaultLength(defaultLength: Double) {
+        _icall_Unit_Double(setDefaultLengthMethodBind, this.rawMemory, defaultLength)
     }
 
 
     private val getDefaultLengthMethodBind: CPointer<godot_method_bind> by lazy { getMB("Bone2D", "get_default_length") }
-    open fun getDefaultLength(): Float {
-        return _icall_Float(getDefaultLengthMethodBind, this.rawMemory)
+    open fun getDefaultLength(): Double {
+        return _icall_Double(getDefaultLengthMethodBind, this.rawMemory)
     }
 
 

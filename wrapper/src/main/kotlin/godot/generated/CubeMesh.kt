@@ -53,19 +53,19 @@ open class CubeMesh : PrimitiveMesh {
     }
 
 
-    open var subdivideWidth: Int
-        get() = _icall_Int(getSubdivideWidthMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setSubdivideWidthMethodBind, this.rawMemory, value)
+    open var subdivideWidth: Long
+        get() = _icall_Long(getSubdivideWidthMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setSubdivideWidthMethodBind, this.rawMemory, value)
 
 
-    open var subdivideHeight: Int
-        get() = _icall_Int(getSubdivideHeightMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setSubdivideHeightMethodBind, this.rawMemory, value)
+    open var subdivideHeight: Long
+        get() = _icall_Long(getSubdivideHeightMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setSubdivideHeightMethodBind, this.rawMemory, value)
 
 
-    open var subdivideDepth: Int
-        get() = _icall_Int(getSubdivideDepthMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setSubdivideDepthMethodBind, this.rawMemory, value)
+    open var subdivideDepth: Long
+        get() = _icall_Long(getSubdivideDepthMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setSubdivideDepthMethodBind, this.rawMemory, value)
 
 
 
@@ -84,38 +84,38 @@ open class CubeMesh : PrimitiveMesh {
 
 
     private val setSubdivideWidthMethodBind: CPointer<godot_method_bind> by lazy { getMB("CubeMesh", "set_subdivide_width") }
-    open fun setSubdivideWidth(subdivide: Int) {
-        _icall_Unit_Int(setSubdivideWidthMethodBind, this.rawMemory, subdivide)
+    open fun setSubdivideWidth(subdivide: Long) {
+        _icall_Unit_Long(setSubdivideWidthMethodBind, this.rawMemory, subdivide)
     }
 
 
     private val getSubdivideWidthMethodBind: CPointer<godot_method_bind> by lazy { getMB("CubeMesh", "get_subdivide_width") }
-    open fun getSubdivideWidth(): Int {
-        return _icall_Int(getSubdivideWidthMethodBind, this.rawMemory)
+    open fun getSubdivideWidth(): Long {
+        return _icall_Long(getSubdivideWidthMethodBind, this.rawMemory)
     }
 
 
     private val setSubdivideHeightMethodBind: CPointer<godot_method_bind> by lazy { getMB("CubeMesh", "set_subdivide_height") }
-    open fun setSubdivideHeight(divisions: Int) {
-        _icall_Unit_Int(setSubdivideHeightMethodBind, this.rawMemory, divisions)
+    open fun setSubdivideHeight(divisions: Long) {
+        _icall_Unit_Long(setSubdivideHeightMethodBind, this.rawMemory, divisions)
     }
 
 
     private val getSubdivideHeightMethodBind: CPointer<godot_method_bind> by lazy { getMB("CubeMesh", "get_subdivide_height") }
-    open fun getSubdivideHeight(): Int {
-        return _icall_Int(getSubdivideHeightMethodBind, this.rawMemory)
+    open fun getSubdivideHeight(): Long {
+        return _icall_Long(getSubdivideHeightMethodBind, this.rawMemory)
     }
 
 
     private val setSubdivideDepthMethodBind: CPointer<godot_method_bind> by lazy { getMB("CubeMesh", "set_subdivide_depth") }
-    open fun setSubdivideDepth(divisions: Int) {
-        _icall_Unit_Int(setSubdivideDepthMethodBind, this.rawMemory, divisions)
+    open fun setSubdivideDepth(divisions: Long) {
+        _icall_Unit_Long(setSubdivideDepthMethodBind, this.rawMemory, divisions)
     }
 
 
     private val getSubdivideDepthMethodBind: CPointer<godot_method_bind> by lazy { getMB("CubeMesh", "get_subdivide_depth") }
-    open fun getSubdivideDepth(): Int {
-        return _icall_Int(getSubdivideDepthMethodBind, this.rawMemory)
+    open fun getSubdivideDepth(): Long {
+        return _icall_Long(getSubdivideDepthMethodBind, this.rawMemory)
     }
 
 

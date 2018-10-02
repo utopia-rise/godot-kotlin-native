@@ -41,9 +41,9 @@ open class Physics2DShapeQueryParameters : Reference {
 
 
     // Properties
-    open var collisionLayer: Int
-        get() = _icall_Int(getCollisionLayerMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setCollisionLayerMethodBind, this.rawMemory, value)
+    open var collisionLayer: Long
+        get() = _icall_Long(getCollisionLayerMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setCollisionLayerMethodBind, this.rawMemory, value)
 
 
     open var exclude: GDArray
@@ -51,9 +51,9 @@ open class Physics2DShapeQueryParameters : Reference {
         set(value) = _icall_Unit_GDArray(setExcludeMethodBind, this.rawMemory, value)
 
 
-    open var margin: Float
-        get() = _icall_Float(getMarginMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setMarginMethodBind, this.rawMemory, value)
+    open var margin: Double
+        get() = _icall_Double(getMarginMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setMarginMethodBind, this.rawMemory, value)
 
 
     open var motion: Vector2
@@ -125,26 +125,26 @@ open class Physics2DShapeQueryParameters : Reference {
 
 
     private val setMarginMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DShapeQueryParameters", "set_margin") }
-    open fun setMargin(margin: Float) {
-        _icall_Unit_Float(setMarginMethodBind, this.rawMemory, margin)
+    open fun setMargin(margin: Double) {
+        _icall_Unit_Double(setMarginMethodBind, this.rawMemory, margin)
     }
 
 
     private val getMarginMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DShapeQueryParameters", "get_margin") }
-    open fun getMargin(): Float {
-        return _icall_Float(getMarginMethodBind, this.rawMemory)
+    open fun getMargin(): Double {
+        return _icall_Double(getMarginMethodBind, this.rawMemory)
     }
 
 
     private val setCollisionLayerMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DShapeQueryParameters", "set_collision_layer") }
-    open fun setCollisionLayer(collisionLayer: Int) {
-        _icall_Unit_Int(setCollisionLayerMethodBind, this.rawMemory, collisionLayer)
+    open fun setCollisionLayer(collisionLayer: Long) {
+        _icall_Unit_Long(setCollisionLayerMethodBind, this.rawMemory, collisionLayer)
     }
 
 
     private val getCollisionLayerMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DShapeQueryParameters", "get_collision_layer") }
-    open fun getCollisionLayer(): Int {
-        return _icall_Int(getCollisionLayerMethodBind, this.rawMemory)
+    open fun getCollisionLayer(): Long {
+        return _icall_Long(getCollisionLayerMethodBind, this.rawMemory)
     }
 
 

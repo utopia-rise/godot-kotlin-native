@@ -43,9 +43,9 @@ open class AudioEffectDelay : AudioEffect {
 
 
     // Properties
-    open var dry: Float
-        get() = _icall_Float(getDryMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setDryMethodBind, this.rawMemory, value)
+    open var dry: Double
+        get() = _icall_Double(getDryMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setDryMethodBind, this.rawMemory, value)
 
 
     open var tap1_active: Boolean
@@ -53,19 +53,19 @@ open class AudioEffectDelay : AudioEffect {
         set(value) = _icall_Unit_Boolean(setTap1ActiveMethodBind, this.rawMemory, value)
 
 
-    open var tap1_delayMs: Float
-        get() = _icall_Float(getTap1DelayMsMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setTap1DelayMsMethodBind, this.rawMemory, value)
+    open var tap1_delayMs: Double
+        get() = _icall_Double(getTap1DelayMsMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setTap1DelayMsMethodBind, this.rawMemory, value)
 
 
-    open var tap1_levelDb: Float
-        get() = _icall_Float(getTap1LevelDbMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setTap1LevelDbMethodBind, this.rawMemory, value)
+    open var tap1_levelDb: Double
+        get() = _icall_Double(getTap1LevelDbMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setTap1LevelDbMethodBind, this.rawMemory, value)
 
 
-    open var tap1_pan: Float
-        get() = _icall_Float(getTap1PanMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setTap1PanMethodBind, this.rawMemory, value)
+    open var tap1_pan: Double
+        get() = _icall_Double(getTap1PanMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setTap1PanMethodBind, this.rawMemory, value)
 
 
     open var tap2_active: Boolean
@@ -73,19 +73,19 @@ open class AudioEffectDelay : AudioEffect {
         set(value) = _icall_Unit_Boolean(setTap2ActiveMethodBind, this.rawMemory, value)
 
 
-    open var tap2_delayMs: Float
-        get() = _icall_Float(getTap2DelayMsMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setTap2DelayMsMethodBind, this.rawMemory, value)
+    open var tap2_delayMs: Double
+        get() = _icall_Double(getTap2DelayMsMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setTap2DelayMsMethodBind, this.rawMemory, value)
 
 
-    open var tap2_levelDb: Float
-        get() = _icall_Float(getTap2LevelDbMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setTap2LevelDbMethodBind, this.rawMemory, value)
+    open var tap2_levelDb: Double
+        get() = _icall_Double(getTap2LevelDbMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setTap2LevelDbMethodBind, this.rawMemory, value)
 
 
-    open var tap2_pan: Float
-        get() = _icall_Float(getTap2PanMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setTap2PanMethodBind, this.rawMemory, value)
+    open var tap2_pan: Double
+        get() = _icall_Double(getTap2PanMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setTap2PanMethodBind, this.rawMemory, value)
 
 
     open var feedback_active: Boolean
@@ -93,33 +93,33 @@ open class AudioEffectDelay : AudioEffect {
         set(value) = _icall_Unit_Boolean(setFeedbackActiveMethodBind, this.rawMemory, value)
 
 
-    open var feedback_delayMs: Float
-        get() = _icall_Float(getFeedbackDelayMsMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setFeedbackDelayMsMethodBind, this.rawMemory, value)
+    open var feedback_delayMs: Double
+        get() = _icall_Double(getFeedbackDelayMsMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setFeedbackDelayMsMethodBind, this.rawMemory, value)
 
 
-    open var feedback_levelDb: Float
-        get() = _icall_Float(getFeedbackLevelDbMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setFeedbackLevelDbMethodBind, this.rawMemory, value)
+    open var feedback_levelDb: Double
+        get() = _icall_Double(getFeedbackLevelDbMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setFeedbackLevelDbMethodBind, this.rawMemory, value)
 
 
-    open var feedback_lowpass: Float
-        get() = _icall_Float(getFeedbackLowpassMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setFeedbackLowpassMethodBind, this.rawMemory, value)
+    open var feedback_lowpass: Double
+        get() = _icall_Double(getFeedbackLowpassMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setFeedbackLowpassMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setDryMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectDelay", "set_dry") }
-    open fun setDry(amount: Float) {
-        _icall_Unit_Float(setDryMethodBind, this.rawMemory, amount)
+    open fun setDry(amount: Double) {
+        _icall_Unit_Double(setDryMethodBind, this.rawMemory, amount)
     }
 
 
     private val getDryMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectDelay", "get_dry") }
-    open fun getDry(): Float {
-        return _icall_Float(getDryMethodBind, this.rawMemory)
+    open fun getDry(): Double {
+        return _icall_Double(getDryMethodBind, this.rawMemory)
     }
 
 
@@ -136,38 +136,38 @@ open class AudioEffectDelay : AudioEffect {
 
 
     private val setTap1DelayMsMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectDelay", "set_tap1_delay_ms") }
-    open fun setTap1DelayMs(amount: Float) {
-        _icall_Unit_Float(setTap1DelayMsMethodBind, this.rawMemory, amount)
+    open fun setTap1DelayMs(amount: Double) {
+        _icall_Unit_Double(setTap1DelayMsMethodBind, this.rawMemory, amount)
     }
 
 
     private val getTap1DelayMsMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectDelay", "get_tap1_delay_ms") }
-    open fun getTap1DelayMs(): Float {
-        return _icall_Float(getTap1DelayMsMethodBind, this.rawMemory)
+    open fun getTap1DelayMs(): Double {
+        return _icall_Double(getTap1DelayMsMethodBind, this.rawMemory)
     }
 
 
     private val setTap1LevelDbMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectDelay", "set_tap1_level_db") }
-    open fun setTap1LevelDb(amount: Float) {
-        _icall_Unit_Float(setTap1LevelDbMethodBind, this.rawMemory, amount)
+    open fun setTap1LevelDb(amount: Double) {
+        _icall_Unit_Double(setTap1LevelDbMethodBind, this.rawMemory, amount)
     }
 
 
     private val getTap1LevelDbMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectDelay", "get_tap1_level_db") }
-    open fun getTap1LevelDb(): Float {
-        return _icall_Float(getTap1LevelDbMethodBind, this.rawMemory)
+    open fun getTap1LevelDb(): Double {
+        return _icall_Double(getTap1LevelDbMethodBind, this.rawMemory)
     }
 
 
     private val setTap1PanMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectDelay", "set_tap1_pan") }
-    open fun setTap1Pan(amount: Float) {
-        _icall_Unit_Float(setTap1PanMethodBind, this.rawMemory, amount)
+    open fun setTap1Pan(amount: Double) {
+        _icall_Unit_Double(setTap1PanMethodBind, this.rawMemory, amount)
     }
 
 
     private val getTap1PanMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectDelay", "get_tap1_pan") }
-    open fun getTap1Pan(): Float {
-        return _icall_Float(getTap1PanMethodBind, this.rawMemory)
+    open fun getTap1Pan(): Double {
+        return _icall_Double(getTap1PanMethodBind, this.rawMemory)
     }
 
 
@@ -184,38 +184,38 @@ open class AudioEffectDelay : AudioEffect {
 
 
     private val setTap2DelayMsMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectDelay", "set_tap2_delay_ms") }
-    open fun setTap2DelayMs(amount: Float) {
-        _icall_Unit_Float(setTap2DelayMsMethodBind, this.rawMemory, amount)
+    open fun setTap2DelayMs(amount: Double) {
+        _icall_Unit_Double(setTap2DelayMsMethodBind, this.rawMemory, amount)
     }
 
 
     private val getTap2DelayMsMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectDelay", "get_tap2_delay_ms") }
-    open fun getTap2DelayMs(): Float {
-        return _icall_Float(getTap2DelayMsMethodBind, this.rawMemory)
+    open fun getTap2DelayMs(): Double {
+        return _icall_Double(getTap2DelayMsMethodBind, this.rawMemory)
     }
 
 
     private val setTap2LevelDbMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectDelay", "set_tap2_level_db") }
-    open fun setTap2LevelDb(amount: Float) {
-        _icall_Unit_Float(setTap2LevelDbMethodBind, this.rawMemory, amount)
+    open fun setTap2LevelDb(amount: Double) {
+        _icall_Unit_Double(setTap2LevelDbMethodBind, this.rawMemory, amount)
     }
 
 
     private val getTap2LevelDbMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectDelay", "get_tap2_level_db") }
-    open fun getTap2LevelDb(): Float {
-        return _icall_Float(getTap2LevelDbMethodBind, this.rawMemory)
+    open fun getTap2LevelDb(): Double {
+        return _icall_Double(getTap2LevelDbMethodBind, this.rawMemory)
     }
 
 
     private val setTap2PanMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectDelay", "set_tap2_pan") }
-    open fun setTap2Pan(amount: Float) {
-        _icall_Unit_Float(setTap2PanMethodBind, this.rawMemory, amount)
+    open fun setTap2Pan(amount: Double) {
+        _icall_Unit_Double(setTap2PanMethodBind, this.rawMemory, amount)
     }
 
 
     private val getTap2PanMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectDelay", "get_tap2_pan") }
-    open fun getTap2Pan(): Float {
-        return _icall_Float(getTap2PanMethodBind, this.rawMemory)
+    open fun getTap2Pan(): Double {
+        return _icall_Double(getTap2PanMethodBind, this.rawMemory)
     }
 
 
@@ -232,38 +232,38 @@ open class AudioEffectDelay : AudioEffect {
 
 
     private val setFeedbackDelayMsMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectDelay", "set_feedback_delay_ms") }
-    open fun setFeedbackDelayMs(amount: Float) {
-        _icall_Unit_Float(setFeedbackDelayMsMethodBind, this.rawMemory, amount)
+    open fun setFeedbackDelayMs(amount: Double) {
+        _icall_Unit_Double(setFeedbackDelayMsMethodBind, this.rawMemory, amount)
     }
 
 
     private val getFeedbackDelayMsMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectDelay", "get_feedback_delay_ms") }
-    open fun getFeedbackDelayMs(): Float {
-        return _icall_Float(getFeedbackDelayMsMethodBind, this.rawMemory)
+    open fun getFeedbackDelayMs(): Double {
+        return _icall_Double(getFeedbackDelayMsMethodBind, this.rawMemory)
     }
 
 
     private val setFeedbackLevelDbMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectDelay", "set_feedback_level_db") }
-    open fun setFeedbackLevelDb(amount: Float) {
-        _icall_Unit_Float(setFeedbackLevelDbMethodBind, this.rawMemory, amount)
+    open fun setFeedbackLevelDb(amount: Double) {
+        _icall_Unit_Double(setFeedbackLevelDbMethodBind, this.rawMemory, amount)
     }
 
 
     private val getFeedbackLevelDbMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectDelay", "get_feedback_level_db") }
-    open fun getFeedbackLevelDb(): Float {
-        return _icall_Float(getFeedbackLevelDbMethodBind, this.rawMemory)
+    open fun getFeedbackLevelDb(): Double {
+        return _icall_Double(getFeedbackLevelDbMethodBind, this.rawMemory)
     }
 
 
     private val setFeedbackLowpassMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectDelay", "set_feedback_lowpass") }
-    open fun setFeedbackLowpass(amount: Float) {
-        _icall_Unit_Float(setFeedbackLowpassMethodBind, this.rawMemory, amount)
+    open fun setFeedbackLowpass(amount: Double) {
+        _icall_Unit_Double(setFeedbackLowpassMethodBind, this.rawMemory, amount)
     }
 
 
     private val getFeedbackLowpassMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectDelay", "get_feedback_lowpass") }
-    open fun getFeedbackLowpass(): Float {
-        return _icall_Float(getFeedbackLowpassMethodBind, this.rawMemory)
+    open fun getFeedbackLowpass(): Double {
+        return _icall_Double(getFeedbackLowpassMethodBind, this.rawMemory)
     }
 
 

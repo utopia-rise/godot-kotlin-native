@@ -76,14 +76,14 @@ open class PolygonPathFinder : Resource {
 
 
     private val setPointPenaltyMethodBind: CPointer<godot_method_bind> by lazy { getMB("PolygonPathFinder", "set_point_penalty") }
-    open fun setPointPenalty(idx: Int, penalty: Float) {
-        _icall_Unit_Int_Float(setPointPenaltyMethodBind, this.rawMemory, idx, penalty)
+    open fun setPointPenalty(idx: Long, penalty: Double) {
+        _icall_Unit_Long_Double(setPointPenaltyMethodBind, this.rawMemory, idx, penalty)
     }
 
 
     private val getPointPenaltyMethodBind: CPointer<godot_method_bind> by lazy { getMB("PolygonPathFinder", "get_point_penalty") }
-    open fun getPointPenalty(idx: Int): Float {
-        return _icall_Float_Int(getPointPenaltyMethodBind, this.rawMemory, idx)
+    open fun getPointPenalty(idx: Long): Double {
+        return _icall_Double_Long(getPointPenaltyMethodBind, this.rawMemory, idx)
     }
 
 

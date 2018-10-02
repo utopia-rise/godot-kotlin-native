@@ -19,7 +19,7 @@ open class AudioEffectDistortion : AudioEffect {
 
     // Enums 
 
-    enum class Mode(val id: Int) {
+    enum class Mode(val id: Long) {
         MODE_CLIP(0),
         MODE_ATAN(1),
         MODE_LOFI(2),
@@ -28,7 +28,7 @@ open class AudioEffectDistortion : AudioEffect {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -49,102 +49,102 @@ open class AudioEffectDistortion : AudioEffect {
 
 
         // Constants
-        const val MODE_CLIP: Int = 0
-        const val MODE_ATAN: Int = 1
-        const val MODE_LOFI: Int = 2
-        const val MODE_OVERDRIVE: Int = 3
-        const val MODE_WAVESHAPE: Int = 4
+        const val MODE_CLIP: Long = 0
+        const val MODE_ATAN: Long = 1
+        const val MODE_LOFI: Long = 2
+        const val MODE_OVERDRIVE: Long = 3
+        const val MODE_WAVESHAPE: Long = 4
 
 
     }
 
 
     // Properties
-    open var mode: Int
-        get() = _icall_Int(getModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setModeMethodBind, this.rawMemory, value)
+    open var mode: Long
+        get() = _icall_Long(getModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setModeMethodBind, this.rawMemory, value)
 
 
-    open var preGain: Float
-        get() = _icall_Float(getPreGainMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setPreGainMethodBind, this.rawMemory, value)
+    open var preGain: Double
+        get() = _icall_Double(getPreGainMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setPreGainMethodBind, this.rawMemory, value)
 
 
-    open var keepHfHz: Float
-        get() = _icall_Float(getKeepHfHzMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setKeepHfHzMethodBind, this.rawMemory, value)
+    open var keepHfHz: Double
+        get() = _icall_Double(getKeepHfHzMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setKeepHfHzMethodBind, this.rawMemory, value)
 
 
-    open var drive: Float
-        get() = _icall_Float(getDriveMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setDriveMethodBind, this.rawMemory, value)
+    open var drive: Double
+        get() = _icall_Double(getDriveMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setDriveMethodBind, this.rawMemory, value)
 
 
-    open var postGain: Float
-        get() = _icall_Float(getPostGainMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setPostGainMethodBind, this.rawMemory, value)
+    open var postGain: Double
+        get() = _icall_Double(getPostGainMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setPostGainMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectDistortion", "set_mode") }
-    open fun setMode(mode: Int) {
-        _icall_Unit_Int(setModeMethodBind, this.rawMemory, mode)
+    open fun setMode(mode: Long) {
+        _icall_Unit_Long(setModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectDistortion", "get_mode") }
     open fun getMode(): AudioEffectDistortion.Mode {
-        return AudioEffectDistortion.Mode.fromInt(_icall_Int(getModeMethodBind, this.rawMemory))
+        return AudioEffectDistortion.Mode.fromInt(_icall_Long(getModeMethodBind, this.rawMemory))
     }
 
 
     private val setPreGainMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectDistortion", "set_pre_gain") }
-    open fun setPreGain(preGain: Float) {
-        _icall_Unit_Float(setPreGainMethodBind, this.rawMemory, preGain)
+    open fun setPreGain(preGain: Double) {
+        _icall_Unit_Double(setPreGainMethodBind, this.rawMemory, preGain)
     }
 
 
     private val getPreGainMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectDistortion", "get_pre_gain") }
-    open fun getPreGain(): Float {
-        return _icall_Float(getPreGainMethodBind, this.rawMemory)
+    open fun getPreGain(): Double {
+        return _icall_Double(getPreGainMethodBind, this.rawMemory)
     }
 
 
     private val setKeepHfHzMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectDistortion", "set_keep_hf_hz") }
-    open fun setKeepHfHz(keepHfHz: Float) {
-        _icall_Unit_Float(setKeepHfHzMethodBind, this.rawMemory, keepHfHz)
+    open fun setKeepHfHz(keepHfHz: Double) {
+        _icall_Unit_Double(setKeepHfHzMethodBind, this.rawMemory, keepHfHz)
     }
 
 
     private val getKeepHfHzMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectDistortion", "get_keep_hf_hz") }
-    open fun getKeepHfHz(): Float {
-        return _icall_Float(getKeepHfHzMethodBind, this.rawMemory)
+    open fun getKeepHfHz(): Double {
+        return _icall_Double(getKeepHfHzMethodBind, this.rawMemory)
     }
 
 
     private val setDriveMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectDistortion", "set_drive") }
-    open fun setDrive(drive: Float) {
-        _icall_Unit_Float(setDriveMethodBind, this.rawMemory, drive)
+    open fun setDrive(drive: Double) {
+        _icall_Unit_Double(setDriveMethodBind, this.rawMemory, drive)
     }
 
 
     private val getDriveMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectDistortion", "get_drive") }
-    open fun getDrive(): Float {
-        return _icall_Float(getDriveMethodBind, this.rawMemory)
+    open fun getDrive(): Double {
+        return _icall_Double(getDriveMethodBind, this.rawMemory)
     }
 
 
     private val setPostGainMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectDistortion", "set_post_gain") }
-    open fun setPostGain(postGain: Float) {
-        _icall_Unit_Float(setPostGainMethodBind, this.rawMemory, postGain)
+    open fun setPostGain(postGain: Double) {
+        _icall_Unit_Double(setPostGainMethodBind, this.rawMemory, postGain)
     }
 
 
     private val getPostGainMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectDistortion", "get_post_gain") }
-    open fun getPostGain(): Float {
-        return _icall_Float(getPostGainMethodBind, this.rawMemory)
+    open fun getPostGain(): Double {
+        return _icall_Double(getPostGainMethodBind, this.rawMemory)
     }
 
 

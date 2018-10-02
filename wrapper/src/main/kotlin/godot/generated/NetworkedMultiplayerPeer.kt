@@ -19,24 +19,24 @@ open class NetworkedMultiplayerPeer : PacketPeer {
 
     // Enums 
 
-    enum class ConnectionStatus(val id: Int) {
+    enum class ConnectionStatus(val id: Long) {
         CONNECTION_DISCONNECTED(0),
         CONNECTION_CONNECTING(1),
         CONNECTION_CONNECTED(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class TransferMode(val id: Int) {
+    enum class TransferMode(val id: Long) {
         TRANSFER_MODE_UNRELIABLE(0),
         TRANSFER_MODE_UNRELIABLE_ORDERED(1),
         TRANSFER_MODE_RELIABLE(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -61,14 +61,14 @@ open class NetworkedMultiplayerPeer : PacketPeer {
 
 
         // Constants
-        const val TRANSFER_MODE_UNRELIABLE: Int = 0
-        const val TRANSFER_MODE_UNRELIABLE_ORDERED: Int = 1
-        const val TRANSFER_MODE_RELIABLE: Int = 2
-        const val CONNECTION_DISCONNECTED: Int = 0
-        const val CONNECTION_CONNECTING: Int = 1
-        const val CONNECTION_CONNECTED: Int = 2
-        const val TARGET_PEER_BROADCAST: Int = 0
-        const val TARGET_PEER_SERVER: Int = 1
+        const val TRANSFER_MODE_UNRELIABLE: Long = 0
+        const val TRANSFER_MODE_UNRELIABLE_ORDERED: Long = 1
+        const val TRANSFER_MODE_RELIABLE: Long = 2
+        const val CONNECTION_DISCONNECTED: Long = 0
+        const val CONNECTION_CONNECTING: Long = 1
+        const val CONNECTION_CONNECTED: Long = 2
+        const val TARGET_PEER_BROADCAST: Long = 0
+        const val TARGET_PEER_SERVER: Long = 1
 
 
     }
@@ -80,35 +80,35 @@ open class NetworkedMultiplayerPeer : PacketPeer {
         set(value) = _icall_Unit_Boolean(setRefuseNewConnectionsMethodBind, this.rawMemory, value)
 
 
-    open var transferMode: Int
-        get() = _icall_Int(getTransferModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setTransferModeMethodBind, this.rawMemory, value)
+    open var transferMode: Long
+        get() = _icall_Long(getTransferModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setTransferModeMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setTransferModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("NetworkedMultiplayerPeer", "set_transfer_mode") }
-    open fun setTransferMode(mode: Int) {
-        _icall_Unit_Int(setTransferModeMethodBind, this.rawMemory, mode)
+    open fun setTransferMode(mode: Long) {
+        _icall_Unit_Long(setTransferModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getTransferModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("NetworkedMultiplayerPeer", "get_transfer_mode") }
     open fun getTransferMode(): NetworkedMultiplayerPeer.TransferMode {
-        return NetworkedMultiplayerPeer.TransferMode.fromInt(_icall_Int(getTransferModeMethodBind, this.rawMemory))
+        return NetworkedMultiplayerPeer.TransferMode.fromInt(_icall_Long(getTransferModeMethodBind, this.rawMemory))
     }
 
 
     private val setTargetPeerMethodBind: CPointer<godot_method_bind> by lazy { getMB("NetworkedMultiplayerPeer", "set_target_peer") }
-    open fun setTargetPeer(id: Int) {
-        _icall_Unit_Int(setTargetPeerMethodBind, this.rawMemory, id)
+    open fun setTargetPeer(id: Long) {
+        _icall_Unit_Long(setTargetPeerMethodBind, this.rawMemory, id)
     }
 
 
     private val getPacketPeerMethodBind: CPointer<godot_method_bind> by lazy { getMB("NetworkedMultiplayerPeer", "get_packet_peer") }
-    open fun getPacketPeer(): Int {
-        return _icall_Int(getPacketPeerMethodBind, this.rawMemory)
+    open fun getPacketPeer(): Long {
+        return _icall_Long(getPacketPeerMethodBind, this.rawMemory)
     }
 
 
@@ -120,13 +120,13 @@ open class NetworkedMultiplayerPeer : PacketPeer {
 
     private val getConnectionStatusMethodBind: CPointer<godot_method_bind> by lazy { getMB("NetworkedMultiplayerPeer", "get_connection_status") }
     open fun getConnectionStatus(): NetworkedMultiplayerPeer.ConnectionStatus {
-        return NetworkedMultiplayerPeer.ConnectionStatus.fromInt(_icall_Int(getConnectionStatusMethodBind, this.rawMemory))
+        return NetworkedMultiplayerPeer.ConnectionStatus.fromInt(_icall_Long(getConnectionStatusMethodBind, this.rawMemory))
     }
 
 
     private val getUniqueIdMethodBind: CPointer<godot_method_bind> by lazy { getMB("NetworkedMultiplayerPeer", "get_unique_id") }
-    open fun getUniqueId(): Int {
-        return _icall_Int(getUniqueIdMethodBind, this.rawMemory)
+    open fun getUniqueId(): Long {
+        return _icall_Long(getUniqueIdMethodBind, this.rawMemory)
     }
 
 

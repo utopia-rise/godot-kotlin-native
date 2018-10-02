@@ -40,33 +40,33 @@ open class Physics2DDirectBodyState : Object {
 
 
     // Properties
-    open val step: Float
-        get() = _icall_Float(getStepMethodBind, this.rawMemory)
+    open val step: Double
+        get() = _icall_Double(getStepMethodBind, this.rawMemory)
 
 
-    open val inverseMass: Float
-        get() = _icall_Float(getInverseMassMethodBind, this.rawMemory)
+    open val inverseMass: Double
+        get() = _icall_Double(getInverseMassMethodBind, this.rawMemory)
 
 
-    open val inverseInertia: Float
-        get() = _icall_Float(getInverseInertiaMethodBind, this.rawMemory)
+    open val inverseInertia: Double
+        get() = _icall_Double(getInverseInertiaMethodBind, this.rawMemory)
 
 
-    open val totalAngularDamp: Float
-        get() = _icall_Float(getTotalAngularDampMethodBind, this.rawMemory)
+    open val totalAngularDamp: Double
+        get() = _icall_Double(getTotalAngularDampMethodBind, this.rawMemory)
 
 
-    open val totalLinearDamp: Float
-        get() = _icall_Float(getTotalLinearDampMethodBind, this.rawMemory)
+    open val totalLinearDamp: Double
+        get() = _icall_Double(getTotalLinearDampMethodBind, this.rawMemory)
 
 
     open val totalGravity: Vector2
         get() = _icall_Vector2(getTotalGravityMethodBind, this.rawMemory)
 
 
-    open var angularVelocity: Float
-        get() = _icall_Float(getAngularVelocityMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setAngularVelocityMethodBind, this.rawMemory, value)
+    open var angularVelocity: Double
+        get() = _icall_Double(getAngularVelocityMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setAngularVelocityMethodBind, this.rawMemory, value)
 
 
     open var linearVelocity: Vector2
@@ -102,26 +102,26 @@ open class Physics2DDirectBodyState : Object {
 
 
     private val getTotalLinearDampMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DDirectBodyState", "get_total_linear_damp") }
-    open fun getTotalLinearDamp(): Float {
-        return _icall_Float(getTotalLinearDampMethodBind, this.rawMemory)
+    open fun getTotalLinearDamp(): Double {
+        return _icall_Double(getTotalLinearDampMethodBind, this.rawMemory)
     }
 
 
     private val getTotalAngularDampMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DDirectBodyState", "get_total_angular_damp") }
-    open fun getTotalAngularDamp(): Float {
-        return _icall_Float(getTotalAngularDampMethodBind, this.rawMemory)
+    open fun getTotalAngularDamp(): Double {
+        return _icall_Double(getTotalAngularDampMethodBind, this.rawMemory)
     }
 
 
     private val getInverseMassMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DDirectBodyState", "get_inverse_mass") }
-    open fun getInverseMass(): Float {
-        return _icall_Float(getInverseMassMethodBind, this.rawMemory)
+    open fun getInverseMass(): Double {
+        return _icall_Double(getInverseMassMethodBind, this.rawMemory)
     }
 
 
     private val getInverseInertiaMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DDirectBodyState", "get_inverse_inertia") }
-    open fun getInverseInertia(): Float {
-        return _icall_Float(getInverseInertiaMethodBind, this.rawMemory)
+    open fun getInverseInertia(): Double {
+        return _icall_Double(getInverseInertiaMethodBind, this.rawMemory)
     }
 
 
@@ -138,14 +138,14 @@ open class Physics2DDirectBodyState : Object {
 
 
     private val setAngularVelocityMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DDirectBodyState", "set_angular_velocity") }
-    open fun setAngularVelocity(velocity: Float) {
-        _icall_Unit_Float(setAngularVelocityMethodBind, this.rawMemory, velocity)
+    open fun setAngularVelocity(velocity: Double) {
+        _icall_Unit_Double(setAngularVelocityMethodBind, this.rawMemory, velocity)
     }
 
 
     private val getAngularVelocityMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DDirectBodyState", "get_angular_velocity") }
-    open fun getAngularVelocity(): Float {
-        return _icall_Float(getAngularVelocityMethodBind, this.rawMemory)
+    open fun getAngularVelocity(): Double {
+        return _icall_Double(getAngularVelocityMethodBind, this.rawMemory)
     }
 
 
@@ -174,74 +174,74 @@ open class Physics2DDirectBodyState : Object {
 
 
     private val getContactCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DDirectBodyState", "get_contact_count") }
-    open fun getContactCount(): Int {
-        return _icall_Int(getContactCountMethodBind, this.rawMemory)
+    open fun getContactCount(): Long {
+        return _icall_Long(getContactCountMethodBind, this.rawMemory)
     }
 
 
     private val getContactLocalPositionMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DDirectBodyState", "get_contact_local_position") }
-    open fun getContactLocalPosition(contactIdx: Int): Vector2 {
-        return _icall_Vector2_Int(getContactLocalPositionMethodBind, this.rawMemory, contactIdx)
+    open fun getContactLocalPosition(contactIdx: Long): Vector2 {
+        return _icall_Vector2_Long(getContactLocalPositionMethodBind, this.rawMemory, contactIdx)
     }
 
 
     private val getContactLocalNormalMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DDirectBodyState", "get_contact_local_normal") }
-    open fun getContactLocalNormal(contactIdx: Int): Vector2 {
-        return _icall_Vector2_Int(getContactLocalNormalMethodBind, this.rawMemory, contactIdx)
+    open fun getContactLocalNormal(contactIdx: Long): Vector2 {
+        return _icall_Vector2_Long(getContactLocalNormalMethodBind, this.rawMemory, contactIdx)
     }
 
 
     private val getContactLocalShapeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DDirectBodyState", "get_contact_local_shape") }
-    open fun getContactLocalShape(contactIdx: Int): Int {
-        return _icall_Int_Int(getContactLocalShapeMethodBind, this.rawMemory, contactIdx)
+    open fun getContactLocalShape(contactIdx: Long): Long {
+        return _icall_Long_Long(getContactLocalShapeMethodBind, this.rawMemory, contactIdx)
     }
 
 
     private val getContactColliderMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DDirectBodyState", "get_contact_collider") }
-    open fun getContactCollider(contactIdx: Int): RID {
-        return _icall_RID_Int(getContactColliderMethodBind, this.rawMemory, contactIdx)
+    open fun getContactCollider(contactIdx: Long): RID {
+        return _icall_RID_Long(getContactColliderMethodBind, this.rawMemory, contactIdx)
     }
 
 
     private val getContactColliderPositionMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DDirectBodyState", "get_contact_collider_position") }
-    open fun getContactColliderPosition(contactIdx: Int): Vector2 {
-        return _icall_Vector2_Int(getContactColliderPositionMethodBind, this.rawMemory, contactIdx)
+    open fun getContactColliderPosition(contactIdx: Long): Vector2 {
+        return _icall_Vector2_Long(getContactColliderPositionMethodBind, this.rawMemory, contactIdx)
     }
 
 
     private val getContactColliderIdMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DDirectBodyState", "get_contact_collider_id") }
-    open fun getContactColliderId(contactIdx: Int): Int {
-        return _icall_Int_Int(getContactColliderIdMethodBind, this.rawMemory, contactIdx)
+    open fun getContactColliderId(contactIdx: Long): Long {
+        return _icall_Long_Long(getContactColliderIdMethodBind, this.rawMemory, contactIdx)
     }
 
 
     private val getContactColliderObjectMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DDirectBodyState", "get_contact_collider_object") }
-    open fun getContactColliderObject(contactIdx: Int): Object {
-        return _icall_Object_Int(getContactColliderObjectMethodBind, this.rawMemory, contactIdx)
+    open fun getContactColliderObject(contactIdx: Long): Object {
+        return _icall_Object_Long(getContactColliderObjectMethodBind, this.rawMemory, contactIdx)
     }
 
 
     private val getContactColliderShapeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DDirectBodyState", "get_contact_collider_shape") }
-    open fun getContactColliderShape(contactIdx: Int): Int {
-        return _icall_Int_Int(getContactColliderShapeMethodBind, this.rawMemory, contactIdx)
+    open fun getContactColliderShape(contactIdx: Long): Long {
+        return _icall_Long_Long(getContactColliderShapeMethodBind, this.rawMemory, contactIdx)
     }
 
 
     private val getContactColliderShapeMetadataMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DDirectBodyState", "get_contact_collider_shape_metadata") }
-    open fun getContactColliderShapeMetadata(contactIdx: Int): Variant {
-        return _icall_Variant_Int(getContactColliderShapeMetadataMethodBind, this.rawMemory, contactIdx)
+    open fun getContactColliderShapeMetadata(contactIdx: Long): Variant {
+        return _icall_Variant_Long(getContactColliderShapeMetadataMethodBind, this.rawMemory, contactIdx)
     }
 
 
     private val getContactColliderVelocityAtPositionMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DDirectBodyState", "get_contact_collider_velocity_at_position") }
-    open fun getContactColliderVelocityAtPosition(contactIdx: Int): Vector2 {
-        return _icall_Vector2_Int(getContactColliderVelocityAtPositionMethodBind, this.rawMemory, contactIdx)
+    open fun getContactColliderVelocityAtPosition(contactIdx: Long): Vector2 {
+        return _icall_Vector2_Long(getContactColliderVelocityAtPositionMethodBind, this.rawMemory, contactIdx)
     }
 
 
     private val getStepMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DDirectBodyState", "get_step") }
-    open fun getStep(): Float {
-        return _icall_Float(getStepMethodBind, this.rawMemory)
+    open fun getStep(): Double {
+        return _icall_Double(getStepMethodBind, this.rawMemory)
     }
 
 

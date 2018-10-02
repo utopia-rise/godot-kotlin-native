@@ -19,14 +19,14 @@ open class UndoRedo : Object {
 
     // Enums 
 
-    enum class MergeMode(val id: Int) {
+    enum class MergeMode(val id: Long) {
         MERGE_DISABLE(0),
         MERGE_ENDS(1),
         MERGE_ALL(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -44,9 +44,9 @@ open class UndoRedo : Object {
 
 
         // Constants
-        const val MERGE_DISABLE: Int = 0
-        const val MERGE_ENDS: Int = 1
-        const val MERGE_ALL: Int = 2
+        const val MERGE_DISABLE: Long = 0
+        const val MERGE_ENDS: Long = 1
+        const val MERGE_ALL: Long = 2
 
 
     }
@@ -57,8 +57,8 @@ open class UndoRedo : Object {
 
     // Methods
     private val createActionMethodBind: CPointer<godot_method_bind> by lazy { getMB("UndoRedo", "create_action") }
-    open fun createAction(name: String, mergeMode: Int = 0) {
-        _icall_Unit_String_Int(createActionMethodBind, this.rawMemory, name, mergeMode)
+    open fun createAction(name: String, mergeMode: Long = 0) {
+        _icall_Unit_String_Long(createActionMethodBind, this.rawMemory, name, mergeMode)
     }
 
 
@@ -117,8 +117,8 @@ open class UndoRedo : Object {
 
 
     private val getVersionMethodBind: CPointer<godot_method_bind> by lazy { getMB("UndoRedo", "get_version") }
-    open fun getVersion(): Int {
-        return _icall_Int(getVersionMethodBind, this.rawMemory)
+    open fun getVersion(): Long {
+        return _icall_Long(getVersionMethodBind, this.rawMemory)
     }
 
 

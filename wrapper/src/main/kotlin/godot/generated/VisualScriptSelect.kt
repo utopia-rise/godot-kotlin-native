@@ -43,23 +43,23 @@ open class VisualScriptSelect : VisualScriptNode {
 
 
     // Properties
-    open var type: Int
-        get() = _icall_Int(getTypedMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setTypedMethodBind, this.rawMemory, value)
+    open var type: Long
+        get() = _icall_Long(getTypedMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setTypedMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setTypedMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptSelect", "set_typed") }
-    open fun setTyped(type: Int) {
-        _icall_Unit_Int(setTypedMethodBind, this.rawMemory, type)
+    open fun setTyped(type: Long) {
+        _icall_Unit_Long(setTypedMethodBind, this.rawMemory, type)
     }
 
 
     private val getTypedMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptSelect", "get_typed") }
     open fun getTyped(): Variant.Type {
-        return Variant.Type.fromInt(_icall_Int(getTypedMethodBind, this.rawMemory))
+        return Variant.Type.fromInt(_icall_Long(getTypedMethodBind, this.rawMemory))
     }
 
 

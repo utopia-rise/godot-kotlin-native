@@ -19,34 +19,34 @@ open class VisualServer : Object {
 
     // Enums 
 
-    enum class ReflectionProbeUpdateMode(val id: Int) {
+    enum class ReflectionProbeUpdateMode(val id: Long) {
         REFLECTION_PROBE_UPDATE_ONCE(0),
         REFLECTION_PROBE_UPDATE_ALWAYS(1),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class LightDirectionalShadowDepthRangeMode(val id: Int) {
+    enum class LightDirectionalShadowDepthRangeMode(val id: Long) {
         LIGHT_DIRECTIONAL_SHADOW_DEPTH_RANGE_STABLE(0),
         LIGHT_DIRECTIONAL_SHADOW_DEPTH_RANGE_OPTIMIZED(1),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class BlendShapeMode(val id: Int) {
+    enum class BlendShapeMode(val id: Long) {
         BLEND_SHAPE_MODE_NORMALIZED(0),
         BLEND_SHAPE_MODE_RELATIVE(1),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class PrimitiveType(val id: Int) {
+    enum class PrimitiveType(val id: Long) {
         PRIMITIVE_POINTS(0),
         PRIMITIVE_LINES(1),
         PRIMITIVE_LINE_STRIP(2),
@@ -58,30 +58,30 @@ open class VisualServer : Object {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class EnvironmentSSAOQuality(val id: Int) {
+    enum class EnvironmentSSAOQuality(val id: Long) {
         ENV_SSAO_QUALITY_LOW(0),
         ENV_SSAO_QUALITY_MEDIUM(1),
         ENV_SSAO_QUALITY_HIGH(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class EnvironmentDOFBlurQuality(val id: Int) {
+    enum class EnvironmentDOFBlurQuality(val id: Long) {
         ENV_DOF_BLUR_QUALITY_LOW(0),
         ENV_DOF_BLUR_QUALITY_MEDIUM(1),
         ENV_DOF_BLUR_QUALITY_HIGH(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class RenderInfo(val id: Int) {
+    enum class RenderInfo(val id: Long) {
         INFO_OBJECTS_IN_FRAME(0),
         INFO_VERTICES_IN_FRAME(1),
         INFO_MATERIAL_CHANGES_IN_FRAME(2),
@@ -95,20 +95,20 @@ open class VisualServer : Object {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class NinePatchAxisMode(val id: Int) {
+    enum class NinePatchAxisMode(val id: Long) {
         NINE_PATCH_STRETCH(0),
         NINE_PATCH_TILE(1),
         NINE_PATCH_TILE_FIT(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class ViewportRenderInfo(val id: Int) {
+    enum class ViewportRenderInfo(val id: Long) {
         VIEWPORT_RENDER_INFO_OBJECTS_IN_FRAME(0),
         VIEWPORT_RENDER_INFO_VERTICES_IN_FRAME(1),
         VIEWPORT_RENDER_INFO_MATERIAL_CHANGES_IN_FRAME(2),
@@ -119,29 +119,29 @@ open class VisualServer : Object {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class ViewportClearMode(val id: Int) {
+    enum class ViewportClearMode(val id: Long) {
         VIEWPORT_CLEAR_ALWAYS(0),
         VIEWPORT_CLEAR_NEVER(1),
         VIEWPORT_CLEAR_ONLY_NEXT_FRAME(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class LightOmniShadowDetail(val id: Int) {
+    enum class LightOmniShadowDetail(val id: Long) {
         LIGHT_OMNI_SHADOW_DETAIL_VERTICAL(0),
         LIGHT_OMNI_SHADOW_DETAIL_HORIZONTAL(1),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class ShaderMode(val id: Int) {
+    enum class ShaderMode(val id: Long) {
         SHADER_SPATIAL(0),
         SHADER_CANVAS_ITEM(1),
         SHADER_PARTICLES(2),
@@ -149,19 +149,19 @@ open class VisualServer : Object {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class MultimeshTransformFormat(val id: Int) {
+    enum class MultimeshTransformFormat(val id: Long) {
         MULTIMESH_TRANSFORM_2D(0),
         MULTIMESH_TRANSFORM_3D(1),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class ShadowCastingSetting(val id: Int) {
+    enum class ShadowCastingSetting(val id: Long) {
         SHADOW_CASTING_SETTING_OFF(0),
         SHADOW_CASTING_SETTING_ON(1),
         SHADOW_CASTING_SETTING_DOUBLE_SIDED(2),
@@ -169,10 +169,10 @@ open class VisualServer : Object {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class ViewportDebugDraw(val id: Int) {
+    enum class ViewportDebugDraw(val id: Long) {
         VIEWPORT_DEBUG_DRAW_DISABLED(0),
         VIEWPORT_DEBUG_DRAW_UNSHADED(1),
         VIEWPORT_DEBUG_DRAW_OVERDRAW(2),
@@ -180,10 +180,10 @@ open class VisualServer : Object {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class ViewportUsage(val id: Int) {
+    enum class ViewportUsage(val id: Long) {
         VIEWPORT_USAGE_2D(0),
         VIEWPORT_USAGE_2D_NO_SAMPLING(1),
         VIEWPORT_USAGE_3D(2),
@@ -191,10 +191,10 @@ open class VisualServer : Object {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class EnvironmentBG(val id: Int) {
+    enum class EnvironmentBG(val id: Long) {
         ENV_BG_CLEAR_COLOR(0),
         ENV_BG_COLOR(1),
         ENV_BG_SKY(2),
@@ -205,19 +205,19 @@ open class VisualServer : Object {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class LightOmniShadowMode(val id: Int) {
+    enum class LightOmniShadowMode(val id: Long) {
         LIGHT_OMNI_SHADOW_DUAL_PARABOLOID(0),
         LIGHT_OMNI_SHADOW_CUBE(1),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class TextureFlags(val id: Int) {
+    enum class TextureFlags(val id: Long) {
         TEXTURE_FLAG_MIPMAPS(1),
         TEXTURE_FLAG_REPEAT(2),
         TEXTURE_FLAG_FILTER(4),
@@ -230,19 +230,19 @@ open class VisualServer : Object {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class Features(val id: Int) {
+    enum class Features(val id: Long) {
         FEATURE_SHADERS(0),
         FEATURE_MULTITHREADED(1),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class InstanceType(val id: Int) {
+    enum class InstanceType(val id: Long) {
         INSTANCE_NONE(0),
         INSTANCE_MESH(1),
         INSTANCE_MULTIMESH(2),
@@ -257,10 +257,10 @@ open class VisualServer : Object {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class EnvironmentSSAOBlur(val id: Int) {
+    enum class EnvironmentSSAOBlur(val id: Long) {
         ENV_SSAO_BLUR_DISABLED(0),
         ENV_SSAO_BLUR_1x1(1),
         ENV_SSAO_BLUR_2x2(2),
@@ -268,10 +268,10 @@ open class VisualServer : Object {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class EnvironmentToneMapper(val id: Int) {
+    enum class EnvironmentToneMapper(val id: Long) {
         ENV_TONE_MAPPER_LINEAR(0),
         ENV_TONE_MAPPER_REINHARDT(1),
         ENV_TONE_MAPPER_FILMIC(2),
@@ -279,10 +279,10 @@ open class VisualServer : Object {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class EnvironmentGlowBlendMode(val id: Int) {
+    enum class EnvironmentGlowBlendMode(val id: Long) {
         GLOW_BLEND_MODE_ADDITIVE(0),
         GLOW_BLEND_MODE_SCREEN(1),
         GLOW_BLEND_MODE_SOFTLIGHT(2),
@@ -290,20 +290,20 @@ open class VisualServer : Object {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class MultimeshColorFormat(val id: Int) {
+    enum class MultimeshColorFormat(val id: Long) {
         MULTIMESH_COLOR_NONE(0),
         MULTIMESH_COLOR_8BIT(1),
         MULTIMESH_COLOR_FLOAT(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class CanvasLightShadowFilter(val id: Int) {
+    enum class CanvasLightShadowFilter(val id: Long) {
         CANVAS_LIGHT_FILTER_NONE(0),
         CANVAS_LIGHT_FILTER_PCF3(1),
         CANVAS_LIGHT_FILTER_PCF5(2),
@@ -313,10 +313,10 @@ open class VisualServer : Object {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class ScenarioDebugMode(val id: Int) {
+    enum class ScenarioDebugMode(val id: Long) {
         SCENARIO_DEBUG_DISABLED(0),
         SCENARIO_DEBUG_WIREFRAME(1),
         SCENARIO_DEBUG_OVERDRAW(2),
@@ -324,10 +324,10 @@ open class VisualServer : Object {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class ViewportUpdateMode(val id: Int) {
+    enum class ViewportUpdateMode(val id: Long) {
         VIEWPORT_UPDATE_DISABLED(0),
         VIEWPORT_UPDATE_ONCE(1),
         VIEWPORT_UPDATE_WHEN_VISIBLE(2),
@@ -335,10 +335,10 @@ open class VisualServer : Object {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class ArrayFormat(val id: Int) {
+    enum class ArrayFormat(val id: Long) {
         ARRAY_FORMAT_VERTEX(1),
         ARRAY_FORMAT_NORMAL(2),
         ARRAY_FORMAT_TANGENT(4),
@@ -363,20 +363,20 @@ open class VisualServer : Object {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class ParticlesDrawOrder(val id: Int) {
+    enum class ParticlesDrawOrder(val id: Long) {
         PARTICLES_DRAW_ORDER_INDEX(0),
         PARTICLES_DRAW_ORDER_LIFETIME(1),
         PARTICLES_DRAW_ORDER_VIEW_DEPTH(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class CanvasLightMode(val id: Int) {
+    enum class CanvasLightMode(val id: Long) {
         CANVAS_LIGHT_MODE_ADD(0),
         CANVAS_LIGHT_MODE_SUB(1),
         CANVAS_LIGHT_MODE_MIX(2),
@@ -384,20 +384,20 @@ open class VisualServer : Object {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class LightDirectionalShadowMode(val id: Int) {
+    enum class LightDirectionalShadowMode(val id: Long) {
         LIGHT_DIRECTIONAL_SHADOW_ORTHOGONAL(0),
         LIGHT_DIRECTIONAL_SHADOW_PARALLEL_2_SPLITS(1),
         LIGHT_DIRECTIONAL_SHADOW_PARALLEL_4_SPLITS(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class LightParam(val id: Int) {
+    enum class LightParam(val id: Long) {
         LIGHT_PARAM_ENERGY(0),
         LIGHT_PARAM_SPECULAR(2),
         LIGHT_PARAM_RANGE(3),
@@ -416,10 +416,10 @@ open class VisualServer : Object {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class ArrayType(val id: Int) {
+    enum class ArrayType(val id: Long) {
         ARRAY_VERTEX(0),
         ARRAY_NORMAL(1),
         ARRAY_TANGENT(2),
@@ -433,29 +433,29 @@ open class VisualServer : Object {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class CanvasOccluderPolygonCullMode(val id: Int) {
+    enum class CanvasOccluderPolygonCullMode(val id: Long) {
         CANVAS_OCCLUDER_POLYGON_CULL_DISABLED(0),
         CANVAS_OCCLUDER_POLYGON_CULL_CLOCKWISE(1),
         CANVAS_OCCLUDER_POLYGON_CULL_COUNTER_CLOCKWISE(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class InstanceFlags(val id: Int) {
+    enum class InstanceFlags(val id: Long) {
         INSTANCE_FLAG_USE_BAKED_LIGHT(0),
         INSTANCE_FLAG_MAX(1),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class ViewportMSAA(val id: Int) {
+    enum class ViewportMSAA(val id: Long) {
         VIEWPORT_MSAA_DISABLED(0),
         VIEWPORT_MSAA_2X(1),
         VIEWPORT_MSAA_4X(2),
@@ -464,20 +464,20 @@ open class VisualServer : Object {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class LightType(val id: Int) {
+    enum class LightType(val id: Long) {
         LIGHT_DIRECTIONAL(0),
         LIGHT_OMNI(1),
         LIGHT_SPOT(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class CubeMapSide(val id: Int) {
+    enum class CubeMapSide(val id: Long) {
         CUBEMAP_LEFT(0),
         CUBEMAP_RIGHT(1),
         CUBEMAP_BOTTOM(2),
@@ -487,7 +487,7 @@ open class VisualServer : Object {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -507,212 +507,212 @@ open class VisualServer : Object {
 
 
         // Constants
-        const val NO_INDEX_ARRAY: Int = -1
-        const val ARRAY_WEIGHTS_SIZE: Int = 4
-        const val CANVAS_ITEM_Z_MIN: Int = -4096
-        const val CANVAS_ITEM_Z_MAX: Int = 4096
-        const val MAX_GLOW_LEVELS: Int = 7
-        const val MAX_CURSORS: Int = 8
-        const val MATERIAL_RENDER_PRIORITY_MIN: Int = -128
-        const val MATERIAL_RENDER_PRIORITY_MAX: Int = 127
-        const val CUBEMAP_LEFT: Int = 0
-        const val CUBEMAP_RIGHT: Int = 1
-        const val CUBEMAP_BOTTOM: Int = 2
-        const val CUBEMAP_TOP: Int = 3
-        const val CUBEMAP_FRONT: Int = 4
-        const val CUBEMAP_BACK: Int = 5
-        const val TEXTURE_FLAG_MIPMAPS: Int = 1
-        const val TEXTURE_FLAG_REPEAT: Int = 2
-        const val TEXTURE_FLAG_FILTER: Int = 4
-        const val TEXTURE_FLAG_ANISOTROPIC_FILTER: Int = 8
-        const val TEXTURE_FLAG_CONVERT_TO_LINEAR: Int = 16
-        const val TEXTURE_FLAG_MIRRORED_REPEAT: Int = 32
-        const val TEXTURE_FLAG_CUBEMAP: Int = 2048
-        const val TEXTURE_FLAG_USED_FOR_STREAMING: Int = 4096
-        const val TEXTURE_FLAGS_DEFAULT: Int = 7
-        const val SHADER_SPATIAL: Int = 0
-        const val SHADER_CANVAS_ITEM: Int = 1
-        const val SHADER_PARTICLES: Int = 2
-        const val SHADER_MAX: Int = 3
-        const val ARRAY_VERTEX: Int = 0
-        const val ARRAY_NORMAL: Int = 1
-        const val ARRAY_TANGENT: Int = 2
-        const val ARRAY_COLOR: Int = 3
-        const val ARRAY_TEX_UV: Int = 4
-        const val ARRAY_TEX_UV2: Int = 5
-        const val ARRAY_BONES: Int = 6
-        const val ARRAY_WEIGHTS: Int = 7
-        const val ARRAY_INDEX: Int = 8
-        const val ARRAY_MAX: Int = 9
-        const val ARRAY_FORMAT_VERTEX: Int = 1
-        const val ARRAY_FORMAT_NORMAL: Int = 2
-        const val ARRAY_FORMAT_TANGENT: Int = 4
-        const val ARRAY_FORMAT_COLOR: Int = 8
-        const val ARRAY_FORMAT_TEX_UV: Int = 16
-        const val ARRAY_FORMAT_TEX_UV2: Int = 32
-        const val ARRAY_FORMAT_BONES: Int = 64
-        const val ARRAY_FORMAT_WEIGHTS: Int = 128
-        const val ARRAY_FORMAT_INDEX: Int = 256
-        const val ARRAY_COMPRESS_VERTEX: Int = 512
-        const val ARRAY_COMPRESS_NORMAL: Int = 1024
-        const val ARRAY_COMPRESS_TANGENT: Int = 2048
-        const val ARRAY_COMPRESS_COLOR: Int = 4096
-        const val ARRAY_COMPRESS_TEX_UV: Int = 8192
-        const val ARRAY_COMPRESS_TEX_UV2: Int = 16384
-        const val ARRAY_COMPRESS_BONES: Int = 32768
-        const val ARRAY_COMPRESS_WEIGHTS: Int = 65536
-        const val ARRAY_COMPRESS_INDEX: Int = 131072
-        const val ARRAY_FLAG_USE_2D_VERTICES: Int = 262144
-        const val ARRAY_FLAG_USE_16_BIT_BONES: Int = 524288
-        const val ARRAY_COMPRESS_DEFAULT: Int = 97280
-        const val PRIMITIVE_POINTS: Int = 0
-        const val PRIMITIVE_LINES: Int = 1
-        const val PRIMITIVE_LINE_STRIP: Int = 2
-        const val PRIMITIVE_LINE_LOOP: Int = 3
-        const val PRIMITIVE_TRIANGLES: Int = 4
-        const val PRIMITIVE_TRIANGLE_STRIP: Int = 5
-        const val PRIMITIVE_TRIANGLE_FAN: Int = 6
-        const val PRIMITIVE_MAX: Int = 7
-        const val BLEND_SHAPE_MODE_NORMALIZED: Int = 0
-        const val BLEND_SHAPE_MODE_RELATIVE: Int = 1
-        const val LIGHT_DIRECTIONAL: Int = 0
-        const val LIGHT_OMNI: Int = 1
-        const val LIGHT_SPOT: Int = 2
-        const val LIGHT_PARAM_ENERGY: Int = 0
-        const val LIGHT_PARAM_SPECULAR: Int = 2
-        const val LIGHT_PARAM_RANGE: Int = 3
-        const val LIGHT_PARAM_ATTENUATION: Int = 4
-        const val LIGHT_PARAM_SPOT_ANGLE: Int = 5
-        const val LIGHT_PARAM_SPOT_ATTENUATION: Int = 6
-        const val LIGHT_PARAM_CONTACT_SHADOW_SIZE: Int = 7
-        const val LIGHT_PARAM_SHADOW_MAX_DISTANCE: Int = 8
-        const val LIGHT_PARAM_SHADOW_SPLIT_1_OFFSET: Int = 9
-        const val LIGHT_PARAM_SHADOW_SPLIT_2_OFFSET: Int = 10
-        const val LIGHT_PARAM_SHADOW_SPLIT_3_OFFSET: Int = 11
-        const val LIGHT_PARAM_SHADOW_NORMAL_BIAS: Int = 12
-        const val LIGHT_PARAM_SHADOW_BIAS: Int = 13
-        const val LIGHT_PARAM_SHADOW_BIAS_SPLIT_SCALE: Int = 14
-        const val LIGHT_PARAM_MAX: Int = 15
-        const val LIGHT_OMNI_SHADOW_DUAL_PARABOLOID: Int = 0
-        const val LIGHT_OMNI_SHADOW_CUBE: Int = 1
-        const val LIGHT_OMNI_SHADOW_DETAIL_VERTICAL: Int = 0
-        const val LIGHT_OMNI_SHADOW_DETAIL_HORIZONTAL: Int = 1
-        const val LIGHT_DIRECTIONAL_SHADOW_ORTHOGONAL: Int = 0
-        const val LIGHT_DIRECTIONAL_SHADOW_PARALLEL_2_SPLITS: Int = 1
-        const val LIGHT_DIRECTIONAL_SHADOW_PARALLEL_4_SPLITS: Int = 2
-        const val LIGHT_DIRECTIONAL_SHADOW_DEPTH_RANGE_STABLE: Int = 0
-        const val LIGHT_DIRECTIONAL_SHADOW_DEPTH_RANGE_OPTIMIZED: Int = 1
-        const val VIEWPORT_UPDATE_DISABLED: Int = 0
-        const val VIEWPORT_UPDATE_ONCE: Int = 1
-        const val VIEWPORT_UPDATE_WHEN_VISIBLE: Int = 2
-        const val VIEWPORT_UPDATE_ALWAYS: Int = 3
-        const val VIEWPORT_CLEAR_ALWAYS: Int = 0
-        const val VIEWPORT_CLEAR_NEVER: Int = 1
-        const val VIEWPORT_CLEAR_ONLY_NEXT_FRAME: Int = 2
-        const val VIEWPORT_MSAA_DISABLED: Int = 0
-        const val VIEWPORT_MSAA_2X: Int = 1
-        const val VIEWPORT_MSAA_4X: Int = 2
-        const val VIEWPORT_MSAA_8X: Int = 3
-        const val VIEWPORT_MSAA_16X: Int = 4
-        const val VIEWPORT_USAGE_2D: Int = 0
-        const val VIEWPORT_USAGE_2D_NO_SAMPLING: Int = 1
-        const val VIEWPORT_USAGE_3D: Int = 2
-        const val VIEWPORT_USAGE_3D_NO_EFFECTS: Int = 3
-        const val VIEWPORT_RENDER_INFO_OBJECTS_IN_FRAME: Int = 0
-        const val VIEWPORT_RENDER_INFO_VERTICES_IN_FRAME: Int = 1
-        const val VIEWPORT_RENDER_INFO_MATERIAL_CHANGES_IN_FRAME: Int = 2
-        const val VIEWPORT_RENDER_INFO_SHADER_CHANGES_IN_FRAME: Int = 3
-        const val VIEWPORT_RENDER_INFO_SURFACE_CHANGES_IN_FRAME: Int = 4
-        const val VIEWPORT_RENDER_INFO_DRAW_CALLS_IN_FRAME: Int = 5
-        const val VIEWPORT_RENDER_INFO_MAX: Int = 6
-        const val VIEWPORT_DEBUG_DRAW_DISABLED: Int = 0
-        const val VIEWPORT_DEBUG_DRAW_UNSHADED: Int = 1
-        const val VIEWPORT_DEBUG_DRAW_OVERDRAW: Int = 2
-        const val VIEWPORT_DEBUG_DRAW_WIREFRAME: Int = 3
-        const val SCENARIO_DEBUG_DISABLED: Int = 0
-        const val SCENARIO_DEBUG_WIREFRAME: Int = 1
-        const val SCENARIO_DEBUG_OVERDRAW: Int = 2
-        const val SCENARIO_DEBUG_SHADELESS: Int = 3
-        const val INSTANCE_NONE: Int = 0
-        const val INSTANCE_MESH: Int = 1
-        const val INSTANCE_MULTIMESH: Int = 2
-        const val INSTANCE_IMMEDIATE: Int = 3
-        const val INSTANCE_PARTICLES: Int = 4
-        const val INSTANCE_LIGHT: Int = 5
-        const val INSTANCE_REFLECTION_PROBE: Int = 6
-        const val INSTANCE_GI_PROBE: Int = 7
-        const val INSTANCE_LIGHTMAP_CAPTURE: Int = 8
-        const val INSTANCE_MAX: Int = 9
-        const val INSTANCE_GEOMETRY_MASK: Int = 30
-        const val INSTANCE_FLAG_USE_BAKED_LIGHT: Int = 0
-        const val INSTANCE_FLAG_MAX: Int = 1
-        const val SHADOW_CASTING_SETTING_OFF: Int = 0
-        const val SHADOW_CASTING_SETTING_ON: Int = 1
-        const val SHADOW_CASTING_SETTING_DOUBLE_SIDED: Int = 2
-        const val SHADOW_CASTING_SETTING_SHADOWS_ONLY: Int = 3
-        const val NINE_PATCH_STRETCH: Int = 0
-        const val NINE_PATCH_TILE: Int = 1
-        const val NINE_PATCH_TILE_FIT: Int = 2
-        const val CANVAS_LIGHT_MODE_ADD: Int = 0
-        const val CANVAS_LIGHT_MODE_SUB: Int = 1
-        const val CANVAS_LIGHT_MODE_MIX: Int = 2
-        const val CANVAS_LIGHT_MODE_MASK: Int = 3
-        const val CANVAS_LIGHT_FILTER_NONE: Int = 0
-        const val CANVAS_LIGHT_FILTER_PCF3: Int = 1
-        const val CANVAS_LIGHT_FILTER_PCF5: Int = 2
-        const val CANVAS_LIGHT_FILTER_PCF7: Int = 3
-        const val CANVAS_LIGHT_FILTER_PCF9: Int = 4
-        const val CANVAS_LIGHT_FILTER_PCF13: Int = 5
-        const val CANVAS_OCCLUDER_POLYGON_CULL_DISABLED: Int = 0
-        const val CANVAS_OCCLUDER_POLYGON_CULL_CLOCKWISE: Int = 1
-        const val CANVAS_OCCLUDER_POLYGON_CULL_COUNTER_CLOCKWISE: Int = 2
-        const val INFO_OBJECTS_IN_FRAME: Int = 0
-        const val INFO_VERTICES_IN_FRAME: Int = 1
-        const val INFO_MATERIAL_CHANGES_IN_FRAME: Int = 2
-        const val INFO_SHADER_CHANGES_IN_FRAME: Int = 3
-        const val INFO_SURFACE_CHANGES_IN_FRAME: Int = 4
-        const val INFO_DRAW_CALLS_IN_FRAME: Int = 5
-        const val INFO_USAGE_VIDEO_MEM_TOTAL: Int = 6
-        const val INFO_VIDEO_MEM_USED: Int = 7
-        const val INFO_TEXTURE_MEM_USED: Int = 8
-        const val INFO_VERTEX_MEM_USED: Int = 9
-        const val FEATURE_SHADERS: Int = 0
-        const val FEATURE_MULTITHREADED: Int = 1
-        const val MULTIMESH_TRANSFORM_2D: Int = 0
-        const val MULTIMESH_TRANSFORM_3D: Int = 1
-        const val MULTIMESH_COLOR_NONE: Int = 0
-        const val MULTIMESH_COLOR_8BIT: Int = 1
-        const val MULTIMESH_COLOR_FLOAT: Int = 2
-        const val REFLECTION_PROBE_UPDATE_ONCE: Int = 0
-        const val REFLECTION_PROBE_UPDATE_ALWAYS: Int = 1
-        const val PARTICLES_DRAW_ORDER_INDEX: Int = 0
-        const val PARTICLES_DRAW_ORDER_LIFETIME: Int = 1
-        const val PARTICLES_DRAW_ORDER_VIEW_DEPTH: Int = 2
-        const val ENV_BG_CLEAR_COLOR: Int = 0
-        const val ENV_BG_COLOR: Int = 1
-        const val ENV_BG_SKY: Int = 2
-        const val ENV_BG_COLOR_SKY: Int = 3
-        const val ENV_BG_CANVAS: Int = 4
-        const val ENV_BG_KEEP: Int = 5
-        const val ENV_BG_MAX: Int = 6
-        const val ENV_DOF_BLUR_QUALITY_LOW: Int = 0
-        const val ENV_DOF_BLUR_QUALITY_MEDIUM: Int = 1
-        const val ENV_DOF_BLUR_QUALITY_HIGH: Int = 2
-        const val GLOW_BLEND_MODE_ADDITIVE: Int = 0
-        const val GLOW_BLEND_MODE_SCREEN: Int = 1
-        const val GLOW_BLEND_MODE_SOFTLIGHT: Int = 2
-        const val GLOW_BLEND_MODE_REPLACE: Int = 3
-        const val ENV_TONE_MAPPER_LINEAR: Int = 0
-        const val ENV_TONE_MAPPER_REINHARDT: Int = 1
-        const val ENV_TONE_MAPPER_FILMIC: Int = 2
-        const val ENV_TONE_MAPPER_ACES: Int = 3
-        const val ENV_SSAO_QUALITY_LOW: Int = 0
-        const val ENV_SSAO_QUALITY_MEDIUM: Int = 1
-        const val ENV_SSAO_QUALITY_HIGH: Int = 2
-        const val ENV_SSAO_BLUR_DISABLED: Int = 0
-        const val ENV_SSAO_BLUR_1x1: Int = 1
-        const val ENV_SSAO_BLUR_2x2: Int = 2
-        const val ENV_SSAO_BLUR_3x3: Int = 3
+        const val NO_INDEX_ARRAY: Long = -1
+        const val ARRAY_WEIGHTS_SIZE: Long = 4
+        const val CANVAS_ITEM_Z_MIN: Long = -4096
+        const val CANVAS_ITEM_Z_MAX: Long = 4096
+        const val MAX_GLOW_LEVELS: Long = 7
+        const val MAX_CURSORS: Long = 8
+        const val MATERIAL_RENDER_PRIORITY_MIN: Long = -128
+        const val MATERIAL_RENDER_PRIORITY_MAX: Long = 127
+        const val CUBEMAP_LEFT: Long = 0
+        const val CUBEMAP_RIGHT: Long = 1
+        const val CUBEMAP_BOTTOM: Long = 2
+        const val CUBEMAP_TOP: Long = 3
+        const val CUBEMAP_FRONT: Long = 4
+        const val CUBEMAP_BACK: Long = 5
+        const val TEXTURE_FLAG_MIPMAPS: Long = 1
+        const val TEXTURE_FLAG_REPEAT: Long = 2
+        const val TEXTURE_FLAG_FILTER: Long = 4
+        const val TEXTURE_FLAG_ANISOTROPIC_FILTER: Long = 8
+        const val TEXTURE_FLAG_CONVERT_TO_LINEAR: Long = 16
+        const val TEXTURE_FLAG_MIRRORED_REPEAT: Long = 32
+        const val TEXTURE_FLAG_CUBEMAP: Long = 2048
+        const val TEXTURE_FLAG_USED_FOR_STREAMING: Long = 4096
+        const val TEXTURE_FLAGS_DEFAULT: Long = 7
+        const val SHADER_SPATIAL: Long = 0
+        const val SHADER_CANVAS_ITEM: Long = 1
+        const val SHADER_PARTICLES: Long = 2
+        const val SHADER_MAX: Long = 3
+        const val ARRAY_VERTEX: Long = 0
+        const val ARRAY_NORMAL: Long = 1
+        const val ARRAY_TANGENT: Long = 2
+        const val ARRAY_COLOR: Long = 3
+        const val ARRAY_TEX_UV: Long = 4
+        const val ARRAY_TEX_UV2: Long = 5
+        const val ARRAY_BONES: Long = 6
+        const val ARRAY_WEIGHTS: Long = 7
+        const val ARRAY_INDEX: Long = 8
+        const val ARRAY_MAX: Long = 9
+        const val ARRAY_FORMAT_VERTEX: Long = 1
+        const val ARRAY_FORMAT_NORMAL: Long = 2
+        const val ARRAY_FORMAT_TANGENT: Long = 4
+        const val ARRAY_FORMAT_COLOR: Long = 8
+        const val ARRAY_FORMAT_TEX_UV: Long = 16
+        const val ARRAY_FORMAT_TEX_UV2: Long = 32
+        const val ARRAY_FORMAT_BONES: Long = 64
+        const val ARRAY_FORMAT_WEIGHTS: Long = 128
+        const val ARRAY_FORMAT_INDEX: Long = 256
+        const val ARRAY_COMPRESS_VERTEX: Long = 512
+        const val ARRAY_COMPRESS_NORMAL: Long = 1024
+        const val ARRAY_COMPRESS_TANGENT: Long = 2048
+        const val ARRAY_COMPRESS_COLOR: Long = 4096
+        const val ARRAY_COMPRESS_TEX_UV: Long = 8192
+        const val ARRAY_COMPRESS_TEX_UV2: Long = 16384
+        const val ARRAY_COMPRESS_BONES: Long = 32768
+        const val ARRAY_COMPRESS_WEIGHTS: Long = 65536
+        const val ARRAY_COMPRESS_INDEX: Long = 131072
+        const val ARRAY_FLAG_USE_2D_VERTICES: Long = 262144
+        const val ARRAY_FLAG_USE_16_BIT_BONES: Long = 524288
+        const val ARRAY_COMPRESS_DEFAULT: Long = 97280
+        const val PRIMITIVE_POINTS: Long = 0
+        const val PRIMITIVE_LINES: Long = 1
+        const val PRIMITIVE_LINE_STRIP: Long = 2
+        const val PRIMITIVE_LINE_LOOP: Long = 3
+        const val PRIMITIVE_TRIANGLES: Long = 4
+        const val PRIMITIVE_TRIANGLE_STRIP: Long = 5
+        const val PRIMITIVE_TRIANGLE_FAN: Long = 6
+        const val PRIMITIVE_MAX: Long = 7
+        const val BLEND_SHAPE_MODE_NORMALIZED: Long = 0
+        const val BLEND_SHAPE_MODE_RELATIVE: Long = 1
+        const val LIGHT_DIRECTIONAL: Long = 0
+        const val LIGHT_OMNI: Long = 1
+        const val LIGHT_SPOT: Long = 2
+        const val LIGHT_PARAM_ENERGY: Long = 0
+        const val LIGHT_PARAM_SPECULAR: Long = 2
+        const val LIGHT_PARAM_RANGE: Long = 3
+        const val LIGHT_PARAM_ATTENUATION: Long = 4
+        const val LIGHT_PARAM_SPOT_ANGLE: Long = 5
+        const val LIGHT_PARAM_SPOT_ATTENUATION: Long = 6
+        const val LIGHT_PARAM_CONTACT_SHADOW_SIZE: Long = 7
+        const val LIGHT_PARAM_SHADOW_MAX_DISTANCE: Long = 8
+        const val LIGHT_PARAM_SHADOW_SPLIT_1_OFFSET: Long = 9
+        const val LIGHT_PARAM_SHADOW_SPLIT_2_OFFSET: Long = 10
+        const val LIGHT_PARAM_SHADOW_SPLIT_3_OFFSET: Long = 11
+        const val LIGHT_PARAM_SHADOW_NORMAL_BIAS: Long = 12
+        const val LIGHT_PARAM_SHADOW_BIAS: Long = 13
+        const val LIGHT_PARAM_SHADOW_BIAS_SPLIT_SCALE: Long = 14
+        const val LIGHT_PARAM_MAX: Long = 15
+        const val LIGHT_OMNI_SHADOW_DUAL_PARABOLOID: Long = 0
+        const val LIGHT_OMNI_SHADOW_CUBE: Long = 1
+        const val LIGHT_OMNI_SHADOW_DETAIL_VERTICAL: Long = 0
+        const val LIGHT_OMNI_SHADOW_DETAIL_HORIZONTAL: Long = 1
+        const val LIGHT_DIRECTIONAL_SHADOW_ORTHOGONAL: Long = 0
+        const val LIGHT_DIRECTIONAL_SHADOW_PARALLEL_2_SPLITS: Long = 1
+        const val LIGHT_DIRECTIONAL_SHADOW_PARALLEL_4_SPLITS: Long = 2
+        const val LIGHT_DIRECTIONAL_SHADOW_DEPTH_RANGE_STABLE: Long = 0
+        const val LIGHT_DIRECTIONAL_SHADOW_DEPTH_RANGE_OPTIMIZED: Long = 1
+        const val VIEWPORT_UPDATE_DISABLED: Long = 0
+        const val VIEWPORT_UPDATE_ONCE: Long = 1
+        const val VIEWPORT_UPDATE_WHEN_VISIBLE: Long = 2
+        const val VIEWPORT_UPDATE_ALWAYS: Long = 3
+        const val VIEWPORT_CLEAR_ALWAYS: Long = 0
+        const val VIEWPORT_CLEAR_NEVER: Long = 1
+        const val VIEWPORT_CLEAR_ONLY_NEXT_FRAME: Long = 2
+        const val VIEWPORT_MSAA_DISABLED: Long = 0
+        const val VIEWPORT_MSAA_2X: Long = 1
+        const val VIEWPORT_MSAA_4X: Long = 2
+        const val VIEWPORT_MSAA_8X: Long = 3
+        const val VIEWPORT_MSAA_16X: Long = 4
+        const val VIEWPORT_USAGE_2D: Long = 0
+        const val VIEWPORT_USAGE_2D_NO_SAMPLING: Long = 1
+        const val VIEWPORT_USAGE_3D: Long = 2
+        const val VIEWPORT_USAGE_3D_NO_EFFECTS: Long = 3
+        const val VIEWPORT_RENDER_INFO_OBJECTS_IN_FRAME: Long = 0
+        const val VIEWPORT_RENDER_INFO_VERTICES_IN_FRAME: Long = 1
+        const val VIEWPORT_RENDER_INFO_MATERIAL_CHANGES_IN_FRAME: Long = 2
+        const val VIEWPORT_RENDER_INFO_SHADER_CHANGES_IN_FRAME: Long = 3
+        const val VIEWPORT_RENDER_INFO_SURFACE_CHANGES_IN_FRAME: Long = 4
+        const val VIEWPORT_RENDER_INFO_DRAW_CALLS_IN_FRAME: Long = 5
+        const val VIEWPORT_RENDER_INFO_MAX: Long = 6
+        const val VIEWPORT_DEBUG_DRAW_DISABLED: Long = 0
+        const val VIEWPORT_DEBUG_DRAW_UNSHADED: Long = 1
+        const val VIEWPORT_DEBUG_DRAW_OVERDRAW: Long = 2
+        const val VIEWPORT_DEBUG_DRAW_WIREFRAME: Long = 3
+        const val SCENARIO_DEBUG_DISABLED: Long = 0
+        const val SCENARIO_DEBUG_WIREFRAME: Long = 1
+        const val SCENARIO_DEBUG_OVERDRAW: Long = 2
+        const val SCENARIO_DEBUG_SHADELESS: Long = 3
+        const val INSTANCE_NONE: Long = 0
+        const val INSTANCE_MESH: Long = 1
+        const val INSTANCE_MULTIMESH: Long = 2
+        const val INSTANCE_IMMEDIATE: Long = 3
+        const val INSTANCE_PARTICLES: Long = 4
+        const val INSTANCE_LIGHT: Long = 5
+        const val INSTANCE_REFLECTION_PROBE: Long = 6
+        const val INSTANCE_GI_PROBE: Long = 7
+        const val INSTANCE_LIGHTMAP_CAPTURE: Long = 8
+        const val INSTANCE_MAX: Long = 9
+        const val INSTANCE_GEOMETRY_MASK: Long = 30
+        const val INSTANCE_FLAG_USE_BAKED_LIGHT: Long = 0
+        const val INSTANCE_FLAG_MAX: Long = 1
+        const val SHADOW_CASTING_SETTING_OFF: Long = 0
+        const val SHADOW_CASTING_SETTING_ON: Long = 1
+        const val SHADOW_CASTING_SETTING_DOUBLE_SIDED: Long = 2
+        const val SHADOW_CASTING_SETTING_SHADOWS_ONLY: Long = 3
+        const val NINE_PATCH_STRETCH: Long = 0
+        const val NINE_PATCH_TILE: Long = 1
+        const val NINE_PATCH_TILE_FIT: Long = 2
+        const val CANVAS_LIGHT_MODE_ADD: Long = 0
+        const val CANVAS_LIGHT_MODE_SUB: Long = 1
+        const val CANVAS_LIGHT_MODE_MIX: Long = 2
+        const val CANVAS_LIGHT_MODE_MASK: Long = 3
+        const val CANVAS_LIGHT_FILTER_NONE: Long = 0
+        const val CANVAS_LIGHT_FILTER_PCF3: Long = 1
+        const val CANVAS_LIGHT_FILTER_PCF5: Long = 2
+        const val CANVAS_LIGHT_FILTER_PCF7: Long = 3
+        const val CANVAS_LIGHT_FILTER_PCF9: Long = 4
+        const val CANVAS_LIGHT_FILTER_PCF13: Long = 5
+        const val CANVAS_OCCLUDER_POLYGON_CULL_DISABLED: Long = 0
+        const val CANVAS_OCCLUDER_POLYGON_CULL_CLOCKWISE: Long = 1
+        const val CANVAS_OCCLUDER_POLYGON_CULL_COUNTER_CLOCKWISE: Long = 2
+        const val INFO_OBJECTS_IN_FRAME: Long = 0
+        const val INFO_VERTICES_IN_FRAME: Long = 1
+        const val INFO_MATERIAL_CHANGES_IN_FRAME: Long = 2
+        const val INFO_SHADER_CHANGES_IN_FRAME: Long = 3
+        const val INFO_SURFACE_CHANGES_IN_FRAME: Long = 4
+        const val INFO_DRAW_CALLS_IN_FRAME: Long = 5
+        const val INFO_USAGE_VIDEO_MEM_TOTAL: Long = 6
+        const val INFO_VIDEO_MEM_USED: Long = 7
+        const val INFO_TEXTURE_MEM_USED: Long = 8
+        const val INFO_VERTEX_MEM_USED: Long = 9
+        const val FEATURE_SHADERS: Long = 0
+        const val FEATURE_MULTITHREADED: Long = 1
+        const val MULTIMESH_TRANSFORM_2D: Long = 0
+        const val MULTIMESH_TRANSFORM_3D: Long = 1
+        const val MULTIMESH_COLOR_NONE: Long = 0
+        const val MULTIMESH_COLOR_8BIT: Long = 1
+        const val MULTIMESH_COLOR_FLOAT: Long = 2
+        const val REFLECTION_PROBE_UPDATE_ONCE: Long = 0
+        const val REFLECTION_PROBE_UPDATE_ALWAYS: Long = 1
+        const val PARTICLES_DRAW_ORDER_INDEX: Long = 0
+        const val PARTICLES_DRAW_ORDER_LIFETIME: Long = 1
+        const val PARTICLES_DRAW_ORDER_VIEW_DEPTH: Long = 2
+        const val ENV_BG_CLEAR_COLOR: Long = 0
+        const val ENV_BG_COLOR: Long = 1
+        const val ENV_BG_SKY: Long = 2
+        const val ENV_BG_COLOR_SKY: Long = 3
+        const val ENV_BG_CANVAS: Long = 4
+        const val ENV_BG_KEEP: Long = 5
+        const val ENV_BG_MAX: Long = 6
+        const val ENV_DOF_BLUR_QUALITY_LOW: Long = 0
+        const val ENV_DOF_BLUR_QUALITY_MEDIUM: Long = 1
+        const val ENV_DOF_BLUR_QUALITY_HIGH: Long = 2
+        const val GLOW_BLEND_MODE_ADDITIVE: Long = 0
+        const val GLOW_BLEND_MODE_SCREEN: Long = 1
+        const val GLOW_BLEND_MODE_SOFTLIGHT: Long = 2
+        const val GLOW_BLEND_MODE_REPLACE: Long = 3
+        const val ENV_TONE_MAPPER_LINEAR: Long = 0
+        const val ENV_TONE_MAPPER_REINHARDT: Long = 1
+        const val ENV_TONE_MAPPER_FILMIC: Long = 2
+        const val ENV_TONE_MAPPER_ACES: Long = 3
+        const val ENV_SSAO_QUALITY_LOW: Long = 0
+        const val ENV_SSAO_QUALITY_MEDIUM: Long = 1
+        const val ENV_SSAO_QUALITY_HIGH: Long = 2
+        const val ENV_SSAO_BLUR_DISABLED: Long = 0
+        const val ENV_SSAO_BLUR_1x1: Long = 1
+        const val ENV_SSAO_BLUR_2x2: Long = 2
+        const val ENV_SSAO_BLUR_3x3: Long = 3
 
 
         private val rawMemory: COpaquePointer by lazy { getSingleton("VisualServer", "VisualServer") }
@@ -753,74 +753,74 @@ open class VisualServer : Object {
 
 
         private val textureCreateFromImageMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "texture_create_from_image") }
-        fun textureCreateFromImage(image: Image, flags: Int = 7): RID {
-            return _icall_RID_Object_Int(textureCreateFromImageMethodBind, this.rawMemory, image, flags)
+        fun textureCreateFromImage(image: Image, flags: Long = 7): RID {
+            return _icall_RID_Object_Long(textureCreateFromImageMethodBind, this.rawMemory, image, flags)
         }
 
 
         private val textureAllocateMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "texture_allocate") }
-        fun textureAllocate(texture: RID, width: Int, height: Int, format: Int, flags: Int = 7) {
-            _icall_Unit_RID_Int_Int_Int_Int(textureAllocateMethodBind, this.rawMemory, texture, width, height, format, flags)
+        fun textureAllocate(texture: RID, width: Long, height: Long, format: Long, flags: Long = 7) {
+            _icall_Unit_RID_Long_Long_Long_Long(textureAllocateMethodBind, this.rawMemory, texture, width, height, format, flags)
         }
 
 
         private val textureSetDataMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "texture_set_data") }
-        fun textureSetData(texture: RID, image: Image, cubeSide: Int = 0) {
-            _icall_Unit_RID_Object_Int(textureSetDataMethodBind, this.rawMemory, texture, image, cubeSide)
+        fun textureSetData(texture: RID, image: Image, cubeSide: Long = 0) {
+            _icall_Unit_RID_Object_Long(textureSetDataMethodBind, this.rawMemory, texture, image, cubeSide)
         }
 
 
         private val textureSetDataPartialMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "texture_set_data_partial") }
-        fun textureSetDataPartial(texture: RID, image: Image, srcX: Int, srcY: Int, srcW: Int, srcH: Int, dstX: Int, dstY: Int, dstMip: Int, cubeSide: Int = 0) {
-            _icall_Unit_RID_Object_Int_Int_Int_Int_Int_Int_Int_Int(textureSetDataPartialMethodBind, this.rawMemory, texture, image, srcX, srcY, srcW, srcH, dstX, dstY, dstMip, cubeSide)
+        fun textureSetDataPartial(texture: RID, image: Image, srcX: Long, srcY: Long, srcW: Long, srcH: Long, dstX: Long, dstY: Long, dstMip: Long, cubeSide: Long = 0) {
+            _icall_Unit_RID_Object_Long_Long_Long_Long_Long_Long_Long_Long(textureSetDataPartialMethodBind, this.rawMemory, texture, image, srcX, srcY, srcW, srcH, dstX, dstY, dstMip, cubeSide)
         }
 
 
         private val textureGetDataMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "texture_get_data") }
-        fun textureGetData(texture: RID, cubeSide: Int = 0): Image {
-            return _icall_Image_RID_Int(textureGetDataMethodBind, this.rawMemory, texture, cubeSide)
+        fun textureGetData(texture: RID, cubeSide: Long = 0): Image {
+            return _icall_Image_RID_Long(textureGetDataMethodBind, this.rawMemory, texture, cubeSide)
         }
 
 
         private val textureSetFlagsMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "texture_set_flags") }
-        fun textureSetFlags(texture: RID, flags: Int) {
-            _icall_Unit_RID_Int(textureSetFlagsMethodBind, this.rawMemory, texture, flags)
+        fun textureSetFlags(texture: RID, flags: Long) {
+            _icall_Unit_RID_Long(textureSetFlagsMethodBind, this.rawMemory, texture, flags)
         }
 
 
         private val textureGetFlagsMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "texture_get_flags") }
-        fun textureGetFlags(texture: RID): Int {
-            return _icall_Int_RID(textureGetFlagsMethodBind, this.rawMemory, texture)
+        fun textureGetFlags(texture: RID): Long {
+            return _icall_Long_RID(textureGetFlagsMethodBind, this.rawMemory, texture)
         }
 
 
         private val textureGetFormatMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "texture_get_format") }
         fun textureGetFormat(texture: RID): Image.Format {
-            return Image.Format.fromInt(_icall_Int_RID(textureGetFormatMethodBind, this.rawMemory, texture))
+            return Image.Format.fromInt(_icall_Long_RID(textureGetFormatMethodBind, this.rawMemory, texture))
         }
 
 
         private val textureGetTexidMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "texture_get_texid") }
-        fun textureGetTexid(texture: RID): Int {
-            return _icall_Int_RID(textureGetTexidMethodBind, this.rawMemory, texture)
+        fun textureGetTexid(texture: RID): Long {
+            return _icall_Long_RID(textureGetTexidMethodBind, this.rawMemory, texture)
         }
 
 
         private val textureGetWidthMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "texture_get_width") }
-        fun textureGetWidth(texture: RID): Int {
-            return _icall_Int_RID(textureGetWidthMethodBind, this.rawMemory, texture)
+        fun textureGetWidth(texture: RID): Long {
+            return _icall_Long_RID(textureGetWidthMethodBind, this.rawMemory, texture)
         }
 
 
         private val textureGetHeightMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "texture_get_height") }
-        fun textureGetHeight(texture: RID): Int {
-            return _icall_Int_RID(textureGetHeightMethodBind, this.rawMemory, texture)
+        fun textureGetHeight(texture: RID): Long {
+            return _icall_Long_RID(textureGetHeightMethodBind, this.rawMemory, texture)
         }
 
 
         private val textureSetSizeOverrideMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "texture_set_size_override") }
-        fun textureSetSizeOverride(texture: RID, width: Int, height: Int) {
-            _icall_Unit_RID_Int_Int(textureSetSizeOverrideMethodBind, this.rawMemory, texture, width, height)
+        fun textureSetSizeOverride(texture: RID, width: Long, height: Long) {
+            _icall_Unit_RID_Long_Long(textureSetSizeOverrideMethodBind, this.rawMemory, texture, width, height)
         }
 
 
@@ -861,8 +861,8 @@ open class VisualServer : Object {
 
 
         private val skySetTextureMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "sky_set_texture") }
-        fun skySetTexture(sky: RID, cubeMap: RID, radianceSize: Int) {
-            _icall_Unit_RID_RID_Int(skySetTextureMethodBind, this.rawMemory, sky, cubeMap, radianceSize)
+        fun skySetTexture(sky: RID, cubeMap: RID, radianceSize: Long) {
+            _icall_Unit_RID_RID_Long(skySetTextureMethodBind, this.rawMemory, sky, cubeMap, radianceSize)
         }
 
 
@@ -933,14 +933,14 @@ open class VisualServer : Object {
 
 
         private val materialSetRenderPriorityMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "material_set_render_priority") }
-        fun materialSetRenderPriority(material: RID, priority: Int) {
-            _icall_Unit_RID_Int(materialSetRenderPriorityMethodBind, this.rawMemory, material, priority)
+        fun materialSetRenderPriority(material: RID, priority: Long) {
+            _icall_Unit_RID_Long(materialSetRenderPriorityMethodBind, this.rawMemory, material, priority)
         }
 
 
         private val materialSetLineWidthMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "material_set_line_width") }
-        fun materialSetLineWidth(material: RID, width: Float) {
-            _icall_Unit_RID_Float(materialSetLineWidthMethodBind, this.rawMemory, material, width)
+        fun materialSetLineWidth(material: RID, width: Double) {
+            _icall_Unit_RID_Double(materialSetLineWidthMethodBind, this.rawMemory, material, width)
         }
 
 
@@ -957,116 +957,116 @@ open class VisualServer : Object {
 
 
         private val meshAddSurfaceFromArraysMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "mesh_add_surface_from_arrays") }
-        fun meshAddSurfaceFromArrays(mesh: RID, primtive: Int, arrays: GDArray, blendShapes: GDArray = GDArray(), compressFormat: Int = 97280) {
-            _icall_Unit_RID_Int_GDArray_GDArray_Int(meshAddSurfaceFromArraysMethodBind, this.rawMemory, mesh, primtive, arrays, blendShapes, compressFormat)
+        fun meshAddSurfaceFromArrays(mesh: RID, primtive: Long, arrays: GDArray, blendShapes: GDArray = GDArray(), compressFormat: Long = 97280) {
+            _icall_Unit_RID_Long_GDArray_GDArray_Long(meshAddSurfaceFromArraysMethodBind, this.rawMemory, mesh, primtive, arrays, blendShapes, compressFormat)
         }
 
 
         private val meshSetBlendShapeCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "mesh_set_blend_shape_count") }
-        fun meshSetBlendShapeCount(mesh: RID, amount: Int) {
-            _icall_Unit_RID_Int(meshSetBlendShapeCountMethodBind, this.rawMemory, mesh, amount)
+        fun meshSetBlendShapeCount(mesh: RID, amount: Long) {
+            _icall_Unit_RID_Long(meshSetBlendShapeCountMethodBind, this.rawMemory, mesh, amount)
         }
 
 
         private val meshGetBlendShapeCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "mesh_get_blend_shape_count") }
-        fun meshGetBlendShapeCount(mesh: RID): Int {
-            return _icall_Int_RID(meshGetBlendShapeCountMethodBind, this.rawMemory, mesh)
+        fun meshGetBlendShapeCount(mesh: RID): Long {
+            return _icall_Long_RID(meshGetBlendShapeCountMethodBind, this.rawMemory, mesh)
         }
 
 
         private val meshSetBlendShapeModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "mesh_set_blend_shape_mode") }
-        fun meshSetBlendShapeMode(mesh: RID, mode: Int) {
-            _icall_Unit_RID_Int(meshSetBlendShapeModeMethodBind, this.rawMemory, mesh, mode)
+        fun meshSetBlendShapeMode(mesh: RID, mode: Long) {
+            _icall_Unit_RID_Long(meshSetBlendShapeModeMethodBind, this.rawMemory, mesh, mode)
         }
 
 
         private val meshGetBlendShapeModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "mesh_get_blend_shape_mode") }
         fun meshGetBlendShapeMode(mesh: RID): VisualServer.BlendShapeMode {
-            return VisualServer.BlendShapeMode.fromInt(_icall_Int_RID(meshGetBlendShapeModeMethodBind, this.rawMemory, mesh))
+            return VisualServer.BlendShapeMode.fromInt(_icall_Long_RID(meshGetBlendShapeModeMethodBind, this.rawMemory, mesh))
         }
 
 
         private val meshSurfaceSetMaterialMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "mesh_surface_set_material") }
-        fun meshSurfaceSetMaterial(mesh: RID, surface: Int, material: RID) {
-            _icall_Unit_RID_Int_RID(meshSurfaceSetMaterialMethodBind, this.rawMemory, mesh, surface, material)
+        fun meshSurfaceSetMaterial(mesh: RID, surface: Long, material: RID) {
+            _icall_Unit_RID_Long_RID(meshSurfaceSetMaterialMethodBind, this.rawMemory, mesh, surface, material)
         }
 
 
         private val meshSurfaceGetMaterialMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "mesh_surface_get_material") }
-        fun meshSurfaceGetMaterial(mesh: RID, surface: Int): RID {
-            return _icall_RID_RID_Int(meshSurfaceGetMaterialMethodBind, this.rawMemory, mesh, surface)
+        fun meshSurfaceGetMaterial(mesh: RID, surface: Long): RID {
+            return _icall_RID_RID_Long(meshSurfaceGetMaterialMethodBind, this.rawMemory, mesh, surface)
         }
 
 
         private val meshSurfaceGetArrayLenMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "mesh_surface_get_array_len") }
-        fun meshSurfaceGetArrayLen(mesh: RID, surface: Int): Int {
-            return _icall_Int_RID_Int(meshSurfaceGetArrayLenMethodBind, this.rawMemory, mesh, surface)
+        fun meshSurfaceGetArrayLen(mesh: RID, surface: Long): Long {
+            return _icall_Long_RID_Long(meshSurfaceGetArrayLenMethodBind, this.rawMemory, mesh, surface)
         }
 
 
         private val meshSurfaceGetArrayIndexLenMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "mesh_surface_get_array_index_len") }
-        fun meshSurfaceGetArrayIndexLen(mesh: RID, surface: Int): Int {
-            return _icall_Int_RID_Int(meshSurfaceGetArrayIndexLenMethodBind, this.rawMemory, mesh, surface)
+        fun meshSurfaceGetArrayIndexLen(mesh: RID, surface: Long): Long {
+            return _icall_Long_RID_Long(meshSurfaceGetArrayIndexLenMethodBind, this.rawMemory, mesh, surface)
         }
 
 
         private val meshSurfaceGetArrayMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "mesh_surface_get_array") }
-        fun meshSurfaceGetArray(mesh: RID, surface: Int): PoolByteArray {
-            return _icall_PoolByteArray_RID_Int(meshSurfaceGetArrayMethodBind, this.rawMemory, mesh, surface)
+        fun meshSurfaceGetArray(mesh: RID, surface: Long): PoolByteArray {
+            return _icall_PoolByteArray_RID_Long(meshSurfaceGetArrayMethodBind, this.rawMemory, mesh, surface)
         }
 
 
         private val meshSurfaceGetIndexArrayMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "mesh_surface_get_index_array") }
-        fun meshSurfaceGetIndexArray(mesh: RID, surface: Int): PoolByteArray {
-            return _icall_PoolByteArray_RID_Int(meshSurfaceGetIndexArrayMethodBind, this.rawMemory, mesh, surface)
+        fun meshSurfaceGetIndexArray(mesh: RID, surface: Long): PoolByteArray {
+            return _icall_PoolByteArray_RID_Long(meshSurfaceGetIndexArrayMethodBind, this.rawMemory, mesh, surface)
         }
 
 
         private val meshSurfaceGetArraysMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "mesh_surface_get_arrays") }
-        fun meshSurfaceGetArrays(mesh: RID, surface: Int): GDArray {
-            return _icall_GDArray_RID_Int(meshSurfaceGetArraysMethodBind, this.rawMemory, mesh, surface)
+        fun meshSurfaceGetArrays(mesh: RID, surface: Long): GDArray {
+            return _icall_GDArray_RID_Long(meshSurfaceGetArraysMethodBind, this.rawMemory, mesh, surface)
         }
 
 
         private val meshSurfaceGetBlendShapeArraysMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "mesh_surface_get_blend_shape_arrays") }
-        fun meshSurfaceGetBlendShapeArrays(mesh: RID, surface: Int): GDArray {
-            return _icall_GDArray_RID_Int(meshSurfaceGetBlendShapeArraysMethodBind, this.rawMemory, mesh, surface)
+        fun meshSurfaceGetBlendShapeArrays(mesh: RID, surface: Long): GDArray {
+            return _icall_GDArray_RID_Long(meshSurfaceGetBlendShapeArraysMethodBind, this.rawMemory, mesh, surface)
         }
 
 
         private val meshSurfaceGetFormatMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "mesh_surface_get_format") }
-        fun meshSurfaceGetFormat(mesh: RID, surface: Int): Int {
-            return _icall_Int_RID_Int(meshSurfaceGetFormatMethodBind, this.rawMemory, mesh, surface)
+        fun meshSurfaceGetFormat(mesh: RID, surface: Long): Long {
+            return _icall_Long_RID_Long(meshSurfaceGetFormatMethodBind, this.rawMemory, mesh, surface)
         }
 
 
         private val meshSurfaceGetPrimitiveTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "mesh_surface_get_primitive_type") }
-        fun meshSurfaceGetPrimitiveType(mesh: RID, surface: Int): VisualServer.PrimitiveType {
-            return VisualServer.PrimitiveType.fromInt(_icall_Int_RID_Int(meshSurfaceGetPrimitiveTypeMethodBind, this.rawMemory, mesh, surface))
+        fun meshSurfaceGetPrimitiveType(mesh: RID, surface: Long): VisualServer.PrimitiveType {
+            return VisualServer.PrimitiveType.fromInt(_icall_Long_RID_Long(meshSurfaceGetPrimitiveTypeMethodBind, this.rawMemory, mesh, surface))
         }
 
 
         private val meshSurfaceGetAabbMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "mesh_surface_get_aabb") }
-        fun meshSurfaceGetAabb(mesh: RID, surface: Int): AABB {
-            return _icall_AABB_RID_Int(meshSurfaceGetAabbMethodBind, this.rawMemory, mesh, surface)
+        fun meshSurfaceGetAabb(mesh: RID, surface: Long): AABB {
+            return _icall_AABB_RID_Long(meshSurfaceGetAabbMethodBind, this.rawMemory, mesh, surface)
         }
 
 
         private val meshSurfaceGetSkeletonAabbMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "mesh_surface_get_skeleton_aabb") }
-        fun meshSurfaceGetSkeletonAabb(mesh: RID, surface: Int): GDArray {
-            return _icall_GDArray_RID_Int(meshSurfaceGetSkeletonAabbMethodBind, this.rawMemory, mesh, surface)
+        fun meshSurfaceGetSkeletonAabb(mesh: RID, surface: Long): GDArray {
+            return _icall_GDArray_RID_Long(meshSurfaceGetSkeletonAabbMethodBind, this.rawMemory, mesh, surface)
         }
 
 
         private val meshRemoveSurfaceMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "mesh_remove_surface") }
-        fun meshRemoveSurface(mesh: RID, index: Int) {
-            _icall_Unit_RID_Int(meshRemoveSurfaceMethodBind, this.rawMemory, mesh, index)
+        fun meshRemoveSurface(mesh: RID, index: Long) {
+            _icall_Unit_RID_Long(meshRemoveSurfaceMethodBind, this.rawMemory, mesh, index)
         }
 
 
         private val meshGetSurfaceCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "mesh_get_surface_count") }
-        fun meshGetSurfaceCount(mesh: RID): Int {
-            return _icall_Int_RID(meshGetSurfaceCountMethodBind, this.rawMemory, mesh)
+        fun meshGetSurfaceCount(mesh: RID): Long {
+            return _icall_Long_RID(meshGetSurfaceCountMethodBind, this.rawMemory, mesh)
         }
 
 
@@ -1089,14 +1089,14 @@ open class VisualServer : Object {
 
 
         private val multimeshAllocateMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "multimesh_allocate") }
-        fun multimeshAllocate(multimesh: RID, instances: Int, transformFormat: Int, colorFormat: Int, customDataFormat: Int = 0) {
-            _icall_Unit_RID_Int_Int_Int_Int(multimeshAllocateMethodBind, this.rawMemory, multimesh, instances, transformFormat, colorFormat, customDataFormat)
+        fun multimeshAllocate(multimesh: RID, instances: Long, transformFormat: Long, colorFormat: Long, customDataFormat: Long = 0) {
+            _icall_Unit_RID_Long_Long_Long_Long(multimeshAllocateMethodBind, this.rawMemory, multimesh, instances, transformFormat, colorFormat, customDataFormat)
         }
 
 
         private val multimeshGetInstanceCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "multimesh_get_instance_count") }
-        fun multimeshGetInstanceCount(multimesh: RID): Int {
-            return _icall_Int_RID(multimeshGetInstanceCountMethodBind, this.rawMemory, multimesh)
+        fun multimeshGetInstanceCount(multimesh: RID): Long {
+            return _icall_Long_RID(multimeshGetInstanceCountMethodBind, this.rawMemory, multimesh)
         }
 
 
@@ -1107,26 +1107,26 @@ open class VisualServer : Object {
 
 
         private val multimeshInstanceSetTransformMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "multimesh_instance_set_transform") }
-        fun multimeshInstanceSetTransform(multimesh: RID, index: Int, transform: Transform) {
-            _icall_Unit_RID_Int_Transform(multimeshInstanceSetTransformMethodBind, this.rawMemory, multimesh, index, transform)
+        fun multimeshInstanceSetTransform(multimesh: RID, index: Long, transform: Transform) {
+            _icall_Unit_RID_Long_Transform(multimeshInstanceSetTransformMethodBind, this.rawMemory, multimesh, index, transform)
         }
 
 
         private val multimeshInstanceSetTransform2dMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "multimesh_instance_set_transform_2d") }
-        fun multimeshInstanceSetTransform2d(multimesh: RID, index: Int, transform: Transform2D) {
-            _icall_Unit_RID_Int_Transform2D(multimeshInstanceSetTransform2dMethodBind, this.rawMemory, multimesh, index, transform)
+        fun multimeshInstanceSetTransform2d(multimesh: RID, index: Long, transform: Transform2D) {
+            _icall_Unit_RID_Long_Transform2D(multimeshInstanceSetTransform2dMethodBind, this.rawMemory, multimesh, index, transform)
         }
 
 
         private val multimeshInstanceSetColorMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "multimesh_instance_set_color") }
-        fun multimeshInstanceSetColor(multimesh: RID, index: Int, color: Color) {
-            _icall_Unit_RID_Int_Color(multimeshInstanceSetColorMethodBind, this.rawMemory, multimesh, index, color)
+        fun multimeshInstanceSetColor(multimesh: RID, index: Long, color: Color) {
+            _icall_Unit_RID_Long_Color(multimeshInstanceSetColorMethodBind, this.rawMemory, multimesh, index, color)
         }
 
 
         private val multimeshInstanceSetCustomDataMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "multimesh_instance_set_custom_data") }
-        fun multimeshInstanceSetCustomData(multimesh: RID, index: Int, customData: Color) {
-            _icall_Unit_RID_Int_Color(multimeshInstanceSetCustomDataMethodBind, this.rawMemory, multimesh, index, customData)
+        fun multimeshInstanceSetCustomData(multimesh: RID, index: Long, customData: Color) {
+            _icall_Unit_RID_Long_Color(multimeshInstanceSetCustomDataMethodBind, this.rawMemory, multimesh, index, customData)
         }
 
 
@@ -1143,38 +1143,38 @@ open class VisualServer : Object {
 
 
         private val multimeshInstanceGetTransformMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "multimesh_instance_get_transform") }
-        fun multimeshInstanceGetTransform(multimesh: RID, index: Int): Transform {
-            return _icall_Transform_RID_Int(multimeshInstanceGetTransformMethodBind, this.rawMemory, multimesh, index)
+        fun multimeshInstanceGetTransform(multimesh: RID, index: Long): Transform {
+            return _icall_Transform_RID_Long(multimeshInstanceGetTransformMethodBind, this.rawMemory, multimesh, index)
         }
 
 
         private val multimeshInstanceGetTransform2dMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "multimesh_instance_get_transform_2d") }
-        fun multimeshInstanceGetTransform2d(multimesh: RID, index: Int): Transform2D {
-            return _icall_Transform2D_RID_Int(multimeshInstanceGetTransform2dMethodBind, this.rawMemory, multimesh, index)
+        fun multimeshInstanceGetTransform2d(multimesh: RID, index: Long): Transform2D {
+            return _icall_Transform2D_RID_Long(multimeshInstanceGetTransform2dMethodBind, this.rawMemory, multimesh, index)
         }
 
 
         private val multimeshInstanceGetColorMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "multimesh_instance_get_color") }
-        fun multimeshInstanceGetColor(multimesh: RID, index: Int): Color {
-            return _icall_Color_RID_Int(multimeshInstanceGetColorMethodBind, this.rawMemory, multimesh, index)
+        fun multimeshInstanceGetColor(multimesh: RID, index: Long): Color {
+            return _icall_Color_RID_Long(multimeshInstanceGetColorMethodBind, this.rawMemory, multimesh, index)
         }
 
 
         private val multimeshInstanceGetCustomDataMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "multimesh_instance_get_custom_data") }
-        fun multimeshInstanceGetCustomData(multimesh: RID, index: Int): Color {
-            return _icall_Color_RID_Int(multimeshInstanceGetCustomDataMethodBind, this.rawMemory, multimesh, index)
+        fun multimeshInstanceGetCustomData(multimesh: RID, index: Long): Color {
+            return _icall_Color_RID_Long(multimeshInstanceGetCustomDataMethodBind, this.rawMemory, multimesh, index)
         }
 
 
         private val multimeshSetVisibleInstancesMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "multimesh_set_visible_instances") }
-        fun multimeshSetVisibleInstances(multimesh: RID, visible: Int) {
-            _icall_Unit_RID_Int(multimeshSetVisibleInstancesMethodBind, this.rawMemory, multimesh, visible)
+        fun multimeshSetVisibleInstances(multimesh: RID, visible: Long) {
+            _icall_Unit_RID_Long(multimeshSetVisibleInstancesMethodBind, this.rawMemory, multimesh, visible)
         }
 
 
         private val multimeshGetVisibleInstancesMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "multimesh_get_visible_instances") }
-        fun multimeshGetVisibleInstances(multimesh: RID): Int {
-            return _icall_Int_RID(multimeshGetVisibleInstancesMethodBind, this.rawMemory, multimesh)
+        fun multimeshGetVisibleInstances(multimesh: RID): Long {
+            return _icall_Long_RID(multimeshGetVisibleInstancesMethodBind, this.rawMemory, multimesh)
         }
 
 
@@ -1191,8 +1191,8 @@ open class VisualServer : Object {
 
 
         private val immediateBeginMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "immediate_begin") }
-        fun immediateBegin(immediate: RID, primitive: Int, texture: RID = RID()) {
-            _icall_Unit_RID_Int_RID(immediateBeginMethodBind, this.rawMemory, immediate, primitive, texture)
+        fun immediateBegin(immediate: RID, primitive: Long, texture: RID = RID()) {
+            _icall_Unit_RID_Long_RID(immediateBeginMethodBind, this.rawMemory, immediate, primitive, texture)
         }
 
 
@@ -1269,38 +1269,38 @@ open class VisualServer : Object {
 
 
         private val skeletonAllocateMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "skeleton_allocate") }
-        fun skeletonAllocate(skeleton: RID, bones: Int, is2dSkeleton: Boolean = false) {
-            _icall_Unit_RID_Int_Boolean(skeletonAllocateMethodBind, this.rawMemory, skeleton, bones, is2dSkeleton)
+        fun skeletonAllocate(skeleton: RID, bones: Long, is2dSkeleton: Boolean = false) {
+            _icall_Unit_RID_Long_Boolean(skeletonAllocateMethodBind, this.rawMemory, skeleton, bones, is2dSkeleton)
         }
 
 
         private val skeletonGetBoneCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "skeleton_get_bone_count") }
-        fun skeletonGetBoneCount(skeleton: RID): Int {
-            return _icall_Int_RID(skeletonGetBoneCountMethodBind, this.rawMemory, skeleton)
+        fun skeletonGetBoneCount(skeleton: RID): Long {
+            return _icall_Long_RID(skeletonGetBoneCountMethodBind, this.rawMemory, skeleton)
         }
 
 
         private val skeletonBoneSetTransformMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "skeleton_bone_set_transform") }
-        fun skeletonBoneSetTransform(skeleton: RID, bone: Int, transform: Transform) {
-            _icall_Unit_RID_Int_Transform(skeletonBoneSetTransformMethodBind, this.rawMemory, skeleton, bone, transform)
+        fun skeletonBoneSetTransform(skeleton: RID, bone: Long, transform: Transform) {
+            _icall_Unit_RID_Long_Transform(skeletonBoneSetTransformMethodBind, this.rawMemory, skeleton, bone, transform)
         }
 
 
         private val skeletonBoneGetTransformMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "skeleton_bone_get_transform") }
-        fun skeletonBoneGetTransform(skeleton: RID, bone: Int): Transform {
-            return _icall_Transform_RID_Int(skeletonBoneGetTransformMethodBind, this.rawMemory, skeleton, bone)
+        fun skeletonBoneGetTransform(skeleton: RID, bone: Long): Transform {
+            return _icall_Transform_RID_Long(skeletonBoneGetTransformMethodBind, this.rawMemory, skeleton, bone)
         }
 
 
         private val skeletonBoneSetTransform2dMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "skeleton_bone_set_transform_2d") }
-        fun skeletonBoneSetTransform2d(skeleton: RID, bone: Int, transform: Transform2D) {
-            _icall_Unit_RID_Int_Transform2D(skeletonBoneSetTransform2dMethodBind, this.rawMemory, skeleton, bone, transform)
+        fun skeletonBoneSetTransform2d(skeleton: RID, bone: Long, transform: Transform2D) {
+            _icall_Unit_RID_Long_Transform2D(skeletonBoneSetTransform2dMethodBind, this.rawMemory, skeleton, bone, transform)
         }
 
 
         private val skeletonBoneGetTransform2dMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "skeleton_bone_get_transform_2d") }
-        fun skeletonBoneGetTransform2d(skeleton: RID, bone: Int): Transform2D {
-            return _icall_Transform2D_RID_Int(skeletonBoneGetTransform2dMethodBind, this.rawMemory, skeleton, bone)
+        fun skeletonBoneGetTransform2d(skeleton: RID, bone: Long): Transform2D {
+            return _icall_Transform2D_RID_Long(skeletonBoneGetTransform2dMethodBind, this.rawMemory, skeleton, bone)
         }
 
 
@@ -1329,8 +1329,8 @@ open class VisualServer : Object {
 
 
         private val lightSetParamMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "light_set_param") }
-        fun lightSetParam(light: RID, param: Int, value: Float) {
-            _icall_Unit_RID_Int_Float(lightSetParamMethodBind, this.rawMemory, light, param, value)
+        fun lightSetParam(light: RID, param: Long, value: Double) {
+            _icall_Unit_RID_Long_Double(lightSetParamMethodBind, this.rawMemory, light, param, value)
         }
 
 
@@ -1359,8 +1359,8 @@ open class VisualServer : Object {
 
 
         private val lightSetCullMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "light_set_cull_mask") }
-        fun lightSetCullMask(light: RID, mask: Int) {
-            _icall_Unit_RID_Int(lightSetCullMaskMethodBind, this.rawMemory, light, mask)
+        fun lightSetCullMask(light: RID, mask: Long) {
+            _icall_Unit_RID_Long(lightSetCullMaskMethodBind, this.rawMemory, light, mask)
         }
 
 
@@ -1371,20 +1371,20 @@ open class VisualServer : Object {
 
 
         private val lightOmniSetShadowModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "light_omni_set_shadow_mode") }
-        fun lightOmniSetShadowMode(light: RID, mode: Int) {
-            _icall_Unit_RID_Int(lightOmniSetShadowModeMethodBind, this.rawMemory, light, mode)
+        fun lightOmniSetShadowMode(light: RID, mode: Long) {
+            _icall_Unit_RID_Long(lightOmniSetShadowModeMethodBind, this.rawMemory, light, mode)
         }
 
 
         private val lightOmniSetShadowDetailMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "light_omni_set_shadow_detail") }
-        fun lightOmniSetShadowDetail(light: RID, detail: Int) {
-            _icall_Unit_RID_Int(lightOmniSetShadowDetailMethodBind, this.rawMemory, light, detail)
+        fun lightOmniSetShadowDetail(light: RID, detail: Long) {
+            _icall_Unit_RID_Long(lightOmniSetShadowDetailMethodBind, this.rawMemory, light, detail)
         }
 
 
         private val lightDirectionalSetShadowModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "light_directional_set_shadow_mode") }
-        fun lightDirectionalSetShadowMode(light: RID, mode: Int) {
-            _icall_Unit_RID_Int(lightDirectionalSetShadowModeMethodBind, this.rawMemory, light, mode)
+        fun lightDirectionalSetShadowMode(light: RID, mode: Long) {
+            _icall_Unit_RID_Long(lightDirectionalSetShadowModeMethodBind, this.rawMemory, light, mode)
         }
 
 
@@ -1395,8 +1395,8 @@ open class VisualServer : Object {
 
 
         private val lightDirectionalSetShadowDepthRangeModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "light_directional_set_shadow_depth_range_mode") }
-        fun lightDirectionalSetShadowDepthRangeMode(light: RID, rangeMode: Int) {
-            _icall_Unit_RID_Int(lightDirectionalSetShadowDepthRangeModeMethodBind, this.rawMemory, light, rangeMode)
+        fun lightDirectionalSetShadowDepthRangeMode(light: RID, rangeMode: Long) {
+            _icall_Unit_RID_Long(lightDirectionalSetShadowDepthRangeModeMethodBind, this.rawMemory, light, rangeMode)
         }
 
 
@@ -1407,14 +1407,14 @@ open class VisualServer : Object {
 
 
         private val reflectionProbeSetUpdateModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "reflection_probe_set_update_mode") }
-        fun reflectionProbeSetUpdateMode(probe: RID, mode: Int) {
-            _icall_Unit_RID_Int(reflectionProbeSetUpdateModeMethodBind, this.rawMemory, probe, mode)
+        fun reflectionProbeSetUpdateMode(probe: RID, mode: Long) {
+            _icall_Unit_RID_Long(reflectionProbeSetUpdateModeMethodBind, this.rawMemory, probe, mode)
         }
 
 
         private val reflectionProbeSetIntensityMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "reflection_probe_set_intensity") }
-        fun reflectionProbeSetIntensity(probe: RID, intensity: Float) {
-            _icall_Unit_RID_Float(reflectionProbeSetIntensityMethodBind, this.rawMemory, probe, intensity)
+        fun reflectionProbeSetIntensity(probe: RID, intensity: Double) {
+            _icall_Unit_RID_Double(reflectionProbeSetIntensityMethodBind, this.rawMemory, probe, intensity)
         }
 
 
@@ -1425,20 +1425,20 @@ open class VisualServer : Object {
 
 
         private val reflectionProbeSetInteriorAmbientEnergyMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "reflection_probe_set_interior_ambient_energy") }
-        fun reflectionProbeSetInteriorAmbientEnergy(probe: RID, energy: Float) {
-            _icall_Unit_RID_Float(reflectionProbeSetInteriorAmbientEnergyMethodBind, this.rawMemory, probe, energy)
+        fun reflectionProbeSetInteriorAmbientEnergy(probe: RID, energy: Double) {
+            _icall_Unit_RID_Double(reflectionProbeSetInteriorAmbientEnergyMethodBind, this.rawMemory, probe, energy)
         }
 
 
         private val reflectionProbeSetInteriorAmbientProbeContributionMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "reflection_probe_set_interior_ambient_probe_contribution") }
-        fun reflectionProbeSetInteriorAmbientProbeContribution(probe: RID, contrib: Float) {
-            _icall_Unit_RID_Float(reflectionProbeSetInteriorAmbientProbeContributionMethodBind, this.rawMemory, probe, contrib)
+        fun reflectionProbeSetInteriorAmbientProbeContribution(probe: RID, contrib: Double) {
+            _icall_Unit_RID_Double(reflectionProbeSetInteriorAmbientProbeContributionMethodBind, this.rawMemory, probe, contrib)
         }
 
 
         private val reflectionProbeSetMaxDistanceMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "reflection_probe_set_max_distance") }
-        fun reflectionProbeSetMaxDistance(probe: RID, distance: Float) {
-            _icall_Unit_RID_Float(reflectionProbeSetMaxDistanceMethodBind, this.rawMemory, probe, distance)
+        fun reflectionProbeSetMaxDistance(probe: RID, distance: Double) {
+            _icall_Unit_RID_Double(reflectionProbeSetMaxDistanceMethodBind, this.rawMemory, probe, distance)
         }
 
 
@@ -1473,8 +1473,8 @@ open class VisualServer : Object {
 
 
         private val reflectionProbeSetCullMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "reflection_probe_set_cull_mask") }
-        fun reflectionProbeSetCullMask(probe: RID, layers: Int) {
-            _icall_Unit_RID_Int(reflectionProbeSetCullMaskMethodBind, this.rawMemory, probe, layers)
+        fun reflectionProbeSetCullMask(probe: RID, layers: Long) {
+            _icall_Unit_RID_Long(reflectionProbeSetCullMaskMethodBind, this.rawMemory, probe, layers)
         }
 
 
@@ -1497,14 +1497,14 @@ open class VisualServer : Object {
 
 
         private val giProbeSetCellSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "gi_probe_set_cell_size") }
-        fun giProbeSetCellSize(probe: RID, range: Float) {
-            _icall_Unit_RID_Float(giProbeSetCellSizeMethodBind, this.rawMemory, probe, range)
+        fun giProbeSetCellSize(probe: RID, range: Double) {
+            _icall_Unit_RID_Double(giProbeSetCellSizeMethodBind, this.rawMemory, probe, range)
         }
 
 
         private val giProbeGetCellSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "gi_probe_get_cell_size") }
-        fun giProbeGetCellSize(probe: RID): Float {
-            return _icall_Float_RID(giProbeGetCellSizeMethodBind, this.rawMemory, probe)
+        fun giProbeGetCellSize(probe: RID): Double {
+            return _icall_Double_RID(giProbeGetCellSizeMethodBind, this.rawMemory, probe)
         }
 
 
@@ -1533,62 +1533,62 @@ open class VisualServer : Object {
 
 
         private val giProbeSetDynamicRangeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "gi_probe_set_dynamic_range") }
-        fun giProbeSetDynamicRange(range: RID, arg1: Int) {
-            _icall_Unit_RID_Int(giProbeSetDynamicRangeMethodBind, this.rawMemory, range, arg1)
+        fun giProbeSetDynamicRange(range: RID, arg1: Long) {
+            _icall_Unit_RID_Long(giProbeSetDynamicRangeMethodBind, this.rawMemory, range, arg1)
         }
 
 
         private val giProbeGetDynamicRangeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "gi_probe_get_dynamic_range") }
-        fun giProbeGetDynamicRange(arg0: RID): Int {
-            return _icall_Int_RID(giProbeGetDynamicRangeMethodBind, this.rawMemory, arg0)
+        fun giProbeGetDynamicRange(arg0: RID): Long {
+            return _icall_Long_RID(giProbeGetDynamicRangeMethodBind, this.rawMemory, arg0)
         }
 
 
         private val giProbeSetEnergyMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "gi_probe_set_energy") }
-        fun giProbeSetEnergy(energy: RID, arg1: Float) {
-            _icall_Unit_RID_Float(giProbeSetEnergyMethodBind, this.rawMemory, energy, arg1)
+        fun giProbeSetEnergy(energy: RID, arg1: Double) {
+            _icall_Unit_RID_Double(giProbeSetEnergyMethodBind, this.rawMemory, energy, arg1)
         }
 
 
         private val giProbeGetEnergyMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "gi_probe_get_energy") }
-        fun giProbeGetEnergy(arg0: RID): Float {
-            return _icall_Float_RID(giProbeGetEnergyMethodBind, this.rawMemory, arg0)
+        fun giProbeGetEnergy(arg0: RID): Double {
+            return _icall_Double_RID(giProbeGetEnergyMethodBind, this.rawMemory, arg0)
         }
 
 
         private val giProbeSetBiasMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "gi_probe_set_bias") }
-        fun giProbeSetBias(bias: RID, arg1: Float) {
-            _icall_Unit_RID_Float(giProbeSetBiasMethodBind, this.rawMemory, bias, arg1)
+        fun giProbeSetBias(bias: RID, arg1: Double) {
+            _icall_Unit_RID_Double(giProbeSetBiasMethodBind, this.rawMemory, bias, arg1)
         }
 
 
         private val giProbeGetBiasMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "gi_probe_get_bias") }
-        fun giProbeGetBias(arg0: RID): Float {
-            return _icall_Float_RID(giProbeGetBiasMethodBind, this.rawMemory, arg0)
+        fun giProbeGetBias(arg0: RID): Double {
+            return _icall_Double_RID(giProbeGetBiasMethodBind, this.rawMemory, arg0)
         }
 
 
         private val giProbeSetNormalBiasMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "gi_probe_set_normal_bias") }
-        fun giProbeSetNormalBias(bias: RID, arg1: Float) {
-            _icall_Unit_RID_Float(giProbeSetNormalBiasMethodBind, this.rawMemory, bias, arg1)
+        fun giProbeSetNormalBias(bias: RID, arg1: Double) {
+            _icall_Unit_RID_Double(giProbeSetNormalBiasMethodBind, this.rawMemory, bias, arg1)
         }
 
 
         private val giProbeGetNormalBiasMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "gi_probe_get_normal_bias") }
-        fun giProbeGetNormalBias(arg0: RID): Float {
-            return _icall_Float_RID(giProbeGetNormalBiasMethodBind, this.rawMemory, arg0)
+        fun giProbeGetNormalBias(arg0: RID): Double {
+            return _icall_Double_RID(giProbeGetNormalBiasMethodBind, this.rawMemory, arg0)
         }
 
 
         private val giProbeSetPropagationMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "gi_probe_set_propagation") }
-        fun giProbeSetPropagation(propagation: RID, arg1: Float) {
-            _icall_Unit_RID_Float(giProbeSetPropagationMethodBind, this.rawMemory, propagation, arg1)
+        fun giProbeSetPropagation(propagation: RID, arg1: Double) {
+            _icall_Unit_RID_Double(giProbeSetPropagationMethodBind, this.rawMemory, propagation, arg1)
         }
 
 
         private val giProbeGetPropagationMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "gi_probe_get_propagation") }
-        fun giProbeGetPropagation(arg0: RID): Float {
-            return _icall_Float_RID(giProbeGetPropagationMethodBind, this.rawMemory, arg0)
+        fun giProbeGetPropagation(arg0: RID): Double {
+            return _icall_Double_RID(giProbeGetPropagationMethodBind, this.rawMemory, arg0)
         }
 
 
@@ -1653,14 +1653,14 @@ open class VisualServer : Object {
 
 
         private val lightmapCaptureSetOctreeCellSubdivMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "lightmap_capture_set_octree_cell_subdiv") }
-        fun lightmapCaptureSetOctreeCellSubdiv(capture: RID, subdiv: Int) {
-            _icall_Unit_RID_Int(lightmapCaptureSetOctreeCellSubdivMethodBind, this.rawMemory, capture, subdiv)
+        fun lightmapCaptureSetOctreeCellSubdiv(capture: RID, subdiv: Long) {
+            _icall_Unit_RID_Long(lightmapCaptureSetOctreeCellSubdivMethodBind, this.rawMemory, capture, subdiv)
         }
 
 
         private val lightmapCaptureGetOctreeCellSubdivMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "lightmap_capture_get_octree_cell_subdiv") }
-        fun lightmapCaptureGetOctreeCellSubdiv(capture: RID): Int {
-            return _icall_Int_RID(lightmapCaptureGetOctreeCellSubdivMethodBind, this.rawMemory, capture)
+        fun lightmapCaptureGetOctreeCellSubdiv(capture: RID): Long {
+            return _icall_Long_RID(lightmapCaptureGetOctreeCellSubdivMethodBind, this.rawMemory, capture)
         }
 
 
@@ -1671,14 +1671,14 @@ open class VisualServer : Object {
 
 
         private val lightmapCaptureSetEnergyMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "lightmap_capture_set_energy") }
-        fun lightmapCaptureSetEnergy(capture: RID, energy: Float) {
-            _icall_Unit_RID_Float(lightmapCaptureSetEnergyMethodBind, this.rawMemory, capture, energy)
+        fun lightmapCaptureSetEnergy(capture: RID, energy: Double) {
+            _icall_Unit_RID_Double(lightmapCaptureSetEnergyMethodBind, this.rawMemory, capture, energy)
         }
 
 
         private val lightmapCaptureGetEnergyMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "lightmap_capture_get_energy") }
-        fun lightmapCaptureGetEnergy(capture: RID): Float {
-            return _icall_Float_RID(lightmapCaptureGetEnergyMethodBind, this.rawMemory, capture)
+        fun lightmapCaptureGetEnergy(capture: RID): Double {
+            return _icall_Double_RID(lightmapCaptureGetEnergyMethodBind, this.rawMemory, capture)
         }
 
 
@@ -1701,14 +1701,14 @@ open class VisualServer : Object {
 
 
         private val particlesSetAmountMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "particles_set_amount") }
-        fun particlesSetAmount(particles: RID, amount: Int) {
-            _icall_Unit_RID_Int(particlesSetAmountMethodBind, this.rawMemory, particles, amount)
+        fun particlesSetAmount(particles: RID, amount: Long) {
+            _icall_Unit_RID_Long(particlesSetAmountMethodBind, this.rawMemory, particles, amount)
         }
 
 
         private val particlesSetLifetimeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "particles_set_lifetime") }
-        fun particlesSetLifetime(particles: RID, lifetime: Float) {
-            _icall_Unit_RID_Float(particlesSetLifetimeMethodBind, this.rawMemory, particles, lifetime)
+        fun particlesSetLifetime(particles: RID, lifetime: Double) {
+            _icall_Unit_RID_Double(particlesSetLifetimeMethodBind, this.rawMemory, particles, lifetime)
         }
 
 
@@ -1719,20 +1719,20 @@ open class VisualServer : Object {
 
 
         private val particlesSetPreProcessTimeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "particles_set_pre_process_time") }
-        fun particlesSetPreProcessTime(particles: RID, time: Float) {
-            _icall_Unit_RID_Float(particlesSetPreProcessTimeMethodBind, this.rawMemory, particles, time)
+        fun particlesSetPreProcessTime(particles: RID, time: Double) {
+            _icall_Unit_RID_Double(particlesSetPreProcessTimeMethodBind, this.rawMemory, particles, time)
         }
 
 
         private val particlesSetExplosivenessRatioMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "particles_set_explosiveness_ratio") }
-        fun particlesSetExplosivenessRatio(particles: RID, ratio: Float) {
-            _icall_Unit_RID_Float(particlesSetExplosivenessRatioMethodBind, this.rawMemory, particles, ratio)
+        fun particlesSetExplosivenessRatio(particles: RID, ratio: Double) {
+            _icall_Unit_RID_Double(particlesSetExplosivenessRatioMethodBind, this.rawMemory, particles, ratio)
         }
 
 
         private val particlesSetRandomnessRatioMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "particles_set_randomness_ratio") }
-        fun particlesSetRandomnessRatio(particles: RID, ratio: Float) {
-            _icall_Unit_RID_Float(particlesSetRandomnessRatioMethodBind, this.rawMemory, particles, ratio)
+        fun particlesSetRandomnessRatio(particles: RID, ratio: Double) {
+            _icall_Unit_RID_Double(particlesSetRandomnessRatioMethodBind, this.rawMemory, particles, ratio)
         }
 
 
@@ -1743,8 +1743,8 @@ open class VisualServer : Object {
 
 
         private val particlesSetSpeedScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "particles_set_speed_scale") }
-        fun particlesSetSpeedScale(particles: RID, scale: Float) {
-            _icall_Unit_RID_Float(particlesSetSpeedScaleMethodBind, this.rawMemory, particles, scale)
+        fun particlesSetSpeedScale(particles: RID, scale: Double) {
+            _icall_Unit_RID_Double(particlesSetSpeedScaleMethodBind, this.rawMemory, particles, scale)
         }
 
 
@@ -1761,8 +1761,8 @@ open class VisualServer : Object {
 
 
         private val particlesSetFixedFpsMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "particles_set_fixed_fps") }
-        fun particlesSetFixedFps(particles: RID, fps: Int) {
-            _icall_Unit_RID_Int(particlesSetFixedFpsMethodBind, this.rawMemory, particles, fps)
+        fun particlesSetFixedFps(particles: RID, fps: Long) {
+            _icall_Unit_RID_Long(particlesSetFixedFpsMethodBind, this.rawMemory, particles, fps)
         }
 
 
@@ -1779,20 +1779,20 @@ open class VisualServer : Object {
 
 
         private val particlesSetDrawOrderMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "particles_set_draw_order") }
-        fun particlesSetDrawOrder(particles: RID, order: Int) {
-            _icall_Unit_RID_Int(particlesSetDrawOrderMethodBind, this.rawMemory, particles, order)
+        fun particlesSetDrawOrder(particles: RID, order: Long) {
+            _icall_Unit_RID_Long(particlesSetDrawOrderMethodBind, this.rawMemory, particles, order)
         }
 
 
         private val particlesSetDrawPassesMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "particles_set_draw_passes") }
-        fun particlesSetDrawPasses(particles: RID, count: Int) {
-            _icall_Unit_RID_Int(particlesSetDrawPassesMethodBind, this.rawMemory, particles, count)
+        fun particlesSetDrawPasses(particles: RID, count: Long) {
+            _icall_Unit_RID_Long(particlesSetDrawPassesMethodBind, this.rawMemory, particles, count)
         }
 
 
         private val particlesSetDrawPassMeshMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "particles_set_draw_pass_mesh") }
-        fun particlesSetDrawPassMesh(particles: RID, pass: Int, mesh: RID) {
-            _icall_Unit_RID_Int_RID(particlesSetDrawPassMeshMethodBind, this.rawMemory, particles, pass, mesh)
+        fun particlesSetDrawPassMesh(particles: RID, pass: Long, mesh: RID) {
+            _icall_Unit_RID_Long_RID(particlesSetDrawPassMeshMethodBind, this.rawMemory, particles, pass, mesh)
         }
 
 
@@ -1815,14 +1815,14 @@ open class VisualServer : Object {
 
 
         private val cameraSetPerspectiveMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "camera_set_perspective") }
-        fun cameraSetPerspective(camera: RID, fovyDegrees: Float, zNear: Float, zFar: Float) {
-            _icall_Unit_RID_Float_Float_Float(cameraSetPerspectiveMethodBind, this.rawMemory, camera, fovyDegrees, zNear, zFar)
+        fun cameraSetPerspective(camera: RID, fovyDegrees: Double, zNear: Double, zFar: Double) {
+            _icall_Unit_RID_Double_Double_Double(cameraSetPerspectiveMethodBind, this.rawMemory, camera, fovyDegrees, zNear, zFar)
         }
 
 
         private val cameraSetOrthogonalMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "camera_set_orthogonal") }
-        fun cameraSetOrthogonal(camera: RID, size: Float, zNear: Float, zFar: Float) {
-            _icall_Unit_RID_Float_Float_Float(cameraSetOrthogonalMethodBind, this.rawMemory, camera, size, zNear, zFar)
+        fun cameraSetOrthogonal(camera: RID, size: Double, zNear: Double, zFar: Double) {
+            _icall_Unit_RID_Double_Double_Double(cameraSetOrthogonalMethodBind, this.rawMemory, camera, size, zNear, zFar)
         }
 
 
@@ -1833,8 +1833,8 @@ open class VisualServer : Object {
 
 
         private val cameraSetCullMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "camera_set_cull_mask") }
-        fun cameraSetCullMask(camera: RID, layers: Int) {
-            _icall_Unit_RID_Int(cameraSetCullMaskMethodBind, this.rawMemory, camera, layers)
+        fun cameraSetCullMask(camera: RID, layers: Long) {
+            _icall_Unit_RID_Long(cameraSetCullMaskMethodBind, this.rawMemory, camera, layers)
         }
 
 
@@ -1863,8 +1863,8 @@ open class VisualServer : Object {
 
 
         private val viewportSetSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "viewport_set_size") }
-        fun viewportSetSize(viewport: RID, width: Int, height: Int) {
-            _icall_Unit_RID_Int_Int(viewportSetSizeMethodBind, this.rawMemory, viewport, width, height)
+        fun viewportSetSize(viewport: RID, width: Long, height: Long) {
+            _icall_Unit_RID_Long_Long(viewportSetSizeMethodBind, this.rawMemory, viewport, width, height)
         }
 
 
@@ -1881,8 +1881,8 @@ open class VisualServer : Object {
 
 
         private val viewportAttachToScreenMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "viewport_attach_to_screen") }
-        fun viewportAttachToScreen(viewport: RID, rect: Rect2 = Rect2(0, 0, 0, 0), screen: Int = 0) {
-            _icall_Unit_RID_Rect2_Int(viewportAttachToScreenMethodBind, this.rawMemory, viewport, rect, screen)
+        fun viewportAttachToScreen(viewport: RID, rect: Rect2 = Rect2(0, 0, 0, 0), screen: Long = 0) {
+            _icall_Unit_RID_Rect2_Long(viewportAttachToScreenMethodBind, this.rawMemory, viewport, rect, screen)
         }
 
 
@@ -1893,8 +1893,8 @@ open class VisualServer : Object {
 
 
         private val viewportSetUpdateModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "viewport_set_update_mode") }
-        fun viewportSetUpdateMode(viewport: RID, updateMode: Int) {
-            _icall_Unit_RID_Int(viewportSetUpdateModeMethodBind, this.rawMemory, viewport, updateMode)
+        fun viewportSetUpdateMode(viewport: RID, updateMode: Long) {
+            _icall_Unit_RID_Long(viewportSetUpdateModeMethodBind, this.rawMemory, viewport, updateMode)
         }
 
 
@@ -1905,8 +1905,8 @@ open class VisualServer : Object {
 
 
         private val viewportSetClearModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "viewport_set_clear_mode") }
-        fun viewportSetClearMode(viewport: RID, clearMode: Int) {
-            _icall_Unit_RID_Int(viewportSetClearModeMethodBind, this.rawMemory, viewport, clearMode)
+        fun viewportSetClearMode(viewport: RID, clearMode: Long) {
+            _icall_Unit_RID_Long(viewportSetClearModeMethodBind, this.rawMemory, viewport, clearMode)
         }
 
 
@@ -1983,26 +1983,26 @@ open class VisualServer : Object {
 
 
         private val viewportSetCanvasLayerMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "viewport_set_canvas_layer") }
-        fun viewportSetCanvasLayer(viewport: RID, canvas: RID, layer: Int) {
-            _icall_Unit_RID_RID_Int(viewportSetCanvasLayerMethodBind, this.rawMemory, viewport, canvas, layer)
+        fun viewportSetCanvasLayer(viewport: RID, canvas: RID, layer: Long) {
+            _icall_Unit_RID_RID_Long(viewportSetCanvasLayerMethodBind, this.rawMemory, viewport, canvas, layer)
         }
 
 
         private val viewportSetShadowAtlasSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "viewport_set_shadow_atlas_size") }
-        fun viewportSetShadowAtlasSize(viewport: RID, size: Int) {
-            _icall_Unit_RID_Int(viewportSetShadowAtlasSizeMethodBind, this.rawMemory, viewport, size)
+        fun viewportSetShadowAtlasSize(viewport: RID, size: Long) {
+            _icall_Unit_RID_Long(viewportSetShadowAtlasSizeMethodBind, this.rawMemory, viewport, size)
         }
 
 
         private val viewportSetShadowAtlasQuadrantSubdivisionMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "viewport_set_shadow_atlas_quadrant_subdivision") }
-        fun viewportSetShadowAtlasQuadrantSubdivision(viewport: RID, quadrant: Int, subdivision: Int) {
-            _icall_Unit_RID_Int_Int(viewportSetShadowAtlasQuadrantSubdivisionMethodBind, this.rawMemory, viewport, quadrant, subdivision)
+        fun viewportSetShadowAtlasQuadrantSubdivision(viewport: RID, quadrant: Long, subdivision: Long) {
+            _icall_Unit_RID_Long_Long(viewportSetShadowAtlasQuadrantSubdivisionMethodBind, this.rawMemory, viewport, quadrant, subdivision)
         }
 
 
         private val viewportSetMsaaMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "viewport_set_msaa") }
-        fun viewportSetMsaa(viewport: RID, msaa: Int) {
-            _icall_Unit_RID_Int(viewportSetMsaaMethodBind, this.rawMemory, viewport, msaa)
+        fun viewportSetMsaa(viewport: RID, msaa: Long) {
+            _icall_Unit_RID_Long(viewportSetMsaaMethodBind, this.rawMemory, viewport, msaa)
         }
 
 
@@ -2013,20 +2013,20 @@ open class VisualServer : Object {
 
 
         private val viewportSetUsageMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "viewport_set_usage") }
-        fun viewportSetUsage(viewport: RID, usage: Int) {
-            _icall_Unit_RID_Int(viewportSetUsageMethodBind, this.rawMemory, viewport, usage)
+        fun viewportSetUsage(viewport: RID, usage: Long) {
+            _icall_Unit_RID_Long(viewportSetUsageMethodBind, this.rawMemory, viewport, usage)
         }
 
 
         private val viewportGetRenderInfoMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "viewport_get_render_info") }
-        fun viewportGetRenderInfo(viewport: RID, info: Int): Int {
-            return _icall_Int_RID_Int(viewportGetRenderInfoMethodBind, this.rawMemory, viewport, info)
+        fun viewportGetRenderInfo(viewport: RID, info: Long): Long {
+            return _icall_Long_RID_Long(viewportGetRenderInfoMethodBind, this.rawMemory, viewport, info)
         }
 
 
         private val viewportSetDebugDrawMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "viewport_set_debug_draw") }
-        fun viewportSetDebugDraw(viewport: RID, draw: Int) {
-            _icall_Unit_RID_Int(viewportSetDebugDrawMethodBind, this.rawMemory, viewport, draw)
+        fun viewportSetDebugDraw(viewport: RID, draw: Long) {
+            _icall_Unit_RID_Long(viewportSetDebugDrawMethodBind, this.rawMemory, viewport, draw)
         }
 
 
@@ -2037,8 +2037,8 @@ open class VisualServer : Object {
 
 
         private val environmentSetBackgroundMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "environment_set_background") }
-        fun environmentSetBackground(env: RID, bg: Int) {
-            _icall_Unit_RID_Int(environmentSetBackgroundMethodBind, this.rawMemory, env, bg)
+        fun environmentSetBackground(env: RID, bg: Long) {
+            _icall_Unit_RID_Long(environmentSetBackgroundMethodBind, this.rawMemory, env, bg)
         }
 
 
@@ -2049,8 +2049,8 @@ open class VisualServer : Object {
 
 
         private val environmentSetSkyCustomFovMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "environment_set_sky_custom_fov") }
-        fun environmentSetSkyCustomFov(env: RID, scale: Float) {
-            _icall_Unit_RID_Float(environmentSetSkyCustomFovMethodBind, this.rawMemory, env, scale)
+        fun environmentSetSkyCustomFov(env: RID, scale: Double) {
+            _icall_Unit_RID_Double(environmentSetSkyCustomFovMethodBind, this.rawMemory, env, scale)
         }
 
 
@@ -2061,80 +2061,80 @@ open class VisualServer : Object {
 
 
         private val environmentSetBgEnergyMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "environment_set_bg_energy") }
-        fun environmentSetBgEnergy(env: RID, energy: Float) {
-            _icall_Unit_RID_Float(environmentSetBgEnergyMethodBind, this.rawMemory, env, energy)
+        fun environmentSetBgEnergy(env: RID, energy: Double) {
+            _icall_Unit_RID_Double(environmentSetBgEnergyMethodBind, this.rawMemory, env, energy)
         }
 
 
         private val environmentSetCanvasMaxLayerMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "environment_set_canvas_max_layer") }
-        fun environmentSetCanvasMaxLayer(env: RID, maxLayer: Int) {
-            _icall_Unit_RID_Int(environmentSetCanvasMaxLayerMethodBind, this.rawMemory, env, maxLayer)
+        fun environmentSetCanvasMaxLayer(env: RID, maxLayer: Long) {
+            _icall_Unit_RID_Long(environmentSetCanvasMaxLayerMethodBind, this.rawMemory, env, maxLayer)
         }
 
 
         private val environmentSetAmbientLightMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "environment_set_ambient_light") }
-        fun environmentSetAmbientLight(env: RID, color: Color, energy: Float = 1f, skyContibution: Float = 0f) {
-            _icall_Unit_RID_Color_Float_Float(environmentSetAmbientLightMethodBind, this.rawMemory, env, color, energy, skyContibution)
+        fun environmentSetAmbientLight(env: RID, color: Color, energy: Double = 1.0, skyContibution: Double = 0.0) {
+            _icall_Unit_RID_Color_Double_Double(environmentSetAmbientLightMethodBind, this.rawMemory, env, color, energy, skyContibution)
         }
 
 
         private val environmentSetDofBlurNearMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "environment_set_dof_blur_near") }
-        fun environmentSetDofBlurNear(env: RID, enable: Boolean, distance: Float, transition: Float, farAmount: Float, quality: Int) {
-            _icall_Unit_RID_Boolean_Float_Float_Float_Int(environmentSetDofBlurNearMethodBind, this.rawMemory, env, enable, distance, transition, farAmount, quality)
+        fun environmentSetDofBlurNear(env: RID, enable: Boolean, distance: Double, transition: Double, farAmount: Double, quality: Long) {
+            _icall_Unit_RID_Boolean_Double_Double_Double_Long(environmentSetDofBlurNearMethodBind, this.rawMemory, env, enable, distance, transition, farAmount, quality)
         }
 
 
         private val environmentSetDofBlurFarMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "environment_set_dof_blur_far") }
-        fun environmentSetDofBlurFar(env: RID, enable: Boolean, distance: Float, transition: Float, farAmount: Float, quality: Int) {
-            _icall_Unit_RID_Boolean_Float_Float_Float_Int(environmentSetDofBlurFarMethodBind, this.rawMemory, env, enable, distance, transition, farAmount, quality)
+        fun environmentSetDofBlurFar(env: RID, enable: Boolean, distance: Double, transition: Double, farAmount: Double, quality: Long) {
+            _icall_Unit_RID_Boolean_Double_Double_Double_Long(environmentSetDofBlurFarMethodBind, this.rawMemory, env, enable, distance, transition, farAmount, quality)
         }
 
 
         private val environmentSetGlowMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "environment_set_glow") }
-        fun environmentSetGlow(env: RID, enable: Boolean, levelFlags: Int, intensity: Float, strength: Float, bloomThreshold: Float, blendMode: Int, hdrBleedThreshold: Float, hdrBleedScale: Float, bicubicUpscale: Boolean) {
-            _icall_Unit_RID_Boolean_Int_Float_Float_Float_Int_Float_Float_Boolean(environmentSetGlowMethodBind, this.rawMemory, env, enable, levelFlags, intensity, strength, bloomThreshold, blendMode, hdrBleedThreshold, hdrBleedScale, bicubicUpscale)
+        fun environmentSetGlow(env: RID, enable: Boolean, levelFlags: Long, intensity: Double, strength: Double, bloomThreshold: Double, blendMode: Long, hdrBleedThreshold: Double, hdrBleedScale: Double, bicubicUpscale: Boolean) {
+            _icall_Unit_RID_Boolean_Long_Double_Double_Double_Long_Double_Double_Boolean(environmentSetGlowMethodBind, this.rawMemory, env, enable, levelFlags, intensity, strength, bloomThreshold, blendMode, hdrBleedThreshold, hdrBleedScale, bicubicUpscale)
         }
 
 
         private val environmentSetTonemapMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "environment_set_tonemap") }
-        fun environmentSetTonemap(env: RID, toneMapper: Int, exposure: Float, white: Float, autoExposure: Boolean, minLuminance: Float, maxLuminance: Float, autoExpSpeed: Float, autoExpGrey: Float) {
-            _icall_Unit_RID_Int_Float_Float_Boolean_Float_Float_Float_Float(environmentSetTonemapMethodBind, this.rawMemory, env, toneMapper, exposure, white, autoExposure, minLuminance, maxLuminance, autoExpSpeed, autoExpGrey)
+        fun environmentSetTonemap(env: RID, toneMapper: Long, exposure: Double, white: Double, autoExposure: Boolean, minLuminance: Double, maxLuminance: Double, autoExpSpeed: Double, autoExpGrey: Double) {
+            _icall_Unit_RID_Long_Double_Double_Boolean_Double_Double_Double_Double(environmentSetTonemapMethodBind, this.rawMemory, env, toneMapper, exposure, white, autoExposure, minLuminance, maxLuminance, autoExpSpeed, autoExpGrey)
         }
 
 
         private val environmentSetAdjustmentMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "environment_set_adjustment") }
-        fun environmentSetAdjustment(env: RID, enable: Boolean, brightness: Float, contrast: Float, saturation: Float, ramp: RID) {
-            _icall_Unit_RID_Boolean_Float_Float_Float_RID(environmentSetAdjustmentMethodBind, this.rawMemory, env, enable, brightness, contrast, saturation, ramp)
+        fun environmentSetAdjustment(env: RID, enable: Boolean, brightness: Double, contrast: Double, saturation: Double, ramp: RID) {
+            _icall_Unit_RID_Boolean_Double_Double_Double_RID(environmentSetAdjustmentMethodBind, this.rawMemory, env, enable, brightness, contrast, saturation, ramp)
         }
 
 
         private val environmentSetSsrMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "environment_set_ssr") }
-        fun environmentSetSsr(env: RID, enable: Boolean, maxSteps: Int, fadeIn: Float, fadeOut: Float, depthTolerance: Float, roughness: Boolean) {
-            _icall_Unit_RID_Boolean_Int_Float_Float_Float_Boolean(environmentSetSsrMethodBind, this.rawMemory, env, enable, maxSteps, fadeIn, fadeOut, depthTolerance, roughness)
+        fun environmentSetSsr(env: RID, enable: Boolean, maxSteps: Long, fadeIn: Double, fadeOut: Double, depthTolerance: Double, roughness: Boolean) {
+            _icall_Unit_RID_Boolean_Long_Double_Double_Double_Boolean(environmentSetSsrMethodBind, this.rawMemory, env, enable, maxSteps, fadeIn, fadeOut, depthTolerance, roughness)
         }
 
 
         private val environmentSetSsaoMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "environment_set_ssao") }
-        fun environmentSetSsao(env: RID, enable: Boolean, radius: Float, intensity: Float, radius2: Float, intensity2: Float, bias: Float, lightAffect: Float, color: Float, quality: Color, blur: Int, bilateralSharpness: Int, arg12: Float) {
-            _icall_Unit_RID_Boolean_Float_Float_Float_Float_Float_Float_Float_Color_Int_Int_Float(environmentSetSsaoMethodBind, this.rawMemory, env, enable, radius, intensity, radius2, intensity2, bias, lightAffect, color, quality, blur, bilateralSharpness, arg12)
+        fun environmentSetSsao(env: RID, enable: Boolean, radius: Double, intensity: Double, radius2: Double, intensity2: Double, bias: Double, lightAffect: Double, color: Double, quality: Color, blur: Long, bilateralSharpness: Long, arg12: Double) {
+            _icall_Unit_RID_Boolean_Double_Double_Double_Double_Double_Double_Double_Color_Long_Long_Double(environmentSetSsaoMethodBind, this.rawMemory, env, enable, radius, intensity, radius2, intensity2, bias, lightAffect, color, quality, blur, bilateralSharpness, arg12)
         }
 
 
         private val environmentSetFogMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "environment_set_fog") }
-        fun environmentSetFog(env: RID, enable: Boolean, color: Color, sunColor: Color, sunAmount: Float) {
-            _icall_Unit_RID_Boolean_Color_Color_Float(environmentSetFogMethodBind, this.rawMemory, env, enable, color, sunColor, sunAmount)
+        fun environmentSetFog(env: RID, enable: Boolean, color: Color, sunColor: Color, sunAmount: Double) {
+            _icall_Unit_RID_Boolean_Color_Color_Double(environmentSetFogMethodBind, this.rawMemory, env, enable, color, sunColor, sunAmount)
         }
 
 
         private val environmentSetFogDepthMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "environment_set_fog_depth") }
-        fun environmentSetFogDepth(env: RID, enable: Boolean, depthBegin: Float, depthCurve: Float, transmit: Boolean, transmitCurve: Float) {
-            _icall_Unit_RID_Boolean_Float_Float_Boolean_Float(environmentSetFogDepthMethodBind, this.rawMemory, env, enable, depthBegin, depthCurve, transmit, transmitCurve)
+        fun environmentSetFogDepth(env: RID, enable: Boolean, depthBegin: Double, depthCurve: Double, transmit: Boolean, transmitCurve: Double) {
+            _icall_Unit_RID_Boolean_Double_Double_Boolean_Double(environmentSetFogDepthMethodBind, this.rawMemory, env, enable, depthBegin, depthCurve, transmit, transmitCurve)
         }
 
 
         private val environmentSetFogHeightMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "environment_set_fog_height") }
-        fun environmentSetFogHeight(env: RID, enable: Boolean, minHeight: Float, maxHeight: Float, heightCurve: Float) {
-            _icall_Unit_RID_Boolean_Float_Float_Float(environmentSetFogHeightMethodBind, this.rawMemory, env, enable, minHeight, maxHeight, heightCurve)
+        fun environmentSetFogHeight(env: RID, enable: Boolean, minHeight: Double, maxHeight: Double, heightCurve: Double) {
+            _icall_Unit_RID_Boolean_Double_Double_Double(environmentSetFogHeightMethodBind, this.rawMemory, env, enable, minHeight, maxHeight, heightCurve)
         }
 
 
@@ -2145,8 +2145,8 @@ open class VisualServer : Object {
 
 
         private val scenarioSetDebugMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "scenario_set_debug") }
-        fun scenarioSetDebug(scenario: RID, debugMode: Int) {
-            _icall_Unit_RID_Int(scenarioSetDebugMethodBind, this.rawMemory, scenario, debugMode)
+        fun scenarioSetDebug(scenario: RID, debugMode: Long) {
+            _icall_Unit_RID_Long(scenarioSetDebugMethodBind, this.rawMemory, scenario, debugMode)
         }
 
 
@@ -2157,8 +2157,8 @@ open class VisualServer : Object {
 
 
         private val scenarioSetReflectionAtlasSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "scenario_set_reflection_atlas_size") }
-        fun scenarioSetReflectionAtlasSize(scenario: RID, pSize: Int, subdiv: Int) {
-            _icall_Unit_RID_Int_Int(scenarioSetReflectionAtlasSizeMethodBind, this.rawMemory, scenario, pSize, subdiv)
+        fun scenarioSetReflectionAtlasSize(scenario: RID, pSize: Long, subdiv: Long) {
+            _icall_Unit_RID_Long_Long(scenarioSetReflectionAtlasSizeMethodBind, this.rawMemory, scenario, pSize, subdiv)
         }
 
 
@@ -2193,8 +2193,8 @@ open class VisualServer : Object {
 
 
         private val instanceSetLayerMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "instance_set_layer_mask") }
-        fun instanceSetLayerMask(instance: RID, mask: Int) {
-            _icall_Unit_RID_Int(instanceSetLayerMaskMethodBind, this.rawMemory, instance, mask)
+        fun instanceSetLayerMask(instance: RID, mask: Long) {
+            _icall_Unit_RID_Long(instanceSetLayerMaskMethodBind, this.rawMemory, instance, mask)
         }
 
 
@@ -2205,20 +2205,20 @@ open class VisualServer : Object {
 
 
         private val instanceAttachObjectInstanceIdMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "instance_attach_object_instance_id") }
-        fun instanceAttachObjectInstanceId(instance: RID, id: Int) {
-            _icall_Unit_RID_Int(instanceAttachObjectInstanceIdMethodBind, this.rawMemory, instance, id)
+        fun instanceAttachObjectInstanceId(instance: RID, id: Long) {
+            _icall_Unit_RID_Long(instanceAttachObjectInstanceIdMethodBind, this.rawMemory, instance, id)
         }
 
 
         private val instanceSetBlendShapeWeightMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "instance_set_blend_shape_weight") }
-        fun instanceSetBlendShapeWeight(instance: RID, shape: Int, weight: Float) {
-            _icall_Unit_RID_Int_Float(instanceSetBlendShapeWeightMethodBind, this.rawMemory, instance, shape, weight)
+        fun instanceSetBlendShapeWeight(instance: RID, shape: Long, weight: Double) {
+            _icall_Unit_RID_Long_Double(instanceSetBlendShapeWeightMethodBind, this.rawMemory, instance, shape, weight)
         }
 
 
         private val instanceSetSurfaceMaterialMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "instance_set_surface_material") }
-        fun instanceSetSurfaceMaterial(instance: RID, surface: Int, material: RID) {
-            _icall_Unit_RID_Int_RID(instanceSetSurfaceMaterialMethodBind, this.rawMemory, instance, surface, material)
+        fun instanceSetSurfaceMaterial(instance: RID, surface: Long, material: RID) {
+            _icall_Unit_RID_Long_RID(instanceSetSurfaceMaterialMethodBind, this.rawMemory, instance, surface, material)
         }
 
 
@@ -2253,20 +2253,20 @@ open class VisualServer : Object {
 
 
         private val instanceSetExtraVisibilityMarginMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "instance_set_extra_visibility_margin") }
-        fun instanceSetExtraVisibilityMargin(instance: RID, margin: Float) {
-            _icall_Unit_RID_Float(instanceSetExtraVisibilityMarginMethodBind, this.rawMemory, instance, margin)
+        fun instanceSetExtraVisibilityMargin(instance: RID, margin: Double) {
+            _icall_Unit_RID_Double(instanceSetExtraVisibilityMarginMethodBind, this.rawMemory, instance, margin)
         }
 
 
         private val instanceGeometrySetFlagMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "instance_geometry_set_flag") }
-        fun instanceGeometrySetFlag(instance: RID, flag: Int, enabled: Boolean) {
-            _icall_Unit_RID_Int_Boolean(instanceGeometrySetFlagMethodBind, this.rawMemory, instance, flag, enabled)
+        fun instanceGeometrySetFlag(instance: RID, flag: Long, enabled: Boolean) {
+            _icall_Unit_RID_Long_Boolean(instanceGeometrySetFlagMethodBind, this.rawMemory, instance, flag, enabled)
         }
 
 
         private val instanceGeometrySetCastShadowsSettingMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "instance_geometry_set_cast_shadows_setting") }
-        fun instanceGeometrySetCastShadowsSetting(instance: RID, shadowCastingSetting: Int) {
-            _icall_Unit_RID_Int(instanceGeometrySetCastShadowsSettingMethodBind, this.rawMemory, instance, shadowCastingSetting)
+        fun instanceGeometrySetCastShadowsSetting(instance: RID, shadowCastingSetting: Long) {
+            _icall_Unit_RID_Long(instanceGeometrySetCastShadowsSettingMethodBind, this.rawMemory, instance, shadowCastingSetting)
         }
 
 
@@ -2277,8 +2277,8 @@ open class VisualServer : Object {
 
 
         private val instanceGeometrySetDrawRangeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "instance_geometry_set_draw_range") }
-        fun instanceGeometrySetDrawRange(instance: RID, min: Float, max: Float, minMargin: Float, maxMargin: Float) {
-            _icall_Unit_RID_Float_Float_Float_Float(instanceGeometrySetDrawRangeMethodBind, this.rawMemory, instance, min, max, minMargin, maxMargin)
+        fun instanceGeometrySetDrawRange(instance: RID, min: Double, max: Double, minMargin: Double, maxMargin: Double) {
+            _icall_Unit_RID_Double_Double_Double_Double(instanceGeometrySetDrawRangeMethodBind, this.rawMemory, instance, min, max, minMargin, maxMargin)
         }
 
 
@@ -2343,8 +2343,8 @@ open class VisualServer : Object {
 
 
         private val canvasItemSetLightMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "canvas_item_set_light_mask") }
-        fun canvasItemSetLightMask(item: RID, mask: Int) {
-            _icall_Unit_RID_Int(canvasItemSetLightMaskMethodBind, this.rawMemory, item, mask)
+        fun canvasItemSetLightMask(item: RID, mask: Long) {
+            _icall_Unit_RID_Long(canvasItemSetLightMaskMethodBind, this.rawMemory, item, mask)
         }
 
 
@@ -2391,14 +2391,14 @@ open class VisualServer : Object {
 
 
         private val canvasItemAddLineMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "canvas_item_add_line") }
-        fun canvasItemAddLine(item: RID, from: Vector2, to: Vector2, color: Color, width: Float = 1f, antialiased: Boolean = false) {
-            _icall_Unit_RID_Vector2_Vector2_Color_Float_Boolean(canvasItemAddLineMethodBind, this.rawMemory, item, from, to, color, width, antialiased)
+        fun canvasItemAddLine(item: RID, from: Vector2, to: Vector2, color: Color, width: Double = 1.0, antialiased: Boolean = false) {
+            _icall_Unit_RID_Vector2_Vector2_Color_Double_Boolean(canvasItemAddLineMethodBind, this.rawMemory, item, from, to, color, width, antialiased)
         }
 
 
         private val canvasItemAddPolylineMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "canvas_item_add_polyline") }
-        fun canvasItemAddPolyline(item: RID, points: PoolVector2Array, colors: PoolColorArray, width: Float = 1f, antialiased: Boolean = false) {
-            _icall_Unit_RID_PoolVector2Array_PoolColorArray_Float_Boolean(canvasItemAddPolylineMethodBind, this.rawMemory, item, points, colors, width, antialiased)
+        fun canvasItemAddPolyline(item: RID, points: PoolVector2Array, colors: PoolColorArray, width: Double = 1.0, antialiased: Boolean = false) {
+            _icall_Unit_RID_PoolVector2Array_PoolColorArray_Double_Boolean(canvasItemAddPolylineMethodBind, this.rawMemory, item, points, colors, width, antialiased)
         }
 
 
@@ -2409,8 +2409,8 @@ open class VisualServer : Object {
 
 
         private val canvasItemAddCircleMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "canvas_item_add_circle") }
-        fun canvasItemAddCircle(item: RID, pos: Vector2, radius: Float, color: Color) {
-            _icall_Unit_RID_Vector2_Float_Color(canvasItemAddCircleMethodBind, this.rawMemory, item, pos, radius, color)
+        fun canvasItemAddCircle(item: RID, pos: Vector2, radius: Double, color: Color) {
+            _icall_Unit_RID_Vector2_Double_Color(canvasItemAddCircleMethodBind, this.rawMemory, item, pos, radius, color)
         }
 
 
@@ -2427,14 +2427,14 @@ open class VisualServer : Object {
 
 
         private val canvasItemAddNinePatchMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "canvas_item_add_nine_patch") }
-        fun canvasItemAddNinePatch(item: RID, rect: Rect2, source: Rect2, texture: RID, topleft: Vector2, bottomright: Vector2, xAxisMode: Int = 0, yAxisMode: Int = 0, drawCenter: Boolean = true, modulate: Color = Color(1,1,1,1), normalMap: RID = RID()) {
-            _icall_Unit_RID_Rect2_Rect2_RID_Vector2_Vector2_Int_Int_Boolean_Color_RID(canvasItemAddNinePatchMethodBind, this.rawMemory, item, rect, source, texture, topleft, bottomright, xAxisMode, yAxisMode, drawCenter, modulate, normalMap)
+        fun canvasItemAddNinePatch(item: RID, rect: Rect2, source: Rect2, texture: RID, topleft: Vector2, bottomright: Vector2, xAxisMode: Long = 0, yAxisMode: Long = 0, drawCenter: Boolean = true, modulate: Color = Color(1,1,1,1), normalMap: RID = RID()) {
+            _icall_Unit_RID_Rect2_Rect2_RID_Vector2_Vector2_Long_Long_Boolean_Color_RID(canvasItemAddNinePatchMethodBind, this.rawMemory, item, rect, source, texture, topleft, bottomright, xAxisMode, yAxisMode, drawCenter, modulate, normalMap)
         }
 
 
         private val canvasItemAddPrimitiveMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "canvas_item_add_primitive") }
-        fun canvasItemAddPrimitive(item: RID, points: PoolVector2Array, colors: PoolColorArray, uvs: PoolVector2Array, texture: RID, width: Float = 1f, normalMap: RID = RID()) {
-            _icall_Unit_RID_PoolVector2Array_PoolColorArray_PoolVector2Array_RID_Float_RID(canvasItemAddPrimitiveMethodBind, this.rawMemory, item, points, colors, uvs, texture, width, normalMap)
+        fun canvasItemAddPrimitive(item: RID, points: PoolVector2Array, colors: PoolColorArray, uvs: PoolVector2Array, texture: RID, width: Double = 1.0, normalMap: RID = RID()) {
+            _icall_Unit_RID_PoolVector2Array_PoolColorArray_PoolVector2Array_RID_Double_RID(canvasItemAddPrimitiveMethodBind, this.rawMemory, item, points, colors, uvs, texture, width, normalMap)
         }
 
 
@@ -2445,8 +2445,8 @@ open class VisualServer : Object {
 
 
         private val canvasItemAddTriangleArrayMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "canvas_item_add_triangle_array") }
-        fun canvasItemAddTriangleArray(item: RID, indices: PoolIntArray, points: PoolVector2Array, colors: PoolColorArray, uvs: PoolVector2Array = PoolVector2Array(), bones: PoolIntArray = PoolIntArray(), weights: PoolRealArray = PoolRealArray(), texture: RID = RID(), count: Int = -1, normalMap: RID = RID()) {
-            _icall_Unit_RID_PoolIntArray_PoolVector2Array_PoolColorArray_PoolVector2Array_PoolIntArray_PoolRealArray_RID_Int_RID(canvasItemAddTriangleArrayMethodBind, this.rawMemory, item, indices, points, colors, uvs, bones, weights, texture, count, normalMap)
+        fun canvasItemAddTriangleArray(item: RID, indices: PoolIntArray, points: PoolVector2Array, colors: PoolColorArray, uvs: PoolVector2Array = PoolVector2Array(), bones: PoolIntArray = PoolIntArray(), weights: PoolRealArray = PoolRealArray(), texture: RID = RID(), count: Long = -1, normalMap: RID = RID()) {
+            _icall_Unit_RID_PoolIntArray_PoolVector2Array_PoolColorArray_PoolVector2Array_PoolIntArray_PoolRealArray_RID_Long_RID(canvasItemAddTriangleArrayMethodBind, this.rawMemory, item, indices, points, colors, uvs, bones, weights, texture, count, normalMap)
         }
 
 
@@ -2463,8 +2463,8 @@ open class VisualServer : Object {
 
 
         private val canvasItemAddParticlesMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "canvas_item_add_particles") }
-        fun canvasItemAddParticles(item: RID, particles: RID, texture: RID, normalMap: RID, hFrames: Int, vFrames: Int) {
-            _icall_Unit_RID_RID_RID_RID_Int_Int(canvasItemAddParticlesMethodBind, this.rawMemory, item, particles, texture, normalMap, hFrames, vFrames)
+        fun canvasItemAddParticles(item: RID, particles: RID, texture: RID, normalMap: RID, hFrames: Long, vFrames: Long) {
+            _icall_Unit_RID_RID_RID_RID_Long_Long(canvasItemAddParticlesMethodBind, this.rawMemory, item, particles, texture, normalMap, hFrames, vFrames)
         }
 
 
@@ -2487,8 +2487,8 @@ open class VisualServer : Object {
 
 
         private val canvasItemSetZIndexMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "canvas_item_set_z_index") }
-        fun canvasItemSetZIndex(item: RID, zIndex: Int) {
-            _icall_Unit_RID_Int(canvasItemSetZIndexMethodBind, this.rawMemory, item, zIndex)
+        fun canvasItemSetZIndex(item: RID, zIndex: Long) {
+            _icall_Unit_RID_Long(canvasItemSetZIndexMethodBind, this.rawMemory, item, zIndex)
         }
 
 
@@ -2511,8 +2511,8 @@ open class VisualServer : Object {
 
 
         private val canvasItemSetDrawIndexMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "canvas_item_set_draw_index") }
-        fun canvasItemSetDrawIndex(item: RID, index: Int) {
-            _icall_Unit_RID_Int(canvasItemSetDrawIndexMethodBind, this.rawMemory, item, index)
+        fun canvasItemSetDrawIndex(item: RID, index: Long) {
+            _icall_Unit_RID_Long(canvasItemSetDrawIndexMethodBind, this.rawMemory, item, index)
         }
 
 
@@ -2547,8 +2547,8 @@ open class VisualServer : Object {
 
 
         private val canvasLightSetScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "canvas_light_set_scale") }
-        fun canvasLightSetScale(light: RID, scale: Float) {
-            _icall_Unit_RID_Float(canvasLightSetScaleMethodBind, this.rawMemory, light, scale)
+        fun canvasLightSetScale(light: RID, scale: Double) {
+            _icall_Unit_RID_Double(canvasLightSetScaleMethodBind, this.rawMemory, light, scale)
         }
 
 
@@ -2577,44 +2577,44 @@ open class VisualServer : Object {
 
 
         private val canvasLightSetHeightMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "canvas_light_set_height") }
-        fun canvasLightSetHeight(light: RID, height: Float) {
-            _icall_Unit_RID_Float(canvasLightSetHeightMethodBind, this.rawMemory, light, height)
+        fun canvasLightSetHeight(light: RID, height: Double) {
+            _icall_Unit_RID_Double(canvasLightSetHeightMethodBind, this.rawMemory, light, height)
         }
 
 
         private val canvasLightSetEnergyMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "canvas_light_set_energy") }
-        fun canvasLightSetEnergy(light: RID, energy: Float) {
-            _icall_Unit_RID_Float(canvasLightSetEnergyMethodBind, this.rawMemory, light, energy)
+        fun canvasLightSetEnergy(light: RID, energy: Double) {
+            _icall_Unit_RID_Double(canvasLightSetEnergyMethodBind, this.rawMemory, light, energy)
         }
 
 
         private val canvasLightSetZRangeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "canvas_light_set_z_range") }
-        fun canvasLightSetZRange(light: RID, minZ: Int, maxZ: Int) {
-            _icall_Unit_RID_Int_Int(canvasLightSetZRangeMethodBind, this.rawMemory, light, minZ, maxZ)
+        fun canvasLightSetZRange(light: RID, minZ: Long, maxZ: Long) {
+            _icall_Unit_RID_Long_Long(canvasLightSetZRangeMethodBind, this.rawMemory, light, minZ, maxZ)
         }
 
 
         private val canvasLightSetLayerRangeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "canvas_light_set_layer_range") }
-        fun canvasLightSetLayerRange(light: RID, minLayer: Int, maxLayer: Int) {
-            _icall_Unit_RID_Int_Int(canvasLightSetLayerRangeMethodBind, this.rawMemory, light, minLayer, maxLayer)
+        fun canvasLightSetLayerRange(light: RID, minLayer: Long, maxLayer: Long) {
+            _icall_Unit_RID_Long_Long(canvasLightSetLayerRangeMethodBind, this.rawMemory, light, minLayer, maxLayer)
         }
 
 
         private val canvasLightSetItemCullMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "canvas_light_set_item_cull_mask") }
-        fun canvasLightSetItemCullMask(light: RID, mask: Int) {
-            _icall_Unit_RID_Int(canvasLightSetItemCullMaskMethodBind, this.rawMemory, light, mask)
+        fun canvasLightSetItemCullMask(light: RID, mask: Long) {
+            _icall_Unit_RID_Long(canvasLightSetItemCullMaskMethodBind, this.rawMemory, light, mask)
         }
 
 
         private val canvasLightSetItemShadowCullMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "canvas_light_set_item_shadow_cull_mask") }
-        fun canvasLightSetItemShadowCullMask(light: RID, mask: Int) {
-            _icall_Unit_RID_Int(canvasLightSetItemShadowCullMaskMethodBind, this.rawMemory, light, mask)
+        fun canvasLightSetItemShadowCullMask(light: RID, mask: Long) {
+            _icall_Unit_RID_Long(canvasLightSetItemShadowCullMaskMethodBind, this.rawMemory, light, mask)
         }
 
 
         private val canvasLightSetModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "canvas_light_set_mode") }
-        fun canvasLightSetMode(light: RID, mode: Int) {
-            _icall_Unit_RID_Int(canvasLightSetModeMethodBind, this.rawMemory, light, mode)
+        fun canvasLightSetMode(light: RID, mode: Long) {
+            _icall_Unit_RID_Long(canvasLightSetModeMethodBind, this.rawMemory, light, mode)
         }
 
 
@@ -2625,20 +2625,20 @@ open class VisualServer : Object {
 
 
         private val canvasLightSetShadowBufferSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "canvas_light_set_shadow_buffer_size") }
-        fun canvasLightSetShadowBufferSize(light: RID, size: Int) {
-            _icall_Unit_RID_Int(canvasLightSetShadowBufferSizeMethodBind, this.rawMemory, light, size)
+        fun canvasLightSetShadowBufferSize(light: RID, size: Long) {
+            _icall_Unit_RID_Long(canvasLightSetShadowBufferSizeMethodBind, this.rawMemory, light, size)
         }
 
 
         private val canvasLightSetShadowGradientLengthMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "canvas_light_set_shadow_gradient_length") }
-        fun canvasLightSetShadowGradientLength(light: RID, length: Float) {
-            _icall_Unit_RID_Float(canvasLightSetShadowGradientLengthMethodBind, this.rawMemory, light, length)
+        fun canvasLightSetShadowGradientLength(light: RID, length: Double) {
+            _icall_Unit_RID_Double(canvasLightSetShadowGradientLengthMethodBind, this.rawMemory, light, length)
         }
 
 
         private val canvasLightSetShadowFilterMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "canvas_light_set_shadow_filter") }
-        fun canvasLightSetShadowFilter(light: RID, filter: Int) {
-            _icall_Unit_RID_Int(canvasLightSetShadowFilterMethodBind, this.rawMemory, light, filter)
+        fun canvasLightSetShadowFilter(light: RID, filter: Long) {
+            _icall_Unit_RID_Long(canvasLightSetShadowFilterMethodBind, this.rawMemory, light, filter)
         }
 
 
@@ -2649,8 +2649,8 @@ open class VisualServer : Object {
 
 
         private val canvasLightSetShadowSmoothMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "canvas_light_set_shadow_smooth") }
-        fun canvasLightSetShadowSmooth(light: RID, smooth: Float) {
-            _icall_Unit_RID_Float(canvasLightSetShadowSmoothMethodBind, this.rawMemory, light, smooth)
+        fun canvasLightSetShadowSmooth(light: RID, smooth: Double) {
+            _icall_Unit_RID_Double(canvasLightSetShadowSmoothMethodBind, this.rawMemory, light, smooth)
         }
 
 
@@ -2685,8 +2685,8 @@ open class VisualServer : Object {
 
 
         private val canvasLightOccluderSetLightMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "canvas_light_occluder_set_light_mask") }
-        fun canvasLightOccluderSetLightMask(occluder: RID, mask: Int) {
-            _icall_Unit_RID_Int(canvasLightOccluderSetLightMaskMethodBind, this.rawMemory, occluder, mask)
+        fun canvasLightOccluderSetLightMask(occluder: RID, mask: Long) {
+            _icall_Unit_RID_Long(canvasLightOccluderSetLightMaskMethodBind, this.rawMemory, occluder, mask)
         }
 
 
@@ -2709,14 +2709,14 @@ open class VisualServer : Object {
 
 
         private val canvasOccluderPolygonSetCullModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "canvas_occluder_polygon_set_cull_mode") }
-        fun canvasOccluderPolygonSetCullMode(occluderPolygon: RID, mode: Int) {
-            _icall_Unit_RID_Int(canvasOccluderPolygonSetCullModeMethodBind, this.rawMemory, occluderPolygon, mode)
+        fun canvasOccluderPolygonSetCullMode(occluderPolygon: RID, mode: Long) {
+            _icall_Unit_RID_Long(canvasOccluderPolygonSetCullModeMethodBind, this.rawMemory, occluderPolygon, mode)
         }
 
 
         private val blackBarsSetMarginsMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "black_bars_set_margins") }
-        fun blackBarsSetMargins(left: Int, top: Int, right: Int, bottom: Int) {
-            _icall_Unit_Int_Int_Int_Int(blackBarsSetMarginsMethodBind, this.rawMemory, left, top, right, bottom)
+        fun blackBarsSetMargins(left: Long, top: Long, right: Long, bottom: Long) {
+            _icall_Unit_Long_Long_Long_Long(blackBarsSetMarginsMethodBind, this.rawMemory, left, top, right, bottom)
         }
 
 
@@ -2757,8 +2757,8 @@ open class VisualServer : Object {
 
 
         private val getRenderInfoMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "get_render_info") }
-        fun getRenderInfo(info: Int): Int {
-            return _icall_Int_Int(getRenderInfoMethodBind, this.rawMemory, info)
+        fun getRenderInfo(info: Long): Long {
+            return _icall_Long_Long(getRenderInfoMethodBind, this.rawMemory, info)
         }
 
 
@@ -2781,8 +2781,8 @@ open class VisualServer : Object {
 
 
         private val makeSphereMeshMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "make_sphere_mesh") }
-        fun makeSphereMesh(latitudes: Int, longitudes: Int, radius: Float): RID {
-            return _icall_RID_Int_Int_Float(makeSphereMeshMethodBind, this.rawMemory, latitudes, longitudes, radius)
+        fun makeSphereMesh(latitudes: Long, longitudes: Long, radius: Double): RID {
+            return _icall_RID_Long_Long_Double(makeSphereMeshMethodBind, this.rawMemory, latitudes, longitudes, radius)
         }
 
 
@@ -2799,8 +2799,8 @@ open class VisualServer : Object {
 
 
         private val hasFeatureMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualServer", "has_feature") }
-        fun hasFeature(feature: Int): Boolean {
-            return _icall_Boolean_Int(hasFeatureMethodBind, this.rawMemory, feature)
+        fun hasFeature(feature: Long): Boolean {
+            return _icall_Boolean_Long(hasFeatureMethodBind, this.rawMemory, feature)
         }
 
 

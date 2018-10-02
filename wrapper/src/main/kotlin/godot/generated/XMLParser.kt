@@ -19,7 +19,7 @@ open class XMLParser : Reference {
 
     // Enums 
 
-    enum class NodeType(val id: Int) {
+    enum class NodeType(val id: Long) {
         NODE_NONE(0),
         NODE_ELEMENT(1),
         NODE_ELEMENT_END(2),
@@ -30,7 +30,7 @@ open class XMLParser : Reference {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -49,13 +49,13 @@ open class XMLParser : Reference {
 
 
         // Constants
-        const val NODE_NONE: Int = 0
-        const val NODE_ELEMENT: Int = 1
-        const val NODE_ELEMENT_END: Int = 2
-        const val NODE_TEXT: Int = 3
-        const val NODE_COMMENT: Int = 4
-        const val NODE_CDATA: Int = 5
-        const val NODE_UNKNOWN: Int = 6
+        const val NODE_NONE: Long = 0
+        const val NODE_ELEMENT: Long = 1
+        const val NODE_ELEMENT_END: Long = 2
+        const val NODE_TEXT: Long = 3
+        const val NODE_COMMENT: Long = 4
+        const val NODE_CDATA: Long = 5
+        const val NODE_UNKNOWN: Long = 6
 
 
     }
@@ -67,13 +67,13 @@ open class XMLParser : Reference {
     // Methods
     private val readMethodBind: CPointer<godot_method_bind> by lazy { getMB("XMLParser", "read") }
     open fun read(): GodotError {
-        return GodotError.fromInt(_icall_Int(readMethodBind, this.rawMemory))
+        return GodotError.fromInt(_icall_Long(readMethodBind, this.rawMemory))
     }
 
 
     private val getNodeTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("XMLParser", "get_node_type") }
     open fun getNodeType(): XMLParser.NodeType {
-        return XMLParser.NodeType.fromInt(_icall_Int(getNodeTypeMethodBind, this.rawMemory))
+        return XMLParser.NodeType.fromInt(_icall_Long(getNodeTypeMethodBind, this.rawMemory))
     }
 
 
@@ -90,26 +90,26 @@ open class XMLParser : Reference {
 
 
     private val getNodeOffsetMethodBind: CPointer<godot_method_bind> by lazy { getMB("XMLParser", "get_node_offset") }
-    open fun getNodeOffset(): Int {
-        return _icall_Int(getNodeOffsetMethodBind, this.rawMemory)
+    open fun getNodeOffset(): Long {
+        return _icall_Long(getNodeOffsetMethodBind, this.rawMemory)
     }
 
 
     private val getAttributeCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("XMLParser", "get_attribute_count") }
-    open fun getAttributeCount(): Int {
-        return _icall_Int(getAttributeCountMethodBind, this.rawMemory)
+    open fun getAttributeCount(): Long {
+        return _icall_Long(getAttributeCountMethodBind, this.rawMemory)
     }
 
 
     private val getAttributeNameMethodBind: CPointer<godot_method_bind> by lazy { getMB("XMLParser", "get_attribute_name") }
-    open fun getAttributeName(idx: Int): String {
-        return _icall_String_Int(getAttributeNameMethodBind, this.rawMemory, idx)
+    open fun getAttributeName(idx: Long): String {
+        return _icall_String_Long(getAttributeNameMethodBind, this.rawMemory, idx)
     }
 
 
     private val getAttributeValueMethodBind: CPointer<godot_method_bind> by lazy { getMB("XMLParser", "get_attribute_value") }
-    open fun getAttributeValue(idx: Int): String {
-        return _icall_String_Int(getAttributeValueMethodBind, this.rawMemory, idx)
+    open fun getAttributeValue(idx: Long): String {
+        return _icall_String_Long(getAttributeValueMethodBind, this.rawMemory, idx)
     }
 
 
@@ -138,8 +138,8 @@ open class XMLParser : Reference {
 
 
     private val getCurrentLineMethodBind: CPointer<godot_method_bind> by lazy { getMB("XMLParser", "get_current_line") }
-    open fun getCurrentLine(): Int {
-        return _icall_Int(getCurrentLineMethodBind, this.rawMemory)
+    open fun getCurrentLine(): Long {
+        return _icall_Long(getCurrentLineMethodBind, this.rawMemory)
     }
 
 
@@ -150,20 +150,20 @@ open class XMLParser : Reference {
 
 
     private val seekMethodBind: CPointer<godot_method_bind> by lazy { getMB("XMLParser", "seek") }
-    open fun seek(position: Int): GodotError {
-        return GodotError.fromInt(_icall_Int_Int(seekMethodBind, this.rawMemory, position))
+    open fun seek(position: Long): GodotError {
+        return GodotError.fromInt(_icall_Long_Long(seekMethodBind, this.rawMemory, position))
     }
 
 
     private val openMethodBind: CPointer<godot_method_bind> by lazy { getMB("XMLParser", "open") }
     open fun open(file: String): GodotError {
-        return GodotError.fromInt(_icall_Int_String(openMethodBind, this.rawMemory, file))
+        return GodotError.fromInt(_icall_Long_String(openMethodBind, this.rawMemory, file))
     }
 
 
     private val openBufferMethodBind: CPointer<godot_method_bind> by lazy { getMB("XMLParser", "open_buffer") }
     open fun openBuffer(buffer: PoolByteArray): GodotError {
-        return GodotError.fromInt(_icall_Int_PoolByteArray(openBufferMethodBind, this.rawMemory, buffer))
+        return GodotError.fromInt(_icall_Long_PoolByteArray(openBufferMethodBind, this.rawMemory, buffer))
     }
 
 

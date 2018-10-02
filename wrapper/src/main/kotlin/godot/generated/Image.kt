@@ -19,37 +19,37 @@ open class Image : Resource {
 
     // Enums 
 
-    enum class AlphaMode(val id: Int) {
+    enum class AlphaMode(val id: Long) {
         ALPHA_NONE(0),
         ALPHA_BIT(1),
         ALPHA_BLEND(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class CompressSource(val id: Int) {
+    enum class CompressSource(val id: Long) {
         COMPRESS_SOURCE_GENERIC(0),
         COMPRESS_SOURCE_SRGB(1),
         COMPRESS_SOURCE_NORMAL(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class Interpolation(val id: Int) {
+    enum class Interpolation(val id: Long) {
         INTERPOLATE_NEAREST(0),
         INTERPOLATE_BILINEAR(1),
         INTERPOLATE_CUBIC(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class CompressMode(val id: Int) {
+    enum class CompressMode(val id: Long) {
         COMPRESS_S3TC(0),
         COMPRESS_PVRTC2(1),
         COMPRESS_PVRTC4(2),
@@ -58,10 +58,10 @@ open class Image : Resource {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class Format(val id: Int) {
+    enum class Format(val id: Long) {
         FORMAT_L8(0),
         FORMAT_LA8(1),
         FORMAT_R8(2),
@@ -103,7 +103,7 @@ open class Image : Resource {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -123,58 +123,58 @@ open class Image : Resource {
 
 
         // Constants
-        const val FORMAT_L8: Int = 0
-        const val FORMAT_LA8: Int = 1
-        const val FORMAT_R8: Int = 2
-        const val FORMAT_RG8: Int = 3
-        const val FORMAT_RGB8: Int = 4
-        const val FORMAT_RGBA8: Int = 5
-        const val FORMAT_RGBA4444: Int = 6
-        const val FORMAT_RGBA5551: Int = 7
-        const val FORMAT_RF: Int = 8
-        const val FORMAT_RGF: Int = 9
-        const val FORMAT_RGBF: Int = 10
-        const val FORMAT_RGBAF: Int = 11
-        const val FORMAT_RH: Int = 12
-        const val FORMAT_RGH: Int = 13
-        const val FORMAT_RGBH: Int = 14
-        const val FORMAT_RGBAH: Int = 15
-        const val FORMAT_RGBE9995: Int = 16
-        const val FORMAT_DXT1: Int = 17
-        const val FORMAT_DXT3: Int = 18
-        const val FORMAT_DXT5: Int = 19
-        const val FORMAT_RGTC_R: Int = 20
-        const val FORMAT_RGTC_RG: Int = 21
-        const val FORMAT_BPTC_RGBA: Int = 22
-        const val FORMAT_BPTC_RGBF: Int = 23
-        const val FORMAT_BPTC_RGBFU: Int = 24
-        const val FORMAT_PVRTC2: Int = 25
-        const val FORMAT_PVRTC2A: Int = 26
-        const val FORMAT_PVRTC4: Int = 27
-        const val FORMAT_PVRTC4A: Int = 28
-        const val FORMAT_ETC: Int = 29
-        const val FORMAT_ETC2_R11: Int = 30
-        const val FORMAT_ETC2_R11S: Int = 31
-        const val FORMAT_ETC2_RG11: Int = 32
-        const val FORMAT_ETC2_RG11S: Int = 33
-        const val FORMAT_ETC2_RGB8: Int = 34
-        const val FORMAT_ETC2_RGBA8: Int = 35
-        const val FORMAT_ETC2_RGB8A1: Int = 36
-        const val FORMAT_MAX: Int = 37
-        const val INTERPOLATE_NEAREST: Int = 0
-        const val INTERPOLATE_BILINEAR: Int = 1
-        const val INTERPOLATE_CUBIC: Int = 2
-        const val ALPHA_NONE: Int = 0
-        const val ALPHA_BIT: Int = 1
-        const val ALPHA_BLEND: Int = 2
-        const val COMPRESS_S3TC: Int = 0
-        const val COMPRESS_PVRTC2: Int = 1
-        const val COMPRESS_PVRTC4: Int = 2
-        const val COMPRESS_ETC: Int = 3
-        const val COMPRESS_ETC2: Int = 4
-        const val COMPRESS_SOURCE_GENERIC: Int = 0
-        const val COMPRESS_SOURCE_SRGB: Int = 1
-        const val COMPRESS_SOURCE_NORMAL: Int = 2
+        const val FORMAT_L8: Long = 0
+        const val FORMAT_LA8: Long = 1
+        const val FORMAT_R8: Long = 2
+        const val FORMAT_RG8: Long = 3
+        const val FORMAT_RGB8: Long = 4
+        const val FORMAT_RGBA8: Long = 5
+        const val FORMAT_RGBA4444: Long = 6
+        const val FORMAT_RGBA5551: Long = 7
+        const val FORMAT_RF: Long = 8
+        const val FORMAT_RGF: Long = 9
+        const val FORMAT_RGBF: Long = 10
+        const val FORMAT_RGBAF: Long = 11
+        const val FORMAT_RH: Long = 12
+        const val FORMAT_RGH: Long = 13
+        const val FORMAT_RGBH: Long = 14
+        const val FORMAT_RGBAH: Long = 15
+        const val FORMAT_RGBE9995: Long = 16
+        const val FORMAT_DXT1: Long = 17
+        const val FORMAT_DXT3: Long = 18
+        const val FORMAT_DXT5: Long = 19
+        const val FORMAT_RGTC_R: Long = 20
+        const val FORMAT_RGTC_RG: Long = 21
+        const val FORMAT_BPTC_RGBA: Long = 22
+        const val FORMAT_BPTC_RGBF: Long = 23
+        const val FORMAT_BPTC_RGBFU: Long = 24
+        const val FORMAT_PVRTC2: Long = 25
+        const val FORMAT_PVRTC2A: Long = 26
+        const val FORMAT_PVRTC4: Long = 27
+        const val FORMAT_PVRTC4A: Long = 28
+        const val FORMAT_ETC: Long = 29
+        const val FORMAT_ETC2_R11: Long = 30
+        const val FORMAT_ETC2_R11S: Long = 31
+        const val FORMAT_ETC2_RG11: Long = 32
+        const val FORMAT_ETC2_RG11S: Long = 33
+        const val FORMAT_ETC2_RGB8: Long = 34
+        const val FORMAT_ETC2_RGBA8: Long = 35
+        const val FORMAT_ETC2_RGB8A1: Long = 36
+        const val FORMAT_MAX: Long = 37
+        const val INTERPOLATE_NEAREST: Long = 0
+        const val INTERPOLATE_BILINEAR: Long = 1
+        const val INTERPOLATE_CUBIC: Long = 2
+        const val ALPHA_NONE: Long = 0
+        const val ALPHA_BIT: Long = 1
+        const val ALPHA_BLEND: Long = 2
+        const val COMPRESS_S3TC: Long = 0
+        const val COMPRESS_PVRTC2: Long = 1
+        const val COMPRESS_PVRTC4: Long = 2
+        const val COMPRESS_ETC: Long = 3
+        const val COMPRESS_ETC2: Long = 4
+        const val COMPRESS_SOURCE_GENERIC: Long = 0
+        const val COMPRESS_SOURCE_SRGB: Long = 1
+        const val COMPRESS_SOURCE_NORMAL: Long = 2
 
 
     }
@@ -185,14 +185,14 @@ open class Image : Resource {
 
     // Methods
     private val getWidthMethodBind: CPointer<godot_method_bind> by lazy { getMB("Image", "get_width") }
-    open fun getWidth(): Int {
-        return _icall_Int(getWidthMethodBind, this.rawMemory)
+    open fun getWidth(): Long {
+        return _icall_Long(getWidthMethodBind, this.rawMemory)
     }
 
 
     private val getHeightMethodBind: CPointer<godot_method_bind> by lazy { getMB("Image", "get_height") }
-    open fun getHeight(): Int {
-        return _icall_Int(getHeightMethodBind, this.rawMemory)
+    open fun getHeight(): Long {
+        return _icall_Long(getHeightMethodBind, this.rawMemory)
     }
 
 
@@ -210,7 +210,7 @@ open class Image : Resource {
 
     private val getFormatMethodBind: CPointer<godot_method_bind> by lazy { getMB("Image", "get_format") }
     open fun getFormat(): Image.Format {
-        return Image.Format.fromInt(_icall_Int(getFormatMethodBind, this.rawMemory))
+        return Image.Format.fromInt(_icall_Long(getFormatMethodBind, this.rawMemory))
     }
 
 
@@ -221,14 +221,14 @@ open class Image : Resource {
 
 
     private val convertMethodBind: CPointer<godot_method_bind> by lazy { getMB("Image", "convert") }
-    open fun convert(format: Int) {
-        _icall_Unit_Int(convertMethodBind, this.rawMemory, format)
+    open fun convert(format: Long) {
+        _icall_Unit_Long(convertMethodBind, this.rawMemory, format)
     }
 
 
     private val getMipmapOffsetMethodBind: CPointer<godot_method_bind> by lazy { getMB("Image", "get_mipmap_offset") }
-    open fun getMipmapOffset(mipmap: Int): Int {
-        return _icall_Int_Int(getMipmapOffsetMethodBind, this.rawMemory, mipmap)
+    open fun getMipmapOffset(mipmap: Long): Long {
+        return _icall_Long_Long(getMipmapOffsetMethodBind, this.rawMemory, mipmap)
     }
 
 
@@ -239,8 +239,8 @@ open class Image : Resource {
 
 
     private val resizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Image", "resize") }
-    open fun resize(width: Int, height: Int, interpolation: Int = 1) {
-        _icall_Unit_Int_Int_Int(resizeMethodBind, this.rawMemory, width, height, interpolation)
+    open fun resize(width: Long, height: Long, interpolation: Long = 1) {
+        _icall_Unit_Long_Long_Long(resizeMethodBind, this.rawMemory, width, height, interpolation)
     }
 
 
@@ -257,8 +257,8 @@ open class Image : Resource {
 
 
     private val cropMethodBind: CPointer<godot_method_bind> by lazy { getMB("Image", "crop") }
-    open fun crop(width: Int, height: Int) {
-        _icall_Unit_Int_Int(cropMethodBind, this.rawMemory, width, height)
+    open fun crop(width: Long, height: Long) {
+        _icall_Unit_Long_Long(cropMethodBind, this.rawMemory, width, height)
     }
 
 
@@ -276,7 +276,7 @@ open class Image : Resource {
 
     private val generateMipmapsMethodBind: CPointer<godot_method_bind> by lazy { getMB("Image", "generate_mipmaps") }
     open fun generateMipmaps(renormalize: Boolean = false): GodotError {
-        return GodotError.fromInt(_icall_Int_Boolean(generateMipmapsMethodBind, this.rawMemory, renormalize))
+        return GodotError.fromInt(_icall_Long_Boolean(generateMipmapsMethodBind, this.rawMemory, renormalize))
     }
 
 
@@ -287,14 +287,14 @@ open class Image : Resource {
 
 
     private val createMethodBind: CPointer<godot_method_bind> by lazy { getMB("Image", "create") }
-    open fun create(width: Int, height: Int, useMipmaps: Boolean, format: Int) {
-        _icall_Unit_Int_Int_Boolean_Int(createMethodBind, this.rawMemory, width, height, useMipmaps, format)
+    open fun create(width: Long, height: Long, useMipmaps: Boolean, format: Long) {
+        _icall_Unit_Long_Long_Boolean_Long(createMethodBind, this.rawMemory, width, height, useMipmaps, format)
     }
 
 
     private val createFromDataMethodBind: CPointer<godot_method_bind> by lazy { getMB("Image", "create_from_data") }
-    open fun createFromData(width: Int, height: Int, useMipmaps: Boolean, format: Int, data: PoolByteArray) {
-        _icall_Unit_Int_Int_Boolean_Int_PoolByteArray(createFromDataMethodBind, this.rawMemory, width, height, useMipmaps, format, data)
+    open fun createFromData(width: Long, height: Long, useMipmaps: Boolean, format: Long, data: PoolByteArray) {
+        _icall_Unit_Long_Long_Boolean_Long_PoolByteArray(createFromDataMethodBind, this.rawMemory, width, height, useMipmaps, format, data)
     }
 
 
@@ -306,19 +306,19 @@ open class Image : Resource {
 
     private val loadMethodBind: CPointer<godot_method_bind> by lazy { getMB("Image", "load") }
     open fun load(path: String): GodotError {
-        return GodotError.fromInt(_icall_Int_String(loadMethodBind, this.rawMemory, path))
+        return GodotError.fromInt(_icall_Long_String(loadMethodBind, this.rawMemory, path))
     }
 
 
     private val savePngMethodBind: CPointer<godot_method_bind> by lazy { getMB("Image", "save_png") }
     open fun savePng(path: String): GodotError {
-        return GodotError.fromInt(_icall_Int_String(savePngMethodBind, this.rawMemory, path))
+        return GodotError.fromInt(_icall_Long_String(savePngMethodBind, this.rawMemory, path))
     }
 
 
     private val detectAlphaMethodBind: CPointer<godot_method_bind> by lazy { getMB("Image", "detect_alpha") }
     open fun detectAlpha(): Image.AlphaMode {
-        return Image.AlphaMode.fromInt(_icall_Int(detectAlphaMethodBind, this.rawMemory))
+        return Image.AlphaMode.fromInt(_icall_Long(detectAlphaMethodBind, this.rawMemory))
     }
 
 
@@ -329,14 +329,14 @@ open class Image : Resource {
 
 
     private val compressMethodBind: CPointer<godot_method_bind> by lazy { getMB("Image", "compress") }
-    open fun compress(mode: Int, source: Int, lossyQuality: Float): GodotError {
-        return GodotError.fromInt(_icall_Int_Int_Int_Float(compressMethodBind, this.rawMemory, mode, source, lossyQuality))
+    open fun compress(mode: Long, source: Long, lossyQuality: Double): GodotError {
+        return GodotError.fromInt(_icall_Long_Long_Long_Double(compressMethodBind, this.rawMemory, mode, source, lossyQuality))
     }
 
 
     private val decompressMethodBind: CPointer<godot_method_bind> by lazy { getMB("Image", "decompress") }
     open fun decompress(): GodotError {
-        return GodotError.fromInt(_icall_Int(decompressMethodBind, this.rawMemory))
+        return GodotError.fromInt(_icall_Long(decompressMethodBind, this.rawMemory))
     }
 
 
@@ -377,8 +377,8 @@ open class Image : Resource {
 
 
     private val bumpmapToNormalmapMethodBind: CPointer<godot_method_bind> by lazy { getMB("Image", "bumpmap_to_normalmap") }
-    open fun bumpmapToNormalmap(bumpScale: Float = 1f) {
-        _icall_Unit_Float(bumpmapToNormalmapMethodBind, this.rawMemory, bumpScale)
+    open fun bumpmapToNormalmap(bumpScale: Double = 1.0) {
+        _icall_Unit_Double(bumpmapToNormalmapMethodBind, this.rawMemory, bumpScale)
     }
 
 
@@ -458,8 +458,8 @@ open class Image : Resource {
 
 
     private val getPixelMethodBind: CPointer<godot_method_bind> by lazy { getMB("Image", "get_pixel") }
-    open fun getPixel(x: Int, y: Int): Color {
-        return _icall_Color_Int_Int(getPixelMethodBind, this.rawMemory, x, y)
+    open fun getPixel(x: Long, y: Long): Color {
+        return _icall_Color_Long_Long(getPixelMethodBind, this.rawMemory, x, y)
     }
 
 
@@ -470,20 +470,20 @@ open class Image : Resource {
 
 
     private val setPixelMethodBind: CPointer<godot_method_bind> by lazy { getMB("Image", "set_pixel") }
-    open fun setPixel(x: Int, y: Int, color: Color) {
-        _icall_Unit_Int_Int_Color(setPixelMethodBind, this.rawMemory, x, y, color)
+    open fun setPixel(x: Long, y: Long, color: Color) {
+        _icall_Unit_Long_Long_Color(setPixelMethodBind, this.rawMemory, x, y, color)
     }
 
 
     private val loadPngFromBufferMethodBind: CPointer<godot_method_bind> by lazy { getMB("Image", "load_png_from_buffer") }
     open fun loadPngFromBuffer(buffer: PoolByteArray): GodotError {
-        return GodotError.fromInt(_icall_Int_PoolByteArray(loadPngFromBufferMethodBind, this.rawMemory, buffer))
+        return GodotError.fromInt(_icall_Long_PoolByteArray(loadPngFromBufferMethodBind, this.rawMemory, buffer))
     }
 
 
     private val loadJpgFromBufferMethodBind: CPointer<godot_method_bind> by lazy { getMB("Image", "load_jpg_from_buffer") }
     open fun loadJpgFromBuffer(buffer: PoolByteArray): GodotError {
-        return GodotError.fromInt(_icall_Int_PoolByteArray(loadJpgFromBufferMethodBind, this.rawMemory, buffer))
+        return GodotError.fromInt(_icall_Long_PoolByteArray(loadJpgFromBufferMethodBind, this.rawMemory, buffer))
     }
 
 

@@ -19,7 +19,7 @@ open class Tween : Node {
 
     // Enums 
 
-    enum class TransitionType(val id: Int) {
+    enum class TransitionType(val id: Long) {
         TRANS_LINEAR(0),
         TRANS_SINE(1),
         TRANS_QUINT(2),
@@ -34,19 +34,19 @@ open class Tween : Node {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class TweenProcessMode(val id: Int) {
+    enum class TweenProcessMode(val id: Long) {
         TWEEN_PROCESS_PHYSICS(0),
         TWEEN_PROCESS_IDLE(1),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class EaseType(val id: Int) {
+    enum class EaseType(val id: Long) {
         EASE_IN(0),
         EASE_OUT(1),
         EASE_IN_OUT(2),
@@ -54,7 +54,7 @@ open class Tween : Node {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -76,23 +76,23 @@ open class Tween : Node {
 
 
         // Constants
-        const val TWEEN_PROCESS_PHYSICS: Int = 0
-        const val TWEEN_PROCESS_IDLE: Int = 1
-        const val TRANS_LINEAR: Int = 0
-        const val TRANS_SINE: Int = 1
-        const val TRANS_QUINT: Int = 2
-        const val TRANS_QUART: Int = 3
-        const val TRANS_QUAD: Int = 4
-        const val TRANS_EXPO: Int = 5
-        const val TRANS_ELASTIC: Int = 6
-        const val TRANS_CUBIC: Int = 7
-        const val TRANS_CIRC: Int = 8
-        const val TRANS_BOUNCE: Int = 9
-        const val TRANS_BACK: Int = 10
-        const val EASE_IN: Int = 0
-        const val EASE_OUT: Int = 1
-        const val EASE_IN_OUT: Int = 2
-        const val EASE_OUT_IN: Int = 3
+        const val TWEEN_PROCESS_PHYSICS: Long = 0
+        const val TWEEN_PROCESS_IDLE: Long = 1
+        const val TRANS_LINEAR: Long = 0
+        const val TRANS_SINE: Long = 1
+        const val TRANS_QUINT: Long = 2
+        const val TRANS_QUART: Long = 3
+        const val TRANS_QUAD: Long = 4
+        const val TRANS_EXPO: Long = 5
+        const val TRANS_ELASTIC: Long = 6
+        const val TRANS_CUBIC: Long = 7
+        const val TRANS_CIRC: Long = 8
+        const val TRANS_BOUNCE: Long = 9
+        const val TRANS_BACK: Long = 10
+        const val EASE_IN: Long = 0
+        const val EASE_OUT: Long = 1
+        const val EASE_IN_OUT: Long = 2
+        const val EASE_OUT_IN: Long = 3
 
 
     }
@@ -104,14 +104,14 @@ open class Tween : Node {
         set(value) = _icall_Unit_Boolean(setRepeatMethodBind, this.rawMemory, value)
 
 
-    open var playbackProcessMode: Int
-        get() = _icall_Int(getTweenProcessModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setTweenProcessModeMethodBind, this.rawMemory, value)
+    open var playbackProcessMode: Long
+        get() = _icall_Long(getTweenProcessModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setTweenProcessModeMethodBind, this.rawMemory, value)
 
 
-    open var playbackSpeed: Float
-        get() = _icall_Float(getSpeedScaleMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setSpeedScaleMethodBind, this.rawMemory, value)
+    open var playbackSpeed: Double
+        get() = _icall_Double(getSpeedScaleMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setSpeedScaleMethodBind, this.rawMemory, value)
 
 
 
@@ -142,26 +142,26 @@ open class Tween : Node {
 
 
     private val setSpeedScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("Tween", "set_speed_scale") }
-    open fun setSpeedScale(speed: Float) {
-        _icall_Unit_Float(setSpeedScaleMethodBind, this.rawMemory, speed)
+    open fun setSpeedScale(speed: Double) {
+        _icall_Unit_Double(setSpeedScaleMethodBind, this.rawMemory, speed)
     }
 
 
     private val getSpeedScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("Tween", "get_speed_scale") }
-    open fun getSpeedScale(): Float {
-        return _icall_Float(getSpeedScaleMethodBind, this.rawMemory)
+    open fun getSpeedScale(): Double {
+        return _icall_Double(getSpeedScaleMethodBind, this.rawMemory)
     }
 
 
     private val setTweenProcessModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Tween", "set_tween_process_mode") }
-    open fun setTweenProcessMode(mode: Int) {
-        _icall_Unit_Int(setTweenProcessModeMethodBind, this.rawMemory, mode)
+    open fun setTweenProcessMode(mode: Long) {
+        _icall_Unit_Long(setTweenProcessModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getTweenProcessModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Tween", "get_tween_process_mode") }
     open fun getTweenProcessMode(): Tween.TweenProcessMode {
-        return Tween.TweenProcessMode.fromInt(_icall_Int(getTweenProcessModeMethodBind, this.rawMemory))
+        return Tween.TweenProcessMode.fromInt(_icall_Long(getTweenProcessModeMethodBind, this.rawMemory))
     }
 
 
@@ -230,68 +230,68 @@ open class Tween : Node {
 
 
     private val seekMethodBind: CPointer<godot_method_bind> by lazy { getMB("Tween", "seek") }
-    open fun seek(time: Float): Boolean {
-        return _icall_Boolean_Float(seekMethodBind, this.rawMemory, time)
+    open fun seek(time: Double): Boolean {
+        return _icall_Boolean_Double(seekMethodBind, this.rawMemory, time)
     }
 
 
     private val tellMethodBind: CPointer<godot_method_bind> by lazy { getMB("Tween", "tell") }
-    open fun tell(): Float {
-        return _icall_Float(tellMethodBind, this.rawMemory)
+    open fun tell(): Double {
+        return _icall_Double(tellMethodBind, this.rawMemory)
     }
 
 
     private val getRuntimeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Tween", "get_runtime") }
-    open fun getRuntime(): Float {
-        return _icall_Float(getRuntimeMethodBind, this.rawMemory)
+    open fun getRuntime(): Double {
+        return _icall_Double(getRuntimeMethodBind, this.rawMemory)
     }
 
 
     private val interpolatePropertyMethodBind: CPointer<godot_method_bind> by lazy { getMB("Tween", "interpolate_property") }
-    open fun interpolateProperty(_object: Object, property: NodePath, initialVal: Variant, finalVal: Variant, duration: Float, transType: Int, easeType: Int, delay: Float = 0f): Boolean {
-        return _icall_Boolean_Object_NodePath_Variant_Variant_Float_Int_Int_Float(interpolatePropertyMethodBind, this.rawMemory, _object, property, initialVal, finalVal, duration, transType, easeType, delay)
+    open fun interpolateProperty(_object: Object, property: NodePath, initialVal: Variant, finalVal: Variant, duration: Double, transType: Long, easeType: Long, delay: Double = 0.0): Boolean {
+        return _icall_Boolean_Object_NodePath_Variant_Variant_Double_Long_Long_Double(interpolatePropertyMethodBind, this.rawMemory, _object, property, initialVal, finalVal, duration, transType, easeType, delay)
     }
 
 
     private val interpolateMethodMethodBind: CPointer<godot_method_bind> by lazy { getMB("Tween", "interpolate_method") }
-    open fun interpolateMethod(_object: Object, method: String, initialVal: Variant, finalVal: Variant, duration: Float, transType: Int, easeType: Int, delay: Float = 0f): Boolean {
-        return _icall_Boolean_Object_String_Variant_Variant_Float_Int_Int_Float(interpolateMethodMethodBind, this.rawMemory, _object, method, initialVal, finalVal, duration, transType, easeType, delay)
+    open fun interpolateMethod(_object: Object, method: String, initialVal: Variant, finalVal: Variant, duration: Double, transType: Long, easeType: Long, delay: Double = 0.0): Boolean {
+        return _icall_Boolean_Object_String_Variant_Variant_Double_Long_Long_Double(interpolateMethodMethodBind, this.rawMemory, _object, method, initialVal, finalVal, duration, transType, easeType, delay)
     }
 
 
     private val interpolateCallbackMethodBind: CPointer<godot_method_bind> by lazy { getMB("Tween", "interpolate_callback") }
-    open fun interpolateCallback(_object: Object, duration: Float, callback: String, arg1: Variant, arg2: Variant, arg3: Variant, arg4: Variant, arg5: Variant): Boolean {
-        return _icall_Boolean_Object_Float_String_Variant_Variant_Variant_Variant_Variant(interpolateCallbackMethodBind, this.rawMemory, _object, duration, callback, arg1, arg2, arg3, arg4, arg5)
+    open fun interpolateCallback(_object: Object, duration: Double, callback: String, arg1: Variant, arg2: Variant, arg3: Variant, arg4: Variant, arg5: Variant): Boolean {
+        return _icall_Boolean_Object_Double_String_Variant_Variant_Variant_Variant_Variant(interpolateCallbackMethodBind, this.rawMemory, _object, duration, callback, arg1, arg2, arg3, arg4, arg5)
     }
 
 
     private val interpolateDeferredCallbackMethodBind: CPointer<godot_method_bind> by lazy { getMB("Tween", "interpolate_deferred_callback") }
-    open fun interpolateDeferredCallback(_object: Object, duration: Float, callback: String, arg1: Variant, arg2: Variant, arg3: Variant, arg4: Variant, arg5: Variant): Boolean {
-        return _icall_Boolean_Object_Float_String_Variant_Variant_Variant_Variant_Variant(interpolateDeferredCallbackMethodBind, this.rawMemory, _object, duration, callback, arg1, arg2, arg3, arg4, arg5)
+    open fun interpolateDeferredCallback(_object: Object, duration: Double, callback: String, arg1: Variant, arg2: Variant, arg3: Variant, arg4: Variant, arg5: Variant): Boolean {
+        return _icall_Boolean_Object_Double_String_Variant_Variant_Variant_Variant_Variant(interpolateDeferredCallbackMethodBind, this.rawMemory, _object, duration, callback, arg1, arg2, arg3, arg4, arg5)
     }
 
 
     private val followPropertyMethodBind: CPointer<godot_method_bind> by lazy { getMB("Tween", "follow_property") }
-    open fun followProperty(_object: Object, property: NodePath, initialVal: Variant, target: Object, targetProperty: NodePath, duration: Float, transType: Int, easeType: Int, delay: Float = 0f): Boolean {
-        return _icall_Boolean_Object_NodePath_Variant_Object_NodePath_Float_Int_Int_Float(followPropertyMethodBind, this.rawMemory, _object, property, initialVal, target, targetProperty, duration, transType, easeType, delay)
+    open fun followProperty(_object: Object, property: NodePath, initialVal: Variant, target: Object, targetProperty: NodePath, duration: Double, transType: Long, easeType: Long, delay: Double = 0.0): Boolean {
+        return _icall_Boolean_Object_NodePath_Variant_Object_NodePath_Double_Long_Long_Double(followPropertyMethodBind, this.rawMemory, _object, property, initialVal, target, targetProperty, duration, transType, easeType, delay)
     }
 
 
     private val followMethodMethodBind: CPointer<godot_method_bind> by lazy { getMB("Tween", "follow_method") }
-    open fun followMethod(_object: Object, method: String, initialVal: Variant, target: Object, targetMethod: String, duration: Float, transType: Int, easeType: Int, delay: Float = 0f): Boolean {
-        return _icall_Boolean_Object_String_Variant_Object_String_Float_Int_Int_Float(followMethodMethodBind, this.rawMemory, _object, method, initialVal, target, targetMethod, duration, transType, easeType, delay)
+    open fun followMethod(_object: Object, method: String, initialVal: Variant, target: Object, targetMethod: String, duration: Double, transType: Long, easeType: Long, delay: Double = 0.0): Boolean {
+        return _icall_Boolean_Object_String_Variant_Object_String_Double_Long_Long_Double(followMethodMethodBind, this.rawMemory, _object, method, initialVal, target, targetMethod, duration, transType, easeType, delay)
     }
 
 
     private val targetingPropertyMethodBind: CPointer<godot_method_bind> by lazy { getMB("Tween", "targeting_property") }
-    open fun targetingProperty(_object: Object, property: NodePath, initial: Object, initialVal: NodePath, finalVal: Variant, duration: Float, transType: Int, easeType: Int, delay: Float = 0f): Boolean {
-        return _icall_Boolean_Object_NodePath_Object_NodePath_Variant_Float_Int_Int_Float(targetingPropertyMethodBind, this.rawMemory, _object, property, initial, initialVal, finalVal, duration, transType, easeType, delay)
+    open fun targetingProperty(_object: Object, property: NodePath, initial: Object, initialVal: NodePath, finalVal: Variant, duration: Double, transType: Long, easeType: Long, delay: Double = 0.0): Boolean {
+        return _icall_Boolean_Object_NodePath_Object_NodePath_Variant_Double_Long_Long_Double(targetingPropertyMethodBind, this.rawMemory, _object, property, initial, initialVal, finalVal, duration, transType, easeType, delay)
     }
 
 
     private val targetingMethodMethodBind: CPointer<godot_method_bind> by lazy { getMB("Tween", "targeting_method") }
-    open fun targetingMethod(_object: Object, method: String, initial: Object, initialMethod: String, finalVal: Variant, duration: Float, transType: Int, easeType: Int, delay: Float = 0f): Boolean {
-        return _icall_Boolean_Object_String_Object_String_Variant_Float_Int_Int_Float(targetingMethodMethodBind, this.rawMemory, _object, method, initial, initialMethod, finalVal, duration, transType, easeType, delay)
+    open fun targetingMethod(_object: Object, method: String, initial: Object, initialMethod: String, finalVal: Variant, duration: Double, transType: Long, easeType: Long, delay: Double = 0.0): Boolean {
+        return _icall_Boolean_Object_String_Object_String_Variant_Double_Long_Long_Double(targetingMethodMethodBind, this.rawMemory, _object, method, initial, initialMethod, finalVal, duration, transType, easeType, delay)
     }
 
 

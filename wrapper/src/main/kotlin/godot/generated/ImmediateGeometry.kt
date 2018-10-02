@@ -48,8 +48,8 @@ open class ImmediateGeometry : GeometryInstance {
 
     // Methods
     private val beginMethodBind: CPointer<godot_method_bind> by lazy { getMB("ImmediateGeometry", "begin") }
-    open fun begin(primitive: Int, texture: Texture) {
-        _icall_Unit_Int_Object(beginMethodBind, this.rawMemory, primitive, texture)
+    open fun begin(primitive: Long, texture: Texture) {
+        _icall_Unit_Long_Object(beginMethodBind, this.rawMemory, primitive, texture)
     }
 
 
@@ -90,8 +90,8 @@ open class ImmediateGeometry : GeometryInstance {
 
 
     private val addSphereMethodBind: CPointer<godot_method_bind> by lazy { getMB("ImmediateGeometry", "add_sphere") }
-    open fun addSphere(lats: Int, lons: Int, radius: Float, addUv: Boolean = true) {
-        _icall_Unit_Int_Int_Float_Boolean(addSphereMethodBind, this.rawMemory, lats, lons, radius, addUv)
+    open fun addSphere(lats: Long, lons: Long, radius: Double, addUv: Boolean = true) {
+        _icall_Unit_Long_Long_Double_Boolean(addSphereMethodBind, this.rawMemory, lats, lons, radius, addUv)
     }
 
 

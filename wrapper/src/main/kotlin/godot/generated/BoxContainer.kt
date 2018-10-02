@@ -19,14 +19,14 @@ open class BoxContainer : Container {
 
     // Enums 
 
-    enum class AlignMode(val id: Int) {
+    enum class AlignMode(val id: Long) {
         ALIGN_BEGIN(0),
         ALIGN_CENTER(1),
         ALIGN_END(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -48,18 +48,18 @@ open class BoxContainer : Container {
 
 
         // Constants
-        const val ALIGN_BEGIN: Int = 0
-        const val ALIGN_CENTER: Int = 1
-        const val ALIGN_END: Int = 2
+        const val ALIGN_BEGIN: Long = 0
+        const val ALIGN_CENTER: Long = 1
+        const val ALIGN_END: Long = 2
 
 
     }
 
 
     // Properties
-    open var alignment: Int
-        get() = _icall_Int(getAlignmentMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setAlignmentMethodBind, this.rawMemory, value)
+    open var alignment: Long
+        get() = _icall_Long(getAlignmentMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setAlignmentMethodBind, this.rawMemory, value)
 
 
 
@@ -73,13 +73,13 @@ open class BoxContainer : Container {
 
     private val getAlignmentMethodBind: CPointer<godot_method_bind> by lazy { getMB("BoxContainer", "get_alignment") }
     open fun getAlignment(): BoxContainer.AlignMode {
-        return BoxContainer.AlignMode.fromInt(_icall_Int(getAlignmentMethodBind, this.rawMemory))
+        return BoxContainer.AlignMode.fromInt(_icall_Long(getAlignmentMethodBind, this.rawMemory))
     }
 
 
     private val setAlignmentMethodBind: CPointer<godot_method_bind> by lazy { getMB("BoxContainer", "set_alignment") }
-    open fun setAlignment(alignment: Int) {
-        _icall_Unit_Int(setAlignmentMethodBind, this.rawMemory, alignment)
+    open fun setAlignment(alignment: Long) {
+        _icall_Unit_Long(setAlignmentMethodBind, this.rawMemory, alignment)
     }
 
 

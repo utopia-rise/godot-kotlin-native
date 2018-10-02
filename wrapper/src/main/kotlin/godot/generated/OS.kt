@@ -19,7 +19,7 @@ open class OS : Object {
 
     // Enums 
 
-    enum class SystemDir(val id: Int) {
+    enum class SystemDir(val id: Long) {
         SYSTEM_DIR_DESKTOP(0),
         SYSTEM_DIR_DCIM(1),
         SYSTEM_DIR_DOCUMENTS(2),
@@ -31,10 +31,10 @@ open class OS : Object {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class ScreenOrientation(val id: Int) {
+    enum class ScreenOrientation(val id: Long) {
         SCREEN_ORIENTATION_LANDSCAPE(0),
         SCREEN_ORIENTATION_PORTRAIT(1),
         SCREEN_ORIENTATION_REVERSE_LANDSCAPE(2),
@@ -45,10 +45,10 @@ open class OS : Object {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class PowerState(val id: Int) {
+    enum class PowerState(val id: Long) {
         POWERSTATE_UNKNOWN(0),
         POWERSTATE_ON_BATTERY(1),
         POWERSTATE_NO_BATTERY(2),
@@ -57,10 +57,10 @@ open class OS : Object {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class Month(val id: Int) {
+    enum class Month(val id: Long) {
         MONTH_JANUARY(1),
         MONTH_FEBRUARY(2),
         MONTH_MARCH(3),
@@ -76,10 +76,10 @@ open class OS : Object {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class Weekday(val id: Int) {
+    enum class Weekday(val id: Long) {
         DAY_SUNDAY(0),
         DAY_MONDAY(1),
         DAY_TUESDAY(2),
@@ -90,7 +90,7 @@ open class OS : Object {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -108,45 +108,45 @@ open class OS : Object {
 
 
         // Constants
-        const val DAY_SUNDAY: Int = 0
-        const val DAY_MONDAY: Int = 1
-        const val DAY_TUESDAY: Int = 2
-        const val DAY_WEDNESDAY: Int = 3
-        const val DAY_THURSDAY: Int = 4
-        const val DAY_FRIDAY: Int = 5
-        const val DAY_SATURDAY: Int = 6
-        const val MONTH_JANUARY: Int = 1
-        const val MONTH_FEBRUARY: Int = 2
-        const val MONTH_MARCH: Int = 3
-        const val MONTH_APRIL: Int = 4
-        const val MONTH_MAY: Int = 5
-        const val MONTH_JUNE: Int = 6
-        const val MONTH_JULY: Int = 7
-        const val MONTH_AUGUST: Int = 8
-        const val MONTH_SEPTEMBER: Int = 9
-        const val MONTH_OCTOBER: Int = 10
-        const val MONTH_NOVEMBER: Int = 11
-        const val MONTH_DECEMBER: Int = 12
-        const val SCREEN_ORIENTATION_LANDSCAPE: Int = 0
-        const val SCREEN_ORIENTATION_PORTRAIT: Int = 1
-        const val SCREEN_ORIENTATION_REVERSE_LANDSCAPE: Int = 2
-        const val SCREEN_ORIENTATION_REVERSE_PORTRAIT: Int = 3
-        const val SCREEN_ORIENTATION_SENSOR_LANDSCAPE: Int = 4
-        const val SCREEN_ORIENTATION_SENSOR_PORTRAIT: Int = 5
-        const val SCREEN_ORIENTATION_SENSOR: Int = 6
-        const val SYSTEM_DIR_DESKTOP: Int = 0
-        const val SYSTEM_DIR_DCIM: Int = 1
-        const val SYSTEM_DIR_DOCUMENTS: Int = 2
-        const val SYSTEM_DIR_DOWNLOADS: Int = 3
-        const val SYSTEM_DIR_MOVIES: Int = 4
-        const val SYSTEM_DIR_MUSIC: Int = 5
-        const val SYSTEM_DIR_PICTURES: Int = 6
-        const val SYSTEM_DIR_RINGTONES: Int = 7
-        const val POWERSTATE_UNKNOWN: Int = 0
-        const val POWERSTATE_ON_BATTERY: Int = 1
-        const val POWERSTATE_NO_BATTERY: Int = 2
-        const val POWERSTATE_CHARGING: Int = 3
-        const val POWERSTATE_CHARGED: Int = 4
+        const val DAY_SUNDAY: Long = 0
+        const val DAY_MONDAY: Long = 1
+        const val DAY_TUESDAY: Long = 2
+        const val DAY_WEDNESDAY: Long = 3
+        const val DAY_THURSDAY: Long = 4
+        const val DAY_FRIDAY: Long = 5
+        const val DAY_SATURDAY: Long = 6
+        const val MONTH_JANUARY: Long = 1
+        const val MONTH_FEBRUARY: Long = 2
+        const val MONTH_MARCH: Long = 3
+        const val MONTH_APRIL: Long = 4
+        const val MONTH_MAY: Long = 5
+        const val MONTH_JUNE: Long = 6
+        const val MONTH_JULY: Long = 7
+        const val MONTH_AUGUST: Long = 8
+        const val MONTH_SEPTEMBER: Long = 9
+        const val MONTH_OCTOBER: Long = 10
+        const val MONTH_NOVEMBER: Long = 11
+        const val MONTH_DECEMBER: Long = 12
+        const val SCREEN_ORIENTATION_LANDSCAPE: Long = 0
+        const val SCREEN_ORIENTATION_PORTRAIT: Long = 1
+        const val SCREEN_ORIENTATION_REVERSE_LANDSCAPE: Long = 2
+        const val SCREEN_ORIENTATION_REVERSE_PORTRAIT: Long = 3
+        const val SCREEN_ORIENTATION_SENSOR_LANDSCAPE: Long = 4
+        const val SCREEN_ORIENTATION_SENSOR_PORTRAIT: Long = 5
+        const val SCREEN_ORIENTATION_SENSOR: Long = 6
+        const val SYSTEM_DIR_DESKTOP: Long = 0
+        const val SYSTEM_DIR_DCIM: Long = 1
+        const val SYSTEM_DIR_DOCUMENTS: Long = 2
+        const val SYSTEM_DIR_DOWNLOADS: Long = 3
+        const val SYSTEM_DIR_MOVIES: Long = 4
+        const val SYSTEM_DIR_MUSIC: Long = 5
+        const val SYSTEM_DIR_PICTURES: Long = 6
+        const val SYSTEM_DIR_RINGTONES: Long = 7
+        const val POWERSTATE_UNKNOWN: Long = 0
+        const val POWERSTATE_ON_BATTERY: Long = 1
+        const val POWERSTATE_NO_BATTERY: Long = 2
+        const val POWERSTATE_CHARGING: Long = 3
+        const val POWERSTATE_CHARGED: Long = 4
 
 
         private val rawMemory: COpaquePointer by lazy { getSingleton("OS", "_OS") }
@@ -158,14 +158,14 @@ open class OS : Object {
             set(value) = _icall_Unit_String(setClipboardMethodBind, this.rawMemory, value)
 
 
-        var currentScreen: Int
-            get() = _icall_Int(getCurrentScreenMethodBind, this.rawMemory)
-            set(value) = _icall_Unit_Int(setCurrentScreenMethodBind, this.rawMemory, value)
+        var currentScreen: Long
+            get() = _icall_Long(getCurrentScreenMethodBind, this.rawMemory)
+            set(value) = _icall_Unit_Long(setCurrentScreenMethodBind, this.rawMemory, value)
 
 
-        var exitCode: Int
-            get() = _icall_Int(getExitCodeMethodBind, this.rawMemory)
-            set(value) = _icall_Unit_Int(setExitCodeMethodBind, this.rawMemory, value)
+        var exitCode: Long
+            get() = _icall_Long(getExitCodeMethodBind, this.rawMemory)
+            set(value) = _icall_Unit_Long(setExitCodeMethodBind, this.rawMemory, value)
 
 
         var vsyncEnabled: Boolean
@@ -183,9 +183,9 @@ open class OS : Object {
             set(value) = _icall_Unit_Boolean(setKeepScreenOnMethodBind, this.rawMemory, value)
 
 
-        var screenOrientation: Int
-            get() = _icall_Int(getScreenOrientationMethodBind, this.rawMemory)
-            set(value) = _icall_Unit_Int(setScreenOrientationMethodBind, this.rawMemory, value)
+        var screenOrientation: Long
+            get() = _icall_Long(getScreenOrientationMethodBind, this.rawMemory)
+            set(value) = _icall_Unit_Long(setScreenOrientationMethodBind, this.rawMemory, value)
 
 
         var windowBorderless: Boolean
@@ -252,62 +252,62 @@ open class OS : Object {
 
 
         private val getVideoDriverCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("_OS", "get_video_driver_count") }
-        fun getVideoDriverCount(): Int {
-            return _icall_Int(getVideoDriverCountMethodBind, this.rawMemory)
+        fun getVideoDriverCount(): Long {
+            return _icall_Long(getVideoDriverCountMethodBind, this.rawMemory)
         }
 
 
         private val getVideoDriverNameMethodBind: CPointer<godot_method_bind> by lazy { getMB("_OS", "get_video_driver_name") }
-        fun getVideoDriverName(driver: Int): String {
-            return _icall_String_Int(getVideoDriverNameMethodBind, this.rawMemory, driver)
+        fun getVideoDriverName(driver: Long): String {
+            return _icall_String_Long(getVideoDriverNameMethodBind, this.rawMemory, driver)
         }
 
 
         private val getAudioDriverCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("_OS", "get_audio_driver_count") }
-        fun getAudioDriverCount(): Int {
-            return _icall_Int(getAudioDriverCountMethodBind, this.rawMemory)
+        fun getAudioDriverCount(): Long {
+            return _icall_Long(getAudioDriverCountMethodBind, this.rawMemory)
         }
 
 
         private val getAudioDriverNameMethodBind: CPointer<godot_method_bind> by lazy { getMB("_OS", "get_audio_driver_name") }
-        fun getAudioDriverName(driver: Int): String {
-            return _icall_String_Int(getAudioDriverNameMethodBind, this.rawMemory, driver)
+        fun getAudioDriverName(driver: Long): String {
+            return _icall_String_Long(getAudioDriverNameMethodBind, this.rawMemory, driver)
         }
 
 
         private val getScreenCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("_OS", "get_screen_count") }
-        fun getScreenCount(): Int {
-            return _icall_Int(getScreenCountMethodBind, this.rawMemory)
+        fun getScreenCount(): Long {
+            return _icall_Long(getScreenCountMethodBind, this.rawMemory)
         }
 
 
         private val getCurrentScreenMethodBind: CPointer<godot_method_bind> by lazy { getMB("_OS", "get_current_screen") }
-        fun getCurrentScreen(): Int {
-            return _icall_Int(getCurrentScreenMethodBind, this.rawMemory)
+        fun getCurrentScreen(): Long {
+            return _icall_Long(getCurrentScreenMethodBind, this.rawMemory)
         }
 
 
         private val setCurrentScreenMethodBind: CPointer<godot_method_bind> by lazy { getMB("_OS", "set_current_screen") }
-        fun setCurrentScreen(screen: Int) {
-            _icall_Unit_Int(setCurrentScreenMethodBind, this.rawMemory, screen)
+        fun setCurrentScreen(screen: Long) {
+            _icall_Unit_Long(setCurrentScreenMethodBind, this.rawMemory, screen)
         }
 
 
         private val getScreenPositionMethodBind: CPointer<godot_method_bind> by lazy { getMB("_OS", "get_screen_position") }
-        fun getScreenPosition(screen: Int = -1): Vector2 {
-            return _icall_Vector2_Int(getScreenPositionMethodBind, this.rawMemory, screen)
+        fun getScreenPosition(screen: Long = -1): Vector2 {
+            return _icall_Vector2_Long(getScreenPositionMethodBind, this.rawMemory, screen)
         }
 
 
         private val getScreenSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("_OS", "get_screen_size") }
-        fun getScreenSize(screen: Int = -1): Vector2 {
-            return _icall_Vector2_Int(getScreenSizeMethodBind, this.rawMemory, screen)
+        fun getScreenSize(screen: Long = -1): Vector2 {
+            return _icall_Vector2_Long(getScreenSizeMethodBind, this.rawMemory, screen)
         }
 
 
         private val getScreenDpiMethodBind: CPointer<godot_method_bind> by lazy { getMB("_OS", "get_screen_dpi") }
-        fun getScreenDpi(screen: Int = -1): Int {
-            return _icall_Int_Int(getScreenDpiMethodBind, this.rawMemory, screen)
+        fun getScreenDpi(screen: Long = -1): Long {
+            return _icall_Long_Long(getScreenDpiMethodBind, this.rawMemory, screen)
         }
 
 
@@ -450,14 +450,14 @@ open class OS : Object {
 
 
         private val setScreenOrientationMethodBind: CPointer<godot_method_bind> by lazy { getMB("_OS", "set_screen_orientation") }
-        fun setScreenOrientation(orientation: Int) {
-            _icall_Unit_Int(setScreenOrientationMethodBind, this.rawMemory, orientation)
+        fun setScreenOrientation(orientation: Long) {
+            _icall_Unit_Long(setScreenOrientationMethodBind, this.rawMemory, orientation)
         }
 
 
         private val getScreenOrientationMethodBind: CPointer<godot_method_bind> by lazy { getMB("_OS", "get_screen_orientation") }
         fun getScreenOrientation(): OS.ScreenOrientation {
-            return OS.ScreenOrientation.fromInt(_icall_Int(getScreenOrientationMethodBind, this.rawMemory))
+            return OS.ScreenOrientation.fromInt(_icall_Long(getScreenOrientationMethodBind, this.rawMemory))
         }
 
 
@@ -498,8 +498,8 @@ open class OS : Object {
 
 
         private val getProcessorCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("_OS", "get_processor_count") }
-        fun getProcessorCount(): Int {
-            return _icall_Int(getProcessorCountMethodBind, this.rawMemory)
+        fun getProcessorCount(): Long {
+            return _icall_Long(getProcessorCountMethodBind, this.rawMemory)
         }
 
 
@@ -510,26 +510,26 @@ open class OS : Object {
 
 
         private val executeMethodBind: CPointer<godot_method_bind> by lazy { getMB("_OS", "execute") }
-        fun execute(path: String, arguments: PoolStringArray, blocking: Boolean, output: GDArray = GDArray()): Int {
-            return _icall_Int_String_PoolStringArray_Boolean_GDArray(executeMethodBind, this.rawMemory, path, arguments, blocking, output)
+        fun execute(path: String, arguments: PoolStringArray, blocking: Boolean, output: GDArray = GDArray()): Long {
+            return _icall_Long_String_PoolStringArray_Boolean_GDArray(executeMethodBind, this.rawMemory, path, arguments, blocking, output)
         }
 
 
         private val killMethodBind: CPointer<godot_method_bind> by lazy { getMB("_OS", "kill") }
-        fun kill(pid: Int): GodotError {
-            return GodotError.fromInt(_icall_Int_Int(killMethodBind, this.rawMemory, pid))
+        fun kill(pid: Long): GodotError {
+            return GodotError.fromInt(_icall_Long_Long(killMethodBind, this.rawMemory, pid))
         }
 
 
         private val shellOpenMethodBind: CPointer<godot_method_bind> by lazy { getMB("_OS", "shell_open") }
         fun shellOpen(uri: String): GodotError {
-            return GodotError.fromInt(_icall_Int_String(shellOpenMethodBind, this.rawMemory, uri))
+            return GodotError.fromInt(_icall_Long_String(shellOpenMethodBind, this.rawMemory, uri))
         }
 
 
         private val getProcessIdMethodBind: CPointer<godot_method_bind> by lazy { getMB("_OS", "get_process_id") }
-        fun getProcessId(): Int {
-            return _icall_Int(getProcessIdMethodBind, this.rawMemory)
+        fun getProcessId(): Long {
+            return _icall_Long(getProcessIdMethodBind, this.rawMemory)
         }
 
 
@@ -582,26 +582,26 @@ open class OS : Object {
 
 
         private val getUnixTimeMethodBind: CPointer<godot_method_bind> by lazy { getMB("_OS", "get_unix_time") }
-        fun getUnixTime(): Int {
-            return _icall_Int(getUnixTimeMethodBind, this.rawMemory)
+        fun getUnixTime(): Long {
+            return _icall_Long(getUnixTimeMethodBind, this.rawMemory)
         }
 
 
         private val getDatetimeFromUnixTimeMethodBind: CPointer<godot_method_bind> by lazy { getMB("_OS", "get_datetime_from_unix_time") }
-        fun getDatetimeFromUnixTime(unixTimeVal: Int): Dictionary {
-            return _icall_Dictionary_Int(getDatetimeFromUnixTimeMethodBind, this.rawMemory, unixTimeVal)
+        fun getDatetimeFromUnixTime(unixTimeVal: Long): Dictionary {
+            return _icall_Dictionary_Long(getDatetimeFromUnixTimeMethodBind, this.rawMemory, unixTimeVal)
         }
 
 
         private val getUnixTimeFromDatetimeMethodBind: CPointer<godot_method_bind> by lazy { getMB("_OS", "get_unix_time_from_datetime") }
-        fun getUnixTimeFromDatetime(datetime: Dictionary): Int {
-            return _icall_Int_Dictionary(getUnixTimeFromDatetimeMethodBind, this.rawMemory, datetime)
+        fun getUnixTimeFromDatetime(datetime: Dictionary): Long {
+            return _icall_Long_Dictionary(getUnixTimeFromDatetimeMethodBind, this.rawMemory, datetime)
         }
 
 
         private val getSystemTimeSecsMethodBind: CPointer<godot_method_bind> by lazy { getMB("_OS", "get_system_time_secs") }
-        fun getSystemTimeSecs(): Int {
-            return _icall_Int(getSystemTimeSecsMethodBind, this.rawMemory)
+        fun getSystemTimeSecs(): Long {
+            return _icall_Long(getSystemTimeSecsMethodBind, this.rawMemory)
         }
 
 
@@ -612,44 +612,44 @@ open class OS : Object {
 
 
         private val getExitCodeMethodBind: CPointer<godot_method_bind> by lazy { getMB("_OS", "get_exit_code") }
-        fun getExitCode(): Int {
-            return _icall_Int(getExitCodeMethodBind, this.rawMemory)
+        fun getExitCode(): Long {
+            return _icall_Long(getExitCodeMethodBind, this.rawMemory)
         }
 
 
         private val setExitCodeMethodBind: CPointer<godot_method_bind> by lazy { getMB("_OS", "set_exit_code") }
-        fun setExitCode(code: Int) {
-            _icall_Unit_Int(setExitCodeMethodBind, this.rawMemory, code)
+        fun setExitCode(code: Long) {
+            _icall_Unit_Long(setExitCodeMethodBind, this.rawMemory, code)
         }
 
 
         private val delayUsecMethodBind: CPointer<godot_method_bind> by lazy { getMB("_OS", "delay_usec") }
-        fun delayUsec(usec: Int) {
-            _icall_Unit_Int(delayUsecMethodBind, this.rawMemory, usec)
+        fun delayUsec(usec: Long) {
+            _icall_Unit_Long(delayUsecMethodBind, this.rawMemory, usec)
         }
 
 
         private val delayMsecMethodBind: CPointer<godot_method_bind> by lazy { getMB("_OS", "delay_msec") }
-        fun delayMsec(msec: Int) {
-            _icall_Unit_Int(delayMsecMethodBind, this.rawMemory, msec)
+        fun delayMsec(msec: Long) {
+            _icall_Unit_Long(delayMsecMethodBind, this.rawMemory, msec)
         }
 
 
         private val getTicksMsecMethodBind: CPointer<godot_method_bind> by lazy { getMB("_OS", "get_ticks_msec") }
-        fun getTicksMsec(): Int {
-            return _icall_Int(getTicksMsecMethodBind, this.rawMemory)
+        fun getTicksMsec(): Long {
+            return _icall_Long(getTicksMsecMethodBind, this.rawMemory)
         }
 
 
         private val getTicksUsecMethodBind: CPointer<godot_method_bind> by lazy { getMB("_OS", "get_ticks_usec") }
-        fun getTicksUsec(): Int {
-            return _icall_Int(getTicksUsecMethodBind, this.rawMemory)
+        fun getTicksUsec(): Long {
+            return _icall_Long(getTicksUsecMethodBind, this.rawMemory)
         }
 
 
         private val getSplashTickMsecMethodBind: CPointer<godot_method_bind> by lazy { getMB("_OS", "get_splash_tick_msec") }
-        fun getSplashTickMsec(): Int {
-            return _icall_Int(getSplashTickMsecMethodBind, this.rawMemory)
+        fun getSplashTickMsec(): Long {
+            return _icall_Long(getSplashTickMsecMethodBind, this.rawMemory)
         }
 
 
@@ -732,8 +732,8 @@ open class OS : Object {
 
 
         private val getVirtualKeyboardHeightMethodBind: CPointer<godot_method_bind> by lazy { getMB("_OS", "get_virtual_keyboard_height") }
-        fun getVirtualKeyboardHeight(): Int {
-            return _icall_Int(getVirtualKeyboardHeightMethodBind, this.rawMemory)
+        fun getVirtualKeyboardHeight(): Long {
+            return _icall_Long(getVirtualKeyboardHeightMethodBind, this.rawMemory)
         }
 
 
@@ -750,20 +750,20 @@ open class OS : Object {
 
 
         private val getStaticMemoryUsageMethodBind: CPointer<godot_method_bind> by lazy { getMB("_OS", "get_static_memory_usage") }
-        fun getStaticMemoryUsage(): Int {
-            return _icall_Int(getStaticMemoryUsageMethodBind, this.rawMemory)
+        fun getStaticMemoryUsage(): Long {
+            return _icall_Long(getStaticMemoryUsageMethodBind, this.rawMemory)
         }
 
 
         private val getStaticMemoryPeakUsageMethodBind: CPointer<godot_method_bind> by lazy { getMB("_OS", "get_static_memory_peak_usage") }
-        fun getStaticMemoryPeakUsage(): Int {
-            return _icall_Int(getStaticMemoryPeakUsageMethodBind, this.rawMemory)
+        fun getStaticMemoryPeakUsage(): Long {
+            return _icall_Long(getStaticMemoryPeakUsageMethodBind, this.rawMemory)
         }
 
 
         private val getDynamicMemoryUsageMethodBind: CPointer<godot_method_bind> by lazy { getMB("_OS", "get_dynamic_memory_usage") }
-        fun getDynamicMemoryUsage(): Int {
-            return _icall_Int(getDynamicMemoryUsageMethodBind, this.rawMemory)
+        fun getDynamicMemoryUsage(): Long {
+            return _icall_Long(getDynamicMemoryUsageMethodBind, this.rawMemory)
         }
 
 
@@ -774,8 +774,8 @@ open class OS : Object {
 
 
         private val getSystemDirMethodBind: CPointer<godot_method_bind> by lazy { getMB("_OS", "get_system_dir") }
-        fun getSystemDir(dir: Int): String {
-            return _icall_String_Int(getSystemDirMethodBind, this.rawMemory, dir)
+        fun getSystemDir(dir: Long): String {
+            return _icall_String_Long(getSystemDirMethodBind, this.rawMemory, dir)
         }
 
 
@@ -804,8 +804,8 @@ open class OS : Object {
 
 
         private val nativeVideoPlayMethodBind: CPointer<godot_method_bind> by lazy { getMB("_OS", "native_video_play") }
-        fun nativeVideoPlay(path: String, volume: Float, audioTrack: String, subtitleTrack: String): GodotError {
-            return GodotError.fromInt(_icall_Int_String_Float_String_String(nativeVideoPlayMethodBind, this.rawMemory, path, volume, audioTrack, subtitleTrack))
+        fun nativeVideoPlay(path: String, volume: Double, audioTrack: String, subtitleTrack: String): GodotError {
+            return GodotError.fromInt(_icall_Long_String_Double_String_String(nativeVideoPlayMethodBind, this.rawMemory, path, volume, audioTrack, subtitleTrack))
         }
 
 
@@ -834,20 +834,20 @@ open class OS : Object {
 
 
         private val getScancodeStringMethodBind: CPointer<godot_method_bind> by lazy { getMB("_OS", "get_scancode_string") }
-        fun getScancodeString(code: Int): String {
-            return _icall_String_Int(getScancodeStringMethodBind, this.rawMemory, code)
+        fun getScancodeString(code: Long): String {
+            return _icall_String_Long(getScancodeStringMethodBind, this.rawMemory, code)
         }
 
 
         private val isScancodeUnicodeMethodBind: CPointer<godot_method_bind> by lazy { getMB("_OS", "is_scancode_unicode") }
-        fun isScancodeUnicode(code: Int): Boolean {
-            return _icall_Boolean_Int(isScancodeUnicodeMethodBind, this.rawMemory, code)
+        fun isScancodeUnicode(code: Long): Boolean {
+            return _icall_Boolean_Long(isScancodeUnicodeMethodBind, this.rawMemory, code)
         }
 
 
         private val findScancodeFromStringMethodBind: CPointer<godot_method_bind> by lazy { getMB("_OS", "find_scancode_from_string") }
-        fun findScancodeFromString(string: String): Int {
-            return _icall_Int_String(findScancodeFromStringMethodBind, this.rawMemory, string)
+        fun findScancodeFromString(string: String): Long {
+            return _icall_Long_String(findScancodeFromStringMethodBind, this.rawMemory, string)
         }
 
 
@@ -865,7 +865,7 @@ open class OS : Object {
 
         private val setThreadNameMethodBind: CPointer<godot_method_bind> by lazy { getMB("_OS", "set_thread_name") }
         fun setThreadName(name: String): GodotError {
-            return GodotError.fromInt(_icall_Int_String(setThreadNameMethodBind, this.rawMemory, name))
+            return GodotError.fromInt(_icall_Long_String(setThreadNameMethodBind, this.rawMemory, name))
         }
 
 
@@ -889,19 +889,19 @@ open class OS : Object {
 
         private val getPowerStateMethodBind: CPointer<godot_method_bind> by lazy { getMB("_OS", "get_power_state") }
         fun getPowerState(): OS.PowerState {
-            return OS.PowerState.fromInt(_icall_Int(getPowerStateMethodBind, this.rawMemory))
+            return OS.PowerState.fromInt(_icall_Long(getPowerStateMethodBind, this.rawMemory))
         }
 
 
         private val getPowerSecondsLeftMethodBind: CPointer<godot_method_bind> by lazy { getMB("_OS", "get_power_seconds_left") }
-        fun getPowerSecondsLeft(): Int {
-            return _icall_Int(getPowerSecondsLeftMethodBind, this.rawMemory)
+        fun getPowerSecondsLeft(): Long {
+            return _icall_Long(getPowerSecondsLeftMethodBind, this.rawMemory)
         }
 
 
         private val getPowerPercentLeftMethodBind: CPointer<godot_method_bind> by lazy { getMB("_OS", "get_power_percent_left") }
-        fun getPowerPercentLeft(): Int {
-            return _icall_Int(getPowerPercentLeftMethodBind, this.rawMemory)
+        fun getPowerPercentLeft(): Long {
+            return _icall_Long(getPowerPercentLeftMethodBind, this.rawMemory)
         }
 
 

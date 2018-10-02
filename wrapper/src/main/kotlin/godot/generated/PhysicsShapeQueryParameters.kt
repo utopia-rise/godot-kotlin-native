@@ -41,9 +41,9 @@ open class PhysicsShapeQueryParameters : Reference {
 
 
     // Properties
-    open var collisionMask: Int
-        get() = _icall_Int(getCollisionMaskMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setCollisionMaskMethodBind, this.rawMemory, value)
+    open var collisionMask: Long
+        get() = _icall_Long(getCollisionMaskMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setCollisionMaskMethodBind, this.rawMemory, value)
 
 
     open var exclude: GDArray
@@ -51,9 +51,9 @@ open class PhysicsShapeQueryParameters : Reference {
         set(value) = _icall_Unit_GDArray(setExcludeMethodBind, this.rawMemory, value)
 
 
-    open var margin: Float
-        get() = _icall_Float(getMarginMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setMarginMethodBind, this.rawMemory, value)
+    open var margin: Double
+        get() = _icall_Double(getMarginMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setMarginMethodBind, this.rawMemory, value)
 
 
     open var shapeRid: RID
@@ -104,26 +104,26 @@ open class PhysicsShapeQueryParameters : Reference {
 
 
     private val setMarginMethodBind: CPointer<godot_method_bind> by lazy { getMB("PhysicsShapeQueryParameters", "set_margin") }
-    open fun setMargin(margin: Float) {
-        _icall_Unit_Float(setMarginMethodBind, this.rawMemory, margin)
+    open fun setMargin(margin: Double) {
+        _icall_Unit_Double(setMarginMethodBind, this.rawMemory, margin)
     }
 
 
     private val getMarginMethodBind: CPointer<godot_method_bind> by lazy { getMB("PhysicsShapeQueryParameters", "get_margin") }
-    open fun getMargin(): Float {
-        return _icall_Float(getMarginMethodBind, this.rawMemory)
+    open fun getMargin(): Double {
+        return _icall_Double(getMarginMethodBind, this.rawMemory)
     }
 
 
     private val setCollisionMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("PhysicsShapeQueryParameters", "set_collision_mask") }
-    open fun setCollisionMask(collisionMask: Int) {
-        _icall_Unit_Int(setCollisionMaskMethodBind, this.rawMemory, collisionMask)
+    open fun setCollisionMask(collisionMask: Long) {
+        _icall_Unit_Long(setCollisionMaskMethodBind, this.rawMemory, collisionMask)
     }
 
 
     private val getCollisionMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("PhysicsShapeQueryParameters", "get_collision_mask") }
-    open fun getCollisionMask(): Int {
-        return _icall_Int(getCollisionMaskMethodBind, this.rawMemory)
+    open fun getCollisionMask(): Long {
+        return _icall_Long(getCollisionMaskMethodBind, this.rawMemory)
     }
 
 

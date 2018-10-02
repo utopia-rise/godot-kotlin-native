@@ -19,7 +19,7 @@ open class VisualScriptBuiltinFunc : VisualScriptNode {
 
     // Enums 
 
-    enum class BuiltinFunc(val id: Int) {
+    enum class BuiltinFunc(val id: Long) {
         MATH_SIN(0),
         MATH_COS(1),
         MATH_TAN(2),
@@ -87,7 +87,7 @@ open class VisualScriptBuiltinFunc : VisualScriptNode {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -108,93 +108,93 @@ open class VisualScriptBuiltinFunc : VisualScriptNode {
 
 
         // Constants
-        const val MATH_SIN: Int = 0
-        const val MATH_COS: Int = 1
-        const val MATH_TAN: Int = 2
-        const val MATH_SINH: Int = 3
-        const val MATH_COSH: Int = 4
-        const val MATH_TANH: Int = 5
-        const val MATH_ASIN: Int = 6
-        const val MATH_ACOS: Int = 7
-        const val MATH_ATAN: Int = 8
-        const val MATH_ATAN2: Int = 9
-        const val MATH_SQRT: Int = 10
-        const val MATH_FMOD: Int = 11
-        const val MATH_FPOSMOD: Int = 12
-        const val MATH_FLOOR: Int = 13
-        const val MATH_CEIL: Int = 14
-        const val MATH_ROUND: Int = 15
-        const val MATH_ABS: Int = 16
-        const val MATH_SIGN: Int = 17
-        const val MATH_POW: Int = 18
-        const val MATH_LOG: Int = 19
-        const val MATH_EXP: Int = 20
-        const val MATH_ISNAN: Int = 21
-        const val MATH_ISINF: Int = 22
-        const val MATH_EASE: Int = 23
-        const val MATH_DECIMALS: Int = 24
-        const val MATH_STEPIFY: Int = 25
-        const val MATH_LERP: Int = 26
-        const val MATH_INVERSE_LERP: Int = 27
-        const val MATH_RANGE_LERP: Int = 28
-        const val MATH_DECTIME: Int = 29
-        const val MATH_RANDOMIZE: Int = 30
-        const val MATH_RAND: Int = 31
-        const val MATH_RANDF: Int = 32
-        const val MATH_RANDOM: Int = 33
-        const val MATH_SEED: Int = 34
-        const val MATH_RANDSEED: Int = 35
-        const val MATH_DEG2RAD: Int = 36
-        const val MATH_RAD2DEG: Int = 37
-        const val MATH_LINEAR2DB: Int = 38
-        const val MATH_DB2LINEAR: Int = 39
-        const val MATH_POLAR2CARTESIAN: Int = 40
-        const val MATH_CARTESIAN2POLAR: Int = 41
-        const val MATH_WRAP: Int = 42
-        const val MATH_WRAPF: Int = 43
-        const val LOGIC_MAX: Int = 44
-        const val LOGIC_MIN: Int = 45
-        const val LOGIC_CLAMP: Int = 46
-        const val LOGIC_NEAREST_PO2: Int = 47
-        const val OBJ_WEAKREF: Int = 48
-        const val FUNC_FUNCREF: Int = 49
-        const val TYPE_CONVERT: Int = 50
-        const val TYPE_OF: Int = 51
-        const val TYPE_EXISTS: Int = 52
-        const val TEXT_CHAR: Int = 53
-        const val TEXT_STR: Int = 54
-        const val TEXT_PRINT: Int = 55
-        const val TEXT_PRINTERR: Int = 56
-        const val TEXT_PRINTRAW: Int = 57
-        const val VAR_TO_STR: Int = 58
-        const val STR_TO_VAR: Int = 59
-        const val VAR_TO_BYTES: Int = 60
-        const val BYTES_TO_VAR: Int = 61
-        const val COLORN: Int = 62
-        const val FUNC_MAX: Int = 63
+        const val MATH_SIN: Long = 0
+        const val MATH_COS: Long = 1
+        const val MATH_TAN: Long = 2
+        const val MATH_SINH: Long = 3
+        const val MATH_COSH: Long = 4
+        const val MATH_TANH: Long = 5
+        const val MATH_ASIN: Long = 6
+        const val MATH_ACOS: Long = 7
+        const val MATH_ATAN: Long = 8
+        const val MATH_ATAN2: Long = 9
+        const val MATH_SQRT: Long = 10
+        const val MATH_FMOD: Long = 11
+        const val MATH_FPOSMOD: Long = 12
+        const val MATH_FLOOR: Long = 13
+        const val MATH_CEIL: Long = 14
+        const val MATH_ROUND: Long = 15
+        const val MATH_ABS: Long = 16
+        const val MATH_SIGN: Long = 17
+        const val MATH_POW: Long = 18
+        const val MATH_LOG: Long = 19
+        const val MATH_EXP: Long = 20
+        const val MATH_ISNAN: Long = 21
+        const val MATH_ISINF: Long = 22
+        const val MATH_EASE: Long = 23
+        const val MATH_DECIMALS: Long = 24
+        const val MATH_STEPIFY: Long = 25
+        const val MATH_LERP: Long = 26
+        const val MATH_INVERSE_LERP: Long = 27
+        const val MATH_RANGE_LERP: Long = 28
+        const val MATH_DECTIME: Long = 29
+        const val MATH_RANDOMIZE: Long = 30
+        const val MATH_RAND: Long = 31
+        const val MATH_RANDF: Long = 32
+        const val MATH_RANDOM: Long = 33
+        const val MATH_SEED: Long = 34
+        const val MATH_RANDSEED: Long = 35
+        const val MATH_DEG2RAD: Long = 36
+        const val MATH_RAD2DEG: Long = 37
+        const val MATH_LINEAR2DB: Long = 38
+        const val MATH_DB2LINEAR: Long = 39
+        const val MATH_POLAR2CARTESIAN: Long = 40
+        const val MATH_CARTESIAN2POLAR: Long = 41
+        const val MATH_WRAP: Long = 42
+        const val MATH_WRAPF: Long = 43
+        const val LOGIC_MAX: Long = 44
+        const val LOGIC_MIN: Long = 45
+        const val LOGIC_CLAMP: Long = 46
+        const val LOGIC_NEAREST_PO2: Long = 47
+        const val OBJ_WEAKREF: Long = 48
+        const val FUNC_FUNCREF: Long = 49
+        const val TYPE_CONVERT: Long = 50
+        const val TYPE_OF: Long = 51
+        const val TYPE_EXISTS: Long = 52
+        const val TEXT_CHAR: Long = 53
+        const val TEXT_STR: Long = 54
+        const val TEXT_PRINT: Long = 55
+        const val TEXT_PRINTERR: Long = 56
+        const val TEXT_PRINTRAW: Long = 57
+        const val VAR_TO_STR: Long = 58
+        const val STR_TO_VAR: Long = 59
+        const val VAR_TO_BYTES: Long = 60
+        const val BYTES_TO_VAR: Long = 61
+        const val COLORN: Long = 62
+        const val FUNC_MAX: Long = 63
 
 
     }
 
 
     // Properties
-    open var function: Int
-        get() = _icall_Int(getFuncMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setFuncMethodBind, this.rawMemory, value)
+    open var function: Long
+        get() = _icall_Long(getFuncMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setFuncMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setFuncMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptBuiltinFunc", "set_func") }
-    open fun setFunc(which: Int) {
-        _icall_Unit_Int(setFuncMethodBind, this.rawMemory, which)
+    open fun setFunc(which: Long) {
+        _icall_Unit_Long(setFuncMethodBind, this.rawMemory, which)
     }
 
 
     private val getFuncMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptBuiltinFunc", "get_func") }
     open fun getFunc(): VisualScriptBuiltinFunc.BuiltinFunc {
-        return VisualScriptBuiltinFunc.BuiltinFunc.fromInt(_icall_Int(getFuncMethodBind, this.rawMemory))
+        return VisualScriptBuiltinFunc.BuiltinFunc.fromInt(_icall_Long(getFuncMethodBind, this.rawMemory))
     }
 
 

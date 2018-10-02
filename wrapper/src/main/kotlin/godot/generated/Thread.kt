@@ -19,14 +19,14 @@ open class Thread : Reference {
 
     // Enums 
 
-    enum class Priority(val id: Int) {
+    enum class Priority(val id: Long) {
         PRIORITY_LOW(0),
         PRIORITY_NORMAL(1),
         PRIORITY_HIGH(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -45,9 +45,9 @@ open class Thread : Reference {
 
 
         // Constants
-        const val PRIORITY_LOW: Int = 0
-        const val PRIORITY_NORMAL: Int = 1
-        const val PRIORITY_HIGH: Int = 2
+        const val PRIORITY_LOW: Long = 0
+        const val PRIORITY_NORMAL: Long = 1
+        const val PRIORITY_HIGH: Long = 2
 
 
     }
@@ -58,8 +58,8 @@ open class Thread : Reference {
 
     // Methods
     private val startMethodBind: CPointer<godot_method_bind> by lazy { getMB("_Thread", "start") }
-    open fun start(instance: Object, method: String, userdata: Variant, priority: Int = 1): GodotError {
-        return GodotError.fromInt(_icall_Int_Object_String_Variant_Int(startMethodBind, this.rawMemory, instance, method, userdata, priority))
+    open fun start(instance: Object, method: String, userdata: Variant, priority: Long = 1): GodotError {
+        return GodotError.fromInt(_icall_Long_Object_String_Variant_Long(startMethodBind, this.rawMemory, instance, method, userdata, priority))
     }
 
 

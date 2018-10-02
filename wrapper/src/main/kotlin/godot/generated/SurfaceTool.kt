@@ -45,8 +45,8 @@ open class SurfaceTool : Reference {
 
     // Methods
     private val beginMethodBind: CPointer<godot_method_bind> by lazy { getMB("SurfaceTool", "begin") }
-    open fun begin(primitive: Int) {
-        _icall_Unit_Int(beginMethodBind, this.rawMemory, primitive)
+    open fun begin(primitive: Long) {
+        _icall_Unit_Long(beginMethodBind, this.rawMemory, primitive)
     }
 
 
@@ -111,8 +111,8 @@ open class SurfaceTool : Reference {
 
 
     private val addIndexMethodBind: CPointer<godot_method_bind> by lazy { getMB("SurfaceTool", "add_index") }
-    open fun addIndex(index: Int) {
-        _icall_Unit_Int(addIndexMethodBind, this.rawMemory, index)
+    open fun addIndex(index: Long) {
+        _icall_Unit_Long(addIndexMethodBind, this.rawMemory, index)
     }
 
 
@@ -141,8 +141,8 @@ open class SurfaceTool : Reference {
 
 
     private val addToFormatMethodBind: CPointer<godot_method_bind> by lazy { getMB("SurfaceTool", "add_to_format") }
-    open fun addToFormat(flags: Int) {
-        _icall_Unit_Int(addToFormatMethodBind, this.rawMemory, flags)
+    open fun addToFormat(flags: Long) {
+        _icall_Unit_Long(addToFormatMethodBind, this.rawMemory, flags)
     }
 
 
@@ -159,20 +159,20 @@ open class SurfaceTool : Reference {
 
 
     private val createFromMethodBind: CPointer<godot_method_bind> by lazy { getMB("SurfaceTool", "create_from") }
-    open fun createFrom(existing: Mesh, surface: Int) {
-        _icall_Unit_Object_Int(createFromMethodBind, this.rawMemory, existing, surface)
+    open fun createFrom(existing: Mesh, surface: Long) {
+        _icall_Unit_Object_Long(createFromMethodBind, this.rawMemory, existing, surface)
     }
 
 
     private val appendFromMethodBind: CPointer<godot_method_bind> by lazy { getMB("SurfaceTool", "append_from") }
-    open fun appendFrom(existing: Mesh, surface: Int, transform: Transform) {
-        _icall_Unit_Object_Int_Transform(appendFromMethodBind, this.rawMemory, existing, surface, transform)
+    open fun appendFrom(existing: Mesh, surface: Long, transform: Transform) {
+        _icall_Unit_Object_Long_Transform(appendFromMethodBind, this.rawMemory, existing, surface, transform)
     }
 
 
     private val commitMethodBind: CPointer<godot_method_bind> by lazy { getMB("SurfaceTool", "commit") }
-    open fun commit(existing: ArrayMesh, flags: Int = 97280): ArrayMesh {
-        return _icall_ArrayMesh_Object_Int(commitMethodBind, this.rawMemory, existing, flags)
+    open fun commit(existing: ArrayMesh, flags: Long = 97280): ArrayMesh {
+        return _icall_ArrayMesh_Object_Long(commitMethodBind, this.rawMemory, existing, flags)
     }
 
 

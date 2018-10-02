@@ -58,7 +58,7 @@ open class WebSocketClient : WebSocketMultiplayerPeer {
     // Methods
     private val connectToUrlMethodBind: CPointer<godot_method_bind> by lazy { getMB("WebSocketClient", "connect_to_url") }
     open fun connectToUrl(url: String, protocols: PoolStringArray = PoolStringArray(), gdMpApi: Boolean = false): GodotError {
-        return GodotError.fromInt(_icall_Int_String_PoolStringArray_Boolean(connectToUrlMethodBind, this.rawMemory, url, protocols, gdMpApi))
+        return GodotError.fromInt(_icall_Long_String_PoolStringArray_Boolean(connectToUrlMethodBind, this.rawMemory, url, protocols, gdMpApi))
     }
 
 

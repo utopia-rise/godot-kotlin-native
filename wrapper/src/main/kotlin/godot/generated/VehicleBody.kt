@@ -45,57 +45,57 @@ open class VehicleBody : RigidBody {
 
 
     // Properties
-    open var engineForce: Float
-        get() = _icall_Float(getEngineForceMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setEngineForceMethodBind, this.rawMemory, value)
+    open var engineForce: Double
+        get() = _icall_Double(getEngineForceMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setEngineForceMethodBind, this.rawMemory, value)
 
 
-    open var brake: Float
-        get() = _icall_Float(getBrakeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setBrakeMethodBind, this.rawMemory, value)
+    open var brake: Double
+        get() = _icall_Double(getBrakeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setBrakeMethodBind, this.rawMemory, value)
 
 
-    open var steering: Float
-        get() = _icall_Float(getSteeringMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setSteeringMethodBind, this.rawMemory, value)
+    open var steering: Double
+        get() = _icall_Double(getSteeringMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setSteeringMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setEngineForceMethodBind: CPointer<godot_method_bind> by lazy { getMB("VehicleBody", "set_engine_force") }
-    open fun setEngineForce(engineForce: Float) {
-        _icall_Unit_Float(setEngineForceMethodBind, this.rawMemory, engineForce)
+    open fun setEngineForce(engineForce: Double) {
+        _icall_Unit_Double(setEngineForceMethodBind, this.rawMemory, engineForce)
     }
 
 
     private val getEngineForceMethodBind: CPointer<godot_method_bind> by lazy { getMB("VehicleBody", "get_engine_force") }
-    open fun getEngineForce(): Float {
-        return _icall_Float(getEngineForceMethodBind, this.rawMemory)
+    open fun getEngineForce(): Double {
+        return _icall_Double(getEngineForceMethodBind, this.rawMemory)
     }
 
 
     private val setBrakeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VehicleBody", "set_brake") }
-    open fun setBrake(brake: Float) {
-        _icall_Unit_Float(setBrakeMethodBind, this.rawMemory, brake)
+    open fun setBrake(brake: Double) {
+        _icall_Unit_Double(setBrakeMethodBind, this.rawMemory, brake)
     }
 
 
     private val getBrakeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VehicleBody", "get_brake") }
-    open fun getBrake(): Float {
-        return _icall_Float(getBrakeMethodBind, this.rawMemory)
+    open fun getBrake(): Double {
+        return _icall_Double(getBrakeMethodBind, this.rawMemory)
     }
 
 
     private val setSteeringMethodBind: CPointer<godot_method_bind> by lazy { getMB("VehicleBody", "set_steering") }
-    open fun setSteering(steering: Float) {
-        _icall_Unit_Float(setSteeringMethodBind, this.rawMemory, steering)
+    open fun setSteering(steering: Double) {
+        _icall_Unit_Double(setSteeringMethodBind, this.rawMemory, steering)
     }
 
 
     private val getSteeringMethodBind: CPointer<godot_method_bind> by lazy { getMB("VehicleBody", "get_steering") }
-    open fun getSteering(): Float {
-        return _icall_Float(getSteeringMethodBind, this.rawMemory)
+    open fun getSteering(): Double {
+        return _icall_Double(getSteeringMethodBind, this.rawMemory)
     }
 
 

@@ -52,25 +52,25 @@ open class ResourceInteractiveLoader : Reference {
 
     private val pollMethodBind: CPointer<godot_method_bind> by lazy { getMB("ResourceInteractiveLoader", "poll") }
     open fun poll(): GodotError {
-        return GodotError.fromInt(_icall_Int(pollMethodBind, this.rawMemory))
+        return GodotError.fromInt(_icall_Long(pollMethodBind, this.rawMemory))
     }
 
 
     private val waitMethodBind: CPointer<godot_method_bind> by lazy { getMB("ResourceInteractiveLoader", "wait") }
     open fun wait(): GodotError {
-        return GodotError.fromInt(_icall_Int(waitMethodBind, this.rawMemory))
+        return GodotError.fromInt(_icall_Long(waitMethodBind, this.rawMemory))
     }
 
 
     private val getStageMethodBind: CPointer<godot_method_bind> by lazy { getMB("ResourceInteractiveLoader", "get_stage") }
-    open fun getStage(): Int {
-        return _icall_Int(getStageMethodBind, this.rawMemory)
+    open fun getStage(): Long {
+        return _icall_Long(getStageMethodBind, this.rawMemory)
     }
 
 
     private val getStageCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("ResourceInteractiveLoader", "get_stage_count") }
-    open fun getStageCount(): Int {
-        return _icall_Int(getStageCountMethodBind, this.rawMemory)
+    open fun getStageCount(): Long {
+        return _icall_Long(getStageCountMethodBind, this.rawMemory)
     }
 
 

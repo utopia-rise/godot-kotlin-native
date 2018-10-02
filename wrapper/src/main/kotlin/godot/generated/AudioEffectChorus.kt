@@ -43,249 +43,249 @@ open class AudioEffectChorus : AudioEffect {
 
 
     // Properties
-    open var voiceCount: Int
-        get() = _icall_Int(getVoiceCountMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setVoiceCountMethodBind, this.rawMemory, value)
+    open var voiceCount: Long
+        get() = _icall_Long(getVoiceCountMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setVoiceCountMethodBind, this.rawMemory, value)
 
 
-    open var dry: Float
-        get() = _icall_Float(getDryMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setDryMethodBind, this.rawMemory, value)
+    open var dry: Double
+        get() = _icall_Double(getDryMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setDryMethodBind, this.rawMemory, value)
 
 
-    open var wet: Float
-        get() = _icall_Float(getWetMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setWetMethodBind, this.rawMemory, value)
+    open var wet: Double
+        get() = _icall_Double(getWetMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setWetMethodBind, this.rawMemory, value)
 
 
-    open var voice_1_delayMs: Float
-        get() = _icall_Float_Int(getVoiceDelayMsMethodBind, this.rawMemory, 0)
-        set(value) = _icall_Unit_Int_Float(setVoiceDelayMsMethodBind, this.rawMemory, 0, value)
+    open var voice_1_delayMs: Double
+        get() = _icall_Double_Long(getVoiceDelayMsMethodBind, this.rawMemory, 0)
+        set(value) = _icall_Unit_Long_Double(setVoiceDelayMsMethodBind, this.rawMemory, 0, value)
 
 
-    open var voice_1_rateHz: Float
-        get() = _icall_Float_Int(getVoiceRateHzMethodBind, this.rawMemory, 0)
-        set(value) = _icall_Unit_Int_Float(setVoiceRateHzMethodBind, this.rawMemory, 0, value)
+    open var voice_1_rateHz: Double
+        get() = _icall_Double_Long(getVoiceRateHzMethodBind, this.rawMemory, 0)
+        set(value) = _icall_Unit_Long_Double(setVoiceRateHzMethodBind, this.rawMemory, 0, value)
 
 
-    open var voice_1_depthMs: Float
-        get() = _icall_Float_Int(getVoiceDepthMsMethodBind, this.rawMemory, 0)
-        set(value) = _icall_Unit_Int_Float(setVoiceDepthMsMethodBind, this.rawMemory, 0, value)
+    open var voice_1_depthMs: Double
+        get() = _icall_Double_Long(getVoiceDepthMsMethodBind, this.rawMemory, 0)
+        set(value) = _icall_Unit_Long_Double(setVoiceDepthMsMethodBind, this.rawMemory, 0, value)
 
 
-    open var voice_1_levelDb: Float
-        get() = _icall_Float_Int(getVoiceLevelDbMethodBind, this.rawMemory, 0)
-        set(value) = _icall_Unit_Int_Float(setVoiceLevelDbMethodBind, this.rawMemory, 0, value)
+    open var voice_1_levelDb: Double
+        get() = _icall_Double_Long(getVoiceLevelDbMethodBind, this.rawMemory, 0)
+        set(value) = _icall_Unit_Long_Double(setVoiceLevelDbMethodBind, this.rawMemory, 0, value)
 
 
-    open var voice_1_cutoffHz: Float
-        get() = _icall_Float_Int(getVoiceCutoffHzMethodBind, this.rawMemory, 0)
-        set(value) = _icall_Unit_Int_Float(setVoiceCutoffHzMethodBind, this.rawMemory, 0, value)
+    open var voice_1_cutoffHz: Double
+        get() = _icall_Double_Long(getVoiceCutoffHzMethodBind, this.rawMemory, 0)
+        set(value) = _icall_Unit_Long_Double(setVoiceCutoffHzMethodBind, this.rawMemory, 0, value)
 
 
-    open var voice_1_pan: Float
-        get() = _icall_Float_Int(getVoicePanMethodBind, this.rawMemory, 0)
-        set(value) = _icall_Unit_Int_Float(setVoicePanMethodBind, this.rawMemory, 0, value)
+    open var voice_1_pan: Double
+        get() = _icall_Double_Long(getVoicePanMethodBind, this.rawMemory, 0)
+        set(value) = _icall_Unit_Long_Double(setVoicePanMethodBind, this.rawMemory, 0, value)
 
 
-    open var voice_2_delayMs: Float
-        get() = _icall_Float_Int(getVoiceDelayMsMethodBind, this.rawMemory, 1)
-        set(value) = _icall_Unit_Int_Float(setVoiceDelayMsMethodBind, this.rawMemory, 1, value)
+    open var voice_2_delayMs: Double
+        get() = _icall_Double_Long(getVoiceDelayMsMethodBind, this.rawMemory, 1)
+        set(value) = _icall_Unit_Long_Double(setVoiceDelayMsMethodBind, this.rawMemory, 1, value)
 
 
-    open var voice_2_rateHz: Float
-        get() = _icall_Float_Int(getVoiceRateHzMethodBind, this.rawMemory, 1)
-        set(value) = _icall_Unit_Int_Float(setVoiceRateHzMethodBind, this.rawMemory, 1, value)
+    open var voice_2_rateHz: Double
+        get() = _icall_Double_Long(getVoiceRateHzMethodBind, this.rawMemory, 1)
+        set(value) = _icall_Unit_Long_Double(setVoiceRateHzMethodBind, this.rawMemory, 1, value)
 
 
-    open var voice_2_depthMs: Float
-        get() = _icall_Float_Int(getVoiceDepthMsMethodBind, this.rawMemory, 1)
-        set(value) = _icall_Unit_Int_Float(setVoiceDepthMsMethodBind, this.rawMemory, 1, value)
+    open var voice_2_depthMs: Double
+        get() = _icall_Double_Long(getVoiceDepthMsMethodBind, this.rawMemory, 1)
+        set(value) = _icall_Unit_Long_Double(setVoiceDepthMsMethodBind, this.rawMemory, 1, value)
 
 
-    open var voice_2_levelDb: Float
-        get() = _icall_Float_Int(getVoiceLevelDbMethodBind, this.rawMemory, 1)
-        set(value) = _icall_Unit_Int_Float(setVoiceLevelDbMethodBind, this.rawMemory, 1, value)
+    open var voice_2_levelDb: Double
+        get() = _icall_Double_Long(getVoiceLevelDbMethodBind, this.rawMemory, 1)
+        set(value) = _icall_Unit_Long_Double(setVoiceLevelDbMethodBind, this.rawMemory, 1, value)
 
 
-    open var voice_2_cutoffHz: Float
-        get() = _icall_Float_Int(getVoiceCutoffHzMethodBind, this.rawMemory, 1)
-        set(value) = _icall_Unit_Int_Float(setVoiceCutoffHzMethodBind, this.rawMemory, 1, value)
+    open var voice_2_cutoffHz: Double
+        get() = _icall_Double_Long(getVoiceCutoffHzMethodBind, this.rawMemory, 1)
+        set(value) = _icall_Unit_Long_Double(setVoiceCutoffHzMethodBind, this.rawMemory, 1, value)
 
 
-    open var voice_2_pan: Float
-        get() = _icall_Float_Int(getVoicePanMethodBind, this.rawMemory, 1)
-        set(value) = _icall_Unit_Int_Float(setVoicePanMethodBind, this.rawMemory, 1, value)
+    open var voice_2_pan: Double
+        get() = _icall_Double_Long(getVoicePanMethodBind, this.rawMemory, 1)
+        set(value) = _icall_Unit_Long_Double(setVoicePanMethodBind, this.rawMemory, 1, value)
 
 
-    open var voice_3_delayMs: Float
-        get() = _icall_Float_Int(getVoiceDelayMsMethodBind, this.rawMemory, 2)
-        set(value) = _icall_Unit_Int_Float(setVoiceDelayMsMethodBind, this.rawMemory, 2, value)
+    open var voice_3_delayMs: Double
+        get() = _icall_Double_Long(getVoiceDelayMsMethodBind, this.rawMemory, 2)
+        set(value) = _icall_Unit_Long_Double(setVoiceDelayMsMethodBind, this.rawMemory, 2, value)
 
 
-    open var voice_3_rateHz: Float
-        get() = _icall_Float_Int(getVoiceRateHzMethodBind, this.rawMemory, 2)
-        set(value) = _icall_Unit_Int_Float(setVoiceRateHzMethodBind, this.rawMemory, 2, value)
+    open var voice_3_rateHz: Double
+        get() = _icall_Double_Long(getVoiceRateHzMethodBind, this.rawMemory, 2)
+        set(value) = _icall_Unit_Long_Double(setVoiceRateHzMethodBind, this.rawMemory, 2, value)
 
 
-    open var voice_3_depthMs: Float
-        get() = _icall_Float_Int(getVoiceDepthMsMethodBind, this.rawMemory, 2)
-        set(value) = _icall_Unit_Int_Float(setVoiceDepthMsMethodBind, this.rawMemory, 2, value)
+    open var voice_3_depthMs: Double
+        get() = _icall_Double_Long(getVoiceDepthMsMethodBind, this.rawMemory, 2)
+        set(value) = _icall_Unit_Long_Double(setVoiceDepthMsMethodBind, this.rawMemory, 2, value)
 
 
-    open var voice_3_levelDb: Float
-        get() = _icall_Float_Int(getVoiceLevelDbMethodBind, this.rawMemory, 2)
-        set(value) = _icall_Unit_Int_Float(setVoiceLevelDbMethodBind, this.rawMemory, 2, value)
+    open var voice_3_levelDb: Double
+        get() = _icall_Double_Long(getVoiceLevelDbMethodBind, this.rawMemory, 2)
+        set(value) = _icall_Unit_Long_Double(setVoiceLevelDbMethodBind, this.rawMemory, 2, value)
 
 
-    open var voice_3_cutoffHz: Float
-        get() = _icall_Float_Int(getVoiceCutoffHzMethodBind, this.rawMemory, 2)
-        set(value) = _icall_Unit_Int_Float(setVoiceCutoffHzMethodBind, this.rawMemory, 2, value)
+    open var voice_3_cutoffHz: Double
+        get() = _icall_Double_Long(getVoiceCutoffHzMethodBind, this.rawMemory, 2)
+        set(value) = _icall_Unit_Long_Double(setVoiceCutoffHzMethodBind, this.rawMemory, 2, value)
 
 
-    open var voice_3_pan: Float
-        get() = _icall_Float_Int(getVoicePanMethodBind, this.rawMemory, 2)
-        set(value) = _icall_Unit_Int_Float(setVoicePanMethodBind, this.rawMemory, 2, value)
+    open var voice_3_pan: Double
+        get() = _icall_Double_Long(getVoicePanMethodBind, this.rawMemory, 2)
+        set(value) = _icall_Unit_Long_Double(setVoicePanMethodBind, this.rawMemory, 2, value)
 
 
-    open var voice_4_delayMs: Float
-        get() = _icall_Float_Int(getVoiceDelayMsMethodBind, this.rawMemory, 3)
-        set(value) = _icall_Unit_Int_Float(setVoiceDelayMsMethodBind, this.rawMemory, 3, value)
+    open var voice_4_delayMs: Double
+        get() = _icall_Double_Long(getVoiceDelayMsMethodBind, this.rawMemory, 3)
+        set(value) = _icall_Unit_Long_Double(setVoiceDelayMsMethodBind, this.rawMemory, 3, value)
 
 
-    open var voice_4_rateHz: Float
-        get() = _icall_Float_Int(getVoiceRateHzMethodBind, this.rawMemory, 3)
-        set(value) = _icall_Unit_Int_Float(setVoiceRateHzMethodBind, this.rawMemory, 3, value)
+    open var voice_4_rateHz: Double
+        get() = _icall_Double_Long(getVoiceRateHzMethodBind, this.rawMemory, 3)
+        set(value) = _icall_Unit_Long_Double(setVoiceRateHzMethodBind, this.rawMemory, 3, value)
 
 
-    open var voice_4_depthMs: Float
-        get() = _icall_Float_Int(getVoiceDepthMsMethodBind, this.rawMemory, 3)
-        set(value) = _icall_Unit_Int_Float(setVoiceDepthMsMethodBind, this.rawMemory, 3, value)
+    open var voice_4_depthMs: Double
+        get() = _icall_Double_Long(getVoiceDepthMsMethodBind, this.rawMemory, 3)
+        set(value) = _icall_Unit_Long_Double(setVoiceDepthMsMethodBind, this.rawMemory, 3, value)
 
 
-    open var voice_4_levelDb: Float
-        get() = _icall_Float_Int(getVoiceLevelDbMethodBind, this.rawMemory, 3)
-        set(value) = _icall_Unit_Int_Float(setVoiceLevelDbMethodBind, this.rawMemory, 3, value)
+    open var voice_4_levelDb: Double
+        get() = _icall_Double_Long(getVoiceLevelDbMethodBind, this.rawMemory, 3)
+        set(value) = _icall_Unit_Long_Double(setVoiceLevelDbMethodBind, this.rawMemory, 3, value)
 
 
-    open var voice_4_cutoffHz: Float
-        get() = _icall_Float_Int(getVoiceCutoffHzMethodBind, this.rawMemory, 3)
-        set(value) = _icall_Unit_Int_Float(setVoiceCutoffHzMethodBind, this.rawMemory, 3, value)
+    open var voice_4_cutoffHz: Double
+        get() = _icall_Double_Long(getVoiceCutoffHzMethodBind, this.rawMemory, 3)
+        set(value) = _icall_Unit_Long_Double(setVoiceCutoffHzMethodBind, this.rawMemory, 3, value)
 
 
-    open var voice_4_pan: Float
-        get() = _icall_Float_Int(getVoicePanMethodBind, this.rawMemory, 3)
-        set(value) = _icall_Unit_Int_Float(setVoicePanMethodBind, this.rawMemory, 3, value)
+    open var voice_4_pan: Double
+        get() = _icall_Double_Long(getVoicePanMethodBind, this.rawMemory, 3)
+        set(value) = _icall_Unit_Long_Double(setVoicePanMethodBind, this.rawMemory, 3, value)
 
 
 
 
     // Methods
     private val setVoiceCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectChorus", "set_voice_count") }
-    open fun setVoiceCount(voices: Int) {
-        _icall_Unit_Int(setVoiceCountMethodBind, this.rawMemory, voices)
+    open fun setVoiceCount(voices: Long) {
+        _icall_Unit_Long(setVoiceCountMethodBind, this.rawMemory, voices)
     }
 
 
     private val getVoiceCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectChorus", "get_voice_count") }
-    open fun getVoiceCount(): Int {
-        return _icall_Int(getVoiceCountMethodBind, this.rawMemory)
+    open fun getVoiceCount(): Long {
+        return _icall_Long(getVoiceCountMethodBind, this.rawMemory)
     }
 
 
     private val setVoiceDelayMsMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectChorus", "set_voice_delay_ms") }
-    open fun setVoiceDelayMs(voiceIdx: Int, delayMs: Float) {
-        _icall_Unit_Int_Float(setVoiceDelayMsMethodBind, this.rawMemory, voiceIdx, delayMs)
+    open fun setVoiceDelayMs(voiceIdx: Long, delayMs: Double) {
+        _icall_Unit_Long_Double(setVoiceDelayMsMethodBind, this.rawMemory, voiceIdx, delayMs)
     }
 
 
     private val getVoiceDelayMsMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectChorus", "get_voice_delay_ms") }
-    open fun getVoiceDelayMs(voiceIdx: Int): Float {
-        return _icall_Float_Int(getVoiceDelayMsMethodBind, this.rawMemory, voiceIdx)
+    open fun getVoiceDelayMs(voiceIdx: Long): Double {
+        return _icall_Double_Long(getVoiceDelayMsMethodBind, this.rawMemory, voiceIdx)
     }
 
 
     private val setVoiceRateHzMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectChorus", "set_voice_rate_hz") }
-    open fun setVoiceRateHz(voiceIdx: Int, rateHz: Float) {
-        _icall_Unit_Int_Float(setVoiceRateHzMethodBind, this.rawMemory, voiceIdx, rateHz)
+    open fun setVoiceRateHz(voiceIdx: Long, rateHz: Double) {
+        _icall_Unit_Long_Double(setVoiceRateHzMethodBind, this.rawMemory, voiceIdx, rateHz)
     }
 
 
     private val getVoiceRateHzMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectChorus", "get_voice_rate_hz") }
-    open fun getVoiceRateHz(voiceIdx: Int): Float {
-        return _icall_Float_Int(getVoiceRateHzMethodBind, this.rawMemory, voiceIdx)
+    open fun getVoiceRateHz(voiceIdx: Long): Double {
+        return _icall_Double_Long(getVoiceRateHzMethodBind, this.rawMemory, voiceIdx)
     }
 
 
     private val setVoiceDepthMsMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectChorus", "set_voice_depth_ms") }
-    open fun setVoiceDepthMs(voiceIdx: Int, depthMs: Float) {
-        _icall_Unit_Int_Float(setVoiceDepthMsMethodBind, this.rawMemory, voiceIdx, depthMs)
+    open fun setVoiceDepthMs(voiceIdx: Long, depthMs: Double) {
+        _icall_Unit_Long_Double(setVoiceDepthMsMethodBind, this.rawMemory, voiceIdx, depthMs)
     }
 
 
     private val getVoiceDepthMsMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectChorus", "get_voice_depth_ms") }
-    open fun getVoiceDepthMs(voiceIdx: Int): Float {
-        return _icall_Float_Int(getVoiceDepthMsMethodBind, this.rawMemory, voiceIdx)
+    open fun getVoiceDepthMs(voiceIdx: Long): Double {
+        return _icall_Double_Long(getVoiceDepthMsMethodBind, this.rawMemory, voiceIdx)
     }
 
 
     private val setVoiceLevelDbMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectChorus", "set_voice_level_db") }
-    open fun setVoiceLevelDb(voiceIdx: Int, levelDb: Float) {
-        _icall_Unit_Int_Float(setVoiceLevelDbMethodBind, this.rawMemory, voiceIdx, levelDb)
+    open fun setVoiceLevelDb(voiceIdx: Long, levelDb: Double) {
+        _icall_Unit_Long_Double(setVoiceLevelDbMethodBind, this.rawMemory, voiceIdx, levelDb)
     }
 
 
     private val getVoiceLevelDbMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectChorus", "get_voice_level_db") }
-    open fun getVoiceLevelDb(voiceIdx: Int): Float {
-        return _icall_Float_Int(getVoiceLevelDbMethodBind, this.rawMemory, voiceIdx)
+    open fun getVoiceLevelDb(voiceIdx: Long): Double {
+        return _icall_Double_Long(getVoiceLevelDbMethodBind, this.rawMemory, voiceIdx)
     }
 
 
     private val setVoiceCutoffHzMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectChorus", "set_voice_cutoff_hz") }
-    open fun setVoiceCutoffHz(voiceIdx: Int, cutoffHz: Float) {
-        _icall_Unit_Int_Float(setVoiceCutoffHzMethodBind, this.rawMemory, voiceIdx, cutoffHz)
+    open fun setVoiceCutoffHz(voiceIdx: Long, cutoffHz: Double) {
+        _icall_Unit_Long_Double(setVoiceCutoffHzMethodBind, this.rawMemory, voiceIdx, cutoffHz)
     }
 
 
     private val getVoiceCutoffHzMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectChorus", "get_voice_cutoff_hz") }
-    open fun getVoiceCutoffHz(voiceIdx: Int): Float {
-        return _icall_Float_Int(getVoiceCutoffHzMethodBind, this.rawMemory, voiceIdx)
+    open fun getVoiceCutoffHz(voiceIdx: Long): Double {
+        return _icall_Double_Long(getVoiceCutoffHzMethodBind, this.rawMemory, voiceIdx)
     }
 
 
     private val setVoicePanMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectChorus", "set_voice_pan") }
-    open fun setVoicePan(voiceIdx: Int, pan: Float) {
-        _icall_Unit_Int_Float(setVoicePanMethodBind, this.rawMemory, voiceIdx, pan)
+    open fun setVoicePan(voiceIdx: Long, pan: Double) {
+        _icall_Unit_Long_Double(setVoicePanMethodBind, this.rawMemory, voiceIdx, pan)
     }
 
 
     private val getVoicePanMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectChorus", "get_voice_pan") }
-    open fun getVoicePan(voiceIdx: Int): Float {
-        return _icall_Float_Int(getVoicePanMethodBind, this.rawMemory, voiceIdx)
+    open fun getVoicePan(voiceIdx: Long): Double {
+        return _icall_Double_Long(getVoicePanMethodBind, this.rawMemory, voiceIdx)
     }
 
 
     private val setWetMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectChorus", "set_wet") }
-    open fun setWet(amount: Float) {
-        _icall_Unit_Float(setWetMethodBind, this.rawMemory, amount)
+    open fun setWet(amount: Double) {
+        _icall_Unit_Double(setWetMethodBind, this.rawMemory, amount)
     }
 
 
     private val getWetMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectChorus", "get_wet") }
-    open fun getWet(): Float {
-        return _icall_Float(getWetMethodBind, this.rawMemory)
+    open fun getWet(): Double {
+        return _icall_Double(getWetMethodBind, this.rawMemory)
     }
 
 
     private val setDryMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectChorus", "set_dry") }
-    open fun setDry(amount: Float) {
-        _icall_Unit_Float(setDryMethodBind, this.rawMemory, amount)
+    open fun setDry(amount: Double) {
+        _icall_Unit_Double(setDryMethodBind, this.rawMemory, amount)
     }
 
 
     private val getDryMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectChorus", "get_dry") }
-    open fun getDry(): Float {
-        return _icall_Float(getDryMethodBind, this.rawMemory)
+    open fun getDry(): Double {
+        return _icall_Double(getDryMethodBind, this.rawMemory)
     }
 
 

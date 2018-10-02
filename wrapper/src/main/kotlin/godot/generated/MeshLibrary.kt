@@ -46,80 +46,80 @@ open class MeshLibrary : Resource {
 
     // Methods
     private val createItemMethodBind: CPointer<godot_method_bind> by lazy { getMB("MeshLibrary", "create_item") }
-    open fun createItem(id: Int) {
-        _icall_Unit_Int(createItemMethodBind, this.rawMemory, id)
+    open fun createItem(id: Long) {
+        _icall_Unit_Long(createItemMethodBind, this.rawMemory, id)
     }
 
 
     private val setItemNameMethodBind: CPointer<godot_method_bind> by lazy { getMB("MeshLibrary", "set_item_name") }
-    open fun setItemName(id: Int, name: String) {
-        _icall_Unit_Int_String(setItemNameMethodBind, this.rawMemory, id, name)
+    open fun setItemName(id: Long, name: String) {
+        _icall_Unit_Long_String(setItemNameMethodBind, this.rawMemory, id, name)
     }
 
 
     private val setItemMeshMethodBind: CPointer<godot_method_bind> by lazy { getMB("MeshLibrary", "set_item_mesh") }
-    open fun setItemMesh(id: Int, mesh: Mesh) {
-        _icall_Unit_Int_Object(setItemMeshMethodBind, this.rawMemory, id, mesh)
+    open fun setItemMesh(id: Long, mesh: Mesh) {
+        _icall_Unit_Long_Object(setItemMeshMethodBind, this.rawMemory, id, mesh)
     }
 
 
     private val setItemNavmeshMethodBind: CPointer<godot_method_bind> by lazy { getMB("MeshLibrary", "set_item_navmesh") }
-    open fun setItemNavmesh(id: Int, navmesh: NavigationMesh) {
-        _icall_Unit_Int_Object(setItemNavmeshMethodBind, this.rawMemory, id, navmesh)
+    open fun setItemNavmesh(id: Long, navmesh: NavigationMesh) {
+        _icall_Unit_Long_Object(setItemNavmeshMethodBind, this.rawMemory, id, navmesh)
     }
 
 
     private val setItemShapesMethodBind: CPointer<godot_method_bind> by lazy { getMB("MeshLibrary", "set_item_shapes") }
-    open fun setItemShapes(id: Int, shapes: GDArray) {
-        _icall_Unit_Int_GDArray(setItemShapesMethodBind, this.rawMemory, id, shapes)
+    open fun setItemShapes(id: Long, shapes: GDArray) {
+        _icall_Unit_Long_GDArray(setItemShapesMethodBind, this.rawMemory, id, shapes)
     }
 
 
     private val setItemPreviewMethodBind: CPointer<godot_method_bind> by lazy { getMB("MeshLibrary", "set_item_preview") }
-    open fun setItemPreview(id: Int, texture: Texture) {
-        _icall_Unit_Int_Object(setItemPreviewMethodBind, this.rawMemory, id, texture)
+    open fun setItemPreview(id: Long, texture: Texture) {
+        _icall_Unit_Long_Object(setItemPreviewMethodBind, this.rawMemory, id, texture)
     }
 
 
     private val getItemNameMethodBind: CPointer<godot_method_bind> by lazy { getMB("MeshLibrary", "get_item_name") }
-    open fun getItemName(id: Int): String {
-        return _icall_String_Int(getItemNameMethodBind, this.rawMemory, id)
+    open fun getItemName(id: Long): String {
+        return _icall_String_Long(getItemNameMethodBind, this.rawMemory, id)
     }
 
 
     private val getItemMeshMethodBind: CPointer<godot_method_bind> by lazy { getMB("MeshLibrary", "get_item_mesh") }
-    open fun getItemMesh(id: Int): Mesh {
-        return _icall_Mesh_Int(getItemMeshMethodBind, this.rawMemory, id)
+    open fun getItemMesh(id: Long): Mesh {
+        return _icall_Mesh_Long(getItemMeshMethodBind, this.rawMemory, id)
     }
 
 
     private val getItemNavmeshMethodBind: CPointer<godot_method_bind> by lazy { getMB("MeshLibrary", "get_item_navmesh") }
-    open fun getItemNavmesh(id: Int): NavigationMesh {
-        return _icall_NavigationMesh_Int(getItemNavmeshMethodBind, this.rawMemory, id)
+    open fun getItemNavmesh(id: Long): NavigationMesh {
+        return _icall_NavigationMesh_Long(getItemNavmeshMethodBind, this.rawMemory, id)
     }
 
 
     private val getItemShapesMethodBind: CPointer<godot_method_bind> by lazy { getMB("MeshLibrary", "get_item_shapes") }
-    open fun getItemShapes(id: Int): GDArray {
-        return _icall_GDArray_Int(getItemShapesMethodBind, this.rawMemory, id)
+    open fun getItemShapes(id: Long): GDArray {
+        return _icall_GDArray_Long(getItemShapesMethodBind, this.rawMemory, id)
     }
 
 
     private val getItemPreviewMethodBind: CPointer<godot_method_bind> by lazy { getMB("MeshLibrary", "get_item_preview") }
-    open fun getItemPreview(id: Int): Texture {
-        return _icall_Texture_Int(getItemPreviewMethodBind, this.rawMemory, id)
+    open fun getItemPreview(id: Long): Texture {
+        return _icall_Texture_Long(getItemPreviewMethodBind, this.rawMemory, id)
     }
 
 
     private val removeItemMethodBind: CPointer<godot_method_bind> by lazy { getMB("MeshLibrary", "remove_item") }
-    open fun removeItem(id: Int) {
-        _icall_Unit_Int(removeItemMethodBind, this.rawMemory, id)
+    open fun removeItem(id: Long) {
+        _icall_Unit_Long(removeItemMethodBind, this.rawMemory, id)
     }
 
 
     private val findItemByNameMethodBind: CPointer<godot_method_bind> by lazy { getMB("MeshLibrary", "find_item_by_name") }
-    open fun findItemByName(name: String): Int {
-        return _icall_Int_String(findItemByNameMethodBind, this.rawMemory, name)
+    open fun findItemByName(name: String): Long {
+        return _icall_Long_String(findItemByNameMethodBind, this.rawMemory, name)
     }
 
 
@@ -136,8 +136,8 @@ open class MeshLibrary : Resource {
 
 
     private val getLastUnusedItemIdMethodBind: CPointer<godot_method_bind> by lazy { getMB("MeshLibrary", "get_last_unused_item_id") }
-    open fun getLastUnusedItemId(): Int {
-        return _icall_Int(getLastUnusedItemIdMethodBind, this.rawMemory)
+    open fun getLastUnusedItemId(): Long {
+        return _icall_Long(getLastUnusedItemIdMethodBind, this.rawMemory)
     }
 
 

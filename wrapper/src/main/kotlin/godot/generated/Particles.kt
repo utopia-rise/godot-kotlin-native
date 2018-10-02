@@ -19,14 +19,14 @@ open class Particles : GeometryInstance {
 
     // Enums 
 
-    enum class DrawOrder(val id: Int) {
+    enum class DrawOrder(val id: Long) {
         DRAW_ORDER_INDEX(0),
         DRAW_ORDER_LIFETIME(1),
         DRAW_ORDER_VIEW_DEPTH(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -48,10 +48,10 @@ open class Particles : GeometryInstance {
 
 
         // Constants
-        const val DRAW_ORDER_INDEX: Int = 0
-        const val DRAW_ORDER_LIFETIME: Int = 1
-        const val DRAW_ORDER_VIEW_DEPTH: Int = 2
-        const val MAX_DRAW_PASSES: Int = 4
+        const val DRAW_ORDER_INDEX: Long = 0
+        const val DRAW_ORDER_LIFETIME: Long = 1
+        const val DRAW_ORDER_VIEW_DEPTH: Long = 2
+        const val MAX_DRAW_PASSES: Long = 4
 
 
     }
@@ -63,14 +63,14 @@ open class Particles : GeometryInstance {
         set(value) = _icall_Unit_Boolean(setEmittingMethodBind, this.rawMemory, value)
 
 
-    open var amount: Int
-        get() = _icall_Int(getAmountMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setAmountMethodBind, this.rawMemory, value)
+    open var amount: Long
+        get() = _icall_Long(getAmountMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setAmountMethodBind, this.rawMemory, value)
 
 
-    open var lifetime: Float
-        get() = _icall_Float(getLifetimeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setLifetimeMethodBind, this.rawMemory, value)
+    open var lifetime: Double
+        get() = _icall_Double(getLifetimeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setLifetimeMethodBind, this.rawMemory, value)
 
 
     open var oneShot: Boolean
@@ -78,29 +78,29 @@ open class Particles : GeometryInstance {
         set(value) = _icall_Unit_Boolean(setOneShotMethodBind, this.rawMemory, value)
 
 
-    open var preprocess: Float
-        get() = _icall_Float(getPreProcessTimeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setPreProcessTimeMethodBind, this.rawMemory, value)
+    open var preprocess: Double
+        get() = _icall_Double(getPreProcessTimeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setPreProcessTimeMethodBind, this.rawMemory, value)
 
 
-    open var speedScale: Float
-        get() = _icall_Float(getSpeedScaleMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setSpeedScaleMethodBind, this.rawMemory, value)
+    open var speedScale: Double
+        get() = _icall_Double(getSpeedScaleMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setSpeedScaleMethodBind, this.rawMemory, value)
 
 
-    open var explosiveness: Float
-        get() = _icall_Float(getExplosivenessRatioMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setExplosivenessRatioMethodBind, this.rawMemory, value)
+    open var explosiveness: Double
+        get() = _icall_Double(getExplosivenessRatioMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setExplosivenessRatioMethodBind, this.rawMemory, value)
 
 
-    open var randomness: Float
-        get() = _icall_Float(getRandomnessRatioMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setRandomnessRatioMethodBind, this.rawMemory, value)
+    open var randomness: Double
+        get() = _icall_Double(getRandomnessRatioMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setRandomnessRatioMethodBind, this.rawMemory, value)
 
 
-    open var fixedFps: Int
-        get() = _icall_Int(getFixedFpsMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setFixedFpsMethodBind, this.rawMemory, value)
+    open var fixedFps: Long
+        get() = _icall_Long(getFixedFpsMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setFixedFpsMethodBind, this.rawMemory, value)
 
 
     open var fractDelta: Boolean
@@ -122,9 +122,9 @@ open class Particles : GeometryInstance {
         set(value) = _icall_Unit_Boolean(setUseLocalCoordinatesMethodBind, this.rawMemory, value)
 
 
-    open var drawOrder: Int
-        get() = _icall_Int(getDrawOrderMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setDrawOrderMethodBind, this.rawMemory, value)
+    open var drawOrder: Long
+        get() = _icall_Long(getDrawOrderMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setDrawOrderMethodBind, this.rawMemory, value)
 
 
     open var processMaterial: Material
@@ -132,29 +132,29 @@ open class Particles : GeometryInstance {
         set(value) = _icall_Unit_Object(setProcessMaterialMethodBind, this.rawMemory, value)
 
 
-    open var drawPasses: Int
-        get() = _icall_Int(getDrawPassesMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setDrawPassesMethodBind, this.rawMemory, value)
+    open var drawPasses: Long
+        get() = _icall_Long(getDrawPassesMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setDrawPassesMethodBind, this.rawMemory, value)
 
 
     open var drawPass1: Mesh
-        get() = _icall_Mesh_Int(getDrawPassMeshMethodBind, this.rawMemory, 0)
-        set(value) = _icall_Unit_Int_Object(setDrawPassMeshMethodBind, this.rawMemory, 0, value)
+        get() = _icall_Mesh_Long(getDrawPassMeshMethodBind, this.rawMemory, 0)
+        set(value) = _icall_Unit_Long_Object(setDrawPassMeshMethodBind, this.rawMemory, 0, value)
 
 
     open var drawPass2: Mesh
-        get() = _icall_Mesh_Int(getDrawPassMeshMethodBind, this.rawMemory, 1)
-        set(value) = _icall_Unit_Int_Object(setDrawPassMeshMethodBind, this.rawMemory, 1, value)
+        get() = _icall_Mesh_Long(getDrawPassMeshMethodBind, this.rawMemory, 1)
+        set(value) = _icall_Unit_Long_Object(setDrawPassMeshMethodBind, this.rawMemory, 1, value)
 
 
     open var drawPass3: Mesh
-        get() = _icall_Mesh_Int(getDrawPassMeshMethodBind, this.rawMemory, 2)
-        set(value) = _icall_Unit_Int_Object(setDrawPassMeshMethodBind, this.rawMemory, 2, value)
+        get() = _icall_Mesh_Long(getDrawPassMeshMethodBind, this.rawMemory, 2)
+        set(value) = _icall_Unit_Long_Object(setDrawPassMeshMethodBind, this.rawMemory, 2, value)
 
 
     open var drawPass4: Mesh
-        get() = _icall_Mesh_Int(getDrawPassMeshMethodBind, this.rawMemory, 3)
-        set(value) = _icall_Unit_Int_Object(setDrawPassMeshMethodBind, this.rawMemory, 3, value)
+        get() = _icall_Mesh_Long(getDrawPassMeshMethodBind, this.rawMemory, 3)
+        set(value) = _icall_Unit_Long_Object(setDrawPassMeshMethodBind, this.rawMemory, 3, value)
 
 
 
@@ -167,14 +167,14 @@ open class Particles : GeometryInstance {
 
 
     private val setAmountMethodBind: CPointer<godot_method_bind> by lazy { getMB("Particles", "set_amount") }
-    open fun setAmount(amount: Int) {
-        _icall_Unit_Int(setAmountMethodBind, this.rawMemory, amount)
+    open fun setAmount(amount: Long) {
+        _icall_Unit_Long(setAmountMethodBind, this.rawMemory, amount)
     }
 
 
     private val setLifetimeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Particles", "set_lifetime") }
-    open fun setLifetime(secs: Float) {
-        _icall_Unit_Float(setLifetimeMethodBind, this.rawMemory, secs)
+    open fun setLifetime(secs: Double) {
+        _icall_Unit_Double(setLifetimeMethodBind, this.rawMemory, secs)
     }
 
 
@@ -185,20 +185,20 @@ open class Particles : GeometryInstance {
 
 
     private val setPreProcessTimeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Particles", "set_pre_process_time") }
-    open fun setPreProcessTime(secs: Float) {
-        _icall_Unit_Float(setPreProcessTimeMethodBind, this.rawMemory, secs)
+    open fun setPreProcessTime(secs: Double) {
+        _icall_Unit_Double(setPreProcessTimeMethodBind, this.rawMemory, secs)
     }
 
 
     private val setExplosivenessRatioMethodBind: CPointer<godot_method_bind> by lazy { getMB("Particles", "set_explosiveness_ratio") }
-    open fun setExplosivenessRatio(ratio: Float) {
-        _icall_Unit_Float(setExplosivenessRatioMethodBind, this.rawMemory, ratio)
+    open fun setExplosivenessRatio(ratio: Double) {
+        _icall_Unit_Double(setExplosivenessRatioMethodBind, this.rawMemory, ratio)
     }
 
 
     private val setRandomnessRatioMethodBind: CPointer<godot_method_bind> by lazy { getMB("Particles", "set_randomness_ratio") }
-    open fun setRandomnessRatio(ratio: Float) {
-        _icall_Unit_Float(setRandomnessRatioMethodBind, this.rawMemory, ratio)
+    open fun setRandomnessRatio(ratio: Double) {
+        _icall_Unit_Double(setRandomnessRatioMethodBind, this.rawMemory, ratio)
     }
 
 
@@ -215,8 +215,8 @@ open class Particles : GeometryInstance {
 
 
     private val setFixedFpsMethodBind: CPointer<godot_method_bind> by lazy { getMB("Particles", "set_fixed_fps") }
-    open fun setFixedFps(fps: Int) {
-        _icall_Unit_Int(setFixedFpsMethodBind, this.rawMemory, fps)
+    open fun setFixedFps(fps: Long) {
+        _icall_Unit_Long(setFixedFpsMethodBind, this.rawMemory, fps)
     }
 
 
@@ -233,8 +233,8 @@ open class Particles : GeometryInstance {
 
 
     private val setSpeedScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("Particles", "set_speed_scale") }
-    open fun setSpeedScale(scale: Float) {
-        _icall_Unit_Float(setSpeedScaleMethodBind, this.rawMemory, scale)
+    open fun setSpeedScale(scale: Double) {
+        _icall_Unit_Double(setSpeedScaleMethodBind, this.rawMemory, scale)
     }
 
 
@@ -245,14 +245,14 @@ open class Particles : GeometryInstance {
 
 
     private val getAmountMethodBind: CPointer<godot_method_bind> by lazy { getMB("Particles", "get_amount") }
-    open fun getAmount(): Int {
-        return _icall_Int(getAmountMethodBind, this.rawMemory)
+    open fun getAmount(): Long {
+        return _icall_Long(getAmountMethodBind, this.rawMemory)
     }
 
 
     private val getLifetimeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Particles", "get_lifetime") }
-    open fun getLifetime(): Float {
-        return _icall_Float(getLifetimeMethodBind, this.rawMemory)
+    open fun getLifetime(): Double {
+        return _icall_Double(getLifetimeMethodBind, this.rawMemory)
     }
 
 
@@ -263,20 +263,20 @@ open class Particles : GeometryInstance {
 
 
     private val getPreProcessTimeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Particles", "get_pre_process_time") }
-    open fun getPreProcessTime(): Float {
-        return _icall_Float(getPreProcessTimeMethodBind, this.rawMemory)
+    open fun getPreProcessTime(): Double {
+        return _icall_Double(getPreProcessTimeMethodBind, this.rawMemory)
     }
 
 
     private val getExplosivenessRatioMethodBind: CPointer<godot_method_bind> by lazy { getMB("Particles", "get_explosiveness_ratio") }
-    open fun getExplosivenessRatio(): Float {
-        return _icall_Float(getExplosivenessRatioMethodBind, this.rawMemory)
+    open fun getExplosivenessRatio(): Double {
+        return _icall_Double(getExplosivenessRatioMethodBind, this.rawMemory)
     }
 
 
     private val getRandomnessRatioMethodBind: CPointer<godot_method_bind> by lazy { getMB("Particles", "get_randomness_ratio") }
-    open fun getRandomnessRatio(): Float {
-        return _icall_Float(getRandomnessRatioMethodBind, this.rawMemory)
+    open fun getRandomnessRatio(): Double {
+        return _icall_Double(getRandomnessRatioMethodBind, this.rawMemory)
     }
 
 
@@ -293,8 +293,8 @@ open class Particles : GeometryInstance {
 
 
     private val getFixedFpsMethodBind: CPointer<godot_method_bind> by lazy { getMB("Particles", "get_fixed_fps") }
-    open fun getFixedFps(): Int {
-        return _icall_Int(getFixedFpsMethodBind, this.rawMemory)
+    open fun getFixedFps(): Long {
+        return _icall_Long(getFixedFpsMethodBind, this.rawMemory)
     }
 
 
@@ -311,44 +311,44 @@ open class Particles : GeometryInstance {
 
 
     private val getSpeedScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("Particles", "get_speed_scale") }
-    open fun getSpeedScale(): Float {
-        return _icall_Float(getSpeedScaleMethodBind, this.rawMemory)
+    open fun getSpeedScale(): Double {
+        return _icall_Double(getSpeedScaleMethodBind, this.rawMemory)
     }
 
 
     private val setDrawOrderMethodBind: CPointer<godot_method_bind> by lazy { getMB("Particles", "set_draw_order") }
-    open fun setDrawOrder(order: Int) {
-        _icall_Unit_Int(setDrawOrderMethodBind, this.rawMemory, order)
+    open fun setDrawOrder(order: Long) {
+        _icall_Unit_Long(setDrawOrderMethodBind, this.rawMemory, order)
     }
 
 
     private val getDrawOrderMethodBind: CPointer<godot_method_bind> by lazy { getMB("Particles", "get_draw_order") }
     open fun getDrawOrder(): Particles.DrawOrder {
-        return Particles.DrawOrder.fromInt(_icall_Int(getDrawOrderMethodBind, this.rawMemory))
+        return Particles.DrawOrder.fromInt(_icall_Long(getDrawOrderMethodBind, this.rawMemory))
     }
 
 
     private val setDrawPassesMethodBind: CPointer<godot_method_bind> by lazy { getMB("Particles", "set_draw_passes") }
-    open fun setDrawPasses(passes: Int) {
-        _icall_Unit_Int(setDrawPassesMethodBind, this.rawMemory, passes)
+    open fun setDrawPasses(passes: Long) {
+        _icall_Unit_Long(setDrawPassesMethodBind, this.rawMemory, passes)
     }
 
 
     private val setDrawPassMeshMethodBind: CPointer<godot_method_bind> by lazy { getMB("Particles", "set_draw_pass_mesh") }
-    open fun setDrawPassMesh(pass: Int, mesh: Mesh) {
-        _icall_Unit_Int_Object(setDrawPassMeshMethodBind, this.rawMemory, pass, mesh)
+    open fun setDrawPassMesh(pass: Long, mesh: Mesh) {
+        _icall_Unit_Long_Object(setDrawPassMeshMethodBind, this.rawMemory, pass, mesh)
     }
 
 
     private val getDrawPassesMethodBind: CPointer<godot_method_bind> by lazy { getMB("Particles", "get_draw_passes") }
-    open fun getDrawPasses(): Int {
-        return _icall_Int(getDrawPassesMethodBind, this.rawMemory)
+    open fun getDrawPasses(): Long {
+        return _icall_Long(getDrawPassesMethodBind, this.rawMemory)
     }
 
 
     private val getDrawPassMeshMethodBind: CPointer<godot_method_bind> by lazy { getMB("Particles", "get_draw_pass_mesh") }
-    open fun getDrawPassMesh(pass: Int): Mesh {
-        return _icall_Mesh_Int(getDrawPassMeshMethodBind, this.rawMemory, pass)
+    open fun getDrawPassMesh(pass: Long): Mesh {
+        return _icall_Mesh_Long(getDrawPassMeshMethodBind, this.rawMemory, pass)
     }
 
 

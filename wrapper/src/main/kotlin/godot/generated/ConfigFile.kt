@@ -88,13 +88,13 @@ open class ConfigFile : Reference {
 
     private val loadMethodBind: CPointer<godot_method_bind> by lazy { getMB("ConfigFile", "load") }
     open fun load(path: String): GodotError {
-        return GodotError.fromInt(_icall_Int_String(loadMethodBind, this.rawMemory, path))
+        return GodotError.fromInt(_icall_Long_String(loadMethodBind, this.rawMemory, path))
     }
 
 
     private val saveMethodBind: CPointer<godot_method_bind> by lazy { getMB("ConfigFile", "save") }
     open fun save(path: String): GodotError {
-        return GodotError.fromInt(_icall_Int_String(saveMethodBind, this.rawMemory, path))
+        return GodotError.fromInt(_icall_Long_String(saveMethodBind, this.rawMemory, path))
     }
 
 

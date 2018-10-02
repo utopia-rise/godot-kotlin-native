@@ -44,9 +44,9 @@ open class PrismMesh : PrimitiveMesh {
 
 
     // Properties
-    open var leftToRight: Float
-        get() = _icall_Float(getLeftToRightMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setLeftToRightMethodBind, this.rawMemory, value)
+    open var leftToRight: Double
+        get() = _icall_Double(getLeftToRightMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setLeftToRightMethodBind, this.rawMemory, value)
 
 
     open var size: Vector2
@@ -58,33 +58,33 @@ open class PrismMesh : PrimitiveMesh {
     }
 
 
-    open var subdivideWidth: Int
-        get() = _icall_Int(getSubdivideWidthMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setSubdivideWidthMethodBind, this.rawMemory, value)
+    open var subdivideWidth: Long
+        get() = _icall_Long(getSubdivideWidthMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setSubdivideWidthMethodBind, this.rawMemory, value)
 
 
-    open var subdivideHeight: Int
-        get() = _icall_Int(getSubdivideHeightMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setSubdivideHeightMethodBind, this.rawMemory, value)
+    open var subdivideHeight: Long
+        get() = _icall_Long(getSubdivideHeightMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setSubdivideHeightMethodBind, this.rawMemory, value)
 
 
-    open var subdivideDepth: Int
-        get() = _icall_Int(getSubdivideDepthMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setSubdivideDepthMethodBind, this.rawMemory, value)
+    open var subdivideDepth: Long
+        get() = _icall_Long(getSubdivideDepthMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setSubdivideDepthMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setLeftToRightMethodBind: CPointer<godot_method_bind> by lazy { getMB("PrismMesh", "set_left_to_right") }
-    open fun setLeftToRight(leftToRight: Float) {
-        _icall_Unit_Float(setLeftToRightMethodBind, this.rawMemory, leftToRight)
+    open fun setLeftToRight(leftToRight: Double) {
+        _icall_Unit_Double(setLeftToRightMethodBind, this.rawMemory, leftToRight)
     }
 
 
     private val getLeftToRightMethodBind: CPointer<godot_method_bind> by lazy { getMB("PrismMesh", "get_left_to_right") }
-    open fun getLeftToRight(): Float {
-        return _icall_Float(getLeftToRightMethodBind, this.rawMemory)
+    open fun getLeftToRight(): Double {
+        return _icall_Double(getLeftToRightMethodBind, this.rawMemory)
     }
 
 
@@ -101,38 +101,38 @@ open class PrismMesh : PrimitiveMesh {
 
 
     private val setSubdivideWidthMethodBind: CPointer<godot_method_bind> by lazy { getMB("PrismMesh", "set_subdivide_width") }
-    open fun setSubdivideWidth(segments: Int) {
-        _icall_Unit_Int(setSubdivideWidthMethodBind, this.rawMemory, segments)
+    open fun setSubdivideWidth(segments: Long) {
+        _icall_Unit_Long(setSubdivideWidthMethodBind, this.rawMemory, segments)
     }
 
 
     private val getSubdivideWidthMethodBind: CPointer<godot_method_bind> by lazy { getMB("PrismMesh", "get_subdivide_width") }
-    open fun getSubdivideWidth(): Int {
-        return _icall_Int(getSubdivideWidthMethodBind, this.rawMemory)
+    open fun getSubdivideWidth(): Long {
+        return _icall_Long(getSubdivideWidthMethodBind, this.rawMemory)
     }
 
 
     private val setSubdivideHeightMethodBind: CPointer<godot_method_bind> by lazy { getMB("PrismMesh", "set_subdivide_height") }
-    open fun setSubdivideHeight(segments: Int) {
-        _icall_Unit_Int(setSubdivideHeightMethodBind, this.rawMemory, segments)
+    open fun setSubdivideHeight(segments: Long) {
+        _icall_Unit_Long(setSubdivideHeightMethodBind, this.rawMemory, segments)
     }
 
 
     private val getSubdivideHeightMethodBind: CPointer<godot_method_bind> by lazy { getMB("PrismMesh", "get_subdivide_height") }
-    open fun getSubdivideHeight(): Int {
-        return _icall_Int(getSubdivideHeightMethodBind, this.rawMemory)
+    open fun getSubdivideHeight(): Long {
+        return _icall_Long(getSubdivideHeightMethodBind, this.rawMemory)
     }
 
 
     private val setSubdivideDepthMethodBind: CPointer<godot_method_bind> by lazy { getMB("PrismMesh", "set_subdivide_depth") }
-    open fun setSubdivideDepth(segments: Int) {
-        _icall_Unit_Int(setSubdivideDepthMethodBind, this.rawMemory, segments)
+    open fun setSubdivideDepth(segments: Long) {
+        _icall_Unit_Long(setSubdivideDepthMethodBind, this.rawMemory, segments)
     }
 
 
     private val getSubdivideDepthMethodBind: CPointer<godot_method_bind> by lazy { getMB("PrismMesh", "get_subdivide_depth") }
-    open fun getSubdivideDepth(): Int {
-        return _icall_Int(getSubdivideDepthMethodBind, this.rawMemory)
+    open fun getSubdivideDepth(): Long {
+        return _icall_Long(getSubdivideDepthMethodBind, this.rawMemory)
     }
 
 

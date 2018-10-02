@@ -61,8 +61,8 @@ open class Physics2DTestMotionResult : Reference {
         get() = _icall_Vector2(getColliderVelocityMethodBind, this.rawMemory)
 
 
-    open val colliderId: Int
-        get() = _icall_Int(getColliderIdMethodBind, this.rawMemory)
+    open val colliderId: Long
+        get() = _icall_Long(getColliderIdMethodBind, this.rawMemory)
 
 
     open val colliderRid: RID
@@ -73,8 +73,8 @@ open class Physics2DTestMotionResult : Reference {
         get() = _icall_Object(getColliderMethodBind, this.rawMemory)
 
 
-    open val colliderShape: Int
-        get() = _icall_Int(getColliderShapeMethodBind, this.rawMemory)
+    open val colliderShape: Long
+        get() = _icall_Long(getColliderShapeMethodBind, this.rawMemory)
 
 
 
@@ -111,8 +111,8 @@ open class Physics2DTestMotionResult : Reference {
 
 
     private val getColliderIdMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DTestMotionResult", "get_collider_id") }
-    open fun getColliderId(): Int {
-        return _icall_Int(getColliderIdMethodBind, this.rawMemory)
+    open fun getColliderId(): Long {
+        return _icall_Long(getColliderIdMethodBind, this.rawMemory)
     }
 
 
@@ -129,8 +129,8 @@ open class Physics2DTestMotionResult : Reference {
 
 
     private val getColliderShapeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DTestMotionResult", "get_collider_shape") }
-    open fun getColliderShape(): Int {
-        return _icall_Int(getColliderShapeMethodBind, this.rawMemory)
+    open fun getColliderShape(): Long {
+        return _icall_Long(getColliderShapeMethodBind, this.rawMemory)
     }
 
 

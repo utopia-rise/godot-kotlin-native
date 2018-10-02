@@ -19,7 +19,7 @@ open class StreamPeerSSL : StreamPeer {
 
     // Enums 
 
-    enum class Status(val id: Int) {
+    enum class Status(val id: Long) {
         STATUS_DISCONNECTED(0),
         STATUS_CONNECTED(2),
         STATUS_ERROR(3),
@@ -27,7 +27,7 @@ open class StreamPeerSSL : StreamPeer {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -47,10 +47,10 @@ open class StreamPeerSSL : StreamPeer {
 
 
         // Constants
-        const val STATUS_DISCONNECTED: Int = 0
-        const val STATUS_CONNECTED: Int = 2
-        const val STATUS_ERROR: Int = 3
-        const val STATUS_ERROR_HOSTNAME_MISMATCH: Int = 4
+        const val STATUS_DISCONNECTED: Long = 0
+        const val STATUS_CONNECTED: Long = 2
+        const val STATUS_ERROR: Long = 3
+        const val STATUS_ERROR_HOSTNAME_MISMATCH: Long = 4
 
 
     }
@@ -73,19 +73,19 @@ open class StreamPeerSSL : StreamPeer {
 
     private val acceptStreamMethodBind: CPointer<godot_method_bind> by lazy { getMB("StreamPeerSSL", "accept_stream") }
     open fun acceptStream(arg0: StreamPeer): GodotError {
-        return GodotError.fromInt(_icall_Int_Object(acceptStreamMethodBind, this.rawMemory, arg0))
+        return GodotError.fromInt(_icall_Long_Object(acceptStreamMethodBind, this.rawMemory, arg0))
     }
 
 
     private val connectToStreamMethodBind: CPointer<godot_method_bind> by lazy { getMB("StreamPeerSSL", "connect_to_stream") }
     open fun connectToStream(stream: StreamPeer, validateCerts: Boolean = false, forHostname: String = ""): GodotError {
-        return GodotError.fromInt(_icall_Int_Object_Boolean_String(connectToStreamMethodBind, this.rawMemory, stream, validateCerts, forHostname))
+        return GodotError.fromInt(_icall_Long_Object_Boolean_String(connectToStreamMethodBind, this.rawMemory, stream, validateCerts, forHostname))
     }
 
 
     private val getStatusMethodBind: CPointer<godot_method_bind> by lazy { getMB("StreamPeerSSL", "get_status") }
     open fun getStatus(): StreamPeerSSL.Status {
-        return StreamPeerSSL.Status.fromInt(_icall_Int(getStatusMethodBind, this.rawMemory))
+        return StreamPeerSSL.Status.fromInt(_icall_Long(getStatusMethodBind, this.rawMemory))
     }
 
 

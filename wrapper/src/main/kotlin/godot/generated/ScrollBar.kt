@@ -45,9 +45,9 @@ open class ScrollBar : Range {
 
 
     // Properties
-    open var customStep: Float
-        get() = _icall_Float(getCustomStepMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setCustomStepMethodBind, this.rawMemory, value)
+    open var customStep: Double
+        get() = _icall_Double(getCustomStepMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setCustomStepMethodBind, this.rawMemory, value)
 
 
 
@@ -58,14 +58,14 @@ open class ScrollBar : Range {
 
 
     private val setCustomStepMethodBind: CPointer<godot_method_bind> by lazy { getMB("ScrollBar", "set_custom_step") }
-    open fun setCustomStep(step: Float) {
-        _icall_Unit_Float(setCustomStepMethodBind, this.rawMemory, step)
+    open fun setCustomStep(step: Double) {
+        _icall_Unit_Double(setCustomStepMethodBind, this.rawMemory, step)
     }
 
 
     private val getCustomStepMethodBind: CPointer<godot_method_bind> by lazy { getMB("ScrollBar", "get_custom_step") }
-    open fun getCustomStep(): Float {
-        return _icall_Float(getCustomStepMethodBind, this.rawMemory)
+    open fun getCustomStep(): Double {
+        return _icall_Double(getCustomStepMethodBind, this.rawMemory)
     }
 
 

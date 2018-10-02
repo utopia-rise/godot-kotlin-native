@@ -43,23 +43,23 @@ open class CircleShape2D : Shape2D {
 
 
     // Properties
-    open var radius: Float
-        get() = _icall_Float(getRadiusMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setRadiusMethodBind, this.rawMemory, value)
+    open var radius: Double
+        get() = _icall_Double(getRadiusMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setRadiusMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setRadiusMethodBind: CPointer<godot_method_bind> by lazy { getMB("CircleShape2D", "set_radius") }
-    open fun setRadius(radius: Float) {
-        _icall_Unit_Float(setRadiusMethodBind, this.rawMemory, radius)
+    open fun setRadius(radius: Double) {
+        _icall_Unit_Double(setRadiusMethodBind, this.rawMemory, radius)
     }
 
 
     private val getRadiusMethodBind: CPointer<godot_method_bind> by lazy { getMB("CircleShape2D", "get_radius") }
-    open fun getRadius(): Float {
-        return _icall_Float(getRadiusMethodBind, this.rawMemory)
+    open fun getRadius(): Double {
+        return _icall_Double(getRadiusMethodBind, this.rawMemory)
     }
 
 

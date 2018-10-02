@@ -43,23 +43,23 @@ open class VisualScriptGlobalConstant : VisualScriptNode {
 
 
     // Properties
-    open var constant: Int
-        get() = _icall_Int(getGlobalConstantMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setGlobalConstantMethodBind, this.rawMemory, value)
+    open var constant: Long
+        get() = _icall_Long(getGlobalConstantMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setGlobalConstantMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setGlobalConstantMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptGlobalConstant", "set_global_constant") }
-    open fun setGlobalConstant(index: Int) {
-        _icall_Unit_Int(setGlobalConstantMethodBind, this.rawMemory, index)
+    open fun setGlobalConstant(index: Long) {
+        _icall_Unit_Long(setGlobalConstantMethodBind, this.rawMemory, index)
     }
 
 
     private val getGlobalConstantMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptGlobalConstant", "get_global_constant") }
-    open fun getGlobalConstant(): Int {
-        return _icall_Int(getGlobalConstantMethodBind, this.rawMemory)
+    open fun getGlobalConstant(): Long {
+        return _icall_Long(getGlobalConstantMethodBind, this.rawMemory)
     }
 
 

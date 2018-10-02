@@ -19,7 +19,7 @@ open class VisualScriptPropertySet : VisualScriptNode {
 
     // Enums 
 
-    enum class AssignOp(val id: Int) {
+    enum class AssignOp(val id: Long) {
         ASSIGN_OP_NONE(0),
         ASSIGN_OP_ADD(1),
         ASSIGN_OP_SUB(2),
@@ -34,10 +34,10 @@ open class VisualScriptPropertySet : VisualScriptNode {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class CallMode(val id: Int) {
+    enum class CallMode(val id: Long) {
         CALL_MODE_SELF(0),
         CALL_MODE_NODE_PATH(1),
         CALL_MODE_INSTANCE(2),
@@ -45,7 +45,7 @@ open class VisualScriptPropertySet : VisualScriptNode {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -66,30 +66,30 @@ open class VisualScriptPropertySet : VisualScriptNode {
 
 
         // Constants
-        const val CALL_MODE_SELF: Int = 0
-        const val CALL_MODE_NODE_PATH: Int = 1
-        const val CALL_MODE_INSTANCE: Int = 2
-        const val CALL_MODE_BASIC_TYPE: Int = 3
-        const val ASSIGN_OP_NONE: Int = 0
-        const val ASSIGN_OP_ADD: Int = 1
-        const val ASSIGN_OP_SUB: Int = 2
-        const val ASSIGN_OP_MUL: Int = 3
-        const val ASSIGN_OP_DIV: Int = 4
-        const val ASSIGN_OP_MOD: Int = 5
-        const val ASSIGN_OP_SHIFT_LEFT: Int = 6
-        const val ASSIGN_OP_SHIFT_RIGHT: Int = 7
-        const val ASSIGN_OP_BIT_AND: Int = 8
-        const val ASSIGN_OP_BIT_OR: Int = 9
-        const val ASSIGN_OP_BIT_XOR: Int = 10
+        const val CALL_MODE_SELF: Long = 0
+        const val CALL_MODE_NODE_PATH: Long = 1
+        const val CALL_MODE_INSTANCE: Long = 2
+        const val CALL_MODE_BASIC_TYPE: Long = 3
+        const val ASSIGN_OP_NONE: Long = 0
+        const val ASSIGN_OP_ADD: Long = 1
+        const val ASSIGN_OP_SUB: Long = 2
+        const val ASSIGN_OP_MUL: Long = 3
+        const val ASSIGN_OP_DIV: Long = 4
+        const val ASSIGN_OP_MOD: Long = 5
+        const val ASSIGN_OP_SHIFT_LEFT: Long = 6
+        const val ASSIGN_OP_SHIFT_RIGHT: Long = 7
+        const val ASSIGN_OP_BIT_AND: Long = 8
+        const val ASSIGN_OP_BIT_OR: Long = 9
+        const val ASSIGN_OP_BIT_XOR: Long = 10
 
 
     }
 
 
     // Properties
-    open var setMode: Int
-        get() = _icall_Int(getCallModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setCallModeMethodBind, this.rawMemory, value)
+    open var setMode: Long
+        get() = _icall_Long(getCallModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setCallModeMethodBind, this.rawMemory, value)
 
 
     open var baseType: String
@@ -102,9 +102,9 @@ open class VisualScriptPropertySet : VisualScriptNode {
         set(value) = _icall_Unit_String(setBaseScriptMethodBind, this.rawMemory, value)
 
 
-    open var basicType: Int
-        get() = _icall_Int(getBasicTypeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setBasicTypeMethodBind, this.rawMemory, value)
+    open var basicType: Long
+        get() = _icall_Long(getBasicTypeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setBasicTypeMethodBind, this.rawMemory, value)
 
 
     open var nodePath: NodePath
@@ -122,9 +122,9 @@ open class VisualScriptPropertySet : VisualScriptNode {
         set(value) = _icall_Unit_String(setIndexMethodBind, this.rawMemory, value)
 
 
-    open var assignOp: Int
-        get() = _icall_Int(getAssignOpMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setAssignOpMethodBind, this.rawMemory, value)
+    open var assignOp: Long
+        get() = _icall_Long(getAssignOpMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setAssignOpMethodBind, this.rawMemory, value)
 
 
 
@@ -155,14 +155,14 @@ open class VisualScriptPropertySet : VisualScriptNode {
 
 
     private val setBasicTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptPropertySet", "set_basic_type") }
-    open fun setBasicType(basicType: Int) {
-        _icall_Unit_Int(setBasicTypeMethodBind, this.rawMemory, basicType)
+    open fun setBasicType(basicType: Long) {
+        _icall_Unit_Long(setBasicTypeMethodBind, this.rawMemory, basicType)
     }
 
 
     private val getBasicTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptPropertySet", "get_basic_type") }
     open fun getBasicType(): Variant.Type {
-        return Variant.Type.fromInt(_icall_Int(getBasicTypeMethodBind, this.rawMemory))
+        return Variant.Type.fromInt(_icall_Long(getBasicTypeMethodBind, this.rawMemory))
     }
 
 
@@ -188,14 +188,14 @@ open class VisualScriptPropertySet : VisualScriptNode {
 
 
     private val setCallModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptPropertySet", "set_call_mode") }
-    open fun setCallMode(mode: Int) {
-        _icall_Unit_Int(setCallModeMethodBind, this.rawMemory, mode)
+    open fun setCallMode(mode: Long) {
+        _icall_Unit_Long(setCallModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getCallModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptPropertySet", "get_call_mode") }
     open fun getCallMode(): VisualScriptPropertySet.CallMode {
-        return VisualScriptPropertySet.CallMode.fromInt(_icall_Int(getCallModeMethodBind, this.rawMemory))
+        return VisualScriptPropertySet.CallMode.fromInt(_icall_Long(getCallModeMethodBind, this.rawMemory))
     }
 
 
@@ -224,14 +224,14 @@ open class VisualScriptPropertySet : VisualScriptNode {
 
 
     private val setAssignOpMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptPropertySet", "set_assign_op") }
-    open fun setAssignOp(assignOp: Int) {
-        _icall_Unit_Int(setAssignOpMethodBind, this.rawMemory, assignOp)
+    open fun setAssignOp(assignOp: Long) {
+        _icall_Unit_Long(setAssignOpMethodBind, this.rawMemory, assignOp)
     }
 
 
     private val getAssignOpMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptPropertySet", "get_assign_op") }
     open fun getAssignOp(): VisualScriptPropertySet.AssignOp {
-        return VisualScriptPropertySet.AssignOp.fromInt(_icall_Int(getAssignOpMethodBind, this.rawMemory))
+        return VisualScriptPropertySet.AssignOp.fromInt(_icall_Long(getAssignOpMethodBind, this.rawMemory))
     }
 
 

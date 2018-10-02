@@ -19,7 +19,7 @@ open class Light2D : Node2D {
 
     // Enums 
 
-    enum class ShadowFilter(val id: Int) {
+    enum class ShadowFilter(val id: Long) {
         SHADOW_FILTER_NONE(0),
         SHADOW_FILTER_PCF3(1),
         SHADOW_FILTER_PCF5(2),
@@ -29,10 +29,10 @@ open class Light2D : Node2D {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class Mode(val id: Int) {
+    enum class Mode(val id: Long) {
         MODE_ADD(0),
         MODE_SUB(1),
         MODE_MIX(2),
@@ -40,7 +40,7 @@ open class Light2D : Node2D {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -61,16 +61,16 @@ open class Light2D : Node2D {
 
 
         // Constants
-        const val MODE_ADD: Int = 0
-        const val MODE_SUB: Int = 1
-        const val MODE_MIX: Int = 2
-        const val MODE_MASK: Int = 3
-        const val SHADOW_FILTER_NONE: Int = 0
-        const val SHADOW_FILTER_PCF3: Int = 1
-        const val SHADOW_FILTER_PCF5: Int = 2
-        const val SHADOW_FILTER_PCF7: Int = 3
-        const val SHADOW_FILTER_PCF9: Int = 4
-        const val SHADOW_FILTER_PCF13: Int = 5
+        const val MODE_ADD: Long = 0
+        const val MODE_SUB: Long = 1
+        const val MODE_MIX: Long = 2
+        const val MODE_MASK: Long = 3
+        const val SHADOW_FILTER_NONE: Long = 0
+        const val SHADOW_FILTER_PCF3: Long = 1
+        const val SHADOW_FILTER_PCF5: Long = 2
+        const val SHADOW_FILTER_PCF7: Long = 3
+        const val SHADOW_FILTER_PCF9: Long = 4
+        const val SHADOW_FILTER_PCF13: Long = 5
 
 
     }
@@ -101,9 +101,9 @@ open class Light2D : Node2D {
     }
 
 
-    open var textureScale: Float
-        get() = _icall_Float(getTextureScaleMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setTextureScaleMethodBind, this.rawMemory, value)
+    open var textureScale: Double
+        get() = _icall_Double(getTextureScaleMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setTextureScaleMethodBind, this.rawMemory, value)
 
 
     open var color: Color
@@ -115,44 +115,44 @@ open class Light2D : Node2D {
     }
 
 
-    open var energy: Float
-        get() = _icall_Float(getEnergyMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setEnergyMethodBind, this.rawMemory, value)
+    open var energy: Double
+        get() = _icall_Double(getEnergyMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setEnergyMethodBind, this.rawMemory, value)
 
 
-    open var mode: Int
-        get() = _icall_Int(getModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setModeMethodBind, this.rawMemory, value)
+    open var mode: Long
+        get() = _icall_Long(getModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setModeMethodBind, this.rawMemory, value)
 
 
-    open var rangeHeight: Float
-        get() = _icall_Float(getHeightMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setHeightMethodBind, this.rawMemory, value)
+    open var rangeHeight: Double
+        get() = _icall_Double(getHeightMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setHeightMethodBind, this.rawMemory, value)
 
 
-    open var rangeZMin: Int
-        get() = _icall_Int(getZRangeMinMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setZRangeMinMethodBind, this.rawMemory, value)
+    open var rangeZMin: Long
+        get() = _icall_Long(getZRangeMinMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setZRangeMinMethodBind, this.rawMemory, value)
 
 
-    open var rangeZMax: Int
-        get() = _icall_Int(getZRangeMaxMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setZRangeMaxMethodBind, this.rawMemory, value)
+    open var rangeZMax: Long
+        get() = _icall_Long(getZRangeMaxMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setZRangeMaxMethodBind, this.rawMemory, value)
 
 
-    open var rangeLayerMin: Int
-        get() = _icall_Int(getLayerRangeMinMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setLayerRangeMinMethodBind, this.rawMemory, value)
+    open var rangeLayerMin: Long
+        get() = _icall_Long(getLayerRangeMinMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setLayerRangeMinMethodBind, this.rawMemory, value)
 
 
-    open var rangeLayerMax: Int
-        get() = _icall_Int(getLayerRangeMaxMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setLayerRangeMaxMethodBind, this.rawMemory, value)
+    open var rangeLayerMax: Long
+        get() = _icall_Long(getLayerRangeMaxMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setLayerRangeMaxMethodBind, this.rawMemory, value)
 
 
-    open var rangeItemCullMask: Int
-        get() = _icall_Int(getItemCullMaskMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setItemCullMaskMethodBind, this.rawMemory, value)
+    open var rangeItemCullMask: Long
+        get() = _icall_Long(getItemCullMaskMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setItemCullMaskMethodBind, this.rawMemory, value)
 
 
     open var shadowEnabled: Boolean
@@ -169,29 +169,29 @@ open class Light2D : Node2D {
     }
 
 
-    open var shadowBufferSize: Int
-        get() = _icall_Int(getShadowBufferSizeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setShadowBufferSizeMethodBind, this.rawMemory, value)
+    open var shadowBufferSize: Long
+        get() = _icall_Long(getShadowBufferSizeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setShadowBufferSizeMethodBind, this.rawMemory, value)
 
 
-    open var shadowGradientLength: Float
-        get() = _icall_Float(getShadowGradientLengthMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setShadowGradientLengthMethodBind, this.rawMemory, value)
+    open var shadowGradientLength: Double
+        get() = _icall_Double(getShadowGradientLengthMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setShadowGradientLengthMethodBind, this.rawMemory, value)
 
 
-    open var shadowFilter: Float
-        get() = _icall_Float(getShadowFilterMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setShadowFilterMethodBind, this.rawMemory, value)
+    open var shadowFilter: Double
+        get() = _icall_Double(getShadowFilterMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setShadowFilterMethodBind, this.rawMemory, value)
 
 
-    open var shadowFilterSmooth: Float
-        get() = _icall_Float(getShadowSmoothMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setShadowSmoothMethodBind, this.rawMemory, value)
+    open var shadowFilterSmooth: Double
+        get() = _icall_Double(getShadowSmoothMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setShadowSmoothMethodBind, this.rawMemory, value)
 
 
-    open var shadowItemCullMask: Int
-        get() = _icall_Int(getItemShadowCullMaskMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setItemShadowCullMaskMethodBind, this.rawMemory, value)
+    open var shadowItemCullMask: Long
+        get() = _icall_Long(getItemShadowCullMaskMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setItemShadowCullMaskMethodBind, this.rawMemory, value)
 
 
 
@@ -258,122 +258,122 @@ open class Light2D : Node2D {
 
 
     private val setHeightMethodBind: CPointer<godot_method_bind> by lazy { getMB("Light2D", "set_height") }
-    open fun setHeight(height: Float) {
-        _icall_Unit_Float(setHeightMethodBind, this.rawMemory, height)
+    open fun setHeight(height: Double) {
+        _icall_Unit_Double(setHeightMethodBind, this.rawMemory, height)
     }
 
 
     private val getHeightMethodBind: CPointer<godot_method_bind> by lazy { getMB("Light2D", "get_height") }
-    open fun getHeight(): Float {
-        return _icall_Float(getHeightMethodBind, this.rawMemory)
+    open fun getHeight(): Double {
+        return _icall_Double(getHeightMethodBind, this.rawMemory)
     }
 
 
     private val setEnergyMethodBind: CPointer<godot_method_bind> by lazy { getMB("Light2D", "set_energy") }
-    open fun setEnergy(energy: Float) {
-        _icall_Unit_Float(setEnergyMethodBind, this.rawMemory, energy)
+    open fun setEnergy(energy: Double) {
+        _icall_Unit_Double(setEnergyMethodBind, this.rawMemory, energy)
     }
 
 
     private val getEnergyMethodBind: CPointer<godot_method_bind> by lazy { getMB("Light2D", "get_energy") }
-    open fun getEnergy(): Float {
-        return _icall_Float(getEnergyMethodBind, this.rawMemory)
+    open fun getEnergy(): Double {
+        return _icall_Double(getEnergyMethodBind, this.rawMemory)
     }
 
 
     private val setTextureScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("Light2D", "set_texture_scale") }
-    open fun setTextureScale(textureScale: Float) {
-        _icall_Unit_Float(setTextureScaleMethodBind, this.rawMemory, textureScale)
+    open fun setTextureScale(textureScale: Double) {
+        _icall_Unit_Double(setTextureScaleMethodBind, this.rawMemory, textureScale)
     }
 
 
     private val getTextureScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("Light2D", "get_texture_scale") }
-    open fun getTextureScale(): Float {
-        return _icall_Float(getTextureScaleMethodBind, this.rawMemory)
+    open fun getTextureScale(): Double {
+        return _icall_Double(getTextureScaleMethodBind, this.rawMemory)
     }
 
 
     private val setZRangeMinMethodBind: CPointer<godot_method_bind> by lazy { getMB("Light2D", "set_z_range_min") }
-    open fun setZRangeMin(z: Int) {
-        _icall_Unit_Int(setZRangeMinMethodBind, this.rawMemory, z)
+    open fun setZRangeMin(z: Long) {
+        _icall_Unit_Long(setZRangeMinMethodBind, this.rawMemory, z)
     }
 
 
     private val getZRangeMinMethodBind: CPointer<godot_method_bind> by lazy { getMB("Light2D", "get_z_range_min") }
-    open fun getZRangeMin(): Int {
-        return _icall_Int(getZRangeMinMethodBind, this.rawMemory)
+    open fun getZRangeMin(): Long {
+        return _icall_Long(getZRangeMinMethodBind, this.rawMemory)
     }
 
 
     private val setZRangeMaxMethodBind: CPointer<godot_method_bind> by lazy { getMB("Light2D", "set_z_range_max") }
-    open fun setZRangeMax(z: Int) {
-        _icall_Unit_Int(setZRangeMaxMethodBind, this.rawMemory, z)
+    open fun setZRangeMax(z: Long) {
+        _icall_Unit_Long(setZRangeMaxMethodBind, this.rawMemory, z)
     }
 
 
     private val getZRangeMaxMethodBind: CPointer<godot_method_bind> by lazy { getMB("Light2D", "get_z_range_max") }
-    open fun getZRangeMax(): Int {
-        return _icall_Int(getZRangeMaxMethodBind, this.rawMemory)
+    open fun getZRangeMax(): Long {
+        return _icall_Long(getZRangeMaxMethodBind, this.rawMemory)
     }
 
 
     private val setLayerRangeMinMethodBind: CPointer<godot_method_bind> by lazy { getMB("Light2D", "set_layer_range_min") }
-    open fun setLayerRangeMin(layer: Int) {
-        _icall_Unit_Int(setLayerRangeMinMethodBind, this.rawMemory, layer)
+    open fun setLayerRangeMin(layer: Long) {
+        _icall_Unit_Long(setLayerRangeMinMethodBind, this.rawMemory, layer)
     }
 
 
     private val getLayerRangeMinMethodBind: CPointer<godot_method_bind> by lazy { getMB("Light2D", "get_layer_range_min") }
-    open fun getLayerRangeMin(): Int {
-        return _icall_Int(getLayerRangeMinMethodBind, this.rawMemory)
+    open fun getLayerRangeMin(): Long {
+        return _icall_Long(getLayerRangeMinMethodBind, this.rawMemory)
     }
 
 
     private val setLayerRangeMaxMethodBind: CPointer<godot_method_bind> by lazy { getMB("Light2D", "set_layer_range_max") }
-    open fun setLayerRangeMax(layer: Int) {
-        _icall_Unit_Int(setLayerRangeMaxMethodBind, this.rawMemory, layer)
+    open fun setLayerRangeMax(layer: Long) {
+        _icall_Unit_Long(setLayerRangeMaxMethodBind, this.rawMemory, layer)
     }
 
 
     private val getLayerRangeMaxMethodBind: CPointer<godot_method_bind> by lazy { getMB("Light2D", "get_layer_range_max") }
-    open fun getLayerRangeMax(): Int {
-        return _icall_Int(getLayerRangeMaxMethodBind, this.rawMemory)
+    open fun getLayerRangeMax(): Long {
+        return _icall_Long(getLayerRangeMaxMethodBind, this.rawMemory)
     }
 
 
     private val setItemCullMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("Light2D", "set_item_cull_mask") }
-    open fun setItemCullMask(itemCullMask: Int) {
-        _icall_Unit_Int(setItemCullMaskMethodBind, this.rawMemory, itemCullMask)
+    open fun setItemCullMask(itemCullMask: Long) {
+        _icall_Unit_Long(setItemCullMaskMethodBind, this.rawMemory, itemCullMask)
     }
 
 
     private val getItemCullMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("Light2D", "get_item_cull_mask") }
-    open fun getItemCullMask(): Int {
-        return _icall_Int(getItemCullMaskMethodBind, this.rawMemory)
+    open fun getItemCullMask(): Long {
+        return _icall_Long(getItemCullMaskMethodBind, this.rawMemory)
     }
 
 
     private val setItemShadowCullMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("Light2D", "set_item_shadow_cull_mask") }
-    open fun setItemShadowCullMask(itemShadowCullMask: Int) {
-        _icall_Unit_Int(setItemShadowCullMaskMethodBind, this.rawMemory, itemShadowCullMask)
+    open fun setItemShadowCullMask(itemShadowCullMask: Long) {
+        _icall_Unit_Long(setItemShadowCullMaskMethodBind, this.rawMemory, itemShadowCullMask)
     }
 
 
     private val getItemShadowCullMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("Light2D", "get_item_shadow_cull_mask") }
-    open fun getItemShadowCullMask(): Int {
-        return _icall_Int(getItemShadowCullMaskMethodBind, this.rawMemory)
+    open fun getItemShadowCullMask(): Long {
+        return _icall_Long(getItemShadowCullMaskMethodBind, this.rawMemory)
     }
 
 
     private val setModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Light2D", "set_mode") }
-    open fun setMode(mode: Int) {
-        _icall_Unit_Int(setModeMethodBind, this.rawMemory, mode)
+    open fun setMode(mode: Long) {
+        _icall_Unit_Long(setModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Light2D", "get_mode") }
     open fun getMode(): Light2D.Mode {
-        return Light2D.Mode.fromInt(_icall_Int(getModeMethodBind, this.rawMemory))
+        return Light2D.Mode.fromInt(_icall_Long(getModeMethodBind, this.rawMemory))
     }
 
 
@@ -390,50 +390,50 @@ open class Light2D : Node2D {
 
 
     private val setShadowBufferSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Light2D", "set_shadow_buffer_size") }
-    open fun setShadowBufferSize(size: Int) {
-        _icall_Unit_Int(setShadowBufferSizeMethodBind, this.rawMemory, size)
+    open fun setShadowBufferSize(size: Long) {
+        _icall_Unit_Long(setShadowBufferSizeMethodBind, this.rawMemory, size)
     }
 
 
     private val getShadowBufferSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Light2D", "get_shadow_buffer_size") }
-    open fun getShadowBufferSize(): Int {
-        return _icall_Int(getShadowBufferSizeMethodBind, this.rawMemory)
+    open fun getShadowBufferSize(): Long {
+        return _icall_Long(getShadowBufferSizeMethodBind, this.rawMemory)
     }
 
 
     private val setShadowSmoothMethodBind: CPointer<godot_method_bind> by lazy { getMB("Light2D", "set_shadow_smooth") }
-    open fun setShadowSmooth(smooth: Float) {
-        _icall_Unit_Float(setShadowSmoothMethodBind, this.rawMemory, smooth)
+    open fun setShadowSmooth(smooth: Double) {
+        _icall_Unit_Double(setShadowSmoothMethodBind, this.rawMemory, smooth)
     }
 
 
     private val getShadowSmoothMethodBind: CPointer<godot_method_bind> by lazy { getMB("Light2D", "get_shadow_smooth") }
-    open fun getShadowSmooth(): Float {
-        return _icall_Float(getShadowSmoothMethodBind, this.rawMemory)
+    open fun getShadowSmooth(): Double {
+        return _icall_Double(getShadowSmoothMethodBind, this.rawMemory)
     }
 
 
     private val setShadowGradientLengthMethodBind: CPointer<godot_method_bind> by lazy { getMB("Light2D", "set_shadow_gradient_length") }
-    open fun setShadowGradientLength(multiplier: Float) {
-        _icall_Unit_Float(setShadowGradientLengthMethodBind, this.rawMemory, multiplier)
+    open fun setShadowGradientLength(multiplier: Double) {
+        _icall_Unit_Double(setShadowGradientLengthMethodBind, this.rawMemory, multiplier)
     }
 
 
     private val getShadowGradientLengthMethodBind: CPointer<godot_method_bind> by lazy { getMB("Light2D", "get_shadow_gradient_length") }
-    open fun getShadowGradientLength(): Float {
-        return _icall_Float(getShadowGradientLengthMethodBind, this.rawMemory)
+    open fun getShadowGradientLength(): Double {
+        return _icall_Double(getShadowGradientLengthMethodBind, this.rawMemory)
     }
 
 
     private val setShadowFilterMethodBind: CPointer<godot_method_bind> by lazy { getMB("Light2D", "set_shadow_filter") }
-    open fun setShadowFilter(filter: Int) {
-        _icall_Unit_Int(setShadowFilterMethodBind, this.rawMemory, filter)
+    open fun setShadowFilter(filter: Long) {
+        _icall_Unit_Long(setShadowFilterMethodBind, this.rawMemory, filter)
     }
 
 
     private val getShadowFilterMethodBind: CPointer<godot_method_bind> by lazy { getMB("Light2D", "get_shadow_filter") }
     open fun getShadowFilter(): Light2D.ShadowFilter {
-        return Light2D.ShadowFilter.fromInt(_icall_Int(getShadowFilterMethodBind, this.rawMemory))
+        return Light2D.ShadowFilter.fromInt(_icall_Long(getShadowFilterMethodBind, this.rawMemory))
     }
 
 

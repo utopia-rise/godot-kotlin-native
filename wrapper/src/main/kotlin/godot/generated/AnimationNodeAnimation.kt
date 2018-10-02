@@ -65,8 +65,8 @@ open class AnimationNodeAnimation : AnimationRootNode {
 
 
     private val getPlaybackTimeMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationNodeAnimation", "get_playback_time") }
-    open fun getPlaybackTime(): Float {
-        return _icall_Float(getPlaybackTimeMethodBind, this.rawMemory)
+    open fun getPlaybackTime(): Double {
+        return _icall_Double(getPlaybackTimeMethodBind, this.rawMemory)
     }
 
 

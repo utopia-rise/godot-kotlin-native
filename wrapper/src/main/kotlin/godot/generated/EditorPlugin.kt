@@ -19,7 +19,7 @@ open class EditorPlugin : Node {
 
     // Enums 
 
-    enum class DockSlot(val id: Int) {
+    enum class DockSlot(val id: Long) {
         DOCK_SLOT_LEFT_UL(0),
         DOCK_SLOT_LEFT_BL(1),
         DOCK_SLOT_LEFT_UR(2),
@@ -32,10 +32,10 @@ open class EditorPlugin : Node {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class CustomControlContainer(val id: Int) {
+    enum class CustomControlContainer(val id: Long) {
         CONTAINER_TOOLBAR(0),
         CONTAINER_SPATIAL_EDITOR_MENU(1),
         CONTAINER_SPATIAL_EDITOR_SIDE(2),
@@ -47,7 +47,7 @@ open class EditorPlugin : Node {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -70,23 +70,23 @@ open class EditorPlugin : Node {
 
 
         // Constants
-        const val CONTAINER_TOOLBAR: Int = 0
-        const val CONTAINER_SPATIAL_EDITOR_MENU: Int = 1
-        const val CONTAINER_SPATIAL_EDITOR_SIDE: Int = 2
-        const val CONTAINER_SPATIAL_EDITOR_BOTTOM: Int = 3
-        const val CONTAINER_CANVAS_EDITOR_MENU: Int = 4
-        const val CONTAINER_CANVAS_EDITOR_SIDE: Int = 5
-        const val CONTAINER_CANVAS_EDITOR_BOTTOM: Int = 6
-        const val CONTAINER_PROPERTY_EDITOR_BOTTOM: Int = 7
-        const val DOCK_SLOT_LEFT_UL: Int = 0
-        const val DOCK_SLOT_LEFT_BL: Int = 1
-        const val DOCK_SLOT_LEFT_UR: Int = 2
-        const val DOCK_SLOT_LEFT_BR: Int = 3
-        const val DOCK_SLOT_RIGHT_UL: Int = 4
-        const val DOCK_SLOT_RIGHT_BL: Int = 5
-        const val DOCK_SLOT_RIGHT_UR: Int = 6
-        const val DOCK_SLOT_RIGHT_BR: Int = 7
-        const val DOCK_SLOT_MAX: Int = 8
+        const val CONTAINER_TOOLBAR: Long = 0
+        const val CONTAINER_SPATIAL_EDITOR_MENU: Long = 1
+        const val CONTAINER_SPATIAL_EDITOR_SIDE: Long = 2
+        const val CONTAINER_SPATIAL_EDITOR_BOTTOM: Long = 3
+        const val CONTAINER_CANVAS_EDITOR_MENU: Long = 4
+        const val CONTAINER_CANVAS_EDITOR_SIDE: Long = 5
+        const val CONTAINER_CANVAS_EDITOR_BOTTOM: Long = 6
+        const val CONTAINER_PROPERTY_EDITOR_BOTTOM: Long = 7
+        const val DOCK_SLOT_LEFT_UL: Long = 0
+        const val DOCK_SLOT_LEFT_BL: Long = 1
+        const val DOCK_SLOT_LEFT_UR: Long = 2
+        const val DOCK_SLOT_LEFT_BR: Long = 3
+        const val DOCK_SLOT_RIGHT_UL: Long = 4
+        const val DOCK_SLOT_RIGHT_BL: Long = 5
+        const val DOCK_SLOT_RIGHT_UR: Long = 6
+        const val DOCK_SLOT_RIGHT_BR: Long = 7
+        const val DOCK_SLOT_MAX: Long = 8
 
 
     }
@@ -187,8 +187,8 @@ open class EditorPlugin : Node {
 
 
     private val addControlToContainerMethodBind: CPointer<godot_method_bind> by lazy { getMB("EditorPlugin", "add_control_to_container") }
-    open fun addControlToContainer(container: Int, control: Object) {
-        _icall_Unit_Int_Object(addControlToContainerMethodBind, this.rawMemory, container, control)
+    open fun addControlToContainer(container: Long, control: Object) {
+        _icall_Unit_Long_Object(addControlToContainerMethodBind, this.rawMemory, container, control)
     }
 
 
@@ -199,8 +199,8 @@ open class EditorPlugin : Node {
 
 
     private val addControlToDockMethodBind: CPointer<godot_method_bind> by lazy { getMB("EditorPlugin", "add_control_to_dock") }
-    open fun addControlToDock(slot: Int, control: Object) {
-        _icall_Unit_Int_Object(addControlToDockMethodBind, this.rawMemory, slot, control)
+    open fun addControlToDock(slot: Long, control: Object) {
+        _icall_Unit_Long_Object(addControlToDockMethodBind, this.rawMemory, slot, control)
     }
 
 
@@ -217,8 +217,8 @@ open class EditorPlugin : Node {
 
 
     private val removeControlFromContainerMethodBind: CPointer<godot_method_bind> by lazy { getMB("EditorPlugin", "remove_control_from_container") }
-    open fun removeControlFromContainer(container: Int, control: Object) {
-        _icall_Unit_Int_Object(removeControlFromContainerMethodBind, this.rawMemory, container, control)
+    open fun removeControlFromContainer(container: Long, control: Object) {
+        _icall_Unit_Long_Object(removeControlFromContainerMethodBind, this.rawMemory, container, control)
     }
 
 
@@ -265,8 +265,8 @@ open class EditorPlugin : Node {
 
 
     private val updateOverlaysMethodBind: CPointer<godot_method_bind> by lazy { getMB("EditorPlugin", "update_overlays") }
-    open fun updateOverlays(): Int {
-        return _icall_Int(updateOverlaysMethodBind, this.rawMemory)
+    open fun updateOverlays(): Long {
+        return _icall_Long(updateOverlaysMethodBind, this.rawMemory)
     }
 
 

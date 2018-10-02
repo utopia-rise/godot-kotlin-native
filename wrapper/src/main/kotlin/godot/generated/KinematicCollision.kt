@@ -65,16 +65,16 @@ open class KinematicCollision : Reference {
         get() = _icall_Object(getColliderMethodBind, this.rawMemory)
 
 
-    open val colliderId: Int
-        get() = _icall_Int(getColliderIdMethodBind, this.rawMemory)
+    open val colliderId: Long
+        get() = _icall_Long(getColliderIdMethodBind, this.rawMemory)
 
 
     open val colliderShape: Object
         get() = _icall_Object(getColliderShapeMethodBind, this.rawMemory)
 
 
-    open val colliderShapeIndex: Int
-        get() = _icall_Int(getColliderShapeIndexMethodBind, this.rawMemory)
+    open val colliderShapeIndex: Long
+        get() = _icall_Long(getColliderShapeIndexMethodBind, this.rawMemory)
 
 
     open val colliderVelocity: Vector3
@@ -125,8 +125,8 @@ open class KinematicCollision : Reference {
 
 
     private val getColliderIdMethodBind: CPointer<godot_method_bind> by lazy { getMB("KinematicCollision", "get_collider_id") }
-    open fun getColliderId(): Int {
-        return _icall_Int(getColliderIdMethodBind, this.rawMemory)
+    open fun getColliderId(): Long {
+        return _icall_Long(getColliderIdMethodBind, this.rawMemory)
     }
 
 
@@ -137,8 +137,8 @@ open class KinematicCollision : Reference {
 
 
     private val getColliderShapeIndexMethodBind: CPointer<godot_method_bind> by lazy { getMB("KinematicCollision", "get_collider_shape_index") }
-    open fun getColliderShapeIndex(): Int {
-        return _icall_Int(getColliderShapeIndexMethodBind, this.rawMemory)
+    open fun getColliderShapeIndex(): Long {
+        return _icall_Long(getColliderShapeIndexMethodBind, this.rawMemory)
     }
 
 

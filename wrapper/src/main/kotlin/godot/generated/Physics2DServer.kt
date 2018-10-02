@@ -19,36 +19,36 @@ open class Physics2DServer : Object {
 
     // Enums 
 
-    enum class ProcessInfo(val id: Int) {
+    enum class ProcessInfo(val id: Long) {
         INFO_ACTIVE_OBJECTS(0),
         INFO_COLLISION_PAIRS(1),
         INFO_ISLAND_COUNT(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class AreaBodyStatus(val id: Int) {
+    enum class AreaBodyStatus(val id: Long) {
         AREA_BODY_ADDED(0),
         AREA_BODY_REMOVED(1),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class DampedStringParam(val id: Int) {
+    enum class DampedStringParam(val id: Long) {
         DAMPED_STRING_REST_LENGTH(0),
         DAMPED_STRING_STIFFNESS(1),
         DAMPED_STRING_DAMPING(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class BodyMode(val id: Int) {
+    enum class BodyMode(val id: Long) {
         BODY_MODE_STATIC(0),
         BODY_MODE_KINEMATIC(1),
         BODY_MODE_RIGID(2),
@@ -56,10 +56,10 @@ open class Physics2DServer : Object {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class ShapeType(val id: Int) {
+    enum class ShapeType(val id: Long) {
         SHAPE_LINE(0),
         SHAPE_RAY(1),
         SHAPE_SEGMENT(2),
@@ -72,20 +72,20 @@ open class Physics2DServer : Object {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class JointParam(val id: Int) {
+    enum class JointParam(val id: Long) {
         JOINT_PARAM_BIAS(0),
         JOINT_PARAM_MAX_BIAS(1),
         JOINT_PARAM_MAX_FORCE(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class SpaceParameter(val id: Int) {
+    enum class SpaceParameter(val id: Long) {
         SPACE_PARAM_CONTACT_RECYCLE_RADIUS(0),
         SPACE_PARAM_CONTACT_MAX_SEPARATION(1),
         SPACE_PARAM_BODY_MAX_ALLOWED_PENETRATION(2),
@@ -96,30 +96,30 @@ open class Physics2DServer : Object {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class JointType(val id: Int) {
+    enum class JointType(val id: Long) {
         JOINT_PIN(0),
         JOINT_GROOVE(1),
         JOINT_DAMPED_SPRING(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class CCDMode(val id: Int) {
+    enum class CCDMode(val id: Long) {
         CCD_MODE_DISABLED(0),
         CCD_MODE_CAST_RAY(1),
         CCD_MODE_CAST_SHAPE(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class BodyState(val id: Int) {
+    enum class BodyState(val id: Long) {
         BODY_STATE_TRANSFORM(0),
         BODY_STATE_LINEAR_VELOCITY(1),
         BODY_STATE_ANGULAR_VELOCITY(2),
@@ -128,10 +128,10 @@ open class Physics2DServer : Object {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class BodyParameter(val id: Int) {
+    enum class BodyParameter(val id: Long) {
         BODY_PARAM_BOUNCE(0),
         BODY_PARAM_FRICTION(1),
         BODY_PARAM_MASS(2),
@@ -143,10 +143,10 @@ open class Physics2DServer : Object {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class AreaSpaceOverrideMode(val id: Int) {
+    enum class AreaSpaceOverrideMode(val id: Long) {
         AREA_SPACE_OVERRIDE_DISABLED(0),
         AREA_SPACE_OVERRIDE_COMBINE(1),
         AREA_SPACE_OVERRIDE_COMBINE_REPLACE(2),
@@ -155,10 +155,10 @@ open class Physics2DServer : Object {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class AreaParameter(val id: Int) {
+    enum class AreaParameter(val id: Long) {
         AREA_PARAM_GRAVITY(0),
         AREA_PARAM_GRAVITY_VECTOR(1),
         AREA_PARAM_GRAVITY_IS_POINT(2),
@@ -170,7 +170,7 @@ open class Physics2DServer : Object {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -188,69 +188,69 @@ open class Physics2DServer : Object {
 
 
         // Constants
-        const val SPACE_PARAM_CONTACT_RECYCLE_RADIUS: Int = 0
-        const val SPACE_PARAM_CONTACT_MAX_SEPARATION: Int = 1
-        const val SPACE_PARAM_BODY_MAX_ALLOWED_PENETRATION: Int = 2
-        const val SPACE_PARAM_BODY_LINEAR_VELOCITY_SLEEP_THRESHOLD: Int = 3
-        const val SPACE_PARAM_BODY_ANGULAR_VELOCITY_SLEEP_THRESHOLD: Int = 4
-        const val SPACE_PARAM_BODY_TIME_TO_SLEEP: Int = 5
-        const val SPACE_PARAM_CONSTRAINT_DEFAULT_BIAS: Int = 6
-        const val SHAPE_LINE: Int = 0
-        const val SHAPE_RAY: Int = 1
-        const val SHAPE_SEGMENT: Int = 2
-        const val SHAPE_CIRCLE: Int = 3
-        const val SHAPE_RECTANGLE: Int = 4
-        const val SHAPE_CAPSULE: Int = 5
-        const val SHAPE_CONVEX_POLYGON: Int = 6
-        const val SHAPE_CONCAVE_POLYGON: Int = 7
-        const val SHAPE_CUSTOM: Int = 8
-        const val AREA_PARAM_GRAVITY: Int = 0
-        const val AREA_PARAM_GRAVITY_VECTOR: Int = 1
-        const val AREA_PARAM_GRAVITY_IS_POINT: Int = 2
-        const val AREA_PARAM_GRAVITY_DISTANCE_SCALE: Int = 3
-        const val AREA_PARAM_GRAVITY_POINT_ATTENUATION: Int = 4
-        const val AREA_PARAM_LINEAR_DAMP: Int = 5
-        const val AREA_PARAM_ANGULAR_DAMP: Int = 6
-        const val AREA_PARAM_PRIORITY: Int = 7
-        const val AREA_SPACE_OVERRIDE_DISABLED: Int = 0
-        const val AREA_SPACE_OVERRIDE_COMBINE: Int = 1
-        const val AREA_SPACE_OVERRIDE_COMBINE_REPLACE: Int = 2
-        const val AREA_SPACE_OVERRIDE_REPLACE: Int = 3
-        const val AREA_SPACE_OVERRIDE_REPLACE_COMBINE: Int = 4
-        const val BODY_MODE_STATIC: Int = 0
-        const val BODY_MODE_KINEMATIC: Int = 1
-        const val BODY_MODE_RIGID: Int = 2
-        const val BODY_MODE_CHARACTER: Int = 3
-        const val BODY_PARAM_BOUNCE: Int = 0
-        const val BODY_PARAM_FRICTION: Int = 1
-        const val BODY_PARAM_MASS: Int = 2
-        const val BODY_PARAM_INERTIA: Int = 3
-        const val BODY_PARAM_GRAVITY_SCALE: Int = 4
-        const val BODY_PARAM_LINEAR_DAMP: Int = 5
-        const val BODY_PARAM_ANGULAR_DAMP: Int = 6
-        const val BODY_PARAM_MAX: Int = 7
-        const val BODY_STATE_TRANSFORM: Int = 0
-        const val BODY_STATE_LINEAR_VELOCITY: Int = 1
-        const val BODY_STATE_ANGULAR_VELOCITY: Int = 2
-        const val BODY_STATE_SLEEPING: Int = 3
-        const val BODY_STATE_CAN_SLEEP: Int = 4
-        const val JOINT_PIN: Int = 0
-        const val JOINT_GROOVE: Int = 1
-        const val JOINT_DAMPED_SPRING: Int = 2
-        const val JOINT_PARAM_BIAS: Int = 0
-        const val JOINT_PARAM_MAX_BIAS: Int = 1
-        const val JOINT_PARAM_MAX_FORCE: Int = 2
-        const val DAMPED_STRING_REST_LENGTH: Int = 0
-        const val DAMPED_STRING_STIFFNESS: Int = 1
-        const val DAMPED_STRING_DAMPING: Int = 2
-        const val CCD_MODE_DISABLED: Int = 0
-        const val CCD_MODE_CAST_RAY: Int = 1
-        const val CCD_MODE_CAST_SHAPE: Int = 2
-        const val AREA_BODY_ADDED: Int = 0
-        const val AREA_BODY_REMOVED: Int = 1
-        const val INFO_ACTIVE_OBJECTS: Int = 0
-        const val INFO_COLLISION_PAIRS: Int = 1
-        const val INFO_ISLAND_COUNT: Int = 2
+        const val SPACE_PARAM_CONTACT_RECYCLE_RADIUS: Long = 0
+        const val SPACE_PARAM_CONTACT_MAX_SEPARATION: Long = 1
+        const val SPACE_PARAM_BODY_MAX_ALLOWED_PENETRATION: Long = 2
+        const val SPACE_PARAM_BODY_LINEAR_VELOCITY_SLEEP_THRESHOLD: Long = 3
+        const val SPACE_PARAM_BODY_ANGULAR_VELOCITY_SLEEP_THRESHOLD: Long = 4
+        const val SPACE_PARAM_BODY_TIME_TO_SLEEP: Long = 5
+        const val SPACE_PARAM_CONSTRAINT_DEFAULT_BIAS: Long = 6
+        const val SHAPE_LINE: Long = 0
+        const val SHAPE_RAY: Long = 1
+        const val SHAPE_SEGMENT: Long = 2
+        const val SHAPE_CIRCLE: Long = 3
+        const val SHAPE_RECTANGLE: Long = 4
+        const val SHAPE_CAPSULE: Long = 5
+        const val SHAPE_CONVEX_POLYGON: Long = 6
+        const val SHAPE_CONCAVE_POLYGON: Long = 7
+        const val SHAPE_CUSTOM: Long = 8
+        const val AREA_PARAM_GRAVITY: Long = 0
+        const val AREA_PARAM_GRAVITY_VECTOR: Long = 1
+        const val AREA_PARAM_GRAVITY_IS_POINT: Long = 2
+        const val AREA_PARAM_GRAVITY_DISTANCE_SCALE: Long = 3
+        const val AREA_PARAM_GRAVITY_POINT_ATTENUATION: Long = 4
+        const val AREA_PARAM_LINEAR_DAMP: Long = 5
+        const val AREA_PARAM_ANGULAR_DAMP: Long = 6
+        const val AREA_PARAM_PRIORITY: Long = 7
+        const val AREA_SPACE_OVERRIDE_DISABLED: Long = 0
+        const val AREA_SPACE_OVERRIDE_COMBINE: Long = 1
+        const val AREA_SPACE_OVERRIDE_COMBINE_REPLACE: Long = 2
+        const val AREA_SPACE_OVERRIDE_REPLACE: Long = 3
+        const val AREA_SPACE_OVERRIDE_REPLACE_COMBINE: Long = 4
+        const val BODY_MODE_STATIC: Long = 0
+        const val BODY_MODE_KINEMATIC: Long = 1
+        const val BODY_MODE_RIGID: Long = 2
+        const val BODY_MODE_CHARACTER: Long = 3
+        const val BODY_PARAM_BOUNCE: Long = 0
+        const val BODY_PARAM_FRICTION: Long = 1
+        const val BODY_PARAM_MASS: Long = 2
+        const val BODY_PARAM_INERTIA: Long = 3
+        const val BODY_PARAM_GRAVITY_SCALE: Long = 4
+        const val BODY_PARAM_LINEAR_DAMP: Long = 5
+        const val BODY_PARAM_ANGULAR_DAMP: Long = 6
+        const val BODY_PARAM_MAX: Long = 7
+        const val BODY_STATE_TRANSFORM: Long = 0
+        const val BODY_STATE_LINEAR_VELOCITY: Long = 1
+        const val BODY_STATE_ANGULAR_VELOCITY: Long = 2
+        const val BODY_STATE_SLEEPING: Long = 3
+        const val BODY_STATE_CAN_SLEEP: Long = 4
+        const val JOINT_PIN: Long = 0
+        const val JOINT_GROOVE: Long = 1
+        const val JOINT_DAMPED_SPRING: Long = 2
+        const val JOINT_PARAM_BIAS: Long = 0
+        const val JOINT_PARAM_MAX_BIAS: Long = 1
+        const val JOINT_PARAM_MAX_FORCE: Long = 2
+        const val DAMPED_STRING_REST_LENGTH: Long = 0
+        const val DAMPED_STRING_STIFFNESS: Long = 1
+        const val DAMPED_STRING_DAMPING: Long = 2
+        const val CCD_MODE_DISABLED: Long = 0
+        const val CCD_MODE_CAST_RAY: Long = 1
+        const val CCD_MODE_CAST_SHAPE: Long = 2
+        const val AREA_BODY_ADDED: Long = 0
+        const val AREA_BODY_REMOVED: Long = 1
+        const val INFO_ACTIVE_OBJECTS: Long = 0
+        const val INFO_COLLISION_PAIRS: Long = 1
+        const val INFO_ISLAND_COUNT: Long = 2
 
 
         private val rawMemory: COpaquePointer by lazy { getSingleton("Physics2DServer", "Physics2DServer") }
@@ -316,7 +316,7 @@ open class Physics2DServer : Object {
 
         private val shapeGetTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "shape_get_type") }
         fun shapeGetType(shape: RID): Physics2DServer.ShapeType {
-            return Physics2DServer.ShapeType.fromInt(_icall_Int_RID(shapeGetTypeMethodBind, this.rawMemory, shape))
+            return Physics2DServer.ShapeType.fromInt(_icall_Long_RID(shapeGetTypeMethodBind, this.rawMemory, shape))
         }
 
 
@@ -345,14 +345,14 @@ open class Physics2DServer : Object {
 
 
         private val spaceSetParamMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "space_set_param") }
-        fun spaceSetParam(space: RID, param: Int, value: Float) {
-            _icall_Unit_RID_Int_Float(spaceSetParamMethodBind, this.rawMemory, space, param, value)
+        fun spaceSetParam(space: RID, param: Long, value: Double) {
+            _icall_Unit_RID_Long_Double(spaceSetParamMethodBind, this.rawMemory, space, param, value)
         }
 
 
         private val spaceGetParamMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "space_get_param") }
-        fun spaceGetParam(space: RID, param: Int): Float {
-            return _icall_Float_RID_Int(spaceGetParamMethodBind, this.rawMemory, space, param)
+        fun spaceGetParam(space: RID, param: Long): Double {
+            return _icall_Double_RID_Long(spaceGetParamMethodBind, this.rawMemory, space, param)
         }
 
 
@@ -381,14 +381,14 @@ open class Physics2DServer : Object {
 
 
         private val areaSetSpaceOverrideModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "area_set_space_override_mode") }
-        fun areaSetSpaceOverrideMode(area: RID, mode: Int) {
-            _icall_Unit_RID_Int(areaSetSpaceOverrideModeMethodBind, this.rawMemory, area, mode)
+        fun areaSetSpaceOverrideMode(area: RID, mode: Long) {
+            _icall_Unit_RID_Long(areaSetSpaceOverrideModeMethodBind, this.rawMemory, area, mode)
         }
 
 
         private val areaGetSpaceOverrideModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "area_get_space_override_mode") }
         fun areaGetSpaceOverrideMode(area: RID): Physics2DServer.AreaSpaceOverrideMode {
-            return Physics2DServer.AreaSpaceOverrideMode.fromInt(_icall_Int_RID(areaGetSpaceOverrideModeMethodBind, this.rawMemory, area))
+            return Physics2DServer.AreaSpaceOverrideMode.fromInt(_icall_Long_RID(areaGetSpaceOverrideModeMethodBind, this.rawMemory, area))
         }
 
 
@@ -399,44 +399,44 @@ open class Physics2DServer : Object {
 
 
         private val areaSetShapeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "area_set_shape") }
-        fun areaSetShape(area: RID, shapeIdx: Int, shape: RID) {
-            _icall_Unit_RID_Int_RID(areaSetShapeMethodBind, this.rawMemory, area, shapeIdx, shape)
+        fun areaSetShape(area: RID, shapeIdx: Long, shape: RID) {
+            _icall_Unit_RID_Long_RID(areaSetShapeMethodBind, this.rawMemory, area, shapeIdx, shape)
         }
 
 
         private val areaSetShapeTransformMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "area_set_shape_transform") }
-        fun areaSetShapeTransform(area: RID, shapeIdx: Int, transform: Transform2D) {
-            _icall_Unit_RID_Int_Transform2D(areaSetShapeTransformMethodBind, this.rawMemory, area, shapeIdx, transform)
+        fun areaSetShapeTransform(area: RID, shapeIdx: Long, transform: Transform2D) {
+            _icall_Unit_RID_Long_Transform2D(areaSetShapeTransformMethodBind, this.rawMemory, area, shapeIdx, transform)
         }
 
 
         private val areaSetShapeDisabledMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "area_set_shape_disabled") }
-        fun areaSetShapeDisabled(area: RID, shapeIdx: Int, disable: Boolean) {
-            _icall_Unit_RID_Int_Boolean(areaSetShapeDisabledMethodBind, this.rawMemory, area, shapeIdx, disable)
+        fun areaSetShapeDisabled(area: RID, shapeIdx: Long, disable: Boolean) {
+            _icall_Unit_RID_Long_Boolean(areaSetShapeDisabledMethodBind, this.rawMemory, area, shapeIdx, disable)
         }
 
 
         private val areaGetShapeCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "area_get_shape_count") }
-        fun areaGetShapeCount(area: RID): Int {
-            return _icall_Int_RID(areaGetShapeCountMethodBind, this.rawMemory, area)
+        fun areaGetShapeCount(area: RID): Long {
+            return _icall_Long_RID(areaGetShapeCountMethodBind, this.rawMemory, area)
         }
 
 
         private val areaGetShapeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "area_get_shape") }
-        fun areaGetShape(area: RID, shapeIdx: Int): RID {
-            return _icall_RID_RID_Int(areaGetShapeMethodBind, this.rawMemory, area, shapeIdx)
+        fun areaGetShape(area: RID, shapeIdx: Long): RID {
+            return _icall_RID_RID_Long(areaGetShapeMethodBind, this.rawMemory, area, shapeIdx)
         }
 
 
         private val areaGetShapeTransformMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "area_get_shape_transform") }
-        fun areaGetShapeTransform(area: RID, shapeIdx: Int): Transform2D {
-            return _icall_Transform2D_RID_Int(areaGetShapeTransformMethodBind, this.rawMemory, area, shapeIdx)
+        fun areaGetShapeTransform(area: RID, shapeIdx: Long): Transform2D {
+            return _icall_Transform2D_RID_Long(areaGetShapeTransformMethodBind, this.rawMemory, area, shapeIdx)
         }
 
 
         private val areaRemoveShapeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "area_remove_shape") }
-        fun areaRemoveShape(area: RID, shapeIdx: Int) {
-            _icall_Unit_RID_Int(areaRemoveShapeMethodBind, this.rawMemory, area, shapeIdx)
+        fun areaRemoveShape(area: RID, shapeIdx: Long) {
+            _icall_Unit_RID_Long(areaRemoveShapeMethodBind, this.rawMemory, area, shapeIdx)
         }
 
 
@@ -447,20 +447,20 @@ open class Physics2DServer : Object {
 
 
         private val areaSetCollisionLayerMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "area_set_collision_layer") }
-        fun areaSetCollisionLayer(area: RID, layer: Int) {
-            _icall_Unit_RID_Int(areaSetCollisionLayerMethodBind, this.rawMemory, area, layer)
+        fun areaSetCollisionLayer(area: RID, layer: Long) {
+            _icall_Unit_RID_Long(areaSetCollisionLayerMethodBind, this.rawMemory, area, layer)
         }
 
 
         private val areaSetCollisionMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "area_set_collision_mask") }
-        fun areaSetCollisionMask(area: RID, mask: Int) {
-            _icall_Unit_RID_Int(areaSetCollisionMaskMethodBind, this.rawMemory, area, mask)
+        fun areaSetCollisionMask(area: RID, mask: Long) {
+            _icall_Unit_RID_Long(areaSetCollisionMaskMethodBind, this.rawMemory, area, mask)
         }
 
 
         private val areaSetParamMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "area_set_param") }
-        fun areaSetParam(area: RID, param: Int, value: Variant) {
-            _icall_Unit_RID_Int_Variant(areaSetParamMethodBind, this.rawMemory, area, param, value)
+        fun areaSetParam(area: RID, param: Long, value: Variant) {
+            _icall_Unit_RID_Long_Variant(areaSetParamMethodBind, this.rawMemory, area, param, value)
         }
 
 
@@ -471,8 +471,8 @@ open class Physics2DServer : Object {
 
 
         private val areaGetParamMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "area_get_param") }
-        fun areaGetParam(area: RID, param: Int): Variant {
-            return _icall_Variant_RID_Int(areaGetParamMethodBind, this.rawMemory, area, param)
+        fun areaGetParam(area: RID, param: Long): Variant {
+            return _icall_Variant_RID_Long(areaGetParamMethodBind, this.rawMemory, area, param)
         }
 
 
@@ -483,14 +483,14 @@ open class Physics2DServer : Object {
 
 
         private val areaAttachObjectInstanceIdMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "area_attach_object_instance_id") }
-        fun areaAttachObjectInstanceId(area: RID, id: Int) {
-            _icall_Unit_RID_Int(areaAttachObjectInstanceIdMethodBind, this.rawMemory, area, id)
+        fun areaAttachObjectInstanceId(area: RID, id: Long) {
+            _icall_Unit_RID_Long(areaAttachObjectInstanceIdMethodBind, this.rawMemory, area, id)
         }
 
 
         private val areaGetObjectInstanceIdMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "area_get_object_instance_id") }
-        fun areaGetObjectInstanceId(area: RID): Int {
-            return _icall_Int_RID(areaGetObjectInstanceIdMethodBind, this.rawMemory, area)
+        fun areaGetObjectInstanceId(area: RID): Long {
+            return _icall_Long_RID(areaGetObjectInstanceIdMethodBind, this.rawMemory, area)
         }
 
 
@@ -531,14 +531,14 @@ open class Physics2DServer : Object {
 
 
         private val bodySetModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "body_set_mode") }
-        fun bodySetMode(body: RID, mode: Int) {
-            _icall_Unit_RID_Int(bodySetModeMethodBind, this.rawMemory, body, mode)
+        fun bodySetMode(body: RID, mode: Long) {
+            _icall_Unit_RID_Long(bodySetModeMethodBind, this.rawMemory, body, mode)
         }
 
 
         private val bodyGetModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "body_get_mode") }
         fun bodyGetMode(body: RID): Physics2DServer.BodyMode {
-            return Physics2DServer.BodyMode.fromInt(_icall_Int_RID(bodyGetModeMethodBind, this.rawMemory, body))
+            return Physics2DServer.BodyMode.fromInt(_icall_Long_RID(bodyGetModeMethodBind, this.rawMemory, body))
         }
 
 
@@ -549,50 +549,50 @@ open class Physics2DServer : Object {
 
 
         private val bodySetShapeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "body_set_shape") }
-        fun bodySetShape(body: RID, shapeIdx: Int, shape: RID) {
-            _icall_Unit_RID_Int_RID(bodySetShapeMethodBind, this.rawMemory, body, shapeIdx, shape)
+        fun bodySetShape(body: RID, shapeIdx: Long, shape: RID) {
+            _icall_Unit_RID_Long_RID(bodySetShapeMethodBind, this.rawMemory, body, shapeIdx, shape)
         }
 
 
         private val bodySetShapeTransformMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "body_set_shape_transform") }
-        fun bodySetShapeTransform(body: RID, shapeIdx: Int, transform: Transform2D) {
-            _icall_Unit_RID_Int_Transform2D(bodySetShapeTransformMethodBind, this.rawMemory, body, shapeIdx, transform)
+        fun bodySetShapeTransform(body: RID, shapeIdx: Long, transform: Transform2D) {
+            _icall_Unit_RID_Long_Transform2D(bodySetShapeTransformMethodBind, this.rawMemory, body, shapeIdx, transform)
         }
 
 
         private val bodySetShapeMetadataMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "body_set_shape_metadata") }
-        fun bodySetShapeMetadata(body: RID, shapeIdx: Int, metadata: Variant) {
-            _icall_Unit_RID_Int_Variant(bodySetShapeMetadataMethodBind, this.rawMemory, body, shapeIdx, metadata)
+        fun bodySetShapeMetadata(body: RID, shapeIdx: Long, metadata: Variant) {
+            _icall_Unit_RID_Long_Variant(bodySetShapeMetadataMethodBind, this.rawMemory, body, shapeIdx, metadata)
         }
 
 
         private val bodyGetShapeCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "body_get_shape_count") }
-        fun bodyGetShapeCount(body: RID): Int {
-            return _icall_Int_RID(bodyGetShapeCountMethodBind, this.rawMemory, body)
+        fun bodyGetShapeCount(body: RID): Long {
+            return _icall_Long_RID(bodyGetShapeCountMethodBind, this.rawMemory, body)
         }
 
 
         private val bodyGetShapeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "body_get_shape") }
-        fun bodyGetShape(body: RID, shapeIdx: Int): RID {
-            return _icall_RID_RID_Int(bodyGetShapeMethodBind, this.rawMemory, body, shapeIdx)
+        fun bodyGetShape(body: RID, shapeIdx: Long): RID {
+            return _icall_RID_RID_Long(bodyGetShapeMethodBind, this.rawMemory, body, shapeIdx)
         }
 
 
         private val bodyGetShapeTransformMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "body_get_shape_transform") }
-        fun bodyGetShapeTransform(body: RID, shapeIdx: Int): Transform2D {
-            return _icall_Transform2D_RID_Int(bodyGetShapeTransformMethodBind, this.rawMemory, body, shapeIdx)
+        fun bodyGetShapeTransform(body: RID, shapeIdx: Long): Transform2D {
+            return _icall_Transform2D_RID_Long(bodyGetShapeTransformMethodBind, this.rawMemory, body, shapeIdx)
         }
 
 
         private val bodyGetShapeMetadataMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "body_get_shape_metadata") }
-        fun bodyGetShapeMetadata(body: RID, shapeIdx: Int): Variant {
-            return _icall_Variant_RID_Int(bodyGetShapeMetadataMethodBind, this.rawMemory, body, shapeIdx)
+        fun bodyGetShapeMetadata(body: RID, shapeIdx: Long): Variant {
+            return _icall_Variant_RID_Long(bodyGetShapeMetadataMethodBind, this.rawMemory, body, shapeIdx)
         }
 
 
         private val bodyRemoveShapeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "body_remove_shape") }
-        fun bodyRemoveShape(body: RID, shapeIdx: Int) {
-            _icall_Unit_RID_Int(bodyRemoveShapeMethodBind, this.rawMemory, body, shapeIdx)
+        fun bodyRemoveShape(body: RID, shapeIdx: Long) {
+            _icall_Unit_RID_Long(bodyRemoveShapeMethodBind, this.rawMemory, body, shapeIdx)
         }
 
 
@@ -603,86 +603,86 @@ open class Physics2DServer : Object {
 
 
         private val bodySetShapeDisabledMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "body_set_shape_disabled") }
-        fun bodySetShapeDisabled(body: RID, shapeIdx: Int, disable: Boolean) {
-            _icall_Unit_RID_Int_Boolean(bodySetShapeDisabledMethodBind, this.rawMemory, body, shapeIdx, disable)
+        fun bodySetShapeDisabled(body: RID, shapeIdx: Long, disable: Boolean) {
+            _icall_Unit_RID_Long_Boolean(bodySetShapeDisabledMethodBind, this.rawMemory, body, shapeIdx, disable)
         }
 
 
         private val bodySetShapeAsOneWayCollisionMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "body_set_shape_as_one_way_collision") }
-        fun bodySetShapeAsOneWayCollision(body: RID, shapeIdx: Int, enable: Boolean) {
-            _icall_Unit_RID_Int_Boolean(bodySetShapeAsOneWayCollisionMethodBind, this.rawMemory, body, shapeIdx, enable)
+        fun bodySetShapeAsOneWayCollision(body: RID, shapeIdx: Long, enable: Boolean) {
+            _icall_Unit_RID_Long_Boolean(bodySetShapeAsOneWayCollisionMethodBind, this.rawMemory, body, shapeIdx, enable)
         }
 
 
         private val bodyAttachObjectInstanceIdMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "body_attach_object_instance_id") }
-        fun bodyAttachObjectInstanceId(body: RID, id: Int) {
-            _icall_Unit_RID_Int(bodyAttachObjectInstanceIdMethodBind, this.rawMemory, body, id)
+        fun bodyAttachObjectInstanceId(body: RID, id: Long) {
+            _icall_Unit_RID_Long(bodyAttachObjectInstanceIdMethodBind, this.rawMemory, body, id)
         }
 
 
         private val bodyGetObjectInstanceIdMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "body_get_object_instance_id") }
-        fun bodyGetObjectInstanceId(body: RID): Int {
-            return _icall_Int_RID(bodyGetObjectInstanceIdMethodBind, this.rawMemory, body)
+        fun bodyGetObjectInstanceId(body: RID): Long {
+            return _icall_Long_RID(bodyGetObjectInstanceIdMethodBind, this.rawMemory, body)
         }
 
 
         private val bodySetContinuousCollisionDetectionModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "body_set_continuous_collision_detection_mode") }
-        fun bodySetContinuousCollisionDetectionMode(body: RID, mode: Int) {
-            _icall_Unit_RID_Int(bodySetContinuousCollisionDetectionModeMethodBind, this.rawMemory, body, mode)
+        fun bodySetContinuousCollisionDetectionMode(body: RID, mode: Long) {
+            _icall_Unit_RID_Long(bodySetContinuousCollisionDetectionModeMethodBind, this.rawMemory, body, mode)
         }
 
 
         private val bodyGetContinuousCollisionDetectionModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "body_get_continuous_collision_detection_mode") }
         fun bodyGetContinuousCollisionDetectionMode(body: RID): Physics2DServer.CCDMode {
-            return Physics2DServer.CCDMode.fromInt(_icall_Int_RID(bodyGetContinuousCollisionDetectionModeMethodBind, this.rawMemory, body))
+            return Physics2DServer.CCDMode.fromInt(_icall_Long_RID(bodyGetContinuousCollisionDetectionModeMethodBind, this.rawMemory, body))
         }
 
 
         private val bodySetCollisionLayerMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "body_set_collision_layer") }
-        fun bodySetCollisionLayer(body: RID, layer: Int) {
-            _icall_Unit_RID_Int(bodySetCollisionLayerMethodBind, this.rawMemory, body, layer)
+        fun bodySetCollisionLayer(body: RID, layer: Long) {
+            _icall_Unit_RID_Long(bodySetCollisionLayerMethodBind, this.rawMemory, body, layer)
         }
 
 
         private val bodyGetCollisionLayerMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "body_get_collision_layer") }
-        fun bodyGetCollisionLayer(body: RID): Int {
-            return _icall_Int_RID(bodyGetCollisionLayerMethodBind, this.rawMemory, body)
+        fun bodyGetCollisionLayer(body: RID): Long {
+            return _icall_Long_RID(bodyGetCollisionLayerMethodBind, this.rawMemory, body)
         }
 
 
         private val bodySetCollisionMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "body_set_collision_mask") }
-        fun bodySetCollisionMask(body: RID, mask: Int) {
-            _icall_Unit_RID_Int(bodySetCollisionMaskMethodBind, this.rawMemory, body, mask)
+        fun bodySetCollisionMask(body: RID, mask: Long) {
+            _icall_Unit_RID_Long(bodySetCollisionMaskMethodBind, this.rawMemory, body, mask)
         }
 
 
         private val bodyGetCollisionMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "body_get_collision_mask") }
-        fun bodyGetCollisionMask(body: RID): Int {
-            return _icall_Int_RID(bodyGetCollisionMaskMethodBind, this.rawMemory, body)
+        fun bodyGetCollisionMask(body: RID): Long {
+            return _icall_Long_RID(bodyGetCollisionMaskMethodBind, this.rawMemory, body)
         }
 
 
         private val bodySetParamMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "body_set_param") }
-        fun bodySetParam(body: RID, param: Int, value: Float) {
-            _icall_Unit_RID_Int_Float(bodySetParamMethodBind, this.rawMemory, body, param, value)
+        fun bodySetParam(body: RID, param: Long, value: Double) {
+            _icall_Unit_RID_Long_Double(bodySetParamMethodBind, this.rawMemory, body, param, value)
         }
 
 
         private val bodyGetParamMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "body_get_param") }
-        fun bodyGetParam(body: RID, param: Int): Float {
-            return _icall_Float_RID_Int(bodyGetParamMethodBind, this.rawMemory, body, param)
+        fun bodyGetParam(body: RID, param: Long): Double {
+            return _icall_Double_RID_Long(bodyGetParamMethodBind, this.rawMemory, body, param)
         }
 
 
         private val bodySetStateMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "body_set_state") }
-        fun bodySetState(body: RID, state: Int, value: Variant) {
-            _icall_Unit_RID_Int_Variant(bodySetStateMethodBind, this.rawMemory, body, state, value)
+        fun bodySetState(body: RID, state: Long, value: Variant) {
+            _icall_Unit_RID_Long_Variant(bodySetStateMethodBind, this.rawMemory, body, state, value)
         }
 
 
         private val bodyGetStateMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "body_get_state") }
-        fun bodyGetState(body: RID, state: Int): Variant {
-            return _icall_Variant_RID_Int(bodyGetStateMethodBind, this.rawMemory, body, state)
+        fun bodyGetState(body: RID, state: Long): Variant {
+            return _icall_Variant_RID_Long(bodyGetStateMethodBind, this.rawMemory, body, state)
         }
 
 
@@ -717,14 +717,14 @@ open class Physics2DServer : Object {
 
 
         private val bodySetMaxContactsReportedMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "body_set_max_contacts_reported") }
-        fun bodySetMaxContactsReported(body: RID, amount: Int) {
-            _icall_Unit_RID_Int(bodySetMaxContactsReportedMethodBind, this.rawMemory, body, amount)
+        fun bodySetMaxContactsReported(body: RID, amount: Long) {
+            _icall_Unit_RID_Long(bodySetMaxContactsReportedMethodBind, this.rawMemory, body, amount)
         }
 
 
         private val bodyGetMaxContactsReportedMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "body_get_max_contacts_reported") }
-        fun bodyGetMaxContactsReported(body: RID): Int {
-            return _icall_Int_RID(bodyGetMaxContactsReportedMethodBind, this.rawMemory, body)
+        fun bodyGetMaxContactsReported(body: RID): Long {
+            return _icall_Long_RID(bodyGetMaxContactsReportedMethodBind, this.rawMemory, body)
         }
 
 
@@ -747,8 +747,8 @@ open class Physics2DServer : Object {
 
 
         private val bodyTestMotionMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "body_test_motion") }
-        fun bodyTestMotion(body: RID, from: Transform2D, motion: Vector2, infiniteInertia: Boolean, margin: Float = 0.08f, result: Physics2DTestMotionResult): Boolean {
-            return _icall_Boolean_RID_Transform2D_Vector2_Boolean_Float_Object(bodyTestMotionMethodBind, this.rawMemory, body, from, motion, infiniteInertia, margin, result)
+        fun bodyTestMotion(body: RID, from: Transform2D, motion: Vector2, infiniteInertia: Boolean, margin: Double = 0.08, result: Physics2DTestMotionResult): Boolean {
+            return _icall_Boolean_RID_Transform2D_Vector2_Boolean_Double_Object(bodyTestMotionMethodBind, this.rawMemory, body, from, motion, infiniteInertia, margin, result)
         }
 
 
@@ -759,14 +759,14 @@ open class Physics2DServer : Object {
 
 
         private val jointSetParamMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "joint_set_param") }
-        fun jointSetParam(joint: RID, param: Int, value: Float) {
-            _icall_Unit_RID_Int_Float(jointSetParamMethodBind, this.rawMemory, joint, param, value)
+        fun jointSetParam(joint: RID, param: Long, value: Double) {
+            _icall_Unit_RID_Long_Double(jointSetParamMethodBind, this.rawMemory, joint, param, value)
         }
 
 
         private val jointGetParamMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "joint_get_param") }
-        fun jointGetParam(joint: RID, param: Int): Float {
-            return _icall_Float_RID_Int(jointGetParamMethodBind, this.rawMemory, joint, param)
+        fun jointGetParam(joint: RID, param: Long): Double {
+            return _icall_Double_RID_Long(jointGetParamMethodBind, this.rawMemory, joint, param)
         }
 
 
@@ -789,20 +789,20 @@ open class Physics2DServer : Object {
 
 
         private val dampedStringJointSetParamMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "damped_string_joint_set_param") }
-        fun dampedStringJointSetParam(joint: RID, param: Int, value: Float) {
-            _icall_Unit_RID_Int_Float(dampedStringJointSetParamMethodBind, this.rawMemory, joint, param, value)
+        fun dampedStringJointSetParam(joint: RID, param: Long, value: Double) {
+            _icall_Unit_RID_Long_Double(dampedStringJointSetParamMethodBind, this.rawMemory, joint, param, value)
         }
 
 
         private val dampedStringJointGetParamMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "damped_string_joint_get_param") }
-        fun dampedStringJointGetParam(joint: RID, param: Int): Float {
-            return _icall_Float_RID_Int(dampedStringJointGetParamMethodBind, this.rawMemory, joint, param)
+        fun dampedStringJointGetParam(joint: RID, param: Long): Double {
+            return _icall_Double_RID_Long(dampedStringJointGetParamMethodBind, this.rawMemory, joint, param)
         }
 
 
         private val jointGetTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "joint_get_type") }
         fun jointGetType(joint: RID): Physics2DServer.JointType {
-            return Physics2DServer.JointType.fromInt(_icall_Int_RID(jointGetTypeMethodBind, this.rawMemory, joint))
+            return Physics2DServer.JointType.fromInt(_icall_Long_RID(jointGetTypeMethodBind, this.rawMemory, joint))
         }
 
 
@@ -819,8 +819,8 @@ open class Physics2DServer : Object {
 
 
         private val getProcessInfoMethodBind: CPointer<godot_method_bind> by lazy { getMB("Physics2DServer", "get_process_info") }
-        fun getProcessInfo(processInfo: Int): Int {
-            return _icall_Int_Int(getProcessInfoMethodBind, this.rawMemory, processInfo)
+        fun getProcessInfo(processInfo: Long): Long {
+            return _icall_Long_Long(getProcessInfoMethodBind, this.rawMemory, processInfo)
         }
 
 

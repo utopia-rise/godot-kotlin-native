@@ -19,23 +19,23 @@ open class MultiMesh : Resource {
 
     // Enums 
 
-    enum class TransformFormat(val id: Int) {
+    enum class TransformFormat(val id: Long) {
         TRANSFORM_2D(0),
         TRANSFORM_3D(1),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class ColorFormat(val id: Int) {
+    enum class ColorFormat(val id: Long) {
         COLOR_NONE(0),
         COLOR_8BIT(1),
         COLOR_FLOAT(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -55,30 +55,30 @@ open class MultiMesh : Resource {
 
 
         // Constants
-        const val TRANSFORM_2D: Int = 0
-        const val TRANSFORM_3D: Int = 1
-        const val COLOR_NONE: Int = 0
-        const val COLOR_8BIT: Int = 1
-        const val COLOR_FLOAT: Int = 2
+        const val TRANSFORM_2D: Long = 0
+        const val TRANSFORM_3D: Long = 1
+        const val COLOR_NONE: Long = 0
+        const val COLOR_8BIT: Long = 1
+        const val COLOR_FLOAT: Long = 2
 
 
     }
 
 
     // Properties
-    open var colorFormat: Int
-        get() = _icall_Int(getColorFormatMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setColorFormatMethodBind, this.rawMemory, value)
+    open var colorFormat: Long
+        get() = _icall_Long(getColorFormatMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setColorFormatMethodBind, this.rawMemory, value)
 
 
-    open var transformFormat: Int
-        get() = _icall_Int(getTransformFormatMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setTransformFormatMethodBind, this.rawMemory, value)
+    open var transformFormat: Long
+        get() = _icall_Long(getTransformFormatMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setTransformFormatMethodBind, this.rawMemory, value)
 
 
-    open var instanceCount: Int
-        get() = _icall_Int(getInstanceCountMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setInstanceCountMethodBind, this.rawMemory, value)
+    open var instanceCount: Long
+        get() = _icall_Long(getInstanceCountMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setInstanceCountMethodBind, this.rawMemory, value)
 
 
     open var mesh: Mesh
@@ -102,62 +102,62 @@ open class MultiMesh : Resource {
 
 
     private val setColorFormatMethodBind: CPointer<godot_method_bind> by lazy { getMB("MultiMesh", "set_color_format") }
-    open fun setColorFormat(format: Int) {
-        _icall_Unit_Int(setColorFormatMethodBind, this.rawMemory, format)
+    open fun setColorFormat(format: Long) {
+        _icall_Unit_Long(setColorFormatMethodBind, this.rawMemory, format)
     }
 
 
     private val getColorFormatMethodBind: CPointer<godot_method_bind> by lazy { getMB("MultiMesh", "get_color_format") }
     open fun getColorFormat(): MultiMesh.ColorFormat {
-        return MultiMesh.ColorFormat.fromInt(_icall_Int(getColorFormatMethodBind, this.rawMemory))
+        return MultiMesh.ColorFormat.fromInt(_icall_Long(getColorFormatMethodBind, this.rawMemory))
     }
 
 
     private val setTransformFormatMethodBind: CPointer<godot_method_bind> by lazy { getMB("MultiMesh", "set_transform_format") }
-    open fun setTransformFormat(format: Int) {
-        _icall_Unit_Int(setTransformFormatMethodBind, this.rawMemory, format)
+    open fun setTransformFormat(format: Long) {
+        _icall_Unit_Long(setTransformFormatMethodBind, this.rawMemory, format)
     }
 
 
     private val getTransformFormatMethodBind: CPointer<godot_method_bind> by lazy { getMB("MultiMesh", "get_transform_format") }
     open fun getTransformFormat(): MultiMesh.TransformFormat {
-        return MultiMesh.TransformFormat.fromInt(_icall_Int(getTransformFormatMethodBind, this.rawMemory))
+        return MultiMesh.TransformFormat.fromInt(_icall_Long(getTransformFormatMethodBind, this.rawMemory))
     }
 
 
     private val setInstanceCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("MultiMesh", "set_instance_count") }
-    open fun setInstanceCount(count: Int) {
-        _icall_Unit_Int(setInstanceCountMethodBind, this.rawMemory, count)
+    open fun setInstanceCount(count: Long) {
+        _icall_Unit_Long(setInstanceCountMethodBind, this.rawMemory, count)
     }
 
 
     private val getInstanceCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("MultiMesh", "get_instance_count") }
-    open fun getInstanceCount(): Int {
-        return _icall_Int(getInstanceCountMethodBind, this.rawMemory)
+    open fun getInstanceCount(): Long {
+        return _icall_Long(getInstanceCountMethodBind, this.rawMemory)
     }
 
 
     private val setInstanceTransformMethodBind: CPointer<godot_method_bind> by lazy { getMB("MultiMesh", "set_instance_transform") }
-    open fun setInstanceTransform(instance: Int, transform: Transform) {
-        _icall_Unit_Int_Transform(setInstanceTransformMethodBind, this.rawMemory, instance, transform)
+    open fun setInstanceTransform(instance: Long, transform: Transform) {
+        _icall_Unit_Long_Transform(setInstanceTransformMethodBind, this.rawMemory, instance, transform)
     }
 
 
     private val getInstanceTransformMethodBind: CPointer<godot_method_bind> by lazy { getMB("MultiMesh", "get_instance_transform") }
-    open fun getInstanceTransform(instance: Int): Transform {
-        return _icall_Transform_Int(getInstanceTransformMethodBind, this.rawMemory, instance)
+    open fun getInstanceTransform(instance: Long): Transform {
+        return _icall_Transform_Long(getInstanceTransformMethodBind, this.rawMemory, instance)
     }
 
 
     private val setInstanceColorMethodBind: CPointer<godot_method_bind> by lazy { getMB("MultiMesh", "set_instance_color") }
-    open fun setInstanceColor(instance: Int, color: Color) {
-        _icall_Unit_Int_Color(setInstanceColorMethodBind, this.rawMemory, instance, color)
+    open fun setInstanceColor(instance: Long, color: Color) {
+        _icall_Unit_Long_Color(setInstanceColorMethodBind, this.rawMemory, instance, color)
     }
 
 
     private val getInstanceColorMethodBind: CPointer<godot_method_bind> by lazy { getMB("MultiMesh", "get_instance_color") }
-    open fun getInstanceColor(instance: Int): Color {
-        return _icall_Color_Int(getInstanceColorMethodBind, this.rawMemory, instance)
+    open fun getInstanceColor(instance: Long): Color {
+        return _icall_Color_Long(getInstanceColorMethodBind, this.rawMemory, instance)
     }
 
 

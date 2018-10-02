@@ -19,17 +19,17 @@ open class Node : Object {
 
     // Enums 
 
-    enum class PauseMode(val id: Int) {
+    enum class PauseMode(val id: Long) {
         PAUSE_MODE_INHERIT(0),
         PAUSE_MODE_STOP(1),
         PAUSE_MODE_PROCESS(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class DuplicateFlags(val id: Int) {
+    enum class DuplicateFlags(val id: Long) {
         DUPLICATE_SIGNALS(1),
         DUPLICATE_GROUPS(2),
         DUPLICATE_SCRIPTS(4),
@@ -37,7 +37,7 @@ open class Node : Object {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -60,39 +60,39 @@ open class Node : Object {
 
 
         // Constants
-        const val NOTIFICATION_ENTER_TREE: Int = 10
-        const val NOTIFICATION_EXIT_TREE: Int = 11
-        const val NOTIFICATION_MOVED_IN_PARENT: Int = 12
-        const val NOTIFICATION_READY: Int = 13
-        const val NOTIFICATION_PAUSED: Int = 14
-        const val NOTIFICATION_UNPAUSED: Int = 15
-        const val NOTIFICATION_PHYSICS_PROCESS: Int = 16
-        const val NOTIFICATION_PROCESS: Int = 17
-        const val NOTIFICATION_PARENTED: Int = 18
-        const val NOTIFICATION_UNPARENTED: Int = 19
-        const val NOTIFICATION_INSTANCED: Int = 20
-        const val NOTIFICATION_DRAG_BEGIN: Int = 21
-        const val NOTIFICATION_DRAG_END: Int = 22
-        const val NOTIFICATION_PATH_CHANGED: Int = 23
-        const val NOTIFICATION_TRANSLATION_CHANGED: Int = 24
-        const val NOTIFICATION_INTERNAL_PROCESS: Int = 25
-        const val NOTIFICATION_INTERNAL_PHYSICS_PROCESS: Int = 26
-        const val PAUSE_MODE_INHERIT: Int = 0
-        const val PAUSE_MODE_STOP: Int = 1
-        const val PAUSE_MODE_PROCESS: Int = 2
-        const val DUPLICATE_SIGNALS: Int = 1
-        const val DUPLICATE_GROUPS: Int = 2
-        const val DUPLICATE_SCRIPTS: Int = 4
-        const val DUPLICATE_USE_INSTANCING: Int = 8
+        const val NOTIFICATION_ENTER_TREE: Long = 10
+        const val NOTIFICATION_EXIT_TREE: Long = 11
+        const val NOTIFICATION_MOVED_IN_PARENT: Long = 12
+        const val NOTIFICATION_READY: Long = 13
+        const val NOTIFICATION_PAUSED: Long = 14
+        const val NOTIFICATION_UNPAUSED: Long = 15
+        const val NOTIFICATION_PHYSICS_PROCESS: Long = 16
+        const val NOTIFICATION_PROCESS: Long = 17
+        const val NOTIFICATION_PARENTED: Long = 18
+        const val NOTIFICATION_UNPARENTED: Long = 19
+        const val NOTIFICATION_INSTANCED: Long = 20
+        const val NOTIFICATION_DRAG_BEGIN: Long = 21
+        const val NOTIFICATION_DRAG_END: Long = 22
+        const val NOTIFICATION_PATH_CHANGED: Long = 23
+        const val NOTIFICATION_TRANSLATION_CHANGED: Long = 24
+        const val NOTIFICATION_INTERNAL_PROCESS: Long = 25
+        const val NOTIFICATION_INTERNAL_PHYSICS_PROCESS: Long = 26
+        const val PAUSE_MODE_INHERIT: Long = 0
+        const val PAUSE_MODE_STOP: Long = 1
+        const val PAUSE_MODE_PROCESS: Long = 2
+        const val DUPLICATE_SIGNALS: Long = 1
+        const val DUPLICATE_GROUPS: Long = 2
+        const val DUPLICATE_SCRIPTS: Long = 4
+        const val DUPLICATE_USE_INSTANCING: Long = 8
 
 
     }
 
 
     // Properties
-    open var pauseMode: Int
-        get() = _icall_Int(getPauseModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setPauseModeMethodBind, this.rawMemory, value)
+    open var pauseMode: Long
+        get() = _icall_Long(getPauseModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setPauseModeMethodBind, this.rawMemory, value)
 
 
     open var editor_displayFolded: Boolean
@@ -127,11 +127,11 @@ open class Node : Object {
 
 
     // Methods
-    open fun _process(delta: Float) {
+    open fun _process(delta: Double) {
     }
 
 
-    open fun _physics_process(delta: Float) {
+    open fun _physics_process(delta: Double) {
     }
 
 
@@ -190,8 +190,8 @@ open class Node : Object {
 
 
     private val getChildCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("Node", "get_child_count") }
-    open fun getChildCount(): Int {
-        return _icall_Int(getChildCountMethodBind, this.rawMemory)
+    open fun getChildCount(): Long {
+        return _icall_Long(getChildCountMethodBind, this.rawMemory)
     }
 
 
@@ -202,8 +202,8 @@ open class Node : Object {
 
 
     private val getChildMethodBind: CPointer<godot_method_bind> by lazy { getMB("Node", "get_child") }
-    open fun getChild(idx: Int): Node {
-        return _icall_Node_Int(getChildMethodBind, this.rawMemory, idx)
+    open fun getChild(idx: Long): Node {
+        return _icall_Node_Long(getChildMethodBind, this.rawMemory, idx)
     }
 
 
@@ -292,8 +292,8 @@ open class Node : Object {
 
 
     private val moveChildMethodBind: CPointer<godot_method_bind> by lazy { getMB("Node", "move_child") }
-    open fun moveChild(childNode: Object, toPosition: Int) {
-        _icall_Unit_Object_Int(moveChildMethodBind, this.rawMemory, childNode, toPosition)
+    open fun moveChild(childNode: Object, toPosition: Long) {
+        _icall_Unit_Object_Long(moveChildMethodBind, this.rawMemory, childNode, toPosition)
     }
 
 
@@ -328,8 +328,8 @@ open class Node : Object {
 
 
     private val getIndexMethodBind: CPointer<godot_method_bind> by lazy { getMB("Node", "get_index") }
-    open fun getIndex(): Int {
-        return _icall_Int(getIndexMethodBind, this.rawMemory)
+    open fun getIndex(): Long {
+        return _icall_Long(getIndexMethodBind, this.rawMemory)
     }
 
 
@@ -358,8 +358,8 @@ open class Node : Object {
 
 
     private val propagateNotificationMethodBind: CPointer<godot_method_bind> by lazy { getMB("Node", "propagate_notification") }
-    open fun propagateNotification(what: Int) {
-        _icall_Unit_Int(propagateNotificationMethodBind, this.rawMemory, what)
+    open fun propagateNotification(what: Long) {
+        _icall_Unit_Long(propagateNotificationMethodBind, this.rawMemory, what)
     }
 
 
@@ -376,8 +376,8 @@ open class Node : Object {
 
 
     private val getPhysicsProcessDeltaTimeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Node", "get_physics_process_delta_time") }
-    open fun getPhysicsProcessDeltaTime(): Float {
-        return _icall_Float(getPhysicsProcessDeltaTimeMethodBind, this.rawMemory)
+    open fun getPhysicsProcessDeltaTime(): Double {
+        return _icall_Double(getPhysicsProcessDeltaTimeMethodBind, this.rawMemory)
     }
 
 
@@ -388,8 +388,8 @@ open class Node : Object {
 
 
     private val getProcessDeltaTimeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Node", "get_process_delta_time") }
-    open fun getProcessDeltaTime(): Float {
-        return _icall_Float(getProcessDeltaTimeMethodBind, this.rawMemory)
+    open fun getProcessDeltaTime(): Double {
+        return _icall_Double(getProcessDeltaTimeMethodBind, this.rawMemory)
     }
 
 
@@ -442,14 +442,14 @@ open class Node : Object {
 
 
     private val setPauseModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Node", "set_pause_mode") }
-    open fun setPauseMode(mode: Int) {
-        _icall_Unit_Int(setPauseModeMethodBind, this.rawMemory, mode)
+    open fun setPauseMode(mode: Long) {
+        _icall_Unit_Long(setPauseModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getPauseModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Node", "get_pause_mode") }
     open fun getPauseMode(): Node.PauseMode {
-        return Node.PauseMode.fromInt(_icall_Int(getPauseModeMethodBind, this.rawMemory))
+        return Node.PauseMode.fromInt(_icall_Long(getPauseModeMethodBind, this.rawMemory))
     }
 
 
@@ -466,8 +466,8 @@ open class Node : Object {
 
 
     private val getPositionInParentMethodBind: CPointer<godot_method_bind> by lazy { getMB("Node", "get_position_in_parent") }
-    open fun getPositionInParent(): Int {
-        return _icall_Int(getPositionInParentMethodBind, this.rawMemory)
+    open fun getPositionInParent(): Long {
+        return _icall_Long(getPositionInParentMethodBind, this.rawMemory)
     }
 
 
@@ -514,8 +514,8 @@ open class Node : Object {
 
 
     private val duplicateMethodBind: CPointer<godot_method_bind> by lazy { getMB("Node", "duplicate") }
-    open fun duplicate(flags: Int = 15): Node {
-        return _icall_Node_Int(duplicateMethodBind, this.rawMemory, flags)
+    open fun duplicate(flags: Long = 15): Node {
+        return _icall_Node_Long(duplicateMethodBind, this.rawMemory, flags)
     }
 
 
@@ -556,14 +556,14 @@ open class Node : Object {
 
 
     private val setNetworkMasterMethodBind: CPointer<godot_method_bind> by lazy { getMB("Node", "set_network_master") }
-    open fun setNetworkMaster(id: Int, recursive: Boolean = true) {
-        _icall_Unit_Int_Boolean(setNetworkMasterMethodBind, this.rawMemory, id, recursive)
+    open fun setNetworkMaster(id: Long, recursive: Boolean = true) {
+        _icall_Unit_Long_Boolean(setNetworkMasterMethodBind, this.rawMemory, id, recursive)
     }
 
 
     private val getNetworkMasterMethodBind: CPointer<godot_method_bind> by lazy { getMB("Node", "get_network_master") }
-    open fun getNetworkMaster(): Int {
-        return _icall_Int(getNetworkMasterMethodBind, this.rawMemory)
+    open fun getNetworkMaster(): Long {
+        return _icall_Long(getNetworkMasterMethodBind, this.rawMemory)
     }
 
 
@@ -592,14 +592,14 @@ open class Node : Object {
 
 
     private val rpcConfigMethodBind: CPointer<godot_method_bind> by lazy { getMB("Node", "rpc_config") }
-    open fun rpcConfig(method: String, mode: Int) {
-        _icall_Unit_String_Int(rpcConfigMethodBind, this.rawMemory, method, mode)
+    open fun rpcConfig(method: String, mode: Long) {
+        _icall_Unit_String_Long(rpcConfigMethodBind, this.rawMemory, method, mode)
     }
 
 
     private val rsetConfigMethodBind: CPointer<godot_method_bind> by lazy { getMB("Node", "rset_config") }
-    open fun rsetConfig(property: String, mode: Int) {
-        _icall_Unit_String_Int(rsetConfigMethodBind, this.rawMemory, property, mode)
+    open fun rsetConfig(property: String, mode: Long) {
+        _icall_Unit_String_Long(rsetConfigMethodBind, this.rawMemory, property, mode)
     }
 
 
@@ -625,13 +625,13 @@ open class Node : Object {
 
 
     private val rpcIdMethodBind: CPointer<godot_method_bind> by lazy { getMB("Node", "rpc_id") }
-    open fun rpcId(peerId: Int, method: String, vararg __var_args: Any?): Variant {
+    open fun rpcId(peerId: Long, method: String, vararg __var_args: Any?): Variant {
         return _icall_varargs(rpcIdMethodBind, this.rawMemory, arrayOf(peerId, method, *__var_args))
     }
 
 
     private val rpcUnreliableIdMethodBind: CPointer<godot_method_bind> by lazy { getMB("Node", "rpc_unreliable_id") }
-    open fun rpcUnreliableId(peerId: Int, method: String, vararg __var_args: Any?): Variant {
+    open fun rpcUnreliableId(peerId: Long, method: String, vararg __var_args: Any?): Variant {
         return _icall_varargs(rpcUnreliableIdMethodBind, this.rawMemory, arrayOf(peerId, method, *__var_args))
     }
 
@@ -643,8 +643,8 @@ open class Node : Object {
 
 
     private val rsetIdMethodBind: CPointer<godot_method_bind> by lazy { getMB("Node", "rset_id") }
-    open fun rsetId(peerId: Int, property: String, value: Variant) {
-        _icall_Unit_Int_String_Variant(rsetIdMethodBind, this.rawMemory, peerId, property, value)
+    open fun rsetId(peerId: Long, property: String, value: Variant) {
+        _icall_Unit_Long_String_Variant(rsetIdMethodBind, this.rawMemory, peerId, property, value)
     }
 
 
@@ -655,8 +655,8 @@ open class Node : Object {
 
 
     private val rsetUnreliableIdMethodBind: CPointer<godot_method_bind> by lazy { getMB("Node", "rset_unreliable_id") }
-    open fun rsetUnreliableId(peerId: Int, property: String, value: Variant) {
-        _icall_Unit_Int_String_Variant(rsetUnreliableIdMethodBind, this.rawMemory, peerId, property, value)
+    open fun rsetUnreliableId(peerId: Long, property: String, value: Variant) {
+        _icall_Unit_Long_String_Variant(rsetUnreliableIdMethodBind, this.rawMemory, peerId, property, value)
     }
 
 

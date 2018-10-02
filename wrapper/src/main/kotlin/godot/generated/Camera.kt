@@ -19,32 +19,32 @@ open class Camera : Spatial {
 
     // Enums 
 
-    enum class KeepAspect(val id: Int) {
+    enum class KeepAspect(val id: Long) {
         KEEP_WIDTH(0),
         KEEP_HEIGHT(1),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class Projection(val id: Int) {
+    enum class Projection(val id: Long) {
         PROJECTION_PERSPECTIVE(0),
         PROJECTION_ORTHOGONAL(1),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class DopplerTracking(val id: Int) {
+    enum class DopplerTracking(val id: Long) {
         DOPPLER_TRACKING_DISABLED(0),
         DOPPLER_TRACKING_IDLE_STEP(1),
         DOPPLER_TRACKING_PHYSICS_STEP(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -64,27 +64,27 @@ open class Camera : Spatial {
 
 
         // Constants
-        const val PROJECTION_PERSPECTIVE: Int = 0
-        const val PROJECTION_ORTHOGONAL: Int = 1
-        const val KEEP_WIDTH: Int = 0
-        const val KEEP_HEIGHT: Int = 1
-        const val DOPPLER_TRACKING_DISABLED: Int = 0
-        const val DOPPLER_TRACKING_IDLE_STEP: Int = 1
-        const val DOPPLER_TRACKING_PHYSICS_STEP: Int = 2
+        const val PROJECTION_PERSPECTIVE: Long = 0
+        const val PROJECTION_ORTHOGONAL: Long = 1
+        const val KEEP_WIDTH: Long = 0
+        const val KEEP_HEIGHT: Long = 1
+        const val DOPPLER_TRACKING_DISABLED: Long = 0
+        const val DOPPLER_TRACKING_IDLE_STEP: Long = 1
+        const val DOPPLER_TRACKING_PHYSICS_STEP: Long = 2
 
 
     }
 
 
     // Properties
-    open var keepAspect: Int
-        get() = _icall_Int(getKeepAspectModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setKeepAspectModeMethodBind, this.rawMemory, value)
+    open var keepAspect: Long
+        get() = _icall_Long(getKeepAspectModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setKeepAspectModeMethodBind, this.rawMemory, value)
 
 
-    open var cullMask: Int
-        get() = _icall_Int(getCullMaskMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setCullMaskMethodBind, this.rawMemory, value)
+    open var cullMask: Long
+        get() = _icall_Long(getCullMaskMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setCullMaskMethodBind, this.rawMemory, value)
 
 
     open var environment: Environment
@@ -92,24 +92,24 @@ open class Camera : Spatial {
         set(value) = _icall_Unit_Object(setEnvironmentMethodBind, this.rawMemory, value)
 
 
-    open var hOffset: Float
-        get() = _icall_Float(getHOffsetMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setHOffsetMethodBind, this.rawMemory, value)
+    open var hOffset: Double
+        get() = _icall_Double(getHOffsetMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setHOffsetMethodBind, this.rawMemory, value)
 
 
-    open var vOffset: Float
-        get() = _icall_Float(getVOffsetMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setVOffsetMethodBind, this.rawMemory, value)
+    open var vOffset: Double
+        get() = _icall_Double(getVOffsetMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setVOffsetMethodBind, this.rawMemory, value)
 
 
-    open var dopplerTracking: Int
-        get() = _icall_Int(getDopplerTrackingMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setDopplerTrackingMethodBind, this.rawMemory, value)
+    open var dopplerTracking: Long
+        get() = _icall_Long(getDopplerTrackingMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setDopplerTrackingMethodBind, this.rawMemory, value)
 
 
-    open var projection: Int
-        get() = _icall_Int(getProjectionMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setProjectionMethodBind, this.rawMemory, value)
+    open var projection: Long
+        get() = _icall_Long(getProjectionMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setProjectionMethodBind, this.rawMemory, value)
 
 
     open var current: Boolean
@@ -117,24 +117,24 @@ open class Camera : Spatial {
         set(value) = _icall_Unit_Boolean(setCurrentMethodBind, this.rawMemory, value)
 
 
-    open var fov: Float
-        get() = _icall_Float(getFovMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setFovMethodBind, this.rawMemory, value)
+    open var fov: Double
+        get() = _icall_Double(getFovMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setFovMethodBind, this.rawMemory, value)
 
 
-    open var size: Float
-        get() = _icall_Float(getSizeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setSizeMethodBind, this.rawMemory, value)
+    open var size: Double
+        get() = _icall_Double(getSizeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setSizeMethodBind, this.rawMemory, value)
 
 
-    open var near: Float
-        get() = _icall_Float(getZnearMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setZnearMethodBind, this.rawMemory, value)
+    open var near: Double
+        get() = _icall_Double(getZnearMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setZnearMethodBind, this.rawMemory, value)
 
 
-    open var far: Float
-        get() = _icall_Float(getZfarMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setZfarMethodBind, this.rawMemory, value)
+    open var far: Double
+        get() = _icall_Double(getZfarMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setZfarMethodBind, this.rawMemory, value)
 
 
 
@@ -177,14 +177,14 @@ open class Camera : Spatial {
 
 
     private val setPerspectiveMethodBind: CPointer<godot_method_bind> by lazy { getMB("Camera", "set_perspective") }
-    open fun setPerspective(fov: Float, zNear: Float, zFar: Float) {
-        _icall_Unit_Float_Float_Float(setPerspectiveMethodBind, this.rawMemory, fov, zNear, zFar)
+    open fun setPerspective(fov: Double, zNear: Double, zFar: Double) {
+        _icall_Unit_Double_Double_Double(setPerspectiveMethodBind, this.rawMemory, fov, zNear, zFar)
     }
 
 
     private val setOrthogonalMethodBind: CPointer<godot_method_bind> by lazy { getMB("Camera", "set_orthogonal") }
-    open fun setOrthogonal(size: Float, zNear: Float, zFar: Float) {
-        _icall_Unit_Float_Float_Float(setOrthogonalMethodBind, this.rawMemory, size, zNear, zFar)
+    open fun setOrthogonal(size: Double, zNear: Double, zFar: Double) {
+        _icall_Unit_Double_Double_Double(setOrthogonalMethodBind, this.rawMemory, size, zNear, zFar)
     }
 
 
@@ -219,98 +219,98 @@ open class Camera : Spatial {
 
 
     private val getFovMethodBind: CPointer<godot_method_bind> by lazy { getMB("Camera", "get_fov") }
-    open fun getFov(): Float {
-        return _icall_Float(getFovMethodBind, this.rawMemory)
+    open fun getFov(): Double {
+        return _icall_Double(getFovMethodBind, this.rawMemory)
     }
 
 
     private val getSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Camera", "get_size") }
-    open fun getSize(): Float {
-        return _icall_Float(getSizeMethodBind, this.rawMemory)
+    open fun getSize(): Double {
+        return _icall_Double(getSizeMethodBind, this.rawMemory)
     }
 
 
     private val getZfarMethodBind: CPointer<godot_method_bind> by lazy { getMB("Camera", "get_zfar") }
-    open fun getZfar(): Float {
-        return _icall_Float(getZfarMethodBind, this.rawMemory)
+    open fun getZfar(): Double {
+        return _icall_Double(getZfarMethodBind, this.rawMemory)
     }
 
 
     private val getZnearMethodBind: CPointer<godot_method_bind> by lazy { getMB("Camera", "get_znear") }
-    open fun getZnear(): Float {
-        return _icall_Float(getZnearMethodBind, this.rawMemory)
+    open fun getZnear(): Double {
+        return _icall_Double(getZnearMethodBind, this.rawMemory)
     }
 
 
     private val setFovMethodBind: CPointer<godot_method_bind> by lazy { getMB("Camera", "set_fov") }
-    open fun setFov(arg0: Float) {
-        _icall_Unit_Float(setFovMethodBind, this.rawMemory, arg0)
+    open fun setFov(arg0: Double) {
+        _icall_Unit_Double(setFovMethodBind, this.rawMemory, arg0)
     }
 
 
     private val setSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Camera", "set_size") }
-    open fun setSize(arg0: Float) {
-        _icall_Unit_Float(setSizeMethodBind, this.rawMemory, arg0)
+    open fun setSize(arg0: Double) {
+        _icall_Unit_Double(setSizeMethodBind, this.rawMemory, arg0)
     }
 
 
     private val setZfarMethodBind: CPointer<godot_method_bind> by lazy { getMB("Camera", "set_zfar") }
-    open fun setZfar(arg0: Float) {
-        _icall_Unit_Float(setZfarMethodBind, this.rawMemory, arg0)
+    open fun setZfar(arg0: Double) {
+        _icall_Unit_Double(setZfarMethodBind, this.rawMemory, arg0)
     }
 
 
     private val setZnearMethodBind: CPointer<godot_method_bind> by lazy { getMB("Camera", "set_znear") }
-    open fun setZnear(arg0: Float) {
-        _icall_Unit_Float(setZnearMethodBind, this.rawMemory, arg0)
+    open fun setZnear(arg0: Double) {
+        _icall_Unit_Double(setZnearMethodBind, this.rawMemory, arg0)
     }
 
 
     private val getProjectionMethodBind: CPointer<godot_method_bind> by lazy { getMB("Camera", "get_projection") }
     open fun getProjection(): Camera.Projection {
-        return Camera.Projection.fromInt(_icall_Int(getProjectionMethodBind, this.rawMemory))
+        return Camera.Projection.fromInt(_icall_Long(getProjectionMethodBind, this.rawMemory))
     }
 
 
     private val setProjectionMethodBind: CPointer<godot_method_bind> by lazy { getMB("Camera", "set_projection") }
-    open fun setProjection(arg0: Int) {
-        _icall_Unit_Int(setProjectionMethodBind, this.rawMemory, arg0)
+    open fun setProjection(arg0: Long) {
+        _icall_Unit_Long(setProjectionMethodBind, this.rawMemory, arg0)
     }
 
 
     private val setHOffsetMethodBind: CPointer<godot_method_bind> by lazy { getMB("Camera", "set_h_offset") }
-    open fun setHOffset(ofs: Float) {
-        _icall_Unit_Float(setHOffsetMethodBind, this.rawMemory, ofs)
+    open fun setHOffset(ofs: Double) {
+        _icall_Unit_Double(setHOffsetMethodBind, this.rawMemory, ofs)
     }
 
 
     private val getHOffsetMethodBind: CPointer<godot_method_bind> by lazy { getMB("Camera", "get_h_offset") }
-    open fun getHOffset(): Float {
-        return _icall_Float(getHOffsetMethodBind, this.rawMemory)
+    open fun getHOffset(): Double {
+        return _icall_Double(getHOffsetMethodBind, this.rawMemory)
     }
 
 
     private val setVOffsetMethodBind: CPointer<godot_method_bind> by lazy { getMB("Camera", "set_v_offset") }
-    open fun setVOffset(ofs: Float) {
-        _icall_Unit_Float(setVOffsetMethodBind, this.rawMemory, ofs)
+    open fun setVOffset(ofs: Double) {
+        _icall_Unit_Double(setVOffsetMethodBind, this.rawMemory, ofs)
     }
 
 
     private val getVOffsetMethodBind: CPointer<godot_method_bind> by lazy { getMB("Camera", "get_v_offset") }
-    open fun getVOffset(): Float {
-        return _icall_Float(getVOffsetMethodBind, this.rawMemory)
+    open fun getVOffset(): Double {
+        return _icall_Double(getVOffsetMethodBind, this.rawMemory)
     }
 
 
     private val setCullMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("Camera", "set_cull_mask") }
-    open fun setCullMask(mask: Int) {
-        _icall_Unit_Int(setCullMaskMethodBind, this.rawMemory, mask)
+    open fun setCullMask(mask: Long) {
+        _icall_Unit_Long(setCullMaskMethodBind, this.rawMemory, mask)
     }
 
 
     private val getCullMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("Camera", "get_cull_mask") }
-    open fun getCullMask(): Int {
-        return _icall_Int(getCullMaskMethodBind, this.rawMemory)
+    open fun getCullMask(): Long {
+        return _icall_Long(getCullMaskMethodBind, this.rawMemory)
     }
 
 
@@ -327,26 +327,26 @@ open class Camera : Spatial {
 
 
     private val setKeepAspectModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Camera", "set_keep_aspect_mode") }
-    open fun setKeepAspectMode(mode: Int) {
-        _icall_Unit_Int(setKeepAspectModeMethodBind, this.rawMemory, mode)
+    open fun setKeepAspectMode(mode: Long) {
+        _icall_Unit_Long(setKeepAspectModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getKeepAspectModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Camera", "get_keep_aspect_mode") }
     open fun getKeepAspectMode(): Camera.KeepAspect {
-        return Camera.KeepAspect.fromInt(_icall_Int(getKeepAspectModeMethodBind, this.rawMemory))
+        return Camera.KeepAspect.fromInt(_icall_Long(getKeepAspectModeMethodBind, this.rawMemory))
     }
 
 
     private val setDopplerTrackingMethodBind: CPointer<godot_method_bind> by lazy { getMB("Camera", "set_doppler_tracking") }
-    open fun setDopplerTracking(mode: Int) {
-        _icall_Unit_Int(setDopplerTrackingMethodBind, this.rawMemory, mode)
+    open fun setDopplerTracking(mode: Long) {
+        _icall_Unit_Long(setDopplerTrackingMethodBind, this.rawMemory, mode)
     }
 
 
     private val getDopplerTrackingMethodBind: CPointer<godot_method_bind> by lazy { getMB("Camera", "get_doppler_tracking") }
     open fun getDopplerTracking(): Camera.DopplerTracking {
-        return Camera.DopplerTracking.fromInt(_icall_Int(getDopplerTrackingMethodBind, this.rawMemory))
+        return Camera.DopplerTracking.fromInt(_icall_Long(getDopplerTrackingMethodBind, this.rawMemory))
     }
 
 

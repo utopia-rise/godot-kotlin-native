@@ -19,16 +19,16 @@ open class Mesh : Resource {
 
     // Enums 
 
-    enum class BlendShapeMode(val id: Int) {
+    enum class BlendShapeMode(val id: Long) {
         BLEND_SHAPE_MODE_NORMALIZED(0),
         BLEND_SHAPE_MODE_RELATIVE(1),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class PrimitiveType(val id: Int) {
+    enum class PrimitiveType(val id: Long) {
         PRIMITIVE_POINTS(0),
         PRIMITIVE_LINES(1),
         PRIMITIVE_LINE_STRIP(2),
@@ -39,10 +39,10 @@ open class Mesh : Resource {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class ArrayFormat(val id: Int) {
+    enum class ArrayFormat(val id: Long) {
         ARRAY_FORMAT_VERTEX(1),
         ARRAY_FORMAT_NORMAL(2),
         ARRAY_FORMAT_TANGENT(4),
@@ -68,10 +68,10 @@ open class Mesh : Resource {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class ArrayType(val id: Int) {
+    enum class ArrayType(val id: Long) {
         ARRAY_VERTEX(0),
         ARRAY_NORMAL(1),
         ARRAY_TANGENT(2),
@@ -85,7 +85,7 @@ open class Mesh : Resource {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -105,47 +105,47 @@ open class Mesh : Resource {
 
 
         // Constants
-        const val PRIMITIVE_POINTS: Int = 0
-        const val PRIMITIVE_LINES: Int = 1
-        const val PRIMITIVE_LINE_STRIP: Int = 2
-        const val PRIMITIVE_LINE_LOOP: Int = 3
-        const val PRIMITIVE_TRIANGLES: Int = 4
-        const val PRIMITIVE_TRIANGLE_STRIP: Int = 5
-        const val PRIMITIVE_TRIANGLE_FAN: Int = 6
-        const val BLEND_SHAPE_MODE_NORMALIZED: Int = 0
-        const val BLEND_SHAPE_MODE_RELATIVE: Int = 1
-        const val ARRAY_FORMAT_VERTEX: Int = 1
-        const val ARRAY_FORMAT_NORMAL: Int = 2
-        const val ARRAY_FORMAT_TANGENT: Int = 4
-        const val ARRAY_FORMAT_COLOR: Int = 8
-        const val ARRAY_FORMAT_TEX_UV: Int = 16
-        const val ARRAY_FORMAT_TEX_UV2: Int = 32
-        const val ARRAY_FORMAT_BONES: Int = 64
-        const val ARRAY_FORMAT_WEIGHTS: Int = 128
-        const val ARRAY_FORMAT_INDEX: Int = 256
-        const val ARRAY_COMPRESS_BASE: Int = 9
-        const val ARRAY_COMPRESS_VERTEX: Int = 512
-        const val ARRAY_COMPRESS_NORMAL: Int = 1024
-        const val ARRAY_COMPRESS_TANGENT: Int = 2048
-        const val ARRAY_COMPRESS_COLOR: Int = 4096
-        const val ARRAY_COMPRESS_TEX_UV: Int = 8192
-        const val ARRAY_COMPRESS_TEX_UV2: Int = 16384
-        const val ARRAY_COMPRESS_BONES: Int = 32768
-        const val ARRAY_COMPRESS_WEIGHTS: Int = 65536
-        const val ARRAY_COMPRESS_INDEX: Int = 131072
-        const val ARRAY_FLAG_USE_2D_VERTICES: Int = 262144
-        const val ARRAY_FLAG_USE_16_BIT_BONES: Int = 524288
-        const val ARRAY_COMPRESS_DEFAULT: Int = 97280
-        const val ARRAY_VERTEX: Int = 0
-        const val ARRAY_NORMAL: Int = 1
-        const val ARRAY_TANGENT: Int = 2
-        const val ARRAY_COLOR: Int = 3
-        const val ARRAY_TEX_UV: Int = 4
-        const val ARRAY_TEX_UV2: Int = 5
-        const val ARRAY_BONES: Int = 6
-        const val ARRAY_WEIGHTS: Int = 7
-        const val ARRAY_INDEX: Int = 8
-        const val ARRAY_MAX: Int = 9
+        const val PRIMITIVE_POINTS: Long = 0
+        const val PRIMITIVE_LINES: Long = 1
+        const val PRIMITIVE_LINE_STRIP: Long = 2
+        const val PRIMITIVE_LINE_LOOP: Long = 3
+        const val PRIMITIVE_TRIANGLES: Long = 4
+        const val PRIMITIVE_TRIANGLE_STRIP: Long = 5
+        const val PRIMITIVE_TRIANGLE_FAN: Long = 6
+        const val BLEND_SHAPE_MODE_NORMALIZED: Long = 0
+        const val BLEND_SHAPE_MODE_RELATIVE: Long = 1
+        const val ARRAY_FORMAT_VERTEX: Long = 1
+        const val ARRAY_FORMAT_NORMAL: Long = 2
+        const val ARRAY_FORMAT_TANGENT: Long = 4
+        const val ARRAY_FORMAT_COLOR: Long = 8
+        const val ARRAY_FORMAT_TEX_UV: Long = 16
+        const val ARRAY_FORMAT_TEX_UV2: Long = 32
+        const val ARRAY_FORMAT_BONES: Long = 64
+        const val ARRAY_FORMAT_WEIGHTS: Long = 128
+        const val ARRAY_FORMAT_INDEX: Long = 256
+        const val ARRAY_COMPRESS_BASE: Long = 9
+        const val ARRAY_COMPRESS_VERTEX: Long = 512
+        const val ARRAY_COMPRESS_NORMAL: Long = 1024
+        const val ARRAY_COMPRESS_TANGENT: Long = 2048
+        const val ARRAY_COMPRESS_COLOR: Long = 4096
+        const val ARRAY_COMPRESS_TEX_UV: Long = 8192
+        const val ARRAY_COMPRESS_TEX_UV2: Long = 16384
+        const val ARRAY_COMPRESS_BONES: Long = 32768
+        const val ARRAY_COMPRESS_WEIGHTS: Long = 65536
+        const val ARRAY_COMPRESS_INDEX: Long = 131072
+        const val ARRAY_FLAG_USE_2D_VERTICES: Long = 262144
+        const val ARRAY_FLAG_USE_16_BIT_BONES: Long = 524288
+        const val ARRAY_COMPRESS_DEFAULT: Long = 97280
+        const val ARRAY_VERTEX: Long = 0
+        const val ARRAY_NORMAL: Long = 1
+        const val ARRAY_TANGENT: Long = 2
+        const val ARRAY_COLOR: Long = 3
+        const val ARRAY_TEX_UV: Long = 4
+        const val ARRAY_TEX_UV2: Long = 5
+        const val ARRAY_BONES: Long = 6
+        const val ARRAY_WEIGHTS: Long = 7
+        const val ARRAY_INDEX: Long = 8
+        const val ARRAY_MAX: Long = 9
 
 
     }
@@ -189,8 +189,8 @@ open class Mesh : Resource {
 
 
     private val createOutlineMethodBind: CPointer<godot_method_bind> by lazy { getMB("Mesh", "create_outline") }
-    open fun createOutline(margin: Float): Mesh {
-        return _icall_Mesh_Float(createOutlineMethodBind, this.rawMemory, margin)
+    open fun createOutline(margin: Double): Mesh {
+        return _icall_Mesh_Double(createOutlineMethodBind, this.rawMemory, margin)
     }
 
 

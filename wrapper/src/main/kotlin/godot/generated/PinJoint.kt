@@ -19,14 +19,14 @@ open class PinJoint : Joint {
 
     // Enums 
 
-    enum class Param(val id: Int) {
+    enum class Param(val id: Long) {
         PARAM_BIAS(0),
         PARAM_DAMPING(1),
         PARAM_IMPULSE_CLAMP(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -47,42 +47,42 @@ open class PinJoint : Joint {
 
 
         // Constants
-        const val PARAM_BIAS: Int = 0
-        const val PARAM_DAMPING: Int = 1
-        const val PARAM_IMPULSE_CLAMP: Int = 2
+        const val PARAM_BIAS: Long = 0
+        const val PARAM_DAMPING: Long = 1
+        const val PARAM_IMPULSE_CLAMP: Long = 2
 
 
     }
 
 
     // Properties
-    open var params_bias: Float
-        get() = _icall_Float_Int(getParamMethodBind, this.rawMemory, 0)
-        set(value) = _icall_Unit_Int_Float(setParamMethodBind, this.rawMemory, 0, value)
+    open var params_bias: Double
+        get() = _icall_Double_Long(getParamMethodBind, this.rawMemory, 0)
+        set(value) = _icall_Unit_Long_Double(setParamMethodBind, this.rawMemory, 0, value)
 
 
-    open var params_damping: Float
-        get() = _icall_Float_Int(getParamMethodBind, this.rawMemory, 1)
-        set(value) = _icall_Unit_Int_Float(setParamMethodBind, this.rawMemory, 1, value)
+    open var params_damping: Double
+        get() = _icall_Double_Long(getParamMethodBind, this.rawMemory, 1)
+        set(value) = _icall_Unit_Long_Double(setParamMethodBind, this.rawMemory, 1, value)
 
 
-    open var params_impulseClamp: Float
-        get() = _icall_Float_Int(getParamMethodBind, this.rawMemory, 2)
-        set(value) = _icall_Unit_Int_Float(setParamMethodBind, this.rawMemory, 2, value)
+    open var params_impulseClamp: Double
+        get() = _icall_Double_Long(getParamMethodBind, this.rawMemory, 2)
+        set(value) = _icall_Unit_Long_Double(setParamMethodBind, this.rawMemory, 2, value)
 
 
 
 
     // Methods
     private val setParamMethodBind: CPointer<godot_method_bind> by lazy { getMB("PinJoint", "set_param") }
-    open fun setParam(param: Int, value: Float) {
-        _icall_Unit_Int_Float(setParamMethodBind, this.rawMemory, param, value)
+    open fun setParam(param: Long, value: Double) {
+        _icall_Unit_Long_Double(setParamMethodBind, this.rawMemory, param, value)
     }
 
 
     private val getParamMethodBind: CPointer<godot_method_bind> by lazy { getMB("PinJoint", "get_param") }
-    open fun getParam(param: Int): Float {
-        return _icall_Float_Int(getParamMethodBind, this.rawMemory, param)
+    open fun getParam(param: Long): Double {
+        return _icall_Double_Long(getParamMethodBind, this.rawMemory, param)
     }
 
 

@@ -47,20 +47,20 @@ open class Navigation2D : Node2D {
 
     // Methods
     private val navpolyAddMethodBind: CPointer<godot_method_bind> by lazy { getMB("Navigation2D", "navpoly_add") }
-    open fun navpolyAdd(mesh: NavigationPolygon, xform: Transform2D, owner: Object): Int {
-        return _icall_Int_Object_Transform2D_Object(navpolyAddMethodBind, this.rawMemory, mesh, xform, owner)
+    open fun navpolyAdd(mesh: NavigationPolygon, xform: Transform2D, owner: Object): Long {
+        return _icall_Long_Object_Transform2D_Object(navpolyAddMethodBind, this.rawMemory, mesh, xform, owner)
     }
 
 
     private val navpolySetTransformMethodBind: CPointer<godot_method_bind> by lazy { getMB("Navigation2D", "navpoly_set_transform") }
-    open fun navpolySetTransform(id: Int, xform: Transform2D) {
-        _icall_Unit_Int_Transform2D(navpolySetTransformMethodBind, this.rawMemory, id, xform)
+    open fun navpolySetTransform(id: Long, xform: Transform2D) {
+        _icall_Unit_Long_Transform2D(navpolySetTransformMethodBind, this.rawMemory, id, xform)
     }
 
 
     private val navpolyRemoveMethodBind: CPointer<godot_method_bind> by lazy { getMB("Navigation2D", "navpoly_remove") }
-    open fun navpolyRemove(id: Int) {
-        _icall_Unit_Int(navpolyRemoveMethodBind, this.rawMemory, id)
+    open fun navpolyRemove(id: Long) {
+        _icall_Unit_Long(navpolyRemoveMethodBind, this.rawMemory, id)
     }
 
 

@@ -54,11 +54,11 @@ open class ScriptEditor : PanelContainer {
     }
 
 
-    open fun _tab_changed(arg0: Int) {
+    open fun _tab_changed(arg0: Long) {
     }
 
 
-    open fun _menu_option(arg0: Int) {
+    open fun _menu_option(arg0: Long) {
     }
 
 
@@ -82,11 +82,11 @@ open class ScriptEditor : PanelContainer {
     }
 
 
-    open fun _open_recent_script(arg0: Int) {
+    open fun _open_recent_script(arg0: Long) {
     }
 
 
-    open fun _theme_option(arg0: Int) {
+    open fun _theme_option(arg0: Long) {
     }
 
 
@@ -118,11 +118,11 @@ open class ScriptEditor : PanelContainer {
     }
 
 
-    open fun _goto_script_line(arg0: Reference, arg1: Int) {
+    open fun _goto_script_line(arg0: Reference, arg1: Long) {
     }
 
 
-    open fun _goto_script_line2(arg0: Int) {
+    open fun _goto_script_line2(arg0: Long) {
     }
 
 
@@ -171,15 +171,15 @@ open class ScriptEditor : PanelContainer {
     }
 
 
-    open fun _members_overview_selected(arg0: Int) {
+    open fun _members_overview_selected(arg0: Long) {
     }
 
 
-    open fun _help_overview_selected(arg0: Int) {
+    open fun _help_overview_selected(arg0: Long) {
     }
 
 
-    open fun _script_selected(arg0: Int) {
+    open fun _script_selected(arg0: Long) {
     }
 
 
@@ -187,7 +187,7 @@ open class ScriptEditor : PanelContainer {
     }
 
 
-    open fun _script_split_dragged(arg0: Float) {
+    open fun _script_split_dragged(arg0: Double) {
     }
 
 
@@ -247,7 +247,7 @@ open class ScriptEditor : PanelContainer {
     }
 
 
-    open fun _on_find_in_files_result_selected(arg0: String, arg1: Int, arg2: Int, arg3: Int) {
+    open fun _on_find_in_files_result_selected(arg0: String, arg1: Long, arg2: Long, arg3: Long) {
     }
 
 

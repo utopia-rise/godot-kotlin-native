@@ -51,19 +51,19 @@ open class Sprite3D : SpriteBase3D {
         set(value) = _icall_Unit_Object(setTextureMethodBind, this.rawMemory, value)
 
 
-    open var vframes: Int
-        get() = _icall_Int(getVframesMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setVframesMethodBind, this.rawMemory, value)
+    open var vframes: Long
+        get() = _icall_Long(getVframesMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setVframesMethodBind, this.rawMemory, value)
 
 
-    open var hframes: Int
-        get() = _icall_Int(getHframesMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setHframesMethodBind, this.rawMemory, value)
+    open var hframes: Long
+        get() = _icall_Long(getHframesMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setHframesMethodBind, this.rawMemory, value)
 
 
-    open var frame: Int
-        get() = _icall_Int(getFrameMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setFrameMethodBind, this.rawMemory, value)
+    open var frame: Long
+        get() = _icall_Long(getFrameMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setFrameMethodBind, this.rawMemory, value)
 
 
     open var regionEnabled: Boolean
@@ -120,38 +120,38 @@ open class Sprite3D : SpriteBase3D {
 
 
     private val setFrameMethodBind: CPointer<godot_method_bind> by lazy { getMB("Sprite3D", "set_frame") }
-    open fun setFrame(frame: Int) {
-        _icall_Unit_Int(setFrameMethodBind, this.rawMemory, frame)
+    open fun setFrame(frame: Long) {
+        _icall_Unit_Long(setFrameMethodBind, this.rawMemory, frame)
     }
 
 
     private val getFrameMethodBind: CPointer<godot_method_bind> by lazy { getMB("Sprite3D", "get_frame") }
-    open fun getFrame(): Int {
-        return _icall_Int(getFrameMethodBind, this.rawMemory)
+    open fun getFrame(): Long {
+        return _icall_Long(getFrameMethodBind, this.rawMemory)
     }
 
 
     private val setVframesMethodBind: CPointer<godot_method_bind> by lazy { getMB("Sprite3D", "set_vframes") }
-    open fun setVframes(vframes: Int) {
-        _icall_Unit_Int(setVframesMethodBind, this.rawMemory, vframes)
+    open fun setVframes(vframes: Long) {
+        _icall_Unit_Long(setVframesMethodBind, this.rawMemory, vframes)
     }
 
 
     private val getVframesMethodBind: CPointer<godot_method_bind> by lazy { getMB("Sprite3D", "get_vframes") }
-    open fun getVframes(): Int {
-        return _icall_Int(getVframesMethodBind, this.rawMemory)
+    open fun getVframes(): Long {
+        return _icall_Long(getVframesMethodBind, this.rawMemory)
     }
 
 
     private val setHframesMethodBind: CPointer<godot_method_bind> by lazy { getMB("Sprite3D", "set_hframes") }
-    open fun setHframes(hframes: Int) {
-        _icall_Unit_Int(setHframesMethodBind, this.rawMemory, hframes)
+    open fun setHframes(hframes: Long) {
+        _icall_Unit_Long(setHframesMethodBind, this.rawMemory, hframes)
     }
 
 
     private val getHframesMethodBind: CPointer<godot_method_bind> by lazy { getMB("Sprite3D", "get_hframes") }
-    open fun getHframes(): Int {
-        return _icall_Int(getHframesMethodBind, this.rawMemory)
+    open fun getHframes(): Long {
+        return _icall_Long(getHframesMethodBind, this.rawMemory)
     }
 
 

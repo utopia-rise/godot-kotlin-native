@@ -19,7 +19,7 @@ open class GIProbe : VisualInstance {
 
     // Enums 
 
-    enum class Subdiv(val id: Int) {
+    enum class Subdiv(val id: Long) {
         SUBDIV_64(0),
         SUBDIV_128(1),
         SUBDIV_256(2),
@@ -28,7 +28,7 @@ open class GIProbe : VisualInstance {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -49,20 +49,20 @@ open class GIProbe : VisualInstance {
 
 
         // Constants
-        const val SUBDIV_64: Int = 0
-        const val SUBDIV_128: Int = 1
-        const val SUBDIV_256: Int = 2
-        const val SUBDIV_512: Int = 3
-        const val SUBDIV_MAX: Int = 4
+        const val SUBDIV_64: Long = 0
+        const val SUBDIV_128: Long = 1
+        const val SUBDIV_256: Long = 2
+        const val SUBDIV_512: Long = 3
+        const val SUBDIV_MAX: Long = 4
 
 
     }
 
 
     // Properties
-    open var subdiv: Int
-        get() = _icall_Int(getSubdivMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setSubdivMethodBind, this.rawMemory, value)
+    open var subdiv: Long
+        get() = _icall_Long(getSubdivMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setSubdivMethodBind, this.rawMemory, value)
 
 
     open var extents: Vector3
@@ -74,29 +74,29 @@ open class GIProbe : VisualInstance {
     }
 
 
-    open var dynamicRange: Int
-        get() = _icall_Int(getDynamicRangeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setDynamicRangeMethodBind, this.rawMemory, value)
+    open var dynamicRange: Long
+        get() = _icall_Long(getDynamicRangeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setDynamicRangeMethodBind, this.rawMemory, value)
 
 
-    open var energy: Float
-        get() = _icall_Float(getEnergyMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setEnergyMethodBind, this.rawMemory, value)
+    open var energy: Double
+        get() = _icall_Double(getEnergyMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setEnergyMethodBind, this.rawMemory, value)
 
 
-    open var propagation: Float
-        get() = _icall_Float(getPropagationMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setPropagationMethodBind, this.rawMemory, value)
+    open var propagation: Double
+        get() = _icall_Double(getPropagationMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setPropagationMethodBind, this.rawMemory, value)
 
 
-    open var bias: Float
-        get() = _icall_Float(getBiasMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setBiasMethodBind, this.rawMemory, value)
+    open var bias: Double
+        get() = _icall_Double(getBiasMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setBiasMethodBind, this.rawMemory, value)
 
 
-    open var normalBias: Float
-        get() = _icall_Float(getNormalBiasMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setNormalBiasMethodBind, this.rawMemory, value)
+    open var normalBias: Double
+        get() = _icall_Double(getNormalBiasMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setNormalBiasMethodBind, this.rawMemory, value)
 
 
     open var interior: Boolean
@@ -130,14 +130,14 @@ open class GIProbe : VisualInstance {
 
 
     private val setSubdivMethodBind: CPointer<godot_method_bind> by lazy { getMB("GIProbe", "set_subdiv") }
-    open fun setSubdiv(subdiv: Int) {
-        _icall_Unit_Int(setSubdivMethodBind, this.rawMemory, subdiv)
+    open fun setSubdiv(subdiv: Long) {
+        _icall_Unit_Long(setSubdivMethodBind, this.rawMemory, subdiv)
     }
 
 
     private val getSubdivMethodBind: CPointer<godot_method_bind> by lazy { getMB("GIProbe", "get_subdiv") }
     open fun getSubdiv(): GIProbe.Subdiv {
-        return GIProbe.Subdiv.fromInt(_icall_Int(getSubdivMethodBind, this.rawMemory))
+        return GIProbe.Subdiv.fromInt(_icall_Long(getSubdivMethodBind, this.rawMemory))
     }
 
 
@@ -154,62 +154,62 @@ open class GIProbe : VisualInstance {
 
 
     private val setDynamicRangeMethodBind: CPointer<godot_method_bind> by lazy { getMB("GIProbe", "set_dynamic_range") }
-    open fun setDynamicRange(max: Int) {
-        _icall_Unit_Int(setDynamicRangeMethodBind, this.rawMemory, max)
+    open fun setDynamicRange(max: Long) {
+        _icall_Unit_Long(setDynamicRangeMethodBind, this.rawMemory, max)
     }
 
 
     private val getDynamicRangeMethodBind: CPointer<godot_method_bind> by lazy { getMB("GIProbe", "get_dynamic_range") }
-    open fun getDynamicRange(): Int {
-        return _icall_Int(getDynamicRangeMethodBind, this.rawMemory)
+    open fun getDynamicRange(): Long {
+        return _icall_Long(getDynamicRangeMethodBind, this.rawMemory)
     }
 
 
     private val setEnergyMethodBind: CPointer<godot_method_bind> by lazy { getMB("GIProbe", "set_energy") }
-    open fun setEnergy(max: Float) {
-        _icall_Unit_Float(setEnergyMethodBind, this.rawMemory, max)
+    open fun setEnergy(max: Double) {
+        _icall_Unit_Double(setEnergyMethodBind, this.rawMemory, max)
     }
 
 
     private val getEnergyMethodBind: CPointer<godot_method_bind> by lazy { getMB("GIProbe", "get_energy") }
-    open fun getEnergy(): Float {
-        return _icall_Float(getEnergyMethodBind, this.rawMemory)
+    open fun getEnergy(): Double {
+        return _icall_Double(getEnergyMethodBind, this.rawMemory)
     }
 
 
     private val setBiasMethodBind: CPointer<godot_method_bind> by lazy { getMB("GIProbe", "set_bias") }
-    open fun setBias(max: Float) {
-        _icall_Unit_Float(setBiasMethodBind, this.rawMemory, max)
+    open fun setBias(max: Double) {
+        _icall_Unit_Double(setBiasMethodBind, this.rawMemory, max)
     }
 
 
     private val getBiasMethodBind: CPointer<godot_method_bind> by lazy { getMB("GIProbe", "get_bias") }
-    open fun getBias(): Float {
-        return _icall_Float(getBiasMethodBind, this.rawMemory)
+    open fun getBias(): Double {
+        return _icall_Double(getBiasMethodBind, this.rawMemory)
     }
 
 
     private val setNormalBiasMethodBind: CPointer<godot_method_bind> by lazy { getMB("GIProbe", "set_normal_bias") }
-    open fun setNormalBias(max: Float) {
-        _icall_Unit_Float(setNormalBiasMethodBind, this.rawMemory, max)
+    open fun setNormalBias(max: Double) {
+        _icall_Unit_Double(setNormalBiasMethodBind, this.rawMemory, max)
     }
 
 
     private val getNormalBiasMethodBind: CPointer<godot_method_bind> by lazy { getMB("GIProbe", "get_normal_bias") }
-    open fun getNormalBias(): Float {
-        return _icall_Float(getNormalBiasMethodBind, this.rawMemory)
+    open fun getNormalBias(): Double {
+        return _icall_Double(getNormalBiasMethodBind, this.rawMemory)
     }
 
 
     private val setPropagationMethodBind: CPointer<godot_method_bind> by lazy { getMB("GIProbe", "set_propagation") }
-    open fun setPropagation(max: Float) {
-        _icall_Unit_Float(setPropagationMethodBind, this.rawMemory, max)
+    open fun setPropagation(max: Double) {
+        _icall_Unit_Double(setPropagationMethodBind, this.rawMemory, max)
     }
 
 
     private val getPropagationMethodBind: CPointer<godot_method_bind> by lazy { getMB("GIProbe", "get_propagation") }
-    open fun getPropagation(): Float {
-        return _icall_Float(getPropagationMethodBind, this.rawMemory)
+    open fun getPropagation(): Double {
+        return _icall_Double(getPropagationMethodBind, this.rawMemory)
     }
 
 

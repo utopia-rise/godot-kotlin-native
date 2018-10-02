@@ -19,7 +19,7 @@ open class NetworkedMultiplayerENet : NetworkedMultiplayerPeer {
 
     // Enums 
 
-    enum class CompressionMode(val id: Int) {
+    enum class CompressionMode(val id: Long) {
         COMPRESS_NONE(0),
         COMPRESS_RANGE_CODER(1),
         COMPRESS_FASTLZ(2),
@@ -28,7 +28,7 @@ open class NetworkedMultiplayerENet : NetworkedMultiplayerPeer {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -49,30 +49,30 @@ open class NetworkedMultiplayerENet : NetworkedMultiplayerPeer {
 
 
         // Constants
-        const val COMPRESS_NONE: Int = 0
-        const val COMPRESS_RANGE_CODER: Int = 1
-        const val COMPRESS_FASTLZ: Int = 2
-        const val COMPRESS_ZLIB: Int = 3
-        const val COMPRESS_ZSTD: Int = 4
+        const val COMPRESS_NONE: Long = 0
+        const val COMPRESS_RANGE_CODER: Long = 1
+        const val COMPRESS_FASTLZ: Long = 2
+        const val COMPRESS_ZLIB: Long = 3
+        const val COMPRESS_ZSTD: Long = 4
 
 
     }
 
 
     // Properties
-    open var compressionMode: Int
-        get() = _icall_Int(getCompressionModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setCompressionModeMethodBind, this.rawMemory, value)
+    open var compressionMode: Long
+        get() = _icall_Long(getCompressionModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setCompressionModeMethodBind, this.rawMemory, value)
 
 
-    open var transferChannel: Int
-        get() = _icall_Int(getTransferChannelMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setTransferChannelMethodBind, this.rawMemory, value)
+    open var transferChannel: Long
+        get() = _icall_Long(getTransferChannelMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setTransferChannelMethodBind, this.rawMemory, value)
 
 
-    open var channelCount: Int
-        get() = _icall_Int(getChannelCountMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setChannelCountMethodBind, this.rawMemory, value)
+    open var channelCount: Long
+        get() = _icall_Long(getChannelCountMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setChannelCountMethodBind, this.rawMemory, value)
 
 
     open var alwaysOrdered: Boolean
@@ -84,38 +84,38 @@ open class NetworkedMultiplayerENet : NetworkedMultiplayerPeer {
 
     // Methods
     private val createServerMethodBind: CPointer<godot_method_bind> by lazy { getMB("NetworkedMultiplayerENet", "create_server") }
-    open fun createServer(port: Int, maxClients: Int = 32, inBandwidth: Int = 0, outBandwidth: Int = 0): GodotError {
-        return GodotError.fromInt(_icall_Int_Int_Int_Int_Int(createServerMethodBind, this.rawMemory, port, maxClients, inBandwidth, outBandwidth))
+    open fun createServer(port: Long, maxClients: Long = 32, inBandwidth: Long = 0, outBandwidth: Long = 0): GodotError {
+        return GodotError.fromInt(_icall_Long_Long_Long_Long_Long(createServerMethodBind, this.rawMemory, port, maxClients, inBandwidth, outBandwidth))
     }
 
 
     private val createClientMethodBind: CPointer<godot_method_bind> by lazy { getMB("NetworkedMultiplayerENet", "create_client") }
-    open fun createClient(address: String, port: Int, inBandwidth: Int = 0, outBandwidth: Int = 0, clientPort: Int = 0): GodotError {
-        return GodotError.fromInt(_icall_Int_String_Int_Int_Int_Int(createClientMethodBind, this.rawMemory, address, port, inBandwidth, outBandwidth, clientPort))
+    open fun createClient(address: String, port: Long, inBandwidth: Long = 0, outBandwidth: Long = 0, clientPort: Long = 0): GodotError {
+        return GodotError.fromInt(_icall_Long_String_Long_Long_Long_Long(createClientMethodBind, this.rawMemory, address, port, inBandwidth, outBandwidth, clientPort))
     }
 
 
     private val closeConnectionMethodBind: CPointer<godot_method_bind> by lazy { getMB("NetworkedMultiplayerENet", "close_connection") }
-    open fun closeConnection(waitUsec: Int = 100) {
-        _icall_Unit_Int(closeConnectionMethodBind, this.rawMemory, waitUsec)
+    open fun closeConnection(waitUsec: Long = 100) {
+        _icall_Unit_Long(closeConnectionMethodBind, this.rawMemory, waitUsec)
     }
 
 
     private val disconnectPeerMethodBind: CPointer<godot_method_bind> by lazy { getMB("NetworkedMultiplayerENet", "disconnect_peer") }
-    open fun disconnectPeer(id: Int, now: Boolean = false) {
-        _icall_Unit_Int_Boolean(disconnectPeerMethodBind, this.rawMemory, id, now)
+    open fun disconnectPeer(id: Long, now: Boolean = false) {
+        _icall_Unit_Long_Boolean(disconnectPeerMethodBind, this.rawMemory, id, now)
     }
 
 
     private val setCompressionModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("NetworkedMultiplayerENet", "set_compression_mode") }
-    open fun setCompressionMode(mode: Int) {
-        _icall_Unit_Int(setCompressionModeMethodBind, this.rawMemory, mode)
+    open fun setCompressionMode(mode: Long) {
+        _icall_Unit_Long(setCompressionModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getCompressionModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("NetworkedMultiplayerENet", "get_compression_mode") }
     open fun getCompressionMode(): NetworkedMultiplayerENet.CompressionMode {
-        return NetworkedMultiplayerENet.CompressionMode.fromInt(_icall_Int(getCompressionModeMethodBind, this.rawMemory))
+        return NetworkedMultiplayerENet.CompressionMode.fromInt(_icall_Long(getCompressionModeMethodBind, this.rawMemory))
     }
 
 
@@ -126,50 +126,50 @@ open class NetworkedMultiplayerENet : NetworkedMultiplayerPeer {
 
 
     private val getPeerAddressMethodBind: CPointer<godot_method_bind> by lazy { getMB("NetworkedMultiplayerENet", "get_peer_address") }
-    open fun getPeerAddress(id: Int): String {
-        return _icall_String_Int(getPeerAddressMethodBind, this.rawMemory, id)
+    open fun getPeerAddress(id: Long): String {
+        return _icall_String_Long(getPeerAddressMethodBind, this.rawMemory, id)
     }
 
 
     private val getPeerPortMethodBind: CPointer<godot_method_bind> by lazy { getMB("NetworkedMultiplayerENet", "get_peer_port") }
-    open fun getPeerPort(id: Int): Int {
-        return _icall_Int_Int(getPeerPortMethodBind, this.rawMemory, id)
+    open fun getPeerPort(id: Long): Long {
+        return _icall_Long_Long(getPeerPortMethodBind, this.rawMemory, id)
     }
 
 
     private val getPacketChannelMethodBind: CPointer<godot_method_bind> by lazy { getMB("NetworkedMultiplayerENet", "get_packet_channel") }
-    open fun getPacketChannel(): Int {
-        return _icall_Int(getPacketChannelMethodBind, this.rawMemory)
+    open fun getPacketChannel(): Long {
+        return _icall_Long(getPacketChannelMethodBind, this.rawMemory)
     }
 
 
     private val getLastPacketChannelMethodBind: CPointer<godot_method_bind> by lazy { getMB("NetworkedMultiplayerENet", "get_last_packet_channel") }
-    open fun getLastPacketChannel(): Int {
-        return _icall_Int(getLastPacketChannelMethodBind, this.rawMemory)
+    open fun getLastPacketChannel(): Long {
+        return _icall_Long(getLastPacketChannelMethodBind, this.rawMemory)
     }
 
 
     private val setTransferChannelMethodBind: CPointer<godot_method_bind> by lazy { getMB("NetworkedMultiplayerENet", "set_transfer_channel") }
-    open fun setTransferChannel(channel: Int) {
-        _icall_Unit_Int(setTransferChannelMethodBind, this.rawMemory, channel)
+    open fun setTransferChannel(channel: Long) {
+        _icall_Unit_Long(setTransferChannelMethodBind, this.rawMemory, channel)
     }
 
 
     private val getTransferChannelMethodBind: CPointer<godot_method_bind> by lazy { getMB("NetworkedMultiplayerENet", "get_transfer_channel") }
-    open fun getTransferChannel(): Int {
-        return _icall_Int(getTransferChannelMethodBind, this.rawMemory)
+    open fun getTransferChannel(): Long {
+        return _icall_Long(getTransferChannelMethodBind, this.rawMemory)
     }
 
 
     private val setChannelCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("NetworkedMultiplayerENet", "set_channel_count") }
-    open fun setChannelCount(channels: Int) {
-        _icall_Unit_Int(setChannelCountMethodBind, this.rawMemory, channels)
+    open fun setChannelCount(channels: Long) {
+        _icall_Unit_Long(setChannelCountMethodBind, this.rawMemory, channels)
     }
 
 
     private val getChannelCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("NetworkedMultiplayerENet", "get_channel_count") }
-    open fun getChannelCount(): Int {
-        return _icall_Int(getChannelCountMethodBind, this.rawMemory)
+    open fun getChannelCount(): Long {
+        return _icall_Long(getChannelCountMethodBind, this.rawMemory)
     }
 
 

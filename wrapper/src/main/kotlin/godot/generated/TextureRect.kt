@@ -19,7 +19,7 @@ open class TextureRect : Control {
 
     // Enums 
 
-    enum class StretchMode(val id: Int) {
+    enum class StretchMode(val id: Long) {
         STRETCH_SCALE_ON_EXPAND(0),
         STRETCH_SCALE(1),
         STRETCH_TILE(2),
@@ -31,7 +31,7 @@ open class TextureRect : Control {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -52,14 +52,14 @@ open class TextureRect : Control {
 
 
         // Constants
-        const val STRETCH_SCALE_ON_EXPAND: Int = 0
-        const val STRETCH_SCALE: Int = 1
-        const val STRETCH_TILE: Int = 2
-        const val STRETCH_KEEP: Int = 3
-        const val STRETCH_KEEP_CENTERED: Int = 4
-        const val STRETCH_KEEP_ASPECT: Int = 5
-        const val STRETCH_KEEP_ASPECT_CENTERED: Int = 6
-        const val STRETCH_KEEP_ASPECT_COVERED: Int = 7
+        const val STRETCH_SCALE_ON_EXPAND: Long = 0
+        const val STRETCH_SCALE: Long = 1
+        const val STRETCH_TILE: Long = 2
+        const val STRETCH_KEEP: Long = 3
+        const val STRETCH_KEEP_CENTERED: Long = 4
+        const val STRETCH_KEEP_ASPECT: Long = 5
+        const val STRETCH_KEEP_ASPECT_CENTERED: Long = 6
+        const val STRETCH_KEEP_ASPECT_COVERED: Long = 7
 
 
     }
@@ -76,9 +76,9 @@ open class TextureRect : Control {
         set(value) = _icall_Unit_Boolean(setExpandMethodBind, this.rawMemory, value)
 
 
-    open var stretchMode: Int
-        get() = _icall_Int(getStretchModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setStretchModeMethodBind, this.rawMemory, value)
+    open var stretchMode: Long
+        get() = _icall_Long(getStretchModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setStretchModeMethodBind, this.rawMemory, value)
 
 
 
@@ -109,14 +109,14 @@ open class TextureRect : Control {
 
 
     private val setStretchModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("TextureRect", "set_stretch_mode") }
-    open fun setStretchMode(stretchMode: Int) {
-        _icall_Unit_Int(setStretchModeMethodBind, this.rawMemory, stretchMode)
+    open fun setStretchMode(stretchMode: Long) {
+        _icall_Unit_Long(setStretchModeMethodBind, this.rawMemory, stretchMode)
     }
 
 
     private val getStretchModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("TextureRect", "get_stretch_mode") }
     open fun getStretchMode(): TextureRect.StretchMode {
-        return TextureRect.StretchMode.fromInt(_icall_Int(getStretchModeMethodBind, this.rawMemory))
+        return TextureRect.StretchMode.fromInt(_icall_Long(getStretchModeMethodBind, this.rawMemory))
     }
 
 

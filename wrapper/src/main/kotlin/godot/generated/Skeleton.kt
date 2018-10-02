@@ -36,7 +36,7 @@ open class Skeleton : Spatial {
 
 
         // Constants
-        const val NOTIFICATION_UPDATE_SKELETON: Int = 50
+        const val NOTIFICATION_UPDATE_SKELETON: Long = 50
 
 
     }
@@ -53,80 +53,80 @@ open class Skeleton : Spatial {
 
 
     private val findBoneMethodBind: CPointer<godot_method_bind> by lazy { getMB("Skeleton", "find_bone") }
-    open fun findBone(name: String): Int {
-        return _icall_Int_String(findBoneMethodBind, this.rawMemory, name)
+    open fun findBone(name: String): Long {
+        return _icall_Long_String(findBoneMethodBind, this.rawMemory, name)
     }
 
 
     private val getBoneNameMethodBind: CPointer<godot_method_bind> by lazy { getMB("Skeleton", "get_bone_name") }
-    open fun getBoneName(boneIdx: Int): String {
-        return _icall_String_Int(getBoneNameMethodBind, this.rawMemory, boneIdx)
+    open fun getBoneName(boneIdx: Long): String {
+        return _icall_String_Long(getBoneNameMethodBind, this.rawMemory, boneIdx)
     }
 
 
     private val getBoneParentMethodBind: CPointer<godot_method_bind> by lazy { getMB("Skeleton", "get_bone_parent") }
-    open fun getBoneParent(boneIdx: Int): Int {
-        return _icall_Int_Int(getBoneParentMethodBind, this.rawMemory, boneIdx)
+    open fun getBoneParent(boneIdx: Long): Long {
+        return _icall_Long_Long(getBoneParentMethodBind, this.rawMemory, boneIdx)
     }
 
 
     private val setBoneParentMethodBind: CPointer<godot_method_bind> by lazy { getMB("Skeleton", "set_bone_parent") }
-    open fun setBoneParent(boneIdx: Int, parentIdx: Int) {
-        _icall_Unit_Int_Int(setBoneParentMethodBind, this.rawMemory, boneIdx, parentIdx)
+    open fun setBoneParent(boneIdx: Long, parentIdx: Long) {
+        _icall_Unit_Long_Long(setBoneParentMethodBind, this.rawMemory, boneIdx, parentIdx)
     }
 
 
     private val getBoneCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("Skeleton", "get_bone_count") }
-    open fun getBoneCount(): Int {
-        return _icall_Int(getBoneCountMethodBind, this.rawMemory)
+    open fun getBoneCount(): Long {
+        return _icall_Long(getBoneCountMethodBind, this.rawMemory)
     }
 
 
     private val unparentBoneAndRestMethodBind: CPointer<godot_method_bind> by lazy { getMB("Skeleton", "unparent_bone_and_rest") }
-    open fun unparentBoneAndRest(boneIdx: Int) {
-        _icall_Unit_Int(unparentBoneAndRestMethodBind, this.rawMemory, boneIdx)
+    open fun unparentBoneAndRest(boneIdx: Long) {
+        _icall_Unit_Long(unparentBoneAndRestMethodBind, this.rawMemory, boneIdx)
     }
 
 
     private val getBoneRestMethodBind: CPointer<godot_method_bind> by lazy { getMB("Skeleton", "get_bone_rest") }
-    open fun getBoneRest(boneIdx: Int): Transform {
-        return _icall_Transform_Int(getBoneRestMethodBind, this.rawMemory, boneIdx)
+    open fun getBoneRest(boneIdx: Long): Transform {
+        return _icall_Transform_Long(getBoneRestMethodBind, this.rawMemory, boneIdx)
     }
 
 
     private val setBoneRestMethodBind: CPointer<godot_method_bind> by lazy { getMB("Skeleton", "set_bone_rest") }
-    open fun setBoneRest(boneIdx: Int, rest: Transform) {
-        _icall_Unit_Int_Transform(setBoneRestMethodBind, this.rawMemory, boneIdx, rest)
+    open fun setBoneRest(boneIdx: Long, rest: Transform) {
+        _icall_Unit_Long_Transform(setBoneRestMethodBind, this.rawMemory, boneIdx, rest)
     }
 
 
     private val setBoneDisableRestMethodBind: CPointer<godot_method_bind> by lazy { getMB("Skeleton", "set_bone_disable_rest") }
-    open fun setBoneDisableRest(boneIdx: Int, disable: Boolean) {
-        _icall_Unit_Int_Boolean(setBoneDisableRestMethodBind, this.rawMemory, boneIdx, disable)
+    open fun setBoneDisableRest(boneIdx: Long, disable: Boolean) {
+        _icall_Unit_Long_Boolean(setBoneDisableRestMethodBind, this.rawMemory, boneIdx, disable)
     }
 
 
     private val isBoneRestDisabledMethodBind: CPointer<godot_method_bind> by lazy { getMB("Skeleton", "is_bone_rest_disabled") }
-    open fun isBoneRestDisabled(boneIdx: Int): Boolean {
-        return _icall_Boolean_Int(isBoneRestDisabledMethodBind, this.rawMemory, boneIdx)
+    open fun isBoneRestDisabled(boneIdx: Long): Boolean {
+        return _icall_Boolean_Long(isBoneRestDisabledMethodBind, this.rawMemory, boneIdx)
     }
 
 
     private val bindChildNodeToBoneMethodBind: CPointer<godot_method_bind> by lazy { getMB("Skeleton", "bind_child_node_to_bone") }
-    open fun bindChildNodeToBone(boneIdx: Int, node: Object) {
-        _icall_Unit_Int_Object(bindChildNodeToBoneMethodBind, this.rawMemory, boneIdx, node)
+    open fun bindChildNodeToBone(boneIdx: Long, node: Object) {
+        _icall_Unit_Long_Object(bindChildNodeToBoneMethodBind, this.rawMemory, boneIdx, node)
     }
 
 
     private val unbindChildNodeFromBoneMethodBind: CPointer<godot_method_bind> by lazy { getMB("Skeleton", "unbind_child_node_from_bone") }
-    open fun unbindChildNodeFromBone(boneIdx: Int, node: Object) {
-        _icall_Unit_Int_Object(unbindChildNodeFromBoneMethodBind, this.rawMemory, boneIdx, node)
+    open fun unbindChildNodeFromBone(boneIdx: Long, node: Object) {
+        _icall_Unit_Long_Object(unbindChildNodeFromBoneMethodBind, this.rawMemory, boneIdx, node)
     }
 
 
     private val getBoundChildNodesToBoneMethodBind: CPointer<godot_method_bind> by lazy { getMB("Skeleton", "get_bound_child_nodes_to_bone") }
-    open fun getBoundChildNodesToBone(boneIdx: Int): GDArray {
-        return _icall_GDArray_Int(getBoundChildNodesToBoneMethodBind, this.rawMemory, boneIdx)
+    open fun getBoundChildNodesToBone(boneIdx: Long): GDArray {
+        return _icall_GDArray_Long(getBoundChildNodesToBoneMethodBind, this.rawMemory, boneIdx)
     }
 
 
@@ -137,44 +137,44 @@ open class Skeleton : Spatial {
 
 
     private val getBonePoseMethodBind: CPointer<godot_method_bind> by lazy { getMB("Skeleton", "get_bone_pose") }
-    open fun getBonePose(boneIdx: Int): Transform {
-        return _icall_Transform_Int(getBonePoseMethodBind, this.rawMemory, boneIdx)
+    open fun getBonePose(boneIdx: Long): Transform {
+        return _icall_Transform_Long(getBonePoseMethodBind, this.rawMemory, boneIdx)
     }
 
 
     private val setBonePoseMethodBind: CPointer<godot_method_bind> by lazy { getMB("Skeleton", "set_bone_pose") }
-    open fun setBonePose(boneIdx: Int, pose: Transform) {
-        _icall_Unit_Int_Transform(setBonePoseMethodBind, this.rawMemory, boneIdx, pose)
+    open fun setBonePose(boneIdx: Long, pose: Transform) {
+        _icall_Unit_Long_Transform(setBonePoseMethodBind, this.rawMemory, boneIdx, pose)
     }
 
 
     private val setBoneGlobalPoseMethodBind: CPointer<godot_method_bind> by lazy { getMB("Skeleton", "set_bone_global_pose") }
-    open fun setBoneGlobalPose(boneIdx: Int, pose: Transform) {
-        _icall_Unit_Int_Transform(setBoneGlobalPoseMethodBind, this.rawMemory, boneIdx, pose)
+    open fun setBoneGlobalPose(boneIdx: Long, pose: Transform) {
+        _icall_Unit_Long_Transform(setBoneGlobalPoseMethodBind, this.rawMemory, boneIdx, pose)
     }
 
 
     private val getBoneGlobalPoseMethodBind: CPointer<godot_method_bind> by lazy { getMB("Skeleton", "get_bone_global_pose") }
-    open fun getBoneGlobalPose(boneIdx: Int): Transform {
-        return _icall_Transform_Int(getBoneGlobalPoseMethodBind, this.rawMemory, boneIdx)
+    open fun getBoneGlobalPose(boneIdx: Long): Transform {
+        return _icall_Transform_Long(getBoneGlobalPoseMethodBind, this.rawMemory, boneIdx)
     }
 
 
     private val getBoneCustomPoseMethodBind: CPointer<godot_method_bind> by lazy { getMB("Skeleton", "get_bone_custom_pose") }
-    open fun getBoneCustomPose(boneIdx: Int): Transform {
-        return _icall_Transform_Int(getBoneCustomPoseMethodBind, this.rawMemory, boneIdx)
+    open fun getBoneCustomPose(boneIdx: Long): Transform {
+        return _icall_Transform_Long(getBoneCustomPoseMethodBind, this.rawMemory, boneIdx)
     }
 
 
     private val setBoneCustomPoseMethodBind: CPointer<godot_method_bind> by lazy { getMB("Skeleton", "set_bone_custom_pose") }
-    open fun setBoneCustomPose(boneIdx: Int, customPose: Transform) {
-        _icall_Unit_Int_Transform(setBoneCustomPoseMethodBind, this.rawMemory, boneIdx, customPose)
+    open fun setBoneCustomPose(boneIdx: Long, customPose: Transform) {
+        _icall_Unit_Long_Transform(setBoneCustomPoseMethodBind, this.rawMemory, boneIdx, customPose)
     }
 
 
     private val getBoneTransformMethodBind: CPointer<godot_method_bind> by lazy { getMB("Skeleton", "get_bone_transform") }
-    open fun getBoneTransform(boneIdx: Int): Transform {
-        return _icall_Transform_Int(getBoneTransformMethodBind, this.rawMemory, boneIdx)
+    open fun getBoneTransform(boneIdx: Long): Transform {
+        return _icall_Transform_Long(getBoneTransformMethodBind, this.rawMemory, boneIdx)
     }
 
 

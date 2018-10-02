@@ -19,23 +19,23 @@ open class DirectionalLight : Light {
 
     // Enums 
 
-    enum class ShadowMode(val id: Int) {
+    enum class ShadowMode(val id: Long) {
         SHADOW_ORTHOGONAL(0),
         SHADOW_PARALLEL_2_SPLITS(1),
         SHADOW_PARALLEL_4_SPLITS(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class ShadowDepthRange(val id: Int) {
+    enum class ShadowDepthRange(val id: Long) {
         SHADOW_DEPTH_RANGE_STABLE(0),
         SHADOW_DEPTH_RANGE_OPTIMIZED(1),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -57,20 +57,20 @@ open class DirectionalLight : Light {
 
 
         // Constants
-        const val SHADOW_ORTHOGONAL: Int = 0
-        const val SHADOW_PARALLEL_2_SPLITS: Int = 1
-        const val SHADOW_PARALLEL_4_SPLITS: Int = 2
-        const val SHADOW_DEPTH_RANGE_STABLE: Int = 0
-        const val SHADOW_DEPTH_RANGE_OPTIMIZED: Int = 1
+        const val SHADOW_ORTHOGONAL: Long = 0
+        const val SHADOW_PARALLEL_2_SPLITS: Long = 1
+        const val SHADOW_PARALLEL_4_SPLITS: Long = 2
+        const val SHADOW_DEPTH_RANGE_STABLE: Long = 0
+        const val SHADOW_DEPTH_RANGE_OPTIMIZED: Long = 1
 
 
     }
 
 
     // Properties
-    open var directionalShadowMode: Int
-        get() = _icall_Int(getShadowModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setShadowModeMethodBind, this.rawMemory, value)
+    open var directionalShadowMode: Long
+        get() = _icall_Long(getShadowModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setShadowModeMethodBind, this.rawMemory, value)
 
 
     open var directionalShadowBlendSplits: Boolean
@@ -78,35 +78,35 @@ open class DirectionalLight : Light {
         set(value) = _icall_Unit_Boolean(setBlendSplitsMethodBind, this.rawMemory, value)
 
 
-    open var directionalShadowDepthRange: Int
-        get() = _icall_Int(getShadowDepthRangeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setShadowDepthRangeMethodBind, this.rawMemory, value)
+    open var directionalShadowDepthRange: Long
+        get() = _icall_Long(getShadowDepthRangeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setShadowDepthRangeMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setShadowModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("DirectionalLight", "set_shadow_mode") }
-    open fun setShadowMode(mode: Int) {
-        _icall_Unit_Int(setShadowModeMethodBind, this.rawMemory, mode)
+    open fun setShadowMode(mode: Long) {
+        _icall_Unit_Long(setShadowModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getShadowModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("DirectionalLight", "get_shadow_mode") }
     open fun getShadowMode(): DirectionalLight.ShadowMode {
-        return DirectionalLight.ShadowMode.fromInt(_icall_Int(getShadowModeMethodBind, this.rawMemory))
+        return DirectionalLight.ShadowMode.fromInt(_icall_Long(getShadowModeMethodBind, this.rawMemory))
     }
 
 
     private val setShadowDepthRangeMethodBind: CPointer<godot_method_bind> by lazy { getMB("DirectionalLight", "set_shadow_depth_range") }
-    open fun setShadowDepthRange(mode: Int) {
-        _icall_Unit_Int(setShadowDepthRangeMethodBind, this.rawMemory, mode)
+    open fun setShadowDepthRange(mode: Long) {
+        _icall_Unit_Long(setShadowDepthRangeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getShadowDepthRangeMethodBind: CPointer<godot_method_bind> by lazy { getMB("DirectionalLight", "get_shadow_depth_range") }
     open fun getShadowDepthRange(): DirectionalLight.ShadowDepthRange {
-        return DirectionalLight.ShadowDepthRange.fromInt(_icall_Int(getShadowDepthRangeMethodBind, this.rawMemory))
+        return DirectionalLight.ShadowDepthRange.fromInt(_icall_Long(getShadowDepthRangeMethodBind, this.rawMemory))
     }
 
 

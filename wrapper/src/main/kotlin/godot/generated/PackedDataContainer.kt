@@ -71,13 +71,13 @@ open class PackedDataContainer : Resource {
 
     private val packMethodBind: CPointer<godot_method_bind> by lazy { getMB("PackedDataContainer", "pack") }
     open fun pack(value: Variant): GodotError {
-        return GodotError.fromInt(_icall_Int_Variant(packMethodBind, this.rawMemory, value))
+        return GodotError.fromInt(_icall_Long_Variant(packMethodBind, this.rawMemory, value))
     }
 
 
     private val sizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("PackedDataContainer", "size") }
-    open fun size(): Int {
-        return _icall_Int(sizeMethodBind, this.rawMemory)
+    open fun size(): Long {
+        return _icall_Long(sizeMethodBind, this.rawMemory)
     }
 
 

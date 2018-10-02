@@ -57,7 +57,7 @@ open class EditorInspectorPlugin : Reference {
     }
 
 
-    open fun parse_property(_object: Object, type: Int, path: String, hint: Int, hintText: String, usage: Int): Boolean {
+    open fun parse_property(_object: Object, type: Long, path: String, hint: Long, hintText: String, usage: Long): Boolean {
         throw NotImplementedError("parse_property is not implemented for EditorInspectorPlugin")
     }
 

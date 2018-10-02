@@ -36,9 +36,9 @@ open class NavigationMesh : Resource {
 
 
         // Constants
-        const val SAMPLE_PARTITION_WATERSHED: Int = 0
-        const val SAMPLE_PARTITION_MONOTONE: Int = 1
-        const val SAMPLE_PARTITION_LAYERS: Int = 2
+        const val SAMPLE_PARTITION_WATERSHED: Long = 0
+        const val SAMPLE_PARTITION_MONOTONE: Long = 1
+        const val SAMPLE_PARTITION_LAYERS: Long = 2
 
 
     }
@@ -50,74 +50,74 @@ open class NavigationMesh : Resource {
         set(value) = _icall_Unit_PoolVector3Array(setVerticesMethodBind, this.rawMemory, value)
 
 
-    open var samplePartitionType_samplePartitionType: Int
-        get() = _icall_Int(getSamplePartitionTypeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setSamplePartitionTypeMethodBind, this.rawMemory, value)
+    open var samplePartitionType_samplePartitionType: Long
+        get() = _icall_Long(getSamplePartitionTypeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setSamplePartitionTypeMethodBind, this.rawMemory, value)
 
 
-    open var cell_size: Float
-        get() = _icall_Float(getCellSizeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setCellSizeMethodBind, this.rawMemory, value)
+    open var cell_size: Double
+        get() = _icall_Double(getCellSizeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setCellSizeMethodBind, this.rawMemory, value)
 
 
-    open var cell_height: Float
-        get() = _icall_Float(getCellHeightMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setCellHeightMethodBind, this.rawMemory, value)
+    open var cell_height: Double
+        get() = _icall_Double(getCellHeightMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setCellHeightMethodBind, this.rawMemory, value)
 
 
-    open var agent_height: Float
-        get() = _icall_Float(getAgentHeightMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setAgentHeightMethodBind, this.rawMemory, value)
+    open var agent_height: Double
+        get() = _icall_Double(getAgentHeightMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setAgentHeightMethodBind, this.rawMemory, value)
 
 
-    open var agent_radius: Float
-        get() = _icall_Float(getAgentRadiusMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setAgentRadiusMethodBind, this.rawMemory, value)
+    open var agent_radius: Double
+        get() = _icall_Double(getAgentRadiusMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setAgentRadiusMethodBind, this.rawMemory, value)
 
 
-    open var agent_maxClimb: Float
-        get() = _icall_Float(getAgentMaxClimbMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setAgentMaxClimbMethodBind, this.rawMemory, value)
+    open var agent_maxClimb: Double
+        get() = _icall_Double(getAgentMaxClimbMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setAgentMaxClimbMethodBind, this.rawMemory, value)
 
 
-    open var agent_maxSlope: Float
-        get() = _icall_Float(getAgentMaxSlopeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setAgentMaxSlopeMethodBind, this.rawMemory, value)
+    open var agent_maxSlope: Double
+        get() = _icall_Double(getAgentMaxSlopeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setAgentMaxSlopeMethodBind, this.rawMemory, value)
 
 
-    open var region_minSize: Float
-        get() = _icall_Float(getRegionMinSizeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setRegionMinSizeMethodBind, this.rawMemory, value)
+    open var region_minSize: Double
+        get() = _icall_Double(getRegionMinSizeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setRegionMinSizeMethodBind, this.rawMemory, value)
 
 
-    open var region_mergeSize: Float
-        get() = _icall_Float(getRegionMergeSizeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setRegionMergeSizeMethodBind, this.rawMemory, value)
+    open var region_mergeSize: Double
+        get() = _icall_Double(getRegionMergeSizeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setRegionMergeSizeMethodBind, this.rawMemory, value)
 
 
-    open var edge_maxLength: Float
-        get() = _icall_Float(getEdgeMaxLengthMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setEdgeMaxLengthMethodBind, this.rawMemory, value)
+    open var edge_maxLength: Double
+        get() = _icall_Double(getEdgeMaxLengthMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setEdgeMaxLengthMethodBind, this.rawMemory, value)
 
 
-    open var edge_maxError: Float
-        get() = _icall_Float(getEdgeMaxErrorMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setEdgeMaxErrorMethodBind, this.rawMemory, value)
+    open var edge_maxError: Double
+        get() = _icall_Double(getEdgeMaxErrorMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setEdgeMaxErrorMethodBind, this.rawMemory, value)
 
 
-    open var polygon_vertsPerPoly: Float
-        get() = _icall_Float(getVertsPerPolyMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setVertsPerPolyMethodBind, this.rawMemory, value)
+    open var polygon_vertsPerPoly: Double
+        get() = _icall_Double(getVertsPerPolyMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setVertsPerPolyMethodBind, this.rawMemory, value)
 
 
-    open var detail_sampleDistance: Float
-        get() = _icall_Float(getDetailSampleDistanceMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setDetailSampleDistanceMethodBind, this.rawMemory, value)
+    open var detail_sampleDistance: Double
+        get() = _icall_Double(getDetailSampleDistanceMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setDetailSampleDistanceMethodBind, this.rawMemory, value)
 
 
-    open var detail_sampleMaxError: Float
-        get() = _icall_Float(getDetailSampleMaxErrorMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setDetailSampleMaxErrorMethodBind, this.rawMemory, value)
+    open var detail_sampleMaxError: Double
+        get() = _icall_Double(getDetailSampleMaxErrorMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setDetailSampleMaxErrorMethodBind, this.rawMemory, value)
 
 
     open var filter_lowHangingObstacles: Boolean
@@ -139,170 +139,170 @@ open class NavigationMesh : Resource {
 
     // Methods
     private val setSamplePartitionTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("NavigationMesh", "set_sample_partition_type") }
-    open fun setSamplePartitionType(samplePartitionType: Int) {
-        _icall_Unit_Int(setSamplePartitionTypeMethodBind, this.rawMemory, samplePartitionType)
+    open fun setSamplePartitionType(samplePartitionType: Long) {
+        _icall_Unit_Long(setSamplePartitionTypeMethodBind, this.rawMemory, samplePartitionType)
     }
 
 
     private val getSamplePartitionTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("NavigationMesh", "get_sample_partition_type") }
-    open fun getSamplePartitionType(): Int {
-        return _icall_Int(getSamplePartitionTypeMethodBind, this.rawMemory)
+    open fun getSamplePartitionType(): Long {
+        return _icall_Long(getSamplePartitionTypeMethodBind, this.rawMemory)
     }
 
 
     private val setCellSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("NavigationMesh", "set_cell_size") }
-    open fun setCellSize(cellSize: Float) {
-        _icall_Unit_Float(setCellSizeMethodBind, this.rawMemory, cellSize)
+    open fun setCellSize(cellSize: Double) {
+        _icall_Unit_Double(setCellSizeMethodBind, this.rawMemory, cellSize)
     }
 
 
     private val getCellSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("NavigationMesh", "get_cell_size") }
-    open fun getCellSize(): Float {
-        return _icall_Float(getCellSizeMethodBind, this.rawMemory)
+    open fun getCellSize(): Double {
+        return _icall_Double(getCellSizeMethodBind, this.rawMemory)
     }
 
 
     private val setCellHeightMethodBind: CPointer<godot_method_bind> by lazy { getMB("NavigationMesh", "set_cell_height") }
-    open fun setCellHeight(cellHeight: Float) {
-        _icall_Unit_Float(setCellHeightMethodBind, this.rawMemory, cellHeight)
+    open fun setCellHeight(cellHeight: Double) {
+        _icall_Unit_Double(setCellHeightMethodBind, this.rawMemory, cellHeight)
     }
 
 
     private val getCellHeightMethodBind: CPointer<godot_method_bind> by lazy { getMB("NavigationMesh", "get_cell_height") }
-    open fun getCellHeight(): Float {
-        return _icall_Float(getCellHeightMethodBind, this.rawMemory)
+    open fun getCellHeight(): Double {
+        return _icall_Double(getCellHeightMethodBind, this.rawMemory)
     }
 
 
     private val setAgentHeightMethodBind: CPointer<godot_method_bind> by lazy { getMB("NavigationMesh", "set_agent_height") }
-    open fun setAgentHeight(agentHeight: Float) {
-        _icall_Unit_Float(setAgentHeightMethodBind, this.rawMemory, agentHeight)
+    open fun setAgentHeight(agentHeight: Double) {
+        _icall_Unit_Double(setAgentHeightMethodBind, this.rawMemory, agentHeight)
     }
 
 
     private val getAgentHeightMethodBind: CPointer<godot_method_bind> by lazy { getMB("NavigationMesh", "get_agent_height") }
-    open fun getAgentHeight(): Float {
-        return _icall_Float(getAgentHeightMethodBind, this.rawMemory)
+    open fun getAgentHeight(): Double {
+        return _icall_Double(getAgentHeightMethodBind, this.rawMemory)
     }
 
 
     private val setAgentRadiusMethodBind: CPointer<godot_method_bind> by lazy { getMB("NavigationMesh", "set_agent_radius") }
-    open fun setAgentRadius(agentRadius: Float) {
-        _icall_Unit_Float(setAgentRadiusMethodBind, this.rawMemory, agentRadius)
+    open fun setAgentRadius(agentRadius: Double) {
+        _icall_Unit_Double(setAgentRadiusMethodBind, this.rawMemory, agentRadius)
     }
 
 
     private val getAgentRadiusMethodBind: CPointer<godot_method_bind> by lazy { getMB("NavigationMesh", "get_agent_radius") }
-    open fun getAgentRadius(): Float {
-        return _icall_Float(getAgentRadiusMethodBind, this.rawMemory)
+    open fun getAgentRadius(): Double {
+        return _icall_Double(getAgentRadiusMethodBind, this.rawMemory)
     }
 
 
     private val setAgentMaxClimbMethodBind: CPointer<godot_method_bind> by lazy { getMB("NavigationMesh", "set_agent_max_climb") }
-    open fun setAgentMaxClimb(agentMaxClimb: Float) {
-        _icall_Unit_Float(setAgentMaxClimbMethodBind, this.rawMemory, agentMaxClimb)
+    open fun setAgentMaxClimb(agentMaxClimb: Double) {
+        _icall_Unit_Double(setAgentMaxClimbMethodBind, this.rawMemory, agentMaxClimb)
     }
 
 
     private val getAgentMaxClimbMethodBind: CPointer<godot_method_bind> by lazy { getMB("NavigationMesh", "get_agent_max_climb") }
-    open fun getAgentMaxClimb(): Float {
-        return _icall_Float(getAgentMaxClimbMethodBind, this.rawMemory)
+    open fun getAgentMaxClimb(): Double {
+        return _icall_Double(getAgentMaxClimbMethodBind, this.rawMemory)
     }
 
 
     private val setAgentMaxSlopeMethodBind: CPointer<godot_method_bind> by lazy { getMB("NavigationMesh", "set_agent_max_slope") }
-    open fun setAgentMaxSlope(agentMaxSlope: Float) {
-        _icall_Unit_Float(setAgentMaxSlopeMethodBind, this.rawMemory, agentMaxSlope)
+    open fun setAgentMaxSlope(agentMaxSlope: Double) {
+        _icall_Unit_Double(setAgentMaxSlopeMethodBind, this.rawMemory, agentMaxSlope)
     }
 
 
     private val getAgentMaxSlopeMethodBind: CPointer<godot_method_bind> by lazy { getMB("NavigationMesh", "get_agent_max_slope") }
-    open fun getAgentMaxSlope(): Float {
-        return _icall_Float(getAgentMaxSlopeMethodBind, this.rawMemory)
+    open fun getAgentMaxSlope(): Double {
+        return _icall_Double(getAgentMaxSlopeMethodBind, this.rawMemory)
     }
 
 
     private val setRegionMinSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("NavigationMesh", "set_region_min_size") }
-    open fun setRegionMinSize(regionMinSize: Float) {
-        _icall_Unit_Float(setRegionMinSizeMethodBind, this.rawMemory, regionMinSize)
+    open fun setRegionMinSize(regionMinSize: Double) {
+        _icall_Unit_Double(setRegionMinSizeMethodBind, this.rawMemory, regionMinSize)
     }
 
 
     private val getRegionMinSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("NavigationMesh", "get_region_min_size") }
-    open fun getRegionMinSize(): Float {
-        return _icall_Float(getRegionMinSizeMethodBind, this.rawMemory)
+    open fun getRegionMinSize(): Double {
+        return _icall_Double(getRegionMinSizeMethodBind, this.rawMemory)
     }
 
 
     private val setRegionMergeSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("NavigationMesh", "set_region_merge_size") }
-    open fun setRegionMergeSize(regionMergeSize: Float) {
-        _icall_Unit_Float(setRegionMergeSizeMethodBind, this.rawMemory, regionMergeSize)
+    open fun setRegionMergeSize(regionMergeSize: Double) {
+        _icall_Unit_Double(setRegionMergeSizeMethodBind, this.rawMemory, regionMergeSize)
     }
 
 
     private val getRegionMergeSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("NavigationMesh", "get_region_merge_size") }
-    open fun getRegionMergeSize(): Float {
-        return _icall_Float(getRegionMergeSizeMethodBind, this.rawMemory)
+    open fun getRegionMergeSize(): Double {
+        return _icall_Double(getRegionMergeSizeMethodBind, this.rawMemory)
     }
 
 
     private val setEdgeMaxLengthMethodBind: CPointer<godot_method_bind> by lazy { getMB("NavigationMesh", "set_edge_max_length") }
-    open fun setEdgeMaxLength(edgeMaxLength: Float) {
-        _icall_Unit_Float(setEdgeMaxLengthMethodBind, this.rawMemory, edgeMaxLength)
+    open fun setEdgeMaxLength(edgeMaxLength: Double) {
+        _icall_Unit_Double(setEdgeMaxLengthMethodBind, this.rawMemory, edgeMaxLength)
     }
 
 
     private val getEdgeMaxLengthMethodBind: CPointer<godot_method_bind> by lazy { getMB("NavigationMesh", "get_edge_max_length") }
-    open fun getEdgeMaxLength(): Float {
-        return _icall_Float(getEdgeMaxLengthMethodBind, this.rawMemory)
+    open fun getEdgeMaxLength(): Double {
+        return _icall_Double(getEdgeMaxLengthMethodBind, this.rawMemory)
     }
 
 
     private val setEdgeMaxErrorMethodBind: CPointer<godot_method_bind> by lazy { getMB("NavigationMesh", "set_edge_max_error") }
-    open fun setEdgeMaxError(edgeMaxError: Float) {
-        _icall_Unit_Float(setEdgeMaxErrorMethodBind, this.rawMemory, edgeMaxError)
+    open fun setEdgeMaxError(edgeMaxError: Double) {
+        _icall_Unit_Double(setEdgeMaxErrorMethodBind, this.rawMemory, edgeMaxError)
     }
 
 
     private val getEdgeMaxErrorMethodBind: CPointer<godot_method_bind> by lazy { getMB("NavigationMesh", "get_edge_max_error") }
-    open fun getEdgeMaxError(): Float {
-        return _icall_Float(getEdgeMaxErrorMethodBind, this.rawMemory)
+    open fun getEdgeMaxError(): Double {
+        return _icall_Double(getEdgeMaxErrorMethodBind, this.rawMemory)
     }
 
 
     private val setVertsPerPolyMethodBind: CPointer<godot_method_bind> by lazy { getMB("NavigationMesh", "set_verts_per_poly") }
-    open fun setVertsPerPoly(vertsPerPoly: Float) {
-        _icall_Unit_Float(setVertsPerPolyMethodBind, this.rawMemory, vertsPerPoly)
+    open fun setVertsPerPoly(vertsPerPoly: Double) {
+        _icall_Unit_Double(setVertsPerPolyMethodBind, this.rawMemory, vertsPerPoly)
     }
 
 
     private val getVertsPerPolyMethodBind: CPointer<godot_method_bind> by lazy { getMB("NavigationMesh", "get_verts_per_poly") }
-    open fun getVertsPerPoly(): Float {
-        return _icall_Float(getVertsPerPolyMethodBind, this.rawMemory)
+    open fun getVertsPerPoly(): Double {
+        return _icall_Double(getVertsPerPolyMethodBind, this.rawMemory)
     }
 
 
     private val setDetailSampleDistanceMethodBind: CPointer<godot_method_bind> by lazy { getMB("NavigationMesh", "set_detail_sample_distance") }
-    open fun setDetailSampleDistance(detailSampleDist: Float) {
-        _icall_Unit_Float(setDetailSampleDistanceMethodBind, this.rawMemory, detailSampleDist)
+    open fun setDetailSampleDistance(detailSampleDist: Double) {
+        _icall_Unit_Double(setDetailSampleDistanceMethodBind, this.rawMemory, detailSampleDist)
     }
 
 
     private val getDetailSampleDistanceMethodBind: CPointer<godot_method_bind> by lazy { getMB("NavigationMesh", "get_detail_sample_distance") }
-    open fun getDetailSampleDistance(): Float {
-        return _icall_Float(getDetailSampleDistanceMethodBind, this.rawMemory)
+    open fun getDetailSampleDistance(): Double {
+        return _icall_Double(getDetailSampleDistanceMethodBind, this.rawMemory)
     }
 
 
     private val setDetailSampleMaxErrorMethodBind: CPointer<godot_method_bind> by lazy { getMB("NavigationMesh", "set_detail_sample_max_error") }
-    open fun setDetailSampleMaxError(detailSampleMaxError: Float) {
-        _icall_Unit_Float(setDetailSampleMaxErrorMethodBind, this.rawMemory, detailSampleMaxError)
+    open fun setDetailSampleMaxError(detailSampleMaxError: Double) {
+        _icall_Unit_Double(setDetailSampleMaxErrorMethodBind, this.rawMemory, detailSampleMaxError)
     }
 
 
     private val getDetailSampleMaxErrorMethodBind: CPointer<godot_method_bind> by lazy { getMB("NavigationMesh", "get_detail_sample_max_error") }
-    open fun getDetailSampleMaxError(): Float {
-        return _icall_Float(getDetailSampleMaxErrorMethodBind, this.rawMemory)
+    open fun getDetailSampleMaxError(): Double {
+        return _icall_Double(getDetailSampleMaxErrorMethodBind, this.rawMemory)
     }
 
 
@@ -361,14 +361,14 @@ open class NavigationMesh : Resource {
 
 
     private val getPolygonCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("NavigationMesh", "get_polygon_count") }
-    open fun getPolygonCount(): Int {
-        return _icall_Int(getPolygonCountMethodBind, this.rawMemory)
+    open fun getPolygonCount(): Long {
+        return _icall_Long(getPolygonCountMethodBind, this.rawMemory)
     }
 
 
     private val getPolygonMethodBind: CPointer<godot_method_bind> by lazy { getMB("NavigationMesh", "get_polygon") }
-    open fun getPolygon(idx: Int): PoolIntArray {
-        return _icall_PoolIntArray_Int(getPolygonMethodBind, this.rawMemory, idx)
+    open fun getPolygon(idx: Long): PoolIntArray {
+        return _icall_PoolIntArray_Long(getPolygonMethodBind, this.rawMemory, idx)
     }
 
 

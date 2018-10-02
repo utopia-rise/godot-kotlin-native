@@ -44,74 +44,74 @@ open class DampedSpringJoint2D : Joint2D {
 
 
     // Properties
-    open var length: Float
-        get() = _icall_Float(getLengthMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setLengthMethodBind, this.rawMemory, value)
+    open var length: Double
+        get() = _icall_Double(getLengthMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setLengthMethodBind, this.rawMemory, value)
 
 
-    open var restLength: Float
-        get() = _icall_Float(getRestLengthMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setRestLengthMethodBind, this.rawMemory, value)
+    open var restLength: Double
+        get() = _icall_Double(getRestLengthMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setRestLengthMethodBind, this.rawMemory, value)
 
 
-    open var stiffness: Float
-        get() = _icall_Float(getStiffnessMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setStiffnessMethodBind, this.rawMemory, value)
+    open var stiffness: Double
+        get() = _icall_Double(getStiffnessMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setStiffnessMethodBind, this.rawMemory, value)
 
 
-    open var damping: Float
-        get() = _icall_Float(getDampingMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setDampingMethodBind, this.rawMemory, value)
+    open var damping: Double
+        get() = _icall_Double(getDampingMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setDampingMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setLengthMethodBind: CPointer<godot_method_bind> by lazy { getMB("DampedSpringJoint2D", "set_length") }
-    open fun setLength(length: Float) {
-        _icall_Unit_Float(setLengthMethodBind, this.rawMemory, length)
+    open fun setLength(length: Double) {
+        _icall_Unit_Double(setLengthMethodBind, this.rawMemory, length)
     }
 
 
     private val getLengthMethodBind: CPointer<godot_method_bind> by lazy { getMB("DampedSpringJoint2D", "get_length") }
-    open fun getLength(): Float {
-        return _icall_Float(getLengthMethodBind, this.rawMemory)
+    open fun getLength(): Double {
+        return _icall_Double(getLengthMethodBind, this.rawMemory)
     }
 
 
     private val setRestLengthMethodBind: CPointer<godot_method_bind> by lazy { getMB("DampedSpringJoint2D", "set_rest_length") }
-    open fun setRestLength(restLength: Float) {
-        _icall_Unit_Float(setRestLengthMethodBind, this.rawMemory, restLength)
+    open fun setRestLength(restLength: Double) {
+        _icall_Unit_Double(setRestLengthMethodBind, this.rawMemory, restLength)
     }
 
 
     private val getRestLengthMethodBind: CPointer<godot_method_bind> by lazy { getMB("DampedSpringJoint2D", "get_rest_length") }
-    open fun getRestLength(): Float {
-        return _icall_Float(getRestLengthMethodBind, this.rawMemory)
+    open fun getRestLength(): Double {
+        return _icall_Double(getRestLengthMethodBind, this.rawMemory)
     }
 
 
     private val setStiffnessMethodBind: CPointer<godot_method_bind> by lazy { getMB("DampedSpringJoint2D", "set_stiffness") }
-    open fun setStiffness(stiffness: Float) {
-        _icall_Unit_Float(setStiffnessMethodBind, this.rawMemory, stiffness)
+    open fun setStiffness(stiffness: Double) {
+        _icall_Unit_Double(setStiffnessMethodBind, this.rawMemory, stiffness)
     }
 
 
     private val getStiffnessMethodBind: CPointer<godot_method_bind> by lazy { getMB("DampedSpringJoint2D", "get_stiffness") }
-    open fun getStiffness(): Float {
-        return _icall_Float(getStiffnessMethodBind, this.rawMemory)
+    open fun getStiffness(): Double {
+        return _icall_Double(getStiffnessMethodBind, this.rawMemory)
     }
 
 
     private val setDampingMethodBind: CPointer<godot_method_bind> by lazy { getMB("DampedSpringJoint2D", "set_damping") }
-    open fun setDamping(damping: Float) {
-        _icall_Unit_Float(setDampingMethodBind, this.rawMemory, damping)
+    open fun setDamping(damping: Double) {
+        _icall_Unit_Double(setDampingMethodBind, this.rawMemory, damping)
     }
 
 
     private val getDampingMethodBind: CPointer<godot_method_bind> by lazy { getMB("DampedSpringJoint2D", "get_damping") }
-    open fun getDamping(): Float {
-        return _icall_Float(getDampingMethodBind, this.rawMemory)
+    open fun getDamping(): Double {
+        return _icall_Double(getDampingMethodBind, this.rawMemory)
     }
 
 

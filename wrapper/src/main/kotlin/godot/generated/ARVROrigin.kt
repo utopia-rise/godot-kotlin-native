@@ -42,23 +42,23 @@ open class ARVROrigin : Spatial {
 
 
     // Properties
-    open var worldScale: Float
-        get() = _icall_Float(getWorldScaleMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setWorldScaleMethodBind, this.rawMemory, value)
+    open var worldScale: Double
+        get() = _icall_Double(getWorldScaleMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setWorldScaleMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setWorldScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("ARVROrigin", "set_world_scale") }
-    open fun setWorldScale(worldScale: Float) {
-        _icall_Unit_Float(setWorldScaleMethodBind, this.rawMemory, worldScale)
+    open fun setWorldScale(worldScale: Double) {
+        _icall_Unit_Double(setWorldScaleMethodBind, this.rawMemory, worldScale)
     }
 
 
     private val getWorldScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("ARVROrigin", "get_world_scale") }
-    open fun getWorldScale(): Float {
-        return _icall_Float(getWorldScaleMethodBind, this.rawMemory)
+    open fun getWorldScale(): Double {
+        return _icall_Double(getWorldScaleMethodBind, this.rawMemory)
     }
 
 

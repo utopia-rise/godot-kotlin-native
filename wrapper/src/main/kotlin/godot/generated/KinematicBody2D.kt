@@ -45,9 +45,9 @@ open class KinematicBody2D : PhysicsBody2D {
 
 
     // Properties
-    open var collision_safeMargin: Float
-        get() = _icall_Float(getSafeMarginMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setSafeMarginMethodBind, this.rawMemory, value)
+    open var collision_safeMargin: Double
+        get() = _icall_Double(getSafeMarginMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setSafeMarginMethodBind, this.rawMemory, value)
 
 
     open var motion_syncToPhysics: Boolean
@@ -65,14 +65,14 @@ open class KinematicBody2D : PhysicsBody2D {
 
 
     private val moveAndSlideMethodBind: CPointer<godot_method_bind> by lazy { getMB("KinematicBody2D", "move_and_slide") }
-    open fun moveAndSlide(linearVelocity: Vector2, floorNormal: Vector2 = Vector2(0, 0), infiniteInertia: Boolean = true, slopeStopMinVelocity: Float = 5f, maxBounces: Int = 4, floorMaxAngle: Float = 0.785398f): Vector2 {
-        return _icall_Vector2_Vector2_Vector2_Boolean_Float_Int_Float(moveAndSlideMethodBind, this.rawMemory, linearVelocity, floorNormal, infiniteInertia, slopeStopMinVelocity, maxBounces, floorMaxAngle)
+    open fun moveAndSlide(linearVelocity: Vector2, floorNormal: Vector2 = Vector2(0, 0), infiniteInertia: Boolean = true, slopeStopMinVelocity: Double = 5.0, maxBounces: Long = 4, floorMaxAngle: Double = 0.785398): Vector2 {
+        return _icall_Vector2_Vector2_Vector2_Boolean_Double_Long_Double(moveAndSlideMethodBind, this.rawMemory, linearVelocity, floorNormal, infiniteInertia, slopeStopMinVelocity, maxBounces, floorMaxAngle)
     }
 
 
     private val moveAndSlideWithSnapMethodBind: CPointer<godot_method_bind> by lazy { getMB("KinematicBody2D", "move_and_slide_with_snap") }
-    open fun moveAndSlideWithSnap(linearVelocity: Vector2, snap: Vector2, floorNormal: Vector2 = Vector2(0, 0), infiniteInertia: Boolean = true, slopeStopMinVelocity: Float = 5f, maxBounces: Int = 4, floorMaxAngle: Float = 0.785398f): Vector2 {
-        return _icall_Vector2_Vector2_Vector2_Vector2_Boolean_Float_Int_Float(moveAndSlideWithSnapMethodBind, this.rawMemory, linearVelocity, snap, floorNormal, infiniteInertia, slopeStopMinVelocity, maxBounces, floorMaxAngle)
+    open fun moveAndSlideWithSnap(linearVelocity: Vector2, snap: Vector2, floorNormal: Vector2 = Vector2(0, 0), infiniteInertia: Boolean = true, slopeStopMinVelocity: Double = 5.0, maxBounces: Long = 4, floorMaxAngle: Double = 0.785398): Vector2 {
+        return _icall_Vector2_Vector2_Vector2_Vector2_Boolean_Double_Long_Double(moveAndSlideWithSnapMethodBind, this.rawMemory, linearVelocity, snap, floorNormal, infiniteInertia, slopeStopMinVelocity, maxBounces, floorMaxAngle)
     }
 
 
@@ -107,26 +107,26 @@ open class KinematicBody2D : PhysicsBody2D {
 
 
     private val setSafeMarginMethodBind: CPointer<godot_method_bind> by lazy { getMB("KinematicBody2D", "set_safe_margin") }
-    open fun setSafeMargin(pixels: Float) {
-        _icall_Unit_Float(setSafeMarginMethodBind, this.rawMemory, pixels)
+    open fun setSafeMargin(pixels: Double) {
+        _icall_Unit_Double(setSafeMarginMethodBind, this.rawMemory, pixels)
     }
 
 
     private val getSafeMarginMethodBind: CPointer<godot_method_bind> by lazy { getMB("KinematicBody2D", "get_safe_margin") }
-    open fun getSafeMargin(): Float {
-        return _icall_Float(getSafeMarginMethodBind, this.rawMemory)
+    open fun getSafeMargin(): Double {
+        return _icall_Double(getSafeMarginMethodBind, this.rawMemory)
     }
 
 
     private val getSlideCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("KinematicBody2D", "get_slide_count") }
-    open fun getSlideCount(): Int {
-        return _icall_Int(getSlideCountMethodBind, this.rawMemory)
+    open fun getSlideCount(): Long {
+        return _icall_Long(getSlideCountMethodBind, this.rawMemory)
     }
 
 
     private val getSlideCollisionMethodBind: CPointer<godot_method_bind> by lazy { getMB("KinematicBody2D", "get_slide_collision") }
-    open fun getSlideCollision(slideIdx: Int): KinematicCollision2D {
-        return _icall_KinematicCollision2D_Int(getSlideCollisionMethodBind, this.rawMemory, slideIdx)
+    open fun getSlideCollision(slideIdx: Long): KinematicCollision2D {
+        return _icall_KinematicCollision2D_Long(getSlideCollisionMethodBind, this.rawMemory, slideIdx)
     }
 
 

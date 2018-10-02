@@ -63,8 +63,8 @@ open class RegExMatch : Reference {
 
 
     private val getGroupCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("RegExMatch", "get_group_count") }
-    open fun getGroupCount(): Int {
-        return _icall_Int(getGroupCountMethodBind, this.rawMemory)
+    open fun getGroupCount(): Long {
+        return _icall_Long(getGroupCountMethodBind, this.rawMemory)
     }
 
 
@@ -87,14 +87,14 @@ open class RegExMatch : Reference {
 
 
     private val getStartMethodBind: CPointer<godot_method_bind> by lazy { getMB("RegExMatch", "get_start") }
-    open fun getStart(name: Variant = Variant(0)): Int {
-        return _icall_Int_Variant(getStartMethodBind, this.rawMemory, name)
+    open fun getStart(name: Variant = Variant(0)): Long {
+        return _icall_Long_Variant(getStartMethodBind, this.rawMemory, name)
     }
 
 
     private val getEndMethodBind: CPointer<godot_method_bind> by lazy { getMB("RegExMatch", "get_end") }
-    open fun getEnd(name: Variant = Variant(0)): Int {
-        return _icall_Int_Variant(getEndMethodBind, this.rawMemory, name)
+    open fun getEnd(name: Variant = Variant(0)): Long {
+        return _icall_Long_Variant(getEndMethodBind, this.rawMemory, name)
     }
 
 

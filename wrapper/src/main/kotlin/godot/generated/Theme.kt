@@ -177,14 +177,14 @@ open class Theme : Resource {
 
 
     private val setConstantMethodBind: CPointer<godot_method_bind> by lazy { getMB("Theme", "set_constant") }
-    open fun setConstant(name: String, type: String, constant: Int) {
-        _icall_Unit_String_String_Int(setConstantMethodBind, this.rawMemory, name, type, constant)
+    open fun setConstant(name: String, type: String, constant: Long) {
+        _icall_Unit_String_String_Long(setConstantMethodBind, this.rawMemory, name, type, constant)
     }
 
 
     private val getConstantMethodBind: CPointer<godot_method_bind> by lazy { getMB("Theme", "get_constant") }
-    open fun getConstant(name: String, type: String): Int {
-        return _icall_Int_String_String(getConstantMethodBind, this.rawMemory, name, type)
+    open fun getConstant(name: String, type: String): Long {
+        return _icall_Long_String_String(getConstantMethodBind, this.rawMemory, name, type)
     }
 
 

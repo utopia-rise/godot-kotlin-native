@@ -47,96 +47,96 @@ open class OptionButton : Button {
 
 
     // Properties
-    open val selected: Int
-        get() = _icall_Int(getSelectedMethodBind, this.rawMemory)
+    open val selected: Long
+        get() = _icall_Long(getSelectedMethodBind, this.rawMemory)
 
 
 
 
     // Methods
-    open fun _selected(arg0: Int) {
+    open fun _selected(arg0: Long) {
     }
 
 
-    open fun _focused(arg0: Int) {
+    open fun _focused(arg0: Long) {
     }
 
 
     private val addItemMethodBind: CPointer<godot_method_bind> by lazy { getMB("OptionButton", "add_item") }
-    open fun addItem(label: String, id: Int = -1) {
-        _icall_Unit_String_Int(addItemMethodBind, this.rawMemory, label, id)
+    open fun addItem(label: String, id: Long = -1) {
+        _icall_Unit_String_Long(addItemMethodBind, this.rawMemory, label, id)
     }
 
 
     private val addIconItemMethodBind: CPointer<godot_method_bind> by lazy { getMB("OptionButton", "add_icon_item") }
-    open fun addIconItem(texture: Texture, label: String, id: Int = -1) {
-        _icall_Unit_Object_String_Int(addIconItemMethodBind, this.rawMemory, texture, label, id)
+    open fun addIconItem(texture: Texture, label: String, id: Long = -1) {
+        _icall_Unit_Object_String_Long(addIconItemMethodBind, this.rawMemory, texture, label, id)
     }
 
 
     private val setItemTextMethodBind: CPointer<godot_method_bind> by lazy { getMB("OptionButton", "set_item_text") }
-    open fun setItemText(idx: Int, text: String) {
-        _icall_Unit_Int_String(setItemTextMethodBind, this.rawMemory, idx, text)
+    open fun setItemText(idx: Long, text: String) {
+        _icall_Unit_Long_String(setItemTextMethodBind, this.rawMemory, idx, text)
     }
 
 
     private val setItemIconMethodBind: CPointer<godot_method_bind> by lazy { getMB("OptionButton", "set_item_icon") }
-    open fun setItemIcon(idx: Int, texture: Texture) {
-        _icall_Unit_Int_Object(setItemIconMethodBind, this.rawMemory, idx, texture)
+    open fun setItemIcon(idx: Long, texture: Texture) {
+        _icall_Unit_Long_Object(setItemIconMethodBind, this.rawMemory, idx, texture)
     }
 
 
     private val setItemDisabledMethodBind: CPointer<godot_method_bind> by lazy { getMB("OptionButton", "set_item_disabled") }
-    open fun setItemDisabled(idx: Int, disabled: Boolean) {
-        _icall_Unit_Int_Boolean(setItemDisabledMethodBind, this.rawMemory, idx, disabled)
+    open fun setItemDisabled(idx: Long, disabled: Boolean) {
+        _icall_Unit_Long_Boolean(setItemDisabledMethodBind, this.rawMemory, idx, disabled)
     }
 
 
     private val setItemIdMethodBind: CPointer<godot_method_bind> by lazy { getMB("OptionButton", "set_item_id") }
-    open fun setItemId(idx: Int, id: Int) {
-        _icall_Unit_Int_Int(setItemIdMethodBind, this.rawMemory, idx, id)
+    open fun setItemId(idx: Long, id: Long) {
+        _icall_Unit_Long_Long(setItemIdMethodBind, this.rawMemory, idx, id)
     }
 
 
     private val setItemMetadataMethodBind: CPointer<godot_method_bind> by lazy { getMB("OptionButton", "set_item_metadata") }
-    open fun setItemMetadata(idx: Int, metadata: Variant) {
-        _icall_Unit_Int_Variant(setItemMetadataMethodBind, this.rawMemory, idx, metadata)
+    open fun setItemMetadata(idx: Long, metadata: Variant) {
+        _icall_Unit_Long_Variant(setItemMetadataMethodBind, this.rawMemory, idx, metadata)
     }
 
 
     private val getItemTextMethodBind: CPointer<godot_method_bind> by lazy { getMB("OptionButton", "get_item_text") }
-    open fun getItemText(idx: Int): String {
-        return _icall_String_Int(getItemTextMethodBind, this.rawMemory, idx)
+    open fun getItemText(idx: Long): String {
+        return _icall_String_Long(getItemTextMethodBind, this.rawMemory, idx)
     }
 
 
     private val getItemIconMethodBind: CPointer<godot_method_bind> by lazy { getMB("OptionButton", "get_item_icon") }
-    open fun getItemIcon(idx: Int): Texture {
-        return _icall_Texture_Int(getItemIconMethodBind, this.rawMemory, idx)
+    open fun getItemIcon(idx: Long): Texture {
+        return _icall_Texture_Long(getItemIconMethodBind, this.rawMemory, idx)
     }
 
 
     private val getItemIdMethodBind: CPointer<godot_method_bind> by lazy { getMB("OptionButton", "get_item_id") }
-    open fun getItemId(idx: Int): Int {
-        return _icall_Int_Int(getItemIdMethodBind, this.rawMemory, idx)
+    open fun getItemId(idx: Long): Long {
+        return _icall_Long_Long(getItemIdMethodBind, this.rawMemory, idx)
     }
 
 
     private val getItemMetadataMethodBind: CPointer<godot_method_bind> by lazy { getMB("OptionButton", "get_item_metadata") }
-    open fun getItemMetadata(idx: Int): Variant {
-        return _icall_Variant_Int(getItemMetadataMethodBind, this.rawMemory, idx)
+    open fun getItemMetadata(idx: Long): Variant {
+        return _icall_Variant_Long(getItemMetadataMethodBind, this.rawMemory, idx)
     }
 
 
     private val isItemDisabledMethodBind: CPointer<godot_method_bind> by lazy { getMB("OptionButton", "is_item_disabled") }
-    open fun isItemDisabled(idx: Int): Boolean {
-        return _icall_Boolean_Int(isItemDisabledMethodBind, this.rawMemory, idx)
+    open fun isItemDisabled(idx: Long): Boolean {
+        return _icall_Boolean_Long(isItemDisabledMethodBind, this.rawMemory, idx)
     }
 
 
     private val getItemCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("OptionButton", "get_item_count") }
-    open fun getItemCount(): Int {
-        return _icall_Int(getItemCountMethodBind, this.rawMemory)
+    open fun getItemCount(): Long {
+        return _icall_Long(getItemCountMethodBind, this.rawMemory)
     }
 
 
@@ -153,20 +153,20 @@ open class OptionButton : Button {
 
 
     private val selectMethodBind: CPointer<godot_method_bind> by lazy { getMB("OptionButton", "select") }
-    open fun select(idx: Int) {
-        _icall_Unit_Int(selectMethodBind, this.rawMemory, idx)
+    open fun select(idx: Long) {
+        _icall_Unit_Long(selectMethodBind, this.rawMemory, idx)
     }
 
 
     private val getSelectedMethodBind: CPointer<godot_method_bind> by lazy { getMB("OptionButton", "get_selected") }
-    open fun getSelected(): Int {
-        return _icall_Int(getSelectedMethodBind, this.rawMemory)
+    open fun getSelected(): Long {
+        return _icall_Long(getSelectedMethodBind, this.rawMemory)
     }
 
 
     private val getSelectedIdMethodBind: CPointer<godot_method_bind> by lazy { getMB("OptionButton", "get_selected_id") }
-    open fun getSelectedId(): Int {
-        return _icall_Int(getSelectedIdMethodBind, this.rawMemory)
+    open fun getSelectedId(): Long {
+        return _icall_Long(getSelectedIdMethodBind, this.rawMemory)
     }
 
 
@@ -177,12 +177,12 @@ open class OptionButton : Button {
 
 
     private val removeItemMethodBind: CPointer<godot_method_bind> by lazy { getMB("OptionButton", "remove_item") }
-    open fun removeItem(idx: Int) {
-        _icall_Unit_Int(removeItemMethodBind, this.rawMemory, idx)
+    open fun removeItem(idx: Long) {
+        _icall_Unit_Long(removeItemMethodBind, this.rawMemory, idx)
     }
 
 
-    open fun _select_int(arg0: Int) {
+    open fun _select_int(arg0: Long) {
     }
 
 

@@ -19,13 +19,13 @@ open class AnimationPlayer : Node {
 
     // Enums 
 
-    enum class AnimationProcessMode(val id: Int) {
+    enum class AnimationProcessMode(val id: Long) {
         ANIMATION_PROCESS_PHYSICS(0),
         ANIMATION_PROCESS_IDLE(1),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -48,8 +48,8 @@ open class AnimationPlayer : Node {
 
 
         // Constants
-        const val ANIMATION_PROCESS_PHYSICS: Int = 0
-        const val ANIMATION_PROCESS_IDLE: Int = 1
+        const val ANIMATION_PROCESS_PHYSICS: Long = 0
+        const val ANIMATION_PROCESS_IDLE: Long = 1
 
 
     }
@@ -76,22 +76,22 @@ open class AnimationPlayer : Node {
         set(value) = _icall_Unit_String(setAutoplayMethodBind, this.rawMemory, value)
 
 
-    open val currentAnimationLength: Float
-        get() = _icall_Float(getCurrentAnimationLengthMethodBind, this.rawMemory)
+    open val currentAnimationLength: Double
+        get() = _icall_Double(getCurrentAnimationLengthMethodBind, this.rawMemory)
 
 
-    open val currentAnimationPosition: Float
-        get() = _icall_Float(getCurrentAnimationPositionMethodBind, this.rawMemory)
+    open val currentAnimationPosition: Double
+        get() = _icall_Double(getCurrentAnimationPositionMethodBind, this.rawMemory)
 
 
-    open var playbackProcessMode: Int
-        get() = _icall_Int(getAnimationProcessModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setAnimationProcessModeMethodBind, this.rawMemory, value)
+    open var playbackProcessMode: Long
+        get() = _icall_Long(getAnimationProcessModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setAnimationProcessModeMethodBind, this.rawMemory, value)
 
 
-    open var playbackDefaultBlendTime: Float
-        get() = _icall_Float(getDefaultBlendTimeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setDefaultBlendTimeMethodBind, this.rawMemory, value)
+    open var playbackDefaultBlendTime: Double
+        get() = _icall_Double(getDefaultBlendTimeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setDefaultBlendTimeMethodBind, this.rawMemory, value)
 
 
     open var playbackActive: Boolean
@@ -99,9 +99,9 @@ open class AnimationPlayer : Node {
         set(value) = _icall_Unit_Boolean(setActiveMethodBind, this.rawMemory, value)
 
 
-    open var playbackSpeed: Float
-        get() = _icall_Float(getSpeedScaleMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setSpeedScaleMethodBind, this.rawMemory, value)
+    open var playbackSpeed: Double
+        get() = _icall_Double(getSpeedScaleMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setSpeedScaleMethodBind, this.rawMemory, value)
 
 
 
@@ -117,7 +117,7 @@ open class AnimationPlayer : Node {
 
     private val addAnimationMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationPlayer", "add_animation") }
     open fun addAnimation(name: String, animation: Animation): GodotError {
-        return GodotError.fromInt(_icall_Int_String_Object(addAnimationMethodBind, this.rawMemory, name, animation))
+        return GodotError.fromInt(_icall_Long_String_Object(addAnimationMethodBind, this.rawMemory, name, animation))
     }
 
 
@@ -164,38 +164,38 @@ open class AnimationPlayer : Node {
 
 
     private val setBlendTimeMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationPlayer", "set_blend_time") }
-    open fun setBlendTime(animFrom: String, animTo: String, sec: Float) {
-        _icall_Unit_String_String_Float(setBlendTimeMethodBind, this.rawMemory, animFrom, animTo, sec)
+    open fun setBlendTime(animFrom: String, animTo: String, sec: Double) {
+        _icall_Unit_String_String_Double(setBlendTimeMethodBind, this.rawMemory, animFrom, animTo, sec)
     }
 
 
     private val getBlendTimeMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationPlayer", "get_blend_time") }
-    open fun getBlendTime(animFrom: String, animTo: String): Float {
-        return _icall_Float_String_String(getBlendTimeMethodBind, this.rawMemory, animFrom, animTo)
+    open fun getBlendTime(animFrom: String, animTo: String): Double {
+        return _icall_Double_String_String(getBlendTimeMethodBind, this.rawMemory, animFrom, animTo)
     }
 
 
     private val setDefaultBlendTimeMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationPlayer", "set_default_blend_time") }
-    open fun setDefaultBlendTime(sec: Float) {
-        _icall_Unit_Float(setDefaultBlendTimeMethodBind, this.rawMemory, sec)
+    open fun setDefaultBlendTime(sec: Double) {
+        _icall_Unit_Double(setDefaultBlendTimeMethodBind, this.rawMemory, sec)
     }
 
 
     private val getDefaultBlendTimeMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationPlayer", "get_default_blend_time") }
-    open fun getDefaultBlendTime(): Float {
-        return _icall_Float(getDefaultBlendTimeMethodBind, this.rawMemory)
+    open fun getDefaultBlendTime(): Double {
+        return _icall_Double(getDefaultBlendTimeMethodBind, this.rawMemory)
     }
 
 
     private val playMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationPlayer", "play") }
-    open fun play(name: String = "", customBlend: Float = -1f, customSpeed: Float = 1f, fromEnd: Boolean = false) {
-        _icall_Unit_String_Float_Float_Boolean(playMethodBind, this.rawMemory, name, customBlend, customSpeed, fromEnd)
+    open fun play(name: String = "", customBlend: Double = -1.0, customSpeed: Double = 1.0, fromEnd: Boolean = false) {
+        _icall_Unit_String_Double_Double_Boolean(playMethodBind, this.rawMemory, name, customBlend, customSpeed, fromEnd)
     }
 
 
     private val playBackwardsMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationPlayer", "play_backwards") }
-    open fun playBackwards(name: String = "", customBlend: Float = -1f) {
-        _icall_Unit_String_Float(playBackwardsMethodBind, this.rawMemory, name, customBlend)
+    open fun playBackwards(name: String = "", customBlend: Double = -1.0) {
+        _icall_Unit_String_Double(playBackwardsMethodBind, this.rawMemory, name, customBlend)
     }
 
 
@@ -260,20 +260,20 @@ open class AnimationPlayer : Node {
 
 
     private val setSpeedScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationPlayer", "set_speed_scale") }
-    open fun setSpeedScale(speed: Float) {
-        _icall_Unit_Float(setSpeedScaleMethodBind, this.rawMemory, speed)
+    open fun setSpeedScale(speed: Double) {
+        _icall_Unit_Double(setSpeedScaleMethodBind, this.rawMemory, speed)
     }
 
 
     private val getSpeedScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationPlayer", "get_speed_scale") }
-    open fun getSpeedScale(): Float {
-        return _icall_Float(getSpeedScaleMethodBind, this.rawMemory)
+    open fun getSpeedScale(): Double {
+        return _icall_Double(getSpeedScaleMethodBind, this.rawMemory)
     }
 
 
     private val getPlayingSpeedMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationPlayer", "get_playing_speed") }
-    open fun getPlayingSpeed(): Float {
-        return _icall_Float(getPlayingSpeedMethodBind, this.rawMemory)
+    open fun getPlayingSpeed(): Double {
+        return _icall_Double(getPlayingSpeedMethodBind, this.rawMemory)
     }
 
 
@@ -314,38 +314,38 @@ open class AnimationPlayer : Node {
 
 
     private val setAnimationProcessModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationPlayer", "set_animation_process_mode") }
-    open fun setAnimationProcessMode(mode: Int) {
-        _icall_Unit_Int(setAnimationProcessModeMethodBind, this.rawMemory, mode)
+    open fun setAnimationProcessMode(mode: Long) {
+        _icall_Unit_Long(setAnimationProcessModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getAnimationProcessModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationPlayer", "get_animation_process_mode") }
     open fun getAnimationProcessMode(): AnimationPlayer.AnimationProcessMode {
-        return AnimationPlayer.AnimationProcessMode.fromInt(_icall_Int(getAnimationProcessModeMethodBind, this.rawMemory))
+        return AnimationPlayer.AnimationProcessMode.fromInt(_icall_Long(getAnimationProcessModeMethodBind, this.rawMemory))
     }
 
 
     private val getCurrentAnimationPositionMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationPlayer", "get_current_animation_position") }
-    open fun getCurrentAnimationPosition(): Float {
-        return _icall_Float(getCurrentAnimationPositionMethodBind, this.rawMemory)
+    open fun getCurrentAnimationPosition(): Double {
+        return _icall_Double(getCurrentAnimationPositionMethodBind, this.rawMemory)
     }
 
 
     private val getCurrentAnimationLengthMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationPlayer", "get_current_animation_length") }
-    open fun getCurrentAnimationLength(): Float {
-        return _icall_Float(getCurrentAnimationLengthMethodBind, this.rawMemory)
+    open fun getCurrentAnimationLength(): Double {
+        return _icall_Double(getCurrentAnimationLengthMethodBind, this.rawMemory)
     }
 
 
     private val seekMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationPlayer", "seek") }
-    open fun seek(seconds: Float, update: Boolean = false) {
-        _icall_Unit_Float_Boolean(seekMethodBind, this.rawMemory, seconds, update)
+    open fun seek(seconds: Double, update: Boolean = false) {
+        _icall_Unit_Double_Boolean(seekMethodBind, this.rawMemory, seconds, update)
     }
 
 
     private val advanceMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationPlayer", "advance") }
-    open fun advance(delta: Float) {
-        _icall_Unit_Float(advanceMethodBind, this.rawMemory, delta)
+    open fun advance(delta: Double) {
+        _icall_Unit_Double(advanceMethodBind, this.rawMemory, delta)
     }
 
 

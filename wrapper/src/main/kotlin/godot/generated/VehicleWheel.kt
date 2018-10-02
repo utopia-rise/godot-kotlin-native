@@ -52,135 +52,135 @@ open class VehicleWheel : Spatial {
         set(value) = _icall_Unit_Boolean(setUseAsSteeringMethodBind, this.rawMemory, value)
 
 
-    open var wheelRollInfluence: Float
-        get() = _icall_Float(getRollInfluenceMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setRollInfluenceMethodBind, this.rawMemory, value)
+    open var wheelRollInfluence: Double
+        get() = _icall_Double(getRollInfluenceMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setRollInfluenceMethodBind, this.rawMemory, value)
 
 
-    open var wheelRadius: Float
-        get() = _icall_Float(getRadiusMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setRadiusMethodBind, this.rawMemory, value)
+    open var wheelRadius: Double
+        get() = _icall_Double(getRadiusMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setRadiusMethodBind, this.rawMemory, value)
 
 
-    open var wheelRestLength: Float
-        get() = _icall_Float(getSuspensionRestLengthMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setSuspensionRestLengthMethodBind, this.rawMemory, value)
+    open var wheelRestLength: Double
+        get() = _icall_Double(getSuspensionRestLengthMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setSuspensionRestLengthMethodBind, this.rawMemory, value)
 
 
-    open var wheelFrictionSlip: Float
-        get() = _icall_Float(getFrictionSlipMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setFrictionSlipMethodBind, this.rawMemory, value)
+    open var wheelFrictionSlip: Double
+        get() = _icall_Double(getFrictionSlipMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setFrictionSlipMethodBind, this.rawMemory, value)
 
 
-    open var suspensionTravel: Float
-        get() = _icall_Float(getSuspensionTravelMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setSuspensionTravelMethodBind, this.rawMemory, value)
+    open var suspensionTravel: Double
+        get() = _icall_Double(getSuspensionTravelMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setSuspensionTravelMethodBind, this.rawMemory, value)
 
 
-    open var suspensionStiffness: Float
-        get() = _icall_Float(getSuspensionStiffnessMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setSuspensionStiffnessMethodBind, this.rawMemory, value)
+    open var suspensionStiffness: Double
+        get() = _icall_Double(getSuspensionStiffnessMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setSuspensionStiffnessMethodBind, this.rawMemory, value)
 
 
-    open var suspensionMaxForce: Float
-        get() = _icall_Float(getSuspensionMaxForceMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setSuspensionMaxForceMethodBind, this.rawMemory, value)
+    open var suspensionMaxForce: Double
+        get() = _icall_Double(getSuspensionMaxForceMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setSuspensionMaxForceMethodBind, this.rawMemory, value)
 
 
-    open var dampingCompression: Float
-        get() = _icall_Float(getDampingCompressionMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setDampingCompressionMethodBind, this.rawMemory, value)
+    open var dampingCompression: Double
+        get() = _icall_Double(getDampingCompressionMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setDampingCompressionMethodBind, this.rawMemory, value)
 
 
-    open var dampingRelaxation: Float
-        get() = _icall_Float(getDampingRelaxationMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setDampingRelaxationMethodBind, this.rawMemory, value)
+    open var dampingRelaxation: Double
+        get() = _icall_Double(getDampingRelaxationMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setDampingRelaxationMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setRadiusMethodBind: CPointer<godot_method_bind> by lazy { getMB("VehicleWheel", "set_radius") }
-    open fun setRadius(length: Float) {
-        _icall_Unit_Float(setRadiusMethodBind, this.rawMemory, length)
+    open fun setRadius(length: Double) {
+        _icall_Unit_Double(setRadiusMethodBind, this.rawMemory, length)
     }
 
 
     private val getRadiusMethodBind: CPointer<godot_method_bind> by lazy { getMB("VehicleWheel", "get_radius") }
-    open fun getRadius(): Float {
-        return _icall_Float(getRadiusMethodBind, this.rawMemory)
+    open fun getRadius(): Double {
+        return _icall_Double(getRadiusMethodBind, this.rawMemory)
     }
 
 
     private val setSuspensionRestLengthMethodBind: CPointer<godot_method_bind> by lazy { getMB("VehicleWheel", "set_suspension_rest_length") }
-    open fun setSuspensionRestLength(length: Float) {
-        _icall_Unit_Float(setSuspensionRestLengthMethodBind, this.rawMemory, length)
+    open fun setSuspensionRestLength(length: Double) {
+        _icall_Unit_Double(setSuspensionRestLengthMethodBind, this.rawMemory, length)
     }
 
 
     private val getSuspensionRestLengthMethodBind: CPointer<godot_method_bind> by lazy { getMB("VehicleWheel", "get_suspension_rest_length") }
-    open fun getSuspensionRestLength(): Float {
-        return _icall_Float(getSuspensionRestLengthMethodBind, this.rawMemory)
+    open fun getSuspensionRestLength(): Double {
+        return _icall_Double(getSuspensionRestLengthMethodBind, this.rawMemory)
     }
 
 
     private val setSuspensionTravelMethodBind: CPointer<godot_method_bind> by lazy { getMB("VehicleWheel", "set_suspension_travel") }
-    open fun setSuspensionTravel(length: Float) {
-        _icall_Unit_Float(setSuspensionTravelMethodBind, this.rawMemory, length)
+    open fun setSuspensionTravel(length: Double) {
+        _icall_Unit_Double(setSuspensionTravelMethodBind, this.rawMemory, length)
     }
 
 
     private val getSuspensionTravelMethodBind: CPointer<godot_method_bind> by lazy { getMB("VehicleWheel", "get_suspension_travel") }
-    open fun getSuspensionTravel(): Float {
-        return _icall_Float(getSuspensionTravelMethodBind, this.rawMemory)
+    open fun getSuspensionTravel(): Double {
+        return _icall_Double(getSuspensionTravelMethodBind, this.rawMemory)
     }
 
 
     private val setSuspensionStiffnessMethodBind: CPointer<godot_method_bind> by lazy { getMB("VehicleWheel", "set_suspension_stiffness") }
-    open fun setSuspensionStiffness(length: Float) {
-        _icall_Unit_Float(setSuspensionStiffnessMethodBind, this.rawMemory, length)
+    open fun setSuspensionStiffness(length: Double) {
+        _icall_Unit_Double(setSuspensionStiffnessMethodBind, this.rawMemory, length)
     }
 
 
     private val getSuspensionStiffnessMethodBind: CPointer<godot_method_bind> by lazy { getMB("VehicleWheel", "get_suspension_stiffness") }
-    open fun getSuspensionStiffness(): Float {
-        return _icall_Float(getSuspensionStiffnessMethodBind, this.rawMemory)
+    open fun getSuspensionStiffness(): Double {
+        return _icall_Double(getSuspensionStiffnessMethodBind, this.rawMemory)
     }
 
 
     private val setSuspensionMaxForceMethodBind: CPointer<godot_method_bind> by lazy { getMB("VehicleWheel", "set_suspension_max_force") }
-    open fun setSuspensionMaxForce(length: Float) {
-        _icall_Unit_Float(setSuspensionMaxForceMethodBind, this.rawMemory, length)
+    open fun setSuspensionMaxForce(length: Double) {
+        _icall_Unit_Double(setSuspensionMaxForceMethodBind, this.rawMemory, length)
     }
 
 
     private val getSuspensionMaxForceMethodBind: CPointer<godot_method_bind> by lazy { getMB("VehicleWheel", "get_suspension_max_force") }
-    open fun getSuspensionMaxForce(): Float {
-        return _icall_Float(getSuspensionMaxForceMethodBind, this.rawMemory)
+    open fun getSuspensionMaxForce(): Double {
+        return _icall_Double(getSuspensionMaxForceMethodBind, this.rawMemory)
     }
 
 
     private val setDampingCompressionMethodBind: CPointer<godot_method_bind> by lazy { getMB("VehicleWheel", "set_damping_compression") }
-    open fun setDampingCompression(length: Float) {
-        _icall_Unit_Float(setDampingCompressionMethodBind, this.rawMemory, length)
+    open fun setDampingCompression(length: Double) {
+        _icall_Unit_Double(setDampingCompressionMethodBind, this.rawMemory, length)
     }
 
 
     private val getDampingCompressionMethodBind: CPointer<godot_method_bind> by lazy { getMB("VehicleWheel", "get_damping_compression") }
-    open fun getDampingCompression(): Float {
-        return _icall_Float(getDampingCompressionMethodBind, this.rawMemory)
+    open fun getDampingCompression(): Double {
+        return _icall_Double(getDampingCompressionMethodBind, this.rawMemory)
     }
 
 
     private val setDampingRelaxationMethodBind: CPointer<godot_method_bind> by lazy { getMB("VehicleWheel", "set_damping_relaxation") }
-    open fun setDampingRelaxation(length: Float) {
-        _icall_Unit_Float(setDampingRelaxationMethodBind, this.rawMemory, length)
+    open fun setDampingRelaxation(length: Double) {
+        _icall_Unit_Double(setDampingRelaxationMethodBind, this.rawMemory, length)
     }
 
 
     private val getDampingRelaxationMethodBind: CPointer<godot_method_bind> by lazy { getMB("VehicleWheel", "get_damping_relaxation") }
-    open fun getDampingRelaxation(): Float {
-        return _icall_Float(getDampingRelaxationMethodBind, this.rawMemory)
+    open fun getDampingRelaxation(): Double {
+        return _icall_Double(getDampingRelaxationMethodBind, this.rawMemory)
     }
 
 
@@ -209,14 +209,14 @@ open class VehicleWheel : Spatial {
 
 
     private val setFrictionSlipMethodBind: CPointer<godot_method_bind> by lazy { getMB("VehicleWheel", "set_friction_slip") }
-    open fun setFrictionSlip(length: Float) {
-        _icall_Unit_Float(setFrictionSlipMethodBind, this.rawMemory, length)
+    open fun setFrictionSlip(length: Double) {
+        _icall_Unit_Double(setFrictionSlipMethodBind, this.rawMemory, length)
     }
 
 
     private val getFrictionSlipMethodBind: CPointer<godot_method_bind> by lazy { getMB("VehicleWheel", "get_friction_slip") }
-    open fun getFrictionSlip(): Float {
-        return _icall_Float(getFrictionSlipMethodBind, this.rawMemory)
+    open fun getFrictionSlip(): Double {
+        return _icall_Double(getFrictionSlipMethodBind, this.rawMemory)
     }
 
 
@@ -227,20 +227,20 @@ open class VehicleWheel : Spatial {
 
 
     private val setRollInfluenceMethodBind: CPointer<godot_method_bind> by lazy { getMB("VehicleWheel", "set_roll_influence") }
-    open fun setRollInfluence(rollInfluence: Float) {
-        _icall_Unit_Float(setRollInfluenceMethodBind, this.rawMemory, rollInfluence)
+    open fun setRollInfluence(rollInfluence: Double) {
+        _icall_Unit_Double(setRollInfluenceMethodBind, this.rawMemory, rollInfluence)
     }
 
 
     private val getRollInfluenceMethodBind: CPointer<godot_method_bind> by lazy { getMB("VehicleWheel", "get_roll_influence") }
-    open fun getRollInfluence(): Float {
-        return _icall_Float(getRollInfluenceMethodBind, this.rawMemory)
+    open fun getRollInfluence(): Double {
+        return _icall_Double(getRollInfluenceMethodBind, this.rawMemory)
     }
 
 
     private val getSkidinfoMethodBind: CPointer<godot_method_bind> by lazy { getMB("VehicleWheel", "get_skidinfo") }
-    open fun getSkidinfo(): Float {
-        return _icall_Float(getSkidinfoMethodBind, this.rawMemory)
+    open fun getSkidinfo(): Double {
+        return _icall_Double(getSkidinfoMethodBind, this.rawMemory)
     }
 
 

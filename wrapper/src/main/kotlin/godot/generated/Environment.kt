@@ -19,7 +19,7 @@ open class Environment : Resource {
 
     // Enums 
 
-    enum class SSAOBlur(val id: Int) {
+    enum class SSAOBlur(val id: Long) {
         SSAO_BLUR_DISABLED(0),
         SSAO_BLUR_1x1(1),
         SSAO_BLUR_2x2(2),
@@ -27,10 +27,10 @@ open class Environment : Resource {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class ToneMapper(val id: Int) {
+    enum class ToneMapper(val id: Long) {
         TONE_MAPPER_LINEAR(0),
         TONE_MAPPER_REINHARDT(1),
         TONE_MAPPER_FILMIC(2),
@@ -38,10 +38,10 @@ open class Environment : Resource {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class GlowBlendMode(val id: Int) {
+    enum class GlowBlendMode(val id: Long) {
         GLOW_BLEND_MODE_ADDITIVE(0),
         GLOW_BLEND_MODE_SCREEN(1),
         GLOW_BLEND_MODE_SOFTLIGHT(2),
@@ -49,10 +49,10 @@ open class Environment : Resource {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class BGMode(val id: Int) {
+    enum class BGMode(val id: Long) {
         BG_CLEAR_COLOR(0),
         BG_COLOR(1),
         BG_SKY(2),
@@ -63,27 +63,27 @@ open class Environment : Resource {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class SSAOQuality(val id: Int) {
+    enum class SSAOQuality(val id: Long) {
         SSAO_QUALITY_LOW(0),
         SSAO_QUALITY_MEDIUM(1),
         SSAO_QUALITY_HIGH(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class DOFBlurQuality(val id: Int) {
+    enum class DOFBlurQuality(val id: Long) {
         DOF_BLUR_QUALITY_LOW(0),
         DOF_BLUR_QUALITY_MEDIUM(1),
         DOF_BLUR_QUALITY_HIGH(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -103,40 +103,40 @@ open class Environment : Resource {
 
 
         // Constants
-        const val BG_KEEP: Int = 5
-        const val BG_CLEAR_COLOR: Int = 0
-        const val BG_COLOR: Int = 1
-        const val BG_SKY: Int = 2
-        const val BG_COLOR_SKY: Int = 3
-        const val BG_CANVAS: Int = 4
-        const val BG_MAX: Int = 6
-        const val GLOW_BLEND_MODE_ADDITIVE: Int = 0
-        const val GLOW_BLEND_MODE_SCREEN: Int = 1
-        const val GLOW_BLEND_MODE_SOFTLIGHT: Int = 2
-        const val GLOW_BLEND_MODE_REPLACE: Int = 3
-        const val TONE_MAPPER_LINEAR: Int = 0
-        const val TONE_MAPPER_REINHARDT: Int = 1
-        const val TONE_MAPPER_FILMIC: Int = 2
-        const val TONE_MAPPER_ACES: Int = 3
-        const val DOF_BLUR_QUALITY_LOW: Int = 0
-        const val DOF_BLUR_QUALITY_MEDIUM: Int = 1
-        const val DOF_BLUR_QUALITY_HIGH: Int = 2
-        const val SSAO_BLUR_DISABLED: Int = 0
-        const val SSAO_BLUR_1x1: Int = 1
-        const val SSAO_BLUR_2x2: Int = 2
-        const val SSAO_BLUR_3x3: Int = 3
-        const val SSAO_QUALITY_LOW: Int = 0
-        const val SSAO_QUALITY_MEDIUM: Int = 1
-        const val SSAO_QUALITY_HIGH: Int = 2
+        const val BG_KEEP: Long = 5
+        const val BG_CLEAR_COLOR: Long = 0
+        const val BG_COLOR: Long = 1
+        const val BG_SKY: Long = 2
+        const val BG_COLOR_SKY: Long = 3
+        const val BG_CANVAS: Long = 4
+        const val BG_MAX: Long = 6
+        const val GLOW_BLEND_MODE_ADDITIVE: Long = 0
+        const val GLOW_BLEND_MODE_SCREEN: Long = 1
+        const val GLOW_BLEND_MODE_SOFTLIGHT: Long = 2
+        const val GLOW_BLEND_MODE_REPLACE: Long = 3
+        const val TONE_MAPPER_LINEAR: Long = 0
+        const val TONE_MAPPER_REINHARDT: Long = 1
+        const val TONE_MAPPER_FILMIC: Long = 2
+        const val TONE_MAPPER_ACES: Long = 3
+        const val DOF_BLUR_QUALITY_LOW: Long = 0
+        const val DOF_BLUR_QUALITY_MEDIUM: Long = 1
+        const val DOF_BLUR_QUALITY_HIGH: Long = 2
+        const val SSAO_BLUR_DISABLED: Long = 0
+        const val SSAO_BLUR_1x1: Long = 1
+        const val SSAO_BLUR_2x2: Long = 2
+        const val SSAO_BLUR_3x3: Long = 3
+        const val SSAO_QUALITY_LOW: Long = 0
+        const val SSAO_QUALITY_MEDIUM: Long = 1
+        const val SSAO_QUALITY_HIGH: Long = 2
 
 
     }
 
 
     // Properties
-    open var backgroundMode: Int
-        get() = _icall_Int(getBackgroundMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setBackgroundMethodBind, this.rawMemory, value)
+    open var backgroundMode: Long
+        get() = _icall_Long(getBackgroundMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setBackgroundMethodBind, this.rawMemory, value)
 
 
     open var backgroundSky: Sky
@@ -144,9 +144,9 @@ open class Environment : Resource {
         set(value) = _icall_Unit_Object(setSkyMethodBind, this.rawMemory, value)
 
 
-    open var backgroundSkyCustomFov: Float
-        get() = _icall_Float(getSkyCustomFovMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setSkyCustomFovMethodBind, this.rawMemory, value)
+    open var backgroundSkyCustomFov: Double
+        get() = _icall_Double(getSkyCustomFovMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setSkyCustomFovMethodBind, this.rawMemory, value)
 
 
     open var backgroundColor: Color
@@ -158,14 +158,14 @@ open class Environment : Resource {
     }
 
 
-    open var backgroundEnergy: Float
-        get() = _icall_Float(getBgEnergyMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setBgEnergyMethodBind, this.rawMemory, value)
+    open var backgroundEnergy: Double
+        get() = _icall_Double(getBgEnergyMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setBgEnergyMethodBind, this.rawMemory, value)
 
 
-    open var backgroundCanvasMaxLayer: Int
-        get() = _icall_Int(getCanvasMaxLayerMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setCanvasMaxLayerMethodBind, this.rawMemory, value)
+    open var backgroundCanvasMaxLayer: Long
+        get() = _icall_Long(getCanvasMaxLayerMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setCanvasMaxLayerMethodBind, this.rawMemory, value)
 
 
     open var ambientLightColor: Color
@@ -177,14 +177,14 @@ open class Environment : Resource {
     }
 
 
-    open var ambientLightEnergy: Float
-        get() = _icall_Float(getAmbientLightEnergyMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setAmbientLightEnergyMethodBind, this.rawMemory, value)
+    open var ambientLightEnergy: Double
+        get() = _icall_Double(getAmbientLightEnergyMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setAmbientLightEnergyMethodBind, this.rawMemory, value)
 
 
-    open var ambientLightSkyContribution: Float
-        get() = _icall_Float(getAmbientLightSkyContributionMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setAmbientLightSkyContributionMethodBind, this.rawMemory, value)
+    open var ambientLightSkyContribution: Double
+        get() = _icall_Double(getAmbientLightSkyContributionMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setAmbientLightSkyContributionMethodBind, this.rawMemory, value)
 
 
     open var fogEnabled: Boolean
@@ -210,9 +210,9 @@ open class Environment : Resource {
     }
 
 
-    open var fogSunAmount: Float
-        get() = _icall_Float(getFogSunAmountMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setFogSunAmountMethodBind, this.rawMemory, value)
+    open var fogSunAmount: Double
+        get() = _icall_Double(getFogSunAmountMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setFogSunAmountMethodBind, this.rawMemory, value)
 
 
     open var fogDepthEnabled: Boolean
@@ -220,14 +220,14 @@ open class Environment : Resource {
         set(value) = _icall_Unit_Boolean(setFogDepthEnabledMethodBind, this.rawMemory, value)
 
 
-    open var fogDepthBegin: Float
-        get() = _icall_Float(getFogDepthBeginMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setFogDepthBeginMethodBind, this.rawMemory, value)
+    open var fogDepthBegin: Double
+        get() = _icall_Double(getFogDepthBeginMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setFogDepthBeginMethodBind, this.rawMemory, value)
 
 
-    open var fogDepthCurve: Float
-        get() = _icall_Float(getFogDepthCurveMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setFogDepthCurveMethodBind, this.rawMemory, value)
+    open var fogDepthCurve: Double
+        get() = _icall_Double(getFogDepthCurveMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setFogDepthCurveMethodBind, this.rawMemory, value)
 
 
     open var fogTransmitEnabled: Boolean
@@ -235,9 +235,9 @@ open class Environment : Resource {
         set(value) = _icall_Unit_Boolean(setFogTransmitEnabledMethodBind, this.rawMemory, value)
 
 
-    open var fogTransmitCurve: Float
-        get() = _icall_Float(getFogTransmitCurveMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setFogTransmitCurveMethodBind, this.rawMemory, value)
+    open var fogTransmitCurve: Double
+        get() = _icall_Double(getFogTransmitCurveMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setFogTransmitCurveMethodBind, this.rawMemory, value)
 
 
     open var fogHeightEnabled: Boolean
@@ -245,34 +245,34 @@ open class Environment : Resource {
         set(value) = _icall_Unit_Boolean(setFogHeightEnabledMethodBind, this.rawMemory, value)
 
 
-    open var fogHeightMin: Float
-        get() = _icall_Float(getFogHeightMinMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setFogHeightMinMethodBind, this.rawMemory, value)
+    open var fogHeightMin: Double
+        get() = _icall_Double(getFogHeightMinMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setFogHeightMinMethodBind, this.rawMemory, value)
 
 
-    open var fogHeightMax: Float
-        get() = _icall_Float(getFogHeightMaxMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setFogHeightMaxMethodBind, this.rawMemory, value)
+    open var fogHeightMax: Double
+        get() = _icall_Double(getFogHeightMaxMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setFogHeightMaxMethodBind, this.rawMemory, value)
 
 
-    open var fogHeightCurve: Float
-        get() = _icall_Float(getFogHeightCurveMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setFogHeightCurveMethodBind, this.rawMemory, value)
+    open var fogHeightCurve: Double
+        get() = _icall_Double(getFogHeightCurveMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setFogHeightCurveMethodBind, this.rawMemory, value)
 
 
-    open var tonemapMode: Int
-        get() = _icall_Int(getTonemapperMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setTonemapperMethodBind, this.rawMemory, value)
+    open var tonemapMode: Long
+        get() = _icall_Long(getTonemapperMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setTonemapperMethodBind, this.rawMemory, value)
 
 
-    open var tonemapExposure: Float
-        get() = _icall_Float(getTonemapExposureMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setTonemapExposureMethodBind, this.rawMemory, value)
+    open var tonemapExposure: Double
+        get() = _icall_Double(getTonemapExposureMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setTonemapExposureMethodBind, this.rawMemory, value)
 
 
-    open var tonemapWhite: Float
-        get() = _icall_Float(getTonemapWhiteMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setTonemapWhiteMethodBind, this.rawMemory, value)
+    open var tonemapWhite: Double
+        get() = _icall_Double(getTonemapWhiteMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setTonemapWhiteMethodBind, this.rawMemory, value)
 
 
     open var autoExposureEnabled: Boolean
@@ -280,24 +280,24 @@ open class Environment : Resource {
         set(value) = _icall_Unit_Boolean(setTonemapAutoExposureMethodBind, this.rawMemory, value)
 
 
-    open var autoExposureScale: Float
-        get() = _icall_Float(getTonemapAutoExposureGreyMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setTonemapAutoExposureGreyMethodBind, this.rawMemory, value)
+    open var autoExposureScale: Double
+        get() = _icall_Double(getTonemapAutoExposureGreyMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setTonemapAutoExposureGreyMethodBind, this.rawMemory, value)
 
 
-    open var autoExposureMinLuma: Float
-        get() = _icall_Float(getTonemapAutoExposureMinMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setTonemapAutoExposureMinMethodBind, this.rawMemory, value)
+    open var autoExposureMinLuma: Double
+        get() = _icall_Double(getTonemapAutoExposureMinMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setTonemapAutoExposureMinMethodBind, this.rawMemory, value)
 
 
-    open var autoExposureMaxLuma: Float
-        get() = _icall_Float(getTonemapAutoExposureMaxMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setTonemapAutoExposureMaxMethodBind, this.rawMemory, value)
+    open var autoExposureMaxLuma: Double
+        get() = _icall_Double(getTonemapAutoExposureMaxMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setTonemapAutoExposureMaxMethodBind, this.rawMemory, value)
 
 
-    open var autoExposureSpeed: Float
-        get() = _icall_Float(getTonemapAutoExposureSpeedMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setTonemapAutoExposureSpeedMethodBind, this.rawMemory, value)
+    open var autoExposureSpeed: Double
+        get() = _icall_Double(getTonemapAutoExposureSpeedMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setTonemapAutoExposureSpeedMethodBind, this.rawMemory, value)
 
 
     open var ssReflectionsEnabled: Boolean
@@ -305,24 +305,24 @@ open class Environment : Resource {
         set(value) = _icall_Unit_Boolean(setSsrEnabledMethodBind, this.rawMemory, value)
 
 
-    open var ssReflectionsMaxSteps: Int
-        get() = _icall_Int(getSsrMaxStepsMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setSsrMaxStepsMethodBind, this.rawMemory, value)
+    open var ssReflectionsMaxSteps: Long
+        get() = _icall_Long(getSsrMaxStepsMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setSsrMaxStepsMethodBind, this.rawMemory, value)
 
 
-    open var ssReflectionsFadeIn: Float
-        get() = _icall_Float(getSsrFadeInMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setSsrFadeInMethodBind, this.rawMemory, value)
+    open var ssReflectionsFadeIn: Double
+        get() = _icall_Double(getSsrFadeInMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setSsrFadeInMethodBind, this.rawMemory, value)
 
 
-    open var ssReflectionsFadeOut: Float
-        get() = _icall_Float(getSsrFadeOutMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setSsrFadeOutMethodBind, this.rawMemory, value)
+    open var ssReflectionsFadeOut: Double
+        get() = _icall_Double(getSsrFadeOutMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setSsrFadeOutMethodBind, this.rawMemory, value)
 
 
-    open var ssReflectionsDepthTolerance: Float
-        get() = _icall_Float(getSsrDepthToleranceMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setSsrDepthToleranceMethodBind, this.rawMemory, value)
+    open var ssReflectionsDepthTolerance: Double
+        get() = _icall_Double(getSsrDepthToleranceMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setSsrDepthToleranceMethodBind, this.rawMemory, value)
 
 
     open var ssReflectionsRoughness: Boolean
@@ -335,39 +335,39 @@ open class Environment : Resource {
         set(value) = _icall_Unit_Boolean(setSsaoEnabledMethodBind, this.rawMemory, value)
 
 
-    open var ssaoRadius: Float
-        get() = _icall_Float(getSsaoRadiusMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setSsaoRadiusMethodBind, this.rawMemory, value)
+    open var ssaoRadius: Double
+        get() = _icall_Double(getSsaoRadiusMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setSsaoRadiusMethodBind, this.rawMemory, value)
 
 
-    open var ssaoIntensity: Float
-        get() = _icall_Float(getSsaoIntensityMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setSsaoIntensityMethodBind, this.rawMemory, value)
+    open var ssaoIntensity: Double
+        get() = _icall_Double(getSsaoIntensityMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setSsaoIntensityMethodBind, this.rawMemory, value)
 
 
-    open var ssaoRadius2: Float
-        get() = _icall_Float(getSsaoRadius2MethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setSsaoRadius2MethodBind, this.rawMemory, value)
+    open var ssaoRadius2: Double
+        get() = _icall_Double(getSsaoRadius2MethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setSsaoRadius2MethodBind, this.rawMemory, value)
 
 
-    open var ssaoIntensity2: Float
-        get() = _icall_Float(getSsaoIntensity2MethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setSsaoIntensity2MethodBind, this.rawMemory, value)
+    open var ssaoIntensity2: Double
+        get() = _icall_Double(getSsaoIntensity2MethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setSsaoIntensity2MethodBind, this.rawMemory, value)
 
 
-    open var ssaoBias: Float
-        get() = _icall_Float(getSsaoBiasMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setSsaoBiasMethodBind, this.rawMemory, value)
+    open var ssaoBias: Double
+        get() = _icall_Double(getSsaoBiasMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setSsaoBiasMethodBind, this.rawMemory, value)
 
 
-    open var ssaoLightAffect: Float
-        get() = _icall_Float(getSsaoDirectLightAffectMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setSsaoDirectLightAffectMethodBind, this.rawMemory, value)
+    open var ssaoLightAffect: Double
+        get() = _icall_Double(getSsaoDirectLightAffectMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setSsaoDirectLightAffectMethodBind, this.rawMemory, value)
 
 
-    open var ssaoAoChannelAffect: Float
-        get() = _icall_Float(getSsaoAoChannelAffectMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setSsaoAoChannelAffectMethodBind, this.rawMemory, value)
+    open var ssaoAoChannelAffect: Double
+        get() = _icall_Double(getSsaoAoChannelAffectMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setSsaoAoChannelAffectMethodBind, this.rawMemory, value)
 
 
     open var ssaoColor: Color
@@ -379,19 +379,19 @@ open class Environment : Resource {
     }
 
 
-    open var ssaoQuality: Int
-        get() = _icall_Int(getSsaoQualityMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setSsaoQualityMethodBind, this.rawMemory, value)
+    open var ssaoQuality: Long
+        get() = _icall_Long(getSsaoQualityMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setSsaoQualityMethodBind, this.rawMemory, value)
 
 
-    open var ssaoBlur: Int
-        get() = _icall_Int(getSsaoBlurMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setSsaoBlurMethodBind, this.rawMemory, value)
+    open var ssaoBlur: Long
+        get() = _icall_Long(getSsaoBlurMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setSsaoBlurMethodBind, this.rawMemory, value)
 
 
-    open var ssaoEdgeSharpness: Float
-        get() = _icall_Float(getSsaoEdgeSharpnessMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setSsaoEdgeSharpnessMethodBind, this.rawMemory, value)
+    open var ssaoEdgeSharpness: Double
+        get() = _icall_Double(getSsaoEdgeSharpnessMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setSsaoEdgeSharpnessMethodBind, this.rawMemory, value)
 
 
     open var dofBlurFarEnabled: Boolean
@@ -399,24 +399,24 @@ open class Environment : Resource {
         set(value) = _icall_Unit_Boolean(setDofBlurFarEnabledMethodBind, this.rawMemory, value)
 
 
-    open var dofBlurFarDistance: Float
-        get() = _icall_Float(getDofBlurFarDistanceMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setDofBlurFarDistanceMethodBind, this.rawMemory, value)
+    open var dofBlurFarDistance: Double
+        get() = _icall_Double(getDofBlurFarDistanceMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setDofBlurFarDistanceMethodBind, this.rawMemory, value)
 
 
-    open var dofBlurFarTransition: Float
-        get() = _icall_Float(getDofBlurFarTransitionMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setDofBlurFarTransitionMethodBind, this.rawMemory, value)
+    open var dofBlurFarTransition: Double
+        get() = _icall_Double(getDofBlurFarTransitionMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setDofBlurFarTransitionMethodBind, this.rawMemory, value)
 
 
-    open var dofBlurFarAmount: Float
-        get() = _icall_Float(getDofBlurFarAmountMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setDofBlurFarAmountMethodBind, this.rawMemory, value)
+    open var dofBlurFarAmount: Double
+        get() = _icall_Double(getDofBlurFarAmountMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setDofBlurFarAmountMethodBind, this.rawMemory, value)
 
 
-    open var dofBlurFarQuality: Int
-        get() = _icall_Int(getDofBlurFarQualityMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setDofBlurFarQualityMethodBind, this.rawMemory, value)
+    open var dofBlurFarQuality: Long
+        get() = _icall_Long(getDofBlurFarQualityMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setDofBlurFarQualityMethodBind, this.rawMemory, value)
 
 
     open var dofBlurNearEnabled: Boolean
@@ -424,24 +424,24 @@ open class Environment : Resource {
         set(value) = _icall_Unit_Boolean(setDofBlurNearEnabledMethodBind, this.rawMemory, value)
 
 
-    open var dofBlurNearDistance: Float
-        get() = _icall_Float(getDofBlurNearDistanceMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setDofBlurNearDistanceMethodBind, this.rawMemory, value)
+    open var dofBlurNearDistance: Double
+        get() = _icall_Double(getDofBlurNearDistanceMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setDofBlurNearDistanceMethodBind, this.rawMemory, value)
 
 
-    open var dofBlurNearTransition: Float
-        get() = _icall_Float(getDofBlurNearTransitionMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setDofBlurNearTransitionMethodBind, this.rawMemory, value)
+    open var dofBlurNearTransition: Double
+        get() = _icall_Double(getDofBlurNearTransitionMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setDofBlurNearTransitionMethodBind, this.rawMemory, value)
 
 
-    open var dofBlurNearAmount: Float
-        get() = _icall_Float(getDofBlurNearAmountMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setDofBlurNearAmountMethodBind, this.rawMemory, value)
+    open var dofBlurNearAmount: Double
+        get() = _icall_Double(getDofBlurNearAmountMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setDofBlurNearAmountMethodBind, this.rawMemory, value)
 
 
-    open var dofBlurNearQuality: Int
-        get() = _icall_Int(getDofBlurNearQualityMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setDofBlurNearQualityMethodBind, this.rawMemory, value)
+    open var dofBlurNearQuality: Long
+        get() = _icall_Long(getDofBlurNearQualityMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setDofBlurNearQualityMethodBind, this.rawMemory, value)
 
 
     open var glowEnabled: Boolean
@@ -450,68 +450,68 @@ open class Environment : Resource {
 
 
     open var glowLevels_1: Boolean
-        get() = _icall_Boolean_Int(isGlowLevelEnabledMethodBind, this.rawMemory, 0)
-        set(value) = _icall_Unit_Int_Boolean(setGlowLevelMethodBind, this.rawMemory, 0, value)
+        get() = _icall_Boolean_Long(isGlowLevelEnabledMethodBind, this.rawMemory, 0)
+        set(value) = _icall_Unit_Long_Boolean(setGlowLevelMethodBind, this.rawMemory, 0, value)
 
 
     open var glowLevels_2: Boolean
-        get() = _icall_Boolean_Int(isGlowLevelEnabledMethodBind, this.rawMemory, 1)
-        set(value) = _icall_Unit_Int_Boolean(setGlowLevelMethodBind, this.rawMemory, 1, value)
+        get() = _icall_Boolean_Long(isGlowLevelEnabledMethodBind, this.rawMemory, 1)
+        set(value) = _icall_Unit_Long_Boolean(setGlowLevelMethodBind, this.rawMemory, 1, value)
 
 
     open var glowLevels_3: Boolean
-        get() = _icall_Boolean_Int(isGlowLevelEnabledMethodBind, this.rawMemory, 2)
-        set(value) = _icall_Unit_Int_Boolean(setGlowLevelMethodBind, this.rawMemory, 2, value)
+        get() = _icall_Boolean_Long(isGlowLevelEnabledMethodBind, this.rawMemory, 2)
+        set(value) = _icall_Unit_Long_Boolean(setGlowLevelMethodBind, this.rawMemory, 2, value)
 
 
     open var glowLevels_4: Boolean
-        get() = _icall_Boolean_Int(isGlowLevelEnabledMethodBind, this.rawMemory, 3)
-        set(value) = _icall_Unit_Int_Boolean(setGlowLevelMethodBind, this.rawMemory, 3, value)
+        get() = _icall_Boolean_Long(isGlowLevelEnabledMethodBind, this.rawMemory, 3)
+        set(value) = _icall_Unit_Long_Boolean(setGlowLevelMethodBind, this.rawMemory, 3, value)
 
 
     open var glowLevels_5: Boolean
-        get() = _icall_Boolean_Int(isGlowLevelEnabledMethodBind, this.rawMemory, 4)
-        set(value) = _icall_Unit_Int_Boolean(setGlowLevelMethodBind, this.rawMemory, 4, value)
+        get() = _icall_Boolean_Long(isGlowLevelEnabledMethodBind, this.rawMemory, 4)
+        set(value) = _icall_Unit_Long_Boolean(setGlowLevelMethodBind, this.rawMemory, 4, value)
 
 
     open var glowLevels_6: Boolean
-        get() = _icall_Boolean_Int(isGlowLevelEnabledMethodBind, this.rawMemory, 5)
-        set(value) = _icall_Unit_Int_Boolean(setGlowLevelMethodBind, this.rawMemory, 5, value)
+        get() = _icall_Boolean_Long(isGlowLevelEnabledMethodBind, this.rawMemory, 5)
+        set(value) = _icall_Unit_Long_Boolean(setGlowLevelMethodBind, this.rawMemory, 5, value)
 
 
     open var glowLevels_7: Boolean
-        get() = _icall_Boolean_Int(isGlowLevelEnabledMethodBind, this.rawMemory, 6)
-        set(value) = _icall_Unit_Int_Boolean(setGlowLevelMethodBind, this.rawMemory, 6, value)
+        get() = _icall_Boolean_Long(isGlowLevelEnabledMethodBind, this.rawMemory, 6)
+        set(value) = _icall_Unit_Long_Boolean(setGlowLevelMethodBind, this.rawMemory, 6, value)
 
 
-    open var glowIntensity: Float
-        get() = _icall_Float(getGlowIntensityMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setGlowIntensityMethodBind, this.rawMemory, value)
+    open var glowIntensity: Double
+        get() = _icall_Double(getGlowIntensityMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setGlowIntensityMethodBind, this.rawMemory, value)
 
 
-    open var glowStrength: Float
-        get() = _icall_Float(getGlowStrengthMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setGlowStrengthMethodBind, this.rawMemory, value)
+    open var glowStrength: Double
+        get() = _icall_Double(getGlowStrengthMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setGlowStrengthMethodBind, this.rawMemory, value)
 
 
-    open var glowBloom: Float
-        get() = _icall_Float(getGlowBloomMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setGlowBloomMethodBind, this.rawMemory, value)
+    open var glowBloom: Double
+        get() = _icall_Double(getGlowBloomMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setGlowBloomMethodBind, this.rawMemory, value)
 
 
-    open var glowBlendMode: Int
-        get() = _icall_Int(getGlowBlendModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setGlowBlendModeMethodBind, this.rawMemory, value)
+    open var glowBlendMode: Long
+        get() = _icall_Long(getGlowBlendModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setGlowBlendModeMethodBind, this.rawMemory, value)
 
 
-    open var glowHdrThreshold: Float
-        get() = _icall_Float(getGlowHdrBleedThresholdMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setGlowHdrBleedThresholdMethodBind, this.rawMemory, value)
+    open var glowHdrThreshold: Double
+        get() = _icall_Double(getGlowHdrBleedThresholdMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setGlowHdrBleedThresholdMethodBind, this.rawMemory, value)
 
 
-    open var glowHdrScale: Float
-        get() = _icall_Float(getGlowHdrBleedScaleMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setGlowHdrBleedScaleMethodBind, this.rawMemory, value)
+    open var glowHdrScale: Double
+        get() = _icall_Double(getGlowHdrBleedScaleMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setGlowHdrBleedScaleMethodBind, this.rawMemory, value)
 
 
     open var glowBicubicUpscale: Boolean
@@ -524,19 +524,19 @@ open class Environment : Resource {
         set(value) = _icall_Unit_Boolean(setAdjustmentEnableMethodBind, this.rawMemory, value)
 
 
-    open var adjustmentBrightness: Float
-        get() = _icall_Float(getAdjustmentBrightnessMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setAdjustmentBrightnessMethodBind, this.rawMemory, value)
+    open var adjustmentBrightness: Double
+        get() = _icall_Double(getAdjustmentBrightnessMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setAdjustmentBrightnessMethodBind, this.rawMemory, value)
 
 
-    open var adjustmentContrast: Float
-        get() = _icall_Float(getAdjustmentContrastMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setAdjustmentContrastMethodBind, this.rawMemory, value)
+    open var adjustmentContrast: Double
+        get() = _icall_Double(getAdjustmentContrastMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setAdjustmentContrastMethodBind, this.rawMemory, value)
 
 
-    open var adjustmentSaturation: Float
-        get() = _icall_Float(getAdjustmentSaturationMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setAdjustmentSaturationMethodBind, this.rawMemory, value)
+    open var adjustmentSaturation: Double
+        get() = _icall_Double(getAdjustmentSaturationMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setAdjustmentSaturationMethodBind, this.rawMemory, value)
 
 
     open var adjustmentColorCorrection: Texture
@@ -548,8 +548,8 @@ open class Environment : Resource {
 
     // Methods
     private val setBackgroundMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_background") }
-    open fun setBackground(mode: Int) {
-        _icall_Unit_Int(setBackgroundMethodBind, this.rawMemory, mode)
+    open fun setBackground(mode: Long) {
+        _icall_Unit_Long(setBackgroundMethodBind, this.rawMemory, mode)
     }
 
 
@@ -560,8 +560,8 @@ open class Environment : Resource {
 
 
     private val setSkyCustomFovMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_sky_custom_fov") }
-    open fun setSkyCustomFov(scale: Float) {
-        _icall_Unit_Float(setSkyCustomFovMethodBind, this.rawMemory, scale)
+    open fun setSkyCustomFov(scale: Double) {
+        _icall_Unit_Double(setSkyCustomFovMethodBind, this.rawMemory, scale)
     }
 
 
@@ -572,14 +572,14 @@ open class Environment : Resource {
 
 
     private val setBgEnergyMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_bg_energy") }
-    open fun setBgEnergy(energy: Float) {
-        _icall_Unit_Float(setBgEnergyMethodBind, this.rawMemory, energy)
+    open fun setBgEnergy(energy: Double) {
+        _icall_Unit_Double(setBgEnergyMethodBind, this.rawMemory, energy)
     }
 
 
     private val setCanvasMaxLayerMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_canvas_max_layer") }
-    open fun setCanvasMaxLayer(layer: Int) {
-        _icall_Unit_Int(setCanvasMaxLayerMethodBind, this.rawMemory, layer)
+    open fun setCanvasMaxLayer(layer: Long) {
+        _icall_Unit_Long(setCanvasMaxLayerMethodBind, this.rawMemory, layer)
     }
 
 
@@ -590,20 +590,20 @@ open class Environment : Resource {
 
 
     private val setAmbientLightEnergyMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_ambient_light_energy") }
-    open fun setAmbientLightEnergy(energy: Float) {
-        _icall_Unit_Float(setAmbientLightEnergyMethodBind, this.rawMemory, energy)
+    open fun setAmbientLightEnergy(energy: Double) {
+        _icall_Unit_Double(setAmbientLightEnergyMethodBind, this.rawMemory, energy)
     }
 
 
     private val setAmbientLightSkyContributionMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_ambient_light_sky_contribution") }
-    open fun setAmbientLightSkyContribution(energy: Float) {
-        _icall_Unit_Float(setAmbientLightSkyContributionMethodBind, this.rawMemory, energy)
+    open fun setAmbientLightSkyContribution(energy: Double) {
+        _icall_Unit_Double(setAmbientLightSkyContributionMethodBind, this.rawMemory, energy)
     }
 
 
     private val getBackgroundMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_background") }
     open fun getBackground(): Environment.BGMode {
-        return Environment.BGMode.fromInt(_icall_Int(getBackgroundMethodBind, this.rawMemory))
+        return Environment.BGMode.fromInt(_icall_Long(getBackgroundMethodBind, this.rawMemory))
     }
 
 
@@ -614,8 +614,8 @@ open class Environment : Resource {
 
 
     private val getSkyCustomFovMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_sky_custom_fov") }
-    open fun getSkyCustomFov(): Float {
-        return _icall_Float(getSkyCustomFovMethodBind, this.rawMemory)
+    open fun getSkyCustomFov(): Double {
+        return _icall_Double(getSkyCustomFovMethodBind, this.rawMemory)
     }
 
 
@@ -626,14 +626,14 @@ open class Environment : Resource {
 
 
     private val getBgEnergyMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_bg_energy") }
-    open fun getBgEnergy(): Float {
-        return _icall_Float(getBgEnergyMethodBind, this.rawMemory)
+    open fun getBgEnergy(): Double {
+        return _icall_Double(getBgEnergyMethodBind, this.rawMemory)
     }
 
 
     private val getCanvasMaxLayerMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_canvas_max_layer") }
-    open fun getCanvasMaxLayer(): Int {
-        return _icall_Int(getCanvasMaxLayerMethodBind, this.rawMemory)
+    open fun getCanvasMaxLayer(): Long {
+        return _icall_Long(getCanvasMaxLayerMethodBind, this.rawMemory)
     }
 
 
@@ -644,14 +644,14 @@ open class Environment : Resource {
 
 
     private val getAmbientLightEnergyMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_ambient_light_energy") }
-    open fun getAmbientLightEnergy(): Float {
-        return _icall_Float(getAmbientLightEnergyMethodBind, this.rawMemory)
+    open fun getAmbientLightEnergy(): Double {
+        return _icall_Double(getAmbientLightEnergyMethodBind, this.rawMemory)
     }
 
 
     private val getAmbientLightSkyContributionMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_ambient_light_sky_contribution") }
-    open fun getAmbientLightSkyContribution(): Float {
-        return _icall_Float(getAmbientLightSkyContributionMethodBind, this.rawMemory)
+    open fun getAmbientLightSkyContribution(): Double {
+        return _icall_Double(getAmbientLightSkyContributionMethodBind, this.rawMemory)
     }
 
 
@@ -692,14 +692,14 @@ open class Environment : Resource {
 
 
     private val setFogSunAmountMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_fog_sun_amount") }
-    open fun setFogSunAmount(amount: Float) {
-        _icall_Unit_Float(setFogSunAmountMethodBind, this.rawMemory, amount)
+    open fun setFogSunAmount(amount: Double) {
+        _icall_Unit_Double(setFogSunAmountMethodBind, this.rawMemory, amount)
     }
 
 
     private val getFogSunAmountMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_fog_sun_amount") }
-    open fun getFogSunAmount(): Float {
-        return _icall_Float(getFogSunAmountMethodBind, this.rawMemory)
+    open fun getFogSunAmount(): Double {
+        return _icall_Double(getFogSunAmountMethodBind, this.rawMemory)
     }
 
 
@@ -716,26 +716,26 @@ open class Environment : Resource {
 
 
     private val setFogDepthBeginMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_fog_depth_begin") }
-    open fun setFogDepthBegin(distance: Float) {
-        _icall_Unit_Float(setFogDepthBeginMethodBind, this.rawMemory, distance)
+    open fun setFogDepthBegin(distance: Double) {
+        _icall_Unit_Double(setFogDepthBeginMethodBind, this.rawMemory, distance)
     }
 
 
     private val getFogDepthBeginMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_fog_depth_begin") }
-    open fun getFogDepthBegin(): Float {
-        return _icall_Float(getFogDepthBeginMethodBind, this.rawMemory)
+    open fun getFogDepthBegin(): Double {
+        return _icall_Double(getFogDepthBeginMethodBind, this.rawMemory)
     }
 
 
     private val setFogDepthCurveMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_fog_depth_curve") }
-    open fun setFogDepthCurve(curve: Float) {
-        _icall_Unit_Float(setFogDepthCurveMethodBind, this.rawMemory, curve)
+    open fun setFogDepthCurve(curve: Double) {
+        _icall_Unit_Double(setFogDepthCurveMethodBind, this.rawMemory, curve)
     }
 
 
     private val getFogDepthCurveMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_fog_depth_curve") }
-    open fun getFogDepthCurve(): Float {
-        return _icall_Float(getFogDepthCurveMethodBind, this.rawMemory)
+    open fun getFogDepthCurve(): Double {
+        return _icall_Double(getFogDepthCurveMethodBind, this.rawMemory)
     }
 
 
@@ -752,14 +752,14 @@ open class Environment : Resource {
 
 
     private val setFogTransmitCurveMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_fog_transmit_curve") }
-    open fun setFogTransmitCurve(curve: Float) {
-        _icall_Unit_Float(setFogTransmitCurveMethodBind, this.rawMemory, curve)
+    open fun setFogTransmitCurve(curve: Double) {
+        _icall_Unit_Double(setFogTransmitCurveMethodBind, this.rawMemory, curve)
     }
 
 
     private val getFogTransmitCurveMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_fog_transmit_curve") }
-    open fun getFogTransmitCurve(): Float {
-        return _icall_Float(getFogTransmitCurveMethodBind, this.rawMemory)
+    open fun getFogTransmitCurve(): Double {
+        return _icall_Double(getFogTransmitCurveMethodBind, this.rawMemory)
     }
 
 
@@ -776,74 +776,74 @@ open class Environment : Resource {
 
 
     private val setFogHeightMinMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_fog_height_min") }
-    open fun setFogHeightMin(height: Float) {
-        _icall_Unit_Float(setFogHeightMinMethodBind, this.rawMemory, height)
+    open fun setFogHeightMin(height: Double) {
+        _icall_Unit_Double(setFogHeightMinMethodBind, this.rawMemory, height)
     }
 
 
     private val getFogHeightMinMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_fog_height_min") }
-    open fun getFogHeightMin(): Float {
-        return _icall_Float(getFogHeightMinMethodBind, this.rawMemory)
+    open fun getFogHeightMin(): Double {
+        return _icall_Double(getFogHeightMinMethodBind, this.rawMemory)
     }
 
 
     private val setFogHeightMaxMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_fog_height_max") }
-    open fun setFogHeightMax(height: Float) {
-        _icall_Unit_Float(setFogHeightMaxMethodBind, this.rawMemory, height)
+    open fun setFogHeightMax(height: Double) {
+        _icall_Unit_Double(setFogHeightMaxMethodBind, this.rawMemory, height)
     }
 
 
     private val getFogHeightMaxMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_fog_height_max") }
-    open fun getFogHeightMax(): Float {
-        return _icall_Float(getFogHeightMaxMethodBind, this.rawMemory)
+    open fun getFogHeightMax(): Double {
+        return _icall_Double(getFogHeightMaxMethodBind, this.rawMemory)
     }
 
 
     private val setFogHeightCurveMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_fog_height_curve") }
-    open fun setFogHeightCurve(curve: Float) {
-        _icall_Unit_Float(setFogHeightCurveMethodBind, this.rawMemory, curve)
+    open fun setFogHeightCurve(curve: Double) {
+        _icall_Unit_Double(setFogHeightCurveMethodBind, this.rawMemory, curve)
     }
 
 
     private val getFogHeightCurveMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_fog_height_curve") }
-    open fun getFogHeightCurve(): Float {
-        return _icall_Float(getFogHeightCurveMethodBind, this.rawMemory)
+    open fun getFogHeightCurve(): Double {
+        return _icall_Double(getFogHeightCurveMethodBind, this.rawMemory)
     }
 
 
     private val setTonemapperMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_tonemapper") }
-    open fun setTonemapper(mode: Int) {
-        _icall_Unit_Int(setTonemapperMethodBind, this.rawMemory, mode)
+    open fun setTonemapper(mode: Long) {
+        _icall_Unit_Long(setTonemapperMethodBind, this.rawMemory, mode)
     }
 
 
     private val getTonemapperMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_tonemapper") }
     open fun getTonemapper(): Environment.ToneMapper {
-        return Environment.ToneMapper.fromInt(_icall_Int(getTonemapperMethodBind, this.rawMemory))
+        return Environment.ToneMapper.fromInt(_icall_Long(getTonemapperMethodBind, this.rawMemory))
     }
 
 
     private val setTonemapExposureMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_tonemap_exposure") }
-    open fun setTonemapExposure(exposure: Float) {
-        _icall_Unit_Float(setTonemapExposureMethodBind, this.rawMemory, exposure)
+    open fun setTonemapExposure(exposure: Double) {
+        _icall_Unit_Double(setTonemapExposureMethodBind, this.rawMemory, exposure)
     }
 
 
     private val getTonemapExposureMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_tonemap_exposure") }
-    open fun getTonemapExposure(): Float {
-        return _icall_Float(getTonemapExposureMethodBind, this.rawMemory)
+    open fun getTonemapExposure(): Double {
+        return _icall_Double(getTonemapExposureMethodBind, this.rawMemory)
     }
 
 
     private val setTonemapWhiteMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_tonemap_white") }
-    open fun setTonemapWhite(white: Float) {
-        _icall_Unit_Float(setTonemapWhiteMethodBind, this.rawMemory, white)
+    open fun setTonemapWhite(white: Double) {
+        _icall_Unit_Double(setTonemapWhiteMethodBind, this.rawMemory, white)
     }
 
 
     private val getTonemapWhiteMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_tonemap_white") }
-    open fun getTonemapWhite(): Float {
-        return _icall_Float(getTonemapWhiteMethodBind, this.rawMemory)
+    open fun getTonemapWhite(): Double {
+        return _icall_Double(getTonemapWhiteMethodBind, this.rawMemory)
     }
 
 
@@ -860,50 +860,50 @@ open class Environment : Resource {
 
 
     private val setTonemapAutoExposureMaxMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_tonemap_auto_exposure_max") }
-    open fun setTonemapAutoExposureMax(exposureMax: Float) {
-        _icall_Unit_Float(setTonemapAutoExposureMaxMethodBind, this.rawMemory, exposureMax)
+    open fun setTonemapAutoExposureMax(exposureMax: Double) {
+        _icall_Unit_Double(setTonemapAutoExposureMaxMethodBind, this.rawMemory, exposureMax)
     }
 
 
     private val getTonemapAutoExposureMaxMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_tonemap_auto_exposure_max") }
-    open fun getTonemapAutoExposureMax(): Float {
-        return _icall_Float(getTonemapAutoExposureMaxMethodBind, this.rawMemory)
+    open fun getTonemapAutoExposureMax(): Double {
+        return _icall_Double(getTonemapAutoExposureMaxMethodBind, this.rawMemory)
     }
 
 
     private val setTonemapAutoExposureMinMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_tonemap_auto_exposure_min") }
-    open fun setTonemapAutoExposureMin(exposureMin: Float) {
-        _icall_Unit_Float(setTonemapAutoExposureMinMethodBind, this.rawMemory, exposureMin)
+    open fun setTonemapAutoExposureMin(exposureMin: Double) {
+        _icall_Unit_Double(setTonemapAutoExposureMinMethodBind, this.rawMemory, exposureMin)
     }
 
 
     private val getTonemapAutoExposureMinMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_tonemap_auto_exposure_min") }
-    open fun getTonemapAutoExposureMin(): Float {
-        return _icall_Float(getTonemapAutoExposureMinMethodBind, this.rawMemory)
+    open fun getTonemapAutoExposureMin(): Double {
+        return _icall_Double(getTonemapAutoExposureMinMethodBind, this.rawMemory)
     }
 
 
     private val setTonemapAutoExposureSpeedMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_tonemap_auto_exposure_speed") }
-    open fun setTonemapAutoExposureSpeed(exposureSpeed: Float) {
-        _icall_Unit_Float(setTonemapAutoExposureSpeedMethodBind, this.rawMemory, exposureSpeed)
+    open fun setTonemapAutoExposureSpeed(exposureSpeed: Double) {
+        _icall_Unit_Double(setTonemapAutoExposureSpeedMethodBind, this.rawMemory, exposureSpeed)
     }
 
 
     private val getTonemapAutoExposureSpeedMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_tonemap_auto_exposure_speed") }
-    open fun getTonemapAutoExposureSpeed(): Float {
-        return _icall_Float(getTonemapAutoExposureSpeedMethodBind, this.rawMemory)
+    open fun getTonemapAutoExposureSpeed(): Double {
+        return _icall_Double(getTonemapAutoExposureSpeedMethodBind, this.rawMemory)
     }
 
 
     private val setTonemapAutoExposureGreyMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_tonemap_auto_exposure_grey") }
-    open fun setTonemapAutoExposureGrey(exposureGrey: Float) {
-        _icall_Unit_Float(setTonemapAutoExposureGreyMethodBind, this.rawMemory, exposureGrey)
+    open fun setTonemapAutoExposureGrey(exposureGrey: Double) {
+        _icall_Unit_Double(setTonemapAutoExposureGreyMethodBind, this.rawMemory, exposureGrey)
     }
 
 
     private val getTonemapAutoExposureGreyMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_tonemap_auto_exposure_grey") }
-    open fun getTonemapAutoExposureGrey(): Float {
-        return _icall_Float(getTonemapAutoExposureGreyMethodBind, this.rawMemory)
+    open fun getTonemapAutoExposureGrey(): Double {
+        return _icall_Double(getTonemapAutoExposureGreyMethodBind, this.rawMemory)
     }
 
 
@@ -920,50 +920,50 @@ open class Environment : Resource {
 
 
     private val setSsrMaxStepsMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_ssr_max_steps") }
-    open fun setSsrMaxSteps(maxSteps: Int) {
-        _icall_Unit_Int(setSsrMaxStepsMethodBind, this.rawMemory, maxSteps)
+    open fun setSsrMaxSteps(maxSteps: Long) {
+        _icall_Unit_Long(setSsrMaxStepsMethodBind, this.rawMemory, maxSteps)
     }
 
 
     private val getSsrMaxStepsMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_ssr_max_steps") }
-    open fun getSsrMaxSteps(): Int {
-        return _icall_Int(getSsrMaxStepsMethodBind, this.rawMemory)
+    open fun getSsrMaxSteps(): Long {
+        return _icall_Long(getSsrMaxStepsMethodBind, this.rawMemory)
     }
 
 
     private val setSsrFadeInMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_ssr_fade_in") }
-    open fun setSsrFadeIn(fadeIn: Float) {
-        _icall_Unit_Float(setSsrFadeInMethodBind, this.rawMemory, fadeIn)
+    open fun setSsrFadeIn(fadeIn: Double) {
+        _icall_Unit_Double(setSsrFadeInMethodBind, this.rawMemory, fadeIn)
     }
 
 
     private val getSsrFadeInMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_ssr_fade_in") }
-    open fun getSsrFadeIn(): Float {
-        return _icall_Float(getSsrFadeInMethodBind, this.rawMemory)
+    open fun getSsrFadeIn(): Double {
+        return _icall_Double(getSsrFadeInMethodBind, this.rawMemory)
     }
 
 
     private val setSsrFadeOutMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_ssr_fade_out") }
-    open fun setSsrFadeOut(fadeOut: Float) {
-        _icall_Unit_Float(setSsrFadeOutMethodBind, this.rawMemory, fadeOut)
+    open fun setSsrFadeOut(fadeOut: Double) {
+        _icall_Unit_Double(setSsrFadeOutMethodBind, this.rawMemory, fadeOut)
     }
 
 
     private val getSsrFadeOutMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_ssr_fade_out") }
-    open fun getSsrFadeOut(): Float {
-        return _icall_Float(getSsrFadeOutMethodBind, this.rawMemory)
+    open fun getSsrFadeOut(): Double {
+        return _icall_Double(getSsrFadeOutMethodBind, this.rawMemory)
     }
 
 
     private val setSsrDepthToleranceMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_ssr_depth_tolerance") }
-    open fun setSsrDepthTolerance(depthTolerance: Float) {
-        _icall_Unit_Float(setSsrDepthToleranceMethodBind, this.rawMemory, depthTolerance)
+    open fun setSsrDepthTolerance(depthTolerance: Double) {
+        _icall_Unit_Double(setSsrDepthToleranceMethodBind, this.rawMemory, depthTolerance)
     }
 
 
     private val getSsrDepthToleranceMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_ssr_depth_tolerance") }
-    open fun getSsrDepthTolerance(): Float {
-        return _icall_Float(getSsrDepthToleranceMethodBind, this.rawMemory)
+    open fun getSsrDepthTolerance(): Double {
+        return _icall_Double(getSsrDepthToleranceMethodBind, this.rawMemory)
     }
 
 
@@ -992,86 +992,86 @@ open class Environment : Resource {
 
 
     private val setSsaoRadiusMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_ssao_radius") }
-    open fun setSsaoRadius(radius: Float) {
-        _icall_Unit_Float(setSsaoRadiusMethodBind, this.rawMemory, radius)
+    open fun setSsaoRadius(radius: Double) {
+        _icall_Unit_Double(setSsaoRadiusMethodBind, this.rawMemory, radius)
     }
 
 
     private val getSsaoRadiusMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_ssao_radius") }
-    open fun getSsaoRadius(): Float {
-        return _icall_Float(getSsaoRadiusMethodBind, this.rawMemory)
+    open fun getSsaoRadius(): Double {
+        return _icall_Double(getSsaoRadiusMethodBind, this.rawMemory)
     }
 
 
     private val setSsaoIntensityMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_ssao_intensity") }
-    open fun setSsaoIntensity(intensity: Float) {
-        _icall_Unit_Float(setSsaoIntensityMethodBind, this.rawMemory, intensity)
+    open fun setSsaoIntensity(intensity: Double) {
+        _icall_Unit_Double(setSsaoIntensityMethodBind, this.rawMemory, intensity)
     }
 
 
     private val getSsaoIntensityMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_ssao_intensity") }
-    open fun getSsaoIntensity(): Float {
-        return _icall_Float(getSsaoIntensityMethodBind, this.rawMemory)
+    open fun getSsaoIntensity(): Double {
+        return _icall_Double(getSsaoIntensityMethodBind, this.rawMemory)
     }
 
 
     private val setSsaoRadius2MethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_ssao_radius2") }
-    open fun setSsaoRadius2(radius: Float) {
-        _icall_Unit_Float(setSsaoRadius2MethodBind, this.rawMemory, radius)
+    open fun setSsaoRadius2(radius: Double) {
+        _icall_Unit_Double(setSsaoRadius2MethodBind, this.rawMemory, radius)
     }
 
 
     private val getSsaoRadius2MethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_ssao_radius2") }
-    open fun getSsaoRadius2(): Float {
-        return _icall_Float(getSsaoRadius2MethodBind, this.rawMemory)
+    open fun getSsaoRadius2(): Double {
+        return _icall_Double(getSsaoRadius2MethodBind, this.rawMemory)
     }
 
 
     private val setSsaoIntensity2MethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_ssao_intensity2") }
-    open fun setSsaoIntensity2(intensity: Float) {
-        _icall_Unit_Float(setSsaoIntensity2MethodBind, this.rawMemory, intensity)
+    open fun setSsaoIntensity2(intensity: Double) {
+        _icall_Unit_Double(setSsaoIntensity2MethodBind, this.rawMemory, intensity)
     }
 
 
     private val getSsaoIntensity2MethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_ssao_intensity2") }
-    open fun getSsaoIntensity2(): Float {
-        return _icall_Float(getSsaoIntensity2MethodBind, this.rawMemory)
+    open fun getSsaoIntensity2(): Double {
+        return _icall_Double(getSsaoIntensity2MethodBind, this.rawMemory)
     }
 
 
     private val setSsaoBiasMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_ssao_bias") }
-    open fun setSsaoBias(bias: Float) {
-        _icall_Unit_Float(setSsaoBiasMethodBind, this.rawMemory, bias)
+    open fun setSsaoBias(bias: Double) {
+        _icall_Unit_Double(setSsaoBiasMethodBind, this.rawMemory, bias)
     }
 
 
     private val getSsaoBiasMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_ssao_bias") }
-    open fun getSsaoBias(): Float {
-        return _icall_Float(getSsaoBiasMethodBind, this.rawMemory)
+    open fun getSsaoBias(): Double {
+        return _icall_Double(getSsaoBiasMethodBind, this.rawMemory)
     }
 
 
     private val setSsaoDirectLightAffectMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_ssao_direct_light_affect") }
-    open fun setSsaoDirectLightAffect(amount: Float) {
-        _icall_Unit_Float(setSsaoDirectLightAffectMethodBind, this.rawMemory, amount)
+    open fun setSsaoDirectLightAffect(amount: Double) {
+        _icall_Unit_Double(setSsaoDirectLightAffectMethodBind, this.rawMemory, amount)
     }
 
 
     private val getSsaoDirectLightAffectMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_ssao_direct_light_affect") }
-    open fun getSsaoDirectLightAffect(): Float {
-        return _icall_Float(getSsaoDirectLightAffectMethodBind, this.rawMemory)
+    open fun getSsaoDirectLightAffect(): Double {
+        return _icall_Double(getSsaoDirectLightAffectMethodBind, this.rawMemory)
     }
 
 
     private val setSsaoAoChannelAffectMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_ssao_ao_channel_affect") }
-    open fun setSsaoAoChannelAffect(amount: Float) {
-        _icall_Unit_Float(setSsaoAoChannelAffectMethodBind, this.rawMemory, amount)
+    open fun setSsaoAoChannelAffect(amount: Double) {
+        _icall_Unit_Double(setSsaoAoChannelAffectMethodBind, this.rawMemory, amount)
     }
 
 
     private val getSsaoAoChannelAffectMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_ssao_ao_channel_affect") }
-    open fun getSsaoAoChannelAffect(): Float {
-        return _icall_Float(getSsaoAoChannelAffectMethodBind, this.rawMemory)
+    open fun getSsaoAoChannelAffect(): Double {
+        return _icall_Double(getSsaoAoChannelAffectMethodBind, this.rawMemory)
     }
 
 
@@ -1088,38 +1088,38 @@ open class Environment : Resource {
 
 
     private val setSsaoBlurMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_ssao_blur") }
-    open fun setSsaoBlur(mode: Int) {
-        _icall_Unit_Int(setSsaoBlurMethodBind, this.rawMemory, mode)
+    open fun setSsaoBlur(mode: Long) {
+        _icall_Unit_Long(setSsaoBlurMethodBind, this.rawMemory, mode)
     }
 
 
     private val getSsaoBlurMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_ssao_blur") }
     open fun getSsaoBlur(): Environment.SSAOBlur {
-        return Environment.SSAOBlur.fromInt(_icall_Int(getSsaoBlurMethodBind, this.rawMemory))
+        return Environment.SSAOBlur.fromInt(_icall_Long(getSsaoBlurMethodBind, this.rawMemory))
     }
 
 
     private val setSsaoQualityMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_ssao_quality") }
-    open fun setSsaoQuality(quality: Int) {
-        _icall_Unit_Int(setSsaoQualityMethodBind, this.rawMemory, quality)
+    open fun setSsaoQuality(quality: Long) {
+        _icall_Unit_Long(setSsaoQualityMethodBind, this.rawMemory, quality)
     }
 
 
     private val getSsaoQualityMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_ssao_quality") }
     open fun getSsaoQuality(): Environment.SSAOQuality {
-        return Environment.SSAOQuality.fromInt(_icall_Int(getSsaoQualityMethodBind, this.rawMemory))
+        return Environment.SSAOQuality.fromInt(_icall_Long(getSsaoQualityMethodBind, this.rawMemory))
     }
 
 
     private val setSsaoEdgeSharpnessMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_ssao_edge_sharpness") }
-    open fun setSsaoEdgeSharpness(edgeSharpness: Float) {
-        _icall_Unit_Float(setSsaoEdgeSharpnessMethodBind, this.rawMemory, edgeSharpness)
+    open fun setSsaoEdgeSharpness(edgeSharpness: Double) {
+        _icall_Unit_Double(setSsaoEdgeSharpnessMethodBind, this.rawMemory, edgeSharpness)
     }
 
 
     private val getSsaoEdgeSharpnessMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_ssao_edge_sharpness") }
-    open fun getSsaoEdgeSharpness(): Float {
-        return _icall_Float(getSsaoEdgeSharpnessMethodBind, this.rawMemory)
+    open fun getSsaoEdgeSharpness(): Double {
+        return _icall_Double(getSsaoEdgeSharpnessMethodBind, this.rawMemory)
     }
 
 
@@ -1136,50 +1136,50 @@ open class Environment : Resource {
 
 
     private val setDofBlurFarDistanceMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_dof_blur_far_distance") }
-    open fun setDofBlurFarDistance(intensity: Float) {
-        _icall_Unit_Float(setDofBlurFarDistanceMethodBind, this.rawMemory, intensity)
+    open fun setDofBlurFarDistance(intensity: Double) {
+        _icall_Unit_Double(setDofBlurFarDistanceMethodBind, this.rawMemory, intensity)
     }
 
 
     private val getDofBlurFarDistanceMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_dof_blur_far_distance") }
-    open fun getDofBlurFarDistance(): Float {
-        return _icall_Float(getDofBlurFarDistanceMethodBind, this.rawMemory)
+    open fun getDofBlurFarDistance(): Double {
+        return _icall_Double(getDofBlurFarDistanceMethodBind, this.rawMemory)
     }
 
 
     private val setDofBlurFarTransitionMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_dof_blur_far_transition") }
-    open fun setDofBlurFarTransition(intensity: Float) {
-        _icall_Unit_Float(setDofBlurFarTransitionMethodBind, this.rawMemory, intensity)
+    open fun setDofBlurFarTransition(intensity: Double) {
+        _icall_Unit_Double(setDofBlurFarTransitionMethodBind, this.rawMemory, intensity)
     }
 
 
     private val getDofBlurFarTransitionMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_dof_blur_far_transition") }
-    open fun getDofBlurFarTransition(): Float {
-        return _icall_Float(getDofBlurFarTransitionMethodBind, this.rawMemory)
+    open fun getDofBlurFarTransition(): Double {
+        return _icall_Double(getDofBlurFarTransitionMethodBind, this.rawMemory)
     }
 
 
     private val setDofBlurFarAmountMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_dof_blur_far_amount") }
-    open fun setDofBlurFarAmount(intensity: Float) {
-        _icall_Unit_Float(setDofBlurFarAmountMethodBind, this.rawMemory, intensity)
+    open fun setDofBlurFarAmount(intensity: Double) {
+        _icall_Unit_Double(setDofBlurFarAmountMethodBind, this.rawMemory, intensity)
     }
 
 
     private val getDofBlurFarAmountMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_dof_blur_far_amount") }
-    open fun getDofBlurFarAmount(): Float {
-        return _icall_Float(getDofBlurFarAmountMethodBind, this.rawMemory)
+    open fun getDofBlurFarAmount(): Double {
+        return _icall_Double(getDofBlurFarAmountMethodBind, this.rawMemory)
     }
 
 
     private val setDofBlurFarQualityMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_dof_blur_far_quality") }
-    open fun setDofBlurFarQuality(intensity: Int) {
-        _icall_Unit_Int(setDofBlurFarQualityMethodBind, this.rawMemory, intensity)
+    open fun setDofBlurFarQuality(intensity: Long) {
+        _icall_Unit_Long(setDofBlurFarQualityMethodBind, this.rawMemory, intensity)
     }
 
 
     private val getDofBlurFarQualityMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_dof_blur_far_quality") }
     open fun getDofBlurFarQuality(): Environment.DOFBlurQuality {
-        return Environment.DOFBlurQuality.fromInt(_icall_Int(getDofBlurFarQualityMethodBind, this.rawMemory))
+        return Environment.DOFBlurQuality.fromInt(_icall_Long(getDofBlurFarQualityMethodBind, this.rawMemory))
     }
 
 
@@ -1196,50 +1196,50 @@ open class Environment : Resource {
 
 
     private val setDofBlurNearDistanceMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_dof_blur_near_distance") }
-    open fun setDofBlurNearDistance(intensity: Float) {
-        _icall_Unit_Float(setDofBlurNearDistanceMethodBind, this.rawMemory, intensity)
+    open fun setDofBlurNearDistance(intensity: Double) {
+        _icall_Unit_Double(setDofBlurNearDistanceMethodBind, this.rawMemory, intensity)
     }
 
 
     private val getDofBlurNearDistanceMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_dof_blur_near_distance") }
-    open fun getDofBlurNearDistance(): Float {
-        return _icall_Float(getDofBlurNearDistanceMethodBind, this.rawMemory)
+    open fun getDofBlurNearDistance(): Double {
+        return _icall_Double(getDofBlurNearDistanceMethodBind, this.rawMemory)
     }
 
 
     private val setDofBlurNearTransitionMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_dof_blur_near_transition") }
-    open fun setDofBlurNearTransition(intensity: Float) {
-        _icall_Unit_Float(setDofBlurNearTransitionMethodBind, this.rawMemory, intensity)
+    open fun setDofBlurNearTransition(intensity: Double) {
+        _icall_Unit_Double(setDofBlurNearTransitionMethodBind, this.rawMemory, intensity)
     }
 
 
     private val getDofBlurNearTransitionMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_dof_blur_near_transition") }
-    open fun getDofBlurNearTransition(): Float {
-        return _icall_Float(getDofBlurNearTransitionMethodBind, this.rawMemory)
+    open fun getDofBlurNearTransition(): Double {
+        return _icall_Double(getDofBlurNearTransitionMethodBind, this.rawMemory)
     }
 
 
     private val setDofBlurNearAmountMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_dof_blur_near_amount") }
-    open fun setDofBlurNearAmount(intensity: Float) {
-        _icall_Unit_Float(setDofBlurNearAmountMethodBind, this.rawMemory, intensity)
+    open fun setDofBlurNearAmount(intensity: Double) {
+        _icall_Unit_Double(setDofBlurNearAmountMethodBind, this.rawMemory, intensity)
     }
 
 
     private val getDofBlurNearAmountMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_dof_blur_near_amount") }
-    open fun getDofBlurNearAmount(): Float {
-        return _icall_Float(getDofBlurNearAmountMethodBind, this.rawMemory)
+    open fun getDofBlurNearAmount(): Double {
+        return _icall_Double(getDofBlurNearAmountMethodBind, this.rawMemory)
     }
 
 
     private val setDofBlurNearQualityMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_dof_blur_near_quality") }
-    open fun setDofBlurNearQuality(level: Int) {
-        _icall_Unit_Int(setDofBlurNearQualityMethodBind, this.rawMemory, level)
+    open fun setDofBlurNearQuality(level: Long) {
+        _icall_Unit_Long(setDofBlurNearQualityMethodBind, this.rawMemory, level)
     }
 
 
     private val getDofBlurNearQualityMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_dof_blur_near_quality") }
     open fun getDofBlurNearQuality(): Environment.DOFBlurQuality {
-        return Environment.DOFBlurQuality.fromInt(_icall_Int(getDofBlurNearQualityMethodBind, this.rawMemory))
+        return Environment.DOFBlurQuality.fromInt(_icall_Long(getDofBlurNearQualityMethodBind, this.rawMemory))
     }
 
 
@@ -1256,86 +1256,86 @@ open class Environment : Resource {
 
 
     private val setGlowLevelMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_glow_level") }
-    open fun setGlowLevel(idx: Int, enabled: Boolean) {
-        _icall_Unit_Int_Boolean(setGlowLevelMethodBind, this.rawMemory, idx, enabled)
+    open fun setGlowLevel(idx: Long, enabled: Boolean) {
+        _icall_Unit_Long_Boolean(setGlowLevelMethodBind, this.rawMemory, idx, enabled)
     }
 
 
     private val isGlowLevelEnabledMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "is_glow_level_enabled") }
-    open fun isGlowLevelEnabled(idx: Int): Boolean {
-        return _icall_Boolean_Int(isGlowLevelEnabledMethodBind, this.rawMemory, idx)
+    open fun isGlowLevelEnabled(idx: Long): Boolean {
+        return _icall_Boolean_Long(isGlowLevelEnabledMethodBind, this.rawMemory, idx)
     }
 
 
     private val setGlowIntensityMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_glow_intensity") }
-    open fun setGlowIntensity(intensity: Float) {
-        _icall_Unit_Float(setGlowIntensityMethodBind, this.rawMemory, intensity)
+    open fun setGlowIntensity(intensity: Double) {
+        _icall_Unit_Double(setGlowIntensityMethodBind, this.rawMemory, intensity)
     }
 
 
     private val getGlowIntensityMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_glow_intensity") }
-    open fun getGlowIntensity(): Float {
-        return _icall_Float(getGlowIntensityMethodBind, this.rawMemory)
+    open fun getGlowIntensity(): Double {
+        return _icall_Double(getGlowIntensityMethodBind, this.rawMemory)
     }
 
 
     private val setGlowStrengthMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_glow_strength") }
-    open fun setGlowStrength(strength: Float) {
-        _icall_Unit_Float(setGlowStrengthMethodBind, this.rawMemory, strength)
+    open fun setGlowStrength(strength: Double) {
+        _icall_Unit_Double(setGlowStrengthMethodBind, this.rawMemory, strength)
     }
 
 
     private val getGlowStrengthMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_glow_strength") }
-    open fun getGlowStrength(): Float {
-        return _icall_Float(getGlowStrengthMethodBind, this.rawMemory)
+    open fun getGlowStrength(): Double {
+        return _icall_Double(getGlowStrengthMethodBind, this.rawMemory)
     }
 
 
     private val setGlowBloomMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_glow_bloom") }
-    open fun setGlowBloom(amount: Float) {
-        _icall_Unit_Float(setGlowBloomMethodBind, this.rawMemory, amount)
+    open fun setGlowBloom(amount: Double) {
+        _icall_Unit_Double(setGlowBloomMethodBind, this.rawMemory, amount)
     }
 
 
     private val getGlowBloomMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_glow_bloom") }
-    open fun getGlowBloom(): Float {
-        return _icall_Float(getGlowBloomMethodBind, this.rawMemory)
+    open fun getGlowBloom(): Double {
+        return _icall_Double(getGlowBloomMethodBind, this.rawMemory)
     }
 
 
     private val setGlowBlendModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_glow_blend_mode") }
-    open fun setGlowBlendMode(mode: Int) {
-        _icall_Unit_Int(setGlowBlendModeMethodBind, this.rawMemory, mode)
+    open fun setGlowBlendMode(mode: Long) {
+        _icall_Unit_Long(setGlowBlendModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getGlowBlendModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_glow_blend_mode") }
     open fun getGlowBlendMode(): Environment.GlowBlendMode {
-        return Environment.GlowBlendMode.fromInt(_icall_Int(getGlowBlendModeMethodBind, this.rawMemory))
+        return Environment.GlowBlendMode.fromInt(_icall_Long(getGlowBlendModeMethodBind, this.rawMemory))
     }
 
 
     private val setGlowHdrBleedThresholdMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_glow_hdr_bleed_threshold") }
-    open fun setGlowHdrBleedThreshold(threshold: Float) {
-        _icall_Unit_Float(setGlowHdrBleedThresholdMethodBind, this.rawMemory, threshold)
+    open fun setGlowHdrBleedThreshold(threshold: Double) {
+        _icall_Unit_Double(setGlowHdrBleedThresholdMethodBind, this.rawMemory, threshold)
     }
 
 
     private val getGlowHdrBleedThresholdMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_glow_hdr_bleed_threshold") }
-    open fun getGlowHdrBleedThreshold(): Float {
-        return _icall_Float(getGlowHdrBleedThresholdMethodBind, this.rawMemory)
+    open fun getGlowHdrBleedThreshold(): Double {
+        return _icall_Double(getGlowHdrBleedThresholdMethodBind, this.rawMemory)
     }
 
 
     private val setGlowHdrBleedScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_glow_hdr_bleed_scale") }
-    open fun setGlowHdrBleedScale(scale: Float) {
-        _icall_Unit_Float(setGlowHdrBleedScaleMethodBind, this.rawMemory, scale)
+    open fun setGlowHdrBleedScale(scale: Double) {
+        _icall_Unit_Double(setGlowHdrBleedScaleMethodBind, this.rawMemory, scale)
     }
 
 
     private val getGlowHdrBleedScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_glow_hdr_bleed_scale") }
-    open fun getGlowHdrBleedScale(): Float {
-        return _icall_Float(getGlowHdrBleedScaleMethodBind, this.rawMemory)
+    open fun getGlowHdrBleedScale(): Double {
+        return _icall_Double(getGlowHdrBleedScaleMethodBind, this.rawMemory)
     }
 
 
@@ -1364,38 +1364,38 @@ open class Environment : Resource {
 
 
     private val setAdjustmentBrightnessMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_adjustment_brightness") }
-    open fun setAdjustmentBrightness(brightness: Float) {
-        _icall_Unit_Float(setAdjustmentBrightnessMethodBind, this.rawMemory, brightness)
+    open fun setAdjustmentBrightness(brightness: Double) {
+        _icall_Unit_Double(setAdjustmentBrightnessMethodBind, this.rawMemory, brightness)
     }
 
 
     private val getAdjustmentBrightnessMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_adjustment_brightness") }
-    open fun getAdjustmentBrightness(): Float {
-        return _icall_Float(getAdjustmentBrightnessMethodBind, this.rawMemory)
+    open fun getAdjustmentBrightness(): Double {
+        return _icall_Double(getAdjustmentBrightnessMethodBind, this.rawMemory)
     }
 
 
     private val setAdjustmentContrastMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_adjustment_contrast") }
-    open fun setAdjustmentContrast(contrast: Float) {
-        _icall_Unit_Float(setAdjustmentContrastMethodBind, this.rawMemory, contrast)
+    open fun setAdjustmentContrast(contrast: Double) {
+        _icall_Unit_Double(setAdjustmentContrastMethodBind, this.rawMemory, contrast)
     }
 
 
     private val getAdjustmentContrastMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_adjustment_contrast") }
-    open fun getAdjustmentContrast(): Float {
-        return _icall_Float(getAdjustmentContrastMethodBind, this.rawMemory)
+    open fun getAdjustmentContrast(): Double {
+        return _icall_Double(getAdjustmentContrastMethodBind, this.rawMemory)
     }
 
 
     private val setAdjustmentSaturationMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "set_adjustment_saturation") }
-    open fun setAdjustmentSaturation(saturation: Float) {
-        _icall_Unit_Float(setAdjustmentSaturationMethodBind, this.rawMemory, saturation)
+    open fun setAdjustmentSaturation(saturation: Double) {
+        _icall_Unit_Double(setAdjustmentSaturationMethodBind, this.rawMemory, saturation)
     }
 
 
     private val getAdjustmentSaturationMethodBind: CPointer<godot_method_bind> by lazy { getMB("Environment", "get_adjustment_saturation") }
-    open fun getAdjustmentSaturation(): Float {
-        return _icall_Float(getAdjustmentSaturationMethodBind, this.rawMemory)
+    open fun getAdjustmentSaturation(): Double {
+        return _icall_Double(getAdjustmentSaturationMethodBind, this.rawMemory)
     }
 
 

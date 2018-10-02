@@ -44,28 +44,28 @@ open class ARVRController : Spatial {
 
 
     // Properties
-    open var controllerId: Int
-        get() = _icall_Int(getControllerIdMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setControllerIdMethodBind, this.rawMemory, value)
+    open var controllerId: Long
+        get() = _icall_Long(getControllerIdMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setControllerIdMethodBind, this.rawMemory, value)
 
 
-    open var rumble: Float
-        get() = _icall_Float(getRumbleMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setRumbleMethodBind, this.rawMemory, value)
+    open var rumble: Double
+        get() = _icall_Double(getRumbleMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setRumbleMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setControllerIdMethodBind: CPointer<godot_method_bind> by lazy { getMB("ARVRController", "set_controller_id") }
-    open fun setControllerId(controllerId: Int) {
-        _icall_Unit_Int(setControllerIdMethodBind, this.rawMemory, controllerId)
+    open fun setControllerId(controllerId: Long) {
+        _icall_Unit_Long(setControllerIdMethodBind, this.rawMemory, controllerId)
     }
 
 
     private val getControllerIdMethodBind: CPointer<godot_method_bind> by lazy { getMB("ARVRController", "get_controller_id") }
-    open fun getControllerId(): Int {
-        return _icall_Int(getControllerIdMethodBind, this.rawMemory)
+    open fun getControllerId(): Long {
+        return _icall_Long(getControllerIdMethodBind, this.rawMemory)
     }
 
 
@@ -76,20 +76,20 @@ open class ARVRController : Spatial {
 
 
     private val getJoystickIdMethodBind: CPointer<godot_method_bind> by lazy { getMB("ARVRController", "get_joystick_id") }
-    open fun getJoystickId(): Int {
-        return _icall_Int(getJoystickIdMethodBind, this.rawMemory)
+    open fun getJoystickId(): Long {
+        return _icall_Long(getJoystickIdMethodBind, this.rawMemory)
     }
 
 
     private val isButtonPressedMethodBind: CPointer<godot_method_bind> by lazy { getMB("ARVRController", "is_button_pressed") }
-    open fun isButtonPressed(button: Int): Int {
-        return _icall_Int_Int(isButtonPressedMethodBind, this.rawMemory, button)
+    open fun isButtonPressed(button: Long): Long {
+        return _icall_Long_Long(isButtonPressedMethodBind, this.rawMemory, button)
     }
 
 
     private val getJoystickAxisMethodBind: CPointer<godot_method_bind> by lazy { getMB("ARVRController", "get_joystick_axis") }
-    open fun getJoystickAxis(axis: Int): Float {
-        return _icall_Float_Int(getJoystickAxisMethodBind, this.rawMemory, axis)
+    open fun getJoystickAxis(axis: Long): Double {
+        return _icall_Double_Long(getJoystickAxisMethodBind, this.rawMemory, axis)
     }
 
 
@@ -101,19 +101,19 @@ open class ARVRController : Spatial {
 
     private val getHandMethodBind: CPointer<godot_method_bind> by lazy { getMB("ARVRController", "get_hand") }
     open fun getHand(): ARVRPositionalTracker.TrackerHand {
-        return ARVRPositionalTracker.TrackerHand.fromInt(_icall_Int(getHandMethodBind, this.rawMemory))
+        return ARVRPositionalTracker.TrackerHand.fromInt(_icall_Long(getHandMethodBind, this.rawMemory))
     }
 
 
     private val getRumbleMethodBind: CPointer<godot_method_bind> by lazy { getMB("ARVRController", "get_rumble") }
-    open fun getRumble(): Float {
-        return _icall_Float(getRumbleMethodBind, this.rawMemory)
+    open fun getRumble(): Double {
+        return _icall_Double(getRumbleMethodBind, this.rawMemory)
     }
 
 
     private val setRumbleMethodBind: CPointer<godot_method_bind> by lazy { getMB("ARVRController", "set_rumble") }
-    open fun setRumble(rumble: Float) {
-        _icall_Unit_Float(setRumbleMethodBind, this.rawMemory, rumble)
+    open fun setRumble(rumble: Double) {
+        _icall_Unit_Double(setRumbleMethodBind, this.rawMemory, rumble)
     }
 
 

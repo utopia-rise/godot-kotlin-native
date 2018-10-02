@@ -45,14 +45,14 @@ open class EncodedObjectAsID : Reference {
 
     // Methods
     private val setObjectIdMethodBind: CPointer<godot_method_bind> by lazy { getMB("EncodedObjectAsID", "set_object_id") }
-    open fun setObjectId(id: Int) {
-        _icall_Unit_Int(setObjectIdMethodBind, this.rawMemory, id)
+    open fun setObjectId(id: Long) {
+        _icall_Unit_Long(setObjectIdMethodBind, this.rawMemory, id)
     }
 
 
     private val getObjectIdMethodBind: CPointer<godot_method_bind> by lazy { getMB("EncodedObjectAsID", "get_object_id") }
-    open fun getObjectId(): Int {
-        return _icall_Int(getObjectIdMethodBind, this.rawMemory)
+    open fun getObjectId(): Long {
+        return _icall_Long(getObjectIdMethodBind, this.rawMemory)
     }
 
 

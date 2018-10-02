@@ -19,7 +19,7 @@ open class Input : Object {
 
     // Enums 
 
-    enum class MouseMode(val id: Int) {
+    enum class MouseMode(val id: Long) {
         MOUSE_MODE_VISIBLE(0),
         MOUSE_MODE_HIDDEN(1),
         MOUSE_MODE_CAPTURED(2),
@@ -27,10 +27,10 @@ open class Input : Object {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class CursorShape(val id: Int) {
+    enum class CursorShape(val id: Long) {
         CURSOR_ARROW(0),
         CURSOR_IBEAM(1),
         CURSOR_POINTING_HAND(2),
@@ -51,7 +51,7 @@ open class Input : Object {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -70,27 +70,27 @@ open class Input : Object {
 
 
         // Constants
-        const val MOUSE_MODE_VISIBLE: Int = 0
-        const val MOUSE_MODE_HIDDEN: Int = 1
-        const val MOUSE_MODE_CAPTURED: Int = 2
-        const val MOUSE_MODE_CONFINED: Int = 3
-        const val CURSOR_ARROW: Int = 0
-        const val CURSOR_IBEAM: Int = 1
-        const val CURSOR_POINTING_HAND: Int = 2
-        const val CURSOR_CROSS: Int = 3
-        const val CURSOR_WAIT: Int = 4
-        const val CURSOR_BUSY: Int = 5
-        const val CURSOR_DRAG: Int = 6
-        const val CURSOR_CAN_DROP: Int = 7
-        const val CURSOR_FORBIDDEN: Int = 8
-        const val CURSOR_VSIZE: Int = 9
-        const val CURSOR_HSIZE: Int = 10
-        const val CURSOR_BDIAGSIZE: Int = 11
-        const val CURSOR_FDIAGSIZE: Int = 12
-        const val CURSOR_MOVE: Int = 13
-        const val CURSOR_VSPLIT: Int = 14
-        const val CURSOR_HSPLIT: Int = 15
-        const val CURSOR_HELP: Int = 16
+        const val MOUSE_MODE_VISIBLE: Long = 0
+        const val MOUSE_MODE_HIDDEN: Long = 1
+        const val MOUSE_MODE_CAPTURED: Long = 2
+        const val MOUSE_MODE_CONFINED: Long = 3
+        const val CURSOR_ARROW: Long = 0
+        const val CURSOR_IBEAM: Long = 1
+        const val CURSOR_POINTING_HAND: Long = 2
+        const val CURSOR_CROSS: Long = 3
+        const val CURSOR_WAIT: Long = 4
+        const val CURSOR_BUSY: Long = 5
+        const val CURSOR_DRAG: Long = 6
+        const val CURSOR_CAN_DROP: Long = 7
+        const val CURSOR_FORBIDDEN: Long = 8
+        const val CURSOR_VSIZE: Long = 9
+        const val CURSOR_HSIZE: Long = 10
+        const val CURSOR_BDIAGSIZE: Long = 11
+        const val CURSOR_FDIAGSIZE: Long = 12
+        const val CURSOR_MOVE: Long = 13
+        const val CURSOR_VSPLIT: Long = 14
+        const val CURSOR_HSPLIT: Long = 15
+        const val CURSOR_HELP: Long = 16
 
 
         private val rawMemory: COpaquePointer by lazy { getSingleton("Input", "Input") }
@@ -101,20 +101,20 @@ open class Input : Object {
 
         // Methods
         private val isKeyPressedMethodBind: CPointer<godot_method_bind> by lazy { getMB("Input", "is_key_pressed") }
-        fun isKeyPressed(scancode: Int): Boolean {
-            return _icall_Boolean_Int(isKeyPressedMethodBind, this.rawMemory, scancode)
+        fun isKeyPressed(scancode: Long): Boolean {
+            return _icall_Boolean_Long(isKeyPressedMethodBind, this.rawMemory, scancode)
         }
 
 
         private val isMouseButtonPressedMethodBind: CPointer<godot_method_bind> by lazy { getMB("Input", "is_mouse_button_pressed") }
-        fun isMouseButtonPressed(button: Int): Boolean {
-            return _icall_Boolean_Int(isMouseButtonPressedMethodBind, this.rawMemory, button)
+        fun isMouseButtonPressed(button: Long): Boolean {
+            return _icall_Boolean_Long(isMouseButtonPressedMethodBind, this.rawMemory, button)
         }
 
 
         private val isJoyButtonPressedMethodBind: CPointer<godot_method_bind> by lazy { getMB("Input", "is_joy_button_pressed") }
-        fun isJoyButtonPressed(device: Int, button: Int): Boolean {
-            return _icall_Boolean_Int_Int(isJoyButtonPressedMethodBind, this.rawMemory, device, button)
+        fun isJoyButtonPressed(device: Long, button: Long): Boolean {
+            return _icall_Boolean_Long_Long(isJoyButtonPressedMethodBind, this.rawMemory, device, button)
         }
 
 
@@ -137,8 +137,8 @@ open class Input : Object {
 
 
         private val getActionStrengthMethodBind: CPointer<godot_method_bind> by lazy { getMB("Input", "get_action_strength") }
-        fun getActionStrength(action: String): Float {
-            return _icall_Float_String(getActionStrengthMethodBind, this.rawMemory, action)
+        fun getActionStrength(action: String): Double {
+            return _icall_Double_String(getActionStrengthMethodBind, this.rawMemory, action)
         }
 
 
@@ -155,32 +155,32 @@ open class Input : Object {
 
 
         private val joyConnectionChangedMethodBind: CPointer<godot_method_bind> by lazy { getMB("Input", "joy_connection_changed") }
-        fun joyConnectionChanged(device: Int, connected: Boolean, name: String, guid: String) {
-            _icall_Unit_Int_Boolean_String_String(joyConnectionChangedMethodBind, this.rawMemory, device, connected, name, guid)
+        fun joyConnectionChanged(device: Long, connected: Boolean, name: String, guid: String) {
+            _icall_Unit_Long_Boolean_String_String(joyConnectionChangedMethodBind, this.rawMemory, device, connected, name, guid)
         }
 
 
         private val isJoyKnownMethodBind: CPointer<godot_method_bind> by lazy { getMB("Input", "is_joy_known") }
-        fun isJoyKnown(device: Int): Boolean {
-            return _icall_Boolean_Int(isJoyKnownMethodBind, this.rawMemory, device)
+        fun isJoyKnown(device: Long): Boolean {
+            return _icall_Boolean_Long(isJoyKnownMethodBind, this.rawMemory, device)
         }
 
 
         private val getJoyAxisMethodBind: CPointer<godot_method_bind> by lazy { getMB("Input", "get_joy_axis") }
-        fun getJoyAxis(device: Int, axis: Int): Float {
-            return _icall_Float_Int_Int(getJoyAxisMethodBind, this.rawMemory, device, axis)
+        fun getJoyAxis(device: Long, axis: Long): Double {
+            return _icall_Double_Long_Long(getJoyAxisMethodBind, this.rawMemory, device, axis)
         }
 
 
         private val getJoyNameMethodBind: CPointer<godot_method_bind> by lazy { getMB("Input", "get_joy_name") }
-        fun getJoyName(device: Int): String {
-            return _icall_String_Int(getJoyNameMethodBind, this.rawMemory, device)
+        fun getJoyName(device: Long): String {
+            return _icall_String_Long(getJoyNameMethodBind, this.rawMemory, device)
         }
 
 
         private val getJoyGuidMethodBind: CPointer<godot_method_bind> by lazy { getMB("Input", "get_joy_guid") }
-        fun getJoyGuid(device: Int): String {
-            return _icall_String_Int(getJoyGuidMethodBind, this.rawMemory, device)
+        fun getJoyGuid(device: Long): String {
+            return _icall_String_Long(getJoyGuidMethodBind, this.rawMemory, device)
         }
 
 
@@ -191,50 +191,50 @@ open class Input : Object {
 
 
         private val getJoyVibrationStrengthMethodBind: CPointer<godot_method_bind> by lazy { getMB("Input", "get_joy_vibration_strength") }
-        fun getJoyVibrationStrength(device: Int): Vector2 {
-            return _icall_Vector2_Int(getJoyVibrationStrengthMethodBind, this.rawMemory, device)
+        fun getJoyVibrationStrength(device: Long): Vector2 {
+            return _icall_Vector2_Long(getJoyVibrationStrengthMethodBind, this.rawMemory, device)
         }
 
 
         private val getJoyVibrationDurationMethodBind: CPointer<godot_method_bind> by lazy { getMB("Input", "get_joy_vibration_duration") }
-        fun getJoyVibrationDuration(device: Int): Float {
-            return _icall_Float_Int(getJoyVibrationDurationMethodBind, this.rawMemory, device)
+        fun getJoyVibrationDuration(device: Long): Double {
+            return _icall_Double_Long(getJoyVibrationDurationMethodBind, this.rawMemory, device)
         }
 
 
         private val getJoyButtonStringMethodBind: CPointer<godot_method_bind> by lazy { getMB("Input", "get_joy_button_string") }
-        fun getJoyButtonString(buttonIndex: Int): String {
-            return _icall_String_Int(getJoyButtonStringMethodBind, this.rawMemory, buttonIndex)
+        fun getJoyButtonString(buttonIndex: Long): String {
+            return _icall_String_Long(getJoyButtonStringMethodBind, this.rawMemory, buttonIndex)
         }
 
 
         private val getJoyButtonIndexFromStringMethodBind: CPointer<godot_method_bind> by lazy { getMB("Input", "get_joy_button_index_from_string") }
-        fun getJoyButtonIndexFromString(button: String): Int {
-            return _icall_Int_String(getJoyButtonIndexFromStringMethodBind, this.rawMemory, button)
+        fun getJoyButtonIndexFromString(button: String): Long {
+            return _icall_Long_String(getJoyButtonIndexFromStringMethodBind, this.rawMemory, button)
         }
 
 
         private val getJoyAxisStringMethodBind: CPointer<godot_method_bind> by lazy { getMB("Input", "get_joy_axis_string") }
-        fun getJoyAxisString(axisIndex: Int): String {
-            return _icall_String_Int(getJoyAxisStringMethodBind, this.rawMemory, axisIndex)
+        fun getJoyAxisString(axisIndex: Long): String {
+            return _icall_String_Long(getJoyAxisStringMethodBind, this.rawMemory, axisIndex)
         }
 
 
         private val getJoyAxisIndexFromStringMethodBind: CPointer<godot_method_bind> by lazy { getMB("Input", "get_joy_axis_index_from_string") }
-        fun getJoyAxisIndexFromString(axis: String): Int {
-            return _icall_Int_String(getJoyAxisIndexFromStringMethodBind, this.rawMemory, axis)
+        fun getJoyAxisIndexFromString(axis: String): Long {
+            return _icall_Long_String(getJoyAxisIndexFromStringMethodBind, this.rawMemory, axis)
         }
 
 
         private val startJoyVibrationMethodBind: CPointer<godot_method_bind> by lazy { getMB("Input", "start_joy_vibration") }
-        fun startJoyVibration(device: Int, weakMagnitude: Float, strongMagnitude: Float, duration: Float = 0f) {
-            _icall_Unit_Int_Float_Float_Float(startJoyVibrationMethodBind, this.rawMemory, device, weakMagnitude, strongMagnitude, duration)
+        fun startJoyVibration(device: Long, weakMagnitude: Double, strongMagnitude: Double, duration: Double = 0.0) {
+            _icall_Unit_Long_Double_Double_Double(startJoyVibrationMethodBind, this.rawMemory, device, weakMagnitude, strongMagnitude, duration)
         }
 
 
         private val stopJoyVibrationMethodBind: CPointer<godot_method_bind> by lazy { getMB("Input", "stop_joy_vibration") }
-        fun stopJoyVibration(device: Int) {
-            _icall_Unit_Int(stopJoyVibrationMethodBind, this.rawMemory, device)
+        fun stopJoyVibration(device: Long) {
+            _icall_Unit_Long(stopJoyVibrationMethodBind, this.rawMemory, device)
         }
 
 
@@ -269,20 +269,20 @@ open class Input : Object {
 
 
         private val getMouseButtonMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("Input", "get_mouse_button_mask") }
-        fun getMouseButtonMask(): Int {
-            return _icall_Int(getMouseButtonMaskMethodBind, this.rawMemory)
+        fun getMouseButtonMask(): Long {
+            return _icall_Long(getMouseButtonMaskMethodBind, this.rawMemory)
         }
 
 
         private val setMouseModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Input", "set_mouse_mode") }
-        fun setMouseMode(mode: Int) {
-            _icall_Unit_Int(setMouseModeMethodBind, this.rawMemory, mode)
+        fun setMouseMode(mode: Long) {
+            _icall_Unit_Long(setMouseModeMethodBind, this.rawMemory, mode)
         }
 
 
         private val getMouseModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Input", "get_mouse_mode") }
         fun getMouseMode(): Input.MouseMode {
-            return Input.MouseMode.fromInt(_icall_Int(getMouseModeMethodBind, this.rawMemory))
+            return Input.MouseMode.fromInt(_icall_Long(getMouseModeMethodBind, this.rawMemory))
         }
 
 
@@ -305,14 +305,14 @@ open class Input : Object {
 
 
         private val setDefaultCursorShapeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Input", "set_default_cursor_shape") }
-        fun setDefaultCursorShape(shape: Int = 0) {
-            _icall_Unit_Int(setDefaultCursorShapeMethodBind, this.rawMemory, shape)
+        fun setDefaultCursorShape(shape: Long = 0) {
+            _icall_Unit_Long(setDefaultCursorShapeMethodBind, this.rawMemory, shape)
         }
 
 
         private val setCustomMouseCursorMethodBind: CPointer<godot_method_bind> by lazy { getMB("Input", "set_custom_mouse_cursor") }
-        fun setCustomMouseCursor(image: Resource, shape: Int = 0, hotspot: Vector2 = Vector2(0, 0)) {
-            _icall_Unit_Object_Int_Vector2(setCustomMouseCursorMethodBind, this.rawMemory, image, shape, hotspot)
+        fun setCustomMouseCursor(image: Resource, shape: Long = 0, hotspot: Vector2 = Vector2(0, 0)) {
+            _icall_Unit_Object_Long_Vector2(setCustomMouseCursorMethodBind, this.rawMemory, image, shape, hotspot)
         }
 
 

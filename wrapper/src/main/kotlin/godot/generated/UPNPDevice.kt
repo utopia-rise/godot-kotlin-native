@@ -19,7 +19,7 @@ open class UPNPDevice : Reference {
 
     // Enums 
 
-    enum class IGDStatus(val id: Int) {
+    enum class IGDStatus(val id: Long) {
         IGD_STATUS_OK(0),
         IGD_STATUS_HTTP_ERROR(1),
         IGD_STATUS_HTTP_EMPTY(2),
@@ -33,7 +33,7 @@ open class UPNPDevice : Reference {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -52,16 +52,16 @@ open class UPNPDevice : Reference {
 
 
         // Constants
-        const val IGD_STATUS_OK: Int = 0
-        const val IGD_STATUS_HTTP_ERROR: Int = 1
-        const val IGD_STATUS_HTTP_EMPTY: Int = 2
-        const val IGD_STATUS_NO_URLS: Int = 3
-        const val IGD_STATUS_NO_IGD: Int = 4
-        const val IGD_STATUS_DISCONNECTED: Int = 5
-        const val IGD_STATUS_UNKNOWN_DEVICE: Int = 6
-        const val IGD_STATUS_INVALID_CONTROL: Int = 7
-        const val IGD_STATUS_MALLOC_ERROR: Int = 8
-        const val IGD_STATUS_UNKNOWN_ERROR: Int = 9
+        const val IGD_STATUS_OK: Long = 0
+        const val IGD_STATUS_HTTP_ERROR: Long = 1
+        const val IGD_STATUS_HTTP_EMPTY: Long = 2
+        const val IGD_STATUS_NO_URLS: Long = 3
+        const val IGD_STATUS_NO_IGD: Long = 4
+        const val IGD_STATUS_DISCONNECTED: Long = 5
+        const val IGD_STATUS_UNKNOWN_DEVICE: Long = 6
+        const val IGD_STATUS_INVALID_CONTROL: Long = 7
+        const val IGD_STATUS_MALLOC_ERROR: Long = 8
+        const val IGD_STATUS_UNKNOWN_ERROR: Long = 9
 
 
     }
@@ -93,9 +93,9 @@ open class UPNPDevice : Reference {
         set(value) = _icall_Unit_String(setIgdOurAddrMethodBind, this.rawMemory, value)
 
 
-    open var igdStatus: Int
-        get() = _icall_Int(getIgdStatusMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setIgdStatusMethodBind, this.rawMemory, value)
+    open var igdStatus: Long
+        get() = _icall_Long(getIgdStatusMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setIgdStatusMethodBind, this.rawMemory, value)
 
 
 
@@ -114,14 +114,14 @@ open class UPNPDevice : Reference {
 
 
     private val addPortMappingMethodBind: CPointer<godot_method_bind> by lazy { getMB("UPNPDevice", "add_port_mapping") }
-    open fun addPortMapping(port: Int, portInternal: Int = 0, desc: String = "", proto: String = "UDP", duration: Int = 0): Int {
-        return _icall_Int_Int_Int_String_String_Int(addPortMappingMethodBind, this.rawMemory, port, portInternal, desc, proto, duration)
+    open fun addPortMapping(port: Long, portInternal: Long = 0, desc: String = "", proto: String = "UDP", duration: Long = 0): Long {
+        return _icall_Long_Long_Long_String_String_Long(addPortMappingMethodBind, this.rawMemory, port, portInternal, desc, proto, duration)
     }
 
 
     private val deletePortMappingMethodBind: CPointer<godot_method_bind> by lazy { getMB("UPNPDevice", "delete_port_mapping") }
-    open fun deletePortMapping(port: Int, proto: String = "UDP"): Int {
-        return _icall_Int_Int_String(deletePortMappingMethodBind, this.rawMemory, port, proto)
+    open fun deletePortMapping(port: Long, proto: String = "UDP"): Long {
+        return _icall_Long_Long_String(deletePortMappingMethodBind, this.rawMemory, port, proto)
     }
 
 
@@ -186,14 +186,14 @@ open class UPNPDevice : Reference {
 
 
     private val setIgdStatusMethodBind: CPointer<godot_method_bind> by lazy { getMB("UPNPDevice", "set_igd_status") }
-    open fun setIgdStatus(status: Int) {
-        _icall_Unit_Int(setIgdStatusMethodBind, this.rawMemory, status)
+    open fun setIgdStatus(status: Long) {
+        _icall_Unit_Long(setIgdStatusMethodBind, this.rawMemory, status)
     }
 
 
     private val getIgdStatusMethodBind: CPointer<godot_method_bind> by lazy { getMB("UPNPDevice", "get_igd_status") }
     open fun getIgdStatus(): UPNPDevice.IGDStatus {
-        return UPNPDevice.IGDStatus.fromInt(_icall_Int(getIgdStatusMethodBind, this.rawMemory))
+        return UPNPDevice.IGDStatus.fromInt(_icall_Long(getIgdStatusMethodBind, this.rawMemory))
     }
 
 

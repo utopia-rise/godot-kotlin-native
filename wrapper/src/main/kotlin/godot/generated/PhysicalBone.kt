@@ -19,7 +19,7 @@ open class PhysicalBone : PhysicsBody {
 
     // Enums 
 
-    enum class JointType(val id: Int) {
+    enum class JointType(val id: Long) {
         JOINT_TYPE_NONE(0),
         JOINT_TYPE_PIN(1),
         JOINT_TYPE_CONE(2),
@@ -29,7 +29,7 @@ open class PhysicalBone : PhysicsBody {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -51,21 +51,21 @@ open class PhysicalBone : PhysicsBody {
 
 
         // Constants
-        const val JOINT_TYPE_NONE: Int = 0
-        const val JOINT_TYPE_PIN: Int = 1
-        const val JOINT_TYPE_CONE: Int = 2
-        const val JOINT_TYPE_HINGE: Int = 3
-        const val JOINT_TYPE_SLIDER: Int = 4
-        const val JOINT_TYPE_6DOF: Int = 5
+        const val JOINT_TYPE_NONE: Long = 0
+        const val JOINT_TYPE_PIN: Long = 1
+        const val JOINT_TYPE_CONE: Long = 2
+        const val JOINT_TYPE_HINGE: Long = 3
+        const val JOINT_TYPE_SLIDER: Long = 4
+        const val JOINT_TYPE_6DOF: Long = 5
 
 
     }
 
 
     // Properties
-    open var jointType: Int
-        get() = _icall_Int(getJointTypeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setJointTypeMethodBind, this.rawMemory, value)
+    open var jointType: Long
+        get() = _icall_Long(getJointTypeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setJointTypeMethodBind, this.rawMemory, value)
 
 
     open var jointOffset: Transform
@@ -86,29 +86,29 @@ open class PhysicalBone : PhysicsBody {
     }
 
 
-    open var mass: Float
-        get() = _icall_Float(getMassMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setMassMethodBind, this.rawMemory, value)
+    open var mass: Double
+        get() = _icall_Double(getMassMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setMassMethodBind, this.rawMemory, value)
 
 
-    open var weight: Float
-        get() = _icall_Float(getWeightMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setWeightMethodBind, this.rawMemory, value)
+    open var weight: Double
+        get() = _icall_Double(getWeightMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setWeightMethodBind, this.rawMemory, value)
 
 
-    open var friction: Float
-        get() = _icall_Float(getFrictionMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setFrictionMethodBind, this.rawMemory, value)
+    open var friction: Double
+        get() = _icall_Double(getFrictionMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setFrictionMethodBind, this.rawMemory, value)
 
 
-    open var bounce: Float
-        get() = _icall_Float(getBounceMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setBounceMethodBind, this.rawMemory, value)
+    open var bounce: Double
+        get() = _icall_Double(getBounceMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setBounceMethodBind, this.rawMemory, value)
 
 
-    open var gravityScale: Float
-        get() = _icall_Float(getGravityScaleMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setGravityScaleMethodBind, this.rawMemory, value)
+    open var gravityScale: Double
+        get() = _icall_Double(getGravityScaleMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setGravityScaleMethodBind, this.rawMemory, value)
 
 
 
@@ -119,14 +119,14 @@ open class PhysicalBone : PhysicsBody {
 
 
     private val setJointTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("PhysicalBone", "set_joint_type") }
-    open fun setJointType(jointType: Int) {
-        _icall_Unit_Int(setJointTypeMethodBind, this.rawMemory, jointType)
+    open fun setJointType(jointType: Long) {
+        _icall_Unit_Long(setJointTypeMethodBind, this.rawMemory, jointType)
     }
 
 
     private val getJointTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("PhysicalBone", "get_joint_type") }
     open fun getJointType(): PhysicalBone.JointType {
-        return PhysicalBone.JointType.fromInt(_icall_Int(getJointTypeMethodBind, this.rawMemory))
+        return PhysicalBone.JointType.fromInt(_icall_Long(getJointTypeMethodBind, this.rawMemory))
     }
 
 
@@ -173,62 +173,62 @@ open class PhysicalBone : PhysicsBody {
 
 
     private val setMassMethodBind: CPointer<godot_method_bind> by lazy { getMB("PhysicalBone", "set_mass") }
-    open fun setMass(mass: Float) {
-        _icall_Unit_Float(setMassMethodBind, this.rawMemory, mass)
+    open fun setMass(mass: Double) {
+        _icall_Unit_Double(setMassMethodBind, this.rawMemory, mass)
     }
 
 
     private val getMassMethodBind: CPointer<godot_method_bind> by lazy { getMB("PhysicalBone", "get_mass") }
-    open fun getMass(): Float {
-        return _icall_Float(getMassMethodBind, this.rawMemory)
+    open fun getMass(): Double {
+        return _icall_Double(getMassMethodBind, this.rawMemory)
     }
 
 
     private val setWeightMethodBind: CPointer<godot_method_bind> by lazy { getMB("PhysicalBone", "set_weight") }
-    open fun setWeight(weight: Float) {
-        _icall_Unit_Float(setWeightMethodBind, this.rawMemory, weight)
+    open fun setWeight(weight: Double) {
+        _icall_Unit_Double(setWeightMethodBind, this.rawMemory, weight)
     }
 
 
     private val getWeightMethodBind: CPointer<godot_method_bind> by lazy { getMB("PhysicalBone", "get_weight") }
-    open fun getWeight(): Float {
-        return _icall_Float(getWeightMethodBind, this.rawMemory)
+    open fun getWeight(): Double {
+        return _icall_Double(getWeightMethodBind, this.rawMemory)
     }
 
 
     private val setFrictionMethodBind: CPointer<godot_method_bind> by lazy { getMB("PhysicalBone", "set_friction") }
-    open fun setFriction(friction: Float) {
-        _icall_Unit_Float(setFrictionMethodBind, this.rawMemory, friction)
+    open fun setFriction(friction: Double) {
+        _icall_Unit_Double(setFrictionMethodBind, this.rawMemory, friction)
     }
 
 
     private val getFrictionMethodBind: CPointer<godot_method_bind> by lazy { getMB("PhysicalBone", "get_friction") }
-    open fun getFriction(): Float {
-        return _icall_Float(getFrictionMethodBind, this.rawMemory)
+    open fun getFriction(): Double {
+        return _icall_Double(getFrictionMethodBind, this.rawMemory)
     }
 
 
     private val setBounceMethodBind: CPointer<godot_method_bind> by lazy { getMB("PhysicalBone", "set_bounce") }
-    open fun setBounce(bounce: Float) {
-        _icall_Unit_Float(setBounceMethodBind, this.rawMemory, bounce)
+    open fun setBounce(bounce: Double) {
+        _icall_Unit_Double(setBounceMethodBind, this.rawMemory, bounce)
     }
 
 
     private val getBounceMethodBind: CPointer<godot_method_bind> by lazy { getMB("PhysicalBone", "get_bounce") }
-    open fun getBounce(): Float {
-        return _icall_Float(getBounceMethodBind, this.rawMemory)
+    open fun getBounce(): Double {
+        return _icall_Double(getBounceMethodBind, this.rawMemory)
     }
 
 
     private val setGravityScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("PhysicalBone", "set_gravity_scale") }
-    open fun setGravityScale(gravityScale: Float) {
-        _icall_Unit_Float(setGravityScaleMethodBind, this.rawMemory, gravityScale)
+    open fun setGravityScale(gravityScale: Double) {
+        _icall_Unit_Double(setGravityScaleMethodBind, this.rawMemory, gravityScale)
     }
 
 
     private val getGravityScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("PhysicalBone", "get_gravity_scale") }
-    open fun getGravityScale(): Float {
-        return _icall_Float(getGravityScaleMethodBind, this.rawMemory)
+    open fun getGravityScale(): Double {
+        return _icall_Double(getGravityScaleMethodBind, this.rawMemory)
     }
 
 

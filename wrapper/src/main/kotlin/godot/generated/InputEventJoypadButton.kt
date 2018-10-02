@@ -43,14 +43,14 @@ open class InputEventJoypadButton : InputEvent {
 
 
     // Properties
-    open var buttonIndex: Int
-        get() = _icall_Int(getButtonIndexMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setButtonIndexMethodBind, this.rawMemory, value)
+    open var buttonIndex: Long
+        get() = _icall_Long(getButtonIndexMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setButtonIndexMethodBind, this.rawMemory, value)
 
 
-    open var pressure: Float
-        get() = _icall_Float(getPressureMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setPressureMethodBind, this.rawMemory, value)
+    open var pressure: Double
+        get() = _icall_Double(getPressureMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setPressureMethodBind, this.rawMemory, value)
 
 
     open var pressed: Boolean
@@ -62,26 +62,26 @@ open class InputEventJoypadButton : InputEvent {
 
     // Methods
     private val setButtonIndexMethodBind: CPointer<godot_method_bind> by lazy { getMB("InputEventJoypadButton", "set_button_index") }
-    open fun setButtonIndex(buttonIndex: Int) {
-        _icall_Unit_Int(setButtonIndexMethodBind, this.rawMemory, buttonIndex)
+    open fun setButtonIndex(buttonIndex: Long) {
+        _icall_Unit_Long(setButtonIndexMethodBind, this.rawMemory, buttonIndex)
     }
 
 
     private val getButtonIndexMethodBind: CPointer<godot_method_bind> by lazy { getMB("InputEventJoypadButton", "get_button_index") }
-    open fun getButtonIndex(): Int {
-        return _icall_Int(getButtonIndexMethodBind, this.rawMemory)
+    open fun getButtonIndex(): Long {
+        return _icall_Long(getButtonIndexMethodBind, this.rawMemory)
     }
 
 
     private val setPressureMethodBind: CPointer<godot_method_bind> by lazy { getMB("InputEventJoypadButton", "set_pressure") }
-    open fun setPressure(pressure: Float) {
-        _icall_Unit_Float(setPressureMethodBind, this.rawMemory, pressure)
+    open fun setPressure(pressure: Double) {
+        _icall_Unit_Double(setPressureMethodBind, this.rawMemory, pressure)
     }
 
 
     private val getPressureMethodBind: CPointer<godot_method_bind> by lazy { getMB("InputEventJoypadButton", "get_pressure") }
-    open fun getPressure(): Float {
-        return _icall_Float(getPressureMethodBind, this.rawMemory)
+    open fun getPressure(): Double {
+        return _icall_Double(getPressureMethodBind, this.rawMemory)
     }
 
 

@@ -48,9 +48,9 @@ open class VisualScriptLocalVar : VisualScriptNode {
         set(value) = _icall_Unit_String(setVarNameMethodBind, this.rawMemory, value)
 
 
-    open var type: Int
-        get() = _icall_Int(getVarTypeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setVarTypeMethodBind, this.rawMemory, value)
+    open var type: Long
+        get() = _icall_Long(getVarTypeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setVarTypeMethodBind, this.rawMemory, value)
 
 
 
@@ -69,14 +69,14 @@ open class VisualScriptLocalVar : VisualScriptNode {
 
 
     private val setVarTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptLocalVar", "set_var_type") }
-    open fun setVarType(type: Int) {
-        _icall_Unit_Int(setVarTypeMethodBind, this.rawMemory, type)
+    open fun setVarType(type: Long) {
+        _icall_Unit_Long(setVarTypeMethodBind, this.rawMemory, type)
     }
 
 
     private val getVarTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptLocalVar", "get_var_type") }
     open fun getVarType(): Variant.Type {
-        return Variant.Type.fromInt(_icall_Int(getVarTypeMethodBind, this.rawMemory))
+        return Variant.Type.fromInt(_icall_Long(getVarTypeMethodBind, this.rawMemory))
     }
 
 

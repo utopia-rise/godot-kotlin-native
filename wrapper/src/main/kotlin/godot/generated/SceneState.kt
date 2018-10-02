@@ -19,14 +19,14 @@ open class SceneState : Reference {
 
     // Enums 
 
-    enum class GenEditState(val id: Int) {
+    enum class GenEditState(val id: Long) {
         GEN_EDIT_STATE_DISABLED(0),
         GEN_EDIT_STATE_INSTANCE(1),
         GEN_EDIT_STATE_MAIN(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -45,9 +45,9 @@ open class SceneState : Reference {
 
 
         // Constants
-        const val GEN_EDIT_STATE_DISABLED: Int = 0
-        const val GEN_EDIT_STATE_INSTANCE: Int = 1
-        const val GEN_EDIT_STATE_MAIN: Int = 2
+        const val GEN_EDIT_STATE_DISABLED: Long = 0
+        const val GEN_EDIT_STATE_INSTANCE: Long = 1
+        const val GEN_EDIT_STATE_MAIN: Long = 2
 
 
     }
@@ -58,122 +58,122 @@ open class SceneState : Reference {
 
     // Methods
     private val getNodeCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("SceneState", "get_node_count") }
-    open fun getNodeCount(): Int {
-        return _icall_Int(getNodeCountMethodBind, this.rawMemory)
+    open fun getNodeCount(): Long {
+        return _icall_Long(getNodeCountMethodBind, this.rawMemory)
     }
 
 
     private val getNodeTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("SceneState", "get_node_type") }
-    open fun getNodeType(idx: Int): String {
-        return _icall_String_Int(getNodeTypeMethodBind, this.rawMemory, idx)
+    open fun getNodeType(idx: Long): String {
+        return _icall_String_Long(getNodeTypeMethodBind, this.rawMemory, idx)
     }
 
 
     private val getNodeNameMethodBind: CPointer<godot_method_bind> by lazy { getMB("SceneState", "get_node_name") }
-    open fun getNodeName(idx: Int): String {
-        return _icall_String_Int(getNodeNameMethodBind, this.rawMemory, idx)
+    open fun getNodeName(idx: Long): String {
+        return _icall_String_Long(getNodeNameMethodBind, this.rawMemory, idx)
     }
 
 
     private val getNodePathMethodBind: CPointer<godot_method_bind> by lazy { getMB("SceneState", "get_node_path") }
-    open fun getNodePath(idx: Int, forParent: Boolean = false): NodePath {
-        return _icall_NodePath_Int_Boolean(getNodePathMethodBind, this.rawMemory, idx, forParent)
+    open fun getNodePath(idx: Long, forParent: Boolean = false): NodePath {
+        return _icall_NodePath_Long_Boolean(getNodePathMethodBind, this.rawMemory, idx, forParent)
     }
 
 
     private val getNodeOwnerPathMethodBind: CPointer<godot_method_bind> by lazy { getMB("SceneState", "get_node_owner_path") }
-    open fun getNodeOwnerPath(idx: Int): NodePath {
-        return _icall_NodePath_Int(getNodeOwnerPathMethodBind, this.rawMemory, idx)
+    open fun getNodeOwnerPath(idx: Long): NodePath {
+        return _icall_NodePath_Long(getNodeOwnerPathMethodBind, this.rawMemory, idx)
     }
 
 
     private val isNodeInstancePlaceholderMethodBind: CPointer<godot_method_bind> by lazy { getMB("SceneState", "is_node_instance_placeholder") }
-    open fun isNodeInstancePlaceholder(idx: Int): Boolean {
-        return _icall_Boolean_Int(isNodeInstancePlaceholderMethodBind, this.rawMemory, idx)
+    open fun isNodeInstancePlaceholder(idx: Long): Boolean {
+        return _icall_Boolean_Long(isNodeInstancePlaceholderMethodBind, this.rawMemory, idx)
     }
 
 
     private val getNodeInstancePlaceholderMethodBind: CPointer<godot_method_bind> by lazy { getMB("SceneState", "get_node_instance_placeholder") }
-    open fun getNodeInstancePlaceholder(idx: Int): String {
-        return _icall_String_Int(getNodeInstancePlaceholderMethodBind, this.rawMemory, idx)
+    open fun getNodeInstancePlaceholder(idx: Long): String {
+        return _icall_String_Long(getNodeInstancePlaceholderMethodBind, this.rawMemory, idx)
     }
 
 
     private val getNodeInstanceMethodBind: CPointer<godot_method_bind> by lazy { getMB("SceneState", "get_node_instance") }
-    open fun getNodeInstance(idx: Int): PackedScene {
-        return _icall_PackedScene_Int(getNodeInstanceMethodBind, this.rawMemory, idx)
+    open fun getNodeInstance(idx: Long): PackedScene {
+        return _icall_PackedScene_Long(getNodeInstanceMethodBind, this.rawMemory, idx)
     }
 
 
     private val getNodeGroupsMethodBind: CPointer<godot_method_bind> by lazy { getMB("SceneState", "get_node_groups") }
-    open fun getNodeGroups(idx: Int): PoolStringArray {
-        return _icall_PoolStringArray_Int(getNodeGroupsMethodBind, this.rawMemory, idx)
+    open fun getNodeGroups(idx: Long): PoolStringArray {
+        return _icall_PoolStringArray_Long(getNodeGroupsMethodBind, this.rawMemory, idx)
     }
 
 
     private val getNodeIndexMethodBind: CPointer<godot_method_bind> by lazy { getMB("SceneState", "get_node_index") }
-    open fun getNodeIndex(idx: Int): Int {
-        return _icall_Int_Int(getNodeIndexMethodBind, this.rawMemory, idx)
+    open fun getNodeIndex(idx: Long): Long {
+        return _icall_Long_Long(getNodeIndexMethodBind, this.rawMemory, idx)
     }
 
 
     private val getNodePropertyCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("SceneState", "get_node_property_count") }
-    open fun getNodePropertyCount(idx: Int): Int {
-        return _icall_Int_Int(getNodePropertyCountMethodBind, this.rawMemory, idx)
+    open fun getNodePropertyCount(idx: Long): Long {
+        return _icall_Long_Long(getNodePropertyCountMethodBind, this.rawMemory, idx)
     }
 
 
     private val getNodePropertyNameMethodBind: CPointer<godot_method_bind> by lazy { getMB("SceneState", "get_node_property_name") }
-    open fun getNodePropertyName(idx: Int, propIdx: Int): String {
-        return _icall_String_Int_Int(getNodePropertyNameMethodBind, this.rawMemory, idx, propIdx)
+    open fun getNodePropertyName(idx: Long, propIdx: Long): String {
+        return _icall_String_Long_Long(getNodePropertyNameMethodBind, this.rawMemory, idx, propIdx)
     }
 
 
     private val getNodePropertyValueMethodBind: CPointer<godot_method_bind> by lazy { getMB("SceneState", "get_node_property_value") }
-    open fun getNodePropertyValue(idx: Int, propIdx: Int): Variant {
-        return _icall_Variant_Int_Int(getNodePropertyValueMethodBind, this.rawMemory, idx, propIdx)
+    open fun getNodePropertyValue(idx: Long, propIdx: Long): Variant {
+        return _icall_Variant_Long_Long(getNodePropertyValueMethodBind, this.rawMemory, idx, propIdx)
     }
 
 
     private val getConnectionCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("SceneState", "get_connection_count") }
-    open fun getConnectionCount(): Int {
-        return _icall_Int(getConnectionCountMethodBind, this.rawMemory)
+    open fun getConnectionCount(): Long {
+        return _icall_Long(getConnectionCountMethodBind, this.rawMemory)
     }
 
 
     private val getConnectionSourceMethodBind: CPointer<godot_method_bind> by lazy { getMB("SceneState", "get_connection_source") }
-    open fun getConnectionSource(idx: Int): NodePath {
-        return _icall_NodePath_Int(getConnectionSourceMethodBind, this.rawMemory, idx)
+    open fun getConnectionSource(idx: Long): NodePath {
+        return _icall_NodePath_Long(getConnectionSourceMethodBind, this.rawMemory, idx)
     }
 
 
     private val getConnectionSignalMethodBind: CPointer<godot_method_bind> by lazy { getMB("SceneState", "get_connection_signal") }
-    open fun getConnectionSignal(idx: Int): String {
-        return _icall_String_Int(getConnectionSignalMethodBind, this.rawMemory, idx)
+    open fun getConnectionSignal(idx: Long): String {
+        return _icall_String_Long(getConnectionSignalMethodBind, this.rawMemory, idx)
     }
 
 
     private val getConnectionTargetMethodBind: CPointer<godot_method_bind> by lazy { getMB("SceneState", "get_connection_target") }
-    open fun getConnectionTarget(idx: Int): NodePath {
-        return _icall_NodePath_Int(getConnectionTargetMethodBind, this.rawMemory, idx)
+    open fun getConnectionTarget(idx: Long): NodePath {
+        return _icall_NodePath_Long(getConnectionTargetMethodBind, this.rawMemory, idx)
     }
 
 
     private val getConnectionMethodMethodBind: CPointer<godot_method_bind> by lazy { getMB("SceneState", "get_connection_method") }
-    open fun getConnectionMethod(idx: Int): String {
-        return _icall_String_Int(getConnectionMethodMethodBind, this.rawMemory, idx)
+    open fun getConnectionMethod(idx: Long): String {
+        return _icall_String_Long(getConnectionMethodMethodBind, this.rawMemory, idx)
     }
 
 
     private val getConnectionFlagsMethodBind: CPointer<godot_method_bind> by lazy { getMB("SceneState", "get_connection_flags") }
-    open fun getConnectionFlags(idx: Int): Int {
-        return _icall_Int_Int(getConnectionFlagsMethodBind, this.rawMemory, idx)
+    open fun getConnectionFlags(idx: Long): Long {
+        return _icall_Long_Long(getConnectionFlagsMethodBind, this.rawMemory, idx)
     }
 
 
     private val getConnectionBindsMethodBind: CPointer<godot_method_bind> by lazy { getMB("SceneState", "get_connection_binds") }
-    open fun getConnectionBinds(idx: Int): GDArray {
-        return _icall_GDArray_Int(getConnectionBindsMethodBind, this.rawMemory, idx)
+    open fun getConnectionBinds(idx: Long): GDArray {
+        return _icall_GDArray_Long(getConnectionBindsMethodBind, this.rawMemory, idx)
     }
 
 

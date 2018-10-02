@@ -76,14 +76,14 @@ open class SpriteFrames : Resource {
 
 
     private val setAnimationSpeedMethodBind: CPointer<godot_method_bind> by lazy { getMB("SpriteFrames", "set_animation_speed") }
-    open fun setAnimationSpeed(anim: String, speed: Float) {
-        _icall_Unit_String_Float(setAnimationSpeedMethodBind, this.rawMemory, anim, speed)
+    open fun setAnimationSpeed(anim: String, speed: Double) {
+        _icall_Unit_String_Double(setAnimationSpeedMethodBind, this.rawMemory, anim, speed)
     }
 
 
     private val getAnimationSpeedMethodBind: CPointer<godot_method_bind> by lazy { getMB("SpriteFrames", "get_animation_speed") }
-    open fun getAnimationSpeed(anim: String): Float {
-        return _icall_Float_String(getAnimationSpeedMethodBind, this.rawMemory, anim)
+    open fun getAnimationSpeed(anim: String): Double {
+        return _icall_Double_String(getAnimationSpeedMethodBind, this.rawMemory, anim)
     }
 
 
@@ -100,32 +100,32 @@ open class SpriteFrames : Resource {
 
 
     private val addFrameMethodBind: CPointer<godot_method_bind> by lazy { getMB("SpriteFrames", "add_frame") }
-    open fun addFrame(anim: String, frame: Texture, atPosition: Int = -1) {
-        _icall_Unit_String_Object_Int(addFrameMethodBind, this.rawMemory, anim, frame, atPosition)
+    open fun addFrame(anim: String, frame: Texture, atPosition: Long = -1) {
+        _icall_Unit_String_Object_Long(addFrameMethodBind, this.rawMemory, anim, frame, atPosition)
     }
 
 
     private val getFrameCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("SpriteFrames", "get_frame_count") }
-    open fun getFrameCount(anim: String): Int {
-        return _icall_Int_String(getFrameCountMethodBind, this.rawMemory, anim)
+    open fun getFrameCount(anim: String): Long {
+        return _icall_Long_String(getFrameCountMethodBind, this.rawMemory, anim)
     }
 
 
     private val getFrameMethodBind: CPointer<godot_method_bind> by lazy { getMB("SpriteFrames", "get_frame") }
-    open fun getFrame(anim: String, idx: Int): Texture {
-        return _icall_Texture_String_Int(getFrameMethodBind, this.rawMemory, anim, idx)
+    open fun getFrame(anim: String, idx: Long): Texture {
+        return _icall_Texture_String_Long(getFrameMethodBind, this.rawMemory, anim, idx)
     }
 
 
     private val setFrameMethodBind: CPointer<godot_method_bind> by lazy { getMB("SpriteFrames", "set_frame") }
-    open fun setFrame(anim: String, idx: Int, txt: Texture) {
-        _icall_Unit_String_Int_Object(setFrameMethodBind, this.rawMemory, anim, idx, txt)
+    open fun setFrame(anim: String, idx: Long, txt: Texture) {
+        _icall_Unit_String_Long_Object(setFrameMethodBind, this.rawMemory, anim, idx, txt)
     }
 
 
     private val removeFrameMethodBind: CPointer<godot_method_bind> by lazy { getMB("SpriteFrames", "remove_frame") }
-    open fun removeFrame(anim: String, idx: Int) {
-        _icall_Unit_String_Int(removeFrameMethodBind, this.rawMemory, anim, idx)
+    open fun removeFrame(anim: String, idx: Long) {
+        _icall_Unit_String_Long(removeFrameMethodBind, this.rawMemory, anim, idx)
     }
 
 

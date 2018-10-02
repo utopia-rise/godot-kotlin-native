@@ -42,23 +42,23 @@ open class Shape2D : Resource {
 
 
     // Properties
-    open var customSolverBias: Float
-        get() = _icall_Float(getCustomSolverBiasMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setCustomSolverBiasMethodBind, this.rawMemory, value)
+    open var customSolverBias: Double
+        get() = _icall_Double(getCustomSolverBiasMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setCustomSolverBiasMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setCustomSolverBiasMethodBind: CPointer<godot_method_bind> by lazy { getMB("Shape2D", "set_custom_solver_bias") }
-    open fun setCustomSolverBias(bias: Float) {
-        _icall_Unit_Float(setCustomSolverBiasMethodBind, this.rawMemory, bias)
+    open fun setCustomSolverBias(bias: Double) {
+        _icall_Unit_Double(setCustomSolverBiasMethodBind, this.rawMemory, bias)
     }
 
 
     private val getCustomSolverBiasMethodBind: CPointer<godot_method_bind> by lazy { getMB("Shape2D", "get_custom_solver_bias") }
-    open fun getCustomSolverBias(): Float {
-        return _icall_Float(getCustomSolverBiasMethodBind, this.rawMemory)
+    open fun getCustomSolverBias(): Double {
+        return _icall_Double(getCustomSolverBiasMethodBind, this.rawMemory)
     }
 
 

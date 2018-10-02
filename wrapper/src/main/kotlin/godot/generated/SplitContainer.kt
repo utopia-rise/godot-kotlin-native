@@ -19,14 +19,14 @@ open class SplitContainer : Container {
 
     // Enums 
 
-    enum class DraggerVisibility(val id: Int) {
+    enum class DraggerVisibility(val id: Long) {
         DRAGGER_VISIBLE(0),
         DRAGGER_HIDDEN(1),
         DRAGGER_HIDDEN_COLLAPSED(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -49,18 +49,18 @@ open class SplitContainer : Container {
 
 
         // Constants
-        const val DRAGGER_VISIBLE: Int = 0
-        const val DRAGGER_HIDDEN: Int = 1
-        const val DRAGGER_HIDDEN_COLLAPSED: Int = 2
+        const val DRAGGER_VISIBLE: Long = 0
+        const val DRAGGER_HIDDEN: Long = 1
+        const val DRAGGER_HIDDEN_COLLAPSED: Long = 2
 
 
     }
 
 
     // Properties
-    open var splitOffset: Int
-        get() = _icall_Int(getSplitOffsetMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setSplitOffsetMethodBind, this.rawMemory, value)
+    open var splitOffset: Long
+        get() = _icall_Long(getSplitOffsetMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setSplitOffsetMethodBind, this.rawMemory, value)
 
 
     open var collapsed: Boolean
@@ -68,9 +68,9 @@ open class SplitContainer : Container {
         set(value) = _icall_Unit_Boolean(setCollapsedMethodBind, this.rawMemory, value)
 
 
-    open var draggerVisibility: Int
-        get() = _icall_Int(getDraggerVisibilityMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setDraggerVisibilityMethodBind, this.rawMemory, value)
+    open var draggerVisibility: Long
+        get() = _icall_Long(getDraggerVisibilityMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setDraggerVisibilityMethodBind, this.rawMemory, value)
 
 
 
@@ -81,14 +81,14 @@ open class SplitContainer : Container {
 
 
     private val setSplitOffsetMethodBind: CPointer<godot_method_bind> by lazy { getMB("SplitContainer", "set_split_offset") }
-    open fun setSplitOffset(offset: Int) {
-        _icall_Unit_Int(setSplitOffsetMethodBind, this.rawMemory, offset)
+    open fun setSplitOffset(offset: Long) {
+        _icall_Unit_Long(setSplitOffsetMethodBind, this.rawMemory, offset)
     }
 
 
     private val getSplitOffsetMethodBind: CPointer<godot_method_bind> by lazy { getMB("SplitContainer", "get_split_offset") }
-    open fun getSplitOffset(): Int {
-        return _icall_Int(getSplitOffsetMethodBind, this.rawMemory)
+    open fun getSplitOffset(): Long {
+        return _icall_Long(getSplitOffsetMethodBind, this.rawMemory)
     }
 
 
@@ -105,14 +105,14 @@ open class SplitContainer : Container {
 
 
     private val setDraggerVisibilityMethodBind: CPointer<godot_method_bind> by lazy { getMB("SplitContainer", "set_dragger_visibility") }
-    open fun setDraggerVisibility(mode: Int) {
-        _icall_Unit_Int(setDraggerVisibilityMethodBind, this.rawMemory, mode)
+    open fun setDraggerVisibility(mode: Long) {
+        _icall_Unit_Long(setDraggerVisibilityMethodBind, this.rawMemory, mode)
     }
 
 
     private val getDraggerVisibilityMethodBind: CPointer<godot_method_bind> by lazy { getMB("SplitContainer", "get_dragger_visibility") }
     open fun getDraggerVisibility(): SplitContainer.DraggerVisibility {
-        return SplitContainer.DraggerVisibility.fromInt(_icall_Int(getDraggerVisibilityMethodBind, this.rawMemory))
+        return SplitContainer.DraggerVisibility.fromInt(_icall_Long(getDraggerVisibilityMethodBind, this.rawMemory))
     }
 
 

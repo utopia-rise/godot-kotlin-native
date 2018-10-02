@@ -69,14 +69,14 @@ open class NavigationPolygon : Resource {
 
 
     private val getPolygonCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("NavigationPolygon", "get_polygon_count") }
-    open fun getPolygonCount(): Int {
-        return _icall_Int(getPolygonCountMethodBind, this.rawMemory)
+    open fun getPolygonCount(): Long {
+        return _icall_Long(getPolygonCountMethodBind, this.rawMemory)
     }
 
 
     private val getPolygonMethodBind: CPointer<godot_method_bind> by lazy { getMB("NavigationPolygon", "get_polygon") }
-    open fun getPolygon(idx: Int): PoolIntArray {
-        return _icall_PoolIntArray_Int(getPolygonMethodBind, this.rawMemory, idx)
+    open fun getPolygon(idx: Long): PoolIntArray {
+        return _icall_PoolIntArray_Long(getPolygonMethodBind, this.rawMemory, idx)
     }
 
 
@@ -93,32 +93,32 @@ open class NavigationPolygon : Resource {
 
 
     private val addOutlineAtIndexMethodBind: CPointer<godot_method_bind> by lazy { getMB("NavigationPolygon", "add_outline_at_index") }
-    open fun addOutlineAtIndex(outline: PoolVector2Array, index: Int) {
-        _icall_Unit_PoolVector2Array_Int(addOutlineAtIndexMethodBind, this.rawMemory, outline, index)
+    open fun addOutlineAtIndex(outline: PoolVector2Array, index: Long) {
+        _icall_Unit_PoolVector2Array_Long(addOutlineAtIndexMethodBind, this.rawMemory, outline, index)
     }
 
 
     private val getOutlineCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("NavigationPolygon", "get_outline_count") }
-    open fun getOutlineCount(): Int {
-        return _icall_Int(getOutlineCountMethodBind, this.rawMemory)
+    open fun getOutlineCount(): Long {
+        return _icall_Long(getOutlineCountMethodBind, this.rawMemory)
     }
 
 
     private val setOutlineMethodBind: CPointer<godot_method_bind> by lazy { getMB("NavigationPolygon", "set_outline") }
-    open fun setOutline(idx: Int, outline: PoolVector2Array) {
-        _icall_Unit_Int_PoolVector2Array(setOutlineMethodBind, this.rawMemory, idx, outline)
+    open fun setOutline(idx: Long, outline: PoolVector2Array) {
+        _icall_Unit_Long_PoolVector2Array(setOutlineMethodBind, this.rawMemory, idx, outline)
     }
 
 
     private val getOutlineMethodBind: CPointer<godot_method_bind> by lazy { getMB("NavigationPolygon", "get_outline") }
-    open fun getOutline(idx: Int): PoolVector2Array {
-        return _icall_PoolVector2Array_Int(getOutlineMethodBind, this.rawMemory, idx)
+    open fun getOutline(idx: Long): PoolVector2Array {
+        return _icall_PoolVector2Array_Long(getOutlineMethodBind, this.rawMemory, idx)
     }
 
 
     private val removeOutlineMethodBind: CPointer<godot_method_bind> by lazy { getMB("NavigationPolygon", "remove_outline") }
-    open fun removeOutline(idx: Int) {
-        _icall_Unit_Int(removeOutlineMethodBind, this.rawMemory, idx)
+    open fun removeOutline(idx: Long) {
+        _icall_Unit_Long(removeOutlineMethodBind, this.rawMemory, idx)
     }
 
 

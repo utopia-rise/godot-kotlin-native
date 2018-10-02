@@ -45,20 +45,20 @@ open class PCKPacker : Reference {
 
     // Methods
     private val pckStartMethodBind: CPointer<godot_method_bind> by lazy { getMB("PCKPacker", "pck_start") }
-    open fun pckStart(pckName: String, alignment: Int): GodotError {
-        return GodotError.fromInt(_icall_Int_String_Int(pckStartMethodBind, this.rawMemory, pckName, alignment))
+    open fun pckStart(pckName: String, alignment: Long): GodotError {
+        return GodotError.fromInt(_icall_Long_String_Long(pckStartMethodBind, this.rawMemory, pckName, alignment))
     }
 
 
     private val addFileMethodBind: CPointer<godot_method_bind> by lazy { getMB("PCKPacker", "add_file") }
     open fun addFile(pckPath: String, sourcePath: String): GodotError {
-        return GodotError.fromInt(_icall_Int_String_String(addFileMethodBind, this.rawMemory, pckPath, sourcePath))
+        return GodotError.fromInt(_icall_Long_String_String(addFileMethodBind, this.rawMemory, pckPath, sourcePath))
     }
 
 
     private val flushMethodBind: CPointer<godot_method_bind> by lazy { getMB("PCKPacker", "flush") }
     open fun flush(verbose: Boolean): GodotError {
-        return GodotError.fromInt(_icall_Int_Boolean(flushMethodBind, this.rawMemory, verbose))
+        return GodotError.fromInt(_icall_Long_Boolean(flushMethodBind, this.rawMemory, verbose))
     }
 
 

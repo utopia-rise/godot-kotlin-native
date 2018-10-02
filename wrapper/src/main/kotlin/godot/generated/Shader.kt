@@ -19,14 +19,14 @@ open class Shader : Resource {
 
     // Enums 
 
-    enum class Mode(val id: Int) {
+    enum class Mode(val id: Long) {
         MODE_SPATIAL(0),
         MODE_CANVAS_ITEM(1),
         MODE_PARTICLES(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -46,9 +46,9 @@ open class Shader : Resource {
 
 
         // Constants
-        const val MODE_SPATIAL: Int = 0
-        const val MODE_CANVAS_ITEM: Int = 1
-        const val MODE_PARTICLES: Int = 2
+        const val MODE_SPATIAL: Long = 0
+        const val MODE_CANVAS_ITEM: Long = 1
+        const val MODE_PARTICLES: Long = 2
 
 
     }
@@ -65,7 +65,7 @@ open class Shader : Resource {
     // Methods
     private val getModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("Shader", "get_mode") }
     open fun getMode(): Shader.Mode {
-        return Shader.Mode.fromInt(_icall_Int(getModeMethodBind, this.rawMemory))
+        return Shader.Mode.fromInt(_icall_Long(getModeMethodBind, this.rawMemory))
     }
 
 

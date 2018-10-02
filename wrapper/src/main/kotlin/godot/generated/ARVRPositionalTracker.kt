@@ -19,14 +19,14 @@ open class ARVRPositionalTracker : Object {
 
     // Enums 
 
-    enum class TrackerHand(val id: Int) {
+    enum class TrackerHand(val id: Long) {
         TRACKER_HAND_UNKNOWN(0),
         TRACKER_LEFT_HAND(1),
         TRACKER_RIGHT_HAND(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -44,18 +44,18 @@ open class ARVRPositionalTracker : Object {
 
 
         // Constants
-        const val TRACKER_HAND_UNKNOWN: Int = 0
-        const val TRACKER_LEFT_HAND: Int = 1
-        const val TRACKER_RIGHT_HAND: Int = 2
+        const val TRACKER_HAND_UNKNOWN: Long = 0
+        const val TRACKER_LEFT_HAND: Long = 1
+        const val TRACKER_RIGHT_HAND: Long = 2
 
 
     }
 
 
     // Properties
-    open var rumble: Float
-        get() = _icall_Float(getRumbleMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setRumbleMethodBind, this.rawMemory, value)
+    open var rumble: Double
+        get() = _icall_Double(getRumbleMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setRumbleMethodBind, this.rawMemory, value)
 
 
 
@@ -63,7 +63,7 @@ open class ARVRPositionalTracker : Object {
     // Methods
     private val getTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("ARVRPositionalTracker", "get_type") }
     open fun getType(): ARVRServer.TrackerType {
-        return ARVRServer.TrackerType.fromInt(_icall_Int(getTypeMethodBind, this.rawMemory))
+        return ARVRServer.TrackerType.fromInt(_icall_Long(getTypeMethodBind, this.rawMemory))
     }
 
 
@@ -74,8 +74,8 @@ open class ARVRPositionalTracker : Object {
 
 
     private val getJoyIdMethodBind: CPointer<godot_method_bind> by lazy { getMB("ARVRPositionalTracker", "get_joy_id") }
-    open fun getJoyId(): Int {
-        return _icall_Int(getJoyIdMethodBind, this.rawMemory)
+    open fun getJoyId(): Long {
+        return _icall_Long(getJoyIdMethodBind, this.rawMemory)
     }
 
 
@@ -105,7 +105,7 @@ open class ARVRPositionalTracker : Object {
 
     private val getHandMethodBind: CPointer<godot_method_bind> by lazy { getMB("ARVRPositionalTracker", "get_hand") }
     open fun getHand(): ARVRPositionalTracker.TrackerHand {
-        return ARVRPositionalTracker.TrackerHand.fromInt(_icall_Int(getHandMethodBind, this.rawMemory))
+        return ARVRPositionalTracker.TrackerHand.fromInt(_icall_Long(getHandMethodBind, this.rawMemory))
     }
 
 
@@ -115,7 +115,7 @@ open class ARVRPositionalTracker : Object {
     }
 
 
-    open fun _set_type(type: Int) {
+    open fun _set_type(type: Long) {
     }
 
 
@@ -123,7 +123,7 @@ open class ARVRPositionalTracker : Object {
     }
 
 
-    open fun _set_joy_id(joyId: Int) {
+    open fun _set_joy_id(joyId: Long) {
     }
 
 
@@ -136,14 +136,14 @@ open class ARVRPositionalTracker : Object {
 
 
     private val getRumbleMethodBind: CPointer<godot_method_bind> by lazy { getMB("ARVRPositionalTracker", "get_rumble") }
-    open fun getRumble(): Float {
-        return _icall_Float(getRumbleMethodBind, this.rawMemory)
+    open fun getRumble(): Double {
+        return _icall_Double(getRumbleMethodBind, this.rawMemory)
     }
 
 
     private val setRumbleMethodBind: CPointer<godot_method_bind> by lazy { getMB("ARVRPositionalTracker", "set_rumble") }
-    open fun setRumble(rumble: Float) {
-        _icall_Unit_Float(setRumbleMethodBind, this.rawMemory, rumble)
+    open fun setRumble(rumble: Double) {
+        _icall_Unit_Double(setRumbleMethodBind, this.rawMemory, rumble)
     }
 
 

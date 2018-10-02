@@ -19,13 +19,13 @@ open class ReflectionProbe : VisualInstance {
 
     // Enums 
 
-    enum class UpdateMode(val id: Int) {
+    enum class UpdateMode(val id: Long) {
         UPDATE_ONCE(0),
         UPDATE_ALWAYS(1),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -46,27 +46,27 @@ open class ReflectionProbe : VisualInstance {
 
 
         // Constants
-        const val UPDATE_ONCE: Int = 0
-        const val UPDATE_ALWAYS: Int = 1
+        const val UPDATE_ONCE: Long = 0
+        const val UPDATE_ALWAYS: Long = 1
 
 
     }
 
 
     // Properties
-    open var updateMode: Int
-        get() = _icall_Int(getUpdateModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setUpdateModeMethodBind, this.rawMemory, value)
+    open var updateMode: Long
+        get() = _icall_Long(getUpdateModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setUpdateModeMethodBind, this.rawMemory, value)
 
 
-    open var intensity: Float
-        get() = _icall_Float(getIntensityMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setIntensityMethodBind, this.rawMemory, value)
+    open var intensity: Double
+        get() = _icall_Double(getIntensityMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setIntensityMethodBind, this.rawMemory, value)
 
 
-    open var maxDistance: Float
-        get() = _icall_Float(getMaxDistanceMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setMaxDistanceMethodBind, this.rawMemory, value)
+    open var maxDistance: Double
+        get() = _icall_Double(getMaxDistanceMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setMaxDistanceMethodBind, this.rawMemory, value)
 
 
     open var extents: Vector3
@@ -97,9 +97,9 @@ open class ReflectionProbe : VisualInstance {
         set(value) = _icall_Unit_Boolean(setEnableShadowsMethodBind, this.rawMemory, value)
 
 
-    open var cullMask: Int
-        get() = _icall_Int(getCullMaskMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setCullMaskMethodBind, this.rawMemory, value)
+    open var cullMask: Long
+        get() = _icall_Long(getCullMaskMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setCullMaskMethodBind, this.rawMemory, value)
 
 
     open var interiorEnable: Boolean
@@ -116,28 +116,28 @@ open class ReflectionProbe : VisualInstance {
     }
 
 
-    open var interiorAmbientEnergy: Float
-        get() = _icall_Float(getInteriorAmbientEnergyMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setInteriorAmbientEnergyMethodBind, this.rawMemory, value)
+    open var interiorAmbientEnergy: Double
+        get() = _icall_Double(getInteriorAmbientEnergyMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setInteriorAmbientEnergyMethodBind, this.rawMemory, value)
 
 
-    open var interiorAmbientContrib: Float
-        get() = _icall_Float(getInteriorAmbientProbeContributionMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setInteriorAmbientProbeContributionMethodBind, this.rawMemory, value)
+    open var interiorAmbientContrib: Double
+        get() = _icall_Double(getInteriorAmbientProbeContributionMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setInteriorAmbientProbeContributionMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setIntensityMethodBind: CPointer<godot_method_bind> by lazy { getMB("ReflectionProbe", "set_intensity") }
-    open fun setIntensity(intensity: Float) {
-        _icall_Unit_Float(setIntensityMethodBind, this.rawMemory, intensity)
+    open fun setIntensity(intensity: Double) {
+        _icall_Unit_Double(setIntensityMethodBind, this.rawMemory, intensity)
     }
 
 
     private val getIntensityMethodBind: CPointer<godot_method_bind> by lazy { getMB("ReflectionProbe", "get_intensity") }
-    open fun getIntensity(): Float {
-        return _icall_Float(getIntensityMethodBind, this.rawMemory)
+    open fun getIntensity(): Double {
+        return _icall_Double(getIntensityMethodBind, this.rawMemory)
     }
 
 
@@ -154,38 +154,38 @@ open class ReflectionProbe : VisualInstance {
 
 
     private val setInteriorAmbientEnergyMethodBind: CPointer<godot_method_bind> by lazy { getMB("ReflectionProbe", "set_interior_ambient_energy") }
-    open fun setInteriorAmbientEnergy(ambientEnergy: Float) {
-        _icall_Unit_Float(setInteriorAmbientEnergyMethodBind, this.rawMemory, ambientEnergy)
+    open fun setInteriorAmbientEnergy(ambientEnergy: Double) {
+        _icall_Unit_Double(setInteriorAmbientEnergyMethodBind, this.rawMemory, ambientEnergy)
     }
 
 
     private val getInteriorAmbientEnergyMethodBind: CPointer<godot_method_bind> by lazy { getMB("ReflectionProbe", "get_interior_ambient_energy") }
-    open fun getInteriorAmbientEnergy(): Float {
-        return _icall_Float(getInteriorAmbientEnergyMethodBind, this.rawMemory)
+    open fun getInteriorAmbientEnergy(): Double {
+        return _icall_Double(getInteriorAmbientEnergyMethodBind, this.rawMemory)
     }
 
 
     private val setInteriorAmbientProbeContributionMethodBind: CPointer<godot_method_bind> by lazy { getMB("ReflectionProbe", "set_interior_ambient_probe_contribution") }
-    open fun setInteriorAmbientProbeContribution(ambientProbeContribution: Float) {
-        _icall_Unit_Float(setInteriorAmbientProbeContributionMethodBind, this.rawMemory, ambientProbeContribution)
+    open fun setInteriorAmbientProbeContribution(ambientProbeContribution: Double) {
+        _icall_Unit_Double(setInteriorAmbientProbeContributionMethodBind, this.rawMemory, ambientProbeContribution)
     }
 
 
     private val getInteriorAmbientProbeContributionMethodBind: CPointer<godot_method_bind> by lazy { getMB("ReflectionProbe", "get_interior_ambient_probe_contribution") }
-    open fun getInteriorAmbientProbeContribution(): Float {
-        return _icall_Float(getInteriorAmbientProbeContributionMethodBind, this.rawMemory)
+    open fun getInteriorAmbientProbeContribution(): Double {
+        return _icall_Double(getInteriorAmbientProbeContributionMethodBind, this.rawMemory)
     }
 
 
     private val setMaxDistanceMethodBind: CPointer<godot_method_bind> by lazy { getMB("ReflectionProbe", "set_max_distance") }
-    open fun setMaxDistance(maxDistance: Float) {
-        _icall_Unit_Float(setMaxDistanceMethodBind, this.rawMemory, maxDistance)
+    open fun setMaxDistance(maxDistance: Double) {
+        _icall_Unit_Double(setMaxDistanceMethodBind, this.rawMemory, maxDistance)
     }
 
 
     private val getMaxDistanceMethodBind: CPointer<godot_method_bind> by lazy { getMB("ReflectionProbe", "get_max_distance") }
-    open fun getMaxDistance(): Float {
-        return _icall_Float(getMaxDistanceMethodBind, this.rawMemory)
+    open fun getMaxDistance(): Double {
+        return _icall_Double(getMaxDistanceMethodBind, this.rawMemory)
     }
 
 
@@ -250,26 +250,26 @@ open class ReflectionProbe : VisualInstance {
 
 
     private val setCullMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("ReflectionProbe", "set_cull_mask") }
-    open fun setCullMask(layers: Int) {
-        _icall_Unit_Int(setCullMaskMethodBind, this.rawMemory, layers)
+    open fun setCullMask(layers: Long) {
+        _icall_Unit_Long(setCullMaskMethodBind, this.rawMemory, layers)
     }
 
 
     private val getCullMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("ReflectionProbe", "get_cull_mask") }
-    open fun getCullMask(): Int {
-        return _icall_Int(getCullMaskMethodBind, this.rawMemory)
+    open fun getCullMask(): Long {
+        return _icall_Long(getCullMaskMethodBind, this.rawMemory)
     }
 
 
     private val setUpdateModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("ReflectionProbe", "set_update_mode") }
-    open fun setUpdateMode(mode: Int) {
-        _icall_Unit_Int(setUpdateModeMethodBind, this.rawMemory, mode)
+    open fun setUpdateMode(mode: Long) {
+        _icall_Unit_Long(setUpdateModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getUpdateModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("ReflectionProbe", "get_update_mode") }
     open fun getUpdateMode(): ReflectionProbe.UpdateMode {
-        return ReflectionProbe.UpdateMode.fromInt(_icall_Int(getUpdateModeMethodBind, this.rawMemory))
+        return ReflectionProbe.UpdateMode.fromInt(_icall_Long(getUpdateModeMethodBind, this.rawMemory))
     }
 
 

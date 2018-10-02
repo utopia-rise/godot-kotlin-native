@@ -42,9 +42,9 @@ open class Curve3D : Resource {
 
 
     // Properties
-    open var bakeInterval: Float
-        get() = _icall_Float(getBakeIntervalMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setBakeIntervalMethodBind, this.rawMemory, value)
+    open var bakeInterval: Double
+        get() = _icall_Double(getBakeIntervalMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setBakeIntervalMethodBind, this.rawMemory, value)
 
 
     open var upVectorEnabled: Boolean
@@ -56,68 +56,68 @@ open class Curve3D : Resource {
 
     // Methods
     private val getPointCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("Curve3D", "get_point_count") }
-    open fun getPointCount(): Int {
-        return _icall_Int(getPointCountMethodBind, this.rawMemory)
+    open fun getPointCount(): Long {
+        return _icall_Long(getPointCountMethodBind, this.rawMemory)
     }
 
 
     private val addPointMethodBind: CPointer<godot_method_bind> by lazy { getMB("Curve3D", "add_point") }
-    open fun addPoint(position: Vector3, _in: Vector3 = Vector3(0, 0, 0), out: Vector3 = Vector3(0, 0, 0), atPosition: Int = -1) {
-        _icall_Unit_Vector3_Vector3_Vector3_Int(addPointMethodBind, this.rawMemory, position, _in, out, atPosition)
+    open fun addPoint(position: Vector3, _in: Vector3 = Vector3(0, 0, 0), out: Vector3 = Vector3(0, 0, 0), atPosition: Long = -1) {
+        _icall_Unit_Vector3_Vector3_Vector3_Long(addPointMethodBind, this.rawMemory, position, _in, out, atPosition)
     }
 
 
     private val setPointPositionMethodBind: CPointer<godot_method_bind> by lazy { getMB("Curve3D", "set_point_position") }
-    open fun setPointPosition(idx: Int, position: Vector3) {
-        _icall_Unit_Int_Vector3(setPointPositionMethodBind, this.rawMemory, idx, position)
+    open fun setPointPosition(idx: Long, position: Vector3) {
+        _icall_Unit_Long_Vector3(setPointPositionMethodBind, this.rawMemory, idx, position)
     }
 
 
     private val getPointPositionMethodBind: CPointer<godot_method_bind> by lazy { getMB("Curve3D", "get_point_position") }
-    open fun getPointPosition(idx: Int): Vector3 {
-        return _icall_Vector3_Int(getPointPositionMethodBind, this.rawMemory, idx)
+    open fun getPointPosition(idx: Long): Vector3 {
+        return _icall_Vector3_Long(getPointPositionMethodBind, this.rawMemory, idx)
     }
 
 
     private val setPointTiltMethodBind: CPointer<godot_method_bind> by lazy { getMB("Curve3D", "set_point_tilt") }
-    open fun setPointTilt(idx: Int, tilt: Float) {
-        _icall_Unit_Int_Float(setPointTiltMethodBind, this.rawMemory, idx, tilt)
+    open fun setPointTilt(idx: Long, tilt: Double) {
+        _icall_Unit_Long_Double(setPointTiltMethodBind, this.rawMemory, idx, tilt)
     }
 
 
     private val getPointTiltMethodBind: CPointer<godot_method_bind> by lazy { getMB("Curve3D", "get_point_tilt") }
-    open fun getPointTilt(idx: Int): Float {
-        return _icall_Float_Int(getPointTiltMethodBind, this.rawMemory, idx)
+    open fun getPointTilt(idx: Long): Double {
+        return _icall_Double_Long(getPointTiltMethodBind, this.rawMemory, idx)
     }
 
 
     private val setPointInMethodBind: CPointer<godot_method_bind> by lazy { getMB("Curve3D", "set_point_in") }
-    open fun setPointIn(idx: Int, position: Vector3) {
-        _icall_Unit_Int_Vector3(setPointInMethodBind, this.rawMemory, idx, position)
+    open fun setPointIn(idx: Long, position: Vector3) {
+        _icall_Unit_Long_Vector3(setPointInMethodBind, this.rawMemory, idx, position)
     }
 
 
     private val getPointInMethodBind: CPointer<godot_method_bind> by lazy { getMB("Curve3D", "get_point_in") }
-    open fun getPointIn(idx: Int): Vector3 {
-        return _icall_Vector3_Int(getPointInMethodBind, this.rawMemory, idx)
+    open fun getPointIn(idx: Long): Vector3 {
+        return _icall_Vector3_Long(getPointInMethodBind, this.rawMemory, idx)
     }
 
 
     private val setPointOutMethodBind: CPointer<godot_method_bind> by lazy { getMB("Curve3D", "set_point_out") }
-    open fun setPointOut(idx: Int, position: Vector3) {
-        _icall_Unit_Int_Vector3(setPointOutMethodBind, this.rawMemory, idx, position)
+    open fun setPointOut(idx: Long, position: Vector3) {
+        _icall_Unit_Long_Vector3(setPointOutMethodBind, this.rawMemory, idx, position)
     }
 
 
     private val getPointOutMethodBind: CPointer<godot_method_bind> by lazy { getMB("Curve3D", "get_point_out") }
-    open fun getPointOut(idx: Int): Vector3 {
-        return _icall_Vector3_Int(getPointOutMethodBind, this.rawMemory, idx)
+    open fun getPointOut(idx: Long): Vector3 {
+        return _icall_Vector3_Long(getPointOutMethodBind, this.rawMemory, idx)
     }
 
 
     private val removePointMethodBind: CPointer<godot_method_bind> by lazy { getMB("Curve3D", "remove_point") }
-    open fun removePoint(idx: Int) {
-        _icall_Unit_Int(removePointMethodBind, this.rawMemory, idx)
+    open fun removePoint(idx: Long) {
+        _icall_Unit_Long(removePointMethodBind, this.rawMemory, idx)
     }
 
 
@@ -128,26 +128,26 @@ open class Curve3D : Resource {
 
 
     private val interpolateMethodBind: CPointer<godot_method_bind> by lazy { getMB("Curve3D", "interpolate") }
-    open fun interpolate(idx: Int, t: Float): Vector3 {
-        return _icall_Vector3_Int_Float(interpolateMethodBind, this.rawMemory, idx, t)
+    open fun interpolate(idx: Long, t: Double): Vector3 {
+        return _icall_Vector3_Long_Double(interpolateMethodBind, this.rawMemory, idx, t)
     }
 
 
     private val interpolatefMethodBind: CPointer<godot_method_bind> by lazy { getMB("Curve3D", "interpolatef") }
-    open fun interpolatef(fofs: Float): Vector3 {
-        return _icall_Vector3_Float(interpolatefMethodBind, this.rawMemory, fofs)
+    open fun interpolatef(fofs: Double): Vector3 {
+        return _icall_Vector3_Double(interpolatefMethodBind, this.rawMemory, fofs)
     }
 
 
     private val setBakeIntervalMethodBind: CPointer<godot_method_bind> by lazy { getMB("Curve3D", "set_bake_interval") }
-    open fun setBakeInterval(distance: Float) {
-        _icall_Unit_Float(setBakeIntervalMethodBind, this.rawMemory, distance)
+    open fun setBakeInterval(distance: Double) {
+        _icall_Unit_Double(setBakeIntervalMethodBind, this.rawMemory, distance)
     }
 
 
     private val getBakeIntervalMethodBind: CPointer<godot_method_bind> by lazy { getMB("Curve3D", "get_bake_interval") }
-    open fun getBakeInterval(): Float {
-        return _icall_Float(getBakeIntervalMethodBind, this.rawMemory)
+    open fun getBakeInterval(): Double {
+        return _icall_Double(getBakeIntervalMethodBind, this.rawMemory)
     }
 
 
@@ -164,20 +164,20 @@ open class Curve3D : Resource {
 
 
     private val getBakedLengthMethodBind: CPointer<godot_method_bind> by lazy { getMB("Curve3D", "get_baked_length") }
-    open fun getBakedLength(): Float {
-        return _icall_Float(getBakedLengthMethodBind, this.rawMemory)
+    open fun getBakedLength(): Double {
+        return _icall_Double(getBakedLengthMethodBind, this.rawMemory)
     }
 
 
     private val interpolateBakedMethodBind: CPointer<godot_method_bind> by lazy { getMB("Curve3D", "interpolate_baked") }
-    open fun interpolateBaked(offset: Float, cubic: Boolean = false): Vector3 {
-        return _icall_Vector3_Float_Boolean(interpolateBakedMethodBind, this.rawMemory, offset, cubic)
+    open fun interpolateBaked(offset: Double, cubic: Boolean = false): Vector3 {
+        return _icall_Vector3_Double_Boolean(interpolateBakedMethodBind, this.rawMemory, offset, cubic)
     }
 
 
     private val interpolateBakedUpVectorMethodBind: CPointer<godot_method_bind> by lazy { getMB("Curve3D", "interpolate_baked_up_vector") }
-    open fun interpolateBakedUpVector(offset: Float, applyTilt: Boolean = false): Vector3 {
-        return _icall_Vector3_Float_Boolean(interpolateBakedUpVectorMethodBind, this.rawMemory, offset, applyTilt)
+    open fun interpolateBakedUpVector(offset: Double, applyTilt: Boolean = false): Vector3 {
+        return _icall_Vector3_Double_Boolean(interpolateBakedUpVectorMethodBind, this.rawMemory, offset, applyTilt)
     }
 
 
@@ -206,14 +206,14 @@ open class Curve3D : Resource {
 
 
     private val getClosestOffsetMethodBind: CPointer<godot_method_bind> by lazy { getMB("Curve3D", "get_closest_offset") }
-    open fun getClosestOffset(toPoint: Vector3): Float {
-        return _icall_Float_Vector3(getClosestOffsetMethodBind, this.rawMemory, toPoint)
+    open fun getClosestOffset(toPoint: Vector3): Double {
+        return _icall_Double_Vector3(getClosestOffsetMethodBind, this.rawMemory, toPoint)
     }
 
 
     private val tessellateMethodBind: CPointer<godot_method_bind> by lazy { getMB("Curve3D", "tessellate") }
-    open fun tessellate(maxStages: Int = 5, toleranceDegrees: Float = 4f): PoolVector3Array {
-        return _icall_PoolVector3Array_Int_Float(tessellateMethodBind, this.rawMemory, maxStages, toleranceDegrees)
+    open fun tessellate(maxStages: Long = 5, toleranceDegrees: Double = 4.0): PoolVector3Array {
+        return _icall_PoolVector3Array_Long_Double(tessellateMethodBind, this.rawMemory, maxStages, toleranceDegrees)
     }
 
 

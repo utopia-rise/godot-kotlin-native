@@ -109,14 +109,14 @@ open class Polygon2D : Node2D {
     }
 
 
-    open var textureRotationDegrees: Float
-        get() = _icall_Float(getTextureRotationDegreesMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setTextureRotationDegreesMethodBind, this.rawMemory, value)
+    open var textureRotationDegrees: Double
+        get() = _icall_Double(getTextureRotationDegreesMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setTextureRotationDegreesMethodBind, this.rawMemory, value)
 
 
-    open var textureRotation: Float
-        get() = _icall_Float(getTextureRotationMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setTextureRotationMethodBind, this.rawMemory, value)
+    open var textureRotation: Double
+        get() = _icall_Double(getTextureRotationMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setTextureRotationMethodBind, this.rawMemory, value)
 
 
     open var skeleton: NodePath
@@ -129,9 +129,9 @@ open class Polygon2D : Node2D {
         set(value) = _icall_Unit_Boolean(setInvertMethodBind, this.rawMemory, value)
 
 
-    open var invertBorder: Float
-        get() = _icall_Float(getInvertBorderMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setInvertBorderMethodBind, this.rawMemory, value)
+    open var invertBorder: Double
+        get() = _icall_Double(getInvertBorderMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setInvertBorderMethodBind, this.rawMemory, value)
 
 
 
@@ -222,26 +222,26 @@ open class Polygon2D : Node2D {
 
 
     private val setTextureRotationMethodBind: CPointer<godot_method_bind> by lazy { getMB("Polygon2D", "set_texture_rotation") }
-    open fun setTextureRotation(textureRotation: Float) {
-        _icall_Unit_Float(setTextureRotationMethodBind, this.rawMemory, textureRotation)
+    open fun setTextureRotation(textureRotation: Double) {
+        _icall_Unit_Double(setTextureRotationMethodBind, this.rawMemory, textureRotation)
     }
 
 
     private val getTextureRotationMethodBind: CPointer<godot_method_bind> by lazy { getMB("Polygon2D", "get_texture_rotation") }
-    open fun getTextureRotation(): Float {
-        return _icall_Float(getTextureRotationMethodBind, this.rawMemory)
+    open fun getTextureRotation(): Double {
+        return _icall_Double(getTextureRotationMethodBind, this.rawMemory)
     }
 
 
     private val setTextureRotationDegreesMethodBind: CPointer<godot_method_bind> by lazy { getMB("Polygon2D", "set_texture_rotation_degrees") }
-    open fun setTextureRotationDegrees(textureRotation: Float) {
-        _icall_Unit_Float(setTextureRotationDegreesMethodBind, this.rawMemory, textureRotation)
+    open fun setTextureRotationDegrees(textureRotation: Double) {
+        _icall_Unit_Double(setTextureRotationDegreesMethodBind, this.rawMemory, textureRotation)
     }
 
 
     private val getTextureRotationDegreesMethodBind: CPointer<godot_method_bind> by lazy { getMB("Polygon2D", "get_texture_rotation_degrees") }
-    open fun getTextureRotationDegrees(): Float {
-        return _icall_Float(getTextureRotationDegreesMethodBind, this.rawMemory)
+    open fun getTextureRotationDegrees(): Double {
+        return _icall_Double(getTextureRotationDegreesMethodBind, this.rawMemory)
     }
 
 
@@ -282,14 +282,14 @@ open class Polygon2D : Node2D {
 
 
     private val setInvertBorderMethodBind: CPointer<godot_method_bind> by lazy { getMB("Polygon2D", "set_invert_border") }
-    open fun setInvertBorder(invertBorder: Float) {
-        _icall_Unit_Float(setInvertBorderMethodBind, this.rawMemory, invertBorder)
+    open fun setInvertBorder(invertBorder: Double) {
+        _icall_Unit_Double(setInvertBorderMethodBind, this.rawMemory, invertBorder)
     }
 
 
     private val getInvertBorderMethodBind: CPointer<godot_method_bind> by lazy { getMB("Polygon2D", "get_invert_border") }
-    open fun getInvertBorder(): Float {
-        return _icall_Float(getInvertBorderMethodBind, this.rawMemory)
+    open fun getInvertBorder(): Double {
+        return _icall_Double(getInvertBorderMethodBind, this.rawMemory)
     }
 
 
@@ -312,26 +312,26 @@ open class Polygon2D : Node2D {
 
 
     private val getBoneCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("Polygon2D", "get_bone_count") }
-    open fun getBoneCount(): Int {
-        return _icall_Int(getBoneCountMethodBind, this.rawMemory)
+    open fun getBoneCount(): Long {
+        return _icall_Long(getBoneCountMethodBind, this.rawMemory)
     }
 
 
     private val getBonePathMethodBind: CPointer<godot_method_bind> by lazy { getMB("Polygon2D", "get_bone_path") }
-    open fun getBonePath(index: Int): NodePath {
-        return _icall_NodePath_Int(getBonePathMethodBind, this.rawMemory, index)
+    open fun getBonePath(index: Long): NodePath {
+        return _icall_NodePath_Long(getBonePathMethodBind, this.rawMemory, index)
     }
 
 
     private val getBoneWeightsMethodBind: CPointer<godot_method_bind> by lazy { getMB("Polygon2D", "get_bone_weights") }
-    open fun getBoneWeights(index: Int): PoolRealArray {
-        return _icall_PoolRealArray_Int(getBoneWeightsMethodBind, this.rawMemory, index)
+    open fun getBoneWeights(index: Long): PoolRealArray {
+        return _icall_PoolRealArray_Long(getBoneWeightsMethodBind, this.rawMemory, index)
     }
 
 
     private val eraseBoneMethodBind: CPointer<godot_method_bind> by lazy { getMB("Polygon2D", "erase_bone") }
-    open fun eraseBone(index: Int) {
-        _icall_Unit_Int(eraseBoneMethodBind, this.rawMemory, index)
+    open fun eraseBone(index: Long) {
+        _icall_Unit_Long(eraseBoneMethodBind, this.rawMemory, index)
     }
 
 
@@ -342,14 +342,14 @@ open class Polygon2D : Node2D {
 
 
     private val setBonePathMethodBind: CPointer<godot_method_bind> by lazy { getMB("Polygon2D", "set_bone_path") }
-    open fun setBonePath(index: Int, path: NodePath) {
-        _icall_Unit_Int_NodePath(setBonePathMethodBind, this.rawMemory, index, path)
+    open fun setBonePath(index: Long, path: NodePath) {
+        _icall_Unit_Long_NodePath(setBonePathMethodBind, this.rawMemory, index, path)
     }
 
 
     private val setBoneWeightsMethodBind: CPointer<godot_method_bind> by lazy { getMB("Polygon2D", "set_bone_weights") }
-    open fun setBoneWeights(index: Int, weights: PoolRealArray) {
-        _icall_Unit_Int_PoolRealArray(setBoneWeightsMethodBind, this.rawMemory, index, weights)
+    open fun setBoneWeights(index: Long, weights: PoolRealArray) {
+        _icall_Unit_Long_PoolRealArray(setBoneWeightsMethodBind, this.rawMemory, index, weights)
     }
 
 

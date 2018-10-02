@@ -42,23 +42,23 @@ open class ARVRAnchor : Spatial {
 
 
     // Properties
-    open var anchorId: Int
-        get() = _icall_Int(getAnchorIdMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setAnchorIdMethodBind, this.rawMemory, value)
+    open var anchorId: Long
+        get() = _icall_Long(getAnchorIdMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setAnchorIdMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setAnchorIdMethodBind: CPointer<godot_method_bind> by lazy { getMB("ARVRAnchor", "set_anchor_id") }
-    open fun setAnchorId(anchorId: Int) {
-        _icall_Unit_Int(setAnchorIdMethodBind, this.rawMemory, anchorId)
+    open fun setAnchorId(anchorId: Long) {
+        _icall_Unit_Long(setAnchorIdMethodBind, this.rawMemory, anchorId)
     }
 
 
     private val getAnchorIdMethodBind: CPointer<godot_method_bind> by lazy { getMB("ARVRAnchor", "get_anchor_id") }
-    open fun getAnchorId(): Int {
-        return _icall_Int(getAnchorIdMethodBind, this.rawMemory)
+    open fun getAnchorId(): Long {
+        return _icall_Long(getAnchorIdMethodBind, this.rawMemory)
     }
 
 

@@ -19,14 +19,14 @@ open class Object : GodotObject {
 
     // Enums 
 
-    enum class ConnectFlags(val id: Int) {
+    enum class ConnectFlags(val id: Long) {
         CONNECT_DEFERRED(1),
         CONNECT_PERSIST(2),
         CONNECT_ONESHOT(4),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -44,11 +44,11 @@ open class Object : GodotObject {
 
 
         // Constants
-        const val NOTIFICATION_POSTINITIALIZE: Int = 0
-        const val NOTIFICATION_PREDELETE: Int = 1
-        const val CONNECT_DEFERRED: Int = 1
-        const val CONNECT_PERSIST: Int = 2
-        const val CONNECT_ONESHOT: Int = 4
+        const val NOTIFICATION_POSTINITIALIZE: Long = 0
+        const val NOTIFICATION_PREDELETE: Long = 1
+        const val CONNECT_DEFERRED: Long = 1
+        const val CONNECT_PERSIST: Long = 2
+        const val CONNECT_ONESHOT: Long = 4
 
 
     }
@@ -64,7 +64,7 @@ open class Object : GodotObject {
     }
 
 
-    open fun _notification(what: Int) {
+    open fun _notification(what: Long) {
     }
 
 
@@ -136,14 +136,14 @@ open class Object : GodotObject {
 
 
     private val notificationMethodBind: CPointer<godot_method_bind> by lazy { getMB("Object", "notification") }
-    open fun notification(what: Int, reversed: Boolean = false) {
-        _icall_Unit_Int_Boolean(notificationMethodBind, this.rawMemory, what, reversed)
+    open fun notification(what: Long, reversed: Boolean = false) {
+        _icall_Unit_Long_Boolean(notificationMethodBind, this.rawMemory, what, reversed)
     }
 
 
     private val getInstanceIdMethodBind: CPointer<godot_method_bind> by lazy { getMB("Object", "get_instance_id") }
-    open fun getInstanceId(): Int {
-        return _icall_Int(getInstanceIdMethodBind, this.rawMemory)
+    open fun getInstanceId(): Long {
+        return _icall_Long(getInstanceIdMethodBind, this.rawMemory)
     }
 
 
@@ -244,8 +244,8 @@ open class Object : GodotObject {
 
 
     private val connectMethodBind: CPointer<godot_method_bind> by lazy { getMB("Object", "connect") }
-    open fun connect(signal: String, target: Object, method: String, binds: GDArray = GDArray(), flags: Int = 0): GodotError {
-        return GodotError.fromInt(_icall_Int_String_Object_String_GDArray_Int(connectMethodBind, this.rawMemory, signal, target, method, binds, flags))
+    open fun connect(signal: String, target: Object, method: String, binds: GDArray = GDArray(), flags: Long = 0): GodotError {
+        return GodotError.fromInt(_icall_Long_String_Object_String_GDArray_Long(connectMethodBind, this.rawMemory, signal, target, method, binds, flags))
     }
 
 

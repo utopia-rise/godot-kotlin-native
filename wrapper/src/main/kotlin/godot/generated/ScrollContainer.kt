@@ -51,9 +51,9 @@ open class ScrollContainer : Container {
         set(value) = _icall_Unit_Boolean(setEnableHScrollMethodBind, this.rawMemory, value)
 
 
-    open var scrollHorizontal: Int
-        get() = _icall_Int(getHScrollMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setHScrollMethodBind, this.rawMemory, value)
+    open var scrollHorizontal: Long
+        get() = _icall_Long(getHScrollMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setHScrollMethodBind, this.rawMemory, value)
 
 
     open var scrollVerticalEnabled: Boolean
@@ -61,20 +61,20 @@ open class ScrollContainer : Container {
         set(value) = _icall_Unit_Boolean(setEnableVScrollMethodBind, this.rawMemory, value)
 
 
-    open var scrollVertical: Int
-        get() = _icall_Int(getVScrollMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setVScrollMethodBind, this.rawMemory, value)
+    open var scrollVertical: Long
+        get() = _icall_Long(getVScrollMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setVScrollMethodBind, this.rawMemory, value)
 
 
-    open var scrollDeadzone: Int
-        get() = _icall_Int(getDeadzoneMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setDeadzoneMethodBind, this.rawMemory, value)
+    open var scrollDeadzone: Long
+        get() = _icall_Long(getDeadzoneMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setDeadzoneMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
-    open fun _scroll_moved(arg0: Float) {
+    open fun _scroll_moved(arg0: Double) {
     }
 
 
@@ -111,38 +111,38 @@ open class ScrollContainer : Container {
 
 
     private val setHScrollMethodBind: CPointer<godot_method_bind> by lazy { getMB("ScrollContainer", "set_h_scroll") }
-    open fun setHScroll(value: Int) {
-        _icall_Unit_Int(setHScrollMethodBind, this.rawMemory, value)
+    open fun setHScroll(value: Long) {
+        _icall_Unit_Long(setHScrollMethodBind, this.rawMemory, value)
     }
 
 
     private val getHScrollMethodBind: CPointer<godot_method_bind> by lazy { getMB("ScrollContainer", "get_h_scroll") }
-    open fun getHScroll(): Int {
-        return _icall_Int(getHScrollMethodBind, this.rawMemory)
+    open fun getHScroll(): Long {
+        return _icall_Long(getHScrollMethodBind, this.rawMemory)
     }
 
 
     private val setVScrollMethodBind: CPointer<godot_method_bind> by lazy { getMB("ScrollContainer", "set_v_scroll") }
-    open fun setVScroll(value: Int) {
-        _icall_Unit_Int(setVScrollMethodBind, this.rawMemory, value)
+    open fun setVScroll(value: Long) {
+        _icall_Unit_Long(setVScrollMethodBind, this.rawMemory, value)
     }
 
 
     private val getVScrollMethodBind: CPointer<godot_method_bind> by lazy { getMB("ScrollContainer", "get_v_scroll") }
-    open fun getVScroll(): Int {
-        return _icall_Int(getVScrollMethodBind, this.rawMemory)
+    open fun getVScroll(): Long {
+        return _icall_Long(getVScrollMethodBind, this.rawMemory)
     }
 
 
     private val setDeadzoneMethodBind: CPointer<godot_method_bind> by lazy { getMB("ScrollContainer", "set_deadzone") }
-    open fun setDeadzone(deadzone: Int) {
-        _icall_Unit_Int(setDeadzoneMethodBind, this.rawMemory, deadzone)
+    open fun setDeadzone(deadzone: Long) {
+        _icall_Unit_Long(setDeadzoneMethodBind, this.rawMemory, deadzone)
     }
 
 
     private val getDeadzoneMethodBind: CPointer<godot_method_bind> by lazy { getMB("ScrollContainer", "get_deadzone") }
-    open fun getDeadzone(): Int {
-        return _icall_Int(getDeadzoneMethodBind, this.rawMemory)
+    open fun getDeadzone(): Long {
+        return _icall_Long(getDeadzoneMethodBind, this.rawMemory)
     }
 
 

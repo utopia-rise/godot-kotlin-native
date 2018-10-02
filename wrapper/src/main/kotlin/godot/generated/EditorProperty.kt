@@ -177,7 +177,7 @@ open class EditorProperty : Container {
     }
 
 
-    open fun _focusable_focused(arg0: Int) {
+    open fun _focusable_focused(arg0: Long) {
     }
 
 

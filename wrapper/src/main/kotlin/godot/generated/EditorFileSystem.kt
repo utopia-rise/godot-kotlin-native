@@ -60,8 +60,8 @@ open class EditorFileSystem : Node {
 
 
     private val getScanningProgressMethodBind: CPointer<godot_method_bind> by lazy { getMB("EditorFileSystem", "get_scanning_progress") }
-    open fun getScanningProgress(): Float {
-        return _icall_Float(getScanningProgressMethodBind, this.rawMemory)
+    open fun getScanningProgress(): Double {
+        return _icall_Double(getScanningProgressMethodBind, this.rawMemory)
     }
 
 

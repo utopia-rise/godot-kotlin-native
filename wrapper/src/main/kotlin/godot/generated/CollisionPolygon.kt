@@ -42,9 +42,9 @@ open class CollisionPolygon : Spatial {
 
 
     // Properties
-    open var depth: Float
-        get() = _icall_Float(getDepthMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setDepthMethodBind, this.rawMemory, value)
+    open var depth: Double
+        get() = _icall_Double(getDepthMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setDepthMethodBind, this.rawMemory, value)
 
 
     open var disabled: Boolean
@@ -61,14 +61,14 @@ open class CollisionPolygon : Spatial {
 
     // Methods
     private val setDepthMethodBind: CPointer<godot_method_bind> by lazy { getMB("CollisionPolygon", "set_depth") }
-    open fun setDepth(depth: Float) {
-        _icall_Unit_Float(setDepthMethodBind, this.rawMemory, depth)
+    open fun setDepth(depth: Double) {
+        _icall_Unit_Double(setDepthMethodBind, this.rawMemory, depth)
     }
 
 
     private val getDepthMethodBind: CPointer<godot_method_bind> by lazy { getMB("CollisionPolygon", "get_depth") }
-    open fun getDepth(): Float {
-        return _icall_Float(getDepthMethodBind, this.rawMemory)
+    open fun getDepth(): Double {
+        return _icall_Double(getDepthMethodBind, this.rawMemory)
     }
 
 

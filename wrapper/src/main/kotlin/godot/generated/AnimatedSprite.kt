@@ -55,14 +55,14 @@ open class AnimatedSprite : Node2D {
         set(value) = _icall_Unit_String(setAnimationMethodBind, this.rawMemory, value)
 
 
-    open var frame: Int
-        get() = _icall_Int(getFrameMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setFrameMethodBind, this.rawMemory, value)
+    open var frame: Long
+        get() = _icall_Long(getFrameMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setFrameMethodBind, this.rawMemory, value)
 
 
-    open var speedScale: Float
-        get() = _icall_Float(getSpeedScaleMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setSpeedScaleMethodBind, this.rawMemory, value)
+    open var speedScale: Double
+        get() = _icall_Double(getSpeedScaleMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setSpeedScaleMethodBind, this.rawMemory, value)
 
 
     open var centered: Boolean
@@ -192,26 +192,26 @@ open class AnimatedSprite : Node2D {
 
 
     private val setFrameMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimatedSprite", "set_frame") }
-    open fun setFrame(frame: Int) {
-        _icall_Unit_Int(setFrameMethodBind, this.rawMemory, frame)
+    open fun setFrame(frame: Long) {
+        _icall_Unit_Long(setFrameMethodBind, this.rawMemory, frame)
     }
 
 
     private val getFrameMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimatedSprite", "get_frame") }
-    open fun getFrame(): Int {
-        return _icall_Int(getFrameMethodBind, this.rawMemory)
+    open fun getFrame(): Long {
+        return _icall_Long(getFrameMethodBind, this.rawMemory)
     }
 
 
     private val setSpeedScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimatedSprite", "set_speed_scale") }
-    open fun setSpeedScale(speedScale: Float) {
-        _icall_Unit_Float(setSpeedScaleMethodBind, this.rawMemory, speedScale)
+    open fun setSpeedScale(speedScale: Double) {
+        _icall_Unit_Double(setSpeedScaleMethodBind, this.rawMemory, speedScale)
     }
 
 
     private val getSpeedScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimatedSprite", "get_speed_scale") }
-    open fun getSpeedScale(): Float {
-        return _icall_Float(getSpeedScaleMethodBind, this.rawMemory)
+    open fun getSpeedScale(): Double {
+        return _icall_Double(getSpeedScaleMethodBind, this.rawMemory)
     }
 
 

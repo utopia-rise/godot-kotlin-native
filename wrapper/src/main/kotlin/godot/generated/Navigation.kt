@@ -55,20 +55,20 @@ open class Navigation : Spatial {
 
     // Methods
     private val navmeshAddMethodBind: CPointer<godot_method_bind> by lazy { getMB("Navigation", "navmesh_add") }
-    open fun navmeshAdd(mesh: NavigationMesh, xform: Transform, owner: Object): Int {
-        return _icall_Int_Object_Transform_Object(navmeshAddMethodBind, this.rawMemory, mesh, xform, owner)
+    open fun navmeshAdd(mesh: NavigationMesh, xform: Transform, owner: Object): Long {
+        return _icall_Long_Object_Transform_Object(navmeshAddMethodBind, this.rawMemory, mesh, xform, owner)
     }
 
 
     private val navmeshSetTransformMethodBind: CPointer<godot_method_bind> by lazy { getMB("Navigation", "navmesh_set_transform") }
-    open fun navmeshSetTransform(id: Int, xform: Transform) {
-        _icall_Unit_Int_Transform(navmeshSetTransformMethodBind, this.rawMemory, id, xform)
+    open fun navmeshSetTransform(id: Long, xform: Transform) {
+        _icall_Unit_Long_Transform(navmeshSetTransformMethodBind, this.rawMemory, id, xform)
     }
 
 
     private val navmeshRemoveMethodBind: CPointer<godot_method_bind> by lazy { getMB("Navigation", "navmesh_remove") }
-    open fun navmeshRemove(id: Int) {
-        _icall_Unit_Int(navmeshRemoveMethodBind, this.rawMemory, id)
+    open fun navmeshRemove(id: Long) {
+        _icall_Unit_Long(navmeshRemoveMethodBind, this.rawMemory, id)
     }
 
 

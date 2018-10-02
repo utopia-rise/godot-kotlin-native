@@ -19,22 +19,22 @@ open class ItemList : Control {
 
     // Enums 
 
-    enum class SelectMode(val id: Int) {
+    enum class SelectMode(val id: Long) {
         SELECT_SINGLE(0),
         SELECT_MULTI(1),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class IconMode(val id: Int) {
+    enum class IconMode(val id: Long) {
         ICON_MODE_TOP(0),
         ICON_MODE_LEFT(1),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -61,19 +61,19 @@ open class ItemList : Control {
 
 
         // Constants
-        const val ICON_MODE_TOP: Int = 0
-        const val ICON_MODE_LEFT: Int = 1
-        const val SELECT_SINGLE: Int = 0
-        const val SELECT_MULTI: Int = 1
+        const val ICON_MODE_TOP: Long = 0
+        const val ICON_MODE_LEFT: Long = 1
+        const val SELECT_SINGLE: Long = 0
+        const val SELECT_MULTI: Long = 1
 
 
     }
 
 
     // Properties
-    open var selectMode: Int
-        get() = _icall_Int(getSelectModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setSelectModeMethodBind, this.rawMemory, value)
+    open var selectMode: Long
+        get() = _icall_Long(getSelectModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setSelectModeMethodBind, this.rawMemory, value)
 
 
     open var allowReselect: Boolean
@@ -86,9 +86,9 @@ open class ItemList : Control {
         set(value) = _icall_Unit_Boolean(setAllowRmbSelectMethodBind, this.rawMemory, value)
 
 
-    open var maxTextLines: Int
-        get() = _icall_Int(getMaxTextLinesMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setMaxTextLinesMethodBind, this.rawMemory, value)
+    open var maxTextLines: Long
+        get() = _icall_Long(getMaxTextLinesMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setMaxTextLinesMethodBind, this.rawMemory, value)
 
 
     open var autoHeight: Boolean
@@ -96,9 +96,9 @@ open class ItemList : Control {
         set(value) = _icall_Unit_Boolean(setAutoHeightMethodBind, this.rawMemory, value)
 
 
-    open var maxColumns: Int
-        get() = _icall_Int(getMaxColumnsMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setMaxColumnsMethodBind, this.rawMemory, value)
+    open var maxColumns: Long
+        get() = _icall_Long(getMaxColumnsMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setMaxColumnsMethodBind, this.rawMemory, value)
 
 
     open var sameColumnWidth: Boolean
@@ -106,19 +106,19 @@ open class ItemList : Control {
         set(value) = _icall_Unit_Boolean(setSameColumnWidthMethodBind, this.rawMemory, value)
 
 
-    open var fixedColumnWidth: Int
-        get() = _icall_Int(getFixedColumnWidthMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setFixedColumnWidthMethodBind, this.rawMemory, value)
+    open var fixedColumnWidth: Long
+        get() = _icall_Long(getFixedColumnWidthMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setFixedColumnWidthMethodBind, this.rawMemory, value)
 
 
-    open var iconMode: Int
-        get() = _icall_Int(getIconModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setIconModeMethodBind, this.rawMemory, value)
+    open var iconMode: Long
+        get() = _icall_Long(getIconModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setIconModeMethodBind, this.rawMemory, value)
 
 
-    open var iconScale: Float
-        get() = _icall_Float(getIconScaleMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setIconScaleMethodBind, this.rawMemory, value)
+    open var iconScale: Double
+        get() = _icall_Double(getIconScaleMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setIconScaleMethodBind, this.rawMemory, value)
 
 
     open var fixedIconSize: Vector2
@@ -146,134 +146,134 @@ open class ItemList : Control {
 
 
     private val setItemTextMethodBind: CPointer<godot_method_bind> by lazy { getMB("ItemList", "set_item_text") }
-    open fun setItemText(idx: Int, text: String) {
-        _icall_Unit_Int_String(setItemTextMethodBind, this.rawMemory, idx, text)
+    open fun setItemText(idx: Long, text: String) {
+        _icall_Unit_Long_String(setItemTextMethodBind, this.rawMemory, idx, text)
     }
 
 
     private val getItemTextMethodBind: CPointer<godot_method_bind> by lazy { getMB("ItemList", "get_item_text") }
-    open fun getItemText(idx: Int): String {
-        return _icall_String_Int(getItemTextMethodBind, this.rawMemory, idx)
+    open fun getItemText(idx: Long): String {
+        return _icall_String_Long(getItemTextMethodBind, this.rawMemory, idx)
     }
 
 
     private val setItemIconMethodBind: CPointer<godot_method_bind> by lazy { getMB("ItemList", "set_item_icon") }
-    open fun setItemIcon(idx: Int, icon: Texture) {
-        _icall_Unit_Int_Object(setItemIconMethodBind, this.rawMemory, idx, icon)
+    open fun setItemIcon(idx: Long, icon: Texture) {
+        _icall_Unit_Long_Object(setItemIconMethodBind, this.rawMemory, idx, icon)
     }
 
 
     private val getItemIconMethodBind: CPointer<godot_method_bind> by lazy { getMB("ItemList", "get_item_icon") }
-    open fun getItemIcon(idx: Int): Texture {
-        return _icall_Texture_Int(getItemIconMethodBind, this.rawMemory, idx)
+    open fun getItemIcon(idx: Long): Texture {
+        return _icall_Texture_Long(getItemIconMethodBind, this.rawMemory, idx)
     }
 
 
     private val setItemIconRegionMethodBind: CPointer<godot_method_bind> by lazy { getMB("ItemList", "set_item_icon_region") }
-    open fun setItemIconRegion(idx: Int, rect: Rect2) {
-        _icall_Unit_Int_Rect2(setItemIconRegionMethodBind, this.rawMemory, idx, rect)
+    open fun setItemIconRegion(idx: Long, rect: Rect2) {
+        _icall_Unit_Long_Rect2(setItemIconRegionMethodBind, this.rawMemory, idx, rect)
     }
 
 
     private val getItemIconRegionMethodBind: CPointer<godot_method_bind> by lazy { getMB("ItemList", "get_item_icon_region") }
-    open fun getItemIconRegion(idx: Int): Rect2 {
-        return _icall_Rect2_Int(getItemIconRegionMethodBind, this.rawMemory, idx)
+    open fun getItemIconRegion(idx: Long): Rect2 {
+        return _icall_Rect2_Long(getItemIconRegionMethodBind, this.rawMemory, idx)
     }
 
 
     private val setItemIconModulateMethodBind: CPointer<godot_method_bind> by lazy { getMB("ItemList", "set_item_icon_modulate") }
-    open fun setItemIconModulate(idx: Int, modulate: Color) {
-        _icall_Unit_Int_Color(setItemIconModulateMethodBind, this.rawMemory, idx, modulate)
+    open fun setItemIconModulate(idx: Long, modulate: Color) {
+        _icall_Unit_Long_Color(setItemIconModulateMethodBind, this.rawMemory, idx, modulate)
     }
 
 
     private val getItemIconModulateMethodBind: CPointer<godot_method_bind> by lazy { getMB("ItemList", "get_item_icon_modulate") }
-    open fun getItemIconModulate(idx: Int): Color {
-        return _icall_Color_Int(getItemIconModulateMethodBind, this.rawMemory, idx)
+    open fun getItemIconModulate(idx: Long): Color {
+        return _icall_Color_Long(getItemIconModulateMethodBind, this.rawMemory, idx)
     }
 
 
     private val setItemSelectableMethodBind: CPointer<godot_method_bind> by lazy { getMB("ItemList", "set_item_selectable") }
-    open fun setItemSelectable(idx: Int, selectable: Boolean) {
-        _icall_Unit_Int_Boolean(setItemSelectableMethodBind, this.rawMemory, idx, selectable)
+    open fun setItemSelectable(idx: Long, selectable: Boolean) {
+        _icall_Unit_Long_Boolean(setItemSelectableMethodBind, this.rawMemory, idx, selectable)
     }
 
 
     private val isItemSelectableMethodBind: CPointer<godot_method_bind> by lazy { getMB("ItemList", "is_item_selectable") }
-    open fun isItemSelectable(idx: Int): Boolean {
-        return _icall_Boolean_Int(isItemSelectableMethodBind, this.rawMemory, idx)
+    open fun isItemSelectable(idx: Long): Boolean {
+        return _icall_Boolean_Long(isItemSelectableMethodBind, this.rawMemory, idx)
     }
 
 
     private val setItemDisabledMethodBind: CPointer<godot_method_bind> by lazy { getMB("ItemList", "set_item_disabled") }
-    open fun setItemDisabled(idx: Int, disabled: Boolean) {
-        _icall_Unit_Int_Boolean(setItemDisabledMethodBind, this.rawMemory, idx, disabled)
+    open fun setItemDisabled(idx: Long, disabled: Boolean) {
+        _icall_Unit_Long_Boolean(setItemDisabledMethodBind, this.rawMemory, idx, disabled)
     }
 
 
     private val isItemDisabledMethodBind: CPointer<godot_method_bind> by lazy { getMB("ItemList", "is_item_disabled") }
-    open fun isItemDisabled(idx: Int): Boolean {
-        return _icall_Boolean_Int(isItemDisabledMethodBind, this.rawMemory, idx)
+    open fun isItemDisabled(idx: Long): Boolean {
+        return _icall_Boolean_Long(isItemDisabledMethodBind, this.rawMemory, idx)
     }
 
 
     private val setItemMetadataMethodBind: CPointer<godot_method_bind> by lazy { getMB("ItemList", "set_item_metadata") }
-    open fun setItemMetadata(idx: Int, metadata: Variant) {
-        _icall_Unit_Int_Variant(setItemMetadataMethodBind, this.rawMemory, idx, metadata)
+    open fun setItemMetadata(idx: Long, metadata: Variant) {
+        _icall_Unit_Long_Variant(setItemMetadataMethodBind, this.rawMemory, idx, metadata)
     }
 
 
     private val getItemMetadataMethodBind: CPointer<godot_method_bind> by lazy { getMB("ItemList", "get_item_metadata") }
-    open fun getItemMetadata(idx: Int): Variant {
-        return _icall_Variant_Int(getItemMetadataMethodBind, this.rawMemory, idx)
+    open fun getItemMetadata(idx: Long): Variant {
+        return _icall_Variant_Long(getItemMetadataMethodBind, this.rawMemory, idx)
     }
 
 
     private val setItemCustomBgColorMethodBind: CPointer<godot_method_bind> by lazy { getMB("ItemList", "set_item_custom_bg_color") }
-    open fun setItemCustomBgColor(idx: Int, customBgColor: Color) {
-        _icall_Unit_Int_Color(setItemCustomBgColorMethodBind, this.rawMemory, idx, customBgColor)
+    open fun setItemCustomBgColor(idx: Long, customBgColor: Color) {
+        _icall_Unit_Long_Color(setItemCustomBgColorMethodBind, this.rawMemory, idx, customBgColor)
     }
 
 
     private val getItemCustomBgColorMethodBind: CPointer<godot_method_bind> by lazy { getMB("ItemList", "get_item_custom_bg_color") }
-    open fun getItemCustomBgColor(idx: Int): Color {
-        return _icall_Color_Int(getItemCustomBgColorMethodBind, this.rawMemory, idx)
+    open fun getItemCustomBgColor(idx: Long): Color {
+        return _icall_Color_Long(getItemCustomBgColorMethodBind, this.rawMemory, idx)
     }
 
 
     private val setItemTooltipEnabledMethodBind: CPointer<godot_method_bind> by lazy { getMB("ItemList", "set_item_tooltip_enabled") }
-    open fun setItemTooltipEnabled(idx: Int, enable: Boolean) {
-        _icall_Unit_Int_Boolean(setItemTooltipEnabledMethodBind, this.rawMemory, idx, enable)
+    open fun setItemTooltipEnabled(idx: Long, enable: Boolean) {
+        _icall_Unit_Long_Boolean(setItemTooltipEnabledMethodBind, this.rawMemory, idx, enable)
     }
 
 
     private val isItemTooltipEnabledMethodBind: CPointer<godot_method_bind> by lazy { getMB("ItemList", "is_item_tooltip_enabled") }
-    open fun isItemTooltipEnabled(idx: Int): Boolean {
-        return _icall_Boolean_Int(isItemTooltipEnabledMethodBind, this.rawMemory, idx)
+    open fun isItemTooltipEnabled(idx: Long): Boolean {
+        return _icall_Boolean_Long(isItemTooltipEnabledMethodBind, this.rawMemory, idx)
     }
 
 
     private val setItemTooltipMethodBind: CPointer<godot_method_bind> by lazy { getMB("ItemList", "set_item_tooltip") }
-    open fun setItemTooltip(idx: Int, tooltip: String) {
-        _icall_Unit_Int_String(setItemTooltipMethodBind, this.rawMemory, idx, tooltip)
+    open fun setItemTooltip(idx: Long, tooltip: String) {
+        _icall_Unit_Long_String(setItemTooltipMethodBind, this.rawMemory, idx, tooltip)
     }
 
 
     private val getItemTooltipMethodBind: CPointer<godot_method_bind> by lazy { getMB("ItemList", "get_item_tooltip") }
-    open fun getItemTooltip(idx: Int): String {
-        return _icall_String_Int(getItemTooltipMethodBind, this.rawMemory, idx)
+    open fun getItemTooltip(idx: Long): String {
+        return _icall_String_Long(getItemTooltipMethodBind, this.rawMemory, idx)
     }
 
 
     private val selectMethodBind: CPointer<godot_method_bind> by lazy { getMB("ItemList", "select") }
-    open fun select(idx: Int, single: Boolean = true) {
-        _icall_Unit_Int_Boolean(selectMethodBind, this.rawMemory, idx, single)
+    open fun select(idx: Long, single: Boolean = true) {
+        _icall_Unit_Long_Boolean(selectMethodBind, this.rawMemory, idx, single)
     }
 
 
     private val unselectMethodBind: CPointer<godot_method_bind> by lazy { getMB("ItemList", "unselect") }
-    open fun unselect(idx: Int) {
-        _icall_Unit_Int(unselectMethodBind, this.rawMemory, idx)
+    open fun unselect(idx: Long) {
+        _icall_Unit_Long(unselectMethodBind, this.rawMemory, idx)
     }
 
 
@@ -284,8 +284,8 @@ open class ItemList : Control {
 
 
     private val isSelectedMethodBind: CPointer<godot_method_bind> by lazy { getMB("ItemList", "is_selected") }
-    open fun isSelected(idx: Int): Boolean {
-        return _icall_Boolean_Int(isSelectedMethodBind, this.rawMemory, idx)
+    open fun isSelected(idx: Long): Boolean {
+        return _icall_Boolean_Long(isSelectedMethodBind, this.rawMemory, idx)
     }
 
 
@@ -296,20 +296,20 @@ open class ItemList : Control {
 
 
     private val moveItemMethodBind: CPointer<godot_method_bind> by lazy { getMB("ItemList", "move_item") }
-    open fun moveItem(fromIdx: Int, toIdx: Int) {
-        _icall_Unit_Int_Int(moveItemMethodBind, this.rawMemory, fromIdx, toIdx)
+    open fun moveItem(fromIdx: Long, toIdx: Long) {
+        _icall_Unit_Long_Long(moveItemMethodBind, this.rawMemory, fromIdx, toIdx)
     }
 
 
     private val getItemCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("ItemList", "get_item_count") }
-    open fun getItemCount(): Int {
-        return _icall_Int(getItemCountMethodBind, this.rawMemory)
+    open fun getItemCount(): Long {
+        return _icall_Long(getItemCountMethodBind, this.rawMemory)
     }
 
 
     private val removeItemMethodBind: CPointer<godot_method_bind> by lazy { getMB("ItemList", "remove_item") }
-    open fun removeItem(idx: Int) {
-        _icall_Unit_Int(removeItemMethodBind, this.rawMemory, idx)
+    open fun removeItem(idx: Long) {
+        _icall_Unit_Long(removeItemMethodBind, this.rawMemory, idx)
     }
 
 
@@ -326,14 +326,14 @@ open class ItemList : Control {
 
 
     private val setFixedColumnWidthMethodBind: CPointer<godot_method_bind> by lazy { getMB("ItemList", "set_fixed_column_width") }
-    open fun setFixedColumnWidth(width: Int) {
-        _icall_Unit_Int(setFixedColumnWidthMethodBind, this.rawMemory, width)
+    open fun setFixedColumnWidth(width: Long) {
+        _icall_Unit_Long(setFixedColumnWidthMethodBind, this.rawMemory, width)
     }
 
 
     private val getFixedColumnWidthMethodBind: CPointer<godot_method_bind> by lazy { getMB("ItemList", "get_fixed_column_width") }
-    open fun getFixedColumnWidth(): Int {
-        return _icall_Int(getFixedColumnWidthMethodBind, this.rawMemory)
+    open fun getFixedColumnWidth(): Long {
+        return _icall_Long(getFixedColumnWidthMethodBind, this.rawMemory)
     }
 
 
@@ -350,50 +350,50 @@ open class ItemList : Control {
 
 
     private val setMaxTextLinesMethodBind: CPointer<godot_method_bind> by lazy { getMB("ItemList", "set_max_text_lines") }
-    open fun setMaxTextLines(lines: Int) {
-        _icall_Unit_Int(setMaxTextLinesMethodBind, this.rawMemory, lines)
+    open fun setMaxTextLines(lines: Long) {
+        _icall_Unit_Long(setMaxTextLinesMethodBind, this.rawMemory, lines)
     }
 
 
     private val getMaxTextLinesMethodBind: CPointer<godot_method_bind> by lazy { getMB("ItemList", "get_max_text_lines") }
-    open fun getMaxTextLines(): Int {
-        return _icall_Int(getMaxTextLinesMethodBind, this.rawMemory)
+    open fun getMaxTextLines(): Long {
+        return _icall_Long(getMaxTextLinesMethodBind, this.rawMemory)
     }
 
 
     private val setMaxColumnsMethodBind: CPointer<godot_method_bind> by lazy { getMB("ItemList", "set_max_columns") }
-    open fun setMaxColumns(amount: Int) {
-        _icall_Unit_Int(setMaxColumnsMethodBind, this.rawMemory, amount)
+    open fun setMaxColumns(amount: Long) {
+        _icall_Unit_Long(setMaxColumnsMethodBind, this.rawMemory, amount)
     }
 
 
     private val getMaxColumnsMethodBind: CPointer<godot_method_bind> by lazy { getMB("ItemList", "get_max_columns") }
-    open fun getMaxColumns(): Int {
-        return _icall_Int(getMaxColumnsMethodBind, this.rawMemory)
+    open fun getMaxColumns(): Long {
+        return _icall_Long(getMaxColumnsMethodBind, this.rawMemory)
     }
 
 
     private val setSelectModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("ItemList", "set_select_mode") }
-    open fun setSelectMode(mode: Int) {
-        _icall_Unit_Int(setSelectModeMethodBind, this.rawMemory, mode)
+    open fun setSelectMode(mode: Long) {
+        _icall_Unit_Long(setSelectModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getSelectModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("ItemList", "get_select_mode") }
     open fun getSelectMode(): ItemList.SelectMode {
-        return ItemList.SelectMode.fromInt(_icall_Int(getSelectModeMethodBind, this.rawMemory))
+        return ItemList.SelectMode.fromInt(_icall_Long(getSelectModeMethodBind, this.rawMemory))
     }
 
 
     private val setIconModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("ItemList", "set_icon_mode") }
-    open fun setIconMode(mode: Int) {
-        _icall_Unit_Int(setIconModeMethodBind, this.rawMemory, mode)
+    open fun setIconMode(mode: Long) {
+        _icall_Unit_Long(setIconModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getIconModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("ItemList", "get_icon_mode") }
     open fun getIconMode(): ItemList.IconMode {
-        return ItemList.IconMode.fromInt(_icall_Int(getIconModeMethodBind, this.rawMemory))
+        return ItemList.IconMode.fromInt(_icall_Long(getIconModeMethodBind, this.rawMemory))
     }
 
 
@@ -410,14 +410,14 @@ open class ItemList : Control {
 
 
     private val setIconScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("ItemList", "set_icon_scale") }
-    open fun setIconScale(scale: Float) {
-        _icall_Unit_Float(setIconScaleMethodBind, this.rawMemory, scale)
+    open fun setIconScale(scale: Double) {
+        _icall_Unit_Double(setIconScaleMethodBind, this.rawMemory, scale)
     }
 
 
     private val getIconScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("ItemList", "get_icon_scale") }
-    open fun getIconScale(): Float {
-        return _icall_Float(getIconScaleMethodBind, this.rawMemory)
+    open fun getIconScale(): Double {
+        return _icall_Double(getIconScaleMethodBind, this.rawMemory)
     }
 
 
@@ -464,8 +464,8 @@ open class ItemList : Control {
 
 
     private val getItemAtPositionMethodBind: CPointer<godot_method_bind> by lazy { getMB("ItemList", "get_item_at_position") }
-    open fun getItemAtPosition(position: Vector2, exact: Boolean = false): Int {
-        return _icall_Int_Vector2_Boolean(getItemAtPositionMethodBind, this.rawMemory, position, exact)
+    open fun getItemAtPosition(position: Vector2, exact: Boolean = false): Long {
+        return _icall_Long_Vector2_Boolean(getItemAtPositionMethodBind, this.rawMemory, position, exact)
     }
 
 
@@ -481,7 +481,7 @@ open class ItemList : Control {
     }
 
 
-    open fun _scroll_changed(arg0: Float) {
+    open fun _scroll_changed(arg0: Double) {
     }
 
 

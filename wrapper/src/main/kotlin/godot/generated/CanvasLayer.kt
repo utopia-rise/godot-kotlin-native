@@ -41,9 +41,9 @@ open class CanvasLayer : Node {
 
 
     // Properties
-    open var layer: Int
-        get() = _icall_Int(getLayerMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setLayerMethodBind, this.rawMemory, value)
+    open var layer: Long
+        get() = _icall_Long(getLayerMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setLayerMethodBind, this.rawMemory, value)
 
 
     open var offset: Vector2
@@ -55,14 +55,14 @@ open class CanvasLayer : Node {
     }
 
 
-    open var rotationDegrees: Float
-        get() = _icall_Float(getRotationDegreesMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setRotationDegreesMethodBind, this.rawMemory, value)
+    open var rotationDegrees: Double
+        get() = _icall_Double(getRotationDegreesMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setRotationDegreesMethodBind, this.rawMemory, value)
 
 
-    open var rotation: Float
-        get() = _icall_Float(getRotationMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setRotationMethodBind, this.rawMemory, value)
+    open var rotation: Double
+        get() = _icall_Double(getRotationMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setRotationMethodBind, this.rawMemory, value)
 
 
     open var scale: Vector2
@@ -92,14 +92,14 @@ open class CanvasLayer : Node {
 
     // Methods
     private val setLayerMethodBind: CPointer<godot_method_bind> by lazy { getMB("CanvasLayer", "set_layer") }
-    open fun setLayer(layer: Int) {
-        _icall_Unit_Int(setLayerMethodBind, this.rawMemory, layer)
+    open fun setLayer(layer: Long) {
+        _icall_Unit_Long(setLayerMethodBind, this.rawMemory, layer)
     }
 
 
     private val getLayerMethodBind: CPointer<godot_method_bind> by lazy { getMB("CanvasLayer", "get_layer") }
-    open fun getLayer(): Int {
-        return _icall_Int(getLayerMethodBind, this.rawMemory)
+    open fun getLayer(): Long {
+        return _icall_Long(getLayerMethodBind, this.rawMemory)
     }
 
 
@@ -128,26 +128,26 @@ open class CanvasLayer : Node {
 
 
     private val setRotationMethodBind: CPointer<godot_method_bind> by lazy { getMB("CanvasLayer", "set_rotation") }
-    open fun setRotation(radians: Float) {
-        _icall_Unit_Float(setRotationMethodBind, this.rawMemory, radians)
+    open fun setRotation(radians: Double) {
+        _icall_Unit_Double(setRotationMethodBind, this.rawMemory, radians)
     }
 
 
     private val getRotationMethodBind: CPointer<godot_method_bind> by lazy { getMB("CanvasLayer", "get_rotation") }
-    open fun getRotation(): Float {
-        return _icall_Float(getRotationMethodBind, this.rawMemory)
+    open fun getRotation(): Double {
+        return _icall_Double(getRotationMethodBind, this.rawMemory)
     }
 
 
     private val setRotationDegreesMethodBind: CPointer<godot_method_bind> by lazy { getMB("CanvasLayer", "set_rotation_degrees") }
-    open fun setRotationDegrees(degrees: Float) {
-        _icall_Unit_Float(setRotationDegreesMethodBind, this.rawMemory, degrees)
+    open fun setRotationDegrees(degrees: Double) {
+        _icall_Unit_Double(setRotationDegreesMethodBind, this.rawMemory, degrees)
     }
 
 
     private val getRotationDegreesMethodBind: CPointer<godot_method_bind> by lazy { getMB("CanvasLayer", "get_rotation_degrees") }
-    open fun getRotationDegrees(): Float {
-        return _icall_Float(getRotationDegreesMethodBind, this.rawMemory)
+    open fun getRotationDegrees(): Double {
+        return _icall_Double(getRotationDegreesMethodBind, this.rawMemory)
     }
 
 

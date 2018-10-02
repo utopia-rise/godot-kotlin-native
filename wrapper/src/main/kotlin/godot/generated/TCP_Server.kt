@@ -45,8 +45,8 @@ open class TCP_Server : Reference {
 
     // Methods
     private val listenMethodBind: CPointer<godot_method_bind> by lazy { getMB("TCP_Server", "listen") }
-    open fun listen(port: Int, bindAddress: String = "*"): GodotError {
-        return GodotError.fromInt(_icall_Int_Int_String(listenMethodBind, this.rawMemory, port, bindAddress))
+    open fun listen(port: Long, bindAddress: String = "*"): GodotError {
+        return GodotError.fromInt(_icall_Long_Long_String(listenMethodBind, this.rawMemory, port, bindAddress))
     }
 
 

@@ -51,26 +51,26 @@ open class StreamPeerBuffer : StreamPeer {
 
     // Methods
     private val seekMethodBind: CPointer<godot_method_bind> by lazy { getMB("StreamPeerBuffer", "seek") }
-    open fun seek(position: Int) {
-        _icall_Unit_Int(seekMethodBind, this.rawMemory, position)
+    open fun seek(position: Long) {
+        _icall_Unit_Long(seekMethodBind, this.rawMemory, position)
     }
 
 
     private val getSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("StreamPeerBuffer", "get_size") }
-    open fun getSize(): Int {
-        return _icall_Int(getSizeMethodBind, this.rawMemory)
+    open fun getSize(): Long {
+        return _icall_Long(getSizeMethodBind, this.rawMemory)
     }
 
 
     private val getPositionMethodBind: CPointer<godot_method_bind> by lazy { getMB("StreamPeerBuffer", "get_position") }
-    open fun getPosition(): Int {
-        return _icall_Int(getPositionMethodBind, this.rawMemory)
+    open fun getPosition(): Long {
+        return _icall_Long(getPositionMethodBind, this.rawMemory)
     }
 
 
     private val resizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("StreamPeerBuffer", "resize") }
-    open fun resize(size: Int) {
-        _icall_Unit_Int(resizeMethodBind, this.rawMemory, size)
+    open fun resize(size: Long) {
+        _icall_Unit_Long(resizeMethodBind, this.rawMemory, size)
     }
 
 

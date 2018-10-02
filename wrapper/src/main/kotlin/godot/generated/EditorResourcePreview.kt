@@ -45,7 +45,7 @@ open class EditorResourcePreview : Node {
 
 
     // Methods
-    open fun _preview_ready(arg0: String, arg1: Texture, arg2: Int, arg3: String, arg4: Variant) {
+    open fun _preview_ready(arg0: String, arg1: Texture, arg2: Long, arg3: String, arg4: Variant) {
     }
 
 

@@ -54,9 +54,9 @@ open class Slider : Range {
         set(value) = _icall_Unit_Boolean(setScrollableMethodBind, this.rawMemory, value)
 
 
-    open var tickCount: Int
-        get() = _icall_Int(getTicksMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setTicksMethodBind, this.rawMemory, value)
+    open var tickCount: Long
+        get() = _icall_Long(getTicksMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setTicksMethodBind, this.rawMemory, value)
 
 
     open var ticksOnBorders: Boolean
@@ -72,14 +72,14 @@ open class Slider : Range {
 
 
     private val setTicksMethodBind: CPointer<godot_method_bind> by lazy { getMB("Slider", "set_ticks") }
-    open fun setTicks(count: Int) {
-        _icall_Unit_Int(setTicksMethodBind, this.rawMemory, count)
+    open fun setTicks(count: Long) {
+        _icall_Unit_Long(setTicksMethodBind, this.rawMemory, count)
     }
 
 
     private val getTicksMethodBind: CPointer<godot_method_bind> by lazy { getMB("Slider", "get_ticks") }
-    open fun getTicks(): Int {
-        return _icall_Int(getTicksMethodBind, this.rawMemory)
+    open fun getTicks(): Long {
+        return _icall_Long(getTicksMethodBind, this.rawMemory)
     }
 
 

@@ -19,7 +19,7 @@ open class VisualShaderNodeScalarFunc : VisualShaderNode {
 
     // Enums 
 
-    enum class Function(val id: Int) {
+    enum class Function(val id: Long) {
         FUNC_SIN(0),
         FUNC_COS(1),
         FUNC_TAN(2),
@@ -43,7 +43,7 @@ open class VisualShaderNodeScalarFunc : VisualShaderNode {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -64,49 +64,49 @@ open class VisualShaderNodeScalarFunc : VisualShaderNode {
 
 
         // Constants
-        const val FUNC_SIN: Int = 0
-        const val FUNC_COS: Int = 1
-        const val FUNC_TAN: Int = 2
-        const val FUNC_ASIN: Int = 3
-        const val FUNC_ACOS: Int = 4
-        const val FUNC_ATAN: Int = 5
-        const val FUNC_SINH: Int = 6
-        const val FUNC_COSH: Int = 7
-        const val FUNC_TANH: Int = 8
-        const val FUNC_LOG: Int = 9
-        const val FUNC_EXP: Int = 10
-        const val FUNC_SQRT: Int = 11
-        const val FUNC_ABS: Int = 12
-        const val FUNC_SIGN: Int = 13
-        const val FUNC_FLOOR: Int = 14
-        const val FUNC_ROUND: Int = 15
-        const val FUNC_CEIL: Int = 16
-        const val FUNC_FRAC: Int = 17
-        const val FUNC_SATURATE: Int = 18
-        const val FUNC_NEGATE: Int = 19
+        const val FUNC_SIN: Long = 0
+        const val FUNC_COS: Long = 1
+        const val FUNC_TAN: Long = 2
+        const val FUNC_ASIN: Long = 3
+        const val FUNC_ACOS: Long = 4
+        const val FUNC_ATAN: Long = 5
+        const val FUNC_SINH: Long = 6
+        const val FUNC_COSH: Long = 7
+        const val FUNC_TANH: Long = 8
+        const val FUNC_LOG: Long = 9
+        const val FUNC_EXP: Long = 10
+        const val FUNC_SQRT: Long = 11
+        const val FUNC_ABS: Long = 12
+        const val FUNC_SIGN: Long = 13
+        const val FUNC_FLOOR: Long = 14
+        const val FUNC_ROUND: Long = 15
+        const val FUNC_CEIL: Long = 16
+        const val FUNC_FRAC: Long = 17
+        const val FUNC_SATURATE: Long = 18
+        const val FUNC_NEGATE: Long = 19
 
 
     }
 
 
     // Properties
-    open var function: Int
-        get() = _icall_Int(getFunctionMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setFunctionMethodBind, this.rawMemory, value)
+    open var function: Long
+        get() = _icall_Long(getFunctionMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setFunctionMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setFunctionMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualShaderNodeScalarFunc", "set_function") }
-    open fun setFunction(func: Int) {
-        _icall_Unit_Int(setFunctionMethodBind, this.rawMemory, func)
+    open fun setFunction(func: Long) {
+        _icall_Unit_Long(setFunctionMethodBind, this.rawMemory, func)
     }
 
 
     private val getFunctionMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualShaderNodeScalarFunc", "get_function") }
     open fun getFunction(): VisualShaderNodeScalarFunc.Function {
-        return VisualShaderNodeScalarFunc.Function.fromInt(_icall_Int(getFunctionMethodBind, this.rawMemory))
+        return VisualShaderNodeScalarFunc.Function.fromInt(_icall_Long(getFunctionMethodBind, this.rawMemory))
     }
 
 

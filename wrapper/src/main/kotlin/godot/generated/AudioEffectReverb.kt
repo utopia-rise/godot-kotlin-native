@@ -43,142 +43,142 @@ open class AudioEffectReverb : AudioEffect {
 
 
     // Properties
-    open var predelayMsec: Float
-        get() = _icall_Float(getPredelayMsecMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setPredelayMsecMethodBind, this.rawMemory, value)
+    open var predelayMsec: Double
+        get() = _icall_Double(getPredelayMsecMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setPredelayMsecMethodBind, this.rawMemory, value)
 
 
-    open var predelayFeedback: Float
-        get() = _icall_Float(getPredelayFeedbackMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setPredelayFeedbackMethodBind, this.rawMemory, value)
+    open var predelayFeedback: Double
+        get() = _icall_Double(getPredelayFeedbackMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setPredelayFeedbackMethodBind, this.rawMemory, value)
 
 
-    open var roomSize: Float
-        get() = _icall_Float(getRoomSizeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setRoomSizeMethodBind, this.rawMemory, value)
+    open var roomSize: Double
+        get() = _icall_Double(getRoomSizeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setRoomSizeMethodBind, this.rawMemory, value)
 
 
-    open var damping: Float
-        get() = _icall_Float(getDampingMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setDampingMethodBind, this.rawMemory, value)
+    open var damping: Double
+        get() = _icall_Double(getDampingMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setDampingMethodBind, this.rawMemory, value)
 
 
-    open var spread: Float
-        get() = _icall_Float(getSpreadMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setSpreadMethodBind, this.rawMemory, value)
+    open var spread: Double
+        get() = _icall_Double(getSpreadMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setSpreadMethodBind, this.rawMemory, value)
 
 
-    open var hipass: Float
-        get() = _icall_Float(getHpfMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setHpfMethodBind, this.rawMemory, value)
+    open var hipass: Double
+        get() = _icall_Double(getHpfMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setHpfMethodBind, this.rawMemory, value)
 
 
-    open var dry: Float
-        get() = _icall_Float(getDryMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setDryMethodBind, this.rawMemory, value)
+    open var dry: Double
+        get() = _icall_Double(getDryMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setDryMethodBind, this.rawMemory, value)
 
 
-    open var wet: Float
-        get() = _icall_Float(getWetMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setWetMethodBind, this.rawMemory, value)
+    open var wet: Double
+        get() = _icall_Double(getWetMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setWetMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setPredelayMsecMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectReverb", "set_predelay_msec") }
-    open fun setPredelayMsec(msec: Float) {
-        _icall_Unit_Float(setPredelayMsecMethodBind, this.rawMemory, msec)
+    open fun setPredelayMsec(msec: Double) {
+        _icall_Unit_Double(setPredelayMsecMethodBind, this.rawMemory, msec)
     }
 
 
     private val getPredelayMsecMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectReverb", "get_predelay_msec") }
-    open fun getPredelayMsec(): Float {
-        return _icall_Float(getPredelayMsecMethodBind, this.rawMemory)
+    open fun getPredelayMsec(): Double {
+        return _icall_Double(getPredelayMsecMethodBind, this.rawMemory)
     }
 
 
     private val setPredelayFeedbackMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectReverb", "set_predelay_feedback") }
-    open fun setPredelayFeedback(feedback: Float) {
-        _icall_Unit_Float(setPredelayFeedbackMethodBind, this.rawMemory, feedback)
+    open fun setPredelayFeedback(feedback: Double) {
+        _icall_Unit_Double(setPredelayFeedbackMethodBind, this.rawMemory, feedback)
     }
 
 
     private val getPredelayFeedbackMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectReverb", "get_predelay_feedback") }
-    open fun getPredelayFeedback(): Float {
-        return _icall_Float(getPredelayFeedbackMethodBind, this.rawMemory)
+    open fun getPredelayFeedback(): Double {
+        return _icall_Double(getPredelayFeedbackMethodBind, this.rawMemory)
     }
 
 
     private val setRoomSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectReverb", "set_room_size") }
-    open fun setRoomSize(size: Float) {
-        _icall_Unit_Float(setRoomSizeMethodBind, this.rawMemory, size)
+    open fun setRoomSize(size: Double) {
+        _icall_Unit_Double(setRoomSizeMethodBind, this.rawMemory, size)
     }
 
 
     private val getRoomSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectReverb", "get_room_size") }
-    open fun getRoomSize(): Float {
-        return _icall_Float(getRoomSizeMethodBind, this.rawMemory)
+    open fun getRoomSize(): Double {
+        return _icall_Double(getRoomSizeMethodBind, this.rawMemory)
     }
 
 
     private val setDampingMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectReverb", "set_damping") }
-    open fun setDamping(amount: Float) {
-        _icall_Unit_Float(setDampingMethodBind, this.rawMemory, amount)
+    open fun setDamping(amount: Double) {
+        _icall_Unit_Double(setDampingMethodBind, this.rawMemory, amount)
     }
 
 
     private val getDampingMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectReverb", "get_damping") }
-    open fun getDamping(): Float {
-        return _icall_Float(getDampingMethodBind, this.rawMemory)
+    open fun getDamping(): Double {
+        return _icall_Double(getDampingMethodBind, this.rawMemory)
     }
 
 
     private val setSpreadMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectReverb", "set_spread") }
-    open fun setSpread(amount: Float) {
-        _icall_Unit_Float(setSpreadMethodBind, this.rawMemory, amount)
+    open fun setSpread(amount: Double) {
+        _icall_Unit_Double(setSpreadMethodBind, this.rawMemory, amount)
     }
 
 
     private val getSpreadMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectReverb", "get_spread") }
-    open fun getSpread(): Float {
-        return _icall_Float(getSpreadMethodBind, this.rawMemory)
+    open fun getSpread(): Double {
+        return _icall_Double(getSpreadMethodBind, this.rawMemory)
     }
 
 
     private val setDryMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectReverb", "set_dry") }
-    open fun setDry(amount: Float) {
-        _icall_Unit_Float(setDryMethodBind, this.rawMemory, amount)
+    open fun setDry(amount: Double) {
+        _icall_Unit_Double(setDryMethodBind, this.rawMemory, amount)
     }
 
 
     private val getDryMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectReverb", "get_dry") }
-    open fun getDry(): Float {
-        return _icall_Float(getDryMethodBind, this.rawMemory)
+    open fun getDry(): Double {
+        return _icall_Double(getDryMethodBind, this.rawMemory)
     }
 
 
     private val setWetMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectReverb", "set_wet") }
-    open fun setWet(amount: Float) {
-        _icall_Unit_Float(setWetMethodBind, this.rawMemory, amount)
+    open fun setWet(amount: Double) {
+        _icall_Unit_Double(setWetMethodBind, this.rawMemory, amount)
     }
 
 
     private val getWetMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectReverb", "get_wet") }
-    open fun getWet(): Float {
-        return _icall_Float(getWetMethodBind, this.rawMemory)
+    open fun getWet(): Double {
+        return _icall_Double(getWetMethodBind, this.rawMemory)
     }
 
 
     private val setHpfMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectReverb", "set_hpf") }
-    open fun setHpf(amount: Float) {
-        _icall_Unit_Float(setHpfMethodBind, this.rawMemory, amount)
+    open fun setHpf(amount: Double) {
+        _icall_Unit_Double(setHpfMethodBind, this.rawMemory, amount)
     }
 
 
     private val getHpfMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioEffectReverb", "get_hpf") }
-    open fun getHpf(): Float {
-        return _icall_Float(getHpfMethodBind, this.rawMemory)
+    open fun getHpf(): Double {
+        return _icall_Double(getHpfMethodBind, this.rawMemory)
     }
 
 

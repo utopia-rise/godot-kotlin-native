@@ -19,7 +19,7 @@ open class Label : Control {
 
     // Enums 
 
-    enum class Align(val id: Int) {
+    enum class Align(val id: Long) {
         ALIGN_LEFT(0),
         ALIGN_CENTER(1),
         ALIGN_RIGHT(2),
@@ -27,10 +27,10 @@ open class Label : Control {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class VAlign(val id: Int) {
+    enum class VAlign(val id: Long) {
         VALIGN_TOP(0),
         VALIGN_CENTER(1),
         VALIGN_BOTTOM(2),
@@ -38,7 +38,7 @@ open class Label : Control {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -59,14 +59,14 @@ open class Label : Control {
 
 
         // Constants
-        const val ALIGN_LEFT: Int = 0
-        const val ALIGN_CENTER: Int = 1
-        const val ALIGN_RIGHT: Int = 2
-        const val ALIGN_FILL: Int = 3
-        const val VALIGN_TOP: Int = 0
-        const val VALIGN_CENTER: Int = 1
-        const val VALIGN_BOTTOM: Int = 2
-        const val VALIGN_FILL: Int = 3
+        const val ALIGN_LEFT: Long = 0
+        const val ALIGN_CENTER: Long = 1
+        const val ALIGN_RIGHT: Long = 2
+        const val ALIGN_FILL: Long = 3
+        const val VALIGN_TOP: Long = 0
+        const val VALIGN_CENTER: Long = 1
+        const val VALIGN_BOTTOM: Long = 2
+        const val VALIGN_FILL: Long = 3
 
 
     }
@@ -78,14 +78,14 @@ open class Label : Control {
         set(value) = _icall_Unit_String(setTextMethodBind, this.rawMemory, value)
 
 
-    open var align: Int
-        get() = _icall_Int(getAlignMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setAlignMethodBind, this.rawMemory, value)
+    open var align: Long
+        get() = _icall_Long(getAlignMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setAlignMethodBind, this.rawMemory, value)
 
 
-    open var valign: Int
-        get() = _icall_Int(getValignMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setValignMethodBind, this.rawMemory, value)
+    open var valign: Long
+        get() = _icall_Long(getValignMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setValignMethodBind, this.rawMemory, value)
 
 
     open var autowrap: Boolean
@@ -103,50 +103,50 @@ open class Label : Control {
         set(value) = _icall_Unit_Boolean(setUppercaseMethodBind, this.rawMemory, value)
 
 
-    open var visibleCharacters: Int
-        get() = _icall_Int(getVisibleCharactersMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setVisibleCharactersMethodBind, this.rawMemory, value)
+    open var visibleCharacters: Long
+        get() = _icall_Long(getVisibleCharactersMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setVisibleCharactersMethodBind, this.rawMemory, value)
 
 
-    open var percentVisible: Float
-        get() = _icall_Float(getPercentVisibleMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setPercentVisibleMethodBind, this.rawMemory, value)
+    open var percentVisible: Double
+        get() = _icall_Double(getPercentVisibleMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setPercentVisibleMethodBind, this.rawMemory, value)
 
 
-    open var linesSkipped: Int
-        get() = _icall_Int(getLinesSkippedMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setLinesSkippedMethodBind, this.rawMemory, value)
+    open var linesSkipped: Long
+        get() = _icall_Long(getLinesSkippedMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setLinesSkippedMethodBind, this.rawMemory, value)
 
 
-    open var maxLinesVisible: Int
-        get() = _icall_Int(getMaxLinesVisibleMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setMaxLinesVisibleMethodBind, this.rawMemory, value)
+    open var maxLinesVisible: Long
+        get() = _icall_Long(getMaxLinesVisibleMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setMaxLinesVisibleMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setAlignMethodBind: CPointer<godot_method_bind> by lazy { getMB("Label", "set_align") }
-    open fun setAlign(align: Int) {
-        _icall_Unit_Int(setAlignMethodBind, this.rawMemory, align)
+    open fun setAlign(align: Long) {
+        _icall_Unit_Long(setAlignMethodBind, this.rawMemory, align)
     }
 
 
     private val getAlignMethodBind: CPointer<godot_method_bind> by lazy { getMB("Label", "get_align") }
     open fun getAlign(): Label.Align {
-        return Label.Align.fromInt(_icall_Int(getAlignMethodBind, this.rawMemory))
+        return Label.Align.fromInt(_icall_Long(getAlignMethodBind, this.rawMemory))
     }
 
 
     private val setValignMethodBind: CPointer<godot_method_bind> by lazy { getMB("Label", "set_valign") }
-    open fun setValign(valign: Int) {
-        _icall_Unit_Int(setValignMethodBind, this.rawMemory, valign)
+    open fun setValign(valign: Long) {
+        _icall_Unit_Long(setValignMethodBind, this.rawMemory, valign)
     }
 
 
     private val getValignMethodBind: CPointer<godot_method_bind> by lazy { getMB("Label", "get_valign") }
     open fun getValign(): Label.VAlign {
-        return Label.VAlign.fromInt(_icall_Int(getValignMethodBind, this.rawMemory))
+        return Label.VAlign.fromInt(_icall_Long(getValignMethodBind, this.rawMemory))
     }
 
 
@@ -199,74 +199,74 @@ open class Label : Control {
 
 
     private val getLineHeightMethodBind: CPointer<godot_method_bind> by lazy { getMB("Label", "get_line_height") }
-    open fun getLineHeight(): Int {
-        return _icall_Int(getLineHeightMethodBind, this.rawMemory)
+    open fun getLineHeight(): Long {
+        return _icall_Long(getLineHeightMethodBind, this.rawMemory)
     }
 
 
     private val getLineCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("Label", "get_line_count") }
-    open fun getLineCount(): Int {
-        return _icall_Int(getLineCountMethodBind, this.rawMemory)
+    open fun getLineCount(): Long {
+        return _icall_Long(getLineCountMethodBind, this.rawMemory)
     }
 
 
     private val getVisibleLineCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("Label", "get_visible_line_count") }
-    open fun getVisibleLineCount(): Int {
-        return _icall_Int(getVisibleLineCountMethodBind, this.rawMemory)
+    open fun getVisibleLineCount(): Long {
+        return _icall_Long(getVisibleLineCountMethodBind, this.rawMemory)
     }
 
 
     private val getTotalCharacterCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("Label", "get_total_character_count") }
-    open fun getTotalCharacterCount(): Int {
-        return _icall_Int(getTotalCharacterCountMethodBind, this.rawMemory)
+    open fun getTotalCharacterCount(): Long {
+        return _icall_Long(getTotalCharacterCountMethodBind, this.rawMemory)
     }
 
 
     private val setVisibleCharactersMethodBind: CPointer<godot_method_bind> by lazy { getMB("Label", "set_visible_characters") }
-    open fun setVisibleCharacters(amount: Int) {
-        _icall_Unit_Int(setVisibleCharactersMethodBind, this.rawMemory, amount)
+    open fun setVisibleCharacters(amount: Long) {
+        _icall_Unit_Long(setVisibleCharactersMethodBind, this.rawMemory, amount)
     }
 
 
     private val getVisibleCharactersMethodBind: CPointer<godot_method_bind> by lazy { getMB("Label", "get_visible_characters") }
-    open fun getVisibleCharacters(): Int {
-        return _icall_Int(getVisibleCharactersMethodBind, this.rawMemory)
+    open fun getVisibleCharacters(): Long {
+        return _icall_Long(getVisibleCharactersMethodBind, this.rawMemory)
     }
 
 
     private val setPercentVisibleMethodBind: CPointer<godot_method_bind> by lazy { getMB("Label", "set_percent_visible") }
-    open fun setPercentVisible(percentVisible: Float) {
-        _icall_Unit_Float(setPercentVisibleMethodBind, this.rawMemory, percentVisible)
+    open fun setPercentVisible(percentVisible: Double) {
+        _icall_Unit_Double(setPercentVisibleMethodBind, this.rawMemory, percentVisible)
     }
 
 
     private val getPercentVisibleMethodBind: CPointer<godot_method_bind> by lazy { getMB("Label", "get_percent_visible") }
-    open fun getPercentVisible(): Float {
-        return _icall_Float(getPercentVisibleMethodBind, this.rawMemory)
+    open fun getPercentVisible(): Double {
+        return _icall_Double(getPercentVisibleMethodBind, this.rawMemory)
     }
 
 
     private val setLinesSkippedMethodBind: CPointer<godot_method_bind> by lazy { getMB("Label", "set_lines_skipped") }
-    open fun setLinesSkipped(linesSkipped: Int) {
-        _icall_Unit_Int(setLinesSkippedMethodBind, this.rawMemory, linesSkipped)
+    open fun setLinesSkipped(linesSkipped: Long) {
+        _icall_Unit_Long(setLinesSkippedMethodBind, this.rawMemory, linesSkipped)
     }
 
 
     private val getLinesSkippedMethodBind: CPointer<godot_method_bind> by lazy { getMB("Label", "get_lines_skipped") }
-    open fun getLinesSkipped(): Int {
-        return _icall_Int(getLinesSkippedMethodBind, this.rawMemory)
+    open fun getLinesSkipped(): Long {
+        return _icall_Long(getLinesSkippedMethodBind, this.rawMemory)
     }
 
 
     private val setMaxLinesVisibleMethodBind: CPointer<godot_method_bind> by lazy { getMB("Label", "set_max_lines_visible") }
-    open fun setMaxLinesVisible(linesVisible: Int) {
-        _icall_Unit_Int(setMaxLinesVisibleMethodBind, this.rawMemory, linesVisible)
+    open fun setMaxLinesVisible(linesVisible: Long) {
+        _icall_Unit_Long(setMaxLinesVisibleMethodBind, this.rawMemory, linesVisible)
     }
 
 
     private val getMaxLinesVisibleMethodBind: CPointer<godot_method_bind> by lazy { getMB("Label", "get_max_lines_visible") }
-    open fun getMaxLinesVisible(): Int {
-        return _icall_Int(getMaxLinesVisibleMethodBind, this.rawMemory)
+    open fun getMaxLinesVisible(): Long {
+        return _icall_Long(getMaxLinesVisibleMethodBind, this.rawMemory)
     }
 
 

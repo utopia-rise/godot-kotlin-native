@@ -19,7 +19,7 @@ open class CanvasItem : Node {
 
     // Enums 
 
-    enum class BlendMode(val id: Int) {
+    enum class BlendMode(val id: Long) {
         BLEND_MODE_MIX(0),
         BLEND_MODE_ADD(1),
         BLEND_MODE_SUB(2),
@@ -29,7 +29,7 @@ open class CanvasItem : Node {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -52,17 +52,17 @@ open class CanvasItem : Node {
 
 
         // Constants
-        const val BLEND_MODE_MIX: Int = 0
-        const val BLEND_MODE_ADD: Int = 1
-        const val BLEND_MODE_SUB: Int = 2
-        const val BLEND_MODE_MUL: Int = 3
-        const val BLEND_MODE_PREMULT_ALPHA: Int = 4
-        const val BLEND_MODE_DISABLED: Int = 5
-        const val NOTIFICATION_TRANSFORM_CHANGED: Int = 29
-        const val NOTIFICATION_DRAW: Int = 30
-        const val NOTIFICATION_VISIBILITY_CHANGED: Int = 31
-        const val NOTIFICATION_ENTER_CANVAS: Int = 32
-        const val NOTIFICATION_EXIT_CANVAS: Int = 33
+        const val BLEND_MODE_MIX: Long = 0
+        const val BLEND_MODE_ADD: Long = 1
+        const val BLEND_MODE_SUB: Long = 2
+        const val BLEND_MODE_MUL: Long = 3
+        const val BLEND_MODE_PREMULT_ALPHA: Long = 4
+        const val BLEND_MODE_DISABLED: Long = 5
+        const val NOTIFICATION_TRANSFORM_CHANGED: Long = 29
+        const val NOTIFICATION_DRAW: Long = 30
+        const val NOTIFICATION_VISIBILITY_CHANGED: Long = 31
+        const val NOTIFICATION_ENTER_CANVAS: Long = 32
+        const val NOTIFICATION_EXIT_CANVAS: Long = 33
 
 
     }
@@ -97,9 +97,9 @@ open class CanvasItem : Node {
         set(value) = _icall_Unit_Boolean(setDrawBehindParentMethodBind, this.rawMemory, value)
 
 
-    open var lightMask: Int
-        get() = _icall_Int(getLightMaskMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setLightMaskMethodBind, this.rawMemory, value)
+    open var lightMask: Long
+        get() = _icall_Long(getLightMaskMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setLightMaskMethodBind, this.rawMemory, value)
 
 
     open var material: Material
@@ -168,11 +168,11 @@ open class CanvasItem : Node {
     }
 
 
-    open fun _edit_set_rotation(degrees: Float) {
+    open fun _edit_set_rotation(degrees: Double) {
     }
 
 
-    open fun _edit_get_rotation(): Float {
+    open fun _edit_get_rotation(): Double {
         throw NotImplementedError("_edit_get_rotation is not implemented for CanvasItem")
     }
 
@@ -251,14 +251,14 @@ open class CanvasItem : Node {
 
 
     private val setLightMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("CanvasItem", "set_light_mask") }
-    open fun setLightMask(lightMask: Int) {
-        _icall_Unit_Int(setLightMaskMethodBind, this.rawMemory, lightMask)
+    open fun setLightMask(lightMask: Long) {
+        _icall_Unit_Long(setLightMaskMethodBind, this.rawMemory, lightMask)
     }
 
 
     private val getLightMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("CanvasItem", "get_light_mask") }
-    open fun getLightMask(): Int {
-        return _icall_Int(getLightMaskMethodBind, this.rawMemory)
+    open fun getLightMask(): Long {
+        return _icall_Long(getLightMaskMethodBind, this.rawMemory)
     }
 
 
@@ -308,32 +308,32 @@ open class CanvasItem : Node {
 
 
     private val drawLineMethodBind: CPointer<godot_method_bind> by lazy { getMB("CanvasItem", "draw_line") }
-    open fun drawLine(from: Vector2, to: Vector2, color: Color, width: Float = 1f, antialiased: Boolean = false) {
-        _icall_Unit_Vector2_Vector2_Color_Float_Boolean(drawLineMethodBind, this.rawMemory, from, to, color, width, antialiased)
+    open fun drawLine(from: Vector2, to: Vector2, color: Color, width: Double = 1.0, antialiased: Boolean = false) {
+        _icall_Unit_Vector2_Vector2_Color_Double_Boolean(drawLineMethodBind, this.rawMemory, from, to, color, width, antialiased)
     }
 
 
     private val drawPolylineMethodBind: CPointer<godot_method_bind> by lazy { getMB("CanvasItem", "draw_polyline") }
-    open fun drawPolyline(points: PoolVector2Array, color: Color, width: Float = 1f, antialiased: Boolean = false) {
-        _icall_Unit_PoolVector2Array_Color_Float_Boolean(drawPolylineMethodBind, this.rawMemory, points, color, width, antialiased)
+    open fun drawPolyline(points: PoolVector2Array, color: Color, width: Double = 1.0, antialiased: Boolean = false) {
+        _icall_Unit_PoolVector2Array_Color_Double_Boolean(drawPolylineMethodBind, this.rawMemory, points, color, width, antialiased)
     }
 
 
     private val drawPolylineColorsMethodBind: CPointer<godot_method_bind> by lazy { getMB("CanvasItem", "draw_polyline_colors") }
-    open fun drawPolylineColors(points: PoolVector2Array, colors: PoolColorArray, width: Float = 1f, antialiased: Boolean = false) {
-        _icall_Unit_PoolVector2Array_PoolColorArray_Float_Boolean(drawPolylineColorsMethodBind, this.rawMemory, points, colors, width, antialiased)
+    open fun drawPolylineColors(points: PoolVector2Array, colors: PoolColorArray, width: Double = 1.0, antialiased: Boolean = false) {
+        _icall_Unit_PoolVector2Array_PoolColorArray_Double_Boolean(drawPolylineColorsMethodBind, this.rawMemory, points, colors, width, antialiased)
     }
 
 
     private val drawMultilineMethodBind: CPointer<godot_method_bind> by lazy { getMB("CanvasItem", "draw_multiline") }
-    open fun drawMultiline(points: PoolVector2Array, color: Color, width: Float = 1f, antialiased: Boolean = false) {
-        _icall_Unit_PoolVector2Array_Color_Float_Boolean(drawMultilineMethodBind, this.rawMemory, points, color, width, antialiased)
+    open fun drawMultiline(points: PoolVector2Array, color: Color, width: Double = 1.0, antialiased: Boolean = false) {
+        _icall_Unit_PoolVector2Array_Color_Double_Boolean(drawMultilineMethodBind, this.rawMemory, points, color, width, antialiased)
     }
 
 
     private val drawMultilineColorsMethodBind: CPointer<godot_method_bind> by lazy { getMB("CanvasItem", "draw_multiline_colors") }
-    open fun drawMultilineColors(points: PoolVector2Array, colors: PoolColorArray, width: Float = 1f, antialiased: Boolean = false) {
-        _icall_Unit_PoolVector2Array_PoolColorArray_Float_Boolean(drawMultilineColorsMethodBind, this.rawMemory, points, colors, width, antialiased)
+    open fun drawMultilineColors(points: PoolVector2Array, colors: PoolColorArray, width: Double = 1.0, antialiased: Boolean = false) {
+        _icall_Unit_PoolVector2Array_PoolColorArray_Double_Boolean(drawMultilineColorsMethodBind, this.rawMemory, points, colors, width, antialiased)
     }
 
 
@@ -344,8 +344,8 @@ open class CanvasItem : Node {
 
 
     private val drawCircleMethodBind: CPointer<godot_method_bind> by lazy { getMB("CanvasItem", "draw_circle") }
-    open fun drawCircle(position: Vector2, radius: Float, color: Color) {
-        _icall_Unit_Vector2_Float_Color(drawCircleMethodBind, this.rawMemory, position, radius, color)
+    open fun drawCircle(position: Vector2, radius: Double, color: Color) {
+        _icall_Unit_Vector2_Double_Color(drawCircleMethodBind, this.rawMemory, position, radius, color)
     }
 
 
@@ -374,8 +374,8 @@ open class CanvasItem : Node {
 
 
     private val drawPrimitiveMethodBind: CPointer<godot_method_bind> by lazy { getMB("CanvasItem", "draw_primitive") }
-    open fun drawPrimitive(points: PoolVector2Array, colors: PoolColorArray, uvs: PoolVector2Array, texture: Texture, width: Float = 1f, normalMap: Texture) {
-        _icall_Unit_PoolVector2Array_PoolColorArray_PoolVector2Array_Object_Float_Object(drawPrimitiveMethodBind, this.rawMemory, points, colors, uvs, texture, width, normalMap)
+    open fun drawPrimitive(points: PoolVector2Array, colors: PoolColorArray, uvs: PoolVector2Array, texture: Texture, width: Double = 1.0, normalMap: Texture) {
+        _icall_Unit_PoolVector2Array_PoolColorArray_PoolVector2Array_Object_Double_Object(drawPrimitiveMethodBind, this.rawMemory, points, colors, uvs, texture, width, normalMap)
     }
 
 
@@ -392,14 +392,14 @@ open class CanvasItem : Node {
 
 
     private val drawStringMethodBind: CPointer<godot_method_bind> by lazy { getMB("CanvasItem", "draw_string") }
-    open fun drawString(font: Font, position: Vector2, text: String, modulate: Color = Color(1,1,1,1), clipW: Int = -1) {
-        _icall_Unit_Object_Vector2_String_Color_Int(drawStringMethodBind, this.rawMemory, font, position, text, modulate, clipW)
+    open fun drawString(font: Font, position: Vector2, text: String, modulate: Color = Color(1,1,1,1), clipW: Long = -1) {
+        _icall_Unit_Object_Vector2_String_Color_Long(drawStringMethodBind, this.rawMemory, font, position, text, modulate, clipW)
     }
 
 
     private val drawCharMethodBind: CPointer<godot_method_bind> by lazy { getMB("CanvasItem", "draw_char") }
-    open fun drawChar(font: Font, position: Vector2, char: String, next: String, modulate: Color = Color(1,1,1,1)): Float {
-        return _icall_Float_Object_Vector2_String_String_Color(drawCharMethodBind, this.rawMemory, font, position, char, next, modulate)
+    open fun drawChar(font: Font, position: Vector2, char: String, next: String, modulate: Color = Color(1,1,1,1)): Double {
+        return _icall_Double_Object_Vector2_String_String_Color(drawCharMethodBind, this.rawMemory, font, position, char, next, modulate)
     }
 
 
@@ -416,8 +416,8 @@ open class CanvasItem : Node {
 
 
     private val drawSetTransformMethodBind: CPointer<godot_method_bind> by lazy { getMB("CanvasItem", "draw_set_transform") }
-    open fun drawSetTransform(position: Vector2, rotation: Float, scale: Vector2) {
-        _icall_Unit_Vector2_Float_Vector2(drawSetTransformMethodBind, this.rawMemory, position, rotation, scale)
+    open fun drawSetTransform(position: Vector2, rotation: Double, scale: Vector2) {
+        _icall_Unit_Vector2_Double_Vector2(drawSetTransformMethodBind, this.rawMemory, position, rotation, scale)
     }
 
 

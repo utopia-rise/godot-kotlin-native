@@ -43,40 +43,40 @@ open class InputEventJoypadMotion : InputEvent {
 
 
     // Properties
-    open var axis: Int
-        get() = _icall_Int(getAxisMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setAxisMethodBind, this.rawMemory, value)
+    open var axis: Long
+        get() = _icall_Long(getAxisMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setAxisMethodBind, this.rawMemory, value)
 
 
-    open var axisValue: Float
-        get() = _icall_Float(getAxisValueMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setAxisValueMethodBind, this.rawMemory, value)
+    open var axisValue: Double
+        get() = _icall_Double(getAxisValueMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setAxisValueMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setAxisMethodBind: CPointer<godot_method_bind> by lazy { getMB("InputEventJoypadMotion", "set_axis") }
-    open fun setAxis(axis: Int) {
-        _icall_Unit_Int(setAxisMethodBind, this.rawMemory, axis)
+    open fun setAxis(axis: Long) {
+        _icall_Unit_Long(setAxisMethodBind, this.rawMemory, axis)
     }
 
 
     private val getAxisMethodBind: CPointer<godot_method_bind> by lazy { getMB("InputEventJoypadMotion", "get_axis") }
-    open fun getAxis(): Int {
-        return _icall_Int(getAxisMethodBind, this.rawMemory)
+    open fun getAxis(): Long {
+        return _icall_Long(getAxisMethodBind, this.rawMemory)
     }
 
 
     private val setAxisValueMethodBind: CPointer<godot_method_bind> by lazy { getMB("InputEventJoypadMotion", "set_axis_value") }
-    open fun setAxisValue(axisValue: Float) {
-        _icall_Unit_Float(setAxisValueMethodBind, this.rawMemory, axisValue)
+    open fun setAxisValue(axisValue: Double) {
+        _icall_Unit_Double(setAxisValueMethodBind, this.rawMemory, axisValue)
     }
 
 
     private val getAxisValueMethodBind: CPointer<godot_method_bind> by lazy { getMB("InputEventJoypadMotion", "get_axis_value") }
-    open fun getAxisValue(): Float {
-        return _icall_Float(getAxisValueMethodBind, this.rawMemory)
+    open fun getAxisValue(): Double {
+        return _icall_Double(getAxisValueMethodBind, this.rawMemory)
     }
 
 

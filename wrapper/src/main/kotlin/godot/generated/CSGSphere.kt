@@ -45,19 +45,19 @@ open class CSGSphere : CSGPrimitive {
 
 
     // Properties
-    open var radius: Float
-        get() = _icall_Float(getRadiusMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setRadiusMethodBind, this.rawMemory, value)
+    open var radius: Double
+        get() = _icall_Double(getRadiusMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setRadiusMethodBind, this.rawMemory, value)
 
 
-    open var radialSegments: Int
-        get() = _icall_Int(getRadialSegmentsMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setRadialSegmentsMethodBind, this.rawMemory, value)
+    open var radialSegments: Long
+        get() = _icall_Long(getRadialSegmentsMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setRadialSegmentsMethodBind, this.rawMemory, value)
 
 
-    open var rings: Int
-        get() = _icall_Int(getRingsMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setRingsMethodBind, this.rawMemory, value)
+    open var rings: Long
+        get() = _icall_Long(getRingsMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setRingsMethodBind, this.rawMemory, value)
 
 
     open var smoothFaces: Boolean
@@ -74,38 +74,38 @@ open class CSGSphere : CSGPrimitive {
 
     // Methods
     private val setRadiusMethodBind: CPointer<godot_method_bind> by lazy { getMB("CSGSphere", "set_radius") }
-    open fun setRadius(radius: Float) {
-        _icall_Unit_Float(setRadiusMethodBind, this.rawMemory, radius)
+    open fun setRadius(radius: Double) {
+        _icall_Unit_Double(setRadiusMethodBind, this.rawMemory, radius)
     }
 
 
     private val getRadiusMethodBind: CPointer<godot_method_bind> by lazy { getMB("CSGSphere", "get_radius") }
-    open fun getRadius(): Float {
-        return _icall_Float(getRadiusMethodBind, this.rawMemory)
+    open fun getRadius(): Double {
+        return _icall_Double(getRadiusMethodBind, this.rawMemory)
     }
 
 
     private val setRadialSegmentsMethodBind: CPointer<godot_method_bind> by lazy { getMB("CSGSphere", "set_radial_segments") }
-    open fun setRadialSegments(radialSegments: Int) {
-        _icall_Unit_Int(setRadialSegmentsMethodBind, this.rawMemory, radialSegments)
+    open fun setRadialSegments(radialSegments: Long) {
+        _icall_Unit_Long(setRadialSegmentsMethodBind, this.rawMemory, radialSegments)
     }
 
 
     private val getRadialSegmentsMethodBind: CPointer<godot_method_bind> by lazy { getMB("CSGSphere", "get_radial_segments") }
-    open fun getRadialSegments(): Int {
-        return _icall_Int(getRadialSegmentsMethodBind, this.rawMemory)
+    open fun getRadialSegments(): Long {
+        return _icall_Long(getRadialSegmentsMethodBind, this.rawMemory)
     }
 
 
     private val setRingsMethodBind: CPointer<godot_method_bind> by lazy { getMB("CSGSphere", "set_rings") }
-    open fun setRings(rings: Int) {
-        _icall_Unit_Int(setRingsMethodBind, this.rawMemory, rings)
+    open fun setRings(rings: Long) {
+        _icall_Unit_Long(setRingsMethodBind, this.rawMemory, rings)
     }
 
 
     private val getRingsMethodBind: CPointer<godot_method_bind> by lazy { getMB("CSGSphere", "get_rings") }
-    open fun getRings(): Int {
-        return _icall_Int(getRingsMethodBind, this.rawMemory)
+    open fun getRings(): Long {
+        return _icall_Long(getRingsMethodBind, this.rawMemory)
     }
 
 

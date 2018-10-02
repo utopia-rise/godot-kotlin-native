@@ -19,17 +19,17 @@ open class ParticlesMaterial : Material {
 
     // Enums 
 
-    enum class Flags(val id: Int) {
+    enum class Flags(val id: Long) {
         FLAG_ALIGN_Y_TO_VELOCITY(0),
         FLAG_ROTATE_Y(1),
         FLAG_MAX(4),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class EmissionShape(val id: Int) {
+    enum class EmissionShape(val id: Long) {
         EMISSION_SHAPE_POINT(0),
         EMISSION_SHAPE_SPHERE(1),
         EMISSION_SHAPE_BOX(2),
@@ -38,10 +38,10 @@ open class ParticlesMaterial : Material {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class Parameter(val id: Int) {
+    enum class Parameter(val id: Long) {
         PARAM_INITIAL_LINEAR_VELOCITY(0),
         PARAM_ANGULAR_VELOCITY(1),
         PARAM_ORBIT_VELOCITY(2),
@@ -58,7 +58,7 @@ open class ParticlesMaterial : Material {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -79,36 +79,36 @@ open class ParticlesMaterial : Material {
 
 
         // Constants
-        const val PARAM_INITIAL_LINEAR_VELOCITY: Int = 0
-        const val PARAM_ANGULAR_VELOCITY: Int = 1
-        const val PARAM_ORBIT_VELOCITY: Int = 2
-        const val PARAM_LINEAR_ACCEL: Int = 3
-        const val PARAM_RADIAL_ACCEL: Int = 4
-        const val PARAM_TANGENTIAL_ACCEL: Int = 5
-        const val PARAM_DAMPING: Int = 6
-        const val PARAM_ANGLE: Int = 7
-        const val PARAM_SCALE: Int = 8
-        const val PARAM_HUE_VARIATION: Int = 9
-        const val PARAM_ANIM_SPEED: Int = 10
-        const val PARAM_ANIM_OFFSET: Int = 11
-        const val PARAM_MAX: Int = 12
-        const val FLAG_ALIGN_Y_TO_VELOCITY: Int = 0
-        const val FLAG_ROTATE_Y: Int = 1
-        const val FLAG_MAX: Int = 4
-        const val EMISSION_SHAPE_POINT: Int = 0
-        const val EMISSION_SHAPE_SPHERE: Int = 1
-        const val EMISSION_SHAPE_BOX: Int = 2
-        const val EMISSION_SHAPE_POINTS: Int = 3
-        const val EMISSION_SHAPE_DIRECTED_POINTS: Int = 4
+        const val PARAM_INITIAL_LINEAR_VELOCITY: Long = 0
+        const val PARAM_ANGULAR_VELOCITY: Long = 1
+        const val PARAM_ORBIT_VELOCITY: Long = 2
+        const val PARAM_LINEAR_ACCEL: Long = 3
+        const val PARAM_RADIAL_ACCEL: Long = 4
+        const val PARAM_TANGENTIAL_ACCEL: Long = 5
+        const val PARAM_DAMPING: Long = 6
+        const val PARAM_ANGLE: Long = 7
+        const val PARAM_SCALE: Long = 8
+        const val PARAM_HUE_VARIATION: Long = 9
+        const val PARAM_ANIM_SPEED: Long = 10
+        const val PARAM_ANIM_OFFSET: Long = 11
+        const val PARAM_MAX: Long = 12
+        const val FLAG_ALIGN_Y_TO_VELOCITY: Long = 0
+        const val FLAG_ROTATE_Y: Long = 1
+        const val FLAG_MAX: Long = 4
+        const val EMISSION_SHAPE_POINT: Long = 0
+        const val EMISSION_SHAPE_SPHERE: Long = 1
+        const val EMISSION_SHAPE_BOX: Long = 2
+        const val EMISSION_SHAPE_POINTS: Long = 3
+        const val EMISSION_SHAPE_DIRECTED_POINTS: Long = 4
 
 
     }
 
 
     // Properties
-    open var trailDivisor: Int
-        get() = _icall_Int(getTrailDivisorMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setTrailDivisorMethodBind, this.rawMemory, value)
+    open var trailDivisor: Long
+        get() = _icall_Long(getTrailDivisorMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setTrailDivisorMethodBind, this.rawMemory, value)
 
 
     open var trailSizeModifier: CurveTexture
@@ -121,14 +121,14 @@ open class ParticlesMaterial : Material {
         set(value) = _icall_Unit_Object(setTrailColorModifierMethodBind, this.rawMemory, value)
 
 
-    open var emissionShape: Int
-        get() = _icall_Int(getEmissionShapeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setEmissionShapeMethodBind, this.rawMemory, value)
+    open var emissionShape: Long
+        get() = _icall_Long(getEmissionShapeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setEmissionShapeMethodBind, this.rawMemory, value)
 
 
-    open var emissionSphereRadius: Float
-        get() = _icall_Float(getEmissionSphereRadiusMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setEmissionSphereRadiusMethodBind, this.rawMemory, value)
+    open var emissionSphereRadius: Double
+        get() = _icall_Double(getEmissionSphereRadiusMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setEmissionSphereRadiusMethodBind, this.rawMemory, value)
 
 
     open var emissionBoxExtents: Vector3
@@ -155,34 +155,34 @@ open class ParticlesMaterial : Material {
         set(value) = _icall_Unit_Object(setEmissionColorTextureMethodBind, this.rawMemory, value)
 
 
-    open var emissionPointCount: Int
-        get() = _icall_Int(getEmissionPointCountMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setEmissionPointCountMethodBind, this.rawMemory, value)
+    open var emissionPointCount: Long
+        get() = _icall_Long(getEmissionPointCountMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setEmissionPointCountMethodBind, this.rawMemory, value)
 
 
     open var flagAlignY: Boolean
-        get() = _icall_Boolean_Int(getFlagMethodBind, this.rawMemory, 0)
-        set(value) = _icall_Unit_Int_Boolean(setFlagMethodBind, this.rawMemory, 0, value)
+        get() = _icall_Boolean_Long(getFlagMethodBind, this.rawMemory, 0)
+        set(value) = _icall_Unit_Long_Boolean(setFlagMethodBind, this.rawMemory, 0, value)
 
 
     open var flagRotateY: Boolean
-        get() = _icall_Boolean_Int(getFlagMethodBind, this.rawMemory, 1)
-        set(value) = _icall_Unit_Int_Boolean(setFlagMethodBind, this.rawMemory, 1, value)
+        get() = _icall_Boolean_Long(getFlagMethodBind, this.rawMemory, 1)
+        set(value) = _icall_Unit_Long_Boolean(setFlagMethodBind, this.rawMemory, 1, value)
 
 
     open var flagDisableZ: Boolean
-        get() = _icall_Boolean_Int(getFlagMethodBind, this.rawMemory, 2)
-        set(value) = _icall_Unit_Int_Boolean(setFlagMethodBind, this.rawMemory, 2, value)
+        get() = _icall_Boolean_Long(getFlagMethodBind, this.rawMemory, 2)
+        set(value) = _icall_Unit_Long_Boolean(setFlagMethodBind, this.rawMemory, 2, value)
 
 
-    open var spread: Float
-        get() = _icall_Float(getSpreadMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setSpreadMethodBind, this.rawMemory, value)
+    open var spread: Double
+        get() = _icall_Double(getSpreadMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setSpreadMethodBind, this.rawMemory, value)
 
 
-    open var flatness: Float
-        get() = _icall_Float(getFlatnessMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setFlatnessMethodBind, this.rawMemory, value)
+    open var flatness: Double
+        get() = _icall_Double(getFlatnessMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setFlatnessMethodBind, this.rawMemory, value)
 
 
     open var gravity: Vector3
@@ -194,134 +194,134 @@ open class ParticlesMaterial : Material {
     }
 
 
-    open var initialVelocity: Float
-        get() = _icall_Float_Int(getParamMethodBind, this.rawMemory, 0)
-        set(value) = _icall_Unit_Int_Float(setParamMethodBind, this.rawMemory, 0, value)
+    open var initialVelocity: Double
+        get() = _icall_Double_Long(getParamMethodBind, this.rawMemory, 0)
+        set(value) = _icall_Unit_Long_Double(setParamMethodBind, this.rawMemory, 0, value)
 
 
-    open var initialVelocityRandom: Float
-        get() = _icall_Float_Int(getParamRandomnessMethodBind, this.rawMemory, 0)
-        set(value) = _icall_Unit_Int_Float(setParamRandomnessMethodBind, this.rawMemory, 0, value)
+    open var initialVelocityRandom: Double
+        get() = _icall_Double_Long(getParamRandomnessMethodBind, this.rawMemory, 0)
+        set(value) = _icall_Unit_Long_Double(setParamRandomnessMethodBind, this.rawMemory, 0, value)
 
 
-    open var angularVelocity: Float
-        get() = _icall_Float_Int(getParamMethodBind, this.rawMemory, 1)
-        set(value) = _icall_Unit_Int_Float(setParamMethodBind, this.rawMemory, 1, value)
+    open var angularVelocity: Double
+        get() = _icall_Double_Long(getParamMethodBind, this.rawMemory, 1)
+        set(value) = _icall_Unit_Long_Double(setParamMethodBind, this.rawMemory, 1, value)
 
 
-    open var angularVelocityRandom: Float
-        get() = _icall_Float_Int(getParamRandomnessMethodBind, this.rawMemory, 1)
-        set(value) = _icall_Unit_Int_Float(setParamRandomnessMethodBind, this.rawMemory, 1, value)
+    open var angularVelocityRandom: Double
+        get() = _icall_Double_Long(getParamRandomnessMethodBind, this.rawMemory, 1)
+        set(value) = _icall_Unit_Long_Double(setParamRandomnessMethodBind, this.rawMemory, 1, value)
 
 
     open var angularVelocityCurve: CurveTexture
-        get() = _icall_CurveTexture_Int(getParamTextureMethodBind, this.rawMemory, 1)
-        set(value) = _icall_Unit_Int_Object(setParamTextureMethodBind, this.rawMemory, 1, value)
+        get() = _icall_CurveTexture_Long(getParamTextureMethodBind, this.rawMemory, 1)
+        set(value) = _icall_Unit_Long_Object(setParamTextureMethodBind, this.rawMemory, 1, value)
 
 
-    open var orbitVelocity: Float
-        get() = _icall_Float_Int(getParamMethodBind, this.rawMemory, 2)
-        set(value) = _icall_Unit_Int_Float(setParamMethodBind, this.rawMemory, 2, value)
+    open var orbitVelocity: Double
+        get() = _icall_Double_Long(getParamMethodBind, this.rawMemory, 2)
+        set(value) = _icall_Unit_Long_Double(setParamMethodBind, this.rawMemory, 2, value)
 
 
-    open var orbitVelocityRandom: Float
-        get() = _icall_Float_Int(getParamRandomnessMethodBind, this.rawMemory, 2)
-        set(value) = _icall_Unit_Int_Float(setParamRandomnessMethodBind, this.rawMemory, 2, value)
+    open var orbitVelocityRandom: Double
+        get() = _icall_Double_Long(getParamRandomnessMethodBind, this.rawMemory, 2)
+        set(value) = _icall_Unit_Long_Double(setParamRandomnessMethodBind, this.rawMemory, 2, value)
 
 
     open var orbitVelocityCurve: CurveTexture
-        get() = _icall_CurveTexture_Int(getParamTextureMethodBind, this.rawMemory, 2)
-        set(value) = _icall_Unit_Int_Object(setParamTextureMethodBind, this.rawMemory, 2, value)
+        get() = _icall_CurveTexture_Long(getParamTextureMethodBind, this.rawMemory, 2)
+        set(value) = _icall_Unit_Long_Object(setParamTextureMethodBind, this.rawMemory, 2, value)
 
 
-    open var linearAccel: Float
-        get() = _icall_Float_Int(getParamMethodBind, this.rawMemory, 3)
-        set(value) = _icall_Unit_Int_Float(setParamMethodBind, this.rawMemory, 3, value)
+    open var linearAccel: Double
+        get() = _icall_Double_Long(getParamMethodBind, this.rawMemory, 3)
+        set(value) = _icall_Unit_Long_Double(setParamMethodBind, this.rawMemory, 3, value)
 
 
-    open var linearAccelRandom: Float
-        get() = _icall_Float_Int(getParamRandomnessMethodBind, this.rawMemory, 3)
-        set(value) = _icall_Unit_Int_Float(setParamRandomnessMethodBind, this.rawMemory, 3, value)
+    open var linearAccelRandom: Double
+        get() = _icall_Double_Long(getParamRandomnessMethodBind, this.rawMemory, 3)
+        set(value) = _icall_Unit_Long_Double(setParamRandomnessMethodBind, this.rawMemory, 3, value)
 
 
     open var linearAccelCurve: CurveTexture
-        get() = _icall_CurveTexture_Int(getParamTextureMethodBind, this.rawMemory, 3)
-        set(value) = _icall_Unit_Int_Object(setParamTextureMethodBind, this.rawMemory, 3, value)
+        get() = _icall_CurveTexture_Long(getParamTextureMethodBind, this.rawMemory, 3)
+        set(value) = _icall_Unit_Long_Object(setParamTextureMethodBind, this.rawMemory, 3, value)
 
 
-    open var radialAccel: Float
-        get() = _icall_Float_Int(getParamMethodBind, this.rawMemory, 4)
-        set(value) = _icall_Unit_Int_Float(setParamMethodBind, this.rawMemory, 4, value)
+    open var radialAccel: Double
+        get() = _icall_Double_Long(getParamMethodBind, this.rawMemory, 4)
+        set(value) = _icall_Unit_Long_Double(setParamMethodBind, this.rawMemory, 4, value)
 
 
-    open var radialAccelRandom: Float
-        get() = _icall_Float_Int(getParamRandomnessMethodBind, this.rawMemory, 4)
-        set(value) = _icall_Unit_Int_Float(setParamRandomnessMethodBind, this.rawMemory, 4, value)
+    open var radialAccelRandom: Double
+        get() = _icall_Double_Long(getParamRandomnessMethodBind, this.rawMemory, 4)
+        set(value) = _icall_Unit_Long_Double(setParamRandomnessMethodBind, this.rawMemory, 4, value)
 
 
     open var radialAccelCurve: CurveTexture
-        get() = _icall_CurveTexture_Int(getParamTextureMethodBind, this.rawMemory, 4)
-        set(value) = _icall_Unit_Int_Object(setParamTextureMethodBind, this.rawMemory, 4, value)
+        get() = _icall_CurveTexture_Long(getParamTextureMethodBind, this.rawMemory, 4)
+        set(value) = _icall_Unit_Long_Object(setParamTextureMethodBind, this.rawMemory, 4, value)
 
 
-    open var tangentialAccel: Float
-        get() = _icall_Float_Int(getParamMethodBind, this.rawMemory, 5)
-        set(value) = _icall_Unit_Int_Float(setParamMethodBind, this.rawMemory, 5, value)
+    open var tangentialAccel: Double
+        get() = _icall_Double_Long(getParamMethodBind, this.rawMemory, 5)
+        set(value) = _icall_Unit_Long_Double(setParamMethodBind, this.rawMemory, 5, value)
 
 
-    open var tangentialAccelRandom: Float
-        get() = _icall_Float_Int(getParamRandomnessMethodBind, this.rawMemory, 5)
-        set(value) = _icall_Unit_Int_Float(setParamRandomnessMethodBind, this.rawMemory, 5, value)
+    open var tangentialAccelRandom: Double
+        get() = _icall_Double_Long(getParamRandomnessMethodBind, this.rawMemory, 5)
+        set(value) = _icall_Unit_Long_Double(setParamRandomnessMethodBind, this.rawMemory, 5, value)
 
 
     open var tangentialAccelCurve: CurveTexture
-        get() = _icall_CurveTexture_Int(getParamTextureMethodBind, this.rawMemory, 5)
-        set(value) = _icall_Unit_Int_Object(setParamTextureMethodBind, this.rawMemory, 5, value)
+        get() = _icall_CurveTexture_Long(getParamTextureMethodBind, this.rawMemory, 5)
+        set(value) = _icall_Unit_Long_Object(setParamTextureMethodBind, this.rawMemory, 5, value)
 
 
-    open var damping: Float
-        get() = _icall_Float_Int(getParamMethodBind, this.rawMemory, 6)
-        set(value) = _icall_Unit_Int_Float(setParamMethodBind, this.rawMemory, 6, value)
+    open var damping: Double
+        get() = _icall_Double_Long(getParamMethodBind, this.rawMemory, 6)
+        set(value) = _icall_Unit_Long_Double(setParamMethodBind, this.rawMemory, 6, value)
 
 
-    open var dampingRandom: Float
-        get() = _icall_Float_Int(getParamRandomnessMethodBind, this.rawMemory, 6)
-        set(value) = _icall_Unit_Int_Float(setParamRandomnessMethodBind, this.rawMemory, 6, value)
+    open var dampingRandom: Double
+        get() = _icall_Double_Long(getParamRandomnessMethodBind, this.rawMemory, 6)
+        set(value) = _icall_Unit_Long_Double(setParamRandomnessMethodBind, this.rawMemory, 6, value)
 
 
     open var dampingCurve: CurveTexture
-        get() = _icall_CurveTexture_Int(getParamTextureMethodBind, this.rawMemory, 6)
-        set(value) = _icall_Unit_Int_Object(setParamTextureMethodBind, this.rawMemory, 6, value)
+        get() = _icall_CurveTexture_Long(getParamTextureMethodBind, this.rawMemory, 6)
+        set(value) = _icall_Unit_Long_Object(setParamTextureMethodBind, this.rawMemory, 6, value)
 
 
-    open var angle: Float
-        get() = _icall_Float_Int(getParamMethodBind, this.rawMemory, 7)
-        set(value) = _icall_Unit_Int_Float(setParamMethodBind, this.rawMemory, 7, value)
+    open var angle: Double
+        get() = _icall_Double_Long(getParamMethodBind, this.rawMemory, 7)
+        set(value) = _icall_Unit_Long_Double(setParamMethodBind, this.rawMemory, 7, value)
 
 
-    open var angleRandom: Float
-        get() = _icall_Float_Int(getParamRandomnessMethodBind, this.rawMemory, 7)
-        set(value) = _icall_Unit_Int_Float(setParamRandomnessMethodBind, this.rawMemory, 7, value)
+    open var angleRandom: Double
+        get() = _icall_Double_Long(getParamRandomnessMethodBind, this.rawMemory, 7)
+        set(value) = _icall_Unit_Long_Double(setParamRandomnessMethodBind, this.rawMemory, 7, value)
 
 
     open var angleCurve: CurveTexture
-        get() = _icall_CurveTexture_Int(getParamTextureMethodBind, this.rawMemory, 7)
-        set(value) = _icall_Unit_Int_Object(setParamTextureMethodBind, this.rawMemory, 7, value)
+        get() = _icall_CurveTexture_Long(getParamTextureMethodBind, this.rawMemory, 7)
+        set(value) = _icall_Unit_Long_Object(setParamTextureMethodBind, this.rawMemory, 7, value)
 
 
-    open var scale: Float
-        get() = _icall_Float_Int(getParamMethodBind, this.rawMemory, 8)
-        set(value) = _icall_Unit_Int_Float(setParamMethodBind, this.rawMemory, 8, value)
+    open var scale: Double
+        get() = _icall_Double_Long(getParamMethodBind, this.rawMemory, 8)
+        set(value) = _icall_Unit_Long_Double(setParamMethodBind, this.rawMemory, 8, value)
 
 
-    open var scaleRandom: Float
-        get() = _icall_Float_Int(getParamRandomnessMethodBind, this.rawMemory, 8)
-        set(value) = _icall_Unit_Int_Float(setParamRandomnessMethodBind, this.rawMemory, 8, value)
+    open var scaleRandom: Double
+        get() = _icall_Double_Long(getParamRandomnessMethodBind, this.rawMemory, 8)
+        set(value) = _icall_Unit_Long_Double(setParamRandomnessMethodBind, this.rawMemory, 8, value)
 
 
     open var scaleCurve: CurveTexture
-        get() = _icall_CurveTexture_Int(getParamTextureMethodBind, this.rawMemory, 8)
-        set(value) = _icall_Unit_Int_Object(setParamTextureMethodBind, this.rawMemory, 8, value)
+        get() = _icall_CurveTexture_Long(getParamTextureMethodBind, this.rawMemory, 8)
+        set(value) = _icall_Unit_Long_Object(setParamTextureMethodBind, this.rawMemory, 8, value)
 
 
     open var color: Color
@@ -338,116 +338,116 @@ open class ParticlesMaterial : Material {
         set(value) = _icall_Unit_Object(setColorRampMethodBind, this.rawMemory, value)
 
 
-    open var hueVariation: Float
-        get() = _icall_Float_Int(getParamMethodBind, this.rawMemory, 9)
-        set(value) = _icall_Unit_Int_Float(setParamMethodBind, this.rawMemory, 9, value)
+    open var hueVariation: Double
+        get() = _icall_Double_Long(getParamMethodBind, this.rawMemory, 9)
+        set(value) = _icall_Unit_Long_Double(setParamMethodBind, this.rawMemory, 9, value)
 
 
-    open var hueVariationRandom: Float
-        get() = _icall_Float_Int(getParamRandomnessMethodBind, this.rawMemory, 9)
-        set(value) = _icall_Unit_Int_Float(setParamRandomnessMethodBind, this.rawMemory, 9, value)
+    open var hueVariationRandom: Double
+        get() = _icall_Double_Long(getParamRandomnessMethodBind, this.rawMemory, 9)
+        set(value) = _icall_Unit_Long_Double(setParamRandomnessMethodBind, this.rawMemory, 9, value)
 
 
     open var hueVariationCurve: CurveTexture
-        get() = _icall_CurveTexture_Int(getParamTextureMethodBind, this.rawMemory, 9)
-        set(value) = _icall_Unit_Int_Object(setParamTextureMethodBind, this.rawMemory, 9, value)
+        get() = _icall_CurveTexture_Long(getParamTextureMethodBind, this.rawMemory, 9)
+        set(value) = _icall_Unit_Long_Object(setParamTextureMethodBind, this.rawMemory, 9, value)
 
 
-    open var animSpeed: Float
-        get() = _icall_Float_Int(getParamMethodBind, this.rawMemory, 10)
-        set(value) = _icall_Unit_Int_Float(setParamMethodBind, this.rawMemory, 10, value)
+    open var animSpeed: Double
+        get() = _icall_Double_Long(getParamMethodBind, this.rawMemory, 10)
+        set(value) = _icall_Unit_Long_Double(setParamMethodBind, this.rawMemory, 10, value)
 
 
-    open var animSpeedRandom: Float
-        get() = _icall_Float_Int(getParamRandomnessMethodBind, this.rawMemory, 10)
-        set(value) = _icall_Unit_Int_Float(setParamRandomnessMethodBind, this.rawMemory, 10, value)
+    open var animSpeedRandom: Double
+        get() = _icall_Double_Long(getParamRandomnessMethodBind, this.rawMemory, 10)
+        set(value) = _icall_Unit_Long_Double(setParamRandomnessMethodBind, this.rawMemory, 10, value)
 
 
     open var animSpeedCurve: CurveTexture
-        get() = _icall_CurveTexture_Int(getParamTextureMethodBind, this.rawMemory, 10)
-        set(value) = _icall_Unit_Int_Object(setParamTextureMethodBind, this.rawMemory, 10, value)
+        get() = _icall_CurveTexture_Long(getParamTextureMethodBind, this.rawMemory, 10)
+        set(value) = _icall_Unit_Long_Object(setParamTextureMethodBind, this.rawMemory, 10, value)
 
 
-    open var animOffset: Float
-        get() = _icall_Float_Int(getParamMethodBind, this.rawMemory, 11)
-        set(value) = _icall_Unit_Int_Float(setParamMethodBind, this.rawMemory, 11, value)
+    open var animOffset: Double
+        get() = _icall_Double_Long(getParamMethodBind, this.rawMemory, 11)
+        set(value) = _icall_Unit_Long_Double(setParamMethodBind, this.rawMemory, 11, value)
 
 
-    open var animOffsetRandom: Float
-        get() = _icall_Float_Int(getParamRandomnessMethodBind, this.rawMemory, 11)
-        set(value) = _icall_Unit_Int_Float(setParamRandomnessMethodBind, this.rawMemory, 11, value)
+    open var animOffsetRandom: Double
+        get() = _icall_Double_Long(getParamRandomnessMethodBind, this.rawMemory, 11)
+        set(value) = _icall_Unit_Long_Double(setParamRandomnessMethodBind, this.rawMemory, 11, value)
 
 
     open var animOffsetCurve: CurveTexture
-        get() = _icall_CurveTexture_Int(getParamTextureMethodBind, this.rawMemory, 11)
-        set(value) = _icall_Unit_Int_Object(setParamTextureMethodBind, this.rawMemory, 11, value)
+        get() = _icall_CurveTexture_Long(getParamTextureMethodBind, this.rawMemory, 11)
+        set(value) = _icall_Unit_Long_Object(setParamTextureMethodBind, this.rawMemory, 11, value)
 
 
     open var animLoop: Boolean
-        get() = _icall_Boolean_Int(getFlagMethodBind, this.rawMemory, 3)
-        set(value) = _icall_Unit_Int_Boolean(setFlagMethodBind, this.rawMemory, 3, value)
+        get() = _icall_Boolean_Long(getFlagMethodBind, this.rawMemory, 3)
+        set(value) = _icall_Unit_Long_Boolean(setFlagMethodBind, this.rawMemory, 3, value)
 
 
 
 
     // Methods
     private val setSpreadMethodBind: CPointer<godot_method_bind> by lazy { getMB("ParticlesMaterial", "set_spread") }
-    open fun setSpread(degrees: Float) {
-        _icall_Unit_Float(setSpreadMethodBind, this.rawMemory, degrees)
+    open fun setSpread(degrees: Double) {
+        _icall_Unit_Double(setSpreadMethodBind, this.rawMemory, degrees)
     }
 
 
     private val getSpreadMethodBind: CPointer<godot_method_bind> by lazy { getMB("ParticlesMaterial", "get_spread") }
-    open fun getSpread(): Float {
-        return _icall_Float(getSpreadMethodBind, this.rawMemory)
+    open fun getSpread(): Double {
+        return _icall_Double(getSpreadMethodBind, this.rawMemory)
     }
 
 
     private val setFlatnessMethodBind: CPointer<godot_method_bind> by lazy { getMB("ParticlesMaterial", "set_flatness") }
-    open fun setFlatness(amount: Float) {
-        _icall_Unit_Float(setFlatnessMethodBind, this.rawMemory, amount)
+    open fun setFlatness(amount: Double) {
+        _icall_Unit_Double(setFlatnessMethodBind, this.rawMemory, amount)
     }
 
 
     private val getFlatnessMethodBind: CPointer<godot_method_bind> by lazy { getMB("ParticlesMaterial", "get_flatness") }
-    open fun getFlatness(): Float {
-        return _icall_Float(getFlatnessMethodBind, this.rawMemory)
+    open fun getFlatness(): Double {
+        return _icall_Double(getFlatnessMethodBind, this.rawMemory)
     }
 
 
     private val setParamMethodBind: CPointer<godot_method_bind> by lazy { getMB("ParticlesMaterial", "set_param") }
-    open fun setParam(param: Int, value: Float) {
-        _icall_Unit_Int_Float(setParamMethodBind, this.rawMemory, param, value)
+    open fun setParam(param: Long, value: Double) {
+        _icall_Unit_Long_Double(setParamMethodBind, this.rawMemory, param, value)
     }
 
 
     private val getParamMethodBind: CPointer<godot_method_bind> by lazy { getMB("ParticlesMaterial", "get_param") }
-    open fun getParam(param: Int): Float {
-        return _icall_Float_Int(getParamMethodBind, this.rawMemory, param)
+    open fun getParam(param: Long): Double {
+        return _icall_Double_Long(getParamMethodBind, this.rawMemory, param)
     }
 
 
     private val setParamRandomnessMethodBind: CPointer<godot_method_bind> by lazy { getMB("ParticlesMaterial", "set_param_randomness") }
-    open fun setParamRandomness(param: Int, randomness: Float) {
-        _icall_Unit_Int_Float(setParamRandomnessMethodBind, this.rawMemory, param, randomness)
+    open fun setParamRandomness(param: Long, randomness: Double) {
+        _icall_Unit_Long_Double(setParamRandomnessMethodBind, this.rawMemory, param, randomness)
     }
 
 
     private val getParamRandomnessMethodBind: CPointer<godot_method_bind> by lazy { getMB("ParticlesMaterial", "get_param_randomness") }
-    open fun getParamRandomness(param: Int): Float {
-        return _icall_Float_Int(getParamRandomnessMethodBind, this.rawMemory, param)
+    open fun getParamRandomness(param: Long): Double {
+        return _icall_Double_Long(getParamRandomnessMethodBind, this.rawMemory, param)
     }
 
 
     private val setParamTextureMethodBind: CPointer<godot_method_bind> by lazy { getMB("ParticlesMaterial", "set_param_texture") }
-    open fun setParamTexture(param: Int, texture: Texture) {
-        _icall_Unit_Int_Object(setParamTextureMethodBind, this.rawMemory, param, texture)
+    open fun setParamTexture(param: Long, texture: Texture) {
+        _icall_Unit_Long_Object(setParamTextureMethodBind, this.rawMemory, param, texture)
     }
 
 
     private val getParamTextureMethodBind: CPointer<godot_method_bind> by lazy { getMB("ParticlesMaterial", "get_param_texture") }
-    open fun getParamTexture(param: Int): Texture {
-        return _icall_Texture_Int(getParamTextureMethodBind, this.rawMemory, param)
+    open fun getParamTexture(param: Long): Texture {
+        return _icall_Texture_Long(getParamTextureMethodBind, this.rawMemory, param)
     }
 
 
@@ -476,38 +476,38 @@ open class ParticlesMaterial : Material {
 
 
     private val setFlagMethodBind: CPointer<godot_method_bind> by lazy { getMB("ParticlesMaterial", "set_flag") }
-    open fun setFlag(flag: Int, enable: Boolean) {
-        _icall_Unit_Int_Boolean(setFlagMethodBind, this.rawMemory, flag, enable)
+    open fun setFlag(flag: Long, enable: Boolean) {
+        _icall_Unit_Long_Boolean(setFlagMethodBind, this.rawMemory, flag, enable)
     }
 
 
     private val getFlagMethodBind: CPointer<godot_method_bind> by lazy { getMB("ParticlesMaterial", "get_flag") }
-    open fun getFlag(flag: Int): Boolean {
-        return _icall_Boolean_Int(getFlagMethodBind, this.rawMemory, flag)
+    open fun getFlag(flag: Long): Boolean {
+        return _icall_Boolean_Long(getFlagMethodBind, this.rawMemory, flag)
     }
 
 
     private val setEmissionShapeMethodBind: CPointer<godot_method_bind> by lazy { getMB("ParticlesMaterial", "set_emission_shape") }
-    open fun setEmissionShape(shape: Int) {
-        _icall_Unit_Int(setEmissionShapeMethodBind, this.rawMemory, shape)
+    open fun setEmissionShape(shape: Long) {
+        _icall_Unit_Long(setEmissionShapeMethodBind, this.rawMemory, shape)
     }
 
 
     private val getEmissionShapeMethodBind: CPointer<godot_method_bind> by lazy { getMB("ParticlesMaterial", "get_emission_shape") }
     open fun getEmissionShape(): ParticlesMaterial.EmissionShape {
-        return ParticlesMaterial.EmissionShape.fromInt(_icall_Int(getEmissionShapeMethodBind, this.rawMemory))
+        return ParticlesMaterial.EmissionShape.fromInt(_icall_Long(getEmissionShapeMethodBind, this.rawMemory))
     }
 
 
     private val setEmissionSphereRadiusMethodBind: CPointer<godot_method_bind> by lazy { getMB("ParticlesMaterial", "set_emission_sphere_radius") }
-    open fun setEmissionSphereRadius(radius: Float) {
-        _icall_Unit_Float(setEmissionSphereRadiusMethodBind, this.rawMemory, radius)
+    open fun setEmissionSphereRadius(radius: Double) {
+        _icall_Unit_Double(setEmissionSphereRadiusMethodBind, this.rawMemory, radius)
     }
 
 
     private val getEmissionSphereRadiusMethodBind: CPointer<godot_method_bind> by lazy { getMB("ParticlesMaterial", "get_emission_sphere_radius") }
-    open fun getEmissionSphereRadius(): Float {
-        return _icall_Float(getEmissionSphereRadiusMethodBind, this.rawMemory)
+    open fun getEmissionSphereRadius(): Double {
+        return _icall_Double(getEmissionSphereRadiusMethodBind, this.rawMemory)
     }
 
 
@@ -560,26 +560,26 @@ open class ParticlesMaterial : Material {
 
 
     private val setEmissionPointCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("ParticlesMaterial", "set_emission_point_count") }
-    open fun setEmissionPointCount(pointCount: Int) {
-        _icall_Unit_Int(setEmissionPointCountMethodBind, this.rawMemory, pointCount)
+    open fun setEmissionPointCount(pointCount: Long) {
+        _icall_Unit_Long(setEmissionPointCountMethodBind, this.rawMemory, pointCount)
     }
 
 
     private val getEmissionPointCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("ParticlesMaterial", "get_emission_point_count") }
-    open fun getEmissionPointCount(): Int {
-        return _icall_Int(getEmissionPointCountMethodBind, this.rawMemory)
+    open fun getEmissionPointCount(): Long {
+        return _icall_Long(getEmissionPointCountMethodBind, this.rawMemory)
     }
 
 
     private val setTrailDivisorMethodBind: CPointer<godot_method_bind> by lazy { getMB("ParticlesMaterial", "set_trail_divisor") }
-    open fun setTrailDivisor(divisor: Int) {
-        _icall_Unit_Int(setTrailDivisorMethodBind, this.rawMemory, divisor)
+    open fun setTrailDivisor(divisor: Long) {
+        _icall_Unit_Long(setTrailDivisorMethodBind, this.rawMemory, divisor)
     }
 
 
     private val getTrailDivisorMethodBind: CPointer<godot_method_bind> by lazy { getMB("ParticlesMaterial", "get_trail_divisor") }
-    open fun getTrailDivisor(): Int {
-        return _icall_Int(getTrailDivisorMethodBind, this.rawMemory)
+    open fun getTrailDivisor(): Long {
+        return _icall_Long(getTrailDivisorMethodBind, this.rawMemory)
     }
 
 

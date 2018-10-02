@@ -19,16 +19,16 @@ open class BaseButton : Control {
 
     // Enums 
 
-    enum class ActionMode(val id: Int) {
+    enum class ActionMode(val id: Long) {
         ACTION_MODE_BUTTON_PRESS(0),
         ACTION_MODE_BUTTON_RELEASE(1),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class DrawMode(val id: Int) {
+    enum class DrawMode(val id: Long) {
         DRAW_NORMAL(0),
         DRAW_PRESSED(1),
         DRAW_HOVER(2),
@@ -36,7 +36,7 @@ open class BaseButton : Control {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -61,12 +61,12 @@ open class BaseButton : Control {
 
 
         // Constants
-        const val DRAW_NORMAL: Int = 0
-        const val DRAW_PRESSED: Int = 1
-        const val DRAW_HOVER: Int = 2
-        const val DRAW_DISABLED: Int = 3
-        const val ACTION_MODE_BUTTON_PRESS: Int = 0
-        const val ACTION_MODE_BUTTON_RELEASE: Int = 1
+        const val DRAW_NORMAL: Long = 0
+        const val DRAW_PRESSED: Long = 1
+        const val DRAW_HOVER: Long = 2
+        const val DRAW_DISABLED: Long = 3
+        const val ACTION_MODE_BUTTON_PRESS: Long = 0
+        const val ACTION_MODE_BUTTON_RELEASE: Long = 1
 
 
     }
@@ -88,19 +88,19 @@ open class BaseButton : Control {
         set(value) = _icall_Unit_Boolean(setPressedMethodBind, this.rawMemory, value)
 
 
-    open var actionMode: Int
-        get() = _icall_Int(getActionModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setActionModeMethodBind, this.rawMemory, value)
+    open var actionMode: Long
+        get() = _icall_Long(getActionModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setActionModeMethodBind, this.rawMemory, value)
 
 
-    open var buttonMask: Int
-        get() = _icall_Int(getButtonMaskMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setButtonMaskMethodBind, this.rawMemory, value)
+    open var buttonMask: Long
+        get() = _icall_Long(getButtonMaskMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setButtonMaskMethodBind, this.rawMemory, value)
 
 
-    open var enabledFocusMode: Int
-        get() = _icall_Int(getEnabledFocusModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setEnabledFocusModeMethodBind, this.rawMemory, value)
+    open var enabledFocusMode: Long
+        get() = _icall_Long(getEnabledFocusModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setEnabledFocusModeMethodBind, this.rawMemory, value)
 
 
     open var shortcut: ShortCut
@@ -175,44 +175,44 @@ open class BaseButton : Control {
 
 
     private val setActionModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("BaseButton", "set_action_mode") }
-    open fun setActionMode(mode: Int) {
-        _icall_Unit_Int(setActionModeMethodBind, this.rawMemory, mode)
+    open fun setActionMode(mode: Long) {
+        _icall_Unit_Long(setActionModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getActionModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("BaseButton", "get_action_mode") }
     open fun getActionMode(): BaseButton.ActionMode {
-        return BaseButton.ActionMode.fromInt(_icall_Int(getActionModeMethodBind, this.rawMemory))
+        return BaseButton.ActionMode.fromInt(_icall_Long(getActionModeMethodBind, this.rawMemory))
     }
 
 
     private val setButtonMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("BaseButton", "set_button_mask") }
-    open fun setButtonMask(mask: Int) {
-        _icall_Unit_Int(setButtonMaskMethodBind, this.rawMemory, mask)
+    open fun setButtonMask(mask: Long) {
+        _icall_Unit_Long(setButtonMaskMethodBind, this.rawMemory, mask)
     }
 
 
     private val getButtonMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("BaseButton", "get_button_mask") }
-    open fun getButtonMask(): Int {
-        return _icall_Int(getButtonMaskMethodBind, this.rawMemory)
+    open fun getButtonMask(): Long {
+        return _icall_Long(getButtonMaskMethodBind, this.rawMemory)
     }
 
 
     private val getDrawModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("BaseButton", "get_draw_mode") }
     open fun getDrawMode(): BaseButton.DrawMode {
-        return BaseButton.DrawMode.fromInt(_icall_Int(getDrawModeMethodBind, this.rawMemory))
+        return BaseButton.DrawMode.fromInt(_icall_Long(getDrawModeMethodBind, this.rawMemory))
     }
 
 
     private val setEnabledFocusModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("BaseButton", "set_enabled_focus_mode") }
-    open fun setEnabledFocusMode(mode: Int) {
-        _icall_Unit_Int(setEnabledFocusModeMethodBind, this.rawMemory, mode)
+    open fun setEnabledFocusMode(mode: Long) {
+        _icall_Unit_Long(setEnabledFocusModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getEnabledFocusModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("BaseButton", "get_enabled_focus_mode") }
     open fun getEnabledFocusMode(): Control.FocusMode {
-        return Control.FocusMode.fromInt(_icall_Int(getEnabledFocusModeMethodBind, this.rawMemory))
+        return Control.FocusMode.fromInt(_icall_Long(getEnabledFocusModeMethodBind, this.rawMemory))
     }
 
 

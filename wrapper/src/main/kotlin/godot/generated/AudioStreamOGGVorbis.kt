@@ -53,9 +53,9 @@ open class AudioStreamOGGVorbis : AudioStream {
         set(value) = _icall_Unit_Boolean(setLoopMethodBind, this.rawMemory, value)
 
 
-    open var loopOffset: Float
-        get() = _icall_Float(getLoopOffsetMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setLoopOffsetMethodBind, this.rawMemory, value)
+    open var loopOffset: Double
+        get() = _icall_Double(getLoopOffsetMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setLoopOffsetMethodBind, this.rawMemory, value)
 
 
 
@@ -86,14 +86,14 @@ open class AudioStreamOGGVorbis : AudioStream {
 
 
     private val setLoopOffsetMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamOGGVorbis", "set_loop_offset") }
-    open fun setLoopOffset(seconds: Float) {
-        _icall_Unit_Float(setLoopOffsetMethodBind, this.rawMemory, seconds)
+    open fun setLoopOffset(seconds: Double) {
+        _icall_Unit_Double(setLoopOffsetMethodBind, this.rawMemory, seconds)
     }
 
 
     private val getLoopOffsetMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamOGGVorbis", "get_loop_offset") }
-    open fun getLoopOffset(): Float {
-        return _icall_Float(getLoopOffsetMethodBind, this.rawMemory)
+    open fun getLoopOffset(): Double {
+        return _icall_Double(getLoopOffsetMethodBind, this.rawMemory)
     }
 
 

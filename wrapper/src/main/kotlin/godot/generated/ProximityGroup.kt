@@ -19,13 +19,13 @@ open class ProximityGroup : Spatial {
 
     // Enums 
 
-    enum class DispatchMode(val id: Int) {
+    enum class DispatchMode(val id: Long) {
         MODE_PROXY(0),
         MODE_SIGNAL(1),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -46,8 +46,8 @@ open class ProximityGroup : Spatial {
 
 
         // Constants
-        const val MODE_PROXY: Int = 0
-        const val MODE_SIGNAL: Int = 1
+        const val MODE_PROXY: Long = 0
+        const val MODE_SIGNAL: Long = 1
 
 
     }
@@ -59,9 +59,9 @@ open class ProximityGroup : Spatial {
         set(value) = _icall_Unit_String(setGroupNameMethodBind, this.rawMemory, value)
 
 
-    open var dispatchMode: Int
-        get() = _icall_Int(getDispatchModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setDispatchModeMethodBind, this.rawMemory, value)
+    open var dispatchMode: Long
+        get() = _icall_Long(getDispatchModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setDispatchModeMethodBind, this.rawMemory, value)
 
 
     open var gridRadius: Vector3
@@ -89,14 +89,14 @@ open class ProximityGroup : Spatial {
 
 
     private val setDispatchModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("ProximityGroup", "set_dispatch_mode") }
-    open fun setDispatchMode(mode: Int) {
-        _icall_Unit_Int(setDispatchModeMethodBind, this.rawMemory, mode)
+    open fun setDispatchMode(mode: Long) {
+        _icall_Unit_Long(setDispatchModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getDispatchModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("ProximityGroup", "get_dispatch_mode") }
     open fun getDispatchMode(): ProximityGroup.DispatchMode {
-        return ProximityGroup.DispatchMode.fromInt(_icall_Int(getDispatchModeMethodBind, this.rawMemory))
+        return ProximityGroup.DispatchMode.fromInt(_icall_Long(getDispatchModeMethodBind, this.rawMemory))
     }
 
 

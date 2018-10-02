@@ -51,7 +51,7 @@ open class StreamPeer : Reference {
     // Methods
     private val putDataMethodBind: CPointer<godot_method_bind> by lazy { getMB("StreamPeer", "put_data") }
     open fun putData(data: PoolByteArray): GodotError {
-        return GodotError.fromInt(_icall_Int_PoolByteArray(putDataMethodBind, this.rawMemory, data))
+        return GodotError.fromInt(_icall_Long_PoolByteArray(putDataMethodBind, this.rawMemory, data))
     }
 
 
@@ -62,20 +62,20 @@ open class StreamPeer : Reference {
 
 
     private val getDataMethodBind: CPointer<godot_method_bind> by lazy { getMB("StreamPeer", "get_data") }
-    open fun getData(bytes: Int): GDArray {
-        return _icall_GDArray_Int(getDataMethodBind, this.rawMemory, bytes)
+    open fun getData(bytes: Long): GDArray {
+        return _icall_GDArray_Long(getDataMethodBind, this.rawMemory, bytes)
     }
 
 
     private val getPartialDataMethodBind: CPointer<godot_method_bind> by lazy { getMB("StreamPeer", "get_partial_data") }
-    open fun getPartialData(bytes: Int): GDArray {
-        return _icall_GDArray_Int(getPartialDataMethodBind, this.rawMemory, bytes)
+    open fun getPartialData(bytes: Long): GDArray {
+        return _icall_GDArray_Long(getPartialDataMethodBind, this.rawMemory, bytes)
     }
 
 
     private val getAvailableBytesMethodBind: CPointer<godot_method_bind> by lazy { getMB("StreamPeer", "get_available_bytes") }
-    open fun getAvailableBytes(): Int {
-        return _icall_Int(getAvailableBytesMethodBind, this.rawMemory)
+    open fun getAvailableBytes(): Long {
+        return _icall_Long(getAvailableBytesMethodBind, this.rawMemory)
     }
 
 
@@ -92,62 +92,62 @@ open class StreamPeer : Reference {
 
 
     private val put8MethodBind: CPointer<godot_method_bind> by lazy { getMB("StreamPeer", "put_8") }
-    open fun put8(value: Int) {
-        _icall_Unit_Int(put8MethodBind, this.rawMemory, value)
+    open fun put8(value: Long) {
+        _icall_Unit_Long(put8MethodBind, this.rawMemory, value)
     }
 
 
     private val putU8MethodBind: CPointer<godot_method_bind> by lazy { getMB("StreamPeer", "put_u8") }
-    open fun putU8(value: Int) {
-        _icall_Unit_Int(putU8MethodBind, this.rawMemory, value)
+    open fun putU8(value: Long) {
+        _icall_Unit_Long(putU8MethodBind, this.rawMemory, value)
     }
 
 
     private val put16MethodBind: CPointer<godot_method_bind> by lazy { getMB("StreamPeer", "put_16") }
-    open fun put16(value: Int) {
-        _icall_Unit_Int(put16MethodBind, this.rawMemory, value)
+    open fun put16(value: Long) {
+        _icall_Unit_Long(put16MethodBind, this.rawMemory, value)
     }
 
 
     private val putU16MethodBind: CPointer<godot_method_bind> by lazy { getMB("StreamPeer", "put_u16") }
-    open fun putU16(value: Int) {
-        _icall_Unit_Int(putU16MethodBind, this.rawMemory, value)
+    open fun putU16(value: Long) {
+        _icall_Unit_Long(putU16MethodBind, this.rawMemory, value)
     }
 
 
     private val put32MethodBind: CPointer<godot_method_bind> by lazy { getMB("StreamPeer", "put_32") }
-    open fun put32(value: Int) {
-        _icall_Unit_Int(put32MethodBind, this.rawMemory, value)
+    open fun put32(value: Long) {
+        _icall_Unit_Long(put32MethodBind, this.rawMemory, value)
     }
 
 
     private val putU32MethodBind: CPointer<godot_method_bind> by lazy { getMB("StreamPeer", "put_u32") }
-    open fun putU32(value: Int) {
-        _icall_Unit_Int(putU32MethodBind, this.rawMemory, value)
+    open fun putU32(value: Long) {
+        _icall_Unit_Long(putU32MethodBind, this.rawMemory, value)
     }
 
 
     private val put64MethodBind: CPointer<godot_method_bind> by lazy { getMB("StreamPeer", "put_64") }
-    open fun put64(value: Int) {
-        _icall_Unit_Int(put64MethodBind, this.rawMemory, value)
+    open fun put64(value: Long) {
+        _icall_Unit_Long(put64MethodBind, this.rawMemory, value)
     }
 
 
     private val putU64MethodBind: CPointer<godot_method_bind> by lazy { getMB("StreamPeer", "put_u64") }
-    open fun putU64(value: Int) {
-        _icall_Unit_Int(putU64MethodBind, this.rawMemory, value)
+    open fun putU64(value: Long) {
+        _icall_Unit_Long(putU64MethodBind, this.rawMemory, value)
     }
 
 
     private val putFloatMethodBind: CPointer<godot_method_bind> by lazy { getMB("StreamPeer", "put_float") }
-    open fun putFloat(value: Float) {
-        _icall_Unit_Float(putFloatMethodBind, this.rawMemory, value)
+    open fun putFloat(value: Double) {
+        _icall_Unit_Double(putFloatMethodBind, this.rawMemory, value)
     }
 
 
     private val putDoubleMethodBind: CPointer<godot_method_bind> by lazy { getMB("StreamPeer", "put_double") }
-    open fun putDouble(value: Float) {
-        _icall_Unit_Float(putDoubleMethodBind, this.rawMemory, value)
+    open fun putDouble(value: Double) {
+        _icall_Unit_Double(putDoubleMethodBind, this.rawMemory, value)
     }
 
 
@@ -164,74 +164,74 @@ open class StreamPeer : Reference {
 
 
     private val get8MethodBind: CPointer<godot_method_bind> by lazy { getMB("StreamPeer", "get_8") }
-    open fun get8(): Int {
-        return _icall_Int(get8MethodBind, this.rawMemory)
+    open fun get8(): Long {
+        return _icall_Long(get8MethodBind, this.rawMemory)
     }
 
 
     private val getU8MethodBind: CPointer<godot_method_bind> by lazy { getMB("StreamPeer", "get_u8") }
-    open fun getU8(): Int {
-        return _icall_Int(getU8MethodBind, this.rawMemory)
+    open fun getU8(): Long {
+        return _icall_Long(getU8MethodBind, this.rawMemory)
     }
 
 
     private val get16MethodBind: CPointer<godot_method_bind> by lazy { getMB("StreamPeer", "get_16") }
-    open fun get16(): Int {
-        return _icall_Int(get16MethodBind, this.rawMemory)
+    open fun get16(): Long {
+        return _icall_Long(get16MethodBind, this.rawMemory)
     }
 
 
     private val getU16MethodBind: CPointer<godot_method_bind> by lazy { getMB("StreamPeer", "get_u16") }
-    open fun getU16(): Int {
-        return _icall_Int(getU16MethodBind, this.rawMemory)
+    open fun getU16(): Long {
+        return _icall_Long(getU16MethodBind, this.rawMemory)
     }
 
 
     private val get32MethodBind: CPointer<godot_method_bind> by lazy { getMB("StreamPeer", "get_32") }
-    open fun get32(): Int {
-        return _icall_Int(get32MethodBind, this.rawMemory)
+    open fun get32(): Long {
+        return _icall_Long(get32MethodBind, this.rawMemory)
     }
 
 
     private val getU32MethodBind: CPointer<godot_method_bind> by lazy { getMB("StreamPeer", "get_u32") }
-    open fun getU32(): Int {
-        return _icall_Int(getU32MethodBind, this.rawMemory)
+    open fun getU32(): Long {
+        return _icall_Long(getU32MethodBind, this.rawMemory)
     }
 
 
     private val get64MethodBind: CPointer<godot_method_bind> by lazy { getMB("StreamPeer", "get_64") }
-    open fun get64(): Int {
-        return _icall_Int(get64MethodBind, this.rawMemory)
+    open fun get64(): Long {
+        return _icall_Long(get64MethodBind, this.rawMemory)
     }
 
 
     private val getU64MethodBind: CPointer<godot_method_bind> by lazy { getMB("StreamPeer", "get_u64") }
-    open fun getU64(): Int {
-        return _icall_Int(getU64MethodBind, this.rawMemory)
+    open fun getU64(): Long {
+        return _icall_Long(getU64MethodBind, this.rawMemory)
     }
 
 
     private val getFloatMethodBind: CPointer<godot_method_bind> by lazy { getMB("StreamPeer", "get_float") }
-    open fun getFloat(): Float {
-        return _icall_Float(getFloatMethodBind, this.rawMemory)
+    open fun getFloat(): Double {
+        return _icall_Double(getFloatMethodBind, this.rawMemory)
     }
 
 
     private val getDoubleMethodBind: CPointer<godot_method_bind> by lazy { getMB("StreamPeer", "get_double") }
-    open fun getDouble(): Float {
-        return _icall_Float(getDoubleMethodBind, this.rawMemory)
+    open fun getDouble(): Double {
+        return _icall_Double(getDoubleMethodBind, this.rawMemory)
     }
 
 
     private val getStringMethodBind: CPointer<godot_method_bind> by lazy { getMB("StreamPeer", "get_string") }
-    open fun getString(bytes: Int): String {
-        return _icall_String_Int(getStringMethodBind, this.rawMemory, bytes)
+    open fun getString(bytes: Long): String {
+        return _icall_String_Long(getStringMethodBind, this.rawMemory, bytes)
     }
 
 
     private val getUtf8StringMethodBind: CPointer<godot_method_bind> by lazy { getMB("StreamPeer", "get_utf8_string") }
-    open fun getUtf8String(bytes: Int): String {
-        return _icall_String_Int(getUtf8StringMethodBind, this.rawMemory, bytes)
+    open fun getUtf8String(bytes: Long): String {
+        return _icall_String_Long(getUtf8StringMethodBind, this.rawMemory, bytes)
     }
 
 

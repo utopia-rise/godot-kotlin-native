@@ -42,14 +42,14 @@ open class PacketPeerStream : PacketPeer {
 
 
     // Properties
-    open var inputBufferMaxSize: Int
-        get() = _icall_Int(getInputBufferMaxSizeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setInputBufferMaxSizeMethodBind, this.rawMemory, value)
+    open var inputBufferMaxSize: Long
+        get() = _icall_Long(getInputBufferMaxSizeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setInputBufferMaxSizeMethodBind, this.rawMemory, value)
 
 
-    open var outputBufferMaxSize: Int
-        get() = _icall_Int(getOutputBufferMaxSizeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setOutputBufferMaxSizeMethodBind, this.rawMemory, value)
+    open var outputBufferMaxSize: Long
+        get() = _icall_Long(getOutputBufferMaxSizeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setOutputBufferMaxSizeMethodBind, this.rawMemory, value)
 
 
     open var streamPeer: StreamPeer
@@ -73,26 +73,26 @@ open class PacketPeerStream : PacketPeer {
 
 
     private val setInputBufferMaxSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("PacketPeerStream", "set_input_buffer_max_size") }
-    open fun setInputBufferMaxSize(maxSizeBytes: Int) {
-        _icall_Unit_Int(setInputBufferMaxSizeMethodBind, this.rawMemory, maxSizeBytes)
+    open fun setInputBufferMaxSize(maxSizeBytes: Long) {
+        _icall_Unit_Long(setInputBufferMaxSizeMethodBind, this.rawMemory, maxSizeBytes)
     }
 
 
     private val setOutputBufferMaxSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("PacketPeerStream", "set_output_buffer_max_size") }
-    open fun setOutputBufferMaxSize(maxSizeBytes: Int) {
-        _icall_Unit_Int(setOutputBufferMaxSizeMethodBind, this.rawMemory, maxSizeBytes)
+    open fun setOutputBufferMaxSize(maxSizeBytes: Long) {
+        _icall_Unit_Long(setOutputBufferMaxSizeMethodBind, this.rawMemory, maxSizeBytes)
     }
 
 
     private val getInputBufferMaxSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("PacketPeerStream", "get_input_buffer_max_size") }
-    open fun getInputBufferMaxSize(): Int {
-        return _icall_Int(getInputBufferMaxSizeMethodBind, this.rawMemory)
+    open fun getInputBufferMaxSize(): Long {
+        return _icall_Long(getInputBufferMaxSizeMethodBind, this.rawMemory)
     }
 
 
     private val getOutputBufferMaxSizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("PacketPeerStream", "get_output_buffer_max_size") }
-    open fun getOutputBufferMaxSize(): Int {
-        return _icall_Int(getOutputBufferMaxSizeMethodBind, this.rawMemory)
+    open fun getOutputBufferMaxSize(): Long {
+        return _icall_Long(getOutputBufferMaxSizeMethodBind, this.rawMemory)
     }
 
 

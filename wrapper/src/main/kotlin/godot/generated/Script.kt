@@ -82,7 +82,7 @@ open class Script : Resource {
 
     private val reloadMethodBind: CPointer<godot_method_bind> by lazy { getMB("Script", "reload") }
     open fun reload(keepState: Boolean = false): GodotError {
-        return GodotError.fromInt(_icall_Int_Boolean(reloadMethodBind, this.rawMemory, keepState))
+        return GodotError.fromInt(_icall_Long_Boolean(reloadMethodBind, this.rawMemory, keepState))
     }
 
 

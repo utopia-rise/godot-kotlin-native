@@ -43,23 +43,23 @@ open class AnimationNodeTimeScale : AnimationNode {
 
 
     // Properties
-    open var scale: Float
-        get() = _icall_Float(getScaleMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setScaleMethodBind, this.rawMemory, value)
+    open var scale: Double
+        get() = _icall_Double(getScaleMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setScaleMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationNodeTimeScale", "set_scale") }
-    open fun setScale(scale: Float) {
-        _icall_Unit_Float(setScaleMethodBind, this.rawMemory, scale)
+    open fun setScale(scale: Double) {
+        _icall_Unit_Double(setScaleMethodBind, this.rawMemory, scale)
     }
 
 
     private val getScaleMethodBind: CPointer<godot_method_bind> by lazy { getMB("AnimationNodeTimeScale", "get_scale") }
-    open fun getScale(): Float {
-        return _icall_Float(getScaleMethodBind, this.rawMemory)
+    open fun getScale(): Double {
+        return _icall_Double(getScaleMethodBind, this.rawMemory)
     }
 
 

@@ -44,9 +44,9 @@ open class InputEventMouse : InputEventWithModifiers {
 
 
     // Properties
-    open var buttonMask: Int
-        get() = _icall_Int(getButtonMaskMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setButtonMaskMethodBind, this.rawMemory, value)
+    open var buttonMask: Long
+        get() = _icall_Long(getButtonMaskMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setButtonMaskMethodBind, this.rawMemory, value)
 
 
     open var position: Vector2
@@ -71,14 +71,14 @@ open class InputEventMouse : InputEventWithModifiers {
 
     // Methods
     private val setButtonMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("InputEventMouse", "set_button_mask") }
-    open fun setButtonMask(buttonMask: Int) {
-        _icall_Unit_Int(setButtonMaskMethodBind, this.rawMemory, buttonMask)
+    open fun setButtonMask(buttonMask: Long) {
+        _icall_Unit_Long(setButtonMaskMethodBind, this.rawMemory, buttonMask)
     }
 
 
     private val getButtonMaskMethodBind: CPointer<godot_method_bind> by lazy { getMB("InputEventMouse", "get_button_mask") }
-    open fun getButtonMask(): Int {
-        return _icall_Int(getButtonMaskMethodBind, this.rawMemory)
+    open fun getButtonMask(): Long {
+        return _icall_Long(getButtonMaskMethodBind, this.rawMemory)
     }
 
 

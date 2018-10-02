@@ -19,14 +19,14 @@ open class TabContainer : Container {
 
     // Enums 
 
-    enum class TabAlign(val id: Int) {
+    enum class TabAlign(val id: Long) {
         ALIGN_LEFT(0),
         ALIGN_CENTER(1),
         ALIGN_RIGHT(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -51,23 +51,23 @@ open class TabContainer : Container {
 
 
         // Constants
-        const val ALIGN_LEFT: Int = 0
-        const val ALIGN_CENTER: Int = 1
-        const val ALIGN_RIGHT: Int = 2
+        const val ALIGN_LEFT: Long = 0
+        const val ALIGN_CENTER: Long = 1
+        const val ALIGN_RIGHT: Long = 2
 
 
     }
 
 
     // Properties
-    open var tabAlign: Int
-        get() = _icall_Int(getTabAlignMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setTabAlignMethodBind, this.rawMemory, value)
+    open var tabAlign: Long
+        get() = _icall_Long(getTabAlignMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setTabAlignMethodBind, this.rawMemory, value)
 
 
-    open var currentTab: Int
-        get() = _icall_Int(getCurrentTabMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setCurrentTabMethodBind, this.rawMemory, value)
+    open var currentTab: Long
+        get() = _icall_Long(getCurrentTabMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setCurrentTabMethodBind, this.rawMemory, value)
 
 
     open var tabsVisible: Boolean
@@ -88,26 +88,26 @@ open class TabContainer : Container {
 
 
     private val getTabCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("TabContainer", "get_tab_count") }
-    open fun getTabCount(): Int {
-        return _icall_Int(getTabCountMethodBind, this.rawMemory)
+    open fun getTabCount(): Long {
+        return _icall_Long(getTabCountMethodBind, this.rawMemory)
     }
 
 
     private val setCurrentTabMethodBind: CPointer<godot_method_bind> by lazy { getMB("TabContainer", "set_current_tab") }
-    open fun setCurrentTab(tabIdx: Int) {
-        _icall_Unit_Int(setCurrentTabMethodBind, this.rawMemory, tabIdx)
+    open fun setCurrentTab(tabIdx: Long) {
+        _icall_Unit_Long(setCurrentTabMethodBind, this.rawMemory, tabIdx)
     }
 
 
     private val getCurrentTabMethodBind: CPointer<godot_method_bind> by lazy { getMB("TabContainer", "get_current_tab") }
-    open fun getCurrentTab(): Int {
-        return _icall_Int(getCurrentTabMethodBind, this.rawMemory)
+    open fun getCurrentTab(): Long {
+        return _icall_Long(getCurrentTabMethodBind, this.rawMemory)
     }
 
 
     private val getPreviousTabMethodBind: CPointer<godot_method_bind> by lazy { getMB("TabContainer", "get_previous_tab") }
-    open fun getPreviousTab(): Int {
-        return _icall_Int(getPreviousTabMethodBind, this.rawMemory)
+    open fun getPreviousTab(): Long {
+        return _icall_Long(getPreviousTabMethodBind, this.rawMemory)
     }
 
 
@@ -118,20 +118,20 @@ open class TabContainer : Container {
 
 
     private val getTabControlMethodBind: CPointer<godot_method_bind> by lazy { getMB("TabContainer", "get_tab_control") }
-    open fun getTabControl(idx: Int): Control {
-        return _icall_Control_Int(getTabControlMethodBind, this.rawMemory, idx)
+    open fun getTabControl(idx: Long): Control {
+        return _icall_Control_Long(getTabControlMethodBind, this.rawMemory, idx)
     }
 
 
     private val setTabAlignMethodBind: CPointer<godot_method_bind> by lazy { getMB("TabContainer", "set_tab_align") }
-    open fun setTabAlign(align: Int) {
-        _icall_Unit_Int(setTabAlignMethodBind, this.rawMemory, align)
+    open fun setTabAlign(align: Long) {
+        _icall_Unit_Long(setTabAlignMethodBind, this.rawMemory, align)
     }
 
 
     private val getTabAlignMethodBind: CPointer<godot_method_bind> by lazy { getMB("TabContainer", "get_tab_align") }
     open fun getTabAlign(): TabContainer.TabAlign {
-        return TabContainer.TabAlign.fromInt(_icall_Int(getTabAlignMethodBind, this.rawMemory))
+        return TabContainer.TabAlign.fromInt(_icall_Long(getTabAlignMethodBind, this.rawMemory))
     }
 
 
@@ -148,38 +148,38 @@ open class TabContainer : Container {
 
 
     private val setTabTitleMethodBind: CPointer<godot_method_bind> by lazy { getMB("TabContainer", "set_tab_title") }
-    open fun setTabTitle(tabIdx: Int, title: String) {
-        _icall_Unit_Int_String(setTabTitleMethodBind, this.rawMemory, tabIdx, title)
+    open fun setTabTitle(tabIdx: Long, title: String) {
+        _icall_Unit_Long_String(setTabTitleMethodBind, this.rawMemory, tabIdx, title)
     }
 
 
     private val getTabTitleMethodBind: CPointer<godot_method_bind> by lazy { getMB("TabContainer", "get_tab_title") }
-    open fun getTabTitle(tabIdx: Int): String {
-        return _icall_String_Int(getTabTitleMethodBind, this.rawMemory, tabIdx)
+    open fun getTabTitle(tabIdx: Long): String {
+        return _icall_String_Long(getTabTitleMethodBind, this.rawMemory, tabIdx)
     }
 
 
     private val setTabIconMethodBind: CPointer<godot_method_bind> by lazy { getMB("TabContainer", "set_tab_icon") }
-    open fun setTabIcon(tabIdx: Int, icon: Texture) {
-        _icall_Unit_Int_Object(setTabIconMethodBind, this.rawMemory, tabIdx, icon)
+    open fun setTabIcon(tabIdx: Long, icon: Texture) {
+        _icall_Unit_Long_Object(setTabIconMethodBind, this.rawMemory, tabIdx, icon)
     }
 
 
     private val getTabIconMethodBind: CPointer<godot_method_bind> by lazy { getMB("TabContainer", "get_tab_icon") }
-    open fun getTabIcon(tabIdx: Int): Texture {
-        return _icall_Texture_Int(getTabIconMethodBind, this.rawMemory, tabIdx)
+    open fun getTabIcon(tabIdx: Long): Texture {
+        return _icall_Texture_Long(getTabIconMethodBind, this.rawMemory, tabIdx)
     }
 
 
     private val setTabDisabledMethodBind: CPointer<godot_method_bind> by lazy { getMB("TabContainer", "set_tab_disabled") }
-    open fun setTabDisabled(tabIdx: Int, disabled: Boolean) {
-        _icall_Unit_Int_Boolean(setTabDisabledMethodBind, this.rawMemory, tabIdx, disabled)
+    open fun setTabDisabled(tabIdx: Long, disabled: Boolean) {
+        _icall_Unit_Long_Boolean(setTabDisabledMethodBind, this.rawMemory, tabIdx, disabled)
     }
 
 
     private val getTabDisabledMethodBind: CPointer<godot_method_bind> by lazy { getMB("TabContainer", "get_tab_disabled") }
-    open fun getTabDisabled(tabIdx: Int): Boolean {
-        return _icall_Boolean_Int(getTabDisabledMethodBind, this.rawMemory, tabIdx)
+    open fun getTabDisabled(tabIdx: Long): Boolean {
+        return _icall_Boolean_Long(getTabDisabledMethodBind, this.rawMemory, tabIdx)
     }
 
 
@@ -208,14 +208,14 @@ open class TabContainer : Container {
 
 
     private val setTabsRearrangeGroupMethodBind: CPointer<godot_method_bind> by lazy { getMB("TabContainer", "set_tabs_rearrange_group") }
-    open fun setTabsRearrangeGroup(groupId: Int) {
-        _icall_Unit_Int(setTabsRearrangeGroupMethodBind, this.rawMemory, groupId)
+    open fun setTabsRearrangeGroup(groupId: Long) {
+        _icall_Unit_Long(setTabsRearrangeGroupMethodBind, this.rawMemory, groupId)
     }
 
 
     private val getTabsRearrangeGroupMethodBind: CPointer<godot_method_bind> by lazy { getMB("TabContainer", "get_tabs_rearrange_group") }
-    open fun getTabsRearrangeGroup(): Int {
-        return _icall_Int(getTabsRearrangeGroupMethodBind, this.rawMemory)
+    open fun getTabsRearrangeGroup(): Long {
+        return _icall_Long(getTabsRearrangeGroupMethodBind, this.rawMemory)
     }
 
 

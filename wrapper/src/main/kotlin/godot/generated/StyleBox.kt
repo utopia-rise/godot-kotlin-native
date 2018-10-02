@@ -42,24 +42,24 @@ open class StyleBox : Resource {
 
 
     // Properties
-    open var contentMarginLeft: Float
-        get() = _icall_Float_Int(getDefaultMarginMethodBind, this.rawMemory, 0)
-        set(value) = _icall_Unit_Int_Float(setDefaultMarginMethodBind, this.rawMemory, 0, value)
+    open var contentMarginLeft: Double
+        get() = _icall_Double_Long(getDefaultMarginMethodBind, this.rawMemory, 0)
+        set(value) = _icall_Unit_Long_Double(setDefaultMarginMethodBind, this.rawMemory, 0, value)
 
 
-    open var contentMarginRight: Float
-        get() = _icall_Float_Int(getDefaultMarginMethodBind, this.rawMemory, 2)
-        set(value) = _icall_Unit_Int_Float(setDefaultMarginMethodBind, this.rawMemory, 2, value)
+    open var contentMarginRight: Double
+        get() = _icall_Double_Long(getDefaultMarginMethodBind, this.rawMemory, 2)
+        set(value) = _icall_Unit_Long_Double(setDefaultMarginMethodBind, this.rawMemory, 2, value)
 
 
-    open var contentMarginTop: Float
-        get() = _icall_Float_Int(getDefaultMarginMethodBind, this.rawMemory, 1)
-        set(value) = _icall_Unit_Int_Float(setDefaultMarginMethodBind, this.rawMemory, 1, value)
+    open var contentMarginTop: Double
+        get() = _icall_Double_Long(getDefaultMarginMethodBind, this.rawMemory, 1)
+        set(value) = _icall_Unit_Long_Double(setDefaultMarginMethodBind, this.rawMemory, 1, value)
 
 
-    open var contentMarginBottom: Float
-        get() = _icall_Float_Int(getDefaultMarginMethodBind, this.rawMemory, 3)
-        set(value) = _icall_Unit_Int_Float(setDefaultMarginMethodBind, this.rawMemory, 3, value)
+    open var contentMarginBottom: Double
+        get() = _icall_Double_Long(getDefaultMarginMethodBind, this.rawMemory, 3)
+        set(value) = _icall_Unit_Long_Double(setDefaultMarginMethodBind, this.rawMemory, 3, value)
 
 
 
@@ -72,20 +72,20 @@ open class StyleBox : Resource {
 
 
     private val setDefaultMarginMethodBind: CPointer<godot_method_bind> by lazy { getMB("StyleBox", "set_default_margin") }
-    open fun setDefaultMargin(margin: Int, offset: Float) {
-        _icall_Unit_Int_Float(setDefaultMarginMethodBind, this.rawMemory, margin, offset)
+    open fun setDefaultMargin(margin: Long, offset: Double) {
+        _icall_Unit_Long_Double(setDefaultMarginMethodBind, this.rawMemory, margin, offset)
     }
 
 
     private val getDefaultMarginMethodBind: CPointer<godot_method_bind> by lazy { getMB("StyleBox", "get_default_margin") }
-    open fun getDefaultMargin(margin: Int): Float {
-        return _icall_Float_Int(getDefaultMarginMethodBind, this.rawMemory, margin)
+    open fun getDefaultMargin(margin: Long): Double {
+        return _icall_Double_Long(getDefaultMarginMethodBind, this.rawMemory, margin)
     }
 
 
     private val getMarginMethodBind: CPointer<godot_method_bind> by lazy { getMB("StyleBox", "get_margin") }
-    open fun getMargin(margin: Int): Float {
-        return _icall_Float_Int(getMarginMethodBind, this.rawMemory, margin)
+    open fun getMargin(margin: Long): Double {
+        return _icall_Double_Long(getMarginMethodBind, this.rawMemory, margin)
     }
 
 

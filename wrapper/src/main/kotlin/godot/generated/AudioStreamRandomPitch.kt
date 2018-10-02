@@ -48,9 +48,9 @@ open class AudioStreamRandomPitch : AudioStream {
         set(value) = _icall_Unit_Object(setAudioStreamMethodBind, this.rawMemory, value)
 
 
-    open var randomPitch: Float
-        get() = _icall_Float(getRandomPitchMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setRandomPitchMethodBind, this.rawMemory, value)
+    open var randomPitch: Double
+        get() = _icall_Double(getRandomPitchMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setRandomPitchMethodBind, this.rawMemory, value)
 
 
 
@@ -69,14 +69,14 @@ open class AudioStreamRandomPitch : AudioStream {
 
 
     private val setRandomPitchMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamRandomPitch", "set_random_pitch") }
-    open fun setRandomPitch(scale: Float) {
-        _icall_Unit_Float(setRandomPitchMethodBind, this.rawMemory, scale)
+    open fun setRandomPitch(scale: Double) {
+        _icall_Unit_Double(setRandomPitchMethodBind, this.rawMemory, scale)
     }
 
 
     private val getRandomPitchMethodBind: CPointer<godot_method_bind> by lazy { getMB("AudioStreamRandomPitch", "get_random_pitch") }
-    open fun getRandomPitch(): Float {
-        return _icall_Float(getRandomPitchMethodBind, this.rawMemory)
+    open fun getRandomPitch(): Double {
+        return _icall_Double(getRandomPitchMethodBind, this.rawMemory)
     }
 
 

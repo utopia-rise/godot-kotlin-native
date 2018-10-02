@@ -19,13 +19,13 @@ open class TouchScreenButton : Node2D {
 
     // Enums 
 
-    enum class VisibilityMode(val id: Int) {
+    enum class VisibilityMode(val id: Long) {
         VISIBILITY_ALWAYS(0),
         VISIBILITY_TOUCHSCREEN_ONLY(1),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -48,8 +48,8 @@ open class TouchScreenButton : Node2D {
 
 
         // Constants
-        const val VISIBILITY_ALWAYS: Int = 0
-        const val VISIBILITY_TOUCHSCREEN_ONLY: Int = 1
+        const val VISIBILITY_ALWAYS: Long = 0
+        const val VISIBILITY_TOUCHSCREEN_ONLY: Long = 1
 
 
     }
@@ -96,9 +96,9 @@ open class TouchScreenButton : Node2D {
         set(value) = _icall_Unit_String(setActionMethodBind, this.rawMemory, value)
 
 
-    open var visibilityMode: Int
-        get() = _icall_Int(getVisibilityModeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setVisibilityModeMethodBind, this.rawMemory, value)
+    open var visibilityMode: Long
+        get() = _icall_Long(getVisibilityModeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setVisibilityModeMethodBind, this.rawMemory, value)
 
 
 
@@ -189,14 +189,14 @@ open class TouchScreenButton : Node2D {
 
 
     private val setVisibilityModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("TouchScreenButton", "set_visibility_mode") }
-    open fun setVisibilityMode(mode: Int) {
-        _icall_Unit_Int(setVisibilityModeMethodBind, this.rawMemory, mode)
+    open fun setVisibilityMode(mode: Long) {
+        _icall_Unit_Long(setVisibilityModeMethodBind, this.rawMemory, mode)
     }
 
 
     private val getVisibilityModeMethodBind: CPointer<godot_method_bind> by lazy { getMB("TouchScreenButton", "get_visibility_mode") }
     open fun getVisibilityMode(): TouchScreenButton.VisibilityMode {
-        return TouchScreenButton.VisibilityMode.fromInt(_icall_Int(getVisibilityModeMethodBind, this.rawMemory))
+        return TouchScreenButton.VisibilityMode.fromInt(_icall_Long(getVisibilityModeMethodBind, this.rawMemory))
     }
 
 

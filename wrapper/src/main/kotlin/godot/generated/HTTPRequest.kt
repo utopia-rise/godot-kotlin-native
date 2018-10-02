@@ -19,7 +19,7 @@ open class HTTPRequest : Node {
 
     // Enums 
 
-    enum class Result(val id: Int) {
+    enum class Result(val id: Long) {
         RESULT_SUCCESS(0),
         RESULT_CHUNKED_BODY_SIZE_MISMATCH(1),
         RESULT_CANT_CONNECT(2),
@@ -35,7 +35,7 @@ open class HTTPRequest : Node {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -55,18 +55,18 @@ open class HTTPRequest : Node {
 
 
         // Constants
-        const val RESULT_SUCCESS: Int = 0
-        const val RESULT_CHUNKED_BODY_SIZE_MISMATCH: Int = 1
-        const val RESULT_CANT_CONNECT: Int = 2
-        const val RESULT_CANT_RESOLVE: Int = 3
-        const val RESULT_CONNECTION_ERROR: Int = 4
-        const val RESULT_SSL_HANDSHAKE_ERROR: Int = 5
-        const val RESULT_NO_RESPONSE: Int = 6
-        const val RESULT_BODY_SIZE_LIMIT_EXCEEDED: Int = 7
-        const val RESULT_REQUEST_FAILED: Int = 8
-        const val RESULT_DOWNLOAD_FILE_CANT_OPEN: Int = 9
-        const val RESULT_DOWNLOAD_FILE_WRITE_ERROR: Int = 10
-        const val RESULT_REDIRECT_LIMIT_REACHED: Int = 11
+        const val RESULT_SUCCESS: Long = 0
+        const val RESULT_CHUNKED_BODY_SIZE_MISMATCH: Long = 1
+        const val RESULT_CANT_CONNECT: Long = 2
+        const val RESULT_CANT_RESOLVE: Long = 3
+        const val RESULT_CONNECTION_ERROR: Long = 4
+        const val RESULT_SSL_HANDSHAKE_ERROR: Long = 5
+        const val RESULT_NO_RESPONSE: Long = 6
+        const val RESULT_BODY_SIZE_LIMIT_EXCEEDED: Long = 7
+        const val RESULT_REQUEST_FAILED: Long = 8
+        const val RESULT_DOWNLOAD_FILE_CANT_OPEN: Long = 9
+        const val RESULT_DOWNLOAD_FILE_WRITE_ERROR: Long = 10
+        const val RESULT_REDIRECT_LIMIT_REACHED: Long = 11
 
 
     }
@@ -83,22 +83,22 @@ open class HTTPRequest : Node {
         set(value) = _icall_Unit_Boolean(setUseThreadsMethodBind, this.rawMemory, value)
 
 
-    open var bodySizeLimit: Int
-        get() = _icall_Int(getBodySizeLimitMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setBodySizeLimitMethodBind, this.rawMemory, value)
+    open var bodySizeLimit: Long
+        get() = _icall_Long(getBodySizeLimitMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setBodySizeLimitMethodBind, this.rawMemory, value)
 
 
-    open var maxRedirects: Int
-        get() = _icall_Int(getMaxRedirectsMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setMaxRedirectsMethodBind, this.rawMemory, value)
+    open var maxRedirects: Long
+        get() = _icall_Long(getMaxRedirectsMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setMaxRedirectsMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val requestMethodBind: CPointer<godot_method_bind> by lazy { getMB("HTTPRequest", "request") }
-    open fun request(url: String, customHeaders: PoolStringArray = PoolStringArray(), sslValidateDomain: Boolean = true, method: Int = 0, requestData: String = ""): GodotError {
-        return GodotError.fromInt(_icall_Int_String_PoolStringArray_Boolean_Int_String(requestMethodBind, this.rawMemory, url, customHeaders, sslValidateDomain, method, requestData))
+    open fun request(url: String, customHeaders: PoolStringArray = PoolStringArray(), sslValidateDomain: Boolean = true, method: Long = 0, requestData: String = ""): GodotError {
+        return GodotError.fromInt(_icall_Long_String_PoolStringArray_Boolean_Long_String(requestMethodBind, this.rawMemory, url, customHeaders, sslValidateDomain, method, requestData))
     }
 
 
@@ -110,7 +110,7 @@ open class HTTPRequest : Node {
 
     private val getHttpClientStatusMethodBind: CPointer<godot_method_bind> by lazy { getMB("HTTPRequest", "get_http_client_status") }
     open fun getHttpClientStatus(): HTTPClient.Status {
-        return HTTPClient.Status.fromInt(_icall_Int(getHttpClientStatusMethodBind, this.rawMemory))
+        return HTTPClient.Status.fromInt(_icall_Long(getHttpClientStatusMethodBind, this.rawMemory))
     }
 
 
@@ -127,26 +127,26 @@ open class HTTPRequest : Node {
 
 
     private val setBodySizeLimitMethodBind: CPointer<godot_method_bind> by lazy { getMB("HTTPRequest", "set_body_size_limit") }
-    open fun setBodySizeLimit(bytes: Int) {
-        _icall_Unit_Int(setBodySizeLimitMethodBind, this.rawMemory, bytes)
+    open fun setBodySizeLimit(bytes: Long) {
+        _icall_Unit_Long(setBodySizeLimitMethodBind, this.rawMemory, bytes)
     }
 
 
     private val getBodySizeLimitMethodBind: CPointer<godot_method_bind> by lazy { getMB("HTTPRequest", "get_body_size_limit") }
-    open fun getBodySizeLimit(): Int {
-        return _icall_Int(getBodySizeLimitMethodBind, this.rawMemory)
+    open fun getBodySizeLimit(): Long {
+        return _icall_Long(getBodySizeLimitMethodBind, this.rawMemory)
     }
 
 
     private val setMaxRedirectsMethodBind: CPointer<godot_method_bind> by lazy { getMB("HTTPRequest", "set_max_redirects") }
-    open fun setMaxRedirects(amount: Int) {
-        _icall_Unit_Int(setMaxRedirectsMethodBind, this.rawMemory, amount)
+    open fun setMaxRedirects(amount: Long) {
+        _icall_Unit_Long(setMaxRedirectsMethodBind, this.rawMemory, amount)
     }
 
 
     private val getMaxRedirectsMethodBind: CPointer<godot_method_bind> by lazy { getMB("HTTPRequest", "get_max_redirects") }
-    open fun getMaxRedirects(): Int {
-        return _icall_Int(getMaxRedirectsMethodBind, this.rawMemory)
+    open fun getMaxRedirects(): Long {
+        return _icall_Long(getMaxRedirectsMethodBind, this.rawMemory)
     }
 
 
@@ -163,14 +163,14 @@ open class HTTPRequest : Node {
 
 
     private val getDownloadedBytesMethodBind: CPointer<godot_method_bind> by lazy { getMB("HTTPRequest", "get_downloaded_bytes") }
-    open fun getDownloadedBytes(): Int {
-        return _icall_Int(getDownloadedBytesMethodBind, this.rawMemory)
+    open fun getDownloadedBytes(): Long {
+        return _icall_Long(getDownloadedBytesMethodBind, this.rawMemory)
     }
 
 
     private val getBodySizeMethodBind: CPointer<godot_method_bind> by lazy { getMB("HTTPRequest", "get_body_size") }
-    open fun getBodySize(): Int {
-        return _icall_Int(getBodySizeMethodBind, this.rawMemory)
+    open fun getBodySize(): Long {
+        return _icall_Long(getBodySizeMethodBind, this.rawMemory)
     }
 
 
@@ -178,7 +178,7 @@ open class HTTPRequest : Node {
     }
 
 
-    open fun _request_done(arg0: Int, arg1: Int, arg2: PoolStringArray, arg3: PoolByteArray) {
+    open fun _request_done(arg0: Long, arg1: Long, arg2: PoolStringArray, arg3: PoolByteArray) {
     }
 
 

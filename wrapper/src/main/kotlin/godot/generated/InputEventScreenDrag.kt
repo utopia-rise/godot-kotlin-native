@@ -43,9 +43,9 @@ open class InputEventScreenDrag : InputEvent {
 
 
     // Properties
-    open var index: Int
-        get() = _icall_Int(getIndexMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setIndexMethodBind, this.rawMemory, value)
+    open var index: Long
+        get() = _icall_Long(getIndexMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setIndexMethodBind, this.rawMemory, value)
 
 
     open var position: Vector2
@@ -79,14 +79,14 @@ open class InputEventScreenDrag : InputEvent {
 
     // Methods
     private val setIndexMethodBind: CPointer<godot_method_bind> by lazy { getMB("InputEventScreenDrag", "set_index") }
-    open fun setIndex(index: Int) {
-        _icall_Unit_Int(setIndexMethodBind, this.rawMemory, index)
+    open fun setIndex(index: Long) {
+        _icall_Unit_Long(setIndexMethodBind, this.rawMemory, index)
     }
 
 
     private val getIndexMethodBind: CPointer<godot_method_bind> by lazy { getMB("InputEventScreenDrag", "get_index") }
-    open fun getIndex(): Int {
-        return _icall_Int(getIndexMethodBind, this.rawMemory)
+    open fun getIndex(): Long {
+        return _icall_Long(getIndexMethodBind, this.rawMemory)
     }
 
 

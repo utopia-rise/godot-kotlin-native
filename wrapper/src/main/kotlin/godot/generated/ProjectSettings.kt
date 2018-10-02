@@ -62,14 +62,14 @@ open class ProjectSettings : Object {
 
 
         private val setOrderMethodBind: CPointer<godot_method_bind> by lazy { getMB("ProjectSettings", "set_order") }
-        fun setOrder(name: String, position: Int) {
-            _icall_Unit_String_Int(setOrderMethodBind, this.rawMemory, name, position)
+        fun setOrder(name: String, position: Long) {
+            _icall_Unit_String_Long(setOrderMethodBind, this.rawMemory, name, position)
         }
 
 
         private val getOrderMethodBind: CPointer<godot_method_bind> by lazy { getMB("ProjectSettings", "get_order") }
-        fun getOrder(name: String): Int {
-            return _icall_Int_String(getOrderMethodBind, this.rawMemory, name)
+        fun getOrder(name: String): Long {
+            return _icall_Long_String(getOrderMethodBind, this.rawMemory, name)
         }
 
 
@@ -105,7 +105,7 @@ open class ProjectSettings : Object {
 
         private val saveMethodBind: CPointer<godot_method_bind> by lazy { getMB("ProjectSettings", "save") }
         fun save(): GodotError {
-            return GodotError.fromInt(_icall_Int(saveMethodBind, this.rawMemory))
+            return GodotError.fromInt(_icall_Long(saveMethodBind, this.rawMemory))
         }
 
 
@@ -129,7 +129,7 @@ open class ProjectSettings : Object {
 
         private val saveCustomMethodBind: CPointer<godot_method_bind> by lazy { getMB("ProjectSettings", "save_custom") }
         fun saveCustom(file: String): GodotError {
-            return GodotError.fromInt(_icall_Int_String(saveCustomMethodBind, this.rawMemory, file))
+            return GodotError.fromInt(_icall_Long_String(saveCustomMethodBind, this.rawMemory, file))
         }
 
 

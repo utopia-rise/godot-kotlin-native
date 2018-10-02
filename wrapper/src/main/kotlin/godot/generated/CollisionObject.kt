@@ -58,7 +58,7 @@ open class CollisionObject : Spatial {
 
 
     // Methods
-    open fun _input_event(camera: Object, event: InputEvent, clickPosition: Vector3, clickNormal: Vector3, shapeIdx: Int) {
+    open fun _input_event(camera: Object, event: InputEvent, clickPosition: Vector3, clickNormal: Vector3, shapeIdx: Long) {
     }
 
 
@@ -93,14 +93,14 @@ open class CollisionObject : Spatial {
 
 
     private val createShapeOwnerMethodBind: CPointer<godot_method_bind> by lazy { getMB("CollisionObject", "create_shape_owner") }
-    open fun createShapeOwner(owner: Object): Int {
-        return _icall_Int_Object(createShapeOwnerMethodBind, this.rawMemory, owner)
+    open fun createShapeOwner(owner: Object): Long {
+        return _icall_Long_Object(createShapeOwnerMethodBind, this.rawMemory, owner)
     }
 
 
     private val removeShapeOwnerMethodBind: CPointer<godot_method_bind> by lazy { getMB("CollisionObject", "remove_shape_owner") }
-    open fun removeShapeOwner(ownerId: Int) {
-        _icall_Unit_Int(removeShapeOwnerMethodBind, this.rawMemory, ownerId)
+    open fun removeShapeOwner(ownerId: Long) {
+        _icall_Unit_Long(removeShapeOwnerMethodBind, this.rawMemory, ownerId)
     }
 
 
@@ -111,74 +111,74 @@ open class CollisionObject : Spatial {
 
 
     private val shapeOwnerSetTransformMethodBind: CPointer<godot_method_bind> by lazy { getMB("CollisionObject", "shape_owner_set_transform") }
-    open fun shapeOwnerSetTransform(ownerId: Int, transform: Transform) {
-        _icall_Unit_Int_Transform(shapeOwnerSetTransformMethodBind, this.rawMemory, ownerId, transform)
+    open fun shapeOwnerSetTransform(ownerId: Long, transform: Transform) {
+        _icall_Unit_Long_Transform(shapeOwnerSetTransformMethodBind, this.rawMemory, ownerId, transform)
     }
 
 
     private val shapeOwnerGetTransformMethodBind: CPointer<godot_method_bind> by lazy { getMB("CollisionObject", "shape_owner_get_transform") }
-    open fun shapeOwnerGetTransform(ownerId: Int): Transform {
-        return _icall_Transform_Int(shapeOwnerGetTransformMethodBind, this.rawMemory, ownerId)
+    open fun shapeOwnerGetTransform(ownerId: Long): Transform {
+        return _icall_Transform_Long(shapeOwnerGetTransformMethodBind, this.rawMemory, ownerId)
     }
 
 
     private val shapeOwnerGetOwnerMethodBind: CPointer<godot_method_bind> by lazy { getMB("CollisionObject", "shape_owner_get_owner") }
-    open fun shapeOwnerGetOwner(ownerId: Int): Object {
-        return _icall_Object_Int(shapeOwnerGetOwnerMethodBind, this.rawMemory, ownerId)
+    open fun shapeOwnerGetOwner(ownerId: Long): Object {
+        return _icall_Object_Long(shapeOwnerGetOwnerMethodBind, this.rawMemory, ownerId)
     }
 
 
     private val shapeOwnerSetDisabledMethodBind: CPointer<godot_method_bind> by lazy { getMB("CollisionObject", "shape_owner_set_disabled") }
-    open fun shapeOwnerSetDisabled(ownerId: Int, disabled: Boolean) {
-        _icall_Unit_Int_Boolean(shapeOwnerSetDisabledMethodBind, this.rawMemory, ownerId, disabled)
+    open fun shapeOwnerSetDisabled(ownerId: Long, disabled: Boolean) {
+        _icall_Unit_Long_Boolean(shapeOwnerSetDisabledMethodBind, this.rawMemory, ownerId, disabled)
     }
 
 
     private val isShapeOwnerDisabledMethodBind: CPointer<godot_method_bind> by lazy { getMB("CollisionObject", "is_shape_owner_disabled") }
-    open fun isShapeOwnerDisabled(ownerId: Int): Boolean {
-        return _icall_Boolean_Int(isShapeOwnerDisabledMethodBind, this.rawMemory, ownerId)
+    open fun isShapeOwnerDisabled(ownerId: Long): Boolean {
+        return _icall_Boolean_Long(isShapeOwnerDisabledMethodBind, this.rawMemory, ownerId)
     }
 
 
     private val shapeOwnerAddShapeMethodBind: CPointer<godot_method_bind> by lazy { getMB("CollisionObject", "shape_owner_add_shape") }
-    open fun shapeOwnerAddShape(ownerId: Int, shape: Shape) {
-        _icall_Unit_Int_Object(shapeOwnerAddShapeMethodBind, this.rawMemory, ownerId, shape)
+    open fun shapeOwnerAddShape(ownerId: Long, shape: Shape) {
+        _icall_Unit_Long_Object(shapeOwnerAddShapeMethodBind, this.rawMemory, ownerId, shape)
     }
 
 
     private val shapeOwnerGetShapeCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("CollisionObject", "shape_owner_get_shape_count") }
-    open fun shapeOwnerGetShapeCount(ownerId: Int): Int {
-        return _icall_Int_Int(shapeOwnerGetShapeCountMethodBind, this.rawMemory, ownerId)
+    open fun shapeOwnerGetShapeCount(ownerId: Long): Long {
+        return _icall_Long_Long(shapeOwnerGetShapeCountMethodBind, this.rawMemory, ownerId)
     }
 
 
     private val shapeOwnerGetShapeMethodBind: CPointer<godot_method_bind> by lazy { getMB("CollisionObject", "shape_owner_get_shape") }
-    open fun shapeOwnerGetShape(ownerId: Int, shapeId: Int): Shape {
-        return _icall_Shape_Int_Int(shapeOwnerGetShapeMethodBind, this.rawMemory, ownerId, shapeId)
+    open fun shapeOwnerGetShape(ownerId: Long, shapeId: Long): Shape {
+        return _icall_Shape_Long_Long(shapeOwnerGetShapeMethodBind, this.rawMemory, ownerId, shapeId)
     }
 
 
     private val shapeOwnerGetShapeIndexMethodBind: CPointer<godot_method_bind> by lazy { getMB("CollisionObject", "shape_owner_get_shape_index") }
-    open fun shapeOwnerGetShapeIndex(ownerId: Int, shapeId: Int): Int {
-        return _icall_Int_Int_Int(shapeOwnerGetShapeIndexMethodBind, this.rawMemory, ownerId, shapeId)
+    open fun shapeOwnerGetShapeIndex(ownerId: Long, shapeId: Long): Long {
+        return _icall_Long_Long_Long(shapeOwnerGetShapeIndexMethodBind, this.rawMemory, ownerId, shapeId)
     }
 
 
     private val shapeOwnerRemoveShapeMethodBind: CPointer<godot_method_bind> by lazy { getMB("CollisionObject", "shape_owner_remove_shape") }
-    open fun shapeOwnerRemoveShape(ownerId: Int, shapeId: Int) {
-        _icall_Unit_Int_Int(shapeOwnerRemoveShapeMethodBind, this.rawMemory, ownerId, shapeId)
+    open fun shapeOwnerRemoveShape(ownerId: Long, shapeId: Long) {
+        _icall_Unit_Long_Long(shapeOwnerRemoveShapeMethodBind, this.rawMemory, ownerId, shapeId)
     }
 
 
     private val shapeOwnerClearShapesMethodBind: CPointer<godot_method_bind> by lazy { getMB("CollisionObject", "shape_owner_clear_shapes") }
-    open fun shapeOwnerClearShapes(ownerId: Int) {
-        _icall_Unit_Int(shapeOwnerClearShapesMethodBind, this.rawMemory, ownerId)
+    open fun shapeOwnerClearShapes(ownerId: Long) {
+        _icall_Unit_Long(shapeOwnerClearShapesMethodBind, this.rawMemory, ownerId)
     }
 
 
     private val shapeFindOwnerMethodBind: CPointer<godot_method_bind> by lazy { getMB("CollisionObject", "shape_find_owner") }
-    open fun shapeFindOwner(shapeIndex: Int): Int {
-        return _icall_Int_Int(shapeFindOwnerMethodBind, this.rawMemory, shapeIndex)
+    open fun shapeFindOwner(shapeIndex: Long): Long {
+        return _icall_Long_Long(shapeFindOwnerMethodBind, this.rawMemory, shapeIndex)
     }
 
 

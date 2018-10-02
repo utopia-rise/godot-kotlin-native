@@ -36,17 +36,17 @@ open class Material : Resource {
 
 
         // Constants
-        const val RENDER_PRIORITY_MAX: Int = 127
-        const val RENDER_PRIORITY_MIN: Int = -128
+        const val RENDER_PRIORITY_MAX: Long = 127
+        const val RENDER_PRIORITY_MIN: Long = -128
 
 
     }
 
 
     // Properties
-    open var renderPriority: Int
-        get() = _icall_Int(getRenderPriorityMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setRenderPriorityMethodBind, this.rawMemory, value)
+    open var renderPriority: Long
+        get() = _icall_Long(getRenderPriorityMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setRenderPriorityMethodBind, this.rawMemory, value)
 
 
     open var nextPass: Material
@@ -70,14 +70,14 @@ open class Material : Resource {
 
 
     private val setRenderPriorityMethodBind: CPointer<godot_method_bind> by lazy { getMB("Material", "set_render_priority") }
-    open fun setRenderPriority(priority: Int) {
-        _icall_Unit_Int(setRenderPriorityMethodBind, this.rawMemory, priority)
+    open fun setRenderPriority(priority: Long) {
+        _icall_Unit_Long(setRenderPriorityMethodBind, this.rawMemory, priority)
     }
 
 
     private val getRenderPriorityMethodBind: CPointer<godot_method_bind> by lazy { getMB("Material", "get_render_priority") }
-    open fun getRenderPriority(): Int {
-        return _icall_Int(getRenderPriorityMethodBind, this.rawMemory)
+    open fun getRenderPriority(): Long {
+        return _icall_Long(getRenderPriorityMethodBind, this.rawMemory)
     }
 
 

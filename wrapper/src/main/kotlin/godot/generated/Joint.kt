@@ -52,9 +52,9 @@ open class Joint : Spatial {
         set(value) = _icall_Unit_NodePath(setNodeBMethodBind, this.rawMemory, value)
 
 
-    open var solver_priority: Int
-        get() = _icall_Int(getSolverPriorityMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setSolverPriorityMethodBind, this.rawMemory, value)
+    open var solver_priority: Long
+        get() = _icall_Long(getSolverPriorityMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setSolverPriorityMethodBind, this.rawMemory, value)
 
 
     open var collision_excludeNodes: Boolean
@@ -90,14 +90,14 @@ open class Joint : Spatial {
 
 
     private val setSolverPriorityMethodBind: CPointer<godot_method_bind> by lazy { getMB("Joint", "set_solver_priority") }
-    open fun setSolverPriority(priority: Int) {
-        _icall_Unit_Int(setSolverPriorityMethodBind, this.rawMemory, priority)
+    open fun setSolverPriority(priority: Long) {
+        _icall_Unit_Long(setSolverPriorityMethodBind, this.rawMemory, priority)
     }
 
 
     private val getSolverPriorityMethodBind: CPointer<godot_method_bind> by lazy { getMB("Joint", "get_solver_priority") }
-    open fun getSolverPriority(): Int {
-        return _icall_Int(getSolverPriorityMethodBind, this.rawMemory)
+    open fun getSolverPriority(): Long {
+        return _icall_Long(getSolverPriorityMethodBind, this.rawMemory)
     }
 
 

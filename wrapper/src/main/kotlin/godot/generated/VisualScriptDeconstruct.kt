@@ -43,23 +43,23 @@ open class VisualScriptDeconstruct : VisualScriptNode {
 
 
     // Properties
-    open var type: Int
-        get() = _icall_Int(getDeconstructTypeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setDeconstructTypeMethodBind, this.rawMemory, value)
+    open var type: Long
+        get() = _icall_Long(getDeconstructTypeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setDeconstructTypeMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setDeconstructTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptDeconstruct", "set_deconstruct_type") }
-    open fun setDeconstructType(type: Int) {
-        _icall_Unit_Int(setDeconstructTypeMethodBind, this.rawMemory, type)
+    open fun setDeconstructType(type: Long) {
+        _icall_Unit_Long(setDeconstructTypeMethodBind, this.rawMemory, type)
     }
 
 
     private val getDeconstructTypeMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptDeconstruct", "get_deconstruct_type") }
     open fun getDeconstructType(): Variant.Type {
-        return Variant.Type.fromInt(_icall_Int(getDeconstructTypeMethodBind, this.rawMemory))
+        return Variant.Type.fromInt(_icall_Long(getDeconstructTypeMethodBind, this.rawMemory))
     }
 
 

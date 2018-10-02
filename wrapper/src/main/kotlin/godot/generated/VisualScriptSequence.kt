@@ -43,23 +43,23 @@ open class VisualScriptSequence : VisualScriptNode {
 
 
     // Properties
-    open var steps: Int
-        get() = _icall_Int(getStepsMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setStepsMethodBind, this.rawMemory, value)
+    open var steps: Long
+        get() = _icall_Long(getStepsMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setStepsMethodBind, this.rawMemory, value)
 
 
 
 
     // Methods
     private val setStepsMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptSequence", "set_steps") }
-    open fun setSteps(steps: Int) {
-        _icall_Unit_Int(setStepsMethodBind, this.rawMemory, steps)
+    open fun setSteps(steps: Long) {
+        _icall_Unit_Long(setStepsMethodBind, this.rawMemory, steps)
     }
 
 
     private val getStepsMethodBind: CPointer<godot_method_bind> by lazy { getMB("VisualScriptSequence", "get_steps") }
-    open fun getSteps(): Int {
-        return _icall_Int(getStepsMethodBind, this.rawMemory)
+    open fun getSteps(): Long {
+        return _icall_Long(getStepsMethodBind, this.rawMemory)
     }
 
 

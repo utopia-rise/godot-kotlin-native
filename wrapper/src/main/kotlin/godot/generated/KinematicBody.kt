@@ -45,38 +45,38 @@ open class KinematicBody : PhysicsBody {
 
     // Properties
     open var axisLockLinearX: Boolean
-        get() = _icall_Boolean_Int(getAxisLockMethodBind, this.rawMemory, 1)
-        set(value) = _icall_Unit_Int_Boolean(setAxisLockMethodBind, this.rawMemory, 1, value)
+        get() = _icall_Boolean_Long(getAxisLockMethodBind, this.rawMemory, 1)
+        set(value) = _icall_Unit_Long_Boolean(setAxisLockMethodBind, this.rawMemory, 1, value)
 
 
     open var axisLockLinearY: Boolean
-        get() = _icall_Boolean_Int(getAxisLockMethodBind, this.rawMemory, 2)
-        set(value) = _icall_Unit_Int_Boolean(setAxisLockMethodBind, this.rawMemory, 2, value)
+        get() = _icall_Boolean_Long(getAxisLockMethodBind, this.rawMemory, 2)
+        set(value) = _icall_Unit_Long_Boolean(setAxisLockMethodBind, this.rawMemory, 2, value)
 
 
     open var axisLockLinearZ: Boolean
-        get() = _icall_Boolean_Int(getAxisLockMethodBind, this.rawMemory, 4)
-        set(value) = _icall_Unit_Int_Boolean(setAxisLockMethodBind, this.rawMemory, 4, value)
+        get() = _icall_Boolean_Long(getAxisLockMethodBind, this.rawMemory, 4)
+        set(value) = _icall_Unit_Long_Boolean(setAxisLockMethodBind, this.rawMemory, 4, value)
 
 
     open var axisLockAngularX: Boolean
-        get() = _icall_Boolean_Int(getAxisLockMethodBind, this.rawMemory, 8)
-        set(value) = _icall_Unit_Int_Boolean(setAxisLockMethodBind, this.rawMemory, 8, value)
+        get() = _icall_Boolean_Long(getAxisLockMethodBind, this.rawMemory, 8)
+        set(value) = _icall_Unit_Long_Boolean(setAxisLockMethodBind, this.rawMemory, 8, value)
 
 
     open var axisLockAngularY: Boolean
-        get() = _icall_Boolean_Int(getAxisLockMethodBind, this.rawMemory, 16)
-        set(value) = _icall_Unit_Int_Boolean(setAxisLockMethodBind, this.rawMemory, 16, value)
+        get() = _icall_Boolean_Long(getAxisLockMethodBind, this.rawMemory, 16)
+        set(value) = _icall_Unit_Long_Boolean(setAxisLockMethodBind, this.rawMemory, 16, value)
 
 
     open var axisLockAngularZ: Boolean
-        get() = _icall_Boolean_Int(getAxisLockMethodBind, this.rawMemory, 32)
-        set(value) = _icall_Unit_Int_Boolean(setAxisLockMethodBind, this.rawMemory, 32, value)
+        get() = _icall_Boolean_Long(getAxisLockMethodBind, this.rawMemory, 32)
+        set(value) = _icall_Unit_Long_Boolean(setAxisLockMethodBind, this.rawMemory, 32, value)
 
 
-    open var collision_safeMargin: Float
-        get() = _icall_Float(getSafeMarginMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setSafeMarginMethodBind, this.rawMemory, value)
+    open var collision_safeMargin: Double
+        get() = _icall_Double(getSafeMarginMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setSafeMarginMethodBind, this.rawMemory, value)
 
 
 
@@ -89,8 +89,8 @@ open class KinematicBody : PhysicsBody {
 
 
     private val moveAndSlideMethodBind: CPointer<godot_method_bind> by lazy { getMB("KinematicBody", "move_and_slide") }
-    open fun moveAndSlide(linearVelocity: Vector3, floorNormal: Vector3 = Vector3(0, 0, 0), slopeStopMinVelocity: Float = 0.05f, maxSlides: Int = 4, floorMaxAngle: Float = 0.785398f, infiniteInertia: Boolean = true): Vector3 {
-        return _icall_Vector3_Vector3_Vector3_Float_Int_Float_Boolean(moveAndSlideMethodBind, this.rawMemory, linearVelocity, floorNormal, slopeStopMinVelocity, maxSlides, floorMaxAngle, infiniteInertia)
+    open fun moveAndSlide(linearVelocity: Vector3, floorNormal: Vector3 = Vector3(0, 0, 0), slopeStopMinVelocity: Double = 0.05, maxSlides: Long = 4, floorMaxAngle: Double = 0.785398, infiniteInertia: Boolean = true): Vector3 {
+        return _icall_Vector3_Vector3_Vector3_Double_Long_Double_Boolean(moveAndSlideMethodBind, this.rawMemory, linearVelocity, floorNormal, slopeStopMinVelocity, maxSlides, floorMaxAngle, infiniteInertia)
     }
 
 
@@ -125,38 +125,38 @@ open class KinematicBody : PhysicsBody {
 
 
     private val setAxisLockMethodBind: CPointer<godot_method_bind> by lazy { getMB("KinematicBody", "set_axis_lock") }
-    open fun setAxisLock(axis: Int, lock: Boolean) {
-        _icall_Unit_Int_Boolean(setAxisLockMethodBind, this.rawMemory, axis, lock)
+    open fun setAxisLock(axis: Long, lock: Boolean) {
+        _icall_Unit_Long_Boolean(setAxisLockMethodBind, this.rawMemory, axis, lock)
     }
 
 
     private val getAxisLockMethodBind: CPointer<godot_method_bind> by lazy { getMB("KinematicBody", "get_axis_lock") }
-    open fun getAxisLock(axis: Int): Boolean {
-        return _icall_Boolean_Int(getAxisLockMethodBind, this.rawMemory, axis)
+    open fun getAxisLock(axis: Long): Boolean {
+        return _icall_Boolean_Long(getAxisLockMethodBind, this.rawMemory, axis)
     }
 
 
     private val setSafeMarginMethodBind: CPointer<godot_method_bind> by lazy { getMB("KinematicBody", "set_safe_margin") }
-    open fun setSafeMargin(pixels: Float) {
-        _icall_Unit_Float(setSafeMarginMethodBind, this.rawMemory, pixels)
+    open fun setSafeMargin(pixels: Double) {
+        _icall_Unit_Double(setSafeMarginMethodBind, this.rawMemory, pixels)
     }
 
 
     private val getSafeMarginMethodBind: CPointer<godot_method_bind> by lazy { getMB("KinematicBody", "get_safe_margin") }
-    open fun getSafeMargin(): Float {
-        return _icall_Float(getSafeMarginMethodBind, this.rawMemory)
+    open fun getSafeMargin(): Double {
+        return _icall_Double(getSafeMarginMethodBind, this.rawMemory)
     }
 
 
     private val getSlideCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("KinematicBody", "get_slide_count") }
-    open fun getSlideCount(): Int {
-        return _icall_Int(getSlideCountMethodBind, this.rawMemory)
+    open fun getSlideCount(): Long {
+        return _icall_Long(getSlideCountMethodBind, this.rawMemory)
     }
 
 
     private val getSlideCollisionMethodBind: CPointer<godot_method_bind> by lazy { getMB("KinematicBody", "get_slide_collision") }
-    open fun getSlideCollision(slideIdx: Int): KinematicCollision {
-        return _icall_KinematicCollision_Int(getSlideCollisionMethodBind, this.rawMemory, slideIdx)
+    open fun getSlideCollision(slideIdx: Long): KinematicCollision {
+        return _icall_KinematicCollision_Long(getSlideCollisionMethodBind, this.rawMemory, slideIdx)
     }
 
 

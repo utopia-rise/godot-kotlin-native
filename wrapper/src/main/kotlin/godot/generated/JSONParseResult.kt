@@ -51,9 +51,9 @@ open class JSONParseResult : Reference {
         set(value) = _icall_Unit_String(setErrorStringMethodBind, this.rawMemory, value)
 
 
-    open var errorLine: Int
-        get() = _icall_Int(getErrorLineMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setErrorLineMethodBind, this.rawMemory, value)
+    open var errorLine: Long
+        get() = _icall_Long(getErrorLineMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setErrorLineMethodBind, this.rawMemory, value)
 
 
     open var result: Variant
@@ -66,7 +66,7 @@ open class JSONParseResult : Reference {
     // Methods
     private val getErrorMethodBind: CPointer<godot_method_bind> by lazy { getMB("JSONParseResult", "get_error") }
     open fun getError(): GodotError {
-        return GodotError.fromInt(_icall_Int(getErrorMethodBind, this.rawMemory))
+        return GodotError.fromInt(_icall_Long(getErrorMethodBind, this.rawMemory))
     }
 
 
@@ -77,8 +77,8 @@ open class JSONParseResult : Reference {
 
 
     private val getErrorLineMethodBind: CPointer<godot_method_bind> by lazy { getMB("JSONParseResult", "get_error_line") }
-    open fun getErrorLine(): Int {
-        return _icall_Int(getErrorLineMethodBind, this.rawMemory)
+    open fun getErrorLine(): Long {
+        return _icall_Long(getErrorLineMethodBind, this.rawMemory)
     }
 
 
@@ -89,8 +89,8 @@ open class JSONParseResult : Reference {
 
 
     private val setErrorMethodBind: CPointer<godot_method_bind> by lazy { getMB("JSONParseResult", "set_error") }
-    open fun setError(error: Int) {
-        _icall_Unit_Int(setErrorMethodBind, this.rawMemory, error)
+    open fun setError(error: Long) {
+        _icall_Unit_Long(setErrorMethodBind, this.rawMemory, error)
     }
 
 
@@ -101,8 +101,8 @@ open class JSONParseResult : Reference {
 
 
     private val setErrorLineMethodBind: CPointer<godot_method_bind> by lazy { getMB("JSONParseResult", "set_error_line") }
-    open fun setErrorLine(errorLine: Int) {
-        _icall_Unit_Int(setErrorLineMethodBind, this.rawMemory, errorLine)
+    open fun setErrorLine(errorLine: Long) {
+        _icall_Unit_Long(setErrorLineMethodBind, this.rawMemory, errorLine)
     }
 
 

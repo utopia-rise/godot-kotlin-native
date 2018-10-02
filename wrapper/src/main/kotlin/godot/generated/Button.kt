@@ -19,14 +19,14 @@ open class Button : BaseButton {
 
     // Enums 
 
-    enum class TextAlign(val id: Int) {
+    enum class TextAlign(val id: Long) {
         ALIGN_LEFT(0),
         ALIGN_CENTER(1),
         ALIGN_RIGHT(2),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -48,9 +48,9 @@ open class Button : BaseButton {
 
 
         // Constants
-        const val ALIGN_LEFT: Int = 0
-        const val ALIGN_CENTER: Int = 1
-        const val ALIGN_RIGHT: Int = 2
+        const val ALIGN_LEFT: Long = 0
+        const val ALIGN_CENTER: Long = 1
+        const val ALIGN_RIGHT: Long = 2
 
 
     }
@@ -77,9 +77,9 @@ open class Button : BaseButton {
         set(value) = _icall_Unit_Boolean(setClipTextMethodBind, this.rawMemory, value)
 
 
-    open var align: Int
-        get() = _icall_Int(getTextAlignMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setTextAlignMethodBind, this.rawMemory, value)
+    open var align: Long
+        get() = _icall_Long(getTextAlignMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setTextAlignMethodBind, this.rawMemory, value)
 
 
 
@@ -128,14 +128,14 @@ open class Button : BaseButton {
 
 
     private val setTextAlignMethodBind: CPointer<godot_method_bind> by lazy { getMB("Button", "set_text_align") }
-    open fun setTextAlign(align: Int) {
-        _icall_Unit_Int(setTextAlignMethodBind, this.rawMemory, align)
+    open fun setTextAlign(align: Long) {
+        _icall_Unit_Long(setTextAlignMethodBind, this.rawMemory, align)
     }
 
 
     private val getTextAlignMethodBind: CPointer<godot_method_bind> by lazy { getMB("Button", "get_text_align") }
     open fun getTextAlign(): Button.TextAlign {
-        return Button.TextAlign.fromInt(_icall_Int(getTextAlignMethodBind, this.rawMemory))
+        return Button.TextAlign.fromInt(_icall_Long(getTextAlignMethodBind, this.rawMemory))
     }
 
 

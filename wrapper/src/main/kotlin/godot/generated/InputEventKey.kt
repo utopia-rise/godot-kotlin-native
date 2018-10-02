@@ -49,19 +49,19 @@ open class InputEventKey : InputEventWithModifiers {
         set(value) = _icall_Unit_Boolean(setPressedMethodBind, this.rawMemory, value)
 
 
-    open var scancode: Int
-        get() = _icall_Int(getScancodeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setScancodeMethodBind, this.rawMemory, value)
+    open var scancode: Long
+        get() = _icall_Long(getScancodeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setScancodeMethodBind, this.rawMemory, value)
 
 
-    open var unicode: Int
-        get() = _icall_Int(getUnicodeMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setUnicodeMethodBind, this.rawMemory, value)
+    open var unicode: Long
+        get() = _icall_Long(getUnicodeMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setUnicodeMethodBind, this.rawMemory, value)
 
 
-    open var echo: Int
+    open var echo: Long
         get() = throw UninitializedPropertyAccessException("Cannot access property echo: has no getter")
-        set(value) = _icall_Unit_Int(setEchoMethodBind, this.rawMemory, value)
+        set(value) = _icall_Unit_Long(setEchoMethodBind, this.rawMemory, value)
 
 
 
@@ -74,26 +74,26 @@ open class InputEventKey : InputEventWithModifiers {
 
 
     private val setScancodeMethodBind: CPointer<godot_method_bind> by lazy { getMB("InputEventKey", "set_scancode") }
-    open fun setScancode(scancode: Int) {
-        _icall_Unit_Int(setScancodeMethodBind, this.rawMemory, scancode)
+    open fun setScancode(scancode: Long) {
+        _icall_Unit_Long(setScancodeMethodBind, this.rawMemory, scancode)
     }
 
 
     private val getScancodeMethodBind: CPointer<godot_method_bind> by lazy { getMB("InputEventKey", "get_scancode") }
-    open fun getScancode(): Int {
-        return _icall_Int(getScancodeMethodBind, this.rawMemory)
+    open fun getScancode(): Long {
+        return _icall_Long(getScancodeMethodBind, this.rawMemory)
     }
 
 
     private val setUnicodeMethodBind: CPointer<godot_method_bind> by lazy { getMB("InputEventKey", "set_unicode") }
-    open fun setUnicode(unicode: Int) {
-        _icall_Unit_Int(setUnicodeMethodBind, this.rawMemory, unicode)
+    open fun setUnicode(unicode: Long) {
+        _icall_Unit_Long(setUnicodeMethodBind, this.rawMemory, unicode)
     }
 
 
     private val getUnicodeMethodBind: CPointer<godot_method_bind> by lazy { getMB("InputEventKey", "get_unicode") }
-    open fun getUnicode(): Int {
-        return _icall_Int(getUnicodeMethodBind, this.rawMemory)
+    open fun getUnicode(): Long {
+        return _icall_Long(getUnicodeMethodBind, this.rawMemory)
     }
 
 
@@ -104,8 +104,8 @@ open class InputEventKey : InputEventWithModifiers {
 
 
     private val getScancodeWithModifiersMethodBind: CPointer<godot_method_bind> by lazy { getMB("InputEventKey", "get_scancode_with_modifiers") }
-    open fun getScancodeWithModifiers(): Int {
-        return _icall_Int(getScancodeWithModifiersMethodBind, this.rawMemory)
+    open fun getScancodeWithModifiers(): Long {
+        return _icall_Long(getScancodeWithModifiersMethodBind, this.rawMemory)
     }
 
 

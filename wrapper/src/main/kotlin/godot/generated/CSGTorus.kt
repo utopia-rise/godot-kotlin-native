@@ -45,24 +45,24 @@ open class CSGTorus : CSGPrimitive {
 
 
     // Properties
-    open var innerRadius: Float
-        get() = _icall_Float(getInnerRadiusMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setInnerRadiusMethodBind, this.rawMemory, value)
+    open var innerRadius: Double
+        get() = _icall_Double(getInnerRadiusMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setInnerRadiusMethodBind, this.rawMemory, value)
 
 
-    open var outerRadius: Float
-        get() = _icall_Float(getOuterRadiusMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setOuterRadiusMethodBind, this.rawMemory, value)
+    open var outerRadius: Double
+        get() = _icall_Double(getOuterRadiusMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setOuterRadiusMethodBind, this.rawMemory, value)
 
 
-    open var sides: Int
-        get() = _icall_Int(getSidesMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setSidesMethodBind, this.rawMemory, value)
+    open var sides: Long
+        get() = _icall_Long(getSidesMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setSidesMethodBind, this.rawMemory, value)
 
 
-    open var ringSides: Int
-        get() = _icall_Int(getRingSidesMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Int(setRingSidesMethodBind, this.rawMemory, value)
+    open var ringSides: Long
+        get() = _icall_Long(getRingSidesMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Long(setRingSidesMethodBind, this.rawMemory, value)
 
 
     open var smoothFaces: Boolean
@@ -79,50 +79,50 @@ open class CSGTorus : CSGPrimitive {
 
     // Methods
     private val setInnerRadiusMethodBind: CPointer<godot_method_bind> by lazy { getMB("CSGTorus", "set_inner_radius") }
-    open fun setInnerRadius(radius: Float) {
-        _icall_Unit_Float(setInnerRadiusMethodBind, this.rawMemory, radius)
+    open fun setInnerRadius(radius: Double) {
+        _icall_Unit_Double(setInnerRadiusMethodBind, this.rawMemory, radius)
     }
 
 
     private val getInnerRadiusMethodBind: CPointer<godot_method_bind> by lazy { getMB("CSGTorus", "get_inner_radius") }
-    open fun getInnerRadius(): Float {
-        return _icall_Float(getInnerRadiusMethodBind, this.rawMemory)
+    open fun getInnerRadius(): Double {
+        return _icall_Double(getInnerRadiusMethodBind, this.rawMemory)
     }
 
 
     private val setOuterRadiusMethodBind: CPointer<godot_method_bind> by lazy { getMB("CSGTorus", "set_outer_radius") }
-    open fun setOuterRadius(radius: Float) {
-        _icall_Unit_Float(setOuterRadiusMethodBind, this.rawMemory, radius)
+    open fun setOuterRadius(radius: Double) {
+        _icall_Unit_Double(setOuterRadiusMethodBind, this.rawMemory, radius)
     }
 
 
     private val getOuterRadiusMethodBind: CPointer<godot_method_bind> by lazy { getMB("CSGTorus", "get_outer_radius") }
-    open fun getOuterRadius(): Float {
-        return _icall_Float(getOuterRadiusMethodBind, this.rawMemory)
+    open fun getOuterRadius(): Double {
+        return _icall_Double(getOuterRadiusMethodBind, this.rawMemory)
     }
 
 
     private val setSidesMethodBind: CPointer<godot_method_bind> by lazy { getMB("CSGTorus", "set_sides") }
-    open fun setSides(sides: Int) {
-        _icall_Unit_Int(setSidesMethodBind, this.rawMemory, sides)
+    open fun setSides(sides: Long) {
+        _icall_Unit_Long(setSidesMethodBind, this.rawMemory, sides)
     }
 
 
     private val getSidesMethodBind: CPointer<godot_method_bind> by lazy { getMB("CSGTorus", "get_sides") }
-    open fun getSides(): Int {
-        return _icall_Int(getSidesMethodBind, this.rawMemory)
+    open fun getSides(): Long {
+        return _icall_Long(getSidesMethodBind, this.rawMemory)
     }
 
 
     private val setRingSidesMethodBind: CPointer<godot_method_bind> by lazy { getMB("CSGTorus", "set_ring_sides") }
-    open fun setRingSides(sides: Int) {
-        _icall_Unit_Int(setRingSidesMethodBind, this.rawMemory, sides)
+    open fun setRingSides(sides: Long) {
+        _icall_Unit_Long(setRingSidesMethodBind, this.rawMemory, sides)
     }
 
 
     private val getRingSidesMethodBind: CPointer<godot_method_bind> by lazy { getMB("CSGTorus", "get_ring_sides") }
-    open fun getRingSides(): Int {
-        return _icall_Int(getRingSidesMethodBind, this.rawMemory)
+    open fun getRingSides(): Long {
+        return _icall_Long(getRingSidesMethodBind, this.rawMemory)
     }
 
 

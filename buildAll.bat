@@ -3,36 +3,42 @@
 SET CURRENT_PATH=%0/../
 
 
-IF NOT DEFINED API_GENERATOR_PATH SET API_GENERATOR_PATH="tools/api_classes_generator"
-IF NOT DEFINED API_GENERATOR_TASKS SET API_GENERATOR_TASKS="run"
-
-IF NOT DEFINED WRAPPER_PATH SET WRAPPER_PATH="wrapper"
-IF NOT DEFINED WRAPPER_TASKS SET WRAPPER_TASKS="publish"
-
-IF NOT DEFINED ENTRY_GENERATOR_PATH SET ENTRY_GENERATOR_PATH="tools/entry_generator"
-IF NOT DEFINED ENTRY_GENERATOR_TASKS SET ENTRY_GENERATOR_TASKS="build"
-
-IF NOT DEFINED GRADLE_PLUGIN_PATH SET GRADLE_PLUGIN_PATH="tools/gradle_plugin"
-IF NOT DEFINED GRADLE_PLUGIN_TASKS SET GRADLE_PLUGIN_TASKS="publish"
-
-IF NOT DEFINED SAMPLES_PATH SET SAMPLES_PATH="samples/games/kotlin"
-IF NOT DEFINED SAMPLES_TASKS SET SAMPLES_TASKS="build"
+set ARTIFACTS_LIST=^
+	"tools/api_classes_generator" "run" ^
+	"wrapper" "publish" ^
+	"tools/entry_generator" "build" ^
+	"tools/gradle_plugin" "publish" ^
+	"samples/games/kotlin" "build"
 
 
 
-CALL :ExecuteGradle %API_GENERATOR_PATH%, %API_GENERATOR_TASKS%
-CALL :ExecuteGradle %WRAPPER_PATH%, %WRAPPER_TASKS%
-CALL :ExecuteGradle %ENTRY_GENERATOR_PATH%, %ENTRY_GENERATOR_TASKS%
-CALL :ExecuteGradle %GRADLE_PLUGIN_PATH%, %GRADLE_PLUGIN_TASKS%
-CALL :ExecuteGradle %SAMPLES_PATH%, %SAMPLES_TASKS%
+cd %CURRENT_PATH%
 
-EXIT /B 0
+
+
+setlocal enabledelayedexpansion
+set n=0
+for %%a in (%ARTIFACTS_LIST%) do (
+    set ARTIFACTS[!n!]=%%a
+    set /a n+=1
+)
+set /a n-=1
+for /L %%i in (0,2,%n%) do (
+	set /a i1=%%i
+	set /a i2=%%i+1
+	call set arg1=%%ARTIFACTS[!i1!]%%
+	call set arg2=%%ARTIFACTS[!i2!]%%
+	call :ExecuteGradle !arg1!, !arg2!
+)
+
+
+EXIT /B %ERRORLEVEL%
 
 
 :ExecuteGradle
-cd %~1
-@ECHO on
-call gradlew %~2
-@ECHO off
-cd %CURRENT_PATH%
+	cd %~1
+	@ECHO on
+	call gradlew %~2 --stacktrace
+	@ECHO off
+	cd %CURRENT_PATH%
 EXIT /B 0

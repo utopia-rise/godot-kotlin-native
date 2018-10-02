@@ -19,17 +19,17 @@ open class TextEdit : Control {
 
     // Enums 
 
-    enum class SearchFlags(val id: Int) {
+    enum class SearchFlags(val id: Long) {
         SEARCH_MATCH_CASE(1),
         SEARCH_WHOLE_WORDS(2),
         SEARCH_BACKWARDS(4),
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
-    enum class MenuItems(val id: Int) {
+    enum class MenuItems(val id: Long) {
         MENU_CUT(0),
         MENU_COPY(1),
         MENU_PASTE(2),
@@ -40,7 +40,7 @@ open class TextEdit : Control {
         ;
 
         companion object {
-            fun fromInt(value: Int) = values().single { it.id == value }
+            fun fromInt(value: Long) = values().single { it.id == value }
         }
     }
 
@@ -66,16 +66,16 @@ open class TextEdit : Control {
 
 
         // Constants
-        const val SEARCH_MATCH_CASE: Int = 1
-        const val SEARCH_WHOLE_WORDS: Int = 2
-        const val SEARCH_BACKWARDS: Int = 4
-        const val MENU_CUT: Int = 0
-        const val MENU_COPY: Int = 1
-        const val MENU_PASTE: Int = 2
-        const val MENU_CLEAR: Int = 3
-        const val MENU_SELECT_ALL: Int = 4
-        const val MENU_UNDO: Int = 5
-        const val MENU_MAX: Int = 6
+        const val SEARCH_MATCH_CASE: Long = 1
+        const val SEARCH_WHOLE_WORDS: Long = 2
+        const val SEARCH_BACKWARDS: Long = 4
+        const val MENU_CUT: Long = 0
+        const val MENU_COPY: Long = 1
+        const val MENU_PASTE: Long = 2
+        const val MENU_CLEAR: Long = 3
+        const val MENU_SELECT_ALL: Long = 4
+        const val MENU_UNDO: Long = 5
+        const val MENU_MAX: Long = 6
 
 
     }
@@ -132,9 +132,9 @@ open class TextEdit : Control {
         set(value) = _icall_Unit_Boolean(setSmoothScrollEnableMethodBind, this.rawMemory, value)
 
 
-    open var vScrollSpeed: Float
-        get() = _icall_Float(getVScrollSpeedMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(setVScrollSpeedMethodBind, this.rawMemory, value)
+    open var vScrollSpeed: Double
+        get() = _icall_Double(getVScrollSpeedMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(setVScrollSpeedMethodBind, this.rawMemory, value)
 
 
     open var hidingEnabled: Boolean
@@ -157,9 +157,9 @@ open class TextEdit : Control {
         set(value) = _icall_Unit_Boolean(cursorSetBlinkEnabledMethodBind, this.rawMemory, value)
 
 
-    open var caretBlinkSpeed: Float
-        get() = _icall_Float(cursorGetBlinkSpeedMethodBind, this.rawMemory)
-        set(value) = _icall_Unit_Float(cursorSetBlinkSpeedMethodBind, this.rawMemory, value)
+    open var caretBlinkSpeed: Double
+        get() = _icall_Double(cursorGetBlinkSpeedMethodBind, this.rawMemory)
+        set(value) = _icall_Unit_Double(cursorSetBlinkSpeedMethodBind, this.rawMemory, value)
 
 
     open var caretMovingByRightClick: Boolean
@@ -174,7 +174,7 @@ open class TextEdit : Control {
     }
 
 
-    open fun _scroll_moved(arg0: Float) {
+    open fun _scroll_moved(arg0: Double) {
     }
 
 
@@ -215,8 +215,8 @@ open class TextEdit : Control {
 
 
     private val getLineCountMethodBind: CPointer<godot_method_bind> by lazy { getMB("TextEdit", "get_line_count") }
-    open fun getLineCount(): Int {
-        return _icall_Int(getLineCountMethodBind, this.rawMemory)
+    open fun getLineCount(): Long {
+        return _icall_Long(getLineCountMethodBind, this.rawMemory)
     }
 
 
@@ -227,32 +227,32 @@ open class TextEdit : Control {
 
 
     private val getLineMethodBind: CPointer<godot_method_bind> by lazy { getMB("TextEdit", "get_line") }
-    open fun getLine(line: Int): String {
-        return _icall_String_Int(getLineMethodBind, this.rawMemory, line)
+    open fun getLine(line: Long): String {
+        return _icall_String_Long(getLineMethodBind, this.rawMemory, line)
     }
 
 
     private val cursorSetColumnMethodBind: CPointer<godot_method_bind> by lazy { getMB("TextEdit", "cursor_set_column") }
-    open fun cursorSetColumn(column: Int, adjustViewport: Boolean = true) {
-        _icall_Unit_Int_Boolean(cursorSetColumnMethodBind, this.rawMemory, column, adjustViewport)
+    open fun cursorSetColumn(column: Long, adjustViewport: Boolean = true) {
+        _icall_Unit_Long_Boolean(cursorSetColumnMethodBind, this.rawMemory, column, adjustViewport)
     }
 
 
     private val cursorSetLineMethodBind: CPointer<godot_method_bind> by lazy { getMB("TextEdit", "cursor_set_line") }
-    open fun cursorSetLine(line: Int, adjustViewport: Boolean = true, canBeHidden: Boolean = true, wrapIndex: Int = 0) {
-        _icall_Unit_Int_Boolean_Boolean_Int(cursorSetLineMethodBind, this.rawMemory, line, adjustViewport, canBeHidden, wrapIndex)
+    open fun cursorSetLine(line: Long, adjustViewport: Boolean = true, canBeHidden: Boolean = true, wrapIndex: Long = 0) {
+        _icall_Unit_Long_Boolean_Boolean_Long(cursorSetLineMethodBind, this.rawMemory, line, adjustViewport, canBeHidden, wrapIndex)
     }
 
 
     private val cursorGetColumnMethodBind: CPointer<godot_method_bind> by lazy { getMB("TextEdit", "cursor_get_column") }
-    open fun cursorGetColumn(): Int {
-        return _icall_Int(cursorGetColumnMethodBind, this.rawMemory)
+    open fun cursorGetColumn(): Long {
+        return _icall_Long(cursorGetColumnMethodBind, this.rawMemory)
     }
 
 
     private val cursorGetLineMethodBind: CPointer<godot_method_bind> by lazy { getMB("TextEdit", "cursor_get_line") }
-    open fun cursorGetLine(): Int {
-        return _icall_Int(cursorGetLineMethodBind, this.rawMemory)
+    open fun cursorGetLine(): Long {
+        return _icall_Long(cursorGetLineMethodBind, this.rawMemory)
     }
 
 
@@ -269,14 +269,14 @@ open class TextEdit : Control {
 
 
     private val cursorSetBlinkSpeedMethodBind: CPointer<godot_method_bind> by lazy { getMB("TextEdit", "cursor_set_blink_speed") }
-    open fun cursorSetBlinkSpeed(blinkSpeed: Float) {
-        _icall_Unit_Float(cursorSetBlinkSpeedMethodBind, this.rawMemory, blinkSpeed)
+    open fun cursorSetBlinkSpeed(blinkSpeed: Double) {
+        _icall_Unit_Double(cursorSetBlinkSpeedMethodBind, this.rawMemory, blinkSpeed)
     }
 
 
     private val cursorGetBlinkSpeedMethodBind: CPointer<godot_method_bind> by lazy { getMB("TextEdit", "cursor_get_blink_speed") }
-    open fun cursorGetBlinkSpeed(): Float {
-        return _icall_Float(cursorGetBlinkSpeedMethodBind, this.rawMemory)
+    open fun cursorGetBlinkSpeed(): Double {
+        return _icall_Double(cursorGetBlinkSpeedMethodBind, this.rawMemory)
     }
 
 
@@ -359,8 +359,8 @@ open class TextEdit : Control {
 
 
     private val selectMethodBind: CPointer<godot_method_bind> by lazy { getMB("TextEdit", "select") }
-    open fun select(fromLine: Int, fromColumn: Int, toLine: Int, toColumn: Int) {
-        _icall_Unit_Int_Int_Int_Int(selectMethodBind, this.rawMemory, fromLine, fromColumn, toLine, toColumn)
+    open fun select(fromLine: Long, fromColumn: Long, toLine: Long, toColumn: Long) {
+        _icall_Unit_Long_Long_Long_Long(selectMethodBind, this.rawMemory, fromLine, fromColumn, toLine, toColumn)
     }
 
 
@@ -383,26 +383,26 @@ open class TextEdit : Control {
 
 
     private val getSelectionFromLineMethodBind: CPointer<godot_method_bind> by lazy { getMB("TextEdit", "get_selection_from_line") }
-    open fun getSelectionFromLine(): Int {
-        return _icall_Int(getSelectionFromLineMethodBind, this.rawMemory)
+    open fun getSelectionFromLine(): Long {
+        return _icall_Long(getSelectionFromLineMethodBind, this.rawMemory)
     }
 
 
     private val getSelectionFromColumnMethodBind: CPointer<godot_method_bind> by lazy { getMB("TextEdit", "get_selection_from_column") }
-    open fun getSelectionFromColumn(): Int {
-        return _icall_Int(getSelectionFromColumnMethodBind, this.rawMemory)
+    open fun getSelectionFromColumn(): Long {
+        return _icall_Long(getSelectionFromColumnMethodBind, this.rawMemory)
     }
 
 
     private val getSelectionToLineMethodBind: CPointer<godot_method_bind> by lazy { getMB("TextEdit", "get_selection_to_line") }
-    open fun getSelectionToLine(): Int {
-        return _icall_Int(getSelectionToLineMethodBind, this.rawMemory)
+    open fun getSelectionToLine(): Long {
+        return _icall_Long(getSelectionToLineMethodBind, this.rawMemory)
     }
 
 
     private val getSelectionToColumnMethodBind: CPointer<godot_method_bind> by lazy { getMB("TextEdit", "get_selection_to_column") }
-    open fun getSelectionToColumn(): Int {
-        return _icall_Int(getSelectionToColumnMethodBind, this.rawMemory)
+    open fun getSelectionToColumn(): Long {
+        return _icall_Long(getSelectionToColumnMethodBind, this.rawMemory)
     }
 
 
@@ -419,8 +419,8 @@ open class TextEdit : Control {
 
 
     private val searchMethodBind: CPointer<godot_method_bind> by lazy { getMB("TextEdit", "search") }
-    open fun search(key: String, flags: Int, fromLine: Int, fromColumn: Int): PoolIntArray {
-        return _icall_PoolIntArray_String_Int_Int_Int(searchMethodBind, this.rawMemory, key, flags, fromLine, fromColumn)
+    open fun search(key: String, flags: Long, fromLine: Long, fromColumn: Long): PoolIntArray {
+        return _icall_PoolIntArray_String_Long_Long_Long(searchMethodBind, this.rawMemory, key, flags, fromLine, fromColumn)
     }
 
 
@@ -467,26 +467,26 @@ open class TextEdit : Control {
 
 
     private val setHidingEnabledMethodBind: CPointer<godot_method_bind> by lazy { getMB("TextEdit", "set_hiding_enabled") }
-    open fun setHidingEnabled(enable: Int) {
-        _icall_Unit_Int(setHidingEnabledMethodBind, this.rawMemory, enable)
+    open fun setHidingEnabled(enable: Long) {
+        _icall_Unit_Long(setHidingEnabledMethodBind, this.rawMemory, enable)
     }
 
 
     private val isHidingEnabledMethodBind: CPointer<godot_method_bind> by lazy { getMB("TextEdit", "is_hiding_enabled") }
-    open fun isHidingEnabled(): Int {
-        return _icall_Int(isHidingEnabledMethodBind, this.rawMemory)
+    open fun isHidingEnabled(): Long {
+        return _icall_Long(isHidingEnabledMethodBind, this.rawMemory)
     }
 
 
     private val setLineAsHiddenMethodBind: CPointer<godot_method_bind> by lazy { getMB("TextEdit", "set_line_as_hidden") }
-    open fun setLineAsHidden(line: Int, enable: Boolean) {
-        _icall_Unit_Int_Boolean(setLineAsHiddenMethodBind, this.rawMemory, line, enable)
+    open fun setLineAsHidden(line: Long, enable: Boolean) {
+        _icall_Unit_Long_Boolean(setLineAsHiddenMethodBind, this.rawMemory, line, enable)
     }
 
 
     private val isLineHiddenMethodBind: CPointer<godot_method_bind> by lazy { getMB("TextEdit", "is_line_hidden") }
-    open fun isLineHidden(line: Int): Boolean {
-        return _icall_Boolean_Int(isLineHiddenMethodBind, this.rawMemory, line)
+    open fun isLineHidden(line: Long): Boolean {
+        return _icall_Boolean_Long(isLineHiddenMethodBind, this.rawMemory, line)
     }
 
 
@@ -503,32 +503,32 @@ open class TextEdit : Control {
 
 
     private val foldLineMethodBind: CPointer<godot_method_bind> by lazy { getMB("TextEdit", "fold_line") }
-    open fun foldLine(line: Int) {
-        _icall_Unit_Int(foldLineMethodBind, this.rawMemory, line)
+    open fun foldLine(line: Long) {
+        _icall_Unit_Long(foldLineMethodBind, this.rawMemory, line)
     }
 
 
     private val unfoldLineMethodBind: CPointer<godot_method_bind> by lazy { getMB("TextEdit", "unfold_line") }
-    open fun unfoldLine(line: Int) {
-        _icall_Unit_Int(unfoldLineMethodBind, this.rawMemory, line)
+    open fun unfoldLine(line: Long) {
+        _icall_Unit_Long(unfoldLineMethodBind, this.rawMemory, line)
     }
 
 
     private val toggleFoldLineMethodBind: CPointer<godot_method_bind> by lazy { getMB("TextEdit", "toggle_fold_line") }
-    open fun toggleFoldLine(line: Int) {
-        _icall_Unit_Int(toggleFoldLineMethodBind, this.rawMemory, line)
+    open fun toggleFoldLine(line: Long) {
+        _icall_Unit_Long(toggleFoldLineMethodBind, this.rawMemory, line)
     }
 
 
     private val canFoldMethodBind: CPointer<godot_method_bind> by lazy { getMB("TextEdit", "can_fold") }
-    open fun canFold(line: Int): Boolean {
-        return _icall_Boolean_Int(canFoldMethodBind, this.rawMemory, line)
+    open fun canFold(line: Long): Boolean {
+        return _icall_Boolean_Long(canFoldMethodBind, this.rawMemory, line)
     }
 
 
     private val isFoldedMethodBind: CPointer<godot_method_bind> by lazy { getMB("TextEdit", "is_folded") }
-    open fun isFolded(line: Int): Boolean {
-        return _icall_Boolean_Int(isFoldedMethodBind, this.rawMemory, line)
+    open fun isFolded(line: Long): Boolean {
+        return _icall_Boolean_Long(isFoldedMethodBind, this.rawMemory, line)
     }
 
 
@@ -593,14 +593,14 @@ open class TextEdit : Control {
 
 
     private val setVScrollSpeedMethodBind: CPointer<godot_method_bind> by lazy { getMB("TextEdit", "set_v_scroll_speed") }
-    open fun setVScrollSpeed(speed: Float) {
-        _icall_Unit_Float(setVScrollSpeedMethodBind, this.rawMemory, speed)
+    open fun setVScrollSpeed(speed: Double) {
+        _icall_Unit_Double(setVScrollSpeedMethodBind, this.rawMemory, speed)
     }
 
 
     private val getVScrollSpeedMethodBind: CPointer<godot_method_bind> by lazy { getMB("TextEdit", "get_v_scroll_speed") }
-    open fun getVScrollSpeed(): Float {
-        return _icall_Float(getVScrollSpeedMethodBind, this.rawMemory)
+    open fun getVScrollSpeed(): Double {
+        return _icall_Double(getVScrollSpeedMethodBind, this.rawMemory)
     }
 
 
@@ -635,8 +635,8 @@ open class TextEdit : Control {
 
 
     private val menuOptionMethodBind: CPointer<godot_method_bind> by lazy { getMB("TextEdit", "menu_option") }
-    open fun menuOption(option: Int) {
-        _icall_Unit_Int(menuOptionMethodBind, this.rawMemory, option)
+    open fun menuOption(option: Long) {
+        _icall_Unit_Long(menuOptionMethodBind, this.rawMemory, option)
     }
 
 
