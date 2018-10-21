@@ -5,13 +5,13 @@ plugins {
 }
 
 
-group = 'org.jetbrains.kotlin'
+group = 'org.jetbrains.kotlin.godot'
 version = '1.0.0'
 
 
 gradlePlugin {
     plugins {
-        register("kotlin-godot") {
+        godotGradlePlugin {
             id = "kotlin-godot"
             implementationClass = "godot.gradle.plugin.KotlinGodotPlugin"
         }
@@ -40,7 +40,7 @@ configurations {
 }
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    implementation "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.20-dev-586"
+    implementation "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.20-dev-769"
     compile fileTree(dir: 'lib', include: '*.jar')
     extraLibs fileTree(dir: 'lib', include: '*.jar')
 }

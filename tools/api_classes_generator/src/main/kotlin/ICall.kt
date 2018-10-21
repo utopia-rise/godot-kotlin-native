@@ -11,8 +11,12 @@ class ICall(
         name = buildString {
             append("_icall_$returnType")
 
-            for (arg in arguments)
-                append('_').append(arg.type.convertTypeForICalls())
+            for (arg in arguments) {
+                append('_')
+                if (arg.nullable)
+                    append('n')
+                append(arg.type.convertTypeForICalls())
+            }
         }
     }
 
@@ -21,8 +25,11 @@ class ICall(
         return buildString {
             append("internal fun $name(mb: CPointer<godot_method_bind>, inst: COpaquePointer")
 
-            for ((i, arg) in arguments.withIndex())
+            for ((i, arg) in arguments.withIndex()) {
                 append(", arg$i: ${arg.type.convertTypeForICalls()}")
+                if (arg.nullable)
+                    append('?')
+            }
             append(')')
 
 
@@ -53,13 +60,19 @@ class ICall(
                 if (isPrimitive)
                     appendln("<${returnType}Var>()")
                 else
-                    appendln("Array<ByteVar>(1024)")
+                    appendln("Array<ByteVar>(8)")
             }
 
 
-            appendln("        val args = allocArray<COpaquePointerVar>(${arguments.size})")
-            for (i in arguments.indices)
-                appendln("        args[$i] = arg$i.getRawMemory(memScope)")
+            appendln("        val args = allocArray<COpaquePointerVar>(${arguments.size + 1})")
+            for ((i, arg) in arguments.withIndex()) {
+                append("        args[$i] = arg$i")
+                if (arg.nullable)
+                    append('?')
+                appendln(".getRawMemory(memScope)")
+            }
+            appendln("        args[${arguments.size}] = null")
+
             append("        godot_method_bind_ptrcall(mb, inst, args, ")
             if (shouldReturn)
                 if (isPrimitive)

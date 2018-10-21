@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scripts/MirrorBall.gdns" type="Script" id=1]
+[ext_resource path="res://Sprites/Player.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/Ball.gdns" type="Script" id=3]
+
+[node name="Node" type="Node" index="0"]
+
+[node name="MirrorBall" type="Node2D" parent="." index="0"]
+
+editor/display_folded = true
+position = Vector2( 960, 540 )
+scale = Vector2( 2, 2 )
+script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
+ballPath = NodePath("../Ball")
+center = Vector2( 960, 540 )
+
+[node name="Sprite" type="Sprite" parent="MirrorBall" index="0"]
+
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Ball" type="Node2D" parent="." index="1"]
+
+editor/display_folded = true
+position = Vector2( 960, 540 )
+scale = Vector2( 2, 2 )
+script = ExtResource( 3 )
+_sections_unfolded = [ "Transform" ]
+moveSpeed = 2.0
+
+[node name="Sprite" type="Sprite" parent="Ball" index="0"]
+
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[connection signal="move" from="Ball" to="Ball" method="move"]
+
+

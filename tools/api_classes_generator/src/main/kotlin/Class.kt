@@ -23,10 +23,13 @@ class Class(
         val enums: List<Enum>
 ) {
     val oldName: String = name
+    val shouldGenerate: Boolean
 
     init {
         name = name.escapeUnderscore()
         baseClass = baseClass.escapeUnderscore()
+
+        shouldGenerate = name != "GlobalConstants"
     }
 
 
@@ -44,89 +47,101 @@ class Class(
             appendln("@file:Suppress(\"unused\", \"ClassName\", \"EnumEntryName\", \"FunctionName\", \"SpellCheckingInspection\", \"PARAMETER_NAME_CHANGED_ON_OVERRIDE\", \"UnusedImport\", \"PackageDirectoryMismatch\")")
             appendln("package godot")
             appendln()
-            appendln("import godot.gdnative.*")
-            appendln("import godot.core.*")
-            appendln("import godot.icalls.*")
-            appendln("import kotlinx.cinterop.*")
-            appendln()
+            if (shouldGenerate) {
+                appendln("import godot.gdnative.*")
+                appendln("import godot.core.*")
+                appendln("import godot.utils.*")
+                appendln("import godot.icalls.*")
+                appendln("import kotlinx.cinterop.*")
+                appendln()
+            }
             appendln()
             appendln("// NOTE: THIS FILE IS AUTO GENERATED FROM JSON API CONFIG")
             appendln()
             appendln()
 
 
-            append("open class $name : ").append(if (baseClass == "") "GodotObject" else baseClass).appendln(" {")
+            var constantsPrefix = ""
+            if (shouldGenerate) {
+                append("open class $name : ").append(if (baseClass == "") "GodotObject" else baseClass).appendln(" {")
 
-            append("    ")
-            if (isInstanciable)
-                appendln("constructor() : super(\"$name\")")
-            else
-                appendln("private constructor() : super(\"\")")
-            appendln("    constructor(variant: Variant) : super(variant)")
-            appendln("    internal constructor(mem: COpaquePointer) : super(mem)")
-            appendln("    internal constructor(name: String) : super(name)")
-            appendln()
-            appendln()
-
-
-            appendln("    // Enums ")
-            appendln()
-            for (enum in enums)
-                enum.generate(this)
-            appendln()
-            appendln()
+                append("    ")
+                if (isInstanciable)
+                    // LUL, ask Godot's author for any explanation about _Thread
+                    appendln("constructor() : super(\"${if (name != "Thread") name else "_Thread"}\")")
+                else
+                    appendln("private constructor() : super(\"\")")
+                appendln("    constructor(variant: Variant) : super(variant)")
+                appendln("    internal constructor(mem: COpaquePointer) : super(mem)")
+                appendln("    internal constructor(name: String) : super(name)")
+                appendln()
+                appendln()
 
 
-            appendln("    // Signals")
-            appendln("    class Signal {")
-            appendln("        companion object {")
-            for (sig in signals)
-                appendln("            ${sig.generate()}")
-            appendln("        }")
-            appendln("    }")
-            appendln()
-            appendln()
+                appendln("    // Enums ")
+                appendln()
+                for (enum in enums)
+                    enum.generate(this)
+                appendln()
+                appendln()
 
 
-            if (isSingleton)
-                append("    @ThreadLocal") // TODO: remove later, fixed in konan master
-            appendln("    companion object {")
+                appendln("    // Signals")
+                appendln("    class Signal {")
+                appendln("        companion object {")
+                for (sig in signals)
+                    appendln("            ${sig.generate()}")
+                appendln("        }")
+                appendln("    }")
+                appendln()
+                appendln()
 
-            append(generateCasts(tree))
 
-            appendln("        // Constants")
+                if (isSingleton)
+                    append("    @ThreadLocal") // TODO: remove later, fixed in konan master
+                appendln("    companion object {")
+
+                append(generateCasts(tree))
+
+                constantsPrefix = "        "
+            }
+
+
+            appendln("$constantsPrefix// Constants")
             for (constant in constants)
-                appendln("        const val ${constant.key}: Long = ${constant.value}")
+                appendln("${constantsPrefix}const val ${constant.key}: Long = ${constant.value}")
             appendln()
             appendln()
 
 
-            if (isSingleton)
-                appendln("        private val rawMemory: COpaquePointer by lazy { getSingleton(\"$name\", \"$oldName\") }")
-            else
-                appendln("    }")
-            appendln()
-            appendln()
+            if (shouldGenerate) {
+                if (isSingleton)
+                    appendln("        private val rawMemory: COpaquePointer by lazy { getSingleton(\"$name\", \"$oldName\") }")
+                else
+                    appendln("    }")
+                appendln()
+                appendln()
 
 
-            val prefix = if (isSingleton) "    " else ""
+                val singletonPrefix = if (isSingleton) "    " else ""
 
 
-            appendln("$prefix    // Properties")
-            for (prop in properties)
-                append(prop.generate(prefix, this@Class, tree, icalls))
-            appendln()
-            appendln()
+                appendln("$singletonPrefix    // Properties")
+                for (prop in properties)
+                    append(prop.generate(singletonPrefix, this@Class, tree, icalls))
+                appendln()
+                appendln()
 
 
-            appendln("$prefix    // Methods")
-            for (method in methods)
-                append(method.generate(prefix, this@Class, tree, icalls))
+                appendln("$singletonPrefix    // Methods")
+                for (method in methods)
+                    append(method.generate(singletonPrefix, this@Class, tree, icalls))
 
 
-            if (isSingleton)
-                appendln("    }")
-            appendln("}")
+                if (isSingleton)
+                    appendln("    }")
+                appendln("}")
+            }
         })
     }
 

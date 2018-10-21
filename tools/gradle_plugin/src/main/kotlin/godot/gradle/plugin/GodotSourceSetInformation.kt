@@ -14,6 +14,8 @@ class GodotSourceSetInformation(
 
     var gdnsPath = ""
 
+    var skipEntryGeneration = false
+
 
     fun appendConfigs(confs: Iterable<String>) {
         for (config in confs) {

@@ -11,19 +11,24 @@ class Argument(
         @Json(name = "default_value")
         var defaultValue: String = ""
 ) {
+    val nullable: Boolean
+
     init {
         name = name.convertToCamelCase().escapeKotlinReservedNames()
         type = type.convertTypeToKotlin()
 
-        if (defaultValue == "[Object:null]" || defaultValue == "Null")
+        if (defaultValue == "[Object:null]" || defaultValue == "Null") {
             defaultValue = "null"
+            nullable = true
+        } else
+            nullable = false
     }
 
 
     fun applyDefaultValue(): String {
         if (hasDefaultValue) {
-            if (defaultValue == "null")
-                return "" // TODO: ? = null
+            if (nullable)
+                return "? = null"
 
             return " = " + when (type) {
                 "Color", "Variant" -> "$type($defaultValue)"

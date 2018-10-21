@@ -13,13 +13,20 @@ class Class(
         @Json(name = "tool")
         val isToolClass: Boolean = false,
         @Json(name = "methods")
-        val methods: List<Method> = listOf(),
+        var methods: List<Method> = listOf(),
         @Json(name = "properties")
         val properties: List<Property> = listOf(),
         @Json(name = "signals")
         val signals: List<Signal> = listOf()
 ) {
     var packageName = ""
+
+    init {
+        if (methods.find { m -> m.name == "__yieldSignalListener" } != null)
+            error("Method __yieldSignalListener in class $name: reserved method name, choose another")
+
+        methods += Method("__yieldSignalListener", "Unit", true, listOf("Variant"))
+    }
 
 
     fun generate(bindings: MutableList<String>, bridges: MutableList<String>): String {
@@ -48,40 +55,49 @@ private fun udcBridge${bridgeID + 1}(): CPointer<CFunction<(COpaquePointer?) -> 
 
     fun generateMethods(bridges: MutableList<String>): String {
         return buildString {
-            val generated = mutableListOf<String>()
+            val generated = mutableSetOf<String>()
 
             for (m in methods) {
-                if (generated.indexOf(m.name) != -1)
+                if (generated.contains(m.name))
                     continue
 
 
                 val bridgeID = bridges.size
-                val bridge = StringBuilder().append("""
+                val bridge = StringBuilder().appendln("""
 private fun udcBridge$bridgeID(): CPointer<CFunction<(COpaquePointer?, COpaquePointer?, Int, COpaquePointer?) -> Unit>> {
     return staticCFunction { r, o, n, a -> invoke<$classPath>("${m.name}", r, o, n, a) { obj, numArgs, args -> run {
-        when (numArgs) {
-
-            """.trimIndent())
+        """.trimIndent())
 
 
-                val paramsCount = mutableListOf<Int>()
-                for (method in methods.filter { method -> m.name == method.name }) {
-                    if (paramsCount.find { i -> i == method.arguments.size } != null)
-                        error("Method ${m.name} in $classPath has multiple declarations with ${method.arguments.size} parameters.")
-                    paramsCount.add(method.arguments.size)
+                if (m.isVararg) {
+                    if (methods.count { method -> m.name == method.name } > 1)
+                        error("Method ${m.name} in $classPath has multiple declarations, denied using with varargs")
 
-                    bridge.append(method.generate())
+                    bridge.append(m.generate())
+                } else {
+                    bridge.appendln("        when (numArgs) {")
+
+                    val paramsCount = mutableListOf<Int>()
+                    for (method in methods.filter { method -> m.name == method.name }) {
+                        if (paramsCount.indexOf(method.arguments.size) != -1)
+                            error("Method ${m.name} in $classPath has multiple declarations with ${method.arguments.size} parameters.")
+
+                        paramsCount.add(method.arguments.size)
+                        bridge.append(method.generate())
+                    }
+                    paramsCount.clear()
+
+                    bridge.appendln("            else -> noMethodToInvoke(\"${m.name}\", \"$classPath\", numArgs)")
+                    bridge.appendln("        }")
+                    bridge.appendln("        return@run null")
                 }
-                paramsCount.clear()
 
 
-                bridge.append("""
-            else -> noMethodToInvoke("${m.name}", "$classPath", numArgs)
-        }
-        return@run null }}
-    }
+                bridge.appendln("""
+    }}}
 }
-            """.trimIndent())
+                """.trimIndent())
+
                 bridges.add(bridge.toString())
                 appendln("    registerMethod(\"$classPath\", \"${m.name}\", udcBridge$bridgeID())")
 

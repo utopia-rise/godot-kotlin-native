@@ -4,6 +4,7 @@ import godot.gradle.plugin.KotlinGodotPlugin.Companion.LibrariesDependency
 import org.gradle.api.InvalidUserDataException
 import org.gradle.api.Project
 import org.gradle.internal.cleanup.BuildOutputCleanupRegistry
+import org.jetbrains.kotlin.backend.common.onlyIf
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 import org.jetbrains.kotlin.gradle.plugin.KotlinTargetPreset
@@ -51,35 +52,43 @@ class KotlinGodotTargetPreset(
             val entryPath = project.buildDir.absolutePath + "/godot/entries/" + sourceSet.name
             sourceSet.kotlin.srcDir(entryPath)
 
-            if (!sourceSetsInformation.contains(sourceSet))
-                sourceSetsInformation[sourceSet] = GodotSourceSetInformation(project.projectDir.absolutePath + File.separator, sourceSet)
+
+            val info: GodotSourceSetInformation
+            if (!sourceSetsInformation.contains(sourceSet)) {
+                info = GodotSourceSetInformation(project.projectDir.absolutePath + File.separator, sourceSet)
+                sourceSetsInformation[sourceSet] = info
+            } else
+                info = sourceSetsInformation[sourceSet]!!
 
 
             val generateTask = project.tasks.create(sourceSet.name + "GenerateEntry") {
-                if (HostManager().isEnabled(konanTarget)) {
-                    it.doFirst {
-                        sourceSetsInformation[sourceSet]?.run {
-                            if (configs.isEmpty())
-                                project.logger.warn("$sourceSet has no configs for Godot registration - you may not access Kotlin classes from Godot.")
-                            else {
-                                var libPath = if (libraryPath == "") "${sourceSet.name}.gdnlib" else libraryPath
-                                if (!libPath.startsWith("res://"))
-                                    libPath = "res://$libPath"
+                it.inputs.files(info.configs)
+                it.outputs.dir(entryPath)
 
-                                try {
-                                    generateEntry(configs, entryPath + File.separator + "Entry.kt", gdnsPath, libPath)
-                                    project.logger.info("Generated entry file for godot $sourceSet.")
-                                } catch (e: Exception) {
-                                    val capture = "Failed to generate entry file for godot $sourceSet ($e)"
-                                    throw InvalidUserDataException(capture, e)
-                                }
-                            }
+                it.doFirst {
+                    if (info.configs.isEmpty())
+                        project.logger.warn("$sourceSet has no configs for Godot registration - you may not access Kotlin classes from Godot.")
+                    else {
+                        var libPath = if (info.libraryPath == "") "${sourceSet.name}.gdnlib" else info.libraryPath
+                        if (!libPath.startsWith("res://"))
+                            libPath = "res://$libPath"
+
+                        try {
+                            generateEntry(info.configs, entryPath + File.separator + "Entry.kt", info.gdnsPath, libPath)
+                            project.logger.info("Generated entry file for godot $sourceSet.")
+                        } catch (e: Exception) {
+                            val capture = "Failed to generate entry file for godot $sourceSet ($e)"
+                            throw InvalidUserDataException(capture, e)
                         }
                     }
                 }
             }
             project.getTasksByName(compileKotlinTaskName, false).forEach {
-                it.dependsOn(generateTask)
+                it.dependsOn(generateTask.apply {
+                    onlyIf {
+                        HostManager().isEnabled(konanTarget) && !info.skipEntryGeneration
+                    }
+                })
             }
         }
     }

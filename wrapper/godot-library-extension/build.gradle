@@ -1,0 +1,33 @@
+apply plugin: 'kotlin-multiplatform'
+
+
+kotlin {
+    sourceSets {
+        configure([macosMain, linuxMain, windowsMain]) {
+            kotlin.srcDirs 'src/main/kotlin'
+        }
+    }
+    targets {
+        fromPreset(presets.mingwX64, 'windows')
+        fromPreset(presets.linuxX64, 'linux')
+        fromPreset(presets.macosX64, 'macos')
+        configure([macos, linux, windows]) {
+            compilations.all {                
+                dependencies {
+                    implementation project(':godot-library') 
+                    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core-native:0.30.2-eap13'
+                }
+            }
+            //compilations.main.extraOpts('-Xdisable=devirtualization')
+        }
+
+        // FIXME: correct metadata resolving in the future
+        configure(windows) {
+            compilations.all {
+                dependencies {
+                    implementation 'org.jetbrains.kotlinx:atomicfu-native_debug_mingw_x64:0.11.10-eap13'
+                }
+            }
+        }
+    }
+}

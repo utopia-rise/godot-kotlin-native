@@ -4,7 +4,6 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.internal.FeaturePreviews
 import org.gradle.api.internal.file.FileResolver
-import org.gradle.api.internal.plugins.DslObject
 import org.gradle.internal.cleanup.BuildOutputCleanupRegistry
 import org.gradle.internal.reflect.Instantiator
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
@@ -23,9 +22,9 @@ class KotlinGodotPlugin @Inject constructor(
 ): Plugin<Project> {
 
     companion object {
-        const val KotlinGodotPluginVersion = "1.0.0"
+        const val GodotLibraryVersion = "1.0.0"
         const val KotlinVersion = "1.3.20-dev"
-        const val LibrariesDependency = "org.jetbrains.kotlin:kotlin-godot-libraries:$KotlinGodotPluginVersion"
+        const val LibrariesDependency = "org.jetbrains.kotlin.godot:godot-library:$GodotLibraryVersion"
     }
 
 

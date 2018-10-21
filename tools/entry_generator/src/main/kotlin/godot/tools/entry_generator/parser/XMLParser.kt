@@ -38,9 +38,10 @@ class XMLParser : Parser {
     private fun parseMethod(elem: Element): Method {
         val name = elem.criticalValue("name")
         val returnType = elem.value("returnType", "Unit")
+        val isVararg = elem.value("vararg", "false").toBoolean()
         val arguments = elem.parseNodes("argument") { it.criticalValue("type") }
 
-        return Method(name, returnType, arguments)
+        return Method(name, returnType, isVararg, arguments)
     }
 
 

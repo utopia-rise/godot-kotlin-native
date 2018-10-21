@@ -19,6 +19,7 @@ class GodotSourceSet(
     fun configs(vararg configs: String) = info.appendConfigs(configs.asIterable())
     fun libraryPath(path: String) { info.libraryPath = path }
 
-
     fun generateGDNS(path: String) = info.generateGDNS(path)
+
+    fun skipEntryGeneration(skip: Boolean) { info.skipEntryGeneration = true }
 }

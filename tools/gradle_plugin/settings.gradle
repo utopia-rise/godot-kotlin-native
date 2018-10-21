@@ -1,2 +1,2 @@
-rootProject.name = "kotlin-godot"
+rootProject.name = "godot-gradle-plugin"
 enableFeaturePreview('GRADLE_METADATA')

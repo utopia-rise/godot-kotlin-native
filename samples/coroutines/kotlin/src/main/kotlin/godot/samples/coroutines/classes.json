@@ -1,0 +1,62 @@
+{
+  "package": "Scripts",
+
+  "registerClasses":[
+    {
+      "name": "Ball",
+      "class": "godot.samples.coroutines.Ball",
+      "extends": "Node2D",
+      "methods": [
+        {
+          "name": "_process",
+          "arguments": ["Double"]
+        },
+        {
+          "name": "move",
+          "arguments": ["Vector2"]
+        }
+      ],
+      "properties": [
+        {
+          "name": "moveSpeed",
+          "type": "Double",
+          "defaultValue": "2.0"
+        }
+      ],
+      "signals": [
+        {
+          "name": "move",
+          "arguments": [
+            {
+              "name": "step",
+              "type": "Vector2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "MirrorBall",
+      "class": "godot.samples.coroutines.MirrorBall",
+      "extends": "Node2D",
+      "methods": [
+        {
+          "name": "_ready",
+          "arguments": []
+        }
+      ],
+      "properties": [
+        {
+          "name": "ballPath",
+          "type": "NodePath",
+          "defaultValue": "NodePath()"
+        },
+        {
+          "name": "center",
+          "type": "Vector2",
+          "defaultValue": "Vector2()"
+        }
+      ]
+    }
+  ]
+}
