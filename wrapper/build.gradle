@@ -7,15 +7,22 @@ buildscript {
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.+'
     }
 }
 
 
 subprojects {
     apply plugin: 'maven-publish'
+    apply plugin: 'com.jfrog.bintray'
+
+
+    ext.group = 'org.jetbrains.kotlin.godot'
+    ext.version = '1.0.0-nodevirtualization'
+
     
-    group = 'org.jetbrains.kotlin.godot'
-    version = '1.0.0'
+    group = ext.group
+    version = ext.version
 
     repositories {
         mavenLocal()

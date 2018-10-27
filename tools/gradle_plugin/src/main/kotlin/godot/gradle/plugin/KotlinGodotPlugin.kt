@@ -22,8 +22,8 @@ class KotlinGodotPlugin @Inject constructor(
 ): Plugin<Project> {
 
     companion object {
-        const val GodotLibraryVersion = "1.0.0"
-        const val KotlinVersion = "1.3.20-dev"
+        const val GodotLibraryVersion = "1.0.0-nodevirtualization"
+        const val KotlinVersion = "1.3.20"
         const val LibrariesDependency = "org.jetbrains.kotlin.godot:godot-library:$GodotLibraryVersion"
     }
 
@@ -32,9 +32,8 @@ class KotlinGodotPlugin @Inject constructor(
 
     override fun apply(project: Project) {
         project.run {
-            pluginManager.apply(KotlinMultiplatformPluginWrapper::class.java)
+            //pluginManager.apply(KotlinMultiplatformPluginWrapper::class.java)
             val kotlin = extensions.getByName("kotlin") as KotlinMultiplatformExtension
-
 
             convention.plugins["configureGodot"] = ConfigureGodotConvention(this, sourceSetsInformation)
 

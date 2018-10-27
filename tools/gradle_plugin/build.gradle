@@ -1,12 +1,27 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.+'
+    }
+}
+
 plugins {
     id 'java-gradle-plugin'
     id 'maven-publish'
     id 'org.jetbrains.kotlin.jvm' version '1.2.71'
 }
 
+apply plugin: 'com.jfrog.bintray'
 
-group = 'org.jetbrains.kotlin.godot'
-version = '1.0.0'
+
+ext.group = 'org.jetbrains.kotlin.godot'
+ext.version = '1.0.0-nodevirtualization'
+
+group = ext.group
+version = ext.version
 
 
 gradlePlugin {
@@ -26,7 +41,23 @@ publishing {
         }
     }
 }
-
+/*
+bintray {
+    user = System.getenv('BINTRAY_USER')
+    key = System.getenv('BINTRAY_KEY')
+    publications = ['pluginMaven']
+    pkg {
+        repo = 'kotlin-godot'
+        name = 'godot-gradle-plugin'
+        licenses = ['Apache-2.0']
+        version {
+            name = project.ext.version
+            desc = "Godot gradle plugin ${project.ext.version}"
+            released = new Date()
+            vcsTag = project.ext.version
+        }
+    }
+}*/
 
 
 repositories {

@@ -18,7 +18,7 @@ kotlin {
                     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core-native:0.30.2-eap13'
                 }
             }
-            //compilations.main.extraOpts('-Xdisable=devirtualization')
+            compilations.main.extraOpts('-Xdisable=devirtualization')
         }
 
         // FIXME: correct metadata resolving in the future
@@ -31,3 +31,21 @@ kotlin {
         }
     }
 }
+
+/*
+bintray {
+    user = System.getenv('BINTRAY_USER')
+    key = System.getenv('BINTRAY_KEY')
+    publications = ['kotlinMultiplatform', 'metadata', 'windows', 'linux', 'macos']
+    pkg {
+        repo = 'kotlin-godot'
+        name = 'godot-library-extension'
+        licenses = ['Apache-2.0']
+        version {
+            name = project.ext.version
+            desc = "Godot library extension ${project.ext.version}"
+            released = new Date()
+            vcsTag = project.ext.version
+        }
+    }
+}*/

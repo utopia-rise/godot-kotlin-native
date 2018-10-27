@@ -9,6 +9,7 @@ ARTIFACTS=(
 	"tools/entry_generator" "build"
 	"tools/gradle_plugin" "publish"
 	"samples/games/kotlin" "build"
+	"samples/coroutines/kotlin" "build"
 	)
 
 
