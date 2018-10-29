@@ -18,7 +18,7 @@ subprojects {
 
 
     ext.group = 'org.jetbrains.kotlin.godot'
-    ext.version = '1.0.0-nodevirtualization'
+    ext.version = '1.0.0'
 
     
     group = ext.group

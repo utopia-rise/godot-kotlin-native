@@ -20,7 +20,7 @@ kotlin {
                     }
                 }
             }
-            compilations.main.extraOpts('-Xdisable=devirtualization')
+            //compilations.main.extraOpts('-Xdisable=devirtualization')
         }
     }
 }

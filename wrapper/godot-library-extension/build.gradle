@@ -18,7 +18,7 @@ kotlin {
                     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core-native:0.30.2-eap13'
                 }
             }
-            compilations.main.extraOpts('-Xdisable=devirtualization')
+            //compilations.main.extraOpts('-Xdisable=devirtualization')
         }
 
         // FIXME: correct metadata resolving in the future
