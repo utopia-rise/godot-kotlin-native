@@ -23,7 +23,7 @@ pluginManagement {
                 useModule("org.jetbrains.kotlin:kotlin-gradle-plugin:${requested.version}")
             }
             if (requested.id.id == 'kotlin-godot') {
-                useModule("org.jetbrains.kotlin.godot:godot-gradle-plugin:${requested.version}")
+                useModule("org.godotengine.kotlin:godot-gradle-plugin:${requested.version}")
             }
         }
     }
@@ -45,8 +45,8 @@ So now we can connect plugins to our project.
 In **build.gradle**:
 ```groovy
 plugins {
-    id 'kotlin-multiplatform' version '1.3.20-dev-769'
-    id 'kotlin-godot' version '1.0.0'
+    id 'kotlin-multiplatform' version '1.3.20-dev-1427'
+    id 'kotlin-godot' version '1.0.0-nodevirtualization'
 }
 
 repositories {
