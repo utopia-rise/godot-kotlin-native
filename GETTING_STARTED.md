@@ -46,7 +46,7 @@ In **build.gradle**:
 ```groovy
 plugins {
     id 'kotlin-multiplatform' version '1.3.20-dev-1427'
-    id 'kotlin-godot' version '1.0.0-nodevirtualization'
+    id 'kotlin-godot' version '1.0.0'
 }
 
 repositories {

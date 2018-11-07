@@ -17,7 +17,7 @@ import javax.inject.Inject
 class KotlinGodotPlugin @Inject constructor(): Plugin<Project> {
 
     companion object {
-        const val GodotLibraryVersion = "1.0.0-nodevirtualization"
+        const val GodotLibraryVersion = "1.0.0"
         const val KotlinVersion = "1.3.20"
         const val LibrariesDependency = "org.godotengine.kotlin:godot-library:$GodotLibraryVersion"
     }

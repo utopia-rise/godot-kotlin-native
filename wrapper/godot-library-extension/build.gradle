@@ -18,7 +18,7 @@ kotlin {
                     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core-native:1.0.0'
                 }
             }
-            compilations.main.extraOpts('-Xdisable=devirtualization')
+            //compilations.main.extraOpts('-Xdisable=devirtualization')
         }
     }
 }
