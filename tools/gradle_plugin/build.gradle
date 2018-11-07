@@ -17,8 +17,8 @@ plugins {
 apply plugin: 'com.jfrog.bintray'
 
 
-ext.group = 'org.jetbrains.kotlin.godot'
-ext.version = '1.0.0'
+ext.group = 'org.godotengine.kotlin'
+ext.version = '1.0.0-nodevirtualization'
 
 group = ext.group
 version = ext.version
@@ -71,7 +71,7 @@ configurations {
 }
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    implementation "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.20-dev-769"
+    implementation "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.20-dev-1427"
     compile fileTree(dir: 'lib', include: '*.jar')
     extraLibs fileTree(dir: 'lib', include: '*.jar')
 }

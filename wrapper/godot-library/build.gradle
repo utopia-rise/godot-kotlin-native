@@ -20,12 +20,12 @@ kotlin {
                     }
                 }
             }
-            //compilations.main.extraOpts('-Xdisable=devirtualization')
+            compilations.main.extraOpts('-Xdisable=devirtualization')
         }
     }
 }
 
-ext.setProperty('org.jetbrains.kotlin.native.jvmArgs', '-Xmx8g')
+ext.setProperty('org.jetbrains.kotlin.native.jvmArgs', '-Xmx7g')
 
 /*
 bintray {

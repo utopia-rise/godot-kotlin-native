@@ -14,21 +14,16 @@ import org.jetbrains.kotlin.konan.target.presetName
 import javax.inject.Inject
 
 
-class KotlinGodotPlugin @Inject constructor(
-        fileResolver: FileResolver,
-        private val instantiator: Instantiator,
-        private val buildOutputCleanupRegistry: BuildOutputCleanupRegistry,
-        private val featurePreviews: FeaturePreviews
-): Plugin<Project> {
+class KotlinGodotPlugin @Inject constructor(): Plugin<Project> {
 
     companion object {
         const val GodotLibraryVersion = "1.0.0-nodevirtualization"
         const val KotlinVersion = "1.3.20"
-        const val LibrariesDependency = "org.jetbrains.kotlin.godot:godot-library:$GodotLibraryVersion"
+        const val LibrariesDependency = "org.godotengine.kotlin:godot-library:$GodotLibraryVersion"
     }
 
 
-    val sourceSetsInformation = HashMap<KotlinSourceSet, GodotSourceSetInformation>()
+    private val sourceSetsInformation = HashMap<KotlinSourceSet, GodotSourceSetInformation>()
 
     override fun apply(project: Project) {
         project.run {
@@ -45,7 +40,6 @@ class KotlinGodotPlugin @Inject constructor(
                         name,
                         project,
                         target,
-                        buildOutputCleanupRegistry,
                         KotlinVersion,
                         sourceSetsInformation
                 ).apply {

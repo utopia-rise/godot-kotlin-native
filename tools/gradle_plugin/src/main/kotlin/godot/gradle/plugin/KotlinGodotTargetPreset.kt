@@ -21,12 +21,11 @@ class KotlinGodotTargetPreset(
         private val name: String,
         val project: Project,
         val konanTarget: KonanTarget,
-        private val buildOutputCleanupRegistry: BuildOutputCleanupRegistry,
-        private val kotlinPluginVersion: String,
+        kotlinPluginVersion: String,
         private val sourceSetsInformation: MutableMap<KotlinSourceSet, GodotSourceSetInformation>
 ) : KotlinTargetPreset<KotlinNativeTarget> {
 
-    private val nativePreset = KotlinNativeTargetPreset(name, project, konanTarget, buildOutputCleanupRegistry, kotlinPluginVersion)
+    private val nativePreset = KotlinNativeTargetPreset(name, project, konanTarget, kotlinPluginVersion)
     private val kotlin = project.extensions.getByName("kotlin") as KotlinMultiplatformExtension
 
 
