@@ -1,0 +1,6 @@
+include ':wrapper'
+include ':wrapper:godot-library'
+include ':wrapper:godot-library-extension'
+include ':tools:api_classes_generator'
+include ':tools:entry_generator'
+include ':tools:gradle_plugin'

@@ -3,8 +3,6 @@ package godot.gradle.plugin
 import godot.gradle.plugin.KotlinGodotPlugin.Companion.LibrariesDependency
 import org.gradle.api.InvalidUserDataException
 import org.gradle.api.Project
-import org.gradle.internal.cleanup.BuildOutputCleanupRegistry
-import org.jetbrains.kotlin.backend.common.onlyIf
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 import org.jetbrains.kotlin.gradle.plugin.KotlinTargetPreset
