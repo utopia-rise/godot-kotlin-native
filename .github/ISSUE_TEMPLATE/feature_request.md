@@ -7,14 +7,14 @@ assignees: ''
 
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+**Describe the problem or limitation you are having in your project:**
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+**Describe how this feature / enhancement will help you overcome this problem or limitation:**
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+**Show a mock up screenshots/video or a flow diagram explaining how your proposal will work:**
 
-**Additional context**
-Add any other context or screenshots about the feature request here.
+**Describe implementation detail for your proposal (in code), if possible:**
+
+**If this enhancement will not be used often, can it be worked around with a few lines of code?:**
+
+**Is there a reason why this should be in this project and not individually solved?:**
