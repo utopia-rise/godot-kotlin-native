@@ -7,7 +7,7 @@
 [ext_resource path="res://Games/Pong/Scripts/Ball.gdns" type="Script" id=5]
 [ext_resource path="res://Games/Shmup/Sprites/Player.png" type="Texture" id=6]
 [ext_resource path="res://Games/Pong/Scripts/Enemy.gdns" type="Script" id=7]
-[ext_resource path="res://Games/dodge/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://Games/Dodge/Fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 

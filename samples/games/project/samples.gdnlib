@@ -1,16 +1,18 @@
-[entry]
-
-Windows.64="res://samples.dll"
-Windows.32="res://samples.dll"
-
-[dependencies]
-
-Windows.64=[  ]
-Windows.32=[  ]
-
 [general]
 
 singleton=false
 load_once=true
 symbol_prefix="godot_"
 reloadable=true
+
+[entry]
+
+Windows.64="res://libkotlin.dll"
+Windows.32="res://libkotlin.dll"
+X11.64="res://libkotlin.so"
+
+[dependencies]
+
+Windows.64=[  ]
+Windows.32=[  ]
+X11.64=[  ]

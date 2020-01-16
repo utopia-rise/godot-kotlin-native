@@ -16,7 +16,7 @@ class Main: Node() {
     var score = 0
 
     override fun _ready() {
-        mobScene = PackedScene from ResourceLoader.load("res://Games/dodge/Scenes/Mob.tscn")
+        mobScene = PackedScene from ResourceLoader.load("res://Games/Dodge/Scenes/Mob.tscn")
 
         mobTimer = (Timer from getNode(NodePath("MobTimer"))).apply {
             connect("timeout", this@Main, "_onMobTimerTimeout")

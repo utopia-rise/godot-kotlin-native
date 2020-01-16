@@ -2,7 +2,6 @@ package godot.core.coroutines
 
 import godot.Object
 import godot.core.GD
-import godot.core.GDArray
 import godot.core.Variant
 import godot.core.godotArrayOf
 import kotlinx.cinterop.*
@@ -12,7 +11,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import platform.posix.EXIT_FAILURE
 import kotlin.system.exitProcess
-import kotlinx.coroutines.channels.receiveOrNull
 
 
 class YieldContext<T> internal constructor(

@@ -34,7 +34,7 @@ class ChooseGameScreen: Node() {
     }
 
     fun _onPlayDodgeButtonPressed() {
-        getTree().changeScene("res://Games/dodge/Scenes/Main.tscn")
+        getTree().changeScene("res://Games/Dodge/Scenes/Main.tscn")
     }
 
     fun _onPlayShmupButtonPressed() {

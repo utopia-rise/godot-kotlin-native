@@ -145,8 +145,6 @@ gradle-app.setting
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
 
-#Generated Godot classes
-wrapper/godot-library/src/main/kotlin/godot/generated/
 
 # End of https://www.gitignore.io/api/gradle
 
@@ -154,3 +152,6 @@ wrapper/godot-library/src/main/kotlin/godot/generated/
 
 # 
 !samples/project/Kotlin/GodotCMakeModule/*
+
+#Generated Godot classes
+wrapper/godot-library/src/main/kotlin/godot/generated/

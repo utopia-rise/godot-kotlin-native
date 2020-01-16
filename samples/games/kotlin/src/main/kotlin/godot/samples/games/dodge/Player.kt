@@ -63,6 +63,7 @@ class Player: Area2D() {
         }
     }
 
+    @Suppress("UNUSED_PARAMETER")
     fun _on_Player_body_entered(body: Object) {
         hide()
         emitSignal("hit")
