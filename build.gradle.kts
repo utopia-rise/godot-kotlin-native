@@ -7,16 +7,17 @@ buildscript {
         }
         dependencies {
             classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.61")
+            classpath("com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4")
         }
     }
 
     allprojects {
-        apply(plugin = "idea")
-
         repositories {
             mavenLocal()
             mavenCentral()
             jcenter()
         }
+
+        apply(plugin = "idea")
     }
 }

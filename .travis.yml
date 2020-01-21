@@ -1,0 +1,33 @@
+language: java
+matrix:
+  include:
+    - os: osx
+      osx_image: xcode11.2
+    - os: linux
+    - os: windows
+      language: shell
+before_install:
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
+    export JAVA_HOME=${JAVA_HOME:-/c/jdk}
+    && export PATH=${JAVA_HOME}/bin:${PATH}
+    && choco install jdk8 -params 'installdir=c:\\jdk' -y
+    && export GRADLE_OPTS=-Dorg.gradle.daemon=false;
+    fi
+install:
+  - ./gradlew :tools:api-classes-generator:build
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+    ./gradlew :wrapper:godot-library:build -Pplatform=macos;
+    else
+    ./gradlew :wrapper:godot-library:build -Pplatform=$TRAVIS_OS_NAME;
+    fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+    ./gradlew :wrapper:godot-library-extension:build -Pplatform=macos;
+    else
+    ./gradlew :wrapper:godot-library-extension:build -Pplatform=$TRAVIS_OS_NAME;
+    fi
+  - ./gradlew :tools:godot-gradle-plugin:build
+deploy:
+  - provider: script
+    script: bash .travis/deploy.sh $BINTRAY_USER $BINTRAY_KEY $TRAVIS_OS_NAME
+    on:
+      tags: true
