@@ -1,4 +1,4 @@
-package godot.tools.entry_generator.model
+package org.godotengine.kotlin.entrygenerator.model
 
 import com.beust.klaxon.Json
 

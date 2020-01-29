@@ -3,7 +3,7 @@ package godot.samples.games.main
 import godot.*
 import godot.core.NodePath
 
-class ChooseGameScreen: Node() {
+class ChooseGameScreen: Node(), MainScreen.Signal {
 
     lateinit var playDodgeButton: Button
     lateinit var playPongButton: Button
@@ -11,8 +11,17 @@ class ChooseGameScreen: Node() {
     lateinit var backButton: Button
     lateinit var playCatchBallButton: Button
     lateinit var playFastFinishButton: Button
+    val mainScreen = MainScreen()
+
+
+
+    override fun testSignal(paramA: String, paramB: Int) {
+
+    }
 
     override fun _ready() {
+        mainScreen.connect(MainScreen.Signal::testSignal.name, this, this::testSignal.name)
+
         playDodgeButton = (Button from getNode(NodePath("MenuButtons/PlayDodgeButton"))).apply {
             connect("pressed", this@ChooseGameScreen, "_onPlayDodgeButtonPressed")
         }

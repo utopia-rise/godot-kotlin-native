@@ -1,4 +1,4 @@
-import godot.tools.entry_generator.EntryGenerator
+import org.godotengine.kotlin.entrygenerator.EntryGenerator
 import java.io.File
 
 fun main(args: Array<String>) {

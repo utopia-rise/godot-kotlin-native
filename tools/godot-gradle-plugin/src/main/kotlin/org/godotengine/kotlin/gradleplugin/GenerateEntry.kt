@@ -1,6 +1,6 @@
 package org.godotengine.kotlin.gradleplugin
 
-import godot.tools.entry_generator.EntryGenerator
+import org.godotengine.kotlin.entrygenerator.EntryGenerator
 import java.io.File
 
 

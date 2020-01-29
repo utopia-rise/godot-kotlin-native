@@ -1,6 +1,6 @@
-package godot.tools.entry_generator.parser
+package org.godotengine.kotlin.entrygenerator.parser
 
-import godot.tools.entry_generator.model.*
+import org.godotengine.kotlin.entrygenerator.model.*
 import org.w3c.dom.Element
 import org.w3c.dom.Node
 import org.xml.sax.InputSource

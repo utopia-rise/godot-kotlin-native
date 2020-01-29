@@ -1,7 +1,7 @@
-package godot.tools.entry_generator.parser
+package org.godotengine.kotlin.entrygenerator.parser
 
 import com.beust.klaxon.Klaxon
-import godot.tools.entry_generator.model.Classes
+import org.godotengine.kotlin.entrygenerator.model.Classes
 
 
 class JSONParser : Parser {

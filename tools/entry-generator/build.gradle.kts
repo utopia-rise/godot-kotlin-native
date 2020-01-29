@@ -19,9 +19,13 @@ repositories {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("com.beust:klaxon:3.0.1")//5.2
-    implementation("com.beust:klaxon:3.0.1")//5.2
+    implementation("org.jetbrains.kotlin:kotlin-stdlib")
+    implementation(project(":tools:annotations"))
+    compileOnly("org.jetbrains.kotlin:kotlin-compiler-embeddable") //used for class analisation without reflection
+    implementation("de.jensklingenberg:mpapt-runtime:${Dependencies.mpaptVersion}")
+    implementation("com.squareup:kotlinpoet:${Dependencies.kotlinPoetVersion}")
+    implementation("com.beust:klaxon:5.2")//5.2
+    implementation("com.beust:klaxon:5.2")//5.2
 }
 
 application {

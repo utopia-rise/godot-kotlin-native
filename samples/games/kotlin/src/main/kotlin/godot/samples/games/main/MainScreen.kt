@@ -8,7 +8,13 @@ class MainScreen: Node() {
     lateinit var chooseGameButton: Button
     lateinit var quitButton: Button
 
+    interface Signal {
+        fun testSignal(paramA: String, paramB: Int)
+    }
+
     override fun _ready() {
+        emitSignal(Signal::testSignal.name, "paramA", 1)
+
         chooseGameButton = (Button from getNode(NodePath("MenuButtons/ChooseGameButton"))).apply {
             connect("pressed", this@MainScreen, "_onChooseGameButtonPressed")
         }
