@@ -68,8 +68,6 @@ repositories {
     mavenLocal()
     jcenter()
 }
-
-rootProject.name = "projectname"
 ```
 
 
@@ -114,7 +112,7 @@ libraryPath("${project.rootDir.absolutePath}/project/projectname.gdnlib")
 \
 Now we need to specify the output folder for the generated `.gdns` files:
 ```kotlin
-generateGDNS("${project.rootDir.absolutePath}/project")
+generateGDNS("${project.rootDir.absolutePath}/../project")
 ```
 
 \
@@ -179,8 +177,6 @@ repositories {
     jcenter()
 }
 
-rootProject.name = "projectname"
-
 kotlin {
     sourceSets {
         sourceSets.create("macosMain")
@@ -198,7 +194,7 @@ kotlin {
                 }
 
                 libraryPath("${project.rootDir.absolutePath}/project/projectname.gdnlib")
-                generateGDNS("${project.rootDir.absolutePath}/project")
+                generateGDNS("${project.rootDir.absolutePath}/../project")
                 
                 configs(
                         

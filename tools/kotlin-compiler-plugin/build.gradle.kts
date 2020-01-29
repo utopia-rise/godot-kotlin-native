@@ -1,54 +1,31 @@
 import java.util.*
 
-buildscript {
-    repositories {
-        mavenLocal()
-        jcenter()
-        mavenCentral()
-    }
-}
-
 plugins {
-    id("java-gradle-plugin")
-    id("maven-publish")
     id("org.jetbrains.kotlin.jvm")
-    id("com.jfrog.bintray")
     id("kotlin-kapt")
+    id("maven")
+    id("com.jfrog.bintray")
 }
 
 group = "org.godotengine.kotlin"
-version = Dependencies.godotGradlePluginVersion
-
-gradlePlugin {
-    plugins {
-        create("godotGradlePlugin") {
-            id = "godot-gradle-plugin"
-            implementationClass = "org.godotengine.kotlin.gradleplugin.KotlinGodotPlugin"
-        }
-    }
-}
+version = Dependencies.kotlinCompilerPluginVersion
 
 dependencies {
+    implementation(project(":tools:godot-annotation-processor"))
+    implementation("de.jensklingenberg:mpapt-runtime:${Dependencies.mpaptVersion}")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation(project(":tools:entry-generator"))
-
+    compileOnly("org.jetbrains.kotlin:kotlin-compiler-embeddable")
     compileOnly("com.google.auto.service:auto-service:${Dependencies.googleAutoServiceVersion}")
     kapt("com.google.auto.service:auto-service:${Dependencies.googleAutoServiceVersion}")
-
-    //TODO: these are overrides because of the old klaxon dependency in entry-generator. I don't bother upgrading it as it will be replaced soon enough anyways. Once done, the following two lines can be removed
-    implementation("org.jetbrains.kotlin:kotlin-native-utils:${Dependencies.kotlinVersion}")
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:${Dependencies.kotlinVersion}")
-}
-
-repositories {
-    mavenLocal()
-    mavenCentral()
-    jcenter()
-    maven("https://dl.bintray.com/kotlin/kotlin-dev")
 }
 
 tasks.build {
-    finalizedBy(tasks.publishToMavenLocal)
+    dependsOn(":tools:godot-annotation-processor:install")
+    finalizedBy(tasks.install)
+}
+
+kapt {
+    includeCompileClasspath = true
 }
 
 val bintrayUser: String by project
@@ -58,7 +35,8 @@ if (project.hasProperty("bintrayUser") && project.hasProperty("bintrayKey")) {
     bintray {
         user = bintrayUser
         key = bintrayKey
-        setPublications("pluginMaven")
+
+        setPublications("godotCompilerPlugin")
         pkg(delegateClosureOf<com.jfrog.bintray.gradle.BintrayExtension.PackageConfig> {
             userOrg = "utopia-rise"
             repo = "kotlin-godot"
@@ -69,7 +47,7 @@ if (project.hasProperty("bintrayUser") && project.hasProperty("bintrayKey")) {
             version(closureOf<com.jfrog.bintray.gradle.BintrayExtension.VersionConfig> {
                 this.name = project.version.toString()
                 released = Date().toString()
-                description = "Godot gradle plugin ${project.version}"
+                description = "Godot Kotlin Compiler Plugin ${project.version}"
                 vcsTag = project.version.toString()
             })
         })

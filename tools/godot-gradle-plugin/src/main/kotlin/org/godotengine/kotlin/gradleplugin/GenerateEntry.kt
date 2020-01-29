@@ -1,4 +1,4 @@
-package godot.gradle.plugin
+package org.godotengine.kotlin.gradleplugin
 
 import godot.tools.entry_generator.EntryGenerator
 import java.io.File

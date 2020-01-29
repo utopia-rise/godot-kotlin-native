@@ -9,7 +9,7 @@ plugins {
     application
 }
 
-version = "1.0.0"
+version = Dependencies.entryGeneratorVersion
 group = "org.godotengine.kotlin"
 
 repositories {

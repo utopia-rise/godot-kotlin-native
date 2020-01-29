@@ -16,16 +16,18 @@ before_install:
 install:
   - ./gradlew :tools:api-classes-generator:build
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+    ./gradlew :tools:annotations -Pplatform=macos;
     ./gradlew :wrapper:godot-library:build -Pplatform=macos;
-    else
-    ./gradlew :wrapper:godot-library:build -Pplatform=$TRAVIS_OS_NAME;
-    fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
     ./gradlew :wrapper:godot-library-extension:build -Pplatform=macos;
     else
+    ./gradlew :tools:annotations:build -Pplatform=$TRAVIS_OS_NAME;
+    ./gradlew :wrapper:godot-library:build -Pplatform=$TRAVIS_OS_NAME;
     ./gradlew :wrapper:godot-library-extension:build -Pplatform=$TRAVIS_OS_NAME;
     fi
   - ./gradlew :tools:godot-gradle-plugin:build
+  - ./gradlew :tools:godot-annotation-processor:build
+  - ./gradlew :tools:kotlin-compiler-plugin:build
+  - ./gradlew :tools:kotlin-compiler-native-plugin:build
 deploy:
   - provider: script
     script: bash .travis/deploy.sh $BINTRAY_USER $BINTRAY_KEY $TRAVIS_OS_NAME

@@ -1,17 +1,17 @@
 import java.util.*
 
-val bintrayUser: String by project
-val bintrayKey: String by project
-val platform: String by project
-
 plugins {
     id("kotlin-multiplatform")
     id("maven-publish")
     id("com.jfrog.bintray")
 }
 
+val bintrayUser: String by project
+val bintrayKey: String by project
+val platform: String by project
+
 group = "org.godotengine.kotlin"
-version = "1.0.0"
+version = Dependencies.godotLibraryVersion
 
 kotlin {
     sourceSets {

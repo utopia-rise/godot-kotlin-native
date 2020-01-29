@@ -1,4 +1,4 @@
-package godot.gradle.plugin
+package org.godotengine.kotlin.gradleplugin
 
 import org.gradle.api.InvalidUserDataException
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet

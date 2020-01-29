@@ -7,7 +7,7 @@ plugins {
     application
 }
 
-version = "1.0.0"
+version = Dependencies.apiClassesGeneratorVersion
 group = "org.godotengine.kotlin"
 
 repositories {
@@ -19,7 +19,7 @@ repositories {
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("com.beust:klaxon:3.0.1") //5.2
-    implementation("com.squareup:kotlinpoet:${properties["kotlinPoetVersion"]}")
+    implementation("com.squareup:kotlinpoet:${Dependencies.kotlinPoetVersion}")
 }
 
 application {

@@ -2,6 +2,7 @@ buildscript {
     repositories {
         mavenLocal()
         jcenter()
+        mavenCentral()
     }
     dependencies {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.61")
@@ -15,7 +16,7 @@ repositories {
 }
 
 plugins {
-    id("kotlin-multiplatform")
+    id("org.jetbrains.kotlin.multiplatform") version ("1.3.61")
 }
 
 apply(plugin = "godot-gradle-plugin")
@@ -30,14 +31,14 @@ kotlin {
         }
 
 
-        configure<godot.gradle.plugin.ConfigureGodotConvention> {
+        configure<org.godotengine.kotlin.gradleplugin.ConfigureGodotConvention> {
             this.configureGodot(listOf(sourceSets["macosMain"], sourceSets["linuxMain"], sourceSets["windowsMain"])) {
                 sourceSet {
                     kotlin.srcDirs("src/main/kotlin")
                 }
 
                 libraryPath("coroutines.gdnlib")
-                generateGDNS("${project.rootDir.absolutePath}/project")
+                generateGDNS("${project.rootDir.absolutePath}/../project")
 
                 configs(
                         "src/main/kotlin/godot/samples/coroutines/classes.json"
@@ -68,13 +69,5 @@ kotlin {
                 System.err.println("Not a native target! TargetName: ${target.name}")
             }
         }
-    }
-}
-
-//to build the game samples either build them from the corresponding build task or set skipSamplesBuild in gradle.properties to false
-tasks.build {
-    onlyIf {
-        println("Skipping game samples build: ${project.property("skipSamplesBuild")}")
-        !(project.property("skipSamplesBuild") as String).toBoolean()
     }
 }

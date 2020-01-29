@@ -1,8 +1,15 @@
 package godot.samples.games.pong
 
-import godot.*
-import godot.core.*
+import godot.InputEvent
+import godot.KinematicBody2D
+import godot.Label
+import godot.Node
+import godot.core.NodePath
+import godot.core.Variant
+import godot.core.Vector2
+import org.godotengine.kotlin.annotation.Register
 
+@Register
 class Main: Node() {
 
     lateinit var ball: KinematicBody2D

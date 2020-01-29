@@ -11,7 +11,7 @@ plugins {
 }
 
 group = "org.godotengine.kotlin"
-version = "1.0.0"
+version = Dependencies.godotLibraryExtensionVersion
 
 kotlin {
     sourceSets {

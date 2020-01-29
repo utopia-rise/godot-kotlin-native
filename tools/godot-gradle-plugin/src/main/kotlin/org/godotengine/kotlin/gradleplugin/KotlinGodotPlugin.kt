@@ -1,4 +1,4 @@
-package godot.gradle.plugin
+package org.godotengine.kotlin.gradleplugin
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -7,10 +7,9 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 import org.jetbrains.kotlin.konan.target.Distribution
 import org.jetbrains.kotlin.konan.target.HostManager
 import org.jetbrains.kotlin.konan.target.presetName
-import javax.inject.Inject
 
 
-class KotlinGodotPlugin @Inject constructor(): Plugin<Project> {
+class KotlinGodotPlugin : Plugin<Project> {
 
     companion object {
         const val GodotLibraryVersion = "1.0.0"

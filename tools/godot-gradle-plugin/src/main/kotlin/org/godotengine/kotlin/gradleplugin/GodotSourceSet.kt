@@ -1,4 +1,4 @@
-package godot.gradle.plugin
+package org.godotengine.kotlin.gradleplugin
 
 import groovy.lang.Closure
 import org.gradle.api.Action

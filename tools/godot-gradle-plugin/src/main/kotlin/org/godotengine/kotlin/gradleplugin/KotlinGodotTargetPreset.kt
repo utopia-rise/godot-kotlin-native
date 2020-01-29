@@ -1,6 +1,6 @@
-package godot.gradle.plugin
+package org.godotengine.kotlin.gradleplugin
 
-import godot.gradle.plugin.KotlinGodotPlugin.Companion.LibrariesDependency
+import org.godotengine.kotlin.gradleplugin.KotlinGodotPlugin.Companion.LibrariesDependency
 import org.gradle.api.InvalidUserDataException
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
