@@ -19,6 +19,7 @@ repositories {
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("com.beust:klaxon:3.0.1") //5.2
+    implementation("com.squareup:kotlinpoet:${properties["kotlinPoetVersion"]}")
 }
 
 application {

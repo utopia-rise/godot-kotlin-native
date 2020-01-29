@@ -34,19 +34,19 @@ fun Graph<Class>.doAncestorsHaveMethod(cl: Class, method: Method): Boolean {
         if (m.name == method.name && m.arguments.size == method.arguments.size) {
             var flag = true
 
-            for (i in m.arguments.indices)
-                if (m.arguments[i].type != method.arguments[i].type)
-                    flag = false
+            for (i in m.arguments.indices) {
+                if (m.arguments[i].type != method.arguments[i].type) flag = false
+            }
 
-            if (flag)
-                return true
+            if (flag) return true
         }
         return false
     }
     fun Graph.Node<Class>.findMethodInHierarchy(): Boolean {
-        for (m in value.methods)
-            if (check(m))
-                return true
+        value.methods.forEach {
+            if (check(it)) return true
+        }
+
         return parent?.findMethodInHierarchy() ?: false
     }
     return nodes.find { it.value.name == cl.name }!!.parent!!.findMethodInHierarchy()
@@ -54,13 +54,12 @@ fun Graph<Class>.doAncestorsHaveMethod(cl: Class, method: Method): Boolean {
 
 
 fun Graph<Class>.doAncestorsHaveProperty(cl: Class, prop: Property): Boolean {
-    if (cl.baseClass == "")
-        return false
+    if (cl.baseClass == "") return false
 
     fun Graph.Node<Class>.findPropertyInHierarchy(): Boolean {
-        for (p in value.properties)
-            if (p.name == prop.name)
-                return true
+        value.properties.forEach {
+            if (it.name == prop.name) return true
+        }
         return parent?.findPropertyInHierarchy() ?: false
     }
     return nodes.find { it.value.name == cl.name }!!.parent!!.findPropertyInHierarchy()

@@ -1,106 +1,109 @@
+private val coreTypes = listOf(//"Array", // TODO: kotlin arrays?
+        "GDArray",
+        "Basis",
+        "Color",
+        "Dictionary",
+        "GodotError",
+        "NodePath",
+        "Plane",
+        "PoolByteArray",
+        "PoolIntArray",
+        "PoolRealArray",
+        "PoolStringArray",
+        "PoolVector2Array",
+        "PoolVector3Array",
+        "PoolColorArray",
+        "PoolIntArray",
+        "PoolRealArray",
+        "Quat",
+        "Rect2",
+        "AABB",
+        "RID",
+        "String",
+        "Transform",
+        "Transform2D",
+        "Variant",
+        "Vector2",
+        "Vector3")
+
+private val coreTypeAdaptedForKotlin = listOf("AABB", "Basis", "Color", "Plane", "Quat", "Rect2", "Transform", "Transform2D", "Vector2", "Vector3")
+
+private val kotlinReservedNames = listOf("class", "enum", "interface", "in", "var", "val", "Char", "Short", "Boolean", "Int", "Long", "Float", "Double", "operator", "object") // TODO: smth more?
+
+private val primitives = listOf("Long", "Double", "Boolean", "Unit")
+
 fun String.escapeUnderscore(): String {
-    if (this == "")
-        return this
+    if (this == "") return this
 
-    var ret = this
+    var thisString = this
 
-    while (ret[0] == '_')
-        ret = ret.drop(1)
-    return ret
+    while (thisString[0] == '_') thisString = thisString.drop(1)
+
+    return thisString
 }
-
-
 
 fun String.removeEnumPrefix(): String {
-    if (this == "")
-        return this
+    if (this == "") return this
 
-    var ret = this
+    var thisString = this
 
-    val ind = ret.indexOf("enum.")
-    if (ind != -1)
-        ret = ret.drop(ind + 5)
+    val ind = thisString.indexOf("enum.")
+    if (ind != -1) thisString = thisString.drop(ind + 5)
 
-    if (ret == "Error")
-        return "GodotError"
-    return ret.replace("::", ".").escapeUnderscore()
+    if (thisString == "Error") return "GodotError"
+
+    return thisString.replace("::", ".").escapeUnderscore()
 }
 
+fun String.getPackage() =
+        when {
+            isEnum() -> {
+                var thisString = this
+                val index = thisString.indexOf("enum.")
 
+                if (index != -1) thisString = thisString.drop(index + 5)
 
+                if (thisString == "Error") {
+                    "godot.core"
+                } else {
+                    thisString = thisString.replace("::", ".").split(".")[0]
+                    when {
+                        thisString.isPrimitive() || thisString == "String" -> "kotlin"
+                        thisString.isCoreType() -> "godot.core"
+                        else -> "godot"
+                    }
+                }
+            }
+            isPrimitive() || this == "String" -> "kotlin"
+            isCoreType() -> "godot.core"
+            else -> "godot"
+        }
 
 fun String.isEnum(): Boolean {
     return this.indexOf("enum.") == 0
 }
 
-fun String.isPrimitive(): Boolean {
-    val primitives = listOf("Long", "Double", "Boolean", "Unit")
-    return primitives.find { s -> s == this } != null
-}
+fun String.isPrimitive() = primitives.find { s -> s == this } != null
 
-fun String.isCoreTypeAdaptedForKotlin(): Boolean {
-    val types = listOf("AABB", "Basis", "Color", "Plane", "Quat", "Rect2", "Transform", "Transform2D", "Vector2", "Vector3")
-    return types.find { s -> s == this } != null
-}
+fun String.isCoreTypeAdaptedForKotlin() = coreTypeAdaptedForKotlin.find { s -> s == this } != null
 
-fun String.isCoreType(): Boolean {
-    val coreTypes = listOf(//"Array", // TODO: kotlin arrays?
-            "GDArray",
-            "Basis",
-            "Color",
-            "Dictionary",
-            "GodotError",
-            "NodePath",
-            "Plane",
-            "PoolByteArray",
-            "PoolIntArray",
-            "PoolRealArray",
-            "PoolStringArray",
-            "PoolVector2Array",
-            "PoolVector3Array",
-            "PoolColorArray",
-            "PoolIntArray",
-            "PoolRealArray",
-            "Quat",
-            "Rect2",
-            "AABB",
-            "RID",
-            "String",
-            "Transform",
-            "Transform2D",
-            "Variant",
-            "Vector2",
-            "Vector3")
-    return coreTypes.find { s -> s == this } != null
-}
+fun String.isCoreType() = coreTypes.find { s -> s == this } != null
 
-
-
-fun String.escapeKotlinReservedNames(): String {
-    val names = listOf("class", "enum", "interface", "in", "var", "val", "Char", "Short", "Boolean", "Int", "Long", "Float", "Double", "operator", "object") // TODO: smth more?
-
-    if (names.find { s -> s == this } != null)
-        return "_" + this
-    return this
-}
-
-
-
+fun String.escapeKotlinReservedNames() = if (kotlinReservedNames.find { s -> s == this } != null) "_$this" else this
 
 fun String.convertToCamelCase(): String {
-    if (this == "")
-        return this
+    if (this == "") return this
 
-    var ret = this
+    var thisString = this
 
     val prefix = buildString {
-        while (ret != "" && ret[0] == '_') {
+        while (thisString != "" && thisString[0] == '_') {
             this.append('_')
-            ret = ret.drop(1)
+            thisString = thisString.drop(1)
         }
     }
 
-    var split = ret.split('_')
+    var split = thisString.split('_')
     val first = split[0]
     split = split.drop(1)
 
@@ -108,31 +111,25 @@ fun String.convertToCamelCase(): String {
 }
 
 
-
-
 fun String.convertTypeToKotlin(): String {
-    if (this == "int")
-        return "Long"
-    if (this == "float")
-        return "Double"
-    if (this == "bool")
-        return "Boolean"
-    if (this == "void")
-        return "Unit"
-    if (this == "Array")
-        return "GDArray" // TODO: kotlin arrays?
-    //if (!this.isCoreType() && !this.isEnum() && !this.isPrimitive() && this != "Node" && this != "Reference" && this != "Resource" && this != "ResourceLoader" && this != "SceneTree" && this != "MainLoop" && this != "Script" && this != "Viewport") return "Object" // FIXME: remove line
-    return this
+    return when {
+        this == "int" -> "Long"
+        this == "float" -> "Double"
+        this == "bool" -> "Boolean"
+        this == "void" -> "Unit"
+        this == "Array" -> "GDArray" // TODO: kotlin arrays?
+//if (!this.isCoreType() && !this.isEnum() && !this.isPrimitive() && this != "Node" && this != "Reference" && this != "Resource" && this != "ResourceLoader" && this != "SceneTree" && this != "MainLoop" && this != "Script" && this != "Viewport") return "Object" // FIXME: remove line
+        else -> this
+    }
 }
 
 fun String.convertTypeForICalls(): String {
-    if (this.isEnum())
-        return "Long"
-    if (this.isPrimitive() || this.isCoreType())
-        return this
+    if (this.isEnum()) return "Long"
+
+    if (this.isPrimitive() || this.isCoreType()) return this
+
     return "Object"
 }
-
 
 
 fun String.defaultValue(): String = when (this) {

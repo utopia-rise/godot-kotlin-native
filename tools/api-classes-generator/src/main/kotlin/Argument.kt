@@ -13,6 +13,8 @@ class Argument(
 ) {
     val nullable: Boolean
 
+    val applyDefault: String?
+
     init {
         name = name.convertToCamelCase().escapeKotlinReservedNames()
         type = type.convertTypeToKotlin()
@@ -20,17 +22,14 @@ class Argument(
         if (defaultValue == "[Object:null]" || defaultValue == "Null") {
             defaultValue = "null"
             nullable = true
-        } else
+        } else {
             nullable = false
-    }
+        }
 
-
-    fun applyDefaultValue(): String {
-        if (hasDefaultValue) {
-            if (nullable)
-                return "? = null"
-
-            return " = " + when (type) {
+        applyDefault = if (hasDefaultValue && nullable) {
+            "null"
+        } else if (hasDefaultValue) {
+            when (type) {
                 "Color", "Variant" -> "$type($defaultValue)"
                 "Boolean" -> defaultValue.toLowerCase()
                 "Double" -> intToFloat(defaultValue)
@@ -39,14 +38,14 @@ class Argument(
                 "String" -> "\"$defaultValue\""
                 else -> defaultValue
             }
+        } else {
+            null
         }
-        return ""
     }
 
-
     private fun intToFloat(defaultValue: String): String {
-        if (defaultValue.indexOf('.') != -1)
-            return "${defaultValue}"
-        return defaultValue + ".0"
+        if (defaultValue.indexOf('.') != -1) return defaultValue
+
+        return "$defaultValue.0"
     }
 }
