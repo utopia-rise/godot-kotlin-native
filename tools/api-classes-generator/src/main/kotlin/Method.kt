@@ -64,7 +64,7 @@ open class Method(
                     if (shouldReturn) "return " else "",
                     if (returnType.isEnum()) {
                         "${returnType.removeEnumPrefix()}.fromInt( "
-                    } else if (hasVarargs && returnType != "Variant") {
+                    } else if (hasVarargs && returnType != "Variant" && returnType != "Unit") {
                         "$returnType from "
                     } else {
                         ""

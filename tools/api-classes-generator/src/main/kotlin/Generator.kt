@@ -3,7 +3,7 @@ import com.squareup.kotlinpoet.*
 import java.io.File
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 
-const val GODOT_API_PATH = "godot_api.json"
+const val GODOT_API_PATH = "../../wrapper/lib/godot_headers/api.json"
 const val GENERATED_PATH = "../../wrapper/godot-library/src/main/kotlin/godot/generated/"
 
 fun main() {

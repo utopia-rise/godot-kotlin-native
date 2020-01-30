@@ -4,14 +4,15 @@ import godot.gdnative.*
 
 
 enum class RPCMode(val value: godot_method_rpc_mode) {
-    Disabled(godot_method_rpc_mode.GODOT_METHOD_RPC_MODE_DISABLED),
-    Remote(godot_method_rpc_mode.GODOT_METHOD_RPC_MODE_REMOTE),
-    Sync(godot_method_rpc_mode.GODOT_METHOD_RPC_MODE_SYNC),
-    Master(godot_method_rpc_mode.GODOT_METHOD_RPC_MODE_MASTER),
-    Slave(godot_method_rpc_mode.GODOT_METHOD_RPC_MODE_SLAVE),
-    RemoteSync(godot_method_rpc_mode.GODOT_METHOD_RPC_MODE_REMOTESYNC),
-    MasterSync(godot_method_rpc_mode.GODOT_METHOD_RPC_MODE_MASTERSYNC),
-    SlaveSync(godot_method_rpc_mode.GODOT_METHOD_RPC_MODE_SLAVESYNC)
+    Disabled(GODOT_METHOD_RPC_MODE_DISABLED),
+    Remote(GODOT_METHOD_RPC_MODE_REMOTE),
+    Sync(GODOT_METHOD_RPC_MODE_SYNC),
+    Master(GODOT_METHOD_RPC_MODE_MASTER),
+    Slave(GODOT_METHOD_RPC_MODE_SLAVE),
+    Puppet(GODOT_METHOD_RPC_MODE_PUPPET),
+    RemoteSync(GODOT_METHOD_RPC_MODE_REMOTESYNC),
+    MasterSync(GODOT_METHOD_RPC_MODE_MASTERSYNC),
+    PuppetSync(GODOT_METHOD_RPC_MODE_PUPPETSYNC)
 }
 
 

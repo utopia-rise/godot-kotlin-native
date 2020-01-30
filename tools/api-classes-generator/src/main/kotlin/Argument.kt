@@ -34,7 +34,7 @@ class Argument(
                 "Boolean" -> defaultValue.toLowerCase()
                 "Double" -> intToFloat(defaultValue)
                 "Vector2", "Vector3", "Rect2" -> "$type$defaultValue"
-                "Transform", "Transform2D", "GDArray", "RID", "PoolVector2Array", "PoolStringArray", "PoolVector3Array", "PoolColorArray", "PoolIntArray", "PoolRealArray", "PoolByteArray" -> "$type()"
+                "Dictionary", "Transform", "Transform2D", "GDArray", "RID", "PoolVector2Array", "PoolStringArray", "PoolVector3Array", "PoolColorArray", "PoolIntArray", "PoolRealArray", "PoolByteArray" -> "$type()"
                 "String" -> "\"$defaultValue\""
                 else -> defaultValue
             }
