@@ -1,3 +1,5 @@
+val platform: String by project
+
 buildscript {
     repositories {
         mavenLocal()
@@ -51,28 +53,30 @@ kotlin {
         }
     }
 
-    val targets = listOf(
-            targetFromPreset(presets["godotMingwX64"], "windows"),
-            targetFromPreset(presets["godotLinuxX64"], "linux"),
-            targetFromPreset(presets["godotMacosX64"], "macos")
-    )
+    val target = if (project.hasProperty("platform")) {
+        when(platform) {
+            "windows" -> targetFromPreset(presets["godotMingwX64"], "windows")
+            "linux" -> targetFromPreset(presets["godotLinuxX64"], "linux")
+            "macos" -> targetFromPreset(presets["godotMacosX64"], "macos")
+            else -> targetFromPreset(presets["godotMacosX64"], "macos")
+        }
+    }
+    else targetFromPreset(presets["godotMacosX64"], "macos")
 
-    targets.forEach { target ->
-        target.compilations.getByName("main") {
-            if (this is org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeCompilation) {
-                println("Configuring target ${target.name}")
-                this.target.binaries {
-                    sharedLib(listOf(org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG))
-                }
-                target.compilations.all {
-                    dependencies {
-                        implementation("org.godotengine.kotlin:godot-library:1.0.0")
-                        implementation("org.godotengine.kotlin:annotations:0.0.1-SNAPSHOT")
-                    }
-                }
-            } else {
-                System.err.println("Not a native target! TargetName: ${target.name}")
+    target.compilations.getByName("main") {
+        if (this is org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeCompilation) {
+            println("Configuring target ${target.name}")
+            this.target.binaries {
+                sharedLib(listOf(org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG))
             }
+            target.compilations.all {
+                dependencies {
+                    implementation("org.godotengine.kotlin:godot-library:1.0.0")
+                    implementation("org.godotengine.kotlin:annotations:0.0.1-SNAPSHOT")
+                }
+            }
+        } else {
+            System.err.println("Not a native target! TargetName: ${target.name}")
         }
     }
 }

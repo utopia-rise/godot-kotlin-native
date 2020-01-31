@@ -39,6 +39,10 @@ class Property(
     fun generate(clazz: Class, tree: Graph<Class>, icalls: MutableSet<ICall>): PropertySpec? {
         if (!hasValidGetter && !hasValidSetter) return null
 
+        if (hasValidGetter && !validGetter.returnType.isEnum() && type != validGetter.returnType) {
+            type = validGetter.returnType
+        }
+
         // Sorry for this, CPUParticles has "scale" property overrides ancestor's "scale", but mismatches type
         if (clazz.name == "CPUParticles" && name == "scale") name = "_scale"
 
