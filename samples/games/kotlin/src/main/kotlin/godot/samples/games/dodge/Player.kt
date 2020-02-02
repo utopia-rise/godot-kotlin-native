@@ -45,11 +45,27 @@ class Player: Area2D() {
 
         position += velocity * delta
 
-        if (position.x < 0) position.x = 0.0
-        else if (position.x > screensize.x) position.x = screensize.x
+        if (position.x < 0) {
+            position {
+                it.x = 0.0
+            }
+        }
+        else if (position.x > screensize.x) {
+            position {
+                it.x = screensize.x
+            }
+        }
 
-        if (position.y < 0) position.y = 0.0
-        else if (position.y > screensize.y) position.y = screensize.y
+        if (position.y < 0) {
+            position {
+                it.y = 0.0
+            }
+        }
+        else if (position.y > screensize.y) {
+            position {
+                it.y = screensize.y
+            }
+        }
 
         if (velocity.x != 0.0) {
             playerSprite.setAnimation("right")
