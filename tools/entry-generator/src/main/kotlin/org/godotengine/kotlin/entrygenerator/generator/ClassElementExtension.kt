@@ -49,8 +49,8 @@ private fun getBridgeReturnType(isConstructor: Boolean): ParameterizedTypeName {
                     ClassName("kotlinx.cinterop", "CFunction")
                             .parameterizedBy(
                                     LambdaTypeName.get(
-                                            parameters = *arrayOf(ClassName("kotlinx.cinterop", "COpaquePointer?")),
-                                            returnType = if (isConstructor) ClassName("kotlinx.cinterop", "COpaquePointer?") else Unit::class.asTypeName()
+                                            parameters = *arrayOf(ClassName("kotlinx.cinterop", "COpaquePointer").copy(nullable = true)),
+                                            returnType = if (isConstructor) ClassName("kotlinx.cinterop", "COpaquePointer").copy(nullable = true) else Unit::class.asTypeName()
                                     )
                             )
             )
