@@ -24,14 +24,14 @@ fun Element.ClassElement.generateConstructorBindings(entryFileSpecBuilder: FileS
             .builder("constructorBridge${index}")
             .addModifiers(KModifier.PRIVATE)
             .returns(getBridgeReturnType(isConstructor = true))
-            .addStatement("return staticCFunction { mem -> constructFromRawMem(mem, ${constructorBindingFunctionReferenceProperty.name}) }")
+            .addStatement("return %M { mem -> %M(mem, ${constructorBindingFunctionReferenceProperty.name}) }", MemberName("kotlinx.cinterop", "staticCFunction"), MemberName("godot.registration", "constructFromRawMem"))
             .build()
 
     val destructorBridgeFuncSpec = FunSpec
             .builder("destructorBridge${index}")
             .addModifiers(KModifier.PRIVATE)
             .returns(getBridgeReturnType(isConstructor = false))
-            .addStatement("return staticCFunction { mem -> deconstructFromRawMem<${returnType.canonicalName}>(mem) }")
+            .addStatement("return %M { mem -> %M<${returnType.canonicalName}>(mem) }", MemberName("kotlinx.cinterop", "staticCFunction"), MemberName("godot.registration", "deconstructFromRawMem"))
             .build()
 
     entryFileSpecBuilder

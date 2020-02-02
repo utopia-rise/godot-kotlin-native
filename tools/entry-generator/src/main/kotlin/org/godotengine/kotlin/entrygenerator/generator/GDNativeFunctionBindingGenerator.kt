@@ -15,13 +15,13 @@ class GDNativeFunctionBindingGenerator {
 
     fun registerElement(element: Element, visibleInEditor: Boolean = true, vararg bridgeFunctions: FunSpec) {
         when (element) {
-            is Element.ClassElement -> nativeScriptInitFunctionBuilder.addStatement("registerClass(\"${getFullClassName(element)}\", \"${getBaseClassOfClass(element)}\"${convertBridgeFunctionsToString(bridgeFunctions)})")
-            is Element.PropertyElement -> nativeScriptInitFunctionBuilder.addStatement("registerProperty(\"${getFullClassName(element)}\", \"${element.simpleName}\", $visibleInEditor${convertBridgeFunctionsToString(bridgeFunctions)})")
+            is Element.ClassElement -> nativeScriptInitFunctionBuilder.addStatement("%M(\"${getFullClassName(element)}\", \"${getBaseClassOfClass(element)}\"${convertBridgeFunctionsToString(bridgeFunctions)})", MemberName("godot.registration", "registerClass"))
+            is Element.PropertyElement -> nativeScriptInitFunctionBuilder.addStatement("%M(\"${getFullClassName(element)}\", \"${element.simpleName}\", $visibleInEditor${convertBridgeFunctionsToString(bridgeFunctions)})", MemberName("godot.registration", "registerProperty"))
             is Element.FunctionElement -> {
                 if (element.func.hasAnnotation(Signal::class.java.name)) {
-                    nativeScriptInitFunctionBuilder.addStatement("registerSignal(\"${getFullClassName(element)}\", ${element.simpleName}${getSignalArgumentsAsString(element)}${getSignalDefaultArgumentsAsString(element)})")
+                    nativeScriptInitFunctionBuilder.addStatement("%M(\"${getFullClassName(element)}\", ${element.simpleName}${getSignalArgumentsAsString(element)}${getSignalDefaultArgumentsAsString(element)})", MemberName("godot.registration", "registerSignal"))
                 } else {
-                    nativeScriptInitFunctionBuilder.addStatement("registerMethod(\"${getFullClassName(element)}\", \"${element.simpleName}\"${convertBridgeFunctionsToString(bridgeFunctions)})")
+                    nativeScriptInitFunctionBuilder.addStatement("%M(\"${getFullClassName(element)}\", \"${element.simpleName}\"${convertBridgeFunctionsToString(bridgeFunctions)})", MemberName("godot.registration", "registerMethod"))
                 }
             }
             else -> throw IllegalArgumentException("Element of kind ${element.elementKind} is not registrable")

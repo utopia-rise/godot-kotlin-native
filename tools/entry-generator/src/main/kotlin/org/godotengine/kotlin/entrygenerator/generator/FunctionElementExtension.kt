@@ -14,55 +14,66 @@ fun Element.FunctionElement.generateFunctionBinding(entryFileSpecBuilder: FileSp
             .builder("functionBridge$index")
             .returns(getReturnType())
             .addModifiers(KModifier.PRIVATE)
-            .addCode("return staticCFunction { returnValuePointer, rawObjectPointer, numberOfArguments, argumentsPointer ->")
-            .addCode("invoke<${getFullClassName(this)}>(%S, returnValuePointer, rawObjectPointer, numberOfArguments, argumentsPointer) { obj, numArgs, args ->", this.func.name)
-            .addCode("run {")
+
+    val bridgeFunctionBodyBuilder = CodeBlock.builder()
+            .beginControlFlow("return·%M·{·returnValuePointer,·rawObjectPointer,·numberOfArguments,·argumentsPointer·->", MemberName("kotlinx.cinterop", "staticCFunction")) //START: staticCFunction
+            .beginControlFlow("%M<${getFullClassName(this)}>(%S,·returnValuePointer,·rawObjectPointer,·numberOfArguments,·argumentsPointer)·{·obj,·numArgs,·args·->", MemberName("godot.registration", "invoke"), this.func.name) //START: invoke
+            .beginControlFlow("run") //START: run
 
 
     if (!this.func.hasVarargParameter()) {
-        bridgeFunctionBuilder.addCode("when (numArgs) {")
-        bridgeFunctionBuilder.addCode("${this.func.valueParameters.size} -> {")
+        bridgeFunctionBodyBuilder
+                .beginControlFlow("when·(numArgs)") //START: when
+                .beginControlFlow("${this.func.valueParameters.size}·->") //START: when cases
     }
 
     val arguments = StringBuilder()
     this.func.valueParameters.forEachIndexed { parameterIndex, valueParameterDescriptor ->
         if (!valueParameterDescriptor.isVararg) {
-            bridgeFunctionBuilder.addCode("val arg$parameterIndex = ${valueParameterDescriptor.type.toString().castFromRawMemory("args[$parameterIndex]!!")}")
+            bridgeFunctionBodyBuilder.addStatement("val·arg$parameterIndex·=·${valueParameterDescriptor.type.toString().castFromRawMemory("args[$parameterIndex]!!")}")
 
             if (parameterIndex != 0) {
-                arguments.append(", ")
+                arguments.append(",·")
             }
             arguments.append("arg$parameterIndex")
         } else {
             varargSanityCheck(parameterIndex)
-            bridgeFunctionBuilder.addCode("val arg$parameterIndex = Array(numArgs - ${parameterIndex}) { i -> ${this.func.valueParameters[parameterIndex].varargElementType?.toString()?.castFromRawMemory("args[i + ${parameterIndex}]!!")} }")
+            bridgeFunctionBodyBuilder.addStatement("val·arg$parameterIndex·=·Array(numArgs·-·${parameterIndex})·{·i·->·${this.func.valueParameters[parameterIndex].varargElementType?.toString()?.castFromRawMemory("args[i·+·${parameterIndex}]!!")}·}")
 
             if (parameterIndex != 0) {
-                arguments.append(", ")
+                arguments.append(",·")
             }
             arguments.append("*arg$parameterIndex")
         }
     }
 
     if (this.func.returnType.toString() != Unit::class.java.simpleName) {
-        bridgeFunctionBuilder.addCode("return@run Variant from ")
+        bridgeFunctionBodyBuilder.addStatement("return@run·%T·from·obj.${this.func.name}($arguments)", ClassName("godot.core", "Variant"))
+    } else {
+        bridgeFunctionBodyBuilder
+                .addStatement("obj.${this.func.name}($arguments)")
+                .addStatement("return@run·null")
     }
-    bridgeFunctionBuilder.addCode("obj.${this.func.name}($arguments)")
 
     if (!this.func.hasVarargParameter()) {
-        bridgeFunctionBuilder.addCode("}")
-        bridgeFunctionBuilder.addCode("else -> noMethodToInvoke(%S, %S, numArgs)", this.func.name, getFullClassName(this))
-        bridgeFunctionBuilder.addCode("}")
+        bridgeFunctionBodyBuilder
+                .nextControlFlow("else·->")
+                .addStatement("%M(%S,·%S,·numArgs)", MemberName("godot.registration", "noMethodToInvoke"), this.func.name, getFullClassName(this))
+                .addStatement("return@run·null")
+                .endControlFlow() //END: when cases
+                .endControlFlow() //END: when
     }
-    if (!this.func.hasVarargParameter()) {
-        bridgeFunctionBuilder.addCode("return@run null")
-    }
-    bridgeFunctionBuilder.addCode("}")
-    bridgeFunctionBuilder.addCode("}")
-    bridgeFunctionBuilder.addCode("}")
+
+    bridgeFunctionBodyBuilder
+            .endControlFlow() //END: run
+            .endControlFlow() //END: invoke
+            .endControlFlow() //END: staticCFunction
 
 
-    val bridgeFunction = bridgeFunctionBuilder.build()
+    val bridgeFunction = bridgeFunctionBuilder
+            .addCode(bridgeFunctionBodyBuilder.build())
+            .build()
+
     entryFileSpecBuilder.addFunction(bridgeFunction)
 
     return bridgeFunction
