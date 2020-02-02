@@ -7,6 +7,21 @@ import kotlin.math.*
 
 
 class Vector2(var x: Double, var y: Double) : Comparable<Vector2>, CoreType {
+
+    enum class Axis(private val value: Int) {
+        X(0),
+        Y(1);
+
+        companion object {
+            fun from(value: Int): Axis {
+                values().forEach {
+                    if (it.value == value) return it
+                }
+                throw AssertionError("$value is not a valid value for Enum Vector2.Axis")
+            }
+        }
+    }
+
     constructor() :
             this(0.0, 0.0)
 
