@@ -5,14 +5,95 @@ import godot.gdnative.*
 import kotlinx.cinterop.*
 import kotlin.math.*
 
-class Color(var r: Double, var g: Double, var b: Double, var a: Double = 1.0) : Comparable<Color>, CoreType {
-    constructor() :
-            this(0.0, 0.0, 0.0, 1.0)
+class Color(var r: Double, var g: Double, var b: Double, var a: Double = 1.0): Comparable<Color>, CoreType {
 
-    constructor(r: Number, g: Number, b: Number, a: Number = 1.0) :
-            this(r.toDouble(), g.toDouble(), b.toDouble(), a.toDouble())
+    val r8: Int
+        get() = (r * 255).roundToInt()
+    val g8: Int
+        get() = (g * 255).roundToInt()
+    val b8: Int
+        get() = (b * 255).roundToInt()
+    val a8: Int
+        get() = (a * 255).roundToInt()
 
+    companion object {
+        fun parseCol(p_str: String, p_ofs: Int): Double {
+            var ig = 0.0
+            for (i in 0..1) {
+                var v: Int
+                val c: Char = p_str[i + p_ofs]
 
+                when (c) {
+                    in '0'..'9' -> v = c.toInt() - '0'.toInt()
+                    in 'a'..'f' -> {
+                        v = c.toInt() - 'a'.toInt()
+                        v += 10
+                    }
+                    in 'A'..'F' -> {
+                        v = c.toInt() - 'A'.toInt()
+                        v += 10
+                    }
+                    else -> return -1.0
+                }
+
+                ig += if (i == 0)
+                    v * 16
+                else
+                    v
+            }
+            return ig
+        }
+
+        fun toHex(p_val: Double): String {
+            var v = (p_val * 255).toInt()
+            v = when {
+                v < 0 -> 0
+                v > 255 -> 255
+                else -> v
+            }
+            var ret = ""
+
+            for (i in 0..1) {
+                val c = shortArrayOf(0, 0)
+                val lv = v and 0xF
+                if (lv < 10)
+                    c[0] = ('0'.toInt() + lv).toShort()
+                else
+                    c[0] = ('a'.toInt() + lv - 10).toShort()
+
+                v = v shr 4
+                val cs = String(charArrayOf(c[0].toChar()))
+                ret = cs + ret
+            }
+            return ret
+        }
+
+        fun fromHsv(h: Double, s: Double, v: Double, a: Double): Color {
+            var h2 = (h * 360.0).rem(360.0)
+
+            if (h2 < 0) h2 += 360
+
+            val finalH = h2 / 60
+            val c = v * s
+            val x = c * (1.0 - (finalH.rem(2) - 1))
+            val rgbTriple = when(finalH.toInt()) {
+                0 -> Triple(c, x,0.0)
+                1 -> Triple(x, c, 0.0)
+                2 -> Triple(0.0, c, x)
+                3 -> Triple(0.0, x, c)
+                4 -> Triple(x, 0.0, c)
+                5 -> Triple(c, 0.0, x)
+                else -> Triple(0.0, 0.0, 0.0)
+            }
+
+            val m = v - c
+            return Color(m + rgbTriple.first, m + rgbTriple.second, m + rgbTriple.third, a)
+        }
+    }
+
+    constructor(): this(0.0, 0.0, 0.0, 1.0)
+
+    constructor(r: Number, g: Number, b: Number, a: Number = 1.0): this(r.toDouble(), g.toDouble(), b.toDouble(), a.toDouble())
 
     internal constructor(native: CValue<godot_color>) : this() {
         memScoped {
@@ -21,6 +102,11 @@ class Color(var r: Double, var g: Double, var b: Double, var a: Double = 1.0) : 
     }
     internal constructor(mem: COpaquePointer) : this() {
         this.setRawMemory(mem)
+    }
+
+    private enum class ColorByte(val size: Int, val shift: Int) {
+        BITS32(255, 8),
+        BITS64(65535, 16)
     }
 
 
@@ -62,26 +148,28 @@ class Color(var r: Double, var g: Double, var b: Double, var a: Double = 1.0) : 
                 else -> false
             }
 
-    fun to32(): Int {
-        var c: Int = (a * 255).roundToInt()
-        c = c shl 8
-        c = c or (r * 255).roundToInt()
-        c = c shl 8
-        c = c or (g * 255).roundToInt()
-        c = c shl 8
-        c = c or (b * 255).roundToInt()
+    fun to32(): Int = toByteColorCode(a, r, g, b, ColorByte.BITS32)
 
-        return c
-    }
+    fun toARGB32(): Int = toByteColorCode(a, r, g, b, ColorByte.BITS32)
 
-    fun toARGB32(): Int {
-        var c: Int = (a * 255).roundToInt()
-        c = c shl 8
-        c = c or (r * 255).roundToInt()
-        c = c shl 8
-        c = c or (g * 255).roundToInt()
-        c = c shl 8
-        c = c or (b * 255).roundToInt()
+    fun toABGR32(): Int = toByteColorCode(a, b, g, r, ColorByte.BITS32)
+
+    fun toABGR64(): Int = toByteColorCode(a, b, g, r, ColorByte.BITS64)
+
+    fun toRGBA32(): Int = toByteColorCode(r, g, b, a, ColorByte.BITS32)
+
+    fun toRGBA64(): Int = toByteColorCode(r, g, b, a, ColorByte.BITS64)
+
+    private fun toByteColorCode(first: Double, second: Double, third: Double, fourth: Double, colorByte: ColorByte): Int {
+        val size = colorByte.size
+        val shift = colorByte.shift
+        var c: Int = (first * size).roundToInt()
+        c = c shl shift
+        c = c or (second * size).roundToInt()
+        c = c shl shift
+        c = c or (third * size).roundToInt()
+        c = c shl shift
+        c = c or (fourth * size).roundToInt()
 
         return c
     }
@@ -183,6 +271,10 @@ class Color(var r: Double, var g: Double, var b: Double, var a: Double = 1.0) : 
             }
         }
     }
+
+    fun darkened(amount: Double) = Color(r * (1.0 - amount),g * (1.0 - amount),b * (1.0 - amount), a)
+
+    fun lightened(amount: Double) = Color(r + (1.0 - r) * amount,g + (1.0 - g) * amount,b + (1.0 - b) * amount, a)
 
     fun invert() {
         r = 1.0 - r
@@ -312,60 +404,6 @@ class Color(var r: Double, var g: Double, var b: Double, var a: Double = 1.0) : 
         }
 
         return true
-    }
-
-
-    companion object {
-        fun parseCol(p_str: String, p_ofs: Int): Double {
-            var ig = 0.0
-            for (i in 0..1) {
-                var v: Int
-                val c: Char = p_str[i + p_ofs]
-
-                when (c) {
-                    in '0'..'9' -> v = c.toInt() - '0'.toInt()
-                    in 'a'..'f' -> {
-                        v = c.toInt() - 'a'.toInt()
-                        v += 10
-                    }
-                    in 'A'..'F' -> {
-                        v = c.toInt() - 'A'.toInt()
-                        v += 10
-                    }
-                    else -> return -1.0
-                }
-
-                ig += if (i == 0)
-                    v * 16
-                else
-                    v
-            }
-            return ig
-        }
-
-        fun toHex(p_val: Double): String {
-            var v = (p_val * 255).toInt()
-            v = when {
-                v < 0 -> 0
-                v > 255 -> 255
-                else -> v
-            }
-            var ret = ""
-
-            for (i in 0..1) {
-                val c = shortArrayOf(0, 0)
-                val lv = v and 0xF
-                if (lv < 10)
-                    c[0] = ('0'.toInt() + lv).toShort()
-                else
-                    c[0] = ('a'.toInt() + lv - 10).toShort()
-
-                v = v shr 4
-                val cs = String(charArrayOf(c[0].toChar()))
-                ret = cs + ret
-            }
-            return ret
-        }
     }
 
     fun toHtml(alpha: Boolean): String {

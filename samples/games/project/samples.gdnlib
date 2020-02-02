@@ -9,8 +9,7 @@ reloadable=true
 
 OSX.64="res://libkotlin.dylib"
 OSX.32="res://libkotlin.dylib"
-Windows.64="res://libkotlin.dll"
-Windows.32="res://libkotlin.dll"
+Windows.64="res://kotlin.dll"
 X11.64="res://libkotlin.so"
 
 [dependencies]
@@ -18,5 +17,4 @@ X11.64="res://libkotlin.so"
 OSX.64=[  ]
 OSX.32=[  ]
 Windows.64=[  ]
-Windows.32=[  ]
 X11.64=[  ]
