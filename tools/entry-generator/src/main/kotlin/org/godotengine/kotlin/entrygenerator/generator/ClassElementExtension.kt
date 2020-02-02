@@ -4,6 +4,7 @@ import com.squareup.kotlinpoet.*
 import de.jensklingenberg.mpapt.model.Element
 import de.jensklingenberg.mpapt.model.ElementUtils
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
+import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
 
 fun Element.ClassElement.generateConstructorBindings(entryFileSpecBuilder: FileSpec.Builder, index: Int): Array<FunSpec> {
     val returnType = ClassName(ElementUtils().getPackageOf(this), this.classDescriptor.name.asString())

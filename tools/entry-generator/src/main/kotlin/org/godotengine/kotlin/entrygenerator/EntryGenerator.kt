@@ -5,6 +5,7 @@ import com.squareup.kotlinpoet.FunSpec
 import de.jensklingenberg.mpapt.model.Element
 import org.godotengine.kotlin.entrygenerator.generator.GDNativeFunctionBindingGenerator
 import org.godotengine.kotlin.entrygenerator.generator.generateConstructorBindings
+import org.godotengine.kotlin.entrygenerator.generator.generateFunctionBinding
 import org.godotengine.kotlin.entrygenerator.model.Class
 import org.godotengine.kotlin.entrygenerator.model.Classes
 import org.godotengine.kotlin.entrygenerator.model.unite
@@ -28,6 +29,10 @@ class EntryGenerator {
         classes.forEachIndexed { index, classElement ->
             val generateConstructorBindings = classElement.generateConstructorBindings(entryFileSpec, index)
             gdNativeFunctionBindingGenerator.registerElement(classElement, true, *generateConstructorBindings)
+        }
+        functions.forEachIndexed { index, functionElement ->
+            val generatedFunctionBridge = functionElement.generateFunctionBinding(entryFileSpec, index)
+            gdNativeFunctionBindingGenerator.registerElement(functionElement, false, generatedFunctionBridge)
         }
 
         gdNativeFunctionBindingGenerator.generateGDNativeBindingFunctions(entryFileSpec)
