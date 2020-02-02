@@ -4,8 +4,8 @@ import de.jensklingenberg.mpapt.model.AbstractProcessor
 import de.jensklingenberg.mpapt.model.Element
 import de.jensklingenberg.mpapt.model.RoundEnvironment
 import de.jensklingenberg.mpapt.utils.KotlinPlatformValues
-import org.godotengine.kotlin.entrygenerator.EntryGenerator
 import org.godotengine.kotlin.annotation.Register
+import org.godotengine.kotlin.entrygenerator.EntryGenerator
 import org.jetbrains.kotlin.platform.TargetPlatform
 import java.lang.instrument.IllegalClassFormatException
 import java.nio.file.Paths

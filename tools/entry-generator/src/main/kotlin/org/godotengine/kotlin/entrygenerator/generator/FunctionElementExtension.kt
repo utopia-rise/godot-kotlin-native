@@ -2,33 +2,39 @@ package org.godotengine.kotlin.entrygenerator.generator
 
 import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
-import de.jensklingenberg.mpapt.model.Element
 import org.godotengine.kotlin.entrygenerator.model.castFromRawMemory
 import org.godotengine.kotlin.entrygenerator.utils.hasVarargParameter
+import org.jetbrains.kotlin.descriptors.CallableMemberDescriptor
 import org.jetbrains.kotlin.resolve.calls.components.isVararg
 import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
-import java.lang.StringBuilder
 
-fun Element.FunctionElement.generateFunctionBinding(entryFileSpecBuilder: FileSpec.Builder, index: Int): FunSpec {
-    val bridgeFunctionBuilder = FunSpec
-            .builder("functionBridge$index")
-            .returns(getReturnType())
+fun CallableMemberDescriptor.generateFunctionBinding(entryFileSpecBuilder: FileSpec.Builder, index: Int, functionName: String = "functionBridge", fullClassName: String = getFullClassName(this)): FunSpec {
+    val bridgeFunction = FunSpec
+            .builder("$functionName$index")
+            .returns(getBridgeReturnType())
             .addModifiers(KModifier.PRIVATE)
+            .addCode(getBridgeFunctionBody(fullClassName))
+            .build()
 
+    entryFileSpecBuilder.addFunction(bridgeFunction)
+
+    return bridgeFunction
+}
+
+private fun CallableMemberDescriptor.getBridgeFunctionBody(fullClassName: String): CodeBlock {
     val bridgeFunctionBodyBuilder = CodeBlock.builder()
             .beginControlFlow("return·%M·{·returnValuePointer,·rawObjectPointer,·numberOfArguments,·argumentsPointer·->", MemberName("kotlinx.cinterop", "staticCFunction")) //START: staticCFunction
-            .beginControlFlow("%M<${getFullClassName(this)}>(%S,·returnValuePointer,·rawObjectPointer,·numberOfArguments,·argumentsPointer)·{·obj,·numArgs,·args·->", MemberName("godot.registration", "invoke"), this.func.name) //START: invoke
+            .beginControlFlow("%M<$fullClassName>(%S,·returnValuePointer,·rawObjectPointer,·numberOfArguments,·argumentsPointer)·{·obj,·numArgs,·args·->", MemberName("godot.registration", "invoke"), this.name) //START: invoke
             .beginControlFlow("run") //START: run
 
-
-    if (!this.func.hasVarargParameter()) {
+    if (!this.hasVarargParameter()) {
         bridgeFunctionBodyBuilder
                 .beginControlFlow("when·(numArgs)") //START: when
-                .beginControlFlow("${this.func.valueParameters.size}·->") //START: when cases
+                .beginControlFlow("${this.valueParameters.size}·->") //START: when cases
     }
 
     val arguments = StringBuilder()
-    this.func.valueParameters.forEachIndexed { parameterIndex, valueParameterDescriptor ->
+    this.valueParameters.forEachIndexed { parameterIndex, valueParameterDescriptor ->
         if (!valueParameterDescriptor.isVararg) {
             bridgeFunctionBodyBuilder.addStatement("val·arg$parameterIndex·=·${valueParameterDescriptor.type.toString().castFromRawMemory("args[$parameterIndex]!!")}")
 
@@ -38,7 +44,7 @@ fun Element.FunctionElement.generateFunctionBinding(entryFileSpecBuilder: FileSp
             arguments.append("arg$parameterIndex")
         } else {
             varargSanityCheck(parameterIndex)
-            bridgeFunctionBodyBuilder.addStatement("val·arg$parameterIndex·=·Array(numArgs·-·${parameterIndex})·{·i·->·${this.func.valueParameters[parameterIndex].varargElementType?.toString()?.castFromRawMemory("args[i·+·${parameterIndex}]!!")}·}")
+            bridgeFunctionBodyBuilder.addStatement("val·arg$parameterIndex·=·Array(numArgs·-·${parameterIndex})·{·i·->·${this.valueParameters[parameterIndex].varargElementType?.toString()?.castFromRawMemory("args[i·+·${parameterIndex}]!!")}·}")
 
             if (parameterIndex != 0) {
                 arguments.append(",·")
@@ -47,40 +53,32 @@ fun Element.FunctionElement.generateFunctionBinding(entryFileSpecBuilder: FileSp
         }
     }
 
-    if (this.func.returnType.toString() != Unit::class.java.simpleName) {
-        bridgeFunctionBodyBuilder.addStatement("return@run·%T·from·obj.${this.func.name}($arguments)", ClassName("godot.core", "Variant"))
+    if (this.returnType.toString() != Unit::class.java.simpleName) {
+        bridgeFunctionBodyBuilder.addStatement("return@run·%T·from·obj.${this.name}($arguments)", ClassName("godot.core", "Variant"))
     } else {
         bridgeFunctionBodyBuilder
-                .addStatement("obj.${this.func.name}($arguments)")
+                .addStatement("obj.${this.name}($arguments)")
                 .addStatement("return@run·null")
     }
 
-    if (!this.func.hasVarargParameter()) {
+    if (!this.hasVarargParameter()) {
         bridgeFunctionBodyBuilder
                 .nextControlFlow("else·->")
-                .addStatement("%M(%S,·%S,·numArgs)", MemberName("godot.registration", "noMethodToInvoke"), this.func.name, getFullClassName(this))
+                .addStatement("%M(%S,·%S,·numArgs)", MemberName("godot.registration", "noMethodToInvoke"), this.name, fullClassName)
                 .addStatement("return@run·null")
                 .endControlFlow() //END: when cases
                 .endControlFlow() //END: when
     }
 
-    bridgeFunctionBodyBuilder
+    return bridgeFunctionBodyBuilder
             .endControlFlow() //END: run
             .endControlFlow() //END: invoke
             .endControlFlow() //END: staticCFunction
-
-
-    val bridgeFunction = bridgeFunctionBuilder
-            .addCode(bridgeFunctionBodyBuilder.build())
             .build()
-
-    entryFileSpecBuilder.addFunction(bridgeFunction)
-
-    return bridgeFunction
 }
 
-private fun Element.FunctionElement.varargSanityCheck(index: Int) {
-    if (index != this.func.valueParameters.size - 1) {
+private fun CallableMemberDescriptor.varargSanityCheck(index: Int) {
+    if (index != this.valueParameters.size - 1) {
         throw IllegalArgumentException(
                 """Illegal position of vararg parameter in exported function!
                             |If you wan't to export a function with vararg parameter, it has to be at the last position and your function can only contain 1 vararg parameter!
@@ -88,12 +86,12 @@ private fun Element.FunctionElement.varargSanityCheck(index: Int) {
                         """.trimMargin()
         )
     }
-    if (this.func.valueParameters.size != 1) {
+    if (this.valueParameters.size != 1) {
         //TODO: warning about runtime errors
     }
 }
 
-private fun getReturnType(): ParameterizedTypeName {
+private fun getBridgeReturnType(): ParameterizedTypeName {
     val cOpaquePointerClassName = ClassName("kotlinx.cinterop", "COpaquePointer").copy(nullable = true)
 
     return ClassName("kotlinx.cinterop", "CPointer")
@@ -113,6 +111,6 @@ private fun getReturnType(): ParameterizedTypeName {
             )
 }
 
-private fun getFullClassName(element: Element.FunctionElement): String {
-    return element.descriptor.fqNameSafe.asString()
+private fun getFullClassName(descriptor: CallableMemberDescriptor): String {
+    return descriptor.containingDeclaration.fqNameSafe.asString()
 }

@@ -2,11 +2,11 @@ package org.godotengine.kotlin.entrygenerator.generator
 
 import com.squareup.kotlinpoet.*
 import de.jensklingenberg.mpapt.common.findAnnotation
-import de.jensklingenberg.mpapt.common.getFunctionParameters
 import de.jensklingenberg.mpapt.common.hasAnnotation
 import de.jensklingenberg.mpapt.model.Element
+import org.godotengine.kotlin.annotation.Signal
 import org.godotengine.kotlin.entrygenerator.model.getVariantType
-import org.godotengine.kotlin.annotation.*
+import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
 import org.jetbrains.kotlin.types.asSimpleType
 
@@ -15,17 +15,21 @@ class GDNativeFunctionBindingGenerator {
 
     fun registerElement(element: Element, visibleInEditor: Boolean = true, vararg bridgeFunctions: FunSpec) {
         when (element) {
-            is Element.ClassElement -> nativeScriptInitFunctionBuilder.addStatement("%M(\"${getFullClassName(element)}\", \"${getBaseClassOfClass(element)}\"${convertBridgeFunctionsToString(bridgeFunctions)})", MemberName("godot.registration", "registerClass"))
-            is Element.PropertyElement -> nativeScriptInitFunctionBuilder.addStatement("%M(\"${getFullClassName(element)}\", \"${element.simpleName}\", $visibleInEditor${convertBridgeFunctionsToString(bridgeFunctions)})", MemberName("godot.registration", "registerProperty"))
+            is Element.ClassElement -> nativeScriptInitFunctionBuilder.addStatement("%M(\"${getFullClassName(element)}\",·\"${getBaseClassOfClass(element)}\"${convertBridgeFunctionsToString(bridgeFunctions)})", MemberName("godot.registration", "registerClass"))
+            is Element.PropertyElement -> nativeScriptInitFunctionBuilder.addStatement("%M(\"${getFullClassName(element)}\",·\"${element.simpleName}\", $visibleInEditor${convertBridgeFunctionsToString(bridgeFunctions)})", MemberName("godot.registration", "registerProperty"))
             is Element.FunctionElement -> {
                 if (element.func.hasAnnotation(Signal::class.java.name)) {
-                    nativeScriptInitFunctionBuilder.addStatement("%M(\"${getFullClassName(element)}\", ${element.simpleName}${getSignalArgumentsAsString(element)}${getSignalDefaultArgumentsAsString(element)})", MemberName("godot.registration", "registerSignal"))
+                    nativeScriptInitFunctionBuilder.addStatement("%M(\"${getFullClassName(element)}\",·${element.simpleName}${getSignalArgumentsAsString(element)}${getSignalDefaultArgumentsAsString(element)})", MemberName("godot.registration", "registerSignal"))
                 } else {
-                    nativeScriptInitFunctionBuilder.addStatement("%M(\"${getFullClassName(element)}\", \"${element.simpleName}\"${convertBridgeFunctionsToString(bridgeFunctions)})", MemberName("godot.registration", "registerMethod"))
+                    nativeScriptInitFunctionBuilder.addStatement("%M(\"${getFullClassName(element)}\",·\"${element.simpleName}\"${convertBridgeFunctionsToString(bridgeFunctions)})", MemberName("godot.registration", "registerMethod"))
                 }
             }
             else -> throw IllegalArgumentException("Element of kind ${element.elementKind} is not registrable")
         }
+    }
+
+    fun registerInternalFunction(classElement: Element.ClassElement, pairOfNameAndFunSpec: Pair<Name, FunSpec>) {
+        nativeScriptInitFunctionBuilder.addStatement("%M(\"${getFullClassName(classElement)}\",·\"${pairOfNameAndFunSpec.first.asString()}\",·${pairOfNameAndFunSpec.second.name}())", MemberName("godot.registration", "registerMethod"))
     }
 
     fun generateGDNativeBindingFunctions(entryFileSpecBuilder: FileSpec.Builder) {
@@ -47,11 +51,11 @@ class GDNativeFunctionBindingGenerator {
                 }
 
         val signalArgumentsArrayString = buildString {
-            append(", arrayOf(")
+            append(",·arrayOf(")
             arguments.forEachIndexed { index, pair ->
-                append("${pair.first} to ${pair.second}")
+                append("${pair.first}·to·${pair.second}")
                 if (index != arguments.size - 1) {
-                    append(", ")
+                    append(",·")
                 }
             }
             append(")")
@@ -77,11 +81,11 @@ class GDNativeFunctionBindingGenerator {
         }
 
         val signalArgumentsArrayString = buildString {
-            append(", arrayOf(")
+            append(",·arrayOf(")
             defaultArguments.forEachIndexed { index, defaultArgument ->
                 append("Variant($defaultArgument)")
                 if (index != defaultArguments.size - 1) {
-                    append(", ")
+                    append(",·")
                 }
             }
             append(")")
@@ -97,12 +101,12 @@ class GDNativeFunctionBindingGenerator {
     private fun convertBridgeFunctionsToString(bridgeFunctions: Array<out FunSpec>): String {
         return buildString {
             if (bridgeFunctions.isNotEmpty()) {
-                append(", ")
+                append(",·")
             }
             bridgeFunctions.forEachIndexed { index, funSpec ->
                 append("${funSpec.name}()")
                 if (index != bridgeFunctions.size - 1) {
-                    append(", ")
+                    append(",·")
                 }
             }
         }
