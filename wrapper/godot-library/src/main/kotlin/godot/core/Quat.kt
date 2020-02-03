@@ -191,11 +191,11 @@ class Quat: CoreType {
         w /= this.length()
     }
 
-    fun normalized(): Quat =
-            this / this.length()
+    fun normalized(): Quat = this / this.length()
 
-    fun inverse(): Quat =
-            Quat(-x, -y, -z, -w)
+    fun inverse(): Quat = Quat(-x, -y, -z, -w)
+
+    fun isNormalized() = abs(lengthSquared() - 1.0) < 0.00001
 
     fun slerp(q: Quat, t: Double): Quat {
         val to1 = Quat()
@@ -265,11 +265,9 @@ class Quat: CoreType {
         return sp.slerpni(sq, t2)
     }
 
-    fun getAxis(): Vector3
-            = Vector3(x / sqrt(1.0 - w*w), y / sqrt(1.0 - w*w),z / sqrt(1.0 - w*w))
+    fun getAxis(): Vector3 = Vector3(x / sqrt(1.0 - w*w), y / sqrt(1.0 - w*w),z / sqrt(1.0 - w*w))
 
-    fun getAngle(): Double
-            = 2 * acos(w)
+    fun getAngle(): Double = 2 * acos(w)
 
     operator fun times(v: Vector3) =
             Quat( w * v.x + y * v.z - z * v.y,
