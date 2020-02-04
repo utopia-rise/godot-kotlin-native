@@ -45,8 +45,6 @@ class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>
         z = arr[2].toDouble()
     }
 
-
-
     operator fun get(n: Int): Double =
             when (n) {
                 0 -> x
@@ -141,26 +139,21 @@ class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>
                 (-p0 + p1 * 3.0 - p2 * 3.0 + p3) * t3) * 0.5
     }
 
-    fun length(): Double =
-            sqrt(x * x + y * y + z * z)
+    fun length(): Double = sqrt(x * x + y * y + z * z)
 
-    fun lengthSquared(): Double =
-            x * x + y * y + z * z
+    fun lengthSquared(): Double = x * x + y * y + z * z
 
-    fun distanceSquaredTo(b: Vector3): Double =
-            (b - this).length()
+    fun distanceSquaredTo(b: Vector3): Double = (b - this).length()
 
-    fun distanceTo(b: Vector3): Double =
-            (b - this).lengthSquared()
+    fun distanceTo(b: Vector3): Double = (b - this).lengthSquared()
 
-    fun dot(b: Vector3): Double =
-            x * b.x + y * b.y + z * b.z
+    fun dot(b: Vector3): Double = x * b.x + y * b.y + z * b.z
 
-    fun floor(): Vector3 =
-            Vector3(kotlin.math.floor(x), kotlin.math.floor(y), kotlin.math.floor(z))
+    fun floor(): Vector3 = Vector3(kotlin.math.floor(x), kotlin.math.floor(y), kotlin.math.floor(z))
 
-    fun inverse(): Vector3 =
-            Vector3(1.0 / x, 1.0 / y, 1.0 / z)
+    fun inverse(): Vector3 = Vector3(1.0 / x, 1.0 / y, 1.0 / z)
+
+    fun isNormalized() = kotlin.math.abs(lengthSquared() - 1.0) < 0.00001
 
     fun maxAxis(): Int =
             if (x < y)
@@ -231,7 +224,7 @@ class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>
     }
 
 
-    override fun toString() = "$x, $y, $z"
+    override fun toString() = "($x, $y, $z)"
     override fun hashCode(): Int = this.toString().hashCode()
 }
 

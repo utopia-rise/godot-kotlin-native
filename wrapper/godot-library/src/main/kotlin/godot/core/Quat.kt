@@ -1,9 +1,11 @@
 @file:Suppress("unused", "MemberVisibilityCanBePrivate")
 package godot.core
 
-import godot.gdnative.*
+import godot.gdnative.godot_quat
 import kotlinx.cinterop.*
 import kotlin.math.*
+
+typealias AxisAndAngle = Pair<Vector3, Double>
 
 class Quat: CoreType {
     var x: Double = 0.0
@@ -53,7 +55,7 @@ class Quat: CoreType {
     }
 
     constructor() :
-        this(0.0, 0.0, 0.0, 1.0)
+            this(0.0, 0.0, 0.0, 1.0)
 
     constructor(axis: Vector3, angle: Double) {
         val d: Double = axis.length()
@@ -265,9 +267,24 @@ class Quat: CoreType {
         return sp.slerpni(sq, t2)
     }
 
-    fun getAxis(): Vector3 = Vector3(x / sqrt(1.0 - w*w), y / sqrt(1.0 - w*w),z / sqrt(1.0 - w*w))
+    fun getAxisAndAngle(): AxisAndAngle = Vector3(x / sqrt(1.0 - w*w), y / sqrt(1.0 - w*w),z / sqrt(1.0 - w*w)) to 2 * acos(w)
 
-    fun getAngle(): Double = 2 * acos(w)
+    fun setAxisAndAngle(axisAndAngle: AxisAndAngle) {
+        val axis = axisAndAngle.first
+        if (!axis.isNormalized()) GD.printError("Vector $axis is not normalized", "setAxisAndAngle", "Quat.kt", 270) //TODO: Find an efficient way to get source code line number
+
+        val angle = axisAndAngle.second
+        val d = axis.length()
+        if (d == 0.0) {
+            set(0.0, 0.0, 0.0, 0.0)
+        }
+        else {
+            val sin = sin(angle * 0.5)
+            val cos = cos(angle * 0.5)
+            val s = sin / d
+            set(axis.x * s, axis.y * s, axis.z * s, cos)
+        }
+    }
 
     operator fun times(v: Vector3) =
             Quat( w * v.x + y * v.z - z * v.y,
@@ -276,28 +293,28 @@ class Quat: CoreType {
                     -x * v.x - y * v.y - z * v.z)
 
     operator fun plus(q2: Quat): Quat =
-            Quat( this.x+q2.x, this.y+q2.y, this.z+q2.z, this.w+q2.w )
+            Quat( this.x + q2.x, this.y + q2.y, this.z + q2.z, this.w + q2.w )
 
     operator fun minus(q2: Quat): Quat =
-            Quat( this.x-q2.x, this.y-q2.y, this.z-q2.z, this.w-q2.w )
+            Quat( this.x - q2.x, this.y - q2.y, this.z - q2.z, this.w - q2.w )
 
     operator fun times(q2: Quat): Quat =
-            Quat( this.x*q2.x, this.y*q2.y, this.z*q2.z, this.w*q2.w )
+            Quat( this.x * q2.x, this.y * q2.y, this.z * q2.z, this.w * q2.w )
 
     operator fun unaryMinus(): Quat =
             Quat( -this.x, -this.y, -this.z, -this.w)
 
     operator fun times(f: Double): Quat =
-            Quat(x*f, y*f, z*f, w*f)
+            Quat(x * f, y * f, z * f, w * f)
 
     operator fun div(f: Double): Quat =
-            Quat(x/f, y/f, z/f, w/f)
+            Quat(x / f, y / f, z / f, w / f)
 
     override fun equals(other: Any?): Boolean =
-        when (other) {
-            is Quat -> (x == other.x && y == other.y && z == other.z && w == other.w)
-            else -> false
-        }
+            when (other) {
+                is Quat -> (x == other.x && y == other.y && z == other.z && w == other.w)
+                else -> false
+            }
 
     fun xform(v: Vector3): Vector3 {
         var q = this * v
