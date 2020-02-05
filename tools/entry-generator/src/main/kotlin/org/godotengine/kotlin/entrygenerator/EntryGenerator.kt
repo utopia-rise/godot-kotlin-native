@@ -2,16 +2,15 @@ package org.godotengine.kotlin.entrygenerator
 
 import com.squareup.kotlinpoet.FileSpec
 import de.jensklingenberg.mpapt.model.Element
-import org.godotengine.kotlin.entrygenerator.generator.GDNativeFunctionBindingGenerator
-import org.godotengine.kotlin.entrygenerator.generator.generateConstructorBindings
-import org.godotengine.kotlin.entrygenerator.generator.generateFunctionBinding
-import org.godotengine.kotlin.entrygenerator.generator.generateInternalFunctionBindings
+import org.godotengine.kotlin.entrygenerator.generator.*
 import org.godotengine.kotlin.entrygenerator.model.Class
 import org.godotengine.kotlin.entrygenerator.model.Classes
 import org.godotengine.kotlin.entrygenerator.model.unite
 import org.godotengine.kotlin.entrygenerator.parser.JSONParser
 import org.godotengine.kotlin.entrygenerator.parser.Parser
 import org.godotengine.kotlin.entrygenerator.parser.XMLParser
+import org.jetbrains.kotlin.name.Name
+import org.jetbrains.kotlin.resolve.constants.ConstantValue
 import java.io.File
 
 
@@ -29,7 +28,7 @@ class EntryGenerator {
 
         classes.forEachIndexed { index, classElement ->
             val generatedConstructorBindings = classElement.generateConstructorBindings(entryFileSpec, index)
-            gdNativeFunctionBindingGenerator.registerElement(classElement, true, *generatedConstructorBindings)
+            gdNativeFunctionBindingGenerator.registerElement(classElement, false, *generatedConstructorBindings)
 
             val generatedInternalFunctionBindings = classElement.generateInternalFunctionBindings(entryFileSpec, index)
             generatedInternalFunctionBindings.forEach { pairOfNameAndFunSpec ->
@@ -40,6 +39,17 @@ class EntryGenerator {
         functions.forEachIndexed { index, functionElement ->
             val generatedFunctionBridge = functionElement.func.generateFunctionBinding(entryFileSpec, index)
             gdNativeFunctionBindingGenerator.registerElement(functionElement, false, generatedFunctionBridge)
+        }
+
+        properties.forEachIndexed { index, propertyElement ->
+            val visibleInEditor: Boolean = propertyElement
+                    .annotation!!
+                    .allValueArguments
+                    .getValue(Name.identifier("visibleInEditor"))
+                    .value as Boolean
+
+            val generatedPropertyBindings = propertyElement.generatePropertyBinding(entryFileSpec, index)
+            gdNativeFunctionBindingGenerator.registerElement(propertyElement, visibleInEditor, *generatedPropertyBindings)
         }
 
         gdNativeFunctionBindingGenerator.generateGDNativeBindingFunctions(entryFileSpec)

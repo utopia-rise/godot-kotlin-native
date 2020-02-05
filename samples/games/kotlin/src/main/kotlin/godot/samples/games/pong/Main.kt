@@ -7,18 +7,20 @@ import godot.Node
 import godot.core.NodePath
 import godot.core.Variant
 import godot.core.Vector2
-import org.godotengine.kotlin.annotation.Register
+import org.godotengine.kotlin.annotation.*
 
-@Register
+@RegisterClass
 class Main : Node() {
 
     lateinit var ball: KinematicBody2D
     lateinit var ballStartPos: Vector2
     lateinit var ballStartVel: Vector2
+
+    @RegisterProperty(false, "0")
     var yourScore = 0
     var enemyScore = 0
 
-    @Register
+    @RegisterFunction
     override fun _ready() {
         ball = KinematicBody2D from getNode(NodePath("Ball"))
         ballStartPos = ball.getPosition()
@@ -44,12 +46,12 @@ class Main : Node() {
         startGame()
     }
 
-    @Register
+    @RegisterFunction
     fun varargTest(foo: String, bar: Int, vararg params: Int): String {
         return ""
     }
 
-    @Register
+    @RegisterFunction
     override fun _unhandled_input(event: InputEvent) {
         if (event.isActionPressed("ui_cancel")) {
             getTree().changeScene("res://Games/Main/Scenes/ChooseGameScreen.tscn")

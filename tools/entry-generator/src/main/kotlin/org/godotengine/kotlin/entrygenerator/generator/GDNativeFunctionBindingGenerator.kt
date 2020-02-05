@@ -16,7 +16,7 @@ class GDNativeFunctionBindingGenerator {
     fun registerElement(element: Element, visibleInEditor: Boolean = true, vararg bridgeFunctions: FunSpec) {
         when (element) {
             is Element.ClassElement -> nativeScriptInitFunctionBuilder.addStatement("%M(\"${getFullClassName(element)}\",·\"${getBaseClassOfClass(element)}\"${convertBridgeFunctionsToString(bridgeFunctions)})", MemberName("godot.registration", "registerClass"))
-            is Element.PropertyElement -> nativeScriptInitFunctionBuilder.addStatement("%M(\"${getFullClassName(element)}\",·\"${element.simpleName}\", $visibleInEditor${convertBridgeFunctionsToString(bridgeFunctions)})", MemberName("godot.registration", "registerProperty"))
+            is Element.PropertyElement -> nativeScriptInitFunctionBuilder.addStatement("%M(\"${getFullClassName(element)}\",·\"${element.propertyDescriptor.name}\", $visibleInEditor${convertBridgeFunctionsToString(bridgeFunctions)})", MemberName("godot.registration", "registerProperty"))
             is Element.FunctionElement -> {
                 if (element.func.hasAnnotation(Signal::class.java.name)) {
                     nativeScriptInitFunctionBuilder.addStatement("%M(\"${getFullClassName(element)}\",·${element.simpleName}${getSignalArgumentsAsString(element)}${getSignalDefaultArgumentsAsString(element)})", MemberName("godot.registration", "registerSignal"))
@@ -121,7 +121,7 @@ class GDNativeFunctionBindingGenerator {
     }
 
     private fun getFullClassName(element: Element.FunctionElement): String {
-        return element.descriptor.containingDeclaration.fqNameSafe.asString()
+        return element.func.containingDeclaration.fqNameSafe.asString()
     }
 
     private fun getFullClassName(element: Element.PropertyElement): String {
