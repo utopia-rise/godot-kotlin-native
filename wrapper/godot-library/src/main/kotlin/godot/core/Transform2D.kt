@@ -116,10 +116,10 @@ class Transform2D: CoreType {
     fun xform(rect: Rect2): Rect2 {
         val x = elements[0] * rect.size.x
         val y = elements[1] * rect.size.y
-        val pos = xform(rect.pos)
+        val pos = xform(rect.position)
 
         val newRect = Rect2()
-        newRect.pos = pos
+        newRect.position = pos
         newRect.expandTo(pos + x)
         newRect.expandTo(pos + y)
         newRect.expandTo(pos + x + y)
@@ -134,13 +134,13 @@ class Transform2D: CoreType {
     }
 
     fun xformInv(rect: Rect2): Rect2 {
-        val ends = arrayOf(xformInv(rect.pos),
-                xformInv(Vector2(rect.pos.x, rect.pos.y + rect.size.y)),
-                xformInv(Vector2(rect.pos.x + rect.size.x, rect.pos.y + rect.size.y)),
-                xformInv(Vector2(rect.pos.x + rect.size.x, rect.pos.y)))
+        val ends = arrayOf(xformInv(rect.position),
+                xformInv(Vector2(rect.position.x, rect.position.y + rect.size.y)),
+                xformInv(Vector2(rect.position.x + rect.size.x, rect.position.y + rect.size.y)),
+                xformInv(Vector2(rect.position.x + rect.size.x, rect.position.y)))
 
         val newRect = Rect2()
-        newRect.pos=ends[0]
+        newRect.position=ends[0]
         newRect.expandTo(ends[1])
         newRect.expandTo(ends[2])
         newRect.expandTo(ends[3])
