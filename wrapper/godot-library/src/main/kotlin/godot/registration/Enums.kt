@@ -2,7 +2,7 @@ package godot.registration
 
 import godot.gdnative.*
 
-
+//TODO: rename to match new godot convention -> slave is now puppet
 enum class RPCMode(val value: godot_method_rpc_mode) {
     Disabled(GODOT_METHOD_RPC_MODE_DISABLED),
     Remote(GODOT_METHOD_RPC_MODE_REMOTE),

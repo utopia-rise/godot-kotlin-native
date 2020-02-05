@@ -1,33 +1,50 @@
 package org.godotengine.kotlin.annotation
 
-@Target(AnnotationTarget.FUNCTION)
+@Target(
+        AnnotationTarget.FUNCTION,
+        AnnotationTarget.PROPERTY
+)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class Remote
 
-@Target(AnnotationTarget.FUNCTION)
+@Target(
+        AnnotationTarget.FUNCTION,
+        AnnotationTarget.PROPERTY
+)
+@Retention(AnnotationRetention.RUNTIME)
+annotation class Sync
+
+@Target(
+        AnnotationTarget.FUNCTION,
+        AnnotationTarget.PROPERTY
+)
+@Retention(AnnotationRetention.RUNTIME)
+annotation class Master
+
+@Target(
+        AnnotationTarget.FUNCTION,
+        AnnotationTarget.PROPERTY
+)
+@Retention(AnnotationRetention.RUNTIME)
+annotation class Slave //TODO: rename to match new godot convention -> slave is now puppet
+
+@Target(
+        AnnotationTarget.FUNCTION,
+        AnnotationTarget.PROPERTY
+)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class RemoteSync
 
-@Target(AnnotationTarget.FUNCTION)
+@Target(
+        AnnotationTarget.FUNCTION,
+        AnnotationTarget.PROPERTY
+)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class RemoteUnreliable
+annotation class MasterSync
 
-@Target(AnnotationTarget.FUNCTION)
+@Target(
+        AnnotationTarget.FUNCTION,
+        AnnotationTarget.PROPERTY
+)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class RemoteSyncUnreliable
-
-@Target(AnnotationTarget.FUNCTION)
-@Retention(AnnotationRetention.RUNTIME)
-annotation class RemoteId(val id: Int)
-
-@Target(AnnotationTarget.FUNCTION)
-@Retention(AnnotationRetention.RUNTIME)
-annotation class RemoteSyncId(val id: Int)
-
-@Target(AnnotationTarget.FUNCTION)
-@Retention(AnnotationRetention.RUNTIME)
-annotation class RemoteIdUnreliable(val id: Int)
-
-@Target(AnnotationTarget.FUNCTION)
-@Retention(AnnotationRetention.RUNTIME)
-annotation class RemoteSyncIdUnreliable(val id: Int)
+annotation class SlaveSync //TODO: rename to match new godot convention -> slave is now puppet
