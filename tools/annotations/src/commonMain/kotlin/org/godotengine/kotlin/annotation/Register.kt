@@ -1,5 +1,7 @@
 package org.godotengine.kotlin.annotation
 
+import kotlin.reflect.KClass
+
 @Target(
         AnnotationTarget.CLASS
 )
@@ -10,10 +12,10 @@ annotation class RegisterClass
         AnnotationTarget.FUNCTION
 )
 @Retention(AnnotationRetention.RUNTIME)
-annotation class RegisterFunction
+annotation class RegisterFunction(val rpcMode: KClass<out Annotation> = Disabled::class)
 
 @Target(
         AnnotationTarget.PROPERTY
 )
 @Retention(AnnotationRetention.RUNTIME)
-annotation class RegisterProperty(val visibleInEditor: Boolean, val defaultValue: String)
+annotation class RegisterProperty(val visibleInEditor: Boolean, val defaultValue: String, val rpcMode: KClass<out Annotation> = Disabled::class)

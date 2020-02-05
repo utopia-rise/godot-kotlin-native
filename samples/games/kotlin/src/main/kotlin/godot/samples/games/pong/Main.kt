@@ -16,6 +16,7 @@ class Main : Node() {
     lateinit var ballStartPos: Vector2
     lateinit var ballStartVel: Vector2
 
+    @Master
     @RegisterProperty(false, "0")
     var yourScore = 0
     var enemyScore = 0
@@ -35,6 +36,7 @@ class Main : Node() {
         startGame()
     }
 
+    @RegisterFunction(Remote::class)
     fun startGame() {
         ball.position = ballStartPos
         ball.set("xVel", Variant(ballStartVel.x))
@@ -53,6 +55,7 @@ class Main : Node() {
         startGame()
     }
 
+    @Remote
     @RegisterFunction
     fun varargTest(foo: String, bar: Int, vararg params: Int): String {
         return ""

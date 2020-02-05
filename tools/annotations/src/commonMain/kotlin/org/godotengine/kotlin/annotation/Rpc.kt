@@ -1,11 +1,20 @@
 package org.godotengine.kotlin.annotation
 
+import kotlin.reflect.KClass
+
 @Target(
         AnnotationTarget.FUNCTION,
         AnnotationTarget.PROPERTY
 )
 @Retention(AnnotationRetention.RUNTIME)
 annotation class Remote
+
+@Target(
+        AnnotationTarget.FUNCTION,
+        AnnotationTarget.PROPERTY
+)
+@Retention(AnnotationRetention.RUNTIME)
+annotation class Disabled
 
 @Target(
         AnnotationTarget.FUNCTION,
@@ -48,3 +57,16 @@ annotation class MasterSync
 )
 @Retention(AnnotationRetention.RUNTIME)
 annotation class SlaveSync //TODO: rename to match new godot convention -> slave is now puppet
+
+
+fun rpcAnnotations(): Set<KClass<out Annotation>> {
+    return setOf(
+            Remote::class,
+            Sync::class,
+            Master::class,
+            Slave::class,
+            RemoteSync::class,
+            MasterSync::class,
+            SlaveSync::class
+    )
+}

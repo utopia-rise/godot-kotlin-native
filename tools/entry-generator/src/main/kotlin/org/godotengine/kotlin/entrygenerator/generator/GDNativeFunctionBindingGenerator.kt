@@ -3,13 +3,18 @@ package org.godotengine.kotlin.entrygenerator.generator
 import com.squareup.kotlinpoet.*
 import de.jensklingenberg.mpapt.common.findAnnotation
 import de.jensklingenberg.mpapt.common.hasAnnotation
+import de.jensklingenberg.mpapt.common.simpleName
 import de.jensklingenberg.mpapt.model.Element
-import org.godotengine.kotlin.annotation.RegisterSignal
+import org.godotengine.kotlin.annotation.*
+import org.godotengine.kotlin.entrygenerator.mapper.RpcModeAnnotationMapper
 import org.godotengine.kotlin.entrygenerator.model.getVariantType
+import org.jetbrains.kotlin.descriptors.annotations.AnnotationDescriptor
 import org.jetbrains.kotlin.name.Name
+import org.jetbrains.kotlin.resolve.constants.KClassValue
 import org.jetbrains.kotlin.resolve.constants.StringValue
 import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
 import org.jetbrains.kotlin.types.asSimpleType
+import kotlin.reflect.KClass
 
 class GDNativeFunctionBindingGenerator {
     private val nativeScriptInitFunctionBuilder: FunSpec.Builder = createNativeScriptInitFunctionBuilder()
@@ -17,15 +22,56 @@ class GDNativeFunctionBindingGenerator {
     fun registerElement(element: Element, visibleInEditor: Boolean = true, vararg bridgeFunctions: FunSpec) {
         when (element) {
             is Element.ClassElement -> nativeScriptInitFunctionBuilder.addStatement("%M(\"${getFullClassName(element)}\",·\"${getBaseClassOfClass(element)}\"${convertBridgeFunctionsToString(bridgeFunctions)})", MemberName("godot.registration", "registerClass"))
-            is Element.PropertyElement -> nativeScriptInitFunctionBuilder.addStatement("%M(\"${getFullClassName(element)}\",·\"${element.propertyDescriptor.name}\",·$visibleInEditor${convertBridgeFunctionsToString(bridgeFunctions)})", MemberName("godot.registration", "registerProperty"))
+            is Element.PropertyElement -> nativeScriptInitFunctionBuilder.addStatement("%M(\"${getFullClassName(element)}\",·\"${element.propertyDescriptor.name}\",·$visibleInEditor${convertBridgeFunctionsToString(bridgeFunctions)}${getRpcMode(element)})", MemberName("godot.registration", "registerProperty"))
             is Element.FunctionElement -> {
                 if (element.func.hasAnnotation(RegisterSignal::class.java.name)) {
                     nativeScriptInitFunctionBuilder.addStatement("%M(\"${getFullClassName(element, true)}\",·\"${element.simpleName}\"${getSignalArgumentsAsString(element)}${getSignalDefaultArgumentsAsString(element)})", MemberName("godot.registration", "registerSignal"))
                 } else {
-                    nativeScriptInitFunctionBuilder.addStatement("%M(\"${getFullClassName(element)}\",·\"${element.simpleName}\"${convertBridgeFunctionsToString(bridgeFunctions)})", MemberName("godot.registration", "registerMethod"))
+                    nativeScriptInitFunctionBuilder.addStatement("%M(\"${getFullClassName(element)}\",·\"${element.simpleName}\"${convertBridgeFunctionsToString(bridgeFunctions)}${getRpcMode(element)})", MemberName("godot.registration", "registerMethod"))
                 }
             }
             else -> throw IllegalArgumentException("Element of kind ${element.elementKind} is not registrable")
+        }
+    }
+
+    private fun getRpcMode(element: Element.FunctionElement): String {
+        val annotations = element.func.annotations.map { it.fqName!!.asString() }
+        val registerAnnotation = element.func.annotations.findAnnotation(RegisterFunction::class.java.asClassName().canonicalName)
+        return buildRpcModeString(element, annotations, registerAnnotation)
+    }
+
+    private fun getRpcMode(element: Element.PropertyElement): String {
+        val annotations = element.propertyDescriptor.annotations.map { it.fqName!!.asString() }
+        val registerAnnotation = element.propertyDescriptor.annotations.findAnnotation(RegisterProperty::class.java.asClassName().canonicalName)
+        return buildRpcModeString(element, annotations, registerAnnotation)
+    }
+
+    private fun buildRpcModeString(element: Element, annotations: List<String>, registerAnnotation: AnnotationDescriptor?): String {
+        var rpcAnnotation = rpcAnnotations()
+                .map { it.asTypeName().canonicalName }
+                .firstOrNull { annotations.contains(it) }
+
+        if (registerAnnotation == null && rpcAnnotation != null) {
+            throw IllegalArgumentException("$element is annotated with an rpc mode but is not registered with a Register annotation!\nAll elements with an rpc mode have to be registered as well")
+        }
+
+        if (rpcAnnotation == null) {
+            val rpcModeAnnotation = registerAnnotation!!
+                    .allValueArguments
+                    .filterKeys { it.asString() == "rpcMode" }
+                    .ifEmpty { null }
+                    ?.getValue(Name.identifier("rpcMode"))
+                    ?.value
+
+            if (rpcModeAnnotation != null && rpcModeAnnotation != Disabled::class) {
+                rpcAnnotation = (rpcModeAnnotation as KClassValue.Value.NormalClass).classId.asSingleFqName().asString()
+            }
+        }
+
+        return buildString {
+            if (rpcAnnotation != null) {
+                append(",·rpcMode·=·${RpcModeAnnotationMapper.mapRpcModeAnnotationToClassName(rpcAnnotation)}")
+            }
         }
     }
 
