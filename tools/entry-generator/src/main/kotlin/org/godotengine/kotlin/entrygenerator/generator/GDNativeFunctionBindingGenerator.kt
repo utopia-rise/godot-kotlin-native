@@ -4,9 +4,10 @@ import com.squareup.kotlinpoet.*
 import de.jensklingenberg.mpapt.common.findAnnotation
 import de.jensklingenberg.mpapt.common.hasAnnotation
 import de.jensklingenberg.mpapt.model.Element
-import org.godotengine.kotlin.annotation.Signal
+import org.godotengine.kotlin.annotation.RegisterSignal
 import org.godotengine.kotlin.entrygenerator.model.getVariantType
 import org.jetbrains.kotlin.name.Name
+import org.jetbrains.kotlin.resolve.constants.StringValue
 import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
 import org.jetbrains.kotlin.types.asSimpleType
 
@@ -16,10 +17,10 @@ class GDNativeFunctionBindingGenerator {
     fun registerElement(element: Element, visibleInEditor: Boolean = true, vararg bridgeFunctions: FunSpec) {
         when (element) {
             is Element.ClassElement -> nativeScriptInitFunctionBuilder.addStatement("%M(\"${getFullClassName(element)}\",·\"${getBaseClassOfClass(element)}\"${convertBridgeFunctionsToString(bridgeFunctions)})", MemberName("godot.registration", "registerClass"))
-            is Element.PropertyElement -> nativeScriptInitFunctionBuilder.addStatement("%M(\"${getFullClassName(element)}\",·\"${element.propertyDescriptor.name}\", $visibleInEditor${convertBridgeFunctionsToString(bridgeFunctions)})", MemberName("godot.registration", "registerProperty"))
+            is Element.PropertyElement -> nativeScriptInitFunctionBuilder.addStatement("%M(\"${getFullClassName(element)}\",·\"${element.propertyDescriptor.name}\",·$visibleInEditor${convertBridgeFunctionsToString(bridgeFunctions)})", MemberName("godot.registration", "registerProperty"))
             is Element.FunctionElement -> {
-                if (element.func.hasAnnotation(Signal::class.java.name)) {
-                    nativeScriptInitFunctionBuilder.addStatement("%M(\"${getFullClassName(element)}\",·${element.simpleName}${getSignalArgumentsAsString(element)}${getSignalDefaultArgumentsAsString(element)})", MemberName("godot.registration", "registerSignal"))
+                if (element.func.hasAnnotation(RegisterSignal::class.java.name)) {
+                    nativeScriptInitFunctionBuilder.addStatement("%M(\"${getFullClassName(element, true)}\",·\"${element.simpleName}\"${getSignalArgumentsAsString(element)}${getSignalDefaultArgumentsAsString(element)})", MemberName("godot.registration", "registerSignal"))
                 } else {
                     nativeScriptInitFunctionBuilder.addStatement("%M(\"${getFullClassName(element)}\",·\"${element.simpleName}\"${convertBridgeFunctionsToString(bridgeFunctions)})", MemberName("godot.registration", "registerMethod"))
                 }
@@ -71,10 +72,12 @@ class GDNativeFunctionBindingGenerator {
     private fun getSignalDefaultArgumentsAsString(element: Element.FunctionElement): String {
         val defaultArguments = element
                 .func
-                .findAnnotation(Signal::class.java.name)
+                .findAnnotation(RegisterSignal::class.java.name)
                 ?.allValueArguments
                 ?.values
-                ?.map { it.value as String }
+                ?.flatMap { it.value as ArrayList<*> }
+                ?.map { (it as StringValue).value }
+
 
         if (defaultArguments?.size != element.func.valueParameters.size) {
             throw IllegalArgumentException("Amount of default arguments provided does not match the amount of arguments of the signal")
@@ -120,8 +123,12 @@ class GDNativeFunctionBindingGenerator {
         return element.classDescriptor.fqNameSafe.asString()
     }
 
-    private fun getFullClassName(element: Element.FunctionElement): String {
-        return element.func.containingDeclaration.fqNameSafe.asString()
+    private fun getFullClassName(element: Element.FunctionElement, isSignal: Boolean = false): String {
+        return if (isSignal) {
+            element.func.containingDeclaration.containingDeclaration!!.fqNameSafe.asString()
+        } else {
+            element.func.containingDeclaration.fqNameSafe.asString()
+        }
     }
 
     private fun getFullClassName(element: Element.PropertyElement): String {

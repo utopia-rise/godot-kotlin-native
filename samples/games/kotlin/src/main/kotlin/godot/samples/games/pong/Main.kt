@@ -20,6 +20,13 @@ class Main : Node() {
     var yourScore = 0
     var enemyScore = 0
 
+    interface Signals {
+        @RegisterSignal
+        fun testSignal() {}
+        @RegisterSignal("0", "\"foo\"")
+        fun testSignalWithArgs(intArg: Int, stringArg: String) {}
+    }
+
     @RegisterFunction
     override fun _ready() {
         ball = KinematicBody2D from getNode(NodePath("Ball"))

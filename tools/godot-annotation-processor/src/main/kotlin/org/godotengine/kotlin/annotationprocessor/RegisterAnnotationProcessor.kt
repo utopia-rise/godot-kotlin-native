@@ -16,7 +16,8 @@ class RegisterAnnotationProcessor : AbstractProcessor() {
             setOf(
                     RegisterClass::class.java.name,
                     RegisterFunction::class.java.name,
-                    RegisterProperty::class.java.name
+                    RegisterProperty::class.java.name,
+                    RegisterSignal::class.java.name
             )
 
     override fun isTargetPlatformSupported(platform: TargetPlatform): Boolean {
@@ -38,19 +39,34 @@ class RegisterAnnotationProcessor : AbstractProcessor() {
     private val classes: MutableSet<Element.ClassElement> = mutableSetOf()
     private val properties: MutableSet<Element.PropertyElement> = mutableSetOf()
     private val functions: MutableSet<Element.FunctionElement> = mutableSetOf()
+    private val signals: MutableSet<Element.FunctionElement> = mutableSetOf()
 
     override fun process(roundEnvironment: RoundEnvironment) {
         log("Starting to process \"Register\" annotations") //TODO: remove when done with developing the code generation
 
-        roundEnvironment.getElementsAnnotatedWith(listOf(RegisterClass::class.java.name, RegisterFunction::class.java.name, RegisterProperty::class.java.name)).forEach {
-            log("${it.simpleName} is annotated with Register")
-            when (it) {
-                is Element.ClassElement -> classes.add(it)
-                is Element.PropertyElement -> properties.add(it)
-                is Element.FunctionElement -> functions.add(it)
-                else -> log("$it is not handled by register code generation logic!")
-            }
-        }
+        classes.addAll(
+                roundEnvironment
+                        .getElementsAnnotatedWith(RegisterClass::class.java.name)
+                        .map { it as Element.ClassElement }
+        )
+
+        properties.addAll(
+                roundEnvironment
+                        .getElementsAnnotatedWith(RegisterProperty::class.java.name)
+                        .map { it as Element.PropertyElement }
+        )
+
+        functions.addAll(
+                roundEnvironment
+                        .getElementsAnnotatedWith(RegisterFunction::class.java.name)
+                        .map { it as Element.FunctionElement }
+        )
+
+        signals.addAll(
+                roundEnvironment
+                        .getElementsAnnotatedWith(RegisterSignal::class.java.name)
+                        .map { it as Element.FunctionElement }
+        )
 
         performSanityChecks()
 
@@ -74,7 +90,8 @@ class RegisterAnnotationProcessor : AbstractProcessor() {
                         getKaptGeneratedDirectory(),
                         classes,
                         properties,
-                        functions
+                        functions,
+                        signals
                 )
         log("***Processor over***") //TODO: remove when done with developing the code generation
     }

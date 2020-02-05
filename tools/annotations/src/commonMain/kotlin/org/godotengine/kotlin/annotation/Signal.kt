@@ -1,5 +1,5 @@
 package org.godotengine.kotlin.annotation
 
-@Target(AnnotationTarget.CLASS)
+@Target(AnnotationTarget.FUNCTION)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class Signal(vararg val defaultValues: String)
+annotation class RegisterSignal(vararg val defaultValues: String)
