@@ -76,37 +76,29 @@ class Transform2D: CoreType {
 
 
 
-    fun tdotx(v: Vector2): Double =
-            elements[0][0] * v.x + elements[1][0] * v.y
+    fun tdotx(v: Vector2) = elements[0][0] * v.x + elements[1][0] * v.y
 
-    fun tdoty(v: Vector2): Double =
-            elements[0][1] * v.x + elements[1][1] * v.y
+    fun tdoty(v: Vector2) = elements[0][1] * v.x + elements[1][1] * v.y
 
-    operator fun get(n: Int): Vector2 =
-            elements[n]
+    operator fun get(n: Int) = elements[n]
 
-    fun getAxis(axis: Int) =
-            elements[axis]
+    fun getAxis(axis: Int) = elements[axis]
 
     fun setAxis(axis: Int, vec: Vector2) {
         elements[axis] = vec
     }
 
-    fun getOrigin(): Vector2 =
-            elements[2]
+    fun getOrigin() = elements[2]
 
     fun setOrigin(origin: Vector2) {
         elements[2] = origin
     }
 
-    fun basisXform(v: Vector2): Vector2 =
-            Vector2(tdotx(v), tdoty(v))
+    fun basisXform(v: Vector2) = Vector2(tdotx(v), tdoty(v))
 
-    fun basisXformInv(v: Vector2): Vector2 =
-            Vector2(elements[0].dot(v), elements[1].dot(v))
+    fun basisXformInv(v: Vector2) = Vector2(elements[0].dot(v), elements[1].dot(v))
 
-    fun xform(v: Vector2): Vector2 =
-            Vector2(tdotx(v), tdoty(v)) + elements[2]
+    fun xform(v: Vector2) = Vector2(tdotx(v), tdoty(v)) + elements[2]
 
     fun xformInv(vec: Vector2): Vector2 {
         val v = vec - elements[2]
@@ -127,10 +119,10 @@ class Transform2D: CoreType {
     }
 
     fun setRotationAndScale(rot: Double, scale: Vector2) {
-        elements[0][0]=cos(rot)*scale.x
-        elements[1][1]=cos(rot)*scale.y
-        elements[1][0]=-sin(rot)*scale.y
-        elements[0][1]=sin(rot)*scale.x
+        elements[0][0] = cos(rot) * scale.x
+        elements[1][1] = cos(rot) * scale.y
+        elements[1][0] = -sin(rot) * scale.y
+        elements[0][1] = sin(rot) * scale.x
     }
 
     fun xformInv(rect: Rect2): Rect2 {
@@ -333,8 +325,7 @@ class Transform2D: CoreType {
     }
 
 
-    override fun toString(): String =
-            elements[0].toString() + ", " + elements[1].toString() + ", " + elements[2]
+    override fun toString() = "${elements[0]}, ${elements[1]}, ${elements[2]}"
 
     override fun hashCode(): Int = this.toString().hashCode()
 }
