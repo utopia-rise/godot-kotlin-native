@@ -8,6 +8,15 @@ import kotlin.math.*
 
 class Vector2(var x: Double, var y: Double) : Comparable<Vector2>, CoreType {
 
+    companion object {
+        fun linearInterpolate(vector1: Vector2, vector2: Vector2, t: Double): Vector2 {
+            val res: Vector2 = vector1
+            res.x += (t * (vector2.x - vector1.x))
+            res.y += (t * (vector2.y - vector1.y))
+            return res
+        }
+    }
+
     enum class Axis(private val value: Int) {
         X(0),
         Y(1);
@@ -134,32 +143,23 @@ class Vector2(var x: Double, var y: Double) : Comparable<Vector2>, CoreType {
         return v
     }
 
-    fun length(): Double =
-            sqrt(x * x + y * y)
+    fun length() = sqrt(x * x + y * y)
 
-    fun lengthSquared(): Double =
-            x * x + y * y
+    fun lengthSquared() = x * x + y * y
 
-    fun distanceTo(vector2: Vector2): Double =
-            sqrt((x - vector2.x) * (x - vector2.x) + (y - vector2.y) * (y - vector2.y))
+    fun distanceTo(vector2: Vector2) = sqrt((x - vector2.x) * (x - vector2.x) + (y - vector2.y) * (y - vector2.y))
 
-    fun distanceSquaredTo(vector2: Vector2): Double =
-            (x - vector2.x) * (x - vector2.x) + (y - vector2.y) * (y - vector2.y)
+    fun distanceSquaredTo(vector2: Vector2) = (x - vector2.x) * (x - vector2.x) + (y - vector2.y) * (y - vector2.y)
 
-    fun angleTo(vector2: Vector2): Double =
-            atan2(cross(vector2), dot(vector2))
+    fun angleTo(vector2: Vector2) = atan2(cross(vector2), dot(vector2))
 
-    fun angleToPoint(vector2: Vector2): Double =
-            atan2(y - vector2.y, x - vector2.x)
+    fun angleToPoint(vector2: Vector2) = atan2(y - vector2.y, x - vector2.x)
 
-    fun dot(other: Vector2): Double =
-            x * other.x + y * other.y
+    fun dot(other: Vector2) = x * other.x + y * other.y
 
-    fun cross(other: Vector2): Double =
-            x * other.y - y * other.x
+    fun cross(other: Vector2) = x * other.y - y * other.x
 
-    fun cross(other: Double): Vector2 =
-            Vector2(other * y, -other * x)
+    fun cross(other: Double) = Vector2(other * y, -other * x)
 
     fun project(vec: Vector2): Vector2 {
         val v1: Vector2 = vec
@@ -202,31 +202,20 @@ class Vector2(var x: Double, var y: Double) : Comparable<Vector2>, CoreType {
                 (-p0 + p1 * 3.0 - p2 * 3.0 + p3) * t3) * 0.5
     }
 
-    fun slide(vec: Vector2): Vector2 =
-            this - vec * this.dot(vec)
+    fun slide(vec: Vector2) = vec - this * this.dot(vec)
 
-    fun reflect(vec: Vector2): Vector2 {
-//        val vecSub = vec
-//        vecSub.y = -vecSub.y
-        return vec * this.dot(vec) * 2.0 - this
-        //0,1
-        //100,300
-        // -> 100,-300
-    }
+    fun reflect(vec: Vector2) = vec - this * this.dot(vec) * 2.0
 
-    fun bounce(vec: Vector2): Vector2 =
-    		-reflect(vec)
+    fun bounce(vec: Vector2) = -reflect(vec)
 
-    fun angle(): Double =
-            atan2(y, x)
+    fun angle() = atan2(y, x)
 
     fun setRotation(radians: Double) {
         x = cos(radians)
         y = sin(radians)
     }
 
-    fun abs(): Vector2 =
-            Vector2(kotlin.math.abs(x), kotlin.math.abs(y))
+    fun abs() = Vector2(abs(x), abs(y))
 
     fun rotated(by: Double): Vector2 {
         var v = Vector2(0.0, 0.0)
@@ -235,25 +224,19 @@ class Vector2(var x: Double, var y: Double) : Comparable<Vector2>, CoreType {
         return v
     }
 
-    fun tangent(): Vector2 =
-            Vector2(y, -x)
+    fun tangent() = Vector2(y, -x)
 
-    fun floor(): Vector2 =
-            Vector2(kotlin.math.floor(x), kotlin.math.floor(y))
+    fun floor() = Vector2(floor(x), floor(y))
 
     fun snapped(by: Vector2): Vector2 {
-        val newx: Double = if (by.x != 0.0)
-            kotlin.math.floor(x / by.x + 0.5)
-        else x
-        val newy = if (by.y != 0.0)
-            kotlin.math.floor(y / by.y + 0.5)
-        else y
+        val newX: Double = if (by.x != 0.0) floor(x / by.x + 0.5) else x
 
-        return Vector2(newx, newy)
+        val newY = if (by.y != 0.0) floor(y / by.y + 0.5) else y
+
+        return Vector2(newX, newY)
     }
 
-    fun aspect(): Double =
-            this.width / this.height
+    fun aspect()= this.width / this.height
 
 
 
@@ -261,5 +244,4 @@ class Vector2(var x: Double, var y: Double) : Comparable<Vector2>, CoreType {
     override fun hashCode(): Int = this.toString().hashCode()
 }
 
-operator fun Double.times(vec: Vector2): Vector2 =
-        vec * this
+operator fun Double.times(vec: Vector2) = vec * this

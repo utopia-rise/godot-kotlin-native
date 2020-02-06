@@ -15,29 +15,29 @@ class Variant: CoreType { // FIXME: redundant .copy
         REAL(3),
         STRING(4),
 
-        VECTOR2(5),        // 5
+        VECTOR2(5), // 5
         RECT2(6),
         VECTOR3(7),
         TRANSFORM2D(8),
         PLANE(9),
-        QUAT(10),            // 10
+        QUAT(10), // 10
         RECT3(11),
         BASIS(12),
         TRANSFORM(13),
 
         COLOR(14),
-        NODE_PATH(15),              // 15
+        NODE_PATH(15), // 15
         _RID(16),
         OBJECT(17),
         DICTIONARY(18),
         ARRAY(19),
 
-        POOL_BYTE_ARRAY(20),        // 20
+        POOL_BYTE_ARRAY(20), // 20
         POOL_INT_ARRAY(21),
         POOL_REAL_ARRAY(22),
         POOL_STRING_ARRAY(23),
         POOL_VECTOR2_ARRAY(24),
-        POOL_VECTOR3_ARRAY(25),     // 25
+        POOL_VECTOR3_ARRAY(25), // 25
         POOL_COLOR_ARRAY(26),
 
         VARIANT_MAX(27);
@@ -358,7 +358,7 @@ class Variant: CoreType { // FIXME: redundant .copy
 
     fun toTransform2D(): Transform2D = Transform2D(godot_variant_as_transform2d(nativeValue))
 
-    fun getType(): Variant.Type = Type.fromInt(godot_variant_get_type(nativeValue).value.toLong())
+    fun getType(): Type = Type.fromInt(godot_variant_get_type(nativeValue).value.toLong())
 
     fun call(str: String, args: Array<Variant> = arrayOf()): Variant {
         memScoped {
