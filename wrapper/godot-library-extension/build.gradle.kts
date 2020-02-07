@@ -23,20 +23,28 @@ kotlin {
         }
     }
 
-    val target =
+    val targets =
             if (project.hasProperty("platform")) {
                 when (platform) {
-                    "windows" -> targetFromPreset(presets["mingwX64"], "windows")
-                    "linux" -> targetFromPreset(presets["linuxX64"], "linux")
-                    "macos" -> targetFromPreset(presets["macosX64"], "macos")
-                    else -> targetFromPreset(presets["linuxX64"], "linux")
+                    "windows" -> listOf(targetFromPreset(presets["mingwX64"], "windows"))
+                    "linux" -> listOf(targetFromPreset(presets["linuxX64"], "linux"))
+                    "macos" -> listOf(targetFromPreset(presets["macosX64"], "macos"))
+                    else -> listOf(targetFromPreset(presets["linuxX64"], "linux"))
                 }
-            } else targetFromPreset(presets["linuxX64"], "linux")
+            } else {
+                listOf(
+                        targetFromPreset(presets["linuxX64"], "linux"),
+                        targetFromPreset(presets["macosX64"], "macos"),
+                        targetFromPreset(presets["mingwX64"], "windows")
+                )
+            }
 
-    target.compilations.all {
-        dependencies {
-            implementation(project(":wrapper:godot-library"))
-            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-native:1.3.3")
+    targets.forEach {
+        it.compilations.all {
+            dependencies {
+                implementation(project(":wrapper:godot-library"))
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-native:1.3.3")
+            }
         }
     }
 }
@@ -45,7 +53,7 @@ tasks.build {
     finalizedBy(tasks.publishToMavenLocal)
 }
 
-if(project.hasProperty("bintrayUser") && project.hasProperty("bintrayKey")
+if (project.hasProperty("bintrayUser") && project.hasProperty("bintrayKey")
         && project.hasProperty("platform")) {
     bintray {
         user = bintrayUser
