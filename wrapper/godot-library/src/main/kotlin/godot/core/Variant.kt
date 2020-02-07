@@ -242,9 +242,13 @@ class Variant: CoreType { // FIXME: redundant .copy
         }
     }
 
-    constructor(other: Object) {
+    constructor(other: Object?) {
         memScoped {
-            nativeValue = nativeValue.copy { godot_variant_new_object(this.ptr, other.getRawMemory(memScope)) }
+            nativeValue = if (other != null) {
+                nativeValue.copy { godot_variant_new_object(this.ptr, other.getRawMemory(memScope)) }
+            } else {
+                nativeValue.copy { godot_variant_new_nil(this.ptr) }
+            }
         }
     }
 
