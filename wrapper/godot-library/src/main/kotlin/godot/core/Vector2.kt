@@ -204,7 +204,7 @@ class Vector2(var x: Double, var y: Double) : Comparable<Vector2>, CoreType {
 
     fun slide(vec: Vector2) = vec - this * this.dot(vec)
 
-    fun reflect(vec: Vector2) = vec - this * this.dot(vec) * 2.0
+    fun reflect(vec: Vector2) = vec * this.dot(vec) * 2.0 - this
 
     fun bounce(vec: Vector2) = -reflect(vec)
 
