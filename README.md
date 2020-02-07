@@ -1,4 +1,4 @@
-![Kotlin GDNative Logo](https://i.imgur.com/WBsPe3n.png)
+![Kotlin GDNative Logo](https://imgur.com/dSL1Vch.png)
 
 # Kotlin/Native wrapper for the Godot Game Engine
 
