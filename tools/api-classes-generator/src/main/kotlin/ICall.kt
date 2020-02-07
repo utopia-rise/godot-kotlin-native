@@ -75,7 +75,7 @@ class ICall(
                 )
             } else {
                 codeBlockBuilder.add(
-                        "    val retVar = %M<%T>(8)\n",
+                        "    val retVar = %M<%T>(20)\n",
                         MemberName("kotlinx.cinterop", "allocArray"),
                         ClassName("kotlinx.cinterop", "ByteVar")
                 )
