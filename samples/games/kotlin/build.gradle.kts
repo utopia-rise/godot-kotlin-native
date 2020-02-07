@@ -111,8 +111,8 @@ kotlin {
         )
     }
 
-    targets.forEach {
-        it.compilations.getByName("main") {
+    targets.forEach { target ->
+        target.compilations.getByName("main") {
             if (this is org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeCompilation) {
                 println("Configuring target ${this.target.name}")
                 this.target.binaries {
@@ -161,4 +161,3 @@ kotlin {
         }
     }
 }
-

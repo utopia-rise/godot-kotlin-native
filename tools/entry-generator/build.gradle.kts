@@ -20,7 +20,7 @@ repositories {
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
-    implementation(project(":tools:annotations"))
+    compileOnly(project(":tools:annotations"))
     compileOnly("org.jetbrains.kotlin:kotlin-compiler-embeddable") //used for class analisation without reflection
     implementation("de.jensklingenberg:mpapt-runtime:${Dependencies.mpaptVersion}")
     implementation("com.squareup:kotlinpoet:${Dependencies.kotlinPoetVersion}")
