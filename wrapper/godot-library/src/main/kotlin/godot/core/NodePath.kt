@@ -50,6 +50,10 @@ class NodePath : CoreType {
 
     fun isEmpty(): Boolean = godot_node_path_is_empty(nativeValue)
 
+    fun getAsPropertyPath() = NodePath(godot_node_path_get_as_property_path(nativeValue))
+
+    fun getConcatenatedSubnames() = godot_node_path_get_concatenated_subnames(nativeValue).toKString()
+
     override fun equals(other: Any?): Boolean =
         if(other is NodePath) godot_node_path_operator_equal(nativeValue, other.nativeValue)
         else false
@@ -57,6 +61,4 @@ class NodePath : CoreType {
     override fun hashCode(): Int {
         return nativeValue.hashCode()
     }
-
-
 }
