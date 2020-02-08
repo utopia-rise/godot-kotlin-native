@@ -176,16 +176,31 @@ class GDArray: CoreType { // FIXME: .copy
         godot_array_sort_custom(nativeValue, obj.getRawMemory(memScope), func.toGDString())
     }
 
+    fun bsearch(value: Variant, before: Boolean): Int = godot_array_bsearch(nativeValue, value.nativeValue, before)
+
+    fun bsearchCustom(value: Variant, obj: Object, func: String, before: Boolean): Int = memScoped {
+        godot_array_bsearch_custom(nativeValue, value.nativeValue, obj.getRawMemory(memScope), func.toGDString(), before)
+    }
+
+    fun duplicate(deep: Boolean) = GDArray(godot_array_duplicate(nativeValue, deep))
+
+    fun max() = Variant(godot_array_max(nativeValue))
+
+    fun min() = Variant(godot_array_min(nativeValue))
+
+    fun shuffle() {
+        godot_array_shuffle(nativeValue)
+    }
 
     override fun equals(other: Any?): Boolean {
-        if (this === other)
-            return true
-        if (other !is GDArray)
-            return false
+        if (this === other) return true
+
+        if (other !is GDArray) return false
+
         return this.hashCode() == other.hashCode()
     }
 }
 
-
 fun Array<*>.toGDArray(): GDArray = GDArray(this)
+
 fun godotArrayOf(vararg params: Any?): GDArray = GDArray(params)

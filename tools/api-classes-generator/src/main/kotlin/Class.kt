@@ -176,7 +176,8 @@ class Class(
                     FunSpec.builder("from")
                             .addModifiers(KModifier.INFIX)
                             .addParameter("other", ClassName(if (node.value.name.isCoreType()) "godot.core" else "godot", node.value.name))
-                            .addStatement("return $name(\"\").apply { setRawMemory(other.rawMemory) }").build()
+                            .addStatement("return $name(\"\").apply{ setRawMemory(other.rawMemory) }")
+                            .build()
             )
             node = node.parent
         }
@@ -231,14 +232,14 @@ class Class(
                                     ParameterSpec.builder(
                                             "schedule",
                                             LambdaTypeName.get(
-                                                    parameters = *arrayOf(parameterTypeName),
+                                                    receiver = parameterTypeName,
                                                     returnType = ClassName("kotlin", "Unit")
                                             )
                                     ).build()
                             )
                             .returns(parameterTypeName)
                             .addStatement(
-                                    """return $parameterName.apply {
+                                    """return $parameterName.apply{
                                                 |    schedule(this)
                                                 |    $parameterName = this
                                                 |}

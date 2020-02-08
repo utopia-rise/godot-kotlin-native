@@ -45,8 +45,6 @@ class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>
         z = arr[2].toDouble()
     }
 
-
-
     operator fun get(n: Int): Double =
             when (n) {
                 0 -> x
@@ -110,21 +108,13 @@ class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>
             }
     }
 
-    fun abs(): Vector3 =
-            Vector3(kotlin.math.abs(x), kotlin.math.abs(y), kotlin.math.abs(z))
+    fun abs(): Vector3 = Vector3(kotlin.math.abs(x), kotlin.math.abs(y), kotlin.math.abs(z))
 
-    fun ceil(): Vector3 =
-            Vector3(kotlin.math.ceil(x), kotlin.math.ceil(y), kotlin.math.ceil(z))
+    fun ceil(): Vector3 = Vector3(kotlin.math.ceil(x), kotlin.math.ceil(y), kotlin.math.ceil(z))
 
-    fun cross(b: Vector3): Vector3 =
-            Vector3((y * b.z) - (z * b.y),
-                    (z * b.x) - (x * b.z),
-                    (x * b.y) - (y * b.x))
+    fun cross(b: Vector3): Vector3 = Vector3((y * b.z) - (z * b.y), (z * b.x) - (x * b.z), (x * b.y) - (y * b.x))
 
-    fun linearInterpolate(b: Vector3, t: Double): Vector3 =
-            Vector3(x + (t * (b.x - x)),
-                    y + (t * (b.y - y)),
-                    z + (t * (b.z - z)))
+    fun linearInterpolate(b: Vector3, t: Double): Vector3 = Vector3(x + (t * (b.x - x)), y + (t * (b.y - y)), z + (t * (b.z - z)))
 
     fun cubicInterpolate(b: Vector3, pre: Vector3, post: Vector3, t: Double): Vector3 {
         val p0: Vector3 = pre
@@ -141,42 +131,41 @@ class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>
                 (-p0 + p1 * 3.0 - p2 * 3.0 + p3) * t3) * 0.5
     }
 
-    fun length(): Double =
-            sqrt(x * x + y * y + z * z)
+    fun length(): Double = sqrt(x * x + y * y + z * z)
 
-    fun lengthSquared(): Double =
-            x * x + y * y + z * z
+    fun lengthSquared(): Double = x * x + y * y + z * z
 
-    fun distanceSquaredTo(b: Vector3): Double =
-            (b - this).length()
+    fun distanceSquaredTo(b: Vector3): Double = (b - this).lengthSquared()
 
-    fun distanceTo(b: Vector3): Double =
-            (b - this).lengthSquared()
+    fun distanceTo(b: Vector3): Double = (b - this).length()
 
-    fun dot(b: Vector3): Double =
-            x * b.x + y * b.y + z * b.z
+    fun dot(b: Vector3): Double = x * b.x + y * b.y + z * b.z
 
-    fun floor(): Vector3 =
-            Vector3(kotlin.math.floor(x), kotlin.math.floor(y), kotlin.math.floor(z))
+    fun floor(): Vector3 = Vector3(kotlin.math.floor(x), kotlin.math.floor(y), kotlin.math.floor(z))
 
-    fun inverse(): Vector3 =
-            Vector3(1.0 / x, 1.0 / y, 1.0 / z)
+    fun inverse(): Vector3 = Vector3(1.0 / x, 1.0 / y, 1.0 / z)
 
-    fun maxAxis(): Int =
-            if (x < y)
-                if (y < z) 2
-                else 1
-            else
-                if (x < z) 2
-                else 0
+    fun isNormalized() = kotlin.math.abs(lengthSquared() - 1.0) < 0.00001
 
-    fun minAxis(): Int =
-            if (x < y)
-                if (x < z) 0
-                else 2
-            else
-                if (y < z) 1
-                else 2
+    fun outer(b: Vector3) = Basis(
+            Vector3(x * b.x, x * b.y, x * b.z),
+            Vector3(y * b.x, y * b.y, y * b.z),
+            Vector3(z * b.x, z * b.y, z * b.z)
+    )
+
+    fun maxAxis() = if (x < y) {
+        if (y < z) 2 else 1
+    } else {
+        if (x < z) 2 else 0
+    }
+
+    fun minAxis() = if (x < y) {
+        if (x < z) 0
+        else 2
+    } else {
+        if (y < z) 1
+        else 2
+    }
 
     fun normalize() {
         val l: Double = this.length()
@@ -197,8 +186,7 @@ class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>
         return v
     }
 
-    fun reflect(by: Vector3): Vector3 =
-            by - this * this.dot(by) * 2.0
+    fun reflect(by: Vector3) = by - this * this.dot(by) * 2.0
 
     fun rotated(axis: Vector3, phi: Double): Vector3 {
         val v = this
@@ -213,8 +201,7 @@ class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>
         this.z = ret.z
     }
 
-    fun slide(by: Vector3): Vector3 =
-            by - this * this.dot(by)
+    fun slide(by: Vector3): Vector3 = by - this * this.dot(by)
 
     fun snap(vecal: Double) {
         if (vecal != 0.0) {
@@ -231,14 +218,12 @@ class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>
     }
 
 
-    override fun toString() = "$x, $y, $z"
+    override fun toString() = "($x, $y, $z)"
     override fun hashCode(): Int = this.toString().hashCode()
 }
 
-operator fun Double.times(vecec: Vector3) =
-        vecec * this
+operator fun Double.times(vecec: Vector3) = vecec * this
 
-fun vec3Cross(a: Vector3, b: Vector3): Vector3 =
-        a.cross(b)
+fun vec3Cross(a: Vector3, b: Vector3) = a.cross(b)
 
 

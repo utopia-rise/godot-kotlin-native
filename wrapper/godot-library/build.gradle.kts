@@ -23,27 +23,35 @@ kotlin {
         }
     }
 
-    val target =
+    val targets =
             if (project.hasProperty("platform")) {
                 when (platform) {
-                    "windows" -> targetFromPreset(presets["mingwX64"], "windows")
-                    "linux" -> targetFromPreset(presets["linuxX64"], "linux")
-                    "macos" -> targetFromPreset(presets["macosX64"], "macos")
-                    else -> targetFromPreset(presets["linuxX64"], "linux")
+                    "windows" -> listOf(targetFromPreset(presets["mingwX64"], "windows"))
+                    "linux" -> listOf(targetFromPreset(presets["linuxX64"], "linux"))
+                    "macos" -> listOf(targetFromPreset(presets["macosX64"], "macos"))
+                    else -> listOf(targetFromPreset(presets["linuxX64"], "linux"))
                 }
-            } else targetFromPreset(presets["linuxX64"], "linux")
-
-    target.compilations.getByName("main") {
-        if (this is org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeCompilation) {
-            println("Configuring target ${target.name}")
-            cinterops {
-                create("GDNative") {
-                    defFile("src/main/c_interop/godot.def")
-                    includeDirs("../lib/godot_headers", "src/main/c_interop")
-                }
+            } else {
+                listOf(
+                        targetFromPreset(presets["linuxX64"], "linux"),
+                        targetFromPreset(presets["macosX64"], "macos"),
+                        targetFromPreset(presets["mingwX64"], "windows")
+                )
             }
-        } else {
-            System.err.println("Not a native target! TargetName: ${target.name}")
+
+    targets.forEach {
+        it.compilations.getByName("main") {
+            if (this is org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeCompilation) {
+                println("Configuring target ${it.name}")
+                cinterops {
+                    create("GDNative") {
+                        defFile("src/main/c_interop/godot.def")
+                        includeDirs("../lib/godot_headers", "src/main/c_interop")
+                    }
+                }
+            } else {
+                System.err.println("Not a native target! TargetName: ${it.name}")
+            }
         }
     }
 }
@@ -52,7 +60,7 @@ tasks.build {
     finalizedBy(tasks.publishToMavenLocal)
 }
 
-if(project.hasProperty("bintrayUser") && project.hasProperty("bintrayKey")
+if (project.hasProperty("bintrayUser") && project.hasProperty("bintrayKey")
         && project.hasProperty("platform")) {
     bintray {
         user = bintrayUser

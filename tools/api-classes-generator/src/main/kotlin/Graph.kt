@@ -27,8 +27,9 @@ fun List<Class>.buildTree(): Graph<Class> {
 
 
 fun Graph<Class>.doAncestorsHaveMethod(cl: Class, method: Method): Boolean {
-    if (cl.baseClass == "")
-        return false
+    if (method.name == "toString") return true
+
+    if (cl.baseClass == "") return false
 
     fun check(m: Method): Boolean {
         if (m.name == method.name && m.arguments.size == method.arguments.size) {

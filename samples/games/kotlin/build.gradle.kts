@@ -1,3 +1,5 @@
+val platform: String by project
+
 buildscript {
     repositories {
         mavenLocal()
@@ -51,20 +53,29 @@ kotlin {
         }
     }
 
-    val targets = listOf(
-            targetFromPreset(presets["godotMingwX64"], "windows"),
-            targetFromPreset(presets["godotLinuxX64"], "linux"),
-            targetFromPreset(presets["godotMacosX64"], "macos")
-    )
+    val targets = if (project.hasProperty("platform")) {
+        when (platform) {
+            "windows" -> listOf(targetFromPreset(presets["godotMingwX64"], "windows"))
+            "linux" -> listOf(targetFromPreset(presets["godotLinuxX64"], "linux"))
+            "macos" -> listOf(targetFromPreset(presets["godotMacosX64"], "macos"))
+            else -> listOf(targetFromPreset(presets["godotMacosX64"], "macos"))
+        }
+    } else {
+        listOf(
+                targetFromPreset(presets["godotLinuxX64"], "linux"),
+                targetFromPreset(presets["godotMacosX64"], "macos"),
+                targetFromPreset(presets["godotMingwX64"], "windows")
+        )
+    }
 
-    targets.forEach { target ->
-        target.compilations.getByName("main") {
+    targets.forEach {
+        it.compilations.getByName("main") {
             if (this is org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeCompilation) {
-                println("Configuring target ${target.name}")
+                println("Configuring target ${this.target.name}")
                 this.target.binaries {
                     sharedLib(listOf(org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG))
                 }
-                target.compilations.all {
+                this.target.compilations.all {
                     dependencies {
                         implementation("org.godotengine.kotlin:godot-library:1.0.0")
                         implementation("org.godotengine.kotlin:annotations:0.0.1-SNAPSHOT")
@@ -76,3 +87,4 @@ kotlin {
         }
     }
 }
+

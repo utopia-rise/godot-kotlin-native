@@ -83,16 +83,16 @@ class Transform: CoreType {
     }
 
     fun xform(vector: Vector3): Vector3 =
-            Vector3(basis[0].dot(vector)+origin.x,
-                    basis[1].dot(vector)+origin.y,
-                    basis[2].dot(vector)+origin.z)
+            Vector3(basis[0].dot(vector) + origin.x,
+                    basis[1].dot(vector) + origin.y,
+                    basis[2].dot(vector) + origin.z)
 
     fun xformInv(vector: Vector3): Vector3 {
         val v = vector - origin
         return Vector3(
-                (basis[0][0]*v.x ) + ( basis[1][0]*v.y ) + ( basis[2][0]*v.z ),
-                (basis[0][1]*v.x ) + ( basis[1][1]*v.y ) + ( basis[2][1]*v.z ),
-                (basis[0][2]*v.x ) + ( basis[1][2]*v.y ) + ( basis[2][2]*v.z )
+                (basis[0][0] * v.x ) + ( basis[1][0] * v.y ) + ( basis[2][0] * v.z ),
+                (basis[0][1] * v.x ) + ( basis[1][1] * v.y ) + ( basis[2][1] * v.z ),
+                (basis[0][2] * v.x ) + ( basis[1][2] * v.y ) + ( basis[2][2] * v.z )
         )
     }
 
@@ -105,7 +105,7 @@ class Transform: CoreType {
         val normal = pointDir - point
         normal.normalize()
 
-        return Plane( normal, normal.dot(point) )
+        return Plane(normal, normal.dot(point))
     }
 
     fun xformInv(plane: Plane): Plane {
@@ -117,14 +117,14 @@ class Transform: CoreType {
         val normal = pointDir - point
         normal.normalize()
 
-        return Plane( normal, normal.dot(point) )
+        return Plane(normal, normal.dot(point))
     }
 
     fun xform(aabb: AABB): AABB {
         val x = basis.getAxis(0) * aabb.size.x
         val y = basis.getAxis(1) * aabb.size.y
         val z = basis.getAxis(2) * aabb.size.z
-        val pos = xform( aabb.position )
+        val pos = xform(aabb.position)
 
         val newAabb = AABB()
         newAabb.position = pos
@@ -140,14 +140,14 @@ class Transform: CoreType {
 
     fun xformInv(aabb: AABB): AABB {
         val vertices: Array<Vector3> =
-                arrayOf(Vector3(aabb.position.x+aabb.size.x,	aabb.position.y+aabb.size.y,	aabb.position.z+aabb.size.z),
-                        Vector3(aabb.position.x+aabb.size.x,	aabb.position.y+aabb.size.y,	aabb.position.z),
-                        Vector3(aabb.position.x+aabb.size.x,	aabb.position.y,		aabb.position.z+aabb.size.z),
-                        Vector3(aabb.position.x+aabb.size.x,	aabb.position.y,		aabb.position.z),
-                        Vector3(aabb.position.x,	aabb.position.y+aabb.size.y,	aabb.position.z+aabb.size.z),
-                        Vector3(aabb.position.x,	aabb.position.y+aabb.size.y,	aabb.position.z),
-                        Vector3(aabb.position.x,	aabb.position.y,		aabb.position.z+aabb.size.z),
-                        Vector3(aabb.position.x,	aabb.position.y,		aabb.position.z))
+                arrayOf(Vector3(aabb.position.x + aabb.size.x, aabb.position.y + aabb.size.y, aabb.position.z + aabb.size.z),
+                        Vector3(aabb.position.x + aabb.size.x, aabb.position.y + aabb.size.y, aabb.position.z),
+                        Vector3(aabb.position.x + aabb.size.x, aabb.position.y, aabb.position.z + aabb.size.z),
+                        Vector3(aabb.position.x + aabb.size.x, aabb.position.y, aabb.position.z),
+                        Vector3(aabb.position.x, aabb.position.y + aabb.size.y, aabb.position.z + aabb.size.z),
+                        Vector3(aabb.position.x, aabb.position.y + aabb.size.y, aabb.position.z),
+                        Vector3(aabb.position.x, aabb.position.y, aabb.position.z + aabb.size.z),
+                        Vector3(aabb.position.x, aabb.position.y, aabb.position.z))
 
         val ret = AABB()
         ret.position = xformInv(vertices[0])
@@ -185,8 +185,7 @@ class Transform: CoreType {
         this.origin = t.origin
     }
 
-    fun rotated(axis: Vector3, phi: Double): Transform =
-            Transform(Basis( axis, phi ), Vector3()) * this
+    fun rotated(axis: Vector3, phi: Double): Transform = Transform(Basis(axis, phi), Vector3()) * this
 
     fun rotateBasis(axis: Vector3, phi: Double) {
         basis.rotate(axis, phi)
@@ -248,12 +247,10 @@ class Transform: CoreType {
     }
 
     fun translate(translation: Vector3) {
-        for (i in 0..2)
-            origin[i] += basis[i].dot(translation)
+        for (i in 0..2) origin[i] += basis[i].dot(translation)
     }
 
-    fun translate(tx: Double, ty: Double, tz: Double) =
-            translate(Vector3(tx, ty, tz))
+    fun translate(tx: Double, ty: Double, tz: Double) = translate(Vector3(tx, ty, tz))
 
     fun translated(translation: Vector3): Transform {
         val t = this
@@ -261,8 +258,7 @@ class Transform: CoreType {
         return t
     }
 
-    fun orthonormalize() =
-            basis.orthonormalize()
+    fun orthonormalize() = basis.orthonormalize()
 
     fun orthonormalized(): Transform {
         val t = this
@@ -284,9 +280,7 @@ class Transform: CoreType {
         return t
     }
 
-    override fun toString(): String {
-        return basis.toString() + " - " + origin.toString()
-    }
+    override fun toString(): String = "$basis - $origin"
 
     override fun hashCode(): Int {
         var result = basis.hashCode()

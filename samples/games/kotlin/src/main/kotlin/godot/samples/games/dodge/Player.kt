@@ -5,7 +5,7 @@ import godot.core.NodePath
 import godot.core.Vector2
 
 //TODO: CollisionShape
-class Player: Area2D() {
+class Player : Area2D() {
 
     var speed: Int = 400
     lateinit var screensize: Vector2
@@ -39,24 +39,37 @@ class Player: Area2D() {
         if (velocity.length() != 0.0) {
             velocity = velocity.normalized() * speed.toDouble()
             playerSprite.play()
-        }
-        else
+        } else {
             playerSprite.stop()
+        }
 
         position += velocity * delta
 
-        if (position.x < 0) position.x = 0.0
-        else if (position.x > screensize.x) position.x = screensize.x
+        if (position.x < 0) {
+            position {
+                x = 0.0
+            }
+        } else if (position.x > screensize.x) {
+            position {
+                x = screensize.x
+            }
+        }
 
-        if (position.y < 0) position.y = 0.0
-        else if (position.y > screensize.y) position.y = screensize.y
+        if (position.y < 0) {
+            position {
+                y = 0.0
+            }
+        } else if (position.y > screensize.y) {
+            position {
+                y = screensize.y
+            }
+        }
 
         if (velocity.x != 0.0) {
             playerSprite.setAnimation("right")
             playerSprite.flipV = false
             playerSprite.flipH = velocity.x < 0
-        }
-        else if (velocity.y != 0.0) {
+        } else if (velocity.y != 0.0) {
             playerSprite.setAnimation("up")
             playerSprite.flipH = false
             playerSprite.flipV = velocity.y > 0
