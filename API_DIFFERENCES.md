@@ -24,7 +24,7 @@ This happens because in this way you are modifying the local copy of `position`,
 ```kotlin
     override fun _ready() {
         position { 
-            it.x = 5.0
+            x = 5.0
         }
     }
 ```
@@ -32,9 +32,9 @@ This happens because in this way you are modifying the local copy of `position`,
 Which is the same as:
 ```kotlin
     override fun _ready() {
-        val it = position
-        it.x = 5.0
-        position = it
+        val tmp = position
+        tmp.x = 5.0
+        position = tmp
     }
 ```
 

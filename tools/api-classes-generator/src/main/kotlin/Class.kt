@@ -232,7 +232,7 @@ class Class(
                                     ParameterSpec.builder(
                                             "schedule",
                                             LambdaTypeName.get(
-                                                    parameters = *arrayOf(parameterTypeName),
+                                                    receiver = parameterTypeName,
                                                     returnType = ClassName("kotlin", "Unit")
                                             )
                                     ).build()
