@@ -36,7 +36,8 @@ class Property(
         }
     }
 
-    fun generate(clazz: Class, tree: Graph<Class>, icalls: MutableSet<ICall>): PropertySpec? {
+    fun generate(target: GeneratorTarget, clazz: Class, tree: Graph<Class>, icalls: MutableSet<ICall>): PropertySpec? {
+        if (!target.implementation) return null
         if (!hasValidGetter && !hasValidSetter) return null
 
         if (hasValidGetter && !validGetter.returnType.isEnum() && type != validGetter.returnType) {

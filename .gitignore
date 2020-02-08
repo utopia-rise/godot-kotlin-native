@@ -154,4 +154,5 @@ gradle-app.setting
 !samples/project/Kotlin/GodotCMakeModule/*
 
 #Generated Godot classes
-wrapper/godot-library/src/main/kotlin/godot/generated/
+wrapper/godot-library/src/common/kotlin/godot/generated/
+wrapper/godot-library/src/native/kotlin/godot/generated/

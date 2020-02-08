@@ -1,9 +1,7 @@
 package godot.samples.games.shmup
 
 import godot.*
-import godot.core.GD
-import godot.core.NodePath
-import godot.core.Vector2
+import godot.core.*
 
 class Player: KinematicBody2D() {
     var shootTime = 0

@@ -2,7 +2,7 @@ package godot.samples.games.shmup
 
 import platform.posix.rand
 import godot.Camera2D
-import godot.core.Vector2
+import godot.core.*
 
 class Camera: Camera2D() {
     var duration = 0.0

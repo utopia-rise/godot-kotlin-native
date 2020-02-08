@@ -1,8 +1,7 @@
 package godot.samples.games.dodge
 
 import godot.*
-import godot.core.NodePath
-import godot.core.Vector2
+import godot.core.*
 
 //TODO: CollisionShape
 class Player : Area2D() {

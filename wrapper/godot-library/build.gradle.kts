@@ -15,11 +15,18 @@ version = Dependencies.godotLibraryVersion
 
 kotlin {
     sourceSets {
+        commonMain {
+            kotlin.srcDir("src/common/kotlin")
+            dependencies {
+                implementation(kotlin("stdlib-common"))
+            }
+        }
+
         sourceSets.create("macosMain")
         sourceSets.create("linuxMain")
         sourceSets.create("windowsMain")
         configure(listOf(sourceSets["macosMain"], sourceSets["linuxMain"], sourceSets["windowsMain"])) {
-            this.kotlin.srcDir("src/main/kotlin")
+            this.kotlin.srcDir("src/native/kotlin")
         }
     }
 
@@ -45,8 +52,8 @@ kotlin {
                 println("Configuring target ${it.name}")
                 cinterops {
                     create("GDNative") {
-                        defFile("src/main/c_interop/godot.def")
-                        includeDirs("../lib/godot_headers", "src/main/c_interop")
+                        defFile("src/native/c_interop/godot.def")
+                        includeDirs("../lib/godot_headers", "src/native/c_interop")
                     }
                 }
             } else {
