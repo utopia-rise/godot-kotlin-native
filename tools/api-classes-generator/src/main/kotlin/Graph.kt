@@ -25,12 +25,7 @@ fun List<Class>.buildTree(): Graph<Class> {
     return Graph(this) { child, parent -> child.baseClass == parent.name }
 }
 
-
-fun Graph<Class>.doAncestorsHaveMethod(cl: Class, method: Method): Boolean {
-    if (method.name == "toString") return true
-
-    if (cl.baseClass == "") return false
-
+fun Graph<Class>.getMethodFromAncestor(cl: Class, method: Method): Method? {
     fun check(m: Method): Boolean {
         if (m.name == method.name && m.arguments.size == method.arguments.size) {
             var flag = true
@@ -43,14 +38,22 @@ fun Graph<Class>.doAncestorsHaveMethod(cl: Class, method: Method): Boolean {
         }
         return false
     }
-    fun Graph.Node<Class>.findMethodInHierarchy(): Boolean {
+    fun Graph.Node<Class>.findMethodInHierarchy(): Method? {
         value.methods.forEach {
-            if (check(it)) return true
+            if (check(it)) return it
         }
 
-        return parent?.findMethodInHierarchy() ?: false
+        return parent?.findMethodInHierarchy()
     }
-    return nodes.find { it.value.name == cl.name }!!.parent!!.findMethodInHierarchy()
+    return nodes.find { it.value.name == cl.name }?.parent?.findMethodInHierarchy()
+}
+
+fun Graph<Class>.doAncestorsHaveMethod(cl: Class, method: Method): Boolean {
+    if (method.name == "toString") return true
+
+    if (cl.baseClass == "") return false
+
+    return getMethodFromAncestor(cl, method) != null
 }
 
 
@@ -64,4 +67,9 @@ fun Graph<Class>.doAncestorsHaveProperty(cl: Class, prop: Property): Boolean {
         return parent?.findPropertyInHierarchy() ?: false
     }
     return nodes.find { it.value.name == cl.name }!!.parent!!.findPropertyInHierarchy()
+}
+
+fun Graph<Class>.getSanitisedArgumentName(method: Method, index: Int, cl: Class): String {
+    val parentMethod = getMethodFromAncestor(cl, method)
+    return (parentMethod ?: method).arguments[index].name
 }
