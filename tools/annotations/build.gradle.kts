@@ -72,6 +72,21 @@ kotlin {
                 implementation(kotlin("stdlib-jdk8"))
             }
         }
+        configure(listOf(sourceSets["linuxMain"])) {
+            dependencies {
+                compileOnly(project(":wrapper:godot-library"))
+            }
+        }
+        configure(listOf(sourceSets["macosMain"])) {
+            dependencies {
+                compileOnly(project(":wrapper:godot-library"))
+            }
+        }
+        configure(listOf(sourceSets["windowsMain"])) {
+            dependencies {
+                compileOnly(project(":wrapper:godot-library"))
+            }
+        }
     }
 }
 

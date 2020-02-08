@@ -8,14 +8,10 @@ import kotlin.reflect.KClass
 @Retention(AnnotationRetention.RUNTIME)
 annotation class RegisterClass
 
-@Target(
-        AnnotationTarget.FUNCTION
-)
-@Retention(AnnotationRetention.RUNTIME)
-annotation class RegisterFunction(val rpcMode: KClass<out Annotation> = Disabled::class)
+//@Target(
+//        AnnotationTarget.FUNCTION
+//)
+//@Retention(AnnotationRetention.RUNTIME)
+expect annotation class RegisterFunction
 
-@Target(
-        AnnotationTarget.PROPERTY
-)
-@Retention(AnnotationRetention.RUNTIME)
-annotation class RegisterProperty(val visibleInEditor: Boolean, val defaultValue: String, val rpcMode: KClass<out Annotation> = Disabled::class)
+expect annotation class RegisterProperty

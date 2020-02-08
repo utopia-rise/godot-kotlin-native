@@ -3,18 +3,18 @@ package org.godotengine.kotlin.entrygenerator.generator
 import com.squareup.kotlinpoet.*
 import de.jensklingenberg.mpapt.common.findAnnotation
 import de.jensklingenberg.mpapt.common.hasAnnotation
-import de.jensklingenberg.mpapt.common.simpleName
 import de.jensklingenberg.mpapt.model.Element
 import org.godotengine.kotlin.annotation.*
 import org.godotengine.kotlin.entrygenerator.mapper.RpcModeAnnotationMapper
+import org.godotengine.kotlin.entrygenerator.mapper.TypeHintMapper
 import org.godotengine.kotlin.entrygenerator.model.getVariantType
 import org.jetbrains.kotlin.descriptors.annotations.AnnotationDescriptor
+import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.resolve.constants.KClassValue
 import org.jetbrains.kotlin.resolve.constants.StringValue
 import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
 import org.jetbrains.kotlin.types.asSimpleType
-import kotlin.reflect.KClass
 
 class GDNativeFunctionBindingGenerator {
     private val nativeScriptInitFunctionBuilder: FunSpec.Builder = createNativeScriptInitFunctionBuilder()
@@ -22,7 +22,7 @@ class GDNativeFunctionBindingGenerator {
     fun registerElement(element: Element, visibleInEditor: Boolean = true, vararg bridgeFunctions: FunSpec) {
         when (element) {
             is Element.ClassElement -> nativeScriptInitFunctionBuilder.addStatement("%M(\"${getFullClassName(element)}\",·\"${getBaseClassOfClass(element)}\"${convertBridgeFunctionsToString(bridgeFunctions)})", MemberName("godot.registration", "registerClass"))
-            is Element.PropertyElement -> nativeScriptInitFunctionBuilder.addStatement("%M(\"${getFullClassName(element)}\",·\"${element.propertyDescriptor.name}\",·$visibleInEditor${convertBridgeFunctionsToString(bridgeFunctions)}${getRpcMode(element)})", MemberName("godot.registration", "registerProperty"))
+            is Element.PropertyElement -> nativeScriptInitFunctionBuilder.addStatement("%M(\"${getFullClassName(element)}\",·\"${element.propertyDescriptor.name}\",·$visibleInEditor${convertBridgeFunctionsToString(bridgeFunctions)}${getRpcMode(element)}${getPropertyHints(element)})", MemberName("godot.registration", "registerProperty"))
             is Element.FunctionElement -> {
                 if (element.func.hasAnnotation(RegisterSignal::class.java.name)) {
                     nativeScriptInitFunctionBuilder.addStatement("%M(\"${getFullClassName(element, true)}\",·\"${element.simpleName}\"${getSignalArgumentsAsString(element)}${getSignalDefaultArgumentsAsString(element)})", MemberName("godot.registration", "registerSignal"))
@@ -31,6 +31,35 @@ class GDNativeFunctionBindingGenerator {
                 }
             }
             else -> throw IllegalArgumentException("Element of kind ${element.elementKind} is not registrable")
+        }
+    }
+
+    private fun getPropertyHints(element: Element.PropertyElement): String {
+        val allValueArguments = element
+                .propertyDescriptor
+                .annotations
+                .findAnnotation(RegisterProperty::class.java.asClassName().canonicalName)!!
+                .allValueArguments
+
+        val typeHintAsString = if(allValueArguments.containsKey(Name.identifier("propertyHint"))) {
+            val typeHintAsEnumPair = ((allValueArguments.getValue(Name.identifier("propertyHint"))).value as Pair<ClassId, Name>) //represents an enum. If it cannot be cast, something is wrong and it should fail hard
+            "${typeHintAsEnumPair.first.asString().replace("/", ".")}.${typeHintAsEnumPair.second}"
+        } else {
+            null
+        }
+        val hintString = if(allValueArguments.containsKey(Name.identifier("hintString"))) {
+            allValueArguments.getValue(Name.identifier("hintString")).value as String
+        } else {
+            null
+        }
+
+        return buildString {
+            if (typeHintAsString != null && typeHintAsString != "godot.registration.PropertyHint.None") {
+                append(",·propertyHint·=·$typeHintAsString")
+            }
+            if (hintString != null && hintString.isNotEmpty()) {
+                append(",·hintString·=·\"$hintString\"")
+            }
         }
     }
 
@@ -63,8 +92,9 @@ class GDNativeFunctionBindingGenerator {
                     ?.getValue(Name.identifier("rpcMode"))
                     ?.value
 
-            if (rpcModeAnnotation != null && rpcModeAnnotation != Disabled::class) {
-                rpcAnnotation = (rpcModeAnnotation as KClassValue.Value.NormalClass).classId.asSingleFqName().asString()
+            if (rpcModeAnnotation != null) {
+                val enumMapping = (rpcModeAnnotation as Pair<ClassId, Name>) //represents an enum. If it cannot be cast, something is wrong and it should fail hard
+                rpcAnnotation = "${enumMapping.first.asString().replace("/", ".")}.${enumMapping.second}"
             }
         }
 

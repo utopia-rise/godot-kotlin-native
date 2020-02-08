@@ -8,6 +8,9 @@ import godot.core.NodePath
 import godot.core.Variant
 import godot.core.Vector2
 import org.godotengine.kotlin.annotation.*
+import godot.registration.PropertyHint
+import godot.registration.RPCMode
+import kotlin.reflect.KClass
 
 @RegisterClass
 class Main : Node() {
@@ -16,9 +19,10 @@ class Main : Node() {
     lateinit var ballStartPos: Vector2
     lateinit var ballStartVel: Vector2
 
-    @Master
-    @RegisterProperty(false, "0")
+
+    @RegisterProperty(false, "0", RPCMode.Master, PropertyHint.Range, "0,10")
     var yourScore = 0
+    @RegisterProperty(false, "0")
     var enemyScore = 0
 
     interface Signals {
@@ -36,7 +40,7 @@ class Main : Node() {
         startGame()
     }
 
-    @RegisterFunction(Remote::class)
+    @RegisterFunction(RPCMode.Remote)
     fun startGame() {
         ball.position = ballStartPos
         ball.set("xVel", Variant(ballStartVel.x))
