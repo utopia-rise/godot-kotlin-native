@@ -71,11 +71,11 @@ kotlin {
     targets.forEach {
         it.compilations.getByName("main") {
             if (this is org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeCompilation) {
-                println("Configuring target ${target.name}")
+                println("Configuring target ${this.target.name}")
                 this.target.binaries {
                     sharedLib(listOf(org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG))
                 }
-                target.compilations.all {
+                this.target.compilations.all {
                     dependencies {
                         implementation("org.godotengine.kotlin:godot-library:1.0.0")
                         implementation("org.godotengine.kotlin:annotations:0.0.1-SNAPSHOT")
