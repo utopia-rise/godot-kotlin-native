@@ -51,7 +51,7 @@ open class Method(
         }
 
         //TODO: move adding arguments to generatedFunBuilder to separate function
-        val callArgumentsAsString = buildCallArgumentsString(generatedFunBuilder) //cannot be inlined as it also adds the arguments to the generatedFunBuilder
+        val callArgumentsAsString = buildCallArgumentsString(tree, clazz, generatedFunBuilder) //cannot be inlined as it also adds the arguments to the generatedFunBuilder
 
         if (hasVarargs) {
             generatedFunBuilder.addParameter("__var_args", Any::class.asTypeName().copy(nullable = true), KModifier.VARARG)
@@ -81,7 +81,7 @@ open class Method(
         return generatedFunBuilder.build()
     }
 
-    private fun buildCallArgumentsString(generatedFunBuilder: FunSpec.Builder): String {
+    private fun buildCallArgumentsString(tree: Graph<Class>, cl: Class, generatedFunBuilder: FunSpec.Builder): String {
         return buildString {
             arguments.withIndex().forEach {
                 val index = it.index
@@ -89,7 +89,8 @@ open class Method(
 
                 if (index != 0 || !hasVarargs) append(", ")
 
-                append(argument.name)
+                val sanitisedName = tree.getSanitisedArgumentName(this@Method, index, cl)
+                append(sanitisedName)
 
                 if (argument.type.isEnum()) append(".id")
 
