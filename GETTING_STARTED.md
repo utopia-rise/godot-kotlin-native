@@ -50,6 +50,7 @@ Inside your `build.gradle.kts` file, you need to define the `godot-gradle-plugin
 buildscript {
     repositories {
         mavenLocal()
+        maven("https://dl.bintray.com/utopia-rise/kotlin-godot")
         jcenter()
     }
     dependencies {
@@ -66,6 +67,7 @@ apply(plugin = "godot-gradle-plugin")
 
 repositories {
     mavenLocal()
+    maven("https://dl.bintray.com/utopia-rise/kotlin-godot")
     jcenter()
 }
 ```
@@ -158,6 +160,7 @@ If you followed along your `build.gradle.kts` file should look like this:
 buildscript {
     repositories {
         mavenLocal()
+        maven("https://dl.bintray.com/utopia-rise/kotlin-godot")
         jcenter()
     }
     dependencies {
@@ -174,6 +177,7 @@ apply(plugin = "godot-gradle-plugin")
 
 repositories {
     mavenLocal()
+    maven("https://dl.bintray.com/utopia-rise/kotlin-godot")
     jcenter()
 }
 

@@ -1,6 +1,7 @@
 buildscript {
     repositories {
         mavenLocal()
+        maven("https://dl.bintray.com/utopia-rise/kotlin-godot")
         jcenter()
         mavenCentral()
     }
@@ -12,6 +13,7 @@ buildscript {
 
 repositories {
     mavenLocal()
+    maven("https://dl.bintray.com/utopia-rise/kotlin-godot")
     jcenter()
 }
 

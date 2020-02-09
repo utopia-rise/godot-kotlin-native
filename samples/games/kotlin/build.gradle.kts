@@ -3,6 +3,7 @@ val platform: String by project
 buildscript {
     repositories {
         mavenLocal()
+        maven("https://dl.bintray.com/utopia-rise/kotlin-godot")
         jcenter()
     }
     dependencies {
@@ -19,6 +20,7 @@ apply(plugin = "godot-gradle-plugin")
 
 repositories {
     mavenLocal()
+    maven("https://dl.bintray.com/utopia-rise/kotlin-godot")
     jcenter()
 }
 
