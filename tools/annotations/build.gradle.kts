@@ -31,8 +31,8 @@ kotlin {
         linuxX64("linux")
         mingwX64("windows")
         macosX64("macos")
-        jvm()
     }
+    jvm()
 
 
     sourceSets {
@@ -41,11 +41,9 @@ kotlin {
                 implementation(kotlin("stdlib-common"))
             }
         }
-        if (!project.hasProperty("platform")) {
-            configure(listOf(sourceSets["jvmMain"])) {
-                dependencies {
-                    implementation(kotlin("stdlib-jdk8"))
-                }
+        configure(listOf(sourceSets["jvmMain"])) {
+            dependencies {
+                implementation(kotlin("stdlib-jdk8"))
             }
         }
     }
