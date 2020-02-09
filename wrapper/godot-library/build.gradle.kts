@@ -9,6 +9,7 @@ plugins {
 val bintrayUser: String by project
 val bintrayKey: String by project
 val platform: String by project
+val android_arch: String by project
 
 group = "org.godotengine.kotlin"
 version = Dependencies.godotLibraryVersion
@@ -18,7 +19,15 @@ kotlin {
         sourceSets.create("macosMain")
         sourceSets.create("linuxMain")
         sourceSets.create("windowsMain")
-        configure(listOf(sourceSets["macosMain"], sourceSets["linuxMain"], sourceSets["windowsMain"])) {
+        sourceSets.create("androidArm64Main")
+        sourceSets.create("androidX64Main")
+        configure(listOf(
+                sourceSets["macosMain"],
+                sourceSets["linuxMain"],
+                sourceSets["windowsMain"],
+                sourceSets["androidArm64Main"],
+                sourceSets["androidX64Main"]
+        )) {
             this.kotlin.srcDir("src/main/kotlin")
         }
     }
@@ -29,13 +38,23 @@ kotlin {
                     "windows" -> listOf(targetFromPreset(presets["mingwX64"], "windows"))
                     "linux" -> listOf(targetFromPreset(presets["linuxX64"], "linux"))
                     "macos" -> listOf(targetFromPreset(presets["macosX64"], "macos"))
+                    "android" -> if (project.hasProperty("android_arch")) {
+                        when(android_arch) {
+                            "X64" -> listOf(targetFromPreset(presets["androidNativeX64"], "androidX64"))
+                            "arm64" -> listOf(targetFromPreset(presets["androidNativeArm64"], "androidArm64"))
+                            else -> listOf(targetFromPreset(presets["androidNativeArm64"], "androidArm64"))
+                        }
+                    }
+                    else listOf(targetFromPreset(presets["androidNativeArm64"], "androidArm64"))
                     else -> listOf(targetFromPreset(presets["linuxX64"], "linux"))
                 }
             } else {
                 listOf(
                         targetFromPreset(presets["linuxX64"], "linux"),
                         targetFromPreset(presets["macosX64"], "macos"),
-                        targetFromPreset(presets["mingwX64"], "windows")
+                        targetFromPreset(presets["mingwX64"], "windows"),
+                        targetFromPreset(presets["androidNativeArm64"], "androidArm64"),
+                        targetFromPreset(presets["androidNativeX64"], "androidX64")
                 )
             }
 
