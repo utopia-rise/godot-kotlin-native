@@ -101,6 +101,6 @@ class RegisterAnnotationProcessor : AbstractProcessor() {
      * @return directory path to where the generated code should be written to as a String
      */
     private fun getKaptGeneratedDirectory(): String {
-        return "${Paths.get("").toAbsolutePath()}/build/godot/entriesTest" //TODO: change to entries
+        return "${Paths.get("").toAbsolutePath()}/build/godot/entries/linuxMain" //TODO: change to entries
     }
 }

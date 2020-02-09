@@ -44,7 +44,7 @@ fun String.isCoreType(): Boolean {
 
 
 fun String.castFromRawMemory(value: String): String {
-    return this.castFromVariant("Variant($value)")
+    return this.castFromVariant("godot.core.Variant($value)")
 }
 
 
@@ -53,7 +53,7 @@ fun String.castFromVariant(value: String): String {
         return value
     if (this.isCoreType() || this.isPrimitive())
         return "$value.to$this()"
-    return "$this($value)"
+    return "godot.$this($value)"
 }
 
 

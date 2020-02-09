@@ -7,6 +7,7 @@ import org.godotengine.kotlin.entrygenerator.utils.hasVarargParameter
 import org.jetbrains.kotlin.descriptors.CallableMemberDescriptor
 import org.jetbrains.kotlin.resolve.calls.components.isVararg
 import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
+import org.jetbrains.kotlin.types.asSimpleType
 
 fun CallableMemberDescriptor.generateFunctionBinding(entryFileSpecBuilder: FileSpec.Builder, index: Int, functionName: String = "functionBridge", fullClassName: String = getFullClassName(this)): FunSpec {
     val bridgeFunction = FunSpec
@@ -24,13 +25,17 @@ fun CallableMemberDescriptor.generateFunctionBinding(entryFileSpecBuilder: FileS
 private fun CallableMemberDescriptor.getBridgeFunctionBody(fullClassName: String): CodeBlock {
     val bridgeFunctionBodyBuilder = CodeBlock.builder()
             .beginControlFlow("return·%M·{·returnValuePointer,·rawObjectPointer,·numberOfArguments,·argumentsPointer·->", MemberName("kotlinx.cinterop", "staticCFunction")) //START: staticCFunction
-            .beginControlFlow("%M<$fullClassName>(%S,·returnValuePointer,·rawObjectPointer,·numberOfArguments,·argumentsPointer)·{·obj,·numArgs,·args·->", MemberName("godot.registration", "invoke"), this.name) //START: invoke
+            .beginControlFlow("%M<$fullClassName>(%S,·returnValuePointer,·rawObjectPointer,·numberOfArguments,·argumentsPointer)·{·obj,·numArgs,·${if (this.valueParameters.size > 0) "args" else "_"}·->", MemberName("godot.registration", "invoke"), this.name) //START: invoke
             .beginControlFlow("run") //START: run
 
     if (!this.hasVarargParameter()) {
         bridgeFunctionBodyBuilder
                 .beginControlFlow("when·(numArgs)") //START: when
                 .beginControlFlow("${this.valueParameters.size}·->") //START: when cases
+    }
+
+    if (this.valueParameters.size > 0) {
+        bridgeFunctionBodyBuilder.addStatement("args!!") //needed as we need non null later. also it should crash when null as this should never be null
     }
 
     val arguments = StringBuilder()

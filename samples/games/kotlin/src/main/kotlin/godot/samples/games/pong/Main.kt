@@ -19,18 +19,8 @@ class Main : Node() {
     lateinit var ballStartPos: Vector2
     lateinit var ballStartVel: Vector2
 
-
-    @RegisterProperty(false, "0", RPCMode.Master, PropertyHint.Range, "0,10")
     var yourScore = 0
-    @RegisterProperty(false, "0")
     var enemyScore = 0
-
-    interface Signals {
-        @RegisterSignal
-        fun testSignal() {}
-        @RegisterSignal("0", "\"foo\"")
-        fun testSignalWithArgs(intArg: Int, stringArg: String) {}
-    }
 
     @RegisterFunction
     override fun _ready() {
@@ -40,7 +30,7 @@ class Main : Node() {
         startGame()
     }
 
-    @RegisterFunction(RPCMode.Remote)
+    @RegisterFunction
     fun startGame() {
         ball.position = ballStartPos
         ball.set("xVel", Variant(ballStartVel.x))
@@ -51,18 +41,13 @@ class Main : Node() {
         enemyScoreLabel.setText("ENEMY:\n$enemyScore")
     }
 
+    @RegisterFunction
     fun _on_VisibilityNotifier2D_screen_exited() {
         if (ball.position.y < 0)
             yourScore += 1
         else
             enemyScore += 1
         startGame()
-    }
-
-    @Remote
-    @RegisterFunction
-    fun varargTest(foo: String, bar: Int, vararg params: Int): String {
-        return ""
     }
 
     @RegisterFunction

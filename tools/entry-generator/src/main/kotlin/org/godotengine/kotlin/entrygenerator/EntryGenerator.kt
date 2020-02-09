@@ -22,7 +22,9 @@ class EntryGenerator {
             signals: Set<Element.FunctionElement>
     ) {
         val entryFileSpec: FileSpec.Builder = FileSpec
-                .builder("org.godotengine.kotlin.entry", "Entry")
+                .builder("org.godotengine.kotlin", "Entry")
+                .addImport("kotlinx.cinterop", "get") //needed for getting pointers like this: args[<number>]
+                .addImport("kotlinx.cinterop", "ptr") //needed for getting pointers to `this`: options.ptr
 
         val gdNativeFunctionBindingGenerator = GDNativeFunctionBindingGenerator()
 

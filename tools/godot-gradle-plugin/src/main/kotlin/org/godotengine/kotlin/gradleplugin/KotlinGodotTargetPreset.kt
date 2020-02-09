@@ -77,7 +77,7 @@ class KotlinGodotTargetPreset(
                             libPath = "res://$libPath"
 
                         try {
-                            generateEntry(info.configs, entryPath + File.separator + "Entry.kt", info.gdnsPath, libPath)
+//                            generateEntry(info.configs, entryPath + File.separator + "Entry.kt", info.gdnsPath, libPath)
                             project.logger.info("Generated entry file for godot $sourceSet.")
                         } catch (e: Exception) {
                             val capture = "Failed to generate entry file for godot $sourceSet ($e)"

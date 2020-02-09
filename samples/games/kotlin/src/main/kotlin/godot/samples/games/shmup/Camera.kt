@@ -3,7 +3,10 @@ package godot.samples.games.shmup
 import platform.posix.rand
 import godot.Camera2D
 import godot.core.Vector2
+import org.godotengine.kotlin.annotation.RegisterClass
+import org.godotengine.kotlin.annotation.RegisterFunction
 
+@RegisterClass
 class Camera: Camera2D() {
     var duration = 0.0
     var periodInMs = 0.0
@@ -14,6 +17,7 @@ class Camera: Camera2D() {
     var previousY = 0.0
     var lastOffset = Vector2(0, 0)
 
+    @RegisterFunction
     override fun _process(delta: Double) {
         if (timer == 0.0){
             if(offset.length() > 1.0)
@@ -52,6 +56,7 @@ class Camera: Camera2D() {
         }
     }
 
+    @RegisterFunction
     fun shake(duration: Double, frequency: Double, amplitude: Double){
         this.duration = duration
         timer = duration

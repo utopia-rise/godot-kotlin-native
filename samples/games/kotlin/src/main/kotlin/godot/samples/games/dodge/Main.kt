@@ -2,9 +2,12 @@ package godot.samples.games.dodge
 
 import godot.*
 import godot.core.*
+import org.godotengine.kotlin.annotation.RegisterClass
+import org.godotengine.kotlin.annotation.RegisterFunction
 import kotlin.math.PI
 import kotlin.random.Random
 
+@RegisterClass
 class Main: Node() {
     lateinit var mobTimer: Timer
     lateinit var scoreTimer: Timer
@@ -15,6 +18,7 @@ class Main: Node() {
     lateinit var mobScene: PackedScene
     var score = 0
 
+    @RegisterFunction
     override fun _ready() {
         mobScene = PackedScene from ResourceLoader.load("res://Games/Dodge/Scenes/Mob.tscn")
 
@@ -34,12 +38,14 @@ class Main: Node() {
         getNode(NodePath("HUD")).callv("showMenu", GDArray())
     }
 
+    @RegisterFunction
     fun gameOver() {
         scoreTimer.stop()
         mobTimer.stop()
         getNode(NodePath("HUD")).callv("showGameOver", GDArray())
     }
 
+    @RegisterFunction
     fun newGame() {
         getTree().callGroup("enemies", "free")
         score = 0
@@ -52,16 +58,19 @@ class Main: Node() {
         getNode(NodePath("HUD")).callv("showMessage", godotArrayOf("Get ready!"))
     }
 
+    @RegisterFunction
     fun _onStartTimerTimeout() {
         mobTimer.start()
         scoreTimer.start()
     }
 
+    @RegisterFunction
     fun _onScoreTimerTimeout() {
         score += 1
         getNode(NodePath("HUD")).callv("updateScore", godotArrayOf(score))
     }
 
+    @RegisterFunction
     fun _onMobTimerTimeout() {
         mobSpawnLocation.setOffset(Random.nextInt().toDouble())
         val mob = RigidBody2D from mobScene.instance()
@@ -76,6 +85,7 @@ class Main: Node() {
         mob.setLinearVelocity(Vector2((mob.get("minSpeed").toInt()..mob.get("maxSpeed").toInt()).random(), 0).rotated(direction))
     }
 
+    @RegisterFunction
     override fun _unhandled_input(event: InputEvent) {
         if (event.isActionPressed("ui_cancel")) {
             getTree().changeScene("res://Games/Main/Scenes/ChooseGameScreen.tscn")

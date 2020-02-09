@@ -30,7 +30,7 @@ private fun Element.PropertyElement.generatePropertyGetterFunctionBinding(index:
             .returns(getBridgeReturnType())
             .beginControlFlow("return·%M·{·objectPointer,·returnValuePointer·->", MemberName("kotlinx.cinterop", "staticCFunction")) //START: staticCFunction
             .beginControlFlow("%M<${getFullClassName(this)}>(%S,·%S,·objectPointer,·returnValuePointer)·{·objectValue·->", MemberName("godot.registration", "get"), this.propertyDescriptor.name, getFullClassName(this)) //START: get
-            .addStatement("return·%T(objectValue.${this.propertyDescriptor.name})", ClassName("godot.core", "Variant"))
+            .addStatement("%T(objectValue.${this.propertyDescriptor.name})", ClassName("godot.core", "Variant"))
             .endControlFlow() //END: get
             .endControlFlow() //END: staticCFunction
             .build()

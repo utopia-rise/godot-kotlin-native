@@ -20,16 +20,11 @@ fun Element.ClassElement.generateConstructorBindings(entryFileSpecBuilder: FileS
             .addStatement("return·${ElementUtils().getPackageOf(this)}.${this.classDescriptor.name.asString()}()")
             .build()
 
-    val constructorBindingFunctionReferenceProperty = PropertySpec
-            .builder("constructorFunctionReferenceProperty${index}", returnType, KModifier.PRIVATE)
-            .initializer("::${constructorBindingFuncSpec.name}")
-            .build()
-
     val constructorBridgeFuncSpec = FunSpec
             .builder("constructorBridge${index}")
             .addModifiers(KModifier.PRIVATE)
             .returns(getBridgeReturnType(isConstructor = true))
-            .addStatement("return·%M·{·mem·->·%M(mem,·${constructorBindingFunctionReferenceProperty.name})·}", MemberName("kotlinx.cinterop", "staticCFunction"), MemberName("godot.registration", "constructFromRawMem"))
+            .addStatement("return·%M·{·mem·->·%M(mem,·::${constructorBindingFuncSpec.name})·}", MemberName("kotlinx.cinterop", "staticCFunction"), MemberName("godot.registration", "constructFromRawMem"))
             .build()
 
     val destructorBridgeFuncSpec = FunSpec
@@ -41,7 +36,6 @@ fun Element.ClassElement.generateConstructorBindings(entryFileSpecBuilder: FileS
 
     entryFileSpecBuilder
             .addFunction(constructorBindingFuncSpec)
-            .addProperty(constructorBindingFunctionReferenceProperty)
             .addFunction(constructorBridgeFuncSpec)
             .addFunction(destructorBridgeFuncSpec)
 

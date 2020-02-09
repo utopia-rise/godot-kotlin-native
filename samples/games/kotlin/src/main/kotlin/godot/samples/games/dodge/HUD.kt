@@ -4,7 +4,11 @@ import godot.*
 import godot.core.GDArray
 import godot.core.NodePath
 import godot.core.Variant
+import org.godotengine.kotlin.annotation.RegisterClass
+import org.godotengine.kotlin.annotation.RegisterFunction
+import org.godotengine.kotlin.annotation.RegisterSignal
 
+@RegisterClass
 class HUD: CanvasLayer() {
 
     lateinit var messageLabel: Label
@@ -14,6 +18,12 @@ class HUD: CanvasLayer() {
     lateinit var waitingTimer: Timer
     lateinit var gameOverTimer: Timer
 
+    interface Signal {
+        @RegisterSignal
+        fun startGame() {}
+    }
+
+    @RegisterFunction
     override fun _ready() {
         messageLabel = Label from getNode(NodePath("MessageLabel"))
         scoreLabel = Label from getNode(NodePath("ScoreLabel"))
@@ -28,16 +38,18 @@ class HUD: CanvasLayer() {
             connect("timeout", this@HUD, "_onGameOverTimerTimeout")
         }
 
-        addUserSignal("startGame")
-        connect("startGame", getParent(), "newGame")
+        addUserSignal(Signal::startGame.name)
+        connect(Signal::startGame.name, getParent(), "newGame")
     }
 
+    @RegisterFunction
     fun showMessage(text: String) {
         messageLabel.text = text
         messageLabel.show()
         messageTimer.start()
     }
 
+    @RegisterFunction
     fun showMenu() {
         startButton.text = "Start"
         startButton.show()
@@ -45,29 +57,33 @@ class HUD: CanvasLayer() {
         messageLabel.show()
     }
 
+    @RegisterFunction
     fun showGameOver() {
         messageLabel.text = "Game over!"
         messageLabel.show()
         gameOverTimer.start()
     }
 
+    @RegisterFunction
     fun updateScore(score: Int) {
         scoreLabel.text = score.toString()
     }
 
+    @RegisterFunction
     fun _onMessageTimerTimeout() {
         messageLabel.hide()
     }
 
-
+    @RegisterFunction
     fun _onGameOverTimerTimeout() {
         messageLabel.hide()
         showMenu()
     }
 
+    @RegisterFunction
     fun _onStartButtonPressed() {
         startButton.hide()
-        emitSignal("startGame")
+        emitSignal(Signal::startGame.name)
     }
 
 

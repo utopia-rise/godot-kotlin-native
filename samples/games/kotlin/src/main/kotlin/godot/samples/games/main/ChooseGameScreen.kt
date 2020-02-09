@@ -2,8 +2,11 @@ package godot.samples.games.main
 
 import godot.*
 import godot.core.NodePath
+import org.godotengine.kotlin.annotation.RegisterClass
+import org.godotengine.kotlin.annotation.RegisterFunction
 
-class ChooseGameScreen: Node(), MainScreen.Signal {
+@RegisterClass
+class ChooseGameScreen: Node() {
 
     lateinit var playDodgeButton: Button
     lateinit var playPongButton: Button
@@ -11,17 +14,9 @@ class ChooseGameScreen: Node(), MainScreen.Signal {
     lateinit var backButton: Button
     lateinit var playCatchBallButton: Button
     lateinit var playFastFinishButton: Button
-    val mainScreen = MainScreen()
 
-
-
-    override fun testSignal(paramA: String, paramB: Int) {
-
-    }
-
+    @RegisterFunction
     override fun _ready() {
-        mainScreen.connect(MainScreen.Signal::testSignal.name, this, this::testSignal.name)
-
         playDodgeButton = (Button from getNode(NodePath("MenuButtons/PlayDodgeButton"))).apply {
             connect("pressed", this@ChooseGameScreen, "_onPlayDodgeButtonPressed")
         }
@@ -42,28 +37,33 @@ class ChooseGameScreen: Node(), MainScreen.Signal {
         }
     }
 
+    @RegisterFunction
     fun _onPlayDodgeButtonPressed() {
         getTree().changeScene("res://Games/Dodge/Scenes/Main.tscn")
     }
 
+    @RegisterFunction
     fun _onPlayShmupButtonPressed() {
         getTree().changeScene("res://Games/Shmup/Scenes/Stage.tscn")
     }
 
+    @RegisterFunction
     fun _onPlayCatchBallButtonPressed() {
         getTree().changeScene("res://Games/CatchBall/Scenes/Stage.tscn")
     }
 
+    @RegisterFunction
     fun _onPlayFastFinishButtonPressed() {
         getTree().changeScene("res://Games/FastFinish/Scenes/Stage.tscn")
     }
 
+    @RegisterFunction
     fun _onPlayPongButtonPressed() {
         getTree().changeScene("res://Games/Pong/Scenes/Main.tscn")
     }
 
+    @RegisterFunction
     fun _onBackButtonPressed() {
         getTree().changeScene("res://Games/Main/Scenes/MainScreen.tscn")
     }
-
 }

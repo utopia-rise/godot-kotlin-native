@@ -2,19 +2,17 @@ package godot.samples.games.main
 
 import godot.core.*
 import godot.*
+import org.godotengine.kotlin.annotation.RegisterClass
+import org.godotengine.kotlin.annotation.RegisterFunction
 
+@RegisterClass
 class MainScreen: Node() {
 
     lateinit var chooseGameButton: Button
     lateinit var quitButton: Button
 
-    interface Signal {
-        fun testSignal(paramA: String, paramB: Int)
-    }
-
+    @RegisterFunction
     override fun _ready() {
-        emitSignal(Signal::testSignal.name, "paramA", 1)
-
         chooseGameButton = (Button from getNode(NodePath("MenuButtons/ChooseGameButton"))).apply {
             connect("pressed", this@MainScreen, "_onChooseGameButtonPressed")
         }
@@ -23,10 +21,12 @@ class MainScreen: Node() {
         }
     }
 
+    @RegisterFunction
     fun _onChooseGameButtonPressed() {
         getTree().changeScene("res://Games/Main/Scenes/ChooseGameScreen.tscn")
     }
 
+    @RegisterFunction
     fun _onQuitButtonPressed() {
         getTree().quit()
     }

@@ -221,7 +221,7 @@ class GDNativeFunctionBindingGenerator {
                                 .build()
                 )
                 .addParameter("handle", ClassName("kotlinx.cinterop", "COpaquePointer"))
-                .addStatement("godot_wrapper_nativescript_init(handle)")
+                .addStatement("%M(handle)", MemberName("godot.gdnative", "godot_wrapper_nativescript_init"))
     }
 
     private fun generateGDNativeInitFunction(): FunSpec {
@@ -234,7 +234,7 @@ class GDNativeFunctionBindingGenerator {
                                 .build()
                 )
                 .addParameter("options", ClassName("godot.gdnative", "godot_gdnative_init_options"))
-                .addStatement("godot_wrapper_gdnative_init(options.ptr)")
+                .addStatement("%M(options.ptr)", MemberName("godot.gdnative", "godot_wrapper_gdnative_init"))
                 .build()
     }
 
@@ -248,7 +248,7 @@ class GDNativeFunctionBindingGenerator {
                                 .build()
                 )
                 .addParameter("options", ClassName("godot.gdnative", "godot_gdnative_terminate_options"))
-                .addStatement("godot_wrapper_gdnative_terminate(options.ptr)")
+                .addStatement("%M(options.ptr)", MemberName("godot.gdnative", "godot_wrapper_gdnative_terminate"))
                 .build()
     }
 }

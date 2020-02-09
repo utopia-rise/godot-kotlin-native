@@ -59,9 +59,9 @@ kotlin {
                     sourceSets["iosArm64Main"],
                     sourceSets["iosX64Main"]
             )) {
-                sourceSet {
-                    kotlin.srcDirs("src/main/kotlin")
-                }
+//                sourceSet {
+//                    kotlin.srcDirs("src/main/kotlin")
+//                }
 
                 libraryPath("samples.gdnlib")
                 generateGDNS("${project.rootDir.absolutePath}/..")
