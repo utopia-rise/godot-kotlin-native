@@ -1,48 +1,37 @@
 package org.godotengine.kotlin.gradleplugin
 
-import org.godotengine.kotlin.gradleplugin.KotlinGodotPlugin.Companion.LibrariesDependency
-import org.gradle.api.InvalidUserDataException
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
-import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 import org.jetbrains.kotlin.gradle.plugin.KotlinTargetPreset
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeCompilation
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTargetPreset
-import org.jetbrains.kotlin.konan.target.HostManager
 import org.jetbrains.kotlin.konan.target.KonanTarget
-import java.io.File
 
 
 class KotlinGodotTargetPreset(
         private val name: String,
-        val project: Project,
-        val konanTarget: KonanTarget,
-        kotlinPluginVersion: String,
-        private val sourceSetsInformation: MutableMap<KotlinSourceSet, GodotSourceSetInformation>
+        private val project: Project,
+        konanTarget: KonanTarget,
+        private val kotlinGodotPluginExtension: KotlinGodotPluginExtension
 ) : KotlinTargetPreset<KotlinNativeTarget> {
 
-    private val nativePreset = KotlinNativeTargetPreset(name, project, konanTarget, kotlinPluginVersion)
+    private val nativePreset = KotlinNativeTargetPreset(name, project, konanTarget, kotlinGodotPluginExtension.kotlinVersion)
     private val kotlin = project.extensions.getByName("kotlin") as KotlinMultiplatformExtension
 
 
     override fun getName(): String = name
-
 
     override fun createTarget(name: String): KotlinNativeTarget {
         val target = nativePreset.createTarget(name)
 
         target.compilations.all { compilation ->
             compilation.apply {
-                dependencies { implementation(LibrariesDependency) }
-//                outputKinds = mutableListOf(NativeOutputKind.DYNAMIC) // -> replaced by binary block. see -> https://kotlinlang.org/docs/reference/building-mpp-with-gradle.html#building-final-native-binaries
-                /*
-                Now one has to define it in the gradle build file like so:
-                binaries {
-                    sharedLib([RELEASE])
+                dependencies { implementation("org.godotengine.kotlin:godot-library:${kotlinGodotPluginExtension.godotLibraryVersion}") }
+
+                this.kotlinSourceSets.forEach { kotlinSourceSet ->
+                    kotlinSourceSet.kotlin.srcDir(project.buildDir.absolutePath + "/godot/entries/" + kotlinSourceSet.name)
                 }
-                //TODO: make autocompletion work in groovy. Maybe check first if it works with kts (build.gradle.kts)
-                 */
                 addGeneratorTasks()
             }
         }
@@ -55,47 +44,10 @@ class KotlinGodotTargetPreset(
             val entryPath = project.buildDir.absolutePath + "/godot/entries/" + sourceSet.name
             sourceSet.kotlin.srcDir(entryPath)
 
-
-            val info: GodotSourceSetInformation
-            if (!sourceSetsInformation.contains(sourceSet)) {
-                info = GodotSourceSetInformation(project.projectDir.absolutePath + File.separator, sourceSet)
-                sourceSetsInformation[sourceSet] = info
-            } else
-                info = sourceSetsInformation[sourceSet]!!
-
-
-            val generateTask = project.tasks.create(sourceSet.name + "GenerateEntry") {
-                it.inputs.files(info.configs)
-                it.outputs.dir(entryPath)
-
-                it.doFirst {
-                    if (info.configs.isEmpty())
-                        project.logger.warn("$sourceSet has no configs for Godot registration - you may not access Kotlin classes from Godot.")
-                    else {
-                        var libPath = if (info.libraryPath == "") "${sourceSet.name}.gdnlib" else info.libraryPath
-                        if (!libPath.startsWith("res://"))
-                            libPath = "res://$libPath"
-
-                        try {
-//                            generateEntry(info.configs, entryPath + File.separator + "Entry.kt", info.gdnsPath, libPath)
-                            project.logger.info("Generated entry file for godot $sourceSet.")
-                        } catch (e: Exception) {
-                            val capture = "Failed to generate entry file for godot $sourceSet ($e)"
-                            throw InvalidUserDataException(capture, e)
-                        }
-                    }
-                }
-            }
-
             if (index == 0) {
                 val dummyTarget = nativePreset.createTarget("entryGeneration${sourceSet.name.capitalize()}").apply {
                     this.compilations.all { compilation ->
                         compilation.source(sourceSet)
-
-//                        compilation.apply {
-//                            dependencies { implementation(LibrariesDependency) }
-//                            dependencies { implementation("org.godotengine.kotlin:annotations:0.0.1-SNAPSHOT") }
-//                        }
                     }
                 }
                 kotlin.targets.add(dummyTarget)
@@ -127,11 +79,6 @@ class KotlinGodotTargetPreset(
 
             project.getTasksByName(compileKotlinTaskName, false).forEach { task ->
                 task.dependsOn(
-                        generateTask.apply {
-                            onlyIf {
-                                HostManager().isEnabled(konanTarget) && !info.skipEntryGeneration
-                            }
-                        },
                         "compileKotlinEntryGeneration${sourceSet.name.capitalize()}"
                 )
             }
@@ -144,16 +91,3 @@ class KotlinGodotTargetPreset(
         }
     }
 }
-
-/*
-
-internal fun lowerCamelCaseName(vararg nameParts: String?): String {
-    val nonEmptyParts = nameParts.mapNotNull { it?.takeIf(String::isNotEmpty) }
-    return nonEmptyParts.drop(1).joinToString(
-            separator = "",
-            prefix = nonEmptyParts.firstOrNull().orEmpty(),
-            transform = String::capitalize
-    )
-}
-internal val KotlinCompilation.defaultSourceSetName: String
-    get() = lowerCamelCaseName(target.disambiguationClassifier, compilationName)*/
