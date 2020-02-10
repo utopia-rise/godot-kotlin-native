@@ -44,8 +44,7 @@ kotlin {
                             "arm64" -> listOf(targetFromPreset(presets["androidNativeArm64"], "androidArm64"))
                             else -> listOf(targetFromPreset(presets["androidNativeArm64"], "androidArm64"))
                         }
-                    }
-                    else listOf(targetFromPreset(presets["androidNativeArm64"], "androidArm64"))
+                    } else listOf(targetFromPreset(presets["androidNativeArm64"], "androidArm64"))
                     else -> listOf(targetFromPreset(presets["linuxX64"], "linux"))
                 }
             } else {
