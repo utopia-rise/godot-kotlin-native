@@ -1,4 +1,4 @@
-package godot.registration
+package org.godotengine.kotlin.anntations.internal
 
 @Target(
         AnnotationTarget.CLASS,
@@ -6,4 +6,4 @@ package godot.registration
         AnnotationTarget.PROPERTY
 )
 @Retention(AnnotationRetention.RUNTIME)
-annotation class RegisterInternal
+actual annotation class RegisterInternal
