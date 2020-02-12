@@ -1,4 +1,5 @@
 val platform: String by project
+val android_arch: String by project
 
 buildscript {
     repositories {
@@ -29,13 +30,27 @@ kotlin {
         sourceSets.create("macosMain")
         sourceSets.create("linuxMain")
         sourceSets.create("windowsMain")
-        configure(listOf(sourceSets["macosMain"], sourceSets["linuxMain"], sourceSets["windowsMain"])) {
+        sourceSets.create("androidArm64Main")
+        sourceSets.create("androidX64Main")
+        configure(listOf(
+                sourceSets["macosMain"],
+                sourceSets["linuxMain"],
+                sourceSets["windowsMain"],
+                sourceSets["androidArm64Main"],
+                sourceSets["androidX64Main"]
+        )) {
             this.kotlin.srcDir("src/main/kotlin")
         }
 
 
         configure<org.godotengine.kotlin.gradleplugin.ConfigureGodotConvention> {
-            this.configureGodot(listOf(sourceSets["macosMain"], sourceSets["linuxMain"], sourceSets["windowsMain"])) {
+            this.configureGodot(listOf(
+                    sourceSets["macosMain"],
+                    sourceSets["linuxMain"],
+                    sourceSets["windowsMain"],
+                    sourceSets["androidArm64Main"],
+                    sourceSets["androidX64Main"]
+            )) {
                 sourceSet {
                     kotlin.srcDirs("src/main/kotlin")
                 }
@@ -60,13 +75,22 @@ kotlin {
             "windows" -> listOf(targetFromPreset(presets["godotMingwX64"], "windows"))
             "linux" -> listOf(targetFromPreset(presets["godotLinuxX64"], "linux"))
             "macos" -> listOf(targetFromPreset(presets["godotMacosX64"], "macos"))
+            "android" -> if (project.hasProperty("android_arch")) {
+                when(android_arch) {
+                    "X64" -> listOf(targetFromPreset(presets["godotAndroidNativeX64"], "androidX64"))
+                    "arm64" -> listOf(targetFromPreset(presets["godotAndroidNativeArm64"], "androidArm64"))
+                    else -> listOf(targetFromPreset(presets["godotAndroidNativeArm64"], "androidArm64"))
+                }
+            } else listOf(targetFromPreset(presets["godotAndroidNativeArm64"], "androidArm64"))
             else -> listOf(targetFromPreset(presets["godotMacosX64"], "macos"))
         }
     } else {
         listOf(
                 targetFromPreset(presets["godotLinuxX64"], "linux"),
                 targetFromPreset(presets["godotMacosX64"], "macos"),
-                targetFromPreset(presets["godotMingwX64"], "windows")
+                targetFromPreset(presets["godotMingwX64"], "windows"),
+                targetFromPreset(presets["godotAndroidNativeArm64"], "androidArm64"),
+                targetFromPreset(presets["godotAndroidNativeX64"], "androidX64")
         )
     }
 
