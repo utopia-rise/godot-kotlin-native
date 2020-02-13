@@ -3,7 +3,7 @@
 ## Cloning and initialising the project
 Clone repo on your local machine:
 ```shell 
-git clone https://github.com/utopia-rise/kotlin-godot-wrapper.git
+git clone https://github.com/utopia-rise/godot-kotlin.git
 git submodule init
 git submodule update
 ```
