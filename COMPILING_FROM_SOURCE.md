@@ -14,10 +14,9 @@ Use `build` gradle task to automatically build all subprojects. All artifacts wi
 ## Building the samples
 The samples are not built with the top level `build` gradle task.
 
-Instead, navigate to one of the samples:
-`samples/games`
-`samples/coroutines`
+Instead, navigate to one of the samples kotlin directories:
+`samples/games/kotlin`
+`samples/coroutines/kotlin`
 
 Then build them manually by directly calling the `build` task of the samples from the IDE or through the commandline:
 `./gradlew build`
- 
