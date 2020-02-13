@@ -28,7 +28,7 @@ Look into [**Compiling from source**](COMPILING_FROM_SOURCE.md) section to get m
 ## Developer discussion
 
 Ask questions and collaborate on Discord:
-https://discord.gg/tZ5XpZ
+https://discord.gg/qSU2EQs
 
 ## Authors
 
