@@ -25,6 +25,11 @@ Look into [**Registration**](./REGISTRATION.md) section to get more information.
 
 Look into [**Compiling from source**](COMPILING_FROM_SOURCE.md) section to get more information.
 
+## Developer discussion
+
+Ask questions and collaborate on Gitter:
+https://gitter.im/Godot-Kotlin/community
+
 ## Authors
 
 All authors are indicated in [*CONTRIBUTORS*](https://github.com/utopia-rise/kotlin-godot-wrapper/graphs/contributors) section on **GitHub**.  
