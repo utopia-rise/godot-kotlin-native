@@ -47,21 +47,21 @@ class Player : Area2D() {
 
         if (position.x < 0) {
             position {
-                x = 0.0
+                it.x = 0.0
             }
         } else if (position.x > screensize.x) {
             position {
-                x = screensize.x
+                it.x = screensize.x
             }
         }
 
         if (position.y < 0) {
             position {
-                y = 0.0
+                it.y = 0.0
             }
         } else if (position.y > screensize.y) {
             position {
-                y = screensize.y
+                it.y = screensize.y
             }
         }
 
