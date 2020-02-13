@@ -13,9 +13,9 @@ Use `build` gradle task to automatically build all subprojects. All artifacts wi
 You can also build modules independently in this order:
 ```shell script
 ./gradlew :tools:api-classes-generator:build
-./gradlew :tools:annotations -Pplatform=windows/linux/macos/android; (add -Pandroid_arch=arm64/X64) for android build
-./gradlew :wrapper:godot-library:build -Pplatform=windows/linux/macos/android; (add -Pandroid_arch=arm64/X64) for android build
-./gradlew :wrapper:godot-library-extension:build -Pplatform=windows/linux/macos; Extension is not currently supported on android, we're working on that'
+./gradlew :tools:annotations -Pplatform=windows/linux/macos/android #(add -Pandroid_arch=arm64/X64) for android build
+./gradlew :wrapper:godot-library:build -Pplatform=windows/linux/macos/android #(add -Pandroid_arch=arm64/X64) for android build
+./gradlew :wrapper:godot-library-extension:build -Pplatform=windows/linux/macos #Extension is not currently supported on android, we're working on that'
 ./gradlew :tools:godot-gradle-plugin:build
 ./gradlew :tools:godot-annotation-processor:build
 ./gradlew :tools:kotlin-compiler-plugin:build
