@@ -47,6 +47,9 @@ enableFeaturePreview("GRADLE_METADATA")
 \
 Inside your `build.gradle.kts` file, you need to define the `godot-gradle-plugin` repository and the `kotlin-gradle-plugin` repository:
 ```kotlin
+val platform: String by project
+val android_arch: String by project
+
 buildscript {
     repositories {
         mavenLocal()
@@ -81,13 +84,27 @@ kotlin {
         sourceSets.create("macosMain")
         sourceSets.create("linuxMain")
         sourceSets.create("windowsMain")
-        configure(listOf(sourceSets["macosMain"], sourceSets["linuxMain"], sourceSets["windowsMain"])) {
+        sourceSets.create("androidArm64Main")
+        sourceSets.create("androidX64Main")
+        configure(listOf(
+                sourceSets["macosMain"],
+                sourceSets["linuxMain"],
+                sourceSets["windowsMain"],
+                sourceSets["androidArm64Main"],
+                sourceSets["androidX64Main"]
+        )) {
             this.kotlin.srcDir("src/main/kotlin")
         }
 
 
-        configure<godot.gradle.plugin.ConfigureGodotConvention> {
-            this.configureGodot(listOf(sourceSets["macosMain"], sourceSets["linuxMain"], sourceSets["windowsMain"])) {
+        configure<org.godotengine.kotlin.gradleplugin.ConfigureGodotConvention> {
+            this.configureGodot(listOf(
+                    sourceSets["macosMain"],
+                    sourceSets["linuxMain"],
+                    sourceSets["windowsMain"],
+                    sourceSets["androidArm64Main"],
+                    sourceSets["androidX64Main"]
+            )) {
                 sourceSet {
                     kotlin.srcDirs("src/main/kotlin")
                 }
@@ -128,22 +145,41 @@ configs(
 \
 As the last step, we need to specify for which target to build for:
 ```kotlin
-val targets = listOf(
-        targetFromPreset(presets["godotMingwX64"], "windows"),
-        targetFromPreset(presets["godotLinuxX64"], "linux"),
-        targetFromPreset(presets["godotMacosX64"], "macos")
-)
+val targets = if (project.hasProperty("platform")) {
+    when (platform) {
+        "windows" -> listOf(targetFromPreset(presets["godotMingwX64"], "windows"))
+        "linux" -> listOf(targetFromPreset(presets["godotLinuxX64"], "linux"))
+        "macos" -> listOf(targetFromPreset(presets["godotMacosX64"], "macos"))
+        "android" -> if (project.hasProperty("android_arch")) {
+            when(android_arch) {
+                "X64" -> listOf(targetFromPreset(presets["godotAndroidNativeX64"], "androidX64"))
+                "arm64" -> listOf(targetFromPreset(presets["godotAndroidNativeArm64"], "androidArm64"))
+                else -> listOf(targetFromPreset(presets["godotAndroidNativeArm64"], "androidArm64"))
+            }
+        } else listOf(targetFromPreset(presets["godotAndroidNativeArm64"], "androidArm64"))
+        else -> listOf(targetFromPreset(presets["godotMacosX64"], "macos"))
+    }
+} else {
+    listOf(
+            targetFromPreset(presets["godotLinuxX64"], "linux"),
+            targetFromPreset(presets["godotMacosX64"], "macos"),
+            targetFromPreset(presets["godotMingwX64"], "windows"),
+            targetFromPreset(presets["godotAndroidNativeArm64"], "androidArm64"),
+            targetFromPreset(presets["godotAndroidNativeX64"], "androidX64")
+    )
+}
 
-targets.forEach { target ->
-    target.compilations.getByName("main") {
+targets.forEach {
+    it.compilations.getByName("main") {
         if (this is org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeCompilation) {
-            println("Configuring target ${target.name}")
+            println("Configuring target ${this.target.name}")
             this.target.binaries {
                 sharedLib(listOf(org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG))
             }
-            target.compilations.all {
+            this.target.compilations.all {
                 dependencies {
                     implementation("org.godotengine.kotlin:godot-library:1.0.0")
+                    implementation("org.godotengine.kotlin:annotations:0.0.1-SNAPSHOT")
                 }
             }
         } else {
@@ -157,6 +193,9 @@ targets.forEach { target ->
 #### Final buildscript
 If you followed along your `build.gradle.kts` file should look like this:
 ```kotlin
+val platform: String by project
+val android_arch: String by project
+
 buildscript {
     repositories {
         mavenLocal()
@@ -170,7 +209,7 @@ buildscript {
 }
 
 plugins {
-    id("org.jetbrains.kotlin.multiplatform")
+    id("org.jetbrains.kotlin.multiplatform") version ("1.3.61")
 }
 
 apply(plugin = "godot-gradle-plugin")
@@ -186,43 +225,81 @@ kotlin {
         sourceSets.create("macosMain")
         sourceSets.create("linuxMain")
         sourceSets.create("windowsMain")
-        configure(listOf(sourceSets["macosMain"], sourceSets["linuxMain"], sourceSets["windowsMain"])) {
+        sourceSets.create("androidArm64Main")
+        sourceSets.create("androidX64Main")
+        configure(listOf(
+                sourceSets["macosMain"],
+                sourceSets["linuxMain"],
+                sourceSets["windowsMain"],
+                sourceSets["androidArm64Main"],
+                sourceSets["androidX64Main"]
+        )) {
             this.kotlin.srcDir("src/main/kotlin")
         }
 
 
-        configure<godot.gradle.plugin.ConfigureGodotConvention> {
-            this.configureGodot(listOf(sourceSets["macosMain"], sourceSets["linuxMain"], sourceSets["windowsMain"])) {
+        configure<org.godotengine.kotlin.gradleplugin.ConfigureGodotConvention> {
+            this.configureGodot(listOf(
+                    sourceSets["macosMain"],
+                    sourceSets["linuxMain"],
+                    sourceSets["windowsMain"],
+                    sourceSets["androidArm64Main"],
+                    sourceSets["androidX64Main"]
+            )) {
                 sourceSet {
                     kotlin.srcDirs("src/main/kotlin")
                 }
 
-                libraryPath("${project.rootDir.absolutePath}/project/projectname.gdnlib")
+                libraryPath("samples.gdnlib")
                 generateGDNS("${project.rootDir.absolutePath}/../project")
-                
+
                 configs(
-                        
+                        "src/main/kotlin/godot/samples/games/shmup/classes.json",
+                        "src/main/kotlin/godot/samples/games/dodge/classes.json",
+                        "src/main/kotlin/godot/samples/games/catchBall/classes.json",
+                        "src/main/kotlin/godot/samples/games/main/classes.json",
+                        "src/main/kotlin/godot/samples/games/fastFinish/classes.json",
+                        "src/main/kotlin/godot/samples/games/pong/classes.json"
                 )
             }
         }
     }
-    
-    val targets = listOf(
-            targetFromPreset(presets["godotMingwX64"], "windows"),
-            targetFromPreset(presets["godotLinuxX64"], "linux"),
-            targetFromPreset(presets["godotMacosX64"], "macos")
-    )
-    
-    targets.forEach { target ->
-        target.compilations.getByName("main") {
+
+    val targets = if (project.hasProperty("platform")) {
+        when (platform) {
+            "windows" -> listOf(targetFromPreset(presets["godotMingwX64"], "windows"))
+            "linux" -> listOf(targetFromPreset(presets["godotLinuxX64"], "linux"))
+            "macos" -> listOf(targetFromPreset(presets["godotMacosX64"], "macos"))
+            "android" -> if (project.hasProperty("android_arch")) {
+                when(android_arch) {
+                    "X64" -> listOf(targetFromPreset(presets["godotAndroidNativeX64"], "androidX64"))
+                    "arm64" -> listOf(targetFromPreset(presets["godotAndroidNativeArm64"], "androidArm64"))
+                    else -> listOf(targetFromPreset(presets["godotAndroidNativeArm64"], "androidArm64"))
+                }
+            } else listOf(targetFromPreset(presets["godotAndroidNativeArm64"], "androidArm64"))
+            else -> listOf(targetFromPreset(presets["godotMacosX64"], "macos"))
+        }
+    } else {
+        listOf(
+                targetFromPreset(presets["godotLinuxX64"], "linux"),
+                targetFromPreset(presets["godotMacosX64"], "macos"),
+                targetFromPreset(presets["godotMingwX64"], "windows"),
+                targetFromPreset(presets["godotAndroidNativeArm64"], "androidArm64"),
+                targetFromPreset(presets["godotAndroidNativeX64"], "androidX64")
+        )
+    }
+
+    targets.forEach {
+        it.compilations.getByName("main") {
             if (this is org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeCompilation) {
-                println("Configuring target ${target.name}")
+                println("Configuring target ${this.target.name}")
                 this.target.binaries {
                     sharedLib(listOf(org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG))
                 }
-                target.compilations.all {
+                this.target.compilations.all {
                     dependencies {
                         implementation("org.godotengine.kotlin:godot-library:1.0.0")
+                        implementation("org.godotengine.kotlin:annotations:0.0.1-SNAPSHOT")
                     }
                 }
             } else {
@@ -318,8 +395,22 @@ configs(
 
 Now we can build our project. Use gradle `build` task to build the project. At first gradle will generate a `Entry.kt` file with entry point and all classes registrations from configs. This file will be used by Godot to call our classes.
 
-If everything is okay you will get a shared library (`.dll` on windows, `.so` on linux and macOS). Copy it from gradle `build/bin` directory into your Godot project subdirectory and link it to *GDNativeLibrary* instance. If you mentioned `generateGDNS` option in build file - at that path there will be .gdns files (scripts) which you connect to any node.
+If everything is okay you will get a shared library (`.dll` on windows, `.so` on linux and android, and `.dylib` on macOS). Copy it from gradle `build/bin` directory into your Godot project subdirectory and link it to *GDNativeLibrary* instance. If you mentioned `generateGDNS` option in build file - at that path there will be .gdns files (scripts) which you connect to any node.
 
+You can also specify the platform on which you want to build using `platform` parameter. Here is an example for windows:
+```shell script
+./gradlew build -Pplatform=windows
+```
+
+### Android specificity
+
+Android supported targets are `arm64` and `X64`, for now no 32 bits target are supported.  
+On android you cannot use `godot-library-extension` for the moment, we're looking to add it in the future. So you cannot
+use `yield` on this platform for now.  
+To build project on android you have to add `android_arch` parameter to build task. Here is an example for arm64:
+```shell script
+./gradlew build -Pplatform=android -Pandroid_arch=arm64
+```
 
 ## What's next?
 
