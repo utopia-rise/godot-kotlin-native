@@ -56,7 +56,7 @@ kotlin {
                 }
 
                 libraryPath("samples.gdnlib")
-                generateGDNS("${project.rootDir.absolutePath}/../project")
+                generateGDNS("${project.rootDir.absolutePath}/../..")
 
                 configs(
                         "src/main/kotlin/godot/samples/games/shmup/classes.json",

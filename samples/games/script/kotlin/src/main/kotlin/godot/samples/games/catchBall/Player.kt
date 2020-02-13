@@ -24,11 +24,11 @@ class Player: KinematicBody() {
 
             if(translation.x + velocity.x * delta < 4.0 &&
                     translation.x + velocity.x * delta > -4.0)
-                translation { it.x += velocity.x * delta }
+                translation { x += velocity.x * delta }
 
             if (translation.z + velocity.z * delta < 4.0 &&
                     translation.z + velocity.z * delta > -4.0)
-                translation { it.z += velocity.z * delta }
+                translation { z += velocity.z * delta }
         }
     }
 }
