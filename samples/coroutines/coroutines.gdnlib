@@ -7,8 +7,8 @@ reloadable=true
 
 [entry]
 
-Windows.64="res://script/kotlin/build/bin/windows/releaseShared/kotlin.dll"
-X11.64="res://script/kotlin/build/bin/linux/releaseShared/libkotlin.so"
+Windows.64="res://kotlin/build/bin/windows/releaseShared/kotlin.dll"
+X11.64="res://kotlin/build/bin/linux/releaseShared/libkotlin.so"
 
 [dependencies]
 
