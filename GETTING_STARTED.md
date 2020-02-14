@@ -24,8 +24,7 @@ We recommend you the following folder structure:
 │   ├── .gitignore
 │   ├── build.gradle.kts
 │   └── README.md
-└── project/
-    └── project.godot
+├── project.godot
 ```
 
 ### Creating the projects
