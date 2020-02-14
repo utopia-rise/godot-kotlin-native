@@ -3,6 +3,7 @@ import java.util.*
 val bintrayUser: String by project
 val bintrayKey: String by project
 val platform: String by project
+val armArch: String by project
 
 plugins {
     id("kotlin-multiplatform")
@@ -18,10 +19,14 @@ kotlin {
         sourceSets.create("macosMain")
         sourceSets.create("linuxMain")
         sourceSets.create("windowsMain")
+        sourceSets.create("iosArm64Main")
+        sourceSets.create("iosX64Main")
         configure(listOf(
                 sourceSets["macosMain"],
                 sourceSets["linuxMain"],
-                sourceSets["windowsMain"]
+                sourceSets["windowsMain"],
+                sourceSets["iosArm64Main"],
+                sourceSets["iosX64Main"]
         )) {
             this.kotlin.srcDir("src/main/kotlin")
         }
@@ -33,13 +38,22 @@ kotlin {
                     "windows" -> listOf(targetFromPreset(presets["mingwX64"], "windows"))
                     "linux" -> listOf(targetFromPreset(presets["linuxX64"], "linux"))
                     "macos" -> listOf(targetFromPreset(presets["macosX64"], "macos"))
+                    "ios" -> if (project.hasProperty("armArch")) {
+                        when (armArch) {
+                            "arm64" -> listOf(targetFromPreset(presets["iosArm64"], "iosArm64"))
+                            "X64" -> listOf(targetFromPreset(presets["iosX64"], "iosX64"))
+                            else -> listOf(targetFromPreset(presets["iosArm64"], "iosArm64"))
+                        }
+                    } else listOf(targetFromPreset(presets["iosArm64"], "iosArm64"))
                     else -> listOf(targetFromPreset(presets["linuxX64"], "linux"))
                 }
             } else {
                 listOf(
                         targetFromPreset(presets["linuxX64"], "linux"),
                         targetFromPreset(presets["macosX64"], "macos"),
-                        targetFromPreset(presets["mingwX64"], "windows")
+                        targetFromPreset(presets["mingwX64"], "windows"),
+                        targetFromPreset(presets["iosArm64"], "iosArm64"),
+                        targetFromPreset(presets["iosX64"], "iosX64")
                 )
             }
 
