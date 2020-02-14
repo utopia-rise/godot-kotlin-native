@@ -80,7 +80,9 @@ if (project.hasProperty("bintrayUser") && project.hasProperty("bintrayKey") && p
             userOrg = "utopia-rise"
             repo = "annotations"
 
-            name = "${project.name}-$platform"
+            val armString = if (project.hasProperty("armArch")) armArch else ""
+
+            name = "${project.name}-$platform$armString"
             vcsUrl = "https://github.com/utopia-rise/kotlin-godot-wrapper"
             setLicenses("Apache-2.0")
             version(closureOf<com.jfrog.bintray.gradle.BintrayExtension.VersionConfig> {
