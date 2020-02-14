@@ -22,6 +22,11 @@ You can also build modules independently in this order:
 ./gradlew :tools:kotlin-compiler-native-plugin:build
 ```
 
+or you can add the parameter to your `gradle.properties` file if you're supporting only one platform:
+```
+platform=yourplatformgoeshere
+```
+
 ## Building the samples
 Samples projects are not included in root gradle project, as it is not the way it works for end user. In order to build samples
 you have to start `build` task from `samples/games/kotlin` directory.
