@@ -18,7 +18,7 @@ version = Dependencies.annotationsVersion
 val bintrayUser: String by project
 val bintrayKey: String by project
 val platform: String by project
-val android_arch: String by project
+val armArch: String by project
 
 kotlin {
     if (project.hasProperty("platform")) {
@@ -26,13 +26,19 @@ kotlin {
             "windows" -> mingwX64("windows")
             "linux" -> linuxX64("linux")
             "macos" -> macosX64("macos")
-            "android" -> if (project.hasProperty("android_arch")) {
-                when(android_arch) {
+            "android" -> if (project.hasProperty("armArch")) {
+                when(armArch) {
                     "X64" -> androidNativeX64("androidX64")
                     "arm64" -> androidNativeArm64("androidArm64")
                     else -> androidNativeArm64("androidArm64")
                 }
             } else androidNativeArm64("androidArm64")
+            "ios" -> if (project.hasProperty("armArch")) {
+                when(armArch) {
+                    "arm64" -> iosArm64("iosArm64")
+                    "X64" -> iosX64("iosX64")
+                }
+            } else iosArm64("iosArm64")
             else -> linuxX64("linux")
         }
     } else {
@@ -41,6 +47,8 @@ kotlin {
         macosX64("macos")
         androidNativeX64("androidX64")
         androidNativeArm64("androidArm64")
+        iosArm64("iosArm64")
+        iosX64("iosX64")
     }
     jvm()
 
