@@ -53,7 +53,9 @@ kotlin {
                     sourceSets["linuxMain"],
                     sourceSets["windowsMain"],
                     sourceSets["androidArm64Main"],
-                    sourceSets["androidX64Main"]
+                    sourceSets["androidX64Main"],
+                    sourceSets["iosArm64Main"],
+                    sourceSets["iosX64Main"]
             )) {
                 sourceSet {
                     kotlin.srcDirs("src/main/kotlin")

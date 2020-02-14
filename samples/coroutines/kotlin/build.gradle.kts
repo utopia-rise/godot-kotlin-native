@@ -1,3 +1,6 @@
+val platform: String by project
+val armArch: String by project
+
 buildscript {
     repositories {
         mavenLocal()
@@ -28,13 +31,27 @@ kotlin {
         sourceSets.create("macosMain")
         sourceSets.create("linuxMain")
         sourceSets.create("windowsMain")
-        configure(listOf(sourceSets["macosMain"], sourceSets["linuxMain"], sourceSets["windowsMain"])) {
+        sourceSets.create("iosArm64Main")
+        sourceSets.create("iosX64Main")
+        configure(listOf(
+                sourceSets["macosMain"],
+                sourceSets["linuxMain"],
+                sourceSets["windowsMain"],
+                sourceSets["iosArm64Main"],
+                sourceSets["iosX64Main"]
+        )) {
             this.kotlin.srcDir("src/main/kotlin")
         }
 
 
         configure<org.godotengine.kotlin.gradleplugin.ConfigureGodotConvention> {
-            this.configureGodot(listOf(sourceSets["macosMain"], sourceSets["linuxMain"], sourceSets["windowsMain"])) {
+            this.configureGodot(listOf(
+                    sourceSets["macosMain"],
+                    sourceSets["linuxMain"],
+                    sourceSets["windowsMain"],
+                    sourceSets["iosArm64Main"],
+                    sourceSets["iosX64Main"]
+            )) {
                 sourceSet {
                     kotlin.srcDirs("src/main/kotlin")
                 }
@@ -49,11 +66,29 @@ kotlin {
         }
     }
 
-    val targets = listOf(
-            targetFromPreset(presets["godotMingwX64"], "windows"),
-            targetFromPreset(presets["godotLinuxX64"], "linux"),
-            targetFromPreset(presets["godotMacosX64"], "macos")
-    )
+    val targets = if (project.hasProperty("platform")) {
+        when (platform) {
+            "windows" -> listOf(targetFromPreset(presets["godotMingwX64"], "windows"))
+            "linux" -> listOf(targetFromPreset(presets["godotLinuxX64"], "linux"))
+            "macos" -> listOf(targetFromPreset(presets["godotMacosX64"], "macos"))
+            "ios" -> if (project.hasProperty("armArch")) {
+                when (armArch) {
+                    "arm64" -> listOf(targetFromPreset(presets["iosArm64"], "iosArm64"))
+                    "X64" -> listOf(targetFromPreset(presets["iosX64"], "iosX64"))
+                    else -> listOf(targetFromPreset(presets["iosArm64"], "iosArm64"))
+                }
+            } else listOf(targetFromPreset(presets["iosArm64"], "iosArm64"))
+            else -> listOf(targetFromPreset(presets["linuxX64"], "linux"))
+        }
+    } else {
+        listOf(
+                targetFromPreset(presets["godotLinuxX64"], "linux"),
+                targetFromPreset(presets["godotMacosX64"], "macos"),
+                targetFromPreset(presets["godotMingwX64"], "windows"),
+                targetFromPreset(presets["iosArm64"], "iosArm64"),
+                targetFromPreset(presets["iosX64"], "iosX64")
+        )
+    }
 
     targets.forEach { target ->
         target.compilations.getByName("main") {
