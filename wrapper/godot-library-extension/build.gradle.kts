@@ -3,7 +3,6 @@ import java.util.*
 val bintrayUser: String by project
 val bintrayKey: String by project
 val platform: String by project
-val android_arch: String by project
 
 plugins {
     id("kotlin-multiplatform")
