@@ -73,20 +73,20 @@ kotlin {
             "macos" -> listOf(targetFromPreset(presets["godotMacosX64"], "macos"))
             "ios" -> if (project.hasProperty("armArch")) {
                 when (armArch) {
-                    "arm64" -> listOf(targetFromPreset(presets["iosArm64"], "iosArm64"))
-                    "X64" -> listOf(targetFromPreset(presets["iosX64"], "iosX64"))
-                    else -> listOf(targetFromPreset(presets["iosArm64"], "iosArm64"))
+                    "arm64" -> listOf(targetFromPreset(presets["godotIosArm64"], "iosArm64"))
+                    "X64" -> listOf(targetFromPreset(presets["godotIosX64"], "iosX64"))
+                    else -> listOf(targetFromPreset(presets["godotIosArm64"], "iosArm64"))
                 }
-            } else listOf(targetFromPreset(presets["iosArm64"], "iosArm64"))
-            else -> listOf(targetFromPreset(presets["linuxX64"], "linux"))
+            } else listOf(targetFromPreset(presets["godotIosArm64"], "iosArm64"))
+            else -> listOf(targetFromPreset(presets["godotLinuxX64"], "linux"))
         }
     } else {
         listOf(
                 targetFromPreset(presets["godotLinuxX64"], "linux"),
                 targetFromPreset(presets["godotMacosX64"], "macos"),
                 targetFromPreset(presets["godotMingwX64"], "windows"),
-                targetFromPreset(presets["iosArm64"], "iosArm64"),
-                targetFromPreset(presets["iosX64"], "iosX64")
+                targetFromPreset(presets["godotIosArm64"], "iosArm64"),
+                targetFromPreset(presets["godotIosX64"], "iosX64")
         )
     }
 
