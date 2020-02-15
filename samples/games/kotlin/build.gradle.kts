@@ -1,5 +1,6 @@
 val platform: String by project
 val armArch: String by project
+val iosSigningIdentity: String by project
 
 buildscript {
     repositories {
@@ -120,6 +121,29 @@ kotlin {
                     dependencies {
                         implementation("org.godotengine.kotlin:godot-library:1.0.0")
                         implementation("org.godotengine.kotlin:annotations:0.0.1-SNAPSHOT")
+                    }
+                }
+                if (project.hasProperty("iosSigningIdentity") && this.target.name == "iosArm64") {
+                    tasks.build {
+                        doLast {
+                            exec {
+                                commandLine = listOf("codesign", "-f", "-s", iosSigningIdentity, "build/bin/iosArm64/debugShared/libkotlin.dylib")
+                            }
+                            exec {
+                                commandLine = listOf("install_name_tool", "-id", "@executable_path/dylibs/ios/libkotlin.dylib", "build/bin/iosArm64/debugShared/libkotlin.dylib")
+                            }
+                        }
+                    }
+                } else if (project.hasProperty("iosSigningIdentity") && this.target.name == "iosX64") {
+                    tasks.build {
+                        doLast {
+                            exec {
+                                commandLine = listOf("codesign", "-f", "-s", iosSigningIdentity, "build/bin/iosX64/debugShared/libkotlin.dylib")
+                            }
+                            exec {
+                                commandLine = listOf("install_name_tool", "-id", "@executable_path/dylibs/ios/libkotlin.dylib", "build/bin/iosX64/debugShared/libkotlin.dylib")
+                            }
+                        }
                     }
                 }
             } else {
