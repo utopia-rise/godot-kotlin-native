@@ -63,7 +63,7 @@ buildscript {
 }
 
 plugins {
-    id("org.jetbrains.kotlin.multiplatform")
+    id("org.jetbrains.kotlin.multiplatform") version ("1.3.61")
 }
 
 apply(plugin = "godot-gradle-plugin")
