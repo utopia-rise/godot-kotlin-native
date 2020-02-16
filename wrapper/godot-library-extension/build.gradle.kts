@@ -18,7 +18,11 @@ kotlin {
         sourceSets.create("macosMain")
         sourceSets.create("linuxMain")
         sourceSets.create("windowsMain")
-        configure(listOf(sourceSets["macosMain"], sourceSets["linuxMain"], sourceSets["windowsMain"])) {
+        configure(listOf(
+                sourceSets["macosMain"],
+                sourceSets["linuxMain"],
+                sourceSets["windowsMain"]
+        )) {
             this.kotlin.srcDir("src/main/kotlin")
         }
     }

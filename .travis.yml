@@ -1,11 +1,23 @@
 language: java
 matrix:
   include:
-    - os: osx
+    - name: MacOS
+      env: PLATFORM=macos
+      os: osx
       osx_image: xcode11.2
-    - os: linux
-    - os: windows
+    - name: Linux
+      env: PLATFORM=linux
+      os: linux
+    - name: Windows
+      env: PLATFORM=windows
+      os: windows
       language: shell
+    - name: Android Arm64
+      env: PLATFORM=android ANDROID_ARCH=arm64
+      os: linux
+    - name: Android x64
+      env: PLATFORM=android ANDROID_ARCH=X64
+      os: linux
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
     export JAVA_HOME=${JAVA_HOME:-/c/jdk}
@@ -15,14 +27,13 @@ before_install:
     fi
 install:
   - ./gradlew :tools:api-classes-generator:build
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-    ./gradlew :tools:annotations -Pplatform=macos;
-    ./gradlew :wrapper:godot-library:build -Pplatform=macos;
-    ./gradlew :wrapper:godot-library-extension:build -Pplatform=macos;
+  - if [[ "$PLATFORM" == "android" ]]; then
+    ./gradlew :tools:annotations -Pplatform=$PLATFORM -Pandroid_arch=$ANDROID_ARCH;
+    ./gradlew :wrapper:godot-library:build -Pplatform=$PLATFORM -Pandroid_arch=$ANDROID_ARCH;
     else
-    ./gradlew :tools:annotations:build -Pplatform=$TRAVIS_OS_NAME;
-    ./gradlew :wrapper:godot-library:build -Pplatform=$TRAVIS_OS_NAME;
-    ./gradlew :wrapper:godot-library-extension:build -Pplatform=$TRAVIS_OS_NAME;
+    ./gradlew :tools:annotations -Pplatform=$PLATFORM;
+    ./gradlew :wrapper:godot-library:build -Pplatform=$PLATFORM;
+    ./gradlew :wrapper:godot-library-extension:build -Pplatform=$PLATFORM;
     fi
   - ./gradlew :tools:godot-gradle-plugin:build
   - ./gradlew :tools:godot-annotation-processor:build
@@ -30,6 +41,6 @@ install:
   - ./gradlew :tools:kotlin-compiler-native-plugin:build
 deploy:
   - provider: script
-    script: bash .travis/deploy.sh $BINTRAY_USER $BINTRAY_KEY $TRAVIS_OS_NAME
+    script: bash .travis/deploy.sh $BINTRAY_USER $BINTRAY_KEY $PLATFORM $ANDROID_ARCH
     on:
       tags: true
