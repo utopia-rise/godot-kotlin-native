@@ -13,11 +13,19 @@ matrix:
       os: windows
       language: shell
     - name: Android Arm64
-      env: PLATFORM=android ANDROID_ARCH=arm64
+      env: PLATFORM=android ARM_ARCH=arm64
       os: linux
     - name: Android x64
-      env: PLATFORM=android ANDROID_ARCH=X64
+      env: PLATFORM=android ARM_ARCH=X64
       os: linux
+    - name: iOS Arm64
+      env: PLATFORM=ios ARM_ARCH=arm64
+      os: osx
+      osx_image: xcode11.2
+    - name: iOS x64
+      env: PLATFORM=ios ARM_ARCH=X64
+      os: osx
+      osx_image: xcode11.2
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
     export JAVA_HOME=${JAVA_HOME:-/c/jdk}
@@ -27,11 +35,12 @@ before_install:
     fi
 install:
   - ./gradlew :tools:api-classes-generator:build
-  - if [[ "$PLATFORM" == "android" ]]; then
-    ./gradlew :tools:annotations -Pplatform=$PLATFORM -Pandroid_arch=$ANDROID_ARCH;
-    ./gradlew :wrapper:godot-library:build -Pplatform=$PLATFORM -Pandroid_arch=$ANDROID_ARCH;
+  - if [ "$PLATFORM" == "android" ] || [ "$PLATFORM" == "ios" ]; then
+    ./gradlew :tools:annotations:build -Pplatform=$PLATFORM -ParmArch=$ARM_ARCH;
+    ./gradlew :wrapper:godot-library:build -Pplatform=$PLATFORM -ParmArch=$ARM_ARCH;
+    if [ "$PLATFORM" == "ios" ]; then ./gradlew :wrapper:godot-library-extension:build -Pplatform=$PLATFORM -ParmArch=$ARM_ARCH; fi;
     else
-    ./gradlew :tools:annotations -Pplatform=$PLATFORM;
+    ./gradlew :tools:annotations:build -Pplatform=$PLATFORM;
     ./gradlew :wrapper:godot-library:build -Pplatform=$PLATFORM;
     ./gradlew :wrapper:godot-library-extension:build -Pplatform=$PLATFORM;
     fi
@@ -41,6 +50,6 @@ install:
   - ./gradlew :tools:kotlin-compiler-native-plugin:build
 deploy:
   - provider: script
-    script: bash .travis/deploy.sh $BINTRAY_USER $BINTRAY_KEY $PLATFORM $ANDROID_ARCH
+    script: bash .travis/deploy.sh $BINTRAY_USER $BINTRAY_KEY $PLATFORM $ARM_ARCH
     on:
       tags: true
