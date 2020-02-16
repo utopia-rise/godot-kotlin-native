@@ -13,9 +13,9 @@ Use `build` gradle task to automatically build all subprojects. All artifacts wi
 You can also build modules independently in this order:
 ```shell script
 ./gradlew :tools:api-classes-generator:build
-./gradlew :tools:annotations -Pplatform=windows/linux/macos/android #(add -Pandroid_arch=arm64/X64) for android build
-./gradlew :wrapper:godot-library:build -Pplatform=windows/linux/macos/android #(add -Pandroid_arch=arm64/X64) for android build
-./gradlew :wrapper:godot-library-extension:build -Pplatform=windows/linux/macos #Extension is not currently supported on android, we're working on that'
+./gradlew :tools:annotations -Pplatform=windows/linux/macos/android/ios #(add -ParmArch=arm64/X64) for android and ios build
+./gradlew :wrapper:godot-library:build -Pplatform=windows/linux/macos/android/ios #(add -ParmArch=arm64/X64) for android and ios build
+./gradlew :wrapper:godot-library-extension:build -Pplatform=windows/linux/macos/ios #(add -ParmArch=arm64/X64) for ios build, extension is not currently supported on android, we're working on that
 ./gradlew :tools:godot-gradle-plugin:build
 ./gradlew :tools:godot-annotation-processor:build
 ./gradlew :tools:kotlin-compiler-plugin:build
@@ -32,12 +32,18 @@ Samples projects are not included in root gradle project, as it is not the way i
 you have to start `build` task from `samples/games/kotlin` directory.
 - Build them manually by directly calling the `build` task of the samples from the IDE or through the commandline:  
 `cd samples/games/kotlin`  
-`./gradlew build -Pplatform=desired_platform`, `desired_platform` can be either `windows`, `linux`, `macos`, `android`.  
-For android, you have to add `android_arch` parameter like:  
+`./gradlew build -Pplatform=desired_platform`, `desired_platform` can be either `windows`, `linux`, `macos`, `android`, `ios`.  
+For android and ios, you have to add `armArch` parameter like:  
 `./gradlew build -Pplatform=android -Pplatform=X64`, otherwise it will build `arm64` platform by default. Supported target
 are for now `arm64` and `X64`  
 or  
 `cd samples/coroutines/kotlin`
-`./gradlew :samples:coroutines:kotlin:build`  
+`./gradlew kotlin:build`  
 Coroutines are not supported on android for now.
  
+Also on ios you should add you signing identity, as it is apple requirement, like:
+```shell script
+./gradlew build -Pplatform=ios -ParmArch=arm64 -PiosSigningIdentity="youridentity"
+```
+`youridentity` should looks like this : `Apple Development: mail@provider.com (XXXXXXXXXX)`.
+You can also add `iosSigningIdentity` parameter to your `gradle.properties`.
