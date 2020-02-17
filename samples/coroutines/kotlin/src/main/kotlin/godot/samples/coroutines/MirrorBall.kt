@@ -10,7 +10,7 @@ class MirrorBall : Node2D {
 
 
     lateinit var ballPath: NodePath
-    lateinit var center: Vector2
+    var center = Vector2()
 
 
     private lateinit var ball: Node2D
