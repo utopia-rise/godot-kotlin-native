@@ -23,7 +23,7 @@ class MirrorBall : Node2D {
     private fun follow() = GD.yielding<Unit>(this) {
         while (true) {
             yield(ball, "move")
-            position = center + (center - ball.position)
+            position = center + ball.position
         }
     }
 }

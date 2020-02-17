@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/MirrorBall.gdns" type="Script" id=1]
 [ext_resource path="res://Sprites/Player.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/Ball.gdns" type="Script" id=3]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 3
 
 [node name="Node" type="Node"]
 
@@ -11,8 +14,10 @@ position = Vector2( 960, 540 )
 scale = Vector2( 2, 2 )
 script = ExtResource( 1 )
 ballPath = NodePath("../Ball")
+center = Vector2( 150, 0 )
 
 [node name="Sprite" type="Sprite" parent="MirrorBall"]
+material = SubResource( 1 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
 
@@ -24,3 +29,4 @@ script = ExtResource( 3 )
 [node name="Sprite" type="Sprite" parent="Ball"]
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
+[connection signal="move" from="Ball" to="Ball" method="move"]
