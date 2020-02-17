@@ -1,0 +1,18 @@
+[general]
+
+singleton=false
+load_once=true
+symbol_prefix="godot_"
+reloadable=true
+
+[entry]
+
+OSX.64="res://kotlin/build/bin/osx/debugShared/libkotlin.dylib"
+Windows.64="res://kotlin/build/bin/windows/debugShared/kotlin.dll"
+X11.64="res://kotlin/build/bin/linux/debugShared/libkotlin.so"
+
+[dependencies]
+
+OSX.64=[  ]
+Windows.64=[  ]
+X11.64=[  ]

@@ -13,7 +13,7 @@ class Ball : Node2D {
 
     var moveSpeed = 2.0
 
-
+    // This is wired up from the Godot editor to react to our own "move" signal
     fun move(step: Vector2) {
         translate(step)
     }
@@ -26,9 +26,9 @@ class Ball : Node2D {
         if (Input.isActionPressed("ui_left"))
             step.x -= moveSpeed
         if (Input.isActionPressed("ui_up"))
-            step.y += moveSpeed
-        if (Input.isActionPressed("ui_down"))
             step.y -= moveSpeed
+        if (Input.isActionPressed("ui_down"))
+            step.y += moveSpeed
 
         if (step.x != 0.0 || step.y != 0.0)
             emitSignal("move", step)

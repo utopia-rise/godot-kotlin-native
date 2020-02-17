@@ -1,3 +1,3 @@
 # Games sample
 
-Use `gradlew build` to build samples, then copy output shared library from `build` dir to `../project` directory.
+Use `gradlew build` to build this sample

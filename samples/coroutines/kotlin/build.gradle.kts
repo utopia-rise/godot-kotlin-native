@@ -40,7 +40,7 @@ kotlin {
                 }
 
                 libraryPath("coroutines.gdnlib")
-                generateGDNS("${project.rootDir.absolutePath}/../project")
+                generateGDNS("${project.rootDir.absolutePath}/..")
 
                 configs(
                         "src/main/kotlin/godot/samples/coroutines/classes.json"
@@ -60,7 +60,7 @@ kotlin {
             if (this is org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeCompilation) {
                 println("Configuring target ${target.name}")
                 this.target.binaries {
-                    sharedLib(listOf(org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE))
+                    sharedLib(listOf(org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG))
                 }
                 target.compilations.all {
                     dependencies {
