@@ -47,7 +47,8 @@ enableFeaturePreview("GRADLE_METADATA")
 Inside your `build.gradle.kts` file, you need to define the `godot-gradle-plugin` repository and the `kotlin-gradle-plugin` repository:
 ```kotlin
 val platform: String by project
-val android_arch: String by project
+val armArch: String by project
+val iosSigningIdentity: String by project
 
 buildscript {
     repositories {
@@ -85,12 +86,16 @@ kotlin {
         sourceSets.create("windowsMain")
         sourceSets.create("androidArm64Main")
         sourceSets.create("androidX64Main")
+        sourceSets.create("iosArm64Main")
+        sourceSets.create("iosX64Main")
         configure(listOf(
                 sourceSets["macosMain"],
                 sourceSets["linuxMain"],
                 sourceSets["windowsMain"],
                 sourceSets["androidArm64Main"],
-                sourceSets["androidX64Main"]
+                sourceSets["androidX64Main"],
+                sourceSets["iosArm64Main"],
+                sourceSets["iosX64Main"]
         )) {
             this.kotlin.srcDir("src/main/kotlin")
         }
@@ -102,15 +107,25 @@ kotlin {
                     sourceSets["linuxMain"],
                     sourceSets["windowsMain"],
                     sourceSets["androidArm64Main"],
-                    sourceSets["androidX64Main"]
+                    sourceSets["androidX64Main"],
+                    sourceSets["iosArm64Main"],
+                    sourceSets["iosX64Main"]
             )) {
                 sourceSet {
                     kotlin.srcDirs("src/main/kotlin")
                 }
 
-                // <-- libraryPath goes here (see below)
-                // <-- generateGDNS goes here (see below)
-                // <-- configs go here (see below)
+                libraryPath("samples.gdnlib")
+                generateGDNS("${project.rootDir.absolutePath}/../project")
+
+                configs(
+                        "src/main/kotlin/godot/samples/games/shmup/classes.json",
+                        "src/main/kotlin/godot/samples/games/dodge/classes.json",
+                        "src/main/kotlin/godot/samples/games/catchBall/classes.json",
+                        "src/main/kotlin/godot/samples/games/main/classes.json",
+                        "src/main/kotlin/godot/samples/games/fastFinish/classes.json",
+                        "src/main/kotlin/godot/samples/games/pong/classes.json"
+                )
             }
         }
     }
@@ -149,14 +164,21 @@ val targets = if (project.hasProperty("platform")) {
         "windows" -> listOf(targetFromPreset(presets["godotMingwX64"], "windows"))
         "linux" -> listOf(targetFromPreset(presets["godotLinuxX64"], "linux"))
         "macos" -> listOf(targetFromPreset(presets["godotMacosX64"], "macos"))
-        "android" -> if (project.hasProperty("android_arch")) {
-            when(android_arch) {
+        "android" -> if (project.hasProperty("armArch")) {
+            when(armArch) {
                 "X64" -> listOf(targetFromPreset(presets["godotAndroidNativeX64"], "androidX64"))
                 "arm64" -> listOf(targetFromPreset(presets["godotAndroidNativeArm64"], "androidArm64"))
                 else -> listOf(targetFromPreset(presets["godotAndroidNativeArm64"], "androidArm64"))
             }
         } else listOf(targetFromPreset(presets["godotAndroidNativeArm64"], "androidArm64"))
-        else -> listOf(targetFromPreset(presets["godotMacosX64"], "macos"))
+        "ios" -> if (project.hasProperty("armArch")) {
+            when (armArch) {
+                "arm64" -> listOf(targetFromPreset(presets["godotIosArm64"], "iosArm64"))
+                "X64" -> listOf(targetFromPreset(presets["godotIosX64"], "iosX64"))
+                else -> listOf(targetFromPreset(presets["godotIosArm64"], "iosArm64"))
+            }
+        } else listOf(targetFromPreset(presets["godotIosArm64"], "iosArm64"))
+        else -> listOf(targetFromPreset(presets["godotLinuxX64"], "linux"))
     }
 } else {
     listOf(
@@ -164,7 +186,9 @@ val targets = if (project.hasProperty("platform")) {
             targetFromPreset(presets["godotMacosX64"], "macos"),
             targetFromPreset(presets["godotMingwX64"], "windows"),
             targetFromPreset(presets["godotAndroidNativeArm64"], "androidArm64"),
-            targetFromPreset(presets["godotAndroidNativeX64"], "androidX64")
+            targetFromPreset(presets["godotAndroidNativeX64"], "androidX64"),
+            targetFromPreset(presets["godotIosArm64"], "iosArm64"),
+            targetFromPreset(presets["godotIosX64"], "iosX64")
     )
 }
 
@@ -181,6 +205,29 @@ targets.forEach {
                     implementation("org.godotengine.kotlin:annotations:0.0.1-SNAPSHOT")
                 }
             }
+            if (project.hasProperty("iosSigningIdentity") && this.target.name == "iosArm64") {
+                tasks.build {
+                    doLast {
+                        exec {
+                            commandLine = listOf("codesign", "-f", "-s", iosSigningIdentity, "build/bin/iosArm64/debugShared/libkotlin.dylib")
+                        }
+                        exec {
+                            commandLine = listOf("install_name_tool", "-id", "@executable_path/dylibs/ios/libkotlin.dylib", "build/bin/iosArm64/debugShared/libkotlin.dylib")
+                        }
+                    }
+                }
+            } else if (project.hasProperty("iosSigningIdentity") && this.target.name == "iosX64") {
+                tasks.build {
+                    doLast {
+                        exec {
+                            commandLine = listOf("codesign", "-f", "-s", iosSigningIdentity, "build/bin/iosX64/debugShared/libkotlin.dylib")
+                        }
+                        exec {
+                            commandLine = listOf("install_name_tool", "-id", "@executable_path/dylibs/ios/libkotlin.dylib", "build/bin/iosX64/debugShared/libkotlin.dylib")
+                        }
+                    }
+                }
+            }
         } else {
             System.err.println("Not a native target! TargetName: ${target.name}")
         }
@@ -193,7 +240,8 @@ targets.forEach {
 If you followed along your `build.gradle.kts` file should look like this:
 ```kotlin
 val platform: String by project
-val android_arch: String by project
+val armArch: String by project
+val iosSigningIdentity: String by project
 
 buildscript {
     repositories {
@@ -226,12 +274,16 @@ kotlin {
         sourceSets.create("windowsMain")
         sourceSets.create("androidArm64Main")
         sourceSets.create("androidX64Main")
+        sourceSets.create("iosArm64Main")
+        sourceSets.create("iosX64Main")
         configure(listOf(
                 sourceSets["macosMain"],
                 sourceSets["linuxMain"],
                 sourceSets["windowsMain"],
                 sourceSets["androidArm64Main"],
-                sourceSets["androidX64Main"]
+                sourceSets["androidX64Main"],
+                sourceSets["iosArm64Main"],
+                sourceSets["iosX64Main"]
         )) {
             this.kotlin.srcDir("src/main/kotlin")
         }
@@ -243,7 +295,9 @@ kotlin {
                     sourceSets["linuxMain"],
                     sourceSets["windowsMain"],
                     sourceSets["androidArm64Main"],
-                    sourceSets["androidX64Main"]
+                    sourceSets["androidX64Main"],
+                    sourceSets["iosArm64Main"],
+                    sourceSets["iosX64Main"]
             )) {
                 sourceSet {
                     kotlin.srcDirs("src/main/kotlin")
@@ -269,14 +323,21 @@ kotlin {
             "windows" -> listOf(targetFromPreset(presets["godotMingwX64"], "windows"))
             "linux" -> listOf(targetFromPreset(presets["godotLinuxX64"], "linux"))
             "macos" -> listOf(targetFromPreset(presets["godotMacosX64"], "macos"))
-            "android" -> if (project.hasProperty("android_arch")) {
-                when(android_arch) {
+            "android" -> if (project.hasProperty("armArch")) {
+                when(armArch) {
                     "X64" -> listOf(targetFromPreset(presets["godotAndroidNativeX64"], "androidX64"))
                     "arm64" -> listOf(targetFromPreset(presets["godotAndroidNativeArm64"], "androidArm64"))
                     else -> listOf(targetFromPreset(presets["godotAndroidNativeArm64"], "androidArm64"))
                 }
             } else listOf(targetFromPreset(presets["godotAndroidNativeArm64"], "androidArm64"))
-            else -> listOf(targetFromPreset(presets["godotMacosX64"], "macos"))
+            "ios" -> if (project.hasProperty("armArch")) {
+                when (armArch) {
+                    "arm64" -> listOf(targetFromPreset(presets["godotIosArm64"], "iosArm64"))
+                    "X64" -> listOf(targetFromPreset(presets["godotIosX64"], "iosX64"))
+                    else -> listOf(targetFromPreset(presets["godotIosArm64"], "iosArm64"))
+                }
+            } else listOf(targetFromPreset(presets["godotIosArm64"], "iosArm64"))
+            else -> listOf(targetFromPreset(presets["godotLinuxX64"], "linux"))
         }
     } else {
         listOf(
@@ -284,7 +345,9 @@ kotlin {
                 targetFromPreset(presets["godotMacosX64"], "macos"),
                 targetFromPreset(presets["godotMingwX64"], "windows"),
                 targetFromPreset(presets["godotAndroidNativeArm64"], "androidArm64"),
-                targetFromPreset(presets["godotAndroidNativeX64"], "androidX64")
+                targetFromPreset(presets["godotAndroidNativeX64"], "androidX64"),
+                targetFromPreset(presets["godotIosArm64"], "iosArm64"),
+                targetFromPreset(presets["godotIosX64"], "iosX64")
         )
     }
 
@@ -301,6 +364,29 @@ kotlin {
                         implementation("org.godotengine.kotlin:annotations:0.0.1-SNAPSHOT")
                     }
                 }
+                if (project.hasProperty("iosSigningIdentity") && this.target.name == "iosArm64") {
+                    tasks.build {
+                        doLast {
+                            exec {
+                                commandLine = listOf("codesign", "-f", "-s", iosSigningIdentity, "build/bin/iosArm64/debugShared/libkotlin.dylib")
+                            }
+                            exec {
+                                commandLine = listOf("install_name_tool", "-id", "@executable_path/dylibs/ios/libkotlin.dylib", "build/bin/iosArm64/debugShared/libkotlin.dylib")
+                            }
+                        }
+                    }
+                } else if (project.hasProperty("iosSigningIdentity") && this.target.name == "iosX64") {
+                    tasks.build {
+                        doLast {
+                            exec {
+                                commandLine = listOf("codesign", "-f", "-s", iosSigningIdentity, "build/bin/iosX64/debugShared/libkotlin.dylib")
+                            }
+                            exec {
+                                commandLine = listOf("install_name_tool", "-id", "@executable_path/dylibs/ios/libkotlin.dylib", "build/bin/iosX64/debugShared/libkotlin.dylib")
+                            }
+                        }
+                    }
+                }
             } else {
                 System.err.println("Not a native target! TargetName: ${target.name}")
             }
@@ -309,7 +395,7 @@ kotlin {
 }
 ```
 
-We created a windows, linux and macOs build for our library with *debug* configuration, and set source dir as `src/main/kotlin`
+We created a windows, linux, macos, android and ios build for our library with *debug* configuration, and set source dir as `src/main/kotlin`
 
 
 ## Kotlin code
@@ -401,15 +487,28 @@ You can also specify the platform on which you want to build using `platform` pa
 ./gradlew build -Pplatform=windows
 ```
 
-### Android specificity
+### Android specificities
 
-Android supported targets are `arm64` and `X64`, for now no 32 bits target are supported.  
+Android supported architectures are `arm64` and `X64`, for now no 32 bits target are supported.  
 On android you cannot use `godot-library-extension` for the moment, we're looking to add it in the future. So you cannot
 use `yield` on this platform for now.  
-To build project on android you have to add `android_arch` parameter to build task. Here is an example for arm64:
+To build project on android you have to add `armArch` parameter to build task. Here is an example for arm64:
 ```shell script
-./gradlew build -Pplatform=android -Pandroid_arch=arm64
+./gradlew build -Pplatform=android -ParmArch=arm64
 ```
+
+### iOS specificities
+
+Same as android, the supported architectures are `arm64` and `X64`.  
+You can use `godot-library-extension` on iOS.  
+In order to build for iOS, you have to specify `ios` as `platform` parameter and the desired `armArch` (like on android).
+Apple required you to sign your code with a signing identity. Gradle build script will do it for you if you add the
+`iosSigningIdentity` parameter.  
+Here is an example:  
+```shell script
+./gradlew build -Pplatform=ios -ParmArch=arm64 -PiosSigningIdentity="youridentity"
+```
+`youridentity` should looks like this : `Apple Development: mail@provider.com (XXXXXXXXXX)`.
 
 ## What's next?
 

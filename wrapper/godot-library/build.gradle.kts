@@ -9,7 +9,7 @@ plugins {
 val bintrayUser: String by project
 val bintrayKey: String by project
 val platform: String by project
-val android_arch: String by project
+val armArch: String by project
 
 group = "org.godotengine.kotlin"
 version = Dependencies.godotLibraryVersion
@@ -21,12 +21,16 @@ kotlin {
         sourceSets.create("windowsMain")
         sourceSets.create("androidArm64Main")
         sourceSets.create("androidX64Main")
+        sourceSets.create("iosArm64Main")
+        sourceSets.create("iosX64Main")
         configure(listOf(
                 sourceSets["macosMain"],
                 sourceSets["linuxMain"],
                 sourceSets["windowsMain"],
                 sourceSets["androidArm64Main"],
-                sourceSets["androidX64Main"]
+                sourceSets["androidX64Main"],
+                sourceSets["iosArm64Main"],
+                sourceSets["iosX64Main"]
         )) {
             this.kotlin.srcDir("src/main/kotlin")
         }
@@ -38,13 +42,20 @@ kotlin {
                     "windows" -> listOf(targetFromPreset(presets["mingwX64"], "windows"))
                     "linux" -> listOf(targetFromPreset(presets["linuxX64"], "linux"))
                     "macos" -> listOf(targetFromPreset(presets["macosX64"], "macos"))
-                    "android" -> if (project.hasProperty("android_arch")) {
-                        when(android_arch) {
+                    "android" -> if (project.hasProperty("armArch")) {
+                        when(armArch) {
                             "X64" -> listOf(targetFromPreset(presets["androidNativeX64"], "androidX64"))
                             "arm64" -> listOf(targetFromPreset(presets["androidNativeArm64"], "androidArm64"))
                             else -> listOf(targetFromPreset(presets["androidNativeArm64"], "androidArm64"))
                         }
                     } else listOf(targetFromPreset(presets["androidNativeArm64"], "androidArm64"))
+                    "ios" -> if (project.hasProperty("armArch")) {
+                        when (armArch) {
+                            "arm64" -> listOf(targetFromPreset(presets["iosArm64"], "iosArm64"))
+                            "X64" -> listOf(targetFromPreset(presets["iosX64"], "iosX64"))
+                            else -> listOf(targetFromPreset(presets["iosArm64"], "iosArm64"))
+                        }
+                    } else listOf(targetFromPreset(presets["iosArm64"], "iosArm64"))
                     else -> listOf(targetFromPreset(presets["linuxX64"], "linux"))
                 }
             } else {
@@ -53,7 +64,9 @@ kotlin {
                         targetFromPreset(presets["macosX64"], "macos"),
                         targetFromPreset(presets["mingwX64"], "windows"),
                         targetFromPreset(presets["androidNativeArm64"], "androidArm64"),
-                        targetFromPreset(presets["androidNativeX64"], "androidX64")
+                        targetFromPreset(presets["androidNativeX64"], "androidX64"),
+                        targetFromPreset(presets["iosArm64"], "iosArm64"),
+                        targetFromPreset(presets["iosX64"], "iosX64")
                 )
             }
 
@@ -88,7 +101,9 @@ if (project.hasProperty("bintrayUser") && project.hasProperty("bintrayKey")
             userOrg = "utopia-rise"
             repo = "kotlin-godot"
 
-            name = "${project.name}-$platform"
+            val armString = if (project.hasProperty("armArch")) armArch else ""
+
+            name = "${project.name}-$platform$armString"
             vcsUrl = "https://github.com/utopia-rise/kotlin-godot-wrapper"
             setLicenses("Apache-2.0")
             version(closureOf<com.jfrog.bintray.gradle.BintrayExtension.VersionConfig> {

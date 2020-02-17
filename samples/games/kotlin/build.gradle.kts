@@ -1,5 +1,6 @@
 val platform: String by project
-val android_arch: String by project
+val armArch: String by project
+val iosSigningIdentity: String by project
 
 buildscript {
     repositories {
@@ -32,12 +33,16 @@ kotlin {
         sourceSets.create("windowsMain")
         sourceSets.create("androidArm64Main")
         sourceSets.create("androidX64Main")
+        sourceSets.create("iosArm64Main")
+        sourceSets.create("iosX64Main")
         configure(listOf(
                 sourceSets["macosMain"],
                 sourceSets["linuxMain"],
                 sourceSets["windowsMain"],
                 sourceSets["androidArm64Main"],
-                sourceSets["androidX64Main"]
+                sourceSets["androidX64Main"],
+                sourceSets["iosArm64Main"],
+                sourceSets["iosX64Main"]
         )) {
             this.kotlin.srcDir("src/main/kotlin")
         }
@@ -49,7 +54,9 @@ kotlin {
                     sourceSets["linuxMain"],
                     sourceSets["windowsMain"],
                     sourceSets["androidArm64Main"],
-                    sourceSets["androidX64Main"]
+                    sourceSets["androidX64Main"],
+                    sourceSets["iosArm64Main"],
+                    sourceSets["iosX64Main"]
             )) {
                 sourceSet {
                     kotlin.srcDirs("src/main/kotlin")
@@ -75,14 +82,21 @@ kotlin {
             "windows" -> listOf(targetFromPreset(presets["godotMingwX64"], "windows"))
             "linux" -> listOf(targetFromPreset(presets["godotLinuxX64"], "linux"))
             "macos" -> listOf(targetFromPreset(presets["godotMacosX64"], "macos"))
-            "android" -> if (project.hasProperty("android_arch")) {
-                when(android_arch) {
+            "android" -> if (project.hasProperty("armArch")) {
+                when(armArch) {
                     "X64" -> listOf(targetFromPreset(presets["godotAndroidNativeX64"], "androidX64"))
                     "arm64" -> listOf(targetFromPreset(presets["godotAndroidNativeArm64"], "androidArm64"))
                     else -> listOf(targetFromPreset(presets["godotAndroidNativeArm64"], "androidArm64"))
                 }
             } else listOf(targetFromPreset(presets["godotAndroidNativeArm64"], "androidArm64"))
-            else -> listOf(targetFromPreset(presets["godotMacosX64"], "macos"))
+            "ios" -> if (project.hasProperty("armArch")) {
+                when (armArch) {
+                    "arm64" -> listOf(targetFromPreset(presets["godotIosArm64"], "iosArm64"))
+                    "X64" -> listOf(targetFromPreset(presets["godotIosX64"], "iosX64"))
+                    else -> listOf(targetFromPreset(presets["godotIosArm64"], "iosArm64"))
+                }
+            } else listOf(targetFromPreset(presets["godotIosArm64"], "iosArm64"))
+            else -> listOf(targetFromPreset(presets["godotLinuxX64"], "linux"))
         }
     } else {
         listOf(
@@ -90,7 +104,9 @@ kotlin {
                 targetFromPreset(presets["godotMacosX64"], "macos"),
                 targetFromPreset(presets["godotMingwX64"], "windows"),
                 targetFromPreset(presets["godotAndroidNativeArm64"], "androidArm64"),
-                targetFromPreset(presets["godotAndroidNativeX64"], "androidX64")
+                targetFromPreset(presets["godotAndroidNativeX64"], "androidX64"),
+                targetFromPreset(presets["godotIosArm64"], "iosArm64"),
+                targetFromPreset(presets["godotIosX64"], "iosX64")
         )
     }
 
@@ -105,6 +121,29 @@ kotlin {
                     dependencies {
                         implementation("org.godotengine.kotlin:godot-library:1.0.0")
                         implementation("org.godotengine.kotlin:annotations:0.0.1-SNAPSHOT")
+                    }
+                }
+                if (project.hasProperty("iosSigningIdentity") && this.target.name == "iosArm64") {
+                    tasks.build {
+                        doLast {
+                            exec {
+                                commandLine = listOf("codesign", "-f", "-s", iosSigningIdentity, "build/bin/iosArm64/debugShared/libkotlin.dylib")
+                            }
+                            exec {
+                                commandLine = listOf("install_name_tool", "-id", "@executable_path/dylibs/ios/libkotlin.dylib", "build/bin/iosArm64/debugShared/libkotlin.dylib")
+                            }
+                        }
+                    }
+                } else if (project.hasProperty("iosSigningIdentity") && this.target.name == "iosX64") {
+                    tasks.build {
+                        doLast {
+                            exec {
+                                commandLine = listOf("codesign", "-f", "-s", iosSigningIdentity, "build/bin/iosX64/debugShared/libkotlin.dylib")
+                            }
+                            exec {
+                                commandLine = listOf("install_name_tool", "-id", "@executable_path/dylibs/ios/libkotlin.dylib", "build/bin/iosX64/debugShared/libkotlin.dylib")
+                            }
+                        }
                     }
                 }
             } else {
