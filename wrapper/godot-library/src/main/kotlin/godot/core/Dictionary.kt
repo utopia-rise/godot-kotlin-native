@@ -53,16 +53,25 @@ class Dictionary: CoreType {
 
     fun erase(key: Variant) = godot_dictionary_erase(nativeValue, key.nativeValue)
 
+    fun erase(key: Any) = this.erase(Variant.from(key))
+
     fun has(key: Variant): Boolean = godot_dictionary_has(nativeValue, key.nativeValue)
 
-    fun get(key: Variant): Variant? = godot_dictionary_operator_index(nativeValue, key.nativeValue)?.pointed?.readValue()?.let { Variant(it) }
+    fun has(key: Any): Boolean = this.has(Variant.from(key))
 
+    operator fun get(key: Variant): Variant? = godot_dictionary_operator_index(nativeValue, key.nativeValue)?.pointed?.readValue()?.let { Variant(it) }
+
+    operator fun get(key: Any): Variant? = this[Variant.from(key)]
+
+    operator fun set(key: Variant, value: Variant) = godot_dictionary_set(nativeValue, key.nativeValue, value.nativeValue)
+
+    operator fun set(key: Any, value: Any) = this.set(Variant.from(key), Variant.from(value))
 
     override fun equals(other: Any?): Boolean {
-        if (this === other)
-            return true
-        if (other !is Dictionary)
-            return false
+        if (this === other) return true
+
+        if (other !is Dictionary) return false
+
         return this.hashCode() == other.hashCode()
     }
 }
