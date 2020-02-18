@@ -59,9 +59,9 @@ class Dictionary: CoreType {
 
     fun has(key: Any): Boolean = this.has(Variant.from(key))
 
-    operator fun get(key: Variant): Variant? = godot_dictionary_operator_index(nativeValue, key.nativeValue)?.pointed?.readValue()?.let { Variant(it) }
+    operator fun get(key: Variant, defaultValue: Variant? = null): Variant? = godot_dictionary_operator_index(nativeValue, key.nativeValue)?.pointed?.readValue()?.let { Variant(it) } ?: defaultValue
 
-    operator fun get(key: Any): Variant? = this[Variant.from(key)]
+    operator fun get(key: Any, defaultValue: Any? = null): Variant? = this[Variant.from(key), if (defaultValue != null) Variant.from(defaultValue) else null]
 
     operator fun set(key: Variant, value: Variant) = godot_dictionary_set(nativeValue, key.nativeValue, value.nativeValue)
 
