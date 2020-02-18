@@ -63,7 +63,14 @@ class GDArray: CoreType { // FIXME: .copy
         nativeValue = nativeValue.copy { godot_array_new_pool_string_array(this.ptr, other.nativeValue) }
     }
 
+    val indices: Iterator<Int>
+        get() = object: Iterator<Int> {
+            var idx: Int = 0
+            var size: Int = this@GDArray.size()
 
+            override fun next(): Int = idx++
+            override fun hasNext(): Boolean = idx < size
+        }
 
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
         return nativeValue.getPointer(memScope)
@@ -73,13 +80,9 @@ class GDArray: CoreType { // FIXME: .copy
         nativeValue = mem.reinterpret<godot_array>().pointed.readValue()
     }
 
-
-
     fun toKotlinArray(): Array<Variant> {
         return Array(this.size()) { i -> this[i]!! }
     }
-
-
 
     operator fun iterator(): Iterator<Variant> = object: Iterator<Variant> {
         var idx: Int = 0
@@ -96,17 +99,6 @@ class GDArray: CoreType { // FIXME: .copy
         override fun next(): Pair<Int,Variant> = idx to this@GDArray[idx++]!!
         override fun hasNext(): Boolean = idx < size
     }
-
-    val indices: Iterator<Int>
-        get() = object: Iterator<Int> {
-            var idx: Int = 0
-            var size: Int = this@GDArray.size()
-
-            override fun next(): Int = idx++
-            override fun hasNext(): Boolean = idx < size
-        }
-
-
 
     fun clear() {
         nativeValue = nativeValue.copy { godot_array_clear(this.ptr) }
@@ -203,4 +195,19 @@ class GDArray: CoreType { // FIXME: .copy
 
 fun Array<*>.toGDArray(): GDArray = GDArray(this)
 
+inline fun GDArray.forEach(block: (Variant) -> Unit) {
+    val it = this.iterator()
+    while (it.hasNext()) {
+        block(it.next())
+    }
+}
+
+//Maybe there's something better
+inline fun GDArray.forEachIndex(block: (Int) -> Unit) {
+    while (indices.hasNext()) {
+        block(indices.next())
+    }
+}
+
+//Maybe there's something better
 fun godotArrayOf(vararg params: Any?): GDArray = GDArray(params)

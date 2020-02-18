@@ -8,6 +8,12 @@ import godot.gdnative.*
 class Dictionary: CoreType {
     var nativeValue = cValue<godot_dictionary> {}
 
+    val keys: GDArray
+        get() = GDArray(godot_dictionary_keys(nativeValue))
+
+    val values: GDArray
+        get() = GDArray(godot_dictionary_values(nativeValue))
+
 
     constructor() {
         nativeValue = nativeValue.copy { godot_dictionary_new(this.ptr) }
@@ -47,10 +53,6 @@ class Dictionary: CoreType {
 
     fun hasAll(keys: GDArray): Boolean = godot_dictionary_has_all(nativeValue, keys.nativeValue)
 
-    fun keys(): GDArray = GDArray(godot_dictionary_keys(nativeValue))
-
-    fun values(): GDArray = GDArray(godot_dictionary_values(nativeValue))
-
     fun erase(key: Variant) = godot_dictionary_erase(nativeValue, key.nativeValue)
 
     fun erase(key: Any) = this.erase(Variant.from(key))
@@ -73,5 +75,14 @@ class Dictionary: CoreType {
         if (other !is Dictionary) return false
 
         return this.hashCode() == other.hashCode()
+    }
+}
+
+//Maybe there's something better
+inline fun Dictionary.forEach(block: (key: Variant, value: Variant) -> Unit) {
+    val keyIt = this.keys.iterator()
+    val valIt = this.values.iterator()
+    while (keyIt.hasNext() && valIt.hasNext()) {
+        block(keyIt.next(), valIt.next())
     }
 }
