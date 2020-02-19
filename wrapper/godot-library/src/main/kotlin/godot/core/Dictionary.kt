@@ -8,6 +8,12 @@ import godot.gdnative.*
 class Dictionary: CoreType {
     var nativeValue = cValue<godot_dictionary> {}
 
+    val keys: GDArray
+        get() = GDArray(godot_dictionary_keys(nativeValue))
+
+    val values: GDArray
+        get() = GDArray(godot_dictionary_values(nativeValue))
+
 
     constructor() {
         nativeValue = nativeValue.copy { godot_dictionary_new(this.ptr) }
@@ -47,22 +53,36 @@ class Dictionary: CoreType {
 
     fun hasAll(keys: GDArray): Boolean = godot_dictionary_has_all(nativeValue, keys.nativeValue)
 
-    fun keys(): GDArray = GDArray(godot_dictionary_keys(nativeValue))
-
-    fun values(): GDArray = GDArray(godot_dictionary_values(nativeValue))
-
     fun erase(key: Variant) = godot_dictionary_erase(nativeValue, key.nativeValue)
+
+    fun erase(key: Any) = this.erase(Variant.from(key))
 
     fun has(key: Variant): Boolean = godot_dictionary_has(nativeValue, key.nativeValue)
 
-    fun get(key: Variant): Variant? = godot_dictionary_operator_index(nativeValue, key.nativeValue)?.pointed?.readValue()?.let { Variant(it) }
+    fun has(key: Any): Boolean = this.has(Variant.from(key))
 
+    operator fun get(key: Variant, defaultValue: Variant? = null): Variant? = godot_dictionary_operator_index(nativeValue, key.nativeValue)?.pointed?.readValue()?.let { Variant(it) } ?: defaultValue
+
+    operator fun get(key: Any, defaultValue: Any? = null): Variant? = this[Variant.from(key), if (defaultValue != null) Variant.from(defaultValue) else null]
+
+    operator fun set(key: Variant, value: Variant) = godot_dictionary_set(nativeValue, key.nativeValue, value.nativeValue)
+
+    operator fun set(key: Any, value: Any) = this.set(Variant.from(key), Variant.from(value))
 
     override fun equals(other: Any?): Boolean {
-        if (this === other)
-            return true
-        if (other !is Dictionary)
-            return false
+        if (this === other) return true
+
+        if (other !is Dictionary) return false
+
         return this.hashCode() == other.hashCode()
+    }
+}
+
+//Maybe there's something better
+inline fun Dictionary.forEach(block: (key: Variant, value: Variant) -> Unit) {
+    val keyIt = this.keys.iterator()
+    val valIt = this.values.iterator()
+    while (keyIt.hasNext() && valIt.hasNext()) {
+        block(keyIt.next(), valIt.next())
     }
 }
