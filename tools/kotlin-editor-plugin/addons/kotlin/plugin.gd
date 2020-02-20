@@ -1,9 +1,9 @@
 tool
 extends EditorPlugin
 
-const TOOL_ITEM_NAME := "Kotlin"
+const TOOL_ITEM_NAME := "Kotlin Tools"
 
-var popupScene := preload("res://addons/kotlin/editor_plugin/EditorPlugin.tscn")
+var popupScene := preload("res://addons/kotlin/tools/KotlinTools.tscn")
 var popup: Popup
 
 func _enter_tree():
