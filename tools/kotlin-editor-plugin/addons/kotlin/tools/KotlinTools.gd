@@ -52,7 +52,6 @@ func _http_request_completed(result: int, response_code: int, headers: PoolStrin
 	else:
 		print("Failed to download zip")
 		setupDialog.hide()
-		remove_child(setupDialog)
 
 
 func unzip(filePath: String):
@@ -64,7 +63,7 @@ func background_unzip(filePath: String):
 	var dir := Directory.new()
 	dir.open("res://")
 	
-	var gdunzip = load('res://addons/gdunzip/gdunzip.gd').new()
+	var gdunzip = load('res://addons/kotlin/gdunzip/gdunzip.gd').new()
 	var loaded = gdunzip.load(filePath)
 	if loaded:
 		for f in gdunzip.files.values():
@@ -97,7 +96,6 @@ func step_2_cleanup():
 
 func step_3_configure():
 	setupDialog.hide()
-	remove_child(setupDialog)
 	
 	print("Step 3: Configure project")
 	var buildDialog := buildDialogScene.instance() as BuildDialog
@@ -112,7 +110,10 @@ func _on_ConfigGradleButton_pressed():
 
 func _on_BuildButton_pressed():
 	var buildDialog := buildDialogScene.instance()
-	buildDialog.buildType = "build"
 	add_child(buildDialog)
 	buildDialog.show()
-	buildDialog.start_build()
+	buildDialog.start_build("build")
+
+
+func _on_KotlinToolMenuItem_about_to_show():
+	var dir := Directory.new()

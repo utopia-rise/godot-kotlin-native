@@ -3,7 +3,6 @@
 [ext_resource path="res://addons/kotlin/progress_dialog/ProgressDialog.gd" type="Script" id=1]
 
 [node name="ProgressDialog" type="WindowDialog"]
-visible = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -42,4 +41,6 @@ margin_top = 18.0
 margin_right = 200.0
 margin_bottom = 34.0
 rect_min_size = Vector2( 0, 16 )
+value = 29.5
 percent_visible = false
+[connection signal="popup_hide" from="." to="." method="_on_ProgressDialog_popup_hide"]

@@ -3,7 +3,6 @@
 [ext_resource path="res://addons/kotlin/tools/KotlinTools.gd" type="Script" id=1]
 
 [node name="KotlinToolMenuItem" type="WindowDialog"]
-visible = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -70,6 +69,7 @@ margin_top = 130.0
 margin_right = 238.0
 margin_bottom = 150.0
 text = "Build Kotlin"
+[connection signal="about_to_show" from="." to="." method="_on_KotlinToolMenuItem_about_to_show"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/AddSupportButton" to="." method="_on_AddSupportButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer2/ConfigGradleButton" to="." method="_on_ConfigGradleButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer2/BuildButton" to="." method="_on_BuildButton_pressed"]
