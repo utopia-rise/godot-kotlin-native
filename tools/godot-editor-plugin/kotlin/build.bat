@@ -1,1 +1,0 @@
-call gradlew.bat build
