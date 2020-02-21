@@ -9,13 +9,37 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "WindowDialog",
+"class": "BaseProgressDialog",
+"language": "GDScript",
+"path": "res://addons/kotlin/progress_dialog/ProgressDialog.gd"
+}, {
+"base": "BaseProgressDialog",
+"class": "BuildDialog",
+"language": "GDScript",
+"path": "res://addons/kotlin/build_dialog/BuildDialog.gd"
+}, {
+"base": "ToolButton",
+"class": "GradleBuildButton",
+"language": "GDScript",
+"path": "res://addons/kotlin/build_button/GradleBuildButton.gd"
+}, {
 "base": "Node",
 "class": "KotlinUtilities",
 "language": "GDScript",
-"path": "res://addons/kotlin/kotlin_utilities.gd"
+"path": "res://addons/kotlin/tools/KotlinUtilities.gd"
+}, {
+"base": "WindowDialog",
+"class": "SetupDialog",
+"language": "GDScript",
+"path": "res://addons/kotlin/tools/SetupDialog.gd"
 } ]
 _global_script_class_icons={
-"KotlinUtilities": ""
+"BaseProgressDialog": "",
+"BuildDialog": "",
+"GradleBuildButton": "",
+"KotlinUtilities": "",
+"SetupDialog": ""
 }
 
 [application]
