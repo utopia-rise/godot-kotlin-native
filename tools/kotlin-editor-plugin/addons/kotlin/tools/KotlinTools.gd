@@ -1,3 +1,10 @@
+######################################
+# KotlinTools.gd
+# The main tools window, accessible from:
+# Project -> Tools
+# Provides new project setup and common gradle actions
+######################################
+
 tool
 extends WindowDialog
 
@@ -86,6 +93,7 @@ func background_unzip(filePath: String):
 	
 	call_deferred("step_2_cleanup")
 
+
 func step_2_cleanup():
 	print("Step 2: Clean up")
 	var dir = Directory.new()
@@ -98,14 +106,30 @@ func step_3_configure():
 	setupDialog.hide()
 	
 	print("Step 3: Configure project")
+	configure_gradle(true)
+
+
+func configure_gradle(inSetup: bool = false):
 	var buildDialog := buildDialogScene.instance() as BuildDialog
-	buildDialog.buildType = "config"
+	if inSetup:
+		buildDialog.connect("build_complete", self, "setup_complete")
 	add_child(buildDialog)
 	buildDialog.show()
+	buildDialog.start_build("config")
+
+
+func setup_complete():
+	hide()
+	
+	var completeDialog := AcceptDialog.new()
+	completeDialog.window_title = "Kotlin setup"
+	completeDialog.dialog_text = "Setup complete!"
+	get_parent().add_child(completeDialog)
+	completeDialog.popup_centered()
 
 
 func _on_ConfigGradleButton_pressed():
-	step_3_configure()
+	configure_gradle()
 
 
 func _on_BuildButton_pressed():
@@ -115,5 +139,14 @@ func _on_BuildButton_pressed():
 	buildDialog.start_build("build")
 
 
+# Configure the tool window
 func _on_KotlinToolMenuItem_about_to_show():
 	var dir := Directory.new()
+	# Kotlin is already setup, show actions
+	if dir.dir_exists("res://kotlin"):
+		$ActionsContainer.show()
+		$SetupContainer.hide()
+	# Not setup yet, show intro
+	else:
+		$ActionsContainer.hide()
+		$SetupContainer.show()
