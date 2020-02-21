@@ -1,0 +1,45 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/kotlin/progress_dialog/ProgressDialog.gd" type="Script" id=1]
+
+[node name="ProgressDialog" type="WindowDialog"]
+visible = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -128.0
+margin_top = -64.0
+margin_right = 128.0
+margin_bottom = 64.0
+popup_exclusive = true
+window_title = "Progress"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.0
+margin_top = -23.0
+margin_right = 100.0
+margin_bottom = 23.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+margin_right = 200.0
+margin_bottom = 14.0
+text = "Please wait"
+
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer"]
+margin_top = 18.0
+margin_right = 200.0
+margin_bottom = 34.0
+rect_min_size = Vector2( 0, 16 )
+percent_visible = false

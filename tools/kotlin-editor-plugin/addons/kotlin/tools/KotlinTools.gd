@@ -4,12 +4,19 @@ extends WindowDialog
 const KOTLIN_ZIP := "res://kotlin.zip"
 const DOWNLOAD_FILE := "http://darkrockstudios.com/files/kotlin.zip"
 
+onready var buildDialogScene := preload("res://addons/kotlin/build_dialog/BuildDialog.tscn")
+onready var setupDialogScene := preload("res://addons/kotlin/tools/SetupDialog.tscn")
+onready var setupDialog: WindowDialog = setupDialogScene.instance()
+
 
 func _on_AddSupportButton_pressed():
 	step_1_create_structure()
 
 
 func step_1_create_structure():
+	add_child(setupDialog)
+	setupDialog.show()
+	
 	print("Step 3: Create project structure")
 	var zipFile := File.new()
 	if zipFile.file_exists(KOTLIN_ZIP):
@@ -44,9 +51,16 @@ func _http_request_completed(result: int, response_code: int, headers: PoolStrin
 		unzip(KOTLIN_ZIP)
 	else:
 		print("Failed to download zip")
+		setupDialog.hide()
+		remove_child(setupDialog)
 
 
 func unzip(filePath: String):
+	var thread := Thread.new()
+	thread.start(self, "background_unzip", filePath)
+
+
+func background_unzip(filePath: String):
 	var dir := Directory.new()
 	dir.open("res://")
 	
@@ -71,8 +85,7 @@ func unzip(filePath: String):
 			file.store_buffer(uncompressed)
 			file.close()
 	
-	step_2_cleanup()
-
+	call_deferred("step_2_cleanup")
 
 func step_2_cleanup():
 	print("Step 2: Clean up")
@@ -83,8 +96,14 @@ func step_2_cleanup():
 
 
 func step_3_configure():
+	setupDialog.hide()
+	remove_child(setupDialog)
+	
 	print("Step 3: Configure project")
-	KotlinUtilities.gradle_configure()
+	var buildDialog := buildDialogScene.instance() as BuildDialog
+	buildDialog.buildType = "config"
+	add_child(buildDialog)
+	buildDialog.show()
 
 
 func _on_ConfigGradleButton_pressed():
@@ -92,7 +111,8 @@ func _on_ConfigGradleButton_pressed():
 
 
 func _on_BuildButton_pressed():
-	KotlinUtilities.gradle_build()
-
-
-
+	var buildDialog := buildDialogScene.instance()
+	buildDialog.buildType = "build"
+	add_child(buildDialog)
+	buildDialog.show()
+	buildDialog.start_build()
