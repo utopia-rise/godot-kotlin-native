@@ -4,3 +4,6 @@
 
 [node name="ProgressDialog" instance=ExtResource( 1 )]
 window_title = "Kotlin Setup"
+
+[node name="ProgressBar" parent="VBoxContainer" index="1"]
+value = 63.76

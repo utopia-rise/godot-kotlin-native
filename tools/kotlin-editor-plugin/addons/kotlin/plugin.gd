@@ -1,3 +1,9 @@
+######################################
+# plugin.gd
+# GodotKotlin Editor Plugin
+# New project setup and gradle builds
+######################################
+
 tool
 extends EditorPlugin
 
@@ -13,7 +19,7 @@ var buildDialogScene := preload("res://addons/kotlin/build_dialog/BuildDialog.ts
 func _enter_tree():
 	add_tool_menu_item ( TOOL_ITEM_NAME, self, "open" )
 	add_control_to_container(EditorPlugin.CONTAINER_TOOLBAR, buildButton)
-	buildButton.connect("pressed", self, "open_build_dialog")
+	buildButton.connect("pressed", self, "on_gradle_build_click")
 
 
 func _exit_tree():
@@ -23,14 +29,26 @@ func _exit_tree():
 		kotlinToolsPopup.queue_free()
 		kotlinToolsPopup = null
 	
-	buildButton.disconnect("pressed", self, "open_build_dialog")
+	buildButton.disconnect("pressed", self, "on_gradle_build_click")
 	remove_control_from_container(EditorPlugin.CONTAINER_TOOLBAR, buildButton)
 
 
 func open(ud):
+	open_tools_window()
+
+
+func open_tools_window():
 	kotlinToolsPopup = kotlinToolsScene.instance()
 	add_child(kotlinToolsPopup)
 	kotlinToolsPopup.popup_centered()
+
+
+func on_gradle_build_click():
+	var dir := Directory.new()
+	if dir.dir_exists("res://kotlin"):
+		open_build_dialog()
+	else:
+		open_tools_window()
 
 
 func open_build_dialog():

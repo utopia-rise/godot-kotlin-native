@@ -25,9 +25,9 @@ _global_script_classes=[ {
 "path": "res://addons/kotlin/build_button/GradleBuildButton.gd"
 }, {
 "base": "Node",
-"class": "KotlinUtilities",
+"class": "GradleUtilities",
 "language": "GDScript",
-"path": "res://addons/kotlin/tools/KotlinUtilities.gd"
+"path": "res://addons/kotlin/tools/GradleUtilities.gd"
 }, {
 "base": "WindowDialog",
 "class": "SetupDialog",
@@ -38,7 +38,7 @@ _global_script_class_icons={
 "BaseProgressDialog": "",
 "BuildDialog": "",
 "GradleBuildButton": "",
-"KotlinUtilities": "",
+"GradleUtilities": "",
 "SetupDialog": ""
 }
 

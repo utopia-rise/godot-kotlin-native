@@ -1,5 +1,11 @@
+######################################
+# GradleUtilities.gd
+# Functions for dealing with calling
+# gradle tasks
+######################################
+
 extends Node
-class_name KotlinUtilities
+class_name GradleUtilities
 
 
 static func gradle_configure():
