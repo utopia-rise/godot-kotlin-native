@@ -44,7 +44,3 @@ config/icon="res://icon.png"
 [editor_plugins]
 
 enabled=PoolStringArray( "kotlin" )
-
-[rendering]
-
-environment/default_environment="res://default_env.tres"

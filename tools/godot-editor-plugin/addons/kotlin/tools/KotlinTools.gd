@@ -103,16 +103,41 @@ func step_2_cleanup():
 
 
 func step_3_configure():
-	setupDialog.hide()
-	
 	print("Step 3: Configure project")
 	configure_gradle(true)
 
 
+func step_4_create_library():
+	print("Step 4: Create GDNative library")
+	
+	# Create the GDNlib file
+	var gdnslib := GDNativeLibrary.new()
+	
+	gdnslib.config_file.set_value("general", "singleton", false)
+	gdnslib.config_file.set_value("general", "load_once", true)
+	gdnslib.config_file.set_value("general", "symbol_prefix", "godot_")
+	gdnslib.config_file.set_value("general", "reloadable", true)
+	
+	gdnslib.config_file.set_value("entry", "OSX.64", "res://kotlin/build/bin/osx/debugShared/libkotlin.dylib")
+	gdnslib.config_file.set_value("entry", "Windows.64", "res://kotlin/build/bin/windows/debugShared/kotlin.dll")
+	gdnslib.config_file.set_value("entry", "X11.64", "res://kotlin/build/bin/linux/debugShared/libkotlin.so")
+	
+	gdnslib.config_file.set_value("dependencies", "OSX.64", [])
+	gdnslib.config_file.set_value("dependencies", "Windows.64", [])
+	gdnslib.config_file.set_value("dependencies", "X11.64", [])
+	
+	gdnslib.config_file.save("res://kotlin.gdnlib")
+	
+	# All done! Close it out
+	setupDialog.hide()
+	setup_complete()
+
+
 func configure_gradle(inSetup: bool = false):
 	var buildDialog := buildDialogScene.instance() as BuildDialog
+	# During setup, continue on to the next step, other wise just finish
 	if inSetup:
-		buildDialog.connect("build_complete", self, "setup_complete")
+		buildDialog.connect("build_complete", self, "step_4_create_library")
 	add_child(buildDialog)
 	buildDialog.show()
 	buildDialog.start_build("config")
