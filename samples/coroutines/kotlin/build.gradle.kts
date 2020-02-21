@@ -1,6 +1,7 @@
 val platform: String by project
 val armArch: String by project
 val iosSigningIdentity: String by project
+val buildTarget: String? by project
 
 buildscript {
     repositories {
@@ -94,11 +95,19 @@ kotlin {
     targets.forEach { target ->
         target.compilations.getByName("main") {
             if (this is org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeCompilation) {
-                println("Configuring target ${target.name}")
+                println("Configuring target ${this.target.name}")
                 this.target.binaries {
-                    sharedLib(listOf(org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG))
+                    val libTarget = when(buildTarget?.toLowerCase()) {
+                        "release" -> listOf(org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE)
+                        "debug" -> listOf(org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG)
+                        else -> {
+                            System.err.println("Build target not specified, defaulting to DEBUG. To set release target, specify: -Ptarget=RELEASE")
+                            listOf(org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG)
+                        }
+                    }
+                    sharedLib(libTarget)
                 }
-                target.compilations.all {
+                this.target.compilations.all {
                     dependencies {
                         implementation("org.godotengine.kotlin:godot-library-extension:1.0.0")
                     }
