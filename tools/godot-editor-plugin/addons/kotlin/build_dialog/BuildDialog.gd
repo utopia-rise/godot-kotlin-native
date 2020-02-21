@@ -30,6 +30,12 @@ func build(data):
 		assert(false) # Build type must be valid
 	
 	emit_signal("build_complete")
+	call_deferred("close")
+
+func close():
+	if buildThread != null:
+		buildThread.wait_to_finish()
+		buildThread = null
 	
-	call_deferred("hide")
-	call_deferred("queue_free")
+	hide()
+	queue_free()
