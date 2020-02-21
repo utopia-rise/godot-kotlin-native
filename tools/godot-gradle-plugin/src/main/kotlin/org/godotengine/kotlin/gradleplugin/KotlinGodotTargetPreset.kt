@@ -51,7 +51,7 @@ class KotlinGodotTargetPreset(
 
 
     private fun KotlinNativeCompilation.addGeneratorTasks() {
-        for (sourceSet in kotlinSourceSets) {
+        kotlinSourceSets.forEachIndexed { index, sourceSet ->
             val entryPath = project.buildDir.absolutePath + "/godot/entries/" + sourceSet.name
             sourceSet.kotlin.srcDir(entryPath)
 
@@ -86,12 +86,60 @@ class KotlinGodotTargetPreset(
                     }
                 }
             }
-            project.getTasksByName(compileKotlinTaskName, false).forEach {
-                it.dependsOn(generateTask.apply {
-                    onlyIf {
-                        HostManager().isEnabled(konanTarget) && !info.skipEntryGeneration
+
+            if (index == 0) {
+                val dummyTarget = nativePreset.createTarget("entryGeneration${sourceSet.name.capitalize()}").apply {
+                    this.compilations.all { compilation ->
+                        compilation.source(sourceSet)
+
+//                        compilation.apply {
+//                            dependencies { implementation(LibrariesDependency) }
+//                            dependencies { implementation("org.godotengine.kotlin:annotations:0.0.1-SNAPSHOT") }
+//                        }
                     }
-                })
+                }
+                kotlin.targets.add(dummyTarget)
+
+                val dependencyResolutionTask = project.tasks.create("resolveDependenciesFor${sourceSet.name.capitalize()}") { task ->
+                    task.group = "godotInternalTasks"
+                    task.doFirst { _ ->
+                        project
+                                .configurations
+                                .filter { it.name.contains("${target.name}Implementation") }
+                                .flatMap { it.dependencies }
+                                .filter { it.group != null && it.version != null }
+                                .forEach {
+                                    kotlin.targets.getByName("entryGeneration${sourceSet.name.capitalize()}").compilations.forEach { compilation ->
+                                        compilation.apply {
+                                            dependencies {
+                                                implementation("${it.group}:${it.name}:${it.version}")
+                                            }
+                                        }
+                                    }
+                                }
+                    }
+                }
+
+                project.getTasksByName("compileKotlinEntryGeneration${sourceSet.name.capitalize()}", false).forEach { task ->
+                    task.dependsOn(dependencyResolutionTask)
+                }
+            }
+
+            project.getTasksByName(compileKotlinTaskName, false).forEach { task ->
+                task.dependsOn(
+                        generateTask.apply {
+                            onlyIf {
+                                HostManager().isEnabled(konanTarget) && !info.skipEntryGeneration
+                            }
+                        },
+                        "compileKotlinEntryGeneration${sourceSet.name.capitalize()}"
+                )
+            }
+
+            project.tasks.forEach {
+                if (it.name.contains("entryGeneration", true)) {
+                    it.group = "godotInternalTasks"
+                }
             }
         }
     }
