@@ -1,6 +1,5 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://addons/kotlin/build_button/GradleBuildButton.gd" type="Script" id=1]
 [ext_resource path="res://addons/kotlin/build_button/button_icon.png" type="Texture" id=2]
 
 [sub_resource type="InputEventKey" id=1]
@@ -20,7 +19,6 @@ margin_bottom = -576.0
 shortcut = SubResource( 2 )
 text = "Build Kotln"
 icon = ExtResource( 2 )
-script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

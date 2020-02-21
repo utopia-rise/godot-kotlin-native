@@ -1,3 +1,9 @@
+######################################
+# ProgressDialog.gd
+# Base class for showing the user that a
+# background task is running.
+######################################
+
 tool
 extends WindowDialog
 class_name BaseProgressDialog
