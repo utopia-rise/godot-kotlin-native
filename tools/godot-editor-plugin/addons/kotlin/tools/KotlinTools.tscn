@@ -18,6 +18,7 @@ __meta__ = {
 }
 
 [node name="SetupContainer" type="VBoxContainer" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -55,7 +56,6 @@ __meta__ = {
 }
 
 [node name="ActionsContainer" type="VBoxContainer" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -69,27 +69,36 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="ActionsContainer"]
-margin_top = 25.0
+margin_top = 13.0
 margin_right = 384.0
-margin_bottom = 39.0
+margin_bottom = 27.0
 text = "Actions"
 align = 1
 
 [node name="ConfigGradleButton" type="Button" parent="ActionsContainer"]
-margin_top = 43.0
+margin_top = 31.0
 margin_right = 384.0
-margin_bottom = 63.0
+margin_bottom = 51.0
 text = "Config Gradle"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BuildButton" type="Button" parent="ActionsContainer"]
-margin_top = 67.0
+[node name="BuildTargetButton" type="OptionButton" parent="ActionsContainer"]
+margin_top = 55.0
 margin_right = 384.0
-margin_bottom = 87.0
+margin_bottom = 75.0
+text = "debug"
+items = [ "debug", null, false, 0, null, "release", null, false, 1, null ]
+selected = 0
+
+[node name="BuildButton" type="Button" parent="ActionsContainer"]
+margin_top = 79.0
+margin_right = 384.0
+margin_bottom = 99.0
 text = "Build Kotlin"
 [connection signal="about_to_show" from="." to="." method="_on_KotlinToolMenuItem_about_to_show"]
 [connection signal="pressed" from="SetupContainer/CenterContainer/AddSupportButton" to="." method="_on_AddSupportButton_pressed"]
 [connection signal="pressed" from="ActionsContainer/ConfigGradleButton" to="." method="_on_ConfigGradleButton_pressed"]
+[connection signal="item_selected" from="ActionsContainer/BuildTargetButton" to="." method="_on_BuildTargetButton_item_selected"]
 [connection signal="pressed" from="ActionsContainer/BuildButton" to="." method="_on_BuildButton_pressed"]

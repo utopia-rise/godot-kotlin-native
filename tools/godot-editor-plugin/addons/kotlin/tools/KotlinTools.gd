@@ -15,6 +15,8 @@ onready var buildDialogScene := preload("res://addons/kotlin/build_dialog/BuildD
 onready var setupDialogScene := preload("res://addons/kotlin/tools/SetupDialog.tscn")
 onready var setupDialog: WindowDialog = setupDialogScene.instance()
 
+onready var GradleProperties := load("res://addons/kotlin/tools/GradleProperties.gd")
+
 
 func _on_AddSupportButton_pressed():
 	step_1_create_structure()
@@ -169,9 +171,34 @@ func _on_KotlinToolMenuItem_about_to_show():
 	var dir := Directory.new()
 	# Kotlin is already setup, show actions
 	if dir.dir_exists("res://kotlin"):
+		update_build_target()
+		
 		$ActionsContainer.show()
 		$SetupContainer.hide()
 	# Not setup yet, show intro
 	else:
 		$ActionsContainer.hide()
 		$SetupContainer.show()
+
+
+func _on_BuildTargetButton_item_selected(id):
+	match id:
+		0:
+			GradleProperties.write_property(GradleProperties.KEY_BUILD_TARGET, "debug")
+			print("Updating Kotlin Build Target to: DEBUG")
+		1:
+			GradleProperties.write_property(GradleProperties.KEY_BUILD_TARGET, "release")
+			print("Updating Kotlin Build Target to: RELEASE")
+
+# Update the build target selector
+func update_build_target():
+	
+	var buildTarget = GradleProperties.read_build_target()
+	
+	if buildTarget == "debug":
+			$ActionsContainer/BuildTargetButton.selected = 0
+	elif buildTarget == "release":
+			$ActionsContainer/BuildTargetButton.selected = 1
+	# Default to debug
+	else:
+			$ActionsContainer/BuildTargetButton.selected = 0
