@@ -35,7 +35,6 @@ func open(ud):
 
 func open_build_dialog():
 	var buildDialog = buildDialogScene.instance()
-	buildDialog.set_build_type("build")
 	add_child(buildDialog)
 	buildDialog.show()
-	buildDialog.start_build()
+	buildDialog.start_build("build")

@@ -4,14 +4,11 @@ class_name BuildDialog
 
 
 var buildType: String = "build"
+var buildThread: Thread
 
-
-func set_build_type(newType: String):
-	buildType = newType
-
-
-func start_build():
-	var buildThread = Thread.new()
+func start_build(type: String):
+	buildType = type
+	buildThread = Thread.new()
 	buildThread.start(self, "build")
 
 

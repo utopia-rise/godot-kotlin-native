@@ -11,3 +11,7 @@ func _process(delta):
 		rotating_progress = 0.0
 	
 	$VBoxContainer/ProgressBar.value = (rotating_progress / rollOver) * $VBoxContainer/ProgressBar.max_value
+
+
+func _on_ProgressDialog_popup_hide():
+	get_parent().remove_child(self)
