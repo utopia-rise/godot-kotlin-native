@@ -41,6 +41,8 @@ or
 `./gradlew kotlin:build`  
 Coroutines are not supported on android for now.
 
+To specify release or debug add: `-PbuildType=RELEASE` by default debug will be built if nothing is specified.
+
 ### iOS Signing
  
 Also on ios you should add you signing identity, as it is apple requirement, like:
