@@ -17,6 +17,8 @@ onready var setupDialog: WindowDialog = setupDialogScene.instance()
 
 onready var GradleProperties := load("res://addons/kotlin/tools/GradleProperties.gd")
 
+export(NodePath) var buildTypeSelectorPath: NodePath
+onready var buildTypeSelector: OptionButton = get_node(buildTypeSelectorPath)
 
 func _on_AddSupportButton_pressed():
 	step_1_create_structure()
@@ -196,9 +198,9 @@ func update_build_type():
 	var buildType = GradleProperties.read_build_type()
 	
 	if buildType == "debug":
-		$ActionsContainer/BuildTargetButton.selected = 0
+		buildTypeSelector.selected = 0
 	elif buildType == "release":
-		$ActionsContainer/BuildTargetButton.selected = 1
+		buildTypeSelector.selected = 1
 	# Default to debug
 	else:
-		$ActionsContainer/BuildTargetButton.selected = 0
+		buildTypeSelector.selected = 0

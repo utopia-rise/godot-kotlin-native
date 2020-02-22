@@ -17,7 +17,7 @@ anchor_bottom = 1.0
 margin_right = -996.0
 margin_bottom = -576.0
 shortcut = SubResource( 2 )
-text = "Build Kotln"
+text = "Build Kotlin"
 icon = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false

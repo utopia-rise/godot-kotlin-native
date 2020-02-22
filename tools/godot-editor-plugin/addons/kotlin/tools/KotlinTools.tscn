@@ -16,6 +16,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+buildTypeSelectorPath = NodePath("ActionsContainer/HBoxContainer/BuildTypeButton")
 
 [node name="SetupContainer" type="VBoxContainer" parent="."]
 visible = false
@@ -55,7 +56,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ActionsContainer" type="VBoxContainer" parent="."]
+[node name="ActionsContainer" type="HBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -68,37 +69,58 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="ActionsContainer"]
-margin_top = 13.0
-margin_right = 384.0
-margin_bottom = 27.0
-text = "Actions"
-align = 1
+[node name="HBoxContainer" type="VBoxContainer" parent="ActionsContainer"]
+margin_right = 186.0
+margin_bottom = 112.0
+size_flags_horizontal = 3
 
-[node name="ConfigGradleButton" type="Button" parent="ActionsContainer"]
-margin_top = 31.0
-margin_right = 384.0
-margin_bottom = 51.0
-text = "Config Gradle"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Label" type="Label" parent="ActionsContainer/HBoxContainer"]
+margin_right = 186.0
+margin_bottom = 14.0
+text = "Build Kotlin Scripts:"
 
-[node name="BuildTypeButton" type="OptionButton" parent="ActionsContainer"]
-margin_top = 55.0
-margin_right = 384.0
-margin_bottom = 75.0
+[node name="BuildTypeButton" type="OptionButton" parent="ActionsContainer/HBoxContainer"]
+margin_top = 18.0
+margin_right = 186.0
+margin_bottom = 38.0
 text = "debug"
 items = [ "debug", null, false, 0, null, "release", null, false, 1, null ]
 selected = 0
 
-[node name="BuildButton" type="Button" parent="ActionsContainer"]
-margin_top = 79.0
-margin_right = 384.0
-margin_bottom = 99.0
+[node name="BuildButton" type="Button" parent="ActionsContainer/HBoxContainer"]
+margin_top = 42.0
+margin_right = 186.0
+margin_bottom = 62.0
 text = "Build Kotlin"
+
+[node name="VSeparator" type="VSeparator" parent="ActionsContainer"]
+margin_left = 190.0
+margin_right = 194.0
+margin_bottom = 112.0
+
+[node name="HBoxContainer2" type="VBoxContainer" parent="ActionsContainer"]
+margin_left = 198.0
+margin_right = 384.0
+margin_bottom = 112.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="ActionsContainer/HBoxContainer2"]
+margin_right = 186.0
+margin_bottom = 14.0
+text = "Config:"
+
+[node name="ConfigGradleButton" type="Button" parent="ActionsContainer/HBoxContainer2"]
+margin_top = 18.0
+margin_right = 97.0
+margin_bottom = 38.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Config Gradle"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="about_to_show" from="." to="." method="_on_KotlinToolMenuItem_about_to_show"]
 [connection signal="pressed" from="SetupContainer/CenterContainer/AddSupportButton" to="." method="_on_AddSupportButton_pressed"]
-[connection signal="pressed" from="ActionsContainer/ConfigGradleButton" to="." method="_on_ConfigGradleButton_pressed"]
-[connection signal="item_selected" from="ActionsContainer/BuildTypeButton" to="." method="_on_BuildTypeButton_item_selected"]
-[connection signal="pressed" from="ActionsContainer/BuildButton" to="." method="_on_BuildButton_pressed"]
+[connection signal="item_selected" from="ActionsContainer/HBoxContainer/BuildTypeButton" to="." method="_on_BuildTypeButton_item_selected"]
+[connection signal="pressed" from="ActionsContainer/HBoxContainer/BuildButton" to="." method="_on_BuildButton_pressed"]
+[connection signal="pressed" from="ActionsContainer/HBoxContainer2/ConfigGradleButton" to="." method="_on_ConfigGradleButton_pressed"]
