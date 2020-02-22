@@ -1,6 +1,7 @@
 val platform: String by project
 val armArch: String by project
 val iosSigningIdentity: String by project
+val buildType: String? by project
 
 buildscript {
     repositories {
@@ -115,7 +116,15 @@ kotlin {
             if (this is org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeCompilation) {
                 println("Configuring target ${this.target.name}")
                 this.target.binaries {
-                    sharedLib(listOf(org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG))
+                    val libTarget = when(buildType?.toLowerCase()) {
+                        "release" -> listOf(org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE)
+                        "debug" -> listOf(org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG)
+                        else -> {
+                            logger.warn("Build target not specified, defaulting to DEBUG. To set release target, specify: -PbuildType=RELEASE")
+                            listOf(org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG)
+                        }
+                    }
+                    sharedLib(libTarget)
                 }
                 this.target.compilations.all {
                     dependencies {
