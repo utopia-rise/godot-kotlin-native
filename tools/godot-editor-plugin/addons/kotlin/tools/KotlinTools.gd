@@ -171,7 +171,7 @@ func _on_KotlinToolMenuItem_about_to_show():
 	var dir := Directory.new()
 	# Kotlin is already setup, show actions
 	if dir.dir_exists("res://kotlin"):
-		update_build_target()
+		update_build_type()
 		
 		$ActionsContainer.show()
 		$SetupContainer.hide()
@@ -181,23 +181,23 @@ func _on_KotlinToolMenuItem_about_to_show():
 		$SetupContainer.show()
 
 
-func _on_BuildTargetButton_item_selected(id):
+func _on_BuildTypeButton_item_selected(id):
 	match id:
 		0:
 			GradleProperties.write_property(GradleProperties.KEY_BUILD_TARGET, "debug")
-			print("Updating Kotlin Build Target to: DEBUG")
+			print("Updating Kotlin Build Type to: DEBUG")
 		1:
 			GradleProperties.write_property(GradleProperties.KEY_BUILD_TARGET, "release")
-			print("Updating Kotlin Build Target to: RELEASE")
+			print("Updating Kotlin Build Type to: RELEASE")
 
-# Update the build target selector
-func update_build_target():
+
+# Update the build type selector
+func update_build_type():
+	var buildType = GradleProperties.read_build_type()
 	
-	var buildTarget = GradleProperties.read_build_target()
-	
-	if buildTarget == "debug":
+	if buildType == "debug":
 			$ActionsContainer/BuildTargetButton.selected = 0
-	elif buildTarget == "release":
+	elif buildType == "release":
 			$ActionsContainer/BuildTargetButton.selected = 1
 	# Default to debug
 	else:

@@ -84,7 +84,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BuildTargetButton" type="OptionButton" parent="ActionsContainer"]
+[node name="BuildTypeButton" type="OptionButton" parent="ActionsContainer"]
 margin_top = 55.0
 margin_right = 384.0
 margin_bottom = 75.0
@@ -100,5 +100,5 @@ text = "Build Kotlin"
 [connection signal="about_to_show" from="." to="." method="_on_KotlinToolMenuItem_about_to_show"]
 [connection signal="pressed" from="SetupContainer/CenterContainer/AddSupportButton" to="." method="_on_AddSupportButton_pressed"]
 [connection signal="pressed" from="ActionsContainer/ConfigGradleButton" to="." method="_on_ConfigGradleButton_pressed"]
-[connection signal="item_selected" from="ActionsContainer/BuildTargetButton" to="." method="_on_BuildTargetButton_item_selected"]
+[connection signal="item_selected" from="ActionsContainer/BuildTypeButton" to="." method="_on_BuildTypeButton_item_selected"]
 [connection signal="pressed" from="ActionsContainer/BuildButton" to="." method="_on_BuildButton_pressed"]
