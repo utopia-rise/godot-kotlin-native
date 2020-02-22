@@ -196,9 +196,9 @@ func update_build_type():
 	var buildType = GradleProperties.read_build_type()
 	
 	if buildType == "debug":
-			$ActionsContainer/BuildTargetButton.selected = 0
+		$ActionsContainer/BuildTargetButton.selected = 0
 	elif buildType == "release":
-			$ActionsContainer/BuildTargetButton.selected = 1
+		$ActionsContainer/BuildTargetButton.selected = 1
 	# Default to debug
 	else:
-			$ActionsContainer/BuildTargetButton.selected = 0
+		$ActionsContainer/BuildTargetButton.selected = 0

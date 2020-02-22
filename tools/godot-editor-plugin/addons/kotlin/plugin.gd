@@ -39,7 +39,7 @@ func open(ud):
 
 func open_tools_window():
 	kotlinToolsPopup = kotlinToolsScene.instance()
-	add_child(kotlinToolsPopup)
+	get_editor_interface().get_editor_viewport().add_child(kotlinToolsPopup)
 	kotlinToolsPopup.popup_centered()
 
 
@@ -53,6 +53,6 @@ func on_gradle_build_click():
 
 func open_build_dialog():
 	var buildDialog = buildDialogScene.instance()
-	add_child(buildDialog)
+	get_editor_interface().get_editor_viewport().add_child(buildDialog)
 	buildDialog.show()
 	buildDialog.start_build("build")
