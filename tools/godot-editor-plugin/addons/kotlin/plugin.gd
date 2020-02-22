@@ -17,7 +17,7 @@ var buildDialogScene := preload("res://addons/kotlin/build_dialog/BuildDialog.ts
 
 
 func _enter_tree():
-	add_tool_menu_item ( TOOL_ITEM_NAME, self, "open" )
+	add_tool_menu_item ( TOOL_ITEM_NAME, self, "on_tool_menu_click" )
 	add_control_to_container(EditorPlugin.CONTAINER_TOOLBAR, buildButton)
 	buildButton.connect("pressed", self, "on_gradle_build_click")
 
@@ -29,11 +29,10 @@ func _exit_tree():
 		kotlinToolsPopup.queue_free()
 		kotlinToolsPopup = null
 	
-	buildButton.disconnect("pressed", self, "on_gradle_build_click")
 	remove_control_from_container(EditorPlugin.CONTAINER_TOOLBAR, buildButton)
 
 
-func open(ud):
+func on_tool_menu_click(ud):
 	open_tools_window()
 
 
