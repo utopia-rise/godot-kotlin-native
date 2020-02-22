@@ -8,17 +8,17 @@ extends Node
 
 const FILE_PATH := "res://kotlin/gradle.properties"
 
-const KEY_BUILD_TARGET := "buildTarget"
+const KEY_BUILD_TYPE := "buildType"
 const KEY_PLATFORM := "platform"
 
 
-static func read_build_target() -> String:
+static func read_build_type() -> String:
 	var properties := read_properties()
 	
 	var buildTarget: String
 	if properties != null and properties.size() > 0:
 		for key in properties:
-			if key.to_lower() == KEY_BUILD_TARGET.to_lower():
+			if key.to_lower() == KEY_BUILD_TYPE.to_lower():
 				var value := properties[key] as String
 				buildTarget = value
 				break
