@@ -25,6 +25,21 @@ Look into [**Registration**](./REGISTRATION.md) section to get more information.
 
 Look into [**Compiling from source**](COMPILING_FROM_SOURCE.md) section to get more information.
 
+## Roadmap
+
+### 0.1.0-3.2 beta version:
+[Annotation processing (basic) (to be tested if fast enough)](https://github.com/utopia-rise/godot-kotlin/issues/2).  
+[Debug sample coroutines](https://github.com/utopia-rise/godot-kotlin/issues/36).
+
+### 1.0.0-3.2 release version:
+[Annotation processing enhanced with expect and actual implementation](https://github.com/utopia-rise/godot-kotlin/issues/2#issuecomment-589839699).  
+[Make test to be sure of core functionality (like missing set in dictionary), maybe port 2D platform to Kotlin native](https://github.com/utopia-rise/godot-kotlin/issues/37).  
+[Implement performance test](https://github.com/utopia-rise/godot-kotlin/issues/38).  
+[Project setup](https://github.com/utopia-rise/godot-kotlin/pull/33).  
+
+Later:
+Change cast that is actually horrible with infix methods.
+
 ## Developer discussion
 
 Ask questions and collaborate on Discord:
