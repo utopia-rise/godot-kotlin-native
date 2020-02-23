@@ -27,7 +27,6 @@ class KotlinGodotPlugin : Plugin<Project> {
 
 
         project.run {
-            //pluginManager.apply(KotlinMultiplatformPluginWrapper::class.java)
             val kotlinMultiplatformExtension = extensions.getByName("kotlin") as KotlinMultiplatformExtension
             val kotlinGodotPluginExtension = extensions.getByName("kotlinGodotPluginExtension") as KotlinGodotPluginExtension
 

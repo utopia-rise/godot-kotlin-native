@@ -19,7 +19,6 @@ class KotlinGodotTargetPreset(
     private val nativePreset = KotlinNativeTargetPreset(name, project, konanTarget, kotlinGodotPluginExtension.kotlinVersion)
     private val kotlin = project.extensions.getByName("kotlin") as KotlinMultiplatformExtension
 
-
     override fun getName(): String = name
 
     override fun createTarget(name: String): KotlinNativeTarget {
@@ -35,7 +34,7 @@ class KotlinGodotTargetPreset(
             compilation.apply {
 
                 this.kotlinSourceSets.forEach { kotlinSourceSet ->
-                    kotlinSourceSet.kotlin.srcDir(project.buildDir.absolutePath + "/godot/entries/" + kotlinSourceSet.name)
+                    kotlinSourceSet.kotlin.srcDir(project.buildDir.absolutePath + "/godot/entries/")
                 }
                 addGeneratorTasks()
             }
@@ -46,10 +45,12 @@ class KotlinGodotTargetPreset(
 
     private fun KotlinNativeCompilation.addGeneratorTasks() {
         kotlinSourceSets.forEachIndexed { index, sourceSet ->
-            val entryPath = project.buildDir.absolutePath + "/godot/entries/" + sourceSet.name
+            if (sourceSet.name.contains("Test")) return //no entry generation should happen for test builds
+
+            val entryPath = project.buildDir.absolutePath + "/godot/entries/"
             sourceSet.kotlin.srcDir(entryPath)
 
-            if (index == 0) {
+            if (index == 0 && !project.tasks.any { it.name.contains("resolveDependenciesFor") }) {
                 val dummyTarget = nativePreset.createTarget("entryGeneration${sourceSet.name.capitalize()}").apply {
                     this.compilations.all { compilation ->
                         compilation.source(sourceSet)
@@ -84,7 +85,7 @@ class KotlinGodotTargetPreset(
 
             project.getTasksByName(compileKotlinTaskName, false).forEach { task ->
                 task.dependsOn(
-                        "compileKotlinEntryGeneration${sourceSet.name.capitalize()}"
+                        project.tasks.first { it.name.contains("compileKotlinEntryGeneration") }
                 )
             }
 
