@@ -4,6 +4,7 @@ plugins {
     id("org.jetbrains.kotlin.jvm")
     id("maven")
     id("kotlin-kapt")
+    id("maven-publish")
     id("com.jfrog.bintray")
 }
 

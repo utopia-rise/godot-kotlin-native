@@ -120,7 +120,7 @@ kotlin {
                 this.target.compilations.all {
                     dependencies {
                         implementation("org.godotengine.kotlin:godot-library:1.0.0")
-                        implementation("org.godotengine.kotlin:annotations:0.0.1-SNAPSHOT")
+                        implementation("org.godotengine.kotlin:annotations:0.0.1")
                     }
                 }
                 if (project.hasProperty("iosSigningIdentity") && this.target.name == "iosArm64") {
