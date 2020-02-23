@@ -6,12 +6,10 @@ import de.jensklingenberg.mpapt.common.hasAnnotation
 import de.jensklingenberg.mpapt.model.Element
 import org.godotengine.kotlin.annotation.*
 import org.godotengine.kotlin.entrygenerator.mapper.RpcModeAnnotationMapper
-import org.godotengine.kotlin.entrygenerator.mapper.TypeHintMapper
-import org.godotengine.kotlin.entrygenerator.model.getVariantType
+import org.godotengine.kotlin.entrygenerator.utils.getVariantType
 import org.jetbrains.kotlin.descriptors.annotations.AnnotationDescriptor
 import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.Name
-import org.jetbrains.kotlin.resolve.constants.KClassValue
 import org.jetbrains.kotlin.resolve.constants.StringValue
 import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
 import org.jetbrains.kotlin.types.asSimpleType

@@ -2,7 +2,7 @@ package org.godotengine.kotlin.entrygenerator.generator
 
 import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
-import org.godotengine.kotlin.entrygenerator.model.castFromRawMemory
+import org.godotengine.kotlin.entrygenerator.utils.castFromRawMemory
 import org.godotengine.kotlin.entrygenerator.utils.hasVarargParameter
 import org.jetbrains.kotlin.descriptors.CallableMemberDescriptor
 import org.jetbrains.kotlin.resolve.calls.components.isVararg

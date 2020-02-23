@@ -1,4 +1,4 @@
-package org.godotengine.kotlin.entrygenerator.model
+package org.godotengine.kotlin.entrygenerator.utils
 
 
 fun String.castToVariant(value: String): String {

@@ -3,7 +3,7 @@ package org.godotengine.kotlin.entrygenerator.generator
 import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import de.jensklingenberg.mpapt.model.Element
-import org.godotengine.kotlin.entrygenerator.model.castFromVariant
+import org.godotengine.kotlin.entrygenerator.utils.castFromVariant
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
 
