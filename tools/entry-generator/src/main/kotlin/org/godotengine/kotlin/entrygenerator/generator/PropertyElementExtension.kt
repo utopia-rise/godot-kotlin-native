@@ -11,8 +11,6 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
  * generates getter/setter function bindings for properties
  */
 fun Element.PropertyElement.generatePropertyBinding(entryFileSpec: FileSpec.Builder, index: Int): Array<FunSpec> {
-    propertySanityChecks()
-
     //order is important!
     val functionSpecs = arrayOf(
             generatePropertyGetterFunctionBinding(index),
@@ -85,8 +83,4 @@ private fun getBridgeReturnType(): ParameterizedTypeName {
 
 private fun getFullClassName(propertyElement: Element.PropertyElement): String {
     return propertyElement.propertyDescriptor.containingDeclaration.fqNameSafe.asString()
-}
-
-private fun Element.PropertyElement.propertySanityChecks() {
-
 }
