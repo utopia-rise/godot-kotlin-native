@@ -12,6 +12,10 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
 import org.jetbrains.kotlin.resolve.descriptorUtil.getAllSuperclassesWithoutAny
 import org.jetbrains.kotlin.resolve.scopes.DescriptorKindFilter
 
+/**
+ * generates all constructor and destructor bindings for a class
+ * @return the function specs of those to be registered in the class registration function
+ */
 fun Element.ClassElement.generateConstructorBindings(entryFileSpecBuilder: FileSpec.Builder, index: Int): Array<FunSpec> {
     val returnType = ClassName(ElementUtils().getPackageOf(this), this.classDescriptor.name.asString())
     val constructorBindingFuncSpec = FunSpec
@@ -43,6 +47,11 @@ fun Element.ClassElement.generateConstructorBindings(entryFileSpecBuilder: FileS
     return arrayOf(constructorBridgeFuncSpec, destructorBridgeFuncSpec)
 }
 
+/**
+ * generated godot-library specific function bindings for internal functions that need a binding as well<br>
+ * one example is the yield signal listener function which is present in each godot object, and thus in every class
+ * a user can register
+ */
 fun Element.ClassElement.generateInternalFunctionBindings(entryFileSpecBuilder: FileSpec.Builder, index: Int): Array<Pair<Name, FunSpec>> {
     return classDescriptor
             .getAllSuperclassesWithoutAny()
@@ -60,6 +69,10 @@ fun Element.ClassElement.generateInternalFunctionBindings(entryFileSpecBuilder: 
             .toTypedArray()
 }
 
+/**
+ * helper function that assembles the return type for a bidge function:<br>
+ * <code> CPointer<CFunction<(COpaquePointer?) -> COpaquePointer?>> </code>
+ */
 private fun getBridgeReturnType(isConstructor: Boolean): ParameterizedTypeName {
     return ClassName("kotlinx.cinterop", "CPointer")
             .parameterizedBy(

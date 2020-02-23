@@ -4,7 +4,10 @@ import com.squareup.kotlinpoet.*
 import de.jensklingenberg.mpapt.common.findAnnotation
 import de.jensklingenberg.mpapt.common.hasAnnotation
 import de.jensklingenberg.mpapt.model.Element
-import org.godotengine.kotlin.annotation.*
+import org.godotengine.kotlin.annotation.RegisterFunction
+import org.godotengine.kotlin.annotation.RegisterProperty
+import org.godotengine.kotlin.annotation.RegisterSignal
+import org.godotengine.kotlin.annotation.rpcAnnotations
 import org.godotengine.kotlin.entrygenerator.mapper.RpcModeAnnotationMapper
 import org.godotengine.kotlin.entrygenerator.utils.getVariantType
 import org.jetbrains.kotlin.descriptors.annotations.AnnotationDescriptor
@@ -14,9 +17,16 @@ import org.jetbrains.kotlin.resolve.constants.StringValue
 import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
 import org.jetbrains.kotlin.types.asSimpleType
 
+/**
+ * This class is responsible for registering classes, properties, functions and signals<br>
+ * It also assembles additional parameters the engine might need (ex: propertyType hint, rpcMode, etc.)
+ */
 class GDNativeFunctionBindingGenerator {
     private val nativeScriptInitFunctionBuilder: FunSpec.Builder = createNativeScriptInitFunctionBuilder()
 
+    /**
+     * register an element (class, property, function, signal) along with the corresponding bridge functions
+     */
     fun registerElement(element: Element, visibleInEditor: Boolean = true, vararg bridgeFunctions: FunSpec) {
         when (element) {
             is Element.ClassElement -> nativeScriptInitFunctionBuilder.addStatement("%M(\"${getFullClassName(element)}\",·\"${getBaseClassOfClass(element)}\"${convertBridgeFunctionsToString(bridgeFunctions)})", MemberName("godot.registration", "registerClass"))
@@ -32,6 +42,9 @@ class GDNativeFunctionBindingGenerator {
         }
     }
 
+    /**
+     * assembles a propertyTypeHint along with a propertyHintString if needed
+     */
     private fun getPropertyHints(element: Element.PropertyElement): String {
         val allValueArguments = element
                 .propertyDescriptor
@@ -62,18 +75,27 @@ class GDNativeFunctionBindingGenerator {
         }
     }
 
+    /**
+     * get's the rpcMode for a function
+     */
     private fun getRpcMode(element: Element.FunctionElement): String {
         val annotations = element.func.annotations.map { it.fqName!!.asString() }
         val registerAnnotation = element.func.annotations.findAnnotation(RegisterFunction::class.java.asClassName().canonicalName)
         return buildRpcModeString(element, annotations, registerAnnotation)
     }
 
+    /**
+     * get's the rpcMode for a property
+     */
     private fun getRpcMode(element: Element.PropertyElement): String {
         val annotations = element.propertyDescriptor.annotations.map { it.fqName!!.asString() }
         val registerAnnotation = element.propertyDescriptor.annotations.findAnnotation(RegisterProperty::class.java.asClassName().canonicalName)
         return buildRpcModeString(element, annotations, registerAnnotation)
     }
 
+    /**
+     * assembles the rpcMode string by rpcModeAnnotation or by RegisterAnnotation parameter
+     */
     private fun buildRpcModeString(element: Element, annotations: List<String>, registerAnnotation: AnnotationDescriptor?): String {
         var rpcAnnotation = rpcAnnotations()
                 .map { it.asTypeName().canonicalName }
@@ -105,10 +127,16 @@ class GDNativeFunctionBindingGenerator {
         }
     }
 
+    /**
+     * registers an internal function from godot-library. Ex: the yield listener method in any Godot Object
+     */
     fun registerInternalFunction(classElement: Element.ClassElement, pairOfNameAndFunSpec: Pair<Name, FunSpec>) {
         nativeScriptInitFunctionBuilder.addStatement("%M(\"${getFullClassName(classElement)}\",·\"${pairOfNameAndFunSpec.first.asString()}\",·${pairOfNameAndFunSpec.second.name}())", MemberName("godot.registration", "registerMethod"))
     }
 
+    /**
+     * generates the three functions the engine needs to work with the lib. (godot_gdnative_init, godot_gdnative_terminate and godot_nativescript_init)
+     */
     fun generateGDNativeBindingFunctions(entryFileSpecBuilder: FileSpec.Builder) {
         entryFileSpecBuilder
                 .addFunction(generateGDNativeInitFunction())
@@ -116,7 +144,9 @@ class GDNativeFunctionBindingGenerator {
                 .addFunction(nativeScriptInitFunctionBuilder.build())
     }
 
-
+    /**
+     * assembles the arguments needed for registering a signal as string)
+     */
     private fun getSignalArgumentsAsString(element: Element.FunctionElement): String {
         val arguments = element
                 .func
@@ -145,6 +175,9 @@ class GDNativeFunctionBindingGenerator {
         }
     }
 
+    /**
+     * assembles the default arguments for a signal if needed
+     */
     private fun getSignalDefaultArgumentsAsString(element: Element.FunctionElement): String {
         val defaultArguments = element
                 .func
@@ -177,6 +210,9 @@ class GDNativeFunctionBindingGenerator {
         }
     }
 
+    /**
+     * convert bridge functions to string to be able to reference it when registering constructors, functions or getter/setter functions for properties
+     */
     private fun convertBridgeFunctionsToString(bridgeFunctions: Array<out FunSpec>): String {
         return buildString {
             if (bridgeFunctions.isNotEmpty()) {

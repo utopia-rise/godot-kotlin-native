@@ -7,6 +7,9 @@ import org.godotengine.kotlin.entrygenerator.utils.castFromVariant
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
 
+/**
+ * generates getter/setter function bindings for properties
+ */
 fun Element.PropertyElement.generatePropertyBinding(entryFileSpec: FileSpec.Builder, index: Int): Array<FunSpec> {
     propertySanityChecks()
 

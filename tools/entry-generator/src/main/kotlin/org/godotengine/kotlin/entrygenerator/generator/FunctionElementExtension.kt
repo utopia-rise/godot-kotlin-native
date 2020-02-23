@@ -8,6 +8,10 @@ import org.jetbrains.kotlin.descriptors.CallableMemberDescriptor
 import org.jetbrains.kotlin.resolve.calls.components.isVararg
 import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
 
+/**
+ * generates function bindings for registered functions
+ * @return FunSpec of registered functionBinding for registration {@link org.godotengine.kotlin.entrygenerator.generator.GDNGDNativeFunctionBindingGenerator#registerElement()}
+ */
 fun CallableMemberDescriptor.generateFunctionBinding(entryFileSpecBuilder: FileSpec.Builder, index: Int, functionName: String = "functionBridge", fullClassName: String = getFullClassName(this)): FunSpec {
     val bridgeFunction = FunSpec
             .builder("$functionName$index")
@@ -21,6 +25,9 @@ fun CallableMemberDescriptor.generateFunctionBinding(entryFileSpecBuilder: FileS
     return bridgeFunction
 }
 
+/**
+ * helper method which generated the function body for a bridge function depending on the arguments the function has
+ */
 private fun CallableMemberDescriptor.getBridgeFunctionBody(fullClassName: String): CodeBlock {
     val bridgeFunctionBodyBuilder = CodeBlock.builder()
             .beginControlFlow("return·%M·{·returnValuePointer,·rawObjectPointer,·numberOfArguments,·argumentsPointer·->", MemberName("kotlinx.cinterop", "staticCFunction")) //START: staticCFunction
@@ -90,11 +97,12 @@ private fun CallableMemberDescriptor.varargSanityCheck(index: Int) {
                         """.trimMargin()
         )
     }
-    if (this.valueParameters.size != 1) {
-        //TODO: warning about runtime errors
-    }
 }
 
+/**
+ * helper function that assembles the return type for a bidge function. Ex:<br>
+ * <code> CPointer<CFunction<(COpaquePointer?,COpaquePointer?,Int,COpaquePointer?) -> Unit>> </code>
+ */
 private fun getBridgeReturnType(): ParameterizedTypeName {
     val cOpaquePointerClassName = ClassName("kotlinx.cinterop", "COpaquePointer").copy(nullable = true)
 

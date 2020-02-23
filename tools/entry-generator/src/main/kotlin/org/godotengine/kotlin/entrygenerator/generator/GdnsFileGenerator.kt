@@ -7,6 +7,10 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
 import java.io.File
 
 class GdnsFileGenerator {
+    /**
+     * generates the gdns files at either the location the user provided in the RegisterClass annotation or inside a
+     * scripts folder with subfolders corresponding to the package name
+     */
     fun generateGdnsFiles(outputDirectory: String, libraryPath: String, classes: Set<Element.ClassElement>) {
         classes.forEach { classElement ->
             val pathFromAnnotation = classElement
