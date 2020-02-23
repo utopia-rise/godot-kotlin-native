@@ -304,10 +304,12 @@ func _on_ArmArchOptionButton_item_selected(id):
 func update_ios_identity(properties: Dictionary):
 	var iosSigningIdentity = null
 	if properties.has(GradleProperties.KEY_IOS_IDENTITY):
-		print("has ios")
 		iosSigningIdentity = properties[GradleProperties.KEY_IOS_IDENTITY]
-	print(iosSigningIdentity)
-	iosIdentityLineEdit.text = iosSigningIdentity
+	
+	if iosSigningIdentity != null:
+		iosIdentityLineEdit.text = iosSigningIdentity
+	else:
+		iosIdentityLineEdit.text = ""
 
 
 func _on_iOSIdentityLineEdit_text_changed(new_text):
