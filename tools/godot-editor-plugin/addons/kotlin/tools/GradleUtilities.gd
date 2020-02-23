@@ -12,14 +12,14 @@ static func gradle_configure():
 	if is_windows():
 		execute("gradlew.bat")
 	else:
-		execute("gradlew")
+		execute("./gradlew")
 
 
 static func gradle_build():
 	if is_windows():
 		execute("build.bat")
 	else:
-		execute("build")
+		execute("./build")
 
 
 static func execute(command: String):
@@ -28,7 +28,7 @@ static func execute(command: String):
 	if is_windows():
 		OS.execute("CMD.exe", ["/C cd kotlin && %s" % command], true, output)
 	else:
-		OS.execute("sh", ["cd kotlin && %s" % command], true, output)
+		OS.execute("/bin/sh", ["cd kotlin ; %s" % command], true, output)
 	
 	print(output)
 
