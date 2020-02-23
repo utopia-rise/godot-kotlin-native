@@ -121,7 +121,7 @@ However, you might prefer describing it as an annotation. The following annotati
 - `@MasterSync`
 - `@PuppetSync`
 
-Example:
+Example:  
 **Property exported, not visible in the editor, with default value 300, rpcMode RemoteSync:**
 ```kotlin
 @RemoteSync
@@ -196,7 +196,8 @@ class ListeningClass: EmitingClass.Signal { // <- Note the interface implementat
 }
 ```
 
-#Summary
+# Summary
+
 **@RegisterClass**
 
 | argument name   | type         | required | description |
