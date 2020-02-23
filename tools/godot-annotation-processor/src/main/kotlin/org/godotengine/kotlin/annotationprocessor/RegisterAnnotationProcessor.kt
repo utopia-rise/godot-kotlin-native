@@ -23,7 +23,7 @@ class RegisterAnnotationProcessor : AbstractProcessor() {
     override fun isTargetPlatformSupported(platform: TargetPlatform): Boolean {
         return when (val targetName = platform.first().platformName) {
             KotlinPlatformValues.JS -> false
-            KotlinPlatformValues.JVM -> false
+            KotlinPlatformValues.JVM -> true
             KotlinPlatformValues.NATIVE -> true
             else -> {
                 log("Unknown configured target: $targetName")
