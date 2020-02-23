@@ -34,7 +34,7 @@ you have to start `build` task from `samples/games/kotlin` directory.
 `cd samples/games/kotlin`  
 `./gradlew build -Pplatform=desired_platform`, `desired_platform` can be either `windows`, `linux`, `macos`, `android`, `ios`.  
 For android and ios, you have to add `armArch` parameter like:  
-`./gradlew build -Pplatform=android -Pplatform=X64`, otherwise it will build `arm64` platform by default. Supported target
+`./gradlew build -Pplatform=android -ParmArch=X64`, otherwise it will build `arm64` platform by default. Supported target
 are for now `arm64` and `X64`  
 or  
 `cd samples/coroutines/kotlin`
