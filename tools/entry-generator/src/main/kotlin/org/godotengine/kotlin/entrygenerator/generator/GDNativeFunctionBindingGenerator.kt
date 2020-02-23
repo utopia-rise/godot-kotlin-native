@@ -53,7 +53,7 @@ class GDNativeFunctionBindingGenerator {
         }
 
         return buildString {
-            if (typeHintAsString != null && typeHintAsString != "godot.registration.PropertyHint.None") {
+            if (typeHintAsString != null && typeHintAsString != "godot.registration.PropertyHint.None") { //TODO: replace hardcoded cannonical name with class reference once expect/actual implementation for jvm is done
                 append(",·propertyHint·=·$typeHintAsString")
             }
             if (hintString != null && hintString.isNotEmpty()) {
@@ -92,6 +92,7 @@ class GDNativeFunctionBindingGenerator {
                     ?.value
 
             if (rpcModeAnnotation != null) {
+                @Suppress("UNCHECKED_CAST")
                 val enumMapping = (rpcModeAnnotation as Pair<ClassId, Name>) //represents an enum. If it cannot be cast, something is wrong and it should fail hard
                 rpcAnnotation = "${enumMapping.first.asString().replace("/", ".")}.${enumMapping.second}"
             }
