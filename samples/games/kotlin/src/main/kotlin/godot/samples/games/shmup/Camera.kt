@@ -6,7 +6,7 @@ import godot.core.Vector2
 import org.godotengine.kotlin.annotation.RegisterClass
 import org.godotengine.kotlin.annotation.RegisterFunction
 
-@RegisterClass
+@RegisterClass("Games/Shmup/Scripts")
 class Camera: Camera2D() {
     var duration = 0.0
     var periodInMs = 0.0

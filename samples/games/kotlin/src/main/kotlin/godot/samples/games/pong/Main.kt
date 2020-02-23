@@ -12,7 +12,7 @@ import godot.registration.PropertyHint
 import godot.registration.RPCMode
 import kotlin.reflect.KClass
 
-@RegisterClass
+@RegisterClass("Games/Pong/Scripts")
 class Main : Node() {
 
     lateinit var ball: KinematicBody2D

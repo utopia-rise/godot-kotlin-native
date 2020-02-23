@@ -7,7 +7,7 @@ import godot.core.Variant
 import org.godotengine.kotlin.annotation.RegisterClass
 import org.godotengine.kotlin.annotation.RegisterFunction
 
-@RegisterClass
+@RegisterClass("Games/Shmup/Scripts")
 class EnemyPath: Path2D() {
 
     @RegisterFunction

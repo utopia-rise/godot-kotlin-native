@@ -5,7 +5,7 @@ import godot.core.NodePath
 import org.godotengine.kotlin.annotation.RegisterClass
 import org.godotengine.kotlin.annotation.RegisterFunction
 
-@RegisterClass
+@RegisterClass("Games/Main/Scripts")
 class ChooseGameScreen: Node() {
 
     lateinit var playDodgeButton: Button

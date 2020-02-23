@@ -5,10 +5,18 @@ import de.jensklingenberg.mpapt.model.Element
 import de.jensklingenberg.mpapt.model.RoundEnvironment
 import de.jensklingenberg.mpapt.utils.KotlinPlatformValues
 import org.godotengine.kotlin.annotation.*
+import org.godotengine.kotlin.annotationprocessor.CommandlineArguments.GODOT_PROJECT_PATH
+import org.godotengine.kotlin.annotationprocessor.CommandlineArguments.LIBRARY_PATH
 import org.godotengine.kotlin.entrygenerator.EntryGenerator
+import org.jetbrains.kotlin.config.CompilerConfigurationKey
 import org.jetbrains.kotlin.platform.TargetPlatform
 import java.lang.instrument.IllegalClassFormatException
 import java.nio.file.Paths
+
+object CommandlineArguments {
+    val LIBRARY_PATH: CompilerConfigurationKey<String> = CompilerConfigurationKey.create("path to godot gdnlib")
+    val GODOT_PROJECT_PATH: CompilerConfigurationKey<String> = CompilerConfigurationKey.create("path to root of godot project")
+}
 
 class RegisterAnnotationProcessor : AbstractProcessor() {
 
@@ -104,6 +112,8 @@ class RegisterAnnotationProcessor : AbstractProcessor() {
         EntryGenerator()
                 .generateEntry(
                         getKaptGeneratedDirectory(),
+                        configuration.get(LIBRARY_PATH)!!,
+                        configuration.get(GODOT_PROJECT_PATH)!!,
                         classes,
                         properties,
                         functions,

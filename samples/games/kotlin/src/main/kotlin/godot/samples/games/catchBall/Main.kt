@@ -4,7 +4,7 @@ import godot.*
 import org.godotengine.kotlin.annotation.RegisterClass
 import org.godotengine.kotlin.annotation.RegisterFunction
 
-@RegisterClass
+@RegisterClass("Games/CatchBall/Scripts")
 class Main: Node() {
 
     @RegisterFunction

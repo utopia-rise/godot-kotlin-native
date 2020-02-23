@@ -8,7 +8,7 @@ import org.godotengine.kotlin.annotation.RegisterClass
 import org.godotengine.kotlin.annotation.RegisterFunction
 import org.godotengine.kotlin.annotation.RegisterProperty
 
-@RegisterClass
+@RegisterClass("Games/Shmup/Scripts")
 class Player: KinematicBody2D() {
     var shootTime = 0
     var shooting = false

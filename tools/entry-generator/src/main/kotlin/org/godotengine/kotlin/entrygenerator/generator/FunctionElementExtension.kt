@@ -7,7 +7,6 @@ import org.godotengine.kotlin.entrygenerator.utils.hasVarargParameter
 import org.jetbrains.kotlin.descriptors.CallableMemberDescriptor
 import org.jetbrains.kotlin.resolve.calls.components.isVararg
 import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
-import org.jetbrains.kotlin.types.asSimpleType
 
 fun CallableMemberDescriptor.generateFunctionBinding(entryFileSpecBuilder: FileSpec.Builder, index: Int, functionName: String = "functionBridge", fullClassName: String = getFullClassName(this)): FunSpec {
     val bridgeFunction = FunSpec

@@ -7,7 +7,7 @@ import org.godotengine.kotlin.annotation.RegisterFunction
 import kotlin.random.Random
 import kotlin.system.getTimeNanos
 
-@RegisterClass
+@RegisterClass("Games/CatchBall/Scripts")
 class Ball: RigidBody() {
 
     @RegisterFunction

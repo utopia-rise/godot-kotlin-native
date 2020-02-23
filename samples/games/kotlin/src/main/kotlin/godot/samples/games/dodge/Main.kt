@@ -7,7 +7,7 @@ import org.godotengine.kotlin.annotation.RegisterFunction
 import kotlin.math.PI
 import kotlin.random.Random
 
-@RegisterClass
+@RegisterClass("Games/Dodge/Scripts")
 class Main: Node() {
     lateinit var mobTimer: Timer
     lateinit var scoreTimer: Timer

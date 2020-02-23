@@ -8,7 +8,7 @@ import org.godotengine.kotlin.annotation.RegisterClass
 import org.godotengine.kotlin.annotation.RegisterFunction
 import org.godotengine.kotlin.annotation.RegisterProperty
 
-@RegisterClass
+@RegisterClass("Games/Dodge/Scripts")
 class Mob: RigidBody2D() {
     @RegisterProperty(true, "150")
     var minSpeed = 150

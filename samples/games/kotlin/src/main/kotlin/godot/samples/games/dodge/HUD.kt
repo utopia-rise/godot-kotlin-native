@@ -8,7 +8,7 @@ import org.godotengine.kotlin.annotation.RegisterClass
 import org.godotengine.kotlin.annotation.RegisterFunction
 import org.godotengine.kotlin.annotation.RegisterSignal
 
-@RegisterClass
+@RegisterClass("Games/Dodge/Scripts")
 class HUD: CanvasLayer() {
 
     lateinit var messageLabel: Label

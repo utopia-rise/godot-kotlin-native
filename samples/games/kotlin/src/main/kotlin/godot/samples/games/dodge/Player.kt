@@ -9,7 +9,7 @@ import org.godotengine.kotlin.annotation.RegisterProperty
 import org.godotengine.kotlin.annotation.RegisterSignal
 
 //TODO: CollisionShape
-@RegisterClass
+@RegisterClass("Games/Dodge/Scripts")
 class Player : Area2D() {
 
     @RegisterProperty(true, "400")

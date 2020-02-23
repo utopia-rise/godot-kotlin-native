@@ -5,7 +5,7 @@ import godot.core.*
 import org.godotengine.kotlin.annotation.RegisterClass
 import org.godotengine.kotlin.annotation.RegisterFunction
 
-@RegisterClass
+@RegisterClass("Games/FastFinish/Scripts")
 class Stage: Node() {
     lateinit var path: Path2D
     lateinit var player: Player

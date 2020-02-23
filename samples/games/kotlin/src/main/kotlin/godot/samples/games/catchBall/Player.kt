@@ -6,7 +6,7 @@ import org.godotengine.kotlin.annotation.RegisterClass
 import org.godotengine.kotlin.annotation.RegisterFunction
 import org.godotengine.kotlin.annotation.RegisterProperty
 
-@RegisterClass
+@RegisterClass("Games/CatchBall/Scripts")
 class Player: KinematicBody() {
 
     @RegisterProperty(true, "6")

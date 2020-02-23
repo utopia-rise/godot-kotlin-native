@@ -5,7 +5,7 @@ import godot.*
 import org.godotengine.kotlin.annotation.RegisterClass
 import org.godotengine.kotlin.annotation.RegisterFunction
 
-@RegisterClass
+@RegisterClass("Games/Main/Scripts")
 class MainScreen: Node() {
 
     lateinit var chooseGameButton: Button

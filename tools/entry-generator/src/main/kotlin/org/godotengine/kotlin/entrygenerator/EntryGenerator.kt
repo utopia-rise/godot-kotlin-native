@@ -1,21 +1,20 @@
 package org.godotengine.kotlin.entrygenerator
 
 import com.squareup.kotlinpoet.FileSpec
+import de.jensklingenberg.mpapt.common.findAnnotation
 import de.jensklingenberg.mpapt.model.Element
+import org.godotengine.kotlin.annotation.RegisterClass
 import org.godotengine.kotlin.entrygenerator.generator.*
-import org.godotengine.kotlin.entrygenerator.model.Class
-import org.godotengine.kotlin.entrygenerator.model.Classes
-import org.godotengine.kotlin.entrygenerator.model.unite
-import org.godotengine.kotlin.entrygenerator.parser.JSONParser
-import org.godotengine.kotlin.entrygenerator.parser.Parser
-import org.godotengine.kotlin.entrygenerator.parser.XMLParser
 import org.jetbrains.kotlin.name.Name
+import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
 import java.io.File
 
 
 class EntryGenerator {
     fun generateEntry(
             kaptGeneratedDirectory: String,
+            libraryPath: String,
+            godotProjectPath: String,
             classes: Set<Element.ClassElement>,
             properties: Set<Element.PropertyElement>,
             functions: Set<Element.FunctionElement>,
@@ -60,45 +59,39 @@ class EntryGenerator {
 
         gdNativeFunctionBindingGenerator.generateGDNativeBindingFunctions(entryFileSpec)
 
+        generateGdnsFiles(godotProjectPath, libraryPath, classes)
+
         entryFileSpec
                 .build()
                 .writeTo(File(kaptGeneratedDirectory))
     }
 
-    companion object {
-        fun generate(configs: List<String>, entryOut: (String) -> Unit, gdnsOut: Class.(String) -> Unit, libPath: String) {
-            val configsContent = mutableListOf<Classes>()
+    private fun generateGdnsFiles(outputDirectory: String, libraryPath: String, classes: Set<Element.ClassElement>) {
+        classes.forEach { classElement ->
+            val pathFromAnnotation = classElement
+                    .classDescriptor
+                    .annotations
+                    .findAnnotation(RegisterClass::class.java.name)!!
+                    .allValueArguments
+                    .filter { it.key.asString() == "outputDir" }
+                    .map { it.value.value as String }
+                    .firstOrNull { it.isNotBlank() }
 
-            for (config in configs) {
-                val content = File(config).readText()
+            val outputPath = pathFromAnnotation ?: "scripts/${(classElement.classDescriptor.containingDeclaration.name.asString()).replace(".", File.separator)}"
 
-                lateinit var parser: Parser
-                if (config.endsWith(".json"))
-                    parser = JSONParser()
-                if (config.endsWith(".xml"))
-                    parser = XMLParser()
-
-                configsContent.add(parser.parseConfig(content))
-            }
-
-
-            val classes = configsContent.unite()
-            entryOut(classes.generate())
-
-
-            for (cl in classes.classes) {
-                cl.gdnsOut("""
-[gd_resource type="NativeScript" load_steps=2 format=2]
-
-[ext_resource path="$libPath" type="GDNativeLibrary" id=1]
-
-[resource]
-
-resource_name = "${cl.name}"
-class_name = "${cl.classPath}"
-library = ExtResource( 1 )
+            val out = File("$outputDirectory/$outputPath/${classElement.classDescriptor.name}.gdns")
+            out.parentFile.mkdirs()
+            out.createNewFile()
+            out.writeText("""
+                [gd_resource type="NativeScript" load_steps=2 format=2]
+                
+                [ext_resource path="res://$libraryPath" type="GDNativeLibrary" id=1]
+                
+                [resource]
+                resource_name = "${classElement.classDescriptor.name}"
+                class_name = "${classElement.classDescriptor.fqNameSafe}"
+                library = ExtResource( 1 )
             """.trimIndent())
-            }
         }
     }
 }

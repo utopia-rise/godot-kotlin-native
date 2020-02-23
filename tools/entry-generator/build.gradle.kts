@@ -25,8 +25,6 @@ dependencies {
     compileOnly("org.jetbrains.kotlin:kotlin-compiler-embeddable") //used for class analisation without reflection
     implementation("de.jensklingenberg:mpapt-runtime:${Dependencies.mpaptVersion}")
     implementation("com.squareup:kotlinpoet:${Dependencies.kotlinPoetVersion}")
-    implementation("com.beust:klaxon:5.2")//5.2
-    implementation("com.beust:klaxon:5.2")//5.2
 }
 
 application {

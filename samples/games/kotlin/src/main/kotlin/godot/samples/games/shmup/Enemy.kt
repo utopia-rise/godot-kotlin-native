@@ -6,7 +6,7 @@ import org.godotengine.kotlin.annotation.RegisterClass
 import org.godotengine.kotlin.annotation.RegisterFunction
 import org.godotengine.kotlin.annotation.RegisterProperty
 
-@RegisterClass
+@RegisterClass("Games/Shmup/Scripts")
 class Enemy: Area2D() {
     @RegisterProperty(true, "2")
     var health = 2

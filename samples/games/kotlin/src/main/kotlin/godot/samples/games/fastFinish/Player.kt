@@ -5,7 +5,7 @@ import godot.core.*
 import org.godotengine.kotlin.annotation.RegisterClass
 import org.godotengine.kotlin.annotation.RegisterFunction
 
-@RegisterClass
+@RegisterClass("Games/FastFinish/Scripts")
 class Player : Area2D() {
     var velocity = 0.0
     var speed = 30.0

@@ -3,7 +3,6 @@
 [ext_resource path="res://samples.gdnlib" type="GDNativeLibrary" id=1]
 
 [resource]
-
 resource_name = "Player"
 class_name = "godot.samples.games.shmup.Player"
 library = ExtResource( 1 )
