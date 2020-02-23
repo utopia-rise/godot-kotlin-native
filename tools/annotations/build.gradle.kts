@@ -74,17 +74,17 @@ kotlin {
         }
         configure(listOf(sourceSets["linuxMain"])) {
             dependencies {
-                compileOnly(project(":wrapper:godot-library"))
+                implementation(project(":wrapper:godot-library"))
             }
         }
         configure(listOf(sourceSets["macosMain"])) {
             dependencies {
-                compileOnly(project(":wrapper:godot-library"))
+                implementation(project(":wrapper:godot-library"))
             }
         }
         configure(listOf(sourceSets["windowsMain"])) {
             dependencies {
-                compileOnly(project(":wrapper:godot-library"))
+                implementation(project(":wrapper:godot-library"))
             }
         }
     }

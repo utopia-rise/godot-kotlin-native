@@ -25,9 +25,14 @@ class KotlinGodotTargetPreset(
     override fun createTarget(name: String): KotlinNativeTarget {
         val target = nativePreset.createTarget(name)
 
+        target.compilations.getByName("main") {
+            it.target.binaries {
+                sharedLib(listOf(kotlinGodotPluginExtension.releaseType))
+            }
+        }
+
         target.compilations.all { compilation ->
             compilation.apply {
-                dependencies { implementation("org.godotengine.kotlin:godot-library:${kotlinGodotPluginExtension.godotLibraryVersion}") }
 
                 this.kotlinSourceSets.forEach { kotlinSourceSet ->
                     kotlinSourceSet.kotlin.srcDir(project.buildDir.absolutePath + "/godot/entries/" + kotlinSourceSet.name)

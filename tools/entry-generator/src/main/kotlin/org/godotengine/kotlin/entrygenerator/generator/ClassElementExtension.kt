@@ -5,6 +5,7 @@ import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import de.jensklingenberg.mpapt.common.hasAnnotation
 import de.jensklingenberg.mpapt.model.Element
 import de.jensklingenberg.mpapt.model.ElementUtils
+import org.godotengine.kotlin.anntations.internal.RegisterInternal
 import org.jetbrains.kotlin.descriptors.CallableMemberDescriptor
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
@@ -48,7 +49,7 @@ fun Element.ClassElement.generateInternalFunctionBindings(entryFileSpecBuilder: 
             .map { it.defaultType.memberScope }
             .flatMap { it.getContributedDescriptors(DescriptorKindFilter.FUNCTIONS) }
             .filterIsInstance<CallableMemberDescriptor>() //should be callable anyway as we applied the DescriptorKindFilter.FUNCTIONS, but it's safer and like that we don't need to cast anything
-            .filter { it.annotations.hasAnnotation("godot.registration.RegisterInternal") } //TODO: don't hardcode the fully qualified annotation name
+            .filter { it.annotations.hasAnnotation(RegisterInternal::class.java.name) }
             .distinctBy { it.name } //to remove duplicate functions as each godot subtype inherits all functions from it's supertype
             .mapIndexed { superClassFunctionIndex, callableMemberDescriptor ->
                 Pair(

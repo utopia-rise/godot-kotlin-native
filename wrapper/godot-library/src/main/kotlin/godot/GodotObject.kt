@@ -4,10 +4,10 @@ import godot.core.CoreType
 import godot.core.Variant
 import godot.gdnative.godot_get_class_constructor
 import godot.gdnative.godot_variant_as_object
-import godot.registration.RegisterInternal
 import godot.registration.nativeConstructorInvocationFlag
 import godot.registration.nonNativeConstructorRawMemory
 import kotlinx.cinterop.*
+import org.godotengine.kotlin.anntations.internal.RegisterInternal
 import kotlin.reflect.KFunction1
 
 

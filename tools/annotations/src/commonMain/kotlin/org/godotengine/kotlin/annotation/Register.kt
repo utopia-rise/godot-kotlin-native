@@ -1,7 +1,5 @@
 package org.godotengine.kotlin.annotation
 
-import kotlin.reflect.KClass
-
 @Target(
         AnnotationTarget.CLASS
 )

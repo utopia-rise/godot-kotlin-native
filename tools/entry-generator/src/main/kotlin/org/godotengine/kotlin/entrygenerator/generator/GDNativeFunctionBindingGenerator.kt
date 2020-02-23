@@ -41,6 +41,7 @@ class GDNativeFunctionBindingGenerator {
                 .findAnnotation(RegisterProperty::class.java.asClassName().canonicalName)!!
                 .allValueArguments
 
+        @Suppress("UNCHECKED_CAST") //see comment at cast
         val typeHintAsString = if(allValueArguments.containsKey(Name.identifier("propertyHint"))) {
             val typeHintAsEnumPair = ((allValueArguments.getValue(Name.identifier("propertyHint"))).value as Pair<ClassId, Name>) //represents an enum. If it cannot be cast, something is wrong and it should fail hard
             "${typeHintAsEnumPair.first.asString().replace("/", ".")}.${typeHintAsEnumPair.second}"

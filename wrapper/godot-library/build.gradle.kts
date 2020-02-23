@@ -88,6 +88,9 @@ kotlin {
                         includeDirs("../lib/godot_headers", "src/main/c_interop")
                     }
                 }
+                dependencies {
+                    implementation(project(":tools:annotations-internal"))
+                }
             } else {
                 System.err.println("Not a native target! TargetName: ${it.name}")
             }

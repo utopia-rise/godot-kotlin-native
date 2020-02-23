@@ -48,33 +48,12 @@ kotlin {
             this.kotlin.srcDir("src/main/kotlin")
         }
 
-
-        configure<org.godotengine.kotlin.gradleplugin.ConfigureGodotConvention> {
-            this.configureGodot(listOf(
-                    sourceSets["macosMain"],
-                    sourceSets["linuxMain"],
-                    sourceSets["windowsMain"],
-                    sourceSets["androidArm64Main"],
-                    sourceSets["androidX64Main"],
-                    sourceSets["iosArm64Main"],
-                    sourceSets["iosX64Main"]
-            )) {
-//                sourceSet {
-//                    kotlin.srcDirs("src/main/kotlin")
-//                }
-
-                libraryPath("samples.gdnlib")
-                generateGDNS("${project.rootDir.absolutePath}/..")
-
-                configs(
-                        "src/main/kotlin/godot/samples/games/shmup/classes.json",
-                        "src/main/kotlin/godot/samples/games/dodge/classes.json",
-                        "src/main/kotlin/godot/samples/games/catchBall/classes.json",
-                        "src/main/kotlin/godot/samples/games/main/classes.json",
-                        "src/main/kotlin/godot/samples/games/fastFinish/classes.json",
-                        "src/main/kotlin/godot/samples/games/pong/classes.json"
-                )
-            }
+        configure<org.godotengine.kotlin.gradleplugin.KotlinGodotPluginExtension> {
+            this.releaseType = org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
+            this.kotlinVersion = "1.3.61"
+            this.godotProjectPath = "${project.rootDir.absolutePath}/../project"
+            this.libraryPath = "samples.gdnlib"
+            this.godotLibraryVersion = "1.0.0"
         }
     }
 
@@ -114,19 +93,8 @@ kotlin {
     targets.forEach { target ->
         target.compilations.getByName("main") {
             if (this is org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeCompilation) {
-                println("Configuring target ${this.target.name}")
-                this.target.binaries {
-                    val libTarget = when(buildType?.toLowerCase()) {
-                        "release" -> listOf(org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE)
-                        "debug" -> listOf(org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG)
-                        else -> {
-                            logger.warn("Build target not specified, defaulting to DEBUG. To set release target, specify: -PbuildType=RELEASE")
-                            listOf(org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG)
-                        }
-                    }
-                    sharedLib(libTarget)
-                }
-                this.target.compilations.all {
+                println("Configuring target ${target.name}")
+                target.compilations.all {
                     dependencies {
                         implementation("org.godotengine.kotlin:godot-library:1.0.0")
                         implementation("org.godotengine.kotlin:annotations:0.0.1")
