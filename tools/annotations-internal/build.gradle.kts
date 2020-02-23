@@ -13,7 +13,7 @@ repositories {
 }
 
 group = "org.godotengine.kotlin"
-version = Dependencies.annotationsVersion
+version = Dependencies.internalAnnotationsVersion
 
 val bintrayUser: String by project
 val bintrayKey: String by project

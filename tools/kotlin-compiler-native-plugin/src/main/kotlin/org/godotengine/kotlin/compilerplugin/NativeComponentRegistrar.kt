@@ -23,7 +23,7 @@ class NativeComponentRegistrar : ComponentRegistrar {
 }
 
 @AutoService(CommandLineProcessor::class)
-class NativeTestComponentCommandLineProcessor : CommandLineProcessor {
+class NativeGodotKotlinCompilerPluginCommandLineProcessor : CommandLineProcessor {
     companion object {
         val LIBRARY_PATH_OPTION = CliOption(
                 "library-path", "<name>", CommandlineArguments.LIBRARY_PATH.toString(),

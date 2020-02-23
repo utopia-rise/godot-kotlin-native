@@ -27,6 +27,12 @@ repositories {
     jcenter()
 }
 
+configure<org.godotengine.kotlin.gradleplugin.KotlinGodotPluginExtension> {
+    this.releaseType = org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
+    this.godotProjectPath = "${project.rootDir.absolutePath}/.."
+    this.libraryPath = "samples.gdnlib"
+}
+
 kotlin {
     sourceSets {
         sourceSets.create("macosMain")
@@ -46,14 +52,6 @@ kotlin {
                 sourceSets["iosX64Main"]
         )) {
             this.kotlin.srcDir("src/main/kotlin")
-        }
-
-        configure<org.godotengine.kotlin.gradleplugin.KotlinGodotPluginExtension> {
-            this.releaseType = org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
-            this.kotlinVersion = "1.3.61"
-            this.godotProjectPath = "${project.rootDir.absolutePath}/.."
-            this.libraryPath = "samples.gdnlib"
-            this.godotLibraryVersion = "1.0.0"
         }
     }
 
@@ -97,7 +95,7 @@ kotlin {
                 target.compilations.all {
                     dependencies {
                         implementation("org.godotengine.kotlin:godot-library:1.0.0")
-                        implementation("org.godotengine.kotlin:annotations:0.0.1")
+                        implementation("org.godotengine.kotlin:annotations:0.0.2")
                     }
                 }
                 if (project.hasProperty("iosSigningIdentity") && this.target.name == "iosArm64") {
