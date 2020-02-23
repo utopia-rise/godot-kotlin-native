@@ -100,12 +100,11 @@ if (project.hasProperty("bintrayUser") && project.hasProperty("bintrayKey")
     bintray {
         user = bintrayUser
         key = bintrayKey
-        setPublications(platform)
+        val armString = if (project.hasProperty("armArch")) armArch else ""
+        setPublications(platform + armString.capitalize())
         pkg(delegateClosureOf<com.jfrog.bintray.gradle.BintrayExtension.PackageConfig> {
             userOrg = "utopia-rise"
             repo = "kotlin-godot"
-
-            val armString = if (project.hasProperty("armArch")) armArch else ""
 
             name = "${project.name}-$platform$armString"
             vcsUrl = "https://github.com/utopia-rise/kotlin-godot-wrapper"

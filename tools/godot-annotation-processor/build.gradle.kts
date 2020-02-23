@@ -36,6 +36,14 @@ tasks.build {
     finalizedBy(tasks.install)
 }
 
+publishing {
+    publications {
+        register("godotAnnotationProcessor", MavenPublication::class.java) {
+            from(components["java"])
+        }
+    }
+}
+
 val bintrayUser: String by project
 val bintrayKey: String by project
 

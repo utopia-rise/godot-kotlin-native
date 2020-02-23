@@ -56,9 +56,9 @@ val shadowJar by tasks.getting(com.github.jengelman.gradle.plugins.shadow.tasks.
 
 publishing {
     publications {
-        create<MavenPublication>("shadow") {
+        register<MavenPublication>("godotCompilerNativePlugin") {
             configure<com.github.jengelman.gradle.plugins.shadow.ShadowExtension> {
-                component(this@create)
+                component(this@register)
             }
         }
     }

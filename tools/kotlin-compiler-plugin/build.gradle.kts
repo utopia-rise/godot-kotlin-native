@@ -29,6 +29,14 @@ kapt {
     includeCompileClasspath = true
 }
 
+publishing {
+    publications {
+        register("godotCompilerPlugin", MavenPublication::class.java) {
+            from(components["java"])
+        }
+    }
+}
+
 val bintrayUser: String by project
 val bintrayKey: String by project
 
