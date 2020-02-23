@@ -4,6 +4,7 @@ plugins {
     id("org.jetbrains.kotlin.jvm")
     id("maven")
     id("kotlin-kapt")
+    id("maven-publish")
     id("com.jfrog.bintray")
 }
 
@@ -33,6 +34,14 @@ kapt {
 
 tasks.build {
     finalizedBy(tasks.install)
+}
+
+publishing {
+    publications {
+        register("godotAnnotationProcessor", MavenPublication::class.java) {
+            from(components["java"])
+        }
+    }
 }
 
 val bintrayUser: String by project

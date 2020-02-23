@@ -9,11 +9,11 @@ object Dependencies {
 
     const val godotLibraryVersion = "1.0.0"
     const val godotLibraryExtensionVersion = "1.0.0"
-    const val kotlinCompilerPluginVersion = "0.0.1-SNAPSHOT" //remember to bump the version in KotlinGodotSubplugin as well!
-    const val kotlinNativeCompilerPluginVersion = "0.0.1-SNAPSHOT" //remember to bump the version in KotlinGodotSubplugin as well!
+    const val kotlinCompilerPluginVersion = "0.0.1" //remember to bump the version in KotlinGodotSubplugin as well!
+    const val kotlinNativeCompilerPluginVersion = "0.0.1" //remember to bump the version in KotlinGodotSubplugin as well!
     const val godotGradlePluginVersion = "1.0.1"
-    const val godotAnnotationProcessorVersion = "0.0.1-SNAPSHOT"
+    const val godotAnnotationProcessorVersion = "0.0.1"
     const val entryGeneratorVersion = "1.0.0"
     const val apiClassesGeneratorVersion = "1.0.0"
-    const val annotationsVersion = "0.0.1-SNAPSHOT"
+    const val annotationsVersion = "0.0.1"
 }

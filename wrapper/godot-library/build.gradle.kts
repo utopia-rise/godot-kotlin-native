@@ -56,7 +56,15 @@ kotlin {
                             else -> listOf(targetFromPreset(presets["iosArm64"], "iosArm64"))
                         }
                     } else listOf(targetFromPreset(presets["iosArm64"], "iosArm64"))
-                    else -> listOf(targetFromPreset(presets["linuxX64"], "linux"))
+                    else -> listOf(
+                            targetFromPreset(presets["linuxX64"], "linux"),
+                            targetFromPreset(presets["macosX64"], "macos"),
+                            targetFromPreset(presets["mingwX64"], "windows"),
+                            targetFromPreset(presets["androidNativeArm64"], "androidArm64"),
+                            targetFromPreset(presets["androidNativeX64"], "androidX64"),
+                            targetFromPreset(presets["iosArm64"], "iosArm64"),
+                            targetFromPreset(presets["iosX64"], "iosX64")
+                    )
                 }
             } else {
                 listOf(
@@ -91,17 +99,34 @@ tasks.build {
     finalizedBy(tasks.publishToMavenLocal)
 }
 
+tasks {
+    // workaround to upload gradle metadata file
+    // https://github.com/bintray/gradle-bintray-plugin/issues/229
+    withType<com.jfrog.bintray.gradle.tasks.BintrayUploadTask> {
+        doFirst {
+            publishing.publications.withType<MavenPublication> {
+                buildDir.resolve("publications/$name/module.json").also {
+                    if (it.exists()) {
+                        artifact(object: org.gradle.api.publish.maven.internal.artifact.FileBasedMavenArtifact(it) {
+                            override fun getDefaultExtension() = "module"
+                        })
+                    }
+                }
+            }
+        }
+    }
+}
+
 if (project.hasProperty("bintrayUser") && project.hasProperty("bintrayKey")
         && project.hasProperty("platform")) {
     bintray {
         user = bintrayUser
         key = bintrayKey
-        setPublications(platform)
+        val armString = if (project.hasProperty("armArch")) armArch else ""
+        setPublications(platform + armString.capitalize())
         pkg(delegateClosureOf<com.jfrog.bintray.gradle.BintrayExtension.PackageConfig> {
             userOrg = "utopia-rise"
             repo = "kotlin-godot"
-
-            val armString = if (project.hasProperty("armArch")) armArch else ""
 
             name = "${project.name}-$platform$armString"
             vcsUrl = "https://github.com/utopia-rise/kotlin-godot-wrapper"

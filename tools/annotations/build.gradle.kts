@@ -39,7 +39,15 @@ kotlin {
                     "X64" -> iosX64("iosX64")
                 }
             } else iosArm64("iosArm64")
-            else -> linuxX64("linux")
+            else -> {
+                linuxX64("linux")
+                mingwX64("windows")
+                macosX64("macos")
+                androidNativeX64("androidX64")
+                androidNativeArm64("androidArm64")
+                iosArm64("iosArm64")
+                iosX64("iosX64")
+            }
         }
     } else {
         linuxX64("linux")
@@ -71,16 +79,33 @@ tasks.build {
     finalizedBy(tasks.publishToMavenLocal)
 }
 
+tasks {
+    // workaround to upload gradle metadata file
+    // https://github.com/bintray/gradle-bintray-plugin/issues/229
+    withType<com.jfrog.bintray.gradle.tasks.BintrayUploadTask> {
+        doFirst {
+            publishing.publications.withType<MavenPublication> {
+                buildDir.resolve("publications/$name/module.json").also {
+                    if (it.exists()) {
+                        artifact(object: org.gradle.api.publish.maven.internal.artifact.FileBasedMavenArtifact(it) {
+                            override fun getDefaultExtension() = "module"
+                        })
+                    }
+                }
+            }
+        }
+    }
+}
+
 if (project.hasProperty("bintrayUser") && project.hasProperty("bintrayKey") && project.hasProperty("platform")) {
     bintray {
         user = bintrayUser
         key = bintrayKey
-        setPublications(platform)
+        val armString = if (project.hasProperty("armArch")) armArch else ""
+        setPublications(platform + armString.capitalize())
         pkg(delegateClosureOf<com.jfrog.bintray.gradle.BintrayExtension.PackageConfig> {
             userOrg = "utopia-rise"
-            repo = "annotations"
-
-            val armString = if (project.hasProperty("armArch")) armArch else ""
+            repo = "kotlin-godot"
 
             name = "${project.name}-$platform$armString"
             vcsUrl = "https://github.com/utopia-rise/kotlin-godot-wrapper"
