@@ -20,6 +20,15 @@ onready var GradleProperties := load("res://addons/kotlin/tools/GradleProperties
 export(NodePath) var buildTypeSelectorPath: NodePath
 onready var buildTypeSelector: OptionButton = get_node(buildTypeSelectorPath)
 
+export(NodePath) var platformSelectorPath: NodePath
+onready var platformSelector: OptionButton = get_node(platformSelectorPath)
+
+export(NodePath) var armArchSelectorPath: NodePath
+onready var armArchSelector: OptionButton = get_node(armArchSelectorPath)
+
+export(NodePath) var iosIdentityLineEditPath: NodePath
+onready var iosIdentityLineEditSelector: LineEdit = get_node(iosIdentityLineEditPath)
+
 func _on_AddSupportButton_pressed():
 	step_1_create_structure()
 
@@ -117,6 +126,7 @@ func step_3_configure():
 		output.clear()
 		OS.execute("/bin/chmod", ["+x", "kotlin/build"], true, output)
 		print(output)
+	
 	configure_gradle(true)
 
 
@@ -182,7 +192,7 @@ func _on_KotlinToolMenuItem_about_to_show():
 	var dir := Directory.new()
 	# Kotlin is already setup, show actions
 	if dir.dir_exists("res://kotlin"):
-		update_build_type()
+		update_ui_from_properties()
 		
 		$ActionsContainer.show()
 		$SetupContainer.hide()
@@ -202,14 +212,63 @@ func _on_BuildTypeButton_item_selected(id):
 			print("Updating Kotlin Build Type to: RELEASE")
 
 
+func update_ui_from_properties():
+	var properties := GradleProperties.read_properties() as Dictionary
+	update_build_type(properties)
+	update_platform(properties)
+
+
 # Update the build type selector
-func update_build_type():
-	var buildType = GradleProperties.read_build_type()
+func update_build_type(properties: Dictionary):
+	var buildType = null
+	if properties.has(GradleProperties.KEY_BUILD_TYPE):
+		buildType = properties[GradleProperties.KEY_BUILD_TYPE]
 	
 	if buildType == "debug":
 		buildTypeSelector.selected = 0
 	elif buildType == "release":
 		buildTypeSelector.selected = 1
-	# Default to debug
 	else:
 		buildTypeSelector.selected = 0
+
+
+func update_platform(properties: Dictionary):
+	var platform = null
+	if properties.has(GradleProperties.KEY_PLATFORM):
+		platform = properties[GradleProperties.KEY_PLATFORM]
+	
+	if platform == "windows":
+		platformSelector.selected = 1
+	elif platform == "linux":
+		platformSelector.selected = 2
+	elif platform == "macos":
+		platformSelector.selected = 3
+	elif platform == "ios":
+		platformSelector.selected = 4
+	elif platform == "android":
+		platformSelector.selected = 5
+	# Default to all
+	else:
+		platformSelector.selected = 0
+
+
+func _on_PlatformButton_item_selected(id):
+	var newPlatform = null
+	match id:
+		# all
+		0:
+			newPlatform = null
+		1:
+			newPlatform = "windows"
+		2:
+			newPlatform = "linux"
+		3:
+			newPlatform = "macos"
+		4:
+			newPlatform = "ios"
+		5:
+			newPlatform = "android"
+		_:
+			newPlatform = null
+	
+	GradleProperties.write_property(GradleProperties.KEY_PLATFORM, newPlatform)
