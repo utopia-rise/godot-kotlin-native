@@ -205,11 +205,11 @@ func _on_KotlinToolMenuItem_about_to_show():
 func _on_BuildTypeButton_item_selected(id):
 	match id:
 		0:
-			GradleProperties.write_property(GradleProperties.KEY_BUILD_TYPE, "debug")
 			print("Updating Kotlin Build Type to: DEBUG")
+			GradleProperties.write_property(GradleProperties.KEY_BUILD_TYPE, "debug")
 		1:
-			GradleProperties.write_property(GradleProperties.KEY_BUILD_TYPE, "release")
 			print("Updating Kotlin Build Type to: RELEASE")
+			GradleProperties.write_property(GradleProperties.KEY_BUILD_TYPE, "release")
 
 
 func update_ui_from_properties():
