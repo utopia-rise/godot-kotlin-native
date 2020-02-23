@@ -108,6 +108,15 @@ func step_2_cleanup():
 
 func step_3_configure():
 	print("Step 3: Configure project")
+	
+	if not GradleUtilities.is_windows():
+		print("Setting permissions...")
+		var output := []
+		OS.execute("/bin/chmod", ["+x", "kotlin/gradlew"], true, output)
+		print(output)
+		output.clear()
+		OS.execute("/bin/chmod", ["+x", "kotlin/build"], true, output)
+		print(output)
 	configure_gradle(true)
 
 
