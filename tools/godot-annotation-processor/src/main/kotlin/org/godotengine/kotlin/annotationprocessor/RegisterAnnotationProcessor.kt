@@ -78,7 +78,23 @@ class RegisterAnnotationProcessor : AbstractProcessor() {
     private fun performSanityChecks() {
         classes.forEach {
             if (it.classDescriptor.constructors.size > 1) {
-                throw IllegalClassFormatException("A Class annotated with \"@Register\" can only have a default constructor!\nBut ${it.classDescriptor.name} contains ${it.classDescriptor.constructors.size} constructors")
+                throw IllegalClassFormatException("A Class annotated with \"@RegisterClass\" can only have a default constructor!\nBut ${it.classDescriptor.name} contains ${it.classDescriptor.constructors.size} constructors")
+            }
+        }
+        functions.forEach {
+            if (!classes.map { classElement -> classElement.classDescriptor }.contains(it.descriptor)) {
+                throw Exception("${it.descriptor.name.asString()} contains a registered function: ${it.func.name} but is not annotated with @RegisterClass! Classes containing functions which are registered, also have to be registered!")
+            }
+        }
+        properties.forEach {
+            if (!classes.map { classElement -> classElement.classDescriptor }.contains(it.propertyDescriptor.containingDeclaration)) {
+                throw Exception("${it.propertyDescriptor.containingDeclaration.name.asString()} contains a registered property: ${it.propertyDescriptor.name} but is not annotated with @RegisterClass! Classes containing properties which are registered, also have to be registered!")
+            }
+        }
+        signals.forEach {
+            //signals are wrapped in a interface
+            if (!classes.map { classElement -> classElement.classDescriptor }.contains(it.descriptor.containingDeclaration)) {
+                throw Exception("${it.descriptor.containingDeclaration.name.asString()} contains a signal: ${it.func.name} but is not annotated with @RegisterClass! Classes containing signals, also have to be registered!")
             }
         }
     }
