@@ -3,9 +3,7 @@ package org.godotengine.kotlin.annotation
 import godot.registration.PropertyHint
 import godot.registration.RPCMode
 
-@Target(
-        AnnotationTarget.PROPERTY
-)
+@Target(AnnotationTarget.PROPERTY)
 @Retention(AnnotationRetention.RUNTIME)
 actual annotation class RegisterProperty(
         val visibleInEditor: Boolean,
@@ -15,9 +13,7 @@ actual annotation class RegisterProperty(
         val hintString: String = ""
 )
 
-@Target(
-        AnnotationTarget.FUNCTION
-)
+@Target(AnnotationTarget.FUNCTION)
 @Retention(AnnotationRetention.RUNTIME)
 actual annotation class RegisterFunction(
         val rpcMode: RPCMode = RPCMode.Disabled

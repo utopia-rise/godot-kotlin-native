@@ -11,10 +11,10 @@ class RpcModeAnnotationMapper {
                 Remote::class.java.name, "godot.registration.RPCMode.Remote" -> ClassName("godot.registration.RPCMode", "Remote")
                 Sync::class.java.name, "godot.registration.RPCMode.Sync" -> ClassName("godot.registration.RPCMode", "Sync")
                 Master::class.java.name, "godot.registration.RPCMode.Master" -> ClassName("godot.registration.RPCMode", "Master")
-                Slave::class.java.name, "godot.registration.RPCMode.Slave" -> ClassName("godot.registration.RPCMode", "Slave")
+                Puppet::class.java.name, "godot.registration.RPCMode.Puppet" -> ClassName("godot.registration.RPCMode", "Puppet")
                 RemoteSync::class.java.name, "godot.registration.RPCMode.RemoteSync" -> ClassName("godot.registration.RPCMode", "RemoteSync")
                 MasterSync::class.java.name, "godot.registration.RPCMode.MasterSync" -> ClassName("godot.registration.RPCMode", "MasterSync")
-                SlaveSync::class.java.name, "godot.registration.RPCMode.SlaveSync" -> ClassName("godot.registration.RPCMode", "SlaveSync")
+                PuppetSync::class.java.name, "godot.registration.RPCMode.PuppetSync" -> ClassName("godot.registration.RPCMode", "PuppetSync")
                 else -> throw IllegalArgumentException("Unknown annotation or registration $rpcModeAnnotationAsString")
             }
         }

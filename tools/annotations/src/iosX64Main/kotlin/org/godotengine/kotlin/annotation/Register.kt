@@ -1,4 +1,5 @@
 package org.godotengine.kotlin.annotation
+
 import godot.registration.PropertyHint
 import godot.registration.RPCMode
 

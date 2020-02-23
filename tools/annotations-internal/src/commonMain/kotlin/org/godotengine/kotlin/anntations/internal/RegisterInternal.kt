@@ -1,3 +1,9 @@
 package org.godotengine.kotlin.anntations.internal
 
-expect annotation class RegisterInternal
+@Target(
+        AnnotationTarget.CLASS,
+        AnnotationTarget.FUNCTION,
+        AnnotationTarget.PROPERTY
+)
+@Retention(AnnotationRetention.RUNTIME)
+annotation class RegisterInternal

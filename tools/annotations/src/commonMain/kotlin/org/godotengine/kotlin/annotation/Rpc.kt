@@ -35,7 +35,7 @@ annotation class Master
         AnnotationTarget.PROPERTY
 )
 @Retention(AnnotationRetention.RUNTIME)
-annotation class Slave //TODO: rename to match new godot convention -> slave is now puppet
+annotation class Puppet
 
 @Target(
         AnnotationTarget.FUNCTION,
@@ -56,17 +56,18 @@ annotation class MasterSync
         AnnotationTarget.PROPERTY
 )
 @Retention(AnnotationRetention.RUNTIME)
-annotation class SlaveSync //TODO: rename to match new godot convention -> slave is now puppet
+annotation class PuppetSync
 
 
 fun rpcAnnotations(): Set<KClass<out Annotation>> {
     return setOf(
+            Disabled::class,
             Remote::class,
             Sync::class,
             Master::class,
-            Slave::class,
+            Puppet::class,
             RemoteSync::class,
             MasterSync::class,
-            SlaveSync::class
+            PuppetSync::class
     )
 }
