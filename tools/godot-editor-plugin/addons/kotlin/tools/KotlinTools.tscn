@@ -164,3 +164,5 @@ margin_bottom = 126.0
 [connection signal="pressed" from="ActionsContainer/BuildContainer/BuildButton" to="." method="_on_BuildButton_pressed"]
 [connection signal="pressed" from="ActionsContainer/BuildContainer/ConfigGradleButton" to="." method="_on_ConfigGradleButton_pressed"]
 [connection signal="item_selected" from="ActionsContainer/ConfigContainer/PlatformButton" to="." method="_on_PlatformButton_item_selected"]
+[connection signal="item_selected" from="ActionsContainer/ConfigContainer/ArmArchOptionButton" to="." method="_on_ArmArchOptionButton_item_selected"]
+[connection signal="text_changed" from="ActionsContainer/ConfigContainer/iOSIdentityLineEdit" to="." method="_on_iOSIdentityLineEdit_text_changed"]

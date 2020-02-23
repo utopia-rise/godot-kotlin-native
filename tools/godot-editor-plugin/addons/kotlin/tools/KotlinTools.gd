@@ -27,7 +27,7 @@ export(NodePath) var armArchSelectorPath: NodePath
 onready var armArchSelector: OptionButton = get_node(armArchSelectorPath)
 
 export(NodePath) var iosIdentityLineEditPath: NodePath
-onready var iosIdentityLineEditSelector: LineEdit = get_node(iosIdentityLineEditPath)
+onready var iosIdentityLineEdit: LineEdit = get_node(iosIdentityLineEditPath)
 
 func _on_AddSupportButton_pressed():
 	step_1_create_structure()
@@ -205,10 +205,10 @@ func _on_KotlinToolMenuItem_about_to_show():
 func _on_BuildTypeButton_item_selected(id):
 	match id:
 		0:
-			GradleProperties.write_property(GradleProperties.KEY_BUILD_TARGET, "debug")
+			GradleProperties.write_property(GradleProperties.KEY_BUILD_TYPE, "debug")
 			print("Updating Kotlin Build Type to: DEBUG")
 		1:
-			GradleProperties.write_property(GradleProperties.KEY_BUILD_TARGET, "release")
+			GradleProperties.write_property(GradleProperties.KEY_BUILD_TYPE, "release")
 			print("Updating Kotlin Build Type to: RELEASE")
 
 
@@ -216,6 +216,8 @@ func update_ui_from_properties():
 	var properties := GradleProperties.read_properties() as Dictionary
 	update_build_type(properties)
 	update_platform(properties)
+	update_arm_arch(properties)
+	update_ios_identity(properties)
 
 
 # Update the build type selector
@@ -272,3 +274,45 @@ func _on_PlatformButton_item_selected(id):
 			newPlatform = null
 	
 	GradleProperties.write_property(GradleProperties.KEY_PLATFORM, newPlatform)
+
+
+func update_arm_arch(properties: Dictionary):
+	var armArch = null
+	if properties.has(GradleProperties.KEY_ARM_ARCH):
+		armArch = properties[GradleProperties.KEY_ARM_ARCH]
+	
+	if armArch == "arm64":
+		armArchSelector.selected = 0
+	elif armArch == "x64":
+		armArchSelector.selected = 1
+	else:
+		armArchSelector.selected = 0
+
+
+func _on_ArmArchOptionButton_item_selected(id):
+	var newArmArch: String
+	match id:
+		# all
+		0:
+			newArmArch = "arm64"
+		1:
+			newArmArch = "x64"
+	
+	GradleProperties.write_property(GradleProperties.KEY_ARM_ARCH, newArmArch)
+
+
+func update_ios_identity(properties: Dictionary):
+	var iosSigningIdentity = null
+	if properties.has(GradleProperties.KEY_IOS_IDENTITY):
+		print("has ios")
+		iosSigningIdentity = properties[GradleProperties.KEY_IOS_IDENTITY]
+	print(iosSigningIdentity)
+	iosIdentityLineEdit.text = iosSigningIdentity
+
+
+func _on_iOSIdentityLineEdit_text_changed(new_text):
+	var newIdentity = iosIdentityLineEdit.text.strip_edges()
+	if newIdentity.length() == 0:
+		newIdentity = null
+	
+	GradleProperties.write_property(GradleProperties.KEY_IOS_IDENTITY, newIdentity)
