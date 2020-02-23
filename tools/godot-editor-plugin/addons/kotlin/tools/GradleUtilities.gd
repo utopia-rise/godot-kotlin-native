@@ -28,7 +28,8 @@ static func execute(command: String):
 	if is_windows():
 		OS.execute("CMD.exe", ["/C cd kotlin && %s" % command], true, output)
 	else:
-		OS.execute("/bin/sh", ["cd kotlin ; %s" % command], true, output)
+		var exitStatus = OS.execute('/bin/sh', ["-c", "cd kotlin && %s" % command], true, output)
+		print(exitStatus)
 	
 	print(output)
 
