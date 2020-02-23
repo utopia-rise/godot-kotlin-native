@@ -3,6 +3,7 @@
 [ext_resource path="res://addons/kotlin/tools/KotlinTools.gd" type="Script" id=1]
 
 [node name="KotlinToolMenuItem" type="WindowDialog"]
+visible = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -10,13 +11,17 @@ anchor_bottom = 0.5
 margin_left = -307.0
 margin_top = -176.0
 margin_right = 93.0
-margin_bottom = -48.0
+margin_bottom = 45.0
+size_flags_vertical = 3
 window_title = "Kotlin Tools"
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-buildTypeSelectorPath = NodePath("ActionsContainer/HBoxContainer/BuildTypeButton")
+buildTypeSelectorPath = NodePath("ActionsContainer/BuildContainer/BuildTypeButton")
+platformSelectorPath = NodePath("ActionsContainer/ConfigContainer/PlatformButton")
+armArchSelectorPath = NodePath("ActionsContainer/ConfigContainer/ArmArchOptionButton")
+iosIdentityLineEditPath = NodePath("ActionsContainer/ConfigContainer/iOSIdentityLineEdit")
 
 [node name="SetupContainer" type="VBoxContainer" parent="."]
 visible = false
@@ -69,17 +74,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="VBoxContainer" parent="ActionsContainer"]
+[node name="BuildContainer" type="VBoxContainer" parent="ActionsContainer"]
 margin_right = 186.0
-margin_bottom = 112.0
+margin_bottom = 205.0
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="ActionsContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="ActionsContainer/BuildContainer"]
 margin_right = 186.0
 margin_bottom = 14.0
 text = "Build Kotlin Scripts:"
 
-[node name="BuildTypeButton" type="OptionButton" parent="ActionsContainer/HBoxContainer"]
+[node name="BuildTypeButton" type="OptionButton" parent="ActionsContainer/BuildContainer"]
 margin_top = 18.0
 margin_right = 186.0
 margin_bottom = 38.0
@@ -87,40 +92,75 @@ text = "debug"
 items = [ "debug", null, false, 0, null, "release", null, false, 1, null ]
 selected = 0
 
-[node name="BuildButton" type="Button" parent="ActionsContainer/HBoxContainer"]
+[node name="BuildButton" type="Button" parent="ActionsContainer/BuildContainer"]
 margin_top = 42.0
 margin_right = 186.0
 margin_bottom = 62.0
 text = "Build Kotlin"
 
-[node name="VSeparator" type="VSeparator" parent="ActionsContainer"]
-margin_left = 190.0
-margin_right = 194.0
-margin_bottom = 112.0
-
-[node name="HBoxContainer2" type="VBoxContainer" parent="ActionsContainer"]
-margin_left = 198.0
-margin_right = 384.0
-margin_bottom = 112.0
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="ActionsContainer/HBoxContainer2"]
-margin_right = 186.0
-margin_bottom = 14.0
-text = "Config:"
-
-[node name="ConfigGradleButton" type="Button" parent="ActionsContainer/HBoxContainer2"]
-margin_top = 18.0
+[node name="ConfigGradleButton" type="Button" parent="ActionsContainer/BuildContainer"]
+visible = false
+margin_top = 66.0
 margin_right = 97.0
-margin_bottom = 38.0
+margin_bottom = 86.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "Config Gradle"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="VSeparator" type="VSeparator" parent="ActionsContainer"]
+margin_left = 190.0
+margin_right = 194.0
+margin_bottom = 205.0
+
+[node name="ConfigContainer" type="VBoxContainer" parent="ActionsContainer"]
+margin_left = 198.0
+margin_right = 384.0
+margin_bottom = 205.0
+size_flags_horizontal = 3
+
+[node name="PlatformLabel" type="Label" parent="ActionsContainer/ConfigContainer"]
+margin_right = 186.0
+margin_bottom = 14.0
+text = "Build Platform:"
+
+[node name="PlatformButton" type="OptionButton" parent="ActionsContainer/ConfigContainer"]
+margin_top = 18.0
+margin_right = 186.0
+margin_bottom = 38.0
+text = "All"
+items = [ "All", null, false, 0, null, "Windows", null, false, 1, null, "Linux", null, false, 2, null, "MacOS", null, false, 3, null, "iOS", null, false, 4, null, "Android", null, false, 5, null ]
+selected = 0
+
+[node name="ArmArchLabel" type="Label" parent="ActionsContainer/ConfigContainer"]
+margin_top = 42.0
+margin_right = 186.0
+margin_bottom = 56.0
+text = "Arm Arcitecture:"
+
+[node name="ArmArchOptionButton" type="OptionButton" parent="ActionsContainer/ConfigContainer"]
+margin_top = 60.0
+margin_right = 186.0
+margin_bottom = 80.0
+text = "arm64"
+items = [ "arm64", null, false, 0, null, "x64", null, false, 1, null ]
+selected = 0
+
+[node name="iOSIdentityLabel" type="Label" parent="ActionsContainer/ConfigContainer"]
+margin_top = 84.0
+margin_right = 186.0
+margin_bottom = 98.0
+text = "iOS Signing Identity:"
+
+[node name="iOSIdentityLineEdit" type="LineEdit" parent="ActionsContainer/ConfigContainer"]
+margin_top = 102.0
+margin_right = 186.0
+margin_bottom = 126.0
 [connection signal="about_to_show" from="." to="." method="_on_KotlinToolMenuItem_about_to_show"]
 [connection signal="pressed" from="SetupContainer/CenterContainer/AddSupportButton" to="." method="_on_AddSupportButton_pressed"]
-[connection signal="item_selected" from="ActionsContainer/HBoxContainer/BuildTypeButton" to="." method="_on_BuildTypeButton_item_selected"]
-[connection signal="pressed" from="ActionsContainer/HBoxContainer/BuildButton" to="." method="_on_BuildButton_pressed"]
-[connection signal="pressed" from="ActionsContainer/HBoxContainer2/ConfigGradleButton" to="." method="_on_ConfigGradleButton_pressed"]
+[connection signal="item_selected" from="ActionsContainer/BuildContainer/BuildTypeButton" to="." method="_on_BuildTypeButton_item_selected"]
+[connection signal="pressed" from="ActionsContainer/BuildContainer/BuildButton" to="." method="_on_BuildButton_pressed"]
+[connection signal="pressed" from="ActionsContainer/BuildContainer/ConfigGradleButton" to="." method="_on_ConfigGradleButton_pressed"]
+[connection signal="item_selected" from="ActionsContainer/ConfigContainer/PlatformButton" to="." method="_on_PlatformButton_item_selected"]

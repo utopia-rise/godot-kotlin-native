@@ -10,6 +10,8 @@ const FILE_PATH := "res://kotlin/gradle.properties"
 
 const KEY_BUILD_TYPE := "buildType"
 const KEY_PLATFORM := "platform"
+const KEY_ARM_ARCH := "armArch"
+const KEY_IOS_IDENTITY := "iosSigningIdentity"
 
 
 static func read_build_type() -> String:
@@ -45,9 +47,12 @@ static func read_properties() -> Dictionary:
 	return properties
 
 
-static func write_property(key: String, value: String):
+static func write_property(key: String, value):
 	var properties := read_properties()
-	properties[key] = value
+	if value != null:
+		properties[key] = value
+	else:
+		properties.erase(key)
 	write_properties(properties)
 
 
