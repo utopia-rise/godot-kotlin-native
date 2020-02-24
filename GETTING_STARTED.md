@@ -76,6 +76,26 @@ repositories {
 }
 ```
 
+Then you need to configure the godot gradle plugin:
+```kotlin
+configure<org.godotengine.kotlin.gradleplugin.KotlinGodotPluginExtension> {
+    this.releaseType = org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
+    this.godotProjectPath = "${project.rootDir.absolutePath}/.."
+    this.libraryPath = "samples.gdnlib"
+}
+```
+
+There we need to specify the path for the `.gdnlib` file godot uses to load our dynamic library.  
+The `.gdnlib` file goes in the root of the `project` folder.  
+You can copy and modify one from the samples or see [here](https://docs.godotengine.org/en/3.1/tutorials/plugins/gdnative/gdnative-c-example.html#creating-the-gdnativelibrary-gdnlib-file) on how to generate one yourself.
+```kotlin
+this.libraryPath = "samples.gdnlib"
+```
+
+Also we need to specify the output folder for the generated `.gdns` files:
+```kotlin
+this.godotProjectPath = "${project.rootDir.absolutePath}/.."
+```
 
 \
 Next step is to specify the sourceSets of the targets we want to support. Add in `build.gradle.kts`:
@@ -100,61 +120,10 @@ kotlin {
         )) {
             this.kotlin.srcDir("src/main/kotlin")
         }
-
-
-        configure<org.godotengine.kotlin.gradleplugin.ConfigureGodotConvention> {
-            this.configureGodot(listOf(
-                    sourceSets["macosMain"],
-                    sourceSets["linuxMain"],
-                    sourceSets["windowsMain"],
-                    sourceSets["androidArm64Main"],
-                    sourceSets["androidX64Main"],
-                    sourceSets["iosArm64Main"],
-                    sourceSets["iosX64Main"]
-            )) {
-                sourceSet {
-                    kotlin.srcDirs("src/main/kotlin")
-                }
-
-                libraryPath("samples.gdnlib")
-                generateGDNS("${project.rootDir.absolutePath}/../project")
-
-                configs(
-                        "src/main/kotlin/godot/samples/games/shmup/classes.json",
-                        "src/main/kotlin/godot/samples/games/dodge/classes.json",
-                        "src/main/kotlin/godot/samples/games/catchBall/classes.json",
-                        "src/main/kotlin/godot/samples/games/main/classes.json",
-                        "src/main/kotlin/godot/samples/games/fastFinish/classes.json",
-                        "src/main/kotlin/godot/samples/games/pong/classes.json"
-                )
-            }
-        }
     }
     
     //<-- targets go here (see below)
 }
-```
-
-\
-Next we need to specify the path for the `.gdnlib` file godot uses to load our dynamic library.  
-The `.gdnlib` file goes in the root of the `project` subfolder.  
-You can copy and modify one from the samples or see [here](https://docs.godotengine.org/en/3.1/tutorials/plugins/gdnative/gdnative-c-example.html#creating-the-gdnativelibrary-gdnlib-file) on how to generate one yourself.
-```kotlin
-libraryPath("${project.rootDir.absolutePath}/project/projectname.gdnlib")
-```
-
-\
-Now we need to specify the output folder for the generated `.gdns` files:
-```kotlin
-generateGDNS("${project.rootDir.absolutePath}/../project")
-```
-
-\
-In order to generate the `.gdns` files we need to provide a configs closure (see [REGISTRATION](REGISTRATION.md) on how to populate the closure. For now it's empty):
-```kotlin
-configs(
-        
-)
 ```
 
 \
@@ -277,6 +246,12 @@ repositories {
     jcenter()
 }
 
+configure<org.godotengine.kotlin.gradleplugin.KotlinGodotPluginExtension> {
+    this.releaseType = org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
+    this.godotProjectPath = "${project.rootDir.absolutePath}/.."
+    this.libraryPath = "samples.gdnlib"
+}
+
 kotlin {
     sourceSets {
         sourceSets.create("macosMain")
@@ -296,35 +271,6 @@ kotlin {
                 sourceSets["iosX64Main"]
         )) {
             this.kotlin.srcDir("src/main/kotlin")
-        }
-
-
-        configure<org.godotengine.kotlin.gradleplugin.ConfigureGodotConvention> {
-            this.configureGodot(listOf(
-                    sourceSets["macosMain"],
-                    sourceSets["linuxMain"],
-                    sourceSets["windowsMain"],
-                    sourceSets["androidArm64Main"],
-                    sourceSets["androidX64Main"],
-                    sourceSets["iosArm64Main"],
-                    sourceSets["iosX64Main"]
-            )) {
-                sourceSet {
-                    kotlin.srcDirs("src/main/kotlin")
-                }
-
-                libraryPath("samples.gdnlib")
-                generateGDNS("${project.rootDir.absolutePath}/../project")
-
-                configs(
-                        "src/main/kotlin/godot/samples/games/shmup/classes.json",
-                        "src/main/kotlin/godot/samples/games/dodge/classes.json",
-                        "src/main/kotlin/godot/samples/games/catchBall/classes.json",
-                        "src/main/kotlin/godot/samples/games/main/classes.json",
-                        "src/main/kotlin/godot/samples/games/fastFinish/classes.json",
-                        "src/main/kotlin/godot/samples/games/pong/classes.json"
-                )
-            }
         }
     }
 
@@ -425,6 +371,7 @@ package com.company.game.logic
 
 import godot.Node
 
+@RegisterClass // <- see Registration readme
 class MyNode: Node {
     constructor() : super()
 }
@@ -439,64 +386,29 @@ package com.company.game.logic
 import godot.Node
 import godot.core.GD
 
+@RegisterClass // <- see Registration readme
 class MyNode: Node {
     constructor() : super()
 
+    @RegisterFunction // <- see Registration readme
     override fun _ready() {
         GD.print("Hello Godot!")
     }
 }
 ```
 
-So what's next? We have access to the full Godot API here. Next step is to tell Godot about our class. For this purpose there is a **registration** mechanism.
+So what's next? We have access to the full Godot API here. Next step is to tell Godot about our class. For this purpose there is a **registration** mechanism leveraging the power of annotations.
 
 ## Registration
 
-To have access to Kotlin classes from Godot you have to **register** them. Kotlin wrapper has special utility to register classes. Only thing you have to do is to describe your classes structure in XML or JSON file.
-
-Example `classes.json`
-```json
-{
-  "package": "Scripts",
-
-  "registerClasses": [
-    {
-      "name": "MyClass",
-      "class": "com.company.game.logic.MyClass",
-      "extends": "Node",
-      "methods": [
-        {
-          "name": "_ready",
-          "arguments": []
-        }
-      ]
-    }
-  ]
-}
-```
-
-In this file you specify:
-- package -> your classes will be generated in this subdirectory of `project`
-- The class name -> this name will be seen in Godot
-- The class path -> the full class name **with package** with which godot can call our class
-- Parent class
-- Properties
-- Methods
-- Signals
+To have access to Kotlin classes from Godot you have to **register** them. Kotlin wrapper has special utility to register classes. Only thing you have to do is to annotate you classes, functions, properties and signals you want godot to know about.
 
 More information about registering: [Registering classes](REGISTRATION.md)
-
-Now we need to add the config file we've just created to the `configs` closure:
-```kotlin
-configs(
-        "src/main/kotlin/com/company/game/logic/classes.json"
-)
-```
 
 
 ## Compiling
 
-Now we can build our project. Use gradle `build` task to build the project. At first gradle will generate a `Entry.kt` file with entry point and all classes registrations from configs. This file will be used by Godot to call our classes.
+Now we can build our project. Use gradle `build` task to build the project. At first gradle will generate a `Entry.kt` file with entry point and all classes, functions, properties and signals annotated. This file will be used by Godot to call our classes.
 
 If everything is okay you will get a shared library (`.dll` on windows, `.so` on linux and android, and `.dylib` on macOS). Copy it from gradle `build/bin` directory into your Godot project subdirectory and link it to *GDNativeLibrary* instance. If you mentioned `generateGDNS` option in build file - at that path there will be .gdns files (scripts) which you connect to any node.
 
