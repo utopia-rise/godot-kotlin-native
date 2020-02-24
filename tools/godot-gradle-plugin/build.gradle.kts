@@ -35,7 +35,6 @@ dependencies {
     compileOnly("com.google.auto.service:auto-service:${Dependencies.googleAutoServiceVersion}")
     kapt("com.google.auto.service:auto-service:${Dependencies.googleAutoServiceVersion}")
 
-    //TODO: these are overrides because of the old klaxon dependency in entry-generator. I don't bother upgrading it as it will be replaced soon enough anyways. Once done, the following two lines can be removed
     implementation("org.jetbrains.kotlin:kotlin-native-utils:${Dependencies.kotlinVersion}")
     implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:${Dependencies.kotlinVersion}")
 }

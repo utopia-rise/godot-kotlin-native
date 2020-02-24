@@ -64,12 +64,6 @@ kotlin {
                 implementation(kotlin("stdlib-jdk8"))
             }
         }
-        configure(listOf(sourceSets["linuxMain"])) {
-        }
-        configure(listOf(sourceSets["macosMain"])) {
-        }
-        configure(listOf(sourceSets["windowsMain"])) {
-        }
     }
 }
 

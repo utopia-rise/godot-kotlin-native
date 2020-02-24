@@ -72,15 +72,8 @@ kotlin {
                 implementation(kotlin("stdlib-jdk8"))
             }
         }
-        configure(listOf(
-                sourceSets["linuxMain"],
-                sourceSets["androidX64Main"],
-                sourceSets["androidArm64Main"],
-                sourceSets["macosMain"],
-                sourceSets["iosX64Main"],
-                sourceSets["iosArm64Main"],
-                sourceSets["windowsMain"]
-        )) {
+
+        configure(getSourceSetsToConfigure()) {
             dependencies {
                 implementation(project(":wrapper:godot-library"))
             }
@@ -130,5 +123,40 @@ if (project.hasProperty("bintrayUser") && project.hasProperty("bintrayKey") && p
                 vcsTag = project.version.toString()
             })
         })
+    }
+}
+
+fun getSourceSetsToConfigure(): List<org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet> {
+    return if (project.hasProperty("platform")) {
+        listOf(when (platform) {
+            "windows" -> kotlin.sourceSets["windowsMain"]
+            "linux" -> kotlin.sourceSets["linuxMain"]
+            "macos" -> kotlin.sourceSets["macosMain"]
+            "android" -> if (project.hasProperty("armArch")) {
+                when(armArch) {
+                    "X64" -> kotlin.sourceSets["androidX64Main"]
+                    "arm64" -> kotlin.sourceSets["androidArm64Main"]
+                    else -> kotlin.sourceSets["androidArm64Main"]
+                }
+            } else kotlin.sourceSets["androidArm64Main"]
+            "ios" -> if (project.hasProperty("armArch")) {
+                when(armArch) {
+                    "arm64" -> kotlin.sourceSets["iosArm64Main"]
+                    "X64" -> kotlin.sourceSets["iosX64Main"]
+                    else -> kotlin.sourceSets["iosArm64Main"]
+                }
+            } else kotlin.sourceSets["iosArm64Main"]
+            else -> kotlin.sourceSets["linuxMain"]
+        })
+    } else {
+        listOf(
+                kotlin.sourceSets["linuxMain"],
+                kotlin.sourceSets["androidX64Main"],
+                kotlin.sourceSets["androidArm64Main"],
+                kotlin.sourceSets["macosMain"],
+                kotlin.sourceSets["iosX64Main"],
+                kotlin.sourceSets["iosArm64Main"],
+                kotlin.sourceSets["windowsMain"]
+        )
     }
 }
