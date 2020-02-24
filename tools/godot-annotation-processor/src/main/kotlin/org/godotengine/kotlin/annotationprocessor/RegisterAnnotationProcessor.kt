@@ -40,17 +40,12 @@ class RegisterAnnotationProcessor : AbstractProcessor() {
         }
     }
 
-    override fun initProcessor() {
-        log("***Processor started***") //TODO: remove when done with developing the code generation
-    }
-
     private val classes: MutableSet<Element.ClassElement> = mutableSetOf()
     private val properties: MutableSet<Element.PropertyElement> = mutableSetOf()
     private val functions: MutableSet<Element.FunctionElement> = mutableSetOf()
     private val signals: MutableSet<Element.FunctionElement> = mutableSetOf()
 
     override fun process(roundEnvironment: RoundEnvironment) {
-        log("Starting to process \"Register\" annotations") //TODO: remove when done with developing the code generation
 
         classes.addAll(
                 roundEnvironment
@@ -77,10 +72,6 @@ class RegisterAnnotationProcessor : AbstractProcessor() {
         )
 
         performSanityChecks()
-
-        //code generation logic
-
-        log("Finished processing \"Register\" annotations") //TODO: remove when done with developing the code generation
     }
 
     private fun performSanityChecks() {
@@ -108,7 +99,6 @@ class RegisterAnnotationProcessor : AbstractProcessor() {
     }
 
     override fun processingOver() {
-        //write generated code logic
         EntryGenerator()
                 .generateEntry(
                         getKaptGeneratedDirectory(),
@@ -119,7 +109,6 @@ class RegisterAnnotationProcessor : AbstractProcessor() {
                         functions,
                         signals
                 )
-        log("***Processor over***") //TODO: remove when done with developing the code generation
     }
 
     /**
