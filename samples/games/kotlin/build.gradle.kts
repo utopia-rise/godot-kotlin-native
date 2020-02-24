@@ -28,7 +28,11 @@ repositories {
 }
 
 configure<org.godotengine.kotlin.gradleplugin.KotlinGodotPluginExtension> {
-    this.releaseType = org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
+    this.releaseType = if (buildType?.toLowerCase() == "release") {
+        org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
+    } else {
+        org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
+    }
     this.godotProjectPath = "${project.rootDir.absolutePath}/.."
     this.libraryPath = "samples.gdnlib"
 }
