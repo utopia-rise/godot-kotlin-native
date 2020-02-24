@@ -6,6 +6,8 @@ To have access to Kotlin classes from Godot you have to register them. In order 
 * [Properties](#properties)
 * [RPC Annotations](#rpc-annotations)
 * [Signals](#signals)
+    * [The Godot way](#the-godot-way)
+    * [The more typesafe way](#the-more-typesafe-way)
 * [Summary](#summary)
 * [What's next?](#whats-next)
 
@@ -137,10 +139,40 @@ fun clientReady() {
 ```
 
 # Signals
-To make Signals as typesafe as possible. The Signal concept in this wrapper is a bit harder to grasp at first but will make your life easier along the way.  
-The class containing this signal has to be annotated with `@RegisterClass`!    
+This wrapper provides a simple way of registering signals and optionally (which we recommend) a more typesafe way of defining Signals.  
+The class containing this signal has to be annotated with `@RegisterClass`!  
 
-## Signal description:
+## The Godot Way
+### Signal description:
+A signal is defined by an empty function annotated with `@RegisterSignal`:
+```kotlin
+@RegisterSignal
+fun startGame() {}
+```
+
+### Emiting signals:
+You can emit signals like in GDScript:
+```kotlin
+instanceOfClass.emitSignal("startGame")
+```
+
+### Connecting Signals:
+Also like in GDScript you can connect signals by method name as string:
+```kotlin
+instanceOfClass.connect("startGame", this, "gameStarted")
+```
+
+### Default arguments:
+You can also provide default arguments for signals in the annotation. But note: the number of default arguments must match the number of arguments the signals function has:
+```kotlin
+@RegisterSignal("\"asStringArgument\"", "1", "fully.qualified.InstanceOfClass()")
+fun startGame(aStringArgument: String, anIntegerArgument: Int, aClassInstance: InstanceOfClass) {}
+```
+
+## The more typesafe way:
+We strongly recommend using signals this way, as it provides more safety against typo's, more typesafety and better refactoring support.
+
+### Signal description:
 Signals are defined inside their corresponding class as interface functions:
 ```kotlin
 interface Signal {
@@ -149,27 +181,19 @@ interface Signal {
 }
 ```
 
-## Emiting signals:
+### Emiting signals:
 Safe:
 ```kotlin
 instanceOfClass.emitSignal(ClassName.Signal::startGame.name)
 ```
-Unsafe:
-```kotlin
-instanceOfClass.emitSignal("startGame")
-```
 
-## Connecting signals:
+### Connecting signals:
 Safe:
 ```kotlin
 instanceOfClass.connect(ClassName.Signal::startGame.name, this, this::gameStarted.name)
 ```
-Unsafe:
-```kotlin
-instanceOfClass.connect("startGame", this, "gameStarted")
-```
 
-## Default arguments
+### Default arguments
 You can also provide default arguments for signals in the annotation. But note: the number of default arguments must match the number of arguments the signals function has:
 ```kotlin
 @RegisterClass
@@ -180,7 +204,7 @@ class EmitingClass {
     }
 }
 ```
-If you implement above example you might see why we opted for this more typesafe solution:
+If you implement above example you might see why we recommend this way of using signals:
 ```kotlin
 @RegisterClass
 class ListeningClass: EmitingClass.Signal { // <- Note the interface implementation
