@@ -14,7 +14,7 @@ open class KotlinGodotPluginExtension {
     var releaseType = org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
 
     override fun toString(): String {
-        return "KotlinGodotPluginExtension(kotlinVersion='$kotlinVersion', libraryPath='$libraryPath', godotProjectPath='$godotProjectPath')"
+        return "KotlinGodotPluginExtension(kotlinVersion='$kotlinVersion', libraryPath='$libraryPath', godotProjectPath='$godotProjectPath', releaseType=$releaseType)"
     }
 }
 
