@@ -8,8 +8,8 @@
 tool
 extends WindowDialog
 
-const KOTLIN_ZIP := "res://kotlin.zip"
-const DOWNLOAD_FILE := "http://darkrockstudios.com/files/kotlin.zip"
+const KOTLIN_ZIP := "res://kotlin_template.zip"
+const DOWNLOAD_FILE := "http://darkrockstudios.com/files/kotlin_template.zip"
 
 onready var buildDialogScene := preload("res://addons/kotlin/build_dialog/BuildDialog.tscn")
 onready var setupDialogScene := preload("res://addons/kotlin/tools/SetupDialog.tscn")
@@ -124,7 +124,7 @@ func step_3_configure():
 		OS.execute("/bin/chmod", ["+x", "kotlin/gradlew"], true, output)
 		print(output)
 		output.clear()
-		OS.execute("/bin/chmod", ["+x", "kotlin/build"], true, output)
+		OS.execute("/bin/chmod", ["+x", "kotlin/runBuild"], true, output)
 		print(output)
 	
 	configure_gradle(true)

@@ -17,9 +17,9 @@ static func gradle_configure():
 
 static func gradle_build():
 	if is_windows():
-		execute("build.bat")
+		execute("runBuild.bat")
 	else:
-		execute("./build")
+		execute("./runBuild")
 
 
 static func execute(command: String):
