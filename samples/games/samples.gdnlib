@@ -7,9 +7,10 @@ reloadable=true
 
 [entry]
 
-OSX.64="res://kotlin/build/bin/osx/debugShared/libkotlin.dylib"
+OSX.64="res://kotlin/build/bin/macos/debugShared/libkotlin.dylib"
 Windows.64="res://kotlin/build/bin/windows/debugShared/kotlin.dll"
 X11.64="res://kotlin/build/bin/linux/debugShared/libkotlin.so"
+Android.arm64-v8a="res://kotlin/build/bin/androidArm64/debugShared/libkotlin.so"
 
 [dependencies]
 

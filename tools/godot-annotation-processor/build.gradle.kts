@@ -20,6 +20,7 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
     implementation(project(":tools:annotations"))
+    implementation(project(":tools:entry-generator"))
     implementation("de.jensklingenberg:mpapt-runtime:${Dependencies.mpaptVersion}")
     implementation("com.squareup:kotlinpoet:${Dependencies.kotlinPoetVersion}")
 

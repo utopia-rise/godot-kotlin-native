@@ -27,6 +27,16 @@ repositories {
     jcenter()
 }
 
+configure<org.godotengine.kotlin.gradleplugin.KotlinGodotPluginExtension> {
+    this.releaseType = if (buildType?.toLowerCase() == "release") {
+        org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
+    } else {
+        org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
+    }
+    this.godotProjectPath = "${project.rootDir.absolutePath}/.."
+    this.libraryPath = "samples.gdnlib"
+}
+
 kotlin {
     sourceSets {
         sourceSets.create("macosMain")
@@ -46,35 +56,6 @@ kotlin {
                 sourceSets["iosX64Main"]
         )) {
             this.kotlin.srcDir("src/main/kotlin")
-        }
-
-
-        configure<org.godotengine.kotlin.gradleplugin.ConfigureGodotConvention> {
-            this.configureGodot(listOf(
-                    sourceSets["macosMain"],
-                    sourceSets["linuxMain"],
-                    sourceSets["windowsMain"],
-                    sourceSets["androidArm64Main"],
-                    sourceSets["androidX64Main"],
-                    sourceSets["iosArm64Main"],
-                    sourceSets["iosX64Main"]
-            )) {
-                sourceSet {
-                    kotlin.srcDirs("src/main/kotlin")
-                }
-
-                libraryPath("samples.gdnlib")
-                generateGDNS("${project.rootDir.absolutePath}/..")
-
-                configs(
-                        "src/main/kotlin/godot/samples/games/shmup/classes.json",
-                        "src/main/kotlin/godot/samples/games/dodge/classes.json",
-                        "src/main/kotlin/godot/samples/games/catchBall/classes.json",
-                        "src/main/kotlin/godot/samples/games/main/classes.json",
-                        "src/main/kotlin/godot/samples/games/fastFinish/classes.json",
-                        "src/main/kotlin/godot/samples/games/pong/classes.json"
-                )
-            }
         }
     }
 
@@ -111,25 +92,14 @@ kotlin {
         )
     }
 
-    targets.forEach {
-        it.compilations.getByName("main") {
+    targets.forEach { target ->
+        target.compilations.getByName("main") {
             if (this is org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeCompilation) {
-                println("Configuring target ${this.target.name}")
-                this.target.binaries {
-                    val libTarget = when(buildType?.toLowerCase()) {
-                        "release" -> listOf(org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE)
-                        "debug" -> listOf(org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG)
-                        else -> {
-                            logger.warn("Build target not specified, defaulting to DEBUG. To set release target, specify: -PbuildType=RELEASE")
-                            listOf(org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG)
-                        }
-                    }
-                    sharedLib(libTarget)
-                }
-                this.target.compilations.all {
+                println("Configuring target ${target.name}")
+                target.compilations.all {
                     dependencies {
                         implementation("org.godotengine.kotlin:godot-library:1.0.0")
-                        implementation("org.godotengine.kotlin:annotations:0.0.1")
+                        implementation("org.godotengine.kotlin:annotations:0.0.2")
                     }
                 }
                 if (project.hasProperty("iosSigningIdentity") && this.target.name == "iosArm64") {
@@ -161,4 +131,3 @@ kotlin {
         }
     }
 }
-

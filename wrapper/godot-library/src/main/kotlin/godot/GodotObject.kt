@@ -7,6 +7,7 @@ import godot.gdnative.godot_variant_as_object
 import godot.registration.nativeConstructorInvocationFlag
 import godot.registration.nonNativeConstructorRawMemory
 import kotlinx.cinterop.*
+import org.godotengine.kotlin.anntations.internal.RegisterInternal
 import kotlin.reflect.KFunction1
 
 
@@ -17,9 +18,11 @@ abstract class GodotObject : CoreType {
     internal constructor(mem: COpaquePointer) {
         godotCoreMemory = mem.reinterpret<COpaquePointerVar>().pointed.value
     }
+
     internal constructor(variant: Variant) {
         godotCoreMemory = godot_variant_as_object(variant.nativeValue)
     }
+
     internal constructor(name: String) {
         if (nativeConstructorInvocationFlag) {
             if (name != "") {
@@ -49,6 +52,7 @@ abstract class GodotObject : CoreType {
 
 
     var __yieldSignalFunction: KFunction1<Array<out Variant>, Unit>? = null
+    @RegisterInternal
     fun __yieldSignalListener(vararg args: Variant) {
         __yieldSignalFunction?.invoke(args)
     }

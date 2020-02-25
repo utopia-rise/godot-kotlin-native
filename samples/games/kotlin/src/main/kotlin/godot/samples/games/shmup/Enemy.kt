@@ -2,19 +2,25 @@ package godot.samples.games.shmup
 
 import godot.*
 import godot.core.*
+import org.godotengine.kotlin.annotation.RegisterClass
+import org.godotengine.kotlin.annotation.RegisterFunction
+import org.godotengine.kotlin.annotation.RegisterProperty
 
-
+@RegisterClass("Games/Shmup/Scripts")
 class Enemy: Area2D() {
+    @RegisterProperty(true, "2")
     var health = 2
     lateinit var bullet: NativeScript
     lateinit var camera: Node
 
+    @RegisterFunction
     override fun _ready() {
         addToGroup("enemies")
         bullet = NativeScript from ResourceLoader.load("res://Games/Shmup/Scripts/Bullet.gdns")
         camera = getTree().getRoot().getNode(NodePath("Stage/Camera2D"))
     }
 
+    @RegisterFunction
     override fun _process(delta: Double) {
         checkCollisions()
     }

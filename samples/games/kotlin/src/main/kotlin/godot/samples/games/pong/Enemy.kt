@@ -2,11 +2,17 @@ package godot.samples.games.pong
 
 import godot.*
 import godot.core.*
+import org.godotengine.kotlin.annotation.RegisterClass
+import org.godotengine.kotlin.annotation.RegisterFunction
+import org.godotengine.kotlin.annotation.RegisterProperty
 
+@RegisterClass("Games/Pong/Scripts")
 class Enemy: KinematicBody2D() {
 
+    @RegisterProperty(true, "400")
     var speed = 400
 
+    @RegisterFunction
     override fun _physics_process(delta: Double) {
         var velocity = Vector2()
         val ball = KinematicBody2D from getParent().getNode(NodePath("Ball"))
@@ -24,5 +30,4 @@ class Enemy: KinematicBody2D() {
             position.y = 12.263565.toDouble()
         }
     }
-
 }

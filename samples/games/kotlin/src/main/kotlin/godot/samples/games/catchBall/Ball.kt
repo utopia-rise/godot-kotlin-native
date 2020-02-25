@@ -2,11 +2,15 @@ package godot.samples.games.catchBall
 
 import godot.*
 import godot.core.*
+import org.godotengine.kotlin.annotation.RegisterClass
+import org.godotengine.kotlin.annotation.RegisterFunction
 import kotlin.random.Random
 import kotlin.system.getTimeNanos
 
+@RegisterClass("Games/CatchBall/Scripts")
 class Ball: RigidBody() {
 
+    @RegisterFunction
     override fun _ready() {
         val random = Random(getTimeNanos())
         fun ClosedRange<Int>.random() =

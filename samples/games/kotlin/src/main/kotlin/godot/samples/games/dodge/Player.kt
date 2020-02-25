@@ -3,27 +3,40 @@ package godot.samples.games.dodge
 import godot.*
 import godot.core.NodePath
 import godot.core.Vector2
+import org.godotengine.kotlin.annotation.RegisterClass
+import org.godotengine.kotlin.annotation.RegisterFunction
+import org.godotengine.kotlin.annotation.RegisterProperty
+import org.godotengine.kotlin.annotation.RegisterSignal
 
 //TODO: CollisionShape
+@RegisterClass("Games/Dodge/Scripts")
 class Player : Area2D() {
 
+    @RegisterProperty(true, "400")
     var speed: Int = 400
     lateinit var screensize: Vector2
 
     lateinit var playerSprite: AnimatedSprite
     lateinit var collisionShape: CollisionShape2D
 
+    interface Signal {
+        @RegisterSignal
+        fun hit() {}
+    }
+
+    @RegisterFunction
     override fun _ready() {
-        addUserSignal("hit")
+        addUserSignal(Signal::hit.name)
         playerSprite = AnimatedSprite from getNode(NodePath("AnimatedSprite"))
         collisionShape = CollisionShape2D from getNode(NodePath("CollisionShape2D"))
         screensize = getViewportRect().size
         hide()
 
         this.connect("body_entered", this, "_on_Player_body_entered")
-        this.connect("hit", getParent(), "gameOver")
+        this.connect(Signal::hit.name, getParent(), "gameOver")
     }
 
+    @RegisterFunction
     override fun _process(delta: Double) {
         var velocity = Vector2()
 
@@ -77,12 +90,14 @@ class Player : Area2D() {
     }
 
     @Suppress("UNUSED_PARAMETER")
+    @RegisterFunction
     fun _on_Player_body_entered(body: Object) {
         hide()
-        emitSignal("hit")
+        emitSignal(Signal::hit.name)
         collisionShape.disabled = true
     }
 
+    @RegisterFunction
     fun start(pos: Vector2) {
         position = pos
         show()

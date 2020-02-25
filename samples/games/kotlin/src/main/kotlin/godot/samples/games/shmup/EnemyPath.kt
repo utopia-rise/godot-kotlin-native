@@ -4,9 +4,13 @@ import godot.Path2D
 import godot.Tween
 import godot.core.NodePath
 import godot.core.Variant
+import org.godotengine.kotlin.annotation.RegisterClass
+import org.godotengine.kotlin.annotation.RegisterFunction
 
+@RegisterClass("Games/Shmup/Scripts")
 class EnemyPath: Path2D() {
 
+    @RegisterFunction
     override fun _ready() {
         val follow = getNode(NodePath("PathFollow2D"))
         val tween = Tween().apply {

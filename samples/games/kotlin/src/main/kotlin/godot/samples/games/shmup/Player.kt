@@ -4,17 +4,24 @@ import godot.*
 import godot.core.GD
 import godot.core.NodePath
 import godot.core.Vector2
+import org.godotengine.kotlin.annotation.RegisterClass
+import org.godotengine.kotlin.annotation.RegisterFunction
+import org.godotengine.kotlin.annotation.RegisterProperty
 
+@RegisterClass("Games/Shmup/Scripts")
 class Player: KinematicBody2D() {
     var shootTime = 0
     var shooting = false
+    @RegisterProperty(true, "10")
     var speed = 600.0
     lateinit var Bullet: PackedScene
 
+    @RegisterFunction
     override fun _ready() {
         Bullet = PackedScene from ResourceLoader.load("res://Games/Shmup/Scenes/Bullet.tscn")
     }
 
+    @RegisterFunction
     override fun _process(delta: Double) {
         move(delta)
         shooting()
@@ -58,5 +65,4 @@ class Player: KinematicBody2D() {
         if (shootTime > 8)
             shooting = false
     }
-
 }
