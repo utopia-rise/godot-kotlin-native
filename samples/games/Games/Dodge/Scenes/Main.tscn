@@ -5,63 +5,33 @@
 [ext_resource path="res://Games/Dodge/Scenes/HUD.tscn" type="PackedScene" id=3]
 
 [sub_resource type="Curve2D" id=1]
-
-bake_interval = 5.0
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 1.00525, 0.552567, 0, 0, 0, 0, 1920.32, -2.52325, 0, 0, 0, 0, 1917.24, 1080.17, 0, 0, 0, 0, -0.0200195, 1079.14, 0, 0, 0, 0, 1.00525, 0.552567 )
 }
 
 [node name="Main" type="Node"]
-
 script = ExtResource( 1 )
 
-[node name="Player" parent="." index="0" instance=ExtResource( 2 )]
-
+[node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 293.866, 161.355 )
 
-[node name="MobTimer" type="Timer" parent="." index="1"]
-
-process_mode = 1
+[node name="MobTimer" type="Timer" parent="."]
 wait_time = 0.2
-one_shot = false
-autostart = false
 
-[node name="ScoreTimer" type="Timer" parent="." index="2"]
+[node name="ScoreTimer" type="Timer" parent="."]
 
-process_mode = 1
-wait_time = 1.0
-one_shot = false
-autostart = false
-
-[node name="StartTimer" type="Timer" parent="." index="3"]
-
-process_mode = 1
+[node name="StartTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
-autostart = false
 
-[node name="HUD" parent="." index="4" instance=ExtResource( 3 )]
+[node name="HUD" parent="." instance=ExtResource( 3 )]
 
-[node name="MobPath" type="Path2D" parent="." index="5"]
-
-self_modulate = Color( 0.5, 0.6, 1, 0.7 )
+[node name="MobPath" type="Path2D" parent="."]
 curve = SubResource( 1 )
 
-[node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath" index="0"]
-
+[node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
 position = Vector2( 1.00525, 0.552567 )
 rotation = -0.00160256
-offset = 0.0
-h_offset = 0.0
-v_offset = 0.0
-rotate = true
-cubic_interp = true
-loop = true
-lookahead = 4.0
 
-[node name="StartPosition" type="Position2D" parent="." index="6"]
-
+[node name="StartPosition" type="Position2D" parent="."]
 position = Vector2( 1020, 480 )
-_sections_unfolded = [ "Transform" ]
-
-

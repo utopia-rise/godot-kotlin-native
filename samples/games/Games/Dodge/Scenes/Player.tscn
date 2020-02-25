@@ -7,7 +7,6 @@
 [ext_resource path="res://Games/Dodge/Sprites/playerGrey_up2.png" type="Texture" id=5]
 
 [sub_resource type="SpriteFrames" id=1]
-
 animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
 "loop": true,
@@ -22,37 +21,19 @@ animations = [ {
 
 [sub_resource type="CapsuleShape2D" id=2]
 
-custom_solver_bias = 0.0
-radius = 10.0
-height = 20.0
-
-[node name="Player" type="Area2D" index="0"]
-
+[node name="Player" type="Area2D"]
 position = Vector2( -0.387421, 0.387421 )
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-audio_bus_override = false
-audio_bus_name = "Master"
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
-speed = 400
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="0"]
-
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 1 )
 animation = "right"
-_sections_unfolded = [ "Transform" ]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
-
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.01612, 0.674684 )
 scale = Vector2( 2.71941, 1.73077 )
 shape = SubResource( 2 )
-
-
