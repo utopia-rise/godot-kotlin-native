@@ -11,6 +11,13 @@ plugins {
     id("com.jfrog.bintray")
 }
 
+repositories {
+    mavenLocal()
+    jcenter()
+    mavenCentral()
+    maven(url = "https://dl.bintray.com/utopia-rise/kotlinx")
+}
+
 group = "org.godotengine.kotlin"
 version = Dependencies.godotLibraryExtensionVersion
 
@@ -26,12 +33,16 @@ kotlin {
         sourceSets.create("windowsMain")
         sourceSets.create("iosArm64Main")
         sourceSets.create("iosX64Main")
+        sourceSets.create("androidArm64Main")
+        sourceSets.create("androidX64Main")
         configure(listOf(
                 sourceSets["macosMain"],
                 sourceSets["linuxMain"],
                 sourceSets["windowsMain"],
                 sourceSets["iosArm64Main"],
-                sourceSets["iosX64Main"]
+                sourceSets["iosX64Main"],
+                sourceSets["androidArm64Main"],
+                sourceSets["androidX64Main"]
         )) {
             this.kotlin.srcDir("src/main/kotlin")
         }
@@ -43,6 +54,13 @@ kotlin {
                     "windows" -> listOf(targetFromPreset(presets["mingwX64"], "windows"))
                     "linux" -> listOf(targetFromPreset(presets["linuxX64"], "linux"))
                     "macos" -> listOf(targetFromPreset(presets["macosX64"], "macos"))
+                    "android" -> if (project.hasProperty("armArch")) {
+                        when (armArch) {
+                            "arm64" -> listOf(targetFromPreset(presets["androidNativeArm64"], "androidArm64"))
+                            "X64" -> listOf(targetFromPreset(presets["androidNativeX64"], "androidX64"))
+                            else -> listOf(targetFromPreset(presets["androidNativeArm64"], "androidArm64"))
+                        }
+                    } else listOf(targetFromPreset(presets["androidNativeArm64"], "androidArm64"))
                     "ios" -> if (project.hasProperty("armArch")) {
                         when (armArch) {
                             "arm64" -> listOf(targetFromPreset(presets["iosArm64"], "iosArm64"))
@@ -64,7 +82,9 @@ kotlin {
                         targetFromPreset(presets["macosX64"], "macos"),
                         targetFromPreset(presets["mingwX64"], "windows"),
                         targetFromPreset(presets["iosArm64"], "iosArm64"),
-                        targetFromPreset(presets["iosX64"], "iosX64")
+                        targetFromPreset(presets["iosX64"], "iosX64"),
+                        targetFromPreset(presets["androidNativeArm64"], "androidArm64"),
+                        targetFromPreset(presets["androidNativeX64"], "androidX64")
                 )
             }
 
