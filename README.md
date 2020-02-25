@@ -47,9 +47,9 @@ https://discord.gg/qSU2EQs
 
 ## Authors
 
-All authors are indicated in [*CONTRIBUTORS*](https://github.com/utopia-rise/kotlin-godot-wrapper/graphs/contributors) section on **GitHub**.  
+All authors are indicated in [*CONTRIBUTORS*](https://github.com/utopia-rise/godot-kotlin/graphs/contributors) section on **GitHub**.  
 This repo is a successor of [**MrAkakuy's** kotlin bindings for godot](https://github.com/MrAkakuy/kotlin-godot-wrapper), who did a great work with his project. We really thank him, without him this project would not exist.
 
-If you have any questions, issues or feature suggestions you can write an [*Issue* here](https://github.com/utopia-rise/kotlin-godot-wrapper/issues/new/choose).
+If you have any questions, issues or feature suggestions you can write an [*Issue* here](https://github.com/utopia-rise/godot-kotlin/issues/new/choose).
 
 [License](./LICENSE)
