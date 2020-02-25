@@ -40,6 +40,11 @@ tasks.build {
     finalizedBy(tasks.publishToMavenLocal)
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
 val bintrayUser: String by project
 val bintrayKey: String by project
 

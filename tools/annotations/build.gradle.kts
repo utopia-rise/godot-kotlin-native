@@ -20,6 +20,11 @@ val bintrayKey: String by project
 val platform: String by project
 val armArch: String by project
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
 kotlin {
     if (project.hasProperty("platform")) {
         when (platform) {

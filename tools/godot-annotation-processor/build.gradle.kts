@@ -36,6 +36,11 @@ tasks.build {
     finalizedBy(tasks.install)
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
 publishing {
     publications {
         register("godotAnnotationProcessor", MavenPublication::class.java) {
