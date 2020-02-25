@@ -94,13 +94,13 @@ class Player : Area2D() {
     fun _on_Player_body_entered(body: Object) {
         hide()
         emitSignal(Signal::hit.name)
-        collisionShape.disabled = true
+        collisionShape.callDeferred("set_disabled", true)
     }
 
     @RegisterFunction
     fun start(pos: Vector2) {
         position = pos
         show()
-        collisionShape.disabled = false
+        collisionShape.callDeferred("set_disabled", false)
     }
 }
