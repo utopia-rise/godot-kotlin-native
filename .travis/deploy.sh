@@ -20,9 +20,7 @@ if [ $3 == "android" ] || [ $3 == "ios" ]; then
   ./gradlew :tools:annotations-internal:bintrayUpload -PbintrayUser=$1 -PbintrayKey=$2 -Pplatform=$3 -ParmArch=$4
   ./gradlew :wrapper:godot-library:bintrayUpload -PbintrayUser=$1 -PbintrayKey=$2 -Pplatform=$3 -ParmArch=$4
   ./gradlew :tools:annotations:bintrayUpload -PbintrayUser=$1 -PbintrayKey=$2 -Pplatform=$3 -ParmArch=$4
-  if [ $3 == "ios" ]; then
-      ./gradlew :wrapper:godot-library-extension:bintrayUpload -PbintrayUser=$1 -PbintrayKey=$2 -Pplatform=$3 -ParmArch=$4
-  fi
+  ./gradlew :wrapper:godot-library-extension:bintrayUpload -PbintrayUser=$1 -PbintrayKey=$2 -Pplatform=$3 -ParmArch=$4
 else
   ./gradlew :tools:annotations-internal:bintrayUpload -PbintrayUser=$1 -PbintrayKey=$2 -Pplatform=$3
   ./gradlew :wrapper:godot-library:bintrayUpload -PbintrayUser=$1 -PbintrayKey=$2 -Pplatform=$3

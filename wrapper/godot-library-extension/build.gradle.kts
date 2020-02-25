@@ -13,9 +13,19 @@ plugins {
 
 repositories {
     mavenLocal()
-    jcenter()
-    mavenCentral()
     maven(url = "https://dl.bintray.com/utopia-rise/kotlinx")
+    jcenter {
+        content {
+            excludeModule("org.jetbrains.kotlinx", "kotlinx-coroutines-core-native")
+            excludeModule("org.jetbrains.kotlinx", "atomicfu-native")
+        }
+    }
+    mavenCentral {
+        content {
+            excludeModule("org.jetbrains.kotlinx", "kotlinx-coroutines-core-native")
+            excludeModule("org.jetbrains.kotlinx", "atomicfu-native")
+        }
+    }
 }
 
 group = "org.godotengine.kotlin"

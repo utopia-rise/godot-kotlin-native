@@ -14,8 +14,18 @@ buildscript {
     allprojects {
         repositories {
             mavenLocal()
-            mavenCentral()
-            jcenter()
+            mavenCentral {
+                content {
+                    excludeModule("org.jetbrains.kotlinx", "kotlinx-coroutines-core-native")
+                    excludeModule("org.jetbrains.kotlinx", "atomicfu-native")
+                }
+            }
+            jcenter {
+                content {
+                    excludeModule("org.jetbrains.kotlinx", "kotlinx-coroutines-core-native")
+                    excludeModule("org.jetbrains.kotlinx", "atomicfu-native")
+                }
+            }
         }
 
         apply(plugin = "idea")

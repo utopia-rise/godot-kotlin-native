@@ -39,7 +39,7 @@ install:
     ./gradlew :tools:annotations:build -Pplatform=$PLATFORM -ParmArch=$ARM_ARCH;
     ./gradlew :tools:annotations-internal:build -Pplatform=$PLATFORM -ParmArch=$ARM_ARCH;
     ./gradlew :wrapper:godot-library:build -Pplatform=$PLATFORM -ParmArch=$ARM_ARCH;
-    if [ "$PLATFORM" == "ios" ]; then ./gradlew :wrapper:godot-library-extension:build -Pplatform=$PLATFORM -ParmArch=$ARM_ARCH; fi;
+    ./gradlew :wrapper:godot-library-extension:build -Pplatform=$PLATFORM -ParmArch=$ARM_ARCH;
     else
     ./gradlew :tools:annotations:build -Pplatform=$PLATFORM;
     ./gradlew :tools:annotations-internal:build -Pplatform=$PLATFORM;
