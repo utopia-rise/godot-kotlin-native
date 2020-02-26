@@ -25,6 +25,11 @@ tasks.build {
     finalizedBy(tasks.install)
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
 kapt {
     includeCompileClasspath = true
 }

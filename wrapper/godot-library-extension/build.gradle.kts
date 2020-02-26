@@ -14,6 +14,11 @@ plugins {
 group = "org.godotengine.kotlin"
 version = Dependencies.godotLibraryExtensionVersion
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
 kotlin {
     sourceSets {
         sourceSets.create("macosMain")

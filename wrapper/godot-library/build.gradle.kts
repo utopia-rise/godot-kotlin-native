@@ -14,6 +14,11 @@ val armArch: String by project
 group = "org.godotengine.kotlin"
 version = Dependencies.godotLibraryVersion
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
 kotlin {
     sourceSets {
         sourceSets.create("macosMain")
