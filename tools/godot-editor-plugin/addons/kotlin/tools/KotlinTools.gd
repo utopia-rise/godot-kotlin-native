@@ -10,7 +10,7 @@ extends WindowDialog
 
 const KOTLIN_ZIP := "res://kotlin_template.zip"
 const GITHUB_USER := "utopia-rise"
-const DOWNLOAD_FILE := "https://github.com/%s/godot%s" % [GITHUB_USER, KOTLIN_ZIP]
+const DOWNLOAD_FILE := "https://github.com/%s/godot-kotlin/releases/latest/download/%s" % [GITHUB_USER, KOTLIN_ZIP]
 
 onready var buildDialogScene := preload("res://addons/kotlin/build_dialog/BuildDialog.tscn")
 onready var setupDialogScene := preload("res://addons/kotlin/tools/SetupDialog.tscn")
