@@ -30,7 +30,7 @@ class BunnymarkV2: Node2D() {
 
         var bunny_children = bunnies.get_children()
 
-        for i in range(0, bunny_children.size()){
+        for (i in range(0, bunny_children.size())) {
             var bunny = bunny_children[i]
             var pos = bunny.position
             var speed = bunny_speeds[i]
@@ -40,21 +40,21 @@ class BunnymarkV2: Node2D() {
 
             newPosition.y += grav * delta
 
-            if pos.x > screen_size.x{
+            if (pos.x > screen_size.x) {
                 newPosition.x *= -1
                 pos.x = screen_size.x
             }
 
-            if pos.x < 0{
+            if (pos.x < 0) {
                 newPosition.x *= -1
                 pos.x = 0
             }
 
-            if pos.y > screen_size.y{
+            if (pos.y > screen_size.y) {
                 pos.y = screen_size.y
             }
 
-            if randf() > 0.5{
+            if (randf() > 0.5) {
                 newPosition.y = -(randi() % 1100 + 50)
             }
             else{
@@ -62,7 +62,7 @@ class BunnymarkV2: Node2D() {
             }
 
 
-            if pos.y < 0{
+            if (pos.y < 0) {
                 newPosition.y = 0
                 pos.y = 0
             }
@@ -84,10 +84,7 @@ class BunnymarkV2: Node2D() {
     @RegisterFunction
     fun remove_bunny() {
         var child_count = bunnies.get_child_count()
-        if(child_count == 0){
-            return
-        }
-
+        if (child_count == 0) return
         var bunny = bunnies.get_child(child_count - 1)
         bunny_speeds.pop_back()
         bunnies.remove_child(bunny)
