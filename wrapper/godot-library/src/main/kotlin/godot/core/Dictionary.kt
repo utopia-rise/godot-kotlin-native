@@ -45,6 +45,8 @@ class Dictionary: CoreType {
 
     fun isEmpty(): Boolean = godot_dictionary_empty(nativeValue)
 
+    fun duplicate(deep: Boolean = false): Dictionary = Dictionary(godot_dictionary_duplicate(nativeValue, deep))
+
     override fun hashCode(): Int = godot_dictionary_hash(nativeValue)
 
     fun size(): Int = godot_dictionary_size(nativeValue)

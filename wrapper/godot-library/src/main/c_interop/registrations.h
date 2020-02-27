@@ -7,6 +7,9 @@
 
 
 const godot_gdnative_core_api_struct *api = NULL;
+const godot_gdnative_core_1_1_api_struct *api11 = NULL;
+const godot_gdnative_core_1_2_api_struct *api12 = NULL;
+
 const godot_gdnative_ext_nativescript_api_struct *nativescript_api = NULL;
 void *nativescript_handle = NULL;
 
@@ -14,6 +17,8 @@ void *nativescript_handle = NULL;
 
 static void godot_wrapper_gdnative_init(godot_gdnative_init_options *p_options) {
     api = p_options->api_struct;
+    api11 = (godot_gdnative_core_1_1_api_struct *) (api->next);
+    api12 = (godot_gdnative_core_1_2_api_struct *) (api11->next);
 
     for (int i = 0; i < api-> num_extensions; i++) {
         switch (api->extensions[i]->type) {

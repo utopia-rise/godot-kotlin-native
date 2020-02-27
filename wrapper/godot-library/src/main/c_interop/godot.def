@@ -1471,6 +1471,10 @@ godot_bool godot_dictionary_empty(const godot_dictionary * p_self) {
        return api->godot_dictionary_empty(p_self);
 }
 
+godot_dictionary godot_dictionary_duplicate(const godot_dictionary * p_self, const godot_bool deep) {
+       return api12->godot_dictionary_duplicate(p_self, deep);
+}
+
 void godot_dictionary_clear(godot_dictionary * p_self) {
        return api->godot_dictionary_clear(p_self);
 }
