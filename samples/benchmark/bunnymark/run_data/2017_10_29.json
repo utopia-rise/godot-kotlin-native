@@ -1,0 +1,26 @@
+{
+    "benchmark_results": {
+        "BunnymarkV1DrawTexture_cpp": 58140,
+        "BunnymarkV1DrawTexture_cs": 50100,
+        "BunnymarkV1DrawTexture_gd": 13620,
+        "BunnymarkV1DrawTexture_nim": 53700,
+        "BunnymarkV1Sprites_cpp": 31360,
+        "BunnymarkV1Sprites_cs": 19900,
+        "BunnymarkV1Sprites_gd": 11540,
+        "BunnymarkV1Sprites_nim": 28180,
+        "BunnymarkV2_cpp": 29560,
+        "BunnymarkV2_cs": 15620,
+        "BunnymarkV2_gd": 12120,
+        "BunnymarkV2_nim": 23900
+    },
+    "run_date": {
+        "year": 2017,
+        "month": 10,
+        "day": 29,
+        "weekday": 0,
+        "dst": true,
+        "hour": 23,
+        "minute": 10,
+        "second": 54
+    }
+}
