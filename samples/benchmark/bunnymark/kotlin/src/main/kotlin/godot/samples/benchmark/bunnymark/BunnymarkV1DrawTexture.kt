@@ -5,17 +5,24 @@ import godot.*
 import org.godotengine.kotlin.annotation.RegisterClass
 import org.godotengine.kotlin.annotation.RegisterFunction
 
-@RegisterClass("benchmarks/BunnymarkV1Sprites/kot")
-class BunnymarkV1Sprites: Node2D() {
+@RegisterClass("benchmarks/BunnymarkV1DrawTexture/kot")
+class BunnymarkV1DrawTexture: Node2D() {
 
-    var bunnies:GdArray = GdArray()
+    var bunnies = GDArray()
     var grav = 500
     var bunnyTexture = Texture from ResourceLoader.load("res://images/godot_bunny.png")
 
     lateinit var screenSize: Vector2
 
     @RegisterFunction
-    fun _process(delta) {
+    override fun _draw() {
+        for (bunny in bunnies) {
+            draw_texture(bunny_texture, bunny[0])
+        }
+    }
+
+    @RegisterFunction
+    override fun _process(delta){
         screen_size = get_viewport_rect().size
 
         for (bunny in bunnies){
@@ -56,22 +63,20 @@ class BunnymarkV1Sprites: Node2D() {
             bunny[0].position = pos
             bunny[1] = speed
         }
+        update()
     }
 
     @RegisterFunction
     fun add_bunny() {
-        var bunny = Sprite()
-        bunny.set_texture(bunny_texture)
-        add_child(bunny)
-        bunny.position = Vector2(screen_size.x / 2, screen_size.y / 2)
-        bunnies.append([bunny, Vector2(randi() % 200 + 50, randi() % 200 + 50)])
+        bunnies.append([
+                    Vector2(screen_size.x / 2, screen_size.y / 2),
+                    Vector2(randi() % 200 + 50, randi() % 200 + 50)
+                ])
     }
 
     @RegisterFunction
     fun remove_bunny() {
         if (bunnies.size() == 0) return
-        var bunny = bunnies[bunnies.size() - 1]
-        remove_child(bunny[0])
         bunnies.pop_back()
     }
 

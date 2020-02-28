@@ -17,14 +17,14 @@ class BunnymarkV2: Node2D() {
     lateinit var screenSize: Vector2
 
     @RegisterFunction
-    fun _ready(){
+    override fun _ready(){
         add_child(bunnies)
         label.rect_position = Vector2(0, 20)
         add_child(label)
     }
 
     @RegisterFunction
-    fun _process(delta){
+    override fun _process(delta){
         screen_size = get_viewport_rect().size
         label.text = "Bunnies: " + str(bunnies.get_child_count())
 
