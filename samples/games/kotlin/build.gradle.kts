@@ -1,4 +1,3 @@
-import org.jetbrains.kotlin.gradle.plugin.KotlinTarget
 
 val platform: String by project
 val armArch: String by project
@@ -96,7 +95,7 @@ kotlin {
     }
 }
 
-fun configureTargetAction(kotlinTarget: @ParameterName(name = "target") KotlinTarget) {
+fun configureTargetAction(kotlinTarget: @ParameterName(name = "target") org.jetbrains.kotlin.gradle.plugin.KotlinTarget) {
     kotlinTarget.compilations.getByName("main") {
         if (this is org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeCompilation) {
             println("Configuring target ${target.name}")
