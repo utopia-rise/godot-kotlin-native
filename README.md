@@ -45,6 +45,10 @@ Change cast that is actually horrible with infix methods.
 Ask questions and collaborate on Discord:
 https://discord.gg/qSU2EQs
 
+## Projects we use
+
+Look into [**Projects we use**](./PROJECTS_WE_USE.md) section to see which projects we use internally.
+
 ## Authors
 
 All authors are indicated in [*CONTRIBUTORS*](https://github.com/utopia-rise/godot-kotlin/graphs/contributors) section on **GitHub**.  
