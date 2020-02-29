@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Games/Dodge/Scripts/Mob.gdns" type="Script" id=1]
 [ext_resource path="res://Games/Dodge/Sprites/enemySwimming_1.png" type="Texture" id=2]
@@ -8,8 +8,10 @@
 [ext_resource path="res://Games/Dodge/Sprites/enemyFlyingAlt_1.png" type="Texture" id=6]
 [ext_resource path="res://Games/Dodge/Sprites/enemyFlyingAlt_2.png" type="Texture" id=7]
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="PhysicsMaterial" id=1]
+friction = 0.0
 
+[sub_resource type="SpriteFrames" id=2]
 animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
 "loop": true,
@@ -26,47 +28,21 @@ animations = [ {
 "name": "fly",
 "speed": 3.0
 } ]
-_sections_unfolded = [ "Resource" ]
 
 [node name="RigidBody2D" type="RigidBody2D"]
-
-input_pickable = false
-collision_layer = 1
 collision_mask = 0
-mode = 0
-mass = 1.02041e-005
-friction = 0.0
-bounce = 0.0
+mass = 1.02041e-05
+physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
-custom_integrator = false
-continuous_cd = 0
-contacts_reported = 0
-contact_monitor = false
-sleeping = false
-can_sleep = true
-linear_velocity = Vector2( 0, 0 )
 linear_damp = 0.0
-angular_velocity = 0.0
-angular_damp = -1.0
 script = ExtResource( 1 )
-_sections_unfolded = [ "Angular", "Collision", "Linear" ]
-minSpeed = 150
-maxSpeed = 250
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="0"]
-
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.75, 0.75 )
-frames = SubResource( 1 )
+frames = SubResource( 2 )
 animation = "fly"
-_sections_unfolded = [ "Transform" ]
 
-[node name="CollisionShape2D" type="CollisionPolygon2D" parent="." index="1"]
-
-build_mode = 0
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
 polygon = PoolVector2Array( -2.99579, -32.4627, 9.12613, -33.2533, 19.6669, -31.6721, 30.2077, -26.6653, 36.2687, -18.4961, 41.0121, -8.48236, 41.8026, 1.5314, 38.1133, 13.9168, 32.5794, 23.14, 23.6198, 30.5186, 14.6601, 33.1538, 7.54501, 34.4714, -0.360596, 34.2079, -4.04987, 55.2895, -36.1993, 54.2354, -41.2062, 46.8569, -14.5907, 1.79492, -41.4697, -45.9022, -38.8345, -55.916, -28.8208, -57.4971 )
 
-[node name="VisibilityNotifier" type="VisibilityNotifier2D" parent="." index="2"]
-
-rect = Rect2( -10, -10, 20, 20 )
-
-
+[node name="VisibilityNotifier" type="VisibilityNotifier2D" parent="."]
