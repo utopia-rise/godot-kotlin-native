@@ -8,90 +8,94 @@ import org.godotengine.kotlin.annotation.RegisterFunction
 @RegisterClass("benchmarks/BunnymarkV2/kot")
 class BunnymarkV2: Node2D() {
 
-    var grav = 500
-    var bunny_speeds = GDArray()
-    var label = Label()
-    var bunnies = Node2D()
-    var bunnyTexture = Texture from ResourceLoader.load("res://images/godot_bunny.png")
+
+    private var grav = 500
+    private var bunny_speeds = ArrayList<Vector2>()
+    private var label = Label()
+    private var bunnies = Node2D()
+    private var bunnyTexture = Texture from ResourceLoader.load("res://images/godot_bunny.png")
+    private val rng = RandomNumberGenerator()
 
     lateinit var screenSize: Vector2
 
     @RegisterFunction
     override fun _ready(){
-        add_child(bunnies)
-        label.rect_position = Vector2(0, 20)
-        add_child(label)
+        addChild(bunnies)
+        //label.rectPosition = Vector2(0, 20)
+        addChild(label)
     }
 
     @RegisterFunction
-    override fun _process(delta){
-        screen_size = get_viewport_rect().size
-        label.text = "Bunnies: " + str(bunnies.get_child_count())
+    override fun _process(delta: Double){
+        screenSize = getViewportRect().size
 
-        var bunny_children = bunnies.get_children()
+        label.text = "Bunnies: " + bunnies.getChildCount().toString()
 
-        for (i in range(0, bunny_children.size())) {
-            var bunny = bunny_children[i]
-            var pos = bunny.position
-            var speed = bunny_speeds[i]
+        var bunny_children = bunnies.getChildren()
 
-            pos.x += newPosition.x * delta
-            pos.y += newPosition.y * delta
+        for (i in 0 until bunny_children.size()){
+            val bunny = Sprite from bunny_children[i]!!
+            val pos = bunny.position
+            val speed = bunny_speeds[i]
 
-            newPosition.y += grav * delta
+            pos.x += speed.x * delta
+            pos.y += speed.y * delta
 
-            if (pos.x > screen_size.x) {
-                newPosition.x *= -1
-                pos.x = screen_size.x
+            speed.y += grav * delta
+
+            if (pos.x > screenSize.x) {
+                speed.x *= -1
+                pos.x = screenSize.x
             }
 
             if (pos.x < 0) {
-                newPosition.x *= -1
-                pos.x = 0
+                speed.x *= -1.0
+                pos.x = 0.0
             }
 
-            if (pos.y > screen_size.y) {
-                pos.y = screen_size.y
+            if (pos.y > screenSize.y) {
+                pos.y = screenSize.y
             }
 
-            if (randf() > 0.5) {
-                newPosition.y = -(randi() % 1100 + 50)
+            if (rng.randf() > 0.5) {
+                speed.y = -(rng.randi() % 1100 + 50).toDouble()
             }
             else{
-                newPosition.y *= -0.85
+                speed.y *= -0.85
             }
-
 
             if (pos.y < 0) {
-                newPosition.y = 0
-                pos.y = 0
+                speed.y = 0.0
+                pos.y = 0.0
             }
 
-            bunny[0].position = pos
-            bunny[1] = newPosition
+            bunny.position = pos
+            bunny_speeds[i] =  speed
         }
     }
 
     @RegisterFunction
     fun add_bunny() {
         var bunny = Sprite()
-        bunny.set_texture(bunny_texture)
-        add_child(bunny)
-        bunny.position = Vector2(screen_size.x / 2, screen_size.y / 2)
-        bunnies.append([bunny, Vector2(randi() % 200 + 50, randi() % 200 + 50)])
+        bunny.setTexture(bunnyTexture)
+        addChild(bunny)
+        bunny.position = Vector2(screenSize.x / 2, screenSize.y / 2)
+        bunny_speeds.add(
+                Vector2(rng.randi() % 200 + 50, rng.randi() % 200 + 50)
+        )
     }
 
     @RegisterFunction
     fun remove_bunny() {
-        var child_count = bunnies.get_child_count()
-        if (child_count == 0) return
-        var bunny = bunnies.get_child(child_count - 1)
-        bunny_speeds.pop_back()
-        bunnies.remove_child(bunny)
+        val child_count = bunnies.getChildCount()
+        if (child_count == 0L) return
+        val bunny = bunnies.getChild(child_count - 1)
+        bunnies.removeChild(bunny)
+        bunny_speeds.removeAt(child_count.toInt())
     }
 
     @RegisterFunction
     fun finish(){
-        emit_signal("benchmark_finished", bunnies.size())
+        emitSignal("benchmark_finished", bunny_speeds.size)
     }
 }
