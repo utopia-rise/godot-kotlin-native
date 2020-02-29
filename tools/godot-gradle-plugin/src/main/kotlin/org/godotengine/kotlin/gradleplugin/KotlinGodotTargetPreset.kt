@@ -24,6 +24,8 @@ class KotlinGodotTargetPreset(
     override fun createTarget(name: String): KotlinNativeTarget {
         val target = nativePreset.createTarget(name)
 
+        kotlinGodotPluginExtension.configureTargetAction.invoke(target)
+
         target.compilations.getByName("main") {
             it.target.binaries {
                 sharedLib(listOf(kotlinGodotPluginExtension.releaseType))
@@ -57,30 +59,7 @@ class KotlinGodotTargetPreset(
                     }
                 }
                 kotlin.targets.add(dummyTarget)
-
-                val dependencyResolutionTask = project.tasks.create("resolveDependenciesFor${sourceSet.name.capitalize()}") { task ->
-                    task.group = "godotInternalTasks"
-                    task.doFirst { _ ->
-                        project
-                                .configurations
-                                .filter { it.name.contains("${target.name}Implementation") }
-                                .flatMap { it.dependencies }
-                                .filter { it.group != null && it.version != null }
-                                .forEach {
-                                    kotlin.targets.getByName("entryGeneration${sourceSet.name.capitalize()}").compilations.forEach { compilation ->
-                                        compilation.apply {
-                                            dependencies {
-                                                implementation("${it.group}:${it.name}:${it.version}")
-                                            }
-                                        }
-                                    }
-                                }
-                    }
-                }
-
-                project.getTasksByName("compileKotlinEntryGeneration${sourceSet.name.capitalize()}", false).forEach { task ->
-                    task.dependsOn(dependencyResolutionTask)
-                }
+                kotlinGodotPluginExtension.configureTargetAction.invoke(dummyTarget)
             }
 
             project.getTasksByName(compileKotlinTaskName, false).forEach { task ->

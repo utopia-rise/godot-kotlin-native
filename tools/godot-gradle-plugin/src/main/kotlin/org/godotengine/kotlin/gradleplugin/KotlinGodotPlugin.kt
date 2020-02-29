@@ -12,9 +12,11 @@ open class KotlinGodotPluginExtension {
     var libraryPath = ""
     var godotProjectPath = ""
     var releaseType = org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
+    var configureTargetAction: (target: org.jetbrains.kotlin.gradle.plugin.KotlinTarget) -> Unit = {}
+
 
     override fun toString(): String {
-        return "KotlinGodotPluginExtension(kotlinVersion='$kotlinVersion', libraryPath='$libraryPath', godotProjectPath='$godotProjectPath', releaseType=$releaseType)"
+        return "KotlinGodotPluginExtension(kotlinVersion='$kotlinVersion', libraryPath='$libraryPath', godotProjectPath='$godotProjectPath', releaseType=$releaseType, configureTargetAction=$configureTargetAction)"
     }
 }
 

@@ -127,9 +127,9 @@ kotlin {
 ```
 
 \
-As the last step, we need to specify for which target to build for:
+Then, we need to specify for which target to build for:
 ```kotlin
-val targets = if (project.hasProperty("platform")) {
+if (project.hasProperty("platform")) {
     when (platform) {
         "windows" -> listOf(targetFromPreset(presets["godotMingwX64"], "windows"))
         "linux" -> listOf(targetFromPreset(presets["godotLinuxX64"], "linux"))
@@ -161,26 +161,30 @@ val targets = if (project.hasProperty("platform")) {
             targetFromPreset(presets["godotIosX64"], "iosX64")
     )
 }
+```
+\
+As a last step, we need to configure our projects targets with the dependencies and other configuration they need.  
+We NEED to do this in a separate `configureTargetAction` function, that we add to the godot-kotlin plugin configuration
+```kotlin
+configure<org.godotengine.kotlin.gradleplugin.KotlinGodotPluginExtension> {
+    this.releaseType = if (buildType?.toLowerCase() == "release") {
+        org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
+    } else {
+        org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
+    }
+    this.godotProjectPath = "${project.rootDir.absolutePath}/.."
+    this.libraryPath = "samples.gdnlib"
+    this.configureTargetAction = ::configureTargetAction // <-- note this line here!
+}
 
-targets.forEach {
-    it.compilations.getByName("main") {
+fun configureTargetAction(kotlinTarget: @ParameterName(name = "target") KotlinTarget) {
+    kotlinTarget.compilations.getByName("main") {
         if (this is org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeCompilation) {
-            println("Configuring target ${this.target.name}")
-            this.target.binaries {
-                    val libTarget = when(buildType?.toLowerCase()) {
-                        "release" -> listOf(org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE)
-                        "debug" -> listOf(org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG)
-                        else -> {
-                            logger.warn("Build target not specified, defaulting to DEBUG. To set release target, specify: -PbuildType=RELEASE")
-                            listOf(org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG)
-                        }
-                    }
-                    sharedLib(libTarget)
-                }
-            this.target.compilations.all {
+            println("Configuring target ${target.name}")
+            target.compilations.all {
                 dependencies {
                     implementation("org.godotengine.kotlin:godot-library:1.0.0")
-                    implementation("org.godotengine.kotlin:annotations:0.0.1")
+                    implementation("org.godotengine.kotlin:annotations:0.0.2")
                 }
             }
             if (project.hasProperty("iosSigningIdentity") && this.target.name == "iosArm64") {
@@ -247,9 +251,14 @@ repositories {
 }
 
 configure<org.godotengine.kotlin.gradleplugin.KotlinGodotPluginExtension> {
-    this.releaseType = org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
+    this.releaseType = if (buildType?.toLowerCase() == "release") {
+        org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
+    } else {
+        org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
+    }
     this.godotProjectPath = "${project.rootDir.absolutePath}/.."
     this.libraryPath = "samples.gdnlib"
+    this.configureTargetAction = ::configureTargetAction
 }
 
 kotlin {
@@ -274,7 +283,7 @@ kotlin {
         }
     }
 
-    val targets = if (project.hasProperty("platform")) {
+    if (project.hasProperty("platform")) {
         when (platform) {
             "windows" -> listOf(targetFromPreset(presets["godotMingwX64"], "windows"))
             "linux" -> listOf(targetFromPreset(presets["godotLinuxX64"], "linux"))
@@ -306,54 +315,43 @@ kotlin {
                 targetFromPreset(presets["godotIosX64"], "iosX64")
         )
     }
+}
 
-    targets.forEach {
-        it.compilations.getByName("main") {
-            if (this is org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeCompilation) {
-                println("Configuring target ${this.target.name}")
-                this.target.binaries {
-                    val libTarget = when(buildType?.toLowerCase()) {
-                        "release" -> listOf(org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE)
-                        "debug" -> listOf(org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG)
-                        else -> {
-                            logger.warn("Build target not specified, defaulting to DEBUG. To set release target, specify: -PbuildType=RELEASE")
-                            listOf(org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG)
-                        }
-                    }
-                    sharedLib(libTarget)
+fun configureTargetAction(kotlinTarget: @ParameterName(name = "target") org.jetbrains.kotlin.gradle.plugin.KotlinTarget) {
+    kotlinTarget.compilations.getByName("main") {
+        if (this is org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeCompilation) {
+            println("Configuring target ${target.name}")
+            target.compilations.all {
+                dependencies {
+                    implementation("org.godotengine.kotlin:godot-library:1.0.0")
+                    implementation("org.godotengine.kotlin:annotations:0.0.2")
                 }
-                this.target.compilations.all {
-                    dependencies {
-                        implementation("org.godotengine.kotlin:godot-library:1.0.0")
-                        implementation("org.godotengine.kotlin:annotations:0.0.1")
-                    }
-                }
-                if (project.hasProperty("iosSigningIdentity") && this.target.name == "iosArm64") {
-                    tasks.build {
-                        doLast {
-                            exec {
-                                commandLine = listOf("codesign", "-f", "-s", iosSigningIdentity, "build/bin/iosArm64/debugShared/libkotlin.dylib")
-                            }
-                            exec {
-                                commandLine = listOf("install_name_tool", "-id", "@executable_path/dylibs/ios/libkotlin.dylib", "build/bin/iosArm64/debugShared/libkotlin.dylib")
-                            }
-                        }
-                    }
-                } else if (project.hasProperty("iosSigningIdentity") && this.target.name == "iosX64") {
-                    tasks.build {
-                        doLast {
-                            exec {
-                                commandLine = listOf("codesign", "-f", "-s", iosSigningIdentity, "build/bin/iosX64/debugShared/libkotlin.dylib")
-                            }
-                            exec {
-                                commandLine = listOf("install_name_tool", "-id", "@executable_path/dylibs/ios/libkotlin.dylib", "build/bin/iosX64/debugShared/libkotlin.dylib")
-                            }
-                        }
-                    }
-                }
-            } else {
-                System.err.println("Not a native target! TargetName: ${target.name}")
             }
+            if (project.hasProperty("iosSigningIdentity") && this.target.name == "iosArm64") {
+                tasks.build {
+                    doLast {
+                        exec {
+                            commandLine = listOf("codesign", "-f", "-s", iosSigningIdentity, "build/bin/iosArm64/debugShared/libkotlin.dylib")
+                        }
+                        exec {
+                            commandLine = listOf("install_name_tool", "-id", "@executable_path/dylibs/ios/libkotlin.dylib", "build/bin/iosArm64/debugShared/libkotlin.dylib")
+                        }
+                    }
+                }
+            } else if (project.hasProperty("iosSigningIdentity") && this.target.name == "iosX64") {
+                tasks.build {
+                    doLast {
+                        exec {
+                            commandLine = listOf("codesign", "-f", "-s", iosSigningIdentity, "build/bin/iosX64/debugShared/libkotlin.dylib")
+                        }
+                        exec {
+                            commandLine = listOf("install_name_tool", "-id", "@executable_path/dylibs/ios/libkotlin.dylib", "build/bin/iosX64/debugShared/libkotlin.dylib")
+                        }
+                    }
+                }
+            }
+        } else {
+            System.err.println("Not a native target! TargetName: ${target.name}")
         }
     }
 }
