@@ -54,14 +54,15 @@ class BunnymarkV1DrawTexture: Node2D() {
 
             if (pos.y > screenSize.y) {
                 pos.y = screenSize.y
+                if (rng.randf() > 0.5) {
+                    speed.y = -(rng.randi() % 1100 + 50).toDouble()
+                }
+                else{
+                    speed.y *= -0.85
+                }
             }
 
-            if (rng.randf() > 0.5) {
-                speed.y = -(rng.randi() % 1100 + 50).toDouble()
-            }
-            else{
-                speed.y *= -0.85
-            }
+
 
             if (pos.y < 0) {
                 speed.y = 0.0
@@ -86,7 +87,7 @@ class BunnymarkV1DrawTexture: Node2D() {
     @RegisterFunction
     fun remove_bunny() {
         if (bunnies.size == 0) return
-        bunnies.removeAt(bunnies.size)
+        bunnies.removeAt(bunnies.size - 1)
     }
 
     @RegisterFunction

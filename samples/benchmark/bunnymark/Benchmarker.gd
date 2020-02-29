@@ -6,8 +6,6 @@ var fps_label = null
 var benchmark_container = null
 var benchmark_node = null
 var output_path = "user://benchmark_results.json"
-var benchmark = null
-var language = null
 var arg_bench = "--bench="
 var arg_lang = "--lang="
 
@@ -21,19 +19,16 @@ var bunnymark_update_elapsed_time = 0.0
 var stable_updates = 0
 
 var nativescript_languages = {
-	"cpp": true,
-	"nim": true,
-	"d": true,
-	"rs": true,
+	"kot": true
 }
+
+export(String, "BunnymarkV2", "BunnymarkV1Sprites", "BunnymarkV1DrawTexture") var benchmark: String = "BunnymarkV2"
+export(String, "gd", "kot") var language: String = "gd"
 
 func _ready():
 	set_process(false)
 	fps_label = get_node("Panel/FPS")
 	benchmark_container = get_node("BenchmarkContainer")
-
-	benchmark = "BunnymarkV2"
-	language = "gd"
 
 	var args = OS.get_cmdline_args()
 	for arg in args:

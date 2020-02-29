@@ -21,18 +21,16 @@ class BunnymarkV2: Node2D() {
     @RegisterFunction
     override fun _ready(){
         addChild(bunnies)
-        //label.rectPosition = Vector2(0, 20)
+        label.setPosition(Vector2(0, 20))
         addChild(label)
     }
 
     @RegisterFunction
     override fun _process(delta: Double){
         screenSize = getViewportRect().size
-
         label.text = "Bunnies: " + bunnies.getChildCount().toString()
 
         var bunny_children = bunnies.getChildren()
-
         for (i in 0 until bunny_children.size()){
             val bunny = Sprite from bunny_children[i]!!
             val pos = bunny.position
@@ -55,13 +53,12 @@ class BunnymarkV2: Node2D() {
 
             if (pos.y > screenSize.y) {
                 pos.y = screenSize.y
-            }
-
-            if (rng.randf() > 0.5) {
-                speed.y = -(rng.randi() % 1100 + 50).toDouble()
-            }
-            else{
-                speed.y *= -0.85
+                if (rng.randf() > 0.5) {
+                    speed.y = -(rng.randi() % 1100 + 50).toDouble()
+                }
+                else{
+                    speed.y *= -0.85
+                }
             }
 
             if (pos.y < 0) {
@@ -76,9 +73,9 @@ class BunnymarkV2: Node2D() {
 
     @RegisterFunction
     fun add_bunny() {
-        var bunny = Sprite()
+        val bunny = Sprite()
         bunny.setTexture(bunnyTexture)
-        addChild(bunny)
+        bunnies.addChild(bunny)
         bunny.position = Vector2(screenSize.x / 2, screenSize.y / 2)
         bunny_speeds.add(
                 Vector2(rng.randi() % 200 + 50, rng.randi() % 200 + 50)
@@ -91,7 +88,7 @@ class BunnymarkV2: Node2D() {
         if (child_count == 0L) return
         val bunny = bunnies.getChild(child_count - 1)
         bunnies.removeChild(bunny)
-        bunny_speeds.removeAt(child_count.toInt())
+        bunny_speeds.removeAt(child_count.toInt() - 1)
     }
 
     @RegisterFunction
