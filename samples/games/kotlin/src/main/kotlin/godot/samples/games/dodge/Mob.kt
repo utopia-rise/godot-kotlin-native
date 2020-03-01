@@ -10,9 +10,9 @@ import org.godotengine.kotlin.annotation.RegisterProperty
 
 @RegisterClass("Games/Dodge/Scripts")
 class Mob: RigidBody2D() {
-    @RegisterProperty(true, "150")
+    @RegisterProperty(true)
     var minSpeed = 150
-    @RegisterProperty(true, "250")
+    @RegisterProperty(true)
     var maxSpeed = 250
     val animationList = arrayOf("fly", "walk", "swim")
 

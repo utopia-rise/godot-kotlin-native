@@ -1,11 +1,12 @@
 package org.godotengine.kotlin.entrygenerator.generator
 
+import com.intellij.psi.impl.source.tree.LeafPsiElement
 import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import de.jensklingenberg.mpapt.model.Element
 import org.godotengine.kotlin.entrygenerator.utils.castFromVariant
-import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
+import org.jetbrains.kotlin.resolve.source.KotlinSourceElement
 
 /**
  * generates getter/setter function bindings for properties
@@ -50,11 +51,16 @@ private fun Element.PropertyElement.generatePropertySetterFunctionBinding(index:
 }
 
 private fun Element.PropertyElement.generateDefaultValueGetter(index: Int): FunSpec {
-    val defaultArgument: String = this
-            .annotation!!
-            .allValueArguments
-            .getValue(Name.identifier("defaultValue"))
-            .value as String
+    if (this.propertyDescriptor.isLateInit) {
+        throw IllegalStateException("The property ${this.propertyDescriptor.fqNameSafe} you annotated with @RegisterProperty is a lateinit var. You can only register properties with have a default value!\nEx: var myProperty = false")
+    }
+
+    val defaultArgument: String = (this
+            .propertyDescriptor
+            .source as KotlinSourceElement)
+            .psi //source code representation of the property
+            .lastChild //value assignement as KtConstantExpression
+            .text //value as text representation in source code
 
     return FunSpec
             .builder("defaultValueGetter$index")

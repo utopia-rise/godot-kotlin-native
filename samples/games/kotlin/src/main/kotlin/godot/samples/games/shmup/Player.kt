@@ -12,7 +12,7 @@ import org.godotengine.kotlin.annotation.RegisterProperty
 class Player: KinematicBody2D() {
     var shootTime = 0
     var shooting = false
-    @RegisterProperty(true, "10")
+    @RegisterProperty(true)
     var speed = 600.0
     lateinit var Bullet: PackedScene
 

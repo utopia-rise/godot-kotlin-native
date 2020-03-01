@@ -9,9 +9,9 @@ import org.godotengine.kotlin.annotation.RegisterProperty
 @RegisterClass("Games/Pong/Scripts")
 class Ball: KinematicBody2D() {
 
-    @RegisterProperty(true, "300")
+    @RegisterProperty(true)
     var xVel = 300
-    @RegisterProperty(true, "300")
+    @RegisterProperty(true)
     var yVel = 300
     lateinit var velocity: Vector2
     lateinit var visibilityNotifier2D: VisibilityNotifier2D

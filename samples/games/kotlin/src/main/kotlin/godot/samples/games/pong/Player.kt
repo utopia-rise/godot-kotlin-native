@@ -9,7 +9,7 @@ import org.godotengine.kotlin.annotation.RegisterProperty
 @RegisterClass("Games/Pong/Scripts")
 class Player: KinematicBody2D() {
 
-    @RegisterProperty(true, "400")
+    @RegisterProperty(true)
     var speed = 400
 
     @RegisterFunction

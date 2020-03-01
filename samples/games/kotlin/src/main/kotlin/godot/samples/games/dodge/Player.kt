@@ -12,7 +12,7 @@ import org.godotengine.kotlin.annotation.RegisterSignal
 @RegisterClass("Games/Dodge/Scripts")
 class Player : Area2D() {
 
-    @RegisterProperty(true, "400")
+    @RegisterProperty(true)
     var speed: Int = 400
     lateinit var screensize: Vector2
 

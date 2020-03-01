@@ -28,7 +28,7 @@ dependencies {
     implementation(project(":tools:godot-annotation-processor"))
     implementation("de.jensklingenberg:mpapt-runtime:${Dependencies.mpaptVersion}")
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
-    compileOnly("org.jetbrains.kotlin:kotlin-compiler")
+    implementation("org.jetbrains.kotlin:kotlin-compiler")
     compileOnly("com.google.auto.service:auto-service:${Dependencies.googleAutoServiceVersion}")
     kapt("com.google.auto.service:auto-service:${Dependencies.googleAutoServiceVersion}")
 }

@@ -25,7 +25,7 @@ dependencies {
     implementation("de.jensklingenberg:mpapt-runtime:${Dependencies.mpaptVersion}")
     implementation("com.squareup:kotlinpoet:${Dependencies.kotlinPoetVersion}")
 
-    compileOnly("org.jetbrains.kotlin:kotlin-compiler-embeddable")
+    compileOnly("org.jetbrains.kotlin:kotlin-compiler")
     compileOnly("com.google.auto.service:auto-service:${Dependencies.googleAutoServiceVersion}")
     kapt("com.google.auto.service:auto-service:${Dependencies.googleAutoServiceVersion}")
 }

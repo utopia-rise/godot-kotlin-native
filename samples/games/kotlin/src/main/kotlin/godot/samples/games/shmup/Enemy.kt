@@ -8,7 +8,7 @@ import org.godotengine.kotlin.annotation.RegisterProperty
 
 @RegisterClass("Games/Shmup/Scripts")
 class Enemy: Area2D() {
-    @RegisterProperty(true, "2")
+    @RegisterProperty(true)
     var health = 2
     lateinit var bullet: NativeScript
     lateinit var camera: Node

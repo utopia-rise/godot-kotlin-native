@@ -7,7 +7,6 @@ import godot.registration.RPCMode
 @Retention(AnnotationRetention.RUNTIME)
 actual annotation class RegisterProperty(
         val visibleInEditor: Boolean,
-        val defaultValue: String,
         val rpcMode: RPCMode = RPCMode.Disabled,
         val propertyHint: PropertyHint = PropertyHint.None,
         val hintString: String = ""
