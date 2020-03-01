@@ -2,12 +2,12 @@ package godot.samples.coroutines
 
 import godot.Node2D
 import godot.core.*
+import org.godotengine.kotlin.annotation.RegisterClass
+import org.godotengine.kotlin.annotation.RegisterFunction
 
 
-class MirrorBall : Node2D {
-    constructor() : super()
-    constructor(value: Variant) : super(value)
-
+@RegisterClass("Scripts/")
+class MirrorBall : Node2D() {
 
     lateinit var ballPath: NodePath
     var center = Vector2()
@@ -15,6 +15,7 @@ class MirrorBall : Node2D {
 
     private lateinit var ball: Node2D
 
+    @RegisterFunction
     override fun _ready() {
         ball = Node2D from getNode(ballPath)
         follow()

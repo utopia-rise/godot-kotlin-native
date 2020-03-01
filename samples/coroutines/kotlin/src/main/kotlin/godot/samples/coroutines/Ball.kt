@@ -4,20 +4,22 @@ import godot.Input
 import godot.Node2D
 import godot.core.Variant
 import godot.core.Vector2
+import org.godotengine.kotlin.annotation.RegisterClass
+import org.godotengine.kotlin.annotation.RegisterFunction
 
 
-class Ball : Node2D {
-    constructor() : super()
-    constructor(value: Variant) : super(value)
-
+@RegisterClass("Scripts/")
+class Ball : Node2D() {
 
     var moveSpeed = 2.0
 
     // This is wired up from the Godot editor to react to our own "move" signal
+    @RegisterFunction
     fun move(step: Vector2) {
         translate(step)
     }
 
+    @RegisterFunction
     override fun _process(delta: Double) {
         val step = Vector2()
 

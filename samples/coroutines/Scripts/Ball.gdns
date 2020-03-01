@@ -3,7 +3,6 @@
 [ext_resource path="res://coroutines.gdnlib" type="GDNativeLibrary" id=1]
 
 [resource]
-
 resource_name = "Ball"
 class_name = "godot.samples.coroutines.Ball"
 library = ExtResource( 1 )

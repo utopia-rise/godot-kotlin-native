@@ -13,8 +13,6 @@ blend_mode = 3
 position = Vector2( 960, 540 )
 scale = Vector2( 2, 2 )
 script = ExtResource( 1 )
-ballPath = NodePath("../Ball")
-center = Vector2( 150, 0 )
 
 [node name="Sprite" type="Sprite" parent="MirrorBall"]
 material = SubResource( 1 )
@@ -29,4 +27,3 @@ script = ExtResource( 3 )
 [node name="Sprite" type="Sprite" parent="Ball"]
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
-[connection signal="move" from="Ball" to="Ball" method="move"]
