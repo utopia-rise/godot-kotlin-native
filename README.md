@@ -57,3 +57,6 @@ This repo is a successor of [**MrAkakuy's** kotlin bindings for godot](https://g
 If you have any questions, issues or feature suggestions you can write an [*Issue* here](https://github.com/utopia-rise/godot-kotlin/issues/new/choose).
 
 [License](./LICENSE)
+
+## Other bindings
+There is another binding being developed by raniejade at [raniejade/godot-kotlin](https://github.com/raniejade/godot-kotlin), please check it out!
