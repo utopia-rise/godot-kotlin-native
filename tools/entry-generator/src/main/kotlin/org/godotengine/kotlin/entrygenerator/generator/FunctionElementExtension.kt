@@ -47,7 +47,7 @@ private fun CallableMemberDescriptor.getBridgeFunctionBody(fullClassName: String
     val arguments = StringBuilder()
     this.valueParameters.forEachIndexed { parameterIndex, valueParameterDescriptor ->
         if (!valueParameterDescriptor.isVararg) {
-            bridgeFunctionBodyBuilder.addStatement("val·arg$parameterIndex·=·${valueParameterDescriptor.type.toString().castFromRawMemory("args[$parameterIndex]!!")}")
+            bridgeFunctionBodyBuilder.addStatement("val·arg$parameterIndex·=·${valueParameterDescriptor.type.castFromRawMemory("args[$parameterIndex]!!")}")
 
             if (parameterIndex != 0) {
                 arguments.append(",·")
@@ -55,7 +55,7 @@ private fun CallableMemberDescriptor.getBridgeFunctionBody(fullClassName: String
             arguments.append("arg$parameterIndex")
         } else {
             varargSanityCheck(parameterIndex)
-            bridgeFunctionBodyBuilder.addStatement("val·arg$parameterIndex·=·Array(numArgs·-·${parameterIndex})·{·i·->·${this.valueParameters[parameterIndex].varargElementType?.toString()?.castFromRawMemory("args[i·+·${parameterIndex}]!!")}·}")
+            bridgeFunctionBodyBuilder.addStatement("val·arg$parameterIndex·=·Array(numArgs·-·${parameterIndex})·{·i·->·${this.valueParameters[parameterIndex].varargElementType?.castFromRawMemory("args[i·+·${parameterIndex}]!!")}·}")
 
             if (parameterIndex != 0) {
                 arguments.append(",·")

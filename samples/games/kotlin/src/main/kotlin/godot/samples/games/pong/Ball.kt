@@ -13,6 +13,10 @@ class Ball: KinematicBody2D() {
     var xVel = 300
     @RegisterProperty(true)
     var yVel = 300
+
+    @RegisterProperty(true) //TODO: cedric -> remove!!!
+    var testProperty = NodePath("some/node/path")
+
     lateinit var velocity: Vector2
     lateinit var visibilityNotifier2D: VisibilityNotifier2D
 

@@ -1,5 +1,9 @@
 package org.godotengine.kotlin.entrygenerator.utils
 
+import org.jetbrains.kotlin.js.descriptorUtils.getJetTypeFqName
+import org.jetbrains.kotlin.types.KotlinType
+import org.jetbrains.kotlin.types.asSimpleType
+
 
 fun String.castToVariant(value: String): String {
     return "Variant($value)"
@@ -43,7 +47,7 @@ fun String.isCoreType(): Boolean {
 }
 
 
-fun String.castFromRawMemory(value: String): String {
+fun KotlinType.castFromRawMemory(value: String): String {
     return this.castFromVariant("godot.core.Variant($value)")
 }
 
@@ -53,7 +57,19 @@ fun String.castFromVariant(value: String): String {
         return value
     if (this.isCoreType() || this.isPrimitive())
         return "$value.to$this()"
-    return "godot.$this($value)"
+    return "$this($value)"
+}
+
+fun KotlinType.castFromVariant(value: String): String {
+    if (this.toString() == "Variant")
+        return value
+    if (this.toString().isCoreType() || this.toString().isPrimitive())
+        return "$value.to$this()"
+    return "${this.asFqString()}($value)"
+}
+
+fun KotlinType.asFqString(): String {
+    return this.asSimpleType().getJetTypeFqName(false)
 }
 
 
