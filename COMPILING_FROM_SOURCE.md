@@ -15,7 +15,7 @@ You can also build modules independently in this order:
 ./gradlew :tools:api-classes-generator:build
 ./gradlew :tools:annotations-internal:build -Pplatform=windows/linux/macos/android/ios #(add -ParmArch=arm64/X64) for android and ios build
 ./gradlew :wrapper:godot-library:build -Pplatform=windows/linux/macos/android/ios #(add -ParmArch=arm64/X64) for android and ios build
-./gradlew :wrapper:godot-library-extension:build -Pplatform=windows/linux/macos/ios #(add -ParmArch=arm64/X64) for ios build, extension is not currently supported on android, we're working on that
+./gradlew :wrapper:godot-library-extension:build -Pplatform=windows/linux/macos/ios #(add -ParmArch=arm64/X64) for android and ios build
 ./gradlew :tools:godot-gradle-plugin:build
 ./gradlew :tools:godot-annotation-processor:build
 ./gradlew :tools:kotlin-compiler-plugin:build
@@ -30,7 +30,7 @@ platform=yourplatformgoeshere
 
 ## Building the samples
 Samples projects are not included in root gradle project, as it is not the way it works for end user. In order to build samples
-you have to start `build` task from `samples/games/kotlin` directory.
+you have to start `build` task from `samples/games/kotlin` directory or from `samples/coroutines/kotlin` for coroutines sample.
 - Build them manually by directly calling the `build` task of the samples from the IDE or through the commandline:  
 `cd samples/games/kotlin`  
 `./gradlew build -Pplatform=desired_platform`, `desired_platform` can be either `windows`, `linux`, `macos`, `android`, `ios`.  
@@ -38,9 +38,8 @@ For android and ios, you have to add `armArch` parameter like:
 `./gradlew build -Pplatform=android -ParmArch=X64`, otherwise it will build `arm64` platform by default. Supported target
 are for now `arm64` and `X64`  
 or  
-`cd samples/coroutines/kotlin`
-`./gradlew kotlin:build`  
-Coroutines are not supported on android for now.
+`cd samples/coroutines/kotlin`  
+`./gradlew kotlin:build -Pplatform=desired_platform` and as for games sample, you can add `-ParmArch=desiredArmArch` if you are building for android or iOS.  
 
 To specify release or debug add: `-PbuildType=RELEASE` by default debug will be built if nothing is specified.
 
