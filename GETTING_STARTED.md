@@ -72,7 +72,22 @@ apply(plugin = "godot-gradle-plugin")
 repositories {
     mavenLocal()
     maven("https://dl.bintray.com/utopia-rise/kotlin-godot")
-    jcenter()
+    maven(url = "https://dl.bintray.com/utopia-rise/kotlinx")
+
+    //Here we exclude jetbrains coroutines and atomicfu because they do not provide the ones for android platform
+    //so we exclude them so that those dependencies are downloaded from our bintray, where we provide android dependencies
+    jcenter {
+        content {
+            excludeModule("org.jetbrains.kotlinx", "kotlinx-coroutines-core-native")
+            excludeModule("org.jetbrains.kotlinx", "atomicfu-native")
+        }
+    }
+    mavenCentral {
+        content {
+            excludeModule("org.jetbrains.kotlinx", "kotlinx-coroutines-core-native")
+            excludeModule("org.jetbrains.kotlinx", "atomicfu-native")
+        }
+    }
 }
 ```
 
@@ -183,7 +198,7 @@ fun configureTargetAction(kotlinTarget: @ParameterName(name = "target") KotlinTa
             println("Configuring target ${target.name}")
             target.compilations.all {
                 dependencies {
-                    implementation("org.godotengine.kotlin:godot-library:1.0.0")
+                    implementation("org.godotengine.kotlin:godot-library:1.0.0") // or implementation("org.godotengine.kotlin:godot-library-extension:1.0.0") if you want coroutines like yield
                     implementation("org.godotengine.kotlin:annotations:0.0.2")
                 }
             }
@@ -247,7 +262,22 @@ apply(plugin = "godot-gradle-plugin")
 repositories {
     mavenLocal()
     maven("https://dl.bintray.com/utopia-rise/kotlin-godot")
-    jcenter()
+    maven(url = "https://dl.bintray.com/utopia-rise/kotlinx")
+    
+    //Here we exclude jetbrains coroutines and atomicfu because they do not provide the ones for android platform
+    //so we exclude them so that those dependencies are downloaded from our bintray, where we provide android dependencies
+    jcenter {
+        content {
+            excludeModule("org.jetbrains.kotlinx", "kotlinx-coroutines-core-native")
+            excludeModule("org.jetbrains.kotlinx", "atomicfu-native")
+        }
+    }
+    mavenCentral {
+        content {
+            excludeModule("org.jetbrains.kotlinx", "kotlinx-coroutines-core-native")
+            excludeModule("org.jetbrains.kotlinx", "atomicfu-native")
+        }
+    }
 }
 
 configure<org.godotengine.kotlin.gradleplugin.KotlinGodotPluginExtension> {
@@ -323,7 +353,7 @@ fun configureTargetAction(kotlinTarget: @ParameterName(name = "target") org.jetb
             println("Configuring target ${target.name}")
             target.compilations.all {
                 dependencies {
-                    implementation("org.godotengine.kotlin:godot-library:1.0.0")
+                    implementation("org.godotengine.kotlin:godot-library:1.0.0") // or implementation("org.godotengine.kotlin:godot-library-extension:1.0.0") if you want coroutines like yield
                     implementation("org.godotengine.kotlin:annotations:0.0.2")
                 }
             }
@@ -418,8 +448,6 @@ You can also specify the platform on which you want to build using `platform` pa
 ### Android specificities
 
 Android supported architectures are `arm64` and `X64`, for now no 32 bits target are supported.  
-On android you cannot use `godot-library-extension` for the moment, we're looking to add it in the future. So you cannot
-use `yield` on this platform for now.  
 To build project on android you have to add `armArch` parameter to build task. Here is an example for arm64:
 ```shell script
 ./gradlew build -Pplatform=android -ParmArch=arm64
@@ -428,7 +456,6 @@ To build project on android you have to add `armArch` parameter to build task. H
 ### iOS specificities
 
 Same as android, the supported architectures are `arm64` and `X64`.  
-You can use `godot-library-extension` on iOS.  
 In order to build for iOS, you have to specify `ios` as `platform` parameter and the desired `armArch` (like on android).
 Apple required you to sign your code with a signing identity. Gradle build script will do it for you if you add the
 `iosSigningIdentity` parameter.  

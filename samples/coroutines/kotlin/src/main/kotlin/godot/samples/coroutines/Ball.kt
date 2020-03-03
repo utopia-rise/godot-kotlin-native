@@ -4,20 +4,28 @@ import godot.Input
 import godot.Node2D
 import godot.core.Variant
 import godot.core.Vector2
+import org.godotengine.kotlin.annotation.RegisterClass
+import org.godotengine.kotlin.annotation.RegisterFunction
+import org.godotengine.kotlin.annotation.RegisterSignal
 
 
-class Ball : Node2D {
-    constructor() : super()
-    constructor(value: Variant) : super(value)
-
+@RegisterClass("Scripts/")
+class Ball : Node2D() {
 
     var moveSpeed = 2.0
 
+    interface Signal {
+        @RegisterSignal("godot.core.Vector2()")
+        fun move(step: Vector2) {}
+    }
+
     // This is wired up from the Godot editor to react to our own "move" signal
+    @RegisterFunction
     fun move(step: Vector2) {
         translate(step)
     }
 
+    @RegisterFunction
     override fun _process(delta: Double) {
         val step = Vector2()
 
@@ -31,6 +39,6 @@ class Ball : Node2D {
             step.y += moveSpeed
 
         if (step.x != 0.0 || step.y != 0.0)
-            emitSignal("move", step)
+            emitSignal(Signal::move.name, step)
     }
 }

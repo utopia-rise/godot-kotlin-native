@@ -13,8 +13,6 @@ blend_mode = 3
 position = Vector2( 960, 540 )
 scale = Vector2( 2, 2 )
 script = ExtResource( 1 )
-ballPath = NodePath("../Ball")
-center = Vector2( 150, 0 )
 
 [node name="Sprite" type="Sprite" parent="MirrorBall"]
 material = SubResource( 1 )
