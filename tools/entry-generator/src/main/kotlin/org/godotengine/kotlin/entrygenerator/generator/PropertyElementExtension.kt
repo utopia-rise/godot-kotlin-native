@@ -58,7 +58,7 @@ private fun Element.PropertyElement.generateDefaultValueGetter(index: Int): FunS
     if (this.propertyDescriptor.isLateInit) {
         throw IllegalStateException("The property ${this.propertyDescriptor.fqNameSafe} you annotated with @RegisterProperty is a lateinit var. You can only register properties with have a default value!\nEx: var myProperty = false")
     }
-    if (!this.propertyDescriptor.type.toString().isCoreType() && (!this.propertyDescriptor.type.toString().isPrimitive() && !this.propertyDescriptor.type.asFqString().startsWith("kotlin"))) {
+    if (!this.propertyDescriptor.type.toString().isCoreType() && (!this.propertyDescriptor.type.toString().isPrimitive() && !this.propertyDescriptor.type.asFqString().startsWith("kotlin"))) { //TODO: Implement support for curom classes after https://github.com/utopia-rise/godot-kotlin/issues/55 is done
         throw IllegalStateException("The property ${this.propertyDescriptor.fqNameSafe} you annotated with @RegisterProperty is a custom type ${this.propertyDescriptor.type}! This is not supported at the moment. Please export a godot or primitive type.")
     }
 
