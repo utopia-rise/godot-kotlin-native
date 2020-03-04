@@ -54,7 +54,7 @@ To use `yield` keyword in your program **library extension** is needed.
                 }
                 target.compilations.all {
                     dependencies {
-                        implementation("org.godotengine.kotlin:godot-library-extension:1.0.0") // <-- This one here
+                        implementation("org.godotengine.kotlin:godot-library-extension:0.1.0-3.2") // <-- This one here
                     }
                 }
             } else {
