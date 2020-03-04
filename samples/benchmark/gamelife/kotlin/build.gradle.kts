@@ -1,4 +1,3 @@
-import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
 
 val platform: String by project
 val armArch: String by project
@@ -31,9 +30,9 @@ repositories {
 
 configure<org.godotengine.kotlin.gradleplugin.KotlinGodotPluginExtension> {
     this.releaseType = if (buildType?.toLowerCase() == "release") {
-        NativeBuildType.RELEASE
+        org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
     } else {
-        NativeBuildType.DEBUG
+        org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
     }
     this.godotProjectPath = "${project.rootDir.absolutePath}/.."
     this.libraryPath = "gameoflife.gdnlib"
