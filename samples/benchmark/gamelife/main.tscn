@@ -4,7 +4,6 @@
 
 [node name="main" type="Spatial"]
 script = ExtResource( 1 )
-size = 80
 
 [node name="camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 25, 50, 25 )
