@@ -4,6 +4,7 @@ import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import org.godotengine.kotlin.entrygenerator.utils.castFromRawMemory
 import org.godotengine.kotlin.entrygenerator.utils.hasVarargParameter
+import org.godotengine.kotlin.entrygenerator.utils.isPrimitive
 import org.jetbrains.kotlin.descriptors.CallableMemberDescriptor
 import org.jetbrains.kotlin.resolve.calls.components.isVararg
 import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
@@ -55,7 +56,11 @@ private fun CallableMemberDescriptor.getBridgeFunctionBody(fullClassName: String
             arguments.append("arg$parameterIndex")
         } else {
             varargSanityCheck(parameterIndex)
-            bridgeFunctionBodyBuilder.addStatement("val·arg$parameterIndex·=·Array(numArgs·-·${parameterIndex})·{·i·->·${this.valueParameters[parameterIndex].varargElementType?.castFromRawMemory("args[i·+·${parameterIndex}]!!")}·}")
+            var statementString = "val·arg$parameterIndex·=·Array(numArgs·-·${parameterIndex})·{·i·->·${this.valueParameters[parameterIndex].varargElementType?.castFromRawMemory("args[i·+·${parameterIndex}]!!")}·}"
+            if (this.valueParameters[parameterIndex].varargElementType?.toString()?.isPrimitive() == true) { //is a primitive data type. Thus it has to be converted to a primitive array
+               statementString = "$statementString.to${this.valueParameters[parameterIndex].varargElementType}Array()"
+            }
+            bridgeFunctionBodyBuilder.addStatement(statementString)
 
             if (parameterIndex != 0) {
                 arguments.append(",·")

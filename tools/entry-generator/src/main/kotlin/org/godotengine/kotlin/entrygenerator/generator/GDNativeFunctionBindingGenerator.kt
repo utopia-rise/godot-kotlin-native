@@ -13,7 +13,6 @@ import org.godotengine.kotlin.entrygenerator.utils.getVariantType
 import org.jetbrains.kotlin.descriptors.annotations.AnnotationDescriptor
 import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.Name
-import org.jetbrains.kotlin.resolve.constants.StringValue
 import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
 import org.jetbrains.kotlin.types.asSimpleType
 
@@ -33,7 +32,7 @@ class GDNativeFunctionBindingGenerator {
             is Element.PropertyElement -> nativeScriptInitFunctionBuilder.addStatement("%M(\"${getFullClassName(element)}\",·\"${element.propertyDescriptor.name}\",·$visibleInEditor${convertBridgeFunctionsToString(bridgeFunctions)}${getRpcMode(element)}${getPropertyHints(element)})", MemberName("godot.registration", "registerProperty"))
             is Element.FunctionElement -> {
                 if (element.func.hasAnnotation(RegisterSignal::class.java.name)) {
-                    nativeScriptInitFunctionBuilder.addStatement("%M(\"${getFullClassName(element, true)}\",·\"${element.simpleName}\"${getSignalArgumentsAsString(element)}${getSignalDefaultArgumentsAsString(element)})", MemberName("godot.registration", "registerSignal"))
+                    nativeScriptInitFunctionBuilder.addStatement("%M(\"${getFullClassName(element, true)}\",·\"${element.simpleName}\"${getSignalArgumentsAsString(element)})", MemberName("godot.registration", "registerSignal"))
                 } else {
                     nativeScriptInitFunctionBuilder.addStatement("%M(\"${getFullClassName(element)}\",·\"${element.simpleName}\"${convertBridgeFunctionsToString(bridgeFunctions)}${getRpcMode(element)})", MemberName("godot.registration", "registerMethod"))
                 }
@@ -53,13 +52,13 @@ class GDNativeFunctionBindingGenerator {
                 .allValueArguments
 
         @Suppress("UNCHECKED_CAST") //see comment at cast
-        val typeHintAsString = if(allValueArguments.containsKey(Name.identifier("propertyHint"))) {
+        val typeHintAsString = if (allValueArguments.containsKey(Name.identifier("propertyHint"))) {
             val typeHintAsEnumPair = ((allValueArguments.getValue(Name.identifier("propertyHint"))).value as Pair<ClassId, Name>) //represents an enum. If it cannot be cast, something is wrong and it should fail hard
             "${typeHintAsEnumPair.first.asString().replace("/", ".")}.${typeHintAsEnumPair.second}"
         } else {
             null
         }
-        val hintString = if(allValueArguments.containsKey(Name.identifier("hintString"))) {
+        val hintString = if (allValueArguments.containsKey(Name.identifier("hintString"))) {
             allValueArguments.getValue(Name.identifier("hintString")).value as String
         } else {
             null
@@ -175,40 +174,53 @@ class GDNativeFunctionBindingGenerator {
         }
     }
 
-    /**
-     * assembles the default arguments for a signal if needed
-     */
-    private fun getSignalDefaultArgumentsAsString(element: Element.FunctionElement): String {
-        val defaultArguments = element
-                .func
-                .findAnnotation(RegisterSignal::class.java.name)
-                ?.allValueArguments
-                ?.values
-                ?.flatMap { it.value as ArrayList<*> }
-                ?.map { (it as StringValue).value }
-
-
-        if (defaultArguments?.size != element.func.valueParameters.size) {
-            throw IllegalArgumentException("Amount of default arguments provided does not match the amount of arguments of the signal")
-        }
-
-        val signalArgumentsArrayString = buildString {
-            append(",·arrayOf(")
-            defaultArguments.forEachIndexed { index, defaultArgument ->
-                append("Variant($defaultArgument)")
-                if (index != defaultArguments.size - 1) {
-                    append(",·")
-                }
-            }
-            append(")")
-        }
-
-        return if (defaultArguments.isNotEmpty()) {
-            signalArgumentsArrayString
-        } else {
-            ""
-        }
-    }
+    //left here for reference once we may be able to implement this again
+//    /**
+//     * assembles the default arguments for a signal if needed
+//     */
+//    private fun getSignalDefaultArgumentsAsString(element: Element.FunctionElement): String {
+//        val defaultValues = element
+//                .func
+//                .valueParameters
+//                .filter { it.hasDefaultValue() }
+//                .map {
+//                    Pair(
+//                            it,
+//                            (it.source as KotlinSourceElement).psi.children.last().text
+//                    )
+//                }
+//
+//        if (defaultValues.size != element.func.valueParameters.size) {
+//            throw IllegalArgumentException("You declared a default value for ${defaultValues.size} arguments but the signal has ${element.func.valueParameters.size} arguments. You either have to define default values for all arguments or for none!")
+//        }
+//
+////        val map = intArrayOf(1, 2).map { Variant(it) }.toTypedArray()
+////        gameOver("", *(intArrayOf(1, 2).map { Variant(it) }.toTypedArray()))
+//
+//
+//
+//        val signalArgumentsArrayString = buildString {
+//            append(",·arrayOf(")
+//            defaultValues.forEachIndexed { index, defaultValue ->
+//                if (defaultValue.first.isVararg) {
+//                    append("*(${defaultValue.second.replace(" ", "·")}.map { Variant(it) }.toTypedArray())")
+////                    append("godot.core.Variant(godot.core.GDArray(${defaultValues.size})·{·Variant(${defaultValue.second.replace(" ", "·")}[it])·})")
+//                } else {
+//                    append("godot.core.Variant(${defaultValue.second.replace(" ", "·")})")
+//                }
+//                if (index != defaultValues.size - 1) {
+//                    append(",·")
+//                }
+//            }
+//            append(")")
+//        }
+//
+//        return if (defaultValues.isNotEmpty()) {
+//            signalArgumentsArrayString
+//        } else {
+//            ""
+//        }
+//    }
 
     /**
      * convert bridge functions to string to be able to reference it when registering constructors, functions or getter/setter functions for properties
