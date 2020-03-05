@@ -14,6 +14,8 @@ if [ $3 == "linux" ]; then
   ./gradlew :wrapper:godot-library-extension:bintrayUpload -PbintrayUser=$1 -PbintrayKey=$2 -Pplatform=metadata
   ./gradlew :tools:annotations:bintrayUpload -PbintrayUser=$1 -PbintrayKey=$2 -Pplatform=kotlinMultiplatform
   ./gradlew :tools:annotations:bintrayUpload -PbintrayUser=$1 -PbintrayKey=$2 -Pplatform=metadata
+  ./gradlew :tools:annotations-internal:bintrayUpload -PbintrayUser=$1 -PbintrayKey=$2 -Pplatform=$3 -PisJvmPublish=true
+  ./gradlew :tools:annotations:bintrayUpload -PbintrayUser=$1 -PbintrayKey=$2 -Pplatform=$3 -PisJvmPublish=true
 fi
 
 if [ $3 == "android" ] || [ $3 == "ios" ]; then

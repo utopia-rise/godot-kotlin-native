@@ -19,6 +19,7 @@ val bintrayUser: String by project
 val bintrayKey: String by project
 val platform: String by project
 val armArch: String by project
+val isJvmPublish: String by project
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
@@ -113,12 +114,16 @@ if (project.hasProperty("bintrayUser") && project.hasProperty("bintrayKey") && p
         user = bintrayUser
         key = bintrayKey
         val armString = if (project.hasProperty("armArch")) armArch else ""
-        setPublications(platform + armString.capitalize())
+        if (project.hasProperty("isJvmPublish") && isJvmPublish == "true") {
+            setPublications("jvm")
+        } else setPublications(platform + armString.capitalize())
         pkg(delegateClosureOf<com.jfrog.bintray.gradle.BintrayExtension.PackageConfig> {
             userOrg = "utopia-rise"
             repo = "kotlin-godot"
 
-            name = "${project.name}-$platform$armString"
+            name = if (project.hasProperty("isJvmPublish") && isJvmPublish == "true") {
+                "${project.name}-jvm"
+            } else "${project.name}-$platform$armString"
             vcsUrl = "https://github.com/utopia-rise/kotlin-godot-wrapper"
             setLicenses("Apache-2.0")
             version(closureOf<com.jfrog.bintray.gradle.BintrayExtension.VersionConfig> {
