@@ -100,15 +100,13 @@ var size = 50
 func _ready():
 	started = OS.get_system_time_msecs()
 	map = Map.new(size, size)
-	self.multimesh.instance_count = map.w * map.h
-
-	var l = int(sqrt(self.multimesh.instance_count))
+	self.multimesh.instance_count = size*size
 
 	var index : int = 0
 	
 	var offset = (size - 50) * 0.5
-	for y in l:
-		for x in l:
+	for y in size:
+		for x in size:
 			self.multimesh.set_instance_transform(index, Transform(Basis(), Vector3(x - offset, randi() % 10 * 0.1, y - offset)))
 			self.multimesh.set_instance_color(index, Color(255, x, y))
 			
