@@ -1,4 +1,3 @@
-    
 val platform: String by project
 val armArch: String by project
 val iosSigningIdentity: String by project
@@ -9,10 +8,32 @@ buildscript {
         mavenLocal()
         maven("https://dl.bintray.com/utopia-rise/kotlin-godot")
         jcenter()
+        mavenCentral()
     }
     dependencies {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.61")
         classpath("org.godotengine.kotlin:godot-gradle-plugin:0.1.0-3.2")
+    }
+}
+
+repositories {
+    mavenLocal()
+    maven("https://dl.bintray.com/utopia-rise/kotlin-godot")
+    maven(url = "https://dl.bintray.com/utopia-rise/kotlinx")
+
+    //Here we exclude jetbrains coroutines and atomicfu because they do not provide the ones for android platform
+    //so we exclude them so that those dependencies are downloaded from our bintray, where we provide android dependencies
+    jcenter {
+        content {
+            excludeModule("org.jetbrains.kotlinx", "kotlinx-coroutines-core-native")
+            excludeModule("org.jetbrains.kotlinx", "atomicfu-native")
+        }
+    }
+    mavenCentral {
+        content {
+            excludeModule("org.jetbrains.kotlinx", "kotlinx-coroutines-core-native")
+            excludeModule("org.jetbrains.kotlinx", "atomicfu-native")
+        }
     }
 }
 
@@ -21,12 +42,6 @@ plugins {
 }
 
 apply(plugin = "godot-gradle-plugin")
-
-repositories {
-    mavenLocal()
-    maven("https://dl.bintray.com/utopia-rise/kotlin-godot")
-    jcenter()
-}
 
 configure<org.godotengine.kotlin.gradleplugin.KotlinGodotPluginExtension> {
     this.releaseType = if (buildType?.toLowerCase() == "release") {
@@ -98,10 +113,10 @@ kotlin {
 fun configureTargetAction(kotlinTarget: @ParameterName(name = "target") org.jetbrains.kotlin.gradle.plugin.KotlinTarget) {
     kotlinTarget.compilations.getByName("main") {
         if (this is org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeCompilation) {
-            println("Configuring target ${target.name}")
-            target.compilations.all {
+            println("Configuring target ${this.target.name}")
+            this.target.compilations.all {
                 dependencies {
-                    implementation("org.godotengine.kotlin:godot-library:0.1.0-3.2")
+                    implementation("org.godotengine.kotlin:godot-library-extension:0.1.0-3.2")
                     implementation("org.godotengine.kotlin:annotations:0.1.0-3.2")
                 }
             }
@@ -109,10 +124,10 @@ fun configureTargetAction(kotlinTarget: @ParameterName(name = "target") org.jetb
                 tasks.build {
                     doLast {
                         exec {
-                            commandLine = listOf("codesign", "-f", "-s", iosSigningIdentity, "build/bin/iosArm64/debugShared/libkotlin.dylib")
+                            commandLine = listOf("codesign", "-f", "-s", iosSigningIdentity, "build/bin/iosArm64/releaseShared/libkotlin.dylib")
                         }
                         exec {
-                            commandLine = listOf("install_name_tool", "-id", "@executable_path/dylibs/ios/libkotlin.dylib", "build/bin/iosArm64/debugShared/libkotlin.dylib")
+                            commandLine = listOf("install_name_tool", "-id", "@executable_path/dylibs/ios/libkotlin.dylib", "build/bin/iosArm64/releaseShared/libkotlin.dylib")
                         }
                     }
                 }
@@ -120,16 +135,16 @@ fun configureTargetAction(kotlinTarget: @ParameterName(name = "target") org.jetb
                 tasks.build {
                     doLast {
                         exec {
-                            commandLine = listOf("codesign", "-f", "-s", iosSigningIdentity, "build/bin/iosX64/debugShared/libkotlin.dylib")
+                            commandLine = listOf("codesign", "-f", "-s", iosSigningIdentity, "build/bin/iosX64/releaseShared/libkotlin.dylib")
                         }
                         exec {
-                            commandLine = listOf("install_name_tool", "-id", "@executable_path/dylibs/ios/libkotlin.dylib", "build/bin/iosX64/debugShared/libkotlin.dylib")
+                            commandLine = listOf("install_name_tool", "-id", "@executable_path/dylibs/ios/libkotlin.dylib", "build/bin/iosX64/releaseShared/libkotlin.dylib")
                         }
                     }
                 }
             }
         } else {
-            System.err.println("Not a native target! TargetName: ${target.name}")
+            System.err.println("Not a native target! TargetName: ${kotlinTarget.name}")
         }
     }
 }
