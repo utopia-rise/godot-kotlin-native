@@ -86,7 +86,9 @@ kotlin {
                             targetFromPreset(presets["macosX64"], "macos"),
                             targetFromPreset(presets["mingwX64"], "windows"),
                             targetFromPreset(presets["iosArm64"], "iosArm64"),
-                            targetFromPreset(presets["iosX64"], "iosX64")
+                            targetFromPreset(presets["iosX64"], "iosX64"),
+                            targetFromPreset(presets["androidNativeArm64"], "androidArm64"),
+                            targetFromPreset(presets["androidNativeX64"], "androidX64")
                     )
                 }
             } else {
