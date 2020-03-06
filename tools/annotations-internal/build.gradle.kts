@@ -40,7 +40,15 @@ kotlin {
                     "X64" -> iosX64("iosX64")
                 }
             } else iosArm64("iosArm64")
-            else -> linuxX64("linux")
+            else -> {
+                linuxX64("linux")
+                mingwX64("windows")
+                macosX64("macos")
+                androidNativeX64("androidX64")
+                androidNativeArm64("androidArm64")
+                iosArm64("iosArm64")
+                iosX64("iosX64")
+            }
         }
     } else {
         linuxX64("linux")
