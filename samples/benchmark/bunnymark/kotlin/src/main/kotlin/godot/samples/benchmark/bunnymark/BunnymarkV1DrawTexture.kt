@@ -6,20 +6,20 @@ import org.godotengine.kotlin.annotation.RegisterClass
 import org.godotengine.kotlin.annotation.RegisterFunction
 
 @RegisterClass("benchmarks/BunnymarkV1DrawTexture/kot")
-class BunnymarkV1DrawTexture: Node2D() {
+class BunnymarkV1DrawTexture : Node2D() {
 
-    data class Bunny(var position:Vector2, var speed: Vector2)
+    data class Bunny(var position: Vector2, var speed: Vector2)
 
     private var bunnies = ArrayList<Bunny>()
-    private var grav = 500
+    private var gravity = 500
     private var bunnyTexture = Texture from ResourceLoader.load("res://images/godot_bunny.png")
-    private val rng = RandomNumberGenerator()
+    private val randomNumberGenerator = RandomNumberGenerator()
 
     lateinit var screenSize: Vector2
 
     @RegisterFunction
     override fun _ready() {
-        rng.randomize()
+        randomNumberGenerator.randomize()
     }
 
     @RegisterFunction
@@ -30,17 +30,17 @@ class BunnymarkV1DrawTexture: Node2D() {
     }
 
     @RegisterFunction
-    override fun _process(delta: Double){
+    override fun _process(delta: Double) {
         screenSize = getViewportRect().size
 
-        for (bunny in bunnies){
+        for (bunny in bunnies) {
             val pos = bunny.position
             val speed = bunny.speed
 
             pos.x += speed.x * delta
             pos.y += speed.y * delta
 
-            speed.y += grav * delta
+            speed.y += gravity * delta
 
             if (pos.x > screenSize.x) {
                 speed.x *= -1
@@ -54,10 +54,9 @@ class BunnymarkV1DrawTexture: Node2D() {
 
             if (pos.y > screenSize.y) {
                 pos.y = screenSize.y
-                if (rng.randf() > 0.5) {
-                    speed.y = -(rng.randi() % 1100 + 50).toDouble()
-                }
-                else{
+                if (randomNumberGenerator.randf() > 0.5) {
+                    speed.y = -(randomNumberGenerator.randi() % 1100 + 50).toDouble()
+                } else {
                     speed.y *= -0.85
                 }
             }
@@ -70,7 +69,7 @@ class BunnymarkV1DrawTexture: Node2D() {
             }
 
             bunny.position = pos
-            bunny.speed =  speed
+            bunny.speed = speed
         }
         update()
     }
@@ -78,10 +77,10 @@ class BunnymarkV1DrawTexture: Node2D() {
     @RegisterFunction
     fun add_bunny() {
         bunnies.add(Bunny(
-                    Vector2(screenSize.x / 2, screenSize.y / 2),
-                    Vector2(rng.randi() % 200 + 50, rng.randi() % 200 + 50)
+                Vector2(screenSize.x / 2, screenSize.y / 2),
+                Vector2(randomNumberGenerator.randi() % 200 + 50, randomNumberGenerator.randi() % 200 + 50)
 
-            ))
+        ))
     }
 
     @RegisterFunction
@@ -91,7 +90,7 @@ class BunnymarkV1DrawTexture: Node2D() {
     }
 
     @RegisterFunction
-    fun finish(){
+    fun finish() {
         emitSignal("benchmark_finished", bunnies.size)
     }
 }

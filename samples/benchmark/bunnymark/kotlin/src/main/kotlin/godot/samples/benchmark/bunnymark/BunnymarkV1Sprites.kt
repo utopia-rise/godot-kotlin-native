@@ -6,14 +6,14 @@ import org.godotengine.kotlin.annotation.RegisterClass
 import org.godotengine.kotlin.annotation.RegisterFunction
 
 @RegisterClass("benchmarks/BunnymarkV1Sprites/kot")
-class BunnymarkV1Sprites: Node2D() {
+class BunnymarkV1Sprites : Node2D() {
 
     private data class Bunny(var sprite: Sprite, var speed: Vector2)
 
     private var bunnies = ArrayList<Bunny>()
-    private var grav = 500
+    private var gravity = 500
     private var bunnyTexture = Texture from ResourceLoader.load("res://images/godot_bunny.png")
-    private val rng = RandomNumberGenerator()
+    private val randomNumberGenerator = RandomNumberGenerator()
 
     lateinit var screenSize: Vector2
 
@@ -21,14 +21,14 @@ class BunnymarkV1Sprites: Node2D() {
     override fun _process(delta: Double) {
         screenSize = getViewportRect().size
 
-        for (bunny in bunnies){
+        for (bunny in bunnies) {
             val pos = bunny.sprite.position
             val speed = bunny.speed
 
             pos.x += speed.x * delta
             pos.y += speed.y * delta
 
-            speed.y += grav * delta
+            speed.y += gravity * delta
 
             if (pos.x > screenSize.x) {
                 speed.x *= -1
@@ -42,10 +42,9 @@ class BunnymarkV1Sprites: Node2D() {
 
             if (pos.y > screenSize.y) {
                 pos.y = screenSize.y
-                if (rng.randf() > 0.5) {
-                    speed.y = -(rng.randi() % 1100 + 50).toDouble()
-                }
-                else{
+                if (randomNumberGenerator.randf() > 0.5) {
+                    speed.y = -(randomNumberGenerator.randi() % 1100 + 50).toDouble()
+                } else {
                     speed.y *= -0.85
                 }
             }
@@ -58,7 +57,7 @@ class BunnymarkV1Sprites: Node2D() {
             }
 
             bunny.sprite.position = pos
-            bunny.speed =  speed
+            bunny.speed = speed
         }
     }
 
@@ -69,10 +68,10 @@ class BunnymarkV1Sprites: Node2D() {
         addChild(bunny)
         bunny.position = Vector2(screenSize.x / 2, screenSize.y / 2)
         bunnies.add(
-                    Bunny(
+                Bunny(
                         bunny,
-                        Vector2(rng.randi() % 200 + 50, rng.randi() % 200 + 50)
-                        )
+                        Vector2(randomNumberGenerator.randi() % 200 + 50, randomNumberGenerator.randi() % 200 + 50)
+                )
         )
     }
 
@@ -85,7 +84,7 @@ class BunnymarkV1Sprites: Node2D() {
     }
 
     @RegisterFunction
-    fun finish(){
+    fun finish() {
         emitSignal("benchmark_finished", bunnies.size)
     }
 }

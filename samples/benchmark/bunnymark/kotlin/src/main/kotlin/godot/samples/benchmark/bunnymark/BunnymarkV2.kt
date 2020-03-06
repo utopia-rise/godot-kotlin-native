@@ -6,40 +6,40 @@ import org.godotengine.kotlin.annotation.RegisterClass
 import org.godotengine.kotlin.annotation.RegisterFunction
 
 @RegisterClass("benchmarks/BunnymarkV2/kot")
-class BunnymarkV2: Node2D() {
+class BunnymarkV2 : Node2D() {
 
 
-    private var grav = 500
-    private var bunny_speeds = ArrayList<Vector2>()
+    private var gravity = 500
+    private var bunnySpeeds = ArrayList<Vector2>()
     private var label = Label()
     private var bunnies = Node2D()
     private var bunnyTexture = Texture from ResourceLoader.load("res://images/godot_bunny.png")
-    private val rng = RandomNumberGenerator()
+    private val randomNumberGenerator = RandomNumberGenerator()
 
     lateinit var screenSize: Vector2
 
     @RegisterFunction
-    override fun _ready(){
+    override fun _ready() {
         addChild(bunnies)
         label.setPosition(Vector2(0, 20))
         addChild(label)
     }
 
     @RegisterFunction
-    override fun _process(delta: Double){
+    override fun _process(delta: Double) {
         screenSize = getViewportRect().size
         label.text = "Bunnies: " + bunnies.getChildCount().toString()
 
-        var bunny_children = bunnies.getChildren()
-        for (i in 0 until bunny_children.size()){
+        val bunny_children = bunnies.getChildren()
+        for (i in 0 until bunny_children.size()) {
             val bunny = Sprite from bunny_children[i]!!
             val pos = bunny.position
-            val speed = bunny_speeds[i]
+            val speed = bunnySpeeds[i]
 
             pos.x += speed.x * delta
             pos.y += speed.y * delta
 
-            speed.y += grav * delta
+            speed.y += gravity * delta
 
             if (pos.x > screenSize.x) {
                 speed.x *= -1
@@ -53,10 +53,9 @@ class BunnymarkV2: Node2D() {
 
             if (pos.y > screenSize.y) {
                 pos.y = screenSize.y
-                if (rng.randf() > 0.5) {
-                    speed.y = -(rng.randi() % 1100 + 50).toDouble()
-                }
-                else{
+                if (randomNumberGenerator.randf() > 0.5) {
+                    speed.y = -(randomNumberGenerator.randi() % 1100 + 50).toDouble()
+                } else {
                     speed.y *= -0.85
                 }
             }
@@ -67,7 +66,7 @@ class BunnymarkV2: Node2D() {
             }
 
             bunny.position = pos
-            bunny_speeds[i] =  speed
+            bunnySpeeds[i] = speed
         }
     }
 
@@ -77,8 +76,8 @@ class BunnymarkV2: Node2D() {
         bunny.setTexture(bunnyTexture)
         bunnies.addChild(bunny)
         bunny.position = Vector2(screenSize.x / 2, screenSize.y / 2)
-        bunny_speeds.add(
-                Vector2(rng.randi() % 200 + 50, rng.randi() % 200 + 50)
+        bunnySpeeds.add(
+                Vector2(randomNumberGenerator.randi() % 200 + 50, randomNumberGenerator.randi() % 200 + 50)
         )
     }
 
@@ -88,11 +87,11 @@ class BunnymarkV2: Node2D() {
         if (child_count == 0L) return
         val bunny = bunnies.getChild(child_count - 1)
         bunnies.removeChild(bunny)
-        bunny_speeds.removeAt(child_count.toInt() - 1)
+        bunnySpeeds.removeAt(child_count.toInt() - 1)
     }
 
     @RegisterFunction
-    fun finish(){
-        emitSignal("benchmark_finished", bunny_speeds.size)
+    fun finish() {
+        emitSignal("benchmark_finished", bunnySpeeds.size)
     }
 }

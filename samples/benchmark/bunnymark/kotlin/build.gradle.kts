@@ -1,4 +1,3 @@
-
 val platform: String by project
 val armArch: String by project
 val iosSigningIdentity: String by project
@@ -12,7 +11,7 @@ buildscript {
     }
     dependencies {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.61")
-        classpath("org.godotengine.kotlin:godot-gradle-plugin:1.0.1")
+        classpath("org.godotengine.kotlin:godot-gradle-plugin:0.1.0-3.2")
     }
 }
 
@@ -36,7 +35,6 @@ configure<org.godotengine.kotlin.gradleplugin.KotlinGodotPluginExtension> {
     }
     this.godotProjectPath = "${project.rootDir.absolutePath}/.."
     this.libraryPath = "bunnymark.gdnlib"
-    this.configureTargetAction = ::configureTargetAction
 }
 
 kotlin {
@@ -61,7 +59,7 @@ kotlin {
         }
     }
 
-    if (project.hasProperty("platform")) {
+    val targets = if (project.hasProperty("platform")) {
         when (platform) {
             "windows" -> listOf(targetFromPreset(presets["godotMingwX64"], "windows"))
             "linux" -> listOf(targetFromPreset(presets["godotLinuxX64"], "linux"))
@@ -93,43 +91,43 @@ kotlin {
                 targetFromPreset(presets["godotIosX64"], "iosX64")
         )
     }
-}
 
-fun configureTargetAction(kotlinTarget: @ParameterName(name = "target") org.jetbrains.kotlin.gradle.plugin.KotlinTarget) {
-    kotlinTarget.compilations.getByName("main") {
-        if (this is org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeCompilation) {
-            println("Configuring target ${target.name}")
-            target.compilations.all {
-                dependencies {
-                    implementation("org.godotengine.kotlin:godot-library:1.0.0")
-                    implementation("org.godotengine.kotlin:annotations:0.0.2")
+    targets.forEach { target ->
+        target.compilations.getByName("main") {
+            if (this is org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeCompilation) {
+                println("Configuring target ${target.name}")
+                target.compilations.all {
+                    dependencies {
+                        implementation("org.godotengine.kotlin:godot-library:0.1.0-3.2")
+                        implementation("org.godotengine.kotlin:annotations:0.1.0-3.2")
+                    }
                 }
-            }
-            if (project.hasProperty("iosSigningIdentity") && this.target.name == "iosArm64") {
-                tasks.build {
-                    doLast {
-                        exec {
-                            commandLine = listOf("codesign", "-f", "-s", iosSigningIdentity, "build/bin/iosArm64/debugShared/libkotlin.dylib")
+                if (project.hasProperty("iosSigningIdentity") && this.target.name == "iosArm64") {
+                    tasks.build {
+                        doLast {
+                            exec {
+                                commandLine = listOf("codesign", "-f", "-s", iosSigningIdentity, "build/bin/iosArm64/debugShared/libkotlin.dylib")
+                            }
+                            exec {
+                                commandLine = listOf("install_name_tool", "-id", "@executable_path/dylibs/ios/libkotlin.dylib", "build/bin/iosArm64/debugShared/libkotlin.dylib")
+                            }
                         }
-                        exec {
-                            commandLine = listOf("install_name_tool", "-id", "@executable_path/dylibs/ios/libkotlin.dylib", "build/bin/iosArm64/debugShared/libkotlin.dylib")
+                    }
+                } else if (project.hasProperty("iosSigningIdentity") && this.target.name == "iosX64") {
+                    tasks.build {
+                        doLast {
+                            exec {
+                                commandLine = listOf("codesign", "-f", "-s", iosSigningIdentity, "build/bin/iosX64/debugShared/libkotlin.dylib")
+                            }
+                            exec {
+                                commandLine = listOf("install_name_tool", "-id", "@executable_path/dylibs/ios/libkotlin.dylib", "build/bin/iosX64/debugShared/libkotlin.dylib")
+                            }
                         }
                     }
                 }
-            } else if (project.hasProperty("iosSigningIdentity") && this.target.name == "iosX64") {
-                tasks.build {
-                    doLast {
-                        exec {
-                            commandLine = listOf("codesign", "-f", "-s", iosSigningIdentity, "build/bin/iosX64/debugShared/libkotlin.dylib")
-                        }
-                        exec {
-                            commandLine = listOf("install_name_tool", "-id", "@executable_path/dylibs/ios/libkotlin.dylib", "build/bin/iosX64/debugShared/libkotlin.dylib")
-                        }
-                    }
-                }
+            } else {
+                System.err.println("Not a native target! TargetName: ${target.name}")
             }
-        } else {
-            System.err.println("Not a native target! TargetName: ${target.name}")
         }
     }
 }
