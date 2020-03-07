@@ -160,7 +160,7 @@ class GDNativeFunctionBindingGenerator {
         val signalArgumentsArrayString = buildString {
             append(",·arrayOf(")
             arguments.forEachIndexed { index, pair ->
-                append("${pair.first}·to·${pair.second}")
+                append("\"${pair.first}\"·to·${pair.second}")
                 if (index != arguments.size - 1) {
                     append(",·")
                 }
