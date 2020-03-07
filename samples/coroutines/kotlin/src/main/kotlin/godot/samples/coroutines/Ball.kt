@@ -15,7 +15,7 @@ class Ball : Node2D() {
     var moveSpeed = 2.0
 
     interface Signal {
-        @RegisterSignal("godot.core.Vector2()")
+        @RegisterSignal
         fun move(step: Vector2) {}
     }
 

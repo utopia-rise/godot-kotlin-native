@@ -10,7 +10,7 @@ import org.godotengine.kotlin.annotation.RegisterProperty
 @RegisterClass("Scripts/")
 class MirrorBall : Node2D() {
 
-    @RegisterProperty(true, "godot.core.NodePath(\"../Ball\")")
+    @RegisterProperty(true)
     var ballPath: NodePath = NodePath("../Ball")
     var center = Vector2()
 
