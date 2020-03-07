@@ -75,7 +75,6 @@ The annotation takes the following arguments:
 | argument name   | type         | required | description |
 | --------------- | ------------ | -------- | ----------- |
 | visibleInEditor | Boolean      | yes      | defines whether the property is visible in the editor or not
-| defaultValue    | String       | yes      | defines the default value of the property. Note: A string has to be defined with escaped `"`. See the examples. Note: the default value has a higher priority than the one defined in the script! Godot will override the value defined in script with the value defined in the annotation on initialization! 
 | rpcMode         | RPCMode      | no       | defines how/and if this property can be set over the network. The same functionality can be achieved with the corresponding RpcMode annotations (read below)
 | propertyHint    | PropertyHint | no       | you can provide a property hint for the editor (so you have a texture picker for example)
 | hintString      | String       | no       | you can provide a hint string in addition to the propertyHint. See the [Godot documentation](https://docs.godotengine.org/en/3.2/getting_started/scripting/gdscript/gdscript_exports.html) on how they should be formatted.
@@ -83,31 +82,31 @@ The annotation takes the following arguments:
 Examples:  
 **Property exported, visible in the editor, with default value 300:**
 ```kotlin
-@RegisterProperty(true, "300")
+@RegisterProperty(true)
 var xVel = 300
 ```
 
-**Property exported, visible in the editor, with default string value "aStringValue":**
+**Property exported, visible in the editor, with default string value "someString":**
 ```kotlin
-@RegisterProperty(true, "\"aStringValue\"")
+@RegisterProperty(true)
 var xVel = "someString"
 ```
 
 **Property exported, not visible in the editor, with default instance of class:**
 ```kotlin
-@RegisterProperty(false, "fully.qualified.AClassWithDefaultConstructor()")
-lateinit var aClassInstance: AClassWithDefaultConstructor
+@RegisterProperty(false)
+var aClassInstance: AClassWithDefaultConstructor = AClassWithDefaultConstructor()
 ```
 
 **Property exported, not visible in the editor, with default value 300, rpcMode RemoteSync:**
 ```kotlin
-@RegisterProperty(false, "300", RPCMode.RemoteSync)
+@RegisterProperty(false, RPCMode.RemoteSync)
 var xVel = 300
 ```
 
 **Property exported, visible in the editor, with default value 300, rpcMode Disabled, typeHint Range, with hintString:**
 ```kotlin
-@RegisterProperty(false, "300", propertyHint = PropertyHint.Range, hintString = "0,100000,1000,or_greater")
+@RegisterProperty(false, propertyHint = PropertyHint.Range, hintString = "0,100000,1000,or_greater")
 var xVel = 300
 ```
 
@@ -127,7 +126,7 @@ Example:
 **Property exported, not visible in the editor, with default value 300, rpcMode RemoteSync:**
 ```kotlin
 @RemoteSync
-@RegisterProperty(false, "300")
+@RegisterProperty(false)
 var xVel = 300
 ```
 
@@ -162,13 +161,6 @@ Also like in GDScript you can connect signals by method name as string:
 instanceOfClass.connect("startGame", this, "gameStarted")
 ```
 
-### Default arguments:
-You can also provide default arguments for signals in the annotation. But note: the number of default arguments must match the number of arguments the signals function has:
-```kotlin
-@RegisterSignal("\"asStringArgument\"", "1", "fully.qualified.InstanceOfClass()")
-fun startGame(aStringArgument: String, anIntegerArgument: Int, aClassInstance: InstanceOfClass) {}
-```
-
 ## The more typesafe way:
 We strongly recommend using signals this way, as it provides more safety against typo's, more typesafety and better refactoring support.
 
@@ -193,18 +185,7 @@ Safe:
 instanceOfClass.connect(ClassName.Signal::startGame.name, this, this::gameStarted.name)
 ```
 
-### Default arguments
-You can also provide default arguments for signals in the annotation. But note: the number of default arguments must match the number of arguments the signals function has:
-```kotlin
-@RegisterClass
-class EmitingClass {
-    interface Signal {
-        @RegisterSignal("\"asStringArgument\"", "1", "fully.qualified.InstanceOfClass()")
-        fun startGame(aStringArgument: String, anIntegerArgument: Int, aClassInstance: InstanceOfClass) {}
-    }
-}
-```
-If you implement above example you might see why we recommend this way of using signals:
+If you implement a signal you might see why we recommend this way of using signals:
 ```kotlin
 @RegisterClass
 class ListeningClass: EmitingClass.Signal { // <- Note the interface implementation
@@ -241,17 +222,12 @@ class ListeningClass: EmitingClass.Signal { // <- Note the interface implementat
 | argument name   | type         | required | description |
 | --------------- | ------------ | -------- | ----------- |
 | visibleInEditor | Boolean      | yes      | defines whether the property is visible in the editor or not
-| defaultValue    | String       | yes      | defines the default value of the property. Note: A string has to be defined with escaped `"`. See the examples. Note: the default value has a higher priority than the one defined in the script! Godot will override the value defined in script with the value defined in the annotation on initialization! 
 | rpcMode         | RPCMode      | no       | defines how/and if this property can be set over the network. The same functionality can be achieved with the corresponding RpcMode annotations (read below)
 | propertyHint    | PropertyHint | no       | you can provide a property hint for the editor (so you have a texture picker for example)
 | hintString      | String       | no       | you can provide a hint string in addition to the propertyHint. See the [Godot documentation](https://docs.godotengine.org/en/3.2/getting_started/scripting/gdscript/gdscript_exports.html) on how they should be formatted.
 <br>
 
 **@RegisterSignal**
-
-| argument name   | type         | required | description |
-| --------------- | ------------ | -------- | ----------- |
-| defaultValues   | vararg String| no       | default arguments which godot provides when the signal is emited with less arguments. Number of default arguments has to match arguments of signal function!
 <br>
 
 **RPC Annotations:**  
