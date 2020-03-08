@@ -4,6 +4,8 @@ To have access to Kotlin classes from Godot you have to register them. In order 
 * [Classes](#classes)
 * [Functions](#functions)
 * [Properties](#properties)
+    * [Default Value](#default-value)
+    * [Examples](#examples)
 * [RPC Annotations](#rpc-annotations)
 * [Signals](#signals)
     * [The Godot way](#the-godot-way)
@@ -79,7 +81,36 @@ The annotation takes the following arguments:
 | propertyHint    | PropertyHint | no       | you can provide a property hint for the editor (so you have a texture picker for example)
 | hintString      | String       | no       | you can provide a hint string in addition to the propertyHint. See the [Godot documentation](https://docs.godotengine.org/en/3.2/getting_started/scripting/gdscript/gdscript_exports.html) on how they should be formatted.
 
-Examples:  
+## Default Value
+The default value Godot needs to properly handle your property is taken from the value you assigned the property with.  
+You cannot register a `lateinit` Property and the property value declaration cannot be a function call or another property!  
+**Valid:**
+```kotlin
+@RegisterProperty(true)
+var aProperty: Boolean = true
+```
+**Invalid:**
+```kotlin
+fun foo() = false
+
+@RegisterProperty(true)
+var aProperty: Boolean = foo()
+```
+**Valid:**
+```kotlin
+@RegisterProperty(true)
+var aProperty: Boolean = NodePath("Some/Path/To/A/Node")
+```
+**Invalid:**
+```kotlin
+val nodePathAsString = "Some/Path/To/A/Node"
+
+@RegisterProperty(true)
+var aProperty: Boolean = NodePath(nodePathAsString)
+```
+If you try to do that, you will get a unknown reference exception!
+
+## Examples:  
 **Property exported, visible in the editor, with default value 300:**
 ```kotlin
 @RegisterProperty(true)
