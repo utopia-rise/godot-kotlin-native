@@ -108,7 +108,7 @@ val nodePathAsString = "Some/Path/To/A/Node"
 @RegisterProperty(true)
 var aProperty: Boolean = NodePath(nodePathAsString)
 ```
-If you try to do that, you will get a unknown reference exception!
+If you try to do that, you will get a exception during compilation!
 
 ## Examples:  
 **Property exported, visible in the editor, with default value 300:**

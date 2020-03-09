@@ -1,5 +1,6 @@
 package org.godotengine.kotlin.entrygenerator.generator
 
+import com.intellij.psi.PsiElement
 import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import de.jensklingenberg.mpapt.model.Element
@@ -8,6 +9,10 @@ import org.godotengine.kotlin.entrygenerator.utils.castFromVariant
 import org.godotengine.kotlin.entrygenerator.utils.isCoreType
 import org.godotengine.kotlin.entrygenerator.utils.isPrimitive
 import org.jetbrains.kotlin.js.descriptorUtils.getJetTypeFqName
+import org.jetbrains.kotlin.psi.KtCallExpression
+import org.jetbrains.kotlin.psi.KtConstantExpression
+import org.jetbrains.kotlin.psi.KtStringTemplateExpression
+import org.jetbrains.kotlin.psi.KtValueArgumentList
 import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
 import org.jetbrains.kotlin.resolve.source.KotlinSourceElement
 import org.jetbrains.kotlin.types.asSimpleType
@@ -55,6 +60,9 @@ private fun Element.PropertyElement.generatePropertySetterFunctionBinding(index:
 }
 
 private fun Element.PropertyElement.generateDefaultValueGetter(index: Int): FunSpec {
+    if (!this.propertyDescriptor.isVar) {
+        throw IllegalStateException("The property ${this.propertyDescriptor.fqNameSafe} you annotated with @RegisterProperty is a val. You can only register properties which are mutable as Godot needs to be able to write")
+    }
     if (this.propertyDescriptor.isLateInit) {
         throw IllegalStateException("The property ${this.propertyDescriptor.fqNameSafe} you annotated with @RegisterProperty is a lateinit var. You can only register properties which have a default value!\nEx: var myProperty = false")
     }
@@ -62,20 +70,23 @@ private fun Element.PropertyElement.generateDefaultValueGetter(index: Int): FunS
         throw IllegalStateException("The property ${this.propertyDescriptor.fqNameSafe} you annotated with @RegisterProperty is a custom type ${this.propertyDescriptor.type}! This is not supported at the moment. Please export a godot or primitive type.")
     }
 
-    val defaultArgument: String = (this
+    val defaultArgumentPsi = (this
             .propertyDescriptor
             .source as KotlinSourceElement)
             .psi //source code representation of the property
             .children
-            .last() //value assignment as KtConstantExpression
-            .text //value as text representation in source code
+            .last() //value assignment as KtExpression
+
+    if (isContainingReference(defaultArgumentPsi)) {
+        throw IllegalStateException("You initialized the property ${this.propertyDescriptor.fqNameSafe} (which you annotated with @RegisterProperty) with a reference: ${defaultArgumentPsi.text}. This is not supported! initialize your property with a compile time constant")
+    }
 
     val fqTypeName = this.propertyDescriptor.type.asSimpleType().getJetTypeFqName(false)
 
-    val defaultValueString = if(fqTypeName.startsWith("kotlin")) {
-        defaultArgument
+    val defaultValueString = if (fqTypeName.startsWith("kotlin")) {
+        defaultArgumentPsi.text
     } else {
-        "${fqTypeName.substringBeforeLast(".")}.$defaultArgument"
+        "${fqTypeName.substringBeforeLast(".")}.${defaultArgumentPsi.text}"
     }
 
     return FunSpec
@@ -83,6 +94,22 @@ private fun Element.PropertyElement.generateDefaultValueGetter(index: Int): FunS
             .returns(ClassName("godot.core", "Variant"))
             .addStatement("return·%T($defaultValueString)", ClassName("godot.core", "Variant"))
             .build()
+}
+
+private fun isContainingReference(element: PsiElement): Boolean {
+    if (element !is KtConstantExpression && element !is KtStringTemplateExpression && element !is KtCallExpression) {
+        return true
+    }
+    element
+            .children
+            .filterIsInstance<KtValueArgumentList>()
+            .flatMap { it.children.flatMap { subChildren -> subChildren.children.toList() }.toList() }
+            .forEach {
+                if (isContainingReference(it)) { //recursive call to check all children for references
+                    return true
+                }
+            }
+    return false
 }
 
 private fun getBridgeReturnType(): ParameterizedTypeName {
