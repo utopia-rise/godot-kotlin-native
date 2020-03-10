@@ -97,11 +97,8 @@ class Class(
     }
 
     private fun generateConstructors(typeBuilder: TypeSpec.Builder, cOpaquePointerClass: ClassName) {
-        val superConstructorName = when {
-            isInstanciable && name != "Thread" -> "\"$name\""
-            isInstanciable && name == "Thread" -> "\"_Thread\""
-            else -> ""
-        }
+        val superConstructorName = if (isInstanciable) "\"$oldName\"" else ""
+
         typeBuilder.addFunction(
                 FunSpec.constructorBuilder()
                         .callSuperConstructor(superConstructorName)
