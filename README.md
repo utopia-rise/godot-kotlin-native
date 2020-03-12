@@ -2,6 +2,10 @@
 
 # Kotlin/Native wrapper for the Godot Game Engine
 
+## Release README
+
+[0.1.0-3.2](https://github.com/utopia-rise/godot-kotlin/blob/0.1.0-3.2/README.md)
+
 ## Overview
 
 This is a **Kotlin** language wrapper for the [**Godot**](https://godotengine.org/) game engine. It uses the [**GDNative**](https://godotengine.org/article/dlscript-here) utility to interact with **Godot**'s core api's. The wrapper provides you Godot API's as Kotlin classes, so you can write your game logic completely in Kotlin. It will be compiled into a dynamic library using [*Kotlin/Native*](https://kotlinlang.org/docs/reference/native-overview.html). It contains GDNative bindings which allows Godot core and Kotlin code interact with each other.
