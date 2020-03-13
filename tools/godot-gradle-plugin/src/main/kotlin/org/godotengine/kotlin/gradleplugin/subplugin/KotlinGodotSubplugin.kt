@@ -29,12 +29,12 @@ class KotlinGodotSubplugin : KotlinGradleSubplugin<AbstractCompile> {
     override fun getPluginArtifact(): SubpluginArtifact = SubpluginArtifact(
             groupId = "org.godotengine.kotlin",
             artifactId = "kotlin-compiler-plugin",
-            version = "0.1.0-3.2" // remember to bump this version in conjunction with the version in Dependencies from buildSrc
+            version = "0.1.1-3.2" // remember to bump this version in conjunction with the version in Dependencies from buildSrc
     )
 
     override fun getNativeCompilerPluginArtifact() = SubpluginArtifact(
             groupId = "org.godotengine.kotlin",
             artifactId = "kotlin-compiler-native-plugin",
-            version = "0.1.0-3.2" // remember to bump this version in conjunction with the version in Dependencies from buildSrc
+            version = "0.1.1-3.2" // remember to bump this version in conjunction with the version in Dependencies from buildSrc
     )
 }
