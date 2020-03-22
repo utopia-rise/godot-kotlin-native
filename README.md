@@ -13,6 +13,14 @@ You don't have to worry about any binding logic. Just write your game scripts li
 
 CI status: [![Build Status](https://travis-ci.com/utopia-rise/godot-kotlin.svg?branch=master)](https://travis-ci.com/utopia-rise/godot-kotlin)
 
+## Important notes
+
+The binding will be merged with https://github.com/raniejade/godot-kotlin.  
+The development will be in this repository in a new branch. Name: master-merge.
+We strongly don't recommend using this binding until the new binding is in place!  
+The development of the new binding will probably start by the end of week 13 of 2020 here in [this](https://github.com/utopia-rise/godot-kotlin/tree/master-merge) branch.  
+For further information and questions, visit the discord channel linked below.
+
 ## Getting started
 
 Look into [**Getting started**](./GETTING_STARTED.md) section to get more information.
