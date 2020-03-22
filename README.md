@@ -50,3 +50,54 @@ All merge relevant discussions and decisions will be made there so we recommend 
 
 \
 **TODO:** further documentation which is relevant for contributing to the merge after the second meeting in week 13
+
+### Discussed topics
+These topics are here for documentation purpose. They will be converted to individual issues:
+
+- Registration  
+    Using the existing annotation processing logic with some minor changes:  
+      
+    Adding TypeHint annotations:  
+    ```kotlin
+    @RegisterProperty
+    @IntRange(start = 10, end = 100, step = 2) 
+    val myProperty: Int = 100
+    ```  
+- Annotations as part of core
+- Signals  
+    Signals defined with generic functions with the number of arguments the signal has:  
+    ```kotlin
+    fun signal()  
+    fun <TYPE1> signal(paramName1: String)  
+    fun <TYPE1, TYPE2> signal(paramName1: String, paramName2: String)
+    ...
+    ```
+    Signals as parameters like in @raniejade's binding. Possible to define signal emition after property change:
+    ```kotlin
+     val signalReverseChanged by signal<Boolean>("someName") 
+    var reverse by Delegates.observable(signalReverseChanged.asListener())
+    ```
+- Gradle Build Script  
+    Build script setup like in @raniejade's binding but with parameter support:  
+    ```kotlin
+    val platform by extra
+    val signingIdenty by extra 
+    
+    godot {
+        platforms(platform, android32, android64)
+        libraries {
+          val nameOfTheProject by creating {
+            //individual configurations
+          }
+        }
+    }
+  
+    val signingIdenty by extra 
+    val signIos by tasks.getting<SigningWhatever> { 
+        identity = signingIdentity 
+    } 
+    ```
+- Intellij plugin with signal navigation
+- Versioning:  
+    Semantic, with supported godot version in artefact name:  
+    `com.utopia-rise:godot-library-godot_version:x.y.z`
