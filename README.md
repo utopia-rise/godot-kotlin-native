@@ -1,5 +1,12 @@
 **TODO:** replace this README once the rework is ready to be merged!
 
+---
+**Important**
+
+Development will start here after the second Maintainers meeting in week 13
+
+---
+
 # Merge Development branch
 This is the Development Branch for the merge of our binding with the one from @raniejade at 
 https://github.com/raniejade/godot-kotlin
