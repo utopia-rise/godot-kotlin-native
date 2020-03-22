@@ -1,62 +1,45 @@
-![Kotlin GDNative Logo](https://imgur.com/dSL1Vch.png)
+**TODO:** replace this README once the rework is ready to be merged!
 
-# Kotlin/Native wrapper for the Godot Game Engine
+# Merge Development branch
+This is the Development Branch for the merge of our binding with the one from @raniejade at 
+https://github.com/raniejade/godot-kotlin
 
-## Release README
+## Merge Development Notes
 
-[0.1.0-3.2](https://github.com/utopia-rise/godot-kotlin/blob/0.1.0-3.2/README.md)
+### Overview
 
-## Overview
+**Project Structure:**
+```
+.
+├── buildSrc
+│   ├── dependency version definitions
+│   └── api classes codegeneration
+├── entry-generation
+│   ├── godot-entry-generator
+│   ├── godot-annotation-processor
+│   ├── godot-compiler-native-plugin
+│   └── godot-compiler-plugin
+├── plugins
+│   ├── godot-gradle-plugin
+│   └── godot-idea-plugin
+├── godot-kotlin
+│   ├── godot-headers (git submodule)
+│   ├── godot-library
+│   ├── godot-coroutines
+│   ├── godot-analytics
+│   └── more-extensions
+└── samples
+    ├── mini-games
+    ├── bunny-benchmark
+    ├── platformer-3d
+    └── follow-coroutines
+```
 
-This is a **Kotlin** language wrapper for the [**Godot**](https://godotengine.org/) game engine. It uses the [**GDNative**](https://godotengine.org/article/dlscript-here) utility to interact with **Godot**'s core api's. The wrapper provides you Godot API's as Kotlin classes, so you can write your game logic completely in Kotlin. It will be compiled into a dynamic library using [*Kotlin/Native*](https://kotlinlang.org/docs/reference/native-overview.html). It contains GDNative bindings which allows Godot core and Kotlin code interact with each other.
-You don't have to worry about any binding logic. Just write your game scripts like you would for [GDScript](https://docs.godotengine.org/en/3.1/getting_started/scripting/gdscript/gdscript_basics.html) or [C#](https://docs.godotengine.org/en/3.1/getting_started/scripting/c_sharp/).
+### Contribution
+If you want to contribute to the merge look at the issues page and filter for the label 
+[merge](https://github.com/utopia-rise/godot-kotlin/issues?q=is%3Aissue+is%3Aopen+label%3Amerge+). Search for an issue 
+you want to implement and comment on it. We'll assign it to you if appropriate and add you to our merge discord channel.  
+All merge relevant discussions and decisions will be made there so we recommend having it.
 
-CI status: [![Build Status](https://travis-ci.com/utopia-rise/godot-kotlin.svg?branch=master)](https://travis-ci.com/utopia-rise/godot-kotlin)
-
-## Getting started
-
-Look into [**Getting started**](./GETTING_STARTED.md) section to get more information.
-
-## API differences from GDScript
-
-Look into [**API differences from GDScript**](./API_DIFFERENCES.md) section to get more information.
-
-## Registering classes
-
-Look into [**Registration**](./REGISTRATION.md) section to get more information.
-
-## Compiling from sources
-
-Look into [**Compiling from source**](COMPILING_FROM_SOURCE.md) section to get more information.
-
-## Roadmap
-
-### 1.0.0-3.2 release version:
-[Annotation processing enhanced with expect and actual implementation](https://github.com/utopia-rise/godot-kotlin/issues/2#issuecomment-589839699).  
-[Make test to be sure of core functionality (like missing set in dictionary), maybe port 2D platform to Kotlin native](https://github.com/utopia-rise/godot-kotlin/issues/37).  
-[Implement performance test](https://github.com/utopia-rise/godot-kotlin/issues/38).  
-[Project setup](https://github.com/utopia-rise/godot-kotlin/pull/33).  
-
-Later:
-Change cast that is actually horrible with infix methods.
-
-## Developer discussion
-
-Ask questions and collaborate on Discord:
-https://discord.gg/qSU2EQs
-
-## Projects we use
-
-Look into [**Projects we use**](./PROJECTS_WE_USE.md) section to see which projects we use internally.
-
-## Authors
-
-All authors are indicated in [*CONTRIBUTORS*](https://github.com/utopia-rise/godot-kotlin/graphs/contributors) section on **GitHub**.  
-This repo is a successor of [**MrAkakuy's** kotlin bindings for godot](https://github.com/MrAkakuy/kotlin-godot-wrapper), who did a great work with his project. We really thank him, without him this project would not exist.
-
-If you have any questions, issues or feature suggestions you can write an [*Issue* here](https://github.com/utopia-rise/godot-kotlin/issues/new/choose).
-
-[License](./LICENSE)
-
-## Other bindings
-There is another binding being developed by raniejade at [raniejade/godot-kotlin](https://github.com/raniejade/godot-kotlin), please check it out!
+\
+**TODO:** further documentation which is relevant for contributing to the merge after the second meeting in week 13
