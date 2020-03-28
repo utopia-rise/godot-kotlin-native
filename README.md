@@ -1,19 +1,10 @@
 **TODO:** replace this README once the rework is ready to be merged!
 
----
-**Important**
-
-Development will start here after the second Maintainers meeting in week 13
-
----
-
 # Merge Development branch
 This is the Development Branch for the merge of our binding with the one from @raniejade at 
 https://github.com/raniejade/godot-kotlin
 
-## Merge Development Notes
-
-### Overview
+## Overview
 
 **Project Structure:**
 ```
@@ -43,16 +34,23 @@ https://github.com/raniejade/godot-kotlin
     └── follow-coroutines
 ```
 
-### Contribution
+## Contribution
 If you want to contribute to the merge look at the issues page and filter for the label 
 [merge](https://github.com/utopia-rise/godot-kotlin/issues?q=is%3Aissue+is%3Aopen+label%3Amerge+). Search for an issue 
 you want to implement and comment on it. We'll assign it to you if appropriate and add you to our merge discord channel.  
 All merge relevant discussions and decisions will be made there so we recommend having it.
 
-\
-**TODO:** further documentation which is relevant for contributing to the merge after the second meeting in week 13
+### Guidelines:
+- **CodeStyle:**  
+We enforce the code style do match the official kotlin [coding conventions](https://kotlinlang.org/docs/reference/coding-conventions.html). Read there on how to set those up for your IDE.  
+We will enforce this later on through CI and linting.  
+- **Branching:**  
+We do branching like described in `git-flow`.
 
-### Discussed topics
+Each Issue has a Maintainer that is the "supervisor" for the general topic the issue belongs to. Discuss implementation details with this maintainer.
+
+
+## Discussed topics
 These topics are here for documentation purpose. They will be converted to individual issues:
 
 - Registration  
