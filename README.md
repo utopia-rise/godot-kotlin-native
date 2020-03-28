@@ -1,19 +1,10 @@
 **TODO:** replace this README once the rework is ready to be merged!
 
----
-**Important**
-
-Development will start here after the second Maintainers meeting in week 13
-
----
-
 # Merge Development branch
 This is the Development Branch for the merge of our binding with the one from @raniejade at 
 https://github.com/raniejade/godot-kotlin
 
-## Merge Development Notes
-
-### Overview
+## Overview
 
 **Project Structure:**
 ```
@@ -43,7 +34,7 @@ https://github.com/raniejade/godot-kotlin
     └── follow-coroutines
 ```
 
-### Contribution
+## Contribution
 If you want to contribute to the merge look at the issues page and filter for the label 
 [merge](https://github.com/utopia-rise/godot-kotlin/issues?q=is%3Aissue+is%3Aopen+label%3Amerge+). Search for an issue 
 you want to implement and comment on it. We'll assign it to you if appropriate and add you to our merge discord channel.  
