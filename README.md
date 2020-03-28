@@ -19,8 +19,9 @@ https://github.com/raniejade/godot-kotlin
 ```
 .
 ├── buildSrc
-│   ├── dependency version definitions
-│   └── api classes codegeneration
+│   └── src/main/kotlin
+│       ├── VersionCodes.kt
+│       └── godot/codegen
 ├── entry-generation
 │   ├── godot-entry-generator
 │   ├── godot-annotation-processor
