@@ -20,7 +20,7 @@ https://github.com/raniejade/godot-kotlin
 .
 ├── buildSrc
 │   └── src/main/kotlin
-│       ├── VersionCodes.kt
+│       ├── DependenciesVersions.kt
 │       └── godot/codegen
 ├── entry-generation
 │   ├── godot-entry-generator
