@@ -17,7 +17,7 @@ class IncludeDsl(val root: String) {
     settings.include(project)
     settings.project(":$project").also {
       it.projectDir = file("$root/$project")
-      it.buildFileName = "$root/$project/build.gradle.kts"
+      it.buildFileName = "build.gradle.kts"
     }
   }
 }
