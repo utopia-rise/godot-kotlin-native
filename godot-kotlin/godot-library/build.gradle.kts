@@ -1,3 +1,3 @@
 plugins {
-  kotlin("multiplatform")
+    kotlin("multiplatform")
 }
