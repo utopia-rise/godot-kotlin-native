@@ -10,6 +10,9 @@ open class GodotExtension(objects: ObjectFactory) {
   val cleanupGeneratedFiles = objects.property<Boolean>()
   val gdnsDir = objects.fileProperty()
   val platforms = objects.listProperty<Platform>()
+
+  internal val entrySourceDir = objects.directoryProperty()
+
   private var configureTargets: KotlinNativeTarget.() -> Unit = {}
 
   fun platforms(vararg platforms: Platform) {
@@ -18,5 +21,9 @@ open class GodotExtension(objects: ObjectFactory) {
 
   fun configureTargets(block: KotlinNativeTarget.() -> Unit) {
     this.configureTargets = block
+  }
+
+  internal fun configureTarget(target: KotlinNativeTarget) {
+    configureTargets(target)
   }
 }
