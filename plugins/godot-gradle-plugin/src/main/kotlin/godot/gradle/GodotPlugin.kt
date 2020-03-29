@@ -23,7 +23,7 @@ class GodotPlugin : Plugin<Project> {
     private fun setupExtensionDefaults(project: Project, godot: GodotExtension) {
         with(godot) {
             platforms(*Platform.values())
-            debug.set(false)
+            debug.set(true)
             cleanupGeneratedFiles.set(true)
             gdnsDir.set(project.file("src/gdns/kotlin"))
             entrySourceDir.set(project.buildDir.resolve("godot-entry"))
