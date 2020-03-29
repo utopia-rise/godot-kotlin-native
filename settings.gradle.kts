@@ -1,13 +1,26 @@
-include(":wrapper")
-include(":wrapper:godot-library")
-include(":wrapper:godot-library-extension")
-include(":tools:api-classes-generator")
-include(":tools:entry-generator")
-include(":tools:godot-gradle-plugin")
-include(":tools:annotations")
-include(":tools:annotations-internal")
-include(":tools:godot-annotation-processor")
-include(":tools:kotlin-compiler-plugin")
-include(":tools:kotlin-compiler-native-plugin")
+rootProject.name = "godot-kotlin"
 
-enableFeaturePreview("GRADLE_METADATA")
+subdir("godot-kotlin") {
+    include("godot-library")
+}
+
+subdir("plugins") {
+    include("godot-gradle-plugin")
+}
+
+subdir("entry-generator") {
+    include("godot-entry-generator")
+}
+
+class IncludeDsl(val root: String) {
+    fun include(project: String) {
+        settings.include(project)
+        settings.project(":$project").also {
+            it.projectDir = file("$root/$project")
+        }
+    }
+}
+
+fun subdir(root: String, block: IncludeDsl.() -> Unit) {
+    block(IncludeDsl(root))
+}
