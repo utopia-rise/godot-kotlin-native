@@ -16,8 +16,8 @@ gradlePlugin {
 }
 
 pluginBundle {
-    website = "https://github.com/raniejade/godot-kotlin"
-    vcsUrl = "https://github.com/raniejade/godot-kotlin.git"
+    website = "https://github.com/utopia-rise/godot-kotlin"
+    vcsUrl = "https://github.com/utopia-rise/godot-kotlin.git"
     tags = listOf("kotlin", "godot", "gamedev")
 
     mavenCoordinates {
