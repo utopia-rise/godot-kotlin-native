@@ -6,24 +6,24 @@ import org.gradle.kotlin.dsl.property
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 open class GodotExtension(objects: ObjectFactory) {
-  val debug = objects.property<Boolean>()
-  val cleanupGeneratedFiles = objects.property<Boolean>()
-  val gdnsDir = objects.fileProperty()
-  val platforms = objects.listProperty<Platform>()
+    val debug = objects.property<Boolean>()
+    val cleanupGeneratedFiles = objects.property<Boolean>()
+    val gdnsDir = objects.fileProperty()
+    val platforms = objects.listProperty<Platform>()
 
-  internal val entrySourceDir = objects.directoryProperty()
+    internal val entrySourceDir = objects.directoryProperty()
 
-  private var configureTargets: KotlinNativeTarget.() -> Unit = {}
+    private var configureTargets: KotlinNativeTarget.() -> Unit = {}
 
-  fun platforms(vararg platforms: Platform) {
-    this.platforms.set(platforms.toList())
-  }
+    fun platforms(vararg platforms: Platform) {
+        this.platforms.set(platforms.toList())
+    }
 
-  fun configureTargets(block: KotlinNativeTarget.() -> Unit) {
-    this.configureTargets = block
-  }
+    fun configureTargets(block: KotlinNativeTarget.() -> Unit) {
+        this.configureTargets = block
+    }
 
-  internal fun configureTarget(target: KotlinNativeTarget) {
-    configureTargets(target)
-  }
+    internal fun configureTarget(target: KotlinNativeTarget) {
+        configureTargets(target)
+    }
 }

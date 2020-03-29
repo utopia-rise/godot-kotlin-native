@@ -80,7 +80,7 @@ class GodotPlugin : Plugin<Project> {
                     // this ensure that the dummy target is compiled first so that
                     // the entry files are generated before the actual targets gets compiled.
                     target.compilations.getByName("main").compileKotlinTask.dependsOn(
-                      dummyTarget.compilations.getByName("main").compileKotlinTask
+                        dummyTarget.compilations.getByName("main").compileKotlinTask
                     )
                     binaries {
                         val buildType = if (godot.debug.get()) {
