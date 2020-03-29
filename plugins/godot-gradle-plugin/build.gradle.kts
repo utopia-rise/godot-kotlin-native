@@ -7,7 +7,7 @@ plugins {
 gradlePlugin {
   plugins {
     create("godotPlugin") {
-      id = "com.utopia-rise:godot-kotlin"
+      id = "com.utopia-rise.godot-kotlin"
       displayName = "Gradle plugin for godot-kotlin"
       implementationClass = "godot.gradle.GodotPlugin"
     }
@@ -28,7 +28,7 @@ pluginBundle {
 }
 
 dependencies {
-  implementation(kotlin("stdlib"))
-  implementation(kotlin("gradle-plugin"))
-  implementation(kotlin("gradle-plugin-api"))
+    implementation(kotlin("stdlib"))
+    implementation(kotlin("gradle-plugin"))
+    implementation(kotlin("gradle-plugin-api"))
 }
