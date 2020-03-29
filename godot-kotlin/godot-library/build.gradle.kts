@@ -4,11 +4,6 @@ plugins {
     kotlin("multiplatform")
 }
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
-}
-
 //TODO: this needs to be properly configured! This is just a basic setup to be able to implement the annotations
 kotlin {
     linuxX64()
