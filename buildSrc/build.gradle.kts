@@ -3,7 +3,11 @@ plugins {
 }
 
 repositories {
-    mavenLocal()
-    mavenCentral()
     jcenter()
+    mavenCentral()
+    gradlePluginPortal()
+}
+
+dependencies {
+    implementation(kotlin("gradle-plugin", version = "1.3.71"))
 }
