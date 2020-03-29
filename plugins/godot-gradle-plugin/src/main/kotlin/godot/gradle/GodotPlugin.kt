@@ -71,10 +71,10 @@ class GodotPlugin : Plugin<Project> {
                     Platform.OSX_X64 -> mpp.macosX64("macosX64")
                     Platform.ANDROID_X32 -> mpp.androidNativeX64("androidX32")
                     Platform.ANDROID_X64 -> mpp.androidNativeX64("androidX64")
-                    Platform.ANDROID_ARM_X32 -> mpp.androidNativeArm32("androidArm32")
-                    Platform.ANDROID_ARM_X64 -> mpp.androidNativeArm64("androidArm64")
+                    Platform.ANDROID_ARM32 -> mpp.androidNativeArm32("androidArm32")
+                    Platform.ANDROID_ARM64 -> mpp.androidNativeArm64("androidArm64")
                     Platform.IOS_X64 -> mpp.iosX64("iosX64")
-                    Platform.IOS_ARM_X64 -> mpp.iosArm64("iosArm64")
+                    Platform.IOS_ARM64 -> mpp.iosArm64("iosArm64")
                     else -> throw AssertionError("Unsupported platform: $platform")
                 }
                 target.configureSourceSets(true)
