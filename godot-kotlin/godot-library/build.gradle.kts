@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+
 plugins {
     kotlin("multiplatform")
 }
@@ -15,7 +17,7 @@ kotlin {
 
     val nativeMain = sourceSets.create("nativeMain")
 
-    targets.withType<org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget> {
+    targets.withType<KotlinNativeTarget> {
         compilations.getByName("main").defaultSourceSet { dependsOn(nativeMain) }
     }
 }
