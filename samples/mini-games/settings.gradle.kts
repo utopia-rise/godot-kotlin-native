@@ -6,7 +6,7 @@ includeBuild("../../") {
 
 pluginManagement {
     resolutionStrategy.eachPlugin {
-        when(requested.id.id) {
+        when (requested.id.id) {
             "com.utopia-rise.godot-kotlin" -> useModule("com.utopia-rise:godot-gradle-plugin:0.1.0")
         }
     }
