@@ -1,7 +1,7 @@
 package godot.codegen
 
 import com.beust.klaxon.Json
-import java.lang.Class
+import com.squareup.kotlinpoet.*
 
 
 open class Method(
