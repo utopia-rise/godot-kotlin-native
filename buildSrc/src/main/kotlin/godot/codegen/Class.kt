@@ -1,9 +1,9 @@
 package godot.codegen
 
 import com.beust.klaxon.Json
-import java.io.File
-import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.*
+import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
+import java.io.File
 
 
 class Class(
