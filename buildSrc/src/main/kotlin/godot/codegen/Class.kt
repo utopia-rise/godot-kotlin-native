@@ -38,11 +38,10 @@ class Class(
     }
 
 
-    fun generate(path: String, tree: Graph<Class>, icalls: MutableSet<ICall>) {
+    fun generate(outputDir: File, tree: Graph<Class>, icalls: MutableSet<ICall>) {
         applyGettersAndSettersForProperties()
         if (!shouldGenerate) return
 
-        val outputDirectory = getPathForGeneratedFiles(path)
         val packageName = "godot"
         val className = ClassName(packageName, name)
 
@@ -74,7 +73,7 @@ class Class(
 
         fileBuilder
                 .build()
-                .writeTo(outputDirectory)
+                .writeTo(outputDir)
     }
 
     private fun applyGettersAndSettersForProperties() {
@@ -83,12 +82,6 @@ class Class(
                 property.applyGetterOrSetter(method)
             }
         }
-    }
-
-    private fun getPathForGeneratedFiles(path: String): File {
-        val outputDir = File(path)
-        outputDir.parentFile.mkdirs()
-        return outputDir
     }
 
     private fun createTypeBuilder(className: ClassName, packageName: String): TypeSpec.Builder {
