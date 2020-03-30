@@ -100,3 +100,7 @@ These topics are here for documentation purpose. They will be converted to indiv
 - Versioning:  
     Semantic, with supported godot version in artefact name:  
     `com.utopia-rise:godot-library-godot_version:x.y.z`
+    
+    
+## IntelliJ IDEA Setup
+IntelliJ IDEA is our IDE of choice for developing `godot-kotlin`. To import this project, open Intellij IDEA and click `Import Project` then select the `build.gradle.kts` file found in the root of the repository. The initial import will take a while, but once done you are ready to hack away!

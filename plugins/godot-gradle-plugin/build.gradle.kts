@@ -32,3 +32,27 @@ dependencies {
     implementation(kotlin("gradle-plugin"))
     implementation(kotlin("gradle-plugin-api"))
 }
+
+tasks {
+    val sourceJar by creating(Jar::class) {
+        archiveBaseName.set("godot-gradle-plugin")
+        archiveVersion.set(project.version.toString())
+        archiveClassifier.set("sources")
+        from(sourceSets["main"].allSource)
+    }
+}
+
+publishing {
+    publications {
+        // this is only used for publishing locally.
+        val godotPlugin by creating(MavenPublication::class) {
+            pom {
+                groupId = "com.utopia-rise"
+                artifactId = "godot-gradle-plugin"
+                version = "${project.version}"
+            }
+            from(components.getByName("java"))
+            artifact(tasks.getByName("sourceJar"))
+        }
+    }
+}
