@@ -8,8 +8,8 @@ subdir("plugins") {
     include("godot-gradle-plugin")
 }
 
-subdir("entry-generator") {
-    include("godot-entry-generator")
+subdir("entry-generation") {
+    include("godot-annotation-processor")
 }
 
 // TODO: remove this once the samples are not using the local artifacts
