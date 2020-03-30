@@ -252,6 +252,13 @@ annotation class NodePathValidTypes
 annotation class SaveFile(vararg val extensions: String = [])
 
 /**
+ * Can only be used on Int properties!
+ */
+@Target(AnnotationTarget.PROPERTY)
+@Retention(AnnotationRetention.RUNTIME)
+annotation class IntIsObjectId
+
+/**
  * Can only be used on String and File properties!
  */
 @Target(AnnotationTarget.PROPERTY)
