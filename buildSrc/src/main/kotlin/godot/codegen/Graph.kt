@@ -1,7 +1,5 @@
 package godot.codegen
 
-import Property
-
 class Graph<T>(elements: List<T>, sortFun: (T, T) -> Boolean) {
     val nodes = mutableListOf<Node<T>>()
 

@@ -3,6 +3,7 @@ package godot.codegen
 import com.beust.klaxon.Klaxon
 import java.io.File
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
+import com.squareup.kotlinpoet.*
 
 const val GODOT_API_PATH = "../../wrapper/lib/godot_headers/api.json"
 const val GENERATED_PATH = "../../wrapper/godot-library/src/main/kotlin/godot/generated/"
