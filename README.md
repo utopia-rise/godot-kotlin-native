@@ -103,4 +103,4 @@ These topics are here for documentation purpose. They will be converted to indiv
     
     
 ## IntelliJ IDEA Setup
-IntelliJ IDEA is our IDE of choice for developing `godot-kotlin`. To import this project, open Intellij IDEA and click `Import Project` then select the `build.gradle.kts` file found in the root of the repository. The initial import will take a while, but once done you are ready to hack away!
+IntelliJ IDEA is our IDE of choice for developing `godot-kotlin`. Before importing, please run the following command: `./gradlew publishToMavenLocal -PignoreSamples`. This command is required to import the samples into IntelliJ IDEA. Once done, open Intellij IDEA and click `Import Project` then select the `build.gradle.kts` file found in the root of the repository. The initial import will take a while, but once done you are ready to hack away!
