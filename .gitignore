@@ -30,3 +30,4 @@ build
 .idea/**/libraries
 *.iml
 .idea/modules.xml
+.idea/compiler.xml
