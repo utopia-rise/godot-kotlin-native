@@ -77,20 +77,6 @@ annotation class Flags
  */
 @Target(AnnotationTarget.PROPERTY)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class Layers2DPhysics
-
-/**
- * Can only be used on Int properties!
- */
-@Target(AnnotationTarget.PROPERTY)
-@Retention(AnnotationRetention.RUNTIME)
-annotation class Layers3DPhysics
-
-/**
- * Can only be used on Int properties!
- */
-@Target(AnnotationTarget.PROPERTY)
-@Retention(AnnotationRetention.RUNTIME)
 annotation class Layers2DRender
 
 /**
@@ -98,7 +84,21 @@ annotation class Layers2DRender
  */
 @Target(AnnotationTarget.PROPERTY)
 @Retention(AnnotationRetention.RUNTIME)
+annotation class Layers2DPhysics
+
+/**
+ * Can only be used on Int properties!
+ */
+@Target(AnnotationTarget.PROPERTY)
+@Retention(AnnotationRetention.RUNTIME)
 annotation class Layers3DRender
+
+/**
+ * Can only be used on Int properties!
+ */
+@Target(AnnotationTarget.PROPERTY)
+@Retention(AnnotationRetention.RUNTIME)
+annotation class Layers3DPhysics
 
 /**
  * Can only be used on String and File properties!
