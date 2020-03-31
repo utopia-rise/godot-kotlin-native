@@ -155,7 +155,7 @@ class Class(
                         cOpaquePointerClass,
                         KModifier.PRIVATE, KModifier.FINAL
                 )
-                .delegate("lazy{ %M(\"$name\", \"$oldName\") }", MemberName("godot.utils", "getSingleton"))
+                .delegate("lazy{ %M(\"$name\", \"$oldName\") }", MemberName("godot.internal", "getSingleton"))
                 .build()
     }
 
@@ -177,7 +177,7 @@ class Class(
                 FunSpec.builder("from")
                         .addModifiers(KModifier.INFIX)
                         .addParameter("other", ClassName("godot.core", "Variant"))
-                        .addStatement("return %M($name(\"\"), other)", MemberName("godot.utils", "fromVariant"))
+                        .addStatement("return %M($name(\"\"), other)", MemberName("godot.internal", "fromVariant"))
                         .build()
         )
 
@@ -254,7 +254,7 @@ class Class(
                                         .parameterizedBy(ClassName("godot.gdnative", "godot_method_bind"))
                         ).delegate("%L%M(\"${oldName}\",\"${method.oldName}\")%L",
                                 "lazy{ ",
-                                MemberName("godot.utils", "getMB"),
+                                MemberName("godot.internal", "getMB"),
                                 " }"
                         ).addModifiers(KModifier.PRIVATE, KModifier.FINAL).build()
                 )

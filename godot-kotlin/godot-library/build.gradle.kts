@@ -13,7 +13,7 @@ kotlin {
     targets.withType<KotlinNativeTarget> {
         compilations.getByName("main") {
             defaultSourceSet {
-                kotlin.srcDirs("src/main/nativeGen/kotlin")
+                kotlin.srcDirs("src/main/nativeGen/kotlin", "src/main/nativeInternal/kotlin")
             }
             val gdnative by cinterops.creating {
                 defFile("src/main/nativeInterop/cinterop/godot.def")
@@ -23,9 +23,13 @@ kotlin {
     }
 }
 
+val generateAPI by tasks.creating(GenerateApiTask::class) {
+    source.set(project.file("$rootDir/godot-kotlin/godot-headers/api.json"))
+    outputDirectory.set(project.file("$rootDir/godot-kotlin/godot-library/src/main/nativeGen/kotlin/"))
+}
+
 tasks {
-    val generateAPI by creating(GenerateApiTask::class) {
-        source.set(project.file("$rootDir/godot-kotlin/godot-headers/api.json"))
-        outputDirectory.set(project.file("$rootDir/godot-kotlin/godot-library/src/main/nativeGen/kotlin/"))
+    build {
+        dependsOn(generateAPI)
     }
 }
