@@ -21,7 +21,7 @@ pluginBundle {
     tags = listOf("kotlin", "godot", "gamedev")
 
     mavenCoordinates {
-        groupId = "com.utopia-rise"
+        groupId = "${project.group}"
         artifactId = "godot-gradle-plugin"
         version = "${project.version}"
     }
@@ -47,7 +47,7 @@ publishing {
         // this is only used for publishing locally.
         val godotPlugin by creating(MavenPublication::class) {
             pom {
-                groupId = "com.utopia-rise"
+                groupId = "${project.group}"
                 artifactId = project.name
                 version = "${project.version}"
             }

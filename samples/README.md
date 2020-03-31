@@ -5,7 +5,7 @@ The following will show you how to test out a local build of godot-kotlin.
 For the moment, trying out the samples requires publishing the project locally. In order to do so,
 just run the following command:
 ```shell script
-./gradlew publishToMavenLocal
+./gradlew publishToMavenLocal -PignoreSamples
 ```
 
 ## Configure samples to use local artifacts
