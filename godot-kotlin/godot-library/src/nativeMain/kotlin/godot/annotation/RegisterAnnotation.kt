@@ -4,7 +4,7 @@ import godot.registration.RPCMode
 
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class RegisterClass
+annotation class RegisterClass(val isTool: Boolean = false)
 
 @Target(AnnotationTarget.PROPERTY)
 @Retention(AnnotationRetention.RUNTIME)
