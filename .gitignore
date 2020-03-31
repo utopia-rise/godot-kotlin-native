@@ -28,3 +28,4 @@ build
 .idea/**/gradle.xml
 .idea/**/libraries
 *.iml
+.idea/modules.xml
