@@ -12,6 +12,15 @@ subdir("entry-generator") {
     include("godot-entry-generator")
 }
 
+// TODO: remove this once the samples are not using the local artifacts
+val ignoreSamples: String? by extra
+
+// include the samples as composite builds
+// so they get included in IntelliJ IDEA!
+if (ignoreSamples == null) {
+    includeBuild("samples/mini-games")
+}
+
 class IncludeDsl(val root: String) {
     fun include(project: String) {
         settings.include(project)
