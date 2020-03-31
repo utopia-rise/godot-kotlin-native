@@ -11,6 +11,7 @@ build
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
+.idea/misc.xml
 
 # Generated files
 .idea/**/contentModel.xml
@@ -27,3 +28,6 @@ build
 # Gradle
 .idea/**/gradle.xml
 .idea/**/libraries
+*.iml
+.idea/modules.xml
+.idea/compiler.xml
