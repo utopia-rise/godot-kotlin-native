@@ -9,9 +9,10 @@ import org.jetbrains.kotlin.descriptors.FunctionDescriptor
 import org.jetbrains.kotlin.descriptors.PropertyDescriptor
 import org.jetbrains.kotlin.platform.TargetPlatform
 import java.lang.instrument.IllegalClassFormatException
-import java.nio.file.Paths
 
-class GodotAnnotationProcessor : AbstractProcessor() {
+class GodotAnnotationProcessor(
+    private val entryGenerationOutputDir: String
+) : AbstractProcessor() {
     override fun getSupportedAnnotationTypes(): Set<String> =
         setOf(
             "godot.annotation.RegisterClass",
@@ -94,13 +95,5 @@ class GodotAnnotationProcessor : AbstractProcessor() {
 
     override fun processingOver() {
         //TODO: entry generation
-    }
-
-    /**
-     * Returns the path as a String to which the generated code should be written
-     * @return directory path to where the generated code should be written to as a String
-     */
-    private fun getKaptGeneratedDirectory(): String {
-        return "${Paths.get("").toAbsolutePath()}/build/godot/entries"
     }
 }
