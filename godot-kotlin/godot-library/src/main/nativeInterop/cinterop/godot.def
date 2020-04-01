@@ -1,0 +1,2 @@
+package = godot.gdnative
+headers = gdnative_api_struct.gen.h registrations.h
