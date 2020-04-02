@@ -1,3 +1,4 @@
+import godot.tasks.GenerateApiTask
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import com.jfrog.bintray.gradle.tasks.BintrayUploadTask
 import org.gradle.api.publish.maven.internal.artifact.FileBasedMavenArtifact
@@ -49,6 +50,16 @@ kotlin {
     }
 }
 
+val generateAPI by tasks.creating(GenerateApiTask::class) {
+    source.set(project.file("$rootDir/godot-kotlin/godot-headers/api.json"))
+    outputDirectory.set(project.file("$rootDir/godot-kotlin/godot-library/src/nativeGen/kotlin/"))
+}
+
+tasks {
+    build {
+        dependsOn(generateAPI)
+    }
+}
 tasks {
     build {
         finalizedBy(publishToMavenLocal)
