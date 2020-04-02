@@ -11,13 +11,10 @@ kotlin {
     mingwX64("windows")
 
     val internal = sourceSets.create("nativeInternal")
-    val generated = sourceSets.create("nativeGen")
-    val core = sourceSets.create("nativeCore")
-    val public = sourceSets.create("nativePublic")
+    val core = sourceSets.create("nativeCore") { dependsOn(internal) }
+    val generated = sourceSets.create("nativeGen") { dependsOn(core) }
+    val public = sourceSets.create("nativePublic") { dependsOn(generated) }
 
-    core.dependsOn(internal)
-    generated.dependsOn(core)
-    public.dependsOn(generated)
 
     targets.withType<KotlinNativeTarget> {
         compilations.getByName("main") {
