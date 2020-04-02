@@ -10,14 +10,26 @@ kotlin {
     linuxX64("linux")
     mingwX64("windows")
 
+    val internal = sourceSets.create("nativeInternal")
+    val generated = sourceSets.create("nativeGen")
+    val core = sourceSets.create("nativeCore")
+    val public = sourceSets.create("nativePublic")
+
+    core.dependsOn(internal)
+    generated.dependsOn(core)
+    public.dependsOn(generated)
+
     targets.withType<KotlinNativeTarget> {
         compilations.getByName("main") {
             defaultSourceSet {
-                kotlin.srcDirs("src/main/nativeGen/kotlin", "src/main/nativeInternal/kotlin", "src/main/nativeCore/kotlin", "src/main/nativePublic/kotlin")
+                dependsOn(internal)
+                dependsOn(generated)
+                dependsOn(core)
+                dependsOn(public)
             }
             val gdnative by cinterops.creating {
-                defFile("src/main/nativeInterop/cinterop/godot.def")
-                includeDirs("$rootDir/godot-kotlin/godot-headers/", "src/main/nativeInterop/cinterop")
+                defFile("src/nativeInterop/cinterop/godot.def")
+                includeDirs("$rootDir/godot-kotlin/godot-headers/", "src/nativeInterop/cinterop")
             }
         }
     }
