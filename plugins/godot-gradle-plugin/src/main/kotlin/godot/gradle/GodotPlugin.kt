@@ -2,9 +2,11 @@ package godot.gradle
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.tasks.Delete
 import org.gradle.internal.os.OperatingSystem
 import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.getByType
+import org.gradle.kotlin.dsl.register
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
@@ -63,6 +65,15 @@ class GodotPlugin : Plugin<Project> {
 
             val buildTask = project.tasks.getByName("build")
 
+            // clean up task
+            if (godot.cleanupGeneratedFiles.get()) {
+                val cleanGeneratedFilesTask = project.tasks.register<Delete>("cleanGeneratedFiles") {
+                    group = GODOT_TASK_GROUP
+                    delete(godot.gdnsDir.get())
+                }
+                buildTask.dependsOn(cleanGeneratedFilesTask)
+            }
+
             // create the targets and connect it to the main source set
             godot.platforms.get().forEach { platform ->
                 val target = when (platform) {
@@ -93,7 +104,7 @@ class GodotPlugin : Plugin<Project> {
                             // this will create a task dependency
                             // build -> build<Target> -> link<BuildType><Target>
                             project.tasks.register("build${target.name.capitalize()}") {
-                                group = "Godot"
+                                group = GODOT_TASK_GROUP
                                 dependsOn(linkTask)
                                 buildTask.dependsOn(this)
                             }
@@ -108,5 +119,6 @@ class GodotPlugin : Plugin<Project> {
     companion object {
         const val MAIN_SOURCE_SET_NAME = "godotMain"
         const val TEST_SOURCE_SET_NAME = "godotTest"
+        const val GODOT_TASK_GROUP = "Godot"
     }
 }
