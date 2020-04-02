@@ -6,13 +6,28 @@ plugins {
 
 //TODO: this needs to be properly configured! This is just a basic setup to be able to implement the annotations
 kotlin {
-    linuxX64()
-    mingwX64()
-    macosX64()
+    macosX64("macos")
+    linuxX64("linux")
+    mingwX64("windows")
 
-    val nativeMain = sourceSets.create("nativeMain")
+    val internalSourceSet = sourceSets.create("nativeInternal")
+    val coreSourceSet = sourceSets.create("nativeCore") { dependsOn(internalSourceSet) }
+    val generatedSourceSet = sourceSets.create("nativeGen") { dependsOn(coreSourceSet) }
+    val publicSourceSet = sourceSets.create("nativePublic") { dependsOn(generatedSourceSet) }
+
 
     targets.withType<KotlinNativeTarget> {
-        compilations.getByName("main").defaultSourceSet { dependsOn(nativeMain) }
+        compilations.getByName("main") {
+            defaultSourceSet {
+                dependsOn(internalSourceSet)
+                dependsOn(generatedSourceSet)
+                dependsOn(coreSourceSet)
+                dependsOn(publicSourceSet)
+            }
+            val gdnative by cinterops.creating {
+                defFile("src/nativeInterop/cinterop/godot.def")
+                includeDirs("$rootDir/godot-kotlin/godot-headers/", "src/nativeInterop/cinterop")
+            }
+        }
     }
 }
