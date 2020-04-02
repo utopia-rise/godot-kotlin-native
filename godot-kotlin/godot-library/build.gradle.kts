@@ -1,3 +1,4 @@
+import godot.tasks.GenerateApiTask
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
@@ -29,5 +30,16 @@ kotlin {
                 includeDirs("$rootDir/godot-kotlin/godot-headers/", "src/nativeInterop/cinterop")
             }
         }
+    }
+}
+
+val generateAPI by tasks.creating(GenerateApiTask::class) {
+    source.set(project.file("$rootDir/godot-kotlin/godot-headers/api.json"))
+    outputDirectory.set(project.file("$rootDir/godot-kotlin/godot-library/src/nativeGen/kotlin/"))
+}
+
+tasks {
+    build {
+        dependsOn(generateAPI)
     }
 }
