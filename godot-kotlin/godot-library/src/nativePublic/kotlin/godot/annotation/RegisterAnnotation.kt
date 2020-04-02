@@ -10,13 +10,13 @@ annotation class RegisterClass(val isTool: Boolean = false)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class RegisterProperty(
     val visibleInEditor: Boolean = false,
-    val rpcMode: RPCMode = RPCMode.Disabled
+    val rpcMode: RPCMode = RPCMode.DISABLED
 )
 
 @Target(AnnotationTarget.FUNCTION)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class RegisterFunction(
-    val rpcMode: RPCMode = RPCMode.Disabled
+    val rpcMode: RPCMode = RPCMode.DISABLED
 )
 
 @Target(AnnotationTarget.PROPERTY)
