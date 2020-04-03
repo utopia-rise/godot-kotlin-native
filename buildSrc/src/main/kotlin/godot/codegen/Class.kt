@@ -31,9 +31,13 @@ class Class(
     private val shouldGenerate: Boolean
     val additionalImports = mutableListOf<Pair<String, String>>()
 
+    val allMethods: List<Method>
+
     init {
         name = name.escapeUnderscore()
         baseClass = baseClass.escapeUnderscore()
+
+        allMethods = methods.toMutableList()
 
         shouldGenerate = name != "GlobalConstants"
     }

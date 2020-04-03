@@ -5,6 +5,7 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
+import java.io.File
 
 open class GenerateApiTask : DefaultTask() {
 
@@ -20,9 +21,4 @@ open class GenerateApiTask : DefaultTask() {
         outputDirectory.get().asFile.deleteRecursively()
         Generator.generate(source.asFile.get(), outputDirectory.asFile.get())
     }
-}
-
-// Here to test
-fun main() {
-    GenerateApiTask().generateAPI()
 }

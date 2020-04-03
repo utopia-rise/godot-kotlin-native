@@ -73,3 +73,11 @@ object Generator {
             .build()
     }
 }
+
+// Here to test
+fun main() {
+    Generator.generate(
+        File("C:/Users/ptmeisels/git/kotlin-godot-wrapper/godot-kotlin/godot-headers/api.json"),
+        File("C:/Users/ptmeisels/git/kotlin-godot-wrapper/godot-kotlin/godot-library/src/nativeGen/kotlin")
+    )
+}

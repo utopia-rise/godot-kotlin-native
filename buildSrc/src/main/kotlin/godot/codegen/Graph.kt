@@ -50,6 +50,17 @@ fun Graph<Class>.getMethodFromAncestor(cl: Class, method: Method): Method? {
     return nodes.find { it.value.name == cl.name }?.parent?.findMethodInHierarchy()
 }
 
+infix fun Graph<Class>.getMethodsFromAncestorsOf(clazz: Class): List<Method> {
+    fun Graph.Node<Class>.findMethodsFromAncestors(): List<Method> {
+        val methods = mutableListOf<Method>()
+        methods.addAll(this.value.methods)
+        methods.addAll(this.parent?.findMethodsFromAncestors() ?: emptyList())
+        return methods
+    }
+
+    return nodes.find { it.value.name == clazz.name }?.parent?.findMethodsFromAncestors() ?: emptyList()
+}
+
 fun Graph<Class>.doAncestorsHaveMethod(cl: Class, method: Method): Boolean {
     if (method.name == "toString") return true
 
