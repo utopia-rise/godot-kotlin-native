@@ -32,7 +32,7 @@ dependencies {
     implementation(kotlin("gradle-plugin"))
     implementation(kotlin("gradle-plugin-api"))
 
-    implementation(project(":godot-compiler-plugin-common"))
+    compileOnly(project(":godot-compiler-plugin-common"))
 }
 
 tasks {

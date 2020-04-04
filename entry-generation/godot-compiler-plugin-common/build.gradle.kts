@@ -1,8 +1,12 @@
 plugins {
     `kotlin-dsl`
+    id("maven-publish")
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-compiler-embeddable")
+    compileOnly(kotlin("compiler"))
 }
 
+tasks.build {
+    finalizedBy(tasks.publishToMavenLocal)
+}

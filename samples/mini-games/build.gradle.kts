@@ -1,3 +1,8 @@
+repositories {
+    mavenLocal()
+    jcenter()
+}
+
 plugins {
     id("com.utopia-rise.godot-kotlin") version "0.1.0"
     kotlin("multiplatform") version "1.3.71"

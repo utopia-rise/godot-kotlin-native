@@ -6,8 +6,8 @@ object CompilerPluginConst {
     const val compilerPluginVersion = "0.1.0" //remember to bump in conjunction with the version defined in the root build.gradle.kts
     const val compilerPluginGroupId = "com.utopia-rise"
 
-    const val compilerPluginArtifactId = "kotlin-compiler-plugin"
-    const val compilerNativePluginArtifactId = "kotlin-compiler-native-plugin"
+    const val compilerPluginArtifactId = "godot-compiler-plugin"
+    const val compilerNativePluginArtifactId = "godot-compiler-native-plugin"
     const val compilerPluginId = "GodotCompilerPlugin"
 
     object CommandLineOptionNames {

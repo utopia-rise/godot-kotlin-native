@@ -96,5 +96,6 @@ class GodotAnnotationProcessor(
 
     override fun processingOver() {
         //TODO: entry generation
+        log("Annotation processor completed")
     }
 }
