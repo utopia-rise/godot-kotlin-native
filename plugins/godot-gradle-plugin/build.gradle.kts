@@ -31,6 +31,8 @@ dependencies {
     implementation(kotlin("stdlib"))
     implementation(kotlin("gradle-plugin"))
     implementation(kotlin("gradle-plugin-api"))
+
+    implementation(project(":godot-compiler-plugin-common"))
 }
 
 tasks {

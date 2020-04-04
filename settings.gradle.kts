@@ -12,6 +12,18 @@ subdir("entry-generation") {
     include("godot-annotation-processor")
 }
 
+subdir("entry-generation") {
+    include("godot-compiler-native-plugin")
+}
+
+subdir("entry-generation") {
+    include("godot-compiler-plugin")
+}
+
+subdir("entry-generation") {
+    include("godot-compiler-plugin-common")
+}
+
 // TODO: remove this once the samples are not using the local artifacts
 val ignoreSamples: String? by extra
 
