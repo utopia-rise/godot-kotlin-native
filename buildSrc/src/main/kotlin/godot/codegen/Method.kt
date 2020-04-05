@@ -31,41 +31,18 @@ open class Method(
     fun generate(clazz: Class, tree: Graph<Class>, icalls: MutableSet<ICall>): FunSpec {
         // Uncomment to disable method implementation generation
         //if (isGetterOrSetter) return null
-        val modifiers = mutableListOf<KModifier>()
 
-        if (!clazz.isSingleton) {
-            modifiers.add(getModifier(tree, clazz))
-        }
-
-        val generatedFunBuilder = FunSpec
-            .builder(name)
-            .addModifiers(modifiers)
+        val generatedSignature = generateSignature(clazz, tree)
+        val generatedFunBuilder = generatedSignature.first.addModifiers(KModifier.OVERRIDE)
+        val callArgumentsAsString = generatedSignature.second
 
         val shouldReturn = returnType != "Unit"
-        if (shouldReturn) {
-            generatedFunBuilder.returns(ClassName(returnType.getPackage(), returnType.removeEnumPrefix()))
-        }
 
         if (returnType.isEnum()) {
             val type = returnType.removeEnumPrefix()
             if (type.contains('.')) {
                 clazz.additionalImports.add(returnType.getPackage() to type.split('.')[0])
             }
-        }
-
-        //TODO: move adding arguments to generatedFunBuilder to separate function
-        val callArgumentsAsString = buildCallArgumentsString(
-            tree,
-            clazz,
-            generatedFunBuilder
-        ) //cannot be inlined as it also adds the arguments to the generatedFunBuilder
-
-        if (hasVarargs) {
-            generatedFunBuilder.addParameter(
-                "__var_args",
-                Any::class.asTypeName().copy(nullable = true),
-                KModifier.VARARG
-            )
         }
 
         if (!isVirtual) {
@@ -95,6 +72,42 @@ open class Method(
             }
         }
         return generatedFunBuilder.build()
+    }
+
+    fun generateForInterface(clazz: Class, tree: Graph<Class>) = generateSignature(clazz, tree).first.addModifiers(KModifier.ABSTRACT).build()
+
+    private fun generateSignature(clazz: Class, tree: Graph<Class>): Pair<FunSpec.Builder, String> {
+        val modifiers = mutableListOf<KModifier>()
+
+        if (!clazz.isSingleton) {
+            modifiers.add(getModifier(tree, clazz))
+        }
+
+        val generatedFunBuilder = FunSpec
+            .builder(name)
+            .addModifiers(modifiers)
+
+        if (returnType != "Unit") {
+            generatedFunBuilder.returns(ClassName(returnType.getPackage(), returnType.removeEnumPrefix()))
+        }
+
+
+        //TODO: move adding arguments to generatedFunBuilder to separate function
+        val callArgumentsAsString = buildCallArgumentsString(
+            tree,
+            clazz,
+            generatedFunBuilder
+        ) //cannot be inlined as it also adds the arguments to the generatedFunBuilder
+
+        if (hasVarargs) {
+            generatedFunBuilder.addParameter(
+                "__var_args",
+                Any::class.asTypeName().copy(nullable = true),
+                KModifier.VARARG
+            )
+        }
+
+        return generatedFunBuilder to callArgumentsAsString
     }
 
     private fun buildCallArgumentsString(tree: Graph<Class>, cl: Class, generatedFunBuilder: FunSpec.Builder): String {

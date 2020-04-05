@@ -31,7 +31,7 @@ class Class(
     private val shouldGenerate: Boolean
     val additionalImports = mutableListOf<Pair<String, String>>()
 
-    val allMethods: List<Method>
+    val allMethods: MutableList<Method>
 
     init {
         name = name.escapeUnderscore()
@@ -44,17 +44,52 @@ class Class(
 
 
     fun generate(outputDir: File, tree: Graph<Class>, icalls: MutableSet<ICall>) {
+        allMethods.addAll(tree getMethodsFromAncestorsOf this)
         applyGettersAndSettersForProperties()
         if (!shouldGenerate) return
 
         val packageName = "godot"
         val className = ClassName(packageName, name)
 
-        val classTypeBuilder = createTypeBuilder(className, packageName)
+        val generatedInterface = generateInterface(packageName, tree)
+
+        //Build Type and create file
+        val fileBuilder = if (isInstanciable) {
+            FileSpec
+                .builder(packageName, className.simpleName)
+                .addType(generatedInterface)
+                .addType(generateClassImpl(packageName, className, icalls, tree))
+        } else {
+            FileSpec
+                .builder(packageName, className.simpleName)
+                .addType(generatedInterface)
+        }
+
+
+        additionalImports.forEach {
+            fileBuilder.addImport(it.first, it.second)
+        }
+
+        fileBuilder
+            .build()
+            .writeTo(outputDir)
+    }
+
+    private fun generateInterface(packageName: String, tree: Graph<Class>): TypeSpec {
+        val interfaceBuilder = createTypeBuilder(ClassName(packageName, name), packageName, true)
+        methods.forEach {
+            interfaceBuilder.addFunction(it.generateForInterface(this, tree))
+        }
+        generateEnums(interfaceBuilder)
+        return interfaceBuilder.build()
+    }
+
+    private fun generateClassImpl(packageName: String, className: ClassName, icalls: MutableSet<ICall>, tree: Graph<Class>): TypeSpec {
+        val classTypeBuilder = createTypeBuilder(className, packageName, false)
         val cOpaquePointerClass = ClassName("kotlinx.cinterop", "COpaquePointer")
 
+
         generateConstructors(classTypeBuilder, cOpaquePointerClass)
-        generateEnums(classTypeBuilder)
         generateSignals(classTypeBuilder)
 
         val baseCompanion = createBaseCompanion(cOpaquePointerClass)
@@ -66,19 +101,7 @@ class Class(
         generateMethods(propertiesReceiverType, tree, icalls)
 
         classTypeBuilder.addType(baseCompanion.build())
-
-        //Build Type and create file
-        val fileBuilder = FileSpec
-            .builder(packageName, className.simpleName)
-            .addType(classTypeBuilder.build())
-
-        additionalImports.forEach {
-            fileBuilder.addImport(it.first, it.second)
-        }
-
-        fileBuilder
-            .build()
-            .writeTo(outputDir)
+        return classTypeBuilder.build()
     }
 
     private fun applyGettersAndSettersForProperties() {
@@ -89,11 +112,21 @@ class Class(
         }
     }
 
-    private fun createTypeBuilder(className: ClassName, packageName: String): TypeSpec.Builder {
-        return TypeSpec
-            .classBuilder(className)
-            .addModifiers(KModifier.OPEN)
-            .superclass(ClassName(packageName, if (baseClass.isEmpty()) "GodotObject" else baseClass))
+    private fun createTypeBuilder(className: ClassName, packageName: String, isInterface: Boolean): TypeSpec.Builder {
+        return if (!isInterface) {
+            TypeSpec.classBuilder(ClassName(packageName, "${className.simpleName}Impl"))
+                .addModifiers(KModifier.OPEN)
+                .addModifiers(KModifier.INLINE)
+                .addProperty(PropertySpec
+                    .builder("pointer", ClassName("kotlinx.cinterop", "COpaquePointer"))
+                    .addModifiers(KModifier.FINAL)
+                    .build())
+                .addSuperinterface(className)
+        }
+        else {
+            TypeSpec.interfaceBuilder(className)
+                .addSuperinterface(ClassName(packageName, if (baseClass.isEmpty()) "GodotObject" else baseClass))
+        }
     }
 
     private fun generateConstructors(typeBuilder: TypeSpec.Builder, cOpaquePointerClass: ClassName) {
@@ -185,7 +218,7 @@ class Class(
             FunSpec.builder("from")
                 .addModifiers(KModifier.INFIX)
                 .addParameter("other", ClassName("godot.core", "Variant"))
-                .addStatement("return %M($name(\"\"), other)", MemberName("godot.internal", "fromVariant"))
+                .addStatement("return %M($name(\"\"), other)", MemberName("godot.internal.utils", "fromVariant"))
                 .build()
         )
 
@@ -262,7 +295,7 @@ class Class(
         tree: Graph<Class>,
         icalls: MutableSet<ICall>
     ) {
-        methods.forEach { method ->
+        allMethods.forEach { method ->
             if (!method.isVirtual) {
                 propertiesReceiverType.addProperty(
                     PropertySpec.builder(
@@ -272,7 +305,7 @@ class Class(
                     ).delegate(
                         "%L%M(\"${oldName}\",\"${method.oldName}\")%L",
                         "lazy{ ",
-                        MemberName("godot.internal", "getMB"),
+                        MemberName("godot.internal.utils", "getMethodBind"),
                         " }"
                     ).addModifiers(KModifier.PRIVATE, KModifier.FINAL).build()
                 )
