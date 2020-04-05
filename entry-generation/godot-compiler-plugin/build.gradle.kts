@@ -1,25 +1,16 @@
 plugins {
     `kotlin-dsl`
-    id("maven")
     id("maven-publish")
 }
 
 dependencies {
     implementation(project(":godot-annotation-processor"))
-    compileOnly(project(":godot-compiler-plugin-common"))
-    compileOnly("de.jensklingenberg:mpapt-runtime:${DependenciesVersions.mpaptVersion}")
+    implementation(project(":godot-compiler-plugin-common"))
+    implementation("de.jensklingenberg:mpapt-runtime:${DependenciesVersions.mpaptVersion}")
     compileOnly(kotlin("compiler"))
 }
 
-publishing {
-    publications {
-        register("godotCompilerPlugin", MavenPublication::class.java) {
-            from(components["java"])
-        }
-    }
-}
-
 tasks.build {
-    dependsOn(":godot-annotation-processor:install")
-    finalizedBy(tasks.install)
+    dependsOn(":godot-annotation-processor:publishToMavenLocal")
+    finalizedBy(tasks.publishToMavenLocal)
 }

@@ -1,9 +1,9 @@
 plugins {
     `kotlin-dsl`
-    id("maven")
+    id("maven-publish")
 }
 
 dependencies {
-    compileOnly("de.jensklingenberg:mpapt-runtime:${DependenciesVersions.mpaptVersion}")
+    implementation("de.jensklingenberg:mpapt-runtime:${DependenciesVersions.mpaptVersion}")
     compileOnly(kotlin("compiler"))
 }

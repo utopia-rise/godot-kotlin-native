@@ -1,3 +1,10 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        jcenter()
+    }
+}
+
 repositories {
     mavenLocal()
     jcenter()
