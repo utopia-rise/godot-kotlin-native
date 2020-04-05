@@ -24,6 +24,7 @@ dependencies {
 }
 
 val fatJar = task<Jar>("fatJar") {
+    @Suppress("UnstableApiUsage")
     manifest {
         attributes["Implementation-Title"] = "Godot Kotlin Native Compiler Plugin Fat Jar"
         attributes["Implementation-Version"] = project.version
@@ -37,6 +38,7 @@ val fatJar = task<Jar>("fatJar") {
 }
 
 val shadowJar by tasks.getting(com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar::class) {
+    @Suppress("UnstableApiUsage")
     manifest.inheritFrom(fatJar.manifest)
     archiveBaseName.set("godot-compiler-native-plugin")
     archiveVersion.set(project.version.toString())
