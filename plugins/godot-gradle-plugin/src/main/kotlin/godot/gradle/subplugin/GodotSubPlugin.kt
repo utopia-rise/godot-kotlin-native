@@ -10,6 +10,7 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinCompilation
 import org.jetbrains.kotlin.gradle.plugin.KotlinGradleSubplugin
 import org.jetbrains.kotlin.gradle.plugin.SubpluginArtifact
 import org.jetbrains.kotlin.gradle.plugin.SubpluginOption
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeCompilation
 import org.jetbrains.kotlin.gradle.tasks.KotlinNativeCompile
 
 class GodotSubPlugin : KotlinGradleSubplugin<AbstractCompile> {
@@ -37,7 +38,7 @@ class GodotSubPlugin : KotlinGradleSubplugin<AbstractCompile> {
     override fun getCompilerPluginId(): String = CompilerPluginConst.compilerPluginId
 
     override fun isApplicable(project: Project, task: AbstractCompile): Boolean =
-        project.plugins.hasPlugin(GodotPlugin::class.java)
+        project.plugins.hasPlugin(GodotPlugin::class.java) && task is KotlinNativeCompile
 
     override fun getPluginArtifact(): SubpluginArtifact = SubpluginArtifact(
         groupId = CompilerPluginConst.compilerPluginGroupId,
