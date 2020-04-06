@@ -11,8 +11,8 @@ import org.jetbrains.kotlin.extensions.StorageComponentContainerContributor
 class NativeComponentRegistrar : ComponentRegistrar {
     override fun registerProjectComponents(project: MockProject, configuration: CompilerConfiguration) {
         val processor = GodotAnnotationProcessor(
-            configuration.get(CompilerPluginConst.CommandlineArguments.ENTRY_DIR_PATH)!!,
-            configuration.get(CompilerPluginConst.CommandlineArguments.GDNS_DIR_PATH)!!
+            checkNotNull(configuration.get(CompilerPluginConst.CommandlineArguments.ENTRY_DIR_PATH)) { "No path for generated entry file specified" },
+            checkNotNull(configuration.get(CompilerPluginConst.CommandlineArguments.GDNS_DIR_PATH)) { "No path for generated gdns files specified" }
         )
         val mpapt = MpAptProject(processor, configuration)
 
