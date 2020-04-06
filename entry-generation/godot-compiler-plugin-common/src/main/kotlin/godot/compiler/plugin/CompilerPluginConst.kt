@@ -1,4 +1,4 @@
-package godot.compilerplugin
+package godot.compiler.plugin
 
 import org.jetbrains.kotlin.config.CompilerConfigurationKey
 

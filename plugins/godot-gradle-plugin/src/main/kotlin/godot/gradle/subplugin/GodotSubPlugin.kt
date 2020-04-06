@@ -1,6 +1,6 @@
 package godot.gradle.subplugin
 
-import godot.compilerplugin.CompilerPluginConst
+import godot.compiler.plugin.CompilerPluginConst
 import godot.gradle.GodotExtension
 import godot.gradle.GodotPlugin
 import org.gradle.api.Project
@@ -10,6 +10,7 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinCompilation
 import org.jetbrains.kotlin.gradle.plugin.KotlinGradleSubplugin
 import org.jetbrains.kotlin.gradle.plugin.SubpluginArtifact
 import org.jetbrains.kotlin.gradle.plugin.SubpluginOption
+import org.jetbrains.kotlin.gradle.tasks.KotlinNativeCompile
 
 class GodotSubPlugin : KotlinGradleSubplugin<AbstractCompile> {
     override fun apply(
