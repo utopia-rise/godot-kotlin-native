@@ -14,13 +14,7 @@ subdir("entry-generation") {
 
 subdir("entry-generation") {
     include("godot-compiler-native-plugin")
-}
-
-subdir("entry-generation") {
     include("godot-compiler-plugin")
-}
-
-subdir("entry-generation") {
     include("godot-compiler-plugin-common")
 }
 
