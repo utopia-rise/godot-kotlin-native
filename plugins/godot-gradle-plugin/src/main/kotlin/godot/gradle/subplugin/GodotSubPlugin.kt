@@ -10,8 +10,6 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinCompilation
 import org.jetbrains.kotlin.gradle.plugin.KotlinGradleSubplugin
 import org.jetbrains.kotlin.gradle.plugin.SubpluginArtifact
 import org.jetbrains.kotlin.gradle.plugin.SubpluginOption
-import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeCompilation
-import org.jetbrains.kotlin.gradle.tasks.KotlinNativeCompile
 
 class GodotSubPlugin : KotlinGradleSubplugin<AbstractCompile> {
     override fun apply(
@@ -38,7 +36,10 @@ class GodotSubPlugin : KotlinGradleSubplugin<AbstractCompile> {
     override fun getCompilerPluginId(): String = CompilerPluginConst.compilerPluginId
 
     override fun isApplicable(project: Project, task: AbstractCompile): Boolean =
-        project.plugins.hasPlugin(GodotPlugin::class.java) && task is KotlinNativeCompile
+        //&& task is KotlinNativeCompile -> we cannot do this check here as the compiler plugin get's called in the
+        // linking stage again, which then fails as the subPlugin is disabled for it and thus does not provide the
+        // needed command line arguments
+        project.plugins.hasPlugin(GodotPlugin::class.java)
 
     override fun getPluginArtifact(): SubpluginArtifact = SubpluginArtifact(
         groupId = CompilerPluginConst.compilerPluginGroupId,
