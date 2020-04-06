@@ -25,7 +25,7 @@ class NativeGodotKotlinCompilerPluginCommandLineProcessor : CommandLineProcessor
     companion object {
         val GDNS_DIR_PATH_OPTION = CliOption(
             CompilerPluginConst.CommandLineOptionNames.gdnsDirPathOption,
-            "<name>",
+            "Path to where the generated gdns files should be written to",
             CompilerPluginConst.CommandlineArguments.GDNS_DIR_PATH.toString(),
             required = true,
             allowMultipleOccurrences = false
@@ -33,7 +33,7 @@ class NativeGodotKotlinCompilerPluginCommandLineProcessor : CommandLineProcessor
 
         val ENTRY_DIR_PATH_OPTION = CliOption(
             CompilerPluginConst.CommandLineOptionNames.entryDirPathOption,
-            "<name>",
+            "Path to where the generated entry file should be written to",
             CompilerPluginConst.CommandlineArguments.ENTRY_DIR_PATH.toString(),
             required = true,
             allowMultipleOccurrences = false
