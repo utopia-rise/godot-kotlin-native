@@ -27,7 +27,7 @@ class Class(
     val enums: List<Enum>
 ) {
 
-    private val oldName: String = name
+    val oldName: String = name
     private val shouldGenerate: Boolean
     val additionalImports = mutableListOf<Pair<String, String>>()
 
@@ -54,25 +54,35 @@ class Class(
         val generatedInterface = generateInterface(packageName, tree)
 
         //Build Type and create file
-        val fileBuilder = if (isInstanciable) {
-            FileSpec
+        val fileBuilders = if (isInstanciable || isSingleton) {
+            listOf(
+                FileSpec
                 .builder(packageName, className.simpleName)
-                .addType(generatedInterface)
-                .addType(generateClassImpl(packageName, className, icalls, tree))
+                .addType(generatedInterface),
+                FileSpec
+                .builder(packageName, "${className.simpleName}Methods")
+                .addType(generateMethodsClass(className, icalls, tree)),
+                FileSpec
+                .builder(packageName, "${className.simpleName}Impl")
+                .addType(generateClassImpl(packageName, className, tree, icalls))
+            )
         } else {
-            FileSpec
+            listOf(
+                FileSpec
                 .builder(packageName, className.simpleName)
                 .addType(generatedInterface)
+            )
         }
 
 
         additionalImports.forEach {
-            fileBuilder.addImport(it.first, it.second)
+            fileBuilders.forEach { file -> file.addImport(it.first, it.second) }
         }
 
-        fileBuilder
-            .build()
+        fileBuilders.forEach {
+            it.build()
             .writeTo(outputDir)
+        }
     }
 
     private fun generateInterface(packageName: String, tree: Graph<Class>): TypeSpec {
@@ -84,12 +94,12 @@ class Class(
         return interfaceBuilder.build()
     }
 
-    private fun generateClassImpl(packageName: String, className: ClassName, icalls: MutableSet<ICall>, tree: Graph<Class>): TypeSpec {
+    private fun generateClassImpl(packageName: String, className: ClassName, tree: Graph<Class>, icalls: MutableSet<ICall>): TypeSpec {
         val classTypeBuilder = createTypeBuilder(className, packageName, false)
         val cOpaquePointerClass = ClassName("kotlinx.cinterop", "COpaquePointer")
 
 
-        generateConstructors(classTypeBuilder, cOpaquePointerClass)
+        generateImplConstructorsAndInline(classTypeBuilder)
         generateSignals(classTypeBuilder)
 
         val baseCompanion = createBaseCompanion(cOpaquePointerClass)
@@ -98,10 +108,17 @@ class Class(
 
         val propertiesReceiverType = if (isSingleton) baseCompanion else classTypeBuilder
         generateProperties(tree, icalls, propertiesReceiverType)
-        generateMethods(propertiesReceiverType, tree, icalls)
+        generateMethodsForImpl(propertiesReceiverType, tree)
 
         classTypeBuilder.addType(baseCompanion.build())
         return classTypeBuilder.build()
+    }
+
+    private fun generateMethodsClass(className: ClassName, icalls: MutableSet<ICall>, tree: Graph<Class>): TypeSpec {
+        val methodsClassBuilder = TypeSpec.objectBuilder("${className.simpleName}Methods")
+        methodsClassBuilder.addModifiers(KModifier.INTERNAL)
+        generateMethodsBindingsAndCalls(methodsClassBuilder, tree, icalls)
+        return methodsClassBuilder.build()
     }
 
     private fun applyGettersAndSettersForProperties() {
@@ -115,18 +132,27 @@ class Class(
     private fun createTypeBuilder(className: ClassName, packageName: String, isInterface: Boolean): TypeSpec.Builder {
         return if (!isInterface) {
             TypeSpec.classBuilder(ClassName(packageName, "${className.simpleName}Impl"))
-                .addModifiers(KModifier.OPEN)
-                .addModifiers(KModifier.INLINE)
-                .addProperty(PropertySpec
-                    .builder("pointer", ClassName("kotlinx.cinterop", "COpaquePointer"))
-                    .addModifiers(KModifier.FINAL)
-                    .build())
                 .addSuperinterface(className)
         }
         else {
             TypeSpec.interfaceBuilder(className)
                 .addSuperinterface(ClassName(packageName, if (baseClass.isEmpty()) "GodotObject" else baseClass))
         }
+    }
+
+    private fun generateImplConstructorsAndInline(typeBuilder: TypeSpec.Builder) {
+        val cOpaquePtrType = ClassName("kotlinx.cinterop", "COpaquePointer")
+        typeBuilder.primaryConstructor(
+            FunSpec.constructorBuilder()
+                .addParameter("pointer", cOpaquePtrType)
+                .build()
+        )
+            .addProperty(
+                PropertySpec.builder("pointer", cOpaquePtrType)
+                    .initializer("pointer")
+                    .addModifiers(KModifier.FINAL).build()
+            )
+            .addModifiers(KModifier.INLINE)
     }
 
     private fun generateConstructors(typeBuilder: TypeSpec.Builder, cOpaquePointerClass: ClassName) {
@@ -245,7 +271,7 @@ class Class(
         propertiesReceiverType: TypeSpec.Builder
     ) {
         properties.forEach { property ->
-            val propertySpec = property.generate(this, tree, icalls)
+            val propertySpec = property.generateForMethodsClass(this, tree, icalls)
             if (propertySpec != null) {
                 propertiesReceiverType.addProperty(propertySpec)
 
@@ -290,7 +316,7 @@ class Class(
         }
     }
 
-    private fun generateMethods(
+    private fun generateMethodsBindingsAndCalls(
         propertiesReceiverType: TypeSpec.Builder,
         tree: Graph<Class>,
         icalls: MutableSet<ICall>
@@ -310,7 +336,13 @@ class Class(
                     ).addModifiers(KModifier.PRIVATE, KModifier.FINAL).build()
                 )
             }
-            propertiesReceiverType.addFunction(method.generate(this, tree, icalls))
+            propertiesReceiverType.addFunction(method.generateForMethodsClass(this, tree, icalls))
+        }
+    }
+
+    private fun generateMethodsForImpl(receiverType: TypeSpec.Builder, tree: Graph<Class>) {
+        allMethods.forEach {
+            receiverType.addFunction(it.generateForClassImpl(this, tree))
         }
     }
 }

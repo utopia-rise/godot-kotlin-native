@@ -35,7 +35,7 @@ class ICall(
 
     private fun createReturnTypeClass() = ClassName(
         if (returnType.isEnum()) "kotlin" else returnType.getPackage(),
-        if (returnType.isEnum()) "Long" else returnType
+        if (returnType.isEnum()) "Long" else "${returnType}Impl"
     )
 
     private fun generateICall(): FunSpec {

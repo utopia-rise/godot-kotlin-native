@@ -32,6 +32,26 @@ object Generator {
         iCallFileSpec
             .build()
             .writeTo(outputDir)
+
+        val pseudoConstructorsFileSpec = FileSpec.builder("godot", "PseudoConstructors")
+        generatePseudoConstructors(pseudoConstructorsFileSpec, classes)
+        pseudoConstructorsFileSpec.build().writeTo(outputDir)
+    }
+
+    private fun generatePseudoConstructors(pseudoConstructorsFileSpec: FileSpec.Builder, classes: List<Class>) {
+        classes.filter { it.isInstanciable }.forEach {
+            pseudoConstructorsFileSpec.addFunction(
+                FunSpec.builder(it.name)
+                    .returns(ClassName("godot", it.name))
+                    .addStatement(
+                        "return ${it.name}Impl(%M(\"${it.oldName}\")?.reinterpret<%T<() -> %T>>()()) ?: \n throw NotImplementedError(\"No constructor for ${it.name} in Godot\")",
+                        MemberName("godot.gdnative", "godot_get_class_constructor"),
+                        ClassName("kotlinx.cinterop", "CFunction"),
+                        ClassName("kotlinx.cinterop", "COpaquePointer")
+                    )
+                    .build()
+            )
+        }
     }
 
     private fun generateICallsVarargsFunction(): FunSpec {
