@@ -3,6 +3,7 @@ package godot.gradle.subplugin
 import godot.compiler.plugin.CompilerPluginConst
 import godot.gradle.GodotExtension
 import godot.gradle.GodotPlugin
+import godot.utils.GodotBuildProperties
 import org.gradle.api.Project
 import org.gradle.api.tasks.compile.AbstractCompile
 import org.jetbrains.kotlin.gradle.dsl.KotlinCommonOptions
@@ -44,12 +45,12 @@ class GodotSubPlugin : KotlinGradleSubplugin<AbstractCompile> {
     override fun getPluginArtifact(): SubpluginArtifact = SubpluginArtifact(
         groupId = CompilerPluginConst.compilerPluginGroupId,
         artifactId = CompilerPluginConst.compilerPluginArtifactId,
-        version = CompilerPluginConst.compilerPluginVersion
+        version = GodotBuildProperties.godotKotlinVersion
     )
 
     override fun getNativeCompilerPluginArtifact() = SubpluginArtifact(
         groupId = CompilerPluginConst.compilerPluginGroupId,
         artifactId = CompilerPluginConst.compilerNativePluginArtifactId,
-        version = CompilerPluginConst.compilerPluginVersion
+        version = GodotBuildProperties.godotKotlinVersion
     )
 }

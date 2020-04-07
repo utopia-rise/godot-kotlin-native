@@ -32,6 +32,7 @@ dependencies {
     implementation(kotlin("gradle-plugin"))
     implementation(kotlin("gradle-plugin-api"))
 
+    implementation(project(":godot-build-props"))
     compileOnly(project(":godot-compiler-plugin-common"))
 }
 
@@ -41,6 +42,10 @@ tasks {
         archiveVersion.set(project.version.toString())
         archiveClassifier.set("sources")
         from(sourceSets["main"].allSource)
+    }
+
+    build {
+        finalizedBy(publishToMavenLocal)
     }
 }
 

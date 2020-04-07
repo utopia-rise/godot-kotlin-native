@@ -3,7 +3,6 @@ package godot.compiler.plugin
 import org.jetbrains.kotlin.config.CompilerConfigurationKey
 
 object CompilerPluginConst {
-    const val compilerPluginVersion = "0.1.0" //remember to bump in conjunction with the version defined in the root build.gradle.kts
     const val compilerPluginGroupId = "com.utopia-rise"
 
     const val compilerPluginArtifactId = "godot-compiler-plugin"
