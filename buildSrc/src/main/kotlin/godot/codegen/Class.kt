@@ -268,7 +268,7 @@ class Class(
                     ).delegate(
                         "%L%M(\"${oldName}\",\"${method.oldName}\")%L",
                         "lazy{ ",
-                        MemberName("godot.internal", "getMB"),
+                        MemberName("godot.internal.utils", "getMethodBind"),
                         " }"
                     ).addModifiers(KModifier.PRIVATE, KModifier.FINAL).build()
                 )
