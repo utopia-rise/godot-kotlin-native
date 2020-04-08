@@ -11,7 +11,8 @@ import org.jetbrains.kotlin.platform.TargetPlatform
 import java.lang.instrument.IllegalClassFormatException
 
 class GodotAnnotationProcessor(
-    private val entryGenerationOutputDir: String
+    private val entryGenerationOutputDir: String,
+    private val gdnsGenerationOutputDir: String
 ) : AbstractProcessor() {
     override fun getSupportedAnnotationTypes(): Set<String> =
         setOf(
@@ -95,5 +96,6 @@ class GodotAnnotationProcessor(
 
     override fun processingOver() {
         //TODO: entry generation
+        log("Annotation processor completed")
     }
 }
