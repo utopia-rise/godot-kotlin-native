@@ -4,6 +4,9 @@ plugins {
 }
 
 dependencies {
-    implementation("de.jensklingenberg:mpapt-runtime:${DependenciesVersions.mpaptVersion}")
     compileOnly(kotlin("compiler"))
+}
+
+tasks.build {
+    finalizedBy(tasks.publishToMavenLocal)
 }
