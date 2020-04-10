@@ -1,6 +1,9 @@
 package godot.entrygenerator.filebuilder
 
-import com.squareup.kotlinpoet.*
+import com.squareup.kotlinpoet.AnnotationSpec
+import com.squareup.kotlinpoet.ClassName
+import com.squareup.kotlinpoet.FileSpec
+import com.squareup.kotlinpoet.FunSpec
 import java.io.File
 
 class EntryFileBuilder {
@@ -20,7 +23,7 @@ class EntryFileBuilder {
                 .build()
         )
         .addParameter("handle", ClassName("kotlinx.cinterop", "COpaquePointer"))
-        .addStatement("%M(handle)", MemberName("godot.gdnative", "godot_wrapper_nativescript_init"))
+        .addStatement("%T.nativescriptInit(handle)", ClassName("godot.core", "Godot"))
 
 
     fun binding(bindingAction: FileSpec.Builder.() -> Unit): EntryFileBuilder {
@@ -34,6 +37,8 @@ class EntryFileBuilder {
     }
 
     fun build(outputPath: String) {
+        entryFileSpec.addFunction(nativeScriptInitFunctionSpec.build())
+        entryFileSpec.addFunction(generateGDNativeScriptTerminateFunction())
         entryFileSpec.build().writeTo(File(outputPath))
     }
 
@@ -48,7 +53,7 @@ class EntryFileBuilder {
                     .build()
             )
             .addParameter("options", ClassName("godot.gdnative", "godot_gdnative_init_options"))
-            .addStatement("%M(options.ptr)", MemberName("godot.gdnative", "godot_wrapper_gdnative_init"))
+            .addStatement("%T.init(options)", ClassName("godot.core", "Godot"))
             .build()
     }
 
@@ -62,7 +67,21 @@ class EntryFileBuilder {
                     .build()
             )
             .addParameter("options", ClassName("godot.gdnative", "godot_gdnative_terminate_options"))
-            .addStatement("%M(options.ptr)", MemberName("godot.gdnative", "godot_wrapper_gdnative_terminate"))
+            .addStatement("%T.terminate(options)", ClassName("godot.core", "Godot"))
+            .build()
+    }
+
+    private fun generateGDNativeScriptTerminateFunction(): FunSpec {
+        return FunSpec
+            .builder("NativeScriptTerminate")
+            .addAnnotation(
+                AnnotationSpec
+                    .builder(ClassName("kotlin.native", "CName"))
+                    .addMember("%S", "godot_nativescript_terminate")
+                    .build()
+            )
+            .addParameter("handle", ClassName("kotlinx.cinterop", "COpaquePointer"))
+            .addStatement("%T.nativescriptTerminate(handle)", ClassName("godot.core", "Godot"))
             .build()
     }
 }
