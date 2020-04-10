@@ -19,12 +19,13 @@ object FunctionRegistrationGenerator {
         className: ClassName
     ) {
         functions.forEach { functionDescriptor ->
-            registerClassControlFlow.addStatement(
-                "function(%S,·%L,·%M)",
-                functionDescriptor.name,
-                className.member(functionDescriptor.name.asString()),
-                mapRpcModeAnnotationToClassName(getRpcModeEnum(functionDescriptor))
-            )
+            registerClassControlFlow
+                .addStatement(
+                    "function(%S,·%L,·%M)",
+                    functionDescriptor.name,
+                    className.member(functionDescriptor.name.asString()),
+                    mapRpcModeAnnotationToClassName(getRpcModeEnum(functionDescriptor))
+                )
         }
     }
 
