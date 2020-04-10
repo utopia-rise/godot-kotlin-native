@@ -1,4 +1,3 @@
-
 package godot.core
 
 import godot.gdnative.*
