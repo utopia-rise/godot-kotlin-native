@@ -4,7 +4,7 @@ import kotlinx.cinterop.COpaquePointer
 import kotlinx.cinterop.StableRef
 import kotlinx.cinterop.asStableRef
 
-// I have no why this exist, just copied it over from the cpp binding when implementing the cast system.
+// I have no idea why this exist, just copied it over from the cpp binding when implementing the cast system.
 
 class Wrapped(val instance: COpaquePointer, val tag: COpaquePointer)
 
