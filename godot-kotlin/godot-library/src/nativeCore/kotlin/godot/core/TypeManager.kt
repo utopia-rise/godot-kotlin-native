@@ -15,6 +15,9 @@ open class Object(__ignore: String?) {
     internal lateinit var ptr: COpaquePointer
 
     fun getClass(): String = ""
+
+    open fun _onInit() {}
+    open fun _onDestroy() {}
 }
 object ClassDB {
     fun getParentClass(cls: String): String = ""
