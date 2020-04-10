@@ -4,7 +4,7 @@ import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.MemberName.Companion.member
 import godot.entrygenerator.extension.getAnnotationValue
-import godot.entrygenerator.mapper.RpcModeAnnotationMapper.Companion.mapRpcModeAnnotationToClassName
+import godot.entrygenerator.mapper.RpcModeAnnotationMapper.mapRpcModeAnnotationToClassName
 import godot.entrygenerator.model.REGISTER_FUNCTION_ANNOTATION
 import godot.entrygenerator.model.REGISTER_FUNCTION_ANNOTATION_RPC_MODE_ARGUMENT
 import org.jetbrains.kotlin.descriptors.FunctionDescriptor
