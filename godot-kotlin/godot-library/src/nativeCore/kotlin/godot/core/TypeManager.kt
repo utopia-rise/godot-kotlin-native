@@ -14,7 +14,6 @@ open class Object(__ignore: String?) {
 
     fun getClass(): String = ""
 }
-
 object ClassDB {
     fun getParentClass(cls: String): String = ""
 }
