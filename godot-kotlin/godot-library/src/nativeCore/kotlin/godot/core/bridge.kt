@@ -25,11 +25,13 @@ fun destroyInstance(instance: COpaquePointer?, methodData: COpaquePointer?, clas
     kotlinInstanceRef.dispose()
 }
 
-fun invokeMethod(instance: COpaquePointer?,
-                 methodData: COpaquePointer?,
-                 classData: COpaquePointer?,
-                 numArgs: Int,
-                 args: CPointer<CPointerVar<godot_variant>>?): CValue<godot_variant> {
+fun invokeMethod(
+    instance: COpaquePointer?,
+    methodData: COpaquePointer?,
+    classData: COpaquePointer?,
+    numArgs: Int,
+    args: CPointer<CPointerVar<godot_variant>>?
+): CValue<godot_variant> {
     val kotlinInstanceRef = checkNotNull(classData).asStableRef<Object>()
     val kotlinInstance = kotlinInstanceRef.get()
     val methodHandleRef = checkNotNull(methodData).asStableRef<Function<Object, *>>()
