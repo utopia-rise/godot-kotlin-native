@@ -4,13 +4,13 @@ import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.FunSpec
+import godot.entrygenerator.generator.ClassRegistrationGenerator
+import godot.entrygenerator.model.ClassWithMembers
 import java.io.File
 
 class EntryFileBuilder {
     private val entryFileSpec = FileSpec
         .builder("godot", "Entry")
-        .addImport("kotlinx.cinterop", "get") //needed for getting pointers like this: args[<number>]
-        .addImport("kotlinx.cinterop", "ptr") //needed for getting pointers to `this`: options.ptr
         .addFunction(generateGDNativeInitFunction())
         .addFunction(generateGDNativeTerminateFunction())
 
@@ -26,13 +26,17 @@ class EntryFileBuilder {
         .addStatement("%T.nativescriptInit(handle)", ClassName("godot.core", "Godot"))
 
 
-    fun binding(bindingAction: FileSpec.Builder.() -> Unit): EntryFileBuilder {
-        bindingAction(entryFileSpec)
-        return this
-    }
+    fun registerClassesWithMembers(classesWithMembers: Set<ClassWithMembers>): EntryFileBuilder {
+        val classRegistryControlFlow = nativeScriptInitFunctionSpec
+            .beginControlFlow(
+                "with(%T(handle))·{",
+                ClassName("godot.core", "ClassRegistry")
+            ) //START: with ClassRegistry
 
-    fun bindingRegistration(bindingRegistrationAction: FunSpec.Builder.() -> Unit): EntryFileBuilder {
-        bindingRegistrationAction(nativeScriptInitFunctionSpec)
+        ClassRegistrationGenerator.registerClasses(classesWithMembers, classRegistryControlFlow)
+
+        classRegistryControlFlow.endControlFlow() //END: with ClassRegistry
+
         return this
     }
 
@@ -42,6 +46,10 @@ class EntryFileBuilder {
         entryFileSpec.build().writeTo(File(outputPath))
     }
 
+    private fun registration(registrationAction: FunSpec.Builder.() -> Unit): EntryFileBuilder {
+        registrationAction(nativeScriptInitFunctionSpec)
+        return this
+    }
 
     private fun generateGDNativeInitFunction(): FunSpec {
         return FunSpec
