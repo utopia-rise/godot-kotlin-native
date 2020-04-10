@@ -31,3 +31,4 @@ build
 *.iml
 .idea/modules.xml
 .idea/compiler.xml
+.idea/jarRepositories.xml
