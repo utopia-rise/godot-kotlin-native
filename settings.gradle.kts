@@ -16,6 +16,7 @@ subdir("entry-generation") {
     include("godot-compiler-native-plugin")
     include("godot-compiler-plugin")
     include("godot-compiler-plugin-common")
+    include("godot-entry-generator")
 }
 
 subdir("utils") {
