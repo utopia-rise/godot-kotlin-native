@@ -76,7 +76,7 @@ internal object Godot {
         nativescriptWrapper.compareAndSwap(nativescriptWrapper.value, null)
     }
 
-    fun shouldInitHandle(): Boolean = initHandle.value == 0
+    fun shouldInitPtr(): Boolean = initHandle.value == 0
 
     fun <T> noInitZone(cb: () -> T): T {
         initHandle.compareAndSet(initHandle.value, 1)

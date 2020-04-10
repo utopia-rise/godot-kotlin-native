@@ -7,7 +7,9 @@ import kotlin.native.concurrent.freeze
 // TODO: remove when the class generator is done.
 open class Object(__ignore: String?) {
     constructor(): this(null) {
-        // nada
+        if (Godot.shouldInitPtr()) {
+            // call godot constructor here
+        }
     }
 
     internal lateinit var ptr: COpaquePointer
