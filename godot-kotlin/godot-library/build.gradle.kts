@@ -8,6 +8,7 @@ plugins {
 //TODO: this needs to be properly configured! This is just a basic setup to be able to implement the annotations
 kotlin {
     // we don't have godot-library in the mobile targets yet, limit these to desktop for now
+    //has to be change in `GodotPlugin` of `godot-gradle-plugin` as well
     macosX64("macos")
     linuxX64("linux")
     mingwX64("windows")

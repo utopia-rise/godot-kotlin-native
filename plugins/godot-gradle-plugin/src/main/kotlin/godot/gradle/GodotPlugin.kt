@@ -27,6 +27,7 @@ class GodotPlugin : Plugin<Project> {
     private fun setupExtensionDefaults(project: Project, godot: GodotExtension) {
         with(godot) {
             // we don't have godot-library in the mobile targets yet, limit these to desktop for now
+            //has to be change in `build.gradle.kts` of `godot-library` as well
             platforms(
                 Platform.LINUX_X64,
                 Platform.WINDOWS_X64,
