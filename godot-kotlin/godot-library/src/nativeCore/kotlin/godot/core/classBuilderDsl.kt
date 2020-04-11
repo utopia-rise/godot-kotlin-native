@@ -88,4 +88,8 @@ class ClassBuilder<T: Object> internal constructor(private val classHandle: Clas
         val function = Function10(body)
         classHandle.registerFunction(name, StableRef.create(function).asCPointer(), rpcMode)
     }
+
+    fun signal(name: String, parameters: Map<String, Variant.Type>) {
+        classHandle.registerSignal(name, parameters)
+    }
 }
