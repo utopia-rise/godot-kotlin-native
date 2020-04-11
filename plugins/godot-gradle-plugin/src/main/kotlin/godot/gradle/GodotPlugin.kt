@@ -26,7 +26,12 @@ class GodotPlugin : Plugin<Project> {
 
     private fun setupExtensionDefaults(project: Project, godot: GodotExtension) {
         with(godot) {
-            platforms(*Platform.values())
+            // we don't have godot-library in the mobile targets yet, limit these to desktop for now
+            platforms(
+                Platform.LINUX_X64,
+                Platform.WINDOWS_X64,
+                Platform.OSX_X64
+            )
             debug.set(true)
             cleanupGeneratedFiles.set(true)
             gdnsDir.set(project.file("src/gdns/kotlin"))
