@@ -34,7 +34,7 @@ fun transformTypeDeclarationsToClassWithMember(
     signals.forEach { propertyDescriptor ->
         classesWithMembers
             .first { it.classDescriptor == propertyDescriptor.containingDeclaration }
-            .properties
+            .signals
             .add(propertyDescriptor)
     }
     return classesWithMembers

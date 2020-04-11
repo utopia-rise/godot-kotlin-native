@@ -37,8 +37,7 @@ object ClassRegistrationGenerator {
 
             SignalRegistrationGenerator.registerSignals(
                 classWithMembers.signals,
-                registerClassControlFlow,
-                className
+                registerClassControlFlow
             )
 
             registerClassControlFlow.endControlFlow() //END: registerClass
