@@ -42,9 +42,9 @@ class GodotPlugin : Plugin<Project> {
 
             fun KotlinNativeTarget.configureSourceSets(includeEntrySourceDir: Boolean) {
                 compilations.getByName("main").defaultSourceSet {
-                    kotlin.srcDirs += project.file("src/$MAIN_SOURCE_SET_NAME/kotlin")
+                    kotlin.srcDirs("src/$MAIN_SOURCE_SET_NAME/kotlin")
                     if (includeEntrySourceDir) {
-                        kotlin.srcDirs += godot.entrySourceDir.get().asFile
+                        kotlin.srcDirs(godot.entrySourceDir.get().asFile)
                     }
 
                     dependencies {
@@ -57,7 +57,7 @@ class GodotPlugin : Plugin<Project> {
                 }
 
                 compilations.getByName("test").defaultSourceSet {
-                    kotlin.srcDirs += project.file("src/$TEST_SOURCE_SET_NAME/kotlin")
+                    kotlin.srcDirs("src/$TEST_SOURCE_SET_NAME/kotlin")
                 }
             }
 
