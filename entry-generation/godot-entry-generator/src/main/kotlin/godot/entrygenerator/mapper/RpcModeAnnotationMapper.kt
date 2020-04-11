@@ -10,7 +10,6 @@ object RpcModeAnnotationMapper {
         return when (rpcModeAnnotationAsString) {
             "godot.registration.RPCMode.DISABLED" -> ClassName("godot.registration.RPCMode", "DISABLED")
             "godot.registration.RPCMode.REMOTE" -> ClassName("godot.registration.RPCMode", "REMOTE")
-            "godot.registration.RPCMode.SYNC" -> ClassName("godot.registration.RPCMode", "SYNC")
             "godot.registration.RPCMode.MASTER" -> ClassName("godot.registration.RPCMode", "MASTER")
             "godot.registration.RPCMode.PUPPET" -> ClassName("godot.registration.RPCMode", "PUPPET")
             "godot.registration.RPCMode.REMOTESYNC" -> ClassName("godot.registration.RPCMode", "REMOTESYNC")
