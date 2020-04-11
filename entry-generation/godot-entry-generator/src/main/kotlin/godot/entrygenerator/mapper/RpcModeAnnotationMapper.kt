@@ -8,14 +8,14 @@ object RpcModeAnnotationMapper {
      */
     fun mapRpcModeAnnotationToClassName(rpcModeAnnotationAsString: String): ClassName {
         return when (rpcModeAnnotationAsString) {
-            "godot.registration.RPCMode.Disabled" -> ClassName("godot.registration.RPCMode", "Disabled")
-            "godot.registration.RPCMode.Remote" -> ClassName("godot.registration.RPCMode", "Remote")
-            "godot.registration.RPCMode.Sync" -> ClassName("godot.registration.RPCMode", "Sync")
-            "godot.registration.RPCMode.Master" -> ClassName("godot.registration.RPCMode", "Master")
-            "godot.registration.RPCMode.Puppet" -> ClassName("godot.registration.RPCMode", "Puppet")
-            "godot.registration.RPCMode.RemoteSync" -> ClassName("godot.registration.RPCMode", "RemoteSync")
-            "godot.registration.RPCMode.MasterSync" -> ClassName("godot.registration.RPCMode", "MasterSync")
-            "godot.registration.RPCMode.PuppetSync" -> ClassName("godot.registration.RPCMode", "PuppetSync")
+            "godot.registration.RPCMode.DISABLED" -> ClassName("godot.registration.RPCMode", "DISABLED")
+            "godot.registration.RPCMode.REMOTE" -> ClassName("godot.registration.RPCMode", "REMOTE")
+            "godot.registration.RPCMode.SYNC" -> ClassName("godot.registration.RPCMode", "SYNC")
+            "godot.registration.RPCMode.MASTER" -> ClassName("godot.registration.RPCMode", "MASTER")
+            "godot.registration.RPCMode.PUPPET" -> ClassName("godot.registration.RPCMode", "PUPPET")
+            "godot.registration.RPCMode.REMOTESYNC" -> ClassName("godot.registration.RPCMode", "REMOTESYNC")
+            "godot.registration.RPCMode.MASTERSYNC" -> ClassName("godot.registration.RPCMode", "MASTERSYNC")
+            "godot.registration.RPCMode.PUPPETSYNC" -> ClassName("godot.registration.RPCMode", "PUPPETSYNC")
             else -> throw IllegalArgumentException("Unknown annotation or registration $rpcModeAnnotationAsString")
         }
     }

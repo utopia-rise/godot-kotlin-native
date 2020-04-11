@@ -4,10 +4,10 @@ import org.jetbrains.kotlin.descriptors.annotations.Annotations
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 
-inline fun <T> Annotations.getAnnotationValue(
+fun <T> Annotations.getAnnotationValue(
     annotation: String,
-    value: String,
-    noSuchAnnotationAction: () -> Throwable
+    key: String,
+    defaultValue: T
 ): T {
     return this
         .findAnnotation(FqName(annotation))
@@ -16,9 +16,10 @@ inline fun <T> Annotations.getAnnotationValue(
             annotationDescriptor
                 .allValueArguments
                 .entries
-                .first { it.key == Name.identifier(value) }
-                .value
-                .value as T
+                .firstOrNull { it.key == Name.identifier(key) }
+                ?.value
+                ?.value as T
+                ?: defaultValue
         }
-        ?: throw noSuchAnnotationAction()
+        ?: defaultValue
 }

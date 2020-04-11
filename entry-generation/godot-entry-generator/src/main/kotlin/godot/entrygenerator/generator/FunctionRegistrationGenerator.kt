@@ -9,6 +9,7 @@ import godot.entrygenerator.model.REGISTER_FUNCTION_ANNOTATION
 import godot.entrygenerator.model.REGISTER_FUNCTION_ANNOTATION_RPC_MODE_ARGUMENT
 import org.jetbrains.kotlin.descriptors.FunctionDescriptor
 import org.jetbrains.kotlin.name.ClassId
+import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 
 object FunctionRegistrationGenerator {
@@ -21,10 +22,10 @@ object FunctionRegistrationGenerator {
         functions.forEach { functionDescriptor ->
             registerClassControlFlow
                 .addStatement(
-                    "function(%S,·%L,·%M)",
+                    "function(%S,·%T,·%L)",
                     functionDescriptor.name,
-                    className.member(functionDescriptor.name.asString()),
-                    mapRpcModeAnnotationToClassName(getRpcModeEnum(functionDescriptor))
+                    mapRpcModeAnnotationToClassName(getRpcModeEnum(functionDescriptor)),
+                    className.member(functionDescriptor.name.asString()).reference()
                 )
         }
     }
@@ -39,8 +40,10 @@ object FunctionRegistrationGenerator {
     private fun getCompilerRpcModeEnumRepresentation(functionDescriptor: FunctionDescriptor): Pair<ClassId, Name> {
         return functionDescriptor
             .annotations
-            .getAnnotationValue(REGISTER_FUNCTION_ANNOTATION, REGISTER_FUNCTION_ANNOTATION_RPC_MODE_ARGUMENT) {
-                IllegalStateException("${functionDescriptor.name} has no RegisterFunction annotation even though the annotation processor found one.")
-            }
+            .getAnnotationValue(
+                REGISTER_FUNCTION_ANNOTATION,
+                REGISTER_FUNCTION_ANNOTATION_RPC_MODE_ARGUMENT,
+                Pair(ClassId(FqName("godot.registration"), Name.identifier("RPCMode")), Name.identifier("DISABLED"))
+            )
     }
 }

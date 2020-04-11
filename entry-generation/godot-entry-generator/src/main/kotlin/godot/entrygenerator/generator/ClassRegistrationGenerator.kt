@@ -24,7 +24,7 @@ object ClassRegistrationGenerator {
 
             val registerClassControlFlow = classRegistryControlFlow.beginControlFlow(
                 "registerClass(%S,·%S,·%L,·${isTool(classWithMembers.classDescriptor)})·{",
-                className,
+                classNameAsString,
                 superClass,
                 className.constructorReference()
             ) //START: registerClass
@@ -42,8 +42,6 @@ object ClassRegistrationGenerator {
     private fun isTool(classDescriptor: ClassDescriptor): Boolean {
         return classDescriptor
             .annotations
-            .getAnnotationValue(REGISTER_CLASS_ANNOTATION, REGISTER_CLASS_ANNOTATION_TOOL_ARGUMENT) {
-                IllegalStateException("${classDescriptor.name} has no RegisterClass annotation even though the annotation processor found one.")
-            }
+            .getAnnotationValue(REGISTER_CLASS_ANNOTATION, REGISTER_CLASS_ANNOTATION_TOOL_ARGUMENT, false)
     }
 }
