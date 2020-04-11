@@ -2,10 +2,13 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
     kotlin("multiplatform")
+    `maven-publish`
 }
 
 //TODO: this needs to be properly configured! This is just a basic setup to be able to implement the annotations
 kotlin {
+    // we don't have godot-library in the mobile targets yet, limit these to desktop for now
+    //has to be change in `GodotPlugin` of `godot-gradle-plugin` as well
     macosX64("macos")
     linuxX64("linux")
     mingwX64("windows")
@@ -23,12 +26,24 @@ kotlin {
                 // dependsOn(generatedSourceSet)
                 // dependsOn(coreSourceSet)
                 // dependsOn(publicSourceSet)
-                kotlin.srcDirs(listOf("nativeInternal", "nativeCore", "nativeGen", "nativePublic").map { "src/$it/kotlin" })
+                kotlin.srcDirs(
+                    listOf(
+                        "nativeInternal",
+                        "nativeCore",
+                        "nativeGen",
+                        "nativePublic"
+                    ).map { "src/$it/kotlin" })
             }
             val gdnative by cinterops.creating {
                 defFile("src/nativeInterop/cinterop/godot.def")
                 includeDirs("$rootDir/godot-kotlin/godot-headers/", "src/nativeInterop/cinterop")
             }
         }
+    }
+}
+
+tasks {
+    build {
+        finalizedBy(publishToMavenLocal)
     }
 }

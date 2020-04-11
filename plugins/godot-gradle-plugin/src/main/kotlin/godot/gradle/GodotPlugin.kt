@@ -1,5 +1,6 @@
 package godot.gradle
 
+import godot.utils.GodotBuildProperties
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.tasks.Delete
@@ -10,6 +11,7 @@ import org.gradle.kotlin.dsl.register
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
+import org.jetbrains.kotlin.konan.target.HostManager
 
 class GodotPlugin : Plugin<Project> {
     override fun apply(project: Project) {
@@ -24,7 +26,13 @@ class GodotPlugin : Plugin<Project> {
 
     private fun setupExtensionDefaults(project: Project, godot: GodotExtension) {
         with(godot) {
-            platforms(*Platform.values())
+            // we don't have godot-library in the mobile targets yet, limit these to desktop for now
+            //has to be change in `build.gradle.kts` of `godot-library` as well
+            platforms(
+                Platform.LINUX_X64,
+                Platform.WINDOWS_X64,
+                Platform.OSX_X64
+            )
             debug.set(true)
             cleanupGeneratedFiles.set(true)
             gdnsDir.set(project.file("src/gdns/kotlin"))
@@ -35,19 +43,27 @@ class GodotPlugin : Plugin<Project> {
     private fun setupKotlinPlugin(project: Project, mpp: KotlinMultiplatformExtension, godot: GodotExtension) {
         project.afterEvaluate {
             // create the main source set
-            val godotMain = mpp.sourceSets.create(MAIN_SOURCE_SET_NAME)
-            val godotTest = mpp.sourceSets.create(TEST_SOURCE_SET_NAME)
+            // val godotMain = mpp.sourceSets.create(MAIN_SOURCE_SET_NAME)
+            // val godotTest = mpp.sourceSets.create(TEST_SOURCE_SET_NAME)
 
             fun KotlinNativeTarget.configureSourceSets(includeEntrySourceDir: Boolean) {
                 compilations.getByName("main").defaultSourceSet {
-                    dependsOn(godotMain)
+                    kotlin.srcDirs("src/$MAIN_SOURCE_SET_NAME/kotlin")
                     if (includeEntrySourceDir) {
-                        kotlin.srcDirs += godot.entrySourceDir.get().asFile
+                        kotlin.srcDirs(godot.entrySourceDir.get().asFile)
+                    }
+
+                    dependencies {
+                        // TODO: remove this once we have published the godot-library artifact.
+                        // don't add dependencies to targets not buildable in the current host
+                        if (HostManager().isEnabled(this@configureSourceSets.konanTarget)) {
+                            implementation("com.utopia-rise:godot-library:${GodotBuildProperties.godotKotlinVersion}")
+                        }
                     }
                 }
 
                 compilations.getByName("test").defaultSourceSet {
-                    dependsOn(godotTest)
+                    kotlin.srcDirs("src/$TEST_SOURCE_SET_NAME/kotlin")
                 }
             }
 
