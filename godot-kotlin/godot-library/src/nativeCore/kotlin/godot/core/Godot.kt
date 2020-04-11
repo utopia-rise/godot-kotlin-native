@@ -5,7 +5,7 @@ import kotlinx.cinterop.*
 import kotlin.native.concurrent.AtomicInt
 import kotlin.native.concurrent.AtomicReference
 
-internal object Godot {
+object Godot {
     private val gdnativeWrapper = AtomicReference<CPointer<godot_gdnative_core_api_struct>?>(null)
     private val nativescriptWrapper = AtomicReference<CPointer<godot_gdnative_ext_nativescript_api_struct>?>(null)
 
