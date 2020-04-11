@@ -48,6 +48,10 @@ class Class(
 
         val classTypeBuilder = createTypeBuilder(className, packageName)
 
+        if (name == "Object") {
+            generatePointerVariable(classTypeBuilder)
+        }
+
         generateConstructors(classTypeBuilder)
         generateEnums(classTypeBuilder)
         generateSignals(classTypeBuilder)
@@ -91,6 +95,18 @@ class Class(
             .superclass(ClassName(packageName, if (baseClass.isEmpty()) "GodotObject" else baseClass))
     }
 
+    private fun generatePointerVariable(typeBuilder: TypeSpec.Builder) {
+        typeBuilder.addProperty(
+            PropertySpec.builder(
+                "ptr",
+                ClassName("kotlinx.cinterop", "COpaquePointer")
+            )
+                .addModifiers(KModifier.INTERNAL, KModifier.LATEINIT)
+                .mutable(true)
+                .build()
+        )
+    }
+
     private fun generateConstructors(typeBuilder: TypeSpec.Builder) {
         if (isInstanciable) {
             typeBuilder.addFunction(
@@ -99,7 +115,7 @@ class Class(
                     .addStatement(
                         """if (shouldInit()) {
                             |    %M("$oldName")?.let {
-                            |        this.rawMemory = it.%M<%T<()->%T>>().%M()
+                            |        this.ptr = it.%M<%T<()->%T>>().%M()
                             |    } ?: throw NotImplementedError("No constructor for $name in Godot")
                             |}
                             |""".trimMargin(),
@@ -116,10 +132,10 @@ class Class(
         typeBuilder.primaryConstructor(
             FunSpec.constructorBuilder()
                 .addParameter(ParameterSpec("_ignore", Any::class.asTypeName().copy(nullable = true)))
-                .callSuperConstructor("_ignore")
+                .callSuperConstructor()
                 .addModifiers(KModifier.INTERNAL)
                 .build()
-        )
+        ).addSuperclassConstructorParameter("_ignore")
     }
 
     private fun generateEnums(typeBuilder: TypeSpec.Builder) {

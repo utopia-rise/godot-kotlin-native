@@ -73,7 +73,7 @@ class Property(
                 FunSpec.setterBuilder()
                     .addParameter("value", propertyType)
                     .addStatement(
-                        "%M(${validSetter.name}MethodBind, this.rawMemory${if (index != -1) ", $index, value)" else ", value)"}",
+                        "%M(${validSetter.name}MethodBind, this.ptr${if (index != -1) ", $index, value)" else ", value)"}",
                         MemberName("godot.icalls", icall.name)
                     )
                     .build()
@@ -91,7 +91,7 @@ class Property(
                 FunSpec.getterBuilder()
                     //Hard to maintain but do not see how to do better (Pierre-Thomas Meisels)
                     .addStatement(
-                        "return %M(${validGetter.name}MethodBind, this.rawMemory${if (index != -1) ", $index)" else ")"}",
+                        "return %M(${validGetter.name}MethodBind, this.ptr${if (index != -1) ", $index)" else ")"}",
                         MemberName("godot.icalls", icall.name)
                     )
                     .build()
