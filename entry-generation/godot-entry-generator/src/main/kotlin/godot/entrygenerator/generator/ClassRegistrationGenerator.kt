@@ -35,6 +35,12 @@ object ClassRegistrationGenerator {
                 className
             )
 
+            SignalRegistrationGenerator.registerSignals(
+                classWithMembers.signals,
+                registerClassControlFlow,
+                className
+            )
+
             registerClassControlFlow.endControlFlow() //END: registerClass
         }
     }
