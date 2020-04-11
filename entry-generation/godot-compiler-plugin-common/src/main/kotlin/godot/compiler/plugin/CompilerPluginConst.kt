@@ -12,6 +12,7 @@ object CompilerPluginConst {
     object CommandLineOptionNames {
         const val gdnsDirPathOption = "gdns-dir-path"
         const val entryDirPathOption = "entry-dir-path"
+        const val enabledOption = "enabled"
     }
 
     object CommandlineArguments {
@@ -19,5 +20,7 @@ object CompilerPluginConst {
             CompilerConfigurationKey.create("path to root of godot project")
         val ENTRY_DIR_PATH: CompilerConfigurationKey<String> =
             CompilerConfigurationKey.create("path to the folder in which the generated entry file should be written")
+        val ENABLED: CompilerConfigurationKey<Boolean> =
+            CompilerConfigurationKey.create("flag to enable entry generation")
     }
 }
