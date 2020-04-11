@@ -24,6 +24,10 @@ class GodotSubPlugin : KotlinGradleSubplugin<AbstractCompile> {
         val extension = project.extensions.getByType(GodotExtension::class.java)
         return listOf(
             SubpluginOption(
+                CompilerPluginConst.CommandLineOptionNames.enabledOption,
+                (kotlinCompile.name == "compileKotlinDummyTarget").toString()
+            ),
+            SubpluginOption(
                 CompilerPluginConst.CommandLineOptionNames.gdnsDirPathOption,
                 extension.gdnsDir.get().asFile.absolutePath
             ),

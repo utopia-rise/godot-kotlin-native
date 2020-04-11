@@ -14,14 +14,19 @@ class CommonComponentRegistrar : ComponentRegistrar {
         project: MockProject,
         configuration: CompilerConfiguration
     ) {
-        val processor = GodotAnnotationProcessor(
-            checkNotNull(configuration.get(CompilerPluginConst.CommandlineArguments.ENTRY_DIR_PATH)) { "No path for generated entry file specified" },
-            checkNotNull(configuration.get(CompilerPluginConst.CommandlineArguments.GDNS_DIR_PATH)) { "No path for generated gdns files specified" }
-        )
-        val mpapt = MpAptProject(processor, configuration)
-        StorageComponentContainerContributor.registerExtension(project, mpapt)
-        ClassBuilderInterceptorExtension.registerExtension(project, mpapt)
-        JsSyntheticTranslateExtension.registerExtension(project, mpapt)
+        val enabled = checkNotNull(configuration.get(CompilerPluginConst.CommandlineArguments.ENABLED)) {
+            "enabled parameter missing"
+        }
+        if (enabled) {
+            val processor = GodotAnnotationProcessor(
+                checkNotNull(configuration.get(CompilerPluginConst.CommandlineArguments.ENTRY_DIR_PATH)) { "No path for generated entry file specified" },
+                checkNotNull(configuration.get(CompilerPluginConst.CommandlineArguments.GDNS_DIR_PATH)) { "No path for generated gdns files specified" }
+            )
+            val mpapt = MpAptProject(processor, configuration)
+            StorageComponentContainerContributor.registerExtension(project, mpapt)
+            ClassBuilderInterceptorExtension.registerExtension(project, mpapt)
+            JsSyntheticTranslateExtension.registerExtension(project, mpapt)
+        }
     }
 }
 
@@ -43,13 +48,22 @@ class CommonGodotKotlinCompilerPluginCommandLineProcessor : CommandLineProcessor
             allowMultipleOccurrences = false
         )
 
+        val ENABLED = CliOption(
+            CompilerPluginConst.CommandLineOptionNames.enabledOption,
+            "Flag to enable entry generation",
+            CompilerPluginConst.CommandlineArguments.ENABLED.toString(),
+            required = true,
+            allowMultipleOccurrences = false
+        )
+
         const val PLUGIN_ID = CompilerPluginConst.compilerPluginId
     }
 
     override val pluginId = PLUGIN_ID
     override val pluginOptions = listOf(
         GDNS_DIR_PATH_OPTION,
-        ENTRY_DIR_PATH_OPTION
+        ENTRY_DIR_PATH_OPTION,
+        ENABLED
     )
 
     override fun processOption(option: AbstractCliOption, value: String, configuration: CompilerConfiguration) {
@@ -59,6 +73,9 @@ class CommonGodotKotlinCompilerPluginCommandLineProcessor : CommandLineProcessor
             )
             ENTRY_DIR_PATH_OPTION -> configuration.put(
                 CompilerPluginConst.CommandlineArguments.ENTRY_DIR_PATH, value
+            )
+            ENABLED -> configuration.put(
+                CompilerPluginConst.CommandlineArguments.ENABLED, value.toBoolean()
             )
             else -> throw CliOptionProcessingException("Unknown option: ${option.optionName}")
         }

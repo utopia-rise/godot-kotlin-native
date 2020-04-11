@@ -4,9 +4,7 @@ package godot.registration
 enum class RPCMode {
     DISABLED,
     REMOTE,
-    SYNC,
     MASTER,
-    SLAVE,
     PUPPET,
     REMOTE_SYNC,
     MASTER_SYNC,
