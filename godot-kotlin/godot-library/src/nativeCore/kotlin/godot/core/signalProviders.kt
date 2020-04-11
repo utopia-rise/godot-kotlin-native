@@ -19,7 +19,7 @@ fun signal(): SignalDelegateProvider<Signal0> {
 }
 
 @Suppress("UNUSED_PARAMETER")
-fun <P0> signal(p0: String, dropSignalPrefix: Boolean = false): SignalDelegateProvider<Signal1<P0>> {
+fun <P0> signal(p0: String): SignalDelegateProvider<Signal1<P0>> {
     return SignalDelegateProvider(::Signal1)
 }
 
