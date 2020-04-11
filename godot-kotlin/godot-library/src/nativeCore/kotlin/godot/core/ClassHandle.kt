@@ -54,9 +54,7 @@ internal class ClassHandle<T: Object>(
                 rpc_type = when (rpcMode) {
                     RPCMode.DISABLED -> GODOT_METHOD_RPC_MODE_DISABLED
                     RPCMode.REMOTE -> GODOT_METHOD_RPC_MODE_REMOTE
-                    RPCMode.SYNC -> GODOT_METHOD_RPC_MODE_SYNC
                     RPCMode.MASTER -> GODOT_METHOD_RPC_MODE_MASTER
-                    RPCMode.SLAVE -> GODOT_METHOD_RPC_MODE_SLAVE
                     RPCMode.PUPPET -> GODOT_METHOD_RPC_MODE_PUPPET
                     RPCMode.REMOTE_SYNC -> GODOT_METHOD_RPC_MODE_REMOTESYNC
                     RPCMode.MASTER_SYNC -> GODOT_METHOD_RPC_MODE_MASTERSYNC
