@@ -47,13 +47,12 @@ class Class(
         val className = ClassName(packageName, name)
 
         val classTypeBuilder = createTypeBuilder(className, packageName)
-        val cOpaquePointerClass = ClassName("kotlinx.cinterop", "COpaquePointer")
 
-        generateConstructors(classTypeBuilder, cOpaquePointerClass)
+        generateConstructors(classTypeBuilder)
         generateEnums(classTypeBuilder)
         generateSignals(classTypeBuilder)
 
-        val baseCompanion = createBaseCompanion(cOpaquePointerClass)
+        val baseCompanion = createBaseCompanion()
         generateCasts(tree, baseCompanion)
         generateConstants(baseCompanion)
 
@@ -92,32 +91,33 @@ class Class(
             .superclass(ClassName(packageName, if (baseClass.isEmpty()) "GodotObject" else baseClass))
     }
 
-    private fun generateConstructors(typeBuilder: TypeSpec.Builder, cOpaquePointerClass: ClassName) {
-        val superConstructorName = if (isInstanciable) "\"$oldName\"" else ""
+    private fun generateConstructors(typeBuilder: TypeSpec.Builder) {
+        if (isInstanciable) {
+            typeBuilder.addFunction(
+                FunSpec.constructorBuilder()
+                    .callThisConstructor("null")
+                    .addStatement(
+                        """if (shouldInit()) {
+                            |    %M("$oldName")?.let {
+                            |        this.rawMemory = it.%M<%T<()->%T>>().%M()
+                            |    } ?: throw NotImplementedError("No constructor for $name in Godot")
+                            |}
+                            |""".trimMargin(),
+                        MemberName("godot.gdnative", "godot_get_class_constructor"),
+                        MemberName("kotlinx.cinterop", "reinterpret"),
+                        ClassName("kotlinx.cinterop", "CFunction"),
+                        ClassName("kotlinx.cinterop", "COpaquePointer"),
+                        MemberName("kotlinx.cinterop", "invoke")
+                    )
+                    .build()
+            )
+        }
 
-        typeBuilder.addFunction(
+        typeBuilder.primaryConstructor(
             FunSpec.constructorBuilder()
-                .callSuperConstructor(superConstructorName)
-                .build()
-        )
-        typeBuilder.addFunction(
-            FunSpec.constructorBuilder()
-                .addParameter("variant", ClassName("godot.core", "Variant"))
-                .callSuperConstructor("variant")
-                .build()
-        )
-        typeBuilder.addFunction(
-            FunSpec.constructorBuilder()
+                .addParameter(ParameterSpec("_ignore", Any::class.asTypeName().copy(nullable = true)))
+                .callSuperConstructor("_ignore")
                 .addModifiers(KModifier.INTERNAL)
-                .addParameter("mem", cOpaquePointerClass)
-                .callSuperConstructor("mem")
-                .build()
-        )
-        typeBuilder.addFunction(
-            FunSpec.constructorBuilder()
-                .addModifiers(KModifier.INTERNAL)
-                .addParameter("name", String::class)
-                .callSuperConstructor("name")
                 .build()
         )
     }
@@ -140,11 +140,11 @@ class Class(
         typeBuilder.addType(signalClassBuilder.build())
     }
 
-    private fun createBaseCompanion(cOpaquePointerClass: ClassName): TypeSpec.Builder {
+    private fun createBaseCompanion(): TypeSpec.Builder {
         return TypeSpec.companionObjectBuilder().apply {
             if (isSingleton) {
                 this.addAnnotation(ClassName("kotlin.native", "ThreadLocal"))
-                this.addProperty(createSingletonProperty(cOpaquePointerClass))
+                this.addProperty(createSingletonProperty(ClassName("kotlinx.cinterop", "COpaquePointer")))
             }
         }
     }
