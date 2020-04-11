@@ -1,7 +1,7 @@
 package godot.entrygenerator
 
 import godot.entrygenerator.filebuilder.EntryFileBuilder
-import godot.entrygenerator.transformer.TypeDeclarationsToClassWithMemberTransformer
+import godot.entrygenerator.transformer.transformTypeDeclarationsToClassWithMember
 import org.jetbrains.kotlin.descriptors.ClassDescriptor
 import org.jetbrains.kotlin.descriptors.FunctionDescriptor
 import org.jetbrains.kotlin.descriptors.PropertyDescriptor
@@ -20,7 +20,7 @@ class EntryGenerator {
 
         entryFileBuilder
             .registerClassesWithMembers(
-                TypeDeclarationsToClassWithMemberTransformer.transform(
+                transformTypeDeclarationsToClassWithMember(
                     classes,
                     properties,
                     functions,
