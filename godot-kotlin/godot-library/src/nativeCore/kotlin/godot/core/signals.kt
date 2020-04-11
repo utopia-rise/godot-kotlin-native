@@ -21,13 +21,13 @@ abstract class Signal(
     }
 }
 
-abstract class Signal0(name: String) : Signal(name) {
+class Signal0(name: String) : Signal(name) {
     internal fun emit(instance: Object) {
         emitSignal(instance)
     }
 }
 
-abstract class Signal1<P0>(name: String) : Signal(name) {
+class Signal1<P0>(name: String) : Signal(name) {
     internal fun emit(instance: Object, p0: P0) {
         emitSignal(
             instance,
@@ -36,7 +36,7 @@ abstract class Signal1<P0>(name: String) : Signal(name) {
     }
 }
 
-abstract class Signal2<P0, P1>(name: String) : Signal(name) {
+class Signal2<P0, P1>(name: String) : Signal(name) {
     internal fun emit(instance: Object, p0: P0, p1: P1) {
         emitSignal(
             instance,
@@ -46,7 +46,7 @@ abstract class Signal2<P0, P1>(name: String) : Signal(name) {
     }
 }
 
-abstract class Signal3<P0, P1, P2>(name: String) : Signal(name) {
+class Signal3<P0, P1, P2>(name: String) : Signal(name) {
     internal fun emit(instance: Object, p0: P0, p1: P1, p2: P2) {
         emitSignal(
             instance,
@@ -57,7 +57,7 @@ abstract class Signal3<P0, P1, P2>(name: String) : Signal(name) {
     }
 }
 
-abstract class Signal4<P0, P1, P2, P3>(name: String) : Signal(name) {
+class Signal4<P0, P1, P2, P3>(name: String) : Signal(name) {
     internal fun emit(instance: Object, p0: P0, p1: P1, p2: P2, p3: P3) {
         emitSignal(
             instance,
@@ -69,7 +69,7 @@ abstract class Signal4<P0, P1, P2, P3>(name: String) : Signal(name) {
     }
 }
 
-abstract class Signal5<P0, P1, P2, P3, P4>(name: String) : Signal(name) {
+class Signal5<P0, P1, P2, P3, P4>(name: String) : Signal(name) {
     internal fun emit(instance: Object, p0: P0, p1: P1, p2: P2, p3: P3, p4: P4) {
         emitSignal(
             instance,
@@ -82,7 +82,7 @@ abstract class Signal5<P0, P1, P2, P3, P4>(name: String) : Signal(name) {
     }
 }
 
-abstract class Signal6<P0, P1, P2, P3, P4, P5>(name: String) : Signal(name) {
+class Signal6<P0, P1, P2, P3, P4, P5>(name: String) : Signal(name) {
     internal fun emit(instance: Object, p0: P0, p1: P1, p2: P2, p3: P3, p4: P4, p5: P5) {
         emitSignal(
             instance,
@@ -96,7 +96,7 @@ abstract class Signal6<P0, P1, P2, P3, P4, P5>(name: String) : Signal(name) {
     }
 }
 
-abstract class Signal7<P0, P1, P2, P3, P4, P5, P6>(name: String) : Signal(name) {
+class Signal7<P0, P1, P2, P3, P4, P5, P6>(name: String) : Signal(name) {
     internal fun emit(instance: Object, p0: P0, p1: P1, p2: P2, p3: P3, p4: P4, p5: P5, p6: P6) {
         emitSignal(
             instance,
@@ -111,7 +111,7 @@ abstract class Signal7<P0, P1, P2, P3, P4, P5, P6>(name: String) : Signal(name) 
     }
 }
 
-abstract class Signal8<P0, P1, P2, P3, P4, P5, P6, P7>(name: String) : Signal(name) {
+class Signal8<P0, P1, P2, P3, P4, P5, P6, P7>(name: String) : Signal(name) {
     internal fun emit(instance: Object, p0: P0, p1: P1, p2: P2, p3: P3, p4: P4, p5: P5, p6: P6, p7: P7) {
         emitSignal(
             instance,
@@ -127,7 +127,7 @@ abstract class Signal8<P0, P1, P2, P3, P4, P5, P6, P7>(name: String) : Signal(na
     }
 }
 
-abstract class Signal9<P0, P1, P2, P3, P4, P5, P6, P7, P8>(name: String) : Signal(name) {
+class Signal9<P0, P1, P2, P3, P4, P5, P6, P7, P8>(name: String) : Signal(name) {
     internal fun emit(instance: Object, p0: P0, p1: P1, p2: P2, p3: P3, p4: P4, p5: P5, p6: P6, p7: P7, p8: P8) {
         emitSignal(
             instance,
@@ -144,7 +144,7 @@ abstract class Signal9<P0, P1, P2, P3, P4, P5, P6, P7, P8>(name: String) : Signa
     }
 }
 
-abstract class Signal10<P0, P1, P2, P3, P4, P5, P6, P7, P8, P9>(name: String) : Signal(name) {
+class Signal10<P0, P1, P2, P3, P4, P5, P6, P7, P8, P9>(name: String) : Signal(name) {
     internal fun emit(
         instance: Object,
         p0: P0,
