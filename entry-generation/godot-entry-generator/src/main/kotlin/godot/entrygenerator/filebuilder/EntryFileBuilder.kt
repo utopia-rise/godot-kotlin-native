@@ -46,11 +46,6 @@ class EntryFileBuilder {
         entryFileSpec.build().writeTo(File(outputPath))
     }
 
-    private fun registration(registrationAction: FunSpec.Builder.() -> Unit): EntryFileBuilder {
-        registrationAction(nativeScriptInitFunctionSpec)
-        return this
-    }
-
     private fun generateGDNativeInitFunction(): FunSpec {
         return FunSpec
             .builder("GDNativeInit")
