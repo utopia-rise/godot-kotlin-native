@@ -22,7 +22,7 @@ object PropertyHintTypeMapper {
             "godot.annotation.ExpRange" ->
                 ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_EXP_RANGE")
             "godot.annotation.EnumTypeHint" ->
-                ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_ENUM_TYPEHINT")
+                ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_ENUM")
             "godot.annotation.ExpEasing" ->
                 ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_EXP_EASING")
             "godot.annotation.Lenght" ->
@@ -150,7 +150,7 @@ object PropertyHintTypeMapper {
             "godot.annotation.SaveFile" -> throw NotImplementedError("This annotation is not yet implemented")
             "godot.annotation.IntIsObjectId" -> throw NotImplementedError("This annotation is not yet implemented")
             "godot.annotation.Max" -> throw NotImplementedError("This annotation is not yet implemented")
-            null -> Pair("", arrayOf())
+            null -> Pair("%S", arrayOf(""))
             else -> throw IllegalStateException("Unknown annotation ${annotationDescriptor.fqName}")
         }
     }
@@ -243,7 +243,7 @@ object PropertyHintTypeMapper {
         return if (length != -1) {
             Pair("$length", arrayOf())
         } else {
-            Pair("", arrayOf())
+            Pair("%S", arrayOf(""))
         }
     }
 
@@ -293,6 +293,6 @@ object PropertyHintTypeMapper {
             throw IllegalStateException("You annotated the property ${propertyDescriptor.name} which is of type ${propertyDescriptor.type} with @ColorNoAlpha. This annotation is only applicable to Color.")
         }
 
-        return Pair("", arrayOf())
+        return Pair("%S", arrayOf(""))
     }
 }

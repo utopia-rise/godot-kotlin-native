@@ -12,6 +12,7 @@ import godot.entrygenerator.model.REGISTER_PROPERTY_ANNOTATION
 import godot.entrygenerator.model.REGISTER_PROPERTY_ANNOTATION_RPC_MODE_ARGUMENT
 import godot.entrygenerator.model.REGISTER_PROPERTY_ANNOTATION_VISIBLE_IN_EDITOR_ARGUMENT
 import org.jetbrains.kotlin.descriptors.PropertyDescriptor
+import org.jetbrains.kotlin.js.descriptorUtils.getJetTypeFqName
 import org.jetbrains.kotlin.js.resolve.diagnostics.findPsi
 import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
@@ -21,6 +22,7 @@ import org.jetbrains.kotlin.resolve.BindingContext
 import org.jetbrains.kotlin.resolve.bindingContextUtil.getReferenceTargets
 import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
 import org.jetbrains.kotlin.resolve.source.KotlinSourceElement
+import org.jetbrains.kotlin.types.asSimpleType
 import org.jetbrains.kotlin.types.typeUtil.isEnum
 
 object PropertyRegistrationGenerator {
@@ -58,7 +60,10 @@ object PropertyRegistrationGenerator {
                         stringTemplate, //template
                         propertyDescriptor.name, //propertyName
                         className.member(propertyDescriptor.name.asString()).reference(), //propertyReference
-                        TypeToVariantAsClassNameMapper.mapTypeToVariantAsClassName(propertyDescriptor.type.toString()), //property variant type
+                        TypeToVariantAsClassNameMapper.mapTypeToVariantAsClassName(
+                            propertyDescriptor.type.toString(),
+                            propertyDescriptor.type.isEnum()
+                        ), //property variant type
                         "null", //default value null
                         shouldBeVisibleInEditor(propertyDescriptor), //isVisibleInEditor
                         mapRpcModeAnnotationToClassName(getRpcModeEnum(propertyDescriptor)), //rpcMode
@@ -71,7 +76,10 @@ object PropertyRegistrationGenerator {
                         stringTemplate, //template
                         propertyDescriptor.name, //propertyName
                         className.member(propertyDescriptor.name.asString()).reference(), //propertyReference
-                        TypeToVariantAsClassNameMapper.mapTypeToVariantAsClassName(propertyDescriptor.type.toString()), //property variant type
+                        TypeToVariantAsClassNameMapper.mapTypeToVariantAsClassName(
+                            propertyDescriptor.type.toString(),
+                            propertyDescriptor.type.isEnum()
+                        ), //property variant type
                         ClassName("godot.core", "Variant"), //default value variant wrapper
                         getDefaultValue(propertyDescriptor, bindingContext), //default value inside variant wrapper
                         shouldBeVisibleInEditor(propertyDescriptor), //isVisibleInEditor
@@ -127,7 +135,13 @@ object PropertyRegistrationGenerator {
             throw IllegalStateException("You initialized the property ${propertyDescriptor.fqNameSafe} (which you annotated with @RegisterProperty) with a reference: ${defaultArgumentPsi.text}. This is not supported! initialize your property with a compile time constant")
         }
 
-        return defaultArgumentPsi.text
+        val fqTypeName = propertyDescriptor.type.asSimpleType().getJetTypeFqName(false)
+
+        return if (fqTypeName.startsWith("kotlin")) {
+            defaultArgumentPsi.text
+        } else {
+            "${fqTypeName.substringBeforeLast(".")}.${defaultArgumentPsi.text}"
+        }
     }
 
     private fun isContainingReference(

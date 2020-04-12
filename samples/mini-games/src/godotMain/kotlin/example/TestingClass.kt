@@ -61,8 +61,8 @@ class TestingClass : Object() {
     @RegisterProperty
     lateinit var dirExtGlobal: String
 
-//    @EnumTypeHint
-//    @RegisterProperty
-//    var enumTest: TestEnum = TestEnum.ENUM1
+    @EnumTypeHint
+    @RegisterProperty
+    var enumTest: TestEnum = TestEnum.ENUM1
 
 }

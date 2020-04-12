@@ -21,11 +21,14 @@ class Variant (val handle: CValue<godot_variant>) {
         // TODO
     }
 
+    constructor(value: Any) : this(new()) //TODO: replace
+
     enum class Type(val value: Int) {
         BOOL(1), //TODO: replace with correct value
         STRING(1), //TODO: replace with correct value
         INT(1), //TODO: replace with correct value
-        REAL(1) //TODO: replace with correct value
+        REAL(1), //TODO: replace with correct value
+        OBJECT(1) //TODO: replace with correct value
         // TODO: add types
     }
 

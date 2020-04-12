@@ -4,7 +4,12 @@ import com.squareup.kotlinpoet.ClassName
 
 object TypeToVariantAsClassNameMapper {
 
-    fun mapTypeToVariantAsClassName(typeAsString: String): ClassName {
+    fun mapTypeToVariantAsClassName(typeAsString: String, isEnum: Boolean = false): ClassName {
+
+        if (isEnum) {
+            return ClassName("godot.core.Variant.Type", "STRING")
+        }
+
         return when (typeAsString) {
             "Byte", "Short", "Int", "Long" -> ClassName("godot.core.Variant.Type", "INT")
             "Float", "Double" -> ClassName("godot.core.Variant.Type", "REAL")
