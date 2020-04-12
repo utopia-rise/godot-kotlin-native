@@ -99,25 +99,45 @@ class ClassBuilder<T : Object> internal constructor(val classHandle: ClassHandle
         name: String,
         property: KMutableProperty1<T, K>,
         type: Variant.Type,
-        hintType: godot_property_hint = godot_property_hint.GODOT_PROPERTY_HINT_NONE,
-        hintString: String = "",
         default: Variant? = null,
-        isVisibleInEditor: Boolean = true
+        isVisibleInEditor: Boolean = true,
+        rpcMode: RPCMode,
+        hintType: godot_property_hint = godot_property_hint.GODOT_PROPERTY_HINT_NONE,
+        hintString: String = ""
     ) {
         val propertyHandler = MutablePropertyHandler(property)
-        classHandle.registerProperty(name, StableRef.create(propertyHandler).asCPointer(), type, hintType, hintString, default, isVisibleInEditor)
+        classHandle.registerProperty(
+            name,
+            StableRef.create(propertyHandler).asCPointer(),
+            type,
+            default,
+            isVisibleInEditor,
+            rpcMode,
+            hintType,
+            hintString
+        )
     }
 
     inline fun <reified K : Enum<K>> enumProperty(
         name: String,
         property: KMutableProperty1<T, K>,
         type: Variant.Type,
-        hintType: godot_property_hint = godot_property_hint.GODOT_PROPERTY_HINT_NONE,
-        hintString: String = "",
         default: Variant? = null,
-        isVisibleInEditor: Boolean = true
+        isVisibleInEditor: Boolean = true,
+        rpcMode: RPCMode,
+        hintType: godot_property_hint = godot_property_hint.GODOT_PROPERTY_HINT_NONE,
+        hintString: String = ""
     ) {
-        val propertyHandler = MutableEnumPropertyHandler(property) { str -> enumValueOf(str)}
-        classHandle.registerProperty(name, StableRef.create(propertyHandler).asCPointer(), type, hintType, hintString, default, isVisibleInEditor)
+        val propertyHandler = MutableEnumPropertyHandler(property) { str -> enumValueOf(str) }
+        classHandle.registerProperty(
+            name,
+            StableRef.create(propertyHandler).asCPointer(),
+            type,
+            default,
+            isVisibleInEditor,
+            rpcMode,
+            hintType,
+            hintString
+        )
     }
 }

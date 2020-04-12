@@ -52,16 +52,7 @@ internal class ClassHandle<T : Object>(
         disposables.add(methodRef)
         memScoped {
             val attribs = cValue<godot_method_attributes> {
-                rpc_type = when (rpcMode) {
-                    RPCMode.DISABLED -> GODOT_METHOD_RPC_MODE_DISABLED
-                    RPCMode.REMOTE -> GODOT_METHOD_RPC_MODE_REMOTE
-                    RPCMode.MASTER -> GODOT_METHOD_RPC_MODE_MASTER
-                    RPCMode.PUPPET -> GODOT_METHOD_RPC_MODE_PUPPET
-                    RPCMode.REMOTE_SYNC -> GODOT_METHOD_RPC_MODE_REMOTESYNC
-                    RPCMode.MASTER_SYNC -> GODOT_METHOD_RPC_MODE_MASTERSYNC
-                    RPCMode.PUPPET_SYNC -> GODOT_METHOD_RPC_MODE_PUPPETSYNC
-                    else -> throw AssertionError("Unsupported rpc mode $rpcMode")
-                }
+                rpc_type = toGodotRpcMode(rpcMode)
             }
 
             val instanceMethod = cValue<godot_instance_method> {
@@ -76,6 +67,19 @@ internal class ClassHandle<T : Object>(
                 attribs,
                 instanceMethod
             )
+        }
+    }
+
+    private fun toGodotRpcMode(rpcMode: RPCMode): godot_method_rpc_mode {
+        return when (rpcMode) {
+            RPCMode.DISABLED -> GODOT_METHOD_RPC_MODE_DISABLED
+            RPCMode.REMOTE -> GODOT_METHOD_RPC_MODE_REMOTE
+            RPCMode.MASTER -> GODOT_METHOD_RPC_MODE_MASTER
+            RPCMode.PUPPET -> GODOT_METHOD_RPC_MODE_PUPPET
+            RPCMode.REMOTE_SYNC -> GODOT_METHOD_RPC_MODE_REMOTESYNC
+            RPCMode.MASTER_SYNC -> GODOT_METHOD_RPC_MODE_MASTERSYNC
+            RPCMode.PUPPET_SYNC -> GODOT_METHOD_RPC_MODE_PUPPETSYNC
+            else -> throw AssertionError("Unsupported rpc mode $rpcMode")
         }
     }
 
@@ -107,10 +111,11 @@ internal class ClassHandle<T : Object>(
         propertyName: String,
         propertyHandleRef: COpaquePointer,
         propertyType: Variant.Type,
-        hintType: godot_property_hint,
-        hintString: String,
         default: Variant?,
-        isVisibleInEditor: Boolean
+        isVisibleInEditor: Boolean,
+        rpcMode: RPCMode,
+        hintType: godot_property_hint,
+        hintString: String
     ) {
         disposables.add(propertyHandleRef)
         memScoped {
@@ -120,7 +125,7 @@ internal class ClassHandle<T : Object>(
                 GODOT_PROPERTY_USAGE_NOEDITOR
             }
             val attribs = alloc<godot_property_attributes> {
-                rset_type = GODOT_METHOD_RPC_MODE_DISABLED
+                rset_type = toGodotRpcMode(rpcMode)
                 usage = usageFlags
                 type = propertyType.value
                 this.hint = hintType
