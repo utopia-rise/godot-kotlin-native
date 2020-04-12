@@ -50,6 +50,8 @@ class Class(
 
         if (name == "Object") {
             generatePointerVariable(classTypeBuilder)
+            generateInitAndDestroy(classTypeBuilder)
+            generateSignalExtensions(classTypeBuilder)
         }
 
         generateConstructors(classTypeBuilder)
@@ -105,6 +107,99 @@ class Class(
                 .mutable(true)
                 .build()
         )
+    }
+
+    private fun generateInitAndDestroy(typeBuilder: TypeSpec.Builder) {
+        typeBuilder.addFunctions(
+            listOf(
+                FunSpec.builder("_onInit").addModifiers(KModifier.OPEN).build(),
+                FunSpec.builder("_onDestroy").addModifiers(KModifier.OPEN).build()
+            )
+        )
+    }
+
+    private fun generateSignalExtensions(typeBuilder: TypeSpec.Builder) {
+
+        fun List<TypeVariableName>.toParameterTypes() = this.map { ParameterSpec.builder(it.name.toLowerCase(), it).build() }
+
+        val typeVariablesNames = mutableListOf<TypeVariableName>()
+        for (i in 0..10) {
+            if (i != 0) typeVariablesNames.add(TypeVariableName.invoke("A${i - 1}"))
+
+            val signalType = ClassName("godot.core", "Signal$i")
+
+            val emitFunBuilder = FunSpec.builder("emit")
+
+            val signalParameterizedType = if (typeVariablesNames.isNotEmpty()) {
+                val parameterSpecs = typeVariablesNames.toParameterTypes()
+                emitFunBuilder.addTypeVariables(typeVariablesNames)
+                emitFunBuilder.addParameters(parameterSpecs)
+                emitFunBuilder.addStatement(
+                    "%L(this@Object, ${
+                    parameterSpecs
+                        .map { it.name }
+                        .reduce{ acc, string -> "$acc, $string" }
+                    })",
+                "emit"
+                )
+                signalType.parameterizedBy(typeVariablesNames)
+            }
+            else {
+                emitFunBuilder.addStatement(
+                    "%L(this@Object)",
+                    "emit"
+                )
+                signalType
+            }
+
+            emitFunBuilder.receiver(signalParameterizedType)
+
+            typeBuilder.addFunction(emitFunBuilder.build())
+
+            val kTypeVariable = TypeVariableName.invoke(
+                "K",
+                bounds = *arrayOf(
+                    LambdaTypeName.get(
+                        returnType = UNIT
+                    )
+                )
+            ).copy(reified = true)
+            val connectTypeVariableNames = listOf(
+                *typeVariablesNames.toTypedArray(),
+                kTypeVariable
+            )
+
+            val objectType = ClassName("godot", "Object")
+            typeBuilder.addFunction(
+                FunSpec.builder("connect")
+                    .receiver(signalParameterizedType)
+                    .addTypeVariables(connectTypeVariableNames)
+                    .addModifiers(KModifier.INLINE)
+                    .addParameters(
+                        listOf(
+                            ParameterSpec.builder("target", objectType)
+                                .build(),
+                            ParameterSpec.builder("method", kTypeVariable)
+                                .build(),
+                            ParameterSpec.builder("binds", List::class.asTypeName().parameterizedBy(ANY).copy(nullable = true))
+                                .defaultValue("null")
+                                .build(),
+                            ParameterSpec.builder("flags", Long::class)
+                                .defaultValue("0")
+                                .build()
+                        )
+                    )
+                    .addCode("""
+                            |val methodName = (method as %T<%T>).name
+                            |connect(this@%T, target, methodName, binds, flags)
+                            |""".trimMargin(),
+                        ClassName("kotlin.reflect", "KCallable"),
+                        UNIT,
+                        objectType
+                    )
+                    .build()
+            )
+        }
     }
 
     private fun generateConstructors(typeBuilder: TypeSpec.Builder) {
