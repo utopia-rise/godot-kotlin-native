@@ -4,9 +4,11 @@ import com.intellij.mock.MockProject
 import de.jensklingenberg.mpapt.common.MpAptProject
 import godot.annotation.processor.GodotAnnotationProcessor
 import org.jetbrains.kotlin.backend.common.extensions.IrGenerationExtension
+import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
 import org.jetbrains.kotlin.compiler.plugin.*
 import org.jetbrains.kotlin.config.CompilerConfiguration
 import org.jetbrains.kotlin.extensions.StorageComponentContainerContributor
+import org.jetbrains.kotlin.ir.declarations.IrModuleFragment
 
 class NativeComponentRegistrar : ComponentRegistrar {
     override fun registerProjectComponents(project: MockProject, configuration: CompilerConfiguration) {
@@ -22,7 +24,12 @@ class NativeComponentRegistrar : ComponentRegistrar {
             val mpapt = MpAptProject(processor, configuration)
 
             StorageComponentContainerContributor.registerExtension(project, mpapt)
-            IrGenerationExtension.registerExtension(project, mpapt)
+            IrGenerationExtension.registerExtension(project, object : IrGenerationExtension {
+                override fun generate(moduleFragment: IrModuleFragment, pluginContext: IrPluginContext) {
+                    processor.bindingContext = pluginContext.bindingContext
+                    mpapt.generate(moduleFragment, pluginContext)
+                }
+            })
         }
     }
 }

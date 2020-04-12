@@ -54,6 +54,9 @@ class TestingClass : Object() {
     @RegisterProperty
     var dirExt = "*.dummy"
 
+    @RegisterProperty
+    var myEnum: TestEnum = TestEnum.ENUM1
+
     @Dir(true)
     @RegisterProperty
     lateinit var dirExtGlobal: String

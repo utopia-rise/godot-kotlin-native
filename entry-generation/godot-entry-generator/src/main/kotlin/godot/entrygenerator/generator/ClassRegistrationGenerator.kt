@@ -8,13 +8,15 @@ import godot.entrygenerator.model.ClassWithMembers
 import godot.entrygenerator.model.REGISTER_CLASS_ANNOTATION
 import godot.entrygenerator.model.REGISTER_CLASS_ANNOTATION_TOOL_ARGUMENT
 import org.jetbrains.kotlin.descriptors.ClassDescriptor
+import org.jetbrains.kotlin.resolve.BindingContext
 import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
 
 object ClassRegistrationGenerator {
 
     fun registerClasses(
         classesWithMembers: Set<ClassWithMembers>,
-        classRegistryControlFlow: FunSpec.Builder
+        classRegistryControlFlow: FunSpec.Builder,
+        bindingContext: BindingContext
     ) {
         classesWithMembers.forEach { classWithMembers ->
             val classNameAsString = classWithMembers.classDescriptor.name.asString()
@@ -43,7 +45,8 @@ object ClassRegistrationGenerator {
             PropertyRegistrationGenerator.registerProperties(
                 classWithMembers.properties,
                 registerClassControlFlow,
-                className
+                className,
+                bindingContext
             )
 
             registerClassControlFlow.endControlFlow() //END: registerClass

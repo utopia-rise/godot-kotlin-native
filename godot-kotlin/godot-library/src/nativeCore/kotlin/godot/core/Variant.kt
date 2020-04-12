@@ -9,6 +9,18 @@ class Variant (val handle: CValue<godot_variant>) {
         // TODO
     }
 
+    constructor(value: Int) : this(new()) {
+        // TODO
+    }
+
+    constructor(value: Float) : this(new()) {
+        // TODO
+    }
+
+    constructor(value: Double) : this(new()) {
+        // TODO
+    }
+
     enum class Type(val value: Int) {
         BOOL(1), //TODO: replace with correct value
         STRING(1), //TODO: replace with correct value

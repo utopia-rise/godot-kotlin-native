@@ -9,12 +9,14 @@ import org.jetbrains.kotlin.descriptors.ClassDescriptor
 import org.jetbrains.kotlin.descriptors.FunctionDescriptor
 import org.jetbrains.kotlin.descriptors.PropertyDescriptor
 import org.jetbrains.kotlin.platform.TargetPlatform
+import org.jetbrains.kotlin.resolve.BindingContext
 import java.lang.instrument.IllegalClassFormatException
 
 class GodotAnnotationProcessor(
     private val entryGenerationOutputDir: String,
     private val gdnsGenerationOutputDir: String
 ) : AbstractProcessor() {
+    lateinit var bindingContext: BindingContext
     override fun getSupportedAnnotationTypes(): Set<String> =
         setOf(
             "godot.annotation.RegisterClass",
@@ -96,7 +98,7 @@ class GodotAnnotationProcessor(
     }
 
     override fun processingOver() {
-        val entryGenerator = EntryGenerator()
+        val entryGenerator = EntryGenerator(bindingContext)
         entryGenerator.generateEntryFile(entryGenerationOutputDir, classes, properties, functions, signals)
         entryGenerator.generateGdnsFiles(gdnsGenerationOutputDir)
     }

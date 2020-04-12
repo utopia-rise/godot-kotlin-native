@@ -1,6 +1,5 @@
 package godot.entrygenerator.generator
 
-import com.intellij.psi.PsiElement
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.MemberName.Companion.member
@@ -13,17 +12,15 @@ import godot.entrygenerator.model.REGISTER_PROPERTY_ANNOTATION
 import godot.entrygenerator.model.REGISTER_PROPERTY_ANNOTATION_RPC_MODE_ARGUMENT
 import godot.entrygenerator.model.REGISTER_PROPERTY_ANNOTATION_VISIBLE_IN_EDITOR_ARGUMENT
 import org.jetbrains.kotlin.descriptors.PropertyDescriptor
-import org.jetbrains.kotlin.js.descriptorUtils.getJetTypeFqName
+import org.jetbrains.kotlin.js.resolve.diagnostics.findPsi
 import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
-import org.jetbrains.kotlin.psi.KtCallExpression
-import org.jetbrains.kotlin.psi.KtConstantExpression
-import org.jetbrains.kotlin.psi.KtStringTemplateExpression
-import org.jetbrains.kotlin.psi.KtValueArgumentList
+import org.jetbrains.kotlin.psi.*
+import org.jetbrains.kotlin.resolve.BindingContext
+import org.jetbrains.kotlin.resolve.bindingContextUtil.getReferenceTargets
 import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
 import org.jetbrains.kotlin.resolve.source.KotlinSourceElement
-import org.jetbrains.kotlin.types.asSimpleType
 import org.jetbrains.kotlin.types.typeUtil.isEnum
 
 object PropertyRegistrationGenerator {
@@ -31,7 +28,8 @@ object PropertyRegistrationGenerator {
     fun registerProperties(
         properties: List<PropertyDescriptor>,
         registerClassControlFlow: FunSpec.Builder,
-        className: ClassName
+        className: ClassName,
+        bindingContext: BindingContext
     ) {
         properties.forEach { propertyDescriptor ->
             val propertyHintAnnotation = propertyDescriptor.getPropertyHintAnnotation()
@@ -75,7 +73,7 @@ object PropertyRegistrationGenerator {
                         className.member(propertyDescriptor.name.asString()).reference(), //propertyReference
                         TypeToVariantAsClassNameMapper.mapTypeToVariantAsClassName(propertyDescriptor.type.toString()), //property variant type
                         ClassName("godot.core", "Variant"), //default value variant wrapper
-                        getDefaultValue(propertyDescriptor), //default value inside variant wrapper
+                        getDefaultValue(propertyDescriptor, bindingContext), //default value inside variant wrapper
                         shouldBeVisibleInEditor(propertyDescriptor), //isVisibleInEditor
                         mapRpcModeAnnotationToClassName(getRpcModeEnum(propertyDescriptor)), //rpcMode
                         PropertyHintTypeMapper.mapAnnotationDescriptorToPropertyTypeClassName(propertyHintAnnotation), //hint type enum
@@ -112,43 +110,45 @@ object PropertyRegistrationGenerator {
             )
     }
 
-    private fun getDefaultValue(propertyDescriptor: PropertyDescriptor): String {
+    private fun getDefaultValue(
+        propertyDescriptor: PropertyDescriptor,
+        bindingContext: BindingContext
+    ): String {
         if (!propertyDescriptor.isVar) {
             throw IllegalStateException("The property ${propertyDescriptor.fqNameSafe} you annotated with @RegisterProperty is a val. You can only register properties which are mutable as Godot needs to be able to write into it")
         }
 
-        val defaultArgumentPsi = (propertyDescriptor
+        val defaultArgumentPsi = ((propertyDescriptor
             .source as KotlinSourceElement)
-            .psi //source code representation of the property
-            .children
-            .last() //value assignment as KtExpression
+            .psi as KtProperty)
+            .delegateExpressionOrInitializer!! // should not be null
 
-        if (isContainingReference(defaultArgumentPsi)) {
+        if (isContainingReference(defaultArgumentPsi, bindingContext)) {
             throw IllegalStateException("You initialized the property ${propertyDescriptor.fqNameSafe} (which you annotated with @RegisterProperty) with a reference: ${defaultArgumentPsi.text}. This is not supported! initialize your property with a compile time constant")
         }
 
-        val fqTypeName = propertyDescriptor.type.asSimpleType().getJetTypeFqName(false)
-
-        return if (fqTypeName.startsWith("kotlin")) {
-            defaultArgumentPsi.text
-        } else {
-            "${fqTypeName.substringBeforeLast(".")}.${defaultArgumentPsi.text}"
-        }
+        return defaultArgumentPsi.text
     }
 
-    private fun isContainingReference(element: PsiElement): Boolean {
-        if (element !is KtConstantExpression && element !is KtStringTemplateExpression && element !is KtCallExpression) {
-            return true
-        }
-        element
-            .children
-            .filterIsInstance<KtValueArgumentList>()
-            .flatMap { it.children.flatMap { subChildren -> subChildren.children.toList() }.toList() }
-            .forEach {
-                if (isContainingReference(it)) { //recursive call to check all children for references
-                    return true
+    private fun isContainingReference(
+        expression: KtExpression,
+        bindingContext: BindingContext
+    ): Boolean {
+        return when (expression) {
+            is KtConstantExpression -> false
+            is KtStringTemplateExpression -> expression.hasInterpolation()
+            is KtDotQualifiedExpression -> {
+                val receiver = expression.receiverExpression
+                val receiverRef = receiver.getReferenceTargets(bindingContext).firstOrNull()
+
+                if (receiverRef != null) {
+                    val psi = receiverRef.findPsi()
+                    !(psi is KtClass && psi.isEnum())
+                } else {
+                    true
                 }
             }
-        return false
+            else -> true
+        }
     }
 }
