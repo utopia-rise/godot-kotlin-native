@@ -1,8 +1,6 @@
 package example
 
-import godot.annotation.RegisterClass
-import godot.annotation.RegisterFunction
-import godot.annotation.RegisterSignal
+import godot.annotation.*
 import godot.core.Object
 import godot.core.signal
 import godot.registration.RPCMode
@@ -22,4 +20,8 @@ class TestingClass : Object() {
 
     @RegisterFunction(RPCMode.PUPPET_SYNC)
     fun foo() = 1
+
+    @EnumTypeHint(true)
+    @RegisterProperty(true)
+    var enumTest: TestEnum = TestEnum.ENUM1
 }

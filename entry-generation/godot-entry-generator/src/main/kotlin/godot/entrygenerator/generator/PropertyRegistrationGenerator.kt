@@ -33,7 +33,10 @@ object PropertyRegistrationGenerator {
                     shouldBeVisibleInEditor(propertyDescriptor),
                     mapRpcModeAnnotationToClassName(getRpcModeEnum(propertyDescriptor)),
                     PropertyHintTypeMapper.mapAnnotationDescriptorToPropertyTypeClassName(propertyHintAnnotation),
-                    PropertyHintTypeMapper.mapAnnotationDescriptorToPropertyHintString(propertyHintAnnotation)
+                    PropertyHintTypeMapper.mapAnnotationDescriptorToPropertyHintString(
+                        propertyDescriptor,
+                        propertyHintAnnotation
+                    )
                 )
         }
     }
