@@ -19,36 +19,24 @@ object PropertyHintTypeMapper {
         return when (annotationDescriptor?.fqName?.asString()) {
             "godot.annotation.IntRange", "godot.annotation.FloatRange", "godot.annotation.DoubleRange" ->
                 ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_RANGE")
-            "godot.annotation.ExpRange" -> ClassName(
-                "godot.gdnative.godot_property_hint",
-                "GODOT_PROPERTY_HINT_EXP_RANGE"
-            )
-            "godot.annotation.EnumTypeHint" -> ClassName(
-                "godot.gdnative.godot_property_hint",
-                "GODOT_PROPERTY_HINT_ENUM_TYPEHINT"
-            )
-            "godot.annotation.ExpEasing" -> ClassName(
-                "godot.gdnative.godot_property_hint",
-                "GODOT_PROPERTY_HINT_EXP_EASING"
-            )
-            "godot.annotation.Lenght" -> ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_LENGHT")
-            "godot.annotation.Flags" -> ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_FLAGS")
-            "godot.annotation.Layers2DRender" -> ClassName(
-                "godot.gdnative.godot_property_hint",
-                "GODOT_PROPERTY_HINT_LAYERS_2D_RENDER"
-            )
-            "godot.annotation.Layers2DPhysics" -> ClassName(
-                "godot.gdnative.godot_property_hint",
-                "GODOT_PROPERTY_HINT_LAYERS_2D_PHYSICS"
-            )
-            "godot.annotation.Layers3DRender" -> ClassName(
-                "godot.gdnative.godot_property_hint",
-                "GODOT_PROPERTY_HINT_LAYERS_3D_RENDER"
-            )
-            "godot.annotation.Layers3DPhysics" -> ClassName(
-                "godot.gdnative.godot_property_hint",
-                "GODOT_PROPERTY_HINT_LAYERS_3D_PHYSICS"
-            )
+            "godot.annotation.ExpRange" ->
+                ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_EXP_RANGE")
+            "godot.annotation.EnumTypeHint" ->
+                ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_ENUM_TYPEHINT")
+            "godot.annotation.ExpEasing" ->
+                ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_EXP_EASING")
+            "godot.annotation.Lenght" ->
+                ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_LENGHT")
+            "godot.annotation.Flags" ->
+                ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_FLAGS")
+            "godot.annotation.Layers2DRender" ->
+                ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_LAYERS_2D_RENDER")
+            "godot.annotation.Layers2DPhysics" ->
+                ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_LAYERS_2D_PHYSICS")
+            "godot.annotation.Layers3DRender" ->
+                ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_LAYERS_3D_RENDER")
+            "godot.annotation.Layers3DPhysics" ->
+                ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_LAYERS_3D_PHYSICS")
             "godot.annotation.File" ->
                 if (annotationDescriptor.getAnnotationValue(FILE_AND_DIR_ANNOTATION_GLOBAL_ARGUMENT, false)) {
                     ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_GLOBAL_FILE")
@@ -61,90 +49,48 @@ object PropertyHintTypeMapper {
                 } else {
                     ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_DIR")
                 }
-            "godot.annotation.ResourceType" -> ClassName(
-                "godot.gdnative.godot_property_hint",
-                "GODOT_PROPERTY_HINT_RESOURCE_TYPE"
-            )
-            "godot.annotation.MultilineText" -> ClassName(
-                "godot.gdnative.godot_property_hint",
-                "GODOT_PROPERTY_HINT_MULTILINE_TEXT"
-            )
-            "godot.annotation.PlaceHolderText" -> ClassName(
-                "godot.gdnative.godot_property_hint",
-                "GODOT_PROPERTY_HINT_PLACE_HOLDER_TEXT"
-            )
-            "godot.annotation.ColorNoAlpha" -> ClassName(
-                "godot.gdnative.godot_property_hint",
-                "GODOT_PROPERTY_HINT_COLOR_NO_ALPHA"
-            )
-            "godot.annotation.ImageCompressLossy" -> ClassName(
-                "godot.gdnative.godot_property_hint",
-                "GODOT_PROPERTY_HINT_IMAGE_COMPRESS_LOSSY"
-            )
-            "godot.annotation.ImageCompressLossLess" -> ClassName(
-                "godot.gdnative.godot_property_hint",
-                "GODOT_PROPERTY_HINT_IMAGE_COMPRESS_LOSSLESS"
-            )
-            "godot.annotation.ObjectId" -> ClassName(
-                "godot.gdnative.godot_property_hint",
-                "GODOT_PROPERTY_HINT_OBJECT_ID"
-            )
-            "godot.annotation.TypeString" -> ClassName(
-                "godot.gdnative.godot_property_hint",
-                "GODOT_PROPERTY_HINT_TYPE_STRING"
-            )
-            "godot.annotation.NodePathToEditedNode" -> ClassName(
-                "godot.gdnative.godot_property_hint",
-                "GODOT_PROPERTY_HINT_NODEPATH_TO_EDITED_NODE"
-            )
-            "godot.annotation.MethodOfVariantType" -> ClassName(
-                "godot.gdnative.godot_property_hint",
-                "GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE"
-            )
-            "godot.annotation.MethodOfBaseType" -> ClassName(
-                "godot.gdnative.godot_property_hint",
-                "GODOT_PROPERTY_HINT_METHOD_OF_BASE_TYPE"
-            )
-            "godot.annotation.MethodOfInstance" -> ClassName(
-                "godot.gdnative.godot_property_hint",
-                "GODOT_PROPERTY_HINT_METHOD_OF_INSTANCE"
-            )
-            "godot.annotation.MethodOfScript" -> ClassName(
-                "godot.gdnative.godot_property_hint",
-                "GODOT_PROPERTY_HINT_METHOD_OF_SCRIPT"
-            )
-            "godot.annotation.PropertyOfVariantType" -> ClassName(
-                "godot.gdnative.godot_property_hint",
-                "GODOT_PROPERTY_HINT_PROPERTY_OF_VARIANT_TYPE"
-            )
-            "godot.annotation.PropertyOfBaseType" -> ClassName(
-                "godot.gdnative.godot_property_hint",
-                "GODOT_PROPERTY_HINT_PROPERTY_OF_BASE_TYPE"
-            )
-            "godot.annotation.PropertyOfInstance" -> ClassName(
-                "godot.gdnative.godot_property_hint",
-                "GODOT_PROPERTY_HINT_PROPERTY_OF_INSTANCE"
-            )
-            "godot.annotation.PropertyOfScript" -> ClassName(
-                "godot.gdnative.godot_property_hint",
-                "GODOT_PROPERTY_HINT_PROPERTY_OF_SCRIPT"
-            )
-            "godot.annotation.ObjectTooBig" -> ClassName(
-                "godot.gdnative.godot_property_hint",
-                "GODOT_PROPERTY_HINT_OBJECT_TOO_BIG"
-            )
-            "godot.annotation.NodePathValidTypes" -> ClassName(
-                "godot.gdnative.godot_property_hint",
-                "GODOT_PROPERTY_HINT_NODEPATH_VALID_TYPES"
-            )
-            "godot.annotation.SaveFile" -> ClassName(
-                "godot.gdnative.godot_property_hint",
-                "GODOT_PROPERTY_HINT_SAVE_FILE"
-            )
-            "godot.annotation.IntIsObjectId" -> ClassName(
-                "godot.gdnative.godot_property_hint",
-                "GODOT_PROPERTY_HINT_INT_IS_OBJECT_ID"
-            )
+            "godot.annotation.ResourceType" ->
+                ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_RESOURCE_TYPE")
+            "godot.annotation.MultilineText" ->
+                ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_MULTILINE_TEXT")
+            "godot.annotation.PlaceHolderText" ->
+                ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_PLACE_HOLDER_TEXT")
+            "godot.annotation.ColorNoAlpha" ->
+                ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_COLOR_NO_ALPHA")
+            "godot.annotation.ImageCompressLossy" ->
+                ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_IMAGE_COMPRESS_LOSSY")
+            "godot.annotation.ImageCompressLossLess" ->
+                ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_IMAGE_COMPRESS_LOSSLESS")
+            "godot.annotation.ObjectId" ->
+                ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_OBJECT_ID")
+            "godot.annotation.TypeString" ->
+                ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_TYPE_STRING")
+            "godot.annotation.NodePathToEditedNode" ->
+                ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_NODEPATH_TO_EDITED_NODE")
+            "godot.annotation.MethodOfVariantType" ->
+                ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_METHOD_OF_VARIANT_TYPE")
+            "godot.annotation.MethodOfBaseType" ->
+                ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_METHOD_OF_BASE_TYPE")
+            "godot.annotation.MethodOfInstance" ->
+                ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_METHOD_OF_INSTANCE")
+            "godot.annotation.MethodOfScript" ->
+                ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_METHOD_OF_SCRIPT")
+            "godot.annotation.PropertyOfVariantType" ->
+                ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_PROPERTY_OF_VARIANT_TYPE")
+            "godot.annotation.PropertyOfBaseType" ->
+                ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_PROPERTY_OF_BASE_TYPE")
+            "godot.annotation.PropertyOfInstance" ->
+                ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_PROPERTY_OF_INSTANCE")
+            "godot.annotation.PropertyOfScript" ->
+                ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_PROPERTY_OF_SCRIPT")
+            "godot.annotation.ObjectTooBig" ->
+                ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_OBJECT_TOO_BIG")
+            "godot.annotation.NodePathValidTypes" ->
+                ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_NODEPATH_VALID_TYPES")
+            "godot.annotation.SaveFile" ->
+                ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_SAVE_FILE")
+            "godot.annotation.IntIsObjectId" ->
+                ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_INT_IS_OBJECT_ID")
             "godot.annotation.Max" -> ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_MAX")
             null -> ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_NONE")
             else -> throw IllegalStateException("Unknown annotation ${annotationDescriptor.fqName}")
@@ -164,26 +110,14 @@ object PropertyHintTypeMapper {
             throw IllegalStateException("You added the type hint annotation ${annotationDescriptor.fqName} to the property ${propertyDescriptor.name}. But the @RegisterProperty annotation is either not present or the isVisibleInEditor flag is not set to true")
         }
         return when (annotationDescriptor?.fqName?.asString()) {
-            "godot.annotation.IntRange" -> getRangeTypeHint(
-                annotationDescriptor,
-                arrayOf(Int::class),
-                propertyDescriptor
-            )
-            "godot.annotation.FloatRange" -> getRangeTypeHint(
-                annotationDescriptor,
-                arrayOf(Float::class),
-                propertyDescriptor
-            )
-            "godot.annotation.DoubleRange" -> getRangeTypeHint(
-                annotationDescriptor,
-                arrayOf(Double::class),
-                propertyDescriptor
-            )
-            "godot.annotation.ExpRange" -> getRangeTypeHint(
-                annotationDescriptor,
-                arrayOf(Float::class, Double::class),
-                propertyDescriptor
-            )
+            "godot.annotation.IntRange" ->
+                getRangeTypeHint(annotationDescriptor, arrayOf(Int::class), propertyDescriptor)
+            "godot.annotation.FloatRange" ->
+                getRangeTypeHint(annotationDescriptor, arrayOf(Float::class), propertyDescriptor)
+            "godot.annotation.DoubleRange" ->
+                getRangeTypeHint(annotationDescriptor, arrayOf(Double::class), propertyDescriptor)
+            "godot.annotation.ExpRange" ->
+                getRangeTypeHint(annotationDescriptor, arrayOf(Float::class, Double::class), propertyDescriptor)
             "godot.annotation.EnumTypeHint" -> getEnumTypeHint(propertyDescriptor)
             "godot.annotation.ExpEasing" -> getExpEasingTypeHint(annotationDescriptor, propertyDescriptor)
             "godot.annotation.Lenght" -> throw NotImplementedError("This annotation is not yet implemented") //getLengthTypeHint(annotationDescriptor, propertyDescriptor)
@@ -192,10 +126,8 @@ object PropertyHintTypeMapper {
             "godot.annotation.Layers2DPhysics" -> throw NotImplementedError("This annotation is not yet implemented")
             "godot.annotation.Layers3DRender" -> throw NotImplementedError("This annotation is not yet implemented")
             "godot.annotation.Layers3DPhysics" -> throw NotImplementedError("This annotation is not yet implemented")
-            "godot.annotation.File", "godot.annotation.Dir" -> getFileOrDirTypeHint(
-                annotationDescriptor,
-                propertyDescriptor
-            )
+            "godot.annotation.File", "godot.annotation.Dir" ->
+                getFileOrDirTypeHint(annotationDescriptor, propertyDescriptor)
             "godot.annotation.ResourceType" -> throw NotImplementedError("This annotation is not yet implemented")
             "godot.annotation.MultilineText" -> throw NotImplementedError("This annotation is not yet implemented")
             "godot.annotation.PlaceHolderText" -> throw NotImplementedError("This annotation is not yet implemented")
