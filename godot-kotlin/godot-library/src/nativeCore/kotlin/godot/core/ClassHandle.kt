@@ -4,7 +4,7 @@ import godot.gdnative.*
 import godot.registration.RPCMode
 import kotlinx.cinterop.*
 
-internal class ClassHandle<T: Object>(
+internal class ClassHandle<T : Object>(
     private val nativescriptHandle: COpaquePointer,
     private val className: String,
     private val parentClassName: String,
@@ -74,6 +74,30 @@ internal class ClassHandle<T: Object>(
                 methodName.cstr.ptr,
                 attribs,
                 instanceMethod
+            )
+        }
+    }
+
+    fun registerSignal(signalName: String, parameters: Map<String, Variant.Type>) {
+        memScoped {
+            val gdSignal = alloc<godot_signal> {
+                val argInfos = allocArray<godot_signal_argument>(parameters.size)
+                parameters.keys.forEachIndexed { index, key ->
+                    val argInfo = argInfos[index]
+                    val value = parameters.getValue(key)
+                    // argument name
+                    checkNotNull(Godot.gdnative.godot_string_parse_utf8)(argInfo.name.ptr, key.cstr.ptr)
+                    // argument type
+                    argInfo.type = value.value
+                }
+                args = argInfos.getPointer(this@memScoped)
+                checkNotNull(Godot.gdnative.godot_string_parse_utf8)(name.ptr, signalName.cstr.ptr)
+                num_args = parameters.size
+            }
+            checkNotNull(Godot.nativescript.godot_nativescript_register_signal)(
+                nativescriptHandle,
+                className.cstr.ptr,
+                gdSignal.ptr
             )
         }
     }
