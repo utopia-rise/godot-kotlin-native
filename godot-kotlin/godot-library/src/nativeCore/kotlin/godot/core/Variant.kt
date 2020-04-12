@@ -11,7 +11,9 @@ class Variant (val handle: CValue<godot_variant>) {
 
     enum class Type(val value: Int) {
         BOOL(1), //TODO: replace with correct value
-        STRING(1) //TODO: replace with correct value
+        STRING(1), //TODO: replace with correct value
+        INT(1), //TODO: replace with correct value
+        REAL(1) //TODO: replace with correct value
         // TODO: add types
     }
 

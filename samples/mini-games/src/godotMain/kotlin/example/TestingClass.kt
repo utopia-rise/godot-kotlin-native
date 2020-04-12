@@ -4,6 +4,7 @@ import godot.annotation.*
 import godot.core.Object
 import godot.core.signal
 import godot.registration.RPCMode
+import godot.registration.Range
 
 
 @RegisterClass(true)
@@ -21,7 +22,44 @@ class TestingClass : Object() {
     @RegisterFunction(RPCMode.PUPPET_SYNC)
     fun foo() = 1
 
-    @EnumTypeHint(true)
-    @RegisterProperty(true)
-    var enumTest: TestEnum = TestEnum.ENUM1
+    @IntRange(0, 20, 2, Range.OR_GREATER)
+    @RegisterProperty
+    var rangeInt = 1
+
+    @FloatRange(0f, 20f, 2f, Range.OR_GREATER)
+    @RegisterProperty
+    var rangeFloat = 1f
+
+    @DoubleRange(0.0, 20.0, 2.0, Range.OR_GREATER)
+    @RegisterProperty
+    var rangeDouble = 1.0
+
+    @ExpEasing(true, true)
+    @RegisterProperty
+    var expEasingFloat = 2f
+
+    @ExpEasing
+    @RegisterProperty
+    var expEasingDouble = 2.0
+
+    @File("*.txt", "*.kt")
+    @RegisterProperty
+    var fileExt = "*.dummy"
+
+    @File("*.txt", "*.kt", global = true)
+    @RegisterProperty
+    var fileExtGlobal = "*.dummy"
+
+    @Dir
+    @RegisterProperty
+    var dirExt = "*.dummy"
+
+    @Dir(true)
+    @RegisterProperty
+    lateinit var dirExtGlobal: String
+
+//    @EnumTypeHint
+//    @RegisterProperty
+//    var enumTest: TestEnum = TestEnum.ENUM1
+
 }
