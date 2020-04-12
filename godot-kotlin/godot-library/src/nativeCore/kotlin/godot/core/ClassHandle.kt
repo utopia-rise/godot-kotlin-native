@@ -102,6 +102,54 @@ internal class ClassHandle<T : Object>(
         }
     }
 
+    fun registerProperty(
+        propertyName: String,
+        propertyHandleRef: COpaquePointer,
+        propertyType: Variant.Type,
+        hintType: godot_property_hint,
+        hintString: String,
+        default: Variant?,
+        isVisibleInEditor: Boolean
+    ) {
+        disposables.add(propertyHandleRef)
+        memScoped {
+            val usageFlags = if (isVisibleInEditor) {
+                GODOT_PROPERTY_USAGE_DEFAULT
+            } else {
+                GODOT_PROPERTY_USAGE_NOEDITOR
+            }
+            val attribs = alloc<godot_property_attributes> {
+                rset_type = GODOT_METHOD_RPC_MODE_DISABLED
+                usage = usageFlags
+                type = propertyType.value
+                this.hint = hintType
+                checkNotNull(Godot.gdnative.godot_string_parse_utf8)(hint_string.ptr, hintString.cstr.ptr)
+                if (default != null) {
+                    checkNotNull(Godot.gdnative.godot_variant_new_copy)(default_value.ptr, default.handle.ptr)
+                }
+            }
+
+            val getter = cValue<godot_property_get_func> {
+                method_data = propertyHandleRef
+                get_func = staticCFunction(::getProperty)
+            }
+
+            val setter = cValue<godot_property_set_func> {
+                method_data = propertyHandleRef
+                set_func = staticCFunction(::setProperty)
+            }
+
+            checkNotNull(Godot.nativescript.godot_nativescript_register_property)(
+                nativescriptHandle,
+                className.cstr.ptr,
+                propertyName.cstr.ptr,
+                attribs.ptr,
+                setter,
+                getter
+            )
+        }
+    }
+
     fun dispose() {
         disposables.forEach { it.asStableRef<Any>().dispose() }
     }

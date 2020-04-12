@@ -1,5 +1,6 @@
 package godot.core
 
+import godot.gdnative.godot_property_hint
 import godot.registration.RPCMode
 import kotlinx.cinterop.StableRef
 
@@ -9,7 +10,7 @@ import kotlinx.cinterop.StableRef
 annotation class ClassBuilderDSL
 
 @ClassBuilderDSL
-class ClassBuilder<T: Object> internal constructor(private val classHandle: ClassHandle<T>) {
+class ClassBuilder<T : Object> internal constructor(private val classHandle: ClassHandle<T>) {
     fun <R> function(name: String, rpcMode: RPCMode, body: T.() -> R) {
         val function = Function0(body)
         classHandle.registerFunction(name, StableRef.create(function).asCPointer(), rpcMode)
@@ -91,5 +92,17 @@ class ClassBuilder<T: Object> internal constructor(private val classHandle: Clas
 
     fun signal(name: String, parameters: Map<String, Variant.Type>) {
         classHandle.registerSignal(name, parameters)
+    }
+
+    fun <K : Any> property(
+        name: String,
+        propertyHandler: MutablePropertyHandler<T, K>,
+        type: Variant.Type,
+        hintType: godot_property_hint = godot_property_hint.GODOT_PROPERTY_HINT_NONE,
+        hintString: String = "",
+        default: Variant? = null,
+        isVisibleInEditor: Boolean = true
+    ) {
+        classHandle.registerProperty(name, StableRef.create(propertyHandler).asCPointer(), type, hintType, hintString, default, isVisibleInEditor)
     }
 }

@@ -54,3 +54,35 @@ fun invokeMethod(
 
     return methodHandle(kotlinInstance, variantArgs).handle
 }
+
+
+fun getProperty(
+    instance: COpaquePointer?,
+    methodData: COpaquePointer?,
+    classData: COpaquePointer?
+): CValue<godot_variant> {
+    val kotlinInstanceRef = checkNotNull(classData).asStableRef<Object>()
+    val kotlinInstance = kotlinInstanceRef.get()
+    val propertyHandleRef = checkNotNull(methodData).asStableRef<MutablePropertyHandler<Object, *>>()
+    val propertyHandler = propertyHandleRef.get()
+
+    return propertyHandler.get(kotlinInstance).handle
+}
+
+fun setProperty(
+    instance: COpaquePointer?,
+    methodData: COpaquePointer?,
+    classData: COpaquePointer?,
+    value: CPointer<godot_variant>?
+) {
+    val kotlinInstanceRef = checkNotNull(classData).asStableRef<Object>()
+    val kotlinInstance = kotlinInstanceRef.get()
+    val propertyHandleRef = checkNotNull(methodData).asStableRef<MutablePropertyHandler<Object, *>>()
+    val propertyHandler = propertyHandleRef.get()
+    val arg = if (value == null) {
+        Variant()
+    } else {
+        Variant(value.pointed.readValue())
+    }
+    propertyHandler.set(kotlinInstance, arg)
+}
