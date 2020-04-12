@@ -108,7 +108,7 @@ class ClassBuilder<T : Object> internal constructor(val classHandle: ClassHandle
         classHandle.registerProperty(name, StableRef.create(propertyHandler).asCPointer(), type, hintType, hintString, default, isVisibleInEditor)
     }
 
-    inline fun <reified K : Enum<K>> property(
+    inline fun <reified K : Enum<K>> enumProperty(
         name: String,
         property: KMutableProperty1<T, K>,
         type: Variant.Type,
