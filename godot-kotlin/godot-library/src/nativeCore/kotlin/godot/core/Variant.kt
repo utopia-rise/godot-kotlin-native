@@ -4,8 +4,8 @@ import godot.gdnative.godot_variant
 import kotlinx.cinterop.CValue
 
 class Variant (val handle: CValue<godot_variant>) {
-    constructor() {}
-    constructor(value: String) {
+    constructor() : this(new()) {}
+    constructor(value: String) : this(new()) {
         // TODO
     }
 
@@ -28,6 +28,10 @@ class Variant (val handle: CValue<godot_variant>) {
     }
 
     companion object {
+        private fun new(): CValue<godot_variant> {
+            TODO()
+        }
+
         fun wrap(obj: Any?): Variant {
             TODO()
         }
