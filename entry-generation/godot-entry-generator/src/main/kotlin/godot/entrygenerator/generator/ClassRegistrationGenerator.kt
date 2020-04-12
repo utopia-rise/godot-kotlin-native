@@ -40,6 +40,12 @@ object ClassRegistrationGenerator {
                 registerClassControlFlow
             )
 
+            PropertyRegistrationGenerator.registerProperties(
+                classWithMembers.properties,
+                registerClassControlFlow,
+                className
+            )
+
             registerClassControlFlow.endControlFlow() //END: registerClass
         }
     }
