@@ -14,7 +14,7 @@ open class MutablePropertyHandler<T: Object, R>(protected val property: KMutable
     }
 }
 
-class MutableEnumProperty<T: Object, R: Enum<R>>(
+class MutableEnumPropertyHandler<T: Object, R: Enum<R>>(
     property: KMutableProperty1<T, R>,
     private val converter: (String) -> R
 ) : MutablePropertyHandler<T, R>(property) {

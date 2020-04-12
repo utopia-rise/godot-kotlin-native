@@ -3,6 +3,7 @@ package godot.core
 import godot.gdnative.godot_property_hint
 import godot.registration.RPCMode
 import kotlinx.cinterop.StableRef
+import kotlin.reflect.KMutableProperty1
 
 @DslMarker
 @Target(AnnotationTarget.CLASS)
@@ -10,7 +11,7 @@ import kotlinx.cinterop.StableRef
 annotation class ClassBuilderDSL
 
 @ClassBuilderDSL
-class ClassBuilder<T : Object> internal constructor(private val classHandle: ClassHandle<T>) {
+class ClassBuilder<T : Object> internal constructor(val classHandle: ClassHandle<T>) {
     fun <R> function(name: String, rpcMode: RPCMode, body: T.() -> R) {
         val function = Function0(body)
         classHandle.registerFunction(name, StableRef.create(function).asCPointer(), rpcMode)
@@ -96,13 +97,27 @@ class ClassBuilder<T : Object> internal constructor(private val classHandle: Cla
 
     fun <K : Any> property(
         name: String,
-        propertyHandler: MutablePropertyHandler<T, K>,
+        property: KMutableProperty1<T, K>,
         type: Variant.Type,
         hintType: godot_property_hint = godot_property_hint.GODOT_PROPERTY_HINT_NONE,
         hintString: String = "",
         default: Variant? = null,
         isVisibleInEditor: Boolean = true
     ) {
+        val propertyHandler = MutablePropertyHandler(property)
+        classHandle.registerProperty(name, StableRef.create(propertyHandler).asCPointer(), type, hintType, hintString, default, isVisibleInEditor)
+    }
+
+    inline fun <reified K : Enum<K>> property(
+        name: String,
+        property: KMutableProperty1<T, K>,
+        type: Variant.Type,
+        hintType: godot_property_hint = godot_property_hint.GODOT_PROPERTY_HINT_NONE,
+        hintString: String = "",
+        default: Variant? = null,
+        isVisibleInEditor: Boolean = true
+    ) {
+        val propertyHandler = MutableEnumPropertyHandler(property) { str -> enumValueOf(str)}
         classHandle.registerProperty(name, StableRef.create(propertyHandler).asCPointer(), type, hintType, hintString, default, isVisibleInEditor)
     }
 }
