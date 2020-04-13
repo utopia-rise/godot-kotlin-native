@@ -4,9 +4,7 @@ import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.MemberName.Companion.member
 import godot.entrygenerator.extension.getAnnotationValue
-import godot.entrygenerator.extension.getPropertyHintAnnotation
-import godot.entrygenerator.generator.provider.PropertyDefaultValueProvider
-import godot.entrygenerator.mapper.PropertyHintTypeMapper
+import godot.entrygenerator.generator.provider.DefaultValueHandlerProvider
 import godot.entrygenerator.mapper.RpcModeAnnotationMapper.mapRpcModeAnnotationToClassName
 import godot.entrygenerator.mapper.TypeToVariantAsClassNameMapper
 import godot.entrygenerator.model.REGISTER_PROPERTY_ANNOTATION
@@ -28,74 +26,65 @@ object PropertyRegistrationGenerator {
         bindingContext: BindingContext
     ) {
         properties.forEach { propertyDescriptor ->
-            val propertyHintAnnotation = propertyDescriptor.getPropertyHintAnnotation()
-            val (hintStringStringTemplate, valuesForHintStringTemplate) = PropertyHintTypeMapper.mapAnnotationDescriptorToPropertyHintString(
-                propertyDescriptor,
-                propertyHintAnnotation
-            )
-
-            registerClassControlFlow
-                .addStatement(
-                    getStringTemplate(propertyDescriptor, hintStringStringTemplate),
-                    *getTemplateValues(className, propertyDescriptor, bindingContext, valuesForHintStringTemplate)
-                )
-        }
-    }
-
-    private fun getStringTemplate(
-        propertyDescriptor: PropertyDescriptor,
-        hintStringStringTemplate: String
-    ): String {
-        return if (propertyDescriptor.type.isEnum()) {
-            if (propertyDescriptor.isLateInit) {
-                "enumProperty(%S,·%L,·%L,·%L,·%T)"
+            if (propertyDescriptor.type.isEnum()) {
+                registerEnum(className, propertyDescriptor, bindingContext, registerClassControlFlow)
             } else {
-                "enumProperty(%S,·%L,·%T(%L),·%L,·%T)"
-            }
-        } else {
-            if (propertyDescriptor.isLateInit) {
-                "property(%S,·%L,·%T,·%L,·%L,·%T,·%T,·$hintStringStringTemplate)"
-            } else {
-                "property(%S,·%L,·%T,·%T(%L),·%L,·%T,·%T,·$hintStringStringTemplate)"
+                registerProperty(className, propertyDescriptor, bindingContext, registerClassControlFlow)
             }
         }
     }
 
-    private fun getTemplateValues(
+    private fun registerEnum(
         className: ClassName,
         propertyDescriptor: PropertyDescriptor,
         bindingContext: BindingContext,
-        valuesForHintStringTemplate: Array<Any>
-    ): Array<Any> {
-        return ArrayList<Any>().apply {
-            add(propertyDescriptor.name) //propertyName
-            add(className.member(propertyDescriptor.name.asString()).reference()) //propertyReference
-            if (!propertyDescriptor.type.isEnum()) {
-                add(
-                    TypeToVariantAsClassNameMapper.mapTypeToVariantAsClassName(
-                        propertyDescriptor.type.toString(),
-                        propertyDescriptor.type.isEnum()
-                    ) //property variant type
-                )
-            }
-            if (propertyDescriptor.isLateInit) {
-                add("null") //default value null
-            } else {
-                add(ClassName("godot.core", "Variant")) //default value variant wrapper
-                add(
-                    PropertyDefaultValueProvider.provideDefaultValue(
-                        propertyDescriptor,
-                        bindingContext
-                    ) //default value inside variant wrapper
-                )
-            }
-            add(shouldBeVisibleInEditor(propertyDescriptor)) //isVisibleInEditor
-            add(mapRpcModeAnnotationToClassName(getRpcModeEnum(propertyDescriptor))) //rpcMode
-            if (!propertyDescriptor.type.isEnum()) {
-                add(PropertyHintTypeMapper.mapAnnotationDescriptorToPropertyTypeClassName(propertyDescriptor.getPropertyHintAnnotation())) //hint type enum
-                addAll(valuesForHintStringTemplate) //hint string
-            }
-        }.toTypedArray()
+        registerClassControlFlow: FunSpec.Builder
+    ) {
+        val defaultValueProvider =
+            DefaultValueHandlerProvider.provideDefaultValueHandler(propertyDescriptor, bindingContext)
+        val defaultValueStringTemplate = defaultValueProvider.getDefaultValueStringTemplate()
+        val defaultValueStringTemplateValues = defaultValueProvider.getDefaultValueStringTemplateValues()
+
+        registerClassControlFlow
+            .addStatement(
+                "property(%S,·%L,·$defaultValueStringTemplate,·%L,·%T)",
+                propertyDescriptor.name,
+                className.member(propertyDescriptor.name.asString()).reference(),
+                *defaultValueStringTemplateValues,
+                shouldBeVisibleInEditor(propertyDescriptor),
+                mapRpcModeAnnotationToClassName(getRpcModeEnum(propertyDescriptor))
+            )
+    }
+
+    private fun registerProperty(
+        className: ClassName,
+        propertyDescriptor: PropertyDescriptor,
+        bindingContext: BindingContext,
+        registerClassControlFlow: FunSpec.Builder
+    ) {
+        val defaultValueProvider = DefaultValueHandlerProvider.provideDefaultValueHandler(
+            propertyDescriptor,
+            bindingContext
+        )
+        val defaultValueStringTemplate = defaultValueProvider.getDefaultValueStringTemplate()
+        val defaultValueStringTemplateValues = defaultValueProvider.getDefaultValueStringTemplateValues()
+        val hintString = defaultValueProvider.getHintString()
+
+        registerClassControlFlow
+            .addStatement(
+                "property(%S,·%L,·%T,·$defaultValueStringTemplate,·%L,·%T,·%T,·%S)",
+                propertyDescriptor.name,
+                className.member(propertyDescriptor.name.asString()).reference(),
+                TypeToVariantAsClassNameMapper.mapTypeToVariantAsClassName(
+                    propertyDescriptor.type.toString(),
+                    propertyDescriptor.type.isEnum()
+                ), //property variant type
+                *defaultValueStringTemplateValues,
+                shouldBeVisibleInEditor(propertyDescriptor),
+                mapRpcModeAnnotationToClassName(getRpcModeEnum(propertyDescriptor)),
+                defaultValueProvider.getPropertyTypeHint(),
+                hintString
+            )
     }
 
     private fun shouldBeVisibleInEditor(propertyDescriptor: PropertyDescriptor): Boolean {

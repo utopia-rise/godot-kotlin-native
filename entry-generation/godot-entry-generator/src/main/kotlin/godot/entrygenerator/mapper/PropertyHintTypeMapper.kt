@@ -100,7 +100,7 @@ object PropertyHintTypeMapper {
     fun mapAnnotationDescriptorToPropertyHintString(
         propertyDescriptor: PropertyDescriptor,
         annotationDescriptor: AnnotationDescriptor?
-    ): Pair<String, Array<Any>> {
+    ): String {
         if (!propertyDescriptor.annotations.getAnnotationValue(
                 REGISTER_PROPERTY_ANNOTATION,
                 REGISTER_PROPERTY_ANNOTATION_VISIBLE_IN_EDITOR_ARGUMENT,
@@ -150,7 +150,7 @@ object PropertyHintTypeMapper {
             "godot.annotation.SaveFile" -> throw NotImplementedError("This annotation is not yet implemented")
             "godot.annotation.IntIsObjectId" -> throw NotImplementedError("This annotation is not yet implemented")
             "godot.annotation.Max" -> throw NotImplementedError("This annotation is not yet implemented")
-            null -> Pair("%S", arrayOf(""))
+            null -> ""
             else -> throw IllegalStateException("Unknown annotation ${annotationDescriptor.fqName}")
         }
     }
@@ -166,7 +166,7 @@ object PropertyHintTypeMapper {
         annotationDescriptor: AnnotationDescriptor,
         expectedTypes: Array<KClass<*>>,
         propertyDescriptor: PropertyDescriptor
-    ): Pair<String, Array<Any>> {
+    ): String {
         if (expectedTypes.map { it.toString() }.contains(propertyDescriptor.type.toString())) {
             throw IllegalStateException("You annotated the property ${propertyDescriptor.name} which is of type ${propertyDescriptor.type} with a range annotation of type $expectedTypes. Use the correct Annotation for the type")
         }
@@ -191,10 +191,10 @@ object PropertyHintTypeMapper {
             argumentsForStringTemplate.add(orAsClassName.toString().split(".").last().toLowerCase())
         }
 
-        return Pair("%S", arrayOf(join(argumentsForStringTemplate, ",")))
+        return join(argumentsForStringTemplate, ",")
     }
 
-    private fun getEnumTypeHint(propertyDescriptor: PropertyDescriptor): Pair<String, Array<Any>> {
+    private fun getEnumTypeHint(propertyDescriptor: PropertyDescriptor): String {
         if (!propertyDescriptor.type.isEnum()) {
             throw IllegalStateException("You annotated the property ${propertyDescriptor.name} which is of type ${propertyDescriptor.type} with @EnumTypeHint. Only enums can have this annotation!")
         }
@@ -206,13 +206,13 @@ object PropertyHintTypeMapper {
             .map { it.asString() }
             .filter { it != "name" && it != "ordinal" }
 
-        return Pair("%S", arrayOf(join(enumValues, ",")))
+        return join(enumValues, ",")
     }
 
     private fun getExpEasingTypeHint(
         annotationDescriptor: AnnotationDescriptor,
         propertyDescriptor: PropertyDescriptor
-    ): Pair<String, Array<Any>> {
+    ): String {
         if (listOf(Float::class, Double::class).map { it.toString() }.contains(propertyDescriptor.type.toString())) {
             throw IllegalStateException("You annotated the property ${propertyDescriptor.name} which is of type ${propertyDescriptor.type} with @ExpEasing. This annotation is only applicable for Floats and Doubles.")
         }
@@ -227,13 +227,13 @@ object PropertyHintTypeMapper {
             else -> ""
         }
 
-        return Pair("%S", arrayOf(stringTemplateValues))
+        return stringTemplateValues
     }
 
     private fun getLengthTypeHint(
         annotationDescriptor: AnnotationDescriptor,
         propertyDescriptor: PropertyDescriptor
-    ): Pair<String, Array<Any>> {
+    ): String {
         if (listOf(Float::class, Double::class).map { it.toString() }.contains(propertyDescriptor.type.toString())) {
             throw IllegalStateException("You annotated the property ${propertyDescriptor.name} which is of type ${propertyDescriptor.type} with @Length. This annotation is only applicable for Floats and Doubles.")
         }
@@ -241,15 +241,15 @@ object PropertyHintTypeMapper {
         val length = annotationDescriptor.getAnnotationValue(LENGTH_ANNOTATION_LENGTH_ARGUMENT, -1)
 
         return if (length != -1) {
-            Pair("$length", arrayOf())
+            "$length"
         } else {
-            Pair("%S", arrayOf(""))
+            ""
         }
     }
 
     private fun getFlagsTypeHint(
         propertyDescriptor: PropertyDescriptor
-    ): Pair<String, Array<Any>> {
+    ): String {
         if (
             !(propertyDescriptor.type.toString().startsWith("Map")
                 && propertyDescriptor.type.arguments.first().type.isEnum()
@@ -268,13 +268,13 @@ object PropertyHintTypeMapper {
             .map { it.asString() }
             .filter { it != "name" || it != "ordinal" }
 
-        return Pair("%S", arrayOf(join(enumValues, ",")))
+        return join(enumValues, ",")
     }
 
     private fun getFileOrDirTypeHint(
         annotationDescriptor: AnnotationDescriptor,
         propertyDescriptor: PropertyDescriptor
-    ): Pair<String, Array<Any>> {
+    ): String {
         if (propertyDescriptor.type.toString() != "String") {
             throw IllegalStateException("You annotated the property ${propertyDescriptor.name} which is of type ${propertyDescriptor.type} with ${annotationDescriptor.fqName}. This annotation is only applicable to String.")
         }
@@ -283,16 +283,16 @@ object PropertyHintTypeMapper {
             .getAnnotationValue(FILE_AND_DIR_ANNOTATION_EXTENSIONS_ARGUMENT, ArrayList<StringValue>())
             .map { it.value.replace("\"", "") }
 
-        return Pair("%S", arrayOf(join(extensions, ",")))
+        return join(extensions, ",")
     }
 
     private fun getColorNoAlphaHintString(
         propertyDescriptor: PropertyDescriptor
-    ): Pair<String, Array<Any>> {
+    ): String {
         if (propertyDescriptor.type.toString() != "Color") {
             throw IllegalStateException("You annotated the property ${propertyDescriptor.name} which is of type ${propertyDescriptor.type} with @ColorNoAlpha. This annotation is only applicable to Color.")
         }
 
-        return Pair("%S", arrayOf(""))
+        return ""
     }
 }
