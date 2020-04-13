@@ -7,7 +7,6 @@ import godot.core.signal
 import godot.registration.RPCMode
 import godot.registration.Range
 
-
 @RegisterClass(true)
 class TestingClass : Object() {
 

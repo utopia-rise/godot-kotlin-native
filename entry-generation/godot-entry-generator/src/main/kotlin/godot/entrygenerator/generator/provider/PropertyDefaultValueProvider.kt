@@ -1,7 +1,6 @@
 package godot.entrygenerator.generator.provider
 
 import org.jetbrains.kotlin.descriptors.PropertyDescriptor
-import org.jetbrains.kotlin.js.descriptorUtils.getJetTypeFqName
 import org.jetbrains.kotlin.js.resolve.diagnostics.findPsi
 import org.jetbrains.kotlin.psi.*
 import org.jetbrains.kotlin.psi.psiUtil.referenceExpression
@@ -10,7 +9,6 @@ import org.jetbrains.kotlin.resolve.bindingContextUtil.getReferenceTargets
 import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
 import org.jetbrains.kotlin.resolve.source.KotlinSourceElement
 import org.jetbrains.kotlin.serialization.deserialization.descriptors.DeserializedClassConstructorDescriptor
-import org.jetbrains.kotlin.types.asSimpleType
 
 object PropertyDefaultValueProvider {
     fun provideDefaultValue(
@@ -26,55 +24,45 @@ object PropertyDefaultValueProvider {
             .psi as KtProperty)
             .delegateExpressionOrInitializer!! // should not be null
 
-        if (isContainingReference(defaultArgumentPsi, bindingContext)) {
+        val defaultValueExpression = getDefaultValueExpression(defaultArgumentPsi, bindingContext)
+        if (defaultValueExpression == null) {
             throw IllegalStateException("You initialized the property ${propertyDescriptor.fqNameSafe} (which you annotated with @RegisterProperty) with a reference: ${defaultArgumentPsi.text}. This is not supported! initialize your property with a compile time constant")
         }
 
-        val fqTypeName = propertyDescriptor.type.asSimpleType().getJetTypeFqName(false)
-
-        return if (fqTypeName.startsWith("kotlin")) {
-            defaultArgumentPsi.text
-        } else {
-            "${fqTypeName.substringBeforeLast(".")}.${defaultArgumentPsi.text}"
-        }
+        return defaultValueExpression
     }
 
-    private fun isContainingReference(
-        expression: KtExpression,
-        bindingContext: BindingContext
-    ): Boolean {
-        return when (expression) {
-            // constants
-            is KtConstantExpression -> false
-            // string constants
-            is KtStringTemplateExpression -> expression.hasInterpolation()
-            // Enum expressions
-            is KtDotQualifiedExpression -> {
-                val receiver = expression.receiverExpression
-                val receiverRef = receiver.getReferenceTargets(bindingContext).firstOrNull()
+    private fun getDefaultValueExpression(expression: KtExpression, bindingContext: BindingContext): String? {
+        if (expression is KtConstantExpression) {
+            return expression.text
+        } else if (expression is KtStringTemplateExpression && !expression.hasInterpolation()) {
+            return expression.text
+        } else if (expression is KtDotQualifiedExpression) {
+            val receiver = expression.receiverExpression
+            val receiverRef = receiver.getReferenceTargets(bindingContext).firstOrNull()
 
-                if (receiverRef != null) {
-                    val psi = receiverRef.findPsi()
-                    !(psi is KtClass && psi.isEnum())
-                } else {
-                    true
+            if (receiverRef != null) {
+                val psi = receiverRef.findPsi()
+                if (psi is KtClass && psi.isEnum()) {
+                    return "${psi.fqName}.${expression.selectorExpression!!.text}"
                 }
             }
-            // constructor call
-            is KtCallExpression -> {
-                val ref = expression.referenceExpression()?.getReferenceTargets(bindingContext)
-                    ?.firstOrNull()
+        } else if (expression is KtCallExpression) {
+            val ref = expression.referenceExpression()?.getReferenceTargets(bindingContext)
+                ?.firstOrNull()
 
-                if (ref != null) {
-                    val psi = ref.findPsi()
-                    val argWithRef = expression.valueArguments.mapNotNull { it.getArgumentExpression() }
-                        .firstOrNull { isContainingReference(it, bindingContext) }
-                    !((psi is KtConstructor<*> || ref is DeserializedClassConstructorDescriptor) && argWithRef == null)
-                } else {
-                    true
+            if (ref != null) {
+                val psi = ref.findPsi()
+                val argWithRef = expression.valueArguments.mapNotNull { it.getArgumentExpression() }
+                    .firstOrNull { getDefaultValueExpression(it, bindingContext) != null }
+                if (psi is KtConstructor<*> && argWithRef == null) {
+                    return "${psi.getContainingClassOrObject().fqName}${expression.valueArgumentList!!.text}"
+                } else if (ref is DeserializedClassConstructorDescriptor) {
+                    return "${ref.constructedClass.fqNameSafe}${expression.valueArgumentList!!.text}"
                 }
             }
-            else -> true
         }
+
+        return null
     }
 }
