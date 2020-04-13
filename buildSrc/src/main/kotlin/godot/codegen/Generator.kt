@@ -32,6 +32,8 @@ object Generator {
         iCallFileSpec
             .build()
             .writeTo(outputDir)
+
+        generateEngineTypesRegistration(classes).writeTo(outputDir)
     }
 
     private fun generateICallsVarargsFunction(): FunSpec {
@@ -69,6 +71,25 @@ object Generator {
                 MemberName("godot.gdnative", "godot_method_bind_call"),
                 MemberName("godot.gdnative", "godot_variant_destroy"),
                 MemberName("godot.core", "Variant")
+            )
+            .build()
+    }
+
+    private fun generateEngineTypesRegistration(classes: List<Class>): FileSpec {
+        val funBuilder = FunSpec.builder("registerEngineTypes")
+            .addModifiers(KModifier.INTERNAL)
+            .receiver(ClassName("godot.core", "TypeManager"))
+
+        classes.filter { !it.isSingleton && it.name != "Object"}.forEach {
+            funBuilder.addStatement(
+                "registerEngineType(%S, ::%T)",
+                it.name,
+                ClassName(it.name.getPackage(), it.name)
+            )
+        }
+        return FileSpec.builder("godot", "registerEngineTypes")
+            .addFunction(
+                funBuilder.build()
             )
             .build()
     }

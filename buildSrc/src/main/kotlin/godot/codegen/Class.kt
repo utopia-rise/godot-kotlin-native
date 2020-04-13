@@ -203,26 +203,25 @@ class Class(
     }
 
     private fun generateConstructors(typeBuilder: TypeSpec.Builder) {
-        if (isInstanciable) {
-            typeBuilder.addFunction(
-                FunSpec.constructorBuilder()
-                    .callThisConstructor("null")
-                    .addStatement(
-                        """if (shouldInit()) {
+        val noArgConstructor = FunSpec.constructorBuilder()
+            .callThisConstructor("null")
+            .addStatement(
+                """if (shouldInit()) {
                             |    %M("$oldName")?.let {
                             |        this.ptr = it.%M<%T<()->%T>>().%M()
                             |    } ?: throw NotImplementedError("No constructor for $name in Godot")
                             |}
                             |""".trimMargin(),
-                        MemberName("godot.gdnative", "godot_get_class_constructor"),
-                        MemberName("kotlinx.cinterop", "reinterpret"),
-                        ClassName("kotlinx.cinterop", "CFunction"),
-                        ClassName("kotlinx.cinterop", "COpaquePointer"),
-                        MemberName("kotlinx.cinterop", "invoke")
-                    )
-                    .build()
+                MemberName("godot.gdnative", "godot_get_class_constructor"),
+                MemberName("kotlinx.cinterop", "reinterpret"),
+                ClassName("kotlinx.cinterop", "CFunction"),
+                ClassName("kotlinx.cinterop", "COpaquePointer"),
+                MemberName("kotlinx.cinterop", "invoke")
             )
-        }
+
+        if (!isInstanciable) noArgConstructor.addModifiers(KModifier.INTERNAL)
+
+        typeBuilder.addFunction(noArgConstructor.build())
 
         typeBuilder.primaryConstructor(
             FunSpec.constructorBuilder()
