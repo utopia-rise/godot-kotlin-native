@@ -48,9 +48,9 @@ object PropertyRegistrationGenerator {
     ): String {
         return if (propertyDescriptor.type.isEnum()) {
             if (propertyDescriptor.isLateInit) {
-                "enumProperty(%S,·%L,·%T,·%L,·%L,·%T,·%T,·$hintStringStringTemplate)"
+                "enumProperty(%S,·%L,·%L,·%L,·%T)"
             } else {
-                "enumProperty(%S,·%L,·%T,·%T(%L),·%L,·%T,·%T,·$hintStringStringTemplate)"
+                "enumProperty(%S,·%L,·%T(%L),·%L,·%T)"
             }
         } else {
             if (propertyDescriptor.isLateInit) {
@@ -70,12 +70,14 @@ object PropertyRegistrationGenerator {
         return ArrayList<Any>().apply {
             add(propertyDescriptor.name) //propertyName
             add(className.member(propertyDescriptor.name.asString()).reference()) //propertyReference
-            add(
-                TypeToVariantAsClassNameMapper.mapTypeToVariantAsClassName(
-                    propertyDescriptor.type.toString(),
-                    propertyDescriptor.type.isEnum()
-                ) //property variant type
-            )
+            if (!propertyDescriptor.type.isEnum()) {
+                add(
+                    TypeToVariantAsClassNameMapper.mapTypeToVariantAsClassName(
+                        propertyDescriptor.type.toString(),
+                        propertyDescriptor.type.isEnum()
+                    ) //property variant type
+                )
+            }
             if (propertyDescriptor.isLateInit) {
                 add("null") //default value null
             } else {
@@ -89,8 +91,10 @@ object PropertyRegistrationGenerator {
             }
             add(shouldBeVisibleInEditor(propertyDescriptor)) //isVisibleInEditor
             add(mapRpcModeAnnotationToClassName(getRpcModeEnum(propertyDescriptor))) //rpcMode
-            add(PropertyHintTypeMapper.mapAnnotationDescriptorToPropertyTypeClassName(propertyDescriptor.getPropertyHintAnnotation())) //hint type enum
-            addAll(valuesForHintStringTemplate) //hint string
+            if (!propertyDescriptor.type.isEnum()) {
+                add(PropertyHintTypeMapper.mapAnnotationDescriptorToPropertyTypeClassName(propertyDescriptor.getPropertyHintAnnotation())) //hint type enum
+                addAll(valuesForHintStringTemplate) //hint string
+            }
         }.toTypedArray()
     }
 

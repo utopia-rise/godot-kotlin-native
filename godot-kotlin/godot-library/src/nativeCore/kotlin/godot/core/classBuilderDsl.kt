@@ -121,23 +121,20 @@ class ClassBuilder<T : Object> internal constructor(val classHandle: ClassHandle
     inline fun <reified K : Enum<K>> enumProperty(
         name: String,
         property: KMutableProperty1<T, K>,
-        type: Variant.Type,
         default: Variant? = null,
         isVisibleInEditor: Boolean = true,
-        rpcMode: RPCMode,
-        hintType: godot_property_hint = godot_property_hint.GODOT_PROPERTY_HINT_NONE,
-        hintString: String = ""
+        rpcMode: RPCMode
     ) {
         val propertyHandler = MutableEnumPropertyHandler(property) { str -> enumValueOf(str) }
         classHandle.registerProperty(
             name,
             StableRef.create(propertyHandler).asCPointer(),
-            type,
+            Variant.Type.STRING,
             default,
             isVisibleInEditor,
             rpcMode,
-            hintType,
-            hintString
+            godot_property_hint.GODOT_PROPERTY_HINT_ENUM,
+            enumValues<K>().joinToString { it.name }
         )
     }
 }

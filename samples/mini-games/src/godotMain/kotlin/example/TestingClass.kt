@@ -54,9 +54,6 @@ class TestingClass : Object() {
     @RegisterProperty
     var dirExt = "*.dummy"
 
-    @RegisterProperty
-    var variant = Variant("")
-
     @Dir(true)
     @RegisterProperty
     lateinit var dirExtGlobal: String

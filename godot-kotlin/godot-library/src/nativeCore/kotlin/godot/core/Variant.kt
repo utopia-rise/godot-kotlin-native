@@ -21,6 +21,10 @@ class Variant (val handle: CValue<godot_variant>) {
         // TODO
     }
 
+    constructor(enum: Enum<*>) : this(enum.toString()) {
+
+    }
+
     constructor(value: Any) : this(new()) //TODO: replace
 
     enum class Type(val value: Int) {
