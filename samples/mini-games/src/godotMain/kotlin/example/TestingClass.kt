@@ -2,6 +2,7 @@ package example
 
 import godot.annotation.*
 import godot.core.Object
+import godot.core.Variant
 import godot.core.signal
 import godot.registration.RPCMode
 import godot.registration.Range
@@ -55,14 +56,12 @@ class TestingClass : Object() {
     var dirExt = "*.dummy"
 
     @RegisterProperty
-    var myEnum: TestEnum = TestEnum.ENUM1
+    var variant = Variant("")
 
     @Dir(true)
     @RegisterProperty
     lateinit var dirExtGlobal: String
 
-    @EnumTypeHint
     @RegisterProperty
     var enumTest: TestEnum = TestEnum.ENUM1
-
 }
