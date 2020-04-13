@@ -240,15 +240,9 @@ class Class(
     }
 
     private fun generateSignals(typeBuilder: TypeSpec.Builder) {
-        val signalClassBuilder = TypeSpec.classBuilder("Signal")
-        val signalCompanionObjectBuilder = TypeSpec.companionObjectBuilder()
-
         signals.forEach {
-            signalCompanionObjectBuilder.addProperty(it.generated)
+            typeBuilder.addProperty(it.generated)
         }
-        signalClassBuilder.addType(signalCompanionObjectBuilder.build())
-
-        typeBuilder.addType(signalClassBuilder.build())
     }
 
     private fun createBaseCompanion(): TypeSpec.Builder {
