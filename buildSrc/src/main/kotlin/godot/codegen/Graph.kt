@@ -75,3 +75,17 @@ fun Graph<Class>.getSanitisedArgumentName(method: Method, index: Int, cl: Class)
     val parentMethod = getMethodFromAncestor(cl, method)
     return (parentMethod ?: method).arguments[index].name
 }
+
+fun Graph<Class>.isObjectOrItsChild(className: String): Boolean {
+    var isObjectFamily = false
+    var classToCheck = nodes.find { it.value.name == className } ?: return false
+
+    while (!isObjectFamily) {
+        isObjectFamily = classToCheck.value.name == "Object"
+
+        if (isObjectFamily) return true
+
+        classToCheck = classToCheck.parent ?: return false
+    }
+    return isObjectFamily
+}

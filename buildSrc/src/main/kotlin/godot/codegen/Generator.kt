@@ -25,7 +25,7 @@ object Generator {
             .addImport("godot.core", "getRawMemory")
             .addImport("godot.core", "String")
 
-        icalls.forEach { iCallFileSpec.addFunction(it.iCallSpec) }
+        icalls.forEach { iCallFileSpec.addFunction(it.generateICall(tree)) }
 
         outputDir.parentFile.mkdirs()
 

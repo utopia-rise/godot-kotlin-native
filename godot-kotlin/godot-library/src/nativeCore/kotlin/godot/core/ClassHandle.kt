@@ -1,5 +1,6 @@
 package godot.core
 
+import godot.Object
 import godot.gdnative.*
 import godot.registration.RPCMode
 import kotlinx.cinterop.*

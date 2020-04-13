@@ -1,5 +1,6 @@
 package godot.core
 
+import godot.Object
 import kotlinx.cinterop.COpaquePointer
 
 class ClassRegistry(private val nativescriptHandle: COpaquePointer) {

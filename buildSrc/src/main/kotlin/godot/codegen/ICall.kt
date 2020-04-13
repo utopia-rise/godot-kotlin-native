@@ -9,9 +9,6 @@ class ICall(
 ) {
     private val returnTypeClass = createReturnTypeClass()
     val name: String = createICallName()
-    val iCallSpec by lazy {
-        generateICall()
-    }
 
     init {
         if (returnType.isEnum()) returnType = "Long"
@@ -38,7 +35,7 @@ class ICall(
         if (returnType.isEnum()) "Long" else returnType
     )
 
-    private fun generateICall(): FunSpec {
+    fun generateICall(tree: Graph<Class>): FunSpec {
         val spec = FunSpec
             .builder(name)
             .addModifiers(KModifier.INTERNAL)
@@ -58,12 +55,12 @@ class ICall(
         val isPrimitive = returnType.isPrimitive()
 
         addReturnTypeForICall(shouldReturn, spec, isPrimitive)
-        generateICallMethodBlock(shouldReturn, isPrimitive, spec)
+        generateICallMethodBlock(shouldReturn, isPrimitive, spec, tree)
 
         return spec.build()
     }
 
-    private fun generateICallMethodBlock(shouldReturn: Boolean, isPrimitive: Boolean, spec: FunSpec.Builder) {
+    private fun generateICallMethodBlock(shouldReturn: Boolean, isPrimitive: Boolean, spec: FunSpec.Builder, tree: Graph<Class>) {
         val codeBlockBuilder = CodeBlock
             .builder()
             .add("%M {\n", MemberName("kotlinx.cinterop", "memScoped"))
@@ -116,10 +113,27 @@ class ICall(
                     "    %M(mb, inst, args, retVar)\n",
                     MemberName("godot.gdnative", "godot_method_bind_ptrcall")
                 )
-                codeBlockBuilder.add(
-                    "    ret = %T(retVar)\n",
-                    returnTypeClass
-                )
+                if (tree.isObjectOrItsChild(returnTypeClass.simpleName)) {
+                    val typeManagerClass = ClassName("godot.core", "TypeManager")
+                    if (returnTypeClass.simpleName != "Object") {
+                        codeBlockBuilder.add(
+                            "    ret = %M(retVar) as %T\n",
+                            MemberName(typeManagerClass, "wrap"),
+                            returnTypeClass
+                        )
+                    } else {
+                        codeBlockBuilder.add(
+                            "    ret = %M(retVar)\n",
+                            MemberName(typeManagerClass, "wrap")
+                        )
+                    }
+                }
+                else {
+                    codeBlockBuilder.add(
+                        "    ret = %T(retVar)\n",
+                        returnTypeClass
+                    )
+                }
             }
         } else {
             codeBlockBuilder.add(

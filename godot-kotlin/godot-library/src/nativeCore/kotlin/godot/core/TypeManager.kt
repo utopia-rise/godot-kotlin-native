@@ -1,5 +1,6 @@
 package godot.core
 
+import godot.Object
 import kotlinx.cinterop.*
 import kotlin.native.concurrent.AtomicReference
 import kotlin.native.concurrent.freeze
