@@ -4,10 +4,12 @@ import org.jetbrains.kotlin.descriptors.PropertyDescriptor
 import org.jetbrains.kotlin.js.descriptorUtils.getJetTypeFqName
 import org.jetbrains.kotlin.js.resolve.diagnostics.findPsi
 import org.jetbrains.kotlin.psi.*
+import org.jetbrains.kotlin.psi.psiUtil.referenceExpression
 import org.jetbrains.kotlin.resolve.BindingContext
 import org.jetbrains.kotlin.resolve.bindingContextUtil.getReferenceTargets
 import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
 import org.jetbrains.kotlin.resolve.source.KotlinSourceElement
+import org.jetbrains.kotlin.serialization.deserialization.descriptors.DeserializedClassConstructorDescriptor
 import org.jetbrains.kotlin.types.asSimpleType
 
 object PropertyDefaultValueProvider {
@@ -42,8 +44,11 @@ object PropertyDefaultValueProvider {
         bindingContext: BindingContext
     ): Boolean {
         return when (expression) {
+            // constants
             is KtConstantExpression -> false
+            // string constants
             is KtStringTemplateExpression -> expression.hasInterpolation()
+            // Enum expressions
             is KtDotQualifiedExpression -> {
                 val receiver = expression.receiverExpression
                 val receiverRef = receiver.getReferenceTargets(bindingContext).firstOrNull()
@@ -51,6 +56,20 @@ object PropertyDefaultValueProvider {
                 if (receiverRef != null) {
                     val psi = receiverRef.findPsi()
                     !(psi is KtClass && psi.isEnum())
+                } else {
+                    true
+                }
+            }
+            // constructor call
+            is KtCallExpression -> {
+                val ref = expression.referenceExpression()?.getReferenceTargets(bindingContext)
+                    ?.firstOrNull()
+
+                if (ref != null) {
+                    val psi = ref.findPsi()
+                    val argWithRef = expression.valueArguments.mapNotNull { it.getArgumentExpression() }
+                        .firstOrNull { isContainingReference(it, bindingContext) }
+                    !((psi is KtConstructor<*> || ref is DeserializedClassConstructorDescriptor) && argWithRef == null)
                 } else {
                     true
                 }
