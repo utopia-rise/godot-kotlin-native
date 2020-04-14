@@ -2,7 +2,6 @@ package example
 
 import godot.annotation.*
 import godot.core.Object
-import godot.core.Variant
 import godot.core.signal
 import godot.registration.RPCMode
 import godot.registration.Range
@@ -63,7 +62,4 @@ class TestingClass : Object() {
 
     @RegisterProperty
     var flag: Boolean = false
-
-    @RegisterProperty
-    var variantTest = Variant("test")
 }
