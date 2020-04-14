@@ -4,11 +4,21 @@ import com.squareup.kotlinpoet.ClassName
 import godot.entrygenerator.extension.assignmentPsi
 import godot.entrygenerator.extension.getPropertyHintAnnotation
 import godot.entrygenerator.mapper.PropertyHintTypeMapper
+import org.jetbrains.kotlin.cli.common.messages.CompilerMessageLocation
+import org.jetbrains.kotlin.cli.common.messages.MessageCollector
+import org.jetbrains.kotlin.cli.common.messages.MessageCollectorUtil
 import org.jetbrains.kotlin.descriptors.PropertyDescriptor
+import org.jetbrains.kotlin.ir.util.endOffset
+import org.jetbrains.kotlin.ir.util.startOffset
+import org.jetbrains.kotlin.js.resolve.diagnostics.findPsi
 import org.jetbrains.kotlin.psi.KtConstantExpression
+import org.jetbrains.kotlin.psi.KtStringTemplateExpression
+import org.jetbrains.kotlin.psi.psiUtil.getTextWithLocation
+import org.jetbrains.kotlin.psi.psiUtil.startOffset
 import org.jetbrains.kotlin.resolve.BindingContext
+import org.jetbrains.kotlin.resolve.source.KotlinSourceElement
 
-class IntRegistrationValuesHandler(
+class PrimitiveRegistrationValuesHandler(
     propertyDescriptor: PropertyDescriptor,
     bindingContext: BindingContext
 ) : RegistrationValuesHandler(propertyDescriptor, bindingContext) {
@@ -45,7 +55,8 @@ class IntRegistrationValuesHandler(
     private fun getDefaultValue(): String {
         val defaultValuePsi = propertyDescriptor.assignmentPsi
 
-        return if (defaultValuePsi is KtConstantExpression) {
+        return if (defaultValuePsi is KtConstantExpression
+            || (defaultValuePsi is KtStringTemplateExpression && !defaultValuePsi.hasInterpolation())) {
             defaultValuePsi.text
         } else {
             //error

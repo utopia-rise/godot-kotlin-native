@@ -5,8 +5,8 @@ import org.jetbrains.kotlin.descriptors.PropertyDescriptor
 import org.jetbrains.kotlin.resolve.BindingContext
 
 abstract class RegistrationValuesHandler(
-    internal val propertyDescriptor: PropertyDescriptor,
-    internal val bindingContext: BindingContext
+    val propertyDescriptor: PropertyDescriptor,
+    val bindingContext: BindingContext
 ) {
     abstract fun getDefaultValueStringTemplate(): String
     abstract fun getDefaultValueStringTemplateValues(): Array<Any>

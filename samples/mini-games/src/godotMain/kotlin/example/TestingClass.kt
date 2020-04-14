@@ -25,40 +25,43 @@ class TestingClass : Object() {
     @RegisterProperty
     var rangeInt = 1
 
-//    @FloatRange(0f, 20f, 2f, Range.OR_GREATER)
-//    @RegisterProperty
-//    var rangeFloat = 1f
-//
-//    @DoubleRange(0.0, 20.0, 2.0, Range.OR_GREATER)
-//    @RegisterProperty
-//    var rangeDouble = 1.0
-//
-//    @ExpEasing(true, true)
-//    @RegisterProperty
-//    var expEasingFloat = 2f
-//
-//    @ExpEasing
-//    @RegisterProperty
-//    var expEasingDouble = 2.0
-//
-//    @File("*.txt", "*.kt")
-//    @RegisterProperty
-//    var fileExt = "*.dummy"
-//
-//    @File("*.txt", "*.kt", global = true)
-//    @RegisterProperty
-//    var fileExtGlobal = "*.dummy"
-//
-//    @Dir
-//    @RegisterProperty
-//    var dirExt = "*.dummy"
+    @FloatRange(0f, 20f, 2f, Range.OR_GREATER)
+    @RegisterProperty
+    var rangeFloat = 1f
+
+    @DoubleRange(0.0, 20.0, 2.0, Range.OR_GREATER)
+    @RegisterProperty
+    var rangeDouble = 1.0
+
+    @ExpEasing(true, true)
+    @RegisterProperty
+    var expEasingFloat = 2f
+
+    @ExpEasing
+    @RegisterProperty
+    var expEasingDouble = 2.0
+
+    @RegisterProperty
+    var flag: Boolean = false
+
+    @File("*.txt", "*.kt")
+    @RegisterProperty
+    var fileExt = "*.dummy"
+
+    @File("*.txt", "*.kt", global = true)
+    @RegisterProperty
+    var fileExtGlobal = "*.dummy"
+
+    @Dir
+    @RegisterProperty
+    var dirExt = "*.dummy"
 //
 //    @RegisterProperty
 //    var variant = Variant("")
 //
-//    @Dir(true)
-//    @RegisterProperty
-//    lateinit var dirExtGlobal: String
+    @Dir(true)
+    @RegisterProperty
+    lateinit var dirExtGlobal: String
 //
 //    @RegisterProperty
 //    var enumTest: TestEnum = TestEnum.ENUM1
