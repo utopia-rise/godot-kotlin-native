@@ -5,10 +5,11 @@ import godot.entrygenerator.transformer.transformTypeDeclarationsToClassWithMemb
 import org.jetbrains.kotlin.descriptors.ClassDescriptor
 import org.jetbrains.kotlin.descriptors.FunctionDescriptor
 import org.jetbrains.kotlin.descriptors.PropertyDescriptor
+import org.jetbrains.kotlin.resolve.BindingContext
 
-class EntryGenerator {
+class EntryGenerator(bindingContext: BindingContext) {
 
-    private val entryFileBuilder = EntryFileBuilder()
+    private val entryFileBuilder = EntryFileBuilder(bindingContext)
 
     fun generateEntryFile(
         outputPath: String,

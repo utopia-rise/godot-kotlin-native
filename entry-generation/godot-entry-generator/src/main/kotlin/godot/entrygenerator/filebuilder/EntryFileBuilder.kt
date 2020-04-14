@@ -6,9 +6,10 @@ import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.FunSpec
 import godot.entrygenerator.generator.ClassRegistrationGenerator
 import godot.entrygenerator.model.ClassWithMembers
+import org.jetbrains.kotlin.resolve.BindingContext
 import java.io.File
 
-class EntryFileBuilder {
+class EntryFileBuilder(val bindingContext: BindingContext) {
     private val entryFileSpec = FileSpec
         .builder("godot", "Entry")
         .addFunction(generateGDNativeInitFunction())
@@ -33,7 +34,7 @@ class EntryFileBuilder {
                 ClassName("godot.core", "ClassRegistry")
             ) //START: with ClassRegistry
 
-        ClassRegistrationGenerator.registerClasses(classesWithMembers, classRegistryControlFlow)
+        ClassRegistrationGenerator.registerClasses(classesWithMembers, classRegistryControlFlow, bindingContext)
 
         classRegistryControlFlow.endControlFlow() //END: with ClassRegistry
 
