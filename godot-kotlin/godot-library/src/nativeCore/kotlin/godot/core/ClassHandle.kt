@@ -4,6 +4,7 @@ import godot.gdnative.*
 import godot.registration.RPCMode
 import kotlinx.cinterop.*
 
+@PublishedApi
 internal class ClassHandle<T : Object>(
     private val nativescriptHandle: COpaquePointer,
     private val className: String,
@@ -51,16 +52,7 @@ internal class ClassHandle<T : Object>(
         disposables.add(methodRef)
         memScoped {
             val attribs = cValue<godot_method_attributes> {
-                rpc_type = when (rpcMode) {
-                    RPCMode.DISABLED -> GODOT_METHOD_RPC_MODE_DISABLED
-                    RPCMode.REMOTE -> GODOT_METHOD_RPC_MODE_REMOTE
-                    RPCMode.MASTER -> GODOT_METHOD_RPC_MODE_MASTER
-                    RPCMode.PUPPET -> GODOT_METHOD_RPC_MODE_PUPPET
-                    RPCMode.REMOTE_SYNC -> GODOT_METHOD_RPC_MODE_REMOTESYNC
-                    RPCMode.MASTER_SYNC -> GODOT_METHOD_RPC_MODE_MASTERSYNC
-                    RPCMode.PUPPET_SYNC -> GODOT_METHOD_RPC_MODE_PUPPETSYNC
-                    else -> throw AssertionError("Unsupported rpc mode $rpcMode")
-                }
+                rpc_type = toGodotRpcMode(rpcMode)
             }
 
             val instanceMethod = cValue<godot_instance_method> {
@@ -75,6 +67,19 @@ internal class ClassHandle<T : Object>(
                 attribs,
                 instanceMethod
             )
+        }
+    }
+
+    private fun toGodotRpcMode(rpcMode: RPCMode): godot_method_rpc_mode {
+        return when (rpcMode) {
+            RPCMode.DISABLED -> GODOT_METHOD_RPC_MODE_DISABLED
+            RPCMode.REMOTE -> GODOT_METHOD_RPC_MODE_REMOTE
+            RPCMode.MASTER -> GODOT_METHOD_RPC_MODE_MASTER
+            RPCMode.PUPPET -> GODOT_METHOD_RPC_MODE_PUPPET
+            RPCMode.REMOTE_SYNC -> GODOT_METHOD_RPC_MODE_REMOTESYNC
+            RPCMode.MASTER_SYNC -> GODOT_METHOD_RPC_MODE_MASTERSYNC
+            RPCMode.PUPPET_SYNC -> GODOT_METHOD_RPC_MODE_PUPPETSYNC
+            else -> throw AssertionError("Unsupported rpc mode $rpcMode")
         }
     }
 
@@ -98,6 +103,55 @@ internal class ClassHandle<T : Object>(
                 nativescriptHandle,
                 className.cstr.ptr,
                 gdSignal.ptr
+            )
+        }
+    }
+
+    fun registerProperty(
+        propertyName: String,
+        propertyHandleRef: COpaquePointer,
+        propertyType: Variant.Type,
+        default: Variant?,
+        isVisibleInEditor: Boolean,
+        rpcMode: RPCMode,
+        hintType: godot_property_hint,
+        hintString: String
+    ) {
+        disposables.add(propertyHandleRef)
+        memScoped {
+            val usageFlags = if (isVisibleInEditor) {
+                GODOT_PROPERTY_USAGE_DEFAULT
+            } else {
+                GODOT_PROPERTY_USAGE_NOEDITOR
+            }
+            val attribs = alloc<godot_property_attributes> {
+                rset_type = toGodotRpcMode(rpcMode)
+                usage = usageFlags
+                type = propertyType.value
+                this.hint = hintType
+                checkNotNull(Godot.gdnative.godot_string_parse_utf8)(hint_string.ptr, hintString.cstr.ptr)
+                if (default != null) {
+                    checkNotNull(Godot.gdnative.godot_variant_new_copy)(default_value.ptr, default.handle.ptr)
+                }
+            }
+
+            val getter = cValue<godot_property_get_func> {
+                method_data = propertyHandleRef
+                get_func = staticCFunction(::getProperty)
+            }
+
+            val setter = cValue<godot_property_set_func> {
+                method_data = propertyHandleRef
+                set_func = staticCFunction(::setProperty)
+            }
+
+            checkNotNull(Godot.nativescript.godot_nativescript_register_property)(
+                nativescriptHandle,
+                className.cstr.ptr,
+                propertyName.cstr.ptr,
+                attribs.ptr,
+                setter,
+                getter
             )
         }
     }

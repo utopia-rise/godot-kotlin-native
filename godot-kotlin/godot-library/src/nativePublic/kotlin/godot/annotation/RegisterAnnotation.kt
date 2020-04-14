@@ -14,7 +14,7 @@ annotation class RegisterClass(val isTool: Boolean = false)
 @Target(AnnotationTarget.PROPERTY)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class RegisterProperty(
-    val visibleInEditor: Boolean = false,
+    val visibleInEditor: Boolean = true,
     val rpcMode: RPCMode = RPCMode.DISABLED
 )
 

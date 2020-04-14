@@ -1,7 +1,9 @@
 package godot.core
 
+import godot.gdnative.godot_property_hint
 import godot.registration.RPCMode
 import kotlinx.cinterop.StableRef
+import kotlin.reflect.KMutableProperty1
 
 @DslMarker
 @Target(AnnotationTarget.CLASS)
@@ -9,7 +11,7 @@ import kotlinx.cinterop.StableRef
 annotation class ClassBuilderDSL
 
 @ClassBuilderDSL
-class ClassBuilder<T: Object> internal constructor(private val classHandle: ClassHandle<T>) {
+class ClassBuilder<T : Object> internal constructor(val classHandle: ClassHandle<T>) {
     fun <R> function(name: String, rpcMode: RPCMode, body: T.() -> R) {
         val function = Function0(body)
         classHandle.registerFunction(name, StableRef.create(function).asCPointer(), rpcMode)
@@ -91,5 +93,48 @@ class ClassBuilder<T: Object> internal constructor(private val classHandle: Clas
 
     fun signal(name: String, parameters: Map<String, Variant.Type>) {
         classHandle.registerSignal(name, parameters)
+    }
+
+    fun <K : Any> property(
+        name: String,
+        property: KMutableProperty1<T, K>,
+        type: Variant.Type,
+        default: Variant? = null,
+        isVisibleInEditor: Boolean = true,
+        rpcMode: RPCMode,
+        hintType: godot_property_hint = godot_property_hint.GODOT_PROPERTY_HINT_NONE,
+        hintString: String = ""
+    ) {
+        val propertyHandler = MutablePropertyHandler(property)
+        classHandle.registerProperty(
+            name,
+            StableRef.create(propertyHandler).asCPointer(),
+            type,
+            default,
+            isVisibleInEditor,
+            rpcMode,
+            hintType,
+            hintString
+        )
+    }
+
+    inline fun <reified K : Enum<K>> enumProperty(
+        name: String,
+        property: KMutableProperty1<T, K>,
+        default: Variant? = null,
+        isVisibleInEditor: Boolean = true,
+        rpcMode: RPCMode
+    ) {
+        val propertyHandler = MutableEnumPropertyHandler(property) { str -> enumValueOf(str) }
+        classHandle.registerProperty(
+            name,
+            StableRef.create(propertyHandler).asCPointer(),
+            Variant.Type.STRING,
+            default,
+            isVisibleInEditor,
+            rpcMode,
+            godot_property_hint.GODOT_PROPERTY_HINT_ENUM,
+            enumValues<K>().joinToString { it.name }
+        )
     }
 }
