@@ -47,7 +47,7 @@ object PropertyRegistrationGenerator {
 
         registerClassControlFlow
             .addStatement(
-                "property(%S,·%L,·$defaultValueStringTemplate,·%L,·%T)",
+                "enumProperty(%S,·%L,·$defaultValueStringTemplate,·%L,·%T)",
                 propertyDescriptor.name,
                 className.member(propertyDescriptor.name.asString()).reference(),
                 *defaultValueStringTemplateValues,

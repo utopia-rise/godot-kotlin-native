@@ -1,12 +1,13 @@
 package godot.entrygenerator.generator.provider
 
 import com.squareup.kotlinpoet.ClassName
+import godot.entrygenerator.extension.assignmentPsi
 import godot.entrygenerator.extension.getPropertyHintAnnotation
 import godot.entrygenerator.mapper.PropertyHintTypeMapper
 import org.jetbrains.kotlin.descriptors.PropertyDescriptor
 import org.jetbrains.kotlin.resolve.BindingContext
 
-class PrimitiveRegistrationValuesHandler(
+class EnumRegistrationValuesHandler(
     propertyDescriptor: PropertyDescriptor,
     bindingContext: BindingContext
 ) : RegistrationValuesHandler(propertyDescriptor, bindingContext) {
@@ -28,15 +29,10 @@ class PrimitiveRegistrationValuesHandler(
     }
 
     override fun getPropertyTypeHint(): ClassName {
-        return PropertyHintTypeMapper
-            .mapAnnotationDescriptorToPropertyTypeClassName(propertyDescriptor.getPropertyHintAnnotation())
+        throw UnsupportedOperationException("Hint type for enums is handled elsewhere!")
     }
 
     override fun getHintString(): String {
-        return PropertyHintTypeMapper
-            .mapAnnotationDescriptorToPropertyHintString(
-                propertyDescriptor,
-                propertyDescriptor.getPropertyHintAnnotation()
-            )
+        throw UnsupportedOperationException("Hint string for enums is handled elsewhere!")
     }
 }

@@ -41,9 +41,6 @@ class TestingClass : Object() {
     @RegisterProperty
     var expEasingDouble = 2.0
 
-    @RegisterProperty
-    var flag: Boolean = false
-
     @File("*.txt", "*.kt")
     @RegisterProperty
     var fileExt = "*.dummy"
@@ -55,14 +52,14 @@ class TestingClass : Object() {
     @Dir
     @RegisterProperty
     var dirExt = "*.dummy"
-//
-//    @RegisterProperty
-//    var variant = Variant("")
-//
+
     @Dir(true)
     @RegisterProperty
     lateinit var dirExtGlobal: String
-//
-//    @RegisterProperty
-//    var enumTest: TestEnum = TestEnum.ENUM1
+
+    @RegisterProperty
+    var enumTest: TestEnum = TestEnum.ENUM1
+
+    @RegisterProperty
+    var flag: Boolean = false
 }

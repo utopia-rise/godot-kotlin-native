@@ -5,26 +5,6 @@ import kotlinx.cinterop.CValue
 
 class Variant (val handle: CValue<godot_variant>) {
     constructor() : this(new()) {}
-    constructor(value: String) : this(new()) {
-        // TODO
-    }
-
-    constructor(value: Int) : this(new()) {
-        // TODO
-    }
-
-    constructor(value: Float) : this(new()) {
-        // TODO
-    }
-
-    constructor(value: Double) : this(new()) {
-        // TODO
-    }
-
-    constructor(enum: Enum<*>) : this(enum.toString()) {
-
-    }
-
     constructor(value: Any) : this(new()) //TODO: replace
 
     enum class Type(val value: Int) {
