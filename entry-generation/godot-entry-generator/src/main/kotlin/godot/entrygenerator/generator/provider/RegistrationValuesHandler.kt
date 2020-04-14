@@ -35,9 +35,9 @@ abstract class RegistrationValuesHandler(
 
     private fun getDefaultValueExpression(expression: KtExpression): Pair<String, Array<Any>>? {
         if (expression is KtConstantExpression) {
-            return return "%L" to arrayOf(expression.text)
+            return "%L" to arrayOf(expression.text)
         } else if (expression is KtStringTemplateExpression && !expression.hasInterpolation()) {
-            return return "%S" to arrayOf(expression.text)
+            return "%S" to arrayOf(expression.text)
         } else if (expression is KtDotQualifiedExpression) {
             val receiver = expression.receiverExpression
             val receiverRef = receiver.getReferenceTargets(bindingContext).firstOrNull()
