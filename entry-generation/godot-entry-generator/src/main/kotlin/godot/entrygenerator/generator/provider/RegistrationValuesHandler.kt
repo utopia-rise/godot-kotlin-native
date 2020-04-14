@@ -37,7 +37,7 @@ abstract class RegistrationValuesHandler(
         if (expression is KtConstantExpression) {
             return "%L" to arrayOf(expression.text)
         } else if (expression is KtStringTemplateExpression && !expression.hasInterpolation()) {
-            return "%S" to arrayOf(expression.text)
+            return "%S" to arrayOf(expression.text.removeSurrounding("\""))
         } else if (expression is KtDotQualifiedExpression) {
             val receiver = expression.receiverExpression
             val receiverRef = receiver.getReferenceTargets(bindingContext).firstOrNull()
