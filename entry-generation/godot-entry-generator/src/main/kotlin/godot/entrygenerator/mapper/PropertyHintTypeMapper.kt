@@ -13,7 +13,6 @@ import org.jetbrains.kotlin.types.typeUtil.isEnum
 import org.jetbrains.kotlin.utils.join
 import kotlin.reflect.KClass
 
-//TODO: remove this file. Still here for reference until all RegistrationValueHandler's are implemented
 object PropertyHintTypeMapper {
 
     fun mapAnnotationDescriptorToPropertyTypeClassName(annotationDescriptor: AnnotationDescriptor?): ClassName {

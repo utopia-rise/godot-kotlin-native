@@ -2,10 +2,6 @@ package godot.entrygenerator.generator.provider
 
 import com.squareup.kotlinpoet.ClassName
 import godot.entrygenerator.extension.assignmentPsi
-import godot.entrygenerator.extension.getAnnotationValue
-import godot.entrygenerator.extension.getPropertyHintAnnotation
-import godot.entrygenerator.model.REGISTER_PROPERTY_ANNOTATION
-import godot.entrygenerator.model.REGISTER_PROPERTY_ANNOTATION_VISIBLE_IN_EDITOR_ARGUMENT
 import org.jetbrains.kotlin.descriptors.PropertyDescriptor
 import org.jetbrains.kotlin.js.resolve.diagnostics.findPsi
 import org.jetbrains.kotlin.psi.*
@@ -20,25 +16,8 @@ abstract class RegistrationValuesHandler(
     val propertyDescriptor: PropertyDescriptor,
     val bindingContext: BindingContext
 ) {
-    internal val propertyHintAnnotation = propertyDescriptor.getPropertyHintAnnotation()
-
     abstract fun getPropertyTypeHint(): ClassName
     abstract fun getHintString(): String
-
-    init {
-        checkHintAnnotationUsage()
-    }
-
-    private fun checkHintAnnotationUsage() {
-        if (!propertyDescriptor.annotations.getAnnotationValue(
-                REGISTER_PROPERTY_ANNOTATION,
-                REGISTER_PROPERTY_ANNOTATION_VISIBLE_IN_EDITOR_ARGUMENT,
-                true
-            ) && propertyHintAnnotation != null
-        ) {
-            throw IllegalStateException("You added the type hint annotation ${propertyHintAnnotation.fqName} to the property ${propertyDescriptor.name}. But the @RegisterProperty annotation is either not present or the isVisibleInEditor flag is not set to true")
-        }
-    }
 
     fun getDefaultValue(): Pair<String, Array<Any>> {
         if (propertyDescriptor.isLateInit) {
