@@ -42,8 +42,7 @@ object PropertyRegistrationGenerator {
     ) {
         val defaultValueProvider =
             DefaultValueHandlerProvider.provideDefaultValueHandler(propertyDescriptor, bindingContext)
-        val defaultValueStringTemplate = defaultValueProvider.getDefaultValueStringTemplate()
-        val defaultValueStringTemplateValues = defaultValueProvider.getDefaultValueStringTemplateValues()
+        val (defaultValueStringTemplate, defaultValueStringTemplateValues) = defaultValueProvider.getDefaultValue()
 
         registerClassControlFlow
             .addStatement(
@@ -66,8 +65,7 @@ object PropertyRegistrationGenerator {
             propertyDescriptor,
             bindingContext
         )
-        val defaultValueStringTemplate = defaultValueProvider.getDefaultValueStringTemplate()
-        val defaultValueStringTemplateValues = defaultValueProvider.getDefaultValueStringTemplateValues()
+        val (defaultValueStringTemplate, defaultValueStringTemplateValues) = defaultValueProvider.getDefaultValue()
         val hintString = defaultValueProvider.getHintString()
 
         registerClassControlFlow

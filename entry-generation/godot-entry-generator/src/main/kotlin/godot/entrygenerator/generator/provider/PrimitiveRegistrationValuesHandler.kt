@@ -10,23 +10,6 @@ class PrimitiveRegistrationValuesHandler(
     propertyDescriptor: PropertyDescriptor,
     bindingContext: BindingContext
 ) : RegistrationValuesHandler(propertyDescriptor, bindingContext) {
-
-    override fun getDefaultValueStringTemplate(): String {
-        return if (propertyDescriptor.isLateInit) {
-            "%L"
-        } else {
-            "%T(%L)"
-        }
-    }
-
-    override fun getDefaultValueStringTemplateValues(): Array<Any> {
-        return if (propertyDescriptor.isLateInit) {
-            arrayOf("null")
-        } else {
-            arrayOf(ClassName("godot.core", "Variant"), getDefaultValue())
-        }
-    }
-
     override fun getPropertyTypeHint(): ClassName {
         return PropertyHintTypeMapper
             .mapAnnotationDescriptorToPropertyTypeClassName(propertyDescriptor.getPropertyHintAnnotation())

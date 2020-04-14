@@ -11,28 +11,11 @@ class EnumRegistrationValuesHandler(
     propertyDescriptor: PropertyDescriptor,
     bindingContext: BindingContext
 ) : RegistrationValuesHandler(propertyDescriptor, bindingContext) {
-
-    override fun getDefaultValueStringTemplate(): String {
-        return if (propertyDescriptor.isLateInit) {
-            "%L"
-        } else {
-            "%T(%L)"
-        }
-    }
-
-    override fun getDefaultValueStringTemplateValues(): Array<Any> {
-        return if (propertyDescriptor.isLateInit) {
-            arrayOf("null")
-        } else {
-            arrayOf(ClassName("godot.core", "Variant"), getDefaultValue())
-        }
-    }
-
     override fun getPropertyTypeHint(): ClassName {
-        throw UnsupportedOperationException("Hint type for enums is handled elsewhere!")
+        throw UnsupportedOperationException("Hint type for enum is always the same, so it is handled by binding at runtime")
     }
 
     override fun getHintString(): String {
-        throw UnsupportedOperationException("Hint string for enums is handled elsewhere!")
+        throw UnsupportedOperationException("Hint string for enums is handled by the binding at runtime.")
     }
 }
