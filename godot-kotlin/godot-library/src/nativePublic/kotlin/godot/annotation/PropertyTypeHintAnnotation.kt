@@ -238,7 +238,7 @@ annotation class ColorNoAlpha
 //annotation class NodePathValidTypes
 
 /**
- * Can only be used on String and File properties!
+ * Can only be used on String properties!
  */
 //@Target(AnnotationTarget.PROPERTY)
 //@Retention(AnnotationRetention.RUNTIME)
@@ -252,7 +252,7 @@ annotation class ColorNoAlpha
 //annotation class IntIsObjectId
 
 /**
- * Can only be used on String and File properties!
+ * Can only be used on String properties!
  */
 //@Target(AnnotationTarget.PROPERTY)
 //@Retention(AnnotationRetention.RUNTIME)
