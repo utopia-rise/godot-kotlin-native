@@ -57,20 +57,20 @@ object Generator {
             .addStatement(
                 """%M {
                             |    val args = %M<%T<%M>>(arguments.size)
-                            |    for ((i,arg) in arguments.withIndex()) args[i] = %N.from(arg).nativeValue.ptr
-                            |    val result = %M(mb, inst, args, arguments.size, null)
-                            |    for (i in arguments.indices) %M(args[i])
-                            |    return %N(result)
+                            |    for ((i,arg) in arguments.withIndex()) args[i] = %T.wrap(arg).handle.ptr
+                            |    val result = %T.gdnative.godot_method_bind_call(mb, inst, args, arguments.size, null)
+                            |    for (i in arguments.indices) %T.gdnative.godot_variant_destroy(args[i])
+                            |    return %T(result)
                             |}
                             |""".trimMargin(),
                 MemberName("kotlinx.cinterop", "memScoped"),
                 MemberName("kotlinx.cinterop", "allocArray"),
                 ClassName("kotlinx.cinterop", "CPointerVar"),
                 MemberName("godot.gdnative", "godot_variant"),
-                MemberName("godot.core", "Variant"),
-                MemberName("godot.gdnative", "godot_method_bind_call"),
-                MemberName("godot.gdnative", "godot_variant_destroy"),
-                MemberName("godot.core", "Variant")
+                ClassName("godot.core", "Variant"),
+                ClassName("godot.core", "Godot"),
+                ClassName("godot.core", "Godot"),
+                ClassName("godot.core", "Variant")
             )
             .build()
     }
