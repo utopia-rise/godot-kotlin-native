@@ -15,7 +15,6 @@ class CoreTypeRegistrationValuesHandler(
         return when (propertyHintAnnotation?.fqName?.asString()) {
             "godot.annotation.ColorNoAlpha" ->
                 ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_COLOR_NO_ALPHA")
-            //TODO: implement ResourceType
             //TODO: implement ImageCompressLossy
             //TODO: implement ImageCompressLossLess
             //TODO: implement NodePathToEditedNode
@@ -28,7 +27,6 @@ class CoreTypeRegistrationValuesHandler(
     override fun getHintString(): String {
         return when (propertyHintAnnotation?.fqName?.asString()) {
             "godot.annotation.ColorNoAlpha" -> getColorNoAlphaHintString()
-            //TODO: implement ResourceType
             //TODO: implement ImageCompressLossy
             //TODO: implement ImageCompressLossLess
             //TODO: implement NodePathToEditedNode

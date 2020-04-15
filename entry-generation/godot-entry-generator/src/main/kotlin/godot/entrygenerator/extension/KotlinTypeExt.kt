@@ -1,10 +1,18 @@
 package godot.entrygenerator.extension
 
 import org.jetbrains.kotlin.types.KotlinType
+import org.jetbrains.kotlin.types.typeUtil.supertypes
 
 
 fun KotlinType.isCoreType(): Boolean {
     return coreTypes.contains(this.toString())
+}
+
+fun KotlinType.isResource(): Boolean {
+    return this.toString() == "GodotResource"
+        || this
+        .supertypes()
+        .any { it.toString() == "GodotResource" }
 }
 
 private val coreTypes = listOf(

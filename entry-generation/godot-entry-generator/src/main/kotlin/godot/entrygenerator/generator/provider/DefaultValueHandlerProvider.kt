@@ -1,6 +1,7 @@
 package godot.entrygenerator.generator.provider
 
 import godot.entrygenerator.extension.isCoreType
+import godot.entrygenerator.extension.isResource
 import org.jetbrains.kotlin.builtins.KotlinBuiltIns
 import org.jetbrains.kotlin.descriptors.PropertyDescriptor
 import org.jetbrains.kotlin.resolve.BindingContext
@@ -24,6 +25,10 @@ object DefaultValueHandlerProvider {
             )
             propertyDescriptor.type.isEnum() -> EnumRegistrationValuesHandler(propertyDescriptor, bindingContext)
             propertyDescriptor.type.isCoreType() -> CoreTypeRegistrationValuesHandler(
+                propertyDescriptor,
+                bindingContext
+            )
+            propertyDescriptor.type.isResource() -> ResourceRegistrationValuesHandler(
                 propertyDescriptor,
                 bindingContext
             )

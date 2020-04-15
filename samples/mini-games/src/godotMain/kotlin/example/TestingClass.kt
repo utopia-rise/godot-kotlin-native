@@ -1,6 +1,7 @@
 package example
 
 import godot.annotation.*
+import godot.core.GodotResource
 import godot.core.Object
 import godot.core.Variant
 import godot.core.signal
@@ -66,4 +67,13 @@ class TestingClass : Object() {
 
     @RegisterProperty
     var variantTest = Variant("test")
+
+    @RegisterProperty
+    lateinit var resourceVisibleInEditor: GodotResource
+
+    @RegisterProperty(false)
+    var resourceNotVisibleInEditor: GodotResource = GodotResource()
+
+//    @RegisterProperty // <- when visible in editor...
+//    var resourceVisibleInEditorButInitialized: GodotResource = GodotResource() // <- ...should fail!
 }
