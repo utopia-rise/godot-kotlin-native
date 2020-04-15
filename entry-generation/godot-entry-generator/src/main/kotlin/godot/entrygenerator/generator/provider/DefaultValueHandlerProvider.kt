@@ -1,5 +1,6 @@
 package godot.entrygenerator.generator.provider
 
+import godot.entrygenerator.extension.isCoreType
 import org.jetbrains.kotlin.builtins.KotlinBuiltIns
 import org.jetbrains.kotlin.descriptors.PropertyDescriptor
 import org.jetbrains.kotlin.resolve.BindingContext
@@ -10,15 +11,22 @@ object DefaultValueHandlerProvider {
         propertyDescriptor: PropertyDescriptor,
         bindingContext: BindingContext
     ): RegistrationValuesHandler {
-        return when  {
+        return when {
             KotlinBuiltIns.isInt(propertyDescriptor.type)
                 || KotlinBuiltIns.isInt(propertyDescriptor.type)
                 || KotlinBuiltIns.isLong(propertyDescriptor.type)
                 || KotlinBuiltIns.isFloat(propertyDescriptor.type)
                 || KotlinBuiltIns.isDouble(propertyDescriptor.type)
                 || KotlinBuiltIns.isBoolean(propertyDescriptor.type)
-                || KotlinBuiltIns.isString(propertyDescriptor.type) -> PrimitiveRegistrationValuesHandler(propertyDescriptor, bindingContext)
+                || KotlinBuiltIns.isString(propertyDescriptor.type) -> PrimitiveRegistrationValuesHandler(
+                propertyDescriptor,
+                bindingContext
+            )
             propertyDescriptor.type.isEnum() -> EnumRegistrationValuesHandler(propertyDescriptor, bindingContext)
+            propertyDescriptor.type.isCoreType() -> CoreTypeRegistrationValuesHandler(
+                propertyDescriptor,
+                bindingContext
+            )
             else -> TODO()
         }
     }
