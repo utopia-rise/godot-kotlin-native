@@ -4,6 +4,8 @@ import com.beust.klaxon.Json
 import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import java.io.File
+import kotlin.contracts.ExperimentalContracts
+import kotlin.contracts.contract
 
 
 class Class(
@@ -38,7 +40,6 @@ class Class(
         shouldGenerate = name != "GlobalConstants"
     }
 
-
     fun generate(outputDir: File, tree: Graph<Class>, icalls: MutableSet<ICall>) {
         applyGettersAndSettersForProperties()
         if (!shouldGenerate) return
@@ -56,17 +57,18 @@ class Class(
 
         generateConstructors(classTypeBuilder)
         generateEnums(classTypeBuilder)
-        generateSignals(classTypeBuilder)
 
-        val baseCompanion = createBaseCompanion()
-        generateCasts(tree, baseCompanion)
-        generateConstants(baseCompanion)
+        val baseCompanion = if (isSingleton || constants.isNotEmpty()) createBaseCompanion() else null
 
-        val propertiesReceiverType = if (isSingleton) baseCompanion else classTypeBuilder
+        if (baseCompanion != null) generateConstants(baseCompanion)
+
+        val propertiesReceiverType = if (isSingleton) baseCompanion!! else classTypeBuilder
+
+        generateSignals(propertiesReceiverType)
         generateProperties(tree, icalls, propertiesReceiverType)
         generateMethods(propertiesReceiverType, tree, icalls)
 
-        classTypeBuilder.addType(baseCompanion.build())
+        baseCompanion?.build()?.let { classTypeBuilder.addType(it) }
 
         //Build Type and create file
         val fileBuilder = FileSpec
@@ -256,42 +258,12 @@ class Class(
     private fun createSingletonProperty(cOpaquePointerClass: ClassName): PropertySpec {
         return PropertySpec
             .builder(
-                "rawMemory",
+                "ptr",
                 cOpaquePointerClass,
                 KModifier.PRIVATE, KModifier.FINAL
             )
-            .delegate("lazy{ %M(\"$name\", \"$oldName\") }", MemberName("godot.internal", "getSingleton"))
+            .delegate("lazy{ %M(\"$name\", \"$oldName\") }", MemberName("godot.internal.utils", "getSingleton"))
             .build()
-    }
-
-    private fun generateCasts(tree: Graph<Class>, baseCompanion: TypeSpec.Builder) {
-        val funSpecs = mutableListOf<FunSpec>()
-        var node = tree.nodes.find { it.value.name == name }!!.parent
-
-        while (node != null) {
-            funSpecs.add(
-                FunSpec.builder("from")
-                    .addModifiers(KModifier.INFIX)
-                    .addParameter(
-                        "other",
-                        ClassName(if (node.value.name.isCoreType()) "godot.core" else "godot", node.value.name)
-                    )
-                    .addStatement("return $name(\"\").apply{ setRawMemory(other.rawMemory) }")
-                    .build()
-            )
-            node = node.parent
-        }
-        funSpecs.add(
-            FunSpec.builder("from")
-                .addModifiers(KModifier.INFIX)
-                .addParameter("other", ClassName("godot.core", "Variant"))
-                .addStatement("return %M($name(\"\"), other)", MemberName("godot.internal", "fromVariant"))
-                .build()
-        )
-
-        funSpecs.forEach {
-            baseCompanion.addFunction(it)
-        }
     }
 
     private fun generateConstants(baseCompanion: TypeSpec.Builder) {

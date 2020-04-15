@@ -1,28 +1,19 @@
 package godot.internal.utils
 
-import godot.GodotObject
-import godot.gdnative.godot_global_get_singleton
+import godot.core.Godot
 import godot.gdnative.godot_method_bind
-import godot.gdnative.godot_method_bind_get_method
-import godot.gdnative.godot_variant_as_object
-import kotlinx.cinterop.COpaquePointer
-import kotlinx.cinterop.CPointer
-import kotlinx.cinterop.cstr
-import godot.core.Variant
+import kotlinx.cinterop.*
 
 
 internal fun getMethodBind(cl: String, m: String): CPointer<godot_method_bind> {
-    return godot_method_bind_get_method(cl, m) ?: throw NotImplementedError("Cannot get method bind for $m in $cl")
+    memScoped {
+        return Godot.gdnative.godot_method_bind_get_method!!.invoke(cl.cstr.getPointer(this), m.cstr.getPointer(this)) ?: throw NotImplementedError("Cannot get method bind for $m in $cl")
+    }
 }
 
 
 internal fun getSingleton(cl: String, clOld: String): COpaquePointer {
-    return godot_global_get_singleton(cl.cstr) ?: throw NullPointerException("Cannot get singleton instance for class $clOld")
-}
-
-
-internal fun <T: GodotObject> fromVariant(obj: T, other: Variant): T {
-    obj.setRawMemory(godot_variant_as_object(other.nativeValue)
-            ?: throw NullPointerException("godot_variant_as_object return null for $other"))
-    return obj
+    memScoped {
+        return Godot.gdnative.godot_global_get_singleton!!.invoke(cl.cstr.getPointer(this)) ?: throw NullPointerException("Cannot get singleton instance for class $clOld")
+    }
 }
