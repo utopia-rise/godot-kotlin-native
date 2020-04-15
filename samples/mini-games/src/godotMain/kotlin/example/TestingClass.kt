@@ -1,7 +1,7 @@
 package example
 
+import godot.GodotResource
 import godot.annotation.*
-import godot.core.GodotResource
 import godot.core.Object
 import godot.core.Variant
 import godot.core.signal
