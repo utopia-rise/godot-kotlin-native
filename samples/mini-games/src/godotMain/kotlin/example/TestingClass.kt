@@ -1,6 +1,6 @@
 package example
 
-import godot.GodotResource
+import godot.Resource
 import godot.annotation.*
 import godot.core.Object
 import godot.core.Variant
@@ -69,11 +69,11 @@ class TestingClass : Object() {
     var variantTest = Variant("test")
 
     @RegisterProperty
-    lateinit var resourceVisibleInEditor: GodotResource
+    lateinit var resourceVisibleInEditor: Resource
 
     @RegisterProperty(false)
-    var resourceNotVisibleInEditor: GodotResource = GodotResource()
+    var resourceNotVisibleInEditor: Resource = Resource()
 
 //    @RegisterProperty // <- when visible in editor...
-//    var resourceVisibleInEditorButInitialized: GodotResource = GodotResource() // <- ...should fail!
+//    var resourceVisibleInEditorButInitialized: Resource = Resource() // <- ...should fail!
 }

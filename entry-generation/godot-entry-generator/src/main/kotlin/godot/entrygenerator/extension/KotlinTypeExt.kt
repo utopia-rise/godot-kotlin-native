@@ -1,5 +1,6 @@
 package godot.entrygenerator.extension
 
+import org.jetbrains.kotlin.js.descriptorUtils.getJetTypeFqName
 import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.types.typeUtil.supertypes
 
@@ -9,10 +10,11 @@ fun KotlinType.isCoreType(): Boolean {
 }
 
 fun KotlinType.isResource(): Boolean {
-    return this.toString() == "GodotResource"
+    return this.getJetTypeFqName(false) == "godot.Resource"
         || this
         .supertypes()
-        .any { it.toString() == "GodotResource" }
+        .map { it.getJetTypeFqName(false) }
+        .any { it == "godot.Resource" }
 }
 
 private val coreTypes = listOf(
