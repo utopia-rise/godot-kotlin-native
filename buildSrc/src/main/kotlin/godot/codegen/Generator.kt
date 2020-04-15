@@ -58,8 +58,8 @@ object Generator {
                 """%M {
                             |    val args = %M<%T<%M>>(arguments.size)
                             |    for ((i,arg) in arguments.withIndex()) args[i] = %T.wrap(arg).handle.ptr
-                            |    val result = %T.gdnative.godot_method_bind_call(mb, inst, args, arguments.size, null)
-                            |    for (i in arguments.indices) %T.gdnative.godot_variant_destroy(args[i])
+                            |    val result = %T.gdnative.godot_method_bind_call!!.%M(mb, inst, args, arguments.size, null)
+                            |    for (i in arguments.indices) %T.gdnative.godot_variant_destroy!!.%M(args[i])
                             |    return %T(result)
                             |}
                             |""".trimMargin(),
@@ -69,7 +69,9 @@ object Generator {
                 MemberName("godot.gdnative", "godot_variant"),
                 ClassName("godot.core", "Variant"),
                 ClassName("godot.core", "Godot"),
+                MemberName("kotlinx.cinterop", "invoke"),
                 ClassName("godot.core", "Godot"),
+                MemberName("kotlinx.cinterop", "invoke"),
                 ClassName("godot.core", "Variant")
             )
             .build()

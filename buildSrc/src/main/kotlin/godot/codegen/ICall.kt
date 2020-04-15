@@ -100,8 +100,9 @@ class ICall(
         if (shouldReturn) {
             if (isPrimitive) {
                 codeBlockBuilder.add(
-                    "    %T.gdnative.godot_method_bind_ptrcall(mb, inst, args, retVar.%M)\n",
+                    "    %T.gdnative.godot_method_bind_ptrcall!!.%M(mb, inst, args, retVar.%M)\n",
                     ClassName("godot.core", "Godot"),
+                    MemberName("kotlinx.cinterop", "invoke"),
                     MemberName("kotlinx.cinterop", "ptr")
                 )
                 codeBlockBuilder.add(
@@ -110,8 +111,9 @@ class ICall(
                 )
             } else {
                 codeBlockBuilder.add(
-                    "    %T.gdnative.godot_method_bind_ptrcall(mb, inst, args, retVar)\n",
-                    ClassName("godot.core", "Godot")
+                    "    %T.gdnative.godot_method_bind_ptrcall!!.%M(mb, inst, args, retVar)\n",
+                    ClassName("godot.core", "Godot"),
+                    MemberName("kotlinx.cinterop", "invoke")
                 )
                 if (tree.isObjectOrItsChild(returnTypeClass.simpleName)) {
                     val typeManagerClass = ClassName("godot.core", "TypeManager")
@@ -137,8 +139,9 @@ class ICall(
             }
         } else {
             codeBlockBuilder.add(
-                "    %T.gdnative.godot_method_bind_ptrcall(mb, inst, args, null)\n",
-                ClassName("godot.core", "Godot")
+                "    %T.gdnative.godot_method_bind_ptrcall!!.%M(mb, inst, args, null)\n",
+                ClassName("godot.core", "Godot"),
+                MemberName("kotlinx.cinterop", "invoke")
             )
         }
 
