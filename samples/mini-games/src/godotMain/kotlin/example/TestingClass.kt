@@ -94,6 +94,12 @@ class TestingClass : Object() {
     var twoDimensionalArrayVariantArray = variantArrayOf(variantArrayOf(1, 2), variantArrayOf(3, 4))
 
     @RegisterProperty
+    var threeDimensionalArrayVariantArray = variantArrayOf(
+        variantArrayOf(variantArrayOf(1, 2), variantArrayOf(3, 4)),
+        variantArrayOf(variantArrayOf(5, 6), variantArrayOf(7, 8))
+    )
+
+    @RegisterProperty
     var twoDimensionalArrayArray = variantArrayOf(arrayOf(1, 2), arrayOf(3, 4))
 
     @RegisterProperty

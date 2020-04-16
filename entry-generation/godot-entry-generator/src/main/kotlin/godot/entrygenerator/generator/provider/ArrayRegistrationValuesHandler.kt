@@ -142,7 +142,6 @@ class ArrayRegistrationValuesHandler(
                     return getForConstructorCall(ref.constructedClass.fqNameSafe.asString(), arrayTypes)
                 } else if (ref is DeserializedSimpleFunctionDescriptor && ref.fqNameSafe.asString() == "godot.core.variantArrayOf") {
                     return "godot.core.VariantArray,${arrayTypes.first()}"
-
                 } else if (expression.getType(bindingContext)?.getJetTypeFqName(false) == "kotlin.Array") {
                     return "godot.core.VariantArray,${arrayTypes.first()}"
                 }
