@@ -17,6 +17,14 @@ fun KotlinType.isResource(): Boolean {
         .any { it == "godot.Resource" }
 }
 
+fun KotlinType.isVariantArray(): Boolean {
+    return this.getJetTypeFqName(false) == "godot.core.VariantArray"
+        || this
+        .supertypes()
+        .map { it.getJetTypeFqName(false) }
+        .any { it == "godot.core.VariantArray" }
+}
+
 private val coreTypes = listOf(
     "GDArray",
     "Basis",

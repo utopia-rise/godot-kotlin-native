@@ -16,7 +16,7 @@ object TypeToVariantAsClassNameMapper {
             "Boolean" -> ClassName("godot.core.Variant.Type", "BOOL")
             "String" -> ClassName("godot.core.Variant.Type", "STRING")
             "RID" -> ClassName("godot.core.Variant.Type", "_RID")
-            "GDArray" -> ClassName("godot.core.Variant.Type", "ARRAY")
+            "VariantArray" -> ClassName("godot.core.Variant.Type", "ARRAY")
             "Vector2", "Rect2", "Vector3", "Transform2D", "Plane", "Quat", "Rect3", "Basis", "Transform", "Color", "Dictionary" ->
                 ClassName("godot.core.Variant.Type", typeAsString.toUpperCase())
             "NodePath" -> ClassName("godot.core.Variant.Type", "NODE_PATH")

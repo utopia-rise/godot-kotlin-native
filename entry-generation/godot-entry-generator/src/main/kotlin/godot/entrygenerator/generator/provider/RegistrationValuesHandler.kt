@@ -1,20 +1,24 @@
 package godot.entrygenerator.generator.provider
 
 import com.squareup.kotlinpoet.ClassName
+import com.squareup.kotlinpoet.MemberName
 import godot.entrygenerator.extension.assignmentPsi
 import godot.entrygenerator.extension.getAnnotationValue
 import godot.entrygenerator.extension.getPropertyHintAnnotation
 import godot.entrygenerator.model.REGISTER_PROPERTY_ANNOTATION
 import godot.entrygenerator.model.REGISTER_PROPERTY_ANNOTATION_VISIBLE_IN_EDITOR_ARGUMENT
 import org.jetbrains.kotlin.descriptors.PropertyDescriptor
+import org.jetbrains.kotlin.js.descriptorUtils.getJetTypeFqName
 import org.jetbrains.kotlin.js.resolve.diagnostics.findPsi
 import org.jetbrains.kotlin.psi.*
 import org.jetbrains.kotlin.psi.psiUtil.containingClassOrObject
 import org.jetbrains.kotlin.psi.psiUtil.referenceExpression
 import org.jetbrains.kotlin.resolve.BindingContext
 import org.jetbrains.kotlin.resolve.bindingContextUtil.getReferenceTargets
+import org.jetbrains.kotlin.resolve.calls.callUtil.getType
 import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
 import org.jetbrains.kotlin.serialization.deserialization.descriptors.DeserializedClassConstructorDescriptor
+import org.jetbrains.kotlin.serialization.deserialization.descriptors.DeserializedSimpleFunctionDescriptor
 
 abstract class RegistrationValuesHandler(
     val propertyDescriptor: PropertyDescriptor,
@@ -81,14 +85,38 @@ abstract class RegistrationValuesHandler(
                     val className = fqName.shortName().asString()
                     return "%T.%L" to arrayOf(ClassName(pkg, className), expression.selectorExpression!!.text)
                 }
+            } else if (receiver.getType(bindingContext)?.getJetTypeFqName(false) == "kotlin.Array") {
+                //arrayOf() is receiver
+                val transformedReceiverArgs = getDefaultValueExpression(receiver)
+                val expressionRef = expression
+                    .selectorExpression
+                    ?.referenceExpression()
+                    ?.getReferenceTargets(bindingContext)
+                    ?.firstOrNull()
+
+                if (transformedReceiverArgs != null && expressionRef?.fqNameSafe?.asString() == "godot.core.toVariantArray") {
+                    val fqName = expressionRef.fqNameSafe
+                    val pkg = fqName.parent().asString()
+                    val functionName = fqName.shortName().asString()
+
+                    val params = mutableListOf<Any>()
+                    params.addAll(transformedReceiverArgs.second)
+                    params.add(MemberName(pkg, functionName))
+
+                    return "${transformedReceiverArgs.first}.%M()" to params.toTypedArray()
+                }
             }
         } else if (expression is KtCallExpression) {
-            val ref = expression.referenceExpression()?.getReferenceTargets(bindingContext)
+            val ref = expression
+                .referenceExpression()
+                ?.getReferenceTargets(bindingContext)
                 ?.firstOrNull()
 
             if (ref != null) {
                 val psi = ref.findPsi()
-                val transformedArgs = expression.valueArguments.mapNotNull { it.getArgumentExpression() }
+                val transformedArgs = expression
+                    .valueArguments
+                    .mapNotNull { it.getArgumentExpression() }
                     .map { getDefaultValueExpression(it) }
 
                 // if an arg is null, then it means that it contained a non static reference
@@ -117,6 +145,20 @@ abstract class RegistrationValuesHandler(
                     params.add(ClassName(pkg, className))
                     transformedArgs.forEach { params.addAll(it!!.second) }
                     return "%T(${transformedArgs.joinToString { it!!.first }})" to params.toTypedArray()
+                } else if (ref is DeserializedSimpleFunctionDescriptor && ref.fqNameSafe.asString() == "godot.core.variantArrayOf") {
+                    val fqName = ref.fqNameSafe
+                    val pkg = fqName.parent().asString()
+                    val functionName = fqName.shortName().asString()
+                    val params = mutableListOf<Any>()
+                    params.add(MemberName(pkg, functionName))
+                    transformedArgs.forEach { params.addAll(it!!.second) }
+                    return "%M(${transformedArgs.joinToString { it!!.first }})" to params.toTypedArray()
+                } else if (expression.getType(bindingContext)?.getJetTypeFqName(false) == "kotlin.Array") {
+                    //arrayOf -> ref is null in this case
+                    val params = mutableListOf<Any>()
+                    params.add(expression.children.first().text)
+                    transformedArgs.forEach { params.addAll(it!!.second) }
+                    return "%L(${transformedArgs.joinToString { it!!.first }})" to params.toTypedArray()
                 }
             }
         }

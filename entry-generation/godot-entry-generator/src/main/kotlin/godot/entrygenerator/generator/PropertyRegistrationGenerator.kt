@@ -70,7 +70,7 @@ object PropertyRegistrationGenerator {
 
         registerClassControlFlow
             .addStatement(
-                "property(%S,·%L,·%T,·$defaultValueStringTemplate,·%L,·%T,·%T,·%S)",
+                "property(%S,·%L,·%T,·${defaultValueStringTemplate.replace(" ", "·")},·%L,·%T,·%T,·%S)",
                 propertyDescriptor.name,
                 className.member(propertyDescriptor.name.asString()).reference(),
                 TypeToVariantAsClassNameMapper.mapTypeToVariantAsClassName(

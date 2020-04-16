@@ -2,9 +2,7 @@ package example
 
 import godot.Resource
 import godot.annotation.*
-import godot.core.Object
-import godot.core.Variant
-import godot.core.signal
+import godot.core.*
 import godot.registration.RPCMode
 import godot.registration.Range
 
@@ -76,4 +74,19 @@ class TestingClass : Object() {
 
 //    @RegisterProperty // <- when visible in editor...
 //    var resourceVisibleInEditorButInitialized: Resource = Resource() // <- ...should fail!
+
+    @RegisterProperty
+    var variantArrayAny = variantArrayOf(1, 2)
+
+    @RegisterProperty
+    var variantArrayVariant = variantArrayOf(Variant(1), Variant(2))
+
+    @RegisterProperty
+    var twoDimensionalArrayVariantArray = variantArrayOf(variantArrayOf(1, 2), variantArrayOf(3, 4))
+
+    @RegisterProperty
+    var twoDimensionalArrayArray = variantArrayOf(arrayOf(1, 2), arrayOf(3, 4))
+
+    @RegisterProperty
+    var arrayToVariantArray = arrayOf(1, 2).toVariantArray()
 }

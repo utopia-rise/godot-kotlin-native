@@ -2,6 +2,7 @@ package godot.entrygenerator.generator.provider
 
 import godot.entrygenerator.extension.isCoreType
 import godot.entrygenerator.extension.isResource
+import godot.entrygenerator.extension.isVariantArray
 import org.jetbrains.kotlin.builtins.KotlinBuiltIns
 import org.jetbrains.kotlin.descriptors.PropertyDescriptor
 import org.jetbrains.kotlin.resolve.BindingContext
@@ -29,6 +30,10 @@ object DefaultValueHandlerProvider {
                 bindingContext
             )
             propertyDescriptor.type.isResource() -> ResourceRegistrationValuesHandler(
+                propertyDescriptor,
+                bindingContext
+            )
+            propertyDescriptor.type.isVariantArray() -> ArrayRegistrationValuesHandler(
                 propertyDescriptor,
                 bindingContext
             )
