@@ -40,8 +40,8 @@ abstract class RegistrationValuesHandler(
         }
     }
 
-    fun getDefaultValue(): Pair<String, Array<Any>> {
-        if (propertyDescriptor.isLateInit) {
+    open fun getDefaultValue(): Pair<String, Array<Any>> {
+        if (propertyDescriptor.isLateInit || !isVisibleInEditor()) {
             return "%L" to arrayOf("null")
         }
         val defaultValue = getDefaultValueExpression(propertyDescriptor.assignmentPsi)
@@ -52,6 +52,14 @@ abstract class RegistrationValuesHandler(
         params.add(ClassName("godot.core", "Variant"))
         params.addAll(defaultValue.second)
         return "%T(${defaultValue.first})" to params.toTypedArray()
+    }
+
+    internal fun isVisibleInEditor(): Boolean {
+        return propertyDescriptor.annotations.getAnnotationValue(
+            REGISTER_PROPERTY_ANNOTATION,
+            REGISTER_PROPERTY_ANNOTATION_VISIBLE_IN_EDITOR_ARGUMENT,
+            true
+        )
     }
 
     private fun getDefaultValueExpression(expression: KtExpression): Pair<String, Array<Any>>? {
@@ -92,7 +100,7 @@ abstract class RegistrationValuesHandler(
                     }
                 }
 
-                if (psi is KtConstructor<*> && !hasNullArg ) {
+                if (psi is KtConstructor<*> && !hasNullArg) {
                     val fqName = psi.containingClassOrObject!!.fqName
                     require(fqName != null)
                     val pkg = fqName.parent().asString()
