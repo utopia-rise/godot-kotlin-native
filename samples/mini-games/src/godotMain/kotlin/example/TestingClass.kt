@@ -79,7 +79,13 @@ class TestingClass : Object() {
     var variantArray = VariantArray(arrayOf(1, 2))
 
     @RegisterProperty
+    var variantArrayDifferentTypes = VariantArray(arrayOf(1, "a")) //should not generate hint string
+
+    @RegisterProperty
     var variantArrayAny = variantArrayOf(1, 2)
+
+    @RegisterProperty
+    var variantArrayAnyDifferentTypes = variantArrayOf(1, 2, "a", "b") //should not generate hint string
 
     @RegisterProperty
     var variantArrayVariant = variantArrayOf(Variant(1), Variant(2))
@@ -91,5 +97,16 @@ class TestingClass : Object() {
     var twoDimensionalArrayArray = variantArrayOf(arrayOf(1, 2), arrayOf(3, 4))
 
     @RegisterProperty
+    var twoDimensionalArrayArrayDifferentTypes =
+        variantArrayOf(arrayOf(1, 2), arrayOf("a", "b")) //should not generate hint string
+
+    @RegisterProperty
     var arrayToVariantArray = arrayOf(1, 2).toVariantArray()
+
+    @RegisterProperty
+    var kotlin2dArrayToVariantArray = arrayOf(arrayOf(1, 2), arrayOf(3, 4)).toVariantArray()
+
+    @RegisterProperty
+    var kotlin2dArrayToVariantArrayDifferentTypes =
+        arrayOf(arrayOf(1, 2), arrayOf("a", "b")).toVariantArray() //should not generate hint string
 }
