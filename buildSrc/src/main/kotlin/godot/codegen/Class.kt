@@ -209,16 +209,10 @@ class Class(
             .callThisConstructor("null")
             .addStatement(
                 """if (shouldInit()) {
-                            |    %M("$oldName")?.let {
-                            |        this.ptr = it.%M<%T<()->%T>>().%M()
-                            |    } ?: throw NotImplementedError("No constructor for $name in Godot")
-                            |}
-                            |""".trimMargin(),
-                MemberName("godot.gdnative", "godot_get_class_constructor"),
-                MemberName("kotlinx.cinterop", "reinterpret"),
-                ClassName("kotlinx.cinterop", "CFunction"),
-                ClassName("kotlinx.cinterop", "COpaquePointer"),
-                MemberName("kotlinx.cinterop", "invoke")
+                   |    this.ptr = %M("$name", "$oldName")
+                   |}
+                   |""".trimMargin(),
+                MemberName("godot.internal.utils", "getConstructor")
             )
 
         if (!isInstanciable) noArgConstructor.addModifiers(KModifier.INTERNAL)
