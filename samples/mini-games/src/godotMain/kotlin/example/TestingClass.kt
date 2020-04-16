@@ -76,6 +76,9 @@ class TestingClass : Object() {
 //    var resourceVisibleInEditorButInitialized: Resource = Resource() // <- ...should fail!
 
     @RegisterProperty
+    var variantArray = VariantArray(arrayOf(1, 2))
+
+    @RegisterProperty
     var variantArrayAny = variantArrayOf(1, 2)
 
     @RegisterProperty
