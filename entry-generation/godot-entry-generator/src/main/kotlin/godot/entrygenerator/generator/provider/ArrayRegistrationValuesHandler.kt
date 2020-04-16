@@ -3,6 +3,9 @@ package godot.entrygenerator.generator.provider
 import com.squareup.kotlinpoet.ClassName
 import godot.entrygenerator.exceptions.WrongAnnotationUsageException
 import godot.entrygenerator.extension.assignmentPsi
+import godot.entrygenerator.extension.getAsGodotPrimitive
+import godot.entrygenerator.extension.isGodotPrimitive
+import godot.entrygenerator.extension.isString
 import org.jetbrains.kotlin.descriptors.PropertyDescriptor
 import org.jetbrains.kotlin.js.descriptorUtils.getJetTypeFqName
 import org.jetbrains.kotlin.js.resolve.diagnostics.findPsi
@@ -30,13 +33,33 @@ class ArrayRegistrationValuesHandler(
         }
     }
 
-    //Pair(propertyDescriptor.assignmentPsi.text, getHintString(propertyDescriptor.assignmentPsi))
     override fun getHintString(): String {
-        return getHintString(propertyDescriptor.assignmentPsi) ?: ""
+        return mapFqNameToHintStringSupportedType(
+            getCommaSeparatedFqNameTypeString(propertyDescriptor.assignmentPsi) ?: ""
+        )
+    }
+
+    private fun mapFqNameToHintStringSupportedType(commaSeparatedTypes: String): String {
+        val godotTypes = commaSeparatedTypes
+            .split(",")
+            .map {
+                when {
+                    it == "godot.core.VariantArray" -> "Array"
+                    it.isString() -> it.split(".").last()
+                    it.isGodotPrimitive() -> it.getAsGodotPrimitive()
+                    else -> null
+                }
+            }
+
+        return if (godotTypes.any { it == null }) {
+            ""
+        } else {
+            godotTypes.joinToString(",")
+        }
     }
 
     //TODO: this will return the hintString for the array
-    private fun getHintString(expression: KtExpression): String? {
+    private fun getCommaSeparatedFqNameTypeString(expression: KtExpression): String? {
         if (expression is KtConstantExpression) {
             return expression.getType(bindingContext)?.getJetTypeFqName(false)
         } else if (expression is KtStringTemplateExpression && !expression.hasInterpolation()) {
@@ -58,7 +81,7 @@ class ArrayRegistrationValuesHandler(
                 }
             } else if (receiver.getType(bindingContext)?.getJetTypeFqName(false) == "kotlin.Array") {
                 //arrayOf() is receiver
-                val receiverType = getHintString(receiver)
+                val receiverType = getCommaSeparatedFqNameTypeString(receiver)
                 val expressionRef = expression
                     .selectorExpression
                     ?.referenceExpression()
@@ -73,6 +96,7 @@ class ArrayRegistrationValuesHandler(
                         "godot.core.VariantArray,${receiverType}"
                     }
                     else -> {
+                        //TODO: message collector print warning that no hint string is created because of unknown receiver type
                         null
                     }
                 }
@@ -94,10 +118,11 @@ class ArrayRegistrationValuesHandler(
                 val arrayTypes = expression
                     .valueArguments
                     .mapNotNull { it.getArgumentExpression() }
-                    .map { getHintString(it) }
+                    .map { getCommaSeparatedFqNameTypeString(it) }
                     .distinct()
 
                 if (arrayTypes.size != 1) {
+                    //TODO: message collector print warning that no hint string is created because of different types in array
                     return null
                 }
 
@@ -111,45 +136,9 @@ class ArrayRegistrationValuesHandler(
                 }
 
                 if (psi is KtConstructor<*> && !hasNullArg) {
-                    return when {
-                        psi.containingClassOrObject!!.fqName?.asString() == "godot.core.VariantArray" -> {
-                            val types = arrayTypes
-                                .first()
-                                ?.replaceFirst(
-                                    "godot.core.VariantArray",
-                                    ""
-                                ) //replace first to accumulate for multidimensional arrays
-                                ?.removePrefix(",")
-
-                            "godot.core.VariantArray,$types"
-                        }
-                        psi.containingClassOrObject!!.fqName?.asString() == "godot.core.Variant" -> {
-                            return arrayTypes.first()
-                        }
-                        else -> {
-                            "godot.core.Object"
-                        }
-                    }
+                    return getForConstructorCall(psi.containingClassOrObject!!.fqName?.asString(), arrayTypes)
                 } else if (ref is DeserializedClassConstructorDescriptor && !hasNullArg) {
-                    return when {
-                        ref.constructedClass.fqNameSafe.asString() == "godot.core.VariantArray" -> {
-                            val types = arrayTypes
-                                .first()
-                                ?.replaceFirst(
-                                    "godot.core.VariantArray",
-                                    ""
-                                ) //replace first to accumulate for multidimensional arrays
-                                ?.removePrefix(",")
-
-                            "godot.core.VariantArray,$types"
-                        }
-                        ref.constructedClass.fqNameSafe.asString() == "godot.core.Variant" -> {
-                            return arrayTypes.first()
-                        }
-                        else -> {
-                            "godot.core.Object"
-                        }
-                    }
+                    return getForConstructorCall(ref.constructedClass.fqNameSafe.asString(), arrayTypes)
                 } else if (ref is DeserializedSimpleFunctionDescriptor && ref.fqNameSafe.asString() == "godot.core.variantArrayOf") {
                     return "godot.core.VariantArray,${arrayTypes.first()}"
 
@@ -158,6 +147,23 @@ class ArrayRegistrationValuesHandler(
                 }
             }
         }
+        //TODO: message collector print warning that no hint string is created because of unknown declaration
         return null
+    }
+
+    private fun getForConstructorCall(fqName: String?, arrayTypes: List<String?>): String? {
+        val types = arrayTypes
+            .first()
+            ?.replaceFirst(
+                "godot.core.VariantArray",
+                ""
+            ) //replace first to accumulate for multidimensional arrays
+            ?.removePrefix(",")
+
+        return when (fqName) {
+            "godot.core.VariantArray" -> "godot.core.VariantArray,$types"
+            "godot.core.Variant" -> arrayTypes.first()
+            else -> "godot.core.Object"
+        }
     }
 }
