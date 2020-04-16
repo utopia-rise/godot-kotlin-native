@@ -66,7 +66,7 @@ abstract class RegistrationValuesHandler(
         )
     }
 
-    private fun getDefaultValueExpression(expression: KtExpression): Pair<String, Array<Any>>? {
+    internal fun getDefaultValueExpression(expression: KtExpression): Pair<String, Array<Any>>? {
         if (expression is KtConstantExpression) {
             return "%L" to arrayOf(expression.text)
         } else if (expression is KtStringTemplateExpression && !expression.hasInterpolation()) {
