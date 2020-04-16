@@ -47,6 +47,7 @@ class ArrayRegistrationValuesHandler(
                     it == "godot.core.VariantArray" -> "Array"
                     it.isString() -> it.split(".").last()
                     it.isGodotPrimitive() -> it.getAsGodotPrimitive()
+                    //TODO: add more godot registrable types once they are implemented (ex: NodePath)
                     else -> null
                 }
             }
@@ -58,7 +59,7 @@ class ArrayRegistrationValuesHandler(
         }
     }
 
-    //TODO: this will return the hintString for the array
+    //TODO: replace comma separated string with some kind of collection
     private fun getCommaSeparatedFqNameTypeString(expression: KtExpression): String? {
         if (expression is KtConstantExpression) {
             return expression.getType(bindingContext)?.getJetTypeFqName(false)
@@ -163,6 +164,7 @@ class ArrayRegistrationValuesHandler(
         return when (fqName) {
             "godot.core.VariantArray" -> "godot.core.VariantArray,$types"
             "godot.core.Variant" -> arrayTypes.first()
+            //TODO: add more godot registrable types once they are implemented (ex: NodePath)
             else -> "godot.core.Object"
         }
     }
