@@ -254,7 +254,7 @@ class Class(
             .builder(
                 "ptr",
                 cOpaquePointerClass,
-                KModifier.PRIVATE, KModifier.FINAL
+                KModifier.FINAL
             )
             .delegate("lazy{ %M(\"$name\", \"$oldName\") }", MemberName("godot.internal.utils", "getSingleton"))
             .build()
