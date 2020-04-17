@@ -40,13 +40,12 @@ class ArrayRegistrationValuesHandler(
     }
 
     private fun mapFqNameToHintStringSupportedTypeWithAdditionalTypeInfo(
-        typesAsFqStringWithAdditionalTypeInfo: Pair<List<String?>, LinkedHashSet<String>>
+        typesAsFqStringWithAdditionalTypeInfo: List<String?>
     ): String {
-        if (typesAsFqStringWithAdditionalTypeInfo.first.any { it == null }) {
+        if (typesAsFqStringWithAdditionalTypeInfo.any { it == null }) {
             return ""
         }
         val godotTypes = typesAsFqStringWithAdditionalTypeInfo
-            .first
             .map { requireNotNull(it) { "Already did a nullcheck on type strings. Still one was null. Somewhere the list must be altered. Prevent this!" } }
             .map {
                 when {
@@ -60,23 +59,19 @@ class ArrayRegistrationValuesHandler(
         return if (godotTypes.any { it == null }) {
             ""
         } else {
-            val typesAdAdditionalTypeInfos = mutableListOf<String>()
-            typesAdAdditionalTypeInfos.addAll(godotTypes.map { it!! })
-            typesAdAdditionalTypeInfos.addAll(typesAsFqStringWithAdditionalTypeInfo.second)
-            typesAdAdditionalTypeInfos.joinToString(",")
+            godotTypes.joinToString(",")
         }
     }
 
-    private fun getArrayTypesAsFqStringsWithAdditionalTypeInformations(expression: KtExpression): Pair<MutableList<String?>, LinkedHashSet<String>> {
+    private fun getArrayTypesAsFqStringsWithAdditionalTypeInformations(expression: KtExpression): List<String?> {
         val types = mutableListOf<String?>()
-        val additionalTypeInfo = linkedSetOf<String>()
 
         if (expression is KtConstantExpression) {
             types.add(expression.getType(bindingContext)?.getJetTypeFqName(false))
-            return types to additionalTypeInfo
+            return types
         } else if (expression is KtStringTemplateExpression && !expression.hasInterpolation()) {
             types.add(expression.getType(bindingContext)?.builtIns?.string?.fqNameSafe?.asString())
-            return types to additionalTypeInfo
+            return types
         } else if (expression is KtDotQualifiedExpression) {
             val receiver = expression.receiverExpression
             val receiverRef = receiver.getReferenceTargets(bindingContext).firstOrNull()
@@ -85,20 +80,8 @@ class ArrayRegistrationValuesHandler(
                 val psi = receiverRef.findPsi()
                 // TODO: receiver ref might be a deserialized descriptor, fix this once we have core classes
                 if (psi is KtClass && psi.isEnum()) {
-                    val enumStrings = expression
-                        .getType(bindingContext)
-                        ?.memberScope
-                        ?.getVariableNames()
-                        ?.map { it.asString() }
-                        ?.filter { it != "name" && it != "ordinal" }
-                        ?.map { "\"$it\"" }
-
-                    if (enumStrings != null) {
-                        additionalTypeInfo.addAll(enumStrings)
-                    }
-                    types.add("kotlin.Int")
-
-                    return types to additionalTypeInfo
+                    //noop -> entryGeneration function does the hint generation
+                    return listOf()
                 }
             } else if (receiver.getType(bindingContext)?.getJetTypeFqName(false) == "kotlin.Array") {
                 //arrayOf() is receiver
@@ -109,21 +92,19 @@ class ArrayRegistrationValuesHandler(
                     ?.getReferenceTargets(bindingContext)
                     ?.firstOrNull()
 
-                additionalTypeInfo.addAll(receiverTypes.second)
-
                 return when {
-                    receiverTypes.first.isNotEmpty() && expressionRef?.fqNameSafe?.asString() == "godot.core.toVariantArray" -> {
-                        types.addAll(receiverTypes.first)
-                        types to additionalTypeInfo
+                    receiverTypes.isNotEmpty() && expressionRef?.fqNameSafe?.asString() == "godot.core.toVariantArray" -> {
+                        types.addAll(receiverTypes)
+                        types
                     }
-                    receiverTypes.first.isNotEmpty() -> {
+                    receiverTypes.isNotEmpty() -> {
                         types.add("godot.core.VariantArray")
-                        types.addAll(receiverTypes.first)
-                        types to additionalTypeInfo
+                        types.addAll(receiverTypes)
+                        types
                     }
                     else -> {
                         //TODO: message collector print warning that no hint string is created because of unknown receiver type
-                        types to additionalTypeInfo
+                        types
                     }
                 }
             }
@@ -146,19 +127,13 @@ class ArrayRegistrationValuesHandler(
                     .mapNotNull { it.getArgumentExpression() }
                     .map { getArrayTypesAsFqStringsWithAdditionalTypeInformations(it) }
                     .map {
-                        it.first.distinct()
-                        it.second.distinct()
-                        it
+                        it.distinct()
                     }
                     .distinct()
 
-                arrayTypes.forEach {
-                    additionalTypeInfo.addAll(it.second)
-                }
-
                 if (arrayTypes.size != 1) {
                     //TODO: message collector print warning that no hint string is created because of different types in array
-                    return mutableListOf<String?>("") to linkedSetOf()
+                    return mutableListOf<String?>("")
                 }
 
                 // if an arg is null, then it means that it contained a non static reference
@@ -174,31 +149,31 @@ class ArrayRegistrationValuesHandler(
                     types.addAll(
                         getForConstructorCall(
                             psi.containingClassOrObject!!.fqName?.asString(),
-                            arrayTypes.first().first
+                            arrayTypes.first()
                         )
                     )
-                    return types to additionalTypeInfo
+                    return types
                 } else if (ref is DeserializedClassConstructorDescriptor && !hasNullArg) {
                     types.addAll(
                         getForConstructorCall(
                             ref.constructedClass.fqNameSafe.asString(),
-                            arrayTypes.first().first
+                            arrayTypes.first()
                         )
                     )
-                    return types to additionalTypeInfo
+                    return types
                 } else if (ref is DeserializedSimpleFunctionDescriptor && ref.fqNameSafe.asString() == "godot.core.variantArrayOf") {
                     types.add("godot.core.VariantArray")
-                    types.addAll(arrayTypes.first().first)
-                    return types to additionalTypeInfo
+                    types.addAll(arrayTypes.first())
+                    return types
                 } else if (expression.getType(bindingContext)?.getJetTypeFqName(false) == "kotlin.Array") {
                     types.add("godot.core.VariantArray")
-                    types.addAll(arrayTypes.first().first)
-                    return types to additionalTypeInfo
+                    types.addAll(arrayTypes.first())
+                    return types
                 }
             }
         }
         //TODO: message collector print warning that no hint string is created because of unknown declaration
-        return types to additionalTypeInfo
+        return types
     }
 
     private fun getForConstructorCall(fqName: String?, arrayTypes: List<String?>): List<String?> {
