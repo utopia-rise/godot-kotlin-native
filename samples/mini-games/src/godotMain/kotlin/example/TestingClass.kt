@@ -63,6 +63,9 @@ class TestingClass : Object() {
     @RegisterProperty
     var flag: Boolean = false
 
+//    @RegisterProperty
+//    val flagImmutable: Boolean = false // <- this should fail as it's immutable
+
     @RegisterProperty
     var variantTest = Variant("test")
 

@@ -42,6 +42,9 @@ abstract class RegistrationValuesHandler(
         ) {
             throw IllegalStateException("You added the type hint annotation ${propertyHintAnnotation.fqName} to the property ${propertyDescriptor.name}. But the @RegisterProperty annotation is either not present or the isVisibleInEditor flag is not set to true")
         }
+        if (!propertyDescriptor.isVar) {
+            throw IllegalStateException("You try to register the immutable property ${propertyDescriptor.fqNameSafe} with @RegisterProperty. This is not supported! Each property that you register has to be mutable. Use var or lateinit var.")
+        }
     }
 
     open fun getDefaultValue(): Pair<String, Array<Any>> {
