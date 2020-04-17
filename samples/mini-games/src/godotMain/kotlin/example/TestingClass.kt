@@ -118,4 +118,10 @@ class TestingClass : Object() {
     @RegisterProperty
     var kotlin2dArrayToVariantArrayDifferentTypes =
         arrayOf(arrayOf(1, 2), arrayOf("a", "b")).toVariantArray() //should not generate hint string
+
+    @RegisterProperty
+    var enumArray = variantArrayOf(TestEnum.ENUM1, TestEnum.ENUM2)
+
+    @RegisterProperty
+    var enumArray2d = variantArrayOf(arrayOf(TestEnum.ENUM1, TestEnum.ENUM2), arrayOf(TestEnum.ENUM1, TestEnum.ENUM2))
 }
