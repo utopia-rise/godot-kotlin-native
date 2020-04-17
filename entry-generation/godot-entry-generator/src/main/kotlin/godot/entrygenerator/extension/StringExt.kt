@@ -21,7 +21,7 @@ fun String.getAsGodotPrimitive() =
         "kotlin.Float" -> "float"
         "kotlin.Double" -> "float"
         "kotlin.Boolean" -> "bool"
-        "kotlin.Byte" -> "byte" //TODO: don't know the correct type
+        "kotlin.Byte" -> "int"
         "kotlin.Short" -> "int"
         else -> null
     }

@@ -1,28 +1,39 @@
 package godot.core
 
-class VariantArray {
+import godot.gdnative.godot_array
+import kotlinx.cinterop.CValue
 
-    constructor()
-    constructor(elements: Array<out Any>)
-    constructor(elements: Array<out Variant>)
+class VariantArray<T>(val value: CValue<godot_array>) : AbstractMutableList<T>() {
+    constructor(): this(new())
 
-    fun append(value: Variant) {}
-
-    operator fun get(index: Int): Variant {
-        TODO()
+    override fun add(index: Int, element: T) {
+        TODO("Not yet implemented")
     }
 
-    fun size(): Int {
-        TODO()
+    override fun removeAt(index: Int): T {
+        TODO("Not yet implemented")
+    }
+
+    override fun set(index: Int, element: T): T {
+        TODO("Not yet implemented")
+    }
+
+    override val size: Int
+        get() = TODO("Not yet implemented")
+
+    override fun get(index: Int): T {
+        TODO("Not yet implemented")
+    }
+
+    companion object {
+        internal fun new(): CValue<godot_array> {
+            TODO()
+        }
     }
 }
 
-fun variantArrayOf(vararg elements: Variant): VariantArray =
-    if (elements.isEmpty()) VariantArray() else VariantArray(elements)
-
-fun variantArrayOf(vararg elements: Any): VariantArray =
-    if (elements.isEmpty()) VariantArray() else VariantArray(elements)
-
-fun variantArrayOf(array1: VariantArray, array2: VariantArray) = VariantArray()
-fun <T> variantArrayOf(array1: Array<T>, array2: Array<T>) = VariantArray()
-fun <T> Array<T>.toVariantArray() = VariantArray()
+fun <T> variantArrayOf(vararg elements: T): VariantArray<T> {
+    return VariantArray<T>().also {
+        it.addAll(elements)
+    }
+}

@@ -1,5 +1,6 @@
 package godot.entrygenerator.extension
 
+import org.jetbrains.kotlin.builtins.KotlinBuiltIns
 import org.jetbrains.kotlin.js.descriptorUtils.getJetTypeFqName
 import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.types.typeUtil.supertypes
@@ -23,6 +24,16 @@ fun KotlinType.isVariantArray(): Boolean {
         .supertypes()
         .map { it.getJetTypeFqName(false) }
         .any { it == "godot.core.VariantArray" }
+}
+
+fun KotlinType.isCompatibleList(): Boolean {
+    return when {
+        KotlinBuiltIns.isListOrNullableList(this)
+            || KotlinBuiltIns.isArray(this)
+            || KotlinBuiltIns.isPrimitiveArray(this) -> true
+        getJetTypeFqName(false) == "godot.core.VariantArray" -> true
+        else -> false
+    }
 }
 
 private val coreTypes = listOf(
