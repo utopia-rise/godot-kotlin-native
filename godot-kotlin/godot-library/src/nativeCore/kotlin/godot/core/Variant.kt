@@ -29,6 +29,10 @@ class Variant (val handle: CValue<godot_variant>) {
         TODO()
     }
 
+    fun asVariantArray(): VariantArray {
+        TODO()
+    }
+
     companion object {
         private fun new(): CValue<godot_variant> {
             TODO()

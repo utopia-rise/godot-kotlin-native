@@ -7,6 +7,14 @@ class VariantArray {
     constructor(elements: Array<out Variant>)
 
     fun append(value: Variant) {}
+
+    operator fun get(index: Int): Variant {
+        TODO()
+    }
+
+    fun size(): Int {
+        TODO()
+    }
 }
 
 fun variantArrayOf(vararg elements: Variant): VariantArray =

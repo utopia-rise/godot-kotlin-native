@@ -137,4 +137,26 @@ class ClassBuilder<T : Object> internal constructor(val classHandle: ClassHandle
             enumValues<K>().joinToString { it.name }
         )
     }
+
+    inline fun <reified K : Enum<K>> enumArrayProperty(
+        name: String,
+        property: KMutableProperty1<T, VariantArray>,
+        default: List<K> = emptyList(),
+        isVisibleInEditor: Boolean = true,
+        rpcMode: RPCMode
+    ) {
+        val variantArray = VariantArray()
+        default.forEach { variantArray.append(Variant(it.ordinal)) }
+        val propertyHandler = MutablePropertyHandler(property)
+        classHandle.registerProperty(
+            name,
+            StableRef.create(propertyHandler).asCPointer(),
+            Variant.Type.INT,
+            Variant(default),
+            isVisibleInEditor,
+            rpcMode,
+            godot_property_hint.GODOT_PROPERTY_HINT_ENUM,
+            "int,${enumValues<K>().joinToString { it.name }}"
+        )
+    }
 }
