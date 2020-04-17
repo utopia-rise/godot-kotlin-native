@@ -33,7 +33,7 @@ object DefaultValueHandlerProvider {
                 propertyDescriptor,
                 bindingContext
             )
-            propertyDescriptor.type.isCompatibleList() -> Array2RegistrationValuesHandler(
+            propertyDescriptor.type.isCompatibleList() -> ArrayRegistrationValuesHandler(
                 propertyDescriptor,
                 bindingContext
             )

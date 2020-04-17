@@ -3,7 +3,6 @@ package godot.entrygenerator.generator
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.MemberName.Companion.member
-import godot.entrygenerator.extension.assignmentPsi
 import godot.entrygenerator.extension.getAnnotationValue
 import godot.entrygenerator.extension.isCompatibleList
 import godot.entrygenerator.generator.provider.DefaultValueHandlerProvider
@@ -13,7 +12,6 @@ import godot.entrygenerator.model.REGISTER_PROPERTY_ANNOTATION
 import godot.entrygenerator.model.REGISTER_PROPERTY_ANNOTATION_RPC_MODE_ARGUMENT
 import godot.entrygenerator.model.REGISTER_PROPERTY_ANNOTATION_VISIBLE_IN_EDITOR_ARGUMENT
 import org.jetbrains.kotlin.descriptors.PropertyDescriptor
-import org.jetbrains.kotlin.js.descriptorUtils.getJetTypeFqName
 import org.jetbrains.kotlin.js.resolve.diagnostics.findPsi
 import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
@@ -76,7 +74,7 @@ object PropertyRegistrationGenerator {
         val (defaultValueStringTemplate, defaultValueStringTemplateValues) = defaultValueProvider.getDefaultValue()
 
         registerClassControlFlow.addStatement(
-            "enumListProperty(%S,·%L,·$defaultValueStringTemplate,·%L,·%T)",
+            "enumListProperty(%S,·%L,·${defaultValueStringTemplate.replace(" ", "·")},·%L,·%T)",
             propertyDescriptor.name,
             className.member(propertyDescriptor.name.asString()).reference(),
             *defaultValueStringTemplateValues,
@@ -97,7 +95,7 @@ object PropertyRegistrationGenerator {
 
         registerClassControlFlow
             .addStatement(
-                "enumProperty(%S,·%L,·$defaultValueStringTemplate,·%L,·%T)",
+                "enumProperty(%S,·%L,·${defaultValueStringTemplate.replace(" ", "·")},·%L,·%T)",
                 propertyDescriptor.name,
                 className.member(propertyDescriptor.name.asString()).reference(),
                 *defaultValueStringTemplateValues,

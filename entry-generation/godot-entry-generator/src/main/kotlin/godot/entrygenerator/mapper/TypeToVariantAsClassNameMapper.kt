@@ -16,7 +16,6 @@ object TypeToVariantAsClassNameMapper {
             "Boolean" -> ClassName("godot.core.Variant.Type", "BOOL")
             "String" -> ClassName("godot.core.Variant.Type", "STRING")
             "RID" -> ClassName("godot.core.Variant.Type", "_RID")
-            "VariantArray" -> ClassName("godot.core.Variant.Type", "ARRAY")
             "Vector2", "Rect2", "Vector3", "Transform2D", "Plane", "Quat", "Rect3", "Basis", "Transform", "Color", "Dictionary" ->
                 ClassName("godot.core.Variant.Type", typeAsString.toUpperCase())
             "NodePath" -> ClassName("godot.core.Variant.Type", "NODE_PATH")
@@ -27,7 +26,13 @@ object TypeToVariantAsClassNameMapper {
             "PoolVector2Array" -> ClassName("godot.core.Variant.Type", "POOL_VECTOR2_ARRAY")
             "PoolVector3Array" -> ClassName("godot.core.Variant.Type", "POOL_VECTOR3_ARRAY")
             "PoolColorArray" -> ClassName("godot.core.Variant.Type", "POOL_COLOR_ARRAY")
-            else -> ClassName("godot.core.Variant.Type", "OBJECT")
+            else -> {
+                if (typeAsString.startsWith("VariantArray<")) {
+                    ClassName("godot.core.Variant.Type", "ARRAY")
+                } else {
+                    ClassName("godot.core.Variant.Type", "OBJECT")
+                }
+            }
         }
     }
 }
