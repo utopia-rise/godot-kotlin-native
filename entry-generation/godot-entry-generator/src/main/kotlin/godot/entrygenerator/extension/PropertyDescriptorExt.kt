@@ -44,6 +44,7 @@ private val propertyHintAnnotations: List<String> =
         "godot.annotation.FloatRange",
         "godot.annotation.ImageCompressLossLess",
         "godot.annotation.ImageCompressLossy",
+        "godot.annotation.IntFlag",
         "godot.annotation.IntIsObjectId",
         "godot.annotation.IntRange",
         "godot.annotation.Layers2DPhysics",

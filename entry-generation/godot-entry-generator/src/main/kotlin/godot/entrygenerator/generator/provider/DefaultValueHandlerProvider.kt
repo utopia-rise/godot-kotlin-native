@@ -5,6 +5,7 @@ import godot.entrygenerator.extension.isCoreType
 import godot.entrygenerator.extension.isResource
 import org.jetbrains.kotlin.builtins.KotlinBuiltIns
 import org.jetbrains.kotlin.descriptors.PropertyDescriptor
+import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.resolve.BindingContext
 import org.jetbrains.kotlin.types.typeUtil.isEnum
 
@@ -14,9 +15,20 @@ object DefaultValueHandlerProvider {
         bindingContext: BindingContext
     ): RegistrationValuesHandler {
         return when {
-            KotlinBuiltIns.isInt(propertyDescriptor.type)
-                || KotlinBuiltIns.isInt(propertyDescriptor.type)
-                || KotlinBuiltIns.isLong(propertyDescriptor.type)
+            KotlinBuiltIns.isInt(propertyDescriptor.type) ->
+                if (propertyDescriptor.annotations.hasAnnotation(FqName("godot.annotation.IntFlag"))) {
+                    IntFlagRegistrationValuesHandler(
+                        propertyDescriptor,
+                        bindingContext
+                    )
+                } else {
+                    PrimitiveRegistrationValuesHandler(
+                        propertyDescriptor,
+                        bindingContext
+                    )
+                }
+
+            KotlinBuiltIns.isLong(propertyDescriptor.type)
                 || KotlinBuiltIns.isFloat(propertyDescriptor.type)
                 || KotlinBuiltIns.isDouble(propertyDescriptor.type)
                 || KotlinBuiltIns.isBoolean(propertyDescriptor.type)
