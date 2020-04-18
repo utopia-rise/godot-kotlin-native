@@ -87,15 +87,36 @@ class ICall(
                 MemberName("kotlinx.cinterop", "allocArray"),
                 ClassName("kotlinx.cinterop", "COpaquePointerVar")
             )
-            .add(
-                buildString {
-                    arguments.withIndex().forEach {
-                        val i = it.index
-                        appendln("    args[$i] = arg$i${if (it.value.nullable) "?.getRawMemory(memScope)" else ".getRawMemory(memScope)"}\n")
-                    }
+        arguments.withIndex().forEach {
+            val i = it.index
+            val value = it.value
+            val nullInstruction = if (value.nullable) "?" else ""
+            when {
+                value.type == "String" -> {
+                    codeBlockBuilder.add(
+                        "    args[$i] = arg$i$nullInstruction.%M$nullInstruction.ptr\n",
+                        MemberName("kotlinx.cinterop", "cstr")
+                    )
                 }
-            )
-            .add("    args[${arguments.size}] = null\n")
+                value.type.isCoreType() -> {
+                    codeBlockBuilder.add(
+                        "    args[$i] = arg$i$nullInstruction.handle$nullInstruction.ptr\n"
+                    )
+                }
+                value.type.isPrimitive() -> {
+                    codeBlockBuilder.add(
+                        "    args[$i] = %M(arg$i)$nullInstruction.ptr\n",
+                        MemberName("godot.internal.utils", "get${value.type}Var")
+                    )
+                }
+                else -> {
+                    codeBlockBuilder.add(
+                        "    args[$i] = arg$i$nullInstruction.ptr\n"
+                    )
+                }
+            }
+        }
+        codeBlockBuilder.add("    args[${arguments.size}] = null\n")
 
         if (shouldReturn) {
             if (isPrimitive) {

@@ -22,8 +22,6 @@ object Generator {
             .builder("godot.icalls", "__icalls")
             .addFunction(generateICallsVarargsFunction())
             .addImport("kotlinx.cinterop", "set", "get")
-            .addImport("godot.core", "getRawMemory")
-            .addImport("godot.core", "String")
 
         icalls.forEach { iCallFileSpec.addFunction(it.generateICall(tree)) }
 
