@@ -5,6 +5,7 @@ import godot.annotation.*
 import godot.core.Object
 import godot.core.Variant
 import godot.core.signal
+import godot.core.variantArrayOf
 import godot.registration.RPCMode
 import godot.registration.Range
 
@@ -65,6 +66,9 @@ class TestingClass : Object() {
     @RegisterProperty
     var flag: Boolean = false
 
+//    @RegisterProperty
+//    val flagImmutable: Boolean = false // <- this should fail as it's immutable
+
     @RegisterProperty
     var variantTest = Variant("test")
 
@@ -76,4 +80,38 @@ class TestingClass : Object() {
 
 //    @RegisterProperty // <- when visible in editor...
 //    var resourceVisibleInEditorButInitialized: Resource = Resource() // <- ...should fail!
+
+    @RegisterProperty
+    var variantArray = variantArrayOf(arrayOf(1, 2))
+
+    @RegisterProperty
+    var variantArrayDifferentTypes = variantArrayOf(arrayOf(1, "a")) //should not generate hint string
+
+    @RegisterProperty
+    var variantArrayAny = variantArrayOf(1, 2)
+
+    @RegisterProperty
+    var variantArrayAnyDifferentTypes = variantArrayOf(1, 2, "a", "b") //should not generate hint string
+
+    @RegisterProperty
+    var variantArrayVariant = variantArrayOf(Variant(1), Variant(2))
+
+    @RegisterProperty
+    var twoDimensionalArrayVariantArray = variantArrayOf(variantArrayOf(1, 2), variantArrayOf(3, 4))
+
+    @RegisterProperty
+    var threeDimensionalArrayVariantArray = variantArrayOf(
+        variantArrayOf(variantArrayOf(1, 2), variantArrayOf(3, 4)),
+        variantArrayOf(variantArrayOf(5, 6), variantArrayOf(7, 8))
+    )
+
+    @RegisterProperty
+    var twoDimensionalArrayArray = variantArrayOf(arrayOf(1, 2), arrayOf(3, 4))
+
+    @RegisterProperty
+    var twoDimensionalArrayArrayDifferentTypes =
+        variantArrayOf(arrayOf(1, 2), arrayOf("a", "b")) //should not generate hint string
+
+    @RegisterProperty
+    var enumArray = variantArrayOf(TestEnum.ENUM1, TestEnum.ENUM2)
 }

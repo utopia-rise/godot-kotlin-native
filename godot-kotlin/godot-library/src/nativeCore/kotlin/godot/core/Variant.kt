@@ -12,6 +12,7 @@ class Variant (val handle: CValue<godot_variant>) {
         STRING(1), //TODO: replace with correct value
         INT(1), //TODO: replace with correct value
         REAL(1), //TODO: replace with correct value
+        ARRAY(1), //TODO: replace with correct value
         OBJECT(1) //TODO: replace with correct value
         // TODO: add types
     }
@@ -25,6 +26,10 @@ class Variant (val handle: CValue<godot_variant>) {
     }
 
     fun asInt(): Int {
+        TODO()
+    }
+
+    fun asVariantArray(): VariantArray<Any> {
         TODO()
     }
 

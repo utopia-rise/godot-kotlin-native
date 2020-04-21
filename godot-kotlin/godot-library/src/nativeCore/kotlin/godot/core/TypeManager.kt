@@ -20,7 +20,7 @@ open class Object(__ignore: String?) {
     open fun _onDestroy() {}
 
     fun emitSignal(name: String, vararg args: Any?) {}
-    fun connect(name: String, target: Object, method: String, extraArgs: VariantArray, flags: Int) {}
+    fun connect(name: String, target: Object, method: String, extraArgs: VariantArray<Any>, flags: Int) {}
 }
 object ClassDB {
     fun getParentClass(cls: String): String = ""
