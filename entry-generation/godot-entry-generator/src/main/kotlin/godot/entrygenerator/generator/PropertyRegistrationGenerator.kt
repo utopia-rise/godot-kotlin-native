@@ -4,6 +4,7 @@ import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.MemberName.Companion.member
 import godot.entrygenerator.extension.getAnnotationValue
+import godot.entrygenerator.extension.isCompatibleList
 import godot.entrygenerator.generator.provider.DefaultValueHandlerProvider
 import godot.entrygenerator.mapper.RpcModeAnnotationMapper.mapRpcModeAnnotationToClassName
 import godot.entrygenerator.mapper.TypeToVariantAsClassNameMapper
@@ -28,10 +29,32 @@ object PropertyRegistrationGenerator {
         properties.forEach { propertyDescriptor ->
             if (propertyDescriptor.type.isEnum()) {
                 registerEnum(className, propertyDescriptor, bindingContext, registerClassControlFlow)
+            } else if (propertyDescriptor.type.isCompatibleList() && propertyDescriptor.type.arguments[0].type.isEnum()) {
+                registerEnumArray(className, propertyDescriptor, bindingContext, registerClassControlFlow)
             } else {
                 registerProperty(className, propertyDescriptor, bindingContext, registerClassControlFlow)
             }
         }
+    }
+
+    private fun registerEnumArray(
+        className: ClassName,
+        propertyDescriptor: PropertyDescriptor,
+        bindingContext: BindingContext,
+        registerClassControlFlow: FunSpec.Builder
+    ) {
+        val defaultValueProvider =
+            DefaultValueHandlerProvider.provideDefaultValueHandler(propertyDescriptor, bindingContext)
+        val (defaultValueStringTemplate, defaultValueStringTemplateValues) = defaultValueProvider.getDefaultValue()
+
+        registerClassControlFlow.addStatement(
+            "enumListProperty(%S,·%L,·${defaultValueStringTemplate.replace(" ", "·")},·%L,·%T)",
+            propertyDescriptor.name,
+            className.member(propertyDescriptor.name.asString()).reference(),
+            *defaultValueStringTemplateValues,
+            shouldBeVisibleInEditor(propertyDescriptor),
+            mapRpcModeAnnotationToClassName(getRpcModeEnum(propertyDescriptor))
+        )
     }
 
     private fun registerEnum(
@@ -46,7 +69,7 @@ object PropertyRegistrationGenerator {
 
         registerClassControlFlow
             .addStatement(
-                "enumProperty(%S,·%L,·$defaultValueStringTemplate,·%L,·%T)",
+                "enumProperty(%S,·%L,·${defaultValueStringTemplate.replace(" ", "·")},·%L,·%T)",
                 propertyDescriptor.name,
                 className.member(propertyDescriptor.name.asString()).reference(),
                 *defaultValueStringTemplateValues,
@@ -70,7 +93,7 @@ object PropertyRegistrationGenerator {
 
         registerClassControlFlow
             .addStatement(
-                "property(%S,·%L,·%T,·$defaultValueStringTemplate,·%L,·%T,·%T,·%S)",
+                "property(%S,·%L,·%T,·${defaultValueStringTemplate.replace(" ", "·")},·%L,·%T,·%T,·%S)",
                 propertyDescriptor.name,
                 className.member(propertyDescriptor.name.asString()).reference(),
                 TypeToVariantAsClassNameMapper.mapTypeToVariantAsClassName(
