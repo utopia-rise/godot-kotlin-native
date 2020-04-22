@@ -3,7 +3,7 @@ package godot.core
 import godot.gdnative.godot_array
 import kotlinx.cinterop.*
 
-class VariantArray<T> internal constructor(private val handle: CValue<godot_array>) : AbstractMutableList<T>() {
+class VariantArray<T> internal constructor(internal val handle: CValue<godot_array>) : AbstractMutableList<T>() {
     constructor(): this(new())
 
     override fun add(index: Int, element: T) {
