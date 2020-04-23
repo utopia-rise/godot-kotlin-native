@@ -1,33 +1,71 @@
 package godot.core
 
 import godot.gdnative.godot_array
-import kotlinx.cinterop.CValue
+import kotlinx.cinterop.*
 
-class VariantArray<T>(val value: CValue<godot_array>) : AbstractMutableList<T>() {
+class VariantArray<T> internal constructor(internal val handle: CValue<godot_array>) : AbstractMutableList<T>() {
     constructor(): this(new())
 
     override fun add(index: Int, element: T) {
-        TODO("Not yet implemented")
+        memScoped {
+            checkNotNull(Godot.gdnative.godot_array_insert)(
+                handle.ptr,
+                index,
+                element.asVariant().handle.ptr
+            )
+        }
     }
 
     override fun removeAt(index: Int): T {
-        TODO("Not yet implemented")
+        return get(index).also {
+            memScoped {
+                checkNotNull(Godot.gdnative.godot_array_remove)(
+                    handle.ptr,
+                    index
+                )
+            }
+        }
     }
 
     override fun set(index: Int, element: T): T {
-        TODO("Not yet implemented")
+        return get(index).also {
+            memScoped {
+                checkNotNull(Godot.gdnative.godot_array_set)(
+                    handle.ptr,
+                    index,
+                    element.asVariant().handle.ptr
+                )
+            }
+        }
     }
 
     override val size: Int
-        get() = TODO("Not yet implemented")
+        get() = memScoped {
+            checkNotNull(Godot.gdnative.godot_array_size)(
+                handle.ptr
+            )
+        }
 
     override fun get(index: Int): T {
-        TODO("Not yet implemented")
+        return memScoped {
+            Variant(
+                checkNotNull(Godot.gdnative.godot_array_get)(
+                    handle.ptr,
+                    index
+                )
+            ).unwrap()
+        }
     }
+
+    private fun T.asVariant() = Variant.wrap(this)
 
     companion object {
         internal fun new(): CValue<godot_array> {
-            TODO()
+            return memScoped {
+                val handle = alloc<godot_array>()
+                checkNotNull(Godot.gdnative.godot_array_new)(handle.ptr)
+                handle.readValue()
+            }
         }
     }
 }

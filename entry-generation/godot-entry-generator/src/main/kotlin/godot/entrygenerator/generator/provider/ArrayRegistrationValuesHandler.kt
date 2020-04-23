@@ -24,12 +24,8 @@ class ArrayRegistrationValuesHandler(
     }
 
     override fun getHintString(): String {
-        // at this point we know type is either a List, Array, VariantArray or a primitive array
+        // at this point we know type is a VariantArray
         val type = propertyDescriptor.type
-
-        if (KotlinBuiltIns.isPrimitiveArray(type)) {
-            return getPrimitiveArrayHint(type)
-        }
 
         val elementType = type.arguments[0].type
         return when {
@@ -44,10 +40,6 @@ class ArrayRegistrationValuesHandler(
 
                 while (currentType != null) {
                     if (currentType.isCompatibleList()) {
-                        if (KotlinBuiltIns.isPrimitiveArray(currentType)) {
-                            hintBuilder += getPrimitiveArrayHint(currentType)
-                            break
-                        }
                         hintBuilder += ",Array"
                         currentType = currentType.arguments.firstOrNull()?.type
                     } else if (currentType.getJetTypeFqName(false).isGodotPrimitive()) {
@@ -61,15 +53,6 @@ class ArrayRegistrationValuesHandler(
                 }
                 hintBuilder
             }
-        }
-    }
-
-    private fun getPrimitiveArrayHint(type: KotlinType): String {
-        return when (type.getJetTypeFqName(false)) {
-            "kotlin.IntArray", "kotlin.LongArray", "kotlin.ShortArray", "kotlin.ByteArray" -> "Array,int"
-            "kotlin.FloatArray", "kotlin.DoubleArray" -> "Array,float"
-            "kotlin.BooleanArray" -> "Array,bool"
-            else -> throw AssertionError("Unknown primitive array type $type")
         }
     }
 }
