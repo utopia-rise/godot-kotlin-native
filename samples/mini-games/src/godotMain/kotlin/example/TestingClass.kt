@@ -94,7 +94,7 @@ class TestingClass : Object() {
     var variantArrayAnyDifferentTypes = variantArrayOf(1, 2, "a", "b") //should not generate hint string
 
     @RegisterProperty
-    var variantArrayVariant = variantArrayOf(Variant(1), Variant(2))
+    var variantArrayVariant = variantArrayOf(1, 2)
 
     @RegisterProperty
     var twoDimensionalArrayVariantArray = variantArrayOf(variantArrayOf(1, 2), variantArrayOf(3, 4))
@@ -104,13 +104,6 @@ class TestingClass : Object() {
         variantArrayOf(variantArrayOf(1, 2), variantArrayOf(3, 4)),
         variantArrayOf(variantArrayOf(5, 6), variantArrayOf(7, 8))
     )
-
-    @RegisterProperty
-    var twoDimensionalArrayArray = variantArrayOf(arrayOf(1, 2), arrayOf(3, 4))
-
-    @RegisterProperty
-    var twoDimensionalArrayArrayDifferentTypes =
-        variantArrayOf(arrayOf(1, 2), arrayOf("a", "b")) //should not generate hint string
 
     @RegisterProperty
     var enumArray = variantArrayOf(TestEnum.ENUM1, TestEnum.ENUM2)
