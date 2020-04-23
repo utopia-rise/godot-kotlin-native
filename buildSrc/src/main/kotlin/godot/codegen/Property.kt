@@ -2,6 +2,7 @@ package godot.codegen
 
 import com.beust.klaxon.Json
 import com.squareup.kotlinpoet.*
+import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 
 
 class Property(
@@ -53,7 +54,11 @@ class Property(
             modifiers.add(if (tree.doAncestorsHaveProperty(clazz, this)) KModifier.OVERRIDE else KModifier.OPEN)
         }
 
-        val propertyType = ClassName(type.getPackage(), type)
+        val propertyType = if (type == "VariantArray") {
+            ClassName(type.getPackage(), type).parameterizedBy(Any::class.asTypeName())
+        } else {
+            ClassName(type.getPackage(), type)
+        }
         val propertySpecBuilder = PropertySpec
             .builder(
                 name,

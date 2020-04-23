@@ -2,6 +2,7 @@ package godot.codegen
 
 import com.beust.klaxon.Json
 import com.squareup.kotlinpoet.*
+import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 
 
 open class Method(
@@ -43,7 +44,13 @@ open class Method(
 
         val shouldReturn = returnType != "Unit"
         if (shouldReturn) {
-            generatedFunBuilder.returns(ClassName(returnType.getPackage(), returnType.removeEnumPrefix()))
+            val simpleName = returnType.removeEnumPrefix()
+            val returnClassName = if (returnType == "VariantArray") {
+                ClassName(returnType.getPackage(), simpleName).parameterizedBy(Any::class.asTypeName())
+            } else {
+                ClassName(returnType.getPackage(), simpleName)
+            }
+            generatedFunBuilder.returns(returnClassName)
         }
 
         if (returnType.isEnum()) {
@@ -112,10 +119,17 @@ open class Method(
 
                 val parameterBuilder = ParameterSpec.builder(
                     argument.name,
-                    ClassName(
-                        argument.type.getPackage(),
-                        argument.type.removeEnumPrefix()
-                    ).copy(nullable = argument.nullable)
+                    if (argument.type == "VariantArray") {
+                        ClassName(
+                            argument.type.getPackage(),
+                            argument.type.removeEnumPrefix()
+                        ).parameterizedBy(Any::class.asTypeName()).copy(nullable = argument.nullable)
+                    } else {
+                        ClassName(
+                            argument.type.getPackage(),
+                            argument.type.removeEnumPrefix()
+                        ).copy(nullable = argument.nullable)
+                    }
                 )
 
                 if (argument.applyDefault != null) parameterBuilder.defaultValue(argument.applyDefault)

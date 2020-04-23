@@ -1,7 +1,7 @@
 package godot.codegen
 
 private val coreTypes = listOf(//"Array", // TODO: kotlin arrays?
-    "GDArray",
+    "VariantArray",
     "Basis",
     "Color",
     "Dictionary",
@@ -137,7 +137,7 @@ fun String.convertTypeToKotlin(): String {
         this == "float" -> "Double"
         this == "bool" -> "Boolean"
         this == "void" -> "Unit"
-        this == "Array" -> "GDArray" // TODO: kotlin arrays?
+        this == "Array" -> "VariantArray" // TODO: kotlin arrays?
 //if (!this.godot.codegen.isCoreType() && !this.godot.codegen.isEnum() && !this.godot.codegen.isPrimitive() && this != "Node" && this != "Reference" && this != "Resource" && this != "ResourceLoader" && this != "SceneTree" && this != "MainLoop" && this != "Script" && this != "Viewport") return "Object" // FIXME: remove line
         else -> this
     }

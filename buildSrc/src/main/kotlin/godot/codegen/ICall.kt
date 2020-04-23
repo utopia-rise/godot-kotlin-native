@@ -30,10 +30,17 @@ class ICall(
         }
     }
 
-    private fun createReturnTypeClass() = ClassName(
-        if (returnType.isEnum()) "kotlin" else returnType.getPackage(),
-        if (returnType.isEnum()) "Long" else returnType
-    )
+    private fun createReturnTypeClass() = if (returnType == "VariantArray") {
+        ClassName(
+            returnType.getPackage(),
+            returnType
+        ).parameterizedBy(Any::class.asTypeName())
+    } else {
+        ClassName(
+            if (returnType.isEnum()) "kotlin" else returnType.getPackage(),
+            if (returnType.isEnum()) "Long" else returnType
+        )
+    }
 
     fun generateICall(tree: Graph<Class>): FunSpec {
         val spec = FunSpec
@@ -136,9 +143,20 @@ class ICall(
                     ClassName("godot.core", "Godot"),
                     MemberName("kotlinx.cinterop", "invoke")
                 )
-                if (tree.isObjectOrItsChild(returnTypeClass.simpleName)) {
+                val returnTypeClassSimpleName = when (returnTypeClass) {
+                    is ClassName -> {
+                        returnTypeClass.simpleName
+                    }
+                    is ParameterizedTypeName -> {
+                        returnTypeClass.rawType.simpleName
+                    }
+                    else -> {
+                        null
+                    }
+                }
+                if (returnTypeClassSimpleName != null && tree.isObjectOrItsChild(returnTypeClassSimpleName)) {
                     val typeManagerClass = ClassName("godot.core", "TypeManager")
-                    if (returnTypeClass.simpleName != "Object") {
+                    if (returnTypeClassSimpleName != "Object") {
                         codeBlockBuilder.add(
                             "    ret = %M(retVar) as %T\n",
                             MemberName(typeManagerClass, "wrap"),
@@ -179,9 +197,9 @@ class ICall(
         if (shouldReturn) {
             spec.returns(returnTypeClass)
             if (isPrimitive) {
-                spec.addStatement("var ret: %N = ${returnType.defaultValue()}", returnTypeClass.simpleName)
+                spec.addStatement("var ret: %T = ${returnType.defaultValue()}", returnTypeClass)
             } else {
-                spec.addStatement("lateinit var ret: %N", returnTypeClass.simpleName)
+                spec.addStatement("lateinit var ret: %T", returnTypeClass)
             }
         }
     }
@@ -190,7 +208,11 @@ class ICall(
         arguments.withIndex().forEach {
             val argument = it.value
             val argumentTypeAsString = argument.type.convertTypeForICalls()
-            var argumentType: TypeName = ClassName(argumentTypeAsString.getPackage(), argumentTypeAsString)
+            var argumentType: TypeName = if (argumentTypeAsString == "VariantArray") {
+                ClassName(argumentTypeAsString.getPackage(), argumentTypeAsString).parameterizedBy(Any::class.asTypeName())
+            } else {
+                ClassName(argumentTypeAsString.getPackage(), argumentTypeAsString)
+            }
 
             if (argument.nullable) {
                 argumentType = argumentType.copy(nullable = true)
