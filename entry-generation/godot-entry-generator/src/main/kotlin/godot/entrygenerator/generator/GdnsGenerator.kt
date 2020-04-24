@@ -24,7 +24,9 @@ object GdnsGenerator {
             val name = it.name.asString()
             val fqName = it.fqNameSafe.asString()
 
-            File(getGdnsFilePath(outputPath, fqName)).writeText(getGdnsFileContent(gdnLibFile, name, fqName))
+            File(getGdnsFilePath(outputPath, fqName).replaceAfterLast("/", "")).mkdirs()
+            File(getGdnsFilePath(outputPath, fqName))
+                .writeText(getGdnsFileContent(gdnLibFile, name, fqName))
         }
     }
 
