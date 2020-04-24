@@ -9,6 +9,7 @@ open class GodotExtension(objects: ObjectFactory) {
     val debug = objects.property<Boolean>()
     val cleanupGeneratedFiles = objects.property<Boolean>()
     val gdnsDir = objects.fileProperty()
+    val gdnlibFile = objects.fileProperty()
     val platforms = objects.listProperty<Platform>()
 
     internal val entrySourceDir = objects.directoryProperty()

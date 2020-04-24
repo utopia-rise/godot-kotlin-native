@@ -20,7 +20,8 @@ class CommonComponentRegistrar : ComponentRegistrar {
         if (enabled) {
             val processor = GodotAnnotationProcessor(
                 checkNotNull(configuration.get(CompilerPluginConst.CommandlineArguments.ENTRY_DIR_PATH)) { "No path for generated entry file specified" },
-                checkNotNull(configuration.get(CompilerPluginConst.CommandlineArguments.GDNS_DIR_PATH)) { "No path for generated gdns files specified" }
+                checkNotNull(configuration.get(CompilerPluginConst.CommandlineArguments.GDNS_DIR_PATH)) { "No path for generated gdns files specified" },
+                checkNotNull(configuration.get(CompilerPluginConst.CommandlineArguments.GDNLIB_FILE_PATH)) { "No path for generated gdnlib file specified" }
             )
             val mpapt = MpAptProject(processor, configuration)
             StorageComponentContainerContributor.registerExtension(project, mpapt)
@@ -36,6 +37,14 @@ class CommonGodotKotlinCompilerPluginCommandLineProcessor : CommandLineProcessor
             CompilerPluginConst.CommandLineOptionNames.gdnsDirPathOption,
             "Path to where the generated gdns files should be written to",
             CompilerPluginConst.CommandlineArguments.GDNS_DIR_PATH.toString(),
+            required = true,
+            allowMultipleOccurrences = false
+        )
+
+        val GDNLIB_FILE_PATH_OPTION = CliOption(
+            CompilerPluginConst.CommandLineOptionNames.gdnlibFileOption,
+            "Absolute Path as String",
+            CompilerPluginConst.CommandlineArguments.GDNLIB_FILE_PATH.toString(),
             required = true,
             allowMultipleOccurrences = false
         )
@@ -62,6 +71,7 @@ class CommonGodotKotlinCompilerPluginCommandLineProcessor : CommandLineProcessor
     override val pluginId = PLUGIN_ID
     override val pluginOptions = listOf(
         GDNS_DIR_PATH_OPTION,
+        GDNLIB_FILE_PATH_OPTION,
         ENTRY_DIR_PATH_OPTION,
         ENABLED
     )
@@ -70,6 +80,9 @@ class CommonGodotKotlinCompilerPluginCommandLineProcessor : CommandLineProcessor
         return when (option) {
             GDNS_DIR_PATH_OPTION -> configuration.put(
                 CompilerPluginConst.CommandlineArguments.GDNS_DIR_PATH, value
+            )
+            GDNLIB_FILE_PATH_OPTION -> configuration.put(
+                CompilerPluginConst.CommandlineArguments.GDNLIB_FILE_PATH, value
             )
             ENTRY_DIR_PATH_OPTION -> configuration.put(
                 CompilerPluginConst.CommandlineArguments.ENTRY_DIR_PATH, value

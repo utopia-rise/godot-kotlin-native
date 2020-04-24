@@ -36,6 +36,7 @@ class GodotPlugin : Plugin<Project> {
             debug.set(true)
             cleanupGeneratedFiles.set(true)
             gdnsDir.set(project.file("src/gdns/kotlin"))
+            gdnlibFile.set(project.file("${project.name.toLowerCase()}.gdnlib"))
             entrySourceDir.set(project.buildDir.resolve("godot-entry"))
         }
     }

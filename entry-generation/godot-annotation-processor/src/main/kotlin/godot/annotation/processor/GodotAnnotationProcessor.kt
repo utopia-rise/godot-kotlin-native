@@ -14,7 +14,8 @@ import java.lang.instrument.IllegalClassFormatException
 
 class GodotAnnotationProcessor(
     private val entryGenerationOutputDir: String,
-    private val gdnsGenerationOutputDir: String
+    private val gdnsGenerationOutputDir: String,
+    private val gdnlibGenerationOutputFile: String
 ) : AbstractProcessor() {
     lateinit var bindingContext: BindingContext
     override fun getSupportedAnnotationTypes(): Set<String> =
@@ -100,6 +101,6 @@ class GodotAnnotationProcessor(
     override fun processingOver() {
         val entryGenerator = EntryGenerator(bindingContext)
         entryGenerator.generateEntryFile(entryGenerationOutputDir, classes, properties, functions, signals)
-        entryGenerator.generateGdnsFiles(gdnsGenerationOutputDir, classes)
+        entryGenerator.generateGdnsFiles(gdnsGenerationOutputDir, gdnlibGenerationOutputFile, classes)
     }
 }
