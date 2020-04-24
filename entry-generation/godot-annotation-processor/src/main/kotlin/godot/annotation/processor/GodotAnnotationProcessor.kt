@@ -100,6 +100,6 @@ class GodotAnnotationProcessor(
     override fun processingOver() {
         val entryGenerator = EntryGenerator(bindingContext)
         entryGenerator.generateEntryFile(entryGenerationOutputDir, classes, properties, functions, signals)
-        entryGenerator.generateGdnsFiles(gdnsGenerationOutputDir)
+        entryGenerator.generateGdnsFiles(gdnsGenerationOutputDir, classes)
     }
 }

@@ -1,6 +1,7 @@
 package godot.entrygenerator
 
 import godot.entrygenerator.filebuilder.EntryFileBuilder
+import godot.entrygenerator.generator.GdnsGenerator
 import godot.entrygenerator.transformer.transformTypeDeclarationsToClassWithMember
 import org.jetbrains.kotlin.descriptors.ClassDescriptor
 import org.jetbrains.kotlin.descriptors.FunctionDescriptor
@@ -31,7 +32,11 @@ class EntryGenerator(bindingContext: BindingContext) {
             .build(outputPath)
     }
 
-    fun generateGdnsFiles(outputPath: String) {
-
+    fun generateGdnsFiles(
+        outputPath: String,
+        gdnLibFile: String,
+        classes: Set<ClassDescriptor>
+    ) {
+        GdnsGenerator.generateGdnsFiles(outputPath, gdnLibFile, classes)
     }
 }
