@@ -82,10 +82,10 @@ class TestingClass : Object() {
 //    var resourceVisibleInEditorButInitialized: Resource = Resource() // <- ...should fail!
 
     @RegisterProperty
-    var variantArray = variantArrayOf(arrayOf(1, 2))
+    var variantArray = variantArrayOf(variantArrayOf(1, 2))
 
     @RegisterProperty
-    var variantArrayDifferentTypes = variantArrayOf(arrayOf(1, "a")) //should not generate hint string
+    var variantArrayDifferentTypes = variantArrayOf(variantArrayOf(1, "a")) //should not generate hint string
 
     @RegisterProperty
     var variantArrayAny = variantArrayOf(1, 2)
@@ -107,4 +107,8 @@ class TestingClass : Object() {
 
     @RegisterProperty
     var enumArray = variantArrayOf(TestEnum.ENUM1, TestEnum.ENUM2)
+
+    @RegisterProperty
+    @EnumFlag
+    var enumFlag = setOf(TestEnum.ENUM1)
 }

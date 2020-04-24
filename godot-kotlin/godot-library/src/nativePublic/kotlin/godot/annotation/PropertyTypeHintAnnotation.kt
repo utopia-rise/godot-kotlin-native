@@ -61,9 +61,9 @@ annotation class ExpEasing(val attenuation: Boolean = false, val inout: Boolean 
 /**
  * Can only be used on Map<Enum, Boolean> properties!
  */
-//@Target(AnnotationTarget.PROPERTY)
-//@Retention(AnnotationRetention.RUNTIME)
-//annotation class Flags
+@Target(AnnotationTarget.PROPERTY)
+@Retention(AnnotationRetention.RUNTIME)
+annotation class EnumFlag
 
 /**
  * Can only be used on Int properties!
