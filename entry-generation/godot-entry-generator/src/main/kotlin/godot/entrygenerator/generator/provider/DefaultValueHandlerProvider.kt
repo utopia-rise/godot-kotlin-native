@@ -37,6 +37,10 @@ object DefaultValueHandlerProvider {
                 propertyDescriptor,
                 bindingContext
             )
+            KotlinBuiltIns.isSetOrNullableSet((propertyDescriptor.type)) -> EnumFlagRegistrationValuesHandler(
+                propertyDescriptor,
+                bindingContext
+            )
             else -> TODO()
         }
     }

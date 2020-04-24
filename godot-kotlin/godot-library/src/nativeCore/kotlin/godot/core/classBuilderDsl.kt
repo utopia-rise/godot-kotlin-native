@@ -125,7 +125,7 @@ class ClassBuilder<T : Object> internal constructor(val classHandle: ClassHandle
         isVisibleInEditor: Boolean = true,
         rpcMode: RPCMode
     ) {
-        val propertyHandler = MutableEnumPropertyHandler(property) { str -> enumValueOf(str) }
+        val propertyHandler = MutableEnumPropertyHandler(property) { ord -> enumValues<K>()[ord] }
         classHandle.registerProperty(
             name,
             StableRef.create(propertyHandler).asCPointer(),
@@ -134,7 +134,7 @@ class ClassBuilder<T : Object> internal constructor(val classHandle: ClassHandle
             isVisibleInEditor,
             rpcMode,
             godot_property_hint.GODOT_PROPERTY_HINT_ENUM,
-            enumValues<K>().joinToString { it.name }
+            "Array,int,${enumValues<K>().joinToString { it.name }}"
         )
     }
 
@@ -147,7 +147,7 @@ class ClassBuilder<T : Object> internal constructor(val classHandle: ClassHandle
     ) {
         val variantArray = VariantArray<Int>()
         if (default != null) {
-            default.asVariantArray().forEach {
+            default.asVariantArray<Int>().forEach {
                 variantArray.add((it as K).ordinal)
             }
         }
@@ -161,6 +161,32 @@ class ClassBuilder<T : Object> internal constructor(val classHandle: ClassHandle
             rpcMode,
             godot_property_hint.GODOT_PROPERTY_HINT_ENUM,
             "Array,int,${enumValues<K>().joinToString { it.name }}"
+        )
+    }
+
+    inline fun <reified K : Enum<K>> enumFlagProperty(
+        name: String,
+        property: KMutableProperty1<T, Set<K>>,
+        default: Variant? = null,
+        isVisibleInEditor: Boolean = true,
+        rpcMode: RPCMode
+    ) {
+        val variantArray = VariantArray<Int>()
+        if (default != null) {
+            default.asVariantArray<Int>().forEach {
+                variantArray.add((it as K).ordinal)
+            }
+        }
+        val propertyHandler = MutableEnumFlagPropertyHandler(property) { ord -> enumValues<K>()[ord] }
+        classHandle.registerProperty(
+            name,
+            StableRef.create(propertyHandler).asCPointer(),
+            Variant.Type.INT,
+            Variant(variantArray),
+            isVisibleInEditor,
+            rpcMode,
+            godot_property_hint.GODOT_PROPERTY_HINT_FLAGS,
+            "int,FLAGS,${enumValues<K>().joinToString { it.name }}"
         )
     }
 }
