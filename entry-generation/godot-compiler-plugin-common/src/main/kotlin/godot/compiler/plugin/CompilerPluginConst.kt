@@ -14,6 +14,7 @@ object CompilerPluginConst {
         const val gdnlibFileOption = "gdnlib-file-path"
         const val entryDirPathOption = "entry-dir-path"
         const val enabledOption = "enabled"
+        const val cleanGeneratedGdnsFiles = "clean-generated-gdns-files"
     }
 
     object CommandlineArguments {
@@ -25,5 +26,7 @@ object CompilerPluginConst {
             CompilerConfigurationKey.create("path to the folder in which the generated entry file should be written")
         val ENABLED: CompilerConfigurationKey<Boolean> =
             CompilerConfigurationKey.create("flag to enable entry generation")
+        val CLEAN_GENERATED_GDNS_FILES: CompilerConfigurationKey<Boolean> =
+            CompilerConfigurationKey.create("flag to clean generated gdns files that don't have an associated class anymore")
     }
 }

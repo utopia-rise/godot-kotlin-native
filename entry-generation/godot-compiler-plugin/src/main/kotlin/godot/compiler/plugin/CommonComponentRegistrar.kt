@@ -21,7 +21,8 @@ class CommonComponentRegistrar : ComponentRegistrar {
             val processor = GodotAnnotationProcessor(
                 checkNotNull(configuration.get(CompilerPluginConst.CommandlineArguments.ENTRY_DIR_PATH)) { "No path for generated entry file specified" },
                 checkNotNull(configuration.get(CompilerPluginConst.CommandlineArguments.GDNS_DIR_PATH)) { "No path for generated gdns files specified" },
-                checkNotNull(configuration.get(CompilerPluginConst.CommandlineArguments.GDNLIB_FILE_PATH)) { "No path for generated gdnlib file specified" }
+                checkNotNull(configuration.get(CompilerPluginConst.CommandlineArguments.GDNLIB_FILE_PATH)) { "No path for generated gdnlib file specified" },
+                checkNotNull(configuration.get(CompilerPluginConst.CommandlineArguments.CLEAN_GENERATED_GDNS_FILES)) { "No clean generated gdns files option specified" }
             )
             val mpapt = MpAptProject(processor, configuration)
             StorageComponentContainerContributor.registerExtension(project, mpapt)
@@ -65,6 +66,14 @@ class CommonGodotKotlinCompilerPluginCommandLineProcessor : CommandLineProcessor
             allowMultipleOccurrences = false
         )
 
+        val CLEAN_GENERATED_GDNS_FILES = CliOption(
+            CompilerPluginConst.CommandLineOptionNames.cleanGeneratedGdnsFiles,
+            "Flag to enable entry generation",
+            CompilerPluginConst.CommandlineArguments.CLEAN_GENERATED_GDNS_FILES.toString(),
+            required = true,
+            allowMultipleOccurrences = false
+        )
+
         const val PLUGIN_ID = CompilerPluginConst.compilerPluginId
     }
 
@@ -73,7 +82,8 @@ class CommonGodotKotlinCompilerPluginCommandLineProcessor : CommandLineProcessor
         GDNS_DIR_PATH_OPTION,
         GDNLIB_FILE_PATH_OPTION,
         ENTRY_DIR_PATH_OPTION,
-        ENABLED
+        ENABLED,
+        CLEAN_GENERATED_GDNS_FILES
     )
 
     override fun processOption(option: AbstractCliOption, value: String, configuration: CompilerConfiguration) {
@@ -89,6 +99,9 @@ class CommonGodotKotlinCompilerPluginCommandLineProcessor : CommandLineProcessor
             )
             ENABLED -> configuration.put(
                 CompilerPluginConst.CommandlineArguments.ENABLED, value.toBoolean()
+            )
+            CLEAN_GENERATED_GDNS_FILES -> configuration.put(
+                CompilerPluginConst.CommandlineArguments.CLEAN_GENERATED_GDNS_FILES, value.toBoolean()
             )
             else -> throw CliOptionProcessingException("Unknown option: ${option.optionName}")
         }

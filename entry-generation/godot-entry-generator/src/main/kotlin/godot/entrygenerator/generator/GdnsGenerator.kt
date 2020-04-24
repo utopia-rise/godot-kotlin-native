@@ -6,7 +6,12 @@ import java.io.File
 
 object GdnsGenerator {
 
-    fun generateGdnsFiles(outputPath: String, gdnLibFile: String, classes: Set<ClassDescriptor>) {
+    fun generateGdnsFiles(
+        outputPath: String,
+        gdnLibFile: String,
+        cleanGeneratedGdnsFiles: Boolean,
+        classes: Set<ClassDescriptor>
+    ) {
         val existingGdnsFiles = File(outputPath)
             .listFiles()
             ?.filter { it.extension == "gdns" }
@@ -16,8 +21,10 @@ object GdnsGenerator {
         val obsoleteGdnsFiles = existingGdnsFiles
             .filter { !classNames.contains(it.name) }
 
-        obsoleteGdnsFiles.forEach {
-            it.delete()
+        if (cleanGeneratedGdnsFiles) {
+            obsoleteGdnsFiles.forEach {
+                it.delete()
+            }
         }
 
         classes.forEach {

@@ -35,8 +35,9 @@ class EntryGenerator(bindingContext: BindingContext) {
     fun generateGdnsFiles(
         outputPath: String,
         gdnLibFile: String,
+        cleanGeneratedGdnsFiles: Boolean,
         classes: Set<ClassDescriptor>
     ) {
-        GdnsGenerator.generateGdnsFiles(outputPath, gdnLibFile, classes)
+        GdnsGenerator.generateGdnsFiles(outputPath, gdnLibFile, cleanGeneratedGdnsFiles, classes)
     }
 }

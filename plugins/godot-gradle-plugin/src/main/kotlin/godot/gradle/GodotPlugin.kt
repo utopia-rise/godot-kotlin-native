@@ -3,11 +3,9 @@ package godot.gradle
 import godot.utils.GodotBuildProperties
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.tasks.Delete
 import org.gradle.internal.os.OperatingSystem
 import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.getByType
-import org.gradle.kotlin.dsl.register
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
@@ -83,13 +81,13 @@ class GodotPlugin : Plugin<Project> {
             val buildTask = project.tasks.getByName("build")
 
             // clean up task
-            if (godot.cleanupGeneratedFiles.get()) {
-                val cleanGeneratedFilesTask = project.tasks.register<Delete>("cleanGeneratedFiles") {
-                    group = GODOT_TASK_GROUP
-                    delete(godot.gdnsDir.get())
-                }
-                buildTask.dependsOn(cleanGeneratedFilesTask)
-            }
+//            if (godot.cleanupGeneratedFiles.get()) {
+//                val cleanGeneratedFilesTask = project.tasks.register<Delete>("cleanGeneratedFiles") {
+//                    group = GODOT_TASK_GROUP
+//                    delete(godot.gdnsDir.get())
+//                }
+//                buildTask.dependsOn(cleanGeneratedFilesTask)
+//            }
 
             // create the targets and connect it to the main source set
             godot.platforms.get().forEach { platform ->
