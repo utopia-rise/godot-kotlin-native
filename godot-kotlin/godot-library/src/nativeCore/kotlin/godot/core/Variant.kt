@@ -5,7 +5,7 @@ import kotlinx.cinterop.CValue
 
 class Variant (val handle: CValue<godot_variant>) {
     constructor() : this(new()) {}
-    constructor(value: Any) : this(new()) //TODO: replace
+    constructor(value: Any) : this(wrapUnsafe(value)) //TODO: replace
 
     enum class Type(val value: Int) {
         BOOL(1), //TODO: replace with correct value
@@ -29,7 +29,7 @@ class Variant (val handle: CValue<godot_variant>) {
         TODO()
     }
 
-    fun asVariantArray(): VariantArray<Any> {
+    fun <T> asVariantArray(): VariantArray<T> {
         TODO()
     }
 
@@ -39,6 +39,10 @@ class Variant (val handle: CValue<godot_variant>) {
         }
 
         fun wrap(obj: Any?): Variant {
+            return Variant(wrapUnsafe(obj))
+        }
+
+        private fun wrapUnsafe(obj: Any?): CValue<godot_variant> {
             TODO()
         }
     }

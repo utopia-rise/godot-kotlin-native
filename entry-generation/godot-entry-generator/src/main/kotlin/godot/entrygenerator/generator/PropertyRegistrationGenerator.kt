@@ -11,6 +11,7 @@ import godot.entrygenerator.mapper.TypeToVariantAsClassNameMapper
 import godot.entrygenerator.model.REGISTER_PROPERTY_ANNOTATION
 import godot.entrygenerator.model.REGISTER_PROPERTY_ANNOTATION_RPC_MODE_ARGUMENT
 import godot.entrygenerator.model.REGISTER_PROPERTY_ANNOTATION_VISIBLE_IN_EDITOR_ARGUMENT
+import org.jetbrains.kotlin.builtins.KotlinBuiltIns
 import org.jetbrains.kotlin.descriptors.PropertyDescriptor
 import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
@@ -30,14 +31,37 @@ object PropertyRegistrationGenerator {
             if (propertyDescriptor.type.isEnum()) {
                 registerEnum(className, propertyDescriptor, bindingContext, registerClassControlFlow)
             } else if (propertyDescriptor.type.isCompatibleList() && propertyDescriptor.type.arguments[0].type.isEnum()) {
-                registerEnumArray(className, propertyDescriptor, bindingContext, registerClassControlFlow)
+                registerEnumList(className, propertyDescriptor, bindingContext, registerClassControlFlow)
+            } else if (KotlinBuiltIns.isSetOrNullableSet(propertyDescriptor.type)
+                && propertyDescriptor.type.arguments[0].type.isEnum()) {
+                registerEnumFlag(className, propertyDescriptor, bindingContext, registerClassControlFlow)
             } else {
                 registerProperty(className, propertyDescriptor, bindingContext, registerClassControlFlow)
             }
         }
     }
 
-    private fun registerEnumArray(
+    private fun registerEnumFlag(
+        className: ClassName,
+        propertyDescriptor: PropertyDescriptor,
+        bindingContext: BindingContext,
+        registerClassControlFlow: FunSpec.Builder
+    ) {
+        val defaultValueProvider =
+            DefaultValueHandlerProvider.provideDefaultValueHandler(propertyDescriptor, bindingContext)
+        val (defaultValueStringTemplate, defaultValueStringTemplateValues) = defaultValueProvider.getDefaultValue()
+
+        registerClassControlFlow.addStatement(
+            "enumFlagProperty(%S,·%L,·${defaultValueStringTemplate.replace(" ", "·")},·%L,·%T)",
+            propertyDescriptor.name,
+            className.member(propertyDescriptor.name.asString()).reference(),
+            *defaultValueStringTemplateValues,
+            shouldBeVisibleInEditor(propertyDescriptor),
+            mapRpcModeAnnotationToClassName(getRpcModeEnum(propertyDescriptor))
+        )
+    }
+
+    private fun registerEnumList(
         className: ClassName,
         propertyDescriptor: PropertyDescriptor,
         bindingContext: BindingContext,
