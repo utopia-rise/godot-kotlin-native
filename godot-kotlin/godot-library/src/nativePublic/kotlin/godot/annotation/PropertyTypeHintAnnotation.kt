@@ -59,11 +59,22 @@ annotation class ExpEasing(val attenuation: Boolean = false, val inout: Boolean 
 //annotation class Lenght(val lenght: Int = -1)
 
 /**
- * Can only be used on Map<Enum, Boolean> properties!
+ * Flag Property hint supporting enums
+ *
+ * Can only be used on Set<Enum> or MutableSet<Enum> properties!
  */
 @Target(AnnotationTarget.PROPERTY)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class EnumFlag
+
+/**
+ * Flag Property hint supporting Int's
+ *
+ * Can only be used on Int properties!
+ */
+@Target(AnnotationTarget.PROPERTY)
+@Retention(AnnotationRetention.RUNTIME)
+annotation class IntFlag(vararg val names: String)
 
 /**
  * Can only be used on Int properties!
