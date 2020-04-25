@@ -19,7 +19,9 @@ class NativeComponentRegistrar : ComponentRegistrar {
         if (enabled) {
             val processor = GodotAnnotationProcessor(
                 checkNotNull(configuration.get(CompilerPluginConst.CommandlineArguments.ENTRY_DIR_PATH)) { "No path for generated entry file specified" },
-                checkNotNull(configuration.get(CompilerPluginConst.CommandlineArguments.GDNS_DIR_PATH)) { "No path for generated gdns files specified" }
+                checkNotNull(configuration.get(CompilerPluginConst.CommandlineArguments.GDNS_DIR_PATH)) { "No path for generated gdns files specified" },
+                checkNotNull(configuration.get(CompilerPluginConst.CommandlineArguments.GDNLIB_FILE_PATH)) { "No path for generated gdnlib file specified" },
+                checkNotNull(configuration.get(CompilerPluginConst.CommandlineArguments.CLEAN_GENERATED_GDNS_FILES)) { "No clean generated gdns files option specified" }
             )
             val mpapt = MpAptProject(processor, configuration)
 
@@ -44,6 +46,14 @@ class NativeGodotKotlinCompilerPluginCommandLineProcessor : CommandLineProcessor
             allowMultipleOccurrences = false
         )
 
+        val GDNLIB_FILE_PATH_OPTION = CliOption(
+            CompilerPluginConst.CommandLineOptionNames.gdnlibFileOption,
+            "Absolute Path as String",
+            CompilerPluginConst.CommandlineArguments.GDNLIB_FILE_PATH.toString(),
+            required = true,
+            allowMultipleOccurrences = false
+        )
+
         val ENTRY_DIR_PATH_OPTION = CliOption(
             CompilerPluginConst.CommandLineOptionNames.entryDirPathOption,
             "Absolute Path as String",
@@ -60,14 +70,24 @@ class NativeGodotKotlinCompilerPluginCommandLineProcessor : CommandLineProcessor
             allowMultipleOccurrences = false
         )
 
+        val CLEAN_GENERATED_GDNS_FILES = CliOption(
+            CompilerPluginConst.CommandLineOptionNames.cleanGeneratedGdnsFiles,
+            "Flag to enable entry generation",
+            CompilerPluginConst.CommandlineArguments.CLEAN_GENERATED_GDNS_FILES.toString(),
+            required = true,
+            allowMultipleOccurrences = false
+        )
+
         const val PLUGIN_ID = CompilerPluginConst.compilerPluginId
     }
 
     override val pluginId = PLUGIN_ID
     override val pluginOptions = listOf(
         GDNS_DIR_PATH_OPTION,
+        GDNLIB_FILE_PATH_OPTION,
         ENTRY_DIR_PATH_OPTION,
-        ENABLED
+        ENABLED,
+        CLEAN_GENERATED_GDNS_FILES
     )
 
     override fun processOption(option: AbstractCliOption, value: String, configuration: CompilerConfiguration) {
@@ -75,11 +95,17 @@ class NativeGodotKotlinCompilerPluginCommandLineProcessor : CommandLineProcessor
             GDNS_DIR_PATH_OPTION -> configuration.put(
                 CompilerPluginConst.CommandlineArguments.GDNS_DIR_PATH, value
             )
+            GDNLIB_FILE_PATH_OPTION -> configuration.put(
+                CompilerPluginConst.CommandlineArguments.GDNLIB_FILE_PATH, value
+            )
             ENTRY_DIR_PATH_OPTION -> configuration.put(
                 CompilerPluginConst.CommandlineArguments.ENTRY_DIR_PATH, value
             )
             ENABLED -> configuration.put(
                 CompilerPluginConst.CommandlineArguments.ENABLED, value.toBoolean()
+            )
+            CLEAN_GENERATED_GDNS_FILES -> configuration.put(
+                CompilerPluginConst.CommandlineArguments.CLEAN_GENERATED_GDNS_FILES, value.toBoolean()
             )
             else -> throw CliOptionProcessingException("Unknown option: ${option.optionName}")
         }
