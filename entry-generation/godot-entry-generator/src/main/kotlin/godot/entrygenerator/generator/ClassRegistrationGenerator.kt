@@ -26,7 +26,7 @@ object ClassRegistrationGenerator {
 
             val registerClassControlFlow = classRegistryControlFlow.beginControlFlow(
                 "registerClass(%S,·%S,·%L,·${isTool(classWithMembers.classDescriptor)})·{",
-                classNameAsString,
+                classWithMembers.classDescriptor.fqNameSafe.asString(),
                 superClass,
                 className.constructorReference()
             ) //START: registerClass
