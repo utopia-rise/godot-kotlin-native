@@ -76,6 +76,7 @@ class TestingClass : Object() {
     @RegisterProperty
     var variantTest = Variant("test")
 
+    @ResourceType(inherits = [Resource::class])
     @RegisterProperty
     lateinit var resourceVisibleInEditor: Resource
 

@@ -2,8 +2,11 @@ package godot.entrygenerator.generator.provider
 
 import com.squareup.kotlinpoet.ClassName
 import godot.entrygenerator.exceptions.WrongAnnotationUsageException
+import godot.entrygenerator.extension.getAnnotationValue
+import godot.entrygenerator.model.PROPERTY_TYPE_ANNOTATION_INHERITS_ARGUMENT
 import org.jetbrains.kotlin.descriptors.PropertyDescriptor
 import org.jetbrains.kotlin.resolve.BindingContext
+import org.jetbrains.kotlin.resolve.constants.KClassValue
 import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
 
 class ResourceRegistrationValuesHandler(
@@ -20,14 +23,24 @@ class ResourceRegistrationValuesHandler(
 
     override fun getPropertyTypeHint(): ClassName {
         return when (propertyHintAnnotation?.fqName?.asString()) {
-            //TODO: implement ResourceType
+            "godot.annotation.ResourceType" -> ClassName(
+                "godot.gdnative.godot_property_hint",
+                "GODOT_PROPERTY_HINT_RESOURCE_TYPE"
+            )
             null -> ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_NONE")
             else -> throw WrongAnnotationUsageException(propertyDescriptor, propertyHintAnnotation)
         }
     }
 
     override fun getHintString(): String {
-        //TODO: implement ResourceType
-        return ""
+        return propertyHintAnnotation
+            ?.getAnnotationValue(PROPERTY_TYPE_ANNOTATION_INHERITS_ARGUMENT, ArrayList<KClassValue>())
+            ?.asSequence()
+            ?.map { it.value }
+            ?.map { it as KClassValue.Value.NormalClass }
+            ?.map { it.classId }
+            ?.map { it.relativeClassName.asString() }
+            ?.joinToString(",")
+            ?: ""
     }
 }

@@ -1,6 +1,8 @@
 package godot.annotation
 
+import godot.Resource
 import godot.registration.Range
+import kotlin.reflect.KClass
 
 /*
 All type checks will happen at the entry-generator at the moment.
@@ -121,9 +123,9 @@ annotation class Dir(val global: Boolean = false)
 /**
  * Can only be used on properties that derive from Resource!
  */
-//@Target(AnnotationTarget.PROPERTY)
-//@Retention(AnnotationRetention.RUNTIME)
-//annotation class ResourceType(vararg val inherits: KClass<out GodotResource> = [GodotResource::class])
+@Target(AnnotationTarget.PROPERTY)
+@Retention(AnnotationRetention.RUNTIME)
+annotation class ResourceType(vararg val inherits: KClass<out Resource> = [Resource::class])
 
 /**
  * Can only be used on String properties!
