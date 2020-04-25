@@ -1,5 +1,8 @@
 package godot.gradle
 
+/**
+ * Platforms that Godot supports.
+ */
 enum class Platform {
     LINUX_X64,
     WINDOWS_X64,
