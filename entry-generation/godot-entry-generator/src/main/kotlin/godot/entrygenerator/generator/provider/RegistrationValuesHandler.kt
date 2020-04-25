@@ -17,6 +17,8 @@ import org.jetbrains.kotlin.resolve.BindingContext
 import org.jetbrains.kotlin.resolve.bindingContextUtil.getReferenceTargets
 import org.jetbrains.kotlin.resolve.calls.callUtil.getType
 import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
+import org.jetbrains.kotlin.resolve.descriptorUtil.isCompanionObject
+import org.jetbrains.kotlin.resolve.descriptorUtil.parents
 import org.jetbrains.kotlin.serialization.deserialization.descriptors.DeserializedClassConstructorDescriptor
 import org.jetbrains.kotlin.serialization.deserialization.descriptors.DeserializedSimpleFunctionDescriptor
 
@@ -144,6 +146,34 @@ abstract class RegistrationValuesHandler(
                     return "%L(${transformedArgs.joinToString { it!!.first }})" to params.toTypedArray()
                 }
             }
+        } else if (expression is KtBinaryExpression) {
+            val assignment = expression
+                .children
+                .map { getDefaultValueExpression(it as KtExpression) }
+
+            if (!assignment.any { it == null }) {
+                return assignment.joinToString("·") { it!!.first } to
+                    assignment.map { it!!.second }.toTypedArray().flatten().toTypedArray()
+            }
+        } else if (expression is KtNameReferenceExpression) {
+            val ref = expression
+                .referenceExpression()
+                ?.getReferenceTargets(bindingContext)
+                ?.firstOrNull()
+
+            if (ref !is PropertyDescriptor) {
+                throw IllegalStateException("You tried to register property ${propertyDescriptor.fqNameSafe} with a reference (${expression.text}) which is not a property. Default values which are references have to be properties. Functions are not yet supported!")
+            }
+            if (!ref.visibility.isPublicAPI && ref.visibility.name != "internal") {
+                throw IllegalStateException("You tried to register property ${propertyDescriptor.fqNameSafe} with a reference (${expression.text}) which is not public. Default values which are references have to be public or at least internal")
+            }
+            if (!ref.isConst && !ref.parents.first().isCompanionObject()) {
+                throw IllegalStateException("You tried to register property ${propertyDescriptor.fqNameSafe} with a reference (${expression.text}) which is not a const or static. Default values which are references have to be compile time constants or have to be static")
+            }
+
+            return "%M" to arrayOf(MemberName(ref.fqNameSafe.parent().asString(), ref.name.asString()))
+        } else if (expression is KtOperationReferenceExpression) {
+            return "%L" to arrayOf(expression.text)
         }
 
         return null

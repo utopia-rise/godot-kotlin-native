@@ -9,6 +9,10 @@ import godot.core.variantArrayOf
 import godot.registration.RPCMode
 import godot.registration.Range
 
+const val FLAG_1 = 0
+const val FLAG_2 = 1
+internal const val FLAG_3 = 1
+
 @RegisterClass(true)
 class TestingClass : Object() {
 
@@ -111,4 +115,13 @@ class TestingClass : Object() {
     @RegisterProperty
     @EnumFlag
     var enumFlag = setOf(TestEnum.ENUM1)
+
+
+    companion object {
+        val blubb = 0
+    }
+
+    @RegisterProperty
+    @IntFlag("Flag1", "Flag2", "Flag3", "Flag4", "Flag5")
+    var intFlag = FLAG_1 or FLAG_2 or FLAG_3 or 0 or blubb
 }
