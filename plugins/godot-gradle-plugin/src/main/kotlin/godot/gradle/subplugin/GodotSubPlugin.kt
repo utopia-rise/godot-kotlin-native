@@ -32,8 +32,16 @@ class GodotSubPlugin : KotlinGradleSubplugin<AbstractCompile> {
                 extension.gdnsDir.get().asFile.absolutePath
             ),
             SubpluginOption(
+                CompilerPluginConst.CommandLineOptionNames.gdnlibFileOption,
+                project.relativePath(extension.gdnlibFile.get().asFile.absolutePath)
+            ),
+            SubpluginOption(
                 CompilerPluginConst.CommandLineOptionNames.entryDirPathOption,
                 extension.entrySourceDir.get().asFile.absolutePath
+            ),
+            SubpluginOption(
+                CompilerPluginConst.CommandLineOptionNames.cleanGeneratedGdnsFiles,
+                extension.cleanupGeneratedFiles.get().toString()
             )
         )
     }
