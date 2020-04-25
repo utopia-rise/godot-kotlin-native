@@ -90,6 +90,24 @@ abstract class RegistrationValuesHandler(
                     val className = fqName.shortName().asString()
                     return "%T.%L" to arrayOf(ClassName(pkg, className), expression.selectorExpression!!.text)
                 }
+            } else if (receiver is KtStringTemplateExpression) {
+                val selectorExpression = expression
+                    .selectorExpression
+                    ?.referenceExpression()
+                    ?.getReferenceTargets(bindingContext)
+                    ?.firstOrNull()
+
+                if (selectorExpression?.fqNameSafe?.asString() == "kotlin.text.trimIndent") {
+                    val packagePath = selectorExpression
+                        .fqNameSafe
+                        .asString()
+                        .replace(".${selectorExpression.name}", "")
+
+                    return "%L.%M()" to arrayOf(
+                        receiver.text,
+                        MemberName(packagePath, selectorExpression.name.asString())
+                    )
+                }
             }
         } else if (expression is KtCallExpression) {
             val ref = expression
