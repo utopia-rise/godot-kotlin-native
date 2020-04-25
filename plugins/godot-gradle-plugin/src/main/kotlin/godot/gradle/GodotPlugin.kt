@@ -80,6 +80,7 @@ class GodotPlugin : Plugin<Project> {
 
             val buildTask = project.tasks.getByName("build")
 
+            //commented out in favor of the cleanup inside the GdnsGenerator, but left here for reference and to easily enable it again -> as discussed on discord
             // clean up task
 //            if (godot.cleanupGeneratedFiles.get()) {
 //                val cleanGeneratedFilesTask = project.tasks.register<Delete>("cleanGeneratedFiles") {
