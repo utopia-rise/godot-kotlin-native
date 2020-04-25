@@ -8,7 +8,7 @@ import org.gradle.kotlin.dsl.mapProperty
 import org.gradle.kotlin.dsl.property
 import java.io.File
 
-open class GenerateLibrary : DefaultTask() {
+open class GenerateGdnlib : DefaultTask() {
     @Input
     val libraries = project.objects.mapProperty<Platform, File>()
 

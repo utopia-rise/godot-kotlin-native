@@ -96,7 +96,7 @@ class GodotPlugin : Plugin<Project> {
 
             val librariesToBeGenerated = mutableMapOf<Platform, File>()
 
-            val generateLibraryTask = project.tasks.register("generateLibrary", GenerateLibrary::class.java) {
+            val generateGdnlibTask = project.tasks.register("generateGdnlib", GenerateGdnlib::class.java) {
                 singleton.set(godot.singleton)
                 loadOnce.set(godot.loadOnce)
                 reloadable.set(godot.reloadable)
@@ -135,7 +135,7 @@ class GodotPlugin : Plugin<Project> {
                             // build -> build<Target> -> link<BuildType><Target>
                             project.tasks.register("build${target.name.capitalize()}") {
                                 group = GODOT_TASK_GROUP
-                                dependsOn(linkTask, generateLibraryTask)
+                                dependsOn(linkTask, generateGdnlibTask)
                                 buildTask.dependsOn(this)
                                 librariesToBeGenerated[platform] = outputFile.relativeTo(projectDir)
                             }
