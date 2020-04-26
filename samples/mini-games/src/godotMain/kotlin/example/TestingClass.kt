@@ -1,6 +1,7 @@
 package example
 
 import godot.Resource
+import godot.Texture
 import godot.annotation.*
 import godot.core.Object
 import godot.core.Variant
@@ -76,12 +77,12 @@ class TestingClass : Object() {
     @RegisterProperty
     var variantTest = Variant("test")
 
-    @ResourceType(inherits = [Resource::class])
     @RegisterProperty
-    lateinit var resourceVisibleInEditor: Resource
+    lateinit var resourceVisibleInEditor: CustomResource //should be registered as Texture as Custom resource derives from texture
 
     @RegisterProperty(false)
-    var resourceNotVisibleInEditor: Resource = Resource()
+    var resourceNotVisibleInEditor: Resource =
+        Texture() //this should still be registered as Resource and not as Texture
 
 //    @RegisterProperty // <- when visible in editor...
 //    var resourceVisibleInEditorButInitialized: Resource = Resource() // <- ...should fail!

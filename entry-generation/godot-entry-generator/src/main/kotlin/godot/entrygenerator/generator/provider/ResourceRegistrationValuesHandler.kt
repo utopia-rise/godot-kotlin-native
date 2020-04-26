@@ -1,12 +1,9 @@
 package godot.entrygenerator.generator.provider
 
 import com.squareup.kotlinpoet.ClassName
-import godot.entrygenerator.exceptions.WrongAnnotationUsageException
-import godot.entrygenerator.extension.getAnnotationValue
-import godot.entrygenerator.model.PROPERTY_TYPE_ANNOTATION_INHERITS_ARGUMENT
+import godot.entrygenerator.extension.getFirstRegistrableInheritedResourceType
 import org.jetbrains.kotlin.descriptors.PropertyDescriptor
 import org.jetbrains.kotlin.resolve.BindingContext
-import org.jetbrains.kotlin.resolve.constants.KClassValue
 import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
 
 class ResourceRegistrationValuesHandler(
@@ -22,25 +19,17 @@ class ResourceRegistrationValuesHandler(
     }
 
     override fun getPropertyTypeHint(): ClassName {
-        return when (propertyHintAnnotation?.fqName?.asString()) {
-            "godot.annotation.ResourceType" -> ClassName(
-                "godot.gdnative.godot_property_hint",
-                "GODOT_PROPERTY_HINT_RESOURCE_TYPE"
-            )
-            null -> ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_NONE")
-            else -> throw WrongAnnotationUsageException(propertyDescriptor, propertyHintAnnotation)
-        }
+        return ClassName(
+            "godot.gdnative.godot_property_hint",
+            "GODOT_PROPERTY_HINT_RESOURCE_TYPE"
+        )
     }
 
     override fun getHintString(): String {
-        return propertyHintAnnotation
-            ?.getAnnotationValue(PROPERTY_TYPE_ANNOTATION_INHERITS_ARGUMENT, ArrayList<KClassValue>())
-            ?.asSequence()
-            ?.map { it.value }
-            ?.map { it as KClassValue.Value.NormalClass }
-            ?.map { it.classId }
-            ?.map { it.relativeClassName.asString() }
-            ?.joinToString(",")
-            ?: ""
+        return propertyDescriptor
+            .type
+            .getFirstRegistrableInheritedResourceType()
+            ?.toString()
+            ?: throw IllegalStateException("Detected a resource type but couldn't find inherited resource type! This should never happen and it means there's a bug in the type detection")
     }
 }
