@@ -124,4 +124,17 @@ class TestingClass : Object() {
     @RegisterProperty
     @IntFlag("Flag1", "Flag2", "Flag3", "Flag4", "Flag5")
     var intFlag = FLAG_1 or FLAG_2 or FLAG_3 or 0 or blubb
+
+    @RegisterProperty
+    @MultilineText
+    var multiLineText = """
+        asdfökjasfdölkjasdflkjaf
+        asdöflkjnasölfkdj
+        asädfkjasödlfkjn
+        asdäfpkjasödflkjm
+    """.trimIndent()
+
+    @RegisterProperty
+    @PlaceHolderText
+    var placeholderText = "somePlaceHolderText"
 }

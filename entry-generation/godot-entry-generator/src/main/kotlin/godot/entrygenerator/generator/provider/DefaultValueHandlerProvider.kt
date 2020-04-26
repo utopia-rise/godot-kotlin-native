@@ -28,11 +28,28 @@ object DefaultValueHandlerProvider {
                     )
                 }
 
+            KotlinBuiltIns.isString(propertyDescriptor.type) ->
+                if (propertyDescriptor.annotations.hasAnnotation(FqName("godot.annotation.MultilineText"))) {
+                    MultiLineTextRegistrationValuesHandler(
+                        propertyDescriptor,
+                        bindingContext
+                    )
+                } else if (propertyDescriptor.annotations.hasAnnotation(FqName("godot.annotation.PlaceHolderText"))) {
+                    PlaceholderTextRegistrationValuesHandler(
+                        propertyDescriptor,
+                        bindingContext
+                    )
+                } else {
+                    PrimitiveRegistrationValuesHandler(
+                        propertyDescriptor,
+                        bindingContext
+                    )
+                }
+
             KotlinBuiltIns.isLong(propertyDescriptor.type)
                 || KotlinBuiltIns.isFloat(propertyDescriptor.type)
                 || KotlinBuiltIns.isDouble(propertyDescriptor.type)
-                || KotlinBuiltIns.isBoolean(propertyDescriptor.type)
-                || KotlinBuiltIns.isString(propertyDescriptor.type) -> PrimitiveRegistrationValuesHandler(
+                || KotlinBuiltIns.isBoolean(propertyDescriptor.type) -> PrimitiveRegistrationValuesHandler(
                 propertyDescriptor,
                 bindingContext
             )

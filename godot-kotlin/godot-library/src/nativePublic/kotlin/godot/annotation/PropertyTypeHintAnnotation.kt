@@ -128,16 +128,16 @@ annotation class Dir(val global: Boolean = false)
 /**
  * Can only be used on String properties!
  */
-//@Target(AnnotationTarget.PROPERTY)
-//@Retention(AnnotationRetention.RUNTIME)
-//annotation class MultilineText
+@Target(AnnotationTarget.PROPERTY)
+@Retention(AnnotationRetention.RUNTIME)
+annotation class MultilineText
 
 /**
  * Can only be used on String properties!
  */
-//@Target(AnnotationTarget.PROPERTY)
-//@Retention(AnnotationRetention.RUNTIME)
-//annotation class PlaceHolderText
+@Target(AnnotationTarget.PROPERTY)
+@Retention(AnnotationRetention.RUNTIME)
+annotation class PlaceHolderText
 
 /**
  * Can only be used on Color properties!
