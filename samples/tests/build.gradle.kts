@@ -19,9 +19,6 @@ plugins {
     kotlin("multiplatform") version "1.3.71"
 }
 
-godot {
-}
-
 val godotTaskGroup = "godot"
 val binaryOutputDir = "${project.buildDir}/godot/bin"
 
