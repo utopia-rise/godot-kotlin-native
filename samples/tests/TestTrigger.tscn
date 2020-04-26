@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://TestTrigger.gd" type="Script" id=1]
 [ext_resource path="res://tests/RegistrationTest.tscn" type="PackedScene" id=2]
@@ -7,6 +7,10 @@
 
 [sub_resource type="DynamicFont" id=1]
 size = 72
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
 font_data = ExtResource( 4 )
 
 [node name="TestTrigger" type="Node2D"]
@@ -27,16 +31,35 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
 
-[node name="Label" type="Label" parent="CanvasLayer/Control"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -291.0
-margin_top = -42.5
-margin_right = 291.0
-margin_bottom = 42.5
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer"]
+margin_top = 106.0
+margin_right = 1024.0
+margin_bottom = 191.0
+size_flags_vertical = 6
 custom_fonts/font = SubResource( 1 )
 text = "Executing Tests..."
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CurrentTest" type="Label" parent="CanvasLayer/Control/VBoxContainer"]
+margin_top = 302.0
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 2 )
+text = "Current Test:
+SomeTest"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

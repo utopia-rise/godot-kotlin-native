@@ -1,6 +1,8 @@
 extends Node2D
 class_name TestTrigger
 
+onready var currentTestLabel: Label = $CanvasLayer/Control/VBoxContainer/CurrentTest
+
 enum Result { OK, FAILED }
 
 export (Array,PackedScene) var tests := []
@@ -9,8 +11,9 @@ var results := []
 
 func _process(_delta) -> void:
 	for testScenePath in tests:
-		var testScene = testScenePath.instance()
+		var testScene: Node = testScenePath.instance()
 		add_child(testScene)
+		update_current_test_label(testScene.name)
 		yield(testScene, "tree_exited")
 	
 	var someTestsFailed = false
@@ -25,3 +28,6 @@ func _process(_delta) -> void:
 		get_tree().quit(1)
 	else:
 		get_tree().quit(0)
+
+func update_current_test_label(currentTest: String) -> void:
+	currentTestLabel.text = "Current Test:\n%s" % currentTest
