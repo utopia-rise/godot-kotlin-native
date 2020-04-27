@@ -208,10 +208,11 @@ class Class(
         val noArgConstructor = FunSpec.constructorBuilder()
             .callThisConstructor("null")
             .addStatement(
-                """if (shouldInit()) {
+                """if (%M()) {
                    |    this.ptr = %M("$name", "$oldName")
                    |}
                    |""".trimMargin(),
+                MemberName(ClassName("godot.core", "Godot"), "shouldInitPtr"),
                 MemberName("godot.internal.utils", "getConstructor")
             )
 
