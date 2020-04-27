@@ -30,7 +30,7 @@ val ignoreSamples: String? by extra
 // so they get included in IntelliJ IDEA!
 if (ignoreSamples == null) {
     includeBuild("samples/mini-games")
-    includeBuild("samples/tests")
+    includeBuild("tests")
 }
 
 class IncludeDsl(val root: String) {
