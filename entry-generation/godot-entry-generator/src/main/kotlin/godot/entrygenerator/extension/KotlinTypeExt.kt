@@ -17,6 +17,10 @@ fun KotlinType.isResource(): Boolean {
         .any { it == "godot.Resource" }
 }
 
+fun KotlinType.isAnyResourceType(): Boolean {
+    return resourceTypes.contains(this.getJetTypeFqName(false))
+}
+
 fun KotlinType.getFirstRegistrableInheritedResourceType(): KotlinType? {
     return if (resourceTypes.contains(this.getJetTypeFqName(false))) {
         this

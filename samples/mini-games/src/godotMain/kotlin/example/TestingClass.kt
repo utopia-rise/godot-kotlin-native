@@ -78,7 +78,7 @@ class TestingClass : Object() {
     var variantTest = Variant("test")
 
     @RegisterProperty
-    lateinit var resourceVisibleInEditor: CustomResource //should be registered as Texture as Custom resource derives from texture
+    lateinit var resourceVisibleInEditor: Texture //should be registered as Texture as Custom resource derives from texture
 
     @RegisterProperty(false)
     var resourceNotVisibleInEditor: Resource =
