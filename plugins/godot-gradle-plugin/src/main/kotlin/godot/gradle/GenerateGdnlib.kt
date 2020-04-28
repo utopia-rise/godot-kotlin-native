@@ -59,7 +59,7 @@ open class GenerateGdnlib : DefaultTask() {
             Platform.OSX_X64 -> "OSX.64"
             Platform.ANDROID_X64 -> "Android.x86_64"
             Platform.ANDROID_ARM64 -> "Android.arm64-v8a"
-            Platform.IOS_X64 -> "iOS.64" // not sure if Godot even supports this
+            Platform.IOS_X64 -> "iOS.64"
             Platform.IOS_ARM64 -> "iOS.arm64"
         }
     }
