@@ -78,27 +78,45 @@ class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>
 
 
     //API
+    /**
+     * Returns a new vector with all components in absolute values (i.e. positive).
+     */
     fun abs(): Vector3 {
         return Vector3(abs(x), abs(y), abs(z))
     }
 
+    /**
+     * Returns the minimum angle to the given vector.
+     */
     fun angleTo(to: Vector3): RealT {
         return atan2(cross(to).length(), dot(to))
     }
 
+    /**
+     * Returns the vector “bounced off” from a plane defined by the given normal.
+     */
     fun bounce(n: Vector3): Vector3 {
         return -reflect(n)
     }
 
+    /**
+     * Returns a new vector with all components rounded up.
+     */
     fun ceil(): Vector3 {
         return Vector3(ceil(x), ceil(y), ceil(z))
     }
 
-
+    /**
+     * Returns the cross product with b.
+     */
     fun cross(b: Vector3): Vector3 {
         return Vector3((y * b.z) - (z * b.y), (z * b.x) - (x * b.z), (x * b.y) - (y * b.x))
     }
 
+    /**
+     * Performs a cubic interpolation between vectors pre_a, a, b, post_b (a is current), by the given amount t.
+     * t is in the range of 0.0 - 1.0, representing the amount of interpolation.
+     */
     fun cubicInterpolate(b: Vector3, pre: Vector3, post: Vector3, t: Double): Vector3 {
         val p0: Vector3 = pre
         val p1: Vector3 = this
@@ -114,52 +132,91 @@ class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>
             (-p0 + p1 * 3.0 - p2 * 3.0 + p3) * t3) * 0.5
     }
 
+    /**
+     * Returns the normalized vector pointing from this vector to b.
+     */
     fun directionTo(other: Vector3): Vector3 {
         val ret = Vector3(other.x - x, other.y - y, other.z - z)
         ret.normalize()
         return ret
     }
 
+    /**
+     * Returns the squared distance to b.
+     * Prefer this function over distance_to if you need to sort vectors or need the squared distance for some formula.
+     */
     fun distanceSquaredTo(other: Vector3): RealT {
         return (other - this).lengthSquared()
     }
 
+    /**
+     * Returns the distance to b.
+     */
     fun distanceTo(other: Vector3): RealT {
         return (other - this).length()
     }
 
+    /**
+     * Returns the dot product with b.
+     */
     fun dot(b: Vector3): Double {
         return x * b.x + y * b.y + z * b.z
     }
 
+    /**
+     * Returns a new vector with all components rounded down.
+     */
     fun floor(): Vector3 {
         return Vector3(floor(x), floor(y), floor(z))
     }
 
+    /**
+     * Returns the inverse of the vector. This is the same as Vector3( 1.0 / v.x, 1.0 / v.y, 1.0 / v.z ).
+     */
     fun inverse(): Vector3 {
         return Vector3(1.0 / x, 1.0 / y, 1.0 / z)
     }
 
+    /**
+     * Returns true if this vector and v are approximately equal, by running isEqualApprox on each component.
+     */
     fun isEqualApprox(other: Vector3): Boolean {
         return isEqualApprox(other.x, x) && isEqualApprox(other.y, y) && isEqualApprox(other.z, z)
     }
 
+    /**
+     * Returns true if the vector is normalized.
+     */
     fun isNormalized(): Boolean {
         return isEqualApprox(this.length(), 1.0)
     }
 
+    /**
+     * Returns the vector’s length.
+     */
     fun length(): Double {
         return sqrt(x * x + y * y + z * z)
     }
 
+    /**
+     * Returns the vector’s length squared.
+     * Prefer this function over length if you need to sort vectors or need the squared length for some formula.
+     */
     fun lengthSquared(): Double {
         return x * x + y * y + z * z
     }
 
+    /**
+     * Returns the result of the linear interpolation between this vector and b by amount t.
+     * t is in the range of 0.0 - 1.0, representing the amount of interpolation.
+     */
     fun linearInterpolate(b: Vector3, t: Double): Vector3 {
         return Vector3(x + (t * (b.x - x)), y + (t * (b.y - y)), z + (t * (b.z - z)))
     }
 
+    /**
+     * Returns the axis of the vector’s largest value. See AXIS_* constants.
+     */
     fun maxAxis(): Int {
         return if (x < y) {
             if (y < z) {
@@ -176,6 +233,9 @@ class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>
         }
     }
 
+    /**
+     * Returns the axis of the vector’s smallest value. See AXIS_* constants.
+     */
     fun minAxis(): Int {
         return if (x < y) {
             if (x < z) {
@@ -192,6 +252,9 @@ class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>
         }
     }
 
+    /**
+     * Moves the vector toward to by the fixed delta amount.
+     */
     fun moveToward(to: Vector3, delta: RealT): Vector3 {
         val vd = to - this
         val len = vd.length()
@@ -202,6 +265,9 @@ class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>
         }
     }
 
+    /**
+     * Returns the vector scaled to unit length. Equivalent to v / v.length().
+     */
     fun normalized(): Vector3 {
         val v: Vector3 = this
         v.normalize()
@@ -221,30 +287,48 @@ class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>
         }
     }
 
+    /**
+     * Returns the outer product with b.
+     */
     fun outer(b: Vector3) = Basis(
         Vector3(x * b.x, x * b.y, x * b.z),
         Vector3(y * b.x, y * b.y, y * b.z),
         Vector3(z * b.x, z * b.y, z * b.z)
     )
 
+    /**
+     * Returns a vector composed of the fposmod of this vector’s components and mod.
+     */
     fun posmod(mod: RealT): Vector3 {
         return Vector3(x.rem(mod), y.rem(mod), z.rem(mod))
     }
 
+    /**
+     * Returns a vector composed of the fposmod of this vector’s components and modv’s components.
+     */
     fun posmodv(modv: Vector3): Vector3 {
         return Vector3(x.rem(modv.x), y.rem(modv.y), z.rem(modv.z))
     }
 
+    /**
+     * Returns the vector projected onto the vector b.
+     */
     fun project(vec: Vector3): Vector3 {
         val v1: Vector3 = vec
         val v2: Vector3 = this
         return v2 * (v1.dot(v2) / v2.dot(v2))
     }
 
+    /**
+     * Returns the vector reflected from a plane defined by the given normal.
+     */
     fun reflect(by: Vector3): Vector3 {
         return by - this * this.dot(by) * 2.0
     }
 
+    /**
+     * Rotates the vector around a given axis by phi radians. The axis must be a normalized vector.
+     */
     fun rotated(axis: Vector3, phi: Double): Vector3 {
         if (!axis.isNormalized()) {
             Godot.printError("Axis not normalized", "rotated()", "Vector3.kt", 251)
@@ -261,14 +345,26 @@ class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>
         this.z = ret.z
     }
 
+    /**
+     * Returns the vector with all components rounded to the nearest integer, with halfway cases rounded away from zero.
+     */
     fun round(): Vector3 {
         return Vector3(round(x), round(y), round(z))
     }
 
+    /**
+     * Returns the vector with each component set to one or negative one, depending on the signs of the components.
+     */
     fun sign(): Vector3 {
         return Vector3(sign(x), sign(y), sign(z))
     }
 
+    /**
+     * Returns the result of spherical linear interpolation between this vector and b, by amount t.
+     * t is in the range of 0.0 - 1.0, representing the amount of interpolation.
+     *
+     * Note: Both vectors must be normalized.
+     */
     fun slerp(b: Vector3, t: RealT): Vector3 {
         if (!this.isNormalized() || !b.isNormalized()) {
             Godot.printError("Vectors not normalized", "slerp()", "Vector3.kt", 275)
@@ -277,10 +373,16 @@ class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>
         return rotated(cross(b).normalized(), theta * t)
     }
 
+    /**
+     * Returns the component of the vector along a plane defined by the given normal.
+     */
     fun slide(vec: Vector3): Vector3 {
         return vec - this * this.dot(vec)
     }
 
+    /**
+     * Returns a copy of the vector snapped to the lowest neared multiple.
+     */
     fun snapped(by: Double): Vector3 {
         val v: Vector3 = this
         v.snap(by)
@@ -295,6 +397,9 @@ class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>
         }
     }
 
+    /**
+     * Returns a diagonal matrix with the vector as main diagonal.
+     */
     fun toDiagonalMatrix(): Basis {
         return Basis()
     }

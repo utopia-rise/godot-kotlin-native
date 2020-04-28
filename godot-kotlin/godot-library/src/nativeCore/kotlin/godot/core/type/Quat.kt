@@ -121,6 +121,9 @@ class Quat(var x: RealT, var y: RealT, var z: RealT, var w: RealT) : CoreType {
 
 
     //API
+    /**
+     * Performs a cubic spherical-linear interpolation with another quaternion.
+     */
     fun cubicSlerp(q: Quat, prep: Quat, postq: Quat, t: RealT): Quat {
         val t2: RealT = (1.0 - t) * t * 2
         val sp = this.slerp(q, t)
@@ -128,10 +131,16 @@ class Quat(var x: RealT, var y: RealT, var z: RealT, var w: RealT) : CoreType {
         return sp.slerpni(sq, t2)
     }
 
+    /**
+     * Returns the dot product of two quaternions.5
+     */
     fun dot(q: Quat): RealT {
         return x * q.x + y * q.y + z * q.z + w * q.w
     }
 
+    /**
+     * Returns Euler angles (in the YXZ convention: first Z, then X, and Y last) corresponding to the rotation represented by the unit quaternion. Returned vector contains the rotation angles in the format (X angle, Y angle, Z angle).
+     */
     fun getEuler(): Vector3 {
         return getEulerYxz()
     }
@@ -152,10 +161,16 @@ class Quat(var x: RealT, var y: RealT, var z: RealT, var w: RealT) : CoreType {
         return m.getEulerXyz()
     }
 
+    /**
+     * Returns the inverse of the quaternion.
+     */
     fun inverse(): Quat {
         return Quat(-x, -y, -z, -w)
     }
 
+    /**
+     * Returns true if this quaterion and quat are approximately equal, by running isEqualApprox on each component.
+     */
     fun isEqualApprox(other: Quat): Boolean {
         return isEqualApprox(other.x, x)
             && isEqualApprox(other.y, y)
@@ -163,18 +178,30 @@ class Quat(var x: RealT, var y: RealT, var z: RealT, var w: RealT) : CoreType {
             && isEqualApprox(other.w, w)
     }
 
+    /**
+     * Returns whether the quaternion is normalized or not.
+     */
     fun isNormalized(): Boolean {
         return abs(lengthSquared() - 1.0) < 0.00001
     }
 
+    /**
+     * Returns the length of the quaternion.
+     */
     fun length(): RealT {
         return sqrt(this.lengthSquared())
     }
 
+    /**
+     * Returns the length of the quaternion, squared.
+     */
     fun lengthSquared(): RealT {
         return dot(this)
     }
 
+    /**
+     * Returns a copy of the quaternion, normalized to unit length.
+     */
     fun normalized(): Quat {
         return this / this.length()
     }
@@ -187,6 +214,9 @@ class Quat(var x: RealT, var y: RealT, var z: RealT, var w: RealT) : CoreType {
         w /= l
     }
 
+    /**
+     * Sets the quaternion to a rotation which rotates around axis by the specified angle, in radians. The axis must be a normalized vector.
+     */
     fun setAxisAndAngle(axis: Vector3, angle: RealT) {
         if (!axis.isNormalized()) {
             Godot.printError("Vector $axis is not normalized", "setAxisAndAngle", "Quat.kt", 192)
@@ -203,6 +233,9 @@ class Quat(var x: RealT, var y: RealT, var z: RealT, var w: RealT) : CoreType {
         }
     }
 
+    /**
+     * Sets the quaternion to a rotation specified by Euler angles (in the YXZ convention: first Z, then X, and Y last), given in the vector format as (X angle, Y angle, Z angle).
+     */
     fun setEuler(p_euler: Vector3) {
         setEulerYxz(p_euler)
     }
@@ -261,6 +294,9 @@ class Quat(var x: RealT, var y: RealT, var z: RealT, var w: RealT) : CoreType {
         )
     }
 
+    /**
+     * Performs a spherical-linear interpolation with another quaternion.
+     */
     fun slerp(q: Quat, t: RealT): Quat {
         val to1 = Quat()
         val omega: RealT
@@ -305,6 +341,9 @@ class Quat(var x: RealT, var y: RealT, var z: RealT, var w: RealT) : CoreType {
         )
     }
 
+    /**
+     * Performs a spherical-linear interpolation with another quaterion without checking if the rotation path is not bigger than 90°.
+     */
     fun slerpni(q: Quat, t: RealT): Quat {
         val from = this
         val dot: RealT = from.dot(q)
@@ -324,6 +363,9 @@ class Quat(var x: RealT, var y: RealT, var z: RealT, var w: RealT) : CoreType {
         )
     }
 
+    /**
+     * Transforms the vector v by this quaternion.
+     */
     fun xform(v: Vector3): Vector3 {
         var q = this * v
         q *= this.inverse()

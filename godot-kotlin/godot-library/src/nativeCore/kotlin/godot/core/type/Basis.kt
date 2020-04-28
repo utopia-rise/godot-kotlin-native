@@ -153,12 +153,18 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
 
 
     //API
+    /**
+     * Returns the determinant of the matrix.
+     */
     fun determinant(): Double {
         return this[0][0] * (this[1][1] * this[2][2] - this[2][1] * this[1][2]) -
             this[1][0] * (this[0][1] * this[2][2] - this[2][1] * this[0][2]) +
             this[2][0] * (this[0][1] * this[1][2] - this[1][1] * this[0][2])
     }
 
+    /**
+     *
+     */
     fun getEuler(): Vector3 {
         return getEulerYxz()
     }
@@ -172,7 +178,7 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
      * so euler.z is the angle of the (first) rotation around Z axis and so on,
      *
      * And thus, assuming the matrix is a rotation matrix, this function returns
-     * the angles in the decomposition R = X(a1).Y(a2).Z(a3) where Z(a) rotates
+     * @return the angles in the decomposition R = X(a1).Y(a2).Z(a3) where Z(a) rotates
      */
     internal fun getEulerXyz(): Vector3 {
         // Euler angles in XYZ convention.
@@ -266,7 +272,12 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
     private fun isRotation(): Boolean =
         abs(determinant() - 1) < CMP_EPSILON && isOrthogonal()
 
-
+    /**
+     * This function considers a discretization of rotations into 24 points on unit sphere,
+     * lying along the vectors (x,y,z) with each component being either -1,0 or 1,
+     * and returns the index of the point best representing the orientation of the object.
+     * It is mainly used by the grid map editor. For further details, refer to Godot source code.
+     */
     fun getOrthogonalIndex(): Int {
         val orth = this
         for (i in 0..2) {
@@ -289,6 +300,9 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
         return 0
     }
 
+    /**
+     *
+     */
     fun getRotationQuat(): Quat {
         // Assumes that the matrix can be decomposed into a proper rotation and scaling matrix as M = R.S,
         // and returns the Euler angles corresponding to the rotation part, complementing get_scale().
@@ -303,6 +317,10 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
         return Quat(m)
     }
 
+    /**
+     * Assuming that the matrix is the combination of a rotation and scaling,
+     * return the absolute value of scaling factors along each axis.
+     */
     fun getScale(): Vector3 {
         // We are assuming M = R.S, and performing a polar decomposition to extract R and S.
         // FIXME: We eventually need a proper polar decomposition.
@@ -317,6 +335,9 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
         )
     }
 
+    /**
+     * Returns the inverse of the matrix.
+     */
     fun inverse(): Basis {
         val b = this
         b.invert()
@@ -351,7 +372,9 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
         )
     }
 
-
+    /**
+     *
+     */
     fun isEqualApprox(a: Basis, epsilon: Double = CMP_EPSILON): Boolean {
         //epsilon has to be Double instead of RealT because of CMP_EPSILON constant
         for (i in 0..2) {
@@ -364,6 +387,10 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
         return true
     }
 
+    /**
+     * Returns the orthonormalized version of the matrix (useful to call from time to time to avoid rounding error for orthogonal matrices).
+     * This performs a Gram-Schmidt orthonormalization on the basis of the matrix.
+     */
     fun orthonormalized(): Basis {
         val b = this
         b.orthonormalize()
@@ -400,6 +427,9 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
         this[2][axis] = value.z
     }
 
+    /**
+     * Introduce an additional rotation around the given axis by phi (radians). The axis must be a normalized vector.
+     */
     fun rotated(axis: Vector3, phi: Double): Basis {
         return Basis(axis, phi) * this
     }
@@ -411,6 +441,9 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
         this.z = ret.z
     }
 
+    /**
+     * Introduce an additional scaling specified by the given 3D scaling factor.
+     */
     fun scaled(scale: Vector3): Basis {
         val b = this
         b.scale(scale)
@@ -429,6 +462,9 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
         this[2][2] *= scale.z
     }
 
+    /**
+     *
+     */
     fun setEuler(p_euler: Vector3) {
         setEulerYxz(p_euler)
     }
@@ -439,7 +475,7 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
      * and similar for other axes.
      * The current implementation uses XYZ convention (Z is the first rotation).
      */
-    fun setEulerXyz(euler: Vector3) {
+    internal fun setEulerXyz(euler: Vector3) {
 
         var c: Double = cos(euler.x)
         var s: Double = sin(euler.x)
@@ -467,7 +503,7 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
      * and similar for other axes.
      * The current implementation uses YXZ convention (Z is the first rotation).
      */
-    fun setEulerYxz(euler: Vector3) {
+    internal fun setEulerYxz(euler: Vector3) {
         var c: Double = cos(euler.x)
         var s: Double = sin(euler.x)
 
@@ -488,6 +524,9 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
         this.z = ret.z
     }
 
+    /**
+     *
+     */
     fun setOrthogonalIndex(index: Int) {
         if (index >= 24) {
             Godot.printError("index >= 24", "setOrthogonalIndex($index)", "Basis.kt", 493)
@@ -499,6 +538,9 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
         this.z = ret.z
     }
 
+    /**
+     * Assuming that the matrix is a proper rotation matrix, slerp performs a spherical-linear interpolation with another rotation matrix.
+     */
     fun slerp(b: Basis, t: RealT): Basis {
         if (!this.isRotation()) {
             Godot.printError("Basis is not a rotation", "slerp()", "Basis.kt", 504)
@@ -515,18 +557,30 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
         return ret;
     }
 
+    /**
+     * Transposed dot product with the x axis of the matrix.
+     */
     fun tdotx(v: Vector3): Double {
         return this[0][0] * v[0] + this[1][0] * v[1] + this[2][0] * v[2]
     }
 
+    /**
+     * Transposed dot product with the y axis of the matrix.
+     */
     fun tdoty(v: Vector3): Double {
         return this[0][1] * v[0] + this[1][1] * v[1] + this[2][1] * v[2]
     }
 
+    /**
+     * Transposed dot product with the z axis of the matrix.
+     */
     fun tdotz(v: Vector3): Double {
         return this[0][2] * v[0] + this[1][2] * v[1] + this[2][2] * v[2]
     }
 
+    /**
+     * Returns the transposed version of the matrix.
+     */
     fun transposed(): Basis {
         val b = this
         b.transpose()
@@ -539,6 +593,9 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
         this[1][2] = this[2][1].also { this[2][1] = this[1][2] }
     }
 
+    /**
+     * Returns a vector transformed (multiplied) by the matrix.
+     */
     fun xform(vector: Vector3): Vector3 =
         Vector3(
             this[0].dot(vector),
@@ -546,6 +603,10 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
             this[2].dot(vector)
         )
 
+    /**
+     * Returns a vector transformed (multiplied) by the transposed matrix.
+     * Note that this results in a multiplication by the inverse of the matrix only if it represents a rotation-reflection.
+     */
     fun xformInv(vector: Vector3): Vector3 =
         Vector3(
             (this[0][0] * vector.x) + (this[1][0] * vector.y) + (this[2][0] * vector.z),
