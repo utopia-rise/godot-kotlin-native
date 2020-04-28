@@ -11,7 +11,8 @@ import kotlin.math.*
 class Quat(var x: RealT, var y: RealT, var z: RealT, var w: RealT) : CoreType {
     //CONSTANTS
     companion object {
-        val IDENTITY = Quat(0.0, 0.0, 0.0, 1.0)
+        val IDENTITY: Quat
+            get() = Quat(0.0, 0.0, 0.0, 1.0)
     }
 
 
@@ -22,7 +23,7 @@ class Quat(var x: RealT, var y: RealT, var z: RealT, var w: RealT) : CoreType {
     constructor(x: Number, y: Number, z: Number, w: Number = 1.0) :
         this(x.toRealT(), y.toRealT(), z.toRealT(), w.toRealT())
 
-    constructor(from: Basis): this() {
+    constructor(from: Basis) : this() {
         val trace = from[0][0] + from[1][1] + from[2][2]
         val temp: DoubleArray
 
@@ -56,10 +57,11 @@ class Quat(var x: RealT, var y: RealT, var z: RealT, var w: RealT) : CoreType {
         set(temp[0], temp[1], temp[2], temp[3])
     }
 
-    constructor(axis: Vector3, angle: RealT): this() {
+    constructor(axis: Vector3, angle: RealT) : this() {
         val d: RealT = axis.length()
-        if (d == 0.0) set(0.0, 0.0, 0.0, 0.0)
-        else {
+        if (d == 0.0) {
+            set(0.0, 0.0, 0.0, 0.0)
+        } else {
             val sinAngle: RealT = sin(angle * 0.5)
             val cosAngle: RealT = cos(angle * 0.5)
             val s: RealT = sinAngle / d
@@ -67,7 +69,7 @@ class Quat(var x: RealT, var y: RealT, var z: RealT, var w: RealT) : CoreType {
         }
     }
 
-    constructor(v0: Vector3, v1: Vector3): this() {
+    constructor(v0: Vector3, v1: Vector3) : this() {
         val c = v0.cross(v1)
         val d = v0.dot(v1)
 
@@ -93,7 +95,7 @@ class Quat(var x: RealT, var y: RealT, var z: RealT, var w: RealT) : CoreType {
         }
     }
 
-    internal constructor(mem: COpaquePointer): this() {
+    internal constructor(mem: COpaquePointer) : this() {
         this.setRawMemory(mem)
     }
 
@@ -134,10 +136,12 @@ class Quat(var x: RealT, var y: RealT, var z: RealT, var w: RealT) : CoreType {
         return getEulerYxz()
     }
 
-    // getEulerYxz returns a vector containing the Euler angles in the format
-    // (ax,ay,az), where ax is the angle of rotation around x axis,
-    // and similar for other axes.
-    // This implementation uses YXZ convention (Z is the first rotation).
+    /**
+     * getEulerYxz returns a vector containing the Euler angles in the format
+     *(ax,ay,az), where ax is the angle of rotation around x axis,
+     * and similar for other axes.
+     * This implementation uses YXZ convention (Z is the first rotation).
+     */
     internal fun getEulerYxz(): Vector3 {
         val m = Basis(this)
         return m.getEulerYxz()
@@ -185,7 +189,7 @@ class Quat(var x: RealT, var y: RealT, var z: RealT, var w: RealT) : CoreType {
 
     fun setAxisAndAngle(axis: Vector3, angle: RealT) {
         if (!axis.isNormalized()) {
-            Godot.printError("Vector $axis is not normalized", "setAxisAndAngle", "Quat.kt", 176)
+            Godot.printError("Vector $axis is not normalized", "setAxisAndAngle", "Quat.kt", 192)
         }
 
         val d = axis.length()
@@ -203,10 +207,12 @@ class Quat(var x: RealT, var y: RealT, var z: RealT, var w: RealT) : CoreType {
         setEulerYxz(p_euler)
     }
 
-    // setEulerXyz expects a vector containing the Euler angles in the format
-    // (ax,ay,az), where ax is the angle of rotation around x axis,
-    // and similar for other axes.
-    // This implementation uses XYZ convention (Z is the first rotation).
+    /**
+     * setEulerXyz expects a vector containing the Euler angles in the format
+     * (ax,ay,az), where ax is the angle of rotation around x axis,
+     * and similar for other axes.
+     * This implementation uses XYZ convention (Z is the first rotation).
+     */
     internal fun setEulerXyz(p_euler: Vector3) {
         val half1: RealT = p_euler.x * 0.5
         val half2: RealT = p_euler.y * 0.5
@@ -366,7 +372,7 @@ class Quat(var x: RealT, var y: RealT, var z: RealT, var w: RealT) : CoreType {
         }
 
     override fun toString(): String {
-        return ""
+        return "($x, $y, $z, $w)"
     }
 
     override fun hashCode(): Int {

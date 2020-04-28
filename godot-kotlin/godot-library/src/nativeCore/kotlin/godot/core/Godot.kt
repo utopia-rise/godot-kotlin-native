@@ -95,7 +95,6 @@ object Godot {
 
     internal fun printError(description: String, function: String, file: String, line: Int, exception: Exception) {
         godot_print_error(description, function, file, line)
-        throw exception
     }
 
     internal fun printError(description: String, function: String, file: String, line: Int) {

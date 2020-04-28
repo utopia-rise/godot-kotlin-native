@@ -12,11 +12,16 @@ import kotlin.math.*
 class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
     //CONSTANTS
     companion object {
-        val IDENTITY = Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)
-        val FLIP_X = Basis(-1, 0, 0, 0, 1, 0, 0, 0, 1)
-        val FLIP_Y = Basis(1, 0, 0, 0, -1, 0, 0, 0, 1)
-        val FLIP_Z = Basis(1, 0, 0, 0, 1, 0, 0, 0, -1)
+        val IDENTITY: Basis
+            get() = Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)
+        val FLIP_X: Basis
+            get() = Basis(-1, 0, 0, 0, 1, 0, 0, 0, 1)
+        val FLIP_Y: Basis
+            get() = Basis(1, 0, 0, 0, -1, 0, 0, 0, 1)
+        val FLIP_Z: Basis
+            get() = Basis(1, 0, 0, 0, 1, 0, 0, 0, -1)
 
+        //used internally by a few methods
         private val orthoBases: Array<Basis> =
             arrayOf(
                 Basis(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0),
@@ -61,8 +66,7 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
         zx: Number,
         zy: Number,
         zz: Number
-    ) :
-        this(Vector3(xx, xy, xz), Vector3(yx, yy, yz), Vector3(zx, zy, zz))
+    ) : this(Vector3(xx, xy, xz), Vector3(yx, yy, yz), Vector3(zx, zy, zz))
 
 
     constructor(from: Vector3) : this() {
@@ -159,15 +163,17 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
         return getEulerYxz()
     }
 
-    // getEulerXyz returns a vector containing the Euler angles in the format
-    // (a1,a2,a3), where a3 is the angle of the first rotation, and a1 is the last
-    // (following the convention they are commonly defined in the literature).
-    //
-    // The current implementation uses XYZ convention (Z is the first rotation),
-    // so euler.z is the angle of the (first) rotation around Z axis and so on,
-    //
-    // And thus, assuming the matrix is a rotation matrix, this function returns
-    // the angles in the decomposition R = X(a1).Y(a2).Z(a3) where Z(a) rotates
+    /**
+     * getEulerXyz returns a vector containing the Euler angles in the format
+     * (a1,a2,a3), where a3 is the angle of the first rotation, and a1 is the last
+     * (following the convention they are commonly defined in the literature).
+     *
+     * The current implementation uses XYZ convention (Z is the first rotation),
+     * so euler.z is the angle of the (first) rotation around Z axis and so on,
+     *
+     * And thus, assuming the matrix is a rotation matrix, this function returns
+     * the angles in the decomposition R = X(a1).Y(a2).Z(a3) where Z(a) rotates
+     */
     internal fun getEulerXyz(): Vector3 {
         // Euler angles in XYZ convention.
         // See https://en.wikipedia.org/wiki/Euler_angles#Rotation_matrix
@@ -194,20 +200,22 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
                 }
             } else {
                 euler.x = -atan2(this[0][1], this[1][1])
-                euler.y = (-Math_PI).toDouble() / 2.0
+                euler.y = (-PI).toDouble() / 2.0
                 euler.z = 0.0
             }
         } else {
             euler.x = atan2(this[0][1], this[1][1])
-            euler.y = Math_PI.toDouble() / 2.0
+            euler.y = PI.toDouble() / 2.0
             euler.z = 0.0
         }
         return euler
     }
 
-    // getEulerYxz returns a vector containing the Euler angles in the YXZ convention,
-    // as in first-Z, then-X, last-Y. The angles for X, Y, and Z rotations are returned
-    // as the x, y, and z components of a Vector3 respectively.
+    /**
+     * getEulerYxz returns a vector containing the Euler angles in the YXZ convention,
+     * as in first-Z, then-X, last-Y. The angles for X, Y, and Z rotations are returned
+     * as the x, y, and z components of a Vector3 respectively.
+     */
     internal fun getEulerYxz(): Vector3 {
 
         // Euler angles in YXZ convention.
@@ -235,12 +243,12 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
                     euler.z = atan2(this[1][0], this[1][1])
                 }
             } else { // m12 == -1
-                euler.x = Math_PI.toDouble() * 0.5
+                euler.x = PI.toDouble() * 0.5
                 euler.y = -atan2(-this[0][1], this[0][0])
                 euler.z = 0.0
             }
         } else { // m12 == 1
-            euler.x = (-Math_PI).toDouble() * 0.5
+            euler.x = (-PI).toDouble() * 0.5
             euler.y = -atan2(-this[0][1], this[0][0])
             euler.z = 0.0
         }
@@ -273,18 +281,15 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
             }
         }
 
-        for (i in 0..23)
-            if (orthoBases[i] == orth)
+        for (i in 0..23) {
+            if (orthoBases[i] == orth) {
                 return i
-
+            }
+        }
         return 0
     }
 
     fun getRotationQuat(): Quat {
-        // Assumes that the matrix can be decomposed into a proper rotation and scaling matrix as M = R.S,
-        // and returns the Euler angles corresponding to the rotation part, complementing get_scale().
-        // See the comment in get_scale() for further information.
-
         // Assumes that the matrix can be decomposed into a proper rotation and scaling matrix as M = R.S,
         // and returns the Euler angles corresponding to the rotation part, complementing get_scale().
         // See the comment in get_scale() for further information.
@@ -319,8 +324,9 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
     }
 
     internal fun invert() {
-        fun cofac(row1: Int, col1: Int, row2: Int, col2: Int) =
-            this[row1][col1] * this[row2][col2] - this[row1][col2] * this[row2][col1]
+        fun cofac(row1: Int, col1: Int, row2: Int, col2: Int): RealT {
+            return this[row1][col1] * this[row2][col2] - this[row1][col2] * this[row2][col1]
+        }
 
         val co: DoubleArray = doubleArrayOf(
             cofac(1, 1, 2, 2),
@@ -345,8 +351,9 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
         )
     }
 
-    //epsilon has to be Double instead of RealT because of CMP_EPSILON constant
+
     fun isEqualApprox(a: Basis, epsilon: Double = CMP_EPSILON): Boolean {
+        //epsilon has to be Double instead of RealT because of CMP_EPSILON constant
         for (i in 0..2) {
             for (j in 0..2) {
                 if (isEqualApprox(this[i][j], a[i][j], epsilon)) {
@@ -365,7 +372,7 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
 
     internal fun orthonormalize() {
         if (determinant() == 0.0) {
-            Godot.printError("determinant == 0\n", "orthonormalize()", "Basis.kt", 464)
+            Godot.printError("determinant == 0\n", "orthonormalize()", "Basis.kt", 375)
             return
         }
 
@@ -426,10 +433,12 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
         setEulerYxz(p_euler)
     }
 
-    // setEulerXyz expects a vector containing the Euler angles in the format
-    // (ax,ay,az), where ax is the angle of rotation around x axis,
-    // and similar for other axes.
-    // The current implementation uses XYZ convention (Z is the first rotation).
+    /**
+     * setEulerXyz expects a vector containing the Euler angles in the format
+     * (ax,ay,az), where ax is the angle of rotation around x axis,
+     * and similar for other axes.
+     * The current implementation uses XYZ convention (Z is the first rotation).
+     */
     fun setEulerXyz(euler: Vector3) {
 
         var c: Double = cos(euler.x)
@@ -452,10 +461,12 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
         this.z = ret.z
     }
 
-    // setEulerYxz expects a vector containing the Euler angles in the format
-    // (ax,ay,az), where ax is the angle of rotation around x axis,
-    // and similar for other axes.
-    // The current implementation uses YXZ convention (Z is the first rotation).
+    /**
+     * setEulerYxz expects a vector containing the Euler angles in the format
+     * (ax,ay,az), where ax is the angle of rotation around x axis,
+     * and similar for other axes.
+     * The current implementation uses YXZ convention (Z is the first rotation).
+     */
     fun setEulerYxz(euler: Vector3) {
         var c: Double = cos(euler.x)
         var s: Double = sin(euler.x)
@@ -479,7 +490,7 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
 
     fun setOrthogonalIndex(index: Int) {
         if (index >= 24) {
-            Godot.printError("index >= 24", "setOrthogonalIndex($index)", "Basis.kt", 482)
+            Godot.printError("index >= 24", "setOrthogonalIndex($index)", "Basis.kt", 493)
             return
         }
         val ret = orthoBases[index]
@@ -489,8 +500,9 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
     }
 
     fun slerp(b: Basis, t: RealT): Basis {
-        if (!this.isRotation())
-            Godot.printError("Basis is not a rotation", "slerp()", "Basis.kt", 493)
+        if (!this.isRotation()) {
+            Godot.printError("Basis is not a rotation", "slerp()", "Basis.kt", 504)
+        }
 
         val from = Quat(this)
         val to = Quat(b)

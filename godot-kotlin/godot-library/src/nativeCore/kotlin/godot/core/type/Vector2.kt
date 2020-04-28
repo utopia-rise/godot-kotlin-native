@@ -8,16 +8,28 @@ import kotlin.math.*
 
 class Vector2(var x: RealT, var y: RealT) : Comparable<Vector2>, CoreType {
     //CONSTANTS
+    enum class Axis(private val value: Int) {
+        X(0),
+        Y(1);
+    }
+
     companion object {
-        const val AXIS_X: Int = 0
-        const val AXIS_Y: Int = 1
-        val ZERO = Vector2(0, 0)
-        val ONE = Vector2(1, 1)
-        val INF = Vector2(RealT.POSITIVE_INFINITY, RealT.POSITIVE_INFINITY)
-        val LEFT = Vector2(-1, 0)
-        val RIGHT = Vector2(1, 0)
-        val UP = Vector2(0, -1)
-        val DOWN = Vector2(0, 1)
+        val AXIS_X = Axis.X
+        val AXIS_Y = Axis.Y
+        val ZERO: Vector2
+            get() = Vector2(0, 0)
+        val ONE: Vector2
+            get() = Vector2(1, 1)
+        val INF: Vector2
+            get() = Vector2(RealT.POSITIVE_INFINITY, RealT.POSITIVE_INFINITY)
+        val LEFT: Vector2
+            get() = Vector2(-1, 0)
+        val RIGHT: Vector2
+            get() = Vector2(1, 0)
+        val UP: Vector2
+            get() = Vector2(0, -1)
+        val DOWN: Vector2
+            get() = Vector2(0, 1)
     }
 
 
@@ -224,8 +236,9 @@ class Vector2(var x: RealT, var y: RealT) : Comparable<Vector2>, CoreType {
     }
 
     fun slerp(b: Vector2, t: RealT): Vector2 {
-        if (!this.isNormalized() || !b.isNormalized())
-            Godot.printError("Vectors not normalized", "slerp()", "Vector2.kt", 228)
+        if (!this.isNormalized() || !b.isNormalized()) {
+            Godot.printError("Vectors not normalized", "slerp()", "Vector2.kt", 240)
+        }
         val theta: RealT = angleTo(b)
         return rotated((theta * t))
     }
@@ -236,9 +249,7 @@ class Vector2(var x: RealT, var y: RealT) : Comparable<Vector2>, CoreType {
 
     fun snapped(by: Vector2): Vector2 {
         val newX: RealT = if (by.x != 0.0) floor(x / by.x + 0.5) else x
-
         val newY = if (by.y != 0.0) floor(y / by.y + 0.5) else y
-
         return Vector2(newX, newY)
     }
 
@@ -304,8 +315,13 @@ class Vector2(var x: RealT, var y: RealT) : Comparable<Vector2>, CoreType {
             }
         }
 
-    override fun toString() = "$x, $y"
-    override fun hashCode(): Int = this.toString().hashCode()
+    override fun toString(): String {
+        return "($x, $y)"
+    }
+
+    override fun hashCode(): Int {
+        return this.toString().hashCode()
+    }
 }
 
 operator fun RealT.times(vec: Vector2) = vec * this

@@ -10,19 +10,34 @@ import kotlin.math.*
 
 class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>, CoreType {
     //CONSTANTS
+    enum class Axis(private val value: Int) {
+        X(0),
+        Y(1),
+        Z(2);
+    }
+
     companion object {
-        const val AXIS_X: Int = 0
-        const val AXIS_Y: Int = 1
-        const val AXIS_Z: Int = 2
-        val ZERO = Vector3(0, 0, 0)
-        val ONE = Vector3(1, 1, 1)
-        val INF = Vector3(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY)
-        val LEFT = Vector3(-1, 0, 0)
-        val RIGHT = Vector3(1, 0, 0)
-        val UP = Vector3(0, 1, 0)
-        val DOWN = Vector3(0, -1, 0)
-        val FORWARD = Vector3(0, 0, -1)
-        val BACK = Vector3(0, 0, 1)
+        val AXIS_X = Axis.X
+        val AXIS_Y = Axis.Y
+        val AXIS_Z = Axis.Z
+        val ZERO: Vector3
+            get() = Vector3(0, 0, 0)
+        val ONE: Vector3
+            get() = Vector3(1, 1, 1)
+        val INF: Vector3
+            get() = Vector3(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY)
+        val LEFT: Vector3
+            get() = Vector3(-1, 0, 0)
+        val RIGHT: Vector3
+            get() = Vector3(1, 0, 0)
+        val UP: Vector3
+            get() = Vector3(0, 1, 0)
+        val DOWN: Vector3
+            get() = Vector3(0, -1, 0)
+        val FORWARD: Vector3
+            get() = Vector3(0, 0, -1)
+        val BACK: Vector3
+            get() = Vector3(0, 0, 1)
     }
 
 
@@ -145,27 +160,46 @@ class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>
         return Vector3(x + (t * (b.x - x)), y + (t * (b.y - y)), z + (t * (b.z - z)))
     }
 
-    fun maxAxis() = if (x < y) {
-        if (y < z) 2 else 1
-    } else {
-        if (x < z) 2 else 0
+    fun maxAxis(): Int {
+        return if (x < y) {
+            if (y < z) {
+                2
+            } else {
+                1
+            }
+        } else {
+            if (x < z) {
+                2
+            } else {
+                0
+            }
+        }
     }
 
-    fun minAxis() = if (x < y) {
-        if (x < z) 0
-        else 2
-    } else {
-        if (y < z) 1
-        else 2
+    fun minAxis(): Int {
+        return if (x < y) {
+            if (x < z) {
+                0
+            } else {
+                2
+            }
+        } else {
+            if (y < z) {
+                1
+            } else {
+                2
+            }
+        }
     }
 
     fun moveToward(to: Vector3, delta: RealT): Vector3 {
         val vd = to - this
         val len = vd.length()
-        return if (len <= delta || len < CMP_EPSILON)
+        return if (len <= delta || len < CMP_EPSILON) {
             to
-        else
+        } else {
             this + vd / len * delta
+        }
     }
 
     fun normalized(): Vector3 {
@@ -212,8 +246,9 @@ class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>
     }
 
     fun rotated(axis: Vector3, phi: Double): Vector3 {
-        if (!axis.isNormalized())
-            Godot.printError("Axis not normalized", "rotated()", "Vector3.kt", 216)
+        if (!axis.isNormalized()) {
+            Godot.printError("Axis not normalized", "rotated()", "Vector3.kt", 251)
+        }
         val v = this
         v.rotate(axis, phi)
         return v
@@ -235,8 +270,9 @@ class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>
     }
 
     fun slerp(b: Vector3, t: RealT): Vector3 {
-        if (!this.isNormalized() || !b.isNormalized())
-            Godot.printError("Vectors not normalized", "slerp()", "Vector3.kt", 239)
+        if (!this.isNormalized() || !b.isNormalized()) {
+            Godot.printError("Vectors not normalized", "slerp()", "Vector3.kt", 275)
+        }
         val theta: RealT = angleTo(b)
         return rotated(cross(b).normalized(), theta * t)
     }
@@ -259,7 +295,7 @@ class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>
         }
     }
 
-    fun to_diagonal_matrix(): Basis {
+    fun toDiagonalMatrix(): Basis {
         return Basis()
     }
 
@@ -328,9 +364,13 @@ class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>
             }
     }
 
-    override fun toString() = "($x, $y, $z)"
+    override fun toString(): String {
+        return "($x, $y, $z)"
+    }
 
-    override fun hashCode(): Int = this.toString().hashCode()
+    override fun hashCode(): Int {
+        return this.toString().hashCode()
+    }
 }
 
 operator fun Double.times(vecec: Vector3) = vecec * this
