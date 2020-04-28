@@ -22,7 +22,7 @@ class Quat(var x: RealT, var y: RealT, var z: RealT, var w: RealT) : CoreType {
     constructor(x: Number, y: Number, z: Number, w: Number = 1.0) :
         this(x.toRealT(), y.toRealT(), z.toRealT(), w.toRealT())
 
-    constructor(from: Basis) {
+    constructor(from: Basis): this() {
         val trace = from[0][0] + from[1][1] + from[2][2]
         val temp: DoubleArray
 
@@ -53,10 +53,10 @@ class Quat(var x: RealT, var y: RealT, var z: RealT, var w: RealT) : CoreType {
             temp[j] = (from[j][i] + from[i][j]) * s
             temp[k] = (from[k][i] + from[i][k]) * s
         }
-        Quat(temp[0], temp[1], temp[2], temp[3])
+        set(temp[0], temp[1], temp[2], temp[3])
     }
 
-    constructor(axis: Vector3, angle: RealT) {
+    constructor(axis: Vector3, angle: RealT): this() {
         val d: RealT = axis.length()
         if (d == 0.0) set(0.0, 0.0, 0.0, 0.0)
         else {
@@ -67,7 +67,7 @@ class Quat(var x: RealT, var y: RealT, var z: RealT, var w: RealT) : CoreType {
         }
     }
 
-    constructor(v0: Vector3, v1: Vector3) {
+    constructor(v0: Vector3, v1: Vector3): this() {
         val c = v0.cross(v1)
         val d = v0.dot(v1)
 
@@ -93,7 +93,7 @@ class Quat(var x: RealT, var y: RealT, var z: RealT, var w: RealT) : CoreType {
         }
     }
 
-    internal constructor(mem: COpaquePointer) {
+    internal constructor(mem: COpaquePointer): this() {
         this.setRawMemory(mem)
     }
 

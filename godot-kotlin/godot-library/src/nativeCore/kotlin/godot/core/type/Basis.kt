@@ -517,7 +517,6 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
 
     fun transposed(): Basis {
         val b = this
-        3
         b.transpose()
         return b
     }
