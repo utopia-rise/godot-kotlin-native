@@ -10,16 +10,16 @@ import kotlin.math.*
 
 class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>, CoreType {
     //CONSTANTS
-    enum class Axis(private val value: Int) {
+    enum class Axis(val value: Int) {
         X(0),
         Y(1),
         Z(2);
     }
 
     companion object {
-        val AXIS_X = Axis.X
-        val AXIS_Y = Axis.Y
-        val AXIS_Z = Axis.Z
+        val AXIS_X = Axis.X.value
+        val AXIS_Y = Axis.Y.value
+        val AXIS_Z = Axis.Z.value
         val ZERO: Vector3
             get() = Vector3(0, 0, 0)
         val ONE: Vector3

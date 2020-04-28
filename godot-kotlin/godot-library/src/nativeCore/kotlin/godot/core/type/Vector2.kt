@@ -8,14 +8,14 @@ import kotlin.math.*
 
 class Vector2(var x: RealT, var y: RealT) : Comparable<Vector2>, CoreType {
     //CONSTANTS
-    enum class Axis(private val value: Int) {
+    enum class Axis(val value: Int) {
         X(0),
         Y(1);
     }
 
     companion object {
-        val AXIS_X = Axis.X
-        val AXIS_Y = Axis.Y
+        val AXIS_X = Axis.X.value
+        val AXIS_Y = Axis.Y.value
         val ZERO: Vector2
             get() = Vector2(0, 0)
         val ONE: Vector2
