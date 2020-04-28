@@ -4,8 +4,6 @@ import com.beust.klaxon.Json
 import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import java.io.File
-import kotlin.contracts.ExperimentalContracts
-import kotlin.contracts.contract
 
 
 class Class(
@@ -93,10 +91,11 @@ class Class(
     }
 
     private fun createTypeBuilder(className: ClassName, packageName: String): TypeSpec.Builder {
-        return TypeSpec
+        val typeSpec = TypeSpec
             .classBuilder(className)
             .addModifiers(KModifier.OPEN)
-            .superclass(ClassName(packageName, if (baseClass.isEmpty()) "GodotObject" else baseClass))
+        if (baseClass.isNotEmpty()) typeSpec.superclass(ClassName(packageName, baseClass))
+        return typeSpec
     }
 
     private fun generatePointerVariable(typeBuilder: TypeSpec.Builder) {
