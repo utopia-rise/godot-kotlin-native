@@ -1,16 +1,19 @@
 package godot.codegen
 
-import com.beust.klaxon.Json
+import com.fasterxml.jackson.annotation.JsonCreator
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.fasterxml.jackson.annotation.JsonProperty
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.MemberName
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.PropertySpec
 
 
-class Signal(
-    @Json(name = "name")
+@JsonIgnoreProperties(ignoreUnknown = true)
+class Signal @JsonCreator constructor(
+    @JsonProperty("name")
     var name: String,
-    @Json(name = "arguments")
+    @JsonProperty("arguments")
     val arguments: List<SignalArgument>
 ) {
 

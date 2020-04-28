@@ -1,14 +1,17 @@
 package godot.codegen
 
-import com.beust.klaxon.Json
+import com.fasterxml.jackson.annotation.JsonCreator
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.fasterxml.jackson.annotation.JsonProperty
 import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.TypeSpec
 
 
-class Enum(
-    @Json(name = "name")
+@JsonIgnoreProperties(ignoreUnknown = true)
+class Enum @JsonCreator constructor(
+    @JsonProperty("name")
     var name: String,
-    @Json(name = "values")
+    @JsonProperty("values")
     var values: Map<String, Int>
 ) {
 

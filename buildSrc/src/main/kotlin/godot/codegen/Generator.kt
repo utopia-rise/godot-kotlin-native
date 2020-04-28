@@ -1,6 +1,7 @@
 package godot.codegen
 
-import com.beust.klaxon.Klaxon
+import com.fasterxml.jackson.core.type.TypeReference
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import java.io.File
@@ -9,7 +10,7 @@ import java.io.File
 object Generator {
 
     fun generate(source: File, outputDir: File) {
-        val classes: List<Class> = Klaxon().parseArray(source.readText())!!
+        val classes: List<Class> = ObjectMapper().readValue(source, object : TypeReference<ArrayList<Class>>() {})
 
         val tree = classes.buildTree()
         val icalls = mutableSetOf<ICall>()

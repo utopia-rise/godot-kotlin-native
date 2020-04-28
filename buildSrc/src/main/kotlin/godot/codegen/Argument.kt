@@ -1,16 +1,19 @@
 package godot.codegen
 
-import com.beust.klaxon.Json
+import com.fasterxml.jackson.annotation.JsonCreator
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.fasterxml.jackson.annotation.JsonProperty
 
 
-class Argument(
-    @Json(name = "name")
+@JsonIgnoreProperties(ignoreUnknown = true)
+class Argument @JsonCreator constructor(
+    @JsonProperty("name")
     var name: String,
-    @Json(name = "type")
+    @JsonProperty("type")
     var type: String,
-    @Json(name = "has_default_value")
+    @JsonProperty("has_default_value")
     val hasDefaultValue: Boolean = false,
-    @Json(name = "default_value")
+    @JsonProperty("default_value")
     var defaultValue: String = ""
 ) {
     val nullable: Boolean

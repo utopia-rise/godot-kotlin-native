@@ -1,20 +1,23 @@
 package godot.codegen
 
-import com.beust.klaxon.Json
+import com.fasterxml.jackson.annotation.JsonCreator
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.fasterxml.jackson.annotation.JsonProperty
 import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 
 
-open class Method(
-    @Json(name = "name")
+@JsonIgnoreProperties(ignoreUnknown = true)
+open class Method @JsonCreator constructor(
+    @JsonProperty("name")
     var name: String,
-    @Json(name = "return_type")
+    @JsonProperty("return_type")
     var returnType: String,
-    @Json(name = "is_virtual")
+    @JsonProperty("is_virtual")
     val isVirtual: Boolean,
-    @Json(name = "has_varargs")
+    @JsonProperty("has_varargs")
     val hasVarargs: Boolean,
-    @Json(name = "arguments")
+    @JsonProperty("arguments")
     val arguments: List<Argument>
 ) {
 

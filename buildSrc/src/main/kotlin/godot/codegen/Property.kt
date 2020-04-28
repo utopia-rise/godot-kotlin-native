@@ -1,20 +1,23 @@
 package godot.codegen
 
-import com.beust.klaxon.Json
+import com.fasterxml.jackson.annotation.JsonCreator
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.fasterxml.jackson.annotation.JsonProperty
 import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 
 
-class Property(
-    @Json(name = "name")
+@JsonIgnoreProperties(ignoreUnknown = true)
+class Property @JsonCreator constructor(
+    @JsonProperty("name")
     var name: String,
-    @Json(name = "type")
+    @JsonProperty("type")
     var type: String,
-    @Json(name = "getter")
+    @JsonProperty("getter")
     var getter: String,
-    @Json(name = "setter")
+    @JsonProperty("setter")
     var setter: String,
-    @Json(name = "index")
+    @JsonProperty("index")
     val index: Int
 ) {
     var hasValidGetter: Boolean = false

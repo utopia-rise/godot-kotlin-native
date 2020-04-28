@@ -1,29 +1,32 @@
 package godot.codegen
 
-import com.beust.klaxon.Json
+import com.fasterxml.jackson.annotation.JsonCreator
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.fasterxml.jackson.annotation.JsonProperty
 import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import java.io.File
 
 
-class Class(
-    @Json(name = "name")
+@JsonIgnoreProperties(ignoreUnknown = true)
+class Class @JsonCreator constructor(
+    @JsonProperty("name")
     var name: String,
-    @Json(name = "base_class")
+    @JsonProperty("base_class")
     var baseClass: String,
-    @Json(name = "singleton")
+    @JsonProperty("singleton")
     val isSingleton: Boolean,
-    @Json(name = "instanciable")
+    @JsonProperty("instanciable")
     val isInstanciable: Boolean,
-    @Json(name = "constants")
+    @JsonProperty("constants")
     val constants: Map<String, Int>,
-    @Json(name = "properties")
+    @JsonProperty("properties")
     val properties: List<Property>,
-    @Json(name = "signals")
+    @JsonProperty("signals")
     val signals: List<Signal>,
-    @Json(name = "methods")
+    @JsonProperty("methods")
     val methods: List<Method>,
-    @Json(name = "enums")
+    @JsonProperty("enums")
     val enums: List<Enum>
 ) {
 
