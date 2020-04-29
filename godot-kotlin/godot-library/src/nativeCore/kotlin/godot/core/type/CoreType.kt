@@ -8,14 +8,20 @@ internal interface CoreType {
     fun setRawMemory(mem: COpaquePointer)
 }
 
-fun Long.getRawMemory(memScope: MemScope): COpaquePointer {
-    return cValuesOf(this).getPointer(memScope)
+internal fun Long.getRawMemory(memScope: MemScope): COpaquePointer {
+    return memScope.alloc<LongVar>().apply {
+        this.value = this@getRawMemory
+    }.ptr
 }
 
-fun Double.getRawMemory(memScope: MemScope): COpaquePointer {
-    return cValuesOf(this).getPointer(memScope)
+internal fun Double.getRawMemory(memScope: MemScope): COpaquePointer {
+    return memScope.alloc<DoubleVar>().apply {
+        this.value = this@getRawMemory
+    }.ptr
 }
 
-fun Boolean.getRawMemory(memScope: MemScope): COpaquePointer {
-    return cValuesOf(this.toByte()).getPointer(memScope)
+internal fun Boolean.getRawMemory(memScope: MemScope): COpaquePointer {
+    return memScope.alloc<BooleanVar>().apply {
+        this.value = this@getRawMemory
+    }.ptr
 }

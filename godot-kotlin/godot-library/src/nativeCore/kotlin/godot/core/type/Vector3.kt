@@ -422,26 +422,19 @@ class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>
             else -> throw IndexOutOfBoundsException()
         }
 
-    operator fun plus(vec: Vector3): Vector3 =
-        Vector3(x + vec.x, y + vec.y, z + vec.z)
+    operator fun plus(vec: Vector3) = Vector3(x + vec.x, y + vec.y, z + vec.z)
 
-    operator fun minus(vec: Vector3): Vector3 =
-        Vector3(x - vec.x, y - vec.y, z - vec.z)
+    operator fun minus(vec: Vector3) = Vector3(x - vec.x, y - vec.y, z - vec.z)
 
-    operator fun times(vec: Vector3): Vector3 =
-        Vector3(x * vec.x, y * vec.y, z * vec.z)
+    operator fun times(vec: Vector3) = Vector3(x * vec.x, y * vec.y, z * vec.z)
 
-    operator fun div(vec: Vector3): Vector3 =
-        Vector3(x / vec.x, y / vec.y, z / vec.z)
+    operator fun div(vec: Vector3) = Vector3(x / vec.x, y / vec.y, z / vec.z)
 
-    operator fun times(scalar: Double): Vector3 =
-        Vector3(x * scalar, y * scalar, z * scalar)
+    operator fun times(scalar: Double) = Vector3(x * scalar, y * scalar, z * scalar)
 
-    operator fun div(scalar: Double): Vector3 =
-        Vector3(x / scalar, y / scalar, z / scalar)
+    operator fun div(scalar: Double) = Vector3(x / scalar, y / scalar, z / scalar)
 
-    operator fun unaryMinus(): Vector3 =
-        Vector3(-x, -y, -z)
+    operator fun unaryMinus() = Vector3(-x, -y, -z)
 
     override fun equals(other: Any?): Boolean =
         when (other) {

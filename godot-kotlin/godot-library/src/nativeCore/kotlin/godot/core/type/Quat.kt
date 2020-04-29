@@ -389,23 +389,17 @@ class Quat(var x: RealT, var y: RealT, var z: RealT, var w: RealT) : CoreType {
             -x * v.x - y * v.y - z * v.z
         )
 
-    operator fun plus(q2: Quat): Quat =
-        Quat(this.x + q2.x, this.y + q2.y, this.z + q2.z, this.w + q2.w)
+    operator fun plus(q2: Quat) = Quat(this.x + q2.x, this.y + q2.y, this.z + q2.z, this.w + q2.w)
 
-    operator fun minus(q2: Quat): Quat =
-        Quat(this.x - q2.x, this.y - q2.y, this.z - q2.z, this.w - q2.w)
+    operator fun minus(q2: Quat) = Quat(this.x - q2.x, this.y - q2.y, this.z - q2.z, this.w - q2.w)
 
-    operator fun times(q2: Quat): Quat =
-        Quat(this.x * q2.x, this.y * q2.y, this.z * q2.z, this.w * q2.w)
+    operator fun times(q2: Quat) = Quat(this.x * q2.x, this.y * q2.y, this.z * q2.z, this.w * q2.w)
 
-    operator fun unaryMinus(): Quat =
-        Quat(-this.x, -this.y, -this.z, -this.w)
+    operator fun unaryMinus() = Quat(-this.x, -this.y, -this.z, -this.w)
 
-    operator fun times(f: RealT): Quat =
-        Quat(x * f, y * f, z * f, w * f)
+    operator fun times(f: RealT) = Quat(x * f, y * f, z * f, w * f)
 
-    operator fun div(f: RealT): Quat =
-        Quat(x / f, y / f, z / f, w / f)
+    operator fun div(f: RealT) = Quat(x / f, y / f, z / f, w / f)
 
     override fun equals(other: Any?): Boolean =
         when (other) {

@@ -380,27 +380,19 @@ class Vector2(var x: RealT, var y: RealT) : Comparable<Vector2>, CoreType {
             else -> throw IndexOutOfBoundsException()
         }
 
-    operator fun plus(v: Vector2): Vector2 =
-        Vector2(x + v.x, y + v.y)
+    operator fun plus(v: Vector2) = Vector2(x + v.x, y + v.y)
 
-    operator fun minus(v: Vector2): Vector2 =
-        Vector2(x - v.x, y - v.y)
+    operator fun minus(v: Vector2) = Vector2(x - v.x, y - v.y)
 
-    operator fun times(v1: Vector2): Vector2 =
-        Vector2(x * v1.x, y * v1.y)
+    operator fun times(v1: Vector2) = Vector2(x * v1.x, y * v1.y)
 
-    operator fun times(rvalue: RealT): Vector2 =
-        Vector2(x * rvalue, y * rvalue)
+    operator fun times(rvalue: RealT) = Vector2(x * rvalue, y * rvalue)
 
-    operator fun div(v1: Vector2): Vector2 =
-        Vector2(x / v1.x, y / v1.y)
+    operator fun div(v1: Vector2) = Vector2(x / v1.x, y / v1.y)
 
-    operator fun div(rvalue: RealT): Vector2 =
-        Vector2(x / rvalue, y / rvalue)
+    operator fun div(rvalue: RealT) = Vector2(x / rvalue, y / rvalue)
 
-    operator fun unaryMinus(): Vector2 =
-        Vector2(-x, -y)
-
+    operator fun unaryMinus() = Vector2(-x, -y)
 
     override fun equals(other: Any?): Boolean =
         when (other) {

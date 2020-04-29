@@ -650,21 +650,17 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
         z[0] = zx; z[1] = zy; z[2] = zz
     }
 
-    operator fun times(matrix: Basis): Basis =
-        Basis(
-            matrix.tdotx(this[0]), matrix.tdoty(this[0]), matrix.tdotz(this[0]),
-            matrix.tdotx(this[1]), matrix.tdoty(this[1]), matrix.tdotz(this[1]),
-            matrix.tdotx(this[2]), matrix.tdoty(this[2]), matrix.tdotz(this[2])
-        )
+    operator fun times(matrix: Basis) = Basis(
+        matrix.tdotx(this[0]), matrix.tdoty(this[0]), matrix.tdotz(this[0]),
+        matrix.tdotx(this[1]), matrix.tdoty(this[1]), matrix.tdotz(this[1]),
+        matrix.tdotx(this[2]), matrix.tdoty(this[2]), matrix.tdotz(this[2])
+    )
 
-    operator fun plus(matrix: Basis): Basis =
-        Basis(this[0] + matrix[0], this[1] + matrix[1], this[2] + matrix[2])
+    operator fun plus(matrix: Basis) = Basis(this[0] + matrix[0], this[1] + matrix[1], this[2] + matrix[2])
 
-    operator fun minus(matrix: Basis): Basis =
-        Basis(this[0] - matrix[0], this[1] - matrix[1], this[2] - matrix[2])
+    operator fun minus(matrix: Basis) = Basis(this[0] - matrix[0], this[1] - matrix[1], this[2] - matrix[2])
 
-    operator fun times(value: Double): Basis =
-        Basis(this[0] * value, this[1] * value, this[2] * value)
+    operator fun times(value: Double) = Basis(this[0] * value, this[1] * value, this[2] * value)
 
     override fun toString(): String =
         "${this[0][0]}, ${this[0][1]}, ${this[0][2]}, " +
