@@ -10,6 +10,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
 import org.jetbrains.kotlin.konan.target.HostManager
+import java.io.File
 
 class GodotPlugin : Plugin<Project> {
     override fun apply(project: Project) {
@@ -35,6 +36,9 @@ class GodotPlugin : Plugin<Project> {
             cleanupGeneratedFiles.set(true)
             gdnsDir.set(project.file("src/gdns/kotlin"))
             gdnlibFile.set(project.file("${project.name.toLowerCase()}.gdnlib"))
+            reloadable.set(true)
+            loadOnce.set(true)
+            singleton.set(false)
             entrySourceDir.set(project.buildDir.resolve("godot-entry"))
         }
     }
@@ -90,6 +94,16 @@ class GodotPlugin : Plugin<Project> {
 //                buildTask.dependsOn(cleanGeneratedFilesTask)
 //            }
 
+            val librariesToBeGenerated = mutableMapOf<Platform, File>()
+
+            val generateGdnlibTask = project.tasks.register("generateGdnlib", GenerateGdnlib::class.java) {
+                singleton.set(godot.singleton)
+                loadOnce.set(godot.loadOnce)
+                reloadable.set(godot.reloadable)
+                output.set(godot.gdnlibFile)
+                libraries.set(project.provider { librariesToBeGenerated })
+            }
+
             // create the targets and connect it to the main source set
             godot.platforms.get().forEach { platform ->
                 val target = when (platform) {
@@ -121,8 +135,9 @@ class GodotPlugin : Plugin<Project> {
                             // build -> build<Target> -> link<BuildType><Target>
                             project.tasks.register("build${target.name.capitalize()}") {
                                 group = GODOT_TASK_GROUP
-                                dependsOn(linkTask)
+                                dependsOn(linkTask, generateGdnlibTask)
                                 buildTask.dependsOn(this)
+                                librariesToBeGenerated[platform] = outputFile.relativeTo(projectDir)
                             }
                         }
                     }
