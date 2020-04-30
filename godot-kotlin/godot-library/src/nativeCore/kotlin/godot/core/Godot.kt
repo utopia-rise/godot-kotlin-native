@@ -84,4 +84,16 @@ object Godot {
         initHandle.compareAndSet(initHandle.value, 0)
         return ret
     }
+
+    internal fun print(message: String) {
+        godot_print(message.toGDString())
+    }
+
+    internal fun printWarning(description: String, function: String, file: String, line: Int) {
+        godot_print_warning(description, function, file, line)
+    }
+
+    internal fun printError(description: String, function: String, file: String, line: Int) {
+        godot_print_error(description, function, file, line)
+    }
 }

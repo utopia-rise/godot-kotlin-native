@@ -1,2 +1,30 @@
 package = godot.gdnative
 headers = gdnative_api_struct.gen.h
+
+---
+
+typedef float real_t;
+
+typedef struct godot_vector2_layout {
+    real_t x;
+    real_t y;
+} godot_vector2_layout;
+
+typedef struct godot_vector3_layout {
+    real_t x;
+    real_t y;
+    real_t z;
+} godot_vector3_layout;
+
+typedef struct godot_basis_layout {
+      godot_vector3_layout x;
+      godot_vector3_layout y;
+      godot_vector3_layout z;
+} godot_basis_layout;
+
+typedef  struct godot_quat_layout {
+    real_t x;
+    real_t y;
+    real_t z;
+    real_t w;
+} godot_quat_layout;
