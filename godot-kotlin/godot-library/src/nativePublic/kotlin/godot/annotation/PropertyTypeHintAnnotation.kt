@@ -119,13 +119,6 @@ annotation class File(vararg val extensions: String = [], val global: Boolean = 
 annotation class Dir(val global: Boolean = false)
 
 /**
- * Can only be used on properties that derive from Resource!
- */
-//@Target(AnnotationTarget.PROPERTY)
-//@Retention(AnnotationRetention.RUNTIME)
-//annotation class ResourceType(vararg val inherits: KClass<out GodotResource> = [GodotResource::class])
-
-/**
  * Can only be used on String properties!
  */
 @Target(AnnotationTarget.PROPERTY)
