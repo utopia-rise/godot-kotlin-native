@@ -1,7 +1,6 @@
 package godot.entrygenerator.generator.provider
 
 import com.squareup.kotlinpoet.ClassName
-import godot.entrygenerator.exceptions.WrongAnnotationUsageException
 import org.jetbrains.kotlin.descriptors.PropertyDescriptor
 import org.jetbrains.kotlin.resolve.BindingContext
 import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
@@ -19,15 +18,13 @@ class ResourceRegistrationValuesHandler(
     }
 
     override fun getPropertyTypeHint(): ClassName {
-        return when (propertyHintAnnotation?.fqName?.asString()) {
-            //TODO: implement ResourceType
-            null -> ClassName("godot.gdnative.godot_property_hint", "GODOT_PROPERTY_HINT_NONE")
-            else -> throw WrongAnnotationUsageException(propertyDescriptor, propertyHintAnnotation)
-        }
+        return ClassName(
+            "godot.gdnative.godot_property_hint",
+            "GODOT_PROPERTY_HINT_RESOURCE_TYPE"
+        )
     }
 
     override fun getHintString(): String {
-        //TODO: implement ResourceType
-        return ""
+        return propertyDescriptor.type.toString()
     }
 }
