@@ -2,6 +2,8 @@
 
 package godot.core
 
+import godot.internal.type.CoreType
+import godot.gdnative.*
 import godot.gdnative.godot_vector2
 import godot.gdnative.godot_vector2_layout
 import kotlinx.cinterop.*

@@ -1,4 +1,4 @@
-package godot.core
+package godot.internal.type
 
 import kotlinx.cinterop.*
 

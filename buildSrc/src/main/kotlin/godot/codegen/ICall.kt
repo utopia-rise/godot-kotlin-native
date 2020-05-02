@@ -112,8 +112,8 @@ class ICall(
                 }
                 value.type.isPrimitive() -> {
                     codeBlockBuilder.add(
-                        "    args[$i] = %M(arg$i)$nullInstruction.ptr\n",
-                        MemberName("godot.internal.utils", "get${value.type}Var")
+                        "    args[$i] = arg$i.%M(this)\n",
+                        MemberName("godot.internal.type", "getRawMemory")
                     )
                 }
                 else -> {
