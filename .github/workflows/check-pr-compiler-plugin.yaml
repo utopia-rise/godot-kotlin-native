@@ -1,0 +1,28 @@
+name: Check PR - godot-compiler-plugin
+on:
+  pull_request:
+    paths:
+      - 'entry-generation/godot-compiler-plugin/**'
+      - 'entry-generation/godot-compiler-plugin-common/**'
+      - 'entry-generation/godot-entry-generator/**'
+      - 'entry-generation/godot-annotation-processor/**'
+      - 'build.gradle.kts'
+      - 'buildSrc/**'
+      - 'gradle.properties'
+      - 'settings.gradle.kts'
+      - '.github/workflows/check-pr-compiler-plugin.yaml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Checkout submodules
+        uses: snickerbockers/submodules-init@v4
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - uses: eskatos/gradle-command-action@v1
+        with:
+          arguments: godot-compiler-plugin:build -PignoreSamples
