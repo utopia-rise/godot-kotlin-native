@@ -1,0 +1,37 @@
+name: Check PR - godot-library
+on:
+  pull_request:
+    paths:
+      - 'godot-kotlin/**'
+      - 'build.gradle.kts'
+      - 'buildSrc/**'
+      - 'gradle.properties'
+      - '.github/workflows/check-pr-core.yaml'
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        include:
+          - os: ubuntu-latest
+            task: build
+            platform: linux
+          - os: macos-latest
+            task: build
+            platform: macos
+          - os: windows-latest
+            task: build
+            platform: windows
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Checkout submodules
+        uses: snickerbockers/submodules-init@v4
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - uses: eskatos/gradle-command-action@v1
+        with:
+          arguments: godot-library:${{ matrix.task }} -Pplatform=${{ matrix.platform }} -PignoreSamples
