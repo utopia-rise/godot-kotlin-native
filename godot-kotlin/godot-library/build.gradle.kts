@@ -1,5 +1,7 @@
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
+val platform: String? by project
+
 plugins {
     kotlin("multiplatform")
     `maven-publish`
@@ -9,9 +11,17 @@ plugins {
 kotlin {
     // we don't have godot-library in the mobile targets yet, limit these to desktop for now
     //has to be change in `GodotPlugin` of `godot-gradle-plugin` as well
-    macosX64("macos")
-    linuxX64("linux")
-    mingwX64("windows")
+    if (platform != null) {
+        when (platform) {
+            "windows" -> mingwX64("windows")
+            "linux" -> linuxX64("linux")
+            "macos" -> macosX64("macos")
+        }
+    } else {
+        macosX64("macos")
+        linuxX64("linux")
+        mingwX64("windows")
+    }
 
     // val internalSourceSet = sourceSets.create("nativeInternal")
     // val coreSourceSet = sourceSets.create("nativeCore") { dependsOn(internalSourceSet) }
