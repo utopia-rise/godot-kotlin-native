@@ -446,9 +446,8 @@ class Color(var r: RealT, var g: RealT, var b: RealT, var a: RealT) : Comparable
             var ig = 0.0
             for (i in 0..1) {
                 var v: Int
-                val c: Char = p_str[i + p_ofs]
 
-                when (c) {
+                when (val c: Char = p_str[i + p_ofs]) {
                     in '0'..'9' -> v = c.toInt() - '0'.toInt()
                     in 'a'..'f' -> {
                         v = c.toInt() - 'a'.toInt()
@@ -513,7 +512,13 @@ class Color(var r: RealT, var g: RealT, var b: RealT, var a: RealT) : Comparable
     }
 
     constructor(from: Int) : this() {
-        TODO()
+        a = (from and 0xFF) / 255.0
+        var hex = from shr 8
+        b = (hex and 0xFF) / 255.0
+        hex = hex shr 8
+        g = (hex and 0xFF) / 255.0
+        hex = hex shr 8
+        r = (hex and 0xFF) / 255.0
     }
 
     internal constructor(native: CValue<godot_color>) : this() {
