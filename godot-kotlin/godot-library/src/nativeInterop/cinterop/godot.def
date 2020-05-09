@@ -28,3 +28,13 @@ typedef  struct godot_quat_layout {
     real_t z;
     real_t w;
 } godot_quat_layout;
+
+typedef  struct godot_plane_layout {
+    godot_vector3_layout normal;
+    real_t d;
+} godot_plane_layout;
+
+typedef  struct godot_aabb_layout {
+      godot_vector3_layout position;
+      godot_vector3_layout size;
+} godot_aabb_layout;
