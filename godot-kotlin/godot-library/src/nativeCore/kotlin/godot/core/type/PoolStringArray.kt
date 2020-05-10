@@ -138,6 +138,14 @@ class PoolStringArray : NativeCoreType<godot_pool_string_array>, Iterable<String
     }
 
     //UTILITIES
+    operator fun plus(other: String) {
+        this.append(other)
+    }
+
+    operator fun plus(other: PoolStringArray) {
+        this.appendArray(other)
+    }
+
     override fun toString(): String {
         return "PoolStringArray(${size()})"
     }

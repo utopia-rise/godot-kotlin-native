@@ -167,6 +167,14 @@ class PoolByteArray : NativeCoreType<godot_pool_byte_array>, Iterable<UByte> {
     }
 
     //UTILITIES
+    operator fun plus(other: UByte) {
+        this.append(other)
+    }
+
+    operator fun plus(other: PoolByteArray) {
+        this.appendArray(other)
+    }
+
     override fun toString(): String {
         return "PoolByteArray(${size()})"
     }
