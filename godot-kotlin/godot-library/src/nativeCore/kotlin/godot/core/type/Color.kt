@@ -669,7 +669,7 @@ class Color(var r: RealT, var g: RealT, var b: RealT, var a: RealT) : Comparable
      * Returns the linear interpolation with another color. The interpolation factor t is between 0 and 1.
      */
     fun linearInterpolate(otherColor: Color, t: RealT): Color {
-        val res = Color(r, g,b, a)this
+        val res = Color(r, g,b, a)
         res.r += (t * (otherColor.r - r))
         res.g += (t * (otherColor.g - g))
         res.b += (t * (otherColor.b - b))
