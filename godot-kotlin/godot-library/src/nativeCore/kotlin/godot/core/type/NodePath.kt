@@ -59,18 +59,28 @@ class NodePath : CoreType {
 
 
     //API
+    /**
+     * Get the node name indicated by idx (0 to get_name_count)
+     */
     fun getName(idx: Int): String {
         return callNative {
             checkNotNull(Godot.gdnative.godot_node_path_get_name)(it, idx)
         }.toKString()
+
     }
 
+    /**
+     * Get the number of node names which make up the path.
+     */
     fun getNameCount(): Int {
         return callNative {
             checkNotNull(Godot.gdnative.godot_node_path_get_name_count)(it)
         }
     }
 
+    /**
+     * Get the path’s property name, or an empty string if the path doesn’t have a property.
+     */
     fun getProperty(): String {
         return NodePath(
             callNative {
@@ -78,31 +88,46 @@ class NodePath : CoreType {
             }).toString()
     }
 
+    /**
+     * Get the resource name indicated by idx (0 to get_subname_count)
+     */
     fun getSubname(idx: Int): String {
         return callNative {
             checkNotNull(Godot.gdnative.godot_node_path_get_subname)(it, idx).toKString()
         }
     }
 
+    /**
+     * Get the number of resource names in the path.
+     */
     fun getSubnameCount(): Int {
         return callNative {
             checkNotNull(Godot.gdnative.godot_node_path_get_subname_count)(it)
         }
     }
 
+    /**
+     * Return true if the node path is absolute (not relative).
+     */
     fun isAbsolute(): Boolean {
         return callNative {
             checkNotNull(Godot.gdnative.godot_node_path_is_absolute)(it)
         }
     }
 
+    /**
+     * Return true if the node path is empty.
+     */
     fun isEmpty(): Boolean {
         return callNative {
             checkNotNull(Godot.gdnative.godot_node_path_is_empty)(it)
         }
     }
 
-    fun getConcatenatedSubnames() {
+    /**
+     *
+     */
+    fun getConcatenatedSubnames(): String {
         return callNative {
             checkNotNull(Godot.gdnative.godot_node_path_get_concatenated_subnames)(it).toKString()
         }

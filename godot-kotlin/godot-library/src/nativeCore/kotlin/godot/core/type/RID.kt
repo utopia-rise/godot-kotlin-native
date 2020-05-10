@@ -49,6 +49,9 @@ class RID : CoreType, Comparable<RID> {
 
 
     //API
+    /**
+     * Returns the ID of the referenced resource.
+     */
     fun getID(): Int {
         return callNative {
             checkNotNull(Godot.gdnative.godot_rid_get_id)(it)
