@@ -4,7 +4,6 @@ package godot.core
 
 import godot.gdnative.*
 import kotlinx.cinterop.*
-import godot.Object
 
 class RID : CoreType, Comparable<RID> {
     //PROPERTIES
@@ -23,7 +22,7 @@ class RID : CoreType, Comparable<RID> {
 
     constructor(from: Object) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_rid_new_with_resource)(it, from.getRawMemory(memScope))
+            checkNotNull(Godot.gdnative.godot_rid_new_with_resource)(it, from.ptr)
         }
     }
 
