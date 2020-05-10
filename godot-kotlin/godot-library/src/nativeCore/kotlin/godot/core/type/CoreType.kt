@@ -45,3 +45,19 @@ internal fun Boolean.getRawMemory(memScope: MemScope): COpaquePointer {
         this.value = this@getRawMemory
     }.ptr
 }
+
+abstract class NativeCoreType<C : CStructVar> : CoreType {
+    internal lateinit var _handle: CValue<C>
+}
+
+internal inline fun <T, reified C : CStructVar> callNative(
+    nativeCore: NativeCoreType<C>,
+    block: MemScope.(CPointer<C>) -> T
+): T {
+    return memScoped {
+        val ptr = nativeCore._handle.ptr
+        val ret: T = block(ptr)
+        nativeCore._handle = ptr.pointed.readValue()
+        ret
+    }
+}
