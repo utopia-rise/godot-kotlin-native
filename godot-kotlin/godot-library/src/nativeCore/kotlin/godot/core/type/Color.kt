@@ -573,7 +573,7 @@ class Color(var r: RealT, var g: RealT, var b: RealT, var a: RealT) : Comparable
      * Returns the most contrasting color.
      */
     fun contrasted(): Color {
-        val c = this
+        val c = Color(r, g,b, a)
         c.contrast()
         return c
     }
@@ -632,7 +632,7 @@ class Color(var r: RealT, var g: RealT, var b: RealT, var a: RealT) : Comparable
      * Returns the inverted color (1 - r, 1 - g, 1 - b, a).
      */
     fun inverted(): Color {
-        val c = this
+        val c = Color(r, g,b, a)
         c.invert()
         return c
     }
@@ -669,7 +669,7 @@ class Color(var r: RealT, var g: RealT, var b: RealT, var a: RealT) : Comparable
      * Returns the linear interpolation with another color. The interpolation factor t is between 0 and 1.
      */
     fun linearInterpolate(otherColor: Color, t: RealT): Color {
-        val res = this
+        val res = Color(r, g,b, a)this
         res.r += (t * (otherColor.r - r))
         res.g += (t * (otherColor.g - g))
         res.b += (t * (otherColor.b - b))
@@ -770,12 +770,16 @@ class Color(var r: RealT, var g: RealT, var b: RealT, var a: RealT) : Comparable
 
     //Utilities
     operator fun plus(c: Color) = Color(r + c.r, g + c.g, b + c.b, a + c.a)
+    operator fun plus(value: RealT) = Color(r + value, g + value, b + value, a + value)
 
     operator fun minus(c: Color) = Color(r - c.r, g - c.g, b - c.b, a - c.a)
+    operator fun minus(value: RealT) = Color(r - value, g - value, b - value, a - value)
 
     operator fun times(c: Color) = Color(r * c.r, g * c.g, b * c.b, a * c.a)
+    operator fun times(value: RealT) = Color(r * value, g * value, b * value, a * value)
 
     operator fun div(c: Color) = Color(r / c.r, g / c.g, b / c.b, a / c.a)
+    operator fun div(value: RealT) = Color(r / value, g / value, b / value, a / value)
 
     override fun compareTo(other: Color): Int {
         return when {
