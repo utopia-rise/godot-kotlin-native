@@ -8,6 +8,9 @@ internal interface CoreType {
     fun setRawMemory(mem: COpaquePointer)
 }
 
+/**
+ * WARNING: Do not inherit from this class, it is only there for the coretypes not entirely reimplemented in Kotlin.
+ */
 abstract class NativeCoreType<C : CStructVar> : CoreType {
     internal lateinit var _handle: CValue<C>
 }
