@@ -149,297 +149,297 @@ class Color(var r: RealT, var g: RealT, var b: RealT, var a: RealT) : Comparable
     }
 
     companion object {
-        val aliceblue: Color
+        inline val aliceblue: Color
             get() = Color(0.94, 0.97, 1.00)
-        val antiquewhite: Color
+        inline val antiquewhite: Color
             get() = Color(0.98, 0.92, 0.84)
-        val aqua: Color
+        inline val aqua: Color
             get() = Color(0.00, 1.00, 1.00)
-        val aquamarine: Color
+        inline val aquamarine: Color
             get() = Color(0.50, 1.00, 0.83)
-        val azure: Color
+        inline val azure: Color
             get() = Color(0.94, 1.00, 1.00)
-        val beige: Color
+        inline val beige: Color
             get() = Color(0.96, 0.96, 0.86)
-        val bisque: Color
+        inline val bisque: Color
             get() = Color(1.00, 0.89, 0.77)
-        val black: Color
+        inline val black: Color
             get() = Color(0.00, 0.00, 0.00)
-        val blanchedalmond: Color
+        inline val blanchedalmond: Color
             get() = Color(1.00, 0.92, 0.80)
-        val blue: Color
+        inline val blue: Color
             get() = Color(0.00, 0.00, 1.00)
-        val blueviolet: Color
+        inline val blueviolet: Color
             get() = Color(0.54, 0.17, 0.89)
-        val brown: Color
+        inline val brown: Color
             get() = Color(0.65, 0.16, 0.16)
-        val burlywood: Color
+        inline val burlywood: Color
             get() = Color(0.87, 0.72, 0.53)
-        val cadetblue: Color
+        inline val cadetblue: Color
             get() = Color(0.37, 0.62, 0.63)
-        val chartreuse: Color
+        inline val chartreuse: Color
             get() = Color(0.50, 1.00, 0.00)
-        val chocolate: Color
+        inline val chocolate: Color
             get() = Color(0.82, 0.41, 0.12)
-        val coral: Color
+        inline val coral: Color
             get() = Color(1.00, 0.50, 0.31)
-        val cornflower: Color
+        inline val cornflower: Color
             get() = Color(0.39, 0.58, 0.93)
-        val cornsilk: Color
+        inline val cornsilk: Color
             get() = Color(1.00, 0.97, 0.86)
-        val crimson: Color
+        inline val crimson: Color
             get() = Color(0.86, 0.08, 0.24)
-        val cyan: Color
+        inline val cyan: Color
             get() = Color(0.00, 1.00, 1.00)
-        val darkblue: Color
+        inline val darkblue: Color
             get() = Color(0.00, 0.00, 0.55)
-        val darkcyan: Color
+        inline val darkcyan: Color
             get() = Color(0.00, 0.55, 0.55)
-        val darkgoldenrod: Color
+        inline val darkgoldenrod: Color
             get() = Color(0.72, 0.53, 0.04)
-        val darkgray: Color
+        inline val darkgray: Color
             get() = Color(0.66, 0.66, 0.66)
-        val darkgreen: Color
+        inline val darkgreen: Color
             get() = Color(0.00, 0.39, 0.00)
-        val darkkhaki: Color
+        inline val darkkhaki: Color
             get() = Color(0.74, 0.72, 0.42)
-        val darkmagenta: Color
+        inline val darkmagenta: Color
             get() = Color(0.55, 0.00, 0.55)
-        val darkolivegreen: Color
+        inline val darkolivegreen: Color
             get() = Color(0.33, 0.42, 0.18)
-        val darkorange: Color
+        inline val darkorange: Color
             get() = Color(1.00, 0.55, 0.00)
-        val darkorchid: Color
+        inline val darkorchid: Color
             get() = Color(0.60, 0.20, 0.80)
-        val darkred: Color
+        inline val darkred: Color
             get() = Color(0.55, 0.00, 0.00)
-        val darksalmon: Color
+        inline val darksalmon: Color
             get() = Color(0.91, 0.59, 0.48)
-        val darkseagreen: Color
+        inline val darkseagreen: Color
             get() = Color(0.56, 0.74, 0.56)
-        val darkslateblue: Color
+        inline val darkslateblue: Color
             get() = Color(0.28, 0.24, 0.55)
-        val darkslategray: Color
+        inline val darkslategray: Color
             get() = Color(0.18, 0.31, 0.31)
-        val darkturquoise: Color
+        inline val darkturquoise: Color
             get() = Color(0.00, 0.81, 0.82)
-        val darkviolet: Color
+        inline val darkviolet: Color
             get() = Color(0.58, 0.00, 0.83)
-        val deeppink: Color
+        inline val deeppink: Color
             get() = Color(1.00, 0.08, 0.58)
-        val deepskyblue: Color
+        inline val deepskyblue: Color
             get() = Color(0.00, 0.75, 1.00)
-        val dimgray: Color
+        inline val dimgray: Color
             get() = Color(0.41, 0.41, 0.41)
-        val dodgerblue: Color
+        inline val dodgerblue: Color
             get() = Color(0.12, 0.56, 1.00)
-        val firebrick: Color
+        inline val firebrick: Color
             get() = Color(0.70, 0.13, 0.13)
-        val floralwhite: Color
+        inline val floralwhite: Color
             get() = Color(1.00, 0.98, 0.94)
-        val forestgreen: Color
+        inline val forestgreen: Color
             get() = Color(0.13, 0.55, 0.13)
-        val fuchsia: Color
+        inline val fuchsia: Color
             get() = Color(1.00, 0.00, 1.00)
-        val gainsboro: Color
+        inline val gainsboro: Color
             get() = Color(0.86, 0.86, 0.86)
-        val ghostwhite: Color
+        inline val ghostwhite: Color
             get() = Color(0.97, 0.97, 1.00)
-        val gold: Color
+        inline val gold: Color
             get() = Color(1.00, 0.84, 0.00)
-        val goldenrod: Color
+        inline val goldenrod: Color
             get() = Color(0.85, 0.65, 0.13)
-        val gray: Color
+        inline val gray: Color
             get() = Color(0.75, 0.75, 0.75)
-        val webgray: Color
+        inline val webgray: Color
             get() = Color(0.50, 0.50, 0.50)
-        val green: Color
+        inline val green: Color
             get() = Color(0.00, 1.00, 0.00)
-        val webgreen: Color
+        inline val webgreen: Color
             get() = Color(0.00, 0.50, 0.00)
-        val greenyellow: Color
+        inline val greenyellow: Color
             get() = Color(0.68, 1.00, 0.18)
-        val honeydew: Color
+        inline val honeydew: Color
             get() = Color(0.94, 1.00, 0.94)
-        val hotpink: Color
+        inline val hotpink: Color
             get() = Color(1.00, 0.41, 0.71)
-        val indianred: Color
+        inline val indianred: Color
             get() = Color(0.80, 0.36, 0.36)
-        val indigo: Color
+        inline val indigo: Color
             get() = Color(0.29, 0.00, 0.51)
-        val ivory: Color
+        inline val ivory: Color
             get() = Color(1.00, 1.00, 0.94)
-        val khaki: Color
+        inline val khaki: Color
             get() = Color(0.94, 0.90, 0.55)
-        val lavender: Color
+        inline val lavender: Color
             get() = Color(0.90, 0.90, 0.98)
-        val lavenderblush: Color
+        inline val lavenderblush: Color
             get() = Color(1.00, 0.94, 0.96)
-        val lawngreen: Color
+        inline val lawngreen: Color
             get() = Color(0.49, 0.99, 0.00)
-        val lemonchiffon: Color
+        inline val lemonchiffon: Color
             get() = Color(1.00, 0.98, 0.80)
-        val lightblue: Color
+        inline val lightblue: Color
             get() = Color(0.68, 0.85, 0.90)
-        val lightcoral: Color
+        inline val lightcoral: Color
             get() = Color(0.94, 0.50, 0.50)
-        val lightcyan: Color
+        inline val lightcyan: Color
             get() = Color(0.88, 1.00, 1.00)
-        val lightgoldenrod: Color
+        inline val lightgoldenrod: Color
             get() = Color(0.98, 0.98, 0.82)
-        val lightgray: Color
+        inline val lightgray: Color
             get() = Color(0.83, 0.83, 0.83)
-        val lightgreen: Color
+        inline val lightgreen: Color
             get() = Color(0.56, 0.93, 0.56)
-        val lightpink: Color
+        inline val lightpink: Color
             get() = Color(1.00, 0.71, 0.76)
-        val lightsalmon: Color
+        inline val lightsalmon: Color
             get() = Color(1.00, 0.63, 0.48)
-        val lightseagreen: Color
+        inline val lightseagreen: Color
             get() = Color(0.13, 0.70, 0.67)
-        val lightskyblue: Color
+        inline val lightskyblue: Color
             get() = Color(0.53, 0.81, 0.98)
-        val lightslategray: Color
+        inline val lightslategray: Color
             get() = Color(0.47, 0.53, 0.60)
-        val lightsteelblue: Color
+        inline val lightsteelblue: Color
             get() = Color(0.69, 0.77, 0.87)
-        val lightyellow: Color
+        inline val lightyellow: Color
             get() = Color(1.00, 1.00, 0.88)
-        val lime: Color
+        inline val lime: Color
             get() = Color(0.00, 1.00, 0.00)
-        val limegreen: Color
+        inline val limegreen: Color
             get() = Color(0.20, 0.80, 0.20)
-        val linen: Color
+        inline val linen: Color
             get() = Color(0.98, 0.94, 0.90)
-        val magenta: Color
+        inline val magenta: Color
             get() = Color(1.00, 0.00, 1.00)
-        val maroon: Color
+        inline val maroon: Color
             get() = Color(0.69, 0.19, 0.38)
-        val webmaroon: Color
+        inline val webmaroon: Color
             get() = Color(0.50, 0.00, 0.00)
-        val mediumaquamarine: Color
+        inline val mediumaquamarine: Color
             get() = Color(0.40, 0.80, 0.67)
-        val mediumblue: Color
+        inline val mediumblue: Color
             get() = Color(0.00, 0.00, 0.80)
-        val mediumorchid: Color
+        inline val mediumorchid: Color
             get() = Color(0.73, 0.33, 0.83)
-        val mediumpurple: Color
+        inline val mediumpurple: Color
             get() = Color(0.58, 0.44, 0.86)
-        val mediumseagreen: Color
+        inline val mediumseagreen: Color
             get() = Color(0.24, 0.70, 0.44)
-        val mediumslateblue: Color
+        inline val mediumslateblue: Color
             get() = Color(0.48, 0.41, 0.93)
-        val mediumspringgreen: Color
+        inline val mediumspringgreen: Color
             get() = Color(0.00, 0.98, 0.60)
-        val mediumturquoise: Color
+        inline val mediumturquoise: Color
             get() = Color(0.28, 0.82, 0.80)
-        val mediumvioletred: Color
+        inline val mediumvioletred: Color
             get() = Color(0.78, 0.08, 0.52)
-        val midnightblue: Color
+        inline val midnightblue: Color
             get() = Color(0.10, 0.10, 0.44)
-        val mintcream: Color
+        inline val mintcream: Color
             get() = Color(0.96, 1.00, 0.98)
-        val mistyrose: Color
+        inline val mistyrose: Color
             get() = Color(1.00, 0.89, 0.88)
-        val moccasin: Color
+        inline val moccasin: Color
             get() = Color(1.00, 0.89, 0.71)
-        val navajowhite: Color
+        inline val navajowhite: Color
             get() = Color(1.00, 0.87, 0.68)
-        val navyblue: Color
+        inline val navyblue: Color
             get() = Color(0.00, 0.00, 0.50)
-        val oldlace: Color
+        inline val oldlace: Color
             get() = Color(0.99, 0.96, 0.90)
-        val olive: Color
+        inline val olive: Color
             get() = Color(0.50, 0.50, 0.00)
-        val olivedrab: Color
+        inline val olivedrab: Color
             get() = Color(0.42, 0.56, 0.14)
-        val orange: Color
+        inline val orange: Color
             get() = Color(1.00, 0.65, 0.00)
-        val orangered: Color
+        inline val orangered: Color
             get() = Color(1.00, 0.27, 0.00)
-        val orchid: Color
+        inline val orchid: Color
             get() = Color(0.85, 0.44, 0.84)
-        val palegoldenrod: Color
+        inline val palegoldenrod: Color
             get() = Color(0.93, 0.91, 0.67)
-        val palegreen: Color
+        inline val palegreen: Color
             get() = Color(0.60, 0.98, 0.60)
-        val paleturquoise: Color
+        inline val paleturquoise: Color
             get() = Color(0.69, 0.93, 0.93)
-        val palevioletred: Color
+        inline val palevioletred: Color
             get() = Color(0.86, 0.44, 0.58)
-        val papayawhip: Color
+        inline val papayawhip: Color
             get() = Color(1.00, 0.94, 0.84)
-        val peachpuff: Color
+        inline val peachpuff: Color
             get() = Color(1.00, 0.85, 0.73)
-        val peru: Color
+        inline val peru: Color
             get() = Color(0.80, 0.52, 0.25)
-        val pink: Color
+        inline val pink: Color
             get() = Color(1.00, 0.75, 0.80)
-        val plum: Color
+        inline val plum: Color
             get() = Color(0.87, 0.63, 0.87)
-        val powderblue: Color
+        inline val powderblue: Color
             get() = Color(0.69, 0.88, 0.90)
-        val purple: Color
+        inline val purple: Color
             get() = Color(0.63, 0.13, 0.94)
-        val webpurple: Color
+        inline val webpurple: Color
             get() = Color(0.50, 0.00, 0.50)
-        val rebeccapurple: Color
+        inline val rebeccapurple: Color
             get() = Color(0.40, 0.20, 0.60)
-        val red: Color
+        inline val red: Color
             get() = Color(1.00, 0.00, 0.00)
-        val rosybrown: Color
+        inline val rosybrown: Color
             get() = Color(0.74, 0.56, 0.56)
-        val royalblue: Color
+        inline val royalblue: Color
             get() = Color(0.25, 0.41, 0.88)
-        val saddlebrown: Color
+        inline val saddlebrown: Color
             get() = Color(0.55, 0.27, 0.07)
-        val salmon: Color
+        inline val salmon: Color
             get() = Color(0.98, 0.50, 0.45)
-        val sandybrown: Color
+        inline val sandybrown: Color
             get() = Color(0.96, 0.64, 0.38)
-        val seagreen: Color
+        inline val seagreen: Color
             get() = Color(0.18, 0.55, 0.34)
-        val seashell: Color
+        inline val seashell: Color
             get() = Color(1.00, 0.96, 0.93)
-        val sienna: Color
+        inline val sienna: Color
             get() = Color(0.63, 0.32, 0.18)
-        val silver: Color
+        inline val silver: Color
             get() = Color(0.75, 0.75, 0.75)
-        val skyblue: Color
+        inline val skyblue: Color
             get() = Color(0.53, 0.81, 0.92)
-        val slateblue: Color
+        inline val slateblue: Color
             get() = Color(0.42, 0.35, 0.80)
-        val slategray: Color
+        inline val slategray: Color
             get() = Color(0.44, 0.50, 0.56)
-        val snow: Color
+        inline val snow: Color
             get() = Color(1.00, 0.98, 0.98)
-        val springgreen: Color
+        inline val springgreen: Color
             get() = Color(0.00, 1.00, 0.50)
-        val steelblue: Color
+        inline val steelblue: Color
             get() = Color(0.27, 0.51, 0.71)
-        val tan: Color
+        inline val tan: Color
             get() = Color(0.82, 0.71, 0.55)
-        val teal: Color
+        inline val teal: Color
             get() = Color(0.00, 0.50, 0.50)
-        val thistle: Color
+        inline val thistle: Color
             get() = Color(0.85, 0.75, 0.85)
-        val tomato: Color
+        inline val tomato: Color
             get() = Color(1.00, 0.39, 0.28)
-        val turquoise: Color
+        inline val turquoise: Color
             get() = Color(0.25, 0.88, 0.82)
-        val transparent: Color
+        inline val transparent: Color
             get() = Color(1.00, 1.00, 1.00, 0.00)
-        val violet: Color
+        inline val violet: Color
             get() = Color(0.93, 0.51, 0.93)
-        val wheat: Color
+        inline val wheat: Color
             get() = Color(0.96, 0.87, 0.70)
-        val white: Color
+        inline val white: Color
             get() = Color(1.00, 1.00, 1.00)
-        val whitesmoke: Color
+        inline val whitesmoke: Color
             get() = Color(0.96, 0.96, 0.96)
-        val yellow: Color
+        inline val yellow: Color
             get() = Color(1.00, 1.00, 0.00)
-        val yellowgreen: Color
+        inline val yellowgreen: Color
             get() = Color(0.60, 0.80, 0.20)
 
         internal fun parseCol(p_str: String, p_ofs: Int): RealT {
@@ -573,7 +573,7 @@ class Color(var r: RealT, var g: RealT, var b: RealT, var a: RealT) : Comparable
      * Returns the most contrasting color.
      */
     fun contrasted(): Color {
-        val c = Color(r, g,b, a)
+        val c = Color(r, g, b, a)
         c.contrast()
         return c
     }
@@ -632,7 +632,7 @@ class Color(var r: RealT, var g: RealT, var b: RealT, var a: RealT) : Comparable
      * Returns the inverted color (1 - r, 1 - g, 1 - b, a).
      */
     fun inverted(): Color {
-        val c = Color(r, g,b, a)
+        val c = Color(r, g, b, a)
         c.invert()
         return c
     }
@@ -669,7 +669,7 @@ class Color(var r: RealT, var g: RealT, var b: RealT, var a: RealT) : Comparable
      * Returns the linear interpolation with another color. The interpolation factor t is between 0 and 1.
      */
     fun linearInterpolate(otherColor: Color, t: RealT): Color {
-        val res = Color(r, g,b, a)
+        val res = Color(r, g, b, a)
         res.r += (t * (otherColor.r - r))
         res.g += (t * (otherColor.g - g))
         res.b += (t * (otherColor.b - b))
