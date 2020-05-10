@@ -243,7 +243,7 @@ class Plane(var normal: Vector3, var d: RealT = 0.0) : CoreType {
 
     //UTILITIES
     override fun toString(): String {
-        return "${this.normal.toString()},$d"
+        return "Plane(normal=$normal, d=$d)"
     }
 
     override fun equals(other: Any?): Boolean {

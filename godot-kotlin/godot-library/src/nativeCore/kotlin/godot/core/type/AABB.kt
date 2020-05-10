@@ -459,8 +459,9 @@ class AABB(var position: Vector3, var size: Vector3) : CoreType {
             else -> false
         }
 
-    override fun toString(): String =
-        "$position - $size"
+    override fun toString(): String {
+        return "AABB(position=$position, size=$size)"
+    }
 
     override fun hashCode(): Int {
         var result = position.hashCode()
