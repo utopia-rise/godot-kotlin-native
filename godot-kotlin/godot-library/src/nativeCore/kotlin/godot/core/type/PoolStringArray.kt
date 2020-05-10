@@ -5,17 +5,17 @@ package godot.core
 import godot.gdnative.*
 import kotlinx.cinterop.*
 
-class PoolByteArray : NativeCoreType<godot_pool_byte_array>, Iterable<UByte> {
+class PoolStringArray : NativeCoreType<godot_pool_string_array>, Iterable<String> {
     //CONSTRUCTOR
     constructor() {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_byte_array_new)(it)
+            checkNotNull(Godot.gdnative.godot_pool_string_array_new)(it)
         }
     }
 
-    constructor(other: PoolByteArray) {
+    constructor(other: PoolStringArray) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_byte_array_new_copy)(it, other._handle.ptr)
+            checkNotNull(Godot.gdnative.godot_pool_string_array_new_copy)(it, other._handle.ptr)
         }
     }
 
@@ -30,7 +30,7 @@ class PoolByteArray : NativeCoreType<godot_pool_byte_array>, Iterable<UByte> {
     }
 
     override fun setRawMemory(mem: COpaquePointer) {
-        _handle = mem.reinterpret<godot_pool_byte_array>().pointed.readValue()
+        _handle = mem.reinterpret<godot_pool_string_array>().pointed.readValue()
     }
 
 
@@ -38,19 +38,19 @@ class PoolByteArray : NativeCoreType<godot_pool_byte_array>, Iterable<UByte> {
     /**
      * Appends an element at the end of the array (alias of push_back).
      */
-    fun append(byte: UByte) {
+    fun append(s: String) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_byte_array_append)(it, byte)
+            checkNotNull(Godot.gdnative.godot_pool_string_array_append)(it, s.toGDString().ptr)
         }
     }
 
 
     /**
-     * Appends a PoolByteArray at the end of this array.
+     * Appends a PoolStringlArray at the end of this array.
      */
-    fun appendArray(array: PoolByteArray) {
+    fun appendArray(array: PoolStringArray) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_byte_array_append_array)(it, array._handle.ptr)
+            checkNotNull(Godot.gdnative.godot_pool_string_array_append_array)(it, array._handle.ptr)
         }
     }
 
@@ -59,26 +59,26 @@ class PoolByteArray : NativeCoreType<godot_pool_byte_array>, Iterable<UByte> {
      */
     fun empty() {
         callNative {
-            checkNotNull(Godot.gdnative12.godot_pool_byte_array_empty)(it)
+            checkNotNull(Godot.gdnative12.godot_pool_string_array_empty)(it)
         }
     }
 
     /**
      *  Retrieve the element at the given index.
      */
-    operator fun get(idx: Int): UByte {
+    operator fun get(idx: Int): String {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_pool_byte_array_get)(it, idx)
-        }
+            checkNotNull(Godot.gdnative.godot_pool_string_array_get)(it, idx)
+        }.toKString()
     }
 
     /**
      * Inserts a new element at a given position in the array.
      * The position must be valid, or at the end of the array (idx == size()).
      */
-    fun insert(idx: Int, data: UByte) {
+    fun insert(idx: Int, data: String) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_byte_array_insert)(it, idx, data)
+            checkNotNull(Godot.gdnative.godot_pool_string_array_insert)(it, idx, data.toGDString().ptr)
         }
     }
 
@@ -87,16 +87,16 @@ class PoolByteArray : NativeCoreType<godot_pool_byte_array>, Iterable<UByte> {
      */
     fun invert() {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_byte_array_invert)(it)
+            checkNotNull(Godot.gdnative.godot_pool_string_array_invert)(it)
         }
     }
 
     /**
      * Appends a value to the array.
      */
-    fun pushBack(data: UByte) {
+    fun pushBack(data: String) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_byte_array_push_back)(it, data)
+            checkNotNull(Godot.gdnative.godot_pool_string_array_push_back)(it, data.toGDString().ptr)
         }
     }
 
@@ -105,7 +105,7 @@ class PoolByteArray : NativeCoreType<godot_pool_byte_array>, Iterable<UByte> {
      */
     fun remove(idx: Int) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_byte_array_remove)(it, idx)
+            checkNotNull(Godot.gdnative.godot_pool_string_array_remove)(it, idx)
         }
     }
 
@@ -115,16 +115,16 @@ class PoolByteArray : NativeCoreType<godot_pool_byte_array>, Iterable<UByte> {
      */
     fun resize(size: Int) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_byte_array_resize)(it, size)
+            checkNotNull(Godot.gdnative.godot_pool_string_array_resize)(it, size)
         }
     }
 
     /**
-     * Changes the Byte at the given index.
+     * Changes the s at the given index.
      */
-    operator fun set(idx: Int, data: UByte) {
+    operator fun set(idx: Int, data: String) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_byte_array_set)(it, idx, data)
+            checkNotNull(Godot.gdnative.godot_pool_string_array_set)(it, idx, data.toGDString().ptr)
         }
     }
 
@@ -133,45 +133,16 @@ class PoolByteArray : NativeCoreType<godot_pool_byte_array>, Iterable<UByte> {
      */
     fun size(): Int {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_pool_byte_array_size)(it)
+            checkNotNull(Godot.gdnative.godot_pool_string_array_size)(it)
         }
-    }
-
-    //POOL ARRAY UNIQUE API
-    /**
-     * Not available in the Gdnative API and no workaround for now
-     */
-    private fun compress(compressionMode: Int = 0): PoolByteArray {
-        TODO()
-    }
-
-    /**
-     * Not available in the Gdnative API and no workaround for now
-     */
-    private fun decompress(bufferSize: Int, compressionMode: Int = 0): PoolByteArray {
-        TODO()
-    }
-
-    /**
-     * Not available in the Gdnative API and no workaround for now
-     */
-    private fun getStringFromAscii(): String {
-        TODO()
-    }
-
-    /**
-     * Not available in the Gdnative API and no workaround for now
-     */
-    private fun getStringFromUtf8(): String {
-        TODO()
     }
 
     //UTILITIES
     override fun toString(): String {
-        return "PoolByteArray(${size()})"
+        return "PoolStringArray(${size()})"
     }
 
-    override fun iterator(): Iterator<UByte> {
+    override fun iterator(): Iterator<String> {
         return IndexedIterator(size(), this::get)
     }
 
@@ -180,18 +151,19 @@ class PoolByteArray : NativeCoreType<godot_pool_byte_array>, Iterable<UByte> {
      * This methods implementation works but is not the fastest one.
      */
     override fun equals(other: Any?): Boolean {
-        if (other is PoolByteArray) {
+        if (other is PoolStringArray) {
             if (other.size() != this.size()) {
                 return false
             }
             val iter1 = this.iterator()
             val iter2 = other.iterator()
-            while (iter1.hasNext()) {
+            while(iter1.hasNext()){
                 if (iter1.next() != iter2.next())
                     return false
             }
             return true
-        } else {
+        }
+        else {
             return false
         }
     }
@@ -200,7 +172,7 @@ class PoolByteArray : NativeCoreType<godot_pool_byte_array>, Iterable<UByte> {
         return _handle.hashCode()
     }
 
-    internal inline fun <T> callNative(block: MemScope.(CPointer<godot_pool_byte_array>) -> T): T {
+    internal inline fun <T> callNative(block: MemScope.(CPointer<godot_pool_string_array>) -> T): T {
         return callNative(this, block)
     }
 }
