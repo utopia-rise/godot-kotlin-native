@@ -140,14 +140,6 @@ class PoolColorArray : NativeCoreType<godot_pool_color_array>, Iterable<Color> {
     }
 
     //UTILITIES
-    operator fun plus(other: Color) {
-        this.append(other)
-    }
-
-    operator fun plus(other: PoolColorArray) {
-        this.appendArray(other)
-    }
-
     override fun toString(): String {
         return "PoolColorArray(${size()})"
     }
@@ -161,12 +153,19 @@ class PoolColorArray : NativeCoreType<godot_pool_color_array>, Iterable<Color> {
      * This methods implementation works but is not the fastest one.
      */
     override fun equals(other: Any?): Boolean {
-        return if (other is PoolColorArray) {
-            val list1 = this.toList()
-            val list2 = other.toList()
-            list1 == list2
+        if (other is PoolColorArray) {
+            if (other.size() != this.size()) {
+                return false
+            }
+            val iter1 = this.iterator()
+            val iter2 = other.iterator()
+            while (iter1.hasNext()) {
+                if (iter1.next() != iter2.next())
+                    return false
+            }
+            return true
         } else {
-            false
+            return false
         }
     }
 
@@ -176,5 +175,20 @@ class PoolColorArray : NativeCoreType<godot_pool_color_array>, Iterable<Color> {
 
     internal inline fun <T> callNative(block: MemScope.(CPointer<godot_pool_color_array>) -> T): T {
         return callNative(this, block)
+    }
+}
+
+public class Color(ptr: CValue<godot_color>) : CoreType {
+
+    init {
+        TODO()
+    }
+
+    override fun getRawMemory(memScope: MemScope): COpaquePointer {
+        TODO("Not yet implemented")
+    }
+
+    override fun setRawMemory(mem: COpaquePointer) {
+        TODO("Not yet implemented")
     }
 }

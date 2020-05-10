@@ -167,14 +167,6 @@ class PoolByteArray : NativeCoreType<godot_pool_byte_array>, Iterable<UByte> {
     }
 
     //UTILITIES
-    operator fun plus(other: UByte) {
-        this.append(other)
-    }
-
-    operator fun plus(other: PoolByteArray) {
-        this.appendArray(other)
-    }
-
     override fun toString(): String {
         return "PoolByteArray(${size()})"
     }
@@ -188,12 +180,19 @@ class PoolByteArray : NativeCoreType<godot_pool_byte_array>, Iterable<UByte> {
      * This methods implementation works but is not the fastest one.
      */
     override fun equals(other: Any?): Boolean {
-        return if (other is PoolByteArray) {
-            val list1 = this.toList()
-            val list2 = other.toList()
-            list1 == list2
+        if (other is PoolByteArray) {
+            if (other.size() != this.size()) {
+                return false
+            }
+            val iter1 = this.iterator()
+            val iter2 = other.iterator()
+            while (iter1.hasNext()) {
+                if (iter1.next() != iter2.next())
+                    return false
+            }
+            return true
         } else {
-            false
+            return false
         }
     }
 

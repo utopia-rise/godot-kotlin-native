@@ -140,14 +140,6 @@ class PoolVector3Array : NativeCoreType<godot_pool_vector3_array>, Iterable<Vect
     }
 
     //UTILITIES
-    operator fun plus(other: Vector3) {
-        this.append(other)
-    }
-
-    operator fun plus(other: PoolVector3Array) {
-        this.appendArray(other)
-    }
-
     override fun toString(): String {
         return "PoolVector3Array(${size()})"
     }
@@ -161,12 +153,19 @@ class PoolVector3Array : NativeCoreType<godot_pool_vector3_array>, Iterable<Vect
      * This methods implementation works but is not the fastest one.
      */
     override fun equals(other: Any?): Boolean {
-        return if (other is PoolVector3Array) {
-            val list1 = this.toList()
-            val list2 = other.toList()
-            list1 == list2
+        if (other is PoolVector3Array) {
+            if (other.size() != this.size()) {
+                return false
+            }
+            val iter1 = this.iterator()
+            val iter2 = other.iterator()
+            while (iter1.hasNext()) {
+                if (iter1.next() != iter2.next())
+                    return false
+            }
+            return true
         } else {
-            false
+            return false
         }
     }
 

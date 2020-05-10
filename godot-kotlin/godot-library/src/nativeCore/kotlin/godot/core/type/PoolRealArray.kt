@@ -138,14 +138,6 @@ class PoolRealArray : NativeCoreType<godot_pool_real_array>, Iterable<RealT> {
     }
 
     //UTILITIES
-    operator fun plus(other: RealT) {
-        this.append(other)
-    }
-
-    operator fun plus(other: PoolRealArray) {
-        this.appendArray(other)
-    }
-
     override fun toString(): String {
         return "PoolRealArray(${size()})"
     }
@@ -159,12 +151,20 @@ class PoolRealArray : NativeCoreType<godot_pool_real_array>, Iterable<RealT> {
      * This methods implementation works but is not the fastest one.
      */
     override fun equals(other: Any?): Boolean {
-        return if (other is PoolRealArray) {
-            val list1 = this.toList()
-            val list2 = other.toList()
-            list1 == list2
-        } else {
-            false
+        if (other is PoolRealArray) {
+            if (other.size() != this.size()) {
+                return false
+            }
+            val iter1 = this.iterator()
+            val iter2 = other.iterator()
+            while(iter1.hasNext()){
+                if (iter1.next() != iter2.next())
+                    return false
+            }
+            return true
+        }
+        else {
+            return false
         }
     }
 

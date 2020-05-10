@@ -138,14 +138,6 @@ class PoolIntArray : NativeCoreType<godot_pool_int_array>, Iterable<Int> {
     }
 
     //UTILITIES
-    operator fun plus(other: Int) {
-        this.append(other)
-    }
-
-    operator fun plus(other: PoolIntArray) {
-        this.appendArray(other)
-    }
-
     override fun toString(): String {
         return "PoolIntArray(${size()})"
     }
@@ -159,12 +151,20 @@ class PoolIntArray : NativeCoreType<godot_pool_int_array>, Iterable<Int> {
      * This methods implementation works but is not the fastest one.
      */
     override fun equals(other: Any?): Boolean {
-        return if (other is PoolIntArray) {
-            val list1 = this.toList()
-            val list2 = other.toList()
-            list1 == list2
-        } else {
-            false
+        if (other is PoolIntArray) {
+            if (other.size() != this.size()) {
+                return false
+            }
+            val iter1 = this.iterator()
+            val iter2 = other.iterator()
+            while(iter1.hasNext()){
+                if (iter1.next() != iter2.next())
+                    return false
+            }
+            return true
+        }
+        else {
+            return false
         }
     }
 
