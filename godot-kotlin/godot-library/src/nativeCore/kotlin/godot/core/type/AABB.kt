@@ -31,7 +31,6 @@ class AABB(var position: Vector3, var size: Vector3) : CoreType {
 
 
     //INTEROP
-    //INTEROP
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
         val value = cValue<godot_aabb_layout> {
             position.x = this@AABB.position.x.toFloat()
