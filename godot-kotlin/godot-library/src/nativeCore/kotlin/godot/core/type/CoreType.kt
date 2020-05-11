@@ -11,7 +11,7 @@ internal interface CoreType {
 /**
  * WARNING: Do not inherit from this class, it is only there for the coretypes not entirely reimplemented in Kotlin.
  */
-abstract class NativeCoreType<C : CStructVar> : CoreType {
+abstract class NativeCoreType<C : CStructVar> internal constructor() : CoreType {
     internal lateinit var _handle: CValue<C>
 }
 
