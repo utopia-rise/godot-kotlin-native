@@ -5,6 +5,13 @@ headers = gdnative_api_struct.gen.h
 
 typedef float real_t;
 
+typedef struct godot_color_layout {
+    real_t r;
+    real_t g;
+    real_t b;
+    real_t a;
+} godot_color_layout;
+
 typedef struct godot_vector2_layout {
     real_t x;
     real_t y;
