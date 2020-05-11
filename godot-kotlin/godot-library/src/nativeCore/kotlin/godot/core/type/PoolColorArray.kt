@@ -185,18 +185,3 @@ class PoolColorArray : NativeCoreType<godot_pool_color_array>, Iterable<Color> {
         return callNative(this, block)
     }
 }
-
-public class Color(ptr: CValue<godot_color>) : CoreType {
-
-    init {
-        TODO()
-    }
-
-    override fun getRawMemory(memScope: MemScope): COpaquePointer {
-        TODO("Not yet implemented")
-    }
-
-    override fun setRawMemory(mem: COpaquePointer) {
-        TODO("Not yet implemented")
-    }
-}
