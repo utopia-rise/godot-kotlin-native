@@ -374,6 +374,8 @@ class Quat(var x: RealT, var y: RealT, var z: RealT, var w: RealT) : CoreType {
 
 
     //UTILITIES
+    override fun toVariant() = Variant(this)
+
     fun set(px: RealT, py: RealT, pz: RealT, pw: RealT) {
         x = px
         y = py

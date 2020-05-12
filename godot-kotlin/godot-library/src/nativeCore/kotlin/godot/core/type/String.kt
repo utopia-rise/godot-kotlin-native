@@ -13,6 +13,8 @@ fun String(mem: COpaquePointer) {
     godot_string_destroy(gdString)
 }
 
+fun String.toVariant() = Variant(this)
+
 internal fun CValue<godot_string>.toKString(): String {
     godot_string_utf8(this).useContents {
         val ret = godot_char_string_get_data(this.ptr)?.toKString()

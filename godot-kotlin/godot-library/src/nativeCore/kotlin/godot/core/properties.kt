@@ -1,5 +1,6 @@
 package godot.core
 
+import godot.core.type.Variant
 import kotlin.reflect.KMutableProperty1
 
 open class MutablePropertyHandler<T: Object, R>(protected val property: KMutableProperty1<T, R>) {

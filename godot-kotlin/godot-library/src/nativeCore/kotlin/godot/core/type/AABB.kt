@@ -453,6 +453,8 @@ class AABB(var position: Vector3, var size: Vector3) : CoreType {
     }
 
     //UTILITIES
+    override fun toVariant() = Variant(this)
+
     override fun equals(other: Any?): Boolean =
         when (other) {
             is AABB -> (position == other.position && size == other.size)

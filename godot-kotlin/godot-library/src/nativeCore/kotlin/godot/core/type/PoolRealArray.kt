@@ -138,6 +138,8 @@ class PoolRealArray : NativeCoreType<godot_pool_real_array>, Iterable<RealT> {
     }
 
     //UTILITIES
+    override fun toVariant() = Variant(this)
+
     operator fun plus(other: RealT) {
         this.append(other)
     }

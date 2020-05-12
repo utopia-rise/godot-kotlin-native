@@ -167,6 +167,8 @@ class PoolByteArray : NativeCoreType<godot_pool_byte_array>, Iterable<UByte> {
     }
 
     //UTILITIES
+    override fun toVariant() = Variant(this)
+
     operator fun plus(other: UByte) {
         this.append(other)
     }

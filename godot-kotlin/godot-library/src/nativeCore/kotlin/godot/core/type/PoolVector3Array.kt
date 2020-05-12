@@ -140,6 +140,8 @@ class PoolVector3Array : NativeCoreType<godot_pool_vector3_array>, Iterable<Vect
     }
 
     //UTILITIES
+    override fun toVariant() = Variant(this)
+
     operator fun plus(other: Vector3) {
         this.append(other)
     }

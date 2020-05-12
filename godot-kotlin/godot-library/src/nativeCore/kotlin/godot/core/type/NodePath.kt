@@ -133,6 +133,8 @@ class NodePath : NativeCoreType<godot_node_path> {
 
 
     //UTILITIES
+    override fun toVariant() = Variant(this)
+
     override fun equals(other: Any?): Boolean {
         return if (other is NodePath) {
             godot_node_path_operator_equal(_handle, other._handle)

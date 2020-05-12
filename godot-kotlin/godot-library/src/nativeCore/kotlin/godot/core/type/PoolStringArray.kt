@@ -138,6 +138,8 @@ class PoolStringArray : NativeCoreType<godot_pool_string_array>, Iterable<String
     }
 
     //UTILITIES
+    override fun toVariant() = Variant(this)
+
     operator fun plus(other: String) {
         this.append(other)
     }

@@ -2,6 +2,7 @@
 
 package godot.core
 
+import godot.core.type.Variant
 import godot.gdnative.*
 import kotlinx.cinterop.*
 
@@ -57,6 +58,8 @@ class RID : NativeCoreType<godot_rid>, Comparable<RID> {
 
 
     //UTILITIES
+    override fun toVariant() = Variant(this)
+
     override fun compareTo(other: RID): Int {
         return when {
             this == other -> 0

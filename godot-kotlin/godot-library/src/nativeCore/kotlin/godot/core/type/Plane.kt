@@ -242,6 +242,8 @@ class Plane(var normal: Vector3, var d: RealT = 0.0) : CoreType {
 
 
     //UTILITIES
+    override fun toVariant() = Variant(this)
+
     override fun toString(): String {
         return "Plane(normal=$normal, d=$d)"
     }

@@ -1,5 +1,6 @@
 package godot.core
 
+import godot.core.type.Variant
 import godot.gdnative.*
 import godot.registration.RPCMode
 import kotlinx.cinterop.*

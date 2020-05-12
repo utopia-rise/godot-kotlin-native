@@ -140,6 +140,8 @@ class PoolColorArray : NativeCoreType<godot_pool_color_array>, Iterable<Color> {
     }
 
     //UTILITIES
+    override fun toVariant() = Variant(this)
+
     operator fun plus(other: Color) {
         this.append(other)
     }

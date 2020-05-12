@@ -138,6 +138,8 @@ class PoolIntArray : NativeCoreType<godot_pool_int_array>, Iterable<Int> {
     }
 
     //UTILITIES
+    override fun toVariant() = Variant(this)
+
     operator fun plus(other: Int) {
         this.append(other)
     }

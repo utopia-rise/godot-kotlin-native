@@ -366,6 +366,8 @@ class Vector2(var x: RealT, var y: RealT) : Comparable<Vector2>, CoreType {
 
 
     //UTILITIES
+    override fun toVariant() = Variant(this)
+
     operator fun get(idx: Int): RealT =
         when (idx) {
             0 -> x
