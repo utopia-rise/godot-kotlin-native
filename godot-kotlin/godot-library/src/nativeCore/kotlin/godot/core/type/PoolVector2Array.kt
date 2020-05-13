@@ -161,19 +161,12 @@ class PoolVector2Array : NativeCoreType<godot_pool_vector2_array>, Iterable<Vect
      * This methods implementation works but is not the fastest one.
      */
     override fun equals(other: Any?): Boolean {
-        if (other is PoolVector2Array) {
-            if (other.size() != this.size()) {
-                return false
-            }
-            val iter1 = this.iterator()
-            val iter2 = other.iterator()
-            while (iter1.hasNext()) {
-                if (iter1.next() != iter2.next())
-                    return false
-            }
-            return true
+        return if (other is PoolVector2Array) {
+            val list1 = this.toList()
+            val list2 = other.toList()
+            list1 == list2
         } else {
-            return false
+            false
         }
     }
 
