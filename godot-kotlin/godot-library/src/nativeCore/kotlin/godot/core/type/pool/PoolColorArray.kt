@@ -2,6 +2,8 @@
 
 package godot.core
 
+import godot.gdnative.*
+import godot.internal.type.NativeCoreType
 import godot.gdnative.godot_aabb
 import godot.gdnative.godot_pool_color_array
 import kotlinx.cinterop.*

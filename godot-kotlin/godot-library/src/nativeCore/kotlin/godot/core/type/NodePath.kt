@@ -2,6 +2,8 @@
 
 package godot.core
 
+import godot.gdnative.*
+import godot.internal.type.NativeCoreType
 import godot.gdnative.godot_node_path
 import godot.gdnative.godot_node_path_operator_equal
 import kotlinx.cinterop.*

@@ -4,6 +4,7 @@ package godot.core
 
 import godot.gdnative.godot_color
 import godot.gdnative.godot_color_layout
+import godot.internal.type.CoreType
 import kotlinx.cinterop.*
 import kotlin.math.floor
 import kotlin.math.max

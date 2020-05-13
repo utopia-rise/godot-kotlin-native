@@ -107,7 +107,7 @@ class ICall(
                 }
                 value.type.isCoreType() -> {
                     codeBlockBuilder.add(
-                        "    args[$i] = arg$i$nullInstruction.handle$nullInstruction.ptr\n"
+                        "    args[$i] = arg$i$nullInstruction.getRawMemory(this)$nullInstruction\n"
                     )
                 }
                 value.type.isPrimitive() -> {
@@ -168,6 +168,12 @@ class ICall(
                             MemberName(typeManagerClass, "wrap")
                         )
                     }
+                }
+                else if (returnTypeClassSimpleName != null && returnTypeClassSimpleName == "String") {
+                    codeBlockBuilder.add(
+                        "    ret = %M(retVar)\n",
+                        MemberName("godot.core", returnTypeClassSimpleName)
+                    )
                 }
                 else {
                     codeBlockBuilder.add(
