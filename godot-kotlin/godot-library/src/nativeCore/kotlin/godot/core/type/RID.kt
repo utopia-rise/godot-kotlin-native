@@ -5,10 +5,8 @@ package godot.core
 import godot.gdnative.*
 import kotlinx.cinterop.*
 
-class RID : CoreType, Comparable<RID> {
+class RID : NativeCoreType<godot_rid>, Comparable<RID> {
     //PROPERTIES
-    private lateinit var _handle: CValue<godot_rid>
-
     val id: Int
         get() = getID()
 
@@ -83,11 +81,6 @@ class RID : CoreType, Comparable<RID> {
     }
 
     internal inline fun <T> callNative(block: MemScope.(CPointer<godot_rid>) -> T): T {
-        return memScoped {
-            val ptr = _handle.ptr
-            val ret: T = block(ptr)
-            _handle = ptr.pointed.readValue()
-            ret
-        }
+        return callNative(this, block)
     }
 }
