@@ -7,10 +7,8 @@ import kotlinx.cinterop.*
 import platform.posix.off_t
 
 
-class NodePath : CoreType {
+class NodePath : NativeCoreType<godot_node_path> {
     //PROPERTIES
-    private lateinit var _handle: CValue<godot_node_path>
-
     val path: String
         get() {
             return callNative {
@@ -152,11 +150,6 @@ class NodePath : CoreType {
     }
 
     internal inline fun <T> callNative(block: MemScope.(CPointer<godot_node_path>) -> T): T {
-        return memScoped {
-            val ptr = _handle.ptr
-            val ret: T = block(ptr)
-            _handle = ptr.pointed.readValue()
-            ret
-        }
+        return callNative(this, block)
     }
 }
