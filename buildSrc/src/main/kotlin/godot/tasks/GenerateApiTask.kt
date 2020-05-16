@@ -1,10 +1,10 @@
 package godot.tasks
 
-import godot.codegen.Generator
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
+import godot.codegen.generateApiFrom
 
 open class GenerateApiTask : DefaultTask() {
 
@@ -18,11 +18,6 @@ open class GenerateApiTask : DefaultTask() {
     fun generateAPI() {
         // First, we clear output directory
         outputDirectory.get().asFile.deleteRecursively()
-        Generator.generate(source.asFile.get(), outputDirectory.asFile.get())
+        outputDirectory.asFile.get() generateApiFrom source.asFile.get()
     }
-}
-
-// Here to test
-fun main() {
-    GenerateApiTask().generateAPI()
 }

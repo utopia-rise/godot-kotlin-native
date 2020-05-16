@@ -45,10 +45,9 @@ class Class @JsonCreator constructor(
         applyGettersAndSettersForProperties()
         if (!shouldGenerate) return
 
-        val packageName = "godot"
-        val className = ClassName(packageName, name)
+        val className = ClassName("godot", name)
 
-        val classTypeBuilder = createTypeBuilder(className, packageName)
+        val classTypeBuilder = createTypeBuilder(className)
 
         if (name == "Object") {
             generatePointerVariable(classTypeBuilder)
@@ -73,7 +72,7 @@ class Class @JsonCreator constructor(
 
         //Build Type and create file
         val fileBuilder = FileSpec
-            .builder(packageName, className.simpleName)
+            .builder("godot", className.simpleName)
             .addType(classTypeBuilder.build())
 
         additionalImports.forEach {
@@ -88,16 +87,16 @@ class Class @JsonCreator constructor(
     private fun applyGettersAndSettersForProperties() {
         properties.forEach { property ->
             methods.forEach { method ->
-                property.applyGetterOrSetter(method)
+                property applyGetterOrSetter method
             }
         }
     }
 
-    private fun createTypeBuilder(className: ClassName, packageName: String): TypeSpec.Builder {
+    private fun createTypeBuilder(className: ClassName): TypeSpec.Builder {
         val typeSpec = TypeSpec
             .classBuilder(className)
             .addModifiers(KModifier.OPEN)
-        if (baseClass.isNotEmpty()) typeSpec.superclass(ClassName(packageName, baseClass))
+        if (baseClass.isNotEmpty()) typeSpec.superclass(ClassName("godot", baseClass))
         return typeSpec
     }
 

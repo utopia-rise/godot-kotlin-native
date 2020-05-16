@@ -42,7 +42,7 @@ class ICall(
         )
     }
 
-    fun generateICall(tree: Graph<Class>): FunSpec {
+    infix fun generateICall(tree: Graph<Class>): FunSpec {
         val spec = FunSpec
             .builder(name)
             .addModifiers(KModifier.INTERNAL)
