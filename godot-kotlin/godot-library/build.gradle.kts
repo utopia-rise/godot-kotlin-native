@@ -65,3 +65,14 @@ tasks {
         }
     }
 }
+
+//TODO: See how to do with mobile platforms
+project.extra["artifacts"] = when (currentOS) {
+    OS.LINUX -> arrayOf("kotlinMultiplatform", "metadata", "linux")
+    OS.WINDOWS -> arrayOf("windows")
+    OS.MACOS -> arrayOf("macos")
+}
+
+apply {
+    plugin(BintrayPublish::class.java)
+}
