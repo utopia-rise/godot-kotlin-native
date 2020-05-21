@@ -11,7 +11,8 @@ repositories {
 }
 
 plugins {
-    id("com.utopia-rise.godot-kotlin") version "0.1.0"
+    //Change plugin version to last locally built, while there is no release.
+    id("com.utopia-rise.godot-kotlin") version "0.1.0-3.2.169+20200521T124527Z"
     kotlin("multiplatform") version "1.3.71"
 }
 

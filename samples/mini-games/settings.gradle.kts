@@ -4,6 +4,7 @@
 // this is only required when trying out local builds. Comment this out when trying out a plugin published
 // in the gradle plugin portal.
 // TODO: remove this once we have the artifacts published
+
 pluginManagement {
     repositories {
         mavenLocal()
@@ -12,8 +13,9 @@ pluginManagement {
     }
 
     resolutionStrategy.eachPlugin {
+        val godotVersion: String? by extra
         when (requested.id.id) {
-            "com.utopia-rise.godot-kotlin" -> useModule("com.utopia-rise:godot-gradle-plugin:${requested.version}")
+            "com.utopia-rise.godot-kotlin" -> useModule("com.utopia-rise:godot-gradle-plugin-$godotVersion:${requested.version}")
         }
     }
 }

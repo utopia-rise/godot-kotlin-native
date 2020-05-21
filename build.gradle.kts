@@ -1,6 +1,12 @@
+apply {
+    plugin(BuildVersion::class.java)
+}
+
+val versionString = project.version.toString()
+
 subprojects {
     group = "com.utopia-rise"
-    version = "0.1.0"
+    version = versionString
     repositories {
         mavenLocal()
         jcenter()

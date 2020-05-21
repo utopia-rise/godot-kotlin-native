@@ -56,13 +56,13 @@ class GodotSubPlugin : KotlinGradleSubplugin<AbstractCompile> {
 
     override fun getPluginArtifact(): SubpluginArtifact = SubpluginArtifact(
         groupId = CompilerPluginConst.compilerPluginGroupId,
-        artifactId = CompilerPluginConst.compilerPluginArtifactId,
+        artifactId = "${CompilerPluginConst.compilerPluginArtifactId}-${CompilerPluginConst.godotVersion}",
         version = GodotBuildProperties.godotKotlinVersion
     )
 
     override fun getNativeCompilerPluginArtifact() = SubpluginArtifact(
         groupId = CompilerPluginConst.compilerPluginGroupId,
-        artifactId = CompilerPluginConst.compilerNativePluginArtifactId,
+        artifactId = "${CompilerPluginConst.compilerNativePluginArtifactId}-${CompilerPluginConst.godotVersion}",
         version = GodotBuildProperties.godotKotlinVersion
     )
 }

@@ -32,6 +32,12 @@ if (ignoreSamples == null) {
     includeBuild("samples/mini-games")
 }
 
+val godotVersion: String? by extra
+
+rootProject.children.forEach {
+    it.name += "-$godotVersion"
+}
+
 class IncludeDsl(val root: String) {
     fun include(project: String) {
         settings.include(project)

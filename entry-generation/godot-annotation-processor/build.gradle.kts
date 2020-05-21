@@ -4,7 +4,7 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":godot-entry-generator"))
+    godotProjectImplementation(":godot-entry-generator", project.extra["godotVersion"] as String)
     implementation("de.jensklingenberg:mpapt-runtime:${DependenciesVersions.mpaptVersion}")
     compileOnly(kotlin("compiler"))
 }
@@ -15,6 +15,10 @@ tasks {
         archiveVersion.set(project.version.toString())
         archiveClassifier.set("sources")
         from(sourceSets["main"].allSource)
+    }
+
+    build {
+        finalizedBy(publishToMavenLocal)
     }
 }
 

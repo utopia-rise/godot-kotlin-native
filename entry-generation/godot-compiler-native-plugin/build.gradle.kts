@@ -22,8 +22,8 @@ val embeddable by configurations.creating {
 }
 
 dependencies {
-    implementation(project(":godot-annotation-processor"))
-    implementation(project(":godot-compiler-plugin-common"))
+    godotProjectImplementation(":godot-annotation-processor", project.extra["godotVersion"] as String)
+    godotProjectImplementation(":godot-compiler-plugin-common", project.extra["godotVersion"] as String)
     implementation("de.jensklingenberg:mpapt-runtime:${DependenciesVersions.mpaptVersion}")
     compileOnly(kotlin("compiler"))
 }
@@ -40,6 +40,12 @@ val shadowJar by tasks.getting(ShadowJar::class) {
     archiveVersion.set(project.version.toString())
     val classifier: String? = null //needed as we need to specify the type null represents. otherwise we get ambiguous overload exception during build
     archiveClassifier.set(classifier)
+}
+
+tasks {
+    build {
+        finalizedBy(publishToMavenLocal)
+    }
 }
 
 publishing {

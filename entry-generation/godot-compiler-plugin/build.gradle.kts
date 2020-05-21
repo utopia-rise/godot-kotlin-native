@@ -4,8 +4,8 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":godot-annotation-processor"))
-    implementation(project(":godot-compiler-plugin-common"))
+    godotProjectImplementation(":godot-annotation-processor", project.extra["godotVersion"] as String)
+    godotProjectImplementation(":godot-compiler-plugin-common", project.extra["godotVersion"] as String)
     implementation("de.jensklingenberg:mpapt-runtime:${DependenciesVersions.mpaptVersion}")
     compileOnly(kotlin("compiler"))
 }
@@ -16,6 +16,10 @@ tasks {
         archiveVersion.set(project.version.toString())
         archiveClassifier.set("sources")
         from(sourceSets["main"].allSource)
+    }
+
+    build {
+        finalizedBy(publishToMavenLocal)
     }
 }
 

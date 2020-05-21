@@ -74,5 +74,5 @@ project.extra["artifacts"] = when (currentOS) {
 }
 
 apply {
-    plugin(BintrayPublish::class.java)
+//    plugin(BintrayPublish::class.java)
 }

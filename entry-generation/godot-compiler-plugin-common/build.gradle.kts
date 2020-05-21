@@ -14,6 +14,10 @@ tasks {
         archiveClassifier.set("sources")
         from(sourceSets["main"].allSource)
     }
+
+    build {
+        finalizedBy(publishToMavenLocal)
+    }
 }
 
 

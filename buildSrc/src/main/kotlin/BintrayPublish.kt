@@ -31,7 +31,7 @@ class BintrayPublish : Plugin<Project> {
             with(pkg) {
                 repo = bintrayRepo
                 desc = "Kotlin Native bindings for Godot Engine"
-                name = "godot-kotlin-${project.extra["godot.version"]}"
+                name = "godot-kotlin"
                 setLicenses("MIT")
                 setLabels("kotlin", "godot", "gamedev", "godotengine")
                 vcsUrl = "https://github.com/utopia-rise/godot-kotlin.git"
@@ -81,7 +81,7 @@ class BintrayPublish : Plugin<Project> {
                                     id.set("core")
                                     name.set("Cedric Hippmann")
                                     url.set("https://github.com/chippmann")
-                                    email.set("")
+                                    email.set("cedric.hippmann@hotmail.com")
                                 }
                                 developer {
                                     id.set("core")
