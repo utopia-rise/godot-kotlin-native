@@ -12,7 +12,7 @@ buildscript {
 
 plugins {
     kotlin("jvm")
-    id("maven-publish")
+    `maven-publish`
 }
 
 apply(plugin = "com.github.johnrengelman.shadow")
