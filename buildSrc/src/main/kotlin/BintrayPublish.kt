@@ -29,6 +29,7 @@ class BintrayPublish : Plugin<Project> {
             key = bintrayApiKey
             publish = doPublish
             with(pkg) {
+                userOrg = "utopia-rise"
                 repo = bintrayRepo
                 desc = "Kotlin Native bindings for Godot Engine"
                 name = "godot-kotlin"
