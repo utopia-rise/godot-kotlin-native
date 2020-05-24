@@ -22,7 +22,7 @@ pluginBundle {
 
     mavenCoordinates {
         groupId = "${project.group}"
-        artifactId = "godot-gradle-plugin-${project.extra["godotVersion"]}"
+        artifactId = "godot-gradle-plugin-${DependenciesVersions.godotVersion}"
         version = "${project.version}"
     }
 }
@@ -32,8 +32,8 @@ dependencies {
     implementation(kotlin("gradle-plugin"))
     implementation(kotlin("gradle-plugin-api"))
 
-    godotProjectImplementation(":godot-build-props", project.extra["godotVersion"] as String)
-    godotProjectCompileOnly(":godot-compiler-plugin-common", project.extra["godotVersion"] as String)
+    implementation(project(":godot-build-props"))
+    compileOnly(project(":godot-compiler-plugin-common"))
 }
 
 tasks {
@@ -55,7 +55,7 @@ publishing {
         val godotPlugin by creating(MavenPublication::class) {
             pom {
                 groupId = "${project.group}"
-                artifactId = project.name
+                artifactId = "${project.name}-${DependenciesVersions.godotVersion}"
                 version = "${project.version}"
             }
             from(components.getByName("java"))

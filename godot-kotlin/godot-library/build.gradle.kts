@@ -64,6 +64,10 @@ tasks {
             }
         }
     }
+
+    withType<PublishToMavenLocal>().configureEach {
+        publication.artifactId += "-${DependenciesVersions.godotVersion}"
+    }
 }
 
 //TODO: See how to do with mobile platforms

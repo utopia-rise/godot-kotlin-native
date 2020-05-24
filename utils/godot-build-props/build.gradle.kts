@@ -20,4 +20,8 @@ tasks {
     build {
         finalizedBy(publishToMavenLocal)
     }
+
+    withType<PublishToMavenLocal>().configureEach {
+        publication.artifactId += "-${DependenciesVersions.godotVersion}"
+    }
 }

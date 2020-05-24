@@ -4,8 +4,8 @@ plugins {
 }
 
 dependencies {
-    godotProjectImplementation(":godot-annotation-processor", project.extra["godotVersion"] as String)
-    godotProjectImplementation(":godot-compiler-plugin-common", project.extra["godotVersion"] as String)
+    implementation(project(":godot-annotation-processor"))
+    implementation(project(":godot-compiler-plugin-common"))
     implementation("de.jensklingenberg:mpapt-runtime:${DependenciesVersions.mpaptVersion}")
     compileOnly(kotlin("compiler"))
 }
@@ -26,6 +26,7 @@ tasks {
 publishing {
     publications {
         val godotCompilerPlugin by creating(MavenPublication::class) {
+
             pom {
                 groupId = "${project.group}"
                 artifactId = project.name

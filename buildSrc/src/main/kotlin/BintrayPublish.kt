@@ -88,7 +88,7 @@ class BintrayPublish : Plugin<Project> {
                                     id.set("core")
                                     name.set("Tristan Grespinet")
                                     url.set("https://github.com/CedNaru")
-                                    email.set("")
+                                    email.set("ced.naru@gmail.com")
                                 }
                             }
                         }

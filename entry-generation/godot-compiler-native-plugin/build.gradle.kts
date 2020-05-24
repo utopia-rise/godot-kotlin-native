@@ -22,8 +22,8 @@ val embeddable by configurations.creating {
 }
 
 dependencies {
-    godotProjectImplementation(":godot-annotation-processor", project.extra["godotVersion"] as String)
-    godotProjectImplementation(":godot-compiler-plugin-common", project.extra["godotVersion"] as String)
+    implementation(project(":godot-annotation-processor"))
+    implementation(project(":godot-compiler-plugin-common"))
     implementation("de.jensklingenberg:mpapt-runtime:${DependenciesVersions.mpaptVersion}")
     compileOnly(kotlin("compiler"))
 }
