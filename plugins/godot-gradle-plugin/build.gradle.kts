@@ -7,7 +7,7 @@ plugins {
 gradlePlugin {
     plugins {
         create("godotPlugin") {
-            id = "com.utopia-rise.godot-kotlin"
+            id = "com.utopia-rise.godot-kotlin-${DependenciesVersions.godotVersion}"
             displayName = "Gradle plugin for godot-kotlin"
             implementationClass = "godot.gradle.GodotPlugin"
         }

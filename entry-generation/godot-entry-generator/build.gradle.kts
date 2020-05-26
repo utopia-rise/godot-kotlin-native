@@ -24,7 +24,7 @@ tasks {
 
 publishing {
     publications {
-        val godotAnnotationProcessor by creating(MavenPublication::class) {
+        val godotEntryGenerator by creating(MavenPublication::class) {
             pom {
                 groupId = "${project.group}"
                 artifactId = "${project.name}-${DependenciesVersions.godotVersion}"
