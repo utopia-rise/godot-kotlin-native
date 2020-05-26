@@ -1,8 +1,12 @@
 import org.apache.tools.ant.filters.ReplaceTokens
 
 plugins {
-    `kotlin-dsl`
+    kotlin("jvm")
     `maven-publish`
+}
+
+dependencies {
+    compileOnly(kotlin("stdlib"))
 }
 
 tasks {
@@ -21,7 +25,7 @@ tasks {
         finalizedBy(publishToMavenLocal)
     }
 
-    withType<PublishToMavenLocal>().configureEach {
+    withType<PublishToMavenLocal> {
         publication.artifactId += "-${DependenciesVersions.godotVersion}"
     }
 }

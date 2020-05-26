@@ -1,19 +1,37 @@
 plugins {
-    `kotlin-dsl`
+    kotlin("jvm")
     `maven-publish`
 }
 
 dependencies {
+    implementation(kotlin("stdlib"))
     compileOnly(kotlin("compiler"))
     implementation("com.squareup:kotlinpoet:${DependenciesVersions.kotlinPoetVersion}")
 }
 
 tasks {
+    val sourceJar by creating(Jar::class) {
+        archiveBaseName.set("${project.name}-${DependenciesVersions.godotVersion}")
+        archiveVersion.set(project.version.toString())
+        archiveClassifier.set("sources")
+        from(sourceSets["main"].allSource)
+    }
+
     build {
         finalizedBy(publishToMavenLocal)
     }
+}
 
-    withType<PublishToMavenLocal>().configureEach {
-        publication.artifactId += "-${DependenciesVersions.godotVersion}"
+publishing {
+    publications {
+        val godotAnnotationProcessor by creating(MavenPublication::class) {
+            pom {
+                groupId = "${project.group}"
+                artifactId = "${project.name}-${DependenciesVersions.godotVersion}"
+                version = "${project.version}"
+            }
+            from(components.getByName("java"))
+            artifact(tasks.getByName("sourceJar"))
+        }
     }
 }
