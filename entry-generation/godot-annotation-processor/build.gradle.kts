@@ -35,3 +35,9 @@ publishing {
         }
     }
 }
+
+project.extra["artifacts"] = arrayOf("godotAnnotationProcessor")
+
+apply {
+    plugin(BintrayPublish::class.java)
+}

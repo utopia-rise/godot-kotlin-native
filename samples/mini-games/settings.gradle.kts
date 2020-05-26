@@ -13,9 +13,8 @@ pluginManagement {
     }
 
     resolutionStrategy.eachPlugin {
-        val godotVersion: String? by extra
         when (requested.id.id) {
-            "com.utopia-rise.godot-kotlin" -> useModule("com.utopia-rise:godot-gradle-plugin-$godotVersion:${requested.version}")
+            "com.utopia-rise.godot-kotlin-3.2" -> useModule("com.utopia-rise:godot-gradle-plugin-3.2:${requested.version}")
         }
     }
 }

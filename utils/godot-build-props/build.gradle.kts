@@ -10,6 +10,13 @@ dependencies {
 }
 
 tasks {
+    val sourceJar by creating(Jar::class) {
+        archiveBaseName.set(project.name)
+        archiveVersion.set(project.version.toString())
+        archiveClassifier.set("sources")
+        from(sourceSets["main"].allSource)
+    }
+
     val processResources by getting(Copy::class) {
         outputs.upToDateWhen { false }
         val tokens = mapOf(
@@ -24,8 +31,25 @@ tasks {
     build {
         finalizedBy(publishToMavenLocal)
     }
+}
 
-    withType<PublishToMavenLocal> {
-        publication.artifactId += "-${DependenciesVersions.godotVersion}"
+publishing {
+    publications {
+        // this is only used for publishing locally.
+        val buildProps by creating(MavenPublication::class) {
+            pom {
+                groupId = "${project.group}"
+                artifactId = "${project.name}-${DependenciesVersions.godotVersion}"
+                version = "${project.version}"
+            }
+            from(components.getByName("java"))
+            artifact(tasks.getByName("sourceJar"))
+        }
     }
+}
+
+project.extra["artifacts"] = arrayOf("buildProps")
+
+apply {
+    plugin(BintrayPublish::class.java)
 }

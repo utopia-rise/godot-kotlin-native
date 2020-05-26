@@ -35,3 +35,9 @@ publishing {
         }
     }
 }
+
+project.extra["artifacts"] = arrayOf("godotEntryGenerator")
+
+apply {
+    plugin(BintrayPublish::class.java)
+}

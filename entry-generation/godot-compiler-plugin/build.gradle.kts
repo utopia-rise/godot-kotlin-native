@@ -37,3 +37,9 @@ publishing {
         }
     }
 }
+
+project.extra["artifacts"] = arrayOf("godotCompilerPlugin")
+
+apply {
+    plugin(BintrayPublish::class.java)
+}

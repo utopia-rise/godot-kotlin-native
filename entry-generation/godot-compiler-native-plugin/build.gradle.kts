@@ -68,3 +68,9 @@ publishing {
         }
     }
 }
+
+project.extra["artifacts"] = arrayOf("shadow")
+
+apply {
+    plugin(BintrayPublish::class.java)
+}
