@@ -2,7 +2,6 @@ buildscript {
     repositories {
         mavenLocal()
         jcenter()
-        maven("https://dl.bintray.com/utopia-rise/godot-kotlin-dev")
     }
 }
 
