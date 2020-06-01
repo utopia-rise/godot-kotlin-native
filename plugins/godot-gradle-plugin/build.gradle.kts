@@ -7,7 +7,7 @@ plugins {
 gradlePlugin {
     plugins {
         create("godotPlugin") {
-            id = "com.utopia-rise.godot-kotlin-${DependenciesVersions.godotVersion}"
+            id = "com.utopia-rise.godot-kotlin"
             displayName = "Gradle plugin for godot-kotlin"
             implementationClass = "godot.gradle.GodotPlugin"
         }
@@ -22,7 +22,7 @@ pluginBundle {
 
     mavenCoordinates {
         groupId = "${project.group}"
-        artifactId = "godot-gradle-plugin-${DependenciesVersions.godotVersion}"
+        artifactId = "godot-gradle-plugin"
         version = "${project.version}"
     }
 }
@@ -55,7 +55,7 @@ publishing {
         val godotGradlePlugin by creating(MavenPublication::class) {
             pom {
                 groupId = "${project.group}"
-                artifactId = "${project.name}-${DependenciesVersions.godotVersion}"
+                artifactId = project.name
                 version = "${project.version}"
             }
             from(components.getByName("java"))

@@ -39,7 +39,7 @@ publishing {
         val buildProps by creating(MavenPublication::class) {
             pom {
                 groupId = "${project.group}"
-                artifactId = "${project.name}-${DependenciesVersions.godotVersion}"
+                artifactId = project.name
                 version = "${project.version}"
             }
             from(components.getByName("java"))

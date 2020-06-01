@@ -9,7 +9,7 @@ dependencies {
 
 tasks {
     val sourceJar by creating(Jar::class) {
-        archiveBaseName.set("${project.name}-${DependenciesVersions.godotVersion}")
+        archiveBaseName.set(project.name)
         archiveVersion.set(project.version.toString())
         archiveClassifier.set("sources")
         from(sourceSets["main"].allSource)
@@ -26,7 +26,7 @@ publishing {
         val godotCompilerPluginCommon by creating(MavenPublication::class) {
             pom {
                 groupId = "${project.group}"
-                artifactId = "${project.name}-${DependenciesVersions.godotVersion}"
+                artifactId = project.name
                 version = "${project.version}"
             }
             from(components.getByName("java"))

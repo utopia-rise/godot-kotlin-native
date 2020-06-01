@@ -61,7 +61,7 @@ class GodotPlugin : Plugin<Project> {
                         // TODO: remove this once we have published the godot-library artifact.
                         // don't add dependencies to targets not buildable in the current host
                         if (HostManager().isEnabled(this@configureSourceSets.konanTarget)) {
-                            implementation("com.utopia-rise:godot-library-${CompilerPluginConst.godotVersion}:${GodotBuildProperties.godotKotlinVersion}")
+                            implementation("com.utopia-rise:godot-library:${GodotBuildProperties.godotKotlinVersion}")
                         }
                     }
                 }
