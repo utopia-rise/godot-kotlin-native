@@ -2,9 +2,9 @@ apply {
     plugin(ReleaseMode::class.java)
 }
 
-version = "0.1.0"
+version = "0.1.0-${DependenciesVersions.godotVersion}"
 
-val versionString = "${project.version}-${DependenciesVersions.godotVersion}"
+val versionString = project.version.toString()
 
 subprojects {
     group = "com.utopia-rise"
