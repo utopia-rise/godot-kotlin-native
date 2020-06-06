@@ -1,6 +1,5 @@
 package godot.gradle
 
-import godot.compiler.plugin.CompilerPluginConst
 import godot.utils.GodotBuildProperties
 import org.gradle.api.Plugin
 import org.gradle.api.Project
