@@ -52,7 +52,7 @@ tasks {
 publishing {
     publications {
         // this is only used for publishing locally.
-        val godotPlugin by creating(MavenPublication::class) {
+        val godotGradlePlugin by creating(MavenPublication::class) {
             pom {
                 groupId = "${project.group}"
                 artifactId = project.name
@@ -62,4 +62,10 @@ publishing {
             artifact(tasks.getByName("sourceJar"))
         }
     }
+}
+
+project.extra["artifacts"] = arrayOf("godotGradlePlugin")
+
+apply {
+    plugin(BintrayPublish::class.java)
 }

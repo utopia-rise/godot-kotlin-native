@@ -10,7 +10,7 @@ class ResourceRegistrationValuesHandler(
     bindingContext: BindingContext
 ) : RegistrationValuesHandler(propertyDescriptor, bindingContext) {
 
-    override fun getDefaultValue(): Pair<String, Array<Any>> {
+    override fun getDefaultValue(): Pair<String, Array<out Any>> {
         if (!propertyDescriptor.isLateInit && isVisibleInEditor()) {
             throw IllegalStateException("You initialized the property \"${propertyDescriptor.fqNameSafe}\". Properties of type Resource which are registered using the @RegisterProperty annotation and are visible in the editor are not allowed to have a default value. Use lateinit.")
         }
