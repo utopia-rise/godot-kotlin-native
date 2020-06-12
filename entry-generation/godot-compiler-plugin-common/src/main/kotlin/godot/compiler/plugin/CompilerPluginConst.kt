@@ -9,6 +9,9 @@ object CompilerPluginConst {
     const val compilerNativePluginArtifactId = "godot-compiler-native-plugin"
     const val compilerPluginId = "GodotCompilerPlugin"
 
+    //Remember to change according to gradle.properties
+    const val godotVersion = "3.2"
+
     object CommandLineOptionNames {
         const val gdnsDirPathOption = "gdns-dir-path"
         const val gdnlibFileOption = "gdnlib-file-path"

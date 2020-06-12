@@ -13,7 +13,7 @@ class EnumFlagRegistrationValuesHandler(
     bindingContext: BindingContext
 ) : RegistrationValuesHandler(propertyDescriptor, bindingContext) {
 
-    override fun getDefaultValue(): Pair<String, Array<Any>> {
+    override fun getDefaultValue(): Pair<String, Array<out Any>> {
         if (propertyHintAnnotation == null || propertyHintAnnotation.fqName?.asString() != "godot.annotation.EnumFlag") {
             throw IllegalStateException("The property \"${propertyDescriptor.fqNameSafe}\" is not annotated with @EnumFlag!")
         }

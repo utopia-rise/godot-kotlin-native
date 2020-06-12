@@ -4,11 +4,13 @@
 // this is only required when trying out local builds. Comment this out when trying out a plugin published
 // in the gradle plugin portal.
 // TODO: remove this once we have the artifacts published
+
 pluginManagement {
     repositories {
         mavenLocal()
         jcenter()
         gradlePluginPortal()
+        maven("https://dl.bintray.com/utopia-rise/godot-kotlin-dev")
     }
 
     resolutionStrategy.eachPlugin {

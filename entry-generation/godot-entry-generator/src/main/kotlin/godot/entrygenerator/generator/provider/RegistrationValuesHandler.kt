@@ -49,7 +49,7 @@ abstract class RegistrationValuesHandler(
         }
     }
 
-    open fun getDefaultValue(): Pair<String, Array<Any>> {
+    open fun getDefaultValue(): Pair<String, Array<out Any>> {
         if (propertyDescriptor.isLateInit || !isVisibleInEditor()) {
             return "%L" to arrayOf("null")
         }
@@ -71,7 +71,7 @@ abstract class RegistrationValuesHandler(
         )
     }
 
-    private fun getDefaultValueExpression(expression: KtExpression): Pair<String, Array<Any>>? {
+    private fun getDefaultValueExpression(expression: KtExpression): Pair<String, Array<out Any>>? {
         if (expression is KtConstantExpression) {
             return "%L" to arrayOf(expression.text)
         } else if (expression is KtStringTemplateExpression && !expression.hasInterpolation()) {

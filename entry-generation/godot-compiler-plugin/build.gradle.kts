@@ -1,6 +1,6 @@
 plugins {
     kotlin("jvm")
-    id("maven-publish")
+    `maven-publish`
 }
 
 dependencies {
@@ -17,11 +17,16 @@ tasks {
         archiveClassifier.set("sources")
         from(sourceSets["main"].allSource)
     }
+
+    build {
+        finalizedBy(publishToMavenLocal)
+    }
 }
 
 publishing {
     publications {
         val godotCompilerPlugin by creating(MavenPublication::class) {
+
             pom {
                 groupId = "${project.group}"
                 artifactId = project.name
@@ -31,4 +36,10 @@ publishing {
             artifact(tasks.getByName("sourceJar"))
         }
     }
+}
+
+project.extra["artifacts"] = arrayOf("godotCompilerPlugin")
+
+apply {
+    plugin(BintrayPublish::class.java)
 }

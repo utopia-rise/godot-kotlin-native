@@ -1,6 +1,6 @@
 plugins {
     kotlin("jvm")
-    id("maven-publish")
+    `maven-publish`
 }
 
 dependencies {
@@ -16,6 +16,10 @@ tasks {
         archiveClassifier.set("sources")
         from(sourceSets["main"].allSource)
     }
+
+    build {
+        finalizedBy(publishToMavenLocal)
+    }
 }
 
 publishing {
@@ -30,4 +34,10 @@ publishing {
             artifact(tasks.getByName("sourceJar"))
         }
     }
+}
+
+project.extra["artifacts"] = arrayOf("godotAnnotationProcessor")
+
+apply {
+    plugin(BintrayPublish::class.java)
 }
