@@ -73,18 +73,28 @@ class ICall(
             .add("%M {\n", MemberName("kotlinx.cinterop", "memScoped"))
 
         if (shouldReturn) {
-            if (isPrimitive) {
-                codeBlockBuilder.add(
-                    "    val retVar = %M<%T>()\n",
-                    MemberName("kotlinx.cinterop", "alloc"),
-                    ClassName("kotlinx.cinterop", "${returnType}Var")
-                )
-            } else {
-                codeBlockBuilder.add(
-                    "    val retVar = %M<%T>(20)\n",
-                    MemberName("kotlinx.cinterop", "allocArray"),
-                    ClassName("kotlinx.cinterop", "ByteVar")
-                )
+            when {
+                isPrimitive -> {
+                    codeBlockBuilder.add(
+                        "    val retVar = %M<%T>()\n",
+                        MemberName("kotlinx.cinterop", "alloc"),
+                        ClassName("kotlinx.cinterop", "${returnType}Var")
+                    )
+                }
+                returnType == "VariantArray" -> {
+                    codeBlockBuilder.add(
+                        "    val retVar = %M<%T>()\n",
+                        MemberName("kotlinx.cinterop", "alloc"),
+                        ClassName("godot.gdnative", "godot_array")
+                    )
+                }
+                else -> {
+                    codeBlockBuilder.add(
+                        "    val retVar = %M<%T>(20)\n",
+                        MemberName("kotlinx.cinterop", "allocArray"),
+                        ClassName("kotlinx.cinterop", "ByteVar")
+                    )
+                }
             }
         }
 
@@ -105,9 +115,14 @@ class ICall(
                         MemberName("kotlinx.cinterop", "cstr")
                     )
                 }
+                value.type == "VariantArray" || value.type == "Variant" -> {
+                    codeBlockBuilder.add(
+                        "    args[$i] = arg$i$nullInstruction.handle$nullInstruction.ptr\n"
+                    )
+                }
                 value.type.isCoreType() -> {
                     codeBlockBuilder.add(
-                        "    args[$i] = arg$i$nullInstruction.getRawMemory(this)$nullInstruction\n"
+                        "    args[$i] = arg$i$nullInstruction.getRawMemory(this)\n"
                     )
                 }
                 value.type.isPrimitive() -> {
@@ -138,11 +153,20 @@ class ICall(
                     MemberName("kotlinx.cinterop", "value")
                 )
             } else {
-                codeBlockBuilder.add(
-                    "    %T.gdnative.godot_method_bind_ptrcall!!.%M(mb, inst, args, retVar)\n",
-                    ClassName("godot.core", "Godot"),
-                    MemberName("kotlinx.cinterop", "invoke")
-                )
+                if (returnType == "VariantArray") {
+                    codeBlockBuilder.add(
+                        "    %T.gdnative.godot_method_bind_ptrcall!!.%M(mb, inst, args, retVar.%M)\n",
+                        ClassName("godot.core", "Godot"),
+                        MemberName("kotlinx.cinterop", "invoke"),
+                        MemberName("kotlinx.cinterop", "ptr")
+                    )
+                } else {
+                    codeBlockBuilder.add(
+                        "    %T.gdnative.godot_method_bind_ptrcall!!.%M(mb, inst, args, retVar)\n",
+                        ClassName("godot.core", "Godot"),
+                        MemberName("kotlinx.cinterop", "invoke")
+                    )
+                }
                 val returnTypeClassSimpleName = when (returnTypeClass) {
                     is ClassName -> {
                         returnTypeClass.simpleName
@@ -154,32 +178,45 @@ class ICall(
                         null
                     }
                 }
-                if (returnTypeClassSimpleName != null && tree.isObjectOrItsChild(returnTypeClassSimpleName)) {
-                    val typeManagerClass = ClassName("godot.core", "TypeManager")
-                    if (returnTypeClassSimpleName != "Object") {
+
+                when {
+                    returnTypeClassSimpleName != null && tree.isObjectOrItsChild(returnTypeClassSimpleName) -> {
+                        val typeManagerClass = ClassName("godot.core", "TypeManager")
+                        if (returnTypeClassSimpleName != "Object") {
+                            codeBlockBuilder.add(
+                                "    ret = %M(retVar) as %T\n",
+                                MemberName(typeManagerClass, "wrap"),
+                                returnTypeClass
+                            )
+                        } else {
+                            codeBlockBuilder.add(
+                                "    ret = %M(retVar)\n",
+                                MemberName(typeManagerClass, "wrap")
+                            )
+                        }
+                    }
+
+                    returnTypeClassSimpleName != null && returnTypeClassSimpleName == "VariantArray" -> {
                         codeBlockBuilder.add(
-                            "    ret = %M(retVar) as %T\n",
-                            MemberName(typeManagerClass, "wrap"),
-                            returnTypeClass
-                        )
-                    } else {
-                        codeBlockBuilder.add(
-                            "    ret = %M(retVar)\n",
-                            MemberName(typeManagerClass, "wrap")
+                            "    ret = %T(retVar.%M())\n",
+                            returnTypeClass,
+                            MemberName("kotlinx.cinterop", "readValue")
                         )
                     }
-                }
-                else if (returnTypeClassSimpleName != null && returnTypeClassSimpleName == "String") {
-                    codeBlockBuilder.add(
-                        "    ret = %M(retVar)\n",
-                        MemberName("godot.core", returnTypeClassSimpleName)
-                    )
-                }
-                else {
-                    codeBlockBuilder.add(
-                        "    ret = %T(retVar)\n",
-                        returnTypeClass
-                    )
+
+                    returnTypeClassSimpleName != null && returnTypeClassSimpleName == "String" -> {
+                        codeBlockBuilder.add(
+                            "    ret = retVar.%M()\n",
+                            MemberName("kotlinx.cinterop", "toKString")
+                        )
+                    }
+
+                    else -> {
+                        codeBlockBuilder.add(
+                            "    ret = %T(retVar)\n",
+                            returnTypeClass
+                        )
+                    }
                 }
             }
         } else {
