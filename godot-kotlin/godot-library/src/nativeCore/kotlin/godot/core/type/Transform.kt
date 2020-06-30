@@ -31,12 +31,10 @@ class Transform(var basis: Basis, var origin: Vector3 = Vector3()) : CoreType {
     constructor(from: Quat):
         this(Basis(from))
 
-    constructor(){
-        basis = Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)
-        origin = Vector3(0, 0, 0)
-    }
+    constructor() :
+        this(Basis(1, 0, 0, 0, 1, 0, 0, 0, 1), Vector3(0, 0, 0))
 
-    internal constructor(native: CValue<godot_transform>) {
+    internal constructor(native: CValue<godot_transform>) : this() {
         basis = Basis()
         origin = Vector3()
 
@@ -44,7 +42,7 @@ class Transform(var basis: Basis, var origin: Vector3 = Vector3()) : CoreType {
             this@Transform.setRawMemory(native.ptr)
         }
     }
-    internal constructor(mem: COpaquePointer) {
+    internal constructor(mem: COpaquePointer) : this() {
         basis = Basis()
         origin = Vector3()
 

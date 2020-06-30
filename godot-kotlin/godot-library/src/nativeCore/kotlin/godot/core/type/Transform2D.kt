@@ -35,19 +35,15 @@ class Transform2D(var x: Vector2, var y: Vector2, var origin: Vector2) : CoreTyp
         pos
     )
 
-    constructor() {
-        x.x = 1.0
-        y.y = 1.0
-    }
+    constructor() : this(Vector2(1,0), Vector2(0,1), Vector2())
 
-
-    internal constructor(native: CValue<godot_transform2d>) {
+    internal constructor(native: CValue<godot_transform2d>) : this() {
         memScoped {
             this@Transform2D.setRawMemory(native.ptr)
         }
     }
 
-    internal constructor(mem: COpaquePointer) {
+    internal constructor(mem: COpaquePointer) : this() {
         this.setRawMemory(mem)
     }
 
