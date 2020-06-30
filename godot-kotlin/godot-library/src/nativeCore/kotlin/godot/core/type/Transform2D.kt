@@ -3,51 +3,41 @@
 package godot.core
 
 import godot.gdnative.godot_transform2d
+import godot.gdnative.godot_transform2d_layout
 import kotlinx.cinterop.*
 import kotlin.math.acos
 import kotlin.math.atan2
 import kotlin.math.cos
 import kotlin.math.sin
 
-
-class Transform2D: CoreType {
-    // Warning #1: basis of Transform2D is stored differently from Basis. In terms of elements array, the basis matrix looks like "on paper":
-    // M = (elements[0][0] elements[1][0])
-    //     (elements[0][1] elements[1][1])
-    // This is such that the columns, which can be interpreted as basis vectors of the coordinate system "painted" on the object, can be accessed as elements[i].
-    // Note that this is the opposite of the indices in mathematical texts, meaning: $M_{12}$ in a math book corresponds to elements[1][0] here.
-    // This requires additional care when working with explicit indices.
-    // See https://en.wikipedia.org/wiki/Row-_and_column-major_order for further reading.
-
-    // Warning #2: 2D be aware that unlike 3D code, 2D code uses a left-handed coordinate system: Y-axis points down,
-    // and angle is measure from +X to +Y in a clockwise-fashion.
-
-    var elements: Array<Vector2> =
-            arrayOf(Vector2(), Vector2(), Vector2())
-
-
-    constructor(xx: Number, xy: Number, yx: Number, yy: Number, ox: Number, oy: Number) {
-        elements[0][0] = xx.toDouble()
-        elements[0][1] = xy.toDouble()
-        elements[1][0] = yx.toDouble()
-        elements[1][1] = yy.toDouble()
-        elements[2][0] = ox.toDouble()
-        elements[2][1] = oy.toDouble()
+class Transform2D(var x: Vector2, var y: Vector2, var origin: Vector2) : CoreType {
+    //CONSTANTS
+    companion object {
+        inline val IDENTITY: Transform2D
+            get() = Transform2D(1, 0, 0, 1, 0, 0)
+        inline val FLIP_X: Transform2D
+            get() = Transform2D(-1, 0, 0, 1, 0, 0)
+        inline val FLIP_Y: Transform2D
+            get() = Transform2D(1, 0, 0, -1, 0, 0)
     }
 
-    constructor(rot: Number, pos: Vector2) {
-        val cr = cos(rot.toDouble())
-        val sr = sin(rot.toDouble())
-        elements[0][0] = cr
-        elements[0][1] = sr
-        elements[1][0] = -sr
-        elements[1][1] = cr
-        elements[2] = pos
-    }
+
+    //CONSTRUCTOR
+    constructor(xx: Number, xy: Number, yx: Number, yy: Number, ox: Number, oy: Number): this(
+        Vector2(xx.toRealT(), xy.toRealT()),
+        Vector2(yx.toRealT(), yy.toRealT()),
+        Vector2(ox.toRealT(), oy.toRealT())
+    )
+
+    constructor(rot: Number, pos: Vector2): this(
+        Vector2(cos(rot.toRealT()), sin(rot.toRealT())),
+        Vector2(-sin(rot.toRealT()), cos(rot.toRealT())),
+        pos
+    )
 
     constructor() {
-        elements[0][0] = 1.0
-        elements[1][1] = 1.0
+        x.x = 1.0
+        y.y = 1.0
     }
 
 
@@ -56,243 +46,104 @@ class Transform2D: CoreType {
             this@Transform2D.setRawMemory(native.ptr)
         }
     }
+
     internal constructor(mem: COpaquePointer) {
         this.setRawMemory(mem)
     }
 
-
+    //INTEROP
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
-        return cValuesOf(elements[0][0].toFloat(), elements[0][1].toFloat(), elements[1][0].toFloat(), 
-                         elements[1][1].toFloat(), elements[2][0].toFloat(), elements[2][1].toFloat()).getPointer(memScope)
-    }
-    override fun setRawMemory(mem: COpaquePointer) {
-        val arr = mem.reinterpret<FloatVar>()
-        elements[0][0] = arr[0].toDouble()
-        elements[0][1] = arr[1].toDouble()
-        elements[1][0] = arr[2].toDouble()
-        elements[1][1] = arr[3].toDouble()
-        elements[2][0] = arr[4].toDouble()
-        elements[2][1] = arr[5].toDouble()
-    }
-
-
-
-    fun tdotx(v: Vector2) = elements[0][0] * v.x + elements[1][0] * v.y
-
-    fun tdoty(v: Vector2) = elements[0][1] * v.x + elements[1][1] * v.y
-
-    operator fun get(n: Int) = elements[n]
-
-    fun getAxis(axis: Int) = elements[axis]
-
-    fun setAxis(axis: Int, vec: Vector2) {
-        elements[axis] = vec
-    }
-
-    fun getOrigin() = elements[2]
-
-    fun setOrigin(origin: Vector2) {
-        elements[2] = origin
-    }
-
-    fun basisXform(v: Vector2) = Vector2(tdotx(v), tdoty(v))
-
-    fun basisXformInv(v: Vector2) = Vector2(elements[0].dot(v), elements[1].dot(v))
-
-    fun xform(v: Vector2) = Vector2(tdotx(v), tdoty(v)) + elements[2]
-
-    fun xformInv(vec: Vector2): Vector2 {
-        val v = vec - elements[2]
-        return Vector2(elements[0].dot(v), elements[1].dot(v))
-    }
-
-    fun xform(rect: Rect2): Rect2 {
-        val x = elements[0] * rect.size.x
-        val y = elements[1] * rect.size.y
-        val pos = xform(rect.position)
-
-        val newRect = Rect2()
-        newRect.position = pos
-        newRect.expandTo(pos + x)
-        newRect.expandTo(pos + y)
-        newRect.expandTo(pos + x + y)
-        return newRect
-    }
-
-    fun setRotationAndScale(rot: Double, scale: Vector2) {
-        elements[0][0] = cos(rot) * scale.x
-        elements[1][1] = cos(rot) * scale.y
-        elements[1][0] = -sin(rot) * scale.y
-        elements[0][1] = sin(rot) * scale.x
-    }
-
-    fun xformInv(rect: Rect2): Rect2 {
-        val ends = arrayOf(xformInv(rect.position),
-                xformInv(Vector2(rect.position.x, rect.position.y + rect.size.y)),
-                xformInv(Vector2(rect.position.x + rect.size.x, rect.position.y + rect.size.y)),
-                xformInv(Vector2(rect.position.x + rect.size.x, rect.position.y)))
-
-        val newRect = Rect2()
-        newRect.position=ends[0]
-        newRect.expandTo(ends[1])
-        newRect.expandTo(ends[2])
-        newRect.expandTo(ends[3])
-
-        return newRect
-    }
-
-    fun invert() {
-        elements[0][1] = elements[1][0].also { elements[1][0] = elements[0][1] }
-        elements[2] = basisXform(-elements[2])
-    }
-
-    fun inverse(): Transform2D {
-        val inv = this
-        inv.invert()
-        return inv
-    }
-
-    fun affineInvert() {
-        val det = basisDeterminant()
-        if (det == 0.0) {
-            GD.printError("determinant == 0", "affineInvert()", "Transform2D.kt", 161)
-            return
+        val value = cValue<godot_transform2d_layout> {
+            x.x = this@Transform2D.x.x.toFloat()
+            x.y = this@Transform2D.x.y.toFloat()
+            y.x = this@Transform2D.y.x.toFloat()
+            y.y = this@Transform2D.y.y.toFloat()
+            origin.x = this@Transform2D.origin.x.toFloat()
+            origin.y = this@Transform2D.origin.y.toFloat()
         }
-        val idet = - 1.0 / det
-        elements[0][0] = elements[1][1].also { elements[1][1] = elements[0][0] }
-        elements[0] *= Vector2(idet,-idet)
-        elements[1] *= Vector2(-idet,idet)
-
-        elements[2] = basisXform(-elements[2])
+        return value.getPointer(memScope)
     }
 
+    override fun setRawMemory(mem: COpaquePointer) {
+        val value = mem.reinterpret<godot_transform2d_layout>().pointed
+        x.setRawMemory(value.x.ptr)
+        x.setRawMemory(value.y.ptr)
+        x.setRawMemory(value.origin.ptr)
+    }
+
+
+    //API
+    /**
+     * Returns the inverse of the matrix.
+     */
     fun affineInverse(): Transform2D {
-        val inv = this
+        val inv = Transform2D(this.x, this.y, this.origin)
         inv.affineInvert()
         return inv
     }
 
-    fun rotate(phi: Double) {
-        val transform2D = Transform2D(phi,Vector2()) * this
-        this.elements = transform2D.elements
+    /**
+     * Returns the inverse of the matrix.
+     */
+    internal fun affineInvert() {
+        val det = basisDeterminant()
+        if (det == 0.0) {
+            Godot.printError("determinant == 0", "affineInvert()", "Transform2D.kt", 84)
+            return
+        }
+        val idet = - 1.0 / det
+        val copy = x.x
+        x.x = y.y
+        y.y = copy
+        this.x *= Vector2(idet,-idet)
+        this.y *= Vector2(-idet,idet)
+
+        this.origin = basisXform(-this.origin)
     }
 
-    fun getRotation(): Double {
+    private fun basisDeterminant(): RealT {
+        return this.x.x * this.y.y - this.x.y * this.y.x
+    }
+
+    /**
+     * Transforms the given vector by this transform’s basis (no translation).
+     */
+    fun basisXform(v: Vector2) = Vector2(tdotx(v), tdoty(v))
+
+    /**
+     * Inverse-transforms the given vector by this transform’s basis (no translation).
+     */
+    fun basisXformInv(v: Vector2) = Vector2(this.x.dot(v), this.y.dot(v))
+
+    /**
+     * Returns the transform’s origin (translation).
+     */
+    fun getOrigin() = this.origin
+
+    /**
+     * Returns the transform’s rotation (in radians).
+     */
+    fun getRotation(): RealT {
         val det = basisDeterminant()
         val m = orthonormalized()
         if (det < 0) {
             m.scaleBasis(Vector2(-1, -1))
         }
-        return atan2(m[0].y, m[0].x)
+        return atan2(m.x.y, m.x.x)
     }
 
-    fun setRotation(rot: Double) {
-        val cr = cos(rot)
-        val sr = sin(rot)
-        elements[0][0] = cr
-        elements[0][1] = sr
-        elements[1][0] = -sr
-        elements[1][1] = cr
-    }
-
+    /**
+     * Returns the scale.
+     */
     fun getScale(): Vector2 {
-        val detSign: Double = if (basisDeterminant() > 0.0) 1.0 else -1.0
-        return detSign * Vector2(elements[0].length(), elements[1].length())
+        val detSign: RealT = if (basisDeterminant() > 0.0) 1.0 else -1.0
+        return detSign * Vector2(this.x.length(), this.y.length())
     }
 
-    fun scale(scale: Vector2) {
-        scaleBasis(scale)
-        elements[2] *= scale
-    }
-
-    fun scaleBasis(scale: Vector2) {
-        elements[0][0] *= scale.x
-        elements[0][1] *= scale.y
-        elements[1][0] *= scale.x
-        elements[1][1] *= scale.y
-    }
-
-    fun translate(translation: Vector2) {
-        elements[2] += basisXform(translation)
-    }
-
-    fun translate(tx: Double, ty: Double) =
-            translate(Vector2(tx, ty))
-
-    fun orthonormalize() {
-        val x = elements[0]
-        var y = elements[1]
-
-        x.normalize()
-        y = (y - x * (x.dot(y)))
-        y.normalize()
-
-        elements[0] = x
-        elements[1] = y
-    }
-
-    fun orthonormalized(): Transform2D {
-        val on = this
-        on.orthonormalize()
-        return on
-    }
-
-    override fun equals(other: Any?): Boolean =
-        when(other) {
-            is Transform2D -> elements[0] == other[0] && elements[1] == other[1] && elements[2] == other[2]
-            else -> false
-        }
-
-    operator fun times(other: Transform2D): Transform2D {
-        val new = this
-        new.elements[2] = xform(other[2])
-        val x0 = tdotx(other[0])
-        val x1 = tdoty(other[0])
-        val y0 = tdotx(other[1])
-        val y1 = tdoty(other[1])
-
-        new[0][0] = x0
-        new[0][1] = x1
-        new[1][0] = y0
-        new[1][1] = y1
-
-        return new
-    }
-
-    fun scaled(scale: Vector2): Transform2D {
-        val copy = this
-        copy.scale(scale)
-        return copy
-    }
-
-    fun basisScaled(scale: Vector2): Transform2D {
-        val copy = this
-        copy.scaleBasis(scale)
-        return copy
-    }
-
-    fun untranslated(): Transform2D {
-        val copy = this
-        copy.elements[2] = Vector2()
-        return copy
-    }
-
-    fun translated(offset: Vector2): Transform2D {
-        val copy = this
-        copy.translate(offset)
-        return copy
-    }
-
-    fun rotated(phi: Double): Transform2D {
-        val copy = this
-        copy.rotate(phi)
-        return copy
-    }
-
-    fun basisDeterminant(): Double =
-            elements[0].x * elements[1].y - elements[0].y * elements[1].x
-
-    fun interpolateWith(transform: Transform2D, c: Double): Transform2D {
+    /**
+     * Returns a transform interpolated between this transform and another by a given weight (0-1).
+     */
+    fun interpolateWith(transform: Transform2D, c: RealT): Transform2D {
         val p1 = getOrigin()
         val p2 = transform.getOrigin()
 
@@ -325,8 +176,187 @@ class Transform2D: CoreType {
         return res
     }
 
+    /**
+     * Returns the inverse of the transform, under the assumption that the transformation is composed of rotation and translation (no scaling, use affine_inverse for transforms with scaling).
+     */
+    fun inverse(): Transform2D {
+        val inv = Transform2D(this.x, this.y, this.origin)
+        inv.invert()
+        return inv
+    }
 
-    override fun toString() = "${elements[0]}, ${elements[1]}, ${elements[2]}"
+    internal fun invert() {
+        val copy = x.y
+        x.y = y.x
+        y.x = copy
+        origin = basisXform(-origin)
+    }
 
-    override fun hashCode(): Int = this.toString().hashCode()
+    /**
+     * Returns true if this transform and transform are approximately equal, by calling is_equal_approx on each component.
+     */
+    fun isEqualApprox(transform: Transform2D): Boolean {
+        return transform.x.isEqualApprox(this.x) && transform.y.isEqualApprox(this.y) && transform.origin.isEqualApprox(this.origin)
+    }
+
+    /**
+     * Returns the transform with the basis orthogonal (90 degrees), and normalized axis vectors.
+     */
+    fun orthonormalized(): Transform2D {
+        val on = Transform2D(this.x, this.y, this.origin)
+        on.orthonormalize()
+        return on
+    }
+
+    internal fun orthonormalize() {
+        val x = this.x
+        var y = this.y
+
+        x.normalize()
+        y = (y - x * (x.dot(y)))
+        y.normalize()
+
+        this.x = x
+        this.y = y
+    }
+
+    /**
+     * Rotates the transform by the given angle (in radians), using matrix multiplication.
+     */
+    fun rotated(phi: RealT): Transform2D {
+        val copy = Transform2D(this.x, this.y, this.origin)
+        copy.rotate(phi)
+        return copy
+    }
+
+    internal fun rotate(phi: RealT) {
+        val transform2D = Transform2D(phi,Vector2()) * this
+        this.x = transform2D.x
+        this.y = transform2D.y
+        this.origin = transform2D.origin
+    }
+
+    /**
+     * Scales the transform by the given scale factor, using matrix multiplication.
+     */
+    fun scaled(scale: Vector2): Transform2D {
+        val copy = Transform2D(this.x, this.y, this.origin)
+        copy.scale(scale)
+        return copy
+    }
+
+    internal fun scale(scale: Vector2) {
+        scaleBasis(scale)
+        this.origin *= scale
+    }
+
+
+    /**
+     * Translates the transform by the given offset, relative to the transform’s basis vectors.
+     * Unlike rotated and scaled, this does not use matrix multiplication.
+     */
+    fun translated(offset: Vector2): Transform2D {
+        val copy = Transform2D(this.x, this.y, this.origin)
+        copy.translate(offset)
+        return copy
+    }
+
+    internal fun translate(offset: Vector2) {
+        this.origin += offset
+    }
+
+    private fun scaleBasis(scale: Vector2) {
+        x.x *= scale.x
+        x.y *= scale.y
+        this.y[0] *= scale.x
+        y.y *= scale.y
+    }
+
+    /**
+     * Transforms the given Vector2 by this transform.
+     */
+    fun xform(v: Vector2): Vector2 {
+        return Vector2(tdotx(v), tdoty(v)) + this.origin
+    }
+
+    /**
+     * Transforms the given Rect2 by this transform.
+     */
+    fun xform(rect: Rect2): Rect2 {
+        val x = this.x * rect.size.x
+        val y = this.y * rect.size.y
+        val pos = xform(rect.position)
+
+        val newRect = Rect2()
+        newRect.position = pos
+        newRect.expandTo(pos + x)
+        newRect.expandTo(pos + y)
+        newRect.expandTo(pos + x + y)
+        return newRect
+    }
+
+    /**
+     * Inverse-transforms the given Vector2 by this transform.
+     */
+    fun xformInv(vec: Vector2): Vector2 {
+        val v = vec - this.origin
+        return Vector2(this.x.dot(v), this.y.dot(v))
+    }
+
+    /**
+     * Inverse-transforms the given Rect2 by this transform.
+     */
+    fun xformInv(rect: Rect2): Rect2 {
+        val ends = arrayOf(xformInv(rect.position),
+            xformInv(Vector2(rect.position.x, rect.position.y + rect.size.y)),
+            xformInv(Vector2(rect.position.x + rect.size.x, rect.position.y + rect.size.y)),
+            xformInv(Vector2(rect.position.x + rect.size.x, rect.position.y)))
+
+        val newRect = Rect2()
+        newRect.position=ends[0]
+        newRect.expandTo(ends[1])
+        newRect.expandTo(ends[2])
+        newRect.expandTo(ends[3])
+
+        return newRect
+    }
+
+    private fun tdotx(v: Vector2) : RealT {
+        return x.x * v.x + this.y[0] * v.y
+    }
+
+    private fun tdoty(v: Vector2) : RealT {
+        return  x.y * v.x + y.y * v.y
+    }
+
+
+    //UTILITIES
+    operator fun times(other: Transform2D): Transform2D {
+        val origin = xform(other.origin)
+        val x0 = tdotx(other.x)
+        val x1 = tdoty(other.x)
+        val y0 = tdotx(other.y)
+        val y1 = tdoty(other.y)
+
+        return Transform2D(x0, x1, y0, y1, origin.x, origin.y)
+    }
+
+    override fun toString(): String {
+        return "${this.x}, ${this.y}, ${this.origin}"
+    }
+
+    override fun equals(other: Any?): Boolean {
+        return when(other) {
+            is Transform2D -> this.x == other.x && this.y == other.y && this.origin == other.origin
+            else -> false
+        }
+    }
+
+    override fun hashCode(): Int {
+        var result = x.hashCode()
+        result = 31 * result + y.hashCode()
+        result = 31 * result + origin.hashCode()
+        return result
+    }
+
 }

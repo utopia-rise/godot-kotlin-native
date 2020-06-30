@@ -56,6 +56,8 @@ typedef struct godot_transform_layout {
       godot_vector3_layout origin;
 } godot_transform_layout;
 
-typedef struct godot_transform2D_layout {
-      godot_vector2_layout values[3];
-} godot_transform2D_layout;
+typedef struct godot_transform2d_layout {
+      godot_vector2_layout x;
+      godot_vector2_layout y;
+      godot_vector2_layout origin;
+} godot_transform2d_layout;

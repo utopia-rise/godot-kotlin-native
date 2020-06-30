@@ -2,10 +2,8 @@
 
 package godot.core
 
-import godot.gdnative.godot_aabb_layout
 import godot.gdnative.godot_rect2
 import godot.gdnative.godot_rect2_layout
-import godot.gdnative.real_t
 import kotlinx.cinterop.*
 import kotlin.math.max
 import kotlin.math.min
@@ -19,6 +17,21 @@ class Rect2(var position: Vector2, var size: Vector2) : CoreType {
             size = value - position
         }
 
+    //CONSTANTS
+    enum class Margin(val value: Int) {
+        LEFT(0),
+        TOP(1),
+        RIGHT(2),
+        BOTTOM(3)
+    }
+
+    companion object {
+        val MARGIN_LEFT = Margin.LEFT.value
+        val MARGIN_TOP = Margin.TOP.value
+        val MARGIN_RIGHT = Margin.RIGHT.value
+        val MARGIN_BOTTOM = Margin.BOTTOM.value
+    }
+
     //CONSTRUCTOR
     constructor() :
         this(Vector2(), Vector2())
@@ -26,7 +39,8 @@ class Rect2(var position: Vector2, var size: Vector2) : CoreType {
     constructor(x: RealT, y: RealT, width: RealT, height: RealT) :
         this(Vector2(x, y), Vector2(width, height))
 
-    internal constructor(native: CValue<godot_aabb_layout>) : this() {
+
+    internal constructor(native: CValue<godot_rect2>) : this() {
         memScoped {
             this@Rect2.setRawMemory(native.ptr)
         }
@@ -86,319 +100,160 @@ class Rect2(var position: Vector2, var size: Vector2) : CoreType {
         return rect
     }
 
-    fun encloses(rect: Rect2): Boolean =
-        (rect.position.x >= position.x) && (rect.position.y >= position.y) &&
+    /**
+     * Returns true if this Rect2 completely encloses another one.
+     */
+    fun encloses(rect: Rect2): Boolean {
+        return (rect.position.x >= position.x) && (rect.position.y >= position.y) &&
             ((rect.position.x + rect.size.x) < (position.x + size.x)) &&
             ((rect.position.y + rect.size.y) < (position.y + size.y))
-}
+    }
 
+    /**
+     * Returns this Rect2 expanded to include a given point.
+     */
     fun expand(vector: Vector2): Rect2 {
-        val r = this
+        val r = Rect2(this.position, this.size)
         r.expandTo(vector)
         return r
     }
 
-    fun getArea(): Double = size.width * size.height
 
-    fun intersects(rect: Rect2): Boolean =
-        when {
-            position.x >= (rect.position.x + rect.size.width) -> false
-            (position.x + size.width) <= rect.position.x -> false
-            position.y >= (rect.position.y + rect.size.height) -> false
-            (position.y + size.height) <= rect.position.y -> false
-            else -> true
-        }
-
-
-
-    fun hasNoArea(): Boolean =
-        size.x <= 0 || size.y <= 0
-
-    fun hasPoint(point: Vector2): Boolean =
-        when {
-            point.x < position.x -> false
-            point.y < position.y -> false
-            point.x >= (position.x + size.x) -> false
-            point.y >= (position.y + size.y) -> false
-            else -> true
-        }
-
-    fun noArea(): Boolean =
-        size.width <= 0 || size.height <= 0
-
-    override fun equals(other: Any?): Boolean =
-        when (other) {
-            is Rect2 -> position == other.position && size == other.size
-            else -> false
-        }
-
-    fun grow(by: Double): Rect2 {
-        val g = this
-        g.position.x -= by
-        g.position.y -= by
-        g.size.width += by * 2
-        g.size.height += by * 2
-        return g
-    }
-
-    fun expand(vector: Vector2): Rect2 {
-        val r = this
-        r.expandTo(vector)
-        return r
-    }
-
-    fun expandTo(vector: Vector2) {
+    internal fun expandTo(vector: Vector2) {
         val begin = position
         val end = position + size
 
-        if (vector.x < begin.x)
+        if (vector.x < begin.x) {
             begin.x = vector.x
-        if (vector.y < begin.y)
+        }
+        if (vector.y < begin.y) {
             begin.y = vector.y
-
-        if (vector.x > end.x)
+        }
+        if (vector.x > end.x) {
             end.x = vector.x
-        if (vector.y > end.y)
+        }
+        if (vector.y > end.y) {
             end.y = vector.y
+        }
 
         position = begin
         size = end - begin
     }
 
-
-    fun distanceTo(point: Vector2): Double {
-        var dist = 1e20
-        if (point.x < position.x) {
-            dist = min(dist, position.x - point.x)
-        }
-        if (point.y < position.y) {
-            dist = min(dist, position.y - point.y)
-        }
-        if (point.x >= (position.x + size.x)) {
-            dist = min(point.x - (position.x + size.x), dist)
-        }
-        if (point.y >= (position.y + size.y)) {
-            dist = min(point.y - (position.y + size.y), dist)
-        }
-        return if (dist == 1e20)
-            0.0
-        else
-            dist
+    /**
+     * Returns the area of the Rect2.
+     */
+    fun getArea(): RealT {
+        return size.x * size.y
     }
 
+    /**
+     * Returns a copy of the Rect2 grown a given amount of units towards all the sides.
+     */
+    fun grow(by: RealT): Rect2 {
+        val g = Rect2(this.position, this.size)
+        g.position.x -= by
+        g.position.y -= by
+        g.size.x += by * 2
+        g.size.y += by * 2
+        return g
+    }
+
+    /**
+     * Returns a copy of the Rect2 grown a given amount of units towards all the sides.
+     */
+    fun growIndividual (left: RealT, top: RealT,right: RealT,bottom: RealT ): Rect2 {
+        val g = Rect2(this.position, this.size)
+        g.position.x -= left
+        g.position.y -= top
+        g.size.x += left + right
+        g.size.y += top + bottom
+        return g
+    }
+
+    /**
+     * Returns a copy of the Rect2 grown a given amount of units towards all the sides.
+     */
+    fun growMargin (margin: Margin, by: RealT ): Rect2 {
+        val g = Rect2(this.position, this.size)
+        g.position.x -= by
+        g.position.y -= by
+        g.size.x += by * 2
+        g.size.y += by * 2
+        return g
+    }
+
+    /**
+     * Returns true if the Rect2 is flat or empty.
+     */
+    fun hasNoArea(): Boolean {
+        return size.x <= 0 || size.y <= 0
+    }
+
+    /**
+     * Returns true if the Rect2 contains a point.
+     */
+    fun hasPoint(point: Vector2): Boolean {
+        return when {
+            point.x < position.x                -> false
+            point.y < position.y                -> false
+            point.x >= (position.x + size.x)    -> false
+            point.y >= (position.y + size.y)    -> false
+            else                                -> true
+        }
+    }
+
+    /**
+     * Returns true if the Rect2 overlaps with b (i.e. they have at least one point in common).
+     * If include_borders is true, they will also be considered overlapping if their borders touch, even without intersection.
+     */
+    fun intersects(rect: Rect2): Boolean {
+        return when {
+            position.x >= (rect.position.x + rect.size.x)   -> false
+            (position.x + size.x) <= rect.position.x        -> false
+            position.y >= (rect.position.y + rect.size.y)   -> false
+            (position.y + size.y) <= rect.position.y        -> false
+            else                                            -> true
+        }
+    }
+
+    /**
+     * Returns true if this Rect2 and rect are approximately equal, by calling is_equal_approx on each component.
+     */
+    fun isEqualApprox(rect: Rect2): Boolean {
+        return rect.position.isEqualApprox(this.position) && rect.size.isEqualApprox(this.size)
+    }
+
+    /**
+     * Returns a larger Rect2 that contains this Rect2 and b.
+     */
     fun merge(rect: Rect2): Rect2 {
+        val ret = Rect2()
 
-        rect.position.x = min(rect.position.x, position.x)
-        rect.position.y = min(rect.position.y, position.y)
+        ret.position.x = min(rect.position.x, position.x)
+        ret.position.y = min(rect.position.y, position.y)
 
+        ret.size.x = max(rect.position.x + rect.size.x, position.x + size.x)
+        ret.size.y = max(rect.position.y + rect.size.y, position.y + size.y)
 
-        rect.size.x = max(rect.position.x + rect.size.x, position.x + size.x)
-        rect.size.y = max(rect.position.y + rect.size.y, position.y + size.y)
+        ret.size = rect.size - rect.position //make relative again
 
-        rect.size = rect.size - rect.position //make relative again
-
-        return rect
+        return ret
     }
 
-    override fun toString(): String = "$position, $size"
 
-    fun intersectsSegment(
-        from: Vector2,
-        to: Vector2,
-        boolPos: Boolean,
-        boolNormal: Boolean
-    ): Triple<Boolean, Vector2?, Vector2?> {
-        var min = 0.0
-        var max = 1.0
-        var axis = 0
-        var sign = 0.0
-
-        for (i in 0..1) {
-            val segFrom = from[i]
-            val segTo = to[i]
-            val boxBegin = position[i]
-            val boxEnd = boxBegin + size[i]
-            val cmin: Double
-            val cmax: Double
-            val csign: Double
-
-            if (segFrom < segTo) {
-                if (segFrom > boxEnd || segTo < boxBegin)
-                    return Triple(false, null, null)
-                val length = segTo - segFrom
-                cmin = if (segFrom < boxBegin) ((boxBegin - segFrom) / length) else 0.0
-                cmax = if (segTo > boxEnd) ((boxEnd - segFrom) / length) else 1.0
-                csign = -1.0
-            } else {
-                if (segTo > boxEnd || segFrom < boxBegin)
-                    return Triple(false, null, null)
-                val length = segTo - segFrom
-                cmin = if (segFrom > boxEnd) (boxEnd - segFrom) / length else 0.0
-                cmax = if (segTo < boxBegin) (boxBegin - segFrom) / length else 1.0
-                csign = 1.0
-            }
-
-            if (cmin > min) {
-                min = cmin
-                axis = i
-                sign = csign
-            }
-            if (cmax < max)
-                max = cmax
-            if (max < min)
-                return Triple(false, null, null)
+    //UTILITIES
+    override fun equals(other: Any?): Boolean {
+        return when (other) {
+            is Rect2 -> position == other.position && size == other.size
+            else -> false
         }
-
-        val rel = to - from
-        var normal: Vector2? = null
-        var pos: Vector2? = null
-        if (boolNormal) {
-            normal = Vector2()
-            normal[axis] = sign
-        }
-
-        if (boolPos)
-            pos = from + rel * min
-
-        return Triple(true, pos, normal)
     }
 
-    fun intersectsTransformed(xform: Transform2D, rect: Rect2): Boolean {
-        val xfPoints = arrayOf(
-            xform.xform(rect.position),
-            xform.xform(Vector2(rect.position.x + rect.size.x, rect.position.y)),
-            xform.xform(Vector2(rect.position.x, rect.position.y + rect.size.y)),
-            xform.xform(Vector2(rect.position.x + rect.size.x, rect.position.y + rect.size.y))
-        )
-
-        var lowLimit = position.y + size.y
-
-        when {
-            xfPoints[0].y > position.y -> {
-            }
-            xfPoints[1].y > position.y -> {
-            }
-            xfPoints[2].y > position.y -> {
-            }
-            xfPoints[3].y > position.y -> {
-            }
-            else -> return false
-        }
-
-        when {
-            xfPoints[0].y < lowLimit -> {
-            }
-            xfPoints[1].y < lowLimit -> {
-            }
-            xfPoints[2].y < lowLimit -> {
-            }
-            xfPoints[3].y < lowLimit -> {
-            }
-            else -> return false
-        }
-
-        when {
-            xfPoints[0].x > position.x -> {
-            }
-            xfPoints[1].x > position.x -> {
-            }
-            xfPoints[2].x > position.x -> {
-            }
-            xfPoints[3].x > position.x -> {
-            }
-            else -> return false
-        }
-
-        lowLimit = position.x + size.x
-
-        when {
-            xfPoints[0].x < lowLimit -> {
-            }
-            xfPoints[1].x < lowLimit -> {
-            }
-            xfPoints[2].x < lowLimit -> {
-            }
-            xfPoints[3].x < lowLimit -> {
-            }
-            else -> return false
-        }
-
-        val xfPoints2 = arrayOf(
-            position,
-            Vector2(position.x + size.x, position.y),
-            Vector2(position.x, position.y + size.y),
-            Vector2(position.x + size.x, position.y + size.y)
-        )
-
-        var maxa = xform.elements[0].dot(xfPoints2[0])
-        var mina = maxa
-
-        var dp = xform.elements[0].dot(xfPoints2[1])
-        maxa = max(dp, maxa)
-        mina = min(dp, mina)
-
-        dp = xform.elements[0].dot(xfPoints2[2])
-        maxa = max(dp, maxa)
-        mina = min(dp, mina)
-
-        dp = xform.elements[0].dot(xfPoints2[3])
-        maxa = max(dp, maxa)
-        mina = min(dp, mina)
-
-        var maxb = xform.elements[0].dot(xfPoints[0])
-        var minb = maxb
-
-        dp = xform.elements[0].dot(xfPoints[1])
-        maxb = max(dp, maxb)
-        minb = min(dp, minb)
-
-        dp = xform.elements[0].dot(xfPoints[2])
-        maxb = max(dp, maxb)
-        minb = min(dp, minb)
-
-        dp = xform.elements[0].dot(xfPoints[3])
-        maxb = max(dp, maxb)
-        minb = min(dp, minb)
-
-
-        if (mina > maxb || minb > maxa)
-            return false
-
-        maxa = xform.elements[1].dot(xfPoints2[0])
-        mina = maxa
-
-        dp = xform.elements[1].dot(xfPoints2[1])
-        maxa = max(dp, maxa)
-        mina = min(dp, mina)
-
-        dp = xform.elements[1].dot(xfPoints2[2])
-        maxa = max(dp, maxa)
-        mina = min(dp, mina)
-
-        dp = xform.elements[1].dot(xfPoints2[3])
-        maxa = max(dp, maxa)
-        mina = min(dp, mina)
-
-        maxb = xform.elements[1].dot(xfPoints[0])
-        minb = maxb
-
-        dp = xform.elements[1].dot(xfPoints[1])
-        maxb = max(dp, maxb)
-        minb = min(dp, minb)
-
-        dp = xform.elements[1].dot(xfPoints[2])
-        maxb = max(dp, maxb)
-        minb = min(dp, minb)
-
-        dp = xform.elements[1].dot(xfPoints[3])
-        maxb = max(dp, maxb)
-        minb = min(dp, minb)
-
-        if (mina > maxb || minb > maxa)
-            return false
-
-        return true
+    override fun toString(): String {
+        return "$position, $size"
     }
+
 
     override fun hashCode(): Int {
         var result = position.hashCode()
