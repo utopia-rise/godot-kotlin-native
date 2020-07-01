@@ -85,28 +85,28 @@ class Rect2(var position: Vector2, var size: Vector2) : CoreType {
     /**
      * Returns the intersection of this Rect2 and b.
      */
-    fun clip(rect: Rect2): Rect2 {
-        if (!intersects(rect)) return Rect2()
+    fun clip(b: Rect2): Rect2 {
+        if (!intersects(b)) return Rect2()
 
-        rect.position.x = max(rect.position.x, position.x)
-        rect.position.y = max(rect.position.y, position.y)
+        b.position.x = max(b.position.x, position.x)
+        b.position.y = max(b.position.y, position.y)
 
-        val rectEnd = rect.position + rect.size
+        val rectEnd = b.position + b.size
         val end = position + size
 
-        rect.size.x = min(rectEnd.x, end.x) - rect.position.x
-        rect.size.y = min(rectEnd.y, end.y) - rect.position.y
+        b.size.x = min(rectEnd.x, end.x) - b.position.x
+        b.size.y = min(rectEnd.y, end.y) - b.position.y
 
-        return rect
+        return b
     }
 
     /**
      * Returns true if this Rect2 completely encloses another one.
      */
-    fun encloses(rect: Rect2): Boolean {
-        return (rect.position.x >= position.x) && (rect.position.y >= position.y) &&
-            ((rect.position.x + rect.size.x) < (position.x + size.x)) &&
-            ((rect.position.y + rect.size.y) < (position.y + size.y))
+    fun encloses(b: Rect2): Boolean {
+        return (b.position.x >= position.x) && (b.position.y >= position.y) &&
+            ((b.position.x + b.size.x) < (position.x + size.x)) &&
+            ((b.position.y + b.size.y) < (position.y + size.y))
     }
 
     /**
@@ -207,36 +207,47 @@ class Rect2(var position: Vector2, var size: Vector2) : CoreType {
      * Returns true if the Rect2 overlaps with b (i.e. they have at least one point in common).
      * If include_borders is true, they will also be considered overlapping if their borders touch, even without intersection.
      */
-    fun intersects(rect: Rect2): Boolean {
-        return when {
-            position.x >= (rect.position.x + rect.size.x)   -> false
-            (position.x + size.x) <= rect.position.x        -> false
-            position.y >= (rect.position.y + rect.size.y)   -> false
-            (position.y + size.y) <= rect.position.y        -> false
-            else                                            -> true
+    fun intersects(b: Rect2, includeBorders: Boolean = false): Boolean {
+        if (includeBorders) {
+            return when {
+                position.x > (b.position.x + b.size.x) -> false
+                (position.x + size.x) < b.position.x -> false
+                position.y > (b.position.y + b.size.y) -> false
+                (position.y + size.y) < b.position.y -> false
+                else -> true
+            }
+        }
+        else {
+            return when {
+                position.x >= (b.position.x + b.size.x) -> false
+                (position.x + size.x) <= b.position.x -> false
+                position.y >= (b.position.y + b.size.y) -> false
+                (position.y + size.y) <= b.position.y -> false
+                else -> true
+            }
         }
     }
 
     /**
      * Returns true if this Rect2 and rect are approximately equal, by calling is_equal_approx on each component.
      */
-    fun isEqualApprox(rect: Rect2): Boolean {
-        return rect.position.isEqualApprox(this.position) && rect.size.isEqualApprox(this.size)
+    fun isEqualApprox(b: Rect2): Boolean {
+        return b.position.isEqualApprox(this.position) && b.size.isEqualApprox(this.size)
     }
 
     /**
      * Returns a larger Rect2 that contains this Rect2 and b.
      */
-    fun merge(rect: Rect2): Rect2 {
+    fun merge(b: Rect2): Rect2 {
         val ret = Rect2()
 
-        ret.position.x = min(rect.position.x, position.x)
-        ret.position.y = min(rect.position.y, position.y)
+        ret.position.x = min(b.position.x, position.x)
+        ret.position.y = min(b.position.y, position.y)
 
-        ret.size.x = max(rect.position.x + rect.size.x, position.x + size.x)
-        ret.size.y = max(rect.position.y + rect.size.y, position.y + size.y)
+        ret.size.x = max(b.position.x + b.size.x, position.x + size.x)
+        ret.size.y = max(b.position.y + b.size.y, position.y + size.y)
 
-        ret.size = rect.size - rect.position //make relative again
+        ret.size = b.size - b.position //make relative again
 
         return ret
     }
