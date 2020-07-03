@@ -1,19 +1,16 @@
 package godot.core
 
-import godot.core.type.Variant
+import godot.core.Variant
 import godot.gdnative.godot_array
 import kotlinx.cinterop.*
 
-class VariantArray<T> internal constructor(internal val handle: CValue<godot_array>) : AbstractMutableList<T>() {
-    constructor(): this(new())
+class VariantArray<T> : NativeCoreType<godot_array>, AbstractMutableList<T>() {
+
+    constructor()
 
     override fun add(index: Int, element: T) {
-        memScoped {
-            checkNotNull(Godot.gdnative.godot_array_insert)(
-                handle.ptr,
-                index,
-                element.asVariant().handle.ptr
-            )
+        callNative {
+            checkNotNull(Godot.gdnative.godot_array_insert)(it, index, element.toVariant()._handle.ptr )
         }
     }
 
@@ -34,7 +31,7 @@ class VariantArray<T> internal constructor(internal val handle: CValue<godot_arr
                 checkNotNull(Godot.gdnative.godot_array_set)(
                     handle.ptr,
                     index,
-                    element.asVariant().handle.ptr
+                    element.asVariant()._handle.ptr
                 )
             }
         }
@@ -58,17 +55,8 @@ class VariantArray<T> internal constructor(internal val handle: CValue<godot_arr
         }
     }
 
-    private fun T.asVariant() = Variant.wrap(this)
+    override fun T.toVariant() = Variant(this)
 
-    companion object {
-        internal fun new(): CValue<godot_array> {
-            return memScoped {
-                val handle = alloc<godot_array>()
-                checkNotNull(Godot.gdnative.godot_array_new)(handle.ptr)
-                handle.readValue()
-            }
-        }
-    }
 }
 
 fun <T> variantArrayOf(vararg elements: T): VariantArray<T> {

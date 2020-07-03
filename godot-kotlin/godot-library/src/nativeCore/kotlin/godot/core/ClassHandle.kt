@@ -1,6 +1,6 @@
 package godot.core
 
-import godot.core.type.Variant
+import godot.core.Variant
 import godot.gdnative.*
 import godot.registration.RPCMode
 import kotlinx.cinterop.*
@@ -132,7 +132,7 @@ internal class ClassHandle<T : Object>(
                 this.hint = hintType
                 checkNotNull(Godot.gdnative.godot_string_parse_utf8)(hint_string.ptr, hintString.cstr.ptr)
                 if (default != null) {
-                    checkNotNull(Godot.gdnative.godot_variant_new_copy)(default_value.ptr, default.handle.ptr)
+                    checkNotNull(Godot.gdnative.godot_variant_new_copy)(default_value.ptr, default._handle.ptr)
                 }
             }
 

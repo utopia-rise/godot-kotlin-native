@@ -2,7 +2,7 @@
 
 package godot.core
 
-import godot.core.type.Variant
+import godot.core.Variant
 import godot.gdnative.*
 import kotlinx.cinterop.*
 

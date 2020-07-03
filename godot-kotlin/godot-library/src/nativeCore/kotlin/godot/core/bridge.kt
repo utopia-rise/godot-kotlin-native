@@ -1,6 +1,6 @@
 package godot.core
 
-import godot.core.type.Variant
+import godot.core.Variant
 import godot.gdnative.godot_variant
 import kotlinx.cinterop.*
 
@@ -53,7 +53,7 @@ fun invokeMethod(
         tmp.toList()
     }
 
-    return methodHandle(kotlinInstance, variantArgs).handle
+    return methodHandle(kotlinInstance, variantArgs)._handle
 }
 
 
@@ -67,7 +67,7 @@ fun getProperty(
     val propertyHandleRef = checkNotNull(methodData).asStableRef<MutablePropertyHandler<Object, *>>()
     val propertyHandler = propertyHandleRef.get()
 
-    return propertyHandler.get(kotlinInstance).handle
+    return propertyHandler.get(kotlinInstance)._handle
 }
 
 fun setProperty(

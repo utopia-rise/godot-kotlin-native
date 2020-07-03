@@ -1,6 +1,6 @@
 package godot.core
 
-import godot.core.type.Variant
+import godot.core.Variant
 
 abstract class Function<T : Object, R>(
     val parameterCount: Int

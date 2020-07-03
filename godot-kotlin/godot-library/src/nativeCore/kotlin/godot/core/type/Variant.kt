@@ -1,4 +1,4 @@
-package godot.core.type
+package godot.core
 
 import godot.core.*
 import godot.gdnative.godot_variant
@@ -169,4 +169,24 @@ fun Variant(from: Double) = Variant.buildAny(Godot.gdnative.godot_variant_new_re
 fun Variant(from: String) = from.asGDString { Variant.buildAny(Godot.gdnative.godot_variant_new_string, it.ptr) }
 
 fun Variant(from: Object) = Variant.buildAny(Godot.gdnative.godot_variant_new_object, from.ptr)
+
+fun Variant(from: AABB) = Variant.buildAny(Godot.gdnative.godot_variant_new_aabb, from.getRawMemory())
+fun Variant(from: Basis) = Variant.buildAny(Godot.gdnative.godot_variant_new_basis, from.ptr)
+fun Variant(from: Color) = Variant.buildAny(Godot.gdnative.godot_variant_new_color, from.ptr)
+fun Variant(from: NodePath) = Variant.buildAny(Godot.gdnative.godot_variant_new_nodepath, from.ptr)
+fun Variant(from: Plane) = Variant.buildAny(Godot.gdnative.godot_variant_new_plane, from.ptr)
+fun Variant(from: Quat) = Variant.buildAny(Godot.gdnative.godot_variant_new_quat, from.ptr)
+fun Variant(from: RID) = Variant.buildAny(Godot.gdnative.godot_variant_new_rid, from.ptr)
+fun Variant(from: Vector2) = Variant.buildAny(Godot.gdnative.godot_variant_new_vector2, from.ptr)
+fun Variant(from: Vector3) = Variant.buildAny(Godot.gdnative.godot_variant_new_vector3, from.ptr)
+
+fun Variant(from: PoolByteArray) = Variant.buildAny(Godot.gdnative.godot_variant_new_AABB, from.ptr)
+fun Variant(from: PoolColorArray) = Variant.buildAny(Godot.gdnative.godot_variant_new_AABB, from.ptr)
+fun Variant(from: PoolIntArray) = Variant.buildAny(Godot.gdnative.godot_variant_new_AABB, from.ptr)
+fun Variant(from: PoolRealArray) = Variant.buildAny(Godot.gdnative.godot_variant_new_AABB, from.ptr)
+fun Variant(from: PoolStringArray) = Variant.buildAny(Godot.gdnative.godot_variant_new_AABB, from.ptr)
+fun Variant(from: PoolVector2Array) = Variant.buildAny(Godot.gdnative.godot_variant_new_AABB, from.ptr)
+fun Variant(from: PoolVector3Array) = Variant.buildAny(Godot.gdnative.godot_variant_new_AABB, from.ptr)
+//fun Variant(from: VariantArray) = Variant.buildAny(Godot.gdnative.godot_variant_new_AABB, from.ptr)
+
 
