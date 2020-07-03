@@ -19,6 +19,11 @@ class PoolStringArray : NativeCoreType<godot_pool_string_array>, Iterable<String
         }
     }
 
+    internal constructor(native: CValue<godot_pool_string_array>) {
+        memScoped {
+            this@PoolStringArray.setRawMemory(native.ptr)
+        }
+    }
 
     internal constructor(mem: COpaquePointer) {
         this.setRawMemory(mem)

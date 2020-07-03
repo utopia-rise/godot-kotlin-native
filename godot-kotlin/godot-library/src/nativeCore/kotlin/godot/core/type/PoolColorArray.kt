@@ -13,12 +13,17 @@ class PoolColorArray : NativeCoreType<godot_pool_color_array>, Iterable<Color> {
         }
     }
 
-    constructor(other: PoolColorArray) {
-        callNative {
-            checkNotNull(Godot.gdnative.godot_pool_color_array_new_copy)(it, other._handle.ptr)
+    internal constructor(native: CValue<godot_pool_color_array>) {
+        memScoped {
+            this@PoolColorArray.setRawMemory(native.ptr)
         }
     }
 
+    internal constructor(native: CValue<godot_aabb>) {
+        memScoped {
+            this@PoolColorArray.setRawMemory(native.ptr)
+        }
+    }
 
     internal constructor(mem: COpaquePointer) {
         this.setRawMemory(mem)

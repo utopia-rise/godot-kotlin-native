@@ -19,7 +19,7 @@ class AABB(var position: Vector3, var size: Vector3) : CoreType {
     constructor() :
         this(Vector3(), Vector3())
 
-    internal constructor(native: CValue<godot_aabb_layout>) : this() {
+    internal constructor(native: CValue<godot_aabb>) : this() {
         memScoped {
             this@AABB.setRawMemory(native.ptr)
         }

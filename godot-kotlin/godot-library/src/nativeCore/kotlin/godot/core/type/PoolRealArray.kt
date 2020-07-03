@@ -13,12 +13,11 @@ class PoolRealArray : NativeCoreType<godot_pool_real_array>, Iterable<RealT> {
         }
     }
 
-    constructor(other: PoolRealArray) {
-        callNative {
-            checkNotNull(Godot.gdnative.godot_pool_real_array_new_copy)(it, other._handle.ptr)
+    internal constructor(native: CValue<godot_pool_real_array>) {
+        memScoped {
+            this@PoolRealArray.setRawMemory(native.ptr)
         }
     }
-
 
     internal constructor(mem: COpaquePointer) {
         this.setRawMemory(mem)

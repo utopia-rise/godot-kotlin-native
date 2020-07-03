@@ -19,6 +19,11 @@ class PoolByteArray : NativeCoreType<godot_pool_byte_array>, Iterable<UByte> {
         }
     }
 
+    internal constructor(native: CValue<godot_pool_byte_array>) {
+        memScoped {
+            this@PoolByteArray.setRawMemory(native.ptr)
+        }
+    }
 
     internal constructor(mem: COpaquePointer) {
         this.setRawMemory(mem)

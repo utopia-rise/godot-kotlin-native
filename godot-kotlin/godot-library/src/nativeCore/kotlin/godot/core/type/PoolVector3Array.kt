@@ -19,6 +19,11 @@ class PoolVector3Array : NativeCoreType<godot_pool_vector3_array>, Iterable<Vect
         }
     }
 
+    internal constructor(native: CValue<godot_pool_vector3_array>) {
+        memScoped {
+            this@PoolVector3Array.setRawMemory(native.ptr)
+        }
+    }
 
     internal constructor(mem: COpaquePointer) {
         this.setRawMemory(mem)
