@@ -45,3 +45,19 @@ typedef struct godot_aabb_layout {
       godot_vector3_layout position;
       godot_vector3_layout size;
 } godot_aabb_layout;
+
+typedef struct godot_rect2_layout {
+      godot_vector2_layout position;
+      godot_vector2_layout size;
+} godot_rect2_layout;
+
+typedef struct godot_transform_layout {
+      godot_basis_layout basis;
+      godot_vector3_layout origin;
+} godot_transform_layout;
+
+typedef struct godot_transform2d_layout {
+      godot_vector2_layout x;
+      godot_vector2_layout y;
+      godot_vector2_layout origin;
+} godot_transform2d_layout;
