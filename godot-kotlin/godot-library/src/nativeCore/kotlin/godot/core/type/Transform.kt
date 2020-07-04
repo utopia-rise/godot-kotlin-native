@@ -312,6 +312,8 @@ class Transform(var basis: Basis, var origin: Vector3 = Vector3()) : CoreType {
 
 
     //UTILITIES
+    override fun toVariant() = Variant(this)
+
     operator fun times(transform: Transform): Transform {
         val t = this
         t.origin = xform(transform.origin)

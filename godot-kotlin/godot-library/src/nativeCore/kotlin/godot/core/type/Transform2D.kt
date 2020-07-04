@@ -327,6 +327,8 @@ class Transform2D(var x: Vector2, var y: Vector2, var origin: Vector2) : CoreTyp
 
 
     //UTILITIES
+    override fun toVariant() = Variant(this)
+
     operator fun times(other: Transform2D): Transform2D {
         val origin = xform(other.origin)
         val x0 = tdotx(other.x)

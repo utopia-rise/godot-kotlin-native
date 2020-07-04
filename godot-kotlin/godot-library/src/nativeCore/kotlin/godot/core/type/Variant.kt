@@ -1,11 +1,21 @@
 package godot.core
 
-import godot.gdnative.godot_pool_byte_array
+
 import godot.gdnative.godot_variant
 import godot.gdnative.godot_variant_type
 import kotlinx.cinterop.*
 
+@Suppress("IMPLICIT_CAST_TO_ANY")
+@ExperimentalUnsignedTypes
 inline class Variant(internal val _handle: CValue<godot_variant>) {
+    //PROPERTIES
+    val type: Type
+        get() {
+            return memScoped {
+                Type.from(checkNotNull(Godot.gdnative.godot_variant_get_type)(_handle.ptr).value.toInt())
+            }
+        }
+
 
     //INTEROP
     fun getRawMemory(memScope: MemScope): COpaquePointer {
@@ -79,25 +89,57 @@ inline class Variant(internal val _handle: CValue<godot_variant>) {
         }
     }
 
-    val type: Type
-        get() {
-            return memScoped {
-                Type.from(checkNotNull(Godot.gdnative.godot_variant_get_type)(_handle.ptr).value.toInt())
+
+    companion object {
+        internal inline fun <reified T> typeForClass(): Type {
+            return when (T::class) {
+                Int::class -> Type.INT
+                Long::class -> Type.INT
+                Float::class -> Type.REAL
+                Double::class -> Type.REAL
+                String::class -> Type.STRING
+                Boolean::class -> Type.BOOL
+                AABB::class -> Type.AABB
+                VariantArray::class -> Type.ARRAY
+                Basis::class -> Type.BASIS
+                Color::class -> Type.COLOR
+                Dictionary::class -> Type.DICTIONARY
+                NodePath::class -> Type.NODE_PATH
+                Plane::class -> Type.PLANE
+                PoolByteArray::class -> Type.POOL_BYTE_ARRAY
+                PoolColorArray::class -> Type.POOL_COLOR_ARRAY
+                PoolIntArray::class -> Type.POOL_INT_ARRAY
+                PoolRealArray::class -> Type.POOL_REAL_ARRAY
+                PoolStringArray::class -> Type.POOL_STRING_ARRAY
+                PoolVector2Array::class -> Type.POOL_VECTOR2_ARRAY
+                PoolVector3Array::class -> Type.POOL_VECTOR3_ARRAY
+                Quat::class -> Type.QUAT
+                Rect2::class -> Type.RECT2
+                RID::class -> Type.RID
+                Transform::class -> Type.TRANSFORM
+                Transform2D::class -> Type.TRANSFORM2D
+                Vector2::class -> Type.VECTOR2
+                Vector3::class -> Type.VECTOR3
+                Object::class -> Type.OBJECT
+                // assume it's null because incompatible with Godot
+                else -> Type.NIL
             }
         }
 
-    //WRAPPING
-    companion object {
+
+        //WRAPPING
         fun wrap(obj: Any?): Variant {
             if (obj == null) {
                 return Variant()
             }
             return when (obj) {
                 is Unit -> Variant()
-                is Int -> Variant(obj)
-                is Float -> Variant(obj)
-                is String -> Variant(obj)
                 is Boolean -> Variant(obj)
+                is Int -> Variant(obj.toLong())
+                is Long -> Variant(obj)
+                is Float -> Variant(obj.toDouble())
+                is Double -> Variant(obj)
+                is String -> Variant(obj)
                 is CoreType -> obj.toVariant()
                 is Variant -> obj
                 is Object -> Variant(obj)
@@ -154,164 +196,95 @@ inline class Variant(internal val _handle: CValue<godot_variant>) {
 
     //UNWRAPPING
     /**
-     * Helper for the Nil Variant constructor
+     * cast the variant to the right type. Warning: It's unsafe
      */
-    inline fun <reified T> unwrap(): T {
-        return when (T::class) {
-            Int::class -> this.asInt()
-            Float::class -> Type.FLOAT
-            String::class -> Type.STRING
-            Boolean::class -> Type.BOOL
-            AABB::class -> Type.AABB
-            VariantArray::class -> Type.ARRAY
-            Basis::class -> Type.BASIS
-            Color::class -> Type.COLOR
-            Dictionary::class -> Type.DICTIONARY
-            NodePath::class -> Type.NODE_PATH
-            Plane::class -> Type.PLANE
-            PoolByteArray::class -> Type.POOL_BYTE_ARRAY
-            PoolColorArray::class -> Type.POOL_COLOR_ARRAY
-            PoolIntArray::class -> Type.POOL_INT_ARRAY
-            PoolFloatArray::class -> Type.POOL_FLOAT_ARRAY
-            PoolStringArray::class -> Type.POOL_STRING_ARRAY
-            PoolVector2Array::class -> Type.POOL_VECTOR2_ARRAY
-            PoolVector3Array::class -> Type.POOL_VECTOR3_ARRAY
-            Quat::class -> Type.QUAT
-            Rect2::class -> Type.RECT2
-            RID::class -> Type.RID
-            Transform::class -> Type.TRANSFORM
-            Transform2D::class -> Type.TRANSFORM2D
-            Vector2::class -> Type.VECTOR2
-            Vector3::class -> Type.VECTOR3
-            // assume an object
-            else -> Type.OBJECT
+    fun <T> unwrap(): T {
+        val ret = when(type) {
+            Type.NIL -> null
+            Type.BOOL -> asBoolean()
+            Type.INT -> asInt()
+            Type.REAL -> asFloat()
+            Type.STRING -> asString()
+            Type.VECTOR2 -> asVector2()
+            Type.RECT2 -> asRect2()
+            Type.VECTOR3 -> asVector3()
+            Type.TRANSFORM2D -> asTransform2D()
+            Type.PLANE -> asPlane()
+            Type.QUAT -> asQuat()
+            Type.AABB -> asAABB()
+            Type.BASIS -> asBasis()
+            Type.TRANSFORM -> asTransform()
+            Type.COLOR -> asColor()
+            Type.NODE_PATH -> asNodePath()
+            Type.RID -> asRID()
+            Type.OBJECT -> asObject()
+            Type.DICTIONARY -> asDictionary<Any?>()
+            Type.ARRAY -> asVariantArray<Any?>()
+            Type.POOL_BYTE_ARRAY -> asPoolByteArray()
+            Type.POOL_INT_ARRAY -> asPoolIntArray()
+            Type.POOL_REAL_ARRAY -> asPoolRealArray()
+            Type.POOL_STRING_ARRAY -> asPoolStringArray()
+            Type.POOL_VECTOR2_ARRAY -> asPoolVector2Array()
+            Type.POOL_VECTOR3_ARRAY -> asPoolVector3Array()
+            Type.POOL_COLOR_ARRAY -> asPoolColorArray()
         }
+        return ret as T
     }
 
-    fun asString(): String {
-            val gdString = memScoped {
-                checkNotNull(Godot.gdnative.godot_variant_as_string)(_handle.ptr)
-            }
-        return gdString.toKString()
-    }
-
-    fun asInt(): Int {
-        return asLong().toInt()
-    }
-
-    fun asLong(): Long {
-        return memScoped {
-            checkNotNull(Godot.gdnative.godot_variant_as_int)(_handle.ptr)
-        }
-    }
-
-    fun asDouble(): Double {
-        return memScoped {
-            checkNotNull(Godot.gdnative.godot_variant_as_real)(_handle.ptr)
-        }
-    }
-
-    fun asFloat(): Float {
-        return asDouble().toFloat()
-    }
-
+    /**
+     * Cast the Variant to a Boolean.
+     */
     fun asBoolean(): Boolean {
         return memScoped {
             checkNotNull(Godot.gdnative.godot_variant_as_bool)(_handle.ptr)
         }
     }
 
-    fun asAABB(): AABB {
-        val value = memScoped {
-            checkNotNull(Godot.gdnative.godot_variant_as_aabb)(_handle.ptr)
-        }
-        return AABB(value)
+    /**
+     * Cast the Variant to a Int.
+     */
+    fun asInt(): Int {
+        return asLong().toInt()
     }
 
-    fun asBasis(): Basis {
-        val value = memScoped {
-            checkNotNull(Godot.gdnative.godot_variant_as_basis)(_handle.ptr)
+    /**
+     * Cast the Variant to a Long.
+     */
+    fun asLong(): Long {
+        return memScoped {
+            checkNotNull(Godot.gdnative.godot_variant_as_int)(_handle.ptr)
         }
-        return Basis(value)
     }
 
-    fun asColor(): Color {
-        val value = memScoped {
-            checkNotNull(Godot.gdnative.godot_variant_as_color)(_handle.ptr)
-        }
-        return Color(value)
+    /**
+     * Cast the Variant to a Float.
+     */
+    fun asFloat(): Float {
+        return asDouble().toFloat()
     }
 
-    fun <T> asVariantArray(): VariantArray<T> {
-        val value = memScoped {
-            checkNotNull(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
+    /**
+     * Cast the Variant to a Double.
+     */
+    fun asDouble(): Double {
+        return memScoped {
+            checkNotNull(Godot.gdnative.godot_variant_as_real)(_handle.ptr)
         }
-        return VariantArray(value)
     }
 
-    fun asPoolByteArray(): PoolByteArray {
-        val value = memScoped {
-            checkNotNull(Godot.gdnative.godot_variant_as_pool_byte_array)(_handle.ptr)
+    /**
+     * Cast the Variant to a String.
+     */
+    fun asString(): String {
+        val gdString = memScoped {
+            checkNotNull(Godot.gdnative.godot_variant_as_string)(_handle.ptr)
         }
-        return PoolByteArray(value)
+        return gdString.toKString()
     }
 
-    fun asPoolColorArray(): PoolColorArray {
-        val value = memScoped {
-            checkNotNull(Godot.gdnative.godot_variant_as_pool_color_array)(_handle.ptr)
-        }
-        return PoolColorArray(value)
-    }
-
-    fun asPoolIntArray(): PoolIntArray {
-        val value = memScoped {
-            checkNotNull(Godot.gdnative.godot_variant_as_pool_int_array)(_handle.ptr)
-        }
-        return PoolIntArray(value)
-    }
-
-    fun asPoolRealArray(): PoolFloatArray {
-        val value = memScoped {
-            checkNotNull(Godot.gdnative.godot_variant_as_pool_real_array)(_handle.ptr)
-        }
-        return PoolRealArray(value)
-    }
-
-    fun asPoolStringArray(): PoolStringArray {
-        val value = memScoped {
-            checkNotNull(Godot.gdnative.godot_variant_as_pool_string_array)(_handle.ptr)
-        }
-        return PoolStringArray(value)
-    }
-
-    fun asPoolVector2Array(): PoolVector2Array {
-        val value = memScoped {
-            checkNotNull(Godot.gdnative.godot_variant_as_pool_vector2_array)(_handle.ptr)
-        }
-        return PoolVector2Array(value)
-    }
-
-    fun asPoolVector3Array(): PoolVector3Array {
-        val value = memScoped {
-            checkNotNull(Godot.gdnative.godot_variant_as_pool_vector3_array)(_handle.ptr)
-        }
-        return PoolVector3Array(value)
-    }
-
-    fun asQuat(): Quat {
-        val value = memScoped {
-                    checkNotNull(Godot.gdnative.godot_variant_as_quat)(_handle.ptr)
-        }
-        return Quat(value)
-    }
-
-    fun asRID(): RID {
-        val value = memScoped {
-                   checkNotNull(Godot.gdnative.godot_variant_as_rid)(_handle.ptr)
-        }
-        return RID(value)
-    }
-
+    /**
+     * Cast the Variant to a Vector2.
+     */
     fun asVector2(): Vector2 {
         val value = memScoped {
             checkNotNull(Godot.gdnative.godot_variant_as_vector2)(_handle.ptr)
@@ -319,13 +292,9 @@ inline class Variant(internal val _handle: CValue<godot_variant>) {
         return Vector2(value)
     }
 
-    fun asVector3(): Vector3 {
-        val value = memScoped {
-            checkNotNull(Godot.gdnative.godot_variant_as_vector3)(_handle.ptr)
-        }
-        return Vector3(value)
-    }
-
+    /**
+     * Cast the Variant to a Rect2.
+     */
     fun asRect2(): Rect2 {
         val value = memScoped {
             checkNotNull(Godot.gdnative.godot_variant_as_rect2)(_handle.ptr)
@@ -333,6 +302,19 @@ inline class Variant(internal val _handle: CValue<godot_variant>) {
         return Rect2(value)
     }
 
+    /**
+     * Cast the Variant to a Vector3.
+     */
+    fun asVector3(): Vector3 {
+        val value = memScoped {
+            checkNotNull(Godot.gdnative.godot_variant_as_vector3)(_handle.ptr)
+        }
+        return Vector3(value)
+    }
+
+    /**
+     * Cast the Variant to a Transform2D.
+     */
     fun asTransform2D(): Transform2D {
         val value = memScoped {
             checkNotNull(Godot.gdnative.godot_variant_as_transform2d)(_handle.ptr)
@@ -340,6 +322,9 @@ inline class Variant(internal val _handle: CValue<godot_variant>) {
         return Transform2D(value)
     }
 
+    /**
+     * Cast the Variant to a Plane.
+     */
     fun asPlane(): Plane {
         val value = memScoped {
             checkNotNull(Godot.gdnative.godot_variant_as_plane)(_handle.ptr)
@@ -347,15 +332,39 @@ inline class Variant(internal val _handle: CValue<godot_variant>) {
         return Plane(value)
     }
 
-
-
-    fun asNodePath(): NodePath {
+    /**
+     * Cast the Variant to a Quat.
+     */
+    fun asQuat(): Quat {
         val value = memScoped {
-            checkNotNull(Godot.gdnative.godot_variant_as_node_path)(_handle.ptr)
+            checkNotNull(Godot.gdnative.godot_variant_as_quat)(_handle.ptr)
         }
-        return NodePath(value)
+        return Quat(value)
     }
 
+    /**
+     * Cast the Variant to a AABB.
+     */
+    fun asAABB(): AABB {
+        val value = memScoped {
+            checkNotNull(Godot.gdnative.godot_variant_as_aabb)(_handle.ptr)
+        }
+        return AABB(value)
+    }
+
+    /**
+     * Cast the Variant to a Basis.
+     */
+    fun asBasis(): Basis {
+        val value = memScoped {
+            checkNotNull(Godot.gdnative.godot_variant_as_basis)(_handle.ptr)
+        }
+        return Basis(value)
+    }
+
+    /**
+     * Cast the Variant to a Transform.
+     */
     fun asTransform(): Transform {
         val value = memScoped {
             checkNotNull(Godot.gdnative.godot_variant_as_transform)(_handle.ptr)
@@ -363,8 +372,42 @@ inline class Variant(internal val _handle: CValue<godot_variant>) {
         return Transform(value)
     }
 
+    /**
+     * Cast the Variant to a Color.
+     */
+    fun asColor(): Color {
+        val value = memScoped {
+            checkNotNull(Godot.gdnative.godot_variant_as_color)(_handle.ptr)
+        }
+        return Color(value)
+    }
+
+    /**
+     * Cast the Variant to a NodePath.
+     */
+    fun asNodePath(): NodePath {
+        val value = memScoped {
+            checkNotNull(Godot.gdnative.godot_variant_as_node_path)(_handle.ptr)
+        }
+        return NodePath(value)
+    }
+
+    /**
+     * Cast the Variant to a RiD.
+     */
+    fun asRID(): RID {
+        val value = memScoped {
+            checkNotNull(Godot.gdnative.godot_variant_as_rid)(_handle.ptr)
+        }
+        return RID(value)
+    }
+
+
+    /**
+     * Cast the Variant to a Godot Object.
+     */
     fun asObject(): Object? {
-        memScoped {
+        return memScoped {
             val ptr = checkNotNull(Godot.gdnative.godot_variant_as_object)(_handle.ptr)
             if (ptr == null) {
                 null
@@ -373,7 +416,133 @@ inline class Variant(internal val _handle: CValue<godot_variant>) {
             }
         }
     }
+
+    /**
+     * Cast the Variant to a Dictionary.
+     */
+    fun <T> asDictionary(): Dictionary<T> {
+        val value = memScoped {
+            checkNotNull(Godot.gdnative.godot_variant_as_dictionary)(_handle.ptr)
+        }
+        return Dictionary(value)
+    }
+
+    /**
+     * Cast the Variant to a Godot Array.
+     */
+    fun <T> asVariantArray(): VariantArray<T> {
+        val value = memScoped {
+            checkNotNull(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
+        }
+        return VariantArray(value)
+    }
+
+    /**
+     * Cast the Variant to a PoolByteArray.
+     */
+    fun asPoolByteArray(): PoolByteArray {
+        val value = memScoped {
+            checkNotNull(Godot.gdnative.godot_variant_as_pool_byte_array)(_handle.ptr)
+        }
+        return PoolByteArray(value)
+    }
+
+    /**
+     * Cast the Variant to a PoolColorArray.
+     */
+    fun asPoolColorArray(): PoolColorArray {
+        val value = memScoped {
+            checkNotNull(Godot.gdnative.godot_variant_as_pool_color_array)(_handle.ptr)
+        }
+        return PoolColorArray(value)
+    }
+
+    /**
+     * Cast the Variant to a PoolIntArray.
+     */
+    fun asPoolIntArray(): PoolIntArray {
+        val value = memScoped {
+            checkNotNull(Godot.gdnative.godot_variant_as_pool_int_array)(_handle.ptr)
+        }
+        return PoolIntArray(value)
+    }
+
+    /**
+     * Cast the Variant to a PoolRealArray.
+     */
+    fun asPoolRealArray(): PoolRealArray {
+        val value = memScoped {
+            checkNotNull(Godot.gdnative.godot_variant_as_pool_real_array)(_handle.ptr)
+        }
+        return PoolRealArray(value)
+    }
+
+    /**
+     * Cast the Variant to a PoolStringArray.
+     */
+    fun asPoolStringArray(): PoolStringArray {
+        val value = memScoped {
+            checkNotNull(Godot.gdnative.godot_variant_as_pool_string_array)(_handle.ptr)
+        }
+        return PoolStringArray(value)
+    }
+
+    /**
+     * Cast the Variant to a PoolVector2Array.
+     */
+    fun asPoolVector2Array(): PoolVector2Array {
+        val value = memScoped {
+            checkNotNull(Godot.gdnative.godot_variant_as_pool_vector2_array)(_handle.ptr)
+        }
+        return PoolVector2Array(value)
+    }
+
+    /**
+     * Cast the Variant to a PoolVector3Array.
+     */
+    fun asPoolVector3Array(): PoolVector3Array {
+        val value = memScoped {
+            checkNotNull(Godot.gdnative.godot_variant_as_pool_vector3_array)(_handle.ptr)
+        }
+        return PoolVector3Array(value)
+    }
+
+
+
+    //UTILITIES
+
+    // hack to get default values of core types
+    // nil variants will always attempt to convert to a sane value of the
+    // target type
+    internal inline fun <reified T: CoreType> defaultValue(): T {
+        val nil = Variant()
+        return when (T::class) {
+            AABB::class -> nil.asAABB()
+            VariantArray::class -> nil.asVariantArray<Any?>()
+            Basis::class -> nil.asBasis()
+            Color::class -> nil.asColor()
+            Dictionary::class -> nil.asDictionary<Any?>()
+            NodePath::class -> nil.asNodePath()
+            Plane::class -> nil.asPlane()
+            PoolByteArray::class -> nil.asPoolByteArray()
+            PoolColorArray::class -> nil.asPoolColorArray()
+            PoolIntArray::class -> nil.asPoolIntArray()
+            PoolRealArray::class -> nil.asPoolRealArray()
+            PoolStringArray::class -> nil.asPoolStringArray()
+            PoolVector2Array::class -> nil.asPoolVector2Array()
+            PoolVector3Array::class -> nil.asPoolVector3Array()
+            Quat::class -> nil.asQuat()
+            Rect2::class -> nil.asRect2()
+            RID::class -> nil.asRID()
+            Transform::class -> nil.asTransform()
+            Transform2D::class -> nil.asTransform2D()
+            Vector2::class -> nil.asVector2()
+            Vector3::class -> nil.asVector3()
+            else -> throw UnsupportedOperationException("Unknown variant class ${T::class}")
+        } as T
+    }
 }
+
 
 //FAKE CONSTRUCTORS. Necessary because inline classes don't support secondary constructors yet.
 //NULL
@@ -411,4 +580,6 @@ fun Variant(from: PoolVector2Array) = Variant.buildAny(Godot.gdnative.godot_vari
 fun Variant(from: PoolVector3Array) = Variant.buildAny(Godot.gdnative.godot_variant_new_pool_vector3_array, from)
 fun <T> Variant(from: VariantArray<T>) = Variant.buildAny(Godot.gdnative.godot_variant_new_array, from)
 
+//Generic constructor to wrap objects unrelated to Godot into a null variant
+fun Variant(from : Any?) = Variant()
 

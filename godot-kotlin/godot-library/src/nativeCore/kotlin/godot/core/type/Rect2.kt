@@ -254,6 +254,8 @@ class Rect2(var position: Vector2, var size: Vector2) : CoreType {
 
 
     //UTILITIES
+    override fun toVariant() = Variant(this)
+
     override fun equals(other: Any?): Boolean {
         return when (other) {
             is Rect2 -> position == other.position && size == other.size

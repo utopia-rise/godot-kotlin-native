@@ -1,6 +1,5 @@
 package godot.core
 
-import godot.core.Variant
 import kotlinx.cinterop.*
 
 
