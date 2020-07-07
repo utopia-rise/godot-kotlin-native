@@ -152,7 +152,8 @@ open class Method @JsonCreator constructor(
 
 
     private fun constructICall(methodArguments: String, icalls: MutableSet<ICall>): Pair<String, String> {
-        if (hasVarargs) return "_icall_varargs" to "( ${name}MethodBind, this.ptr, arrayOf($methodArguments*__var_args))"
+        if (hasVarargs) return "_icall_varargs" to "( ${name}MethodBind, this.ptr, " +
+            if (methodArguments.isNotEmpty()) "arrayOf($methodArguments*__var_args))" else "__var_args)"
 
         val icall = ICall(returnType, arguments)
         icalls.add(icall)
