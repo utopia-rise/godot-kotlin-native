@@ -1,11 +1,11 @@
 package godot.core
 
-import godot.core.NativeCoreType
-import godot.gdnative.godot_array
 import godot.gdnative.godot_dictionary
 import kotlinx.cinterop.*
 
-class Dictionary : NativeCoreType<godot_dictionary>, Iterable<Pair<Variant, Variant>> {
+
+@ExperimentalUnsignedTypes
+class Dictionary : NativeCoreType<godot_dictionary>, Iterable<Entry<Variant, Variant>> {
     //PROPERTIES
     val size: Int
         get() = this.size()
@@ -319,7 +319,7 @@ class Dictionary : NativeCoreType<godot_dictionary>, Iterable<Pair<Variant, Vari
         return callNative(this, block)
     }
 
-    override fun iterator(): Iterator<Pair<Variant, Variant>> {
-        TODO("Not yet implemented")
+    override fun iterator(): Iterator<Entry<Variant, Variant>> {
+        return MapIterator(keys().iterator(), this::get)
     }
 }

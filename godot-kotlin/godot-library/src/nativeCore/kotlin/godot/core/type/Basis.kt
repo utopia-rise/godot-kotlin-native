@@ -4,7 +4,6 @@ package godot.core
 
 import godot.gdnative.godot_basis
 import godot.gdnative.godot_basis_layout
-import godot.gdnative.real_t
 import kotlinx.cinterop.*
 import kotlin.math.*
 

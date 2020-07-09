@@ -192,9 +192,9 @@ class Transform2D(var x: Vector2, var y: Vector2, var origin: Vector2) : CoreTyp
      * Returns true if this transform and transform are approximately equal, by calling is_equal_approx on each component.
      */
     fun isEqualApprox(transform: Transform2D): Boolean {
-        return transform.x.isEqualApprox(this.x) && transform.y.isEqualApprox(this.y) && transform.origin.isEqualApprox(
-            this.origin
-        )
+        return transform.x.isEqualApprox(this.x)
+            && transform.y.isEqualApprox(this.y)
+            && transform.origin.isEqualApprox(this.origin)
     }
 
     /**

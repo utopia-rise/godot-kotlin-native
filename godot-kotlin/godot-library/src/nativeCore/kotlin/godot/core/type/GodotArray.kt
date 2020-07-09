@@ -2,7 +2,6 @@ package godot.core
 
 import godot.gdnative.godot_array
 import kotlinx.cinterop.*
-import platform.posix.VISIT
 
 abstract class GodotArray<T> : NativeCoreType<godot_array>(), Iterable<T> {
     //PROPERTIES

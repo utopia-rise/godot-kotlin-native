@@ -3,7 +3,6 @@
 package godot.core
 
 import godot.gdnative.godot_transform
-import godot.gdnative.godot_transform2d_layout
 import godot.gdnative.godot_transform_layout
 import kotlinx.cinterop.*
 

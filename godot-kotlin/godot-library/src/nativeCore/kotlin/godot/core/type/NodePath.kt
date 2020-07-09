@@ -2,9 +2,9 @@
 
 package godot.core
 
-import godot.gdnative.*
+import godot.gdnative.godot_node_path
+import godot.gdnative.godot_node_path_operator_equal
 import kotlinx.cinterop.*
-import platform.posix.off_t
 
 
 class NodePath : NativeCoreType<godot_node_path> {

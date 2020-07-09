@@ -2,8 +2,7 @@
 
 package godot.core
 
-import godot.core.Variant
-import godot.gdnative.*
+import godot.gdnative.godot_rid
 import kotlinx.cinterop.*
 
 class RID : NativeCoreType<godot_rid>, Comparable<RID> {

@@ -2,7 +2,8 @@
 
 package godot.core
 
-import godot.gdnative.*
+import godot.gdnative.godot_aabb
+import godot.gdnative.godot_aabb_layout
 import kotlinx.cinterop.*
 
 

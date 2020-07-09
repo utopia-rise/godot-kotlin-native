@@ -2,7 +2,8 @@
 
 package godot.core
 
-import godot.gdnative.*
+import godot.gdnative.godot_aabb
+import godot.gdnative.godot_pool_color_array
 import kotlinx.cinterop.*
 
 class PoolColorArray : NativeCoreType<godot_pool_color_array>, Iterable<Color> {

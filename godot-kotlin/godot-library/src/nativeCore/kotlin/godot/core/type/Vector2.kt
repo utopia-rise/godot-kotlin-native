@@ -2,7 +2,8 @@
 
 package godot.core
 
-import godot.gdnative.*
+import godot.gdnative.godot_vector2
+import godot.gdnative.godot_vector2_layout
 import kotlinx.cinterop.*
 import kotlin.math.*
 

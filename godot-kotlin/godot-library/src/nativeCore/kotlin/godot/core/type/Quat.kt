@@ -4,7 +4,6 @@ package godot.core
 
 import godot.gdnative.godot_quat
 import godot.gdnative.godot_quat_layout
-import godot.gdnative.godot_vector3_layout
 import kotlinx.cinterop.*
 import kotlin.math.*
 

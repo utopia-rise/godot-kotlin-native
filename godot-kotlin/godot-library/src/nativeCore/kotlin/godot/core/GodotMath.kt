@@ -1,6 +1,6 @@
 package godot.core
 
-import kotlin.math.*
+import kotlin.math.abs
 
 const val CMP_EPSILON = 0.00001
 const val CMP_EPSILON2 = CMP_EPSILON * CMP_EPSILON

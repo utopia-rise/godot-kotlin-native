@@ -2,7 +2,8 @@
 
 package godot.core
 
-import godot.gdnative.*
+import godot.gdnative.godot_aabb
+import godot.gdnative.godot_pool_int_array
 import kotlinx.cinterop.*
 
 class PoolIntArray : NativeCoreType<godot_pool_int_array>, Iterable<Int> {

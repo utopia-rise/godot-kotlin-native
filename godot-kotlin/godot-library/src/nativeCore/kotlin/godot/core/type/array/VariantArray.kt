@@ -1,8 +1,13 @@
 package godot.core
 
+import godot.core.type.array.core.BasisArray
 import godot.gdnative.godot_array
-import kotlinx.cinterop.*
+import kotlinx.cinterop.COpaquePointer
+import kotlinx.cinterop.CValue
+import kotlinx.cinterop.invoke
+import kotlinx.cinterop.memScoped
 
+@ExperimentalUnsignedTypes
 class VariantArray : GodotArray<Variant> {
 
     //CONSTRUCTOR
@@ -338,7 +343,7 @@ class VariantArray : GodotArray<Variant> {
     fun asFloatVariantArray() = RealVariantArray(_handle)
     fun asStringVariantArray() = StringVariantArray(_handle)
     fun asBoolVariantArray() = BoolVariantArray(_handle)
-    fun <T : Object> asObjectVariantArray() = ObjectVariantArray<T>(_handle)
+    fun <T : Object> asObjectVariantArray() = ObjectArray<T>(_handle)
     fun asAABBArray() = AABBArray(_handle)
     fun asBasisArray() = BasisArray(_handle)
     fun asColorArray() = ColorArray(_handle)
@@ -351,7 +356,6 @@ class VariantArray : GodotArray<Variant> {
     fun asTransform2DArray() = Transform2DArray(_handle)
     fun asAVector2Array() = Vector2Array(_handle)
     fun asAVector3Array() = Vector3Array(_handle)
-
 
     override fun iterator(): Iterator<Variant> {
         return IndexedIterator(size(), this::get)

@@ -2,7 +2,7 @@
 
 package godot.core
 
-import godot.gdnative.*
+import godot.gdnative.godot_pool_real_array
 import kotlinx.cinterop.*
 
 class PoolRealArray : NativeCoreType<godot_pool_real_array>, Iterable<RealT> {

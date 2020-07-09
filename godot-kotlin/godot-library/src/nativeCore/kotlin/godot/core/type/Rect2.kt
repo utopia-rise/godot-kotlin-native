@@ -8,7 +8,6 @@ import kotlinx.cinterop.*
 import kotlin.math.max
 import kotlin.math.min
 
-
 class Rect2(var position: Vector2, var size: Vector2) : CoreType {
     //PROPERTIES
     inline var end: Vector2
@@ -75,8 +74,8 @@ class Rect2(var position: Vector2, var size: Vector2) : CoreType {
      */
     fun abs(): Rect2 {
         return Rect2(
-            position.x - kotlin.math.min(size.x, 0.0),
-            position.x - kotlin.math.min(size.x, 0.0),
+            position.x - min(size.x, 0.0),
+            position.x - min(size.x, 0.0),
             kotlin.math.abs(size.x),
             kotlin.math.abs(size.y)
         )
@@ -176,10 +175,22 @@ class Rect2(var position: Vector2, var size: Vector2) : CoreType {
      */
     fun growMargin(margin: Margin, by: RealT): Rect2 {
         val g = Rect2(this.position, this.size)
-        g.position.x -= by
-        g.position.y -= by
-        g.size.x += by * 2
-        g.size.y += by * 2
+        when(margin){
+            Margin.LEFT -> {
+                g.position.x -= by
+                g.size.x += by
+            }
+            Margin.RIGHT -> {
+                g.size.x += by
+            }
+            Margin.TOP -> {
+                g.position.y -= by
+                g.size.y += by
+            }
+            Margin.BOTTOM -> {
+                g.size.y += by
+            }
+        }
         return g
     }
 

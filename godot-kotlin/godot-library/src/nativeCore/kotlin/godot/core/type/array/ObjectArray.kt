@@ -6,7 +6,8 @@ import kotlinx.cinterop.CValue
 import kotlinx.cinterop.invoke
 import kotlinx.cinterop.memScoped
 
-class ObjectVariantArray<T : Object> : GodotArray<T> {
+@ExperimentalUnsignedTypes
+class ObjectArray<T : Object> : GodotArray<T> {
 
     //CONSTRUCTOR
     constructor() {
@@ -15,7 +16,7 @@ class ObjectVariantArray<T : Object> : GodotArray<T> {
         }
     }
 
-    constructor(other: ObjectVariantArray<T>) {
+    constructor(other: ObjectArray<T>) {
         callNative {
             checkNotNull(Godot.gdnative.godot_array_new_copy)(it, other._handle.ptr)
         }
@@ -36,7 +37,7 @@ class ObjectVariantArray<T : Object> : GodotArray<T> {
 
     internal constructor(native: CValue<godot_array>) {
         memScoped {
-            this@ObjectVariantArray.setRawMemory(native.ptr)
+            this@ObjectArray.setRawMemory(native.ptr)
         }
     }
 
@@ -76,8 +77,8 @@ class ObjectVariantArray<T : Object> : GodotArray<T> {
         }
     }
 
-    override fun duplicate(deep: Boolean): ObjectVariantArray<T> {
-        return ObjectVariantArray(
+    override fun duplicate(deep: Boolean): ObjectArray<T> {
+        return ObjectArray(
             callNative {
                 checkNotNull(Godot.gdnative11.godot_array_duplicate)(it, deep)
             }
@@ -173,8 +174,8 @@ class ObjectVariantArray<T : Object> : GodotArray<T> {
         }
     }
 
-    override fun slice(begin: Int, end: Int, step: Int, deep: Boolean): ObjectVariantArray<T> {
-        return ObjectVariantArray(
+    override fun slice(begin: Int, end: Int, step: Int, deep: Boolean): ObjectArray<T> {
+        return ObjectArray(
             callNative {
                 checkNotNull(Godot.gdnative12.godot_array_slice)(it, begin, end, step, deep)
             }
@@ -206,8 +207,8 @@ class ObjectVariantArray<T : Object> : GodotArray<T> {
     }
 }
 
-fun <T : Object> ObjectVariantArrayOf(vararg elements: T): ObjectVariantArray<T> {
-    return ObjectVariantArray<T>().also {
+fun <T : Object> ObjectArrayOf(vararg elements: T): ObjectArray<T> {
+    return ObjectArray<T>().also {
         for (arg in elements) {
             it.append(arg)
         }
