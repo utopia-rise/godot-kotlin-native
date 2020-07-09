@@ -23,19 +23,19 @@ class Transform2D(var x: Vector2, var y: Vector2, var origin: Vector2) : CoreTyp
 
 
     //CONSTRUCTOR
-    constructor(xx: Number, xy: Number, yx: Number, yy: Number, ox: Number, oy: Number): this(
+    constructor(xx: Number, xy: Number, yx: Number, yy: Number, ox: Number, oy: Number) : this(
         Vector2(xx.toRealT(), xy.toRealT()),
         Vector2(yx.toRealT(), yy.toRealT()),
         Vector2(ox.toRealT(), oy.toRealT())
     )
 
-    constructor(rot: Number, pos: Vector2): this(
+    constructor(rot: Number, pos: Vector2) : this(
         Vector2(cos(rot.toRealT()), sin(rot.toRealT())),
         Vector2(-sin(rot.toRealT()), cos(rot.toRealT())),
         pos
     )
 
-    constructor() : this(Vector2(1,0), Vector2(0,1), Vector2())
+    constructor() : this(Vector2(1, 0), Vector2(0, 1), Vector2())
 
     internal constructor(native: CValue<godot_transform2d>) : this() {
         memScoped {
@@ -87,12 +87,12 @@ class Transform2D(var x: Vector2, var y: Vector2, var origin: Vector2) : CoreTyp
             Godot.printError("determinant == 0", "affineInvert()", "Transform2D.kt", 84)
             return
         }
-        val idet = - 1.0 / det
+        val idet = -1.0 / det
         val copy = x.x
         x.x = y.y
         y.y = copy
-        this.x *= Vector2(idet,-idet)
-        this.y *= Vector2(-idet,idet)
+        this.x *= Vector2(idet, -idet)
+        this.y *= Vector2(-idet, idet)
 
         this.origin = basisXform(-this.origin)
     }
@@ -192,7 +192,9 @@ class Transform2D(var x: Vector2, var y: Vector2, var origin: Vector2) : CoreTyp
      * Returns true if this transform and transform are approximately equal, by calling is_equal_approx on each component.
      */
     fun isEqualApprox(transform: Transform2D): Boolean {
-        return transform.x.isEqualApprox(this.x) && transform.y.isEqualApprox(this.y) && transform.origin.isEqualApprox(this.origin)
+        return transform.x.isEqualApprox(this.x) && transform.y.isEqualApprox(this.y) && transform.origin.isEqualApprox(
+            this.origin
+        )
     }
 
     /**
@@ -226,7 +228,7 @@ class Transform2D(var x: Vector2, var y: Vector2, var origin: Vector2) : CoreTyp
     }
 
     internal fun rotate(phi: RealT) {
-        val transform2D = Transform2D(phi,Vector2()) * this
+        val transform2D = Transform2D(phi, Vector2()) * this
         this.x = transform2D.x
         this.y = transform2D.y
         this.origin = transform2D.origin
@@ -303,13 +305,15 @@ class Transform2D(var x: Vector2, var y: Vector2, var origin: Vector2) : CoreTyp
      * Inverse-transforms the given Rect2 by this transform.
      */
     fun xformInv(rect: Rect2): Rect2 {
-        val ends = arrayOf(xformInv(rect.position),
+        val ends = arrayOf(
+            xformInv(rect.position),
             xformInv(Vector2(rect.position.x, rect.position.y + rect.size.y)),
             xformInv(Vector2(rect.position.x + rect.size.x, rect.position.y + rect.size.y)),
-            xformInv(Vector2(rect.position.x + rect.size.x, rect.position.y)))
+            xformInv(Vector2(rect.position.x + rect.size.x, rect.position.y))
+        )
 
         val newRect = Rect2()
-        newRect.position=ends[0]
+        newRect.position = ends[0]
         newRect.expandTo(ends[1])
         newRect.expandTo(ends[2])
         newRect.expandTo(ends[3])
@@ -317,12 +321,12 @@ class Transform2D(var x: Vector2, var y: Vector2, var origin: Vector2) : CoreTyp
         return newRect
     }
 
-    private fun tdotx(v: Vector2) : RealT {
+    private fun tdotx(v: Vector2): RealT {
         return x.x * v.x + this.y[0] * v.y
     }
 
-    private fun tdoty(v: Vector2) : RealT {
-        return  x.y * v.x + y.y * v.y
+    private fun tdoty(v: Vector2): RealT {
+        return x.y * v.x + y.y * v.y
     }
 
 
@@ -344,7 +348,7 @@ class Transform2D(var x: Vector2, var y: Vector2, var origin: Vector2) : CoreTyp
     }
 
     override fun equals(other: Any?): Boolean {
-        return when(other) {
+        return when (other) {
             is Transform2D -> this.x == other.x && this.y == other.y && this.origin == other.origin
             else -> false
         }

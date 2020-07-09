@@ -80,7 +80,6 @@ internal class ClassHandle<T : Object>(
             RPCMode.REMOTE_SYNC -> GODOT_METHOD_RPC_MODE_REMOTESYNC
             RPCMode.MASTER_SYNC -> GODOT_METHOD_RPC_MODE_MASTERSYNC
             RPCMode.PUPPET_SYNC -> GODOT_METHOD_RPC_MODE_PUPPETSYNC
-            else -> throw AssertionError("Unsupported rpc mode $rpcMode")
         }
     }
 

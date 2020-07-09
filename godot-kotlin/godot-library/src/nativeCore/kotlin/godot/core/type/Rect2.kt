@@ -162,7 +162,7 @@ class Rect2(var position: Vector2, var size: Vector2) : CoreType {
     /**
      * Returns a copy of the Rect2 grown a given amount of units towards all the sides.
      */
-    fun growIndividual (left: RealT, top: RealT,right: RealT,bottom: RealT ): Rect2 {
+    fun growIndividual(left: RealT, top: RealT, right: RealT, bottom: RealT): Rect2 {
         val g = Rect2(this.position, this.size)
         g.position.x -= left
         g.position.y -= top
@@ -174,7 +174,7 @@ class Rect2(var position: Vector2, var size: Vector2) : CoreType {
     /**
      * Returns a copy of the Rect2 grown a given amount of units towards all the sides.
      */
-    fun growMargin (margin: Margin, by: RealT ): Rect2 {
+    fun growMargin(margin: Margin, by: RealT): Rect2 {
         val g = Rect2(this.position, this.size)
         g.position.x -= by
         g.position.y -= by
@@ -195,11 +195,11 @@ class Rect2(var position: Vector2, var size: Vector2) : CoreType {
      */
     fun hasPoint(point: Vector2): Boolean {
         return when {
-            point.x < position.x                -> false
-            point.y < position.y                -> false
-            point.x >= (position.x + size.x)    -> false
-            point.y >= (position.y + size.y)    -> false
-            else                                -> true
+            point.x < position.x -> false
+            point.y < position.y -> false
+            point.x >= (position.x + size.x) -> false
+            point.y >= (position.y + size.y) -> false
+            else -> true
         }
     }
 
@@ -216,8 +216,7 @@ class Rect2(var position: Vector2, var size: Vector2) : CoreType {
                 (position.y + size.y) < b.position.y -> false
                 else -> true
             }
-        }
-        else {
+        } else {
             return when {
                 position.x >= (b.position.x + b.size.x) -> false
                 (position.x + size.x) <= b.position.x -> false

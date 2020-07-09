@@ -147,28 +147,28 @@ class PoolByteArray : NativeCoreType<godot_pool_byte_array>, Iterable<UByte> {
      * Not available in the Gdnative API and no workaround for now
      */
     private fun compress(compressionMode: Int = 0): PoolByteArray {
-        TODO()
+        return PoolByteArray()
     }
 
     /**
      * Not available in the Gdnative API and no workaround for now
      */
     private fun decompress(bufferSize: Int, compressionMode: Int = 0): PoolByteArray {
-        TODO()
+        return PoolByteArray()
     }
 
     /**
      * Not available in the Gdnative API and no workaround for now
      */
     private fun getStringFromAscii(): String {
-        TODO()
+        return String()
     }
 
     /**
      * Not available in the Gdnative API and no workaround for now
      */
     private fun getStringFromUtf8(): String {
-        TODO()
+        return String()
     }
 
     //UTILITIES

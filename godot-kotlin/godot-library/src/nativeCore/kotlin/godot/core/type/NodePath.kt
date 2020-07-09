@@ -25,13 +25,13 @@ class NodePath : NativeCoreType<godot_node_path> {
 
     constructor(from: String) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_node_path_new)(it, String().toGDString().ptr)
+            checkNotNull(Godot.gdnative.godot_node_path_new)(it, from.toGDString().ptr)
         }
     }
 
     constructor(from: NodePath) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_node_path_new)(it, String().toGDString().ptr)
+            checkNotNull(Godot.gdnative.godot_node_path_new_copy)(it, from._handle.ptr)
         }
     }
 

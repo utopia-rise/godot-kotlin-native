@@ -1,6 +1,7 @@
 package godot.core
 
 
+import godot.gdnative.godot_array
 import godot.gdnative.godot_variant
 import godot.gdnative.godot_variant_type
 import kotlinx.cinterop.*
@@ -100,7 +101,7 @@ inline class Variant(internal val _handle: CValue<godot_variant>) {
                 String::class -> Type.STRING
                 Boolean::class -> Type.BOOL
                 AABB::class -> Type.AABB
-                VariantArray::class -> Type.ARRAY
+                GodotArray::class -> Type.ARRAY
                 Basis::class -> Type.BASIS
                 Color::class -> Type.COLOR
                 Dictionary::class -> Type.DICTIONARY
@@ -146,52 +147,6 @@ inline class Variant(internal val _handle: CValue<godot_variant>) {
                 else -> throw UnsupportedOperationException("Can't convert type ${obj::class} to Variant")
             }
         }
-
-        /**
-         * Helper for the Nil Variant constructor
-         */
-        internal fun buildAny(block: CPointer<CFunction<(CPointer<godot_variant>?) -> Unit>>?): Variant {
-            return Variant(
-                memScoped {
-                    cValue {
-                        checkNotNull(block)(this.ptr)
-                    }
-                }
-            )
-        }
-
-        /**
-         * Helper for the primitive Variant constructors
-         */
-        internal fun <T> buildAny(
-            block: CPointer<CFunction<(CPointer<godot_variant>?, T) -> Unit>>?,
-            value: T
-        ): Variant {
-            return Variant(
-                memScoped {
-                    cValue {
-                        checkNotNull(block)(this.ptr, value)
-                    }
-                }
-            )
-        }
-
-        /**
-         * Helper for the core Variant constructors
-         */
-        internal fun <T: CPointed>  buildAny(
-            block: CPointer<CFunction<(CPointer<godot_variant>?, CPointer<T>?) -> Unit>>?,
-            core: CoreType
-        ): Variant {
-            return Variant(
-                memScoped {
-                    val ptr = core.getRawMemory(this).reinterpret<T>()
-                    cValue {
-                        checkNotNull(block)(this.ptr,  ptr)
-                    }
-                }
-            )
-        }
     }
 
     //UNWRAPPING
@@ -199,7 +154,7 @@ inline class Variant(internal val _handle: CValue<godot_variant>) {
      * cast the variant to the right type. Warning: It's unsafe
      */
     fun <T> unwrap(): T {
-        val ret = when(type) {
+        val ret = when (type) {
             Type.NIL -> null
             Type.BOOL -> asBoolean()
             Type.INT -> asInt()
@@ -218,8 +173,8 @@ inline class Variant(internal val _handle: CValue<godot_variant>) {
             Type.NODE_PATH -> asNodePath()
             Type.RID -> asRID()
             Type.OBJECT -> asObject()
-            Type.DICTIONARY -> asDictionary<Any?>()
-            Type.ARRAY -> asVariantArray<Any?>()
+            Type.DICTIONARY -> asDictionary()
+            Type.ARRAY -> asVariantArray()
             Type.POOL_BYTE_ARRAY -> asPoolByteArray()
             Type.POOL_INT_ARRAY -> asPoolIntArray()
             Type.POOL_REAL_ARRAY -> asPoolRealArray()
@@ -420,22 +375,24 @@ inline class Variant(internal val _handle: CValue<godot_variant>) {
     /**
      * Cast the Variant to a Dictionary.
      */
-    fun <T> asDictionary(): Dictionary<T> {
+    fun asDictionary(): Dictionary {
         val value = memScoped {
             checkNotNull(Godot.gdnative.godot_variant_as_dictionary)(_handle.ptr)
         }
         return Dictionary(value)
     }
 
-    /**
-     * Cast the Variant to a Godot Array.
-     */
-    fun <T> asVariantArray(): VariantArray<T> {
-        val value = memScoped {
+    private fun asArray(): CValue<godot_array> {
+        return memScoped {
             checkNotNull(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
         }
-        return VariantArray(value)
     }
+
+    /** Cast the Variant to a Godot Array. */
+    fun asVariantArray(): VariantArray = VariantArray(asArray())
+
+    /** Cast the Variant to a Godot Array. */
+    fun asIntVariantArray(): IntVariantArray = IntVariantArray(asArray())
 
     /**
      * Cast the Variant to a PoolByteArray.
@@ -508,20 +465,20 @@ inline class Variant(internal val _handle: CValue<godot_variant>) {
     }
 
 
-
     //UTILITIES
+    fun toVariant() = this
 
     // hack to get default values of core types
     // nil variants will always attempt to convert to a sane value of the
     // target type
-    internal inline fun <reified T: CoreType> defaultValue(): T {
+    internal inline fun <reified T : CoreType> defaultValue(): T {
         val nil = Variant()
         return when (T::class) {
             AABB::class -> nil.asAABB()
-            VariantArray::class -> nil.asVariantArray<Any?>()
+            GodotArray::class -> nil.asVariantArray()
             Basis::class -> nil.asBasis()
             Color::class -> nil.asColor()
-            Dictionary::class -> nil.asDictionary<Any?>()
+            Dictionary::class -> nil.asDictionary()
             NodePath::class -> nil.asNodePath()
             Plane::class -> nil.asPlane()
             PoolByteArray::class -> nil.asPoolByteArray()
@@ -543,43 +500,125 @@ inline class Variant(internal val _handle: CValue<godot_variant>) {
     }
 }
 
-
 //FAKE CONSTRUCTORS. Necessary because inline classes don't support secondary constructors yet.
 //NULL
-fun Variant() = Variant.buildAny(Godot.gdnative.godot_variant_new_nil)
+fun Variant() = Variant(
+    memScoped {
+        cValue<godot_variant> {
+            checkNotNull(Godot.gdnative.godot_variant_new_nil)(this.ptr)
+        }
+    }
+)
 
 //PRIMITIVES
-fun Variant(from: Boolean) = Variant.buildAny(Godot.gdnative.godot_variant_new_bool, from)
-fun Variant(from: Int) = Variant.buildAny(Godot.gdnative.godot_variant_new_int, from.toLong())
-fun Variant(from: Long) = Variant.buildAny(Godot.gdnative.godot_variant_new_int, from)
-fun Variant(from: Float) = Variant.buildAny(Godot.gdnative.godot_variant_new_real, from.toDouble())
-fun Variant(from: Double) = Variant.buildAny(Godot.gdnative.godot_variant_new_real, from)
-fun Variant(from: String) = from.asGDString { Variant.buildAny(Godot.gdnative.godot_variant_new_string, it.ptr) }
+fun Variant(from: Boolean) = Variant(
+    memScoped {
+        cValue<godot_variant> {
+            checkNotNull(Godot.gdnative.godot_variant_new_bool)(this.ptr, from)
+        }
+    }
+)
+
+fun Variant(from: Int) = Variant(
+    memScoped {
+        cValue<godot_variant> {
+            checkNotNull(Godot.gdnative.godot_variant_new_int)(this.ptr, from.toLong())
+        }
+    }
+)
+
+fun Variant(from: Long) = Variant(
+    memScoped {
+        cValue<godot_variant> {
+            checkNotNull(Godot.gdnative.godot_variant_new_int)(this.ptr, from)
+        }
+    }
+)
+
+fun Variant(from: Float) = Variant(
+    memScoped {
+        cValue<godot_variant> {
+            checkNotNull(Godot.gdnative.godot_variant_new_real)(this.ptr, from.toDouble())
+        }
+    }
+)
+
+fun Variant(from: Double) = Variant(
+    memScoped {
+        cValue<godot_variant> {
+            checkNotNull(Godot.gdnative.godot_variant_new_real)(this.ptr, from)
+        }
+    }
+)
+
+fun Variant(from: String) = Variant(
+    memScoped {
+        cValue<godot_variant> {
+            checkNotNull(Godot.gdnative.godot_variant_new_object)(this.ptr, from.toGDString().ptr)
+        }
+    }
+)
+
 
 //OBJECT
-fun Variant(from: Object) = Variant.buildAny(Godot.gdnative.godot_variant_new_object, from.ptr)
+fun Variant(from: Object) = Variant(
+    memScoped {
+        cValue<godot_variant> {
+            checkNotNull(Godot.gdnative.godot_variant_new_object)(this.ptr, from.ptr)
+        }
+    }
+)
+
+/**
+ * Helper for the core Variant constructors
+ */
+internal fun <T : CPointed> buildAny(
+    block: CPointer<CFunction<(CPointer<godot_variant>?, CPointer<T>?) -> Unit>>?,
+    core: CoreType
+): Variant {
+    return Variant(
+        memScoped {
+            val ptr = core.getRawMemory(this).reinterpret<T>()
+            cValue<godot_variant> {
+                checkNotNull(block)(this.ptr, ptr)
+            }
+        }
+    )
+}
+
 
 //CORE
-fun Variant(from: AABB) = Variant.buildAny(Godot.gdnative.godot_variant_new_aabb, from)
-fun Variant(from: Basis) = Variant.buildAny(Godot.gdnative.godot_variant_new_basis, from)
-fun Variant(from: Color) = Variant.buildAny(Godot.gdnative.godot_variant_new_color, from)
-fun Variant(from: NodePath) = Variant.buildAny(Godot.gdnative.godot_variant_new_node_path, from)
-fun Variant(from: Plane) = Variant.buildAny(Godot.gdnative.godot_variant_new_plane, from)
-fun Variant(from: Quat) = Variant.buildAny(Godot.gdnative.godot_variant_new_quat, from)
-fun Variant(from: RID) = Variant.buildAny(Godot.gdnative.godot_variant_new_rid, from)
-fun Variant(from: Vector2) = Variant.buildAny(Godot.gdnative.godot_variant_new_vector2, from)
-fun Variant(from: Vector3) = Variant.buildAny(Godot.gdnative.godot_variant_new_vector3, from)
+fun Variant(from: AABB) = buildAny(Godot.gdnative.godot_variant_new_aabb, from)
+fun Variant(from: Basis) = buildAny(Godot.gdnative.godot_variant_new_basis, from)
+fun Variant(from: Color) = buildAny(Godot.gdnative.godot_variant_new_color, from)
+fun Variant(from: NodePath) = buildAny(Godot.gdnative.godot_variant_new_node_path, from)
+fun Variant(from: Plane) = buildAny(Godot.gdnative.godot_variant_new_plane, from)
+fun Variant(from: Quat) = buildAny(Godot.gdnative.godot_variant_new_quat, from)
+fun Variant(from: RID) = buildAny(Godot.gdnative.godot_variant_new_rid, from)
+fun Variant(from: Vector2) = buildAny(Godot.gdnative.godot_variant_new_vector2, from)
+fun Variant(from: Vector3) = buildAny(Godot.gdnative.godot_variant_new_vector3, from)
+fun Variant(from: Transform2D) = buildAny(Godot.gdnative.godot_variant_new_transform2d, from)
+fun Variant(from: Transform) = buildAny(Godot.gdnative.godot_variant_new_transform, from)
+fun Variant(from: Rect2) = buildAny(Godot.gdnative.godot_variant_new_rect2, from)
+fun Variant(from: Dictionary) = buildAny(Godot.gdnative.godot_variant_new_dictionary, from)
+fun Variant(from: Variant) = from
 
 //CONTAINER CORE
-fun Variant(from: PoolByteArray) = Variant.buildAny(Godot.gdnative.godot_variant_new_pool_byte_array, from)
-fun Variant(from: PoolColorArray) = Variant.buildAny(Godot.gdnative.godot_variant_new_pool_color_array, from)
-fun Variant(from: PoolIntArray) = Variant.buildAny(Godot.gdnative.godot_variant_new_pool_int_array, from)
-fun Variant(from: PoolRealArray) = Variant.buildAny(Godot.gdnative.godot_variant_new_pool_real_array, from)
-fun Variant(from: PoolStringArray) = Variant.buildAny(Godot.gdnative.godot_variant_new_pool_string_array, from)
-fun Variant(from: PoolVector2Array) = Variant.buildAny(Godot.gdnative.godot_variant_new_pool_vector2_array, from)
-fun Variant(from: PoolVector3Array) = Variant.buildAny(Godot.gdnative.godot_variant_new_pool_vector3_array, from)
-fun <T> Variant(from: VariantArray<T>) = Variant.buildAny(Godot.gdnative.godot_variant_new_array, from)
+fun Variant(from: PoolByteArray) = buildAny(Godot.gdnative.godot_variant_new_pool_byte_array, from)
+fun Variant(from: PoolColorArray) = buildAny(Godot.gdnative.godot_variant_new_pool_color_array, from)
+fun Variant(from: PoolIntArray) = buildAny(Godot.gdnative.godot_variant_new_pool_int_array, from)
+fun Variant(from: PoolRealArray) = buildAny(Godot.gdnative.godot_variant_new_pool_real_array, from)
+fun Variant(from: PoolStringArray) = buildAny(Godot.gdnative.godot_variant_new_pool_string_array, from)
+fun Variant(from: PoolVector2Array) = buildAny(Godot.gdnative.godot_variant_new_pool_vector2_array, from)
+fun Variant(from: PoolVector3Array) = buildAny(Godot.gdnative.godot_variant_new_pool_vector3_array, from)
+fun <T> Variant(from: GodotArray<T>) = buildAny(Godot.gdnative.godot_variant_new_array, from)
 
-//Generic constructor to wrap objects unrelated to Godot into a null variant
-fun Variant(from : Any?) = Variant()
 
+//EXTENSION METHOD TO CAST OBJECT TO VARIANT
+fun Any?.toVariant() = Variant()
+fun Boolean.toVariant() = Variant(this)
+fun Int.toVariant() = Variant(this)
+fun Long.toVariant() = Variant(this)
+fun Float.toVariant() = Variant(this)
+fun Double.toVariant() = Variant(this)
+fun String.toVariant() = Variant(this)
