@@ -1,8 +1,5 @@
-package godot.core.type.array.core
+package godot.core
 
-import godot.core.Basis
-import godot.core.CoreArray
-import godot.core.Variant
 import godot.gdnative.godot_array
 import kotlinx.cinterop.COpaquePointer
 import kotlinx.cinterop.CValue
@@ -10,15 +7,18 @@ import kotlinx.cinterop.CValue
 @ExperimentalUnsignedTypes
 class BasisArray : CoreArray<Basis> {
     constructor() : super()
-    constructor(other: BasisArray) : super(other)
     internal constructor(native: CValue<godot_array>) : super(native)
     internal constructor(mem: COpaquePointer) : super(mem)
 
     override fun getCore(value: Variant): Basis = value.asBasis()
-    override fun getCoreArray(value: CValue<godot_array>) =
-        BasisArray(value)
+    override fun getCoreArray(value: CValue<godot_array>) = BasisArray(value)
+
 }
 
+/**
+ * Build an BasisArray based on the vararg arguments.
+ * Warning: Might be slow with a lot of arguments because GDNative can only append items one by one
+ */
 @ExperimentalUnsignedTypes
 fun BasisArrayOf(vararg elements: Basis) = BasisArray().also {
     for (arg in elements) {
@@ -26,12 +26,25 @@ fun BasisArrayOf(vararg elements: Basis) = BasisArray().also {
     }
 }
 
+/**
+ * Convert an iterable into an BasisArray
+ * Warning: Might be slow if the iterable contains a lot of items because GDNative can only append items one by one
+ */
 @ExperimentalUnsignedTypes
-fun Iterable<Basis>.toVariantArray() = BasisArray().also{
+fun Iterable<Basis>.toVariantArray() = BasisArray().also {
     for (arg in this) {
         it.append(arg)
     }
 }
 
+/**
+ * Build a BasisArray based on an Iterable
+ * Warning: Might be slow if the iterable contains a lot of items because GDNative can only append items one by one
+ */
 @ExperimentalUnsignedTypes
 fun BasisArray(iter: Iterable<Basis>) = iter.toVariantArray()
+
+/**
+ * Create a shallow copy of the Array
+ */
+fun BasisArray(other: BasisArray) = other.duplicate(false)

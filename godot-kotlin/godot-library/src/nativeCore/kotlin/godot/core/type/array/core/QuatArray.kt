@@ -16,6 +16,10 @@ class QuatArray : CoreArray<Quat> {
         QuatArray(value)
 }
 
+/**
+ * Build an QuatArray based on the vararg arguments.
+ * Warning: Might be slow with a lot of arguments because GDNative can only append items one by one
+ */
 @ExperimentalUnsignedTypes
 fun QuatArrayOf(vararg elements: Quat) = QuatArray().also {
     for (arg in elements) {
@@ -23,12 +27,20 @@ fun QuatArrayOf(vararg elements: Quat) = QuatArray().also {
     }
 }
 
+/**
+ * Convert an iterable into an QuatArray
+ * Warning: Might be slow with a lot of arguments because GDNative can only append items one by one
+ */
 @ExperimentalUnsignedTypes
-fun Iterable<Quat>.toVariantArray() = QuatArray().also{
+fun Iterable<Quat>.toVariantArray() = QuatArray().also {
     for (arg in this) {
         it.append(arg)
     }
 }
 
+/**
+ * Build a QuatArray based on an Iterable
+ * Warning: Might be slow with a lot of arguments because GDNative can only append items one by one
+ */
 @ExperimentalUnsignedTypes
 fun QuatArray(iter: Iterable<Quat>) = iter.toVariantArray()

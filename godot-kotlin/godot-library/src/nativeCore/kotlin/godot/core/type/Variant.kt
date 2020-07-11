@@ -554,7 +554,7 @@ fun Variant(from: Double) = Variant(
 fun Variant(from: String) = Variant(
     memScoped {
         cValue<godot_variant> {
-            checkNotNull(Godot.gdnative.godot_variant_new_object)(this.ptr, from.toGDString().ptr)
+            checkNotNull(Godot.gdnative.godot_variant_new_string)(this.ptr, from.toGDString().ptr)
         }
     }
 )
@@ -572,7 +572,7 @@ fun Variant(from: Object) = Variant(
 /**
  * Helper for the core Variant constructors
  */
-internal fun <T : CPointed> buildAny(
+internal fun <T : CPointed> wrapCore(
     block: CPointer<CFunction<(CPointer<godot_variant>?, CPointer<T>?) -> Unit>>?,
     core: CoreType
 ): Variant {
@@ -588,34 +588,36 @@ internal fun <T : CPointed> buildAny(
 
 
 //CORE
-fun Variant(from: AABB) = buildAny(Godot.gdnative.godot_variant_new_aabb, from)
-fun Variant(from: Basis) = buildAny(Godot.gdnative.godot_variant_new_basis, from)
-fun Variant(from: Color) = buildAny(Godot.gdnative.godot_variant_new_color, from)
-fun Variant(from: NodePath) = buildAny(Godot.gdnative.godot_variant_new_node_path, from)
-fun Variant(from: Plane) = buildAny(Godot.gdnative.godot_variant_new_plane, from)
-fun Variant(from: Quat) = buildAny(Godot.gdnative.godot_variant_new_quat, from)
-fun Variant(from: RID) = buildAny(Godot.gdnative.godot_variant_new_rid, from)
-fun Variant(from: Vector2) = buildAny(Godot.gdnative.godot_variant_new_vector2, from)
-fun Variant(from: Vector3) = buildAny(Godot.gdnative.godot_variant_new_vector3, from)
-fun Variant(from: Transform2D) = buildAny(Godot.gdnative.godot_variant_new_transform2d, from)
-fun Variant(from: Transform) = buildAny(Godot.gdnative.godot_variant_new_transform, from)
-fun Variant(from: Rect2) = buildAny(Godot.gdnative.godot_variant_new_rect2, from)
-fun Variant(from: Dictionary) = buildAny(Godot.gdnative.godot_variant_new_dictionary, from)
+fun Variant(from: AABB) = wrapCore(Godot.gdnative.godot_variant_new_aabb, from)
+fun Variant(from: Basis) = wrapCore(Godot.gdnative.godot_variant_new_basis, from)
+fun Variant(from: Color) = wrapCore(Godot.gdnative.godot_variant_new_color, from)
+fun Variant(from: NodePath) = wrapCore(Godot.gdnative.godot_variant_new_node_path, from)
+fun Variant(from: Plane) = wrapCore(Godot.gdnative.godot_variant_new_plane, from)
+fun Variant(from: Quat) = wrapCore(Godot.gdnative.godot_variant_new_quat, from)
+fun Variant(from: RID) = wrapCore(Godot.gdnative.godot_variant_new_rid, from)
+fun Variant(from: Vector2) = wrapCore(Godot.gdnative.godot_variant_new_vector2, from)
+fun Variant(from: Vector3) = wrapCore(Godot.gdnative.godot_variant_new_vector3, from)
+fun Variant(from: Transform2D) = wrapCore(Godot.gdnative.godot_variant_new_transform2d, from)
+fun Variant(from: Transform) = wrapCore(Godot.gdnative.godot_variant_new_transform, from)
+fun Variant(from: Rect2) = wrapCore(Godot.gdnative.godot_variant_new_rect2, from)
+fun Variant(from: Dictionary) = wrapCore(Godot.gdnative.godot_variant_new_dictionary, from)
 fun Variant(from: Variant) = from
 
 //CONTAINER CORE
-fun Variant(from: PoolByteArray) = buildAny(Godot.gdnative.godot_variant_new_pool_byte_array, from)
-fun Variant(from: PoolColorArray) = buildAny(Godot.gdnative.godot_variant_new_pool_color_array, from)
-fun Variant(from: PoolIntArray) = buildAny(Godot.gdnative.godot_variant_new_pool_int_array, from)
-fun Variant(from: PoolRealArray) = buildAny(Godot.gdnative.godot_variant_new_pool_real_array, from)
-fun Variant(from: PoolStringArray) = buildAny(Godot.gdnative.godot_variant_new_pool_string_array, from)
-fun Variant(from: PoolVector2Array) = buildAny(Godot.gdnative.godot_variant_new_pool_vector2_array, from)
-fun Variant(from: PoolVector3Array) = buildAny(Godot.gdnative.godot_variant_new_pool_vector3_array, from)
-fun <T> Variant(from: GodotArray<T>) = buildAny(Godot.gdnative.godot_variant_new_array, from)
+fun Variant(from: PoolByteArray) = wrapCore(Godot.gdnative.godot_variant_new_pool_byte_array, from)
+fun Variant(from: PoolColorArray) = wrapCore(Godot.gdnative.godot_variant_new_pool_color_array, from)
+fun Variant(from: PoolIntArray) = wrapCore(Godot.gdnative.godot_variant_new_pool_int_array, from)
+fun Variant(from: PoolRealArray) = wrapCore(Godot.gdnative.godot_variant_new_pool_real_array, from)
+fun Variant(from: PoolStringArray) = wrapCore(Godot.gdnative.godot_variant_new_pool_string_array, from)
+fun Variant(from: PoolVector2Array) = wrapCore(Godot.gdnative.godot_variant_new_pool_vector2_array, from)
+fun Variant(from: PoolVector3Array) = wrapCore(Godot.gdnative.godot_variant_new_pool_vector3_array, from)
+fun <T> Variant(from: GodotArray<T>) = wrapCore(Godot.gdnative.godot_variant_new_array, from)
 
+//Throw an exception for the types not supported by Godot
+fun Variant(from: Any?): Variant = throw UnsupportedOperationException("Unknown variant class")
 
-//EXTENSION METHOD TO CAST OBJECT TO VARIANT
-fun Any?.toVariant() = Variant()
+//EXTENSION METHOD TO CAST PRIMITIVES TO VARIANT
+fun Any?.toVariant() = Variant(this)
 fun Boolean.toVariant() = Variant(this)
 fun Int.toVariant() = Variant(this)
 fun Long.toVariant() = Variant(this)

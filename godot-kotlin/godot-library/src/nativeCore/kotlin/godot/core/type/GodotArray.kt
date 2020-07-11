@@ -3,7 +3,7 @@ package godot.core
 import godot.gdnative.godot_array
 import kotlinx.cinterop.*
 
-abstract class GodotArray<T> : NativeCoreType<godot_array>(), Iterable<T> {
+abstract class GodotArray<T> internal constructor() : NativeCoreType<godot_array>(), Iterable<T> {
     //PROPERTIES
     val size: Int
         get() = this.size()

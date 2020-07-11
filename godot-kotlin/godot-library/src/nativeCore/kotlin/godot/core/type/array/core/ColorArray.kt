@@ -3,26 +3,22 @@ package godot.core
 import godot.gdnative.godot_array
 import kotlinx.cinterop.COpaquePointer
 import kotlinx.cinterop.CValue
-import kotlinx.cinterop.invoke
 
 @ExperimentalUnsignedTypes
 class ColorArray : CoreArray<Color> {
     constructor() : super()
-    constructor(other: ColorArray) : super(other)
-    constructor(other: PoolColorArray) {
-        callNative {
-            checkNotNull(Godot.gdnative.godot_array_new_pool_color_array)(it, other._handle.ptr)
-        }
-    }
-
     internal constructor(native: CValue<godot_array>) : super(native)
     internal constructor(mem: COpaquePointer) : super(mem)
 
     override fun getCore(value: Variant): Color = value.asColor()
-    override fun getCoreArray(value: CValue<godot_array>) =
-        ColorArray(value)
+    override fun getCoreArray(value: CValue<godot_array>) = ColorArray(value)
+
 }
 
+/**
+ * Build an ColorArray based on the vararg arguments.
+ * Warning: Might be slow with a lot of arguments because GDNative can only append items one by one
+ */
 @ExperimentalUnsignedTypes
 fun ColorArrayOf(vararg elements: Color) = ColorArray().also {
     for (arg in elements) {
@@ -30,12 +26,25 @@ fun ColorArrayOf(vararg elements: Color) = ColorArray().also {
     }
 }
 
+/**
+ * Convert an iterable into an ColorArray
+ * Warning: Might be slow if the iterable contains a lot of items because GDNative can only append items one by one
+ */
 @ExperimentalUnsignedTypes
-fun Iterable<Color>.toVariantArray() = ColorArray().also{
+fun Iterable<Color>.toVariantArray() = ColorArray().also {
     for (arg in this) {
         it.append(arg)
     }
 }
 
+/**
+ * Build a ColorArray based on an Iterable
+ * Warning: Might be slow if the iterable contains a lot of items because GDNative can only append items one by one
+ */
 @ExperimentalUnsignedTypes
 fun ColorArray(iter: Iterable<Color>) = iter.toVariantArray()
+
+/**
+ * Create a shallow copy of the Array
+ */
+fun ColorArray(other: ColorArray) = other.duplicate(false)

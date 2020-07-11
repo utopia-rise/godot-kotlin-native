@@ -16,24 +16,6 @@ class ObjectArray<T : Object> : GodotArray<T> {
         }
     }
 
-    constructor(other: ObjectArray<T>) {
-        callNative {
-            checkNotNull(Godot.gdnative.godot_array_new_copy)(it, other._handle.ptr)
-        }
-    }
-
-    constructor(other: PoolByteArray) {
-        callNative {
-            checkNotNull(Godot.gdnative.godot_array_new_pool_byte_array)(it, other._handle.ptr)
-        }
-    }
-
-    constructor(other: PoolIntArray) {
-        callNative {
-            checkNotNull(Godot.gdnative.godot_array_new_pool_int_array)(it, other._handle.ptr)
-        }
-    }
-
 
     internal constructor(native: CValue<godot_array>) {
         memScoped {
@@ -207,10 +189,36 @@ class ObjectArray<T : Object> : GodotArray<T> {
     }
 }
 
-fun <T : Object> ObjectArrayOf(vararg elements: T): ObjectArray<T> {
-    return ObjectArray<T>().also {
-        for (arg in elements) {
-            it.append(arg)
-        }
+/**
+ * Build an AABBArray based on the vararg arguments.
+ * Warning: Might be slow with a lot of arguments because GDNative can only append items one by one
+ */
+@ExperimentalUnsignedTypes
+fun <T : Object> ObjectArrayOf(vararg elements: T) = ObjectArray<T>().also {
+    for (arg in elements) {
+        it.append(arg)
     }
 }
+
+/**
+ * Convert an iterable into an ObjectArray
+ * Warning: Might be slow if the iterable contains a lot of items because GDNative can only append items one by one
+ */
+@ExperimentalUnsignedTypes
+fun <T : Object> Iterable<T>.toVariantArray() = ObjectArray<T>().also {
+    for (arg in this) {
+        it.append(arg)
+    }
+}
+
+/**
+ * Build a ObjectArray based on an Iterable
+ * Warning: Might be slow if the iterable contains a lot of items because GDNative can only append items one by one
+ */
+@ExperimentalUnsignedTypes
+fun <T : Object> ObjectArray(iter: Iterable<T>) = iter.toVariantArray()
+
+/**
+ * Create a shallow copy of the Array
+ */
+fun <T : Object> ObjectArray(other: ObjectArray<T>) = other.duplicate(false)

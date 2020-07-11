@@ -1,6 +1,5 @@
 package godot.core
 
-import godot.core.type.array.core.BasisArray
 import godot.gdnative.godot_array
 import kotlinx.cinterop.COpaquePointer
 import kotlinx.cinterop.CValue
@@ -361,3 +360,8 @@ class VariantArray : GodotArray<Variant> {
         return IndexedIterator(size(), this::get)
     }
 }
+
+/**
+ * Create a shallow copy of the Array
+ */
+fun VariantArray(other: VariantArray) = other.duplicate(false)
