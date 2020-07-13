@@ -2,23 +2,29 @@
 
 package godot.core
 
-import godot.gdnative.*
+import godot.gdnative.godot_aabb
+import godot.gdnative.godot_pool_color_array
 import kotlinx.cinterop.*
 
-class PoolVector2Array : NativeCoreType<godot_pool_vector2_array>, Iterable<Vector2> {
+class PoolColorArray : NativeCoreType<godot_pool_color_array>, Iterable<Color> {
     //CONSTRUCTOR
     constructor() {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_vector2_array_new)(it)
+            checkNotNull(Godot.gdnative.godot_pool_color_array_new)(it)
         }
     }
 
-    constructor(other: PoolVector2Array) {
-        callNative {
-            checkNotNull(Godot.gdnative.godot_pool_vector2_array_new_copy)(it, other._handle.ptr)
+    internal constructor(native: CValue<godot_pool_color_array>) {
+        memScoped {
+            this@PoolColorArray.setRawMemory(native.ptr)
         }
     }
 
+    internal constructor(native: CValue<godot_aabb>) {
+        memScoped {
+            this@PoolColorArray.setRawMemory(native.ptr)
+        }
+    }
 
     internal constructor(mem: COpaquePointer) {
         this.setRawMemory(mem)
@@ -30,7 +36,7 @@ class PoolVector2Array : NativeCoreType<godot_pool_vector2_array>, Iterable<Vect
     }
 
     override fun setRawMemory(mem: COpaquePointer) {
-        _handle = mem.reinterpret<godot_pool_vector2_array>().pointed.readValue()
+        _handle = mem.reinterpret<godot_pool_color_array>().pointed.readValue()
     }
 
 
@@ -38,19 +44,19 @@ class PoolVector2Array : NativeCoreType<godot_pool_vector2_array>, Iterable<Vect
     /**
      * Appends an element at the end of the array (alias of push_back).
      */
-    fun append(vector: Vector2) {
+    fun append(color: Color) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_vector2_array_append)(it, vector.getRawMemory(this).reinterpret())
+            checkNotNull(Godot.gdnative.godot_pool_color_array_append)(it, color.getRawMemory(this).reinterpret())
         }
     }
 
 
     /**
-     * Appends a PoolVector2Array at the end of this array.
+     * Appends a PoolColorArray at the end of this array.
      */
-    fun appendArray(array: PoolVector2Array) {
+    fun appendArray(array: PoolColorArray) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_vector2_array_append_array)(it, array._handle.ptr)
+            checkNotNull(Godot.gdnative.godot_pool_color_array_append_array)(it, array._handle.ptr)
         }
     }
 
@@ -59,17 +65,17 @@ class PoolVector2Array : NativeCoreType<godot_pool_vector2_array>, Iterable<Vect
      */
     fun empty() {
         callNative {
-            checkNotNull(Godot.gdnative12.godot_pool_vector2_array_empty)(it)
+            checkNotNull(Godot.gdnative12.godot_pool_color_array_empty)(it)
         }
     }
 
     /**
      *  Retrieve the element at the given index.
      */
-    operator fun get(idx: Int): Vector2 {
-        return Vector2(
+    operator fun get(idx: Int): Color {
+        return Color(
             callNative {
-                checkNotNull(Godot.gdnative.godot_pool_vector2_array_get)(it, idx)
+                checkNotNull(Godot.gdnative.godot_pool_color_array_get)(it, idx)
             }
         )
     }
@@ -78,9 +84,9 @@ class PoolVector2Array : NativeCoreType<godot_pool_vector2_array>, Iterable<Vect
      * Inserts a new element at a given position in the array.
      * The position must be valid, or at the end of the array (idx == size()).
      */
-    fun insert(idx: Int, data: Vector2) {
+    fun insert(idx: Int, data: Color) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_vector2_array_insert)(it, idx, data.getRawMemory(this).reinterpret())
+            checkNotNull(Godot.gdnative.godot_pool_color_array_insert)(it, idx, data.getRawMemory(this).reinterpret())
         }
     }
 
@@ -89,16 +95,16 @@ class PoolVector2Array : NativeCoreType<godot_pool_vector2_array>, Iterable<Vect
      */
     fun invert() {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_vector2_array_invert)(it)
+            checkNotNull(Godot.gdnative.godot_pool_color_array_invert)(it)
         }
     }
 
     /**
      * Appends a value to the array.
      */
-    fun pushBack(data: Vector2) {
+    fun pushBack(data: Color) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_vector2_array_push_back)(it, data.getRawMemory(this).reinterpret())
+            checkNotNull(Godot.gdnative.godot_pool_color_array_push_back)(it, data.getRawMemory(this).reinterpret())
         }
     }
 
@@ -107,7 +113,7 @@ class PoolVector2Array : NativeCoreType<godot_pool_vector2_array>, Iterable<Vect
      */
     fun remove(idx: Int) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_vector2_array_remove)(it, idx)
+            checkNotNull(Godot.gdnative.godot_pool_color_array_remove)(it, idx)
         }
     }
 
@@ -117,16 +123,16 @@ class PoolVector2Array : NativeCoreType<godot_pool_vector2_array>, Iterable<Vect
      */
     fun resize(size: Int) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_vector2_array_resize)(it, size)
+            checkNotNull(Godot.gdnative.godot_pool_color_array_resize)(it, size)
         }
     }
 
     /**
-     * Changes the vector at the given index.
+     * Changes the color at the given index.
      */
-    operator fun set(idx: Int, data: Vector2) {
+    operator fun set(idx: Int, data: Color) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_vector2_array_set)(it, idx, data.getRawMemory(this).reinterpret())
+            checkNotNull(Godot.gdnative.godot_pool_color_array_set)(it, idx, data.getRawMemory(this).reinterpret())
         }
     }
 
@@ -135,24 +141,26 @@ class PoolVector2Array : NativeCoreType<godot_pool_vector2_array>, Iterable<Vect
      */
     fun size(): Int {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_pool_vector2_array_size)(it)
+            checkNotNull(Godot.gdnative.godot_pool_color_array_size)(it)
         }
     }
 
     //UTILITIES
-    operator fun plus(other: Vector2) {
+    override fun toVariant() = Variant(this)
+
+    operator fun plus(other: Color) {
         this.append(other)
     }
 
-    operator fun plus(other: PoolVector2Array) {
+    operator fun plus(other: PoolColorArray) {
         this.appendArray(other)
     }
 
     override fun toString(): String {
-        return "PoolVector2Array(${size()})"
+        return "PoolColorArray(${size()})"
     }
 
-    override fun iterator(): Iterator<Vector2> {
+    override fun iterator(): Iterator<Color> {
         return IndexedIterator(size(), this::get)
     }
 
@@ -161,7 +169,7 @@ class PoolVector2Array : NativeCoreType<godot_pool_vector2_array>, Iterable<Vect
      * This methods implementation works but is not the fastest one.
      */
     override fun equals(other: Any?): Boolean {
-        return if (other is PoolVector2Array) {
+        return if (other is PoolColorArray) {
             val list1 = this.toList()
             val list2 = other.toList()
             list1 == list2
@@ -174,7 +182,7 @@ class PoolVector2Array : NativeCoreType<godot_pool_vector2_array>, Iterable<Vect
         return _handle.hashCode()
     }
 
-    internal inline fun <T> callNative(block: MemScope.(CPointer<godot_pool_vector2_array>) -> T): T {
+    internal inline fun <T> callNative(block: MemScope.(CPointer<godot_pool_color_array>) -> T): T {
         return callNative(this, block)
     }
 }

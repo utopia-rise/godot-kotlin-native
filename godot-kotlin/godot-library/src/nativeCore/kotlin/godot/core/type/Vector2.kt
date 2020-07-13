@@ -2,7 +2,8 @@
 
 package godot.core
 
-import godot.gdnative.*
+import godot.gdnative.godot_vector2
+import godot.gdnative.godot_vector2_layout
 import kotlinx.cinterop.*
 import kotlin.math.*
 
@@ -366,6 +367,8 @@ class Vector2(var x: RealT, var y: RealT) : Comparable<Vector2>, CoreType {
 
 
     //UTILITIES
+    override fun toVariant() = Variant(this)
+
     operator fun get(idx: Int): RealT =
         when (idx) {
             0 -> x

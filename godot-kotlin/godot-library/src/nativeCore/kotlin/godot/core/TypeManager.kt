@@ -6,7 +6,7 @@ import kotlin.native.concurrent.freeze
 
 // TODO: remove when the class generator is done.
 open class Object(__ignore: String?) {
-    constructor(): this(null) {
+    constructor() : this(null) {
         if (Godot.shouldInitPtr()) {
             // call godot constructor here
         }
@@ -19,9 +19,12 @@ open class Object(__ignore: String?) {
     open fun _onInit() {}
     open fun _onDestroy() {}
 
+    fun toVariant() = Variant(this)
+
     fun emitSignal(name: String, vararg args: Any?) {}
-    fun connect(name: String, target: Object, method: String, extraArgs: VariantArray<Any>, flags: Int) {}
+    fun connect(name: String, target: Object, method: String, extraArgs: VariantArray, flags: Int) {}
 }
+
 object ClassDB {
     fun getParentClass(cls: String): String = ""
 }
@@ -35,7 +38,11 @@ internal object TypeManager {
     fun registerUserType(nativescriptHandle: COpaquePointer, className: String, factory: () -> Object) {
         val ref = createAndRegisterTag(factory)
         memScoped {
-            checkNotNull(Godot.nativescript11.godot_nativescript_set_type_tag)(nativescriptHandle, className.cstr.ptr, ref)
+            checkNotNull(Godot.nativescript11.godot_nativescript_set_type_tag)(
+                nativescriptHandle,
+                className.cstr.ptr,
+                ref
+            )
         }
     }
 
@@ -45,7 +52,11 @@ internal object TypeManager {
     fun registerEngineType(className: String, factory: () -> Object) {
         val ref = createAndRegisterTag(factory)
         memScoped {
-            checkNotNull(Godot.nativescript11.godot_nativescript_set_global_type_tag)(Godot.languageIndex, className.cstr.ptr, ref)
+            checkNotNull(Godot.nativescript11.godot_nativescript_set_global_type_tag)(
+                Godot.languageIndex,
+                className.cstr.ptr,
+                ref
+            )
         }
     }
 
@@ -88,14 +99,20 @@ internal object TypeManager {
             var tag = checkNotNull(Godot.nativescript11.godot_nativescript_get_type_tag)(ptr)
             // engine type
             if (tag == null) {
-                tag = checkNotNull(Godot.nativescript11.godot_nativescript_get_global_type_tag)(Godot.languageIndex, className.cstr.ptr)
+                tag = checkNotNull(Godot.nativescript11.godot_nativescript_get_global_type_tag)(
+                    Godot.languageIndex,
+                    className.cstr.ptr
+                )
             }
             // parent class of an engine type (this is here for types not exposed by gdnative)
             // traverse the type hierarchy to find a tag that we can use
             if (tag == null) {
                 var parentClass = ClassDB.getParentClass(className)
                 while (parentClass.isNotEmpty()) {
-                    tag = checkNotNull(Godot.nativescript11.godot_nativescript_get_global_type_tag)(Godot.languageIndex, parentClass.cstr.ptr)
+                    tag = checkNotNull(Godot.nativescript11.godot_nativescript_get_global_type_tag)(
+                        Godot.languageIndex,
+                        parentClass.cstr.ptr
+                    )
                     if (tag != null) {
                         break
                     }

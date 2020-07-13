@@ -7,10 +7,11 @@ import kotlinx.cinterop.*
 
 
 //From Godot to Kotlin
-fun String(mem: COpaquePointer) {
+fun String(mem: COpaquePointer): String {
     val gdString = mem.reinterpret<godot_string>()
     val s = gdString.pointed.readValue().toKString()
     godot_string_destroy(gdString)
+    return s
 }
 
 internal fun CValue<godot_string>.toKString(): String {

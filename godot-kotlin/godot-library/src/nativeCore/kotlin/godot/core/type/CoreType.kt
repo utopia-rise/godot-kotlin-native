@@ -3,15 +3,17 @@ package godot.core
 import kotlinx.cinterop.*
 
 
-internal interface CoreType {
+interface CoreType {
     fun getRawMemory(memScope: MemScope): COpaquePointer
     fun setRawMemory(mem: COpaquePointer)
+
+    fun toVariant(): Variant
 }
 
 /**
  * WARNING: Do not inherit from this class, it is only there for the coretypes not entirely reimplemented in Kotlin.
  */
-abstract class NativeCoreType<C : CStructVar> internal constructor() : CoreType {
+abstract class NativeCoreType<C : CStructVar> : CoreType {
     internal lateinit var _handle: CValue<C>
 }
 

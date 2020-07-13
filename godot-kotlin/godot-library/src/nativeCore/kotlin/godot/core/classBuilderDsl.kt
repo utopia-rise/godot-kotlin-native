@@ -140,15 +140,15 @@ class ClassBuilder<T : Object> internal constructor(val classHandle: ClassHandle
 
     inline fun <reified K : Enum<K>> enumListProperty(
         name: String,
-        property: KMutableProperty1<T, VariantArray<K>>,
+        property: KMutableProperty1<T, GodotArray<K>>,
         default: Variant? = null,
         isVisibleInEditor: Boolean = true,
         rpcMode: RPCMode
     ) {
-        val variantArray = VariantArray<Int>()
+        val variantArray = IntVariantArray()
         if (default != null) {
-            default.asVariantArray<Int>().forEach {
-                variantArray.add((it as K).ordinal)
+            default.asVariantArray().forEach {
+                variantArray.append((it as K).ordinal)
             }
         }
         val propertyHandler = MutablePropertyHandler(property)
@@ -171,10 +171,10 @@ class ClassBuilder<T : Object> internal constructor(val classHandle: ClassHandle
         isVisibleInEditor: Boolean = true,
         rpcMode: RPCMode
     ) {
-        val variantArray = VariantArray<Int>()
+        val variantArray = IntVariantArray()
         if (default != null) {
-            default.asVariantArray<Int>().forEach {
-                variantArray.add((it as K).ordinal)
+            default.asVariantArray().forEach {
+                variantArray.append((it as K).ordinal)
             }
         }
         val propertyHandler = MutableEnumFlagPropertyHandler(property) { ord -> enumValues<K>()[ord] }

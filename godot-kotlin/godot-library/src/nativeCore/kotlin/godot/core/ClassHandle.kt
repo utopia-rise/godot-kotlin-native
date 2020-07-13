@@ -79,7 +79,6 @@ internal class ClassHandle<T : Object>(
             RPCMode.REMOTE_SYNC -> GODOT_METHOD_RPC_MODE_REMOTESYNC
             RPCMode.MASTER_SYNC -> GODOT_METHOD_RPC_MODE_MASTERSYNC
             RPCMode.PUPPET_SYNC -> GODOT_METHOD_RPC_MODE_PUPPETSYNC
-            else -> throw AssertionError("Unsupported rpc mode $rpcMode")
         }
     }
 
@@ -131,7 +130,7 @@ internal class ClassHandle<T : Object>(
                 this.hint = hintType
                 checkNotNull(Godot.gdnative.godot_string_parse_utf8)(hint_string.ptr, hintString.cstr.ptr)
                 if (default != null) {
-                    checkNotNull(Godot.gdnative.godot_variant_new_copy)(default_value.ptr, default.handle.ptr)
+                    checkNotNull(Godot.gdnative.godot_variant_new_copy)(default_value.ptr, default._handle.ptr)
                 }
             }
 

@@ -2,7 +2,7 @@
 
 package godot.core
 
-import godot.gdnative.*
+import godot.gdnative.godot_pool_byte_array
 import kotlinx.cinterop.*
 
 class PoolByteArray : NativeCoreType<godot_pool_byte_array>, Iterable<UByte> {
@@ -19,6 +19,11 @@ class PoolByteArray : NativeCoreType<godot_pool_byte_array>, Iterable<UByte> {
         }
     }
 
+    internal constructor(native: CValue<godot_pool_byte_array>) {
+        memScoped {
+            this@PoolByteArray.setRawMemory(native.ptr)
+        }
+    }
 
     internal constructor(mem: COpaquePointer) {
         this.setRawMemory(mem)
@@ -142,31 +147,33 @@ class PoolByteArray : NativeCoreType<godot_pool_byte_array>, Iterable<UByte> {
      * Not available in the Gdnative API and no workaround for now
      */
     private fun compress(compressionMode: Int = 0): PoolByteArray {
-        TODO()
+        throw NotImplementedError("Not available in the Gdnative API and no workaround for now")
     }
 
     /**
      * Not available in the Gdnative API and no workaround for now
      */
     private fun decompress(bufferSize: Int, compressionMode: Int = 0): PoolByteArray {
-        TODO()
+        throw NotImplementedError("Not available in the Gdnative API and no workaround for now")
     }
 
     /**
      * Not available in the Gdnative API and no workaround for now
      */
     private fun getStringFromAscii(): String {
-        TODO()
+        throw NotImplementedError("Not available in the Gdnative API and no workaround for now")
     }
 
     /**
      * Not available in the Gdnative API and no workaround for now
      */
     private fun getStringFromUtf8(): String {
-        TODO()
+        throw NotImplementedError("Not available in the Gdnative API and no workaround for now")
     }
 
     //UTILITIES
+    override fun toVariant() = Variant(this)
+
     operator fun plus(other: UByte) {
         this.append(other)
     }

@@ -3,7 +3,6 @@
 package godot.core
 
 import godot.gdnative.godot_transform
-import godot.gdnative.godot_transform2d_layout
 import godot.gdnative.godot_transform_layout
 import kotlinx.cinterop.*
 
@@ -22,13 +21,26 @@ class Transform(var basis: Basis, var origin: Vector3 = Vector3()) : CoreType {
 
 
     //CONSTRUCTOR
-    constructor(xx: Number, xy: Number, xz: Number, yx: Number, yy: Number, yz: Number, zx: Number, zy: Number, zz: Number, tx: Number, ty: Number, tz: Number):
+    constructor(
+        xx: Number,
+        xy: Number,
+        xz: Number,
+        yx: Number,
+        yy: Number,
+        yz: Number,
+        zx: Number,
+        zy: Number,
+        zz: Number,
+        tx: Number,
+        ty: Number,
+        tz: Number
+    ) :
         this(Basis(xx, xy, xz, yx, yy, yz, zx, zy, zz), Vector3(tx, ty, tz))
 
-    constructor(x: Vector3, y: Vector3, z: Vector3, origin: Vector3):
+    constructor(x: Vector3, y: Vector3, z: Vector3, origin: Vector3) :
         this(Basis(x, y, z), origin)
 
-    constructor(from: Quat):
+    constructor(from: Quat) :
         this(Basis(from))
 
     constructor() :
@@ -42,6 +54,7 @@ class Transform(var basis: Basis, var origin: Vector3 = Vector3()) : CoreType {
             this@Transform.setRawMemory(native.ptr)
         }
     }
+
     internal constructor(mem: COpaquePointer) : this() {
         basis = Basis()
         origin = Vector3()
@@ -103,7 +116,7 @@ class Transform(var basis: Basis, var origin: Vector3 = Vector3()) : CoreType {
         val dstLoc = transform.origin
 
         val dst = Transform()
-        dst.basis= Basis(srcRot.slerp(dstRot,c))
+        dst.basis = Basis(srcRot.slerp(dstRot, c))
         dst.basis.scale(srcScale.linearInterpolate(dstScale, c))
         dst.origin = srcLoc.linearInterpolate(dstLoc, c)
 
@@ -176,7 +189,7 @@ class Transform(var basis: Basis, var origin: Vector3 = Vector3()) : CoreType {
     /**
      * Rotates the transform around the given axis by the given angle (in radians), using matrix multiplication. The axis must be a normalized vector.
      */
-    fun rotated(axis: Vector3, phi: RealT): Transform{
+    fun rotated(axis: Vector3, phi: RealT): Transform {
         return Transform(Basis(axis, phi), Vector3()) * this
     }
 
@@ -220,9 +233,11 @@ class Transform(var basis: Basis, var origin: Vector3 = Vector3()) : CoreType {
      * Transforms the given Vector3 by this transform.
      */
     fun xform(vector: Vector3): Vector3 =
-        Vector3(basis[0].dot(vector) + origin.x,
+        Vector3(
+            basis[0].dot(vector) + origin.x,
             basis[1].dot(vector) + origin.y,
-            basis[2].dot(vector) + origin.z)
+            basis[2].dot(vector) + origin.z
+        )
 
     /**
      * Transforms the given AABB by this transform.
@@ -266,9 +281,9 @@ class Transform(var basis: Basis, var origin: Vector3 = Vector3()) : CoreType {
     fun xformInv(vector: Vector3): Vector3 {
         val v = vector - origin
         return Vector3(
-            (basis[0][0] * v.x ) + ( basis[1][0] * v.y ) + ( basis[2][0] * v.z ),
-            (basis[0][1] * v.x ) + ( basis[1][1] * v.y ) + ( basis[2][1] * v.z ),
-            (basis[0][2] * v.x ) + ( basis[1][2] * v.y ) + ( basis[2][2] * v.z )
+            (basis[0][0] * v.x) + (basis[1][0] * v.y) + (basis[2][0] * v.z),
+            (basis[0][1] * v.x) + (basis[1][1] * v.y) + (basis[2][1] * v.z),
+            (basis[0][2] * v.x) + (basis[1][2] * v.y) + (basis[2][2] * v.z)
         )
     }
 
@@ -312,6 +327,8 @@ class Transform(var basis: Basis, var origin: Vector3 = Vector3()) : CoreType {
 
 
     //UTILITIES
+    override fun toVariant() = Variant(this)
+
     operator fun times(transform: Transform): Transform {
         val t = this
         t.origin = xform(transform.origin)

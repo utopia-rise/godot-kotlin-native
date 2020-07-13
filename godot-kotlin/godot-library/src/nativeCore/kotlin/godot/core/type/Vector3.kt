@@ -406,6 +406,8 @@ class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>
 
 
     //UTILITIES
+    override fun toVariant() = Variant(this)
+
     operator fun get(n: Int): Double =
         when (n) {
             0 -> x
