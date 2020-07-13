@@ -2,9 +2,9 @@
 
 package godot.core
 
-import godot.gdnative.*
+import godot.gdnative.godot_node_path
+import godot.gdnative.godot_node_path_operator_equal
 import kotlinx.cinterop.*
-import platform.posix.off_t
 
 
 class NodePath : NativeCoreType<godot_node_path> {
@@ -25,13 +25,13 @@ class NodePath : NativeCoreType<godot_node_path> {
 
     constructor(from: String) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_node_path_new)(it, String().toGDString().ptr)
+            checkNotNull(Godot.gdnative.godot_node_path_new)(it, from.toGDString().ptr)
         }
     }
 
     constructor(from: NodePath) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_node_path_new)(it, String().toGDString().ptr)
+            checkNotNull(Godot.gdnative.godot_node_path_new_copy)(it, from._handle.ptr)
         }
     }
 
@@ -133,6 +133,8 @@ class NodePath : NativeCoreType<godot_node_path> {
 
 
     //UTILITIES
+    override fun toVariant() = Variant(this)
+
     override fun equals(other: Any?): Boolean {
         return if (other is NodePath) {
             godot_node_path_operator_equal(_handle, other._handle)

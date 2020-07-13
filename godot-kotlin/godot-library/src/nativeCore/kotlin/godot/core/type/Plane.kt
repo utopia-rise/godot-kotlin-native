@@ -2,7 +2,6 @@
 
 package godot.core
 
-import godot.gdnative.godot_basis_layout
 import godot.gdnative.godot_plane
 import godot.gdnative.godot_plane_layout
 import kotlinx.cinterop.*
@@ -242,6 +241,8 @@ class Plane(var normal: Vector3, var d: RealT = 0.0) : CoreType {
 
 
     //UTILITIES
+    override fun toVariant() = Variant(this)
+
     override fun toString(): String {
         return "Plane(normal=$normal, d=$d)"
     }

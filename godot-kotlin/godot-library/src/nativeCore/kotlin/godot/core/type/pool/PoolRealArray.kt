@@ -2,23 +2,22 @@
 
 package godot.core
 
-import godot.gdnative.*
+import godot.gdnative.godot_pool_real_array
 import kotlinx.cinterop.*
 
-class PoolVector3Array : NativeCoreType<godot_pool_vector3_array>, Iterable<Vector3> {
+class PoolRealArray : NativeCoreType<godot_pool_real_array>, Iterable<RealT> {
     //CONSTRUCTOR
     constructor() {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_vector3_array_new)(it)
+            checkNotNull(Godot.gdnative.godot_pool_real_array_new)(it)
         }
     }
 
-    constructor(other: PoolVector3Array) {
-        callNative {
-            checkNotNull(Godot.gdnative.godot_pool_vector3_array_new_copy)(it, other._handle.ptr)
+    internal constructor(native: CValue<godot_pool_real_array>) {
+        memScoped {
+            this@PoolRealArray.setRawMemory(native.ptr)
         }
     }
-
 
     internal constructor(mem: COpaquePointer) {
         this.setRawMemory(mem)
@@ -30,7 +29,7 @@ class PoolVector3Array : NativeCoreType<godot_pool_vector3_array>, Iterable<Vect
     }
 
     override fun setRawMemory(mem: COpaquePointer) {
-        _handle = mem.reinterpret<godot_pool_vector3_array>().pointed.readValue()
+        _handle = mem.reinterpret<godot_pool_real_array>().pointed.readValue()
     }
 
 
@@ -38,19 +37,19 @@ class PoolVector3Array : NativeCoreType<godot_pool_vector3_array>, Iterable<Vect
     /**
      * Appends an element at the end of the array (alias of push_back).
      */
-    fun append(vector: Vector3) {
+    fun append(real: RealT) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_vector3_array_append)(it, vector.getRawMemory(this).reinterpret())
+            checkNotNull(Godot.gdnative.godot_pool_real_array_append)(it, real.toFloat())
         }
     }
 
 
     /**
-     * Appends a PoolVector3Array at the end of this array.
+     * Appends a PoolRealArray at the end of this array.
      */
-    fun appendArray(array: PoolVector3Array) {
+    fun appendArray(array: PoolRealArray) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_vector3_array_append_array)(it, array._handle.ptr)
+            checkNotNull(Godot.gdnative.godot_pool_real_array_append_array)(it, array._handle.ptr)
         }
     }
 
@@ -59,28 +58,26 @@ class PoolVector3Array : NativeCoreType<godot_pool_vector3_array>, Iterable<Vect
      */
     fun empty() {
         callNative {
-            checkNotNull(Godot.gdnative12.godot_pool_vector3_array_empty)(it)
+            checkNotNull(Godot.gdnative12.godot_pool_real_array_empty)(it)
         }
     }
 
     /**
      *  Retrieve the element at the given index.
      */
-    operator fun get(idx: Int): Vector3 {
-        return Vector3(
-            callNative {
-                checkNotNull(Godot.gdnative.godot_pool_vector3_array_get)(it, idx)
-            }
-        )
+    operator fun get(idx: Int): RealT {
+        return callNative {
+            checkNotNull(Godot.gdnative.godot_pool_real_array_get)(it, idx)
+        }.toRealT()
     }
 
     /**
      * Inserts a new element at a given position in the array.
      * The position must be valid, or at the end of the array (idx == size()).
      */
-    fun insert(idx: Int, data: Vector3) {
+    fun insert(idx: Int, data: RealT) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_vector3_array_insert)(it, idx, data.getRawMemory(this).reinterpret())
+            checkNotNull(Godot.gdnative.godot_pool_real_array_insert)(it, idx, data.toFloat())
         }
     }
 
@@ -89,16 +86,16 @@ class PoolVector3Array : NativeCoreType<godot_pool_vector3_array>, Iterable<Vect
      */
     fun invert() {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_vector3_array_invert)(it)
+            checkNotNull(Godot.gdnative.godot_pool_real_array_invert)(it)
         }
     }
 
     /**
      * Appends a value to the array.
      */
-    fun pushBack(data: Vector3) {
+    fun pushBack(data: RealT) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_vector3_array_push_back)(it, data.getRawMemory(this).reinterpret())
+            checkNotNull(Godot.gdnative.godot_pool_real_array_push_back)(it, data.toFloat())
         }
     }
 
@@ -107,7 +104,7 @@ class PoolVector3Array : NativeCoreType<godot_pool_vector3_array>, Iterable<Vect
      */
     fun remove(idx: Int) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_vector3_array_remove)(it, idx)
+            checkNotNull(Godot.gdnative.godot_pool_real_array_remove)(it, idx)
         }
     }
 
@@ -117,16 +114,16 @@ class PoolVector3Array : NativeCoreType<godot_pool_vector3_array>, Iterable<Vect
      */
     fun resize(size: Int) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_vector3_array_resize)(it, size)
+            checkNotNull(Godot.gdnative.godot_pool_real_array_resize)(it, size)
         }
     }
 
     /**
-     * Changes the vector at the given index.
+     * Changes the real at the given index.
      */
-    operator fun set(idx: Int, data: Vector3) {
+    operator fun set(idx: Int, data: RealT) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_vector3_array_set)(it, idx, data.getRawMemory(this).reinterpret())
+            checkNotNull(Godot.gdnative.godot_pool_real_array_set)(it, idx, data.toFloat())
         }
     }
 
@@ -135,24 +132,26 @@ class PoolVector3Array : NativeCoreType<godot_pool_vector3_array>, Iterable<Vect
      */
     fun size(): Int {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_pool_vector3_array_size)(it)
+            checkNotNull(Godot.gdnative.godot_pool_real_array_size)(it)
         }
     }
 
     //UTILITIES
-    operator fun plus(other: Vector3) {
+    override fun toVariant() = Variant(this)
+
+    operator fun plus(other: RealT) {
         this.append(other)
     }
 
-    operator fun plus(other: PoolVector3Array) {
+    operator fun plus(other: PoolRealArray) {
         this.appendArray(other)
     }
 
     override fun toString(): String {
-        return "PoolVector3Array(${size()})"
+        return "PoolRealArray(${size()})"
     }
 
-    override fun iterator(): Iterator<Vector3> {
+    override fun iterator(): Iterator<RealT> {
         return IndexedIterator(size(), this::get)
     }
 
@@ -161,7 +160,7 @@ class PoolVector3Array : NativeCoreType<godot_pool_vector3_array>, Iterable<Vect
      * This methods implementation works but is not the fastest one.
      */
     override fun equals(other: Any?): Boolean {
-        return if (other is PoolVector3Array) {
+        return if (other is PoolRealArray) {
             val list1 = this.toList()
             val list2 = other.toList()
             list1 == list2
@@ -174,7 +173,7 @@ class PoolVector3Array : NativeCoreType<godot_pool_vector3_array>, Iterable<Vect
         return _handle.hashCode()
     }
 
-    internal inline fun <T> callNative(block: MemScope.(CPointer<godot_pool_vector3_array>) -> T): T {
+    internal inline fun <T> callNative(block: MemScope.(CPointer<godot_pool_real_array>) -> T): T {
         return callNative(this, block)
     }
 }

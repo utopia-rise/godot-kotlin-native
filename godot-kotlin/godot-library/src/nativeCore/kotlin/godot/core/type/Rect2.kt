@@ -8,7 +8,6 @@ import kotlinx.cinterop.*
 import kotlin.math.max
 import kotlin.math.min
 
-
 class Rect2(var position: Vector2, var size: Vector2) : CoreType {
     //PROPERTIES
     inline var end: Vector2
@@ -75,8 +74,8 @@ class Rect2(var position: Vector2, var size: Vector2) : CoreType {
      */
     fun abs(): Rect2 {
         return Rect2(
-            position.x - kotlin.math.min(size.x, 0.0),
-            position.x - kotlin.math.min(size.x, 0.0),
+            position.x - min(size.x, 0.0),
+            position.x - min(size.x, 0.0),
             kotlin.math.abs(size.x),
             kotlin.math.abs(size.y)
         )
@@ -162,7 +161,7 @@ class Rect2(var position: Vector2, var size: Vector2) : CoreType {
     /**
      * Returns a copy of the Rect2 grown a given amount of units towards all the sides.
      */
-    fun growIndividual (left: RealT, top: RealT,right: RealT,bottom: RealT ): Rect2 {
+    fun growIndividual(left: RealT, top: RealT, right: RealT, bottom: RealT): Rect2 {
         val g = Rect2(this.position, this.size)
         g.position.x -= left
         g.position.y -= top
@@ -174,12 +173,24 @@ class Rect2(var position: Vector2, var size: Vector2) : CoreType {
     /**
      * Returns a copy of the Rect2 grown a given amount of units towards all the sides.
      */
-    fun growMargin (margin: Margin, by: RealT ): Rect2 {
+    fun growMargin(margin: Margin, by: RealT): Rect2 {
         val g = Rect2(this.position, this.size)
-        g.position.x -= by
-        g.position.y -= by
-        g.size.x += by * 2
-        g.size.y += by * 2
+        when(margin){
+            Margin.LEFT -> {
+                g.position.x -= by
+                g.size.x += by
+            }
+            Margin.RIGHT -> {
+                g.size.x += by
+            }
+            Margin.TOP -> {
+                g.position.y -= by
+                g.size.y += by
+            }
+            Margin.BOTTOM -> {
+                g.size.y += by
+            }
+        }
         return g
     }
 
@@ -195,11 +206,11 @@ class Rect2(var position: Vector2, var size: Vector2) : CoreType {
      */
     fun hasPoint(point: Vector2): Boolean {
         return when {
-            point.x < position.x                -> false
-            point.y < position.y                -> false
-            point.x >= (position.x + size.x)    -> false
-            point.y >= (position.y + size.y)    -> false
-            else                                -> true
+            point.x < position.x -> false
+            point.y < position.y -> false
+            point.x >= (position.x + size.x) -> false
+            point.y >= (position.y + size.y) -> false
+            else -> true
         }
     }
 
@@ -216,8 +227,7 @@ class Rect2(var position: Vector2, var size: Vector2) : CoreType {
                 (position.y + size.y) < b.position.y -> false
                 else -> true
             }
-        }
-        else {
+        } else {
             return when {
                 position.x >= (b.position.x + b.size.x) -> false
                 (position.x + size.x) <= b.position.x -> false
@@ -254,6 +264,8 @@ class Rect2(var position: Vector2, var size: Vector2) : CoreType {
 
 
     //UTILITIES
+    override fun toVariant() = Variant(this)
+
     override fun equals(other: Any?): Boolean {
         return when (other) {
             is Rect2 -> position == other.position && size == other.size

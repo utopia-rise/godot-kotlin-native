@@ -4,7 +4,6 @@ package godot.core
 
 import godot.gdnative.godot_quat
 import godot.gdnative.godot_quat_layout
-import godot.gdnative.godot_vector3_layout
 import kotlinx.cinterop.*
 import kotlin.math.*
 
@@ -374,6 +373,8 @@ class Quat(var x: RealT, var y: RealT, var z: RealT, var w: RealT) : CoreType {
 
 
     //UTILITIES
+    override fun toVariant() = Variant(this)
+
     fun set(px: RealT, py: RealT, pz: RealT, pw: RealT) {
         x = px
         y = py

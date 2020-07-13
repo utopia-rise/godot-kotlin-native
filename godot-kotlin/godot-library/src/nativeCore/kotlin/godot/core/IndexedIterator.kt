@@ -13,3 +13,20 @@ internal class IndexedIterator<T>(
         return getter(index++)
     }
 }
+
+data class Entry<out K, out V>(val key: K, val value: V)
+
+internal class MapIterator<K, V>(
+    private val keyIterator: Iterator<K>,
+    private val getter: (K) -> V
+) : Iterator<Entry<K, V>> {
+    override fun hasNext(): Boolean {
+        return keyIterator.hasNext()
+    }
+
+    override fun next(): Entry<K, V> {
+        val key = keyIterator.next()
+        val value = getter(key)
+        return Entry(key, value)
+    }
+}

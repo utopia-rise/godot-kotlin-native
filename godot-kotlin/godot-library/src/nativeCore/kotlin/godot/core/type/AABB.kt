@@ -2,7 +2,8 @@
 
 package godot.core
 
-import godot.gdnative.*
+import godot.gdnative.godot_aabb
+import godot.gdnative.godot_aabb_layout
 import kotlinx.cinterop.*
 
 
@@ -19,7 +20,7 @@ class AABB(var position: Vector3, var size: Vector3) : CoreType {
     constructor() :
         this(Vector3(), Vector3())
 
-    internal constructor(native: CValue<godot_aabb_layout>) : this() {
+    internal constructor(native: CValue<godot_aabb>) : this() {
         memScoped {
             this@AABB.setRawMemory(native.ptr)
         }
@@ -453,6 +454,8 @@ class AABB(var position: Vector3, var size: Vector3) : CoreType {
     }
 
     //UTILITIES
+    override fun toVariant() = Variant(this)
+
     override fun equals(other: Any?): Boolean =
         when (other) {
             is AABB -> (position == other.position && size == other.size)

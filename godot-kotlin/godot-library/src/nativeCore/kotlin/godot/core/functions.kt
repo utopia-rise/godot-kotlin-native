@@ -1,5 +1,6 @@
 package godot.core
 
+
 abstract class Function<T : Object, R>(
     val parameterCount: Int
 ) {

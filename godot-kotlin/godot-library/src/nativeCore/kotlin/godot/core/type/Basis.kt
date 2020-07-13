@@ -4,7 +4,6 @@ package godot.core
 
 import godot.gdnative.godot_basis
 import godot.gdnative.godot_basis_layout
-import godot.gdnative.real_t
 import kotlinx.cinterop.*
 import kotlin.math.*
 
@@ -616,6 +615,8 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
 
 
     //UTILITIES
+    override fun toVariant() = Variant(this)
+
     operator fun get(n: Int): Vector3 {
         return when (n) {
             0 -> x

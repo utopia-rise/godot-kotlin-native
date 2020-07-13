@@ -769,6 +769,8 @@ class Color(var r: RealT, var g: RealT, var b: RealT, var a: RealT) : Comparable
     }
 
     //Utilities
+    override fun toVariant() = Variant(this)
+
     operator fun plus(c: Color) = Color(r + c.r, g + c.g, b + c.b, a + c.a)
     operator fun plus(value: RealT) = Color(r + value, g + value, b + value, a + value)
 
