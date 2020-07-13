@@ -4,6 +4,7 @@ package godot.core
 import godot.gdnative.godot_array
 import godot.gdnative.godot_variant
 import godot.gdnative.godot_variant_type
+import godot.internal.type.CoreType
 import kotlinx.cinterop.*
 
 @Suppress("IMPLICIT_CAST_TO_ANY")
