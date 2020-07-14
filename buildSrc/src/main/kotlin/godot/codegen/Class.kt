@@ -68,6 +68,8 @@ class Class @JsonCreator constructor(
         generateProperties(tree, icalls, classTypeBuilder)
         generateMethods(classTypeBuilder, tree, icalls)
 
+        if (name == "Object") generateToVariantMethod(classTypeBuilder)
+
         baseCompanion?.build()?.let { classTypeBuilder.addType(it) }
 
         //Build Type and create file
@@ -347,5 +349,15 @@ class Class @JsonCreator constructor(
             }
             propertiesReceiverType.addFunction(method.generate(this, tree, icalls))
         }
+    }
+
+    private fun generateToVariantMethod(propertiesReceiverType: TypeSpec.Builder) {
+        val variantType = ClassName("godot.core", "Variant")
+        propertiesReceiverType.addFunction(
+            FunSpec.builder("toVariant")
+                .returns(variantType)
+                .addStatement("return %T(this)", variantType)
+                .build()
+        )
     }
 }
