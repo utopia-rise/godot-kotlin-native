@@ -48,11 +48,7 @@ open class Method @JsonCreator constructor(
         val shouldReturn = returnType != "Unit"
         if (shouldReturn) {
             val simpleName = returnType.removeEnumPrefix()
-            val returnClassName = if (returnType == "VariantArray") {
-                ClassName(returnType.getPackage(), simpleName).parameterizedBy(Any::class.asTypeName())
-            } else {
-                ClassName(returnType.getPackage(), simpleName)
-            }
+            val returnClassName = ClassName(returnType.getPackage(), simpleName)
             generatedFunBuilder.returns(returnClassName)
         }
 
@@ -83,8 +79,10 @@ open class Method @JsonCreator constructor(
             generatedFunBuilder.addStatement(
                 "%L%L%M%L%L",
                 if (shouldReturn) "return " else "",
-                if (returnType.isEnum()) {
-                    "${returnType.removeEnumPrefix()}.fromInt( "
+                if (returnType == "enum.Error") {
+                    "${returnType.removeEnumPrefix()}.byValue( "
+                } else if (returnType.isEnum()) {
+                    "${returnType.removeEnumPrefix()}.from( "
                 } else if (hasVarargs && returnType != "Variant" && returnType != "Unit") {
                     "$returnType from "
                 } else {
@@ -92,7 +90,7 @@ open class Method @JsonCreator constructor(
                 },
                 MemberName("godot.icalls", constructedICall.first),
                 constructedICall.second,
-                if (returnType.isEnum()) ")" else ""
+                if (returnType == "enum.Error") ".toUInt())" else if (returnType.isEnum()) ")" else ""
             )
         } else {
             if (shouldReturn) {
@@ -122,17 +120,10 @@ open class Method @JsonCreator constructor(
 
                 val parameterBuilder = ParameterSpec.builder(
                     argument.name,
-                    if (argument.type == "VariantArray") {
-                        ClassName(
-                            argument.type.getPackage(),
-                            argument.type.removeEnumPrefix()
-                        ).parameterizedBy(Any::class.asTypeName()).copy(nullable = argument.nullable)
-                    } else {
-                        ClassName(
-                            argument.type.getPackage(),
-                            argument.type.removeEnumPrefix()
-                        ).copy(nullable = argument.nullable)
-                    }
+                    ClassName(
+                        argument.type.getPackage(),
+                        argument.type.removeEnumPrefix()
+                    ).copy(nullable = argument.nullable)
                 )
 
                 if (argument.applyDefault != null) parameterBuilder.defaultValue(argument.applyDefault)

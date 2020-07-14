@@ -2,11 +2,11 @@
 
 package godot.core
 
-import godot.gdnative.*
 import godot.internal.type.NativeCoreType
 import godot.gdnative.godot_aabb
 import godot.gdnative.godot_pool_int_array
 import kotlinx.cinterop.*
+import godot.internal.type.callNative
 
 class PoolIntArray : NativeCoreType<godot_pool_int_array>, Iterable<Int> {
     //CONSTRUCTOR

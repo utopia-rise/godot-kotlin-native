@@ -8,7 +8,7 @@ import java.io.File
 
 
 infix fun File.generateApiFrom(jsonSource: File) {
-    val classes: List<Class> = ObjectMapper().readValue(jsonSource, object : TypeReference<ArrayList<Class>>() {})
+    var classes: List<Class> = ObjectMapper().readValue(jsonSource, object : TypeReference<ArrayList<Class>>() {})
 
     val tree = classes.buildTree()
     val icalls = mutableSetOf<ICall>()
@@ -52,12 +52,12 @@ private fun generateICallsVarargsFunction(): FunSpec {
             ClassName("kotlin", "Array").parameterizedBy(STAR)
         )
         .addStatement(
-            """%M {
+            """return %M {
                             |    val args = %M<%T<%M>>(arguments.size)
-                            |    for ((i,arg) in arguments.withIndex()) args[i] = %T.wrap(arg).handle.ptr
+                            |    for ((i,arg) in arguments.withIndex()) args[i] = %T.wrap(arg)._handle.ptr
                             |    val result = %T.gdnative.godot_method_bind_call!!.%M(mb, inst, args, arguments.size, null)
                             |    for (i in arguments.indices) %T.gdnative.godot_variant_destroy!!.%M(args[i])
-                            |    return %T(result)
+                            |    %T(result)
                             |}
                             |""".trimMargin(),
             MemberName("kotlinx.cinterop", "memScoped"),
@@ -79,7 +79,7 @@ private fun generateEngineTypesRegistration(classes: List<Class>): FileSpec {
         .addModifiers(KModifier.INTERNAL)
         .receiver(ClassName("godot.core", "TypeManager"))
 
-    classes.filter { !it.isSingleton && it.name != "Object"}.forEach {
+    classes.filter { !it.isSingleton && it.name != "Object" && it.shouldGenerate}.forEach {
         funBuilder.addStatement(
             "registerEngineType(%S, ::%T)",
             it.name,

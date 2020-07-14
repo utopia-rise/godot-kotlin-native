@@ -89,3 +89,5 @@ fun Graph<Class>.isObjectOrItsChild(className: String): Boolean {
     }
     return isObjectFamily
 }
+
+fun Graph<Class>.getBaseClass(clazz: Class): Class? = nodes.find { it.value.name == clazz.baseClass }?.value

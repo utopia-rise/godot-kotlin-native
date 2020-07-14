@@ -144,6 +144,8 @@ fun String.convertTypeToKotlin(): String {
 }
 
 fun String.convertTypeForICalls(): String {
+    if (this == "enum.Error") return "UInt"
+
     if (this.isEnum()) return "Long"
 
     if (this.isPrimitive() || this.isCoreType()) return this

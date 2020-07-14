@@ -31,19 +31,21 @@ class Class @JsonCreator constructor(
 ) {
 
     private val oldName: String = name
-    private val shouldGenerate: Boolean
+    var shouldGenerate: Boolean = true
     val additionalImports = mutableListOf<Pair<String, String>>()
 
     init {
         name = name.escapeUnderscore()
         baseClass = baseClass.escapeUnderscore()
-
-        shouldGenerate = name != "GlobalConstants"
     }
 
     fun generate(outputDir: File, tree: Graph<Class>, icalls: MutableSet<ICall>) {
-        applyGettersAndSettersForProperties()
+        shouldGenerate = name != "GlobalConstants" && tree.getBaseClass(this)?.isSingleton == false
+            || isInstanciable || isSingleton
+
         if (!shouldGenerate) return
+
+        applyGettersAndSettersForProperties()
 
         val className = ClassName("godot", name)
 
@@ -55,18 +57,16 @@ class Class @JsonCreator constructor(
             generateSignalExtensions(classTypeBuilder)
         }
 
-        generateConstructors(classTypeBuilder)
+        if (!isSingleton) generateConstructors(classTypeBuilder)
         generateEnums(classTypeBuilder)
 
-        val baseCompanion = if (isSingleton || constants.isNotEmpty()) createBaseCompanion() else null
+        val baseCompanion = if (!isSingleton && constants.isNotEmpty()) createBaseCompanion() else null
+        generateConstants(baseCompanion ?: classTypeBuilder)
 
-        if (baseCompanion != null) generateConstants(baseCompanion)
 
-        val propertiesReceiverType = if (isSingleton) baseCompanion!! else classTypeBuilder
-
-        generateSignals(propertiesReceiverType)
-        generateProperties(tree, icalls, propertiesReceiverType)
-        generateMethods(propertiesReceiverType, tree, icalls)
+        generateSignals(classTypeBuilder)
+        generateProperties(tree, icalls, classTypeBuilder)
+        generateMethods(classTypeBuilder, tree, icalls)
 
         baseCompanion?.build()?.let { classTypeBuilder.addType(it) }
 
@@ -93,10 +93,11 @@ class Class @JsonCreator constructor(
     }
 
     private fun createTypeBuilder(className: ClassName): TypeSpec.Builder {
-        val typeSpec = TypeSpec
-            .classBuilder(className)
-            .addModifiers(KModifier.OPEN)
+        val typeSpec = if (isSingleton) TypeSpec.objectBuilder(className)
+        else TypeSpec.classBuilder(className).addModifiers(KModifier.OPEN)
+
         if (baseClass.isNotEmpty()) typeSpec.superclass(ClassName("godot", baseClass))
+
         return typeSpec
     }
 
@@ -238,16 +239,15 @@ class Class @JsonCreator constructor(
 
     private fun generateSignals(typeBuilder: TypeSpec.Builder) {
         signals.forEach {
+            if (properties.map { p -> p.name }.contains(it.name)) it.name = "signal${it.name.capitalize()}"
             typeBuilder.addProperty(it.generated)
         }
     }
 
     private fun createBaseCompanion(): TypeSpec.Builder {
         return TypeSpec.companionObjectBuilder().apply {
-            if (isSingleton) {
-                this.addAnnotation(ClassName("kotlin.native", "ThreadLocal"))
-                this.addProperty(createSingletonProperty(ClassName("kotlinx.cinterop", "COpaquePointer")))
-            }
+            this.addAnnotation(ClassName("kotlin.native", "ThreadLocal"))
+            this.addProperty(createSingletonProperty(ClassName("kotlinx.cinterop", "COpaquePointer")))
         }
     }
 

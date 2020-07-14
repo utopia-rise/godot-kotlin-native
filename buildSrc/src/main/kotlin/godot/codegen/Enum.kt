@@ -33,7 +33,7 @@ class Enum @JsonCreator constructor(
         }
         val companion = TypeSpec.companionObjectBuilder()
             .addFunction(
-                FunSpec.builder("fromInt")
+                FunSpec.builder("from")
                     .addParameter("value", Long::class)
                     .addStatement("return values().single { it.%N == %N }", "id", "value")
                     .build()

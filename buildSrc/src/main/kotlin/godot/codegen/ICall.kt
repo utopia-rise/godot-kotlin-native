@@ -34,7 +34,7 @@ class ICall(
         ClassName(
             returnType.getPackage(),
             returnType
-        ).parameterizedBy(Any::class.asTypeName())
+        )
     } else {
         ClassName(
             if (returnType.isEnum()) "kotlin" else returnType.getPackage(),
@@ -61,16 +61,25 @@ class ICall(
         val shouldReturn = returnType != "Unit"
         val isPrimitive = returnType.isPrimitive()
 
-        addReturnTypeForICall(shouldReturn, spec, isPrimitive)
+        addReturnTypeForICall(shouldReturn, spec)
         generateICallMethodBlock(shouldReturn, isPrimitive, spec, tree)
 
         return spec.build()
     }
 
     private fun generateICallMethodBlock(shouldReturn: Boolean, isPrimitive: Boolean, spec: FunSpec.Builder, tree: Graph<Class>) {
-        val codeBlockBuilder = CodeBlock
-            .builder()
-            .add("%M {\n", MemberName("kotlinx.cinterop", "memScoped"))
+        val codeBlockBuilder = CodeBlock.builder()
+
+        if (shouldReturn) {
+            if (isPrimitive) {
+                spec.addStatement("var ret: %T = ${returnType.defaultValue()}", returnTypeClass)
+                codeBlockBuilder.add("%M {\n", MemberName("kotlinx.cinterop", "memScoped"))
+            } else {
+                codeBlockBuilder.add("val ret = %M {\n", MemberName("kotlinx.cinterop", "memScoped"))
+            }
+        } else {
+            codeBlockBuilder.add("%M {\n", MemberName("kotlinx.cinterop", "memScoped"))
+        }
 
         if (shouldReturn) {
             when {
@@ -98,8 +107,7 @@ class ICall(
             }
         }
 
-        codeBlockBuilder
-            .add(
+        codeBlockBuilder.add(
                 "    val args = %M<%T>(${arguments.size + 1})\n",
                 MemberName("kotlinx.cinterop", "allocArray"),
                 ClassName("kotlinx.cinterop", "COpaquePointerVar")
@@ -117,7 +125,7 @@ class ICall(
                 }
                 value.type == "VariantArray" || value.type == "Variant" -> {
                     codeBlockBuilder.add(
-                        "    args[$i] = arg$i$nullInstruction.handle$nullInstruction.ptr\n"
+                        "    args[$i] = arg$i$nullInstruction._handle$nullInstruction.ptr\n"
                     )
                 }
                 value.type.isCoreType() -> {
@@ -167,53 +175,43 @@ class ICall(
                         MemberName("kotlinx.cinterop", "invoke")
                     )
                 }
-                val returnTypeClassSimpleName = when (returnTypeClass) {
-                    is ClassName -> {
-                        returnTypeClass.simpleName
-                    }
-                    is ParameterizedTypeName -> {
-                        returnTypeClass.rawType.simpleName
-                    }
-                    else -> {
-                        null
-                    }
-                }
+                val returnTypeClassSimpleName = returnTypeClass.simpleName
 
                 when {
-                    returnTypeClassSimpleName != null && tree.isObjectOrItsChild(returnTypeClassSimpleName) -> {
+                    tree.isObjectOrItsChild(returnTypeClassSimpleName) -> {
                         val typeManagerClass = ClassName("godot.core", "TypeManager")
                         if (returnTypeClassSimpleName != "Object") {
                             codeBlockBuilder.add(
-                                "    ret = %M(retVar) as %T\n",
+                                "    %M(retVar) as %T\n",
                                 MemberName(typeManagerClass, "wrap"),
                                 returnTypeClass
                             )
                         } else {
                             codeBlockBuilder.add(
-                                "    ret = %M(retVar)\n",
+                                "    %M(retVar)\n",
                                 MemberName(typeManagerClass, "wrap")
                             )
                         }
                     }
 
-                    returnTypeClassSimpleName != null && returnTypeClassSimpleName == "VariantArray" -> {
+                    returnTypeClassSimpleName == "VariantArray" -> {
                         codeBlockBuilder.add(
-                            "    ret = %T(retVar.%M())\n",
+                            "    %T(retVar.%M())\n",
                             returnTypeClass,
                             MemberName("kotlinx.cinterop", "readValue")
                         )
                     }
 
-                    returnTypeClassSimpleName != null && returnTypeClassSimpleName == "String" -> {
+                    returnTypeClassSimpleName == "String" -> {
                         codeBlockBuilder.add(
-                            "    ret = retVar.%M()\n",
+                            "    retVar.%M()\n",
                             MemberName("kotlinx.cinterop", "toKString")
                         )
                     }
 
                     else -> {
                         codeBlockBuilder.add(
-                            "    ret = %T(retVar)\n",
+                            "    %T(retVar)\n",
                             returnTypeClass
                         )
                     }
@@ -236,14 +234,9 @@ class ICall(
         spec.addCode(codeBlockBuilder.build())
     }
 
-    private fun addReturnTypeForICall(shouldReturn: Boolean, spec: FunSpec.Builder, isPrimitive: Boolean) {
+    private fun addReturnTypeForICall(shouldReturn: Boolean, spec: FunSpec.Builder) {
         if (shouldReturn) {
             spec.returns(returnTypeClass)
-            if (isPrimitive) {
-                spec.addStatement("var ret: %T = ${returnType.defaultValue()}", returnTypeClass)
-            } else {
-                spec.addStatement("lateinit var ret: %T", returnTypeClass)
-            }
         }
     }
 
@@ -251,11 +244,7 @@ class ICall(
         arguments.withIndex().forEach {
             val argument = it.value
             val argumentTypeAsString = argument.type.convertTypeForICalls()
-            var argumentType: TypeName = if (argumentTypeAsString == "VariantArray") {
-                ClassName(argumentTypeAsString.getPackage(), argumentTypeAsString).parameterizedBy(Any::class.asTypeName())
-            } else {
-                ClassName(argumentTypeAsString.getPackage(), argumentTypeAsString)
-            }
+            var argumentType: TypeName = ClassName(argumentTypeAsString.getPackage(), argumentTypeAsString)
 
             if (argument.nullable) {
                 argumentType = argumentType.copy(nullable = true)

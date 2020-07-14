@@ -4,6 +4,7 @@ package godot.core
 
 import godot.gdnative.godot_rect2
 import godot.gdnative.godot_rect2_layout
+import godot.internal.type.CoreType
 import kotlinx.cinterop.*
 import kotlin.math.max
 import kotlin.math.min

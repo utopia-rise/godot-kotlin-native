@@ -4,6 +4,7 @@ package godot.core
 
 import godot.gdnative.godot_transform2d
 import godot.gdnative.godot_transform2d_layout
+import godot.internal.type.CoreType
 import kotlinx.cinterop.*
 import kotlin.math.acos
 import kotlin.math.atan2

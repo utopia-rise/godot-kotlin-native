@@ -16,6 +16,15 @@ class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>
         X(0),
         Y(1),
         Z(2);
+
+        companion object {
+            fun from(longVal: Long) = when(longVal) {
+                0L -> X
+                1L -> Y
+                2L -> Z
+                else -> throw AssertionError("Unknown axis for Vector3: $longVal")
+            }
+        }
     }
 
     companion object {

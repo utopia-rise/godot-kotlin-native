@@ -57,11 +57,7 @@ class Property @JsonCreator constructor(
             modifiers.add(if (tree.doAncestorsHaveProperty(clazz, this)) KModifier.OVERRIDE else KModifier.OPEN)
         }
 
-        val propertyType = if (type == "VariantArray") {
-            ClassName(type.getPackage(), type).parameterizedBy(Any::class.asTypeName())
-        } else {
-            ClassName(type.getPackage(), type)
-        }
+        val propertyType = ClassName(type.getPackage(), type)
         val propertySpecBuilder = PropertySpec
             .builder(
                 name,

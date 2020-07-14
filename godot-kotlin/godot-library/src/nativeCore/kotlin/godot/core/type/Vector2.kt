@@ -14,6 +14,14 @@ class Vector2(var x: RealT, var y: RealT) : Comparable<Vector2>, CoreType {
     enum class Axis(val value: Int) {
         X(0),
         Y(1);
+
+        companion object {
+            fun from(longVal: Long) = when(longVal) {
+                0L -> X
+                1L -> Y
+                else -> throw AssertionError("Unknown axis for Vector2: $longVal")
+            }
+        }
     }
 
     companion object {
