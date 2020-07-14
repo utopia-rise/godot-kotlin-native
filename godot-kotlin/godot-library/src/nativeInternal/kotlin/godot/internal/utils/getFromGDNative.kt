@@ -19,6 +19,6 @@ internal fun getConstructor(className: String, oldClassName: String): COpaquePoi
 
 internal fun getSingleton(className: String, oldClassName: String): COpaquePointer {
     memScoped {
-        return Godot.gdnative.godot_global_get_singleton!!.invoke(oldClassName.cstr.ptr) ?: throw NullPointerException("Cannot get singleton instance $className")
+        return Godot.gdnative.godot_global_get_singleton!!.invoke(oldClassName.cstr.ptr) ?: throw NotImplementedError("Cannot get singleton instance $className")
     }
 }
