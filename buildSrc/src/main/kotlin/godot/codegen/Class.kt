@@ -55,6 +55,7 @@ class Class @JsonCreator constructor(
             generatePointerVariable(classTypeBuilder)
             generateInitAndDestroy(classTypeBuilder)
             generateSignalExtensions(classTypeBuilder)
+            generateToVariantMethod(classTypeBuilder)
         }
 
         if (!isSingleton) generateConstructors(classTypeBuilder)
@@ -68,8 +69,6 @@ class Class @JsonCreator constructor(
         generateSignals(classTypeBuilder)
         generateProperties(tree, icalls, classTypeBuilder)
         generateMethods(classTypeBuilder, tree, icalls)
-
-        if (name == "Object") generateToVariantMethod(classTypeBuilder)
 
         baseCompanion?.build()?.let { classTypeBuilder.addType(it) }
 
@@ -99,7 +98,8 @@ class Class @JsonCreator constructor(
         val typeSpec = if (isSingleton) TypeSpec.objectBuilder(className)
         else TypeSpec.classBuilder(className).addModifiers(KModifier.OPEN)
 
-        if (baseClass.isNotEmpty()) typeSpec.superclass(ClassName("godot", baseClass))
+        if (isSingleton) typeSpec.superclass(ClassName("godot", "Object"))
+        else if (baseClass.isNotEmpty()) typeSpec.superclass(ClassName("godot", baseClass))
 
         return typeSpec
     }
