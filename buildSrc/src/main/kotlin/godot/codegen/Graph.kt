@@ -4,14 +4,15 @@ class Graph<T>(elements: List<T>, sortFun: (T, T) -> Boolean) {
     val nodes = mutableListOf<Node<T>>()
 
     init {
-        for (vertex in elements)
-            nodes.add(Node(vertex))
-        for (v1 in nodes)
-            for (v2 in nodes)
+        elements.forEach { nodes.add(Node(it)) }
+        nodes.forEach { v1 ->
+            nodes.forEach { v2 ->
                 if (sortFun(v1.value, v2.value)) {
                     v2.childs.add(v1)
                     v1.parent = v2
                 }
+            }
+        }
     }
 
 
@@ -31,8 +32,8 @@ fun Graph<Class>.getMethodFromAncestor(cl: Class, method: Method): Method? {
         if (m.name == method.name && m.arguments.size == method.arguments.size) {
             var flag = true
 
-            for (i in m.arguments.indices) {
-                if (m.arguments[i].type != method.arguments[i].type) flag = false
+            m.arguments.withIndex().forEach {
+                if (it.value.type != method.arguments[it.index].type) flag = false
             }
 
             if (flag) return true
