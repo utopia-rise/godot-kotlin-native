@@ -8,7 +8,7 @@ import java.io.File
 
 
 infix fun File.generateApiFrom(jsonSource: File) {
-    var classes: List<Class> = ObjectMapper().readValue(jsonSource, object : TypeReference<ArrayList<Class>>() {})
+    val classes: List<Class> = ObjectMapper().readValue(jsonSource, object : TypeReference<ArrayList<Class>>() {})
 
     val tree = classes.buildTree()
     val icalls = mutableSetOf<ICall>()

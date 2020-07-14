@@ -58,11 +58,12 @@ class Class @JsonCreator constructor(
         }
 
         if (!isSingleton) generateConstructors(classTypeBuilder)
+
         generateEnums(classTypeBuilder)
 
         val baseCompanion = if (!isSingleton && constants.isNotEmpty()) createBaseCompanion() else null
-        generateConstants(baseCompanion ?: classTypeBuilder)
 
+        generateConstants(baseCompanion ?: classTypeBuilder)
 
         generateSignals(classTypeBuilder)
         generateProperties(tree, icalls, classTypeBuilder)
@@ -126,7 +127,9 @@ class Class @JsonCreator constructor(
 
     private fun generateSignalExtensions(typeBuilder: TypeSpec.Builder) {
 
-        fun List<TypeVariableName>.toParameterTypes() = this.map { ParameterSpec.builder(it.name.toLowerCase(), it).build() }
+        fun List<TypeVariableName>.toParameterTypes() = this.map {
+            ParameterSpec.builder(it.name.toLowerCase(), it).build()
+        }
 
         val typeVariablesNames = mutableListOf<TypeVariableName>()
         for (i in 0..10) {

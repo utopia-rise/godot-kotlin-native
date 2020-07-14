@@ -79,18 +79,27 @@ open class Method @JsonCreator constructor(
             generatedFunBuilder.addStatement(
                 "%L%L%M%L%L",
                 if (shouldReturn) "return " else "",
-                if (returnType == "enum.Error") {
-                    "${returnType.removeEnumPrefix()}.byValue( "
-                } else if (returnType.isEnum()) {
-                    "${returnType.removeEnumPrefix()}.from( "
-                } else if (hasVarargs && returnType != "Variant" && returnType != "Unit") {
-                    "$returnType from "
-                } else {
-                    ""
+                when {
+                    returnType == "enum.Error" -> {
+                        "${returnType.removeEnumPrefix()}.byValue( "
+                    }
+                    returnType.isEnum() -> {
+                        "${returnType.removeEnumPrefix()}.from( "
+                    }
+                    hasVarargs && returnType != "Variant" && returnType != "Unit" -> {
+                        "$returnType from "
+                    }
+                    else -> {
+                        ""
+                    }
                 },
                 MemberName("godot.icalls", constructedICall.first),
                 constructedICall.second,
-                if (returnType == "enum.Error") ".toUInt())" else if (returnType.isEnum()) ")" else ""
+                when {
+                    returnType == "enum.Error" -> ".toUInt())"
+                    returnType.isEnum() -> ")"
+                    else -> ""
+                }
             )
         } else {
             if (shouldReturn) {
@@ -135,16 +144,14 @@ open class Method @JsonCreator constructor(
     }
 
     private fun getModifier(tree: Graph<Class>, cl: Class) =
-        if (tree.doAncestorsHaveMethod(cl, this)) {
-            KModifier.OVERRIDE
-        } else {
-            KModifier.OPEN
-        }
-
+        if (tree.doAncestorsHaveMethod(cl, this)) KModifier.OVERRIDE else KModifier.OPEN
 
     private fun constructICall(methodArguments: String, icalls: MutableSet<ICall>): Pair<String, String> {
-        if (hasVarargs) return "_icall_varargs" to "( ${name}MethodBind, this.ptr, " +
-            if (methodArguments.isNotEmpty()) "arrayOf($methodArguments*__var_args))" else "__var_args)"
+        if (hasVarargs) {
+            return "_icall_varargs" to
+                "( ${name}MethodBind, this.ptr, " +
+                if (methodArguments.isNotEmpty()) "arrayOf($methodArguments*__var_args))" else "__var_args)"
+        }
 
         val icall = ICall(returnType, arguments)
         icalls.add(icall)
