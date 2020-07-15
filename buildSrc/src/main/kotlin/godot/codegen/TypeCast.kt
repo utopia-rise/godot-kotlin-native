@@ -1,7 +1,5 @@
 package godot.codegen
 
-import com.sun.corba.se.impl.io.TypeMismatchException
-
 private val coreTypes = listOf(
     "VariantArray",
     "Basis",
@@ -159,5 +157,7 @@ fun String.defaultValue(): String = when (this) {
     "Long" -> "0"
     "RealT" -> "0.0"
     "Boolean" -> "false"
-    else -> throw TypeMismatchException("$this is not a primitive type.")
+    else -> throw Exception("$this is not a primitive type.")
 }
+
+private class TypeException(override val message: String) : Exception()
