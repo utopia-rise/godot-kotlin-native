@@ -6,6 +6,7 @@ import godot.gdnative.godot_transform
 import godot.gdnative.godot_transform_layout
 import godot.internal.type.*
 import kotlinx.cinterop.*
+import godot.internal.*
 
 class Transform(var basis: Basis, var origin: Vector3 = Vector3()) : CoreType {
     //CONSTANTS

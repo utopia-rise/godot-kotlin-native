@@ -7,6 +7,7 @@ import godot.gdnative.godot_quat_layout
 import godot.internal.type.*
 import kotlinx.cinterop.*
 import kotlin.math.*
+import godot.internal.*
 
 class Quat(var x: RealT, var y: RealT, var z: RealT, var w: RealT) : CoreType {
     //CONSTANTS

@@ -8,6 +8,7 @@ import godot.internal.type.CMP_EPSILON
 import godot.internal.type.*
 import kotlinx.cinterop.*
 import kotlin.math.*
+import godot.internal.*
 
 
 class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>,
