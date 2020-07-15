@@ -7,9 +7,9 @@ import godot.gdnative.godot_variant_type
 import godot.internal.type.CoreType
 import kotlinx.cinterop.*
 
-@Suppress("IMPLICIT_CAST_TO_ANY")
+@Suppress("NON_PUBLIC_PRIMARY_CONSTRUCTOR_OF_INLINE_CLASS", "IMPLICIT_CAST_TO_ANY")
 @ExperimentalUnsignedTypes
-inline class Variant(internal val _handle: CValue<godot_variant>) {
+inline class Variant internal constructor(internal val _handle: CValue<godot_variant>) {
     //PROPERTIES
     val type: Type
         get() {
@@ -124,7 +124,7 @@ inline class Variant(internal val _handle: CValue<godot_variant>) {
         OP_MAX(25);
 
         companion object {
-            fun from(value: Long) = when (value) {
+            fun from(value: Long) = when(value) {
                 0L -> OP_EQUAL
                 1L -> OP_NOT_EQUAL
                 2L -> OP_LESS
@@ -162,6 +162,7 @@ inline class Variant(internal val _handle: CValue<godot_variant>) {
     }
 
     companion object {
+        @PublishedApi
         internal inline fun <reified T> typeForClass(): Type {
             return when (T::class) {
                 Int::class -> Type.INT

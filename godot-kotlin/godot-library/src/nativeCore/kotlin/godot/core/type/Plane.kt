@@ -7,6 +7,7 @@ import godot.gdnative.godot_plane_layout
 import godot.internal.type.CoreType
 import kotlinx.cinterop.*
 import kotlin.math.abs
+import godot.internal.*
 
 
 class Plane(var normal: Vector3, var d: RealT = 0.0) : CoreType {

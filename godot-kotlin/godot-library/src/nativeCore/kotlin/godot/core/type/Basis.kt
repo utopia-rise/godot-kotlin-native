@@ -7,6 +7,7 @@ import godot.gdnative.godot_basis
 import godot.gdnative.godot_basis_layout
 import kotlinx.cinterop.*
 import kotlin.math.*
+import godot.internal.*
 
 
 class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {

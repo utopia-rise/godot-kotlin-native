@@ -9,6 +9,11 @@ import kotlinx.cinterop.*
 import godot.internal.type.callNative
 
 class PoolColorArray : NativeCoreType<godot_pool_color_array>, Iterable<Color> {
+    //PROPERTIES
+    val size: Int
+        get() = this.size()
+
+
     //CONSTRUCTOR
     constructor() {
         callNative {

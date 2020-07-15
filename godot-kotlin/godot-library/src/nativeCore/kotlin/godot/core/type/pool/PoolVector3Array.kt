@@ -8,6 +8,11 @@ import kotlinx.cinterop.*
 import godot.internal.type.callNative
 
 class PoolVector3Array : NativeCoreType<godot_pool_vector3_array>, Iterable<Vector3> {
+    //PROPERTIES
+    val size: Int
+        get() = this.size()
+
+
     //CONSTRUCTOR
     constructor() {
         callNative {

@@ -7,6 +7,7 @@ import godot.gdnative.godot_vector3
 import godot.gdnative.godot_vector3_layout
 import kotlinx.cinterop.*
 import kotlin.math.*
+import godot.internal.*
 
 
 class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>,
