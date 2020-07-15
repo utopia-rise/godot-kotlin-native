@@ -1,6 +1,8 @@
 package godot.codegen
 
-private val coreTypes = listOf(//"Array", // TODO: kotlin arrays?
+import com.sun.corba.se.impl.io.TypeMismatchException
+
+private val coreTypes = listOf(
     "VariantArray",
     "Basis",
     "Color",
@@ -48,7 +50,7 @@ private val kotlinReservedNames = listOf(
     "Double",
     "operator",
     "object"
-) // TODO: smth more?
+)
 
 private val primitives = listOf("Long", "RealT", "Boolean", "Unit")
 
@@ -137,8 +139,7 @@ fun String.convertTypeToKotlin(): String {
         this == "float" -> "RealT"
         this == "bool" -> "Boolean"
         this == "void" -> "Unit"
-        this == "Array" -> "VariantArray" // TODO: kotlin arrays?
-//if (!this.godot.codegen.isCoreType() && !this.godot.codegen.isEnum() && !this.godot.codegen.isPrimitive() && this != "Node" && this != "Reference" && this != "Resource" && this != "ResourceLoader" && this != "SceneTree" && this != "MainLoop" && this != "Script" && this != "Viewport") return "Object" // FIXME: remove line
+        this == "Array" -> "VariantArray"
         else -> this
     }
 }
@@ -158,5 +159,5 @@ fun String.defaultValue(): String = when (this) {
     "Long" -> "0"
     "RealT" -> "0.0"
     "Boolean" -> "false"
-    else -> "null" // TODO: throw
+    else -> throw TypeMismatchException("$this is not a primitive type.")
 }
