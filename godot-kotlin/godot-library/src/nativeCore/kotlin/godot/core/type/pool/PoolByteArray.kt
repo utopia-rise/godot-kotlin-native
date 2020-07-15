@@ -6,6 +6,11 @@ import godot.gdnative.godot_pool_byte_array
 import kotlinx.cinterop.*
 
 class PoolByteArray : NativeCoreType<godot_pool_byte_array>, Iterable<UByte> {
+    //PROPERTIES
+    val size: Int
+        get() = this.size()
+
+
     //CONSTRUCTOR
     constructor() {
         callNative {

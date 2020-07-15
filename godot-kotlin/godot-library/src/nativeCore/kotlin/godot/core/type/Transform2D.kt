@@ -9,6 +9,7 @@ import kotlin.math.acos
 import kotlin.math.atan2
 import kotlin.math.cos
 import kotlin.math.sin
+import godot.internal.*
 
 class Transform2D(var x: Vector2, var y: Vector2, var origin: Vector2) : CoreType {
     //CONSTANTS

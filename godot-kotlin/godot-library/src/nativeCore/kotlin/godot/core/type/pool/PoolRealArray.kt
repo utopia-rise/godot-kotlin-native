@@ -3,9 +3,15 @@
 package godot.core
 
 import godot.gdnative.godot_pool_real_array
+import godot.internal.*
 import kotlinx.cinterop.*
 
 class PoolRealArray : NativeCoreType<godot_pool_real_array>, Iterable<RealT> {
+    //PROPERTIES
+    val size: Int
+        get() = this.size()
+
+
     //CONSTRUCTOR
     constructor() {
         callNative {

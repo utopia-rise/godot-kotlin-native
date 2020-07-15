@@ -6,6 +6,7 @@ import godot.gdnative.godot_vector2
 import godot.gdnative.godot_vector2_layout
 import kotlinx.cinterop.*
 import kotlin.math.*
+import godot.internal.*
 
 class Vector2(var x: RealT, var y: RealT) : Comparable<Vector2>, CoreType {
     //CONSTANTS

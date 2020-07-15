@@ -7,6 +7,7 @@ import godot.gdnative.godot_rect2_layout
 import kotlinx.cinterop.*
 import kotlin.math.max
 import kotlin.math.min
+import godot.internal.*
 
 class Rect2(var position: Vector2, var size: Vector2) : CoreType {
     //PROPERTIES
