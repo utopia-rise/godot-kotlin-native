@@ -59,16 +59,17 @@ class ICall(
 
 
         val shouldReturn = returnType != "Unit"
-        val isPrimitive = returnType.isPrimitive()
 
         addReturnTypeForICall(shouldReturn, spec)
-        generateICallMethodBlock(shouldReturn, isPrimitive, spec, tree)
+        generateICallMethodBlock(shouldReturn, spec, tree)
 
         return spec.build()
     }
 
-    private fun generateICallMethodBlock(shouldReturn: Boolean, isPrimitive: Boolean, spec: FunSpec.Builder, tree: Graph<Class>) {
+    private fun generateICallMethodBlock(shouldReturn: Boolean, spec: FunSpec.Builder, tree: Graph<Class>) {
         val codeBlockBuilder = CodeBlock.builder()
+
+        val isPrimitive = returnType.isPrimitive()
 
         if (shouldReturn) {
             if (isPrimitive) {
@@ -87,7 +88,10 @@ class ICall(
                     codeBlockBuilder.add(
                         "    val retVar = %M<%T>()\n",
                         MemberName("kotlinx.cinterop", "alloc"),
-                        ClassName("kotlinx.cinterop", "${returnType}Var")
+                        ClassName(
+                            if (returnType == "RealT") "godot.core" else "kotlinx.cinterop",
+                            "${returnType}Var"
+                        )
                     )
                 }
                 returnType == "VariantArray" -> {

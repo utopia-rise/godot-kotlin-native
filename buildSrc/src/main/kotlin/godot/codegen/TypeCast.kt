@@ -50,7 +50,7 @@ private val kotlinReservedNames = listOf(
     "object"
 ) // TODO: smth more?
 
-private val primitives = listOf("Long", "Double", "Boolean", "Unit")
+private val primitives = listOf("Long", "RealT", "Boolean", "Unit")
 
 fun String.escapeUnderscore(): String {
     if (this == "") return this
@@ -94,8 +94,8 @@ fun String.getPackage() =
                 }
             }
         }
+        isCoreType() || this == "RealT" -> "godot.core"
         isPrimitive() || this == "String" -> "kotlin"
-        isCoreType() -> "godot.core"
         else -> "godot"
     }
 
@@ -134,7 +134,7 @@ fun String.convertToCamelCase(): String {
 fun String.convertTypeToKotlin(): String {
     return when {
         this == "int" -> "Long"
-        this == "float" -> "Double"
+        this == "float" -> "RealT"
         this == "bool" -> "Boolean"
         this == "void" -> "Unit"
         this == "Array" -> "VariantArray" // TODO: kotlin arrays?
@@ -156,7 +156,7 @@ fun String.convertTypeForICalls(): String {
 
 fun String.defaultValue(): String = when (this) {
     "Long" -> "0"
-    "Double" -> "0.0"
+    "RealT" -> "0.0"
     "Boolean" -> "false"
     else -> "null" // TODO: throw
 }
