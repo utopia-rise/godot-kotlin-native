@@ -55,11 +55,10 @@ val generateAPI by tasks.creating(GenerateApiTask::class) {
     outputDirectory.set(project.file("$rootDir/godot-kotlin/godot-library/src/nativeGen/kotlin/"))
 }
 
-tasks {
-    matching { it.name.startsWith("compileKotlin") }.forEach {
-        it.dependsOn(generateAPI)
-    }
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinNativeCompile> {
+    dependsOn(generateAPI)
 }
+
 tasks {
     build {
         finalizedBy(publishToMavenLocal)
