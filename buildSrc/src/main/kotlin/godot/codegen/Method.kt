@@ -4,13 +4,12 @@ import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.squareup.kotlinpoet.*
-import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 open class Method @JsonCreator constructor(
     @JsonProperty("name")
-    var name: String,
+    val oldName: String,
     @JsonProperty("return_type")
     var returnType: String,
     @JsonProperty("is_virtual")
@@ -21,12 +20,10 @@ open class Method @JsonCreator constructor(
     val arguments: List<Argument>
 ) {
 
-    val oldName: String = name
+    val newName: String
 
     init {
-        if (!isVirtual) {
-            name = name.convertToCamelCase()
-        }
+        newName = if (!isVirtual) oldName.convertToCamelCase() else oldName
         returnType = returnType.convertTypeToKotlin()
     }
 
@@ -42,7 +39,7 @@ open class Method @JsonCreator constructor(
         }
 
         val generatedFunBuilder = FunSpec
-            .builder(name)
+            .builder(newName)
             .addModifiers(modifiers)
 
         val shouldReturn = returnType != "Unit"
@@ -107,7 +104,7 @@ open class Method @JsonCreator constructor(
                     "%L %T(%S)",
                     "throw",
                     NotImplementedError::class,
-                    "$oldName is not implemented for ${clazz.name}"
+                    "$oldName is not implemented for ${clazz.newName}"
                 )
             }
         }
@@ -149,12 +146,12 @@ open class Method @JsonCreator constructor(
     private fun constructICall(methodArguments: String, icalls: MutableSet<ICall>): Pair<String, String> {
         if (hasVarargs) {
             return "_icall_varargs" to
-                "( ${name}MethodBind, this.ptr, " +
+                "( ${newName}MethodBind, this.ptr, " +
                 if (methodArguments.isNotEmpty()) "arrayOf($methodArguments*__var_args))" else "__var_args)"
         }
 
         val icall = ICall(returnType, arguments)
         icalls.add(icall)
-        return icall.name to "( ${name}MethodBind, this.ptr$methodArguments)"
+        return icall.name to "( ${newName}MethodBind, this.ptr$methodArguments)"
     }
 }

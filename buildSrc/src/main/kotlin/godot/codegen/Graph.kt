@@ -24,12 +24,12 @@ class Graph<T>(elements: List<T>, sortFun: (T, T) -> Boolean) {
 
 
 fun List<Class>.buildTree(): Graph<Class> {
-    return Graph(this) { child, parent -> child.baseClass == parent.name }
+    return Graph(this) { child, parent -> child.baseClass == parent.newName }
 }
 
 fun Graph<Class>.getMethodFromAncestor(cl: Class, method: Method): Method? {
     fun check(m: Method): Boolean {
-        if (m.name == method.name && m.arguments.size == method.arguments.size) {
+        if (m.newName == method.newName && m.arguments.size == method.arguments.size) {
             var flag = true
 
             m.arguments.withIndex().forEach {
@@ -48,11 +48,11 @@ fun Graph<Class>.getMethodFromAncestor(cl: Class, method: Method): Method? {
 
         return parent?.findMethodInHierarchy()
     }
-    return nodes.find { it.value.name == cl.name }?.parent?.findMethodInHierarchy()
+    return nodes.find { it.value.newName == cl.newName }?.parent?.findMethodInHierarchy()
 }
 
 fun Graph<Class>.doAncestorsHaveMethod(cl: Class, method: Method): Boolean {
-    if (method.name == "toString") return true
+    if (method.newName == "toString") return true
 
     if (cl.baseClass == "") return false
 
@@ -69,7 +69,7 @@ fun Graph<Class>.doAncestorsHaveProperty(cl: Class, prop: Property): Boolean {
         }
         return parent?.findPropertyInHierarchy() ?: false
     }
-    return nodes.find { it.value.name == cl.name }!!.parent!!.findPropertyInHierarchy()
+    return nodes.find { it.value.newName == cl.newName }!!.parent!!.findPropertyInHierarchy()
 }
 
 fun Graph<Class>.getSanitisedArgumentName(method: Method, index: Int, cl: Class): String {
@@ -79,10 +79,10 @@ fun Graph<Class>.getSanitisedArgumentName(method: Method, index: Int, cl: Class)
 
 fun Graph<Class>.isObjectOrItsChild(className: String): Boolean {
     var isObjectFamily = false
-    var classToCheck = nodes.find { it.value.name == className } ?: return false
+    var classToCheck = nodes.find { it.value.newName == className } ?: return false
 
     while (!isObjectFamily) {
-        isObjectFamily = classToCheck.value.name == "Object"
+        isObjectFamily = classToCheck.value.newName == "Object"
 
         if (isObjectFamily) return true
 
@@ -91,4 +91,4 @@ fun Graph<Class>.isObjectOrItsChild(className: String): Boolean {
     return isObjectFamily
 }
 
-fun Graph<Class>.getBaseClass(clazz: Class): Class? = nodes.find { it.value.name == clazz.baseClass }?.value
+fun Graph<Class>.getBaseClass(clazz: Class): Class? = nodes.find { it.value.newName == clazz.baseClass }?.value

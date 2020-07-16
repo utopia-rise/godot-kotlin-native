@@ -11,7 +11,7 @@ import java.io.File
 @JsonIgnoreProperties(ignoreUnknown = true)
 class Class @JsonCreator constructor(
     @JsonProperty("name")
-    var name: String,
+    val oldName: String,
     @JsonProperty("base_class")
     var baseClass: String,
     @JsonProperty("singleton")
@@ -30,28 +30,27 @@ class Class @JsonCreator constructor(
     val enums: List<Enum>
 ) {
 
-    private val oldName: String = name
+    val newName: String = oldName.escapeUnderscore()
     var shouldGenerate: Boolean = true
     val additionalImports = mutableListOf<Pair<String, String>>()
 
     init {
-        name = name.escapeUnderscore()
         baseClass = baseClass.escapeUnderscore()
     }
 
     fun generate(outputDir: File, tree: Graph<Class>, icalls: MutableSet<ICall>) {
-        shouldGenerate = name != "GlobalConstants" && tree.getBaseClass(this)?.isSingleton == false
+        shouldGenerate = newName != "GlobalConstants" && tree.getBaseClass(this)?.isSingleton == false
             || isInstanciable || isSingleton
 
         if (!shouldGenerate) return
 
         applyGettersAndSettersForProperties()
 
-        val className = ClassName("godot", name)
+        val className = ClassName("godot", newName)
 
         val classTypeBuilder = createTypeBuilder(className)
 
-        if (name == "Object") {
+        if (newName == "Object") {
             generatePointerVariable(classTypeBuilder)
             generateInitAndDestroy(classTypeBuilder)
             generateSignalExtensions(classTypeBuilder)
@@ -216,7 +215,7 @@ class Class @JsonCreator constructor(
             .callThisConstructor("null")
             .addStatement(
                 """if (%M()) {
-                   |    this.ptr = %M("$name", "$oldName")
+                   |    this.ptr = %M("$newName", "$oldName")
                    |}
                    |""".trimMargin(),
                 MemberName(ClassName("godot.core", "Godot"), "shouldInitPtr"),
@@ -263,7 +262,7 @@ class Class @JsonCreator constructor(
                 cOpaquePointerClass,
                 KModifier.FINAL
             )
-            .delegate("lazy{ %M(\"$name\", \"$oldName\") }", MemberName("godot.internal.utils", "getSingleton"))
+            .delegate("lazy{ %M(\"$newName\", \"$oldName\") }", MemberName("godot.internal.utils", "getSingleton"))
             .build()
     }
 
@@ -339,7 +338,7 @@ class Class @JsonCreator constructor(
             if (!method.isVirtual) {
                 propertiesReceiverType.addProperty(
                     PropertySpec.builder(
-                        "${method.name}MethodBind",
+                        "${method.newName}MethodBind",
                         ClassName("kotlinx.cinterop", "CPointer")
                             .parameterizedBy(ClassName("godot.gdnative", "godot_method_bind"))
                     ).delegate(

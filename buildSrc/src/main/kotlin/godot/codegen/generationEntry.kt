@@ -79,11 +79,11 @@ private fun generateEngineTypesRegistration(classes: List<Class>): FileSpec {
         .addModifiers(KModifier.INTERNAL)
         .receiver(ClassName("godot.core", "TypeManager"))
 
-    classes.filter { !it.isSingleton && it.name != "Object" && it.shouldGenerate}.forEach {
+    classes.filter { !it.isSingleton && it.newName != "Object" && it.shouldGenerate}.forEach {
         funBuilder.addStatement(
             "registerEngineType(%S, ::%T)",
-            it.name,
-            ClassName(it.name.getPackage(), it.name)
+            it.newName,
+            ClassName(it.newName.getPackage(), it.newName)
         )
     }
     return FileSpec.builder("godot", "registerEngineTypes")
