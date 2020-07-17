@@ -1,5 +1,6 @@
 package godot.core
 
+import godot.Object
 import godot.gdnative.godot_property_hint
 import godot.registration.RPCMode
 import kotlinx.cinterop.StableRef

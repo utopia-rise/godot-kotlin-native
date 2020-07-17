@@ -1,5 +1,6 @@
 package godot.core
 
+import godot.Object
 import godot.gdnative.godot_array
 import kotlinx.cinterop.COpaquePointer
 import kotlinx.cinterop.CValue

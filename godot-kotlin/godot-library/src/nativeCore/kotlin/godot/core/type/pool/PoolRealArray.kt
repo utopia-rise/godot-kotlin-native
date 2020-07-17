@@ -2,8 +2,10 @@
 
 package godot.core
 
+import godot.internal.type.NativeCoreType
 import godot.gdnative.godot_pool_real_array
 import kotlinx.cinterop.*
+import godot.internal.type.callNative
 
 class PoolRealArray : NativeCoreType<godot_pool_real_array>, Iterable<RealT> {
     //CONSTRUCTOR

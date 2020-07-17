@@ -2,18 +2,29 @@
 
 package godot.core
 
+import godot.internal.type.CoreType
 import godot.gdnative.godot_vector3
 import godot.gdnative.godot_vector3_layout
 import kotlinx.cinterop.*
 import kotlin.math.*
 
 
-class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>, CoreType {
+class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>,
+    CoreType {
     //CONSTANTS
     enum class Axis(val value: Int) {
         X(0),
         Y(1),
         Z(2);
+
+        companion object {
+            fun from(longVal: Long) = when(longVal) {
+                0L -> X
+                1L -> Y
+                2L -> Z
+                else -> throw AssertionError("Unknown axis for Vector3: $longVal")
+            }
+        }
     }
 
     companion object {

@@ -2,8 +2,10 @@
 
 package godot.core
 
+import godot.internal.type.NativeCoreType
 import godot.gdnative.godot_pool_byte_array
 import kotlinx.cinterop.*
+import godot.internal.type.callNative
 
 class PoolByteArray : NativeCoreType<godot_pool_byte_array>, Iterable<UByte> {
     //CONSTRUCTOR

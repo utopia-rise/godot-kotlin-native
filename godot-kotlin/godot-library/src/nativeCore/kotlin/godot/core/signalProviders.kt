@@ -1,5 +1,6 @@
 package godot.core
 
+import godot.Object
 import kotlin.reflect.KProperty
 
 class SignalDelegate<T : Signal>(val signal: T) {

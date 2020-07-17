@@ -4,6 +4,7 @@ package godot.core
 
 import godot.gdnative.godot_transform
 import godot.gdnative.godot_transform_layout
+import godot.internal.type.CoreType
 import kotlinx.cinterop.*
 
 class Transform(var basis: Basis, var origin: Vector3 = Vector3()) : CoreType {
