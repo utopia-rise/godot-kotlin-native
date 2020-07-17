@@ -1,19 +1,22 @@
 package godot.core
 
 
+import godot.Object
 import godot.gdnative.godot_array
 import godot.gdnative.godot_variant
 import godot.gdnative.godot_variant_type
+import godot.internal.type.CoreType
 import kotlinx.cinterop.*
 
 @Suppress("IMPLICIT_CAST_TO_ANY")
 @ExperimentalUnsignedTypes
 inline class Variant(internal val _handle: CValue<godot_variant>) {
+
     //PROPERTIES
     val type: Type
         get() {
             return memScoped {
-                Type.from(checkNotNull(Godot.gdnative.godot_variant_get_type)(_handle.ptr).value.toInt())
+                Type.from(checkNotNull(Godot.gdnative.godot_variant_get_type)(_handle.ptr).value.toLong())
             }
         }
 
@@ -24,34 +27,34 @@ inline class Variant(internal val _handle: CValue<godot_variant>) {
     }
 
     //TYPE
-    enum class Type(val value: Int) {
-        NIL(godot_variant_type.GODOT_VARIANT_TYPE_NIL.value.toInt()),
-        BOOL(godot_variant_type.GODOT_VARIANT_TYPE_BOOL.value.toInt()),
-        INT(godot_variant_type.GODOT_VARIANT_TYPE_INT.value.toInt()),
-        REAL(godot_variant_type.GODOT_VARIANT_TYPE_REAL.value.toInt()),
-        STRING(godot_variant_type.GODOT_VARIANT_TYPE_STRING.value.toInt()),
-        VECTOR2(godot_variant_type.GODOT_VARIANT_TYPE_VECTOR2.value.toInt()),
-        RECT2(godot_variant_type.GODOT_VARIANT_TYPE_RECT2.value.toInt()),
-        VECTOR3(godot_variant_type.GODOT_VARIANT_TYPE_VECTOR3.value.toInt()),
-        TRANSFORM2D(godot_variant_type.GODOT_VARIANT_TYPE_TRANSFORM2D.value.toInt()),
-        PLANE(godot_variant_type.GODOT_VARIANT_TYPE_PLANE.value.toInt()),
-        QUAT(godot_variant_type.GODOT_VARIANT_TYPE_QUAT.value.toInt()),
-        AABB(godot_variant_type.GODOT_VARIANT_TYPE_AABB.value.toInt()),
-        BASIS(godot_variant_type.GODOT_VARIANT_TYPE_BASIS.value.toInt()),
-        TRANSFORM(godot_variant_type.GODOT_VARIANT_TYPE_TRANSFORM.value.toInt()),
-        COLOR(godot_variant_type.GODOT_VARIANT_TYPE_COLOR.value.toInt()),
-        NODE_PATH(godot_variant_type.GODOT_VARIANT_TYPE_NODE_PATH.value.toInt()),
-        RID(godot_variant_type.GODOT_VARIANT_TYPE_RID.value.toInt()),
-        OBJECT(godot_variant_type.GODOT_VARIANT_TYPE_OBJECT.value.toInt()),
-        DICTIONARY(godot_variant_type.GODOT_VARIANT_TYPE_DICTIONARY.value.toInt()),
-        ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_ARRAY.value.toInt()),
-        POOL_BYTE_ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_POOL_BYTE_ARRAY.value.toInt()),
-        POOL_INT_ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_POOL_INT_ARRAY.value.toInt()),
-        POOL_REAL_ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_POOL_REAL_ARRAY.value.toInt()),
-        POOL_STRING_ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_POOL_STRING_ARRAY.value.toInt()),
-        POOL_COLOR_ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_POOL_COLOR_ARRAY.value.toInt()),
-        POOL_VECTOR2_ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_POOL_VECTOR2_ARRAY.value.toInt()),
-        POOL_VECTOR3_ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_POOL_VECTOR3_ARRAY.value.toInt());
+    enum class Type(val value: Long) {
+        NIL(godot_variant_type.GODOT_VARIANT_TYPE_NIL.value.toLong()),
+        BOOL(godot_variant_type.GODOT_VARIANT_TYPE_BOOL.value.toLong()),
+        INT(godot_variant_type.GODOT_VARIANT_TYPE_INT.value.toLong()),
+        REAL(godot_variant_type.GODOT_VARIANT_TYPE_REAL.value.toLong()),
+        STRING(godot_variant_type.GODOT_VARIANT_TYPE_STRING.value.toLong()),
+        VECTOR2(godot_variant_type.GODOT_VARIANT_TYPE_VECTOR2.value.toLong()),
+        RECT2(godot_variant_type.GODOT_VARIANT_TYPE_RECT2.value.toLong()),
+        VECTOR3(godot_variant_type.GODOT_VARIANT_TYPE_VECTOR3.value.toLong()),
+        TRANSFORM2D(godot_variant_type.GODOT_VARIANT_TYPE_TRANSFORM2D.value.toLong()),
+        PLANE(godot_variant_type.GODOT_VARIANT_TYPE_PLANE.value.toLong()),
+        QUAT(godot_variant_type.GODOT_VARIANT_TYPE_QUAT.value.toLong()),
+        AABB(godot_variant_type.GODOT_VARIANT_TYPE_AABB.value.toLong()),
+        BASIS(godot_variant_type.GODOT_VARIANT_TYPE_BASIS.value.toLong()),
+        TRANSFORM(godot_variant_type.GODOT_VARIANT_TYPE_TRANSFORM.value.toLong()),
+        COLOR(godot_variant_type.GODOT_VARIANT_TYPE_COLOR.value.toLong()),
+        NODE_PATH(godot_variant_type.GODOT_VARIANT_TYPE_NODE_PATH.value.toLong()),
+        RID(godot_variant_type.GODOT_VARIANT_TYPE_RID.value.toLong()),
+        OBJECT(godot_variant_type.GODOT_VARIANT_TYPE_OBJECT.value.toLong()),
+        DICTIONARY(godot_variant_type.GODOT_VARIANT_TYPE_DICTIONARY.value.toLong()),
+        ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_ARRAY.value.toLong()),
+        POOL_BYTE_ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_POOL_BYTE_ARRAY.value.toLong()),
+        POOL_INT_ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_POOL_INT_ARRAY.value.toLong()),
+        POOL_REAL_ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_POOL_REAL_ARRAY.value.toLong()),
+        POOL_STRING_ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_POOL_STRING_ARRAY.value.toLong()),
+        POOL_COLOR_ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_POOL_COLOR_ARRAY.value.toLong()),
+        POOL_VECTOR2_ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_POOL_VECTOR2_ARRAY.value.toLong()),
+        POOL_VECTOR3_ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_POOL_VECTOR3_ARRAY.value.toLong());
 
         companion object {
             private val types = mapOf(
@@ -84,12 +87,81 @@ inline class Variant(internal val _handle: CValue<godot_variant>) {
                 POOL_COLOR_ARRAY.value to POOL_COLOR_ARRAY
             )
 
-            fun from(value: Int): Type {
+            fun from(value: Long): Type {
                 return types[value] ?: throw AssertionError("Unknown value: $value")
             }
         }
     }
 
+    enum class Operator(val id: Long) {
+        OP_EQUAL(0),
+        OP_NOT_EQUAL(1),
+        OP_LESS(2),
+        OP_LESS_EQUAL(3),
+        OP_GREATER(4),
+        OP_GREATER_EQUAL(5),
+
+        OP_ADD(6),
+        OP_SUBSTRACT(7),
+        OP_MULTIPLY(8),
+        OP_DIVIDE(9),
+        OP_NEGATE(10),
+        OP_POSITIVE(11),
+        OP_MODULE(12),
+        OP_STRING_CONCAT(13),
+
+        OP_SHIFT_LEFT(14),
+        OP_SHIFT_RIGHT(15),
+        OP_BIT_AND(16),
+        OP_BIT_OR(17),
+        OP_BIT_XOR(18),
+        OP_BIT_NEGATE(19),
+
+        OP_AND(20),
+        OP_OR(21),
+        OP_XOR(22),
+        OP_NOT(23),
+
+        OP_IN(24),
+        OP_MAX(25);
+
+        companion object {
+            fun from(value: Long) = when(value) {
+                0L -> OP_EQUAL
+                1L -> OP_NOT_EQUAL
+                2L -> OP_LESS
+                3L -> OP_LESS_EQUAL
+                4L -> OP_GREATER
+                5L -> OP_GREATER_EQUAL
+
+                6L -> OP_ADD
+                7L -> OP_SUBSTRACT
+                8L -> OP_MULTIPLY
+                9L -> OP_DIVIDE
+                10L -> OP_NEGATE
+                11L -> OP_POSITIVE
+                12L -> OP_MODULE
+                13L -> OP_STRING_CONCAT
+
+                14L -> OP_SHIFT_LEFT
+                15L -> OP_SHIFT_RIGHT
+                16L -> OP_BIT_AND
+                17L -> OP_BIT_OR
+                18L -> OP_BIT_XOR
+                19L -> OP_BIT_NEGATE
+
+                20L -> OP_AND
+                21L -> OP_OR
+                22L -> OP_XOR
+                23L -> OP_NOT
+
+                24L -> OP_IN
+                25L -> OP_MAX
+                else -> throw AssertionError("Unknown operator: $value")
+            }
+        }
+
+    }
 
     companion object {
         internal inline fun <reified T> typeForClass(): Type {

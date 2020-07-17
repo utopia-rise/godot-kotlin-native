@@ -1,5 +1,6 @@
 package godot.core
 
+import kotlinx.cinterop.DoubleVar
 import kotlin.math.abs
 
 const val CMP_EPSILON = 0.00001
@@ -25,6 +26,7 @@ internal fun isEqualApprox(a: RealT, b: RealT, epsilon: Double = CMP_EPSILON): B
 }
 
 internal typealias RealT = Double
+internal typealias RealTVar = DoubleVar
 
 fun Number.toRealT(): RealT {
     return this.toDouble()

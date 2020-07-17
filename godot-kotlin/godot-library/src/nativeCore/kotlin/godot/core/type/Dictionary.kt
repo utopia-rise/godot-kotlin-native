@@ -1,6 +1,10 @@
 package godot.core
 
+import godot.Object
 import godot.gdnative.godot_dictionary
+import godot.internal.type.CoreType
+import godot.internal.type.NativeCoreType
+import godot.internal.type.callNative
 import kotlinx.cinterop.*
 
 

@@ -1,5 +1,6 @@
 package godot.core
 
+import godot.Object
 import godot.gdnative.*
 import godot.registration.RPCMode
 import kotlinx.cinterop.*
@@ -82,6 +83,7 @@ internal class ClassHandle<T : Object>(
         }
     }
 
+    @ExperimentalUnsignedTypes
     fun registerSignal(signalName: String, parameters: Map<String, Variant.Type>) {
         memScoped {
             val gdSignal = alloc<godot_signal> {
@@ -92,7 +94,7 @@ internal class ClassHandle<T : Object>(
                     // argument name
                     checkNotNull(Godot.gdnative.godot_string_parse_utf8)(argInfo.name.ptr, key.cstr.ptr)
                     // argument type
-                    argInfo.type = value.value
+                    argInfo.type = value.value.toInt()
                 }
                 args = argInfos.getPointer(this@memScoped)
                 checkNotNull(Godot.gdnative.godot_string_parse_utf8)(name.ptr, signalName.cstr.ptr)
@@ -106,6 +108,7 @@ internal class ClassHandle<T : Object>(
         }
     }
 
+    @ExperimentalUnsignedTypes
     fun registerProperty(
         propertyName: String,
         propertyHandleRef: COpaquePointer,
@@ -126,7 +129,7 @@ internal class ClassHandle<T : Object>(
             val attribs = alloc<godot_property_attributes> {
                 rset_type = toGodotRpcMode(rpcMode)
                 usage = usageFlags
-                type = propertyType.value
+                type = propertyType.value.toInt()
                 this.hint = hintType
                 checkNotNull(Godot.gdnative.godot_string_parse_utf8)(hint_string.ptr, hintString.cstr.ptr)
                 if (default != null) {

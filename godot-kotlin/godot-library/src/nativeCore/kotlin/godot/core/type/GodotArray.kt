@@ -1,7 +1,10 @@
 package godot.core
 
+import godot.Object
 import godot.gdnative.godot_array
+import godot.internal.type.NativeCoreType
 import kotlinx.cinterop.*
+import godot.internal.type.callNative
 
 abstract class GodotArray<T> internal constructor() : NativeCoreType<godot_array>(), Iterable<T> {
     //PROPERTIES

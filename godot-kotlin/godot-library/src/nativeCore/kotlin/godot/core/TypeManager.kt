@@ -1,29 +1,9 @@
 package godot.core
 
+import godot.Object
 import kotlinx.cinterop.*
 import kotlin.native.concurrent.AtomicReference
 import kotlin.native.concurrent.freeze
-
-// TODO: remove when the class generator is done.
-open class Object(__ignore: String?) {
-    constructor() : this(null) {
-        if (Godot.shouldInitPtr()) {
-            // call godot constructor here
-        }
-    }
-
-    internal lateinit var ptr: COpaquePointer
-
-    fun getClass(): String = ""
-
-    open fun _onInit() {}
-    open fun _onDestroy() {}
-
-    fun toVariant() = Variant(this)
-
-    fun emitSignal(name: String, vararg args: Any?) {}
-    fun connect(name: String, target: Object, method: String, extraArgs: VariantArray, flags: Int) {}
-}
 
 object ClassDB {
     fun getParentClass(cls: String): String = ""
