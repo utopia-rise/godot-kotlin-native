@@ -42,9 +42,9 @@ fun Iterable<Transform2D>.toVariantArray() = Transform2DArray().also {
  * Warning: Might be slow if the iterable contains a lot of items because GDNative can only append items one by one
  */
 @ExperimentalUnsignedTypes
-fun Transform2DArray(iter: Iterable<Transform2D>) = iter.toVariantArray()
+fun transform2DArrayOf(iter: Iterable<Transform2D>) = iter.toVariantArray()
 
 /**
  * Create a shallow copy of the Array
  */
-fun Transform2DArray(other: Transform2DArray) = other.duplicate(false)
+fun transform2DArrayOf(other: Transform2DArray) = other.duplicate(false)

@@ -42,9 +42,9 @@ fun Iterable<Plane>.toVariantArray() = PlaneArray().also {
  * Warning: Might be slow if the iterable contains a lot of items because GDNative can only append items one by one
  */
 @ExperimentalUnsignedTypes
-fun PlaneArray(iter: Iterable<Plane>) = iter.toVariantArray()
+fun planeArrayOf(iter: Iterable<Plane>) = iter.toVariantArray()
 
 /**
  * Create a shallow copy of the Array
  */
-fun PlaneArray(other: PlaneArray) = other.duplicate(false)
+fun planeArrayOf(other: PlaneArray) = other.duplicate(false)

@@ -30,10 +30,12 @@ object PropertyRegistrationGenerator {
         properties.forEach { propertyDescriptor ->
             if (propertyDescriptor.type.isEnum()) {
                 registerEnum(className, propertyDescriptor, bindingContext, registerClassControlFlow)
-            } else if (propertyDescriptor.type.isCompatibleList() && propertyDescriptor.type.arguments[0].type.isEnum()) {
+            } else if (propertyDescriptor.type.isCompatibleList() && propertyDescriptor.type.arguments.firstOrNull()?.type?.isEnum() == true) {
                 registerEnumList(className, propertyDescriptor, bindingContext, registerClassControlFlow)
-            } else if (KotlinBuiltIns.isSetOrNullableSet(propertyDescriptor.type)
-                && propertyDescriptor.type.arguments[0].type.isEnum()) {
+            } else if (
+                KotlinBuiltIns.isSetOrNullableSet(propertyDescriptor.type)
+                && propertyDescriptor.type.arguments.firstOrNull()?.type?.isEnum() == true
+            ) {
                 registerEnumFlag(className, propertyDescriptor, bindingContext, registerClassControlFlow)
             } else {
                 registerProperty(className, propertyDescriptor, bindingContext, registerClassControlFlow)
@@ -122,6 +124,7 @@ object PropertyRegistrationGenerator {
                 className.member(propertyDescriptor.name.asString()).reference(),
                 TypeToVariantAsClassNameMapper.mapTypeToVariantAsClassName(
                     propertyDescriptor.type.toString(),
+                    propertyDescriptor.type,
                     propertyDescriptor.type.isEnum()
                 ), //property variant type
                 *defaultValueStringTemplateValues,

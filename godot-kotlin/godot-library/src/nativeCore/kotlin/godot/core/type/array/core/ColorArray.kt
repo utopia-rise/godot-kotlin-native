@@ -42,9 +42,9 @@ fun Iterable<Color>.toVariantArray() = ColorArray().also {
  * Warning: Might be slow if the iterable contains a lot of items because GDNative can only append items one by one
  */
 @ExperimentalUnsignedTypes
-fun ColorArray(iter: Iterable<Color>) = iter.toVariantArray()
+fun colorArrayOf(iter: Iterable<Color>) = iter.toVariantArray()
 
 /**
  * Create a shallow copy of the Array
  */
-fun ColorArray(other: ColorArray) = other.duplicate(false)
+fun colorArrayOf(other: ColorArray) = other.duplicate(false)

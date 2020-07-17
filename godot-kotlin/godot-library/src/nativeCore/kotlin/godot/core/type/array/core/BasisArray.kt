@@ -42,9 +42,9 @@ fun Iterable<Basis>.toVariantArray() = BasisArray().also {
  * Warning: Might be slow if the iterable contains a lot of items because GDNative can only append items one by one
  */
 @ExperimentalUnsignedTypes
-fun BasisArray(iter: Iterable<Basis>) = iter.toVariantArray()
+fun basisArrayOf(iter: Iterable<Basis>) = iter.toVariantArray()
 
 /**
  * Create a shallow copy of the Array
  */
-fun BasisArray(other: BasisArray) = other.duplicate(false)
+fun basisArrayOf(other: BasisArray) = other.duplicate(false)

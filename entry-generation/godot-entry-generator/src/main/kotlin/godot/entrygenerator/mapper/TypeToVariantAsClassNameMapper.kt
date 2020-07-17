@@ -1,10 +1,16 @@
 package godot.entrygenerator.mapper
 
 import com.squareup.kotlinpoet.ClassName
+import godot.entrygenerator.extension.isCompatibleList
+import org.jetbrains.kotlin.types.KotlinType
 
 object TypeToVariantAsClassNameMapper {
 
-    fun mapTypeToVariantAsClassName(typeAsString: String, isEnum: Boolean = false): ClassName {
+    fun mapTypeToVariantAsClassName(
+        typeAsString: String,
+        type: KotlinType? = null,
+        isEnum: Boolean = false
+    ): ClassName {
 
         if (isEnum) {
             return ClassName("godot.core.Variant.Type", "STRING")
@@ -27,7 +33,7 @@ object TypeToVariantAsClassNameMapper {
             "PoolVector3Array" -> ClassName("godot.core.Variant.Type", "POOL_VECTOR3_ARRAY")
             "PoolColorArray" -> ClassName("godot.core.Variant.Type", "POOL_COLOR_ARRAY")
             else -> {
-                if (typeAsString.startsWith("VariantArray<")) {
+                if (type?.isCompatibleList() == true) {
                     ClassName("godot.core.Variant.Type", "ARRAY")
                 } else {
                     ClassName("godot.core.Variant.Type", "OBJECT")

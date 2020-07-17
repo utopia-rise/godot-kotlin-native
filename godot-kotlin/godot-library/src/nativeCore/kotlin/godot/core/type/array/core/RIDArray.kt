@@ -42,9 +42,9 @@ fun Iterable<RID>.toVariantArray() = RIDArray().also {
  * Warning: Might be slow if the iterable contains a lot of items because GDNative can only append items one by one
  */
 @ExperimentalUnsignedTypes
-fun RIDArray(iter: Iterable<RID>) = iter.toVariantArray()
+fun ridArrayOf(iter: Iterable<RID>) = iter.toVariantArray()
 
 /**
  * Create a shallow copy of the Array
  */
-fun RIDArray(other: RIDArray) = other.duplicate(false)
+fun ridArrayOf(other: RIDArray) = other.duplicate(false)

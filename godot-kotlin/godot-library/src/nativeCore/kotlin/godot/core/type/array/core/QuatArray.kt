@@ -43,4 +43,6 @@ fun Iterable<Quat>.toVariantArray() = QuatArray().also {
  * Warning: Might be slow with a lot of arguments because GDNative can only append items one by one
  */
 @ExperimentalUnsignedTypes
-fun QuatArray(iter: Iterable<Quat>) = iter.toVariantArray()
+fun quatArrayOf(iter: Iterable<Quat>) = iter.toVariantArray()
+
+fun quatArrayOf(other: QuatArray) = other.duplicate(false)

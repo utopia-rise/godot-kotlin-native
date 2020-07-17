@@ -2,9 +2,7 @@ package godot.entrygenerator.generator.provider
 
 import com.squareup.kotlinpoet.ClassName
 import godot.entrygenerator.exceptions.WrongAnnotationUsageException
-import godot.entrygenerator.extension.getAsGodotPrimitive
-import godot.entrygenerator.extension.isCompatibleList
-import godot.entrygenerator.extension.isGodotPrimitive
+import godot.entrygenerator.extension.*
 import org.jetbrains.kotlin.builtins.KotlinBuiltIns
 import org.jetbrains.kotlin.descriptors.PropertyDescriptor
 import org.jetbrains.kotlin.js.descriptorUtils.getJetTypeFqName
@@ -27,28 +25,43 @@ class ArrayRegistrationValuesHandler(
         // at this point we know type is a VariantArray
         val type = propertyDescriptor.type
 
-        val elementType = type.arguments[0].type
+        val elementType = type.arguments.firstOrNull()?.type
+
         return when {
-            KotlinBuiltIns.isAny(elementType) -> ""
-            elementType.isEnum() -> {
+            elementType != null && KotlinBuiltIns.isAny(elementType) -> ""
+            elementType != null && elementType.isEnum() -> {
                 // return value is not used, hint is computed at runtime
                 ""
             }
             else -> {
                 var hintBuilder = "Array"
-                var currentType: KotlinType? = elementType
+                var currentElementType: KotlinType? = elementType
 
-                while (currentType != null) {
-                    if (currentType.isCompatibleList()) {
-                        hintBuilder += ",Array"
-                        currentType = currentType.arguments.firstOrNull()?.type
-                    } else if (currentType.getJetTypeFqName(false).isGodotPrimitive()) {
-                        hintBuilder += ",${currentType.getJetTypeFqName(false).getAsGodotPrimitive()}"
-                        break
-                    } else {
-                        // Any
-                        hintBuilder = ""
-                        break
+                if (currentElementType == null) {
+                    val compatibleListType = type.getCompatibleListType()
+                    if (compatibleListType.isNotEmpty()) {
+                        hintBuilder += ",${type.getCompatibleListType()}"
+                    }
+                }
+
+                loop@ while (currentElementType != null) {
+                    when {
+                        currentElementType.isCompatibleList() -> {
+                            hintBuilder += ",Array"
+                            currentElementType = currentElementType.arguments.firstOrNull()?.type
+                        }
+                        currentElementType.getJetTypeFqName(false).isGodotPrimitive() -> {
+                            hintBuilder += ",${currentElementType.getJetTypeFqName(false).getAsGodotPrimitive()}"
+                            break@loop
+                        }
+                        currentElementType.isCoreType() -> {
+                            hintBuilder += ",${currentElementType.getAsCoreType()}"
+                            break@loop
+                        }
+                        else -> {
+                            hintBuilder = ""
+                            break@loop
+                        }
                     }
                 }
                 hintBuilder

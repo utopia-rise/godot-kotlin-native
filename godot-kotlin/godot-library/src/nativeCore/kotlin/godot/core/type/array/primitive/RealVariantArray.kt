@@ -210,7 +210,7 @@ class RealVariantArray : GodotArray<RealT> {
     }
 }
 
-fun FloatVariantArrayOf(vararg elements: RealT): RealVariantArray {
+fun floatVariantArrayOf(vararg elements: RealT): RealVariantArray {
     return RealVariantArray().also {
         for (arg in elements) {
             it.append(arg)
