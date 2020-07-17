@@ -2,7 +2,6 @@ package godot.core
 
 
 import godot.Object
-import godot.gdnative.godot_array
 import godot.gdnative.godot_variant
 import godot.gdnative.godot_variant_type
 import godot.internal.type.CoreType
@@ -11,7 +10,6 @@ import kotlinx.cinterop.*
 @Suppress("IMPLICIT_CAST_TO_ANY")
 @ExperimentalUnsignedTypes
 inline class Variant(internal val _handle: CValue<godot_variant>) {
-
     //PROPERTIES
     val type: Type
         get() {
@@ -88,7 +86,7 @@ inline class Variant(internal val _handle: CValue<godot_variant>) {
             )
 
             fun from(value: Long): Type {
-                return types[value] ?: throw AssertionError("Unknown value: $value")
+                return types[value] ?: throw NoSuchElementException("Unknown value: $value")
             }
         }
     }
@@ -126,7 +124,7 @@ inline class Variant(internal val _handle: CValue<godot_variant>) {
         OP_MAX(25);
 
         companion object {
-            fun from(value: Long) = when(value) {
+            fun from(value: Long) = when (value) {
                 0L -> OP_EQUAL
                 1L -> OP_NOT_EQUAL
                 2L -> OP_LESS
@@ -300,6 +298,17 @@ inline class Variant(internal val _handle: CValue<godot_variant>) {
     }
 
     /**
+     * Cast the Variant to an Enum.
+     */
+    inline fun <reified E : Enum<E>> asEnum(): E {
+        val i = asInt()
+        val values = enumValues<E>()
+        return values.first {
+            it.ordinal == i
+        }
+    }
+
+    /**
      * Cast the Variant to a String.
      */
     fun asString(): String {
@@ -454,17 +463,175 @@ inline class Variant(internal val _handle: CValue<godot_variant>) {
         return Dictionary(value)
     }
 
-    private fun asArray(): CValue<godot_array> {
-        return memScoped {
+    /**
+     * Cast the Variant to a VariantArray
+     */
+    fun asVariantArray(): VariantArray {
+        val value = memScoped {
             checkNotNull(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
         }
+        return VariantArray(value)
     }
 
-    /** Cast the Variant to a Godot Array. */
-    fun asVariantArray(): VariantArray = VariantArray(asArray())
+    /**
+     * Cast the Variant to a AABBArray
+     */
+    fun asAABBArray(): AABBArray {
+        val value = memScoped {
+            checkNotNull(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
+        }
+        return AABBArray(value)
+    }
 
-    /** Cast the Variant to a Godot Array. */
-    fun asIntVariantArray(): IntVariantArray = IntVariantArray(asArray())
+    /**
+     * Cast the Variant to a BoolVariantArray
+     */
+    fun asBasisArray(): BasisArray {
+        val value = memScoped {
+            checkNotNull(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
+        }
+        return BasisArray(value)
+    }
+
+    /**
+     * Cast the Variant to a BoolVariantArray
+     */
+    fun asColorArray(): ColorArray {
+        val value = memScoped {
+            checkNotNull(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
+        }
+        return ColorArray(value)
+    }
+
+    /**
+     * Cast the Variant to a BoolVariantArray
+     */
+    fun asNodePathArray(): NodePathArray {
+        val value = memScoped {
+            checkNotNull(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
+        }
+        return NodePathArray(value)
+    }
+
+    /**
+     * Cast the Variant to a BoolVariantArray
+     */
+    fun asPlaneArray(): PlaneArray {
+        val value = memScoped {
+            checkNotNull(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
+        }
+        return PlaneArray(value)
+    }
+
+    /**
+     * Cast the Variant to a BoolVariantArray
+     */
+    fun asQuatArray(): QuatArray {
+        val value = memScoped {
+            checkNotNull(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
+        }
+        return QuatArray(value)
+    }
+
+    /**
+     * Cast the Variant to a BoolVariantArray
+     */
+    fun asRect2Array(): Rect2Array {
+        val value = memScoped {
+            checkNotNull(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
+        }
+        return Rect2Array(value)
+    }
+
+    /**
+     * Cast the Variant to a BoolVariantArray
+     */
+    fun asRIDArray(): RIDArray {
+        val value = memScoped {
+            checkNotNull(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
+        }
+        return RIDArray(value)
+    }
+
+    /**
+     * Cast the Variant to a BoolVariantArray
+     */
+    fun asTransform2DArray(): Transform2DArray {
+        val value = memScoped {
+            checkNotNull(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
+        }
+        return Transform2DArray(value)
+    }
+
+    /**
+     * Cast the Variant to a BoolVariantArray
+     */
+    fun asTransformArray(): TransformArray {
+        val value = memScoped {
+            checkNotNull(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
+        }
+        return TransformArray(value)
+    }
+
+    /**
+     * Cast the Variant to a BoolVariantArray
+     */
+    fun asVector2Array(): Vector2Array {
+        val value = memScoped {
+            checkNotNull(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
+        }
+        return Vector2Array(value)
+    }
+
+    /**
+     * Cast the Variant to a BoolVariantArray
+     */
+    fun asVector3Array(): Vector3Array {
+        val value = memScoped {
+            checkNotNull(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
+        }
+        return Vector3Array(value)
+    }
+
+    /**
+     * Cast the Variant to a BoolVariantArray
+     */
+    fun asBoolVariantArray(): BoolVariantArray {
+        val value = memScoped {
+            checkNotNull(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
+        }
+        return BoolVariantArray(value)
+    }
+
+    /**
+     * Cast the Variant to a IntVariantArray
+     */
+    fun asIntVariantArray(): IntVariantArray {
+        val value = memScoped {
+            checkNotNull(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
+        }
+        return IntVariantArray(value)
+    }
+
+    /**
+     * Cast the Variant to a RealVariantArray
+     */
+    fun asRealVariantArray(): RealVariantArray {
+        val value = memScoped {
+            checkNotNull(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
+        }
+        return RealVariantArray(value)
+    }
+
+    /**
+     * Cast the Variant to a StringVariantArray
+     */
+    fun asStringVariantArray(): StringVariantArray {
+        val value = memScoped {
+            checkNotNull(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
+        }
+        return StringVariantArray(value)
+    }
 
     /**
      * Cast the Variant to a PoolByteArray.
@@ -599,6 +766,14 @@ fun Variant(from: Int) = Variant(
     }
 )
 
+fun <T : Enum<T>> Variant(from: Enum<T>) = Variant(
+    memScoped {
+        cValue<godot_variant> {
+            checkNotNull(Godot.gdnative.godot_variant_new_int)(this.ptr, from.ordinal.toLong())
+        }
+    }
+)
+
 fun Variant(from: Long) = Variant(
     memScoped {
         cValue<godot_variant> {
@@ -696,3 +871,4 @@ fun Long.toVariant() = Variant(this)
 fun Float.toVariant() = Variant(this)
 fun Double.toVariant() = Variant(this)
 fun String.toVariant() = Variant(this)
+fun <T : Enum<T>> Enum<T>.toVariant() = Variant(this)
