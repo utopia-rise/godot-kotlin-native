@@ -42,9 +42,9 @@ fun Iterable<AABB>.toVariantArray() = AABBArray().also {
  * Warning: Might be slow if the iterable contains a lot of items because GDNative can only append items one by one
  */
 @ExperimentalUnsignedTypes
-fun aabbArrayOf(iter: Iterable<AABB>) = iter.toVariantArray()
+fun AABBArray(iter: Iterable<AABB>) = iter.toVariantArray()
 
 /**
  * Create a shallow copy of the Array
  */
-fun aabbArrayOf(other: AABBArray) = other.duplicate(false)
+fun AABBArray(other: AABBArray) = other.duplicate(false)

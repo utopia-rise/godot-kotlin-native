@@ -42,9 +42,9 @@ fun Iterable<Vector3>.toVariantArray() = Vector3Array().also {
  * Warning: Might be slow if the iterable contains a lot of items because GDNative can only append items one by one
  */
 @ExperimentalUnsignedTypes
-fun vector3ArrayOf(iter: Iterable<Vector3>) = iter.toVariantArray()
+fun Vector3Array(iter: Iterable<Vector3>) = iter.toVariantArray()
 
 /**
  * Create a shallow copy of the Array
  */
-fun vector3ArrayOf(other: Vector3Array) = other.duplicate(false)
+fun Vector3Array(other: Vector3Array) = other.duplicate(false)

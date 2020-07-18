@@ -165,7 +165,7 @@ abstract class RegistrationValuesHandler(
                         }
                         //godot arrays and kotlin collections
                         //Note: kotlin collections only as constructor arguments or function params. TypeToVariantAsClassNameMapper already enshures that they are not registered as property types
-                        ref is DeserializedSimpleFunctionDescriptor && (ref.fqNameSafe.asString().matches(Regex("^godot\\.core\\..*ArrayOf\$")) || ref.findPackage().fqName.asString() == "kotlin.collections") -> {
+                        ref is DeserializedSimpleFunctionDescriptor && (ref.fqNameSafe.asString().matches(Regex("^godot\\.core\\..*ArrayOf\$")) || ref.fqNameSafe.asString().matches(Regex("^godot\\.core\\..*Array\$")) || ref.findPackage().fqName.asString() == "kotlin.collections") -> {
                             val fqName = ref.fqNameSafe
                             val pkg = fqName.parent().asString()
                             val functionName = fqName.shortName().asString()

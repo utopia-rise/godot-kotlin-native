@@ -42,9 +42,9 @@ fun Iterable<Rect2>.toVariantArray() = Rect2Array().also {
  * Warning: Might be slow if the iterable contains a lot of items because GDNative can only append items one by one
  */
 @ExperimentalUnsignedTypes
-fun rect2ArrayOf(iter: Iterable<Rect2>) = iter.toVariantArray()
+fun Rect2Array(iter: Iterable<Rect2>) = iter.toVariantArray()
 
 /**
  * Create a shallow copy of the Array
  */
-fun rect2ArrayOf(other: Rect2Array) = other.duplicate(false)
+fun Rect2Array(other: Rect2Array) = other.duplicate(false)

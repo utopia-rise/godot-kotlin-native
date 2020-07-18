@@ -90,49 +90,49 @@ class TestingClass : Object() {
     var intVariantArray = intVariantArrayOf(1, 2)
 
     @RegisterProperty
-    var realVariantArray = floatVariantArrayOf(1f, 2f)
+    var realVariantArray = realVariantArrayOf(1f, 2f)
 
     @RegisterProperty
     var booleanVariantArray = booleanVariantArrayOf(true, false)
 
     @RegisterProperty
-    var aabbVariantArray = aabbArrayOf(listOf(AABB(Vector3(), Vector3())))
+    var aabbVariantArray = AABBArray(listOf(AABB(Vector3(), Vector3())))
 
     @RegisterProperty
-    var aabbVariantArrayOfOther = aabbArrayOf(aabbArrayOf(listOf(AABB(Vector3(), Vector3()))))
+    var aabbVariantArrayOfOther = AABBArray(AABBArray(listOf(AABB(Vector3(), Vector3()))))
 
     @RegisterProperty
-    var basisVariantArray = basisArrayOf(listOf(Basis()))
+    var basisVariantArray = BasisArray(listOf(Basis()))
 
     @RegisterProperty
-    var colorVariantArray = colorArrayOf(listOf(Color(0, 0, 0)))
+    var colorVariantArray = ColorArray(listOf(Color(0, 0, 0)))
 
     @RegisterProperty
-    var nodePathVariantArray = nodePathArrayOf(listOf(NodePath("some/Node/Path")))
+    var nodePathVariantArray = NodePathArray(listOf(NodePath("some/Node/Path")))
 
     @RegisterProperty
-    var planeVariantArray = planeArrayOf(listOf(Plane()))
+    var planeVariantArray = PlaneArray(listOf(Plane()))
 
     @RegisterProperty
-    var quatVariantArray = quatArrayOf(listOf(Quat()))
+    var quatVariantArray = QuatArray(listOf(Quat()))
 
     @RegisterProperty
-    var rect2VariantArray = rect2ArrayOf(listOf(Rect2()))
+    var rect2VariantArray = Rect2Array(listOf(Rect2()))
 
     @RegisterProperty
-    var ridVariantArray = ridArrayOf(listOf(RID()))
+    var ridVariantArray = RIDArray(listOf(RID()))
 
     @RegisterProperty
-    var transform2DVariantArray = transform2DArrayOf(listOf(Transform2D()))
+    var transform2DVariantArray = Transform2DArray(listOf(Transform2D()))
 
     @RegisterProperty
-    var transformVariantArray = transformArrayOf(listOf(Transform()))
+    var transformVariantArray = TransformArray(listOf(Transform()))
 
     @RegisterProperty
-    var vector2VariantArray = vector2ArrayOf(listOf(Vector2()))
+    var vector2VariantArray = Vector2Array(listOf(Vector2()))
 
     @RegisterProperty
-    var vector3VariantArray = vector3ArrayOf(listOf(Vector3()))
+    var vector3VariantArray = Vector3Array(listOf(Vector3()))
 
 
     //TODO: test after we can create pureVariantArrays and multidimensional variant arrays
