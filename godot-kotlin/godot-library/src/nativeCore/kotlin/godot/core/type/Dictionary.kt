@@ -27,12 +27,6 @@ class Dictionary : NativeCoreType<godot_dictionary>, Iterable<Entry<Variant, Var
         }
     }
 
-    constructor(other: Dictionary) {
-        callNative {
-            checkNotNull(Godot.gdnative.godot_dictionary_new_copy)(it, other._handle.ptr)
-        }
-    }
-
     internal constructor(native: CValue<godot_dictionary>) {
         memScoped {
             this@Dictionary.setRawMemory(native.ptr)
@@ -90,6 +84,12 @@ class Dictionary : NativeCoreType<godot_dictionary>, Iterable<Entry<Variant, Var
             checkNotNull(Godot.gdnative.godot_dictionary_erase)(it, key._handle.ptr)
         }
     }
+    fun erase(key: Int) = erase(Variant(key))
+    fun erase(key: Float) = erase(Variant(key))
+    fun erase(key: String) = erase(Variant(key))
+    fun erase(key: Boolean) = erase(Variant(key))
+    fun erase(key: Object) = erase(key.toVariant())
+    fun erase(key: CoreType) = erase(key.toVariant())
 
     /**
      * Returns the current value for the specified key in the Dictionary.
@@ -327,3 +327,8 @@ class Dictionary : NativeCoreType<godot_dictionary>, Iterable<Entry<Variant, Var
         return MapIterator(keys().iterator(), this::get)
     }
 }
+
+/**
+ * Create a shallow copy of the Dictionary
+ */
+fun Dictionary(other: Dictionary) = other.duplicate(false)
