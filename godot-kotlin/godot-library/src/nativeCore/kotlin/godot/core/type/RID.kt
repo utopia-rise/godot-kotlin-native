@@ -4,7 +4,7 @@ package godot.core
 
 import godot.Object
 import godot.gdnative.godot_rid
-import godot.internal.type.NativeCoreType
+import godot.internal.type.*
 import kotlinx.cinterop.*
 
 class RID : NativeCoreType<godot_rid>, Comparable<RID> {
@@ -85,6 +85,6 @@ class RID : NativeCoreType<godot_rid>, Comparable<RID> {
     }
 
     internal inline fun <T> callNative(block: MemScope.(CPointer<godot_rid>) -> T): T {
-        return godot.internal.type.callNative(this, block)
+        return callNative(this, block)
     }
 }

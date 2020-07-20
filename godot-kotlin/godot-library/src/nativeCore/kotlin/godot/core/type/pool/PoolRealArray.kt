@@ -3,9 +3,7 @@
 package godot.core
 
 import godot.gdnative.godot_pool_real_array
-import godot.internal.type.NativeCoreType
-import godot.internal.type.RealT
-import godot.internal.type.toRealT
+import godot.internal.type.*
 import kotlinx.cinterop.*
 
 class PoolRealArray : NativeCoreType<godot_pool_real_array>, Iterable<RealT> {
@@ -182,6 +180,6 @@ class PoolRealArray : NativeCoreType<godot_pool_real_array>, Iterable<RealT> {
     }
 
     internal inline fun <T> callNative(block: MemScope.(CPointer<godot_pool_real_array>) -> T): T {
-        return godot.internal.type.callNative(this, block)
+        return callNative(this, block)
     }
 }

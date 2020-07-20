@@ -3,7 +3,7 @@
 package godot.core
 
 import godot.gdnative.godot_pool_vector2_array
-import godot.internal.type.NativeCoreType
+import godot.internal.type.*
 import kotlinx.cinterop.*
 
 class PoolVector2Array : NativeCoreType<godot_pool_vector2_array>, Iterable<Vector2> {
@@ -188,6 +188,6 @@ class PoolVector2Array : NativeCoreType<godot_pool_vector2_array>, Iterable<Vect
     }
 
     internal inline fun <T> callNative(block: MemScope.(CPointer<godot_pool_vector2_array>) -> T): T {
-        return godot.internal.type.callNative(this, block)
+        return callNative(this, block)
     }
 }

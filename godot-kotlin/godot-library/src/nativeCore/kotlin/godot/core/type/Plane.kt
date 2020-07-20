@@ -4,10 +4,7 @@ package godot.core
 
 import godot.gdnative.godot_plane
 import godot.gdnative.godot_plane_layout
-import godot.internal.type.CMP_EPSILON
-import godot.internal.type.CoreType
-import godot.internal.type.RealT
-import godot.internal.type.toRealT
+import godot.internal.type.*
 import kotlinx.cinterop.*
 import kotlin.math.abs
 
@@ -205,7 +202,7 @@ class Plane(var normal: Vector3, var d: RealT = 0.0) : CoreType {
      * Returns true if this plane and plane are approximately equal, by running isEqualApprox on each component.
      */
     fun isEqualApprox(other: Plane): Boolean {
-        return this.normal.isEqualApprox(other.normal) && godot.internal.type.isEqualApprox(
+        return this.normal.isEqualApprox(other.normal) && isEqualApprox(
             this.d,
             other.d
         )

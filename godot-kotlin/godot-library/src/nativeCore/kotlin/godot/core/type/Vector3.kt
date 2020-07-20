@@ -5,9 +5,7 @@ package godot.core
 import godot.gdnative.godot_vector3
 import godot.gdnative.godot_vector3_layout
 import godot.internal.type.CMP_EPSILON
-import godot.internal.type.CoreType
-import godot.internal.type.RealT
-import godot.internal.type.toRealT
+import godot.internal.type.*
 import kotlinx.cinterop.*
 import kotlin.math.*
 

@@ -4,9 +4,7 @@ package godot.core
 
 import godot.gdnative.godot_aabb
 import godot.gdnative.godot_aabb_layout
-import godot.internal.type.CMP_EPSILON
-import godot.internal.type.CoreType
-import godot.internal.type.RealT
+import godot.internal.type.*
 import kotlinx.cinterop.*
 
 

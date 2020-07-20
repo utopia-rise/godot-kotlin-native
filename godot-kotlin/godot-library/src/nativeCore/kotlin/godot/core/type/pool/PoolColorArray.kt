@@ -4,7 +4,7 @@ package godot.core
 
 import godot.gdnative.godot_aabb
 import godot.gdnative.godot_pool_color_array
-import godot.internal.type.NativeCoreType
+import godot.internal.type.*
 import kotlinx.cinterop.*
 
 class PoolColorArray : NativeCoreType<godot_pool_color_array>, Iterable<Color> {
@@ -189,6 +189,6 @@ class PoolColorArray : NativeCoreType<godot_pool_color_array>, Iterable<Color> {
     }
 
     internal inline fun <T> callNative(block: MemScope.(CPointer<godot_pool_color_array>) -> T): T {
-        return godot.internal.type.callNative(this, block)
+        return callNative(this, block)
     }
 }

@@ -4,10 +4,7 @@ package godot.core
 
 import godot.gdnative.godot_quat
 import godot.gdnative.godot_quat_layout
-import godot.internal.type.CMP_EPSILON
-import godot.internal.type.CoreType
-import godot.internal.type.RealT
-import godot.internal.type.toRealT
+import godot.internal.type.*
 import kotlinx.cinterop.*
 import kotlin.math.*
 
@@ -175,10 +172,10 @@ class Quat(var x: RealT, var y: RealT, var z: RealT, var w: RealT) : CoreType {
      * Returns true if this quaterion and quat are approximately equal, by running isEqualApprox on each component.
      */
     fun isEqualApprox(other: Quat): Boolean {
-        return godot.internal.type.isEqualApprox(other.x, x)
-        godot.internal.type.isEqualApprox(other.y, y)
-        godot.internal.type.isEqualApprox(other.z, z)
-        godot.internal.type.isEqualApprox(other.w, w)
+        return isEqualApprox(other.x, x)
+        isEqualApprox(other.y, y)
+        isEqualApprox(other.z, z)
+        isEqualApprox(other.w, w)
     }
 
     /**

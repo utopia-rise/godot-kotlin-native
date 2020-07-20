@@ -4,7 +4,7 @@ package godot.core
 
 import godot.gdnative.godot_aabb
 import godot.gdnative.godot_pool_int_array
-import godot.internal.type.NativeCoreType
+import godot.internal.type.*
 import kotlinx.cinterop.*
 
 class PoolIntArray : NativeCoreType<godot_pool_int_array>, Iterable<Int> {
@@ -187,6 +187,6 @@ class PoolIntArray : NativeCoreType<godot_pool_int_array>, Iterable<Int> {
     }
 
     internal inline fun <T> callNative(block: MemScope.(CPointer<godot_pool_int_array>) -> T): T {
-        return godot.internal.type.callNative(this, block)
+        return callNative(this, block)
     }
 }

@@ -4,10 +4,7 @@ package godot.core
 
 import godot.gdnative.godot_basis
 import godot.gdnative.godot_basis_layout
-import godot.internal.type.CMP_EPSILON
-import godot.internal.type.CoreType
-import godot.internal.type.RealT
-import godot.internal.type.toRealT
+import godot.internal.type.*
 import kotlinx.cinterop.*
 import kotlin.math.*
 
@@ -382,7 +379,7 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
         //epsilon has to be Double instead of RealT because of CMP_EPSILON constant
         for (i in 0..2) {
             for (j in 0..2) {
-                if (godot.internal.type.isEqualApprox(this[i][j], a[i][j], epsilon)) {
+                if (isEqualApprox(this[i][j], a[i][j], epsilon)) {
                     return false
                 }
             }

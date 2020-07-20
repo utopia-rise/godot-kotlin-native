@@ -2,8 +2,7 @@ package godot.core
 
 import godot.Object
 import godot.gdnative.godot_dictionary
-import godot.internal.type.CoreType
-import godot.internal.type.NativeCoreType
+import godot.internal.type.*
 import kotlinx.cinterop.*
 
 
@@ -319,7 +318,7 @@ class Dictionary : NativeCoreType<godot_dictionary>, Iterable<Entry<Variant, Var
     }
 
     internal inline fun <T> callNative(block: MemScope.(CPointer<godot_dictionary>) -> T): T {
-        return godot.internal.type.callNative(this, block)
+        return callNative(this, block)
     }
 
     override fun iterator(): Iterator<Entry<Variant, Variant>> {
