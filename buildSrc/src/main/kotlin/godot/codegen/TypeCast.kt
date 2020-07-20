@@ -88,14 +88,16 @@ fun String.getPackage() =
             } else {
                 thisString = thisString.replace("::", ".").split(".")[0]
                 when {
+                    this == "RealT" -> "godot.internal.type"
                     thisString.isPrimitive() || thisString == "String" -> "kotlin"
                     thisString.isCoreType() -> "godot.core"
                     else -> "godot"
                 }
             }
         }
-        isCoreType() || this == "RealT" -> "godot.core"
+        this == "RealT" -> "godot.internal.type"
         isPrimitive() || this == "String" -> "kotlin"
+        isCoreType()  -> "godot.core"
         else -> "godot"
     }
 

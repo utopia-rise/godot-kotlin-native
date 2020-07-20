@@ -2,12 +2,14 @@
 
 package godot.core
 
-import godot.internal.type.CoreType
 import godot.gdnative.godot_vector3
 import godot.gdnative.godot_vector3_layout
+import godot.internal.type.CMP_EPSILON
+import godot.internal.type.CoreType
+import godot.internal.type.RealT
+import godot.internal.type.toRealT
 import kotlinx.cinterop.*
 import kotlin.math.*
-import godot.internal.*
 
 
 class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>,
@@ -193,14 +195,20 @@ class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>
      * Returns true if this vector and v are approximately equal, by running isEqualApprox on each component.
      */
     fun isEqualApprox(other: Vector3): Boolean {
-        return isEqualApprox(other.x, x) && isEqualApprox(other.y, y) && isEqualApprox(other.z, z)
+        return godot.internal.type.isEqualApprox(
+            other.x,
+            x
+        ) && godot.internal.type.isEqualApprox(
+            other.y,
+            y
+        ) && godot.internal.type.isEqualApprox(other.z, z)
     }
 
     /**
      * Returns true if the vector is normalized.
      */
     fun isNormalized(): Boolean {
-        return isEqualApprox(this.length(), 1.0)
+        return godot.internal.type.isEqualApprox(this.length(), 1.0)
     }
 
     /**

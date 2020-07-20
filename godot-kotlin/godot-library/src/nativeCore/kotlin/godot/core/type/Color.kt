@@ -5,13 +5,17 @@ package godot.core
 import godot.gdnative.godot_color
 import godot.gdnative.godot_color_layout
 import godot.internal.type.CoreType
+import godot.internal.type.RealT
+import godot.internal.type.toRealT
 import kotlinx.cinterop.*
 import kotlin.math.floor
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.roundToInt
 
-class Color(var r: RealT, var g: RealT, var b: RealT, var a: RealT) : Comparable<Color>, CoreType {
+
+class Color(var r: RealT, var g: RealT, var b: RealT, var a: RealT) : Comparable<Color>,
+    CoreType {
     //PROPERTIES
     var r8: Int
         get() = (r * 255).roundToInt()
@@ -648,10 +652,10 @@ class Color(var r: RealT, var g: RealT, var b: RealT, var a: RealT) : Comparable
      * Returns true if this color and color are approximately equal, by running isEqualApprox on each component.
      */
     fun isEqualApprox(color: Color): Boolean {
-        return isEqualApprox(r, color.r)
-            && isEqualApprox(g, color.g)
-            && isEqualApprox(b, color.b)
-            && isEqualApprox(a, color.a)
+        return godot.internal.type.isEqualApprox(r, color.r)
+            && godot.internal.type.isEqualApprox(g, color.g)
+            && godot.internal.type.isEqualApprox(b, color.b)
+            && godot.internal.type.isEqualApprox(a, color.a)
     }
 
     /**

@@ -2,13 +2,14 @@
 
 package godot.core
 
-import godot.internal.type.CoreType
-import godot.gdnative.*
 import godot.gdnative.godot_vector2
 import godot.gdnative.godot_vector2_layout
+import godot.internal.type.CMP_EPSILON
+import godot.internal.type.CoreType
+import godot.internal.type.RealT
+import godot.internal.type.toRealT
 import kotlinx.cinterop.*
 import kotlin.math.*
-import godot.internal.*
 
 class Vector2(var x: RealT, var y: RealT) : Comparable<Vector2>, CoreType {
     //CONSTANTS
@@ -212,14 +213,17 @@ class Vector2(var x: RealT, var y: RealT) : Comparable<Vector2>, CoreType {
      * Returns true if this vector and v are approximately equal, by running isEqualApprox on each component.
      */
     fun isEqualApprox(other: Vector2): Boolean {
-        return isEqualApprox(other.x, x) && isEqualApprox(other.y, y)
+        return godot.internal.type.isEqualApprox(
+            other.x,
+            x
+        ) && godot.internal.type.isEqualApprox(other.y, y)
     }
 
     /**
      * Returns true if the vector is normalized.
      */
     fun isNormalized(): Boolean {
-        return isEqualApprox(this.length(), 1.0)
+        return godot.internal.type.isEqualApprox(this.length(), 1.0)
     }
 
     /**

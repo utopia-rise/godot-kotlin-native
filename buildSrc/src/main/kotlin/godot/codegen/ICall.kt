@@ -89,7 +89,7 @@ class ICall(
                         "    val retVar = %M<%T>()\n",
                         MemberName("kotlinx.cinterop", "alloc"),
                         ClassName(
-                            if (returnType == "RealT") "godot.core" else "kotlinx.cinterop",
+                            if (returnType == "RealT") "godot.internal.type" else "kotlinx.cinterop",
                             "${returnType}Var"
                         )
                     )

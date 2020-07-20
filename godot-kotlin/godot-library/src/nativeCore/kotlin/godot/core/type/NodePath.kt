@@ -2,11 +2,10 @@
 
 package godot.core
 
-import godot.internal.type.NativeCoreType
 import godot.gdnative.godot_node_path
 import godot.gdnative.godot_node_path_operator_equal
+import godot.internal.type.NativeCoreType
 import kotlinx.cinterop.*
-import godot.internal.type.callNative
 
 
 class NodePath : NativeCoreType<godot_node_path> {
@@ -154,6 +153,6 @@ class NodePath : NativeCoreType<godot_node_path> {
     }
 
     internal inline fun <T> callNative(block: MemScope.(CPointer<godot_node_path>) -> T): T {
-        return callNative(this, block)
+        return godot.internal.type.callNative(this, block)
     }
 }

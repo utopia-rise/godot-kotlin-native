@@ -2,10 +2,9 @@
 
 package godot.core
 
-import godot.internal.type.NativeCoreType
 import godot.gdnative.godot_pool_byte_array
+import godot.internal.type.NativeCoreType
 import kotlinx.cinterop.*
-import godot.internal.type.callNative
 
 class PoolByteArray : NativeCoreType<godot_pool_byte_array>, Iterable<UByte> {
     //PROPERTIES
@@ -216,6 +215,6 @@ class PoolByteArray : NativeCoreType<godot_pool_byte_array>, Iterable<UByte> {
     }
 
     internal inline fun <T> callNative(block: MemScope.(CPointer<godot_pool_byte_array>) -> T): T {
-        return callNative(this, block)
+        return godot.internal.type.callNative(this, block)
     }
 }

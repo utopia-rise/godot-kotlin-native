@@ -1,12 +1,28 @@
 package godot.core
 
+import godot.Object
+import godot.RandomNumberGenerator
+import godot.global.gdPrint
+import godot.global.gdResource
+import kotlinx.cinterop.invoke
+import kotlinx.cinterop.memScoped
+import kotlin.test.assertTrue
 
-object Gd : gdMath, gdCore {
+
+object gd : gdMath, gdCore, gdRandom, gdPrint, gdResource {
+    override val rng = RandomNumberGenerator()
+    override val builder: StringBuilder = StringBuilder()
+
+    /** Asserts that the condition is true.
+    If the condition is false, an error is generated and the program is halted until you resume it.
+    Only executes in debug builds. Use it for debugging purposes, to make sure a statement is true during development. */
+    fun assert(condition: Boolean, message: String = "") = assertTrue(condition, message)
+
 
     inline fun <reified T> convert(what: Variant): T {
         val type = Variant.typeForClass<T>()
 
-        val ret = when (type) {
+        return when (type) {
             Variant.Type.NIL -> null
             Variant.Type.BOOL -> what.asBoolean()
             Variant.Type.INT -> what.asInt()
@@ -34,8 +50,14 @@ object Gd : gdMath, gdCore {
             Variant.Type.POOL_VECTOR2_ARRAY -> what.asPoolVector2Array()
             Variant.Type.POOL_VECTOR3_ARRAY -> what.asPoolVector3Array()
             Variant.Type.POOL_COLOR_ARRAY -> what.asPoolColorArray()
+        } as T
+    }
+
+    /** Returns whether instance is a valid object (e.g. has not been deleted from memory).*/
+    fun isInstanceValid(instance: Object): Boolean {
+        return memScoped {
+            checkNotNull(Godot.gdnative11.godot_is_instance_valid)(instance.ptr)
         }
-        return ret as T
     }
 
     /** Returns length of Variant var

@@ -220,10 +220,12 @@ internal interface gdMath {
     fun inverseLerp(from: Double, to: Double, weight: Double) = (weight - from) / (to - from)
 
     /** Returns true if a and b are approximately equal to each other. */
-    fun isEqualApprox(a: Float, b: Float) = godot.internal.isEqualApprox(a.toRealT(), b.toRealT())
+    fun isEqualApprox(a: Float, b: Float) =
+        godot.internal.type.isEqualApprox(a.toRealT(), b.toRealT())
 
     /** Returns true if a and b are approximately equal to each other. */
-    fun isEqualApprox(a: Double, b: Double) = godot.internal.isEqualApprox(a.toRealT(), b.toRealT())
+    fun isEqualApprox(a: Double, b: Double) =
+        godot.internal.type.isEqualApprox(a.toRealT(), b.toRealT())
 
 
     /** Returns whether s is an infinity value (either positive infinity or negative infinity). */
@@ -524,18 +526,18 @@ internal interface gdMath {
 
     /** Wraps float value between min and max.
      *  Usable for creating loop-alike behavior or infinite surfaces.*/
-    fun wrapf(value: Float, min: Float, max: Float)  = min + fposmod(value + min,  max - min)
+    fun wrapf(value: Float, min: Float, max: Float) = min + fposmod(value + min, max - min)
 
     /** Wraps double value between min and max.
      *  Usable for creating loop-alike behavior or infinite surfaces.*/
-    fun wrapf(value: Double, min: Double, max: Double)  = min + fposmod(value + min,  max - min)
+    fun wrapf(value: Double, min: Double, max: Double) = min + fposmod(value + min, max - min)
 
 
     /** Wraps int value between min and max.
      *  Usable for creating loop-alike behavior or infinite surfaces.*/
-    fun wrapi(value: Int, min: Int, max: Int)  = min + posmod(value + min,  max - min)
+    fun wrapi(value: Int, min: Int, max: Int) = min + posmod(value + min, max - min)
 
     /** Wraps long value between min and max.
      *  Usable for creating loop-alike behavior or infinite surfaces.*/
-    fun wrapi(value: Long, min: Long, max: Long)  = min + posmod(value + min,  max - min)
+    fun wrapi(value: Long, min: Long, max: Long) = min + posmod(value + min, max - min)
 }
