@@ -272,7 +272,7 @@ abstract class GodotArray<T> internal constructor() : NativeCoreType<godot_array
     }
 
     internal inline fun <C> callNative(block: MemScope.(CPointer<godot_array>) -> C): C {
-        return callNative(this, block)
+        return godot.internal.type.callNative(this, block)
     }
 
 }
