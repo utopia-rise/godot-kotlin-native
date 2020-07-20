@@ -23,6 +23,7 @@ fun String.getAsGodotPrimitive() =
         "kotlin.Boolean" -> "bool"
         "kotlin.Byte" -> "int"
         "kotlin.Short" -> "int"
+        "kotlin.Enum" -> "int"
         else -> null
     }
 
@@ -30,6 +31,7 @@ fun String.isCompatibleList(): Boolean {
     return when(this) {
         "godot.core.VariantArray" -> true
         "godot.core.ObjectArray" -> true
+        "godot.core.EnumArray" -> true
         "godot.core.BoolVariantArray" -> true
         "godot.core.IntVariantArray" -> true
         "godot.core.RealVariantArray" -> true
@@ -53,8 +55,9 @@ fun String.isCompatibleList(): Boolean {
 
 fun String.getCompatibleListType(): String {
     return when(this) {
-        "godot.core.VariantArray" -> "Variant"
+//        "godot.core.VariantArray" -> "Variant"
         "godot.core.ObjectArray" -> "Object"
+        "godot.core.EnumArray" -> "int"
         "godot.core.BoolVariantArray" -> "bool"
         "godot.core.IntVariantArray" -> "int"
         "godot.core.RealVariantArray" -> "float"

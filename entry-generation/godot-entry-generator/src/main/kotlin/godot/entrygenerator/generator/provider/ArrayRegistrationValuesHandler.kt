@@ -21,6 +21,17 @@ class ArrayRegistrationValuesHandler(
         }
     }
 
+    override fun getDefaultValue(): Pair<String, Array<out Any>> {
+        return if (propertyDescriptor.type.arguments.firstOrNull()?.type?.isEnum() == true) {
+            if (propertyDescriptor.isLateInit || !isVisibleInEditor()) {
+                return "%L" to arrayOf("null")
+            }
+            getDefaultValueExpression(propertyDescriptor.assignmentPsi) ?: throw IllegalStateException("") //TODO: error
+        } else {
+            super.getDefaultValue()
+        }
+    }
+
     override fun getHintString(): String {
         // at this point we know type is a VariantArray
         val type = propertyDescriptor.type

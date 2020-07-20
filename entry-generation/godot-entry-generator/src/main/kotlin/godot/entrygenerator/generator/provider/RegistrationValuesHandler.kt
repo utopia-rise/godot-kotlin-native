@@ -13,6 +13,7 @@ import org.jetbrains.kotlin.descriptors.PropertyDescriptor
 import org.jetbrains.kotlin.js.resolve.diagnostics.findPsi
 import org.jetbrains.kotlin.psi.*
 import org.jetbrains.kotlin.psi.psiUtil.containingClassOrObject
+import org.jetbrains.kotlin.psi.psiUtil.parents
 import org.jetbrains.kotlin.psi.psiUtil.referenceExpression
 import org.jetbrains.kotlin.resolve.BindingContext
 import org.jetbrains.kotlin.resolve.bindingContextUtil.getReferenceTargets
@@ -72,7 +73,7 @@ abstract class RegistrationValuesHandler(
         )
     }
 
-    private fun getDefaultValueExpression(expression: KtExpression): Pair<String, Array<out Any>>? {
+    internal fun getDefaultValueExpression(expression: KtExpression): Pair<String, Array<out Any>>? {
         when {
             //normal contant expression like: val foo = 1
             expression is KtConstantExpression -> {
@@ -97,7 +98,7 @@ abstract class RegistrationValuesHandler(
                         val className = fqName.shortName().asString()
                         return "%T.%L" to arrayOf(ClassName(pkg, className), expression.selectorExpression!!.text)
                     }
-                //multiline strings
+                    //multiline strings
                 } else if (receiver is KtStringTemplateExpression) {
                     val selectorExpression = expression
                         .selectorExpression
@@ -142,7 +143,7 @@ abstract class RegistrationValuesHandler(
                     }
 
                     when {
-                        //contructor
+                        //constructor
                         psi is KtConstructor<*> && !hasNullArg -> {
                             val fqName = psi.containingClassOrObject!!.fqName
                             require(fqName != null)
@@ -153,7 +154,7 @@ abstract class RegistrationValuesHandler(
                             transformedArgs.forEach { params.addAll(it!!.second) }
                             return "%T(${transformedArgs.joinToString { it!!.first }})" to params.toTypedArray()
                         }
-                        //contructor
+                        //constructor
                         ref is DeserializedClassConstructorDescriptor && !hasNullArg -> {
                             val fqName = ref.constructedClass.fqNameSafe
                             val pkg = fqName.parent().asString()
@@ -165,7 +166,10 @@ abstract class RegistrationValuesHandler(
                         }
                         //godot arrays and kotlin collections
                         //Note: kotlin collections only as constructor arguments or function params. TypeToVariantAsClassNameMapper already enshures that they are not registered as property types
-                        ref is DeserializedSimpleFunctionDescriptor && (ref.fqNameSafe.asString().matches(Regex("^godot\\.core\\..*ArrayOf\$")) || ref.fqNameSafe.asString().matches(Regex("^godot\\.core\\..*Array\$")) || ref.findPackage().fqName.asString() == "kotlin.collections") -> {
+                        ref is DeserializedSimpleFunctionDescriptor && (
+                            ref.fqNameSafe.asString().matches(Regex("^godot\\.core\\..*(ArrayOf|Array)\$"))
+                                || ref.findPackage().fqName.asString() == "kotlin.collections"
+                            ) -> {
                             val fqName = ref.fqNameSafe
                             val pkg = fqName.parent().asString()
                             val functionName = fqName.shortName().asString()
@@ -218,6 +222,32 @@ abstract class RegistrationValuesHandler(
             //operators like the `or` operator
             expression is KtOperationReferenceExpression -> {
                 return "%L" to arrayOf(expression.text)
+            }
+            //EnumArray -> int to enum mapping function
+            expression is KtLambdaExpression && expression.parents.firstOrNull { it is KtNameReferenceExpression || it is KtCallExpression } != null -> {
+                expression.parents.forEach { parent ->
+                    val packagePathOfParent = when (parent) {
+                        is KtNameReferenceExpression -> parent
+                            .referenceExpression()
+                            ?.getReferenceTargets(bindingContext)
+                            ?.firstOrNull()
+                            ?.fqNameSafe
+                            ?.asString()
+                        is KtCallExpression -> parent
+                            .referenceExpression()
+                            ?.getReferenceTargets(bindingContext)
+                            ?.firstOrNull()
+                            ?.fqNameSafe
+                            ?.asString()
+                        else -> null
+                    }
+
+                    //we could (and maybe should) check that the user is not using any refs inside the lambda, but IMHO this would be overkill and too much work to catch all edge cases
+                    //if he uses refs it just does not compile and he has to figure out himself whats wrong. I guess with proper documentation on how this function should be used, that's enough
+                    if (packagePathOfParent?.matches(Regex("^godot\\.core\\.(EnumArray.*|enumVariantArrayOf)\$")) == true) {
+                        return "%L" to arrayOf(expression.text)
+                    }
+                }
             }
         }
 

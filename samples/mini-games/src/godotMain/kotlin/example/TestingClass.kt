@@ -135,24 +135,42 @@ class TestingClass : Object() {
     var vector3VariantArray = Vector3Array(listOf(Vector3()))
 
 
-    //TODO: test after we can create pureVariantArrays and multidimensional variant arrays
-//    @RegisterProperty
-//    var variantArrayDifferentTypes = variantArrayOf(variantArrayOf(1, "a")) //should not generate hint string
-//
-//    @RegisterProperty
-//    var variantArrayAnyDifferentTypes = variantArrayOf(1, 2, "a", "b") //should not generate hint string
-//
-//    @RegisterProperty
-//    var twoDimensionalArrayVariantArray = variantArrayOf(variantArrayOf(1, 2), variantArrayOf(3, 4))
-//
-//    @RegisterProperty
-//    var threeDimensionalArrayVariantArray = variantArrayOf(
-//        variantArrayOf(variantArrayOf(1, 2), variantArrayOf(3, 4)),
-//        variantArrayOf(variantArrayOf(5, 6), variantArrayOf(7, 8))
-//    )
-//
-//    @RegisterProperty
-//    var enumArray = variantArrayOf(TestEnum.ENUM1, TestEnum.ENUM2)
+    @RegisterProperty
+    var variantArrayDifferentTypes = variantArrayOf(variantArrayOf(1, "a")) //should not generate typed array hint string
+
+    @RegisterProperty
+    var variantArrayAnyDifferentTypes = variantArrayOf(1, 2, "a", "b") //should not generate typed array hint string
+
+    @RegisterProperty
+    var twoDimensionalArrayVariantArray = variantArrayOf(variantArrayOf(1, 2), variantArrayOf(3, 4)) //can not generate typed array hint string
+
+    @RegisterProperty
+    var threeDimensionalArrayVariantArray = variantArrayOf( //can not generate typed array hint string
+        variantArrayOf(variantArrayOf(1, 2), variantArrayOf(3, 4)),
+        variantArrayOf(variantArrayOf(5, 6), variantArrayOf(7, 8))
+    )
+
+    @RegisterProperty
+    var enumArray = EnumArray(listOf(TestEnum.ENUM1, TestEnum.ENUM2)) { enumAsInt ->
+        TestEnum.values().first { it.ordinal == enumAsInt }
+    }
+
+    @RegisterProperty
+    var enumArray2 = EnumArray(listOf(TestEnum.ENUM1, TestEnum.ENUM2), { enumAsInt -> TestEnum.values().first { it.ordinal == enumAsInt }}) //not moved out of parenthesis on purpose! To test the behaviour this way as well!
+
+
+    @RegisterProperty
+    var enumArray3 = EnumArray(EnumArray(listOf(TestEnum.ENUM1, TestEnum.ENUM2)) { enumAsInt ->
+        TestEnum.values().first { it.ordinal == enumAsInt }
+    })
+
+    @RegisterProperty
+    var enumArray4 = EnumArray { enumAsInt ->
+        TestEnum.values().first { it.ordinal == enumAsInt }
+    }
+
+    @RegisterProperty
+    var enumArray5 = enumVariantArrayOf({ enumAsInt -> TestEnum.values().first { it.ordinal == enumAsInt }}, TestEnum.ENUM1, TestEnum.ENUM2)
 
     @RegisterProperty
     @EnumFlag
