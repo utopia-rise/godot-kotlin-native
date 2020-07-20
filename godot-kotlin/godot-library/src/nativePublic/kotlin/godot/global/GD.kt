@@ -2,14 +2,14 @@ package godot.core
 
 import godot.Object
 import godot.RandomNumberGenerator
-import godot.global.gdPrint
-import godot.global.gdResource
+import godot.global.GDPrint
+import godot.global.GDResource
 import kotlinx.cinterop.invoke
 import kotlinx.cinterop.memScoped
 import kotlin.test.assertTrue
 
 
-object gd : gdMath, gdCore, gdRandom, gdPrint, gdResource {
+object GD : GDMath, GDCore, GDRandom, GDPrint, GDResource {
     override val rng = RandomNumberGenerator()
     override val builder: StringBuilder = StringBuilder()
 
@@ -18,7 +18,9 @@ object gd : gdMath, gdCore, gdRandom, gdPrint, gdResource {
     Only executes in debug builds. Use it for debugging purposes, to make sure a statement is true during development. */
     fun assert(condition: Boolean, message: String = "") = assertTrue(condition, message)
 
-
+    /**
+     *  Converts one or more arguments to string in the best way possible.
+     */
     inline fun <reified T> convert(what: Variant): T {
         val type = Variant.typeForClass<T>()
 
@@ -62,7 +64,7 @@ object gd : gdMath, gdCore, gdRandom, gdPrint, gdResource {
 
     /** Returns length of Variant var
      * Note: Generates a fatal error if Variant can not provide a length.
-     * */
+     */
     inline fun <reified T> len(what: Variant): Int {
         val type = Variant.typeForClass<T>()
 

@@ -3,7 +3,7 @@ package godot.global
 import godot.core.Godot
 import godot.core.Variant
 
-internal interface gdPrint {
+internal interface GDPrint {
     val builder: StringBuilder
 
     /** Converts one or more arguments to strings in the best way possible and prints them to the console.**/
@@ -25,7 +25,7 @@ internal interface gdPrint {
         builder.clear()
     }
 
-    /** Converts one or more arguments to strings in the best way possible and prints them to the console.**/
+    /** Prints one or more arguments to the console with a tab between each argument. **/
     fun printt(args: Array<Variant>) {
         for (arg in args) {
             builder.append(arg.toString())

@@ -2,7 +2,7 @@ package godot.core
 
 import godot.RandomNumberGenerator
 
-internal interface gdRandom {
+internal interface GDRandom {
     val rng: RandomNumberGenerator
 
     /** Random range, any floating point value between from and to. */
