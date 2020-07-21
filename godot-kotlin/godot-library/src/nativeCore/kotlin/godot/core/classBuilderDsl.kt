@@ -136,7 +136,7 @@ class ClassBuilder<T : Object> internal constructor(val classHandle: ClassHandle
             isVisibleInEditor,
             rpcMode,
             godot_property_hint.GODOT_PROPERTY_HINT_ENUM,
-            "Array,int,${enumValues<K>().joinToString { it.name }}"
+            enumValues<K>().joinToString { it.name }
         )
     }
 
