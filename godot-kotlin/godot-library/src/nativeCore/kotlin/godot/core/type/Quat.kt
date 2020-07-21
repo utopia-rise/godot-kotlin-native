@@ -183,7 +183,7 @@ class Quat(var x: RealT, var y: RealT, var z: RealT, var w: RealT) : CoreType {
      * Returns whether the quaternion is normalized or not.
      */
     fun isNormalized(): Boolean {
-        return abs(lengthSquared() - 1.0) < 0.00001
+        return abs(lengthSquared() - 1.0) < CMP_EPSILON
     }
 
     /**
