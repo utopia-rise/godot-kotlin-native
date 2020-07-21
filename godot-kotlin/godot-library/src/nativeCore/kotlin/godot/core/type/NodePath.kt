@@ -35,7 +35,8 @@ class NodePath : NativeCoreType<godot_node_path> {
     constructor(from: NodePath) {
         _handle = cValue{}
         callNative {
-            checkNotNull(Godot.gdnative.godot_node_path_new_copy)(it, from._handle.ptr)
+            val str =  checkNotNull(Godot.gdnative.godot_node_path_as_string)(from._handle.ptr)
+            checkNotNull(Godot.gdnative.godot_node_path_new)(it, str.ptr)
         }
     }
 
