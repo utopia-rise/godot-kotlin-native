@@ -4,26 +4,33 @@ import kotlinx.cinterop.DoubleVar
 import kotlinx.cinterop.LongVar
 import kotlin.math.abs
 
-//Real are float in Godot, but Double is the default one in Kotlin.
-//Those type alias and extensions are there to simplify the process when we wish to switch between either Float or Double
+//Reals are Float in Godot, but Double is the default one in Kotlin.
+//Those typealias and extensions are there to simplify the process when we wish to switch between either Float or Double
 internal typealias RealT = Double
 internal typealias RealTVar = DoubleVar
 
+@PublishedApi
 internal inline fun Number.toRealT(): RealT = this.toDouble()
+@PublishedApi
 internal inline fun Double.toRealT(): RealT = this
 
+@PublishedApi
 internal inline fun Number.toGodotReal(): Float = this.toFloat()
+@PublishedApi
 internal inline fun Float.toGodotReal(): Float = this
 
-//Natural are 32bits Int in Godot, so is the default one in Kotlin
-//Those type alias and extensions are there to simplify the process when we wish to switch between either Int or Long
+//Naturals are 32bits Int in Godot, so are the default ones in Kotlin
+//Those typealias and extensions are there to simplify the process when we wish to switch between either Int or Long
 internal typealias NaturalT = Long
 internal typealias NaturalTVar = LongVar
-
+@PublishedApi
 internal inline fun Number.toNaturalT(): NaturalT = this.toLong()
+@PublishedApi
 internal inline fun Long.toNaturalTT(): NaturalT = this
 
+@PublishedApi
 internal inline fun Number.toGodotNatural(): Int = this.toInt()
+@PublishedApi
 internal inline fun Int.toGodotNatural(): Int = this
 
 //Because of float precision, it's hard to obtain two perfectly equal real numbers.
