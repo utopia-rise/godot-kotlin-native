@@ -26,7 +26,9 @@ internal typealias NaturalTVar = LongVar
 @PublishedApi
 internal inline fun Number.toNaturalT(): NaturalT = this.toLong()
 @PublishedApi
-internal inline fun Long.toNaturalTT(): NaturalT = this
+internal inline fun Long.toNaturalT(): NaturalT = this
+@PublishedApi
+internal inline fun UInt.toNaturalT(): NaturalT = this.toLong()
 
 @PublishedApi
 internal inline fun Number.toGodotNatural(): Int = this.toInt()

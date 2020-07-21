@@ -14,7 +14,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
     val type: Type
         get() {
             return memScoped {
-                Type.from(checkNotNull(Godot.gdnative.godot_variant_get_type)(_handle.ptr).value.toLong())
+                Type.from(checkNotNull(Godot.gdnative.godot_variant_get_type)(_handle.ptr).value.toNaturalT())
             }
         }
 
@@ -25,34 +25,34 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
     }
 
     //TYPE
-    enum class Type(val value: Long) {
-        NIL(godot_variant_type.GODOT_VARIANT_TYPE_NIL.value.toLong()),
-        BOOL(godot_variant_type.GODOT_VARIANT_TYPE_BOOL.value.toLong()),
-        INT(godot_variant_type.GODOT_VARIANT_TYPE_INT.value.toLong()),
-        REAL(godot_variant_type.GODOT_VARIANT_TYPE_REAL.value.toLong()),
-        STRING(godot_variant_type.GODOT_VARIANT_TYPE_STRING.value.toLong()),
-        VECTOR2(godot_variant_type.GODOT_VARIANT_TYPE_VECTOR2.value.toLong()),
-        RECT2(godot_variant_type.GODOT_VARIANT_TYPE_RECT2.value.toLong()),
-        VECTOR3(godot_variant_type.GODOT_VARIANT_TYPE_VECTOR3.value.toLong()),
-        TRANSFORM2D(godot_variant_type.GODOT_VARIANT_TYPE_TRANSFORM2D.value.toLong()),
-        PLANE(godot_variant_type.GODOT_VARIANT_TYPE_PLANE.value.toLong()),
-        QUAT(godot_variant_type.GODOT_VARIANT_TYPE_QUAT.value.toLong()),
-        AABB(godot_variant_type.GODOT_VARIANT_TYPE_AABB.value.toLong()),
-        BASIS(godot_variant_type.GODOT_VARIANT_TYPE_BASIS.value.toLong()),
-        TRANSFORM(godot_variant_type.GODOT_VARIANT_TYPE_TRANSFORM.value.toLong()),
-        COLOR(godot_variant_type.GODOT_VARIANT_TYPE_COLOR.value.toLong()),
-        NODE_PATH(godot_variant_type.GODOT_VARIANT_TYPE_NODE_PATH.value.toLong()),
-        RID(godot_variant_type.GODOT_VARIANT_TYPE_RID.value.toLong()),
-        OBJECT(godot_variant_type.GODOT_VARIANT_TYPE_OBJECT.value.toLong()),
-        DICTIONARY(godot_variant_type.GODOT_VARIANT_TYPE_DICTIONARY.value.toLong()),
-        ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_ARRAY.value.toLong()),
-        POOL_BYTE_ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_POOL_BYTE_ARRAY.value.toLong()),
-        POOL_INT_ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_POOL_INT_ARRAY.value.toLong()),
-        POOL_REAL_ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_POOL_REAL_ARRAY.value.toLong()),
-        POOL_STRING_ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_POOL_STRING_ARRAY.value.toLong()),
-        POOL_COLOR_ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_POOL_COLOR_ARRAY.value.toLong()),
-        POOL_VECTOR2_ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_POOL_VECTOR2_ARRAY.value.toLong()),
-        POOL_VECTOR3_ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_POOL_VECTOR3_ARRAY.value.toLong());
+    enum class Type(val value: NaturalT) {
+        NIL(godot_variant_type.GODOT_VARIANT_TYPE_NIL.value.toNaturalT()),
+        BOOL(godot_variant_type.GODOT_VARIANT_TYPE_BOOL.value.toNaturalT()),
+        INT(godot_variant_type.GODOT_VARIANT_TYPE_INT.value.toNaturalT()),
+        REAL(godot_variant_type.GODOT_VARIANT_TYPE_REAL.value.toNaturalT()),
+        STRING(godot_variant_type.GODOT_VARIANT_TYPE_STRING.value.toNaturalT()),
+        VECTOR2(godot_variant_type.GODOT_VARIANT_TYPE_VECTOR2.value.toNaturalT()),
+        RECT2(godot_variant_type.GODOT_VARIANT_TYPE_RECT2.value.toNaturalT()),
+        VECTOR3(godot_variant_type.GODOT_VARIANT_TYPE_VECTOR3.value.toNaturalT()),
+        TRANSFORM2D(godot_variant_type.GODOT_VARIANT_TYPE_TRANSFORM2D.value.toNaturalT()),
+        PLANE(godot_variant_type.GODOT_VARIANT_TYPE_PLANE.value.toNaturalT()),
+        QUAT(godot_variant_type.GODOT_VARIANT_TYPE_QUAT.value.toNaturalT()),
+        AABB(godot_variant_type.GODOT_VARIANT_TYPE_AABB.value.toNaturalT()),
+        BASIS(godot_variant_type.GODOT_VARIANT_TYPE_BASIS.value.toNaturalT()),
+        TRANSFORM(godot_variant_type.GODOT_VARIANT_TYPE_TRANSFORM.value.toNaturalT()),
+        COLOR(godot_variant_type.GODOT_VARIANT_TYPE_COLOR.value.toNaturalT()),
+        NODE_PATH(godot_variant_type.GODOT_VARIANT_TYPE_NODE_PATH.value.toNaturalT()),
+        RID(godot_variant_type.GODOT_VARIANT_TYPE_RID.value.toNaturalT()),
+        OBJECT(godot_variant_type.GODOT_VARIANT_TYPE_OBJECT.value.toNaturalT()),
+        DICTIONARY(godot_variant_type.GODOT_VARIANT_TYPE_DICTIONARY.value.toNaturalT()),
+        ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_ARRAY.value.toNaturalT()),
+        POOL_BYTE_ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_POOL_BYTE_ARRAY.value.toNaturalT()),
+        POOL_INT_ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_POOL_INT_ARRAY.value.toNaturalT()),
+        POOL_REAL_ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_POOL_REAL_ARRAY.value.toNaturalT()),
+        POOL_STRING_ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_POOL_STRING_ARRAY.value.toNaturalT()),
+        POOL_COLOR_ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_POOL_COLOR_ARRAY.value.toNaturalT()),
+        POOL_VECTOR2_ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_POOL_VECTOR2_ARRAY.value.toNaturalT()),
+        POOL_VECTOR3_ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_POOL_VECTOR3_ARRAY.value.toNaturalT());
 
         companion object {
             private val types = mapOf(
