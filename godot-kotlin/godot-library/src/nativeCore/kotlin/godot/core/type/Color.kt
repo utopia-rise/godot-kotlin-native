@@ -4,14 +4,16 @@ package godot.core
 
 import godot.gdnative.godot_color
 import godot.gdnative.godot_color_layout
-import godot.internal.type.CoreType
+import godot.internal.type.*
 import kotlinx.cinterop.*
 import kotlin.math.floor
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.roundToInt
 
-class Color(var r: RealT, var g: RealT, var b: RealT, var a: RealT) : Comparable<Color>, CoreType {
+
+class Color(var r: RealT, var g: RealT, var b: RealT, var a: RealT) : Comparable<Color>,
+    CoreType {
     //PROPERTIES
     var r8: Int
         get() = (r * 255).roundToInt()

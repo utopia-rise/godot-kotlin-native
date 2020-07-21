@@ -2,9 +2,9 @@
 
 package godot.core
 
-import godot.internal.type.CoreType
 import godot.gdnative.godot_basis
 import godot.gdnative.godot_basis_layout
+import godot.internal.type.*
 import kotlinx.cinterop.*
 import kotlin.math.*
 

@@ -2,10 +2,9 @@
 
 package godot.core
 
-import godot.gdnative.*
-import godot.internal.type.CoreType
 import godot.gdnative.godot_aabb
 import godot.gdnative.godot_aabb_layout
+import godot.internal.type.*
 import kotlinx.cinterop.*
 
 

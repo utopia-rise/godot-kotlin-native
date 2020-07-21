@@ -4,14 +4,15 @@ package godot.core
 
 import godot.gdnative.godot_transform2d
 import godot.gdnative.godot_transform2d_layout
-import godot.internal.type.CoreType
+import godot.internal.type.*
 import kotlinx.cinterop.*
 import kotlin.math.acos
 import kotlin.math.atan2
 import kotlin.math.cos
 import kotlin.math.sin
 
-class Transform2D(var x: Vector2, var y: Vector2, var origin: Vector2) : CoreType {
+class Transform2D(var x: Vector2, var y: Vector2, var origin: Vector2) :
+    CoreType {
     //CONSTANTS
     companion object {
         inline val IDENTITY: Transform2D

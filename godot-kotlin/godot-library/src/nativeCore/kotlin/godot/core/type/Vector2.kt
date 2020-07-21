@@ -2,10 +2,9 @@
 
 package godot.core
 
-import godot.internal.type.CoreType
-import godot.gdnative.*
 import godot.gdnative.godot_vector2
 import godot.gdnative.godot_vector2_layout
+import godot.internal.type.*
 import kotlinx.cinterop.*
 import kotlin.math.*
 
@@ -211,7 +210,10 @@ class Vector2(var x: RealT, var y: RealT) : Comparable<Vector2>, CoreType {
      * Returns true if this vector and v are approximately equal, by running isEqualApprox on each component.
      */
     fun isEqualApprox(other: Vector2): Boolean {
-        return isEqualApprox(other.x, x) && isEqualApprox(other.y, y)
+        return isEqualApprox(
+            other.x,
+            x
+        ) && isEqualApprox(other.y, y)
     }
 
     /**

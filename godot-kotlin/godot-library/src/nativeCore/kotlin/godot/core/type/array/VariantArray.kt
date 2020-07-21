@@ -2,7 +2,7 @@ package godot.core
 
 import godot.Object
 import godot.gdnative.godot_array
-import godot.internal.type.CoreType
+import godot.internal.type.*
 import kotlinx.cinterop.COpaquePointer
 import kotlinx.cinterop.CValue
 import kotlinx.cinterop.invoke
