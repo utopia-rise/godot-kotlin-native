@@ -173,9 +173,9 @@ class Quat(var x: RealT, var y: RealT, var z: RealT, var w: RealT) : CoreType {
      */
     fun isEqualApprox(other: Quat): Boolean {
         return isEqualApprox(other.x, x)
-        isEqualApprox(other.y, y)
-        isEqualApprox(other.z, z)
-        isEqualApprox(other.w, w)
+            && isEqualApprox(other.y, y)
+            && isEqualApprox(other.z, z)
+            && isEqualApprox(other.w, w)
     }
 
     /**
