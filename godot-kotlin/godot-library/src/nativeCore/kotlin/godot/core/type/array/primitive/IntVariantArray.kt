@@ -4,33 +4,34 @@ import godot.Object
 import godot.gdnative.godot_array
 import godot.internal.type.NaturalT
 import godot.internal.type.toNaturalT
-import kotlinx.cinterop.COpaquePointer
-import kotlinx.cinterop.CValue
-import kotlinx.cinterop.invoke
-import kotlinx.cinterop.memScoped
+import kotlinx.cinterop.*
 
 class IntVariantArray : GodotArray<NaturalT> {
 
     //CONSTRUCTOR
     constructor() {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_array_new)(it)
         }
     }
 
     constructor(other: IntVariantArray) {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_array_new_copy)(it, other._handle.ptr)
         }
     }
 
     constructor(other: PoolByteArray) {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_array_new_pool_byte_array)(it, other._handle.ptr)
         }
     }
 
     constructor(other: PoolIntArray) {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_array_new_pool_int_array)(it, other._handle.ptr)
         }

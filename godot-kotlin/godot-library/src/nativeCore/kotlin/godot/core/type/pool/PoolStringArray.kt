@@ -14,12 +14,14 @@ class PoolStringArray : NativeCoreType<godot_pool_string_array>, Iterable<String
 
     //CONSTRUCTOR
     constructor() {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_pool_string_array_new)(it)
         }
     }
 
     constructor(other: PoolStringArray) {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_pool_string_array_new_copy)(it, other._handle.ptr)
         }

@@ -15,6 +15,7 @@ class PoolColorArray : NativeCoreType<godot_pool_color_array>, Iterable<Color> {
 
     //CONSTRUCTOR
     constructor() {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_pool_color_array_new)(it)
         }

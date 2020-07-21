@@ -19,18 +19,21 @@ class NodePath : NativeCoreType<godot_node_path> {
 
     //CONSTRUCTOR
     constructor() {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_node_path_new)(it, "".toGDString().ptr)
         }
     }
 
     constructor(from: String) {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_node_path_new)(it, from.toGDString().ptr)
         }
     }
 
     constructor(from: NodePath) {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_node_path_new_copy)(it, from._handle.ptr)
         }

@@ -14,12 +14,14 @@ class PoolByteArray : NativeCoreType<godot_pool_byte_array>, Iterable<UByte> {
 
     //CONSTRUCTOR
     constructor() {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_pool_byte_array_new)(it)
         }
     }
 
     constructor(other: PoolByteArray) {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_pool_byte_array_new_copy)(it, other._handle.ptr)
         }

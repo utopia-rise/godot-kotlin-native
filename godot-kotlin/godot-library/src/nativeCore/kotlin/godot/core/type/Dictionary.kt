@@ -20,6 +20,7 @@ class Dictionary : NativeCoreType<godot_dictionary>, Iterable<Entry<Variant, Var
 
     //CONSTRUCTOR
     constructor() {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_dictionary_new)(it)
         }

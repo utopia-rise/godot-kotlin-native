@@ -4,27 +4,27 @@ import godot.Object
 import godot.gdnative.godot_array
 import godot.internal.type.RealT
 import godot.internal.type.toRealT
-import kotlinx.cinterop.COpaquePointer
-import kotlinx.cinterop.CValue
-import kotlinx.cinterop.invoke
-import kotlinx.cinterop.memScoped
+import kotlinx.cinterop.*
 
 class RealVariantArray : GodotArray<RealT> {
 
     //CONSTRUCTOR
     constructor() {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_array_new)(it)
         }
     }
 
     constructor(other: RealVariantArray) {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_array_new_copy)(it, other._handle.ptr)
         }
     }
 
     constructor(other: PoolRealArray) {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_array_new_pool_real_array)(it, other._handle.ptr)
         }

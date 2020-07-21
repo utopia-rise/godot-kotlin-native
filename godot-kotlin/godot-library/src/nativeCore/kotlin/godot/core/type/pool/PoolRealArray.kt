@@ -14,6 +14,7 @@ class PoolRealArray : NativeCoreType<godot_pool_real_array>, Iterable<RealT> {
 
     //CONSTRUCTOR
     constructor() {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_pool_real_array_new)(it)
         }

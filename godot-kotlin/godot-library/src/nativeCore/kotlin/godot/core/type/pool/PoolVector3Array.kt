@@ -14,12 +14,14 @@ class PoolVector3Array : NativeCoreType<godot_pool_vector3_array>, Iterable<Vect
 
     //CONSTRUCTOR
     constructor() {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_pool_vector3_array_new)(it)
         }
     }
 
     constructor(other: PoolVector3Array) {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_pool_vector3_array_new_copy)(it, other._handle.ptr)
         }

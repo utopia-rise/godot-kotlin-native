@@ -14,6 +14,7 @@ class RID : NativeCoreType<godot_rid>, Comparable<RID> {
 
     //CONSTRUCTOR
     constructor() {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_rid_new)(it)
         }
@@ -21,6 +22,7 @@ class RID : NativeCoreType<godot_rid>, Comparable<RID> {
 
 
     constructor(from: Object) {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_rid_new_with_resource)(it, from.ptr)
         }
