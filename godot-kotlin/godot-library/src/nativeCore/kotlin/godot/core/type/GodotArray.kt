@@ -42,10 +42,10 @@ abstract class GodotArray<T> internal constructor() : NativeCoreType<godot_array
     /**
      * Returns a hashed integer value representing the array contents.
      */
-    fun hash(): Int {
+    fun hash(): NaturalT {
         return callNative {
             checkNotNull(Godot.gdnative.godot_array_hash)(it)
-        }
+        }.toNaturalT()
     }
 
     /**
@@ -264,7 +264,7 @@ abstract class GodotArray<T> internal constructor() : NativeCoreType<godot_array
     }
 
     override fun hashCode(): Int {
-        return hash()
+        return _handle.hashCode()
     }
 
     override fun toString(): String {

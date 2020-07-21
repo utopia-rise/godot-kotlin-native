@@ -2,41 +2,51 @@
 
 package godot.core
 
-import godot.gdnative.*
+import godot.gdnative.godot_string
 import kotlinx.cinterop.*
 
 
 //From Godot to Kotlin
-fun String(mem: COpaquePointer): String {
-    val gdString = mem.reinterpret<godot_string>()
-    val s = gdString.pointed.readValue().toKString()
-    godot_string_destroy(gdString)
-    return s
+internal fun String(ptr: COpaquePointer): String {
+    return ptr.reinterpret<godot_string>().pointed.readValue().toKString()
 }
 
 internal fun CValue<godot_string>.toKString(): String {
-    godot_string_utf8(this).useContents {
-        val ret = godot_char_string_get_data(this.ptr)?.toKString()
+    return memScoped {
+        val charString = checkNotNull(Godot.gdnative.godot_string_utf8)(this@toKString.ptr)
+        val ret = checkNotNull(Godot.gdnative.godot_char_string_get_data)(charString.ptr)?.toKString()
             ?: throw NullPointerException("Failed to convert Godot-string to Kotlin-string")
-        godot_char_string_destroy(this.ptr)
-        return ret
+        checkNotNull(Godot.gdnative.godot_char_string_destroy)(charString.ptr)
+        ret
     }
 }
 
 //From Kotlin to Godot
-fun String.getRawMemory(memScope: MemScope): COpaquePointer {
-    return cValue<godot_string> { godot_string_parse_utf8(this.ptr, this@getRawMemory) }.getPointer(memScope)
+internal fun String.getRawMemory(memScope: MemScope): COpaquePointer {
+    return this.toGDString().getPointer(memScope)
 }
 
 internal fun String.toGDString(): CValue<godot_string> {
-    return cValue { godot_string_parse_utf8(this.ptr, this@toGDString) }
+    return memScoped {
+        cValue {
+            checkNotNull(Godot.gdnative.godot_string_parse_utf8)(
+                this.ptr,
+                this@toGDString.cstr.ptr
+            )
+        }
+    }
 }
 
 internal fun <T> String.asGDString(block: MemScope.(CValue<godot_string>) -> T): T {
     return memScoped {
-        val gdString = cValue<godot_string> { godot_string_parse_utf8(this.ptr, this@asGDString) }
+        val gdString = cValue<godot_string> {
+            checkNotNull(Godot.gdnative.godot_string_parse_utf8)(
+                this.ptr,
+                this@asGDString.cstr.ptr
+            )
+        }
         val ret: T = block(this, gdString)
-        godot_string_destroy(gdString)
+        checkNotNull(Godot.gdnative.godot_string_destroy)(gdString.ptr)
         ret
     }
 }

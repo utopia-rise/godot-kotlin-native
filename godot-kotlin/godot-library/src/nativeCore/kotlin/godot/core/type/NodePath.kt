@@ -138,7 +138,9 @@ class NodePath : NativeCoreType<godot_node_path> {
 
     override fun equals(other: Any?): Boolean {
         return if (other is NodePath) {
-            godot_node_path_operator_equal(_handle, other._handle)
+            callNative{
+                checkNotNull(Godot.gdnative.godot_node_path_operator_equal)(it, other._handle.ptr)
+            }
         } else {
             false
         }

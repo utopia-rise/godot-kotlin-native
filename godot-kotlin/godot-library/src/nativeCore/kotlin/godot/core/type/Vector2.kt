@@ -16,10 +16,10 @@ class Vector2(var x: RealT, var y: RealT) : Comparable<Vector2>, CoreType {
         Y(1);
 
         companion object {
-            fun from(longVal: Long) = when(longVal) {
-                0L -> X
-                1L -> Y
-                else -> throw AssertionError("Unknown axis for Vector2: $longVal")
+            fun from(value: Int) = when(value) {
+                0 -> X
+                1 -> Y
+                else -> throw AssertionError("Unknown axis for Vector2: $value")
             }
         }
     }
@@ -430,12 +430,14 @@ class Vector2(var x: RealT, var y: RealT) : Comparable<Vector2>, CoreType {
             }
         }
 
-    override fun toString(): String {
-        return "($x, $y)"
+    override fun hashCode(): Int {
+        var result = x.hashCode()
+        result = 31 * result + y.hashCode()
+        return result
     }
 
-    override fun hashCode(): Int {
-        return this.toString().hashCode()
+    override fun toString(): String {
+        return "($x, $y)"
     }
 }
 

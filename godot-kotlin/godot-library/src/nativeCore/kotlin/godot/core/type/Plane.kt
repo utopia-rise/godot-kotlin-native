@@ -101,7 +101,7 @@ class Plane(var normal: Vector3, var d: RealT = 0.0) : CoreType {
     /**
      * Returns the shortest distance from the plane to the position point.
      */
-    fun distanceTo(point: Vector3): Double {
+    fun distanceTo(point: Vector3): RealT {
         return normal.dot(point) - d
     }
 

@@ -96,12 +96,12 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
         )
     }
 
-    constructor(axis: Vector3, phi: Double) : this() {
+    constructor(axis: Vector3, phi: RealT) : this() {
         // Rotation matrix from axis and angle, see https://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle
         val axisq = Vector3(axis.x * axis.x, axis.y * axis.y, axis.z * axis.z)
 
-        val cosine: Double = cos(phi)
-        val sine: Double = sin(phi)
+        val cosine: RealT = cos(phi)
+        val sine: RealT = sin(phi)
 
         apply {
             x.x = axisq.x + cosine * (1.0 - axisq.x)
@@ -132,15 +132,15 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
     //INTEROP
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
         val value = cValue<godot_basis_layout> {
-            x.x = this@Basis.x.x.toFloat()
-            x.y = this@Basis.x.y.toFloat()
-            x.z = this@Basis.x.z.toFloat()
-            y.x = this@Basis.y.x.toFloat()
-            y.y = this@Basis.y.y.toFloat()
-            y.z = this@Basis.y.z.toFloat()
-            z.x = this@Basis.z.x.toFloat()
-            z.y = this@Basis.z.y.toFloat()
-            z.z = this@Basis.z.z.toFloat()
+            x.x = this@Basis.x.x.toGodotReal()
+            x.y = this@Basis.x.y.toGodotReal()
+            x.z = this@Basis.x.z.toGodotReal()
+            y.x = this@Basis.y.x.toGodotReal()
+            y.y = this@Basis.y.y.toGodotReal()
+            y.z = this@Basis.y.z.toGodotReal()
+            z.x = this@Basis.z.x.toGodotReal()
+            z.y = this@Basis.z.y.toGodotReal()
+            z.z = this@Basis.z.z.toGodotReal()
         }
         return value.getPointer(memScope)
     }
@@ -157,7 +157,7 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
     /**
      * Returns the determinant of the matrix.
      */
-    fun determinant(): Double {
+    fun determinant(): RealT {
         return this[0][0] * (this[1][1] * this[2][2] - this[2][1] * this[1][2]) -
             this[1][0] * (this[0][1] * this[2][2] - this[2][1] * this[0][2]) +
             this[2][0] * (this[0][1] * this[1][2] - this[1][1] * this[0][2])
@@ -207,12 +207,12 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
                 }
             } else {
                 euler.x = -atan2(this[0][1], this[1][1])
-                euler.y = (-PI).toDouble() / 2.0
+                euler.y = (-PI).toRealT() / 2.0
                 euler.z = 0.0
             }
         } else {
             euler.x = atan2(this[0][1], this[1][1])
-            euler.y = PI.toDouble() / 2.0
+            euler.y = PI.toRealT() / 2.0
             euler.z = 0.0
         }
         return euler
@@ -250,12 +250,12 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
                     euler.z = atan2(this[1][0], this[1][1])
                 }
             } else { // m12 == -1
-                euler.x = PI.toDouble() * 0.5
+                euler.x = PI.toRealT() * 0.5
                 euler.y = -atan2(-this[0][1], this[0][0])
                 euler.z = 0.0
             }
         } else { // m12 == 1
-            euler.x = (-PI).toDouble() * 0.5
+            euler.x = (-PI).toRealT() * 0.5
             euler.y = -atan2(-this[0][1], this[0][0])
             euler.z = 0.0
         }
@@ -328,7 +328,7 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
         // As a cheap workaround until then, to ensure that R is a proper rotation matrix with determinant +1
         // (such that it can be represented by a Quat or Euler angles), we absorb the sign flip into the scaling matrix.
         // As such, it works in conjuction with getRotation().
-        val detSign: Double = if (determinant() > 0) 1.0 else -1.0
+        val detSign: RealT = if (determinant() > 0) 1.0 else -1.0
         return detSign * Vector3(
             Vector3(this[0][0], this[1][0], this[2][0]).length(),
             Vector3(this[0][1], this[1][1], this[2][1]).length(),
@@ -350,13 +350,13 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
             return this[row1][col1] * this[row2][col2] - this[row1][col2] * this[row2][col1]
         }
 
-        val co: DoubleArray = doubleArrayOf(
+        val co = arrayOf(
             cofac(1, 1, 2, 2),
             cofac(1, 2, 2, 0),
             cofac(1, 0, 2, 1)
         )
 
-        val det: Double =
+        val det: RealT =
             this[0][0] * co[0] + this[0][1] * co[1] + this[0][2] * co[2]
 
 
@@ -376,8 +376,8 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
     /**
      *
      */
-    fun isEqualApprox(a: Basis, epsilon: Double = CMP_EPSILON): Boolean {
-        //epsilon has to be Double instead of RealT because of CMP_EPSILON constant
+    fun isEqualApprox(a: Basis, epsilon: RealT = CMP_EPSILON): Boolean {
+        //epsilon has to be RealT instead of RealT because of CMP_EPSILON constant
         for (i in 0..2) {
             for (j in 0..2) {
                 if (isEqualApprox(this[i][j], a[i][j], epsilon)) {
@@ -431,11 +431,11 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
     /**
      * Introduce an additional rotation around the given axis by phi (radians). The axis must be a normalized vector.
      */
-    fun rotated(axis: Vector3, phi: Double): Basis {
+    fun rotated(axis: Vector3, phi: RealT): Basis {
         return Basis(axis, phi) * this
     }
 
-    internal fun rotate(axis: Vector3, phi: Double) {
+    internal fun rotate(axis: Vector3, phi: RealT) {
         val ret = rotated(axis, phi)
         this.x = ret.x
         this.y = ret.y
@@ -478,8 +478,8 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
      */
     internal fun setEulerXyz(euler: Vector3) {
 
-        var c: Double = cos(euler.x)
-        var s: Double = sin(euler.x)
+        var c: RealT = cos(euler.x)
+        var s: RealT = sin(euler.x)
 
         val xmat = Basis(1.0, 0.0, 0.0, 0.0, c, -s, 0.0, s, c)
 
@@ -505,8 +505,8 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
      * The current implementation uses YXZ convention (Z is the first rotation).
      */
     internal fun setEulerYxz(euler: Vector3) {
-        var c: Double = cos(euler.x)
-        var s: Double = sin(euler.x)
+        var c: RealT = cos(euler.x)
+        var s: RealT = sin(euler.x)
 
         val xmat = Basis(1.0, 0.0, 0.0, 0.0, c, -s, 0.0, s, c)
 
@@ -561,21 +561,21 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
     /**
      * Transposed dot product with the x axis of the matrix.
      */
-    fun tdotx(v: Vector3): Double {
+    fun tdotx(v: Vector3): RealT {
         return this[0][0] * v[0] + this[1][0] * v[1] + this[2][0] * v[2]
     }
 
     /**
      * Transposed dot product with the y axis of the matrix.
      */
-    fun tdoty(v: Vector3): Double {
+    fun tdoty(v: Vector3): RealT {
         return this[0][1] * v[0] + this[1][1] * v[1] + this[2][1] * v[2]
     }
 
     /**
      * Transposed dot product with the z axis of the matrix.
      */
-    fun tdotz(v: Vector3): Double {
+    fun tdotz(v: Vector3): RealT {
         return this[0][2] * v[0] + this[1][2] * v[1] + this[2][2] * v[2]
     }
 
@@ -638,15 +638,15 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
     }
 
     fun set(
-        xx: Double,
-        xy: Double,
-        xz: Double,
-        yx: Double,
-        yy: Double,
-        yz: Double,
-        zx: Double,
-        zy: Double,
-        zz: Double
+        xx: RealT,
+        xy: RealT,
+        xz: RealT,
+        yx: RealT,
+        yy: RealT,
+        yz: RealT,
+        zx: RealT,
+        zy: RealT,
+        zz: RealT
     ) {
         x[0] = xx; x[1] = xy; x[2] = xz
         y[0] = yx; y[1] = yy; y[2] = yz
@@ -663,7 +663,7 @@ class Basis(var x: Vector3, var y: Vector3, var z: Vector3) : CoreType {
 
     operator fun minus(matrix: Basis) = Basis(this[0] - matrix[0], this[1] - matrix[1], this[2] - matrix[2])
 
-    operator fun times(value: Double) = Basis(this[0] * value, this[1] * value, this[2] * value)
+    operator fun times(value: RealT) = Basis(this[0] * value, this[1] * value, this[2] * value)
 
     override fun toString(): String =
         "${this[0][0]}, ${this[0][1]}, ${this[0][2]}, " +
