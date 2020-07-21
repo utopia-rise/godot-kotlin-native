@@ -18,7 +18,7 @@ object gd : gdMath, gdCore, gdRandom, gdPrint, gdResource {
     Only executes in debug builds. Use it for debugging purposes, to make sure a statement is true during development. */
     fun assert(condition: Boolean, message: String = "") = assertTrue(condition, message)
 
-
+    /** Converts from a type to another in the best way possible. The type parameter uses the Variant.Type values. */
     inline fun <reified T> convert(what: Variant): T {
         val type = Variant.typeForClass<T>()
 
