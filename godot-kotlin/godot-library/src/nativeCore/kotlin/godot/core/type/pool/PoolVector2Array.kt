@@ -2,12 +2,16 @@
 
 package godot.core
 
-import godot.internal.type.NativeCoreType
 import godot.gdnative.godot_pool_vector2_array
+import godot.internal.type.*
 import kotlinx.cinterop.*
-import godot.internal.type.callNative
 
 class PoolVector2Array : NativeCoreType<godot_pool_vector2_array>, Iterable<Vector2> {
+    //PROPERTIES
+    val size: Int
+        get() = this.size()
+
+
     //CONSTRUCTOR
     constructor() {
         callNative {

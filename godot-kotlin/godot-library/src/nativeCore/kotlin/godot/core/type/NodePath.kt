@@ -2,11 +2,10 @@
 
 package godot.core
 
-import godot.internal.type.NativeCoreType
 import godot.gdnative.godot_node_path
 import godot.gdnative.godot_node_path_operator_equal
+import godot.internal.type.*
 import kotlinx.cinterop.*
-import godot.internal.type.callNative
 
 
 class NodePath : NativeCoreType<godot_node_path> {

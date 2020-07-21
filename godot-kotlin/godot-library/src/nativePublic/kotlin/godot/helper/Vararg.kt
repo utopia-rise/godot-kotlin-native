@@ -1,4 +1,6 @@
-package godot.core
+package godot.helper
+
+import godot.core.Variant
 
 inline fun <reified P0> arrayOfVariant(
     p0: P0

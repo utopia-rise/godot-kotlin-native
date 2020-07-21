@@ -3,7 +3,6 @@ package godot.internal.type
 import godot.core.Variant
 import kotlinx.cinterop.*
 
-
 interface CoreType {
     fun getRawMemory(memScope: MemScope): COpaquePointer
     fun setRawMemory(mem: COpaquePointer)
