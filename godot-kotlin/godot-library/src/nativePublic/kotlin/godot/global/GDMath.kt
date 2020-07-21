@@ -1,6 +1,6 @@
 package godot.core
 
-import godot.internal.type.*
+import godot.internal.type.toRealT
 import kotlin.math.pow
 
 
