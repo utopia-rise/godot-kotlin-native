@@ -1,11 +1,11 @@
 package godot.core
 
 import godot.Object
-import godot.gdnative.godot_array
+import godot.gdnative.godot_array_layout
 import godot.internal.type.*
 import kotlinx.cinterop.*
 
-abstract class GodotArray<T> internal constructor() : NativeCoreType<godot_array>(), Iterable<T> {
+abstract class GodotArray<T> internal constructor() : NativeCoreType<godot_array_layout>(), Iterable<T> {
     //PROPERTIES
     val size: Int
         get() = this.size()
@@ -16,7 +16,7 @@ abstract class GodotArray<T> internal constructor() : NativeCoreType<godot_array
     }
 
     override fun setRawMemory(mem: COpaquePointer) {
-        _handle = mem.reinterpret<godot_array>().pointed.readValue()
+        _handle = mem.reinterpret<godot_array_layout>().pointed.readValue()
     }
 
 
@@ -271,7 +271,7 @@ abstract class GodotArray<T> internal constructor() : NativeCoreType<godot_array
         return "Array(${size()})"
     }
 
-    internal inline fun <C> callNative(block: MemScope.(CPointer<godot_array>) -> C): C {
+    internal inline fun <C> callNative(block: MemScope.(CPointer<godot_array_layout>) -> C): C {
         return callNative(this, block)
     }
 

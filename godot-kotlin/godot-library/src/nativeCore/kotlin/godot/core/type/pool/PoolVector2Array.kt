@@ -3,10 +3,11 @@
 package godot.core
 
 import godot.gdnative.godot_pool_vector2_array
+import godot.gdnative.godot_pool_vector2_array_layout
 import godot.internal.type.*
 import kotlinx.cinterop.*
 
-class PoolVector2Array : NativeCoreType<godot_pool_vector2_array>, Iterable<Vector2> {
+class PoolVector2Array : NativeCoreType<godot_pool_vector2_array_layout>, Iterable<Vector2> {
     //PROPERTIES
     val size: Int
         get() = this.size()
@@ -27,7 +28,7 @@ class PoolVector2Array : NativeCoreType<godot_pool_vector2_array>, Iterable<Vect
         }
     }
 
-    internal constructor(native: CValue<godot_pool_vector2_array>) {
+    internal constructor(native: CValue<godot_pool_vector2_array_layout>) {
         memScoped {
             this@PoolVector2Array.setRawMemory(native.ptr)
         }
@@ -43,7 +44,7 @@ class PoolVector2Array : NativeCoreType<godot_pool_vector2_array>, Iterable<Vect
     }
 
     override fun setRawMemory(mem: COpaquePointer) {
-        _handle = mem.reinterpret<godot_pool_vector2_array>().pointed.readValue()
+        _handle = mem.reinterpret<godot_pool_vector2_array_layout>().pointed.readValue()
     }
 
 
@@ -189,7 +190,7 @@ class PoolVector2Array : NativeCoreType<godot_pool_vector2_array>, Iterable<Vect
         return _handle.hashCode()
     }
 
-    internal inline fun <T> callNative(block: MemScope.(CPointer<godot_pool_vector2_array>) -> T): T {
+    internal inline fun <T> callNative(block: MemScope.(CPointer<godot_pool_vector2_array_layout>) -> T): T {
         return callNative(this, block)
     }
 }

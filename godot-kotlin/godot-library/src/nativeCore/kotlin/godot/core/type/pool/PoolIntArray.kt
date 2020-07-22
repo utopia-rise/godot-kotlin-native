@@ -4,10 +4,11 @@ package godot.core
 
 import godot.gdnative.godot_aabb
 import godot.gdnative.godot_pool_int_array
+import godot.gdnative.godot_pool_int_array_layout
 import godot.internal.type.*
 import kotlinx.cinterop.*
 
-class PoolIntArray : NativeCoreType<godot_pool_int_array>, Iterable<NaturalT> {
+class PoolIntArray : NativeCoreType<godot_pool_int_array_layout>, Iterable<NaturalT> {
     //PROPERTIES
     val size: Int
         get() = this.size()
@@ -21,13 +22,7 @@ class PoolIntArray : NativeCoreType<godot_pool_int_array>, Iterable<NaturalT> {
         }
     }
 
-    internal constructor(native: CValue<godot_pool_int_array>) {
-        memScoped {
-            this@PoolIntArray.setRawMemory(native.ptr)
-        }
-    }
-
-    internal constructor(native: CValue<godot_aabb>) {
+    internal constructor(native: CValue<godot_pool_int_array_layout>) {
         memScoped {
             this@PoolIntArray.setRawMemory(native.ptr)
         }
@@ -43,7 +38,7 @@ class PoolIntArray : NativeCoreType<godot_pool_int_array>, Iterable<NaturalT> {
     }
 
     override fun setRawMemory(mem: COpaquePointer) {
-        _handle = mem.reinterpret<godot_pool_int_array>().pointed.readValue()
+        _handle = mem.reinterpret<godot_pool_int_array_layout>().pointed.readValue()
     }
 
 
@@ -187,7 +182,7 @@ class PoolIntArray : NativeCoreType<godot_pool_int_array>, Iterable<NaturalT> {
         return _handle.hashCode()
     }
 
-    internal inline fun <T> callNative(block: MemScope.(CPointer<godot_pool_int_array>) -> T): T {
+    internal inline fun <T> callNative(block: MemScope.(CPointer<godot_pool_int_array_layout>) -> T): T {
         return callNative(this, block)
     }
 }

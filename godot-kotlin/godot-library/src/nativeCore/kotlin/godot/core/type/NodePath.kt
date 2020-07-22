@@ -3,12 +3,13 @@
 package godot.core
 
 import godot.gdnative.godot_node_path
+import godot.gdnative.godot_node_path_layout
 import godot.gdnative.godot_node_path_operator_equal
 import godot.internal.type.*
 import kotlinx.cinterop.*
 
 
-class NodePath : NativeCoreType<godot_node_path> {
+class NodePath : NativeCoreType<godot_node_path_layout> {
     //PROPERTIES
     val path: String
         get() {
@@ -41,7 +42,7 @@ class NodePath : NativeCoreType<godot_node_path> {
     }
 
 
-    internal constructor(native: CValue<godot_node_path>) {
+    internal constructor(native: CValue<godot_node_path_layout>) {
         callNative {
             checkNotNull(Godot.gdnative.godot_node_path_new_copy)(it, native.ptr)
         }
@@ -57,7 +58,7 @@ class NodePath : NativeCoreType<godot_node_path> {
     }
 
     override fun setRawMemory(mem: COpaquePointer) {
-        _handle = mem.reinterpret<godot_node_path>().pointed.readValue()
+        _handle = mem.reinterpret<godot_node_path_layout>().pointed.readValue()
     }
 
 
@@ -158,7 +159,7 @@ class NodePath : NativeCoreType<godot_node_path> {
         return "NodePath($path)"
     }
 
-    internal inline fun <T> callNative(block: MemScope.(CPointer<godot_node_path>) -> T): T {
+    internal inline fun <T> callNative(block: MemScope.(CPointer<godot_node_path_layout>) -> T): T {
         return callNative(this, block)
     }
 }

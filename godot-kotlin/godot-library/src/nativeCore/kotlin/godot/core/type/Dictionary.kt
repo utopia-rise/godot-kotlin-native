@@ -1,13 +1,13 @@
 package godot.core
 
 import godot.Object
-import godot.gdnative.godot_dictionary
+import godot.gdnative.godot_dictionary_layout
 import godot.internal.type.*
 import kotlinx.cinterop.*
 
 
 @ExperimentalUnsignedTypes
-class Dictionary : NativeCoreType<godot_dictionary>, Iterable<Entry<Variant, Variant>> {
+class Dictionary : NativeCoreType<godot_dictionary_layout>, Iterable<Entry<Variant, Variant>> {
     //PROPERTIES
     val size: Int
         get() = this.size()
@@ -26,7 +26,7 @@ class Dictionary : NativeCoreType<godot_dictionary>, Iterable<Entry<Variant, Var
         }
     }
 
-    internal constructor(native: CValue<godot_dictionary>) {
+    internal constructor(native: CValue<godot_dictionary_layout>) {
         memScoped {
             this@Dictionary.setRawMemory(native.ptr)
         }
@@ -42,7 +42,7 @@ class Dictionary : NativeCoreType<godot_dictionary>, Iterable<Entry<Variant, Var
     }
 
     override fun setRawMemory(mem: COpaquePointer) {
-        _handle = mem.reinterpret<godot_dictionary>().pointed.readValue()
+        _handle = mem.reinterpret<godot_dictionary_layout>().pointed.readValue()
     }
 
 
@@ -318,7 +318,7 @@ class Dictionary : NativeCoreType<godot_dictionary>, Iterable<Entry<Variant, Var
         return "Dictionary($size)"
     }
 
-    internal inline fun <T> callNative(block: MemScope.(CPointer<godot_dictionary>) -> T): T {
+    internal inline fun <T> callNative(block: MemScope.(CPointer<godot_dictionary_layout>) -> T): T {
         return callNative(this, block)
     }
 
