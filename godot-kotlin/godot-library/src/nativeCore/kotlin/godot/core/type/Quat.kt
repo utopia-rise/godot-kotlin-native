@@ -7,6 +7,7 @@ import godot.gdnative.godot_quat_layout
 import godot.internal.type.*
 import kotlinx.cinterop.*
 import kotlin.math.*
+import godot.internal.*
 
 class Quat(var x: RealT, var y: RealT, var z: RealT, var w: RealT) : CoreType {
     //CONSTANTS
@@ -25,20 +26,20 @@ class Quat(var x: RealT, var y: RealT, var z: RealT, var w: RealT) : CoreType {
 
     constructor(from: Basis) : this() {
         val trace = from[0][0] + from[1][1] + from[2][2]
-        val temp: DoubleArray
+        val temp: Array<RealT>
 
         if (trace > 0.0) {
             var s = sqrt(trace + 1.0)
             val temp3 = s * 0.5
             s = 0.5 / s
-            temp = doubleArrayOf(
+            temp = arrayOf(
                 ((from[2][1] - from[1][2]) * s),
                 ((from[0][2] - from[2][0]) * s),
                 ((from[1][0] - from[0][1]) * s),
                 temp3
             )
         } else {
-            temp = doubleArrayOf(0.0, 0.0, 0.0, 0.0)
+            temp = arrayOf(0.0, 0.0, 0.0, 0.0)
             val i = if (from[0][0] < from[1][1]) {
                 if (from[1][1] < from[2][2]) 2 else 1
             } else {
@@ -103,10 +104,10 @@ class Quat(var x: RealT, var y: RealT, var z: RealT, var w: RealT) : CoreType {
     //INTEROP
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
         val value = cValue<godot_quat_layout> {
-            x = this@Quat.x.toFloat()
-            y = this@Quat.y.toFloat()
-            z = this@Quat.z.toFloat()
-            w = this@Quat.w.toFloat()
+            x = this@Quat.x.toGodotReal()
+            y = this@Quat.y.toGodotReal()
+            z = this@Quat.z.toGodotReal()
+            w = this@Quat.w.toGodotReal()
         }
         return value.getPointer(memScope)
     }
@@ -182,7 +183,7 @@ class Quat(var x: RealT, var y: RealT, var z: RealT, var w: RealT) : CoreType {
      * Returns whether the quaternion is normalized or not.
      */
     fun isNormalized(): Boolean {
-        return abs(lengthSquared() - 1.0) < 0.00001
+        return abs(lengthSquared() - 1.0) < CMP_EPSILON
     }
 
     /**
@@ -350,8 +351,8 @@ class Quat(var x: RealT, var y: RealT, var z: RealT, var w: RealT) : CoreType {
 
         if (abs(dot) > 0.9999) return from
 
-        val theta: Double = acos(dot)
-        val sinT: Double = 1.0 / sin(theta)
+        val theta = acos(dot)
+        val sinT = 1.0 / sin(theta)
         val newFactor: RealT = sin(t * theta) * sinT
         val invFactor: RealT = sin((1.0 - t) * theta) * sinT
 

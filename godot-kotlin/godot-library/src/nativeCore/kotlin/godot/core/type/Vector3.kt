@@ -8,9 +8,10 @@ import godot.internal.type.CMP_EPSILON
 import godot.internal.type.*
 import kotlinx.cinterop.*
 import kotlin.math.*
+import godot.internal.*
 
 
-class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>,
+class Vector3(var x: RealT, var y: RealT, var z: RealT) : Comparable<Vector3>,
     CoreType {
     //CONSTANTS
     enum class Axis(val value: Int) {
@@ -37,7 +38,7 @@ class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>
         val ONE: Vector3
             get() = Vector3(1, 1, 1)
         val INF: Vector3
-            get() = Vector3(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY)
+            get() = Vector3(RealT.POSITIVE_INFINITY, RealT.POSITIVE_INFINITY, RealT.POSITIVE_INFINITY)
         val LEFT: Vector3
             get() = Vector3(-1, 0, 0)
         val RIGHT: Vector3
@@ -129,14 +130,14 @@ class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>
      * Performs a cubic interpolation between vectors pre_a, a, b, post_b (a is current), by the given amount t.
      * t is in the range of 0.0 - 1.0, representing the amount of interpolation.
      */
-    fun cubicInterpolate(b: Vector3, pre: Vector3, post: Vector3, t: Double): Vector3 {
+    fun cubicInterpolate(b: Vector3, pre: Vector3, post: Vector3, t: RealT): Vector3 {
         val p0: Vector3 = pre
         val p1: Vector3 = this
         val p2: Vector3 = b
         val p3: Vector3 = post
 
-        val t2: Double = t * t
-        val t3: Double = t2 * t
+        val t2 = t * t
+        val t3 = t2 * t
 
         return ((p1 * 2.0) +
             (-p0 + p2) * t +
@@ -171,7 +172,7 @@ class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>
     /**
      * Returns the dot product with b.
      */
-    fun dot(b: Vector3): Double {
+    fun dot(b: Vector3): RealT {
         return x * b.x + y * b.y + z * b.z
     }
 
@@ -212,7 +213,7 @@ class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>
     /**
      * Returns the vector’s length.
      */
-    fun length(): Double {
+    fun length(): RealT {
         return sqrt(x * x + y * y + z * z)
     }
 
@@ -220,7 +221,7 @@ class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>
      * Returns the vector’s length squared.
      * Prefer this function over length if you need to sort vectors or need the squared length for some formula.
      */
-    fun lengthSquared(): Double {
+    fun lengthSquared(): RealT {
         return x * x + y * y + z * z
     }
 
@@ -228,7 +229,7 @@ class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>
      * Returns the result of the linear interpolation between this vector and b by amount t.
      * t is in the range of 0.0 - 1.0, representing the amount of interpolation.
      */
-    fun linearInterpolate(b: Vector3, t: Double): Vector3 {
+    fun linearInterpolate(b: Vector3, t: RealT): Vector3 {
         return Vector3(x + (t * (b.x - x)), y + (t * (b.y - y)), z + (t * (b.z - z)))
     }
 
@@ -293,7 +294,7 @@ class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>
     }
 
     internal fun normalize() {
-        val l: Double = this.length()
+        val l = this.length()
         if (l == 0.0) {
             x = 0.0
             y = 0.0
@@ -347,7 +348,7 @@ class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>
     /**
      * Rotates the vector around a given axis by phi radians. The axis must be a normalized vector.
      */
-    fun rotated(axis: Vector3, phi: Double): Vector3 {
+    fun rotated(axis: Vector3, phi: RealT): Vector3 {
         if (!axis.isNormalized()) {
             Godot.printError("Axis not normalized", "rotated()", "Vector3.kt", 251)
         }
@@ -356,7 +357,7 @@ class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>
         return v
     }
 
-    internal fun rotate(axis: Vector3, phi: Double) {
+    internal fun rotate(axis: Vector3, phi: RealT) {
         val ret = Basis(axis, phi).xform(this)
         this.x = ret.x
         this.y = ret.y
@@ -401,13 +402,13 @@ class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>
     /**
      * Returns a copy of the vector snapped to the lowest neared multiple.
      */
-    fun snapped(by: Double): Vector3 {
+    fun snapped(by: RealT): Vector3 {
         val v: Vector3 = this
         v.snap(by)
         return v
     }
 
-    internal fun snap(vecal: Double) {
+    internal fun snap(vecal: RealT) {
         if (vecal != 0.0) {
             x = floor(x / vecal + 0.5) * vecal
             y = floor(y / vecal + 0.5) * vecal
@@ -426,7 +427,7 @@ class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>
     //UTILITIES
     override fun toVariant() = Variant(this)
 
-    operator fun get(n: Int): Double =
+    operator fun get(n: Int): RealT =
         when (n) {
             0 -> x
             1 -> y
@@ -434,7 +435,7 @@ class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>
             else -> throw IndexOutOfBoundsException()
         }
 
-    operator fun set(n: Int, f: Double): Unit =
+    operator fun set(n: Int, f: RealT): Unit =
         when (n) {
             0 -> x = f
             1 -> y = f
@@ -450,9 +451,9 @@ class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>
 
     operator fun div(vec: Vector3) = Vector3(x / vec.x, y / vec.y, z / vec.z)
 
-    operator fun times(scalar: Double) = Vector3(x * scalar, y * scalar, z * scalar)
+    operator fun times(scalar: RealT) = Vector3(x * scalar, y * scalar, z * scalar)
 
-    operator fun div(scalar: Double) = Vector3(x / scalar, y / scalar, z / scalar)
+    operator fun div(scalar: RealT) = Vector3(x / scalar, y / scalar, z / scalar)
 
     operator fun unaryMinus() = Vector3(-x, -y, -z)
 
@@ -491,6 +492,6 @@ class Vector3(var x: Double, var y: Double, var z: Double) : Comparable<Vector3>
     }
 }
 
-operator fun Double.times(vecec: Vector3) = vecec * this
+operator fun RealT.times(vecec: Vector3) = vecec * this
 
 

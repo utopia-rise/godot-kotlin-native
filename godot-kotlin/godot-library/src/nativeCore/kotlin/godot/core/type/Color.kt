@@ -6,10 +6,7 @@ import godot.gdnative.godot_color
 import godot.gdnative.godot_color_layout
 import godot.internal.type.*
 import kotlinx.cinterop.*
-import kotlin.math.floor
-import kotlin.math.max
-import kotlin.math.min
-import kotlin.math.roundToInt
+import kotlin.math.*
 
 
 class Color(var r: RealT, var g: RealT, var b: RealT, var a: RealT) : Comparable<Color>,
@@ -685,48 +682,48 @@ class Color(var r: RealT, var g: RealT, var b: RealT, var a: RealT) : Comparable
      * Returns the color’s 32-bit integer in ABGR format (each byte represents a component of the ABGR profile).
      * ABGR is the reversed version of the default format.
      */
-    fun toABGR32(): Int = toByteColorCode(a, b, g, r, ColorByte.BITS32)
+    fun toABGR32(): Int = toByteColorCode(a, b, g, r, ColorByte.BITS32).toInt()
 
     /**
      * Returns the color’s 64-bit integer in ABGR format (each word represents a component of the ABGR profile).
      * ABGR is the reversed version of the default format.
      */
-    fun toABGR64(): Int = toByteColorCode(a, b, g, r, ColorByte.BITS64)
+    fun toABGR64(): Long = toByteColorCode(a, b, g, r, ColorByte.BITS64)
 
     /**
      * Returns the color’s 32-bit integer in ARGB format (each byte represents a component of the ARGB profile).
      * ARGB is more compatible with DirectX.
      */
-    fun toARGB32(): Int = toByteColorCode(a, r, g, b, ColorByte.BITS32)
+    fun toARGB32(): Int = toByteColorCode(a, r, g, b, ColorByte.BITS32).toInt()
 
     /**
      * Returns the color’s 64-bit integer in ARGB format (each word represents a component of the ARGB profile).
      * ARGB is more compatible with DirectX.
      */
-    fun toARGB64(): Int = toByteColorCode(a, r, g, b, ColorByte.BITS64)
+    fun toARGB64(): Long = toByteColorCode(a, r, g, b, ColorByte.BITS64)
 
     /**
      * Returns the color’s 32-bit integer in RGBA format (each byte represents a component of the RGBA profile).
      * RGBA is Godot’s default format.
      */
-    fun toRGBA32(): Int = toByteColorCode(r, g, b, a, ColorByte.BITS32)
+    fun toRGBA32(): Int = toByteColorCode(r, g, b, a, ColorByte.BITS32).toInt()
 
     /**
     Returns the color’s 64-bit integer in RGBA format (each word represents a component of the RGBA profile).
     RGBA is Godot’s default format.
      */
-    fun toRGBA64(): Int = toByteColorCode(r, g, b, a, ColorByte.BITS64)
+    fun toRGBA64(): Long = toByteColorCode(r, g, b, a, ColorByte.BITS64)
 
-    private fun toByteColorCode(first: RealT, second: RealT, third: RealT, fourth: RealT, colorByte: ColorByte): Int {
+    private fun toByteColorCode(first: RealT, second: RealT, third: RealT, fourth: RealT, colorByte: ColorByte): Long {
         val size = colorByte.size
         val shift = colorByte.shift
-        var c: Int = (first * size).roundToInt()
+        var c: Long = (first * size).roundToLong()
         c = c shl shift
-        c = c or (second * size).roundToInt()
+        c = c or (second * size).roundToLong()
         c = c shl shift
-        c = c or (third * size).roundToInt()
+        c = c or (third * size).roundToLong()
         c = c shl shift
-        c = c or (fourth * size).roundToInt()
+        c = c or (fourth * size).roundToLong()
 
         return c
     }

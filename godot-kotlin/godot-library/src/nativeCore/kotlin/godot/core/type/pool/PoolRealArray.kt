@@ -3,10 +3,11 @@
 package godot.core
 
 import godot.gdnative.godot_pool_real_array
+import godot.gdnative.godot_pool_real_array_layout
 import godot.internal.type.*
 import kotlinx.cinterop.*
 
-class PoolRealArray : NativeCoreType<godot_pool_real_array>, Iterable<RealT> {
+class PoolRealArray : NativeCoreType<godot_pool_real_array_layout>, Iterable<RealT> {
     //PROPERTIES
     val size: Int
         get() = this.size()
@@ -14,12 +15,13 @@ class PoolRealArray : NativeCoreType<godot_pool_real_array>, Iterable<RealT> {
 
     //CONSTRUCTOR
     constructor() {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_pool_real_array_new)(it)
         }
     }
 
-    internal constructor(native: CValue<godot_pool_real_array>) {
+    internal constructor(native: CValue<godot_pool_real_array_layout>) {
         memScoped {
             this@PoolRealArray.setRawMemory(native.ptr)
         }
@@ -35,7 +37,7 @@ class PoolRealArray : NativeCoreType<godot_pool_real_array>, Iterable<RealT> {
     }
 
     override fun setRawMemory(mem: COpaquePointer) {
-        _handle = mem.reinterpret<godot_pool_real_array>().pointed.readValue()
+        _handle = mem.reinterpret<godot_pool_real_array_layout>().pointed.readValue()
     }
 
 
@@ -179,7 +181,7 @@ class PoolRealArray : NativeCoreType<godot_pool_real_array>, Iterable<RealT> {
         return _handle.hashCode()
     }
 
-    internal inline fun <T> callNative(block: MemScope.(CPointer<godot_pool_real_array>) -> T): T {
+    internal inline fun <T> callNative(block: MemScope.(CPointer<godot_pool_real_array_layout>) -> T): T {
         return callNative(this, block)
     }
 }

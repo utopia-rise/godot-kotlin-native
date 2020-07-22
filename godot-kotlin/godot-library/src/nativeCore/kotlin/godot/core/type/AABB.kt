@@ -35,12 +35,12 @@ class AABB(var position: Vector3, var size: Vector3) : CoreType {
     //INTEROP
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
         val value = cValue<godot_aabb_layout> {
-            position.x = this@AABB.position.x.toFloat()
-            position.y = this@AABB.position.y.toFloat()
-            position.z = this@AABB.position.z.toFloat()
-            size.x = this@AABB.size.x.toFloat()
-            size.y = this@AABB.size.y.toFloat()
-            size.z = this@AABB.size.z.toFloat()
+            position.x = this@AABB.position.x.toGodotReal()
+            position.y = this@AABB.position.y.toGodotReal()
+            position.z = this@AABB.position.z.toGodotReal()
+            size.x = this@AABB.size.x.toGodotReal()
+            size.y = this@AABB.size.y.toGodotReal()
+            size.z = this@AABB.size.z.toGodotReal()
         }
         return value.getPointer(memScope)
     }
@@ -170,7 +170,7 @@ class AABB(var position: Vector3, var size: Vector3) : CoreType {
     /**
      *  Returns the scalar length of the longest axis of the AABB.
      */
-    fun getLongestAxisSize(): Double {
+    fun getLongestAxisSize(): RealT {
         var maxSize = size.x
         if (size.y > maxSize) {
             maxSize = size.y
@@ -223,7 +223,7 @@ class AABB(var position: Vector3, var size: Vector3) : CoreType {
     /**
      * Gets the position of the 8 endpoints of the AABB in space.
      */
-    fun getShortestAxisSize(): Double {
+    fun getShortestAxisSize(): RealT {
         var minSize = size.x
         if (size.y < minSize) {
             minSize = size.y

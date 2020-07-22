@@ -2,21 +2,20 @@ package godot.core
 
 import godot.Object
 import godot.gdnative.godot_array
-import kotlinx.cinterop.COpaquePointer
-import kotlinx.cinterop.CValue
-import kotlinx.cinterop.invoke
-import kotlinx.cinterop.memScoped
+import kotlinx.cinterop.*
 
 class BoolVariantArray : GodotArray<Boolean> {
 
     //CONSTRUCTOR
     constructor() {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_array_new)(it)
         }
     }
 
     constructor(other: BoolVariantArray) {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_array_new_copy)(it, other._handle.ptr)
         }

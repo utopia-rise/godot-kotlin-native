@@ -8,6 +8,7 @@ import godot.internal.type.*
 import kotlinx.cinterop.*
 import kotlin.math.max
 import kotlin.math.min
+import godot.internal.*
 
 class Rect2(var position: Vector2, var size: Vector2) : CoreType {
     //PROPERTIES
@@ -54,10 +55,10 @@ class Rect2(var position: Vector2, var size: Vector2) : CoreType {
     //INTEROP
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
         val value = cValue<godot_rect2_layout> {
-            position.x = this@Rect2.position.x.toFloat()
-            position.y = this@Rect2.position.y.toFloat()
-            size.x = this@Rect2.size.x.toFloat()
-            size.y = this@Rect2.size.y.toFloat()
+            position.x = this@Rect2.position.x.toGodotReal()
+            position.y = this@Rect2.position.y.toGodotReal()
+            size.x = this@Rect2.size.x.toGodotReal()
+            size.y = this@Rect2.size.y.toGodotReal()
         }
         return value.getPointer(memScope)
     }

@@ -4,16 +4,18 @@ package godot.core
 
 import godot.Object
 import godot.gdnative.godot_rid
+import godot.gdnative.godot_rid_layout
 import godot.internal.type.*
 import kotlinx.cinterop.*
 
-class RID : NativeCoreType<godot_rid>, Comparable<RID> {
+class RID : NativeCoreType<godot_rid_layout>, Comparable<RID> {
     //PROPERTIES
     val id: Int
         get() = getID()
 
     //CONSTRUCTOR
     constructor() {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_rid_new)(it)
         }
@@ -21,13 +23,14 @@ class RID : NativeCoreType<godot_rid>, Comparable<RID> {
 
 
     constructor(from: Object) {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_rid_new_with_resource)(it, from.ptr)
         }
     }
 
 
-    internal constructor(native: CValue<godot_rid>) {
+    internal constructor(native: CValue<godot_rid_layout>) {
         memScoped {
             this@RID.setRawMemory(native.ptr)
         }
@@ -43,7 +46,7 @@ class RID : NativeCoreType<godot_rid>, Comparable<RID> {
     }
 
     override fun setRawMemory(mem: COpaquePointer) {
-        _handle = mem.reinterpret<godot_rid>().pointed.readValue()
+        _handle = mem.reinterpret<godot_rid_layout>().pointed.readValue()
     }
 
 
@@ -84,7 +87,7 @@ class RID : NativeCoreType<godot_rid>, Comparable<RID> {
         return "RID($id)"
     }
 
-    internal inline fun <T> callNative(block: MemScope.(CPointer<godot_rid>) -> T): T {
+    internal inline fun <T> callNative(block: MemScope.(CPointer<godot_rid_layout>) -> T): T {
         return callNative(this, block)
     }
 }

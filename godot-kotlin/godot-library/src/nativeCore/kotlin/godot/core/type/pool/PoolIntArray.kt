@@ -4,10 +4,11 @@ package godot.core
 
 import godot.gdnative.godot_aabb
 import godot.gdnative.godot_pool_int_array
+import godot.gdnative.godot_pool_int_array_layout
 import godot.internal.type.*
 import kotlinx.cinterop.*
 
-class PoolIntArray : NativeCoreType<godot_pool_int_array>, Iterable<Int> {
+class PoolIntArray : NativeCoreType<godot_pool_int_array_layout>, Iterable<NaturalT> {
     //PROPERTIES
     val size: Int
         get() = this.size()
@@ -15,18 +16,13 @@ class PoolIntArray : NativeCoreType<godot_pool_int_array>, Iterable<Int> {
 
     //CONSTRUCTOR
     constructor() {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_pool_int_array_new)(it)
         }
     }
 
-    internal constructor(native: CValue<godot_pool_int_array>) {
-        memScoped {
-            this@PoolIntArray.setRawMemory(native.ptr)
-        }
-    }
-
-    internal constructor(native: CValue<godot_aabb>) {
+    internal constructor(native: CValue<godot_pool_int_array_layout>) {
         memScoped {
             this@PoolIntArray.setRawMemory(native.ptr)
         }
@@ -42,7 +38,7 @@ class PoolIntArray : NativeCoreType<godot_pool_int_array>, Iterable<Int> {
     }
 
     override fun setRawMemory(mem: COpaquePointer) {
-        _handle = mem.reinterpret<godot_pool_int_array>().pointed.readValue()
+        _handle = mem.reinterpret<godot_pool_int_array_layout>().pointed.readValue()
     }
 
 
@@ -50,9 +46,9 @@ class PoolIntArray : NativeCoreType<godot_pool_int_array>, Iterable<Int> {
     /**
      * Appends an element at the end of the array (alias of push_back).
      */
-    fun append(i: Int) {
+    fun append(i: NaturalT) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_int_array_append)(it, i)
+            checkNotNull(Godot.gdnative.godot_pool_int_array_append)(it, i.toGodotNatural())
         }
     }
 
@@ -78,9 +74,9 @@ class PoolIntArray : NativeCoreType<godot_pool_int_array>, Iterable<Int> {
     /**
      *  Retrieve the element at the given index.
      */
-    operator fun get(idx: Int): Int {
+    operator fun get(idx: Int): NaturalT {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_pool_int_array_get)(it, idx)
+            checkNotNull(Godot.gdnative.godot_pool_int_array_get)(it, idx).toNaturalT()
         }
     }
 
@@ -88,9 +84,9 @@ class PoolIntArray : NativeCoreType<godot_pool_int_array>, Iterable<Int> {
      * Inserts a new element at a given position in the array.
      * The position must be valid, or at the end of the array (idx == size()).
      */
-    fun insert(idx: Int, data: Int) {
+    fun insert(idx: Int, data: NaturalT) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_int_array_insert)(it, idx, data)
+            checkNotNull(Godot.gdnative.godot_pool_int_array_insert)(it, idx, data.toGodotNatural())
         }
     }
 
@@ -106,9 +102,9 @@ class PoolIntArray : NativeCoreType<godot_pool_int_array>, Iterable<Int> {
     /**
      * Appends a value to the array.
      */
-    fun pushBack(data: Int) {
+    fun pushBack(data: NaturalT) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_int_array_push_back)(it, data)
+            checkNotNull(Godot.gdnative.godot_pool_int_array_push_back)(it, data.toGodotNatural())
         }
     }
 
@@ -134,9 +130,9 @@ class PoolIntArray : NativeCoreType<godot_pool_int_array>, Iterable<Int> {
     /**
      * Changes the integer at the given index.
      */
-    operator fun set(idx: Int, data: Int) {
+    operator fun set(idx: Int, data: NaturalT) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_int_array_set)(it, idx, data)
+            checkNotNull(Godot.gdnative.godot_pool_int_array_set)(it, idx, data.toGodotNatural())
         }
     }
 
@@ -152,7 +148,7 @@ class PoolIntArray : NativeCoreType<godot_pool_int_array>, Iterable<Int> {
     //UTILITIES
     override fun toVariant() = Variant(this)
 
-    operator fun plus(other: Int) {
+    operator fun plus(other: NaturalT) {
         this.append(other)
     }
 
@@ -164,7 +160,7 @@ class PoolIntArray : NativeCoreType<godot_pool_int_array>, Iterable<Int> {
         return "PoolIntArray(${size()})"
     }
 
-    override fun iterator(): Iterator<Int> {
+    override fun iterator(): Iterator<NaturalT> {
         return IndexedIterator(size(), this::get)
     }
 
@@ -186,7 +182,7 @@ class PoolIntArray : NativeCoreType<godot_pool_int_array>, Iterable<Int> {
         return _handle.hashCode()
     }
 
-    internal inline fun <T> callNative(block: MemScope.(CPointer<godot_pool_int_array>) -> T): T {
+    internal inline fun <T> callNative(block: MemScope.(CPointer<godot_pool_int_array_layout>) -> T): T {
         return callNative(this, block)
     }
 }

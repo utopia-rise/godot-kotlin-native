@@ -3,58 +3,63 @@ package godot.core
 import godot.Object
 import godot.gdnative.godot_array
 import godot.internal.type.*
-import kotlinx.cinterop.COpaquePointer
-import kotlinx.cinterop.CValue
-import kotlinx.cinterop.invoke
-import kotlinx.cinterop.memScoped
+import kotlinx.cinterop.*
 
 @ExperimentalUnsignedTypes
 class VariantArray : GodotArray<Variant> {
 
     //CONSTRUCTOR
     constructor() {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_array_new)(it)
         }
     }
 
     constructor(other: PoolByteArray) {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_array_new_pool_byte_array)(it, other._handle.ptr)
         }
     }
 
     constructor(other: PoolColorArray) {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_array_new_pool_color_array)(it, other._handle.ptr)
         }
     }
 
     constructor(other: PoolIntArray) {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_array_new_pool_int_array)(it, other._handle.ptr)
         }
     }
 
     constructor(other: PoolRealArray) {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_array_new_pool_real_array)(it, other._handle.ptr)
         }
     }
 
     constructor(other: PoolStringArray) {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_array_new_pool_string_array)(it, other._handle.ptr)
         }
     }
 
     constructor(other: PoolVector2Array) {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_array_new_pool_vector2_array)(it, other._handle.ptr)
         }
     }
 
     constructor(other: PoolVector3Array) {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_array_new_pool_vector3_array)(it, other._handle.ptr)
         }

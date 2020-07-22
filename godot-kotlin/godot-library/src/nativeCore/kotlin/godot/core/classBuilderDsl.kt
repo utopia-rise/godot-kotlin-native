@@ -2,6 +2,7 @@ package godot.core
 
 import godot.Object
 import godot.gdnative.godot_property_hint
+import godot.internal.type.toNaturalT
 import godot.registration.RPCMode
 import kotlinx.cinterop.StableRef
 import kotlin.reflect.KMutableProperty1
@@ -139,6 +140,7 @@ class ClassBuilder<T : Object> internal constructor(val classHandle: ClassHandle
         )
     }
 
+
     inline fun <reified K : Enum<K>> enumListProperty(
         name: String,
         property: KMutableProperty1<T, GodotArray<K>>,
@@ -149,7 +151,7 @@ class ClassBuilder<T : Object> internal constructor(val classHandle: ClassHandle
         val variantArray = IntVariantArray()
         if (default != null) {
             default.asVariantArray().forEach {
-                variantArray.append((it as K).ordinal)
+                variantArray.append((it as K).ordinal.toNaturalT())
             }
         }
         val propertyHandler = MutablePropertyHandler(property)
@@ -175,10 +177,10 @@ class ClassBuilder<T : Object> internal constructor(val classHandle: ClassHandle
         val variantArray = IntVariantArray()
         if (default != null) {
             default.asVariantArray().forEach {
-                variantArray.append((it as K).ordinal)
+                variantArray.append((it as K).ordinal.toNaturalT())
             }
         }
-        val propertyHandler = MutableEnumFlagPropertyHandler(property) { ord -> enumValues<K>()[ord] }
+        val propertyHandler = MutableEnumFlagPropertyHandler(property) { ord -> enumValues<K>()[ord.toInt()] }
         classHandle.registerProperty(
             name,
             StableRef.create(propertyHandler).asCPointer(),

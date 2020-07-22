@@ -2,27 +2,27 @@ package godot.core
 
 import godot.Object
 import godot.gdnative.godot_array
-import kotlinx.cinterop.COpaquePointer
-import kotlinx.cinterop.CValue
-import kotlinx.cinterop.invoke
-import kotlinx.cinterop.memScoped
+import kotlinx.cinterop.*
 
 class StringVariantArray : GodotArray<String> {
 
     //CONSTRUCTOR
     constructor() {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_array_new)(it)
         }
     }
 
     constructor(other: StringVariantArray) {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_array_new_copy)(it, other._handle.ptr)
         }
     }
 
     constructor(other: PoolStringArray) {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_array_new_pool_string_array)(it, other._handle.ptr)
         }
