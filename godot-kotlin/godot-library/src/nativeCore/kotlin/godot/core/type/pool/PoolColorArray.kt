@@ -18,7 +18,7 @@ class PoolColorArray : NativeCoreType<godot_pool_color_array_layout>, Iterable<C
     constructor() {
         _handle = cValue{}
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_color_array_new)(it)
+            notNull(Godot.gdnative.godot_pool_color_array_new)(it)
         }
     }
 
@@ -48,7 +48,7 @@ class PoolColorArray : NativeCoreType<godot_pool_color_array_layout>, Iterable<C
      */
     fun append(color: Color) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_color_array_append)(it, color.getRawMemory(this).reinterpret())
+            notNull(Godot.gdnative.godot_pool_color_array_append)(it, color.getRawMemory(this).reinterpret())
         }
     }
 
@@ -58,7 +58,7 @@ class PoolColorArray : NativeCoreType<godot_pool_color_array_layout>, Iterable<C
      */
     fun appendArray(array: PoolColorArray) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_color_array_append_array)(it, array._handle.ptr)
+            notNull(Godot.gdnative.godot_pool_color_array_append_array)(it, array._handle.ptr)
         }
     }
 
@@ -67,7 +67,7 @@ class PoolColorArray : NativeCoreType<godot_pool_color_array_layout>, Iterable<C
      */
     fun empty() {
         callNative {
-            checkNotNull(Godot.gdnative12.godot_pool_color_array_empty)(it)
+            notNull(Godot.gdnative12.godot_pool_color_array_empty)(it)
         }
     }
 
@@ -77,7 +77,7 @@ class PoolColorArray : NativeCoreType<godot_pool_color_array_layout>, Iterable<C
     operator fun get(idx: Int): Color {
         return Color(
             callNative {
-                checkNotNull(Godot.gdnative.godot_pool_color_array_get)(it, idx)
+                notNull(Godot.gdnative.godot_pool_color_array_get)(it, idx)
             }
         )
     }
@@ -88,7 +88,7 @@ class PoolColorArray : NativeCoreType<godot_pool_color_array_layout>, Iterable<C
      */
     fun insert(idx: Int, data: Color) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_color_array_insert)(it, idx, data.getRawMemory(this).reinterpret())
+            notNull(Godot.gdnative.godot_pool_color_array_insert)(it, idx, data.getRawMemory(this).reinterpret())
         }
     }
 
@@ -97,7 +97,7 @@ class PoolColorArray : NativeCoreType<godot_pool_color_array_layout>, Iterable<C
      */
     fun invert() {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_color_array_invert)(it)
+            notNull(Godot.gdnative.godot_pool_color_array_invert)(it)
         }
     }
 
@@ -106,7 +106,7 @@ class PoolColorArray : NativeCoreType<godot_pool_color_array_layout>, Iterable<C
      */
     fun pushBack(data: Color) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_color_array_push_back)(it, data.getRawMemory(this).reinterpret())
+            notNull(Godot.gdnative.godot_pool_color_array_push_back)(it, data.getRawMemory(this).reinterpret())
         }
     }
 
@@ -115,7 +115,7 @@ class PoolColorArray : NativeCoreType<godot_pool_color_array_layout>, Iterable<C
      */
     fun remove(idx: Int) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_color_array_remove)(it, idx)
+            notNull(Godot.gdnative.godot_pool_color_array_remove)(it, idx)
         }
     }
 
@@ -125,7 +125,7 @@ class PoolColorArray : NativeCoreType<godot_pool_color_array_layout>, Iterable<C
      */
     fun resize(size: Int) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_color_array_resize)(it, size)
+            notNull(Godot.gdnative.godot_pool_color_array_resize)(it, size)
         }
     }
 
@@ -134,7 +134,7 @@ class PoolColorArray : NativeCoreType<godot_pool_color_array_layout>, Iterable<C
      */
     operator fun set(idx: Int, data: Color) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_color_array_set)(it, idx, data.getRawMemory(this).reinterpret())
+            notNull(Godot.gdnative.godot_pool_color_array_set)(it, idx, data.getRawMemory(this).reinterpret())
         }
     }
 
@@ -143,7 +143,7 @@ class PoolColorArray : NativeCoreType<godot_pool_color_array_layout>, Iterable<C
      */
     fun size(): Int {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_pool_color_array_size)(it)
+            notNull(Godot.gdnative.godot_pool_color_array_size)(it)
         }
     }
 

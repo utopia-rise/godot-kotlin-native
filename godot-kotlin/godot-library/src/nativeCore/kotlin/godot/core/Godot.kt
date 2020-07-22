@@ -1,6 +1,7 @@
 package godot.core
 
 import godot.gdnative.*
+import godot.internal.type.notNull
 import kotlinx.cinterop.*
 import kotlin.native.concurrent.AtomicInt
 import kotlin.native.concurrent.AtomicReference
@@ -10,21 +11,21 @@ object Godot {
     private val nativescriptWrapper = AtomicReference<CPointer<godot_gdnative_ext_nativescript_api_struct>?>(null)
 
     internal val gdnative: godot_gdnative_core_api_struct
-        get() = checkNotNull(gdnativeWrapper.value).pointed
+        get() = notNull(gdnativeWrapper.value).pointed
 
     internal val gdnative11: godot_gdnative_core_1_1_api_struct
-        get() = checkNotNull(gdnative.next).reinterpret<godot_gdnative_core_1_1_api_struct>().pointed
+        get() = notNull(gdnative.next).reinterpret<godot_gdnative_core_1_1_api_struct>().pointed
 
     internal val gdnative12: godot_gdnative_core_1_2_api_struct
-        get() = checkNotNull(gdnative11.next).reinterpret<godot_gdnative_core_1_2_api_struct>().pointed
+        get() = notNull(gdnative11.next).reinterpret<godot_gdnative_core_1_2_api_struct>().pointed
 
     @PublishedApi
     internal val nativescript: godot_gdnative_ext_nativescript_api_struct
-        get() = checkNotNull(nativescriptWrapper.value).pointed
+        get() = notNull(nativescriptWrapper.value).pointed
 
     @PublishedApi
     internal val nativescript11: godot_gdnative_ext_nativescript_1_1_api_struct
-        get() = checkNotNull(nativescript.next).reinterpret<godot_gdnative_ext_nativescript_1_1_api_struct>().pointed
+        get() = notNull(nativescript.next).reinterpret<godot_gdnative_ext_nativescript_1_1_api_struct>().pointed
 
     internal val languageIndex: Int
         get() = languageIndexRef.value
@@ -34,12 +35,12 @@ object Godot {
     private val initHandle = AtomicInt(0)
 
     fun init(options: godot_gdnative_init_options) {
-        val gdnative = checkNotNull(options.api_struct)
+        val gdnative = notNull(options.api_struct)
         val extensionCount = gdnative.pointed.num_extensions.toInt()
-        val extensions = checkNotNull(gdnative.pointed.extensions)
+        val extensions = notNull(gdnative.pointed.extensions)
         lateinit var nativescript: CPointer<godot_gdnative_ext_nativescript_api_struct>
         (0 until extensionCount).forEach { i ->
-            val extension = checkNotNull(extensions[i])
+            val extension = notNull(extensions[i])
             val type = extension.pointed.type
             when (GDNATIVE_API_TYPES.byValue(type)) {
                 GDNATIVE_API_TYPES.GDNATIVE_EXT_NATIVESCRIPT -> {
@@ -60,7 +61,7 @@ object Godot {
                 alloc_instance_binding_data = staticCFunction(::createWrapper)
                 free_instance_binding_data = staticCFunction(::destroyWrapper)
             }
-            val index = checkNotNull(nativescript11.godot_nativescript_register_instance_binding_data_functions)(
+            val index = notNull(nativescript11.godot_nativescript_register_instance_binding_data_functions)(
                 info
             )
             languageIndexRef.compareAndSet(languageIndexRef.value, index)
@@ -68,7 +69,7 @@ object Godot {
     }
 
     fun nativescriptTerminate(handle: COpaquePointer) {
-        checkNotNull(nativescript11.godot_nativescript_unregister_instance_binding_data_functions)(languageIndex)
+        notNull(nativescript11.godot_nativescript_unregister_instance_binding_data_functions)(languageIndex)
     }
 
     fun terminate(options: godot_gdnative_terminate_options) {
@@ -87,19 +88,19 @@ object Godot {
 
     internal fun print(message: String) {
         memScoped {
-            checkNotNull(gdnative.godot_print)(message.toGDString().ptr)
+            notNull(gdnative.godot_print)(message.toGDString().ptr)
         }
     }
 
     internal fun printWarning(description: String, function: String, file: String, line: Int) {
         memScoped {
-            checkNotNull(gdnative.godot_print_warning)(description.cstr.ptr, function.cstr.ptr, file.cstr.ptr, line)
+            notNull(gdnative.godot_print_warning)(description.cstr.ptr, function.cstr.ptr, file.cstr.ptr, line)
         }
     }
 
     internal fun printError(description: String, function: String, file: String, line: Int) {
         memScoped {
-            checkNotNull(gdnative.godot_print_error)(description.cstr.ptr, function.cstr.ptr, file.cstr.ptr, line)
+            notNull(gdnative.godot_print_error)(description.cstr.ptr, function.cstr.ptr, file.cstr.ptr, line)
         }
     }
 }

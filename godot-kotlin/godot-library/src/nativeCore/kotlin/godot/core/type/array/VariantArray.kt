@@ -12,56 +12,56 @@ class VariantArray : GodotArray<Variant> {
     constructor() {
         _handle = cValue{}
         callNative {
-            checkNotNull(Godot.gdnative.godot_array_new)(it)
+            notNull(Godot.gdnative.godot_array_new)(it)
         }
     }
 
     constructor(other: PoolByteArray) {
         _handle = cValue{}
         callNative {
-            checkNotNull(Godot.gdnative.godot_array_new_pool_byte_array)(it, other._handle.ptr)
+            notNull(Godot.gdnative.godot_array_new_pool_byte_array)(it, other._handle.ptr)
         }
     }
 
     constructor(other: PoolColorArray) {
         _handle = cValue{}
         callNative {
-            checkNotNull(Godot.gdnative.godot_array_new_pool_color_array)(it, other._handle.ptr)
+            notNull(Godot.gdnative.godot_array_new_pool_color_array)(it, other._handle.ptr)
         }
     }
 
     constructor(other: PoolIntArray) {
         _handle = cValue{}
         callNative {
-            checkNotNull(Godot.gdnative.godot_array_new_pool_int_array)(it, other._handle.ptr)
+            notNull(Godot.gdnative.godot_array_new_pool_int_array)(it, other._handle.ptr)
         }
     }
 
     constructor(other: PoolRealArray) {
         _handle = cValue{}
         callNative {
-            checkNotNull(Godot.gdnative.godot_array_new_pool_real_array)(it, other._handle.ptr)
+            notNull(Godot.gdnative.godot_array_new_pool_real_array)(it, other._handle.ptr)
         }
     }
 
     constructor(other: PoolStringArray) {
         _handle = cValue{}
         callNative {
-            checkNotNull(Godot.gdnative.godot_array_new_pool_string_array)(it, other._handle.ptr)
+            notNull(Godot.gdnative.godot_array_new_pool_string_array)(it, other._handle.ptr)
         }
     }
 
     constructor(other: PoolVector2Array) {
         _handle = cValue{}
         callNative {
-            checkNotNull(Godot.gdnative.godot_array_new_pool_vector2_array)(it, other._handle.ptr)
+            notNull(Godot.gdnative.godot_array_new_pool_vector2_array)(it, other._handle.ptr)
         }
     }
 
     constructor(other: PoolVector3Array) {
         _handle = cValue{}
         callNative {
-            checkNotNull(Godot.gdnative.godot_array_new_pool_vector3_array)(it, other._handle.ptr)
+            notNull(Godot.gdnative.godot_array_new_pool_vector3_array)(it, other._handle.ptr)
         }
     }
 
@@ -81,7 +81,7 @@ class VariantArray : GodotArray<Variant> {
 
     override fun append(value: Variant) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_array_append)(it, value._handle.ptr)
+            notNull(Godot.gdnative.godot_array_append)(it, value._handle.ptr)
         }
     }
 
@@ -96,7 +96,7 @@ class VariantArray : GodotArray<Variant> {
 
     override fun bsearch(value: Variant, before: Boolean): Int {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_bsearch)(it, value._handle.ptr, before)
+            notNull(Godot.gdnative.godot_array_bsearch)(it, value._handle.ptr, before)
         }
     }
 
@@ -111,7 +111,7 @@ class VariantArray : GodotArray<Variant> {
 
     override fun bsearchCustom(value: Variant, obj: Object, func: String, before: Boolean): Int {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_bsearch_custom)(
+            notNull(Godot.gdnative.godot_array_bsearch_custom)(
                 it,
                 value._handle.ptr,
                 obj.ptr,
@@ -147,7 +147,7 @@ class VariantArray : GodotArray<Variant> {
 
     override fun count(value: Variant): Int {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_count)(it, value._handle.ptr)
+            notNull(Godot.gdnative.godot_array_count)(it, value._handle.ptr)
         }
     }
 
@@ -163,14 +163,14 @@ class VariantArray : GodotArray<Variant> {
     override fun duplicate(deep: Boolean): VariantArray {
         return VariantArray(
             callNative {
-                checkNotNull(Godot.gdnative11.godot_array_duplicate)(it, deep)
+                notNull(Godot.gdnative11.godot_array_duplicate)(it, deep)
             }
         )
     }
 
     override fun erase(value: Variant) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_array_erase)(it, value._handle.ptr)
+            notNull(Godot.gdnative.godot_array_erase)(it, value._handle.ptr)
         }
     }
 
@@ -185,7 +185,7 @@ class VariantArray : GodotArray<Variant> {
 
     override fun find(what: Variant, from: Int): Int {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_find)(it, what._handle.ptr, from)
+            notNull(Godot.gdnative.godot_array_find)(it, what._handle.ptr, from)
         }
     }
 
@@ -200,7 +200,7 @@ class VariantArray : GodotArray<Variant> {
 
     override fun findLast(value: Variant): Int {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_find_last)(it, value._handle.ptr)
+            notNull(Godot.gdnative.godot_array_find_last)(it, value._handle.ptr)
         }
     }
 
@@ -216,14 +216,14 @@ class VariantArray : GodotArray<Variant> {
     override fun front(): Variant {
         return Variant(
             callNative {
-                checkNotNull(Godot.gdnative.godot_array_front)(it)
+                notNull(Godot.gdnative.godot_array_front)(it)
             }
         )
     }
 
     override fun has(value: Variant): Boolean {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_has)(it, value._handle.ptr)
+            notNull(Godot.gdnative.godot_array_has)(it, value._handle.ptr)
         }
     }
 
@@ -238,7 +238,7 @@ class VariantArray : GodotArray<Variant> {
 
     override fun insert(position: Int, value: Variant) {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_insert)(it, position, value._handle.ptr)
+            notNull(Godot.gdnative.godot_array_insert)(it, position, value._handle.ptr)
         }
     }
 
@@ -254,7 +254,7 @@ class VariantArray : GodotArray<Variant> {
     override fun max(): Variant {
         return Variant(
             callNative {
-                checkNotNull(Godot.gdnative11.godot_array_max)(it)
+                notNull(Godot.gdnative11.godot_array_max)(it)
             }
         )
     }
@@ -262,7 +262,7 @@ class VariantArray : GodotArray<Variant> {
     override fun min(): Variant {
         return Variant(
             callNative {
-                checkNotNull(Godot.gdnative11.godot_array_min)(it)
+                notNull(Godot.gdnative11.godot_array_min)(it)
             }
         )
     }
@@ -270,7 +270,7 @@ class VariantArray : GodotArray<Variant> {
     override fun popBack(): Variant {
         return Variant(
             callNative {
-                checkNotNull(Godot.gdnative.godot_array_pop_back)(it)
+                notNull(Godot.gdnative.godot_array_pop_back)(it)
             }
         )
     }
@@ -278,14 +278,14 @@ class VariantArray : GodotArray<Variant> {
     override fun popFront(): Variant {
         return Variant(
             callNative {
-                checkNotNull(Godot.gdnative.godot_array_pop_front)(it)
+                notNull(Godot.gdnative.godot_array_pop_front)(it)
             }
         )
     }
 
     override fun pushBack(value: Variant) {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_push_back)(it, value._handle.ptr)
+            notNull(Godot.gdnative.godot_array_push_back)(it, value._handle.ptr)
         }
     }
 
@@ -300,7 +300,7 @@ class VariantArray : GodotArray<Variant> {
 
     override fun pushFront(value: Variant) {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_push_front)(it, value._handle.ptr)
+            notNull(Godot.gdnative.godot_array_push_front)(it, value._handle.ptr)
         }
     }
 
@@ -315,7 +315,7 @@ class VariantArray : GodotArray<Variant> {
 
     override fun rfind(what: Variant, from: Int): Int {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_rfind)(it, what._handle.ptr, from)
+            notNull(Godot.gdnative.godot_array_rfind)(it, what._handle.ptr, from)
         }
     }
 
@@ -331,7 +331,7 @@ class VariantArray : GodotArray<Variant> {
     override fun slice(begin: Int, end: Int, step: Int, deep: Boolean): VariantArray {
         return VariantArray(
             callNative {
-                checkNotNull(Godot.gdnative12.godot_array_slice)(it, begin, end, step, deep)
+                notNull(Godot.gdnative12.godot_array_slice)(it, begin, end, step, deep)
             }
         )
     }
@@ -342,7 +342,7 @@ class VariantArray : GodotArray<Variant> {
 
     override operator fun set(idx: Int, data: Variant) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_array_set)(it, idx, data._handle.ptr)
+            notNull(Godot.gdnative.godot_array_set)(it, idx, data._handle.ptr)
         }
     }
 
@@ -359,7 +359,7 @@ class VariantArray : GodotArray<Variant> {
     override operator fun get(idx: Int): Variant {
         return Variant(
             callNative {
-                checkNotNull(Godot.gdnative.godot_array_get)(it, idx)
+                notNull(Godot.gdnative.godot_array_get)(it, idx)
             }
         )
     }

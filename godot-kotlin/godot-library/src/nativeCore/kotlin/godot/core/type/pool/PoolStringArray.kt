@@ -17,14 +17,14 @@ class PoolStringArray : NativeCoreType<godot_pool_string_array_layout>, Iterable
     constructor() {
         _handle = cValue{}
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_string_array_new)(it)
+            notNull(Godot.gdnative.godot_pool_string_array_new)(it)
         }
     }
 
     constructor(other: PoolStringArray) {
         _handle = cValue{}
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_string_array_new_copy)(it, other._handle.ptr)
+            notNull(Godot.gdnative.godot_pool_string_array_new_copy)(it, other._handle.ptr)
         }
     }
 
@@ -54,7 +54,7 @@ class PoolStringArray : NativeCoreType<godot_pool_string_array_layout>, Iterable
      */
     fun append(s: String) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_string_array_append)(it, s.toGDString().ptr)
+            notNull(Godot.gdnative.godot_pool_string_array_append)(it, s.toGDString().ptr)
         }
     }
 
@@ -64,7 +64,7 @@ class PoolStringArray : NativeCoreType<godot_pool_string_array_layout>, Iterable
      */
     fun appendArray(array: PoolStringArray) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_string_array_append_array)(it, array._handle.ptr)
+            notNull(Godot.gdnative.godot_pool_string_array_append_array)(it, array._handle.ptr)
         }
     }
 
@@ -73,7 +73,7 @@ class PoolStringArray : NativeCoreType<godot_pool_string_array_layout>, Iterable
      */
     fun empty() {
         callNative {
-            checkNotNull(Godot.gdnative12.godot_pool_string_array_empty)(it)
+            notNull(Godot.gdnative12.godot_pool_string_array_empty)(it)
         }
     }
 
@@ -82,7 +82,7 @@ class PoolStringArray : NativeCoreType<godot_pool_string_array_layout>, Iterable
      */
     operator fun get(idx: Int): String {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_pool_string_array_get)(it, idx)
+            notNull(Godot.gdnative.godot_pool_string_array_get)(it, idx)
         }.toKString()
     }
 
@@ -92,7 +92,7 @@ class PoolStringArray : NativeCoreType<godot_pool_string_array_layout>, Iterable
      */
     fun insert(idx: Int, data: String) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_string_array_insert)(it, idx, data.toGDString().ptr)
+            notNull(Godot.gdnative.godot_pool_string_array_insert)(it, idx, data.toGDString().ptr)
         }
     }
 
@@ -101,7 +101,7 @@ class PoolStringArray : NativeCoreType<godot_pool_string_array_layout>, Iterable
      */
     fun invert() {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_string_array_invert)(it)
+            notNull(Godot.gdnative.godot_pool_string_array_invert)(it)
         }
     }
 
@@ -110,7 +110,7 @@ class PoolStringArray : NativeCoreType<godot_pool_string_array_layout>, Iterable
      */
     fun pushBack(data: String) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_string_array_push_back)(it, data.toGDString().ptr)
+            notNull(Godot.gdnative.godot_pool_string_array_push_back)(it, data.toGDString().ptr)
         }
     }
 
@@ -119,7 +119,7 @@ class PoolStringArray : NativeCoreType<godot_pool_string_array_layout>, Iterable
      */
     fun remove(idx: Int) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_string_array_remove)(it, idx)
+            notNull(Godot.gdnative.godot_pool_string_array_remove)(it, idx)
         }
     }
 
@@ -129,7 +129,7 @@ class PoolStringArray : NativeCoreType<godot_pool_string_array_layout>, Iterable
      */
     fun resize(size: Int) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_string_array_resize)(it, size)
+            notNull(Godot.gdnative.godot_pool_string_array_resize)(it, size)
         }
     }
 
@@ -138,7 +138,7 @@ class PoolStringArray : NativeCoreType<godot_pool_string_array_layout>, Iterable
      */
     operator fun set(idx: Int, data: String) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_string_array_set)(it, idx, data.toGDString().ptr)
+            notNull(Godot.gdnative.godot_pool_string_array_set)(it, idx, data.toGDString().ptr)
         }
     }
 
@@ -147,7 +147,7 @@ class PoolStringArray : NativeCoreType<godot_pool_string_array_layout>, Iterable
      */
     fun size(): Int {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_pool_string_array_size)(it)
+            notNull(Godot.gdnative.godot_pool_string_array_size)(it)
         }
     }
 

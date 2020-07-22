@@ -2,25 +2,26 @@ package godot.core
 
 import godot.Object
 import godot.gdnative.godot_variant
+import godot.internal.type.notNull
 import kotlinx.cinterop.*
 
 fun createInstance(instance: COpaquePointer?, methodData: COpaquePointer?): COpaquePointer? {
-    val classHandle = checkNotNull(methodData).asStableRef<ClassHandle<Object>>()
+    val classHandle = notNull(methodData).asStableRef<ClassHandle<Object>>()
         .get()
-    val kotlinInstance = classHandle.wrap(checkNotNull(instance))
+    val kotlinInstance = classHandle.wrap(notNull(instance))
     kotlinInstance._onInit()
     val stableRef = StableRef.create(kotlinInstance)
     return stableRef.asCPointer()
 }
 
 fun disposeClassHandle(ref: COpaquePointer?) {
-    val handle = checkNotNull(ref).asStableRef<ClassHandle<Object>>()
+    val handle = notNull(ref).asStableRef<ClassHandle<Object>>()
     handle.get().dispose()
     handle.dispose()
 }
 
 fun destroyInstance(instance: COpaquePointer?, methodData: COpaquePointer?, classData: COpaquePointer?) {
-    val kotlinInstanceRef = checkNotNull(classData).asStableRef<Object>()
+    val kotlinInstanceRef = notNull(classData).asStableRef<Object>()
     val kotlinInstance = kotlinInstanceRef.get()
     kotlinInstance._onDestroy()
     kotlinInstanceRef.dispose()
@@ -33,9 +34,9 @@ fun invokeMethod(
     numArgs: Int,
     args: CPointer<CPointerVar<godot_variant>>?
 ): CValue<godot_variant> {
-    val kotlinInstanceRef = checkNotNull(classData).asStableRef<Object>()
+    val kotlinInstanceRef = notNull(classData).asStableRef<Object>()
     val kotlinInstance = kotlinInstanceRef.get()
-    val methodHandleRef = checkNotNull(methodData).asStableRef<Function<Object, *>>()
+    val methodHandleRef = notNull(methodData).asStableRef<Function<Object, *>>()
     val methodHandle = methodHandleRef.get()
 
     check(methodHandle.parameterCount == numArgs) {
@@ -62,9 +63,9 @@ fun getProperty(
     methodData: COpaquePointer?,
     classData: COpaquePointer?
 ): CValue<godot_variant> {
-    val kotlinInstanceRef = checkNotNull(classData).asStableRef<Object>()
+    val kotlinInstanceRef = notNull(classData).asStableRef<Object>()
     val kotlinInstance = kotlinInstanceRef.get()
-    val propertyHandleRef = checkNotNull(methodData).asStableRef<MutablePropertyHandler<Object, *>>()
+    val propertyHandleRef = notNull(methodData).asStableRef<MutablePropertyHandler<Object, *>>()
     val propertyHandler = propertyHandleRef.get()
 
     return propertyHandler.get(kotlinInstance)._handle
@@ -76,9 +77,9 @@ fun setProperty(
     classData: COpaquePointer?,
     value: CPointer<godot_variant>?
 ) {
-    val kotlinInstanceRef = checkNotNull(classData).asStableRef<Object>()
+    val kotlinInstanceRef = notNull(classData).asStableRef<Object>()
     val kotlinInstance = kotlinInstanceRef.get()
-    val propertyHandleRef = checkNotNull(methodData).asStableRef<MutablePropertyHandler<Object, *>>()
+    val propertyHandleRef = notNull(methodData).asStableRef<MutablePropertyHandler<Object, *>>()
     val propertyHandler = propertyHandleRef.get()
     val arg = if (value == null) {
         Variant()

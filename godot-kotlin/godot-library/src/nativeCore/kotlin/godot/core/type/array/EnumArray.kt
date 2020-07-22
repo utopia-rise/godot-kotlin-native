@@ -2,6 +2,7 @@ package godot.core
 
 import godot.Object
 import godot.gdnative.godot_array
+import godot.internal.type.notNull
 import kotlinx.cinterop.*
 
 class EnumArray<E : Enum<E>>(val mapper: (Int) -> E) : GodotArray<E>() {
@@ -9,7 +10,7 @@ class EnumArray<E : Enum<E>>(val mapper: (Int) -> E) : GodotArray<E>() {
     init {
         _handle = cValue{}
         callNative {
-            checkNotNull(Godot.gdnative.godot_array_new)(it)
+            notNull(Godot.gdnative.godot_array_new)(it)
         }
     }
 
@@ -27,19 +28,19 @@ class EnumArray<E : Enum<E>>(val mapper: (Int) -> E) : GodotArray<E>() {
 
     override fun append(value: E) {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_append)(it, value.toVariant()._handle.ptr)
+            notNull(Godot.gdnative.godot_array_append)(it, value.toVariant()._handle.ptr)
         }
     }
 
     override fun bsearch(value: E, before: Boolean): Int {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_bsearch)(it, value.toVariant()._handle.ptr, before)
+            notNull(Godot.gdnative.godot_array_bsearch)(it, value.toVariant()._handle.ptr, before)
         }
     }
 
     override fun bsearchCustom(value: E, obj: Object, func: String, before: Boolean): Int {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_bsearch_custom)(
+            notNull(Godot.gdnative.godot_array_bsearch_custom)(
                 it,
                 value.toVariant()._handle.ptr,
                 obj.ptr,
@@ -51,14 +52,14 @@ class EnumArray<E : Enum<E>>(val mapper: (Int) -> E) : GodotArray<E>() {
 
     override fun count(value: E): Int {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_count)(it, value.toVariant()._handle.ptr)
+            notNull(Godot.gdnative.godot_array_count)(it, value.toVariant()._handle.ptr)
         }
     }
 
     override fun duplicate(deep: Boolean): EnumArray<E> {
         return EnumArray(
             callNative {
-                checkNotNull(Godot.gdnative11.godot_array_duplicate)(it, deep)
+                notNull(Godot.gdnative11.godot_array_duplicate)(it, deep)
             },
             mapper
         )
@@ -66,46 +67,46 @@ class EnumArray<E : Enum<E>>(val mapper: (Int) -> E) : GodotArray<E>() {
 
     override fun erase(value: E) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_array_erase)(it, value.toVariant()._handle.ptr)
+            notNull(Godot.gdnative.godot_array_erase)(it, value.toVariant()._handle.ptr)
         }
     }
 
     override fun find(what: E, from: Int): Int {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_find)(it, what.toVariant()._handle.ptr, from)
+            notNull(Godot.gdnative.godot_array_find)(it, what.toVariant()._handle.ptr, from)
         }
     }
 
     override fun findLast(value: E): Int {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_find_last)(it, value.toVariant()._handle.ptr)
+            notNull(Godot.gdnative.godot_array_find_last)(it, value.toVariant()._handle.ptr)
         }
     }
 
     override fun front(): E {
         return enum(Variant(
             callNative {
-                checkNotNull(Godot.gdnative.godot_array_front)(it)
+                notNull(Godot.gdnative.godot_array_front)(it)
             }
         ))
     }
 
     override fun has(value: E): Boolean {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_has)(it, value.toVariant()._handle.ptr)
+            notNull(Godot.gdnative.godot_array_has)(it, value.toVariant()._handle.ptr)
         }
     }
 
     override fun insert(position: Int, value: E) {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_insert)(it, position, value.toVariant()._handle.ptr)
+            notNull(Godot.gdnative.godot_array_insert)(it, position, value.toVariant()._handle.ptr)
         }
     }
 
     override fun max(): E {
         return enum(Variant(
             callNative {
-                checkNotNull(Godot.gdnative11.godot_array_max)(it)
+                notNull(Godot.gdnative11.godot_array_max)(it)
             }
         ))
     }
@@ -113,7 +114,7 @@ class EnumArray<E : Enum<E>>(val mapper: (Int) -> E) : GodotArray<E>() {
     override fun min(): E {
         return enum(Variant(
             callNative {
-                checkNotNull(Godot.gdnative11.godot_array_min)(it)
+                notNull(Godot.gdnative11.godot_array_min)(it)
             }
         ))
     }
@@ -121,7 +122,7 @@ class EnumArray<E : Enum<E>>(val mapper: (Int) -> E) : GodotArray<E>() {
     override fun popBack(): E {
         return enum(Variant(
             callNative {
-                checkNotNull(Godot.gdnative.godot_array_pop_back)(it)
+                notNull(Godot.gdnative.godot_array_pop_back)(it)
             }
         ))
     }
@@ -129,33 +130,33 @@ class EnumArray<E : Enum<E>>(val mapper: (Int) -> E) : GodotArray<E>() {
     override fun popFront(): E {
         return enum(Variant(
             callNative {
-                checkNotNull(Godot.gdnative.godot_array_pop_front)(it)
+                notNull(Godot.gdnative.godot_array_pop_front)(it)
             }
         ))
     }
 
     override fun pushBack(value: E) {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_push_back)(it, value.toVariant()._handle.ptr)
+            notNull(Godot.gdnative.godot_array_push_back)(it, value.toVariant()._handle.ptr)
         }
     }
 
     override fun pushFront(value: E) {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_push_front)(it, value.toVariant()._handle.ptr)
+            notNull(Godot.gdnative.godot_array_push_front)(it, value.toVariant()._handle.ptr)
         }
     }
 
     override fun rfind(what: E, from: Int): Int {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_rfind)(it, what.toVariant()._handle.ptr, from)
+            notNull(Godot.gdnative.godot_array_rfind)(it, what.toVariant()._handle.ptr, from)
         }
     }
 
     override fun slice(begin: Int, end: Int, step: Int, deep: Boolean): EnumArray<E> {
         return EnumArray(
             callNative {
-                checkNotNull(Godot.gdnative12.godot_array_slice)(
+                notNull(Godot.gdnative12.godot_array_slice)(
                     it,
                     begin,
                     end,
@@ -174,14 +175,14 @@ class EnumArray<E : Enum<E>>(val mapper: (Int) -> E) : GodotArray<E>() {
 
     override operator fun set(idx: Int, data: E) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_array_set)(it, idx, Variant(data)._handle.ptr)
+            notNull(Godot.gdnative.godot_array_set)(it, idx, Variant(data)._handle.ptr)
         }
     }
 
     override operator fun get(idx: Int): E {
         return enum(Variant(
             callNative {
-                checkNotNull(Godot.gdnative.godot_array_get)(it, idx)
+                notNull(Godot.gdnative.godot_array_get)(it, idx)
             }
         ))
     }

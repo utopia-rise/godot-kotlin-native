@@ -22,7 +22,7 @@ class Dictionary : NativeCoreType<godot_dictionary_layout>, Iterable<Entry<Varia
     constructor() {
         _handle = cValue{}
         callNative {
-            checkNotNull(Godot.gdnative.godot_dictionary_new)(it)
+            notNull(Godot.gdnative.godot_dictionary_new)(it)
         }
     }
 
@@ -52,7 +52,7 @@ class Dictionary : NativeCoreType<godot_dictionary_layout>, Iterable<Entry<Varia
      */
     fun clear() {
         callNative {
-            checkNotNull(Godot.gdnative.godot_dictionary_clear)(it)
+            notNull(Godot.gdnative.godot_dictionary_clear)(it)
         }
     }
 
@@ -62,7 +62,7 @@ class Dictionary : NativeCoreType<godot_dictionary_layout>, Iterable<Entry<Varia
      */
     fun duplicate(deep: Boolean = false) {
         callNative {
-            checkNotNull(Godot.gdnative12.godot_dictionary_duplicate)(it, deep)
+            notNull(Godot.gdnative12.godot_dictionary_duplicate)(it, deep)
         }
     }
 
@@ -71,7 +71,7 @@ class Dictionary : NativeCoreType<godot_dictionary_layout>, Iterable<Entry<Varia
      */
     fun empty(): Boolean {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_dictionary_empty)(it)
+            notNull(Godot.gdnative.godot_dictionary_empty)(it)
         }
     }
 
@@ -80,7 +80,7 @@ class Dictionary : NativeCoreType<godot_dictionary_layout>, Iterable<Entry<Varia
      */
     fun erase(key: Variant) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_dictionary_erase)(it, key._handle.ptr)
+            notNull(Godot.gdnative.godot_dictionary_erase)(it, key._handle.ptr)
         }
     }
     fun erase(key: Int) = erase(Variant(key))
@@ -97,7 +97,7 @@ class Dictionary : NativeCoreType<godot_dictionary_layout>, Iterable<Entry<Varia
     fun get(key: Variant, default: Variant = Variant()): Variant {
         return Variant(
             callNative {
-                checkNotNull(Godot.gdnative11.godot_dictionary_get_with_default)(
+                notNull(Godot.gdnative11.godot_dictionary_get_with_default)(
                     it,
                     key._handle.ptr,
                     default._handle.ptr
@@ -160,7 +160,7 @@ class Dictionary : NativeCoreType<godot_dictionary_layout>, Iterable<Entry<Varia
      */
     fun has(key: Variant): Boolean {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_dictionary_has)(it, key._handle.ptr)
+            notNull(Godot.gdnative.godot_dictionary_has)(it, key._handle.ptr)
         }
     }
 
@@ -176,7 +176,7 @@ class Dictionary : NativeCoreType<godot_dictionary_layout>, Iterable<Entry<Varia
      */
     fun hasAll(keys: VariantArray): Boolean {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_dictionary_has_all)(it, keys._handle.ptr)
+            notNull(Godot.gdnative.godot_dictionary_has_all)(it, keys._handle.ptr)
         }
     }
 
@@ -185,7 +185,7 @@ class Dictionary : NativeCoreType<godot_dictionary_layout>, Iterable<Entry<Varia
      */
     fun hash(): Int {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_dictionary_hash)(it)
+            notNull(Godot.gdnative.godot_dictionary_hash)(it)
         }
     }
 
@@ -195,7 +195,7 @@ class Dictionary : NativeCoreType<godot_dictionary_layout>, Iterable<Entry<Varia
     fun keys(): VariantArray {
         return VariantArray(
             callNative {
-                checkNotNull(Godot.gdnative.godot_dictionary_keys)(it)
+                notNull(Godot.gdnative.godot_dictionary_keys)(it)
             }
         )
     }
@@ -205,7 +205,7 @@ class Dictionary : NativeCoreType<godot_dictionary_layout>, Iterable<Entry<Varia
      */
     fun size(): Int {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_dictionary_size)(it)
+            notNull(Godot.gdnative.godot_dictionary_size)(it)
         }
     }
 
@@ -215,7 +215,7 @@ class Dictionary : NativeCoreType<godot_dictionary_layout>, Iterable<Entry<Varia
     fun values(): VariantArray {
         return VariantArray(
             callNative {
-                checkNotNull(Godot.gdnative.godot_dictionary_values)(it)
+                notNull(Godot.gdnative.godot_dictionary_values)(it)
             }
         )
     }
@@ -225,7 +225,7 @@ class Dictionary : NativeCoreType<godot_dictionary_layout>, Iterable<Entry<Varia
     operator fun get(key: Variant): Variant {
         return Variant(
             callNative {
-                checkNotNull(Godot.gdnative.godot_dictionary_get)(it, key._handle.ptr)
+                notNull(Godot.gdnative.godot_dictionary_get)(it, key._handle.ptr)
             }
         )
     }
@@ -239,7 +239,7 @@ class Dictionary : NativeCoreType<godot_dictionary_layout>, Iterable<Entry<Varia
 
     operator fun set(key: Variant, value: Variant) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_dictionary_set)(it, key._handle.ptr, value._handle.ptr)
+            notNull(Godot.gdnative.godot_dictionary_set)(it, key._handle.ptr, value._handle.ptr)
         }
     }
 
@@ -306,7 +306,7 @@ class Dictionary : NativeCoreType<godot_dictionary_layout>, Iterable<Entry<Varia
             return false
         }
         return callNative {
-            checkNotNull(Godot.gdnative.godot_dictionary_operator_equal)(it, other._handle.ptr)
+            notNull(Godot.gdnative.godot_dictionary_operator_equal)(it, other._handle.ptr)
         }
     }
 

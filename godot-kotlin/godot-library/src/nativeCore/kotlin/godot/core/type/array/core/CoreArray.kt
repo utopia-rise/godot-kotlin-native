@@ -12,14 +12,14 @@ abstract class CoreArray<T : CoreType> : GodotArray<T> {
     constructor() {
         _handle = cValue{}
         callNative {
-            checkNotNull(Godot.gdnative.godot_array_new)(it)
+            notNull(Godot.gdnative.godot_array_new)(it)
         }
     }
 
     constructor(other: CoreArray<T>) {
         _handle = cValue{}
         callNative {
-            checkNotNull(Godot.gdnative.godot_array_new_copy)(it, other._handle.ptr)
+            notNull(Godot.gdnative.godot_array_new_copy)(it, other._handle.ptr)
         }
     }
 
@@ -37,19 +37,19 @@ abstract class CoreArray<T : CoreType> : GodotArray<T> {
 
     override fun append(value: T) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_array_append)(it, value.toVariant()._handle.ptr)
+            notNull(Godot.gdnative.godot_array_append)(it, value.toVariant()._handle.ptr)
         }
     }
 
     override fun bsearch(value: T, before: Boolean): Int {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_bsearch)(it, value.toVariant()._handle.ptr, before)
+            notNull(Godot.gdnative.godot_array_bsearch)(it, value.toVariant()._handle.ptr, before)
         }
     }
 
     override fun bsearchCustom(value: T, obj: Object, func: String, before: Boolean): Int {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_bsearch_custom)(
+            notNull(Godot.gdnative.godot_array_bsearch_custom)(
                 it,
                 value.toVariant()._handle.ptr,
                 obj.ptr,
@@ -61,33 +61,33 @@ abstract class CoreArray<T : CoreType> : GodotArray<T> {
 
     override fun count(value: T): Int {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_count)(it, value.toVariant()._handle.ptr)
+            notNull(Godot.gdnative.godot_array_count)(it, value.toVariant()._handle.ptr)
         }
     }
 
     override fun duplicate(deep: Boolean): CoreArray<T> {
         return getCoreArray(
             callNative {
-                checkNotNull(Godot.gdnative11.godot_array_duplicate)(it, deep)
+                notNull(Godot.gdnative11.godot_array_duplicate)(it, deep)
             }
         )
     }
 
     override fun erase(value: T) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_array_erase)(it, value.toVariant()._handle.ptr)
+            notNull(Godot.gdnative.godot_array_erase)(it, value.toVariant()._handle.ptr)
         }
     }
 
     override fun find(what: T, from: Int): Int {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_find)(it, what.toVariant()._handle.ptr, from)
+            notNull(Godot.gdnative.godot_array_find)(it, what.toVariant()._handle.ptr, from)
         }
     }
 
     override fun findLast(value: T): Int {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_find_last)(it, value.toVariant()._handle.ptr)
+            notNull(Godot.gdnative.godot_array_find_last)(it, value.toVariant()._handle.ptr)
         }
     }
 
@@ -95,7 +95,7 @@ abstract class CoreArray<T : CoreType> : GodotArray<T> {
         return getCore(
             Variant(
                 callNative {
-                    checkNotNull(Godot.gdnative.godot_array_front)(it)
+                    notNull(Godot.gdnative.godot_array_front)(it)
                 }
             )
         )
@@ -103,13 +103,13 @@ abstract class CoreArray<T : CoreType> : GodotArray<T> {
 
     override fun has(value: T): Boolean {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_has)(it, value.toVariant()._handle.ptr)
+            notNull(Godot.gdnative.godot_array_has)(it, value.toVariant()._handle.ptr)
         }
     }
 
     override fun insert(position: Int, value: T) {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_insert)(it, position, value.toVariant()._handle.ptr)
+            notNull(Godot.gdnative.godot_array_insert)(it, position, value.toVariant()._handle.ptr)
         }
     }
 
@@ -117,7 +117,7 @@ abstract class CoreArray<T : CoreType> : GodotArray<T> {
         return getCore(
             Variant(
                 callNative {
-                    checkNotNull(Godot.gdnative11.godot_array_max)(it)
+                    notNull(Godot.gdnative11.godot_array_max)(it)
                 }
             )
         )
@@ -127,7 +127,7 @@ abstract class CoreArray<T : CoreType> : GodotArray<T> {
         return getCore(
             Variant(
                 callNative {
-                    checkNotNull(Godot.gdnative11.godot_array_min)(it)
+                    notNull(Godot.gdnative11.godot_array_min)(it)
                 }
             )
         )
@@ -137,7 +137,7 @@ abstract class CoreArray<T : CoreType> : GodotArray<T> {
         return getCore(
             Variant(
                 callNative {
-                    checkNotNull(Godot.gdnative.godot_array_pop_back)(it)
+                    notNull(Godot.gdnative.godot_array_pop_back)(it)
                 }
             )
         )
@@ -148,7 +148,7 @@ abstract class CoreArray<T : CoreType> : GodotArray<T> {
         return getCore(
             Variant(
                 callNative {
-                    checkNotNull(Godot.gdnative.godot_array_pop_front)(it)
+                    notNull(Godot.gdnative.godot_array_pop_front)(it)
                 }
             )
         )
@@ -156,26 +156,26 @@ abstract class CoreArray<T : CoreType> : GodotArray<T> {
 
     override fun pushBack(value: T) {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_push_back)(it, value.toVariant()._handle.ptr)
+            notNull(Godot.gdnative.godot_array_push_back)(it, value.toVariant()._handle.ptr)
         }
     }
 
     override fun pushFront(value: T) {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_push_front)(it, value.toVariant()._handle.ptr)
+            notNull(Godot.gdnative.godot_array_push_front)(it, value.toVariant()._handle.ptr)
         }
     }
 
     override fun rfind(what: T, from: Int): Int {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_rfind)(it, what.toVariant()._handle.ptr, from)
+            notNull(Godot.gdnative.godot_array_rfind)(it, what.toVariant()._handle.ptr, from)
         }
     }
 
     override fun slice(begin: Int, end: Int, step: Int, deep: Boolean): CoreArray<T> {
         return getCoreArray(
             callNative {
-                checkNotNull(Godot.gdnative12.godot_array_slice)(it, begin, end, step, deep)
+                notNull(Godot.gdnative12.godot_array_slice)(it, begin, end, step, deep)
             }
         )
     }
@@ -186,7 +186,7 @@ abstract class CoreArray<T : CoreType> : GodotArray<T> {
 
     override operator fun set(idx: Int, data: T) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_array_set)(it, idx, data.toVariant()._handle.ptr)
+            notNull(Godot.gdnative.godot_array_set)(it, idx, data.toVariant()._handle.ptr)
         }
     }
 
@@ -194,7 +194,7 @@ abstract class CoreArray<T : CoreType> : GodotArray<T> {
         return getCore(
             Variant(
                 callNative {
-                    checkNotNull(Godot.gdnative.godot_array_get)(it, idx)
+                    notNull(Godot.gdnative.godot_array_get)(it, idx)
                 }
             )
         )

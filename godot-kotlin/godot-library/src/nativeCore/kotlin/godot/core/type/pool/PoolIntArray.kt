@@ -18,7 +18,7 @@ class PoolIntArray : NativeCoreType<godot_pool_int_array_layout>, Iterable<Natur
     constructor() {
         _handle = cValue{}
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_int_array_new)(it)
+            notNull(Godot.gdnative.godot_pool_int_array_new)(it)
         }
     }
 
@@ -48,7 +48,7 @@ class PoolIntArray : NativeCoreType<godot_pool_int_array_layout>, Iterable<Natur
      */
     fun append(i: NaturalT) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_int_array_append)(it, i.toGodotNatural())
+            notNull(Godot.gdnative.godot_pool_int_array_append)(it, i.toGodotNatural())
         }
     }
 
@@ -58,7 +58,7 @@ class PoolIntArray : NativeCoreType<godot_pool_int_array_layout>, Iterable<Natur
      */
     fun appendArray(array: PoolIntArray) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_int_array_append_array)(it, array._handle.ptr)
+            notNull(Godot.gdnative.godot_pool_int_array_append_array)(it, array._handle.ptr)
         }
     }
 
@@ -67,7 +67,7 @@ class PoolIntArray : NativeCoreType<godot_pool_int_array_layout>, Iterable<Natur
      */
     fun empty() {
         callNative {
-            checkNotNull(Godot.gdnative12.godot_pool_int_array_empty)(it)
+            notNull(Godot.gdnative12.godot_pool_int_array_empty)(it)
         }
     }
 
@@ -76,7 +76,7 @@ class PoolIntArray : NativeCoreType<godot_pool_int_array_layout>, Iterable<Natur
      */
     operator fun get(idx: Int): NaturalT {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_pool_int_array_get)(it, idx).toNaturalT()
+            notNull(Godot.gdnative.godot_pool_int_array_get)(it, idx).toNaturalT()
         }
     }
 
@@ -86,7 +86,7 @@ class PoolIntArray : NativeCoreType<godot_pool_int_array_layout>, Iterable<Natur
      */
     fun insert(idx: Int, data: NaturalT) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_int_array_insert)(it, idx, data.toGodotNatural())
+            notNull(Godot.gdnative.godot_pool_int_array_insert)(it, idx, data.toGodotNatural())
         }
     }
 
@@ -95,7 +95,7 @@ class PoolIntArray : NativeCoreType<godot_pool_int_array_layout>, Iterable<Natur
      */
     fun invert() {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_int_array_invert)(it)
+            notNull(Godot.gdnative.godot_pool_int_array_invert)(it)
         }
     }
 
@@ -104,7 +104,7 @@ class PoolIntArray : NativeCoreType<godot_pool_int_array_layout>, Iterable<Natur
      */
     fun pushBack(data: NaturalT) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_int_array_push_back)(it, data.toGodotNatural())
+            notNull(Godot.gdnative.godot_pool_int_array_push_back)(it, data.toGodotNatural())
         }
     }
 
@@ -113,7 +113,7 @@ class PoolIntArray : NativeCoreType<godot_pool_int_array_layout>, Iterable<Natur
      */
     fun remove(idx: Int) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_int_array_remove)(it, idx)
+            notNull(Godot.gdnative.godot_pool_int_array_remove)(it, idx)
         }
     }
 
@@ -123,7 +123,7 @@ class PoolIntArray : NativeCoreType<godot_pool_int_array_layout>, Iterable<Natur
      */
     fun resize(size: Int) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_int_array_resize)(it, size)
+            notNull(Godot.gdnative.godot_pool_int_array_resize)(it, size)
         }
     }
 
@@ -132,7 +132,7 @@ class PoolIntArray : NativeCoreType<godot_pool_int_array_layout>, Iterable<Natur
      */
     operator fun set(idx: Int, data: NaturalT) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_int_array_set)(it, idx, data.toGodotNatural())
+            notNull(Godot.gdnative.godot_pool_int_array_set)(it, idx, data.toGodotNatural())
         }
     }
 
@@ -141,7 +141,7 @@ class PoolIntArray : NativeCoreType<godot_pool_int_array_layout>, Iterable<Natur
      */
     fun size(): Int {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_pool_int_array_size)(it)
+            notNull(Godot.gdnative.godot_pool_int_array_size)(it)
         }
     }
 

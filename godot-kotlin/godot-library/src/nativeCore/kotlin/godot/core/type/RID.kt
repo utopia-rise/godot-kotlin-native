@@ -17,7 +17,7 @@ class RID : NativeCoreType<godot_rid_layout>, Comparable<RID> {
     constructor() {
         _handle = cValue{}
         callNative {
-            checkNotNull(Godot.gdnative.godot_rid_new)(it)
+            notNull(Godot.gdnative.godot_rid_new)(it)
         }
     }
 
@@ -25,7 +25,7 @@ class RID : NativeCoreType<godot_rid_layout>, Comparable<RID> {
     constructor(from: Object) {
         _handle = cValue{}
         callNative {
-            checkNotNull(Godot.gdnative.godot_rid_new_with_resource)(it, from.ptr)
+            notNull(Godot.gdnative.godot_rid_new_with_resource)(it, from.ptr)
         }
     }
 
@@ -56,7 +56,7 @@ class RID : NativeCoreType<godot_rid_layout>, Comparable<RID> {
      */
     fun getID(): Int {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_rid_get_id)(it)
+            notNull(Godot.gdnative.godot_rid_get_id)(it)
         }
     }
 
@@ -67,14 +67,14 @@ class RID : NativeCoreType<godot_rid_layout>, Comparable<RID> {
     override fun compareTo(other: RID): Int {
         return when {
             this == other -> 0
-            callNative { checkNotNull(Godot.gdnative.godot_rid_operator_less)(it, other._handle.ptr) } -> -1
+            callNative { notNull(Godot.gdnative.godot_rid_operator_less)(it, other._handle.ptr) } -> -1
             else -> 1
         }
     }
 
     override fun equals(other: Any?): Boolean {
         return when (other) {
-            is RID -> callNative { checkNotNull(Godot.gdnative.godot_rid_operator_equal)(it, other._handle.ptr) }
+            is RID -> callNative { notNull(Godot.gdnative.godot_rid_operator_equal)(it, other._handle.ptr) }
             else -> false
         }
     }

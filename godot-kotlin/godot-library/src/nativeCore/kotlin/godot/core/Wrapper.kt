@@ -1,5 +1,6 @@
 package godot.core
 
+import godot.internal.type.notNull
 import kotlinx.cinterop.COpaquePointer
 import kotlinx.cinterop.StableRef
 import kotlinx.cinterop.asStableRef
@@ -10,8 +11,8 @@ class Wrapped(val instance: COpaquePointer, val tag: COpaquePointer)
 
 fun createWrapper(data: COpaquePointer?, tag: COpaquePointer?, instance: COpaquePointer?): COpaquePointer? {
     val wrapped = Wrapped(
-        checkNotNull(instance),
-        checkNotNull(tag)
+        notNull(instance),
+        notNull(tag)
     )
     return StableRef.create(wrapped).asCPointer()
 }
