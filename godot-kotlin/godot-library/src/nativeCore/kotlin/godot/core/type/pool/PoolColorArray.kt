@@ -4,10 +4,11 @@ package godot.core
 
 import godot.gdnative.godot_aabb
 import godot.gdnative.godot_pool_color_array
+import godot.gdnative.godot_pool_color_array_layout
 import godot.internal.type.*
 import kotlinx.cinterop.*
 
-class PoolColorArray : NativeCoreType<godot_pool_color_array>, Iterable<Color> {
+class PoolColorArray : NativeCoreType<godot_pool_color_array_layout>, Iterable<Color> {
     //PROPERTIES
     val size: Int
         get() = this.size()
@@ -15,23 +16,18 @@ class PoolColorArray : NativeCoreType<godot_pool_color_array>, Iterable<Color> {
 
     //CONSTRUCTOR
     constructor() {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_pool_color_array_new)(it)
         }
     }
 
-    internal constructor(native: CValue<godot_pool_color_array>) {
+    internal constructor(native: CValue<godot_pool_color_array_layout>) {
         memScoped {
             this@PoolColorArray.setRawMemory(native.ptr)
         }
     }
-
-    internal constructor(native: CValue<godot_aabb>) {
-        memScoped {
-            this@PoolColorArray.setRawMemory(native.ptr)
-        }
-    }
-
+    
     internal constructor(mem: COpaquePointer) {
         this.setRawMemory(mem)
     }
@@ -42,7 +38,7 @@ class PoolColorArray : NativeCoreType<godot_pool_color_array>, Iterable<Color> {
     }
 
     override fun setRawMemory(mem: COpaquePointer) {
-        _handle = mem.reinterpret<godot_pool_color_array>().pointed.readValue()
+        _handle = mem.reinterpret<godot_pool_color_array_layout>().pointed.readValue()
     }
 
 
@@ -188,7 +184,7 @@ class PoolColorArray : NativeCoreType<godot_pool_color_array>, Iterable<Color> {
         return _handle.hashCode()
     }
 
-    internal inline fun <T> callNative(block: MemScope.(CPointer<godot_pool_color_array>) -> T): T {
+    internal inline fun <T> callNative(block: MemScope.(CPointer<godot_pool_color_array_layout>) -> T): T {
         return callNative(this, block)
     }
 }

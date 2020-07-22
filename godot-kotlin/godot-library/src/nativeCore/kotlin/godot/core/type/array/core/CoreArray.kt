@@ -3,22 +3,21 @@ package godot.core
 import godot.Object
 import godot.gdnative.godot_array
 import godot.internal.type.*
-import kotlinx.cinterop.COpaquePointer
-import kotlinx.cinterop.CValue
-import kotlinx.cinterop.invoke
-import kotlinx.cinterop.memScoped
+import kotlinx.cinterop.*
 
 @ExperimentalUnsignedTypes
 abstract class CoreArray<T : CoreType> : GodotArray<T> {
 
     //CONSTRUCTOR
     constructor() {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_array_new)(it)
         }
     }
 
     constructor(other: CoreArray<T>) {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_array_new_copy)(it, other._handle.ptr)
         }

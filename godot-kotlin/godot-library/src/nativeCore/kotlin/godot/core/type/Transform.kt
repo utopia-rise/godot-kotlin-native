@@ -6,6 +6,7 @@ import godot.gdnative.godot_transform
 import godot.gdnative.godot_transform_layout
 import godot.internal.type.*
 import kotlinx.cinterop.*
+import godot.internal.*
 
 class Transform(var basis: Basis, var origin: Vector3 = Vector3()) : CoreType {
     //CONSTANTS
@@ -66,18 +67,18 @@ class Transform(var basis: Basis, var origin: Vector3 = Vector3()) : CoreType {
     //INTEROP
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
         val value = cValue<godot_transform_layout> {
-            basis.x.x = this@Transform.basis.x.x.toFloat()
-            basis.x.y = this@Transform.basis.x.y.toFloat()
-            basis.x.z = this@Transform.basis.x.z.toFloat()
-            basis.y.x = this@Transform.basis.y.x.toFloat()
-            basis.y.y = this@Transform.basis.y.y.toFloat()
-            basis.y.z = this@Transform.basis.y.z.toFloat()
-            basis.z.x = this@Transform.basis.z.x.toFloat()
-            basis.z.y = this@Transform.basis.z.y.toFloat()
-            basis.z.z = this@Transform.basis.z.z.toFloat()
-            origin.x = this@Transform.origin.x.toFloat()
-            origin.y = this@Transform.origin.y.toFloat()
-            origin.z = this@Transform.origin.z.toFloat()
+            basis.x.x = this@Transform.basis.x.x.toGodotReal()
+            basis.x.y = this@Transform.basis.x.y.toGodotReal()
+            basis.x.z = this@Transform.basis.x.z.toGodotReal()
+            basis.y.x = this@Transform.basis.y.x.toGodotReal()
+            basis.y.y = this@Transform.basis.y.y.toGodotReal()
+            basis.y.z = this@Transform.basis.y.z.toGodotReal()
+            basis.z.x = this@Transform.basis.z.x.toGodotReal()
+            basis.z.y = this@Transform.basis.z.y.toGodotReal()
+            basis.z.z = this@Transform.basis.z.z.toGodotReal()
+            origin.x = this@Transform.origin.x.toGodotReal()
+            origin.y = this@Transform.origin.y.toGodotReal()
+            origin.z = this@Transform.origin.z.toGodotReal()
         }
         return value.getPointer(memScope)
     }

@@ -3,7 +3,7 @@ package godot.global
 import godot.Resource
 import godot.ResourceLoader
 
-internal interface GDResource {
+internal interface gdResource {
 
     /**
      * Loads a resource from the filesystem located at path.

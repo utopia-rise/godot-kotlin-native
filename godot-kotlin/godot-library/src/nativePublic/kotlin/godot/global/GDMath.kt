@@ -3,7 +3,6 @@ package godot.core
 import godot.internal.type.toRealT
 import kotlin.math.pow
 
-
 private const val NEPER2DB = 8.6858896380650365530225783783321
 private const val DB2NEPER = 1 / NEPER2DB
 
@@ -25,7 +24,7 @@ val sd = arrayOf(
     0.0000000009999
 )
 
-internal interface GDMath {
+internal interface gdMath {
 
     /** Returns the absolute value of parameter s (i.e. unsigned value, works for integer and float). */
     fun abs(s: Int) = kotlin.math.abs(s)

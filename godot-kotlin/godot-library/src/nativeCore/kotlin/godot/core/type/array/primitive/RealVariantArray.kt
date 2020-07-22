@@ -2,27 +2,29 @@ package godot.core
 
 import godot.Object
 import godot.gdnative.godot_array
-import kotlinx.cinterop.COpaquePointer
-import kotlinx.cinterop.CValue
-import kotlinx.cinterop.invoke
-import kotlinx.cinterop.memScoped
+import godot.internal.type.RealT
+import godot.internal.type.toRealT
+import kotlinx.cinterop.*
 
-class RealVariantArray : GodotArray<Float> {
+class RealVariantArray : GodotArray<RealT> {
 
     //CONSTRUCTOR
     constructor() {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_array_new)(it)
         }
     }
 
     constructor(other: RealVariantArray) {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_array_new_copy)(it, other._handle.ptr)
         }
     }
 
     constructor(other: PoolRealArray) {
+        _handle = cValue{}
         callNative {
             checkNotNull(Godot.gdnative.godot_array_new_pool_real_array)(it, other._handle.ptr)
         }
@@ -41,19 +43,19 @@ class RealVariantArray : GodotArray<Float> {
 
     //API
 
-    override fun append(value: Float) {
+    override fun append(value: RealT) {
         callNative {
             checkNotNull(Godot.gdnative.godot_array_append)(it, value.toVariant()._handle.ptr)
         }
     }
 
-    override fun bsearch(value: Float, before: Boolean): Int {
+    override fun bsearch(value: RealT, before: Boolean): Int {
         return callNative {
             checkNotNull(Godot.gdnative.godot_array_bsearch)(it, value.toVariant()._handle.ptr, before)
         }
     }
 
-    override fun bsearchCustom(value: Float, obj: Object, func: String, before: Boolean): Int {
+    override fun bsearchCustom(value: RealT, obj: Object, func: String, before: Boolean): Int {
         return callNative {
             checkNotNull(Godot.gdnative.godot_array_bsearch_custom)(
                 it,
@@ -65,7 +67,7 @@ class RealVariantArray : GodotArray<Float> {
         }
     }
 
-    override fun count(value: Float): Int {
+    override fun count(value: RealT): Int {
         return callNative {
             checkNotNull(Godot.gdnative.godot_array_count)(it, value.toVariant()._handle.ptr)
         }
@@ -79,90 +81,90 @@ class RealVariantArray : GodotArray<Float> {
         )
     }
 
-    override fun erase(value: Float) {
+    override fun erase(value: RealT) {
         callNative {
             checkNotNull(Godot.gdnative.godot_array_erase)(it, value.toVariant()._handle.ptr)
         }
     }
 
-    override fun find(what: Float, from: Int): Int {
+    override fun find(what: RealT, from: Int): Int {
         return callNative {
             checkNotNull(Godot.gdnative.godot_array_find)(it, what.toVariant()._handle.ptr, from)
         }
     }
 
-    override fun findLast(value: Float): Int {
+    override fun findLast(value: RealT): Int {
         return callNative {
             checkNotNull(Godot.gdnative.godot_array_find_last)(it, value.toVariant()._handle.ptr)
         }
     }
 
-    override fun front(): Float {
+    override fun front(): RealT {
         return Variant(
             callNative {
                 checkNotNull(Godot.gdnative.godot_array_front)(it)
             }
-        ).asFloat()
+        ).asDouble().toRealT()
     }
 
-    override fun has(value: Float): Boolean {
+    override fun has(value: RealT): Boolean {
         return callNative {
             checkNotNull(Godot.gdnative.godot_array_has)(it, value.toVariant()._handle.ptr)
         }
     }
 
-    override fun insert(position: Int, value: Float) {
+    override fun insert(position: Int, value: RealT) {
         return callNative {
             checkNotNull(Godot.gdnative.godot_array_insert)(it, position, value.toVariant()._handle.ptr)
         }
     }
 
-    override fun max(): Float {
+    override fun max(): RealT {
         return Variant(
             callNative {
                 checkNotNull(Godot.gdnative11.godot_array_max)(it)
             }
-        ).asFloat()
+        ).asDouble().toRealT()
     }
 
-    override fun min(): Float {
+    override fun min(): RealT {
         return Variant(
             callNative {
                 checkNotNull(Godot.gdnative11.godot_array_min)(it)
             }
-        ).asFloat()
+        ).asDouble().toRealT()
     }
 
-    override fun popBack(): Float {
+    override fun popBack(): RealT {
         return Variant(
             callNative {
                 checkNotNull(Godot.gdnative.godot_array_pop_back)(it)
             }
-        ).asFloat()
+        ).asDouble().toRealT()
     }
 
 
-    override fun popFront(): Float {
+    override fun popFront(): RealT {
         return Variant(
             callNative {
                 checkNotNull(Godot.gdnative.godot_array_pop_front)(it)
             }
-        ).asFloat()
+        ).asDouble().toRealT()
     }
 
-    override fun pushBack(value: Float) {
+    override fun pushBack(value: RealT) {
         return callNative {
             checkNotNull(Godot.gdnative.godot_array_push_back)(it, value.toVariant()._handle.ptr)
         }
     }
 
-    override fun pushFront(value: Float) {
+    override fun pushFront(value: RealT) {
         return callNative {
             checkNotNull(Godot.gdnative.godot_array_push_front)(it, value.toVariant()._handle.ptr)
         }
     }
 
-    override fun rfind(what: Float, from: Int): Int {
+    override fun rfind(what: RealT, from: Int): Int {
         return callNative {
             checkNotNull(Godot.gdnative.godot_array_rfind)(it, what.toVariant()._handle.ptr, from)
         }
@@ -184,30 +186,30 @@ class RealVariantArray : GodotArray<Float> {
 
     //UTILITIES
 
-    override operator fun set(idx: Int, data: Float) {
+    override operator fun set(idx: Int, data: RealT) {
         callNative {
             checkNotNull(Godot.gdnative.godot_array_set)(it, idx, Variant(data)._handle.ptr)
         }
     }
 
-    override operator fun get(idx: Int): Float {
+    override operator fun get(idx: Int): RealT {
         return Variant(
             callNative {
                 checkNotNull(Godot.gdnative.godot_array_get)(it, idx)
             }
-        ).asFloat()
+        ).asDouble().toRealT()
     }
 
-    override fun plus(other: Float) {
+    override fun plus(other: RealT) {
         this.append(other)
     }
 
-    override fun iterator(): Iterator<Float> {
+    override fun iterator(): Iterator<RealT> {
         return IndexedIterator(size(), this::get)
     }
 }
 
-fun FloatVariantArrayOf(vararg elements: Float): RealVariantArray {
+fun FloatVariantArrayOf(vararg elements: RealT): RealVariantArray {
     return RealVariantArray().also {
         for (arg in elements) {
             it.append(arg)

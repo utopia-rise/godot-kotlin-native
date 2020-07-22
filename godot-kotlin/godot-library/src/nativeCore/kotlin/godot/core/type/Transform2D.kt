@@ -10,6 +10,7 @@ import kotlin.math.acos
 import kotlin.math.atan2
 import kotlin.math.cos
 import kotlin.math.sin
+import godot.internal.*
 
 class Transform2D(var x: Vector2, var y: Vector2, var origin: Vector2) :
     CoreType {
@@ -52,12 +53,12 @@ class Transform2D(var x: Vector2, var y: Vector2, var origin: Vector2) :
     //INTEROP
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
         val value = cValue<godot_transform2d_layout> {
-            x.x = this@Transform2D.x.x.toFloat()
-            x.y = this@Transform2D.x.y.toFloat()
-            y.x = this@Transform2D.y.x.toFloat()
-            y.y = this@Transform2D.y.y.toFloat()
-            origin.x = this@Transform2D.origin.x.toFloat()
-            origin.y = this@Transform2D.origin.y.toFloat()
+            x.x = this@Transform2D.x.x.toGodotReal()
+            x.y = this@Transform2D.x.y.toGodotReal()
+            y.x = this@Transform2D.y.x.toGodotReal()
+            y.y = this@Transform2D.y.y.toGodotReal()
+            origin.x = this@Transform2D.origin.x.toGodotReal()
+            origin.y = this@Transform2D.origin.y.toGodotReal()
         }
         return value.getPointer(memScope)
     }

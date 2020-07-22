@@ -4,14 +4,9 @@ headers = gdnative_api_struct.gen.h
 ---
 
 typedef float real_t;
+typedef uint32_t natural_t;
 
-typedef struct godot_color_layout {
-    real_t r;
-    real_t g;
-    real_t b;
-    real_t a;
-} godot_color_layout;
-
+//VALUE STRUCTURE
 typedef struct godot_vector2_layout {
     real_t x;
     real_t y;
@@ -23,11 +18,28 @@ typedef struct godot_vector3_layout {
     real_t z;
 } godot_vector3_layout;
 
+typedef struct godot_aabb_layout {
+      godot_vector3_layout position;
+      godot_vector3_layout size;
+} godot_aabb_layout;
+
 typedef struct godot_basis_layout {
       godot_vector3_layout x;
       godot_vector3_layout y;
       godot_vector3_layout z;
 } godot_basis_layout;
+
+typedef struct godot_color_layout {
+    real_t r;
+    real_t g;
+    real_t b;
+    real_t a;
+} godot_color_layout;
+
+typedef struct godot_plane_layout {
+    godot_vector3_layout normal;
+    real_t d;
+} godot_plane_layout;
 
 typedef struct godot_quat_layout {
     real_t x;
@@ -35,16 +47,6 @@ typedef struct godot_quat_layout {
     real_t z;
     real_t w;
 } godot_quat_layout;
-
-typedef struct godot_plane_layout {
-    godot_vector3_layout normal;
-    real_t d;
-} godot_plane_layout;
-
-typedef struct godot_aabb_layout {
-      godot_vector3_layout position;
-      godot_vector3_layout size;
-} godot_aabb_layout;
 
 typedef struct godot_rect2_layout {
       godot_vector2_layout position;
@@ -61,3 +63,72 @@ typedef struct godot_transform2d_layout {
       godot_vector2_layout y;
       godot_vector2_layout origin;
 } godot_transform2d_layout;
+
+
+
+//POINTER STRUCTURE
+
+typedef godot_dictionary godot_dictionary_layout;
+typedef godot_array godot_array_layout;
+typedef godot_node_path godot_node_path_layout;
+typedef godot_rid godot_rid_layout;
+typedef godot_string godot_string_layout;
+
+typedef godot_pool_byte_array godot_pool_byte_array_layout;
+typedef godot_pool_color_array godot_pool_color_array_layout;
+typedef godot_pool_int_array godot_pool_int_array_layout;
+typedef godot_pool_real_array godot_pool_real_array_layout;
+typedef godot_pool_string_array godot_pool_string_array_layout;
+typedef godot_pool_vector2_array godot_pool_vector2_array_layout;
+typedef godot_pool_vector3_array godot_pool_vector3_array_layout;
+
+//VARIANT
+
+typedef struct godot_object_layout {
+    uint64_t id;
+    void * ptr;
+} godot_object_layout;
+
+typedef struct godot_variant_layout {
+    natural_t type;
+    union {
+        //Primitives
+        bool _bool;
+        int64_t _int;
+        double _float;
+
+        //Value
+        godot_color_layout _color;
+        godot_plane_layout _plane;
+        godot_quat_layout _quat;
+        godot_rect2_layout _rect2;
+        godot_vector2_layout _vect2;
+        godot_vector3_layout _vect3;
+
+        //Pointer to structure
+        godot_aabb_layout * _aabb;
+        godot_basis_layout * _basis;
+        godot_transform_layout * _transform;
+        godot_transform2d_layout * _transform2d;
+
+        //Generic Pointer
+        godot_node_path_layout * _node_path;
+        godot_rid_layout * _rid;
+        godot_string_layout * _string;
+        void *_ptr;
+
+        //Container
+        godot_array_layout * _array;
+        godot_dictionary_layout * _dict;
+        godot_pool_byte_array_layout * _byte_array;
+        godot_pool_color_array_layout * _color_array;
+        godot_pool_int_array_layout * _int_array;
+        godot_pool_real_array_layout * _real_array;
+        godot_pool_string_array_layout * _string_array;
+        godot_pool_vector2_array_layout * _vector2_array;
+        godot_pool_vector3_array_layout * _vector3_array;
+
+        //Object
+        godot_object_layout * _obj;
+    } data;
+} godot_variant_layout;
