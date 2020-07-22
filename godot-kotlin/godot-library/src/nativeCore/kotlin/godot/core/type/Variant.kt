@@ -14,7 +14,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
     val type: Type
         get() {
             return memScoped {
-                Type.from(notNull(Godot.gdnative.godot_variant_get_type)(_handle.ptr).value.toNaturalT())
+                Type.from(nullSafe(Godot.gdnative.godot_variant_get_type)(_handle.ptr).value.toNaturalT())
             }
         }
 
@@ -262,7 +262,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      */
     fun asBoolean(): Boolean {
         return memScoped {
-            notNull(Godot.gdnative.godot_variant_as_bool)(_handle.ptr)
+            nullSafe(Godot.gdnative.godot_variant_as_bool)(_handle.ptr)
         }
     }
 
@@ -278,7 +278,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      */
     fun asLong(): Long {
         return memScoped {
-            notNull(Godot.gdnative.godot_variant_as_int)(_handle.ptr)
+            nullSafe(Godot.gdnative.godot_variant_as_int)(_handle.ptr)
         }
     }
 
@@ -294,7 +294,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      */
     fun asDouble(): Double {
         return memScoped {
-            notNull(Godot.gdnative.godot_variant_as_real)(_handle.ptr)
+            nullSafe(Godot.gdnative.godot_variant_as_real)(_handle.ptr)
         }
     }
 
@@ -314,7 +314,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      */
     fun asString(): String {
         val gdString = memScoped {
-            notNull(Godot.gdnative.godot_variant_as_string)(_handle.ptr)
+            nullSafe(Godot.gdnative.godot_variant_as_string)(_handle.ptr)
         }
         return gdString.toKString()
     }
@@ -324,7 +324,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      */
     fun asVector2(): Vector2 {
         val value = memScoped {
-            notNull(Godot.gdnative.godot_variant_as_vector2)(_handle.ptr)
+            nullSafe(Godot.gdnative.godot_variant_as_vector2)(_handle.ptr)
         }
         return Vector2(value)
     }
@@ -334,7 +334,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      */
     fun asRect2(): Rect2 {
         val value = memScoped {
-            notNull(Godot.gdnative.godot_variant_as_rect2)(_handle.ptr)
+            nullSafe(Godot.gdnative.godot_variant_as_rect2)(_handle.ptr)
         }
         return Rect2(value)
     }
@@ -344,7 +344,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      */
     fun asVector3(): Vector3 {
         val value = memScoped {
-            notNull(Godot.gdnative.godot_variant_as_vector3)(_handle.ptr)
+            nullSafe(Godot.gdnative.godot_variant_as_vector3)(_handle.ptr)
         }
         return Vector3(value)
     }
@@ -354,7 +354,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      */
     fun asTransform2D(): Transform2D {
         val value = memScoped {
-            notNull(Godot.gdnative.godot_variant_as_transform2d)(_handle.ptr)
+            nullSafe(Godot.gdnative.godot_variant_as_transform2d)(_handle.ptr)
         }
         return Transform2D(value)
     }
@@ -364,7 +364,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      */
     fun asPlane(): Plane {
         val value = memScoped {
-            notNull(Godot.gdnative.godot_variant_as_plane)(_handle.ptr)
+            nullSafe(Godot.gdnative.godot_variant_as_plane)(_handle.ptr)
         }
         return Plane(value)
     }
@@ -374,7 +374,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      */
     fun asQuat(): Quat {
         val value = memScoped {
-            notNull(Godot.gdnative.godot_variant_as_quat)(_handle.ptr)
+            nullSafe(Godot.gdnative.godot_variant_as_quat)(_handle.ptr)
         }
         return Quat(value)
     }
@@ -384,7 +384,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      */
     fun asAABB(): AABB {
         val value = memScoped {
-            notNull(Godot.gdnative.godot_variant_as_aabb)(_handle.ptr)
+            nullSafe(Godot.gdnative.godot_variant_as_aabb)(_handle.ptr)
         }
         return AABB(value)
     }
@@ -394,7 +394,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      */
     fun asBasis(): Basis {
         val value = memScoped {
-            notNull(Godot.gdnative.godot_variant_as_basis)(_handle.ptr)
+            nullSafe(Godot.gdnative.godot_variant_as_basis)(_handle.ptr)
         }
         return Basis(value)
     }
@@ -404,7 +404,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      */
     fun asTransform(): Transform {
         val value = memScoped {
-            notNull(Godot.gdnative.godot_variant_as_transform)(_handle.ptr)
+            nullSafe(Godot.gdnative.godot_variant_as_transform)(_handle.ptr)
         }
         return Transform(value)
     }
@@ -414,7 +414,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      */
     fun asColor(): Color {
         val value = memScoped {
-            notNull(Godot.gdnative.godot_variant_as_color)(_handle.ptr)
+            nullSafe(Godot.gdnative.godot_variant_as_color)(_handle.ptr)
         }
         return Color(value)
     }
@@ -424,7 +424,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      */
     fun asNodePath(): NodePath {
         val value = memScoped {
-            notNull(Godot.gdnative.godot_variant_as_node_path)(_handle.ptr)
+            nullSafe(Godot.gdnative.godot_variant_as_node_path)(_handle.ptr)
         }
         return NodePath(value)
     }
@@ -434,7 +434,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      */
     fun asRID(): RID {
         val value = memScoped {
-            notNull(Godot.gdnative.godot_variant_as_rid)(_handle.ptr)
+            nullSafe(Godot.gdnative.godot_variant_as_rid)(_handle.ptr)
         }
         return RID(value)
     }
@@ -445,7 +445,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      */
     fun asObject(): Object? {
         return memScoped {
-            val ptr = notNull(Godot.gdnative.godot_variant_as_object)(_handle.ptr)
+            val ptr = nullSafe(Godot.gdnative.godot_variant_as_object)(_handle.ptr)
             if (ptr == null) {
                 null
             } else {
@@ -459,7 +459,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      */
     fun asDictionary(): Dictionary {
         val value = memScoped {
-            notNull(Godot.gdnative.godot_variant_as_dictionary)(_handle.ptr)
+            nullSafe(Godot.gdnative.godot_variant_as_dictionary)(_handle.ptr)
         }
         return Dictionary(value)
     }
@@ -469,7 +469,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      */
     fun asVariantArray(): VariantArray {
         val value = memScoped {
-            notNull(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
+            nullSafe(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
         }
         return VariantArray(value)
     }
@@ -479,7 +479,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      */
     fun asAABBArray(): AABBArray {
         val value = memScoped {
-            notNull(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
+            nullSafe(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
         }
         return AABBArray(value)
     }
@@ -489,7 +489,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      */
     fun asBasisArray(): BasisArray {
         val value = memScoped {
-            notNull(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
+            nullSafe(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
         }
         return BasisArray(value)
     }
@@ -499,7 +499,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      */
     fun asColorArray(): ColorArray {
         val value = memScoped {
-            notNull(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
+            nullSafe(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
         }
         return ColorArray(value)
     }
@@ -509,7 +509,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      */
     fun asNodePathArray(): NodePathArray {
         val value = memScoped {
-            notNull(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
+            nullSafe(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
         }
         return NodePathArray(value)
     }
@@ -519,7 +519,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      */
     fun asPlaneArray(): PlaneArray {
         val value = memScoped {
-            notNull(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
+            nullSafe(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
         }
         return PlaneArray(value)
     }
@@ -529,7 +529,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      */
     fun asQuatArray(): QuatArray {
         val value = memScoped {
-            notNull(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
+            nullSafe(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
         }
         return QuatArray(value)
     }
@@ -539,7 +539,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      */
     fun asRect2Array(): Rect2Array {
         val value = memScoped {
-            notNull(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
+            nullSafe(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
         }
         return Rect2Array(value)
     }
@@ -549,7 +549,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      */
     fun asRIDArray(): RIDArray {
         val value = memScoped {
-            notNull(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
+            nullSafe(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
         }
         return RIDArray(value)
     }
@@ -559,7 +559,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      */
     fun asTransform2DArray(): Transform2DArray {
         val value = memScoped {
-            notNull(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
+            nullSafe(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
         }
         return Transform2DArray(value)
     }
@@ -569,7 +569,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      */
     fun asTransformArray(): TransformArray {
         val value = memScoped {
-            notNull(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
+            nullSafe(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
         }
         return TransformArray(value)
     }
@@ -579,7 +579,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      */
     fun asVector2Array(): Vector2Array {
         val value = memScoped {
-            notNull(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
+            nullSafe(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
         }
         return Vector2Array(value)
     }
@@ -589,7 +589,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      */
     fun asVector3Array(): Vector3Array {
         val value = memScoped {
-            notNull(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
+            nullSafe(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
         }
         return Vector3Array(value)
     }
@@ -599,7 +599,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      */
     fun asBoolVariantArray(): BoolVariantArray {
         val value = memScoped {
-            notNull(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
+            nullSafe(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
         }
         return BoolVariantArray(value)
     }
@@ -609,7 +609,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      */
     fun asIntVariantArray(): IntVariantArray {
         val value = memScoped {
-            notNull(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
+            nullSafe(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
         }
         return IntVariantArray(value)
     }
@@ -619,7 +619,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      */
     fun asRealVariantArray(): RealVariantArray {
         val value = memScoped {
-            notNull(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
+            nullSafe(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
         }
         return RealVariantArray(value)
     }
@@ -629,7 +629,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      */
     fun asStringVariantArray(): StringVariantArray {
         val value = memScoped {
-            notNull(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
+            nullSafe(Godot.gdnative.godot_variant_as_array)(_handle.ptr)
         }
         return StringVariantArray(value)
     }
@@ -639,7 +639,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      */
     fun asPoolByteArray(): PoolByteArray {
         val value = memScoped {
-            notNull(Godot.gdnative.godot_variant_as_pool_byte_array)(_handle.ptr)
+            nullSafe(Godot.gdnative.godot_variant_as_pool_byte_array)(_handle.ptr)
         }
         return PoolByteArray(value)
     }
@@ -649,7 +649,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      */
     fun asPoolColorArray(): PoolColorArray {
         val value = memScoped {
-            notNull(Godot.gdnative.godot_variant_as_pool_color_array)(_handle.ptr)
+            nullSafe(Godot.gdnative.godot_variant_as_pool_color_array)(_handle.ptr)
         }
         return PoolColorArray(value)
     }
@@ -659,7 +659,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      */
     fun asPoolIntArray(): PoolIntArray {
         val value = memScoped {
-            notNull(Godot.gdnative.godot_variant_as_pool_int_array)(_handle.ptr)
+            nullSafe(Godot.gdnative.godot_variant_as_pool_int_array)(_handle.ptr)
         }
         return PoolIntArray(value)
     }
@@ -669,7 +669,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      */
     fun asPoolRealArray(): PoolRealArray {
         val value = memScoped {
-            notNull(Godot.gdnative.godot_variant_as_pool_real_array)(_handle.ptr)
+            nullSafe(Godot.gdnative.godot_variant_as_pool_real_array)(_handle.ptr)
         }
         return PoolRealArray(value)
     }
@@ -679,7 +679,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      */
     fun asPoolStringArray(): PoolStringArray {
         val value = memScoped {
-            notNull(Godot.gdnative.godot_variant_as_pool_string_array)(_handle.ptr)
+            nullSafe(Godot.gdnative.godot_variant_as_pool_string_array)(_handle.ptr)
         }
         return PoolStringArray(value)
     }
@@ -689,7 +689,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      */
     fun asPoolVector2Array(): PoolVector2Array {
         val value = memScoped {
-            notNull(Godot.gdnative.godot_variant_as_pool_vector2_array)(_handle.ptr)
+            nullSafe(Godot.gdnative.godot_variant_as_pool_vector2_array)(_handle.ptr)
         }
         return PoolVector2Array(value)
     }
@@ -699,7 +699,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      */
     fun asPoolVector3Array(): PoolVector3Array {
         val value = memScoped {
-            notNull(Godot.gdnative.godot_variant_as_pool_vector3_array)(_handle.ptr)
+            nullSafe(Godot.gdnative.godot_variant_as_pool_vector3_array)(_handle.ptr)
         }
         return PoolVector3Array(value)
     }
@@ -745,7 +745,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
 fun Variant() = Variant(
     memScoped {
         cValue<godot_variant> {
-            notNull(Godot.gdnative.godot_variant_new_nil)(this.ptr)
+            nullSafe(Godot.gdnative.godot_variant_new_nil)(this.ptr)
         }
     }
 )
@@ -754,7 +754,7 @@ fun Variant() = Variant(
 fun Variant(from: Boolean) = Variant(
     memScoped {
         cValue<godot_variant> {
-            notNull(Godot.gdnative.godot_variant_new_bool)(this.ptr, from)
+            nullSafe(Godot.gdnative.godot_variant_new_bool)(this.ptr, from)
         }
     }
 )
@@ -762,7 +762,7 @@ fun Variant(from: Boolean) = Variant(
 fun Variant(from: Int) = Variant(
     memScoped {
         cValue<godot_variant> {
-            notNull(Godot.gdnative.godot_variant_new_int)(this.ptr, from.toLong())
+            nullSafe(Godot.gdnative.godot_variant_new_int)(this.ptr, from.toLong())
         }
     }
 )
@@ -770,7 +770,7 @@ fun Variant(from: Int) = Variant(
 fun <T : Enum<T>> Variant(from: Enum<T>) = Variant(
     memScoped {
         cValue<godot_variant> {
-            notNull(Godot.gdnative.godot_variant_new_int)(this.ptr, from.ordinal.toLong())
+            nullSafe(Godot.gdnative.godot_variant_new_int)(this.ptr, from.ordinal.toLong())
         }
     }
 )
@@ -778,7 +778,7 @@ fun <T : Enum<T>> Variant(from: Enum<T>) = Variant(
 fun Variant(from: Long) = Variant(
     memScoped {
         cValue<godot_variant> {
-            notNull(Godot.gdnative.godot_variant_new_int)(this.ptr, from)
+            nullSafe(Godot.gdnative.godot_variant_new_int)(this.ptr, from)
         }
     }
 )
@@ -786,7 +786,7 @@ fun Variant(from: Long) = Variant(
 fun Variant(from: Float) = Variant(
     memScoped {
         cValue<godot_variant> {
-            notNull(Godot.gdnative.godot_variant_new_real)(this.ptr, from.toDouble())
+            nullSafe(Godot.gdnative.godot_variant_new_real)(this.ptr, from.toDouble())
         }
     }
 )
@@ -794,7 +794,7 @@ fun Variant(from: Float) = Variant(
 fun Variant(from: Double) = Variant(
     memScoped {
         cValue<godot_variant> {
-            notNull(Godot.gdnative.godot_variant_new_real)(this.ptr, from)
+            nullSafe(Godot.gdnative.godot_variant_new_real)(this.ptr, from)
         }
     }
 )
@@ -802,7 +802,7 @@ fun Variant(from: Double) = Variant(
 fun Variant(from: String) = Variant(
     memScoped {
         cValue<godot_variant> {
-            notNull(Godot.gdnative.godot_variant_new_string)(this.ptr, from.toGDString().ptr)
+            nullSafe(Godot.gdnative.godot_variant_new_string)(this.ptr, from.toGDString().ptr)
         }
     }
 )
@@ -812,7 +812,7 @@ fun Variant(from: String) = Variant(
 fun Variant(from: Object) = Variant(
     memScoped {
         cValue<godot_variant> {
-            notNull(Godot.gdnative.godot_variant_new_object)(this.ptr, from.ptr)
+            nullSafe(Godot.gdnative.godot_variant_new_object)(this.ptr, from.ptr)
         }
     }
 )
@@ -828,7 +828,7 @@ internal fun <T : CPointed> wrapCore(
         memScoped {
             val ptr = core.getRawMemory(this).reinterpret<T>()
             cValue<godot_variant> {
-                notNull(block)(this.ptr, ptr)
+                nullSafe(block)(this.ptr, ptr)
             }
         }
     )

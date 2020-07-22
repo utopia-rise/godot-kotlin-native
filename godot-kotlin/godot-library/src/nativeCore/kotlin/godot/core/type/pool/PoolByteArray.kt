@@ -2,7 +2,6 @@
 
 package godot.core
 
-import godot.gdnative.godot_pool_byte_array
 import godot.gdnative.godot_pool_byte_array_layout
 import godot.internal.type.*
 import kotlinx.cinterop.*
@@ -17,14 +16,14 @@ class PoolByteArray : NativeCoreType<godot_pool_byte_array_layout>, Iterable<UBy
     constructor() {
         _handle = cValue{}
         callNative {
-            notNull(Godot.gdnative.godot_pool_byte_array_new)(it)
+            nullSafe(Godot.gdnative.godot_pool_byte_array_new)(it)
         }
     }
 
     constructor(other: PoolByteArray) {
         _handle = cValue{}
         callNative {
-            notNull(Godot.gdnative.godot_pool_byte_array_new_copy)(it, other._handle.ptr)
+            nullSafe(Godot.gdnative.godot_pool_byte_array_new_copy)(it, other._handle.ptr)
         }
     }
 
@@ -54,7 +53,7 @@ class PoolByteArray : NativeCoreType<godot_pool_byte_array_layout>, Iterable<UBy
      */
     fun append(byte: UByte) {
         callNative {
-            notNull(Godot.gdnative.godot_pool_byte_array_append)(it, byte)
+            nullSafe(Godot.gdnative.godot_pool_byte_array_append)(it, byte)
         }
     }
 
@@ -64,7 +63,7 @@ class PoolByteArray : NativeCoreType<godot_pool_byte_array_layout>, Iterable<UBy
      */
     fun appendArray(array: PoolByteArray) {
         callNative {
-            notNull(Godot.gdnative.godot_pool_byte_array_append_array)(it, array._handle.ptr)
+            nullSafe(Godot.gdnative.godot_pool_byte_array_append_array)(it, array._handle.ptr)
         }
     }
 
@@ -73,7 +72,7 @@ class PoolByteArray : NativeCoreType<godot_pool_byte_array_layout>, Iterable<UBy
      */
     fun empty() {
         callNative {
-            notNull(Godot.gdnative12.godot_pool_byte_array_empty)(it)
+            nullSafe(Godot.gdnative12.godot_pool_byte_array_empty)(it)
         }
     }
 
@@ -82,7 +81,7 @@ class PoolByteArray : NativeCoreType<godot_pool_byte_array_layout>, Iterable<UBy
      */
     operator fun get(idx: Int): UByte {
         return callNative {
-            notNull(Godot.gdnative.godot_pool_byte_array_get)(it, idx)
+            nullSafe(Godot.gdnative.godot_pool_byte_array_get)(it, idx)
         }
     }
 
@@ -92,7 +91,7 @@ class PoolByteArray : NativeCoreType<godot_pool_byte_array_layout>, Iterable<UBy
      */
     fun insert(idx: Int, data: UByte) {
         callNative {
-            notNull(Godot.gdnative.godot_pool_byte_array_insert)(it, idx, data)
+            nullSafe(Godot.gdnative.godot_pool_byte_array_insert)(it, idx, data)
         }
     }
 
@@ -101,7 +100,7 @@ class PoolByteArray : NativeCoreType<godot_pool_byte_array_layout>, Iterable<UBy
      */
     fun invert() {
         callNative {
-            notNull(Godot.gdnative.godot_pool_byte_array_invert)(it)
+            nullSafe(Godot.gdnative.godot_pool_byte_array_invert)(it)
         }
     }
 
@@ -110,7 +109,7 @@ class PoolByteArray : NativeCoreType<godot_pool_byte_array_layout>, Iterable<UBy
      */
     fun pushBack(data: UByte) {
         callNative {
-            notNull(Godot.gdnative.godot_pool_byte_array_push_back)(it, data)
+            nullSafe(Godot.gdnative.godot_pool_byte_array_push_back)(it, data)
         }
     }
 
@@ -119,7 +118,7 @@ class PoolByteArray : NativeCoreType<godot_pool_byte_array_layout>, Iterable<UBy
      */
     fun remove(idx: Int) {
         callNative {
-            notNull(Godot.gdnative.godot_pool_byte_array_remove)(it, idx)
+            nullSafe(Godot.gdnative.godot_pool_byte_array_remove)(it, idx)
         }
     }
 
@@ -129,7 +128,7 @@ class PoolByteArray : NativeCoreType<godot_pool_byte_array_layout>, Iterable<UBy
      */
     fun resize(size: Int) {
         callNative {
-            notNull(Godot.gdnative.godot_pool_byte_array_resize)(it, size)
+            nullSafe(Godot.gdnative.godot_pool_byte_array_resize)(it, size)
         }
     }
 
@@ -138,7 +137,7 @@ class PoolByteArray : NativeCoreType<godot_pool_byte_array_layout>, Iterable<UBy
      */
     operator fun set(idx: Int, data: UByte) {
         callNative {
-            notNull(Godot.gdnative.godot_pool_byte_array_set)(it, idx, data)
+            nullSafe(Godot.gdnative.godot_pool_byte_array_set)(it, idx, data)
         }
     }
 
@@ -147,7 +146,7 @@ class PoolByteArray : NativeCoreType<godot_pool_byte_array_layout>, Iterable<UBy
      */
     fun size(): Int {
         return callNative {
-            notNull(Godot.gdnative.godot_pool_byte_array_size)(it)
+            nullSafe(Godot.gdnative.godot_pool_byte_array_size)(it)
         }
     }
 

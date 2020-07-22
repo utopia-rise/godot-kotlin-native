@@ -2,7 +2,6 @@
 
 package godot.core
 
-import godot.gdnative.godot_pool_real_array
 import godot.gdnative.godot_pool_real_array_layout
 import godot.internal.type.*
 import kotlinx.cinterop.*
@@ -17,7 +16,7 @@ class PoolRealArray : NativeCoreType<godot_pool_real_array_layout>, Iterable<Rea
     constructor() {
         _handle = cValue{}
         callNative {
-            notNull(Godot.gdnative.godot_pool_real_array_new)(it)
+            nullSafe(Godot.gdnative.godot_pool_real_array_new)(it)
         }
     }
 
@@ -47,7 +46,7 @@ class PoolRealArray : NativeCoreType<godot_pool_real_array_layout>, Iterable<Rea
      */
     fun append(real: RealT) {
         callNative {
-            notNull(Godot.gdnative.godot_pool_real_array_append)(it, real.toFloat())
+            nullSafe(Godot.gdnative.godot_pool_real_array_append)(it, real.toFloat())
         }
     }
 
@@ -57,7 +56,7 @@ class PoolRealArray : NativeCoreType<godot_pool_real_array_layout>, Iterable<Rea
      */
     fun appendArray(array: PoolRealArray) {
         callNative {
-            notNull(Godot.gdnative.godot_pool_real_array_append_array)(it, array._handle.ptr)
+            nullSafe(Godot.gdnative.godot_pool_real_array_append_array)(it, array._handle.ptr)
         }
     }
 
@@ -66,7 +65,7 @@ class PoolRealArray : NativeCoreType<godot_pool_real_array_layout>, Iterable<Rea
      */
     fun empty() {
         callNative {
-            notNull(Godot.gdnative12.godot_pool_real_array_empty)(it)
+            nullSafe(Godot.gdnative12.godot_pool_real_array_empty)(it)
         }
     }
 
@@ -75,7 +74,7 @@ class PoolRealArray : NativeCoreType<godot_pool_real_array_layout>, Iterable<Rea
      */
     operator fun get(idx: Int): RealT {
         return callNative {
-            notNull(Godot.gdnative.godot_pool_real_array_get)(it, idx)
+            nullSafe(Godot.gdnative.godot_pool_real_array_get)(it, idx)
         }.toRealT()
     }
 
@@ -85,7 +84,7 @@ class PoolRealArray : NativeCoreType<godot_pool_real_array_layout>, Iterable<Rea
      */
     fun insert(idx: Int, data: RealT) {
         callNative {
-            notNull(Godot.gdnative.godot_pool_real_array_insert)(it, idx, data.toFloat())
+            nullSafe(Godot.gdnative.godot_pool_real_array_insert)(it, idx, data.toFloat())
         }
     }
 
@@ -94,7 +93,7 @@ class PoolRealArray : NativeCoreType<godot_pool_real_array_layout>, Iterable<Rea
      */
     fun invert() {
         callNative {
-            notNull(Godot.gdnative.godot_pool_real_array_invert)(it)
+            nullSafe(Godot.gdnative.godot_pool_real_array_invert)(it)
         }
     }
 
@@ -103,7 +102,7 @@ class PoolRealArray : NativeCoreType<godot_pool_real_array_layout>, Iterable<Rea
      */
     fun pushBack(data: RealT) {
         callNative {
-            notNull(Godot.gdnative.godot_pool_real_array_push_back)(it, data.toFloat())
+            nullSafe(Godot.gdnative.godot_pool_real_array_push_back)(it, data.toFloat())
         }
     }
 
@@ -112,7 +111,7 @@ class PoolRealArray : NativeCoreType<godot_pool_real_array_layout>, Iterable<Rea
      */
     fun remove(idx: Int) {
         callNative {
-            notNull(Godot.gdnative.godot_pool_real_array_remove)(it, idx)
+            nullSafe(Godot.gdnative.godot_pool_real_array_remove)(it, idx)
         }
     }
 
@@ -122,7 +121,7 @@ class PoolRealArray : NativeCoreType<godot_pool_real_array_layout>, Iterable<Rea
      */
     fun resize(size: Int) {
         callNative {
-            notNull(Godot.gdnative.godot_pool_real_array_resize)(it, size)
+            nullSafe(Godot.gdnative.godot_pool_real_array_resize)(it, size)
         }
     }
 
@@ -131,7 +130,7 @@ class PoolRealArray : NativeCoreType<godot_pool_real_array_layout>, Iterable<Rea
      */
     operator fun set(idx: Int, data: RealT) {
         callNative {
-            notNull(Godot.gdnative.godot_pool_real_array_set)(it, idx, data.toFloat())
+            nullSafe(Godot.gdnative.godot_pool_real_array_set)(it, idx, data.toFloat())
         }
     }
 
@@ -140,7 +139,7 @@ class PoolRealArray : NativeCoreType<godot_pool_real_array_layout>, Iterable<Rea
      */
     fun size(): Int {
         return callNative {
-            notNull(Godot.gdnative.godot_pool_real_array_size)(it)
+            nullSafe(Godot.gdnative.godot_pool_real_array_size)(it)
         }
     }
 
