@@ -86,14 +86,20 @@ object Godot {
     }
 
     internal fun print(message: String) {
-        godot_print(message.toGDString())
+        memScoped {
+            checkNotNull(gdnative.godot_print)(message.toGDString().ptr)
+        }
     }
 
     internal fun printWarning(description: String, function: String, file: String, line: Int) {
-        godot_print_warning(description, function, file, line)
+        memScoped {
+            checkNotNull(gdnative.godot_print_warning)(description.cstr.ptr, function.cstr.ptr, file.cstr.ptr, line)
+        }
     }
 
     internal fun printError(description: String, function: String, file: String, line: Int) {
-        godot_print_error(description, function, file, line)
+        memScoped {
+            checkNotNull(gdnative.godot_print_error)(description.cstr.ptr, function.cstr.ptr, file.cstr.ptr, line)
+        }
     }
 }

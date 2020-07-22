@@ -85,13 +85,13 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
                 POOL_COLOR_ARRAY.value to POOL_COLOR_ARRAY
             )
 
-            fun from(value: Long): Type {
+            fun from(value: NaturalT): Type {
                 return types[value] ?: throw NoSuchElementException("Unknown value: $value")
             }
         }
     }
 
-    enum class Operator(val id: Long) {
+    enum class Operator(val id: NaturalT) {
         OP_EQUAL(0),
         OP_NOT_EQUAL(1),
         OP_LESS(2),
@@ -124,7 +124,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
         OP_MAX(25);
 
         companion object {
-            fun from(value: Long) = when(value) {
+            fun from(value: NaturalT) = when(value) {
                 0L -> OP_EQUAL
                 1L -> OP_NOT_EQUAL
                 2L -> OP_LESS

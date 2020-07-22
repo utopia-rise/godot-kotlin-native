@@ -29,6 +29,7 @@ internal fun String.getRawMemory(memScope: MemScope): COpaquePointer {
 internal fun String.toGDString(): CValue<godot_string> {
     return memScoped {
         cValue {
+            checkNotNull(Godot.gdnative.godot_string_new)(this.ptr)
             checkNotNull(Godot.gdnative.godot_string_parse_utf8)(
                 this.ptr,
                 this@toGDString.cstr.ptr
@@ -40,6 +41,7 @@ internal fun String.toGDString(): CValue<godot_string> {
 internal fun <T> String.asGDString(block: MemScope.(CValue<godot_string>) -> T): T {
     return memScoped {
         val gdString = cValue<godot_string> {
+            checkNotNull(Godot.gdnative.godot_string_new)(this.ptr)
             checkNotNull(Godot.gdnative.godot_string_parse_utf8)(
                 this.ptr,
                 this@asGDString.cstr.ptr
