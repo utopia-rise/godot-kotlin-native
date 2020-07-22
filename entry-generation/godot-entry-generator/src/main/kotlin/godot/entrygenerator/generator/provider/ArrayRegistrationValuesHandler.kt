@@ -45,37 +45,38 @@ class ArrayRegistrationValuesHandler(
                 ""
             }
             else -> {
-                var hintBuilder = "Array"
-                var currentElementType: KotlinType? = elementType
+                buildString {
+                    append("Array")
+                    var currentElementType: KotlinType? = elementType
 
-                if (currentElementType == null) {
-                    val compatibleListType = type.getCompatibleListType()
-                    if (compatibleListType.isNotEmpty()) {
-                        hintBuilder += ",${type.getCompatibleListType()}"
-                    }
-                }
-
-                loop@ while (currentElementType != null) {
-                    when {
-                        currentElementType.isCompatibleList() -> {
-                            hintBuilder += ",Array"
-                            currentElementType = currentElementType.arguments.firstOrNull()?.type
-                        }
-                        currentElementType.getJetTypeFqName(false).isGodotPrimitive() -> {
-                            hintBuilder += ",${currentElementType.getJetTypeFqName(false).getAsGodotPrimitive()}"
-                            break@loop
-                        }
-                        currentElementType.isCoreType() -> {
-                            hintBuilder += ",${currentElementType.getAsCoreType()}"
-                            break@loop
-                        }
-                        else -> {
-                            hintBuilder = ""
-                            break@loop
+                    if (currentElementType == null) {
+                        val compatibleListType = type.getCompatibleListType()
+                        if (compatibleListType.isNotEmpty()) {
+                            append(",${type.getCompatibleListType()}")
                         }
                     }
+
+                    loop@ while (currentElementType != null) {
+                        when {
+                            currentElementType.isCompatibleList() -> {
+                                append(",Array")
+                                currentElementType = currentElementType.arguments.firstOrNull()?.type
+                            }
+                            currentElementType.getJetTypeFqName(false).isGodotPrimitive() -> {
+                                append(",${currentElementType.getJetTypeFqName(false).getAsGodotPrimitive()}")
+                                break@loop
+                            }
+                            currentElementType.isCoreType() -> {
+                                append(",${currentElementType.getAsCoreType()}")
+                                break@loop
+                            }
+                            else -> {
+                                clear()
+                                break@loop
+                            }
+                        }
+                    }
                 }
-                hintBuilder
             }
         }
     }
