@@ -2,8 +2,6 @@ package godot.entrygenerator.generator.provider
 
 import com.squareup.kotlinpoet.ClassName
 import godot.entrygenerator.extension.assignmentPsi
-import godot.entrygenerator.extension.getPropertyHintAnnotation
-import godot.entrygenerator.mapper.PropertyHintTypeMapper
 import org.jetbrains.kotlin.descriptors.PropertyDescriptor
 import org.jetbrains.kotlin.resolve.BindingContext
 import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
@@ -17,7 +15,10 @@ class EnumFlagRegistrationValuesHandler(
         if (propertyHintAnnotation == null || propertyHintAnnotation.fqName?.asString() != "godot.annotation.EnumFlag") {
             throw IllegalStateException("The property \"${propertyDescriptor.fqNameSafe}\" is not annotated with @EnumFlag!")
         }
-        return super.getDefaultValue()
+        if (propertyDescriptor.isLateInit || !isVisibleInEditor()) {
+            return "%L" to arrayOf("null")
+        }
+        return getDefaultValueExpression(propertyDescriptor.assignmentPsi) ?: "" to arrayOf()
     }
     override fun getPropertyTypeHint(): ClassName {
         throw UnsupportedOperationException("Hint type for enum is always the same, so it is handled by binding at runtime")
