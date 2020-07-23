@@ -163,7 +163,7 @@ class ClassBuilder<T : Object> internal constructor(val classHandle: ClassHandle
             isVisibleInEditor,
             rpcMode,
             godot_property_hint.GODOT_PROPERTY_HINT_ENUM,
-            "2/3:${enumValues<K>().joinToString(",") { it.name }}"
+            "2/3:${enumValues<K>().joinToString(",") { it.name }}" //2 = Variant.Type.Int.ordinal | 3 = PropertyHint.PROPERTY_HINT_ENUM.ordinal
         )
     }
 
