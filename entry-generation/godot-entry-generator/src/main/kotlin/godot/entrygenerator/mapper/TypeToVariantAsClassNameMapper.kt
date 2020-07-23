@@ -33,7 +33,7 @@ object TypeToVariantAsClassNameMapper {
             "PoolVector3Array" -> ClassName("godot.core.Variant.Type", "POOL_VECTOR3_ARRAY")
             "PoolColorArray" -> ClassName("godot.core.Variant.Type", "POOL_COLOR_ARRAY")
             else -> {
-                if (type?.isCompatibleList() == true) {
+                if (type != null && type.isCompatibleList()) {
                     ClassName("godot.core.Variant.Type", "ARRAY")
                 } else {
                     ClassName("godot.core.Variant.Type", "OBJECT")
