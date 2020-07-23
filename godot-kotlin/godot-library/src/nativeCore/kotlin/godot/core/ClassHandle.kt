@@ -2,6 +2,7 @@ package godot.core
 
 import godot.Object
 import godot.gdnative.*
+import godot.internal.type.nullSafe
 import godot.registration.RPCMode
 import kotlinx.cinterop.*
 
@@ -39,7 +40,7 @@ internal class ClassHandle<T : Object>(
             } else {
                 Godot.nativescript.godot_nativescript_register_class
             }
-            checkNotNull(registerMethod)(
+            nullSafe(registerMethod)(
                 nativescriptHandle,
                 className.cstr.ptr,
                 parentClassName.cstr.ptr,
@@ -61,7 +62,7 @@ internal class ClassHandle<T : Object>(
                 this.method = staticCFunction(::invokeMethod)
             }
 
-            checkNotNull(Godot.nativescript.godot_nativescript_register_method)(
+            nullSafe(Godot.nativescript.godot_nativescript_register_method)(
                 nativescriptHandle,
                 className.cstr.ptr,
                 methodName.cstr.ptr,
@@ -92,15 +93,15 @@ internal class ClassHandle<T : Object>(
                     val argInfo = argInfos[index]
                     val value = parameters.getValue(key)
                     // argument name
-                    checkNotNull(Godot.gdnative.godot_string_parse_utf8)(argInfo.name.ptr, key.cstr.ptr)
+                    nullSafe(Godot.gdnative.godot_string_parse_utf8)(argInfo.name.ptr, key.cstr.ptr)
                     // argument type
                     argInfo.type = value.value.toInt()
                 }
                 args = argInfos.getPointer(this@memScoped)
-                checkNotNull(Godot.gdnative.godot_string_parse_utf8)(name.ptr, signalName.cstr.ptr)
+                nullSafe(Godot.gdnative.godot_string_parse_utf8)(name.ptr, signalName.cstr.ptr)
                 num_args = parameters.size
             }
-            checkNotNull(Godot.nativescript.godot_nativescript_register_signal)(
+            nullSafe(Godot.nativescript.godot_nativescript_register_signal)(
                 nativescriptHandle,
                 className.cstr.ptr,
                 gdSignal.ptr
@@ -131,9 +132,9 @@ internal class ClassHandle<T : Object>(
                 usage = usageFlags
                 type = propertyType.value.toInt()
                 this.hint = hintType
-                checkNotNull(Godot.gdnative.godot_string_parse_utf8)(hint_string.ptr, hintString.cstr.ptr)
+                nullSafe(Godot.gdnative.godot_string_parse_utf8)(hint_string.ptr, hintString.cstr.ptr)
                 if (default != null) {
-                    checkNotNull(Godot.gdnative.godot_variant_new_copy)(default_value.ptr, default._handle.ptr)
+                    nullSafe(Godot.gdnative.godot_variant_new_copy)(default_value.ptr, default._handle.ptr)
                 }
             }
 
@@ -147,7 +148,7 @@ internal class ClassHandle<T : Object>(
                 set_func = staticCFunction(::setProperty)
             }
 
-            checkNotNull(Godot.nativescript.godot_nativescript_register_property)(
+            nullSafe(Godot.nativescript.godot_nativescript_register_property)(
                 nativescriptHandle,
                 className.cstr.ptr,
                 propertyName.cstr.ptr,

@@ -2,6 +2,7 @@ package godot.core
 
 import godot.Object
 import godot.gdnative.godot_array
+import godot.internal.type.nullSafe
 import kotlinx.cinterop.*
 
 class BoolVariantArray : GodotArray<Boolean> {
@@ -10,14 +11,14 @@ class BoolVariantArray : GodotArray<Boolean> {
     constructor() {
         _handle = cValue{}
         callNative {
-            checkNotNull(Godot.gdnative.godot_array_new)(it)
+            nullSafe(Godot.gdnative.godot_array_new)(it)
         }
     }
 
     constructor(other: BoolVariantArray) {
         _handle = cValue{}
         callNative {
-            checkNotNull(Godot.gdnative.godot_array_new_copy)(it, other._handle.ptr)
+            nullSafe(Godot.gdnative.godot_array_new_copy)(it, other._handle.ptr)
         }
     }
 
@@ -36,19 +37,19 @@ class BoolVariantArray : GodotArray<Boolean> {
 
     override fun append(value: Boolean) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_array_append)(it, value.toVariant()._handle.ptr)
+            nullSafe(Godot.gdnative.godot_array_append)(it, value.toVariant()._handle.ptr)
         }
     }
 
     override fun bsearch(value: Boolean, before: Boolean): Int {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_bsearch)(it, value.toVariant()._handle.ptr, before)
+            nullSafe(Godot.gdnative.godot_array_bsearch)(it, value.toVariant()._handle.ptr, before)
         }
     }
 
     override fun bsearchCustom(value: Boolean, obj: Object, func: String, before: Boolean): Int {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_bsearch_custom)(
+            nullSafe(Godot.gdnative.godot_array_bsearch_custom)(
                 it,
                 value.toVariant()._handle.ptr,
                 obj.ptr,
@@ -60,60 +61,60 @@ class BoolVariantArray : GodotArray<Boolean> {
 
     override fun count(value: Boolean): Int {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_count)(it, value.toVariant()._handle.ptr)
+            nullSafe(Godot.gdnative.godot_array_count)(it, value.toVariant()._handle.ptr)
         }
     }
 
     override fun duplicate(deep: Boolean): BoolVariantArray {
         return BoolVariantArray(
             callNative {
-                checkNotNull(Godot.gdnative11.godot_array_duplicate)(it, deep)
+                nullSafe(Godot.gdnative11.godot_array_duplicate)(it, deep)
             }
         )
     }
 
     override fun erase(value: Boolean) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_array_erase)(it, value.toVariant()._handle.ptr)
+            nullSafe(Godot.gdnative.godot_array_erase)(it, value.toVariant()._handle.ptr)
         }
     }
 
     override fun find(what: Boolean, from: Int): Int {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_find)(it, what.toVariant()._handle.ptr, from)
+            nullSafe(Godot.gdnative.godot_array_find)(it, what.toVariant()._handle.ptr, from)
         }
     }
 
     override fun findLast(value: Boolean): Int {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_find_last)(it, value.toVariant()._handle.ptr)
+            nullSafe(Godot.gdnative.godot_array_find_last)(it, value.toVariant()._handle.ptr)
         }
     }
 
     override fun front(): Boolean {
         return Variant(
             callNative {
-                checkNotNull(Godot.gdnative.godot_array_front)(it)
+                nullSafe(Godot.gdnative.godot_array_front)(it)
             }
         ).asBoolean()
     }
 
     override fun has(value: Boolean): Boolean {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_has)(it, value.toVariant()._handle.ptr)
+            nullSafe(Godot.gdnative.godot_array_has)(it, value.toVariant()._handle.ptr)
         }
     }
 
     override fun insert(position: Int, value: Boolean) {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_insert)(it, position, value.toVariant()._handle.ptr)
+            nullSafe(Godot.gdnative.godot_array_insert)(it, position, value.toVariant()._handle.ptr)
         }
     }
 
     override fun max(): Boolean {
         return Variant(
             callNative {
-                checkNotNull(Godot.gdnative11.godot_array_max)(it)
+                nullSafe(Godot.gdnative11.godot_array_max)(it)
             }
         ).asBoolean()
     }
@@ -121,7 +122,7 @@ class BoolVariantArray : GodotArray<Boolean> {
     override fun min(): Boolean {
         return Variant(
             callNative {
-                checkNotNull(Godot.gdnative11.godot_array_min)(it)
+                nullSafe(Godot.gdnative11.godot_array_min)(it)
             }
         ).asBoolean()
     }
@@ -129,7 +130,7 @@ class BoolVariantArray : GodotArray<Boolean> {
     override fun popBack(): Boolean {
         return Variant(
             callNative {
-                checkNotNull(Godot.gdnative.godot_array_pop_back)(it)
+                nullSafe(Godot.gdnative.godot_array_pop_back)(it)
             }
         ).asBoolean()
     }
@@ -138,33 +139,33 @@ class BoolVariantArray : GodotArray<Boolean> {
     override fun popFront(): Boolean {
         return Variant(
             callNative {
-                checkNotNull(Godot.gdnative.godot_array_pop_front)(it)
+                nullSafe(Godot.gdnative.godot_array_pop_front)(it)
             }
         ).asBoolean()
     }
 
     override fun pushBack(value: Boolean) {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_push_back)(it, value.toVariant()._handle.ptr)
+            nullSafe(Godot.gdnative.godot_array_push_back)(it, value.toVariant()._handle.ptr)
         }
     }
 
     override fun pushFront(value: Boolean) {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_push_front)(it, value.toVariant()._handle.ptr)
+            nullSafe(Godot.gdnative.godot_array_push_front)(it, value.toVariant()._handle.ptr)
         }
     }
 
     override fun rfind(what: Boolean, from: Int): Int {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_rfind)(it, what.toVariant()._handle.ptr, from)
+            nullSafe(Godot.gdnative.godot_array_rfind)(it, what.toVariant()._handle.ptr, from)
         }
     }
 
     override fun slice(begin: Int, end: Int, step: Int, deep: Boolean): BoolVariantArray {
         return BoolVariantArray(
             callNative {
-                checkNotNull(Godot.gdnative12.godot_array_slice)(
+                nullSafe(Godot.gdnative12.godot_array_slice)(
                     it,
                     begin,
                     end,
@@ -179,14 +180,14 @@ class BoolVariantArray : GodotArray<Boolean> {
 
     override operator fun set(idx: Int, data: Boolean) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_array_set)(it, idx, Variant(data)._handle.ptr)
+            nullSafe(Godot.gdnative.godot_array_set)(it, idx, Variant(data)._handle.ptr)
         }
     }
 
     override operator fun get(idx: Int): Boolean {
         return Variant(
             callNative {
-                checkNotNull(Godot.gdnative.godot_array_get)(it, idx)
+                nullSafe(Godot.gdnative.godot_array_get)(it, idx)
             }
         ).asBoolean()
     }
