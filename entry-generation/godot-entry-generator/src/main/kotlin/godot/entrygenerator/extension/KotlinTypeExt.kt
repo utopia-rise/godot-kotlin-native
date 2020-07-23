@@ -22,15 +22,9 @@ fun KotlinType.isResource(): Boolean {
 }
 
 fun KotlinType.isCompatibleList(): Boolean {
-    return if (getJetTypeFqName(false) == "godot.core.GodotArray") {
-        true
-    } else {
-        supertypes().forEach { supertype ->
-            if (supertype.getJetTypeFqName(false) == "godot.core.GodotArray") {
-                return true
-            }
-        }
-        return false
+    return when {
+        getJetTypeFqName(false) == "godot.core.GodotArray" -> true
+        else -> supertypes().any { it.getJetTypeFqName(false) == "godot.core.GodotArray" }
     }
 }
 
