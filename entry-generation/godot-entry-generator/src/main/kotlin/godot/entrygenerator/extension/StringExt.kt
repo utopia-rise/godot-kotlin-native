@@ -27,32 +27,6 @@ fun String.getAsGodotPrimitive() =
         else -> null
     }
 
-fun String.isCompatibleList(): Boolean {
-    return when(this) {
-        "godot.core.VariantArray",
-        "godot.core.ObjectArray",
-        "godot.core.EnumArray",
-        "godot.core.BoolVariantArray",
-        "godot.core.IntVariantArray",
-        "godot.core.RealVariantArray",
-        "godot.core.StringVariantArray",
-        "godot.core.AABBArray",
-        "godot.core.BasisArray",
-        "godot.core.ColorArray",
-        "godot.core.CoreArray",
-        "godot.core.NodePathArray",
-        "godot.core.PlaneArray",
-        "godot.core.QuatArray",
-        "godot.core.Rect2Array",
-        "godot.core.RIDArray",
-        "godot.core.Transform2DArray",
-        "godot.core.TransformArray",
-        "godot.core.Vector2Array",
-        "godot.core.Vector3Array" -> true
-        else -> false
-    }
-}
-
 fun String.getCompatibleListType(): String {
     return when(this) {
         "godot.core.ObjectArray" -> "Object"
