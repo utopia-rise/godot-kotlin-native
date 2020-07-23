@@ -158,12 +158,12 @@ class ClassBuilder<T : Object> internal constructor(val classHandle: ClassHandle
         classHandle.registerProperty(
             name,
             StableRef.create(propertyHandler).asCPointer(),
-            Variant.Type.INT,
+            Variant.Type.ARRAY,
             Variant(variantArray),
             isVisibleInEditor,
             rpcMode,
             godot_property_hint.GODOT_PROPERTY_HINT_ENUM,
-            "Array,int,${enumValues<K>().joinToString { it.name }}"
+            "2/3:${enumValues<K>().joinToString(",") { it.name }}"
         )
     }
 

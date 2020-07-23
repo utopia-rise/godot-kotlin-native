@@ -74,7 +74,6 @@ class ArrayRegistrationValuesHandler(
                             }
                         }
                     }
-                    append(":19") //variant.type.array.ordinal
                     delete(0, 1)
                 }
             }
