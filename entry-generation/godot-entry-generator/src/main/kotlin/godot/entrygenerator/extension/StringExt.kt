@@ -4,50 +4,50 @@ fun String.isString() = this == "kotlin.String"
 
 fun String.isGodotPrimitive() =
     when (this) {
-        "kotlin.Int" -> true
-        "kotlin.Long" -> true
-        "kotlin.Float" -> true
-        "kotlin.Double" -> true
-        "kotlin.Boolean" -> true
-        "kotlin.Byte" -> true
+        "kotlin.Int",
+        "kotlin.Long",
+        "kotlin.Float",
+        "kotlin.Double",
+        "kotlin.Boolean",
+        "kotlin.Byte",
         "kotlin.Short" -> true
         else -> false
     }
 
 fun String.getAsGodotPrimitive() =
     when (this) {
-        "kotlin.Int" -> "int"
-        "kotlin.Long" -> "int"
-        "kotlin.Float" -> "float"
+        "kotlin.Int",
+        "kotlin.Long",
+        "kotlin.Byte",
+        "kotlin.Short",
+        "kotlin.Enum" -> "int"
+        "kotlin.Float",
         "kotlin.Double" -> "float"
         "kotlin.Boolean" -> "bool"
-        "kotlin.Byte" -> "int"
-        "kotlin.Short" -> "int"
-        "kotlin.Enum" -> "int"
         else -> null
     }
 
 fun String.isCompatibleList(): Boolean {
     return when(this) {
-        "godot.core.VariantArray" -> true
-        "godot.core.ObjectArray" -> true
-        "godot.core.EnumArray" -> true
-        "godot.core.BoolVariantArray" -> true
-        "godot.core.IntVariantArray" -> true
-        "godot.core.RealVariantArray" -> true
-        "godot.core.StringVariantArray" -> true
-        "godot.core.AABBArray" -> true
-        "godot.core.BasisArray" -> true
-        "godot.core.ColorArray" -> true
-        "godot.core.CoreArray" -> true
-        "godot.core.NodePathArray" -> true
-        "godot.core.PlaneArray" -> true
-        "godot.core.QuatArray" -> true
-        "godot.core.Rect2Array" -> true
-        "godot.core.RIDArray" -> true
-        "godot.core.Transform2DArray" -> true
-        "godot.core.TransformArray" -> true
-        "godot.core.Vector2Array" -> true
+        "godot.core.VariantArray",
+        "godot.core.ObjectArray",
+        "godot.core.EnumArray",
+        "godot.core.BoolVariantArray",
+        "godot.core.IntVariantArray",
+        "godot.core.RealVariantArray",
+        "godot.core.StringVariantArray",
+        "godot.core.AABBArray",
+        "godot.core.BasisArray",
+        "godot.core.ColorArray",
+        "godot.core.CoreArray",
+        "godot.core.NodePathArray",
+        "godot.core.PlaneArray",
+        "godot.core.QuatArray",
+        "godot.core.Rect2Array",
+        "godot.core.RIDArray",
+        "godot.core.Transform2DArray",
+        "godot.core.TransformArray",
+        "godot.core.Vector2Array",
         "godot.core.Vector3Array" -> true
         else -> false
     }
@@ -55,11 +55,10 @@ fun String.isCompatibleList(): Boolean {
 
 fun String.getCompatibleListType(): String {
     return when(this) {
-//        "godot.core.VariantArray" -> "Variant"
         "godot.core.ObjectArray" -> "Object"
-        "godot.core.EnumArray" -> "int"
-        "godot.core.BoolVariantArray" -> "bool"
+        "godot.core.EnumArray",
         "godot.core.IntVariantArray" -> "int"
+        "godot.core.BoolVariantArray" -> "bool"
         "godot.core.RealVariantArray" -> "float"
         "godot.core.StringVariantArray" -> "string"
         "godot.core.AABBArray" -> "AABB"
