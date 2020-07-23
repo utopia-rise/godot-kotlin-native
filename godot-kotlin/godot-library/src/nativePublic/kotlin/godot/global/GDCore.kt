@@ -2,7 +2,7 @@ package godot.core
 
 import godot.internal.type.toRealT
 
-internal interface gdCore {
+internal interface GDCore {
 
     /** Returns a character as a String of the given Unicode code point (which is compatible with ASCII code). */
     fun char(code: Int) = code.toChar().toString()

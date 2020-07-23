@@ -10,7 +10,7 @@ import kotlinx.cinterop.memScoped
 import kotlin.test.assertTrue
 
 
-object gd : gdMath, gdCore, gdRandom, gdPrint, gdResource {
+object GD : GDMath, GDCore, GDRandom, GDPrint, GDResource {
     override val rng = RandomNumberGenerator()
     override val builder: StringBuilder = StringBuilder()
 

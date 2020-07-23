@@ -3,7 +3,7 @@ package godot.global
 import godot.core.Godot
 import godot.core.Variant
 
-internal interface gdPrint {
+internal interface GDPrint {
     val builder: StringBuilder
 
     /** Converts one or more arguments to strings in the best way possible and prints them to the console.**/
