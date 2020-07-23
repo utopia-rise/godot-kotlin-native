@@ -26,7 +26,7 @@ abstract class GodotArray<T> internal constructor() : NativeCoreType<godot_array
      */
     fun clear() {
         callNative {
-            checkNotNull(Godot.gdnative.godot_array_clear)(it)
+            nullSafe(Godot.gdnative.godot_array_clear)(it)
         }
     }
 
@@ -35,7 +35,7 @@ abstract class GodotArray<T> internal constructor() : NativeCoreType<godot_array
      */
     fun empty(): Boolean {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_empty)(it)
+            nullSafe(Godot.gdnative.godot_array_empty)(it)
         }
     }
 
@@ -44,7 +44,7 @@ abstract class GodotArray<T> internal constructor() : NativeCoreType<godot_array
      */
     fun hash(): NaturalT {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_hash)(it)
+            nullSafe(Godot.gdnative.godot_array_hash)(it)
         }.toNaturalT()
     }
 
@@ -53,7 +53,7 @@ abstract class GodotArray<T> internal constructor() : NativeCoreType<godot_array
      */
     fun invert() {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_invert)(it)
+            nullSafe(Godot.gdnative.godot_array_invert)(it)
         }
     }
 
@@ -62,7 +62,7 @@ abstract class GodotArray<T> internal constructor() : NativeCoreType<godot_array
      */
     fun remove(position: Int) {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_remove)(it, position)
+            nullSafe(Godot.gdnative.godot_array_remove)(it, position)
         }
     }
 
@@ -72,7 +72,7 @@ abstract class GodotArray<T> internal constructor() : NativeCoreType<godot_array
      */
     fun resize(size: Int) {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_resize)(it, size)
+            nullSafe(Godot.gdnative.godot_array_resize)(it, size)
         }
     }
 
@@ -83,7 +83,7 @@ abstract class GodotArray<T> internal constructor() : NativeCoreType<godot_array
      */
     fun shuffle() {
         return callNative {
-            checkNotNull(Godot.gdnative11.godot_array_shuffle)(it)
+            nullSafe(Godot.gdnative11.godot_array_shuffle)(it)
         }
     }
 
@@ -92,7 +92,7 @@ abstract class GodotArray<T> internal constructor() : NativeCoreType<godot_array
      */
     fun size(): Int {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_size)(it)
+            nullSafe(Godot.gdnative.godot_array_size)(it)
         }
     }
 
@@ -101,7 +101,7 @@ abstract class GodotArray<T> internal constructor() : NativeCoreType<godot_array
      */
     fun sort() {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_sort)(it)
+            nullSafe(Godot.gdnative.godot_array_sort)(it)
         }
     }
 
@@ -111,7 +111,7 @@ abstract class GodotArray<T> internal constructor() : NativeCoreType<godot_array
      */
     fun sortCustom(obj: Object, func: String) {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_array_sort_custom)(it, obj.ptr, func.toGDString().ptr)
+            nullSafe(Godot.gdnative.godot_array_sort_custom)(it, obj.ptr, func.toGDString().ptr)
         }
     }
 

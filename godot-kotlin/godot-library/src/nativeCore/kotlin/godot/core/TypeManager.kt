@@ -1,6 +1,7 @@
 package godot.core
 
 import godot.Object
+import godot.internal.type.nullSafe
 import kotlinx.cinterop.*
 import kotlin.native.concurrent.AtomicReference
 import kotlin.native.concurrent.freeze
@@ -18,7 +19,7 @@ internal object TypeManager {
     fun registerUserType(nativescriptHandle: COpaquePointer, className: String, factory: () -> Object) {
         val ref = createAndRegisterTag(factory)
         memScoped {
-            checkNotNull(Godot.nativescript11.godot_nativescript_set_type_tag)(
+            nullSafe(Godot.nativescript11.godot_nativescript_set_type_tag)(
                 nativescriptHandle,
                 className.cstr.ptr,
                 ref
@@ -32,7 +33,7 @@ internal object TypeManager {
     fun registerEngineType(className: String, factory: () -> Object) {
         val ref = createAndRegisterTag(factory)
         memScoped {
-            checkNotNull(Godot.nativescript11.godot_nativescript_set_global_type_tag)(
+            nullSafe(Godot.nativescript11.godot_nativescript_set_global_type_tag)(
                 Godot.languageIndex,
                 className.cstr.ptr,
                 ref
@@ -76,10 +77,10 @@ internal object TypeManager {
             val className = obj.getClass()
             // user defined type
             // this should be first otherwise casting to a user defined type won't work!
-            var tag = checkNotNull(Godot.nativescript11.godot_nativescript_get_type_tag)(ptr)
+            var tag = nullSafe(Godot.nativescript11.godot_nativescript_get_type_tag)(ptr)
             // engine type
             if (tag == null) {
-                tag = checkNotNull(Godot.nativescript11.godot_nativescript_get_global_type_tag)(
+                tag = nullSafe(Godot.nativescript11.godot_nativescript_get_global_type_tag)(
                     Godot.languageIndex,
                     className.cstr.ptr
                 )
@@ -89,7 +90,7 @@ internal object TypeManager {
             if (tag == null) {
                 var parentClass = ClassDB.getParentClass(className)
                 while (parentClass.isNotEmpty()) {
-                    tag = checkNotNull(Godot.nativescript11.godot_nativescript_get_global_type_tag)(
+                    tag = nullSafe(Godot.nativescript11.godot_nativescript_get_global_type_tag)(
                         Godot.languageIndex,
                         parentClass.cstr.ptr
                     )

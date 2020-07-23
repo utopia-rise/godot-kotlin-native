@@ -4,6 +4,7 @@ import godot.Object
 import godot.RandomNumberGenerator
 import godot.global.gdPrint
 import godot.global.gdResource
+import godot.internal.type.nullSafe
 import kotlinx.cinterop.invoke
 import kotlinx.cinterop.memScoped
 import kotlin.test.assertTrue
@@ -56,7 +57,7 @@ object gd : gdMath, gdCore, gdRandom, gdPrint, gdResource {
     /** Returns whether instance is a valid object (e.g. has not been deleted from memory).*/
     fun isInstanceValid(instance: Object): Boolean {
         return memScoped {
-            checkNotNull(Godot.gdnative11.godot_is_instance_valid)(instance.ptr)
+            nullSafe(Godot.gdnative11.godot_is_instance_valid)(instance.ptr)
         }
     }
 

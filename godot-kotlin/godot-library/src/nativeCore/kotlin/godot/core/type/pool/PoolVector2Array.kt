@@ -2,7 +2,6 @@
 
 package godot.core
 
-import godot.gdnative.godot_pool_vector2_array
 import godot.gdnative.godot_pool_vector2_array_layout
 import godot.internal.type.*
 import kotlinx.cinterop.*
@@ -17,14 +16,14 @@ class PoolVector2Array : NativeCoreType<godot_pool_vector2_array_layout>, Iterab
     constructor() {
         _handle = cValue{}
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_vector2_array_new)(it)
+            nullSafe(Godot.gdnative.godot_pool_vector2_array_new)(it)
         }
     }
 
     constructor(other: PoolVector2Array) {
         _handle = cValue{}
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_vector2_array_new_copy)(it, other._handle.ptr)
+            nullSafe(Godot.gdnative.godot_pool_vector2_array_new_copy)(it, other._handle.ptr)
         }
     }
 
@@ -54,7 +53,7 @@ class PoolVector2Array : NativeCoreType<godot_pool_vector2_array_layout>, Iterab
      */
     fun append(vector: Vector2) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_vector2_array_append)(it, vector.getRawMemory(this).reinterpret())
+            nullSafe(Godot.gdnative.godot_pool_vector2_array_append)(it, vector.getRawMemory(this).reinterpret())
         }
     }
 
@@ -64,7 +63,7 @@ class PoolVector2Array : NativeCoreType<godot_pool_vector2_array_layout>, Iterab
      */
     fun appendArray(array: PoolVector2Array) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_vector2_array_append_array)(it, array._handle.ptr)
+            nullSafe(Godot.gdnative.godot_pool_vector2_array_append_array)(it, array._handle.ptr)
         }
     }
 
@@ -73,7 +72,7 @@ class PoolVector2Array : NativeCoreType<godot_pool_vector2_array_layout>, Iterab
      */
     fun empty() {
         callNative {
-            checkNotNull(Godot.gdnative12.godot_pool_vector2_array_empty)(it)
+            nullSafe(Godot.gdnative12.godot_pool_vector2_array_empty)(it)
         }
     }
 
@@ -83,7 +82,7 @@ class PoolVector2Array : NativeCoreType<godot_pool_vector2_array_layout>, Iterab
     operator fun get(idx: Int): Vector2 {
         return Vector2(
             callNative {
-                checkNotNull(Godot.gdnative.godot_pool_vector2_array_get)(it, idx)
+                nullSafe(Godot.gdnative.godot_pool_vector2_array_get)(it, idx)
             }
         )
     }
@@ -94,7 +93,7 @@ class PoolVector2Array : NativeCoreType<godot_pool_vector2_array_layout>, Iterab
      */
     fun insert(idx: Int, data: Vector2) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_vector2_array_insert)(it, idx, data.getRawMemory(this).reinterpret())
+            nullSafe(Godot.gdnative.godot_pool_vector2_array_insert)(it, idx, data.getRawMemory(this).reinterpret())
         }
     }
 
@@ -103,7 +102,7 @@ class PoolVector2Array : NativeCoreType<godot_pool_vector2_array_layout>, Iterab
      */
     fun invert() {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_vector2_array_invert)(it)
+            nullSafe(Godot.gdnative.godot_pool_vector2_array_invert)(it)
         }
     }
 
@@ -112,7 +111,7 @@ class PoolVector2Array : NativeCoreType<godot_pool_vector2_array_layout>, Iterab
      */
     fun pushBack(data: Vector2) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_vector2_array_push_back)(it, data.getRawMemory(this).reinterpret())
+            nullSafe(Godot.gdnative.godot_pool_vector2_array_push_back)(it, data.getRawMemory(this).reinterpret())
         }
     }
 
@@ -121,7 +120,7 @@ class PoolVector2Array : NativeCoreType<godot_pool_vector2_array_layout>, Iterab
      */
     fun remove(idx: Int) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_vector2_array_remove)(it, idx)
+            nullSafe(Godot.gdnative.godot_pool_vector2_array_remove)(it, idx)
         }
     }
 
@@ -131,7 +130,7 @@ class PoolVector2Array : NativeCoreType<godot_pool_vector2_array_layout>, Iterab
      */
     fun resize(size: Int) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_vector2_array_resize)(it, size)
+            nullSafe(Godot.gdnative.godot_pool_vector2_array_resize)(it, size)
         }
     }
 
@@ -140,7 +139,7 @@ class PoolVector2Array : NativeCoreType<godot_pool_vector2_array_layout>, Iterab
      */
     operator fun set(idx: Int, data: Vector2) {
         callNative {
-            checkNotNull(Godot.gdnative.godot_pool_vector2_array_set)(it, idx, data.getRawMemory(this).reinterpret())
+            nullSafe(Godot.gdnative.godot_pool_vector2_array_set)(it, idx, data.getRawMemory(this).reinterpret())
         }
     }
 
@@ -149,7 +148,7 @@ class PoolVector2Array : NativeCoreType<godot_pool_vector2_array_layout>, Iterab
      */
     fun size(): Int {
         return callNative {
-            checkNotNull(Godot.gdnative.godot_pool_vector2_array_size)(it)
+            nullSafe(Godot.gdnative.godot_pool_vector2_array_size)(it)
         }
     }
 
