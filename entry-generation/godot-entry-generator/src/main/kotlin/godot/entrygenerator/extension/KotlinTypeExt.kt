@@ -9,6 +9,10 @@ fun KotlinType.isCoreType(): Boolean {
     return coreTypes.contains(this.toString())
 }
 
+fun KotlinType.getAsCoreType(): String {
+    return coreTypes.first { it == this.toString() }
+}
+
 fun KotlinType.isResource(): Boolean {
     return this.getJetTypeFqName(false) == "godot.Resource"
         || this
@@ -19,13 +23,16 @@ fun KotlinType.isResource(): Boolean {
 
 fun KotlinType.isCompatibleList(): Boolean {
     return when {
-        getJetTypeFqName(false) == "godot.core.VariantArray" -> true
-        else -> false
+        getJetTypeFqName(false) == "godot.core.GodotArray" -> true
+        else -> supertypes().any { it.getJetTypeFqName(false) == "godot.core.GodotArray" }
     }
 }
 
+fun KotlinType.getCompatibleListType(): String {
+    return getJetTypeFqName(false).getCompatibleListType()
+}
+
 private val coreTypes = listOf(
-    "GDArray",
     "Basis",
     "Color",
     "Dictionary",

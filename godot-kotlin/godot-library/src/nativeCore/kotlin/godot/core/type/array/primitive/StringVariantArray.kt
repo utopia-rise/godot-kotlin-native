@@ -208,7 +208,7 @@ class StringVariantArray : GodotArray<String> {
     }
 }
 
-fun StringVariantArrayOf(vararg elements: String): StringVariantArray {
+fun stringVariantArrayOf(vararg elements: String): StringVariantArray {
     return StringVariantArray().also {
         for (arg in elements) {
             it.append(arg)

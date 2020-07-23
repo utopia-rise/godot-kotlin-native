@@ -201,7 +201,7 @@ class BoolVariantArray : GodotArray<Boolean> {
     }
 }
 
-fun BooleanVariantArrayOf(vararg elements: Boolean): BoolVariantArray {
+fun booleanVariantArrayOf(vararg elements: Boolean): BoolVariantArray {
     return BoolVariantArray().also {
         for (arg in elements) {
             it.append(arg)
