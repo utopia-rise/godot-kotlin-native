@@ -24,7 +24,7 @@ val sd = arrayOf(
     0.0000000009999
 )
 
-internal interface gdMath {
+internal interface GDMath {
 
     /** Returns the absolute value of parameter s (i.e. unsigned value, works for integer and float). */
     fun abs(s: Int) = kotlin.math.abs(s)
