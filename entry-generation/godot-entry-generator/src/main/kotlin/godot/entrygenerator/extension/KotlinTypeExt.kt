@@ -9,10 +9,6 @@ fun KotlinType.isCoreType(): Boolean {
     return coreTypes.contains(this.toString())
 }
 
-fun KotlinType.getAsCoreType(): String {
-    return coreTypes.first { it == this.toString() }
-}
-
 fun KotlinType.isResource(): Boolean {
     return this.getJetTypeFqName(false) == "godot.Resource"
         || this
