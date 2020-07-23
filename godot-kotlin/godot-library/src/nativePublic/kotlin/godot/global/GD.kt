@@ -2,8 +2,8 @@ package godot.core
 
 import godot.Object
 import godot.RandomNumberGenerator
-import godot.global.gdPrint
-import godot.global.gdResource
+import godot.global.GDPrint
+import godot.global.GDResource
 import godot.internal.type.nullSafe
 import kotlinx.cinterop.invoke
 import kotlinx.cinterop.memScoped
