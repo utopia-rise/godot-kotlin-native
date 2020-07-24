@@ -5,35 +5,37 @@ import godot.core.Variant
 import kotlin.native.concurrent.AtomicReference
 
 internal interface GDPrint {
-    val builder: AtomicReference<StringBuilder>
 
     /** Converts one or more arguments to strings in the best way possible and prints them to the console.**/
     fun print(vararg args: Any?) {
-        for (arg in args) {
-            builder.value.append(arg.toString())
+        val s =  buildString{
+            for (arg in args) {
+                append(arg.toString())
+            }
         }
-        Godot.print(builder.toString())
-        builder.value.clear()
+        Godot.print(s.trimEnd().toString())
     }
 
     /** Prints one or more arguments to the console with a space between each argument.**/
     fun prints(vararg args: Any?) {
-        for (arg in args) {
-            builder.value.append(arg.toString())
-            builder.value.append(" ")
+        val s =  buildString{
+            for (arg in args) {
+                append(arg.toString())
+                append(" ")
+            }
         }
-        Godot.print(builder.value.trimEnd().toString())
-        builder.value.clear()
+        Godot.print(s.trimEnd().toString())
     }
 
     /** Converts one or more arguments to strings in the best way possible and prints them to the console.**/
     fun printt(vararg args: Any?) {
-        for (arg in args) {
-            builder.value.append(arg.toString())
-            builder.value.append("    ")
+        val s =  buildString{
+            for (arg in args) {
+                append(arg.toString())
+                append("    ")
+            }
         }
-        Godot.print(builder.value.trimEnd().toString())
-        builder.value.clear()
+        Godot.print(s.trimEnd().toString())
     }
 
     /** Pushes an error message to Godot's built-in debugger and to the OS terminal. */

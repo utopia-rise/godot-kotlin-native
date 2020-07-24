@@ -13,7 +13,6 @@ import kotlin.test.assertTrue
 
 object GD : GDMath, GDCore, GDRandom, GDPrint, GDResource {
     override val rng = RandomNumberGenerator()
-    override val builder: AtomicReference<StringBuilder> = AtomicReference(StringBuilder())
 
     /** Asserts that the condition is true.
     If the condition is false, an error is generated and the program is halted until you resume it.
