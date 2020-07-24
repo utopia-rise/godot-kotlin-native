@@ -358,19 +358,19 @@ internal interface GDMath {
 
 
     /** Returns the nearest larger power of 2 for integer value. */
-    fun nearest_po2(value: Int) = nearest_po2(value.toLong()).toInt()
+    fun nearestPo2(value: Int) = nearestPo2(value.toLong()).toInt()
 
     /** Returns the nearest larger power of 2 for long value. */
-    fun nearest_po2(value: Long): Long {
+    fun nearestPo2(value: Long): Long {
         val powerOf = kotlin.math.ceil(kotlin.math.ln(value.toDouble()) / kotlin.math.ln(2.0))
         return 2.0.pow(powerOf).toLong()
     }
 
     /** Returns the nearest larger power of 2 for float value. */
-    fun nearest_po2(value: Float) = nearest_po2(value.toDouble()).toFloat()
+    fun nearestPo2(value: Float) = nearestPo2(value.toDouble()).toFloat()
 
     /** Returns the nearest larger power of 2 for double value. */
-    fun nearest_po2(value: Double): Double {
+    fun nearestPo2(value: Double): Double {
         val powerOf = kotlin.math.ceil(kotlin.math.ln(value) / kotlin.math.ln(2.0))
         return 2.0.pow(powerOf)
     }
@@ -416,11 +416,11 @@ internal interface GDMath {
 
 
     /** Maps a value from range [istart, istop] to [ostart, ostop]. */
-    fun range_lerp(value: Float, istart: Float, istop: Float, ostart: Float, ostop: Float) =
+    fun rangeLerp(value: Float, istart: Float, istop: Float, ostart: Float, ostop: Float) =
         lerp(ostart, ostop, inverseLerp(istart, istop, value))
 
     /** Maps a value from range [istart, istop] to [ostart, ostop]. */
-    fun range_lerp(value: Double, istart: Double, istop: Double, ostart: Double, ostop: Double) =
+    fun rangeLerp(value: Double, istart: Double, istop: Double, ostart: Double, ostop: Double) =
         lerp(ostart, ostop, inverseLerp(istart, istop, value))
 
     /** Returns the integral value that is nearest to s, with halfway cases rounded away from zero. */
