@@ -7,7 +7,6 @@ import godot.global.GDResource
 import godot.internal.type.nullSafe
 import kotlinx.cinterop.invoke
 import kotlinx.cinterop.memScoped
-import kotlin.native.concurrent.AtomicReference
 import kotlin.test.assertTrue
 
 

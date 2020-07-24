@@ -1,8 +1,6 @@
 package godot.global
 
 import godot.core.Godot
-import godot.core.Variant
-import kotlin.native.concurrent.AtomicReference
 
 internal interface GDPrint {
 
