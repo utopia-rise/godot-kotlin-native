@@ -1,16 +1,16 @@
+[entry]
+
+X11.64="res://build/bin/linuxX64/debugShared/libmini_games.so"
+Windows.64="res://build/bin/windowsX64/debugShared/mini_games.dll"
+
+[dependencies]
+
+X11.64=[  ]
+Windows.64=[  ]
+
 [general]
 
 singleton=false
 load_once=true
 symbol_prefix="godot_"
 reloadable=true
-
-[entry]
-
-Windows.64="res://build/bin/windowsX64/debugShared/mini_games.dll"
-X11.64="res://build/bin/linuxX64/debugShared/libmini_games.so"
-
-[dependencies]
-
-Windows.64=[  ]
-X11.64=[  ]

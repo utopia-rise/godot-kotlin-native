@@ -201,31 +201,31 @@ class TestingClass : Node() {
 
     @RegisterFunction
     override fun _ready() {
-        println("Property: ${this::rangeInt.name} -> $rangeInt")
-        println("Property: ${this::rangeFloat.name} -> $rangeFloat")
-        println("Property: ${this::rangeDouble.name} -> $rangeDouble")
-        println("Property: ${this::expEasingFloat.name} -> $expEasingFloat")
-        println("Property: ${this::expEasingDouble.name} -> $expEasingDouble")
-        println("Property: ${this::fileExt.name} -> $fileExt")
-        println("Property: ${this::fileExtGlobal.name} -> $fileExtGlobal")
-        println("Property: ${this::dirExt.name} -> $dirExt")
-//        println("Property: ${this::dirExtGlobal.name} -> $dirExtGlobal")
-        println("Property: ${this::enumTest.name} -> $enumTest")
-        println("Property: ${this::flag.name} -> $flag")
+        GD.print("Property: ${this::rangeInt.name} -> $rangeInt")
+        GD.print("Property: ${this::rangeFloat.name} -> $rangeFloat")
+        GD.print("Property: ${this::rangeDouble.name} -> $rangeDouble")
+        GD.print("Property: ${this::expEasingFloat.name} -> $expEasingFloat")
+        GD.print("Property: ${this::expEasingDouble.name} -> $expEasingDouble")
+        GD.print("Property: ${this::fileExt.name} -> $fileExt")
+        GD.print("Property: ${this::fileExtGlobal.name} -> $fileExtGlobal")
+        GD.print("Property: ${this::dirExt.name} -> $dirExt")
+//        GD.print("Property: ${this::dirExtGlobal.name} -> $dirExtGlobal")
+        GD.print("Property: ${this::enumTest.name} -> $enumTest")
+        GD.print("Property: ${this::flag.name} -> $flag")
 
-        println("\nPrinting ${this::twoDimensionalArrayVariantArray.name} content:")
+        GD.print("\nPrinting ${this::twoDimensionalArrayVariantArray.name} content:")
         twoDimensionalArrayVariantArray.forEach {
-            println("    Variant type: ${it.type}")
+            GD.print("    Variant type: ${it.type}")
         }
 
-        println("\nPrinting ${this::intVariantArray.name} content:")
+        GD.print("\nPrinting ${this::intVariantArray.name} content:")
         intVariantArray.forEach {
-            println("    $it")
+            GD.print("    $it")
         }
 
-        println("\nPrinting which enum flags from ${this::enumFlag.name} are set:")
+        GD.print("\nPrinting which enum flags from ${this::enumFlag.name} are set:")
         enumFlag.forEach {
-            println("    $it is set")
+            GD.print("    $it is set")
         }
     }
 }
