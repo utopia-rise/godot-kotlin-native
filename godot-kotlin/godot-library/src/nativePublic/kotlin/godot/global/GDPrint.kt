@@ -2,37 +2,38 @@ package godot.global
 
 import godot.core.Godot
 import godot.core.Variant
+import kotlin.native.concurrent.AtomicReference
 
 internal interface GDPrint {
-    val builder: StringBuilder
+    val builder: AtomicReference<StringBuilder>
 
     /** Converts one or more arguments to strings in the best way possible and prints them to the console.**/
-    fun print(args: Array<Variant>) {
+    fun print(vararg args: Any?) {
         for (arg in args) {
-            builder.append(arg.toString())
+            builder.value.append(arg.toString())
         }
         Godot.print(builder.toString())
-        builder.clear()
+        builder.value.clear()
     }
 
     /** Prints one or more arguments to the console with a space between each argument.**/
-    fun prints(args: Array<Variant>) {
+    fun prints(vararg args: Any?) {
         for (arg in args) {
-            builder.append(arg.toString())
-            builder.append(" ")
+            builder.value.append(arg.toString())
+            builder.value.append(" ")
         }
-        Godot.print(builder.trimEnd().toString())
-        builder.clear()
+        Godot.print(builder.value.trimEnd().toString())
+        builder.value.clear()
     }
 
     /** Converts one or more arguments to strings in the best way possible and prints them to the console.**/
-    fun printt(args: Array<Variant>) {
+    fun printt(vararg args: Any?) {
         for (arg in args) {
-            builder.append(arg.toString())
-            builder.append("    ")
+            builder.value.append(arg.toString())
+            builder.value.append("    ")
         }
-        Godot.print(builder.trimEnd().toString())
-        builder.clear()
+        Godot.print(builder.value.trimEnd().toString())
+        builder.value.clear()
     }
 
     /** Pushes an error message to Godot's built-in debugger and to the OS terminal. */
