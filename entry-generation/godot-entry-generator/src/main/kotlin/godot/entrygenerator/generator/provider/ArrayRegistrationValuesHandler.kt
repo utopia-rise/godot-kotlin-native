@@ -32,6 +32,9 @@ class ArrayRegistrationValuesHandler(
         }
     }
 
+    /**
+     * Hint string array formatting: https://github.com/godotengine/godot/blob/00949f0c5fcc6a4f8382a4a97d5591fd9ec380f8/editor/editor_properties_array_dict.cpp
+     */
     override fun getHintString(): String {
         // at this point we know type is a VariantArray
         val type = propertyDescriptor.type
@@ -46,28 +49,23 @@ class ArrayRegistrationValuesHandler(
             }
             else -> {
                 buildString {
-                    append("Array")
                     var currentElementType: KotlinType? = elementType
 
                     if (currentElementType == null) {
                         val compatibleListType = type.getCompatibleListType()
                         if (compatibleListType.isNotEmpty()) {
-                            append(",${type.getCompatibleListType()}")
+                            append(":${compatibleListType}")
                         }
                     }
 
                     loop@ while (currentElementType != null) {
                         when {
                             currentElementType.isCompatibleList() -> {
-                                append(",Array")
+                                append(":19") //variant.type.array.ordinal
                                 currentElementType = currentElementType.arguments.firstOrNull()?.type
                             }
-                            currentElementType.getJetTypeFqName(false).isGodotPrimitive() -> {
-                                append(",${currentElementType.getJetTypeFqName(false).getAsGodotPrimitive()}")
-                                break@loop
-                            }
-                            currentElementType.isCoreType() -> {
-                                append(",${currentElementType.getAsCoreType()}")
+                            currentElementType.getJetTypeFqName(false).isGodotPrimitive() || currentElementType.isCoreType() -> {
+                                append(":${currentElementType.getJetTypeFqName(false).getAsVariantTypeOrdinal()}")
                                 break@loop
                             }
                             else -> {
@@ -76,6 +74,7 @@ class ArrayRegistrationValuesHandler(
                             }
                         }
                     }
+                    delete(0, 1)
                 }
             }
         }

@@ -158,38 +158,37 @@ class ClassBuilder<T : Object> internal constructor(val classHandle: ClassHandle
         classHandle.registerProperty(
             name,
             StableRef.create(propertyHandler).asCPointer(),
-            Variant.Type.INT,
+            Variant.Type.ARRAY,
             Variant(variantArray),
             isVisibleInEditor,
             rpcMode,
             godot_property_hint.GODOT_PROPERTY_HINT_ENUM,
-            "Array,int,${enumValues<K>().joinToString { it.name }}"
+            "2/3:${enumValues<K>().joinToString(",") { it.name }}" //2 = Variant.Type.Int.ordinal | 3 = PropertyHint.PROPERTY_HINT_ENUM.ordinal
         )
     }
 
     inline fun <reified K : Enum<K>> enumFlagProperty(
         name: String,
         property: KMutableProperty1<T, Set<K>>,
-        default: Variant? = null,
+        default: Set<Enum<*>>? = null,
         isVisibleInEditor: Boolean = true,
         rpcMode: RPCMode
     ) {
-        val variantArray = IntVariantArray()
-        if (default != null) {
-            default.asVariantArray().forEach {
-                variantArray.append((it as K).ordinal.toNaturalT())
-            }
+        var intFlag = 0
+        default?.forEach { enum ->
+            intFlag += 1 shl enum.ordinal
         }
-        val propertyHandler = MutableEnumFlagPropertyHandler(property) { ord -> enumValues<K>()[ord.toInt()] }
+
+        val propertyHandler = MutableEnumFlagPropertyHandler(property) { ord -> enumValues<K>().firstOrNull { it.ordinal == ord } }
         classHandle.registerProperty(
             name,
             StableRef.create(propertyHandler).asCPointer(),
             Variant.Type.INT,
-            Variant(variantArray),
+            Variant(intFlag),
             isVisibleInEditor,
             rpcMode,
             godot_property_hint.GODOT_PROPERTY_HINT_FLAGS,
-            "int,FLAGS,${enumValues<K>().joinToString { it.name }}"
+            enumValues<K>().joinToString { it.name }
         )
     }
 }
