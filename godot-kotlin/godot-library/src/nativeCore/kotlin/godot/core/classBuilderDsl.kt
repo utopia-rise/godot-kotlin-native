@@ -179,7 +179,7 @@ class ClassBuilder<T : Object> internal constructor(val classHandle: ClassHandle
             intFlag += 1 shl enum.ordinal
         }
 
-        val propertyHandler = MutableEnumFlagPropertyHandler(property) { ord -> enumValues<K>().firstOrNull { it.ordinal == ord.toInt() } }
+        val propertyHandler = MutableEnumFlagPropertyHandler(property) { ord -> enumValues<K>().firstOrNull { it.ordinal == ord } }
         classHandle.registerProperty(
             name,
             StableRef.create(propertyHandler).asCPointer(),
