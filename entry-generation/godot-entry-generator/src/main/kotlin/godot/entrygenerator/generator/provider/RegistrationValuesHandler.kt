@@ -31,6 +31,10 @@ abstract class RegistrationValuesHandler(
     internal val propertyHintAnnotation = propertyDescriptor.getPropertyHintAnnotation()
 
     abstract fun getPropertyTypeHint(): ClassName
+
+    /**
+     * Hint string formatting: https://github.com/godotengine/godot/blob/dcd11faad3802679a43b27155f1b6bc59aa39b60/core/object.h
+     */
     abstract fun getHintString(): String
 
     init {
