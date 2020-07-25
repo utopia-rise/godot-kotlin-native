@@ -19,77 +19,92 @@ class ClassBuilder<T : Object> internal constructor(val classHandle: ClassHandle
         classHandle.registerFunction(name, StableRef.create(function).asCPointer(), rpcMode)
     }
 
-    fun <P0, R> function(name: String, rpcMode: RPCMode, body: T.(P0) -> R) {
-        val function = Function1(body)
+    fun <P0, R> function(name: String, rpcMode: RPCMode, body: T.(P0) -> R, argumentConverters: List<(Variant) -> T?>) {
+        val function = Function1(body, argumentConverters)
         classHandle.registerFunction(name, StableRef.create(function).asCPointer(), rpcMode)
     }
 
-    fun <P0, P1, R> function(name: String, rpcMode: RPCMode, body: T.(P0, P1) -> R) {
-        val function = Function2(body)
+    fun <P0, P1, R> function(
+        name: String,
+        rpcMode: RPCMode,
+        body: T.(P0, P1) -> R,
+        argumentConverters: List<(Variant) -> T?>
+    ) {
+        val function = Function2(body, argumentConverters)
         classHandle.registerFunction(name, StableRef.create(function).asCPointer(), rpcMode)
     }
 
-    fun <P0, P1, P2, R> function(name: String, rpcMode: RPCMode, body: T.(P0, P1, P2) -> R) {
-        val function = Function3(body)
+    fun <P0, P1, P2, R> function(
+        name: String,
+        rpcMode: RPCMode,
+        body: T.(P0, P1, P2) -> R,
+        argumentConverters: List<(Variant) -> T?>
+    ) {
+        val function = Function3(body, argumentConverters)
         classHandle.registerFunction(name, StableRef.create(function).asCPointer(), rpcMode)
     }
 
-    fun <P0, P1, P2, P3, R> function(name: String, rpcMode: RPCMode, body: T.(P0, P1, P2, P3) -> R) {
-        val function = Function4(body)
+    fun <P0, P1, P2, P3, R> function(
+        name: String,
+        rpcMode: RPCMode,
+        body: T.(P0, P1, P2, P3) -> R,
+        argumentConverters: List<(Variant) -> T?>
+    ) {
+        val function = Function4(body, argumentConverters)
         classHandle.registerFunction(name, StableRef.create(function).asCPointer(), rpcMode)
     }
 
     fun <P0, P1, P2, P3, P4, R> function(
         name: String,
         rpcMode: RPCMode,
-        body: T.(P0, P1, P2, P3, P4) -> R
+        body: T.(P0, P1, P2, P3, P4) -> R, argumentConverters: List<(Variant) -> T?>
     ) {
-        val function = Function5(body)
+        val function = Function5(body, argumentConverters)
         classHandle.registerFunction(name, StableRef.create(function).asCPointer(), rpcMode)
     }
 
     fun <P0, P1, P2, P3, P4, P5, R> function(
         name: String,
         rpcMode: RPCMode,
-        body: T.(P0, P1, P2, P3, P4, P5) -> R
+        body: T.(P0, P1, P2, P3, P4, P5) -> R, argumentConverters: List<(Variant) -> T?>
     ) {
-        val function = Function6(body)
+        val function = Function6(body, argumentConverters)
         classHandle.registerFunction(name, StableRef.create(function).asCPointer(), rpcMode)
     }
 
     fun <P0, P1, P2, P3, P4, P5, P6, R> function(
         name: String,
         rpcMode: RPCMode,
-        body: T.(P0, P1, P2, P3, P4, P5, P6) -> R
+        body: T.(P0, P1, P2, P3, P4, P5, P6) -> R, argumentConverters: List<(Variant) -> T?>
     ) {
-        val function = Function7(body)
+        val function = Function7(body, argumentConverters)
         classHandle.registerFunction(name, StableRef.create(function).asCPointer(), rpcMode)
     }
 
     fun <P0, P1, P2, P3, P4, P5, P6, P7, R> function(
         name: String,
         rpcMode: RPCMode,
-        body: T.(P0, P1, P2, P3, P4, P5, P6, P7) -> R
+        body: T.(P0, P1, P2, P3, P4, P5, P6, P7) -> R, argumentConverters: List<(Variant) -> T?>
     ) {
-        val function = Function8(body)
+        val function = Function8(body, argumentConverters)
         classHandle.registerFunction(name, StableRef.create(function).asCPointer(), rpcMode)
     }
 
     fun <P0, P1, P2, P3, P4, P5, P6, P7, P8, R> function(
         name: String,
         rpcMode: RPCMode,
-        body: T.(P0, P1, P2, P3, P4, P5, P6, P7, P8) -> R
+        body: T.(P0, P1, P2, P3, P4, P5, P6, P7, P8) -> R, argumentConverters: List<(Variant) -> T?>
     ) {
-        val function = Function9(body)
+        val function = Function9(body, argumentConverters)
         classHandle.registerFunction(name, StableRef.create(function).asCPointer(), rpcMode)
     }
 
     fun <P0, P1, P2, P3, P4, P5, P6, P7, P8, P9, R> function(
         name: String,
         rpcMode: RPCMode,
-        body: T.(P0, P1, P2, P3, P4, P5, P6, P7, P8, P9) -> R
+        body: T.(P0, P1, P2, P3, P4, P5, P6, P7, P8, P9) -> R, argumentConverters: List<(Variant) -> T?>
     ) {
-        val function = Function10(body)
+        val function = Function10(body, argumentConverters)
         classHandle.registerFunction(name, StableRef.create(function).asCPointer(), rpcMode)
     }
 
