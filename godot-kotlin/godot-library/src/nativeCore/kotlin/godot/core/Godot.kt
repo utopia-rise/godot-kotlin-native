@@ -2,6 +2,7 @@ package godot.core
 
 import godot.gdnative.*
 import godot.internal.type.nullSafe
+import godot.registerEngineTypes
 import kotlinx.cinterop.*
 import kotlin.native.concurrent.AtomicInt
 import kotlin.native.concurrent.AtomicReference
@@ -53,6 +54,7 @@ object Godot {
 
         gdnativeWrapper.compareAndSwap(null, gdnative)
         nativescriptWrapper.compareAndSwap(null, nativescript)
+        TypeManager.registerEngineTypes()
     }
 
     fun nativescriptInit(handle: COpaquePointer) {
@@ -73,6 +75,7 @@ object Godot {
     }
 
     fun terminate(options: godot_gdnative_terminate_options) {
+        TypeManager.dispose()
         gdnativeWrapper.compareAndSwap(gdnativeWrapper.value, null)
         nativescriptWrapper.compareAndSwap(nativescriptWrapper.value, null)
     }
