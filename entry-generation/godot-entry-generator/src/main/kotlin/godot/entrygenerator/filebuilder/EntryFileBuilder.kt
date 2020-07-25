@@ -5,6 +5,7 @@ import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.FunSpec
 import godot.entrygenerator.generator.ClassRegistrationGenerator
+import godot.entrygenerator.generator.VariantTypeConversionLambdasGenerator
 import godot.entrygenerator.model.ClassWithMembers
 import org.jetbrains.kotlin.resolve.BindingContext
 import java.io.File
@@ -12,6 +13,12 @@ import java.io.File
 class EntryFileBuilder(val bindingContext: BindingContext) {
     private val entryFileSpec = FileSpec
         .builder("godot", "Entry")
+        .addAnnotation(
+            AnnotationSpec
+                .builder(ClassName("kotlin", "Suppress"))
+                .addMember("%S", "EXPERIMENTAL_API_USAGE")
+                .build()
+        )
         .addFunction(generateGDNativeInitFunction())
         .addFunction(generateGDNativeTerminateFunction())
 
@@ -42,9 +49,14 @@ class EntryFileBuilder(val bindingContext: BindingContext) {
     }
 
     fun build(outputPath: String) {
+        generateVariantConversionLambdas()
         entryFileSpec.addFunction(nativeScriptInitFunctionSpec.build())
         entryFileSpec.addFunction(generateGDNativeScriptTerminateFunction())
         entryFileSpec.build().writeTo(File(outputPath))
+    }
+
+    private fun generateVariantConversionLambdas() {
+        VariantTypeConversionLambdasGenerator.generateVariantConversionLambdas(entryFileSpec)
     }
 
     private fun generateGDNativeInitFunction(): FunSpec {
