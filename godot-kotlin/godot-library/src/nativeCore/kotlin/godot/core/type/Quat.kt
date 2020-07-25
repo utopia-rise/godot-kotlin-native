@@ -7,9 +7,14 @@ import godot.gdnative.godot_quat_layout
 import godot.internal.type.*
 import kotlinx.cinterop.*
 import kotlin.math.*
-import godot.internal.*
 
-class Quat(var x: RealT, var y: RealT, var z: RealT, var w: RealT) : CoreType {
+class Quat(
+    var x: RealT,
+    var y: RealT,
+    var z: RealT,
+    var w: RealT
+) : CoreType {
+
     //CONSTANTS
     companion object {
         val IDENTITY: Quat
@@ -21,11 +26,13 @@ class Quat(var x: RealT, var y: RealT, var z: RealT, var w: RealT) : CoreType {
     constructor() :
         this(0.0, 0.0, 0.0, 1.0)
 
+    constructor(other: Quat) : this(other.x, other.y, other.z, other.w)
+
     constructor(x: Number, y: Number, z: Number, w: Number = 1.0) :
         this(x.toRealT(), y.toRealT(), z.toRealT(), w.toRealT())
 
     constructor(from: Basis) : this() {
-        val trace = from[0][0] + from[1][1] + from[2][2]
+        val trace = from.x.x + from.y.y + from.z.z
         val temp: Array<RealT>
 
         if (trace > 0.0) {
@@ -33,17 +40,17 @@ class Quat(var x: RealT, var y: RealT, var z: RealT, var w: RealT) : CoreType {
             val temp3 = s * 0.5
             s = 0.5 / s
             temp = arrayOf(
-                ((from[2][1] - from[1][2]) * s),
-                ((from[0][2] - from[2][0]) * s),
-                ((from[1][0] - from[0][1]) * s),
+                ((from.z.y - from.y.z) * s),
+                ((from.x.z - from.z.x) * s),
+                ((from.y.x - from.x.y) * s),
                 temp3
             )
         } else {
             temp = arrayOf(0.0, 0.0, 0.0, 0.0)
-            val i = if (from[0][0] < from[1][1]) {
-                if (from[1][1] < from[2][2]) 2 else 1
+            val i = if (from.x.x < from.y.y) {
+                if (from.y.y < from.z.z) 2 else 1
             } else {
-                if (from[0][0] < from[2][2]) 2 else 0
+                if (from.x.x < from.z.z) 2 else 0
             }
             val j = (i + 1) % 3
             val k = (i + 2) % 3
@@ -224,7 +231,7 @@ class Quat(var x: RealT, var y: RealT, var z: RealT, var w: RealT) : CoreType {
         }
 
         val d = axis.length()
-        if (d == 0.0) {
+        if (isEqualApprox(d, 0.0)) {
             set(0.0, 0.0, 0.0, 0.0)
         } else {
             val sin = sin(angle * 0.5)
@@ -397,12 +404,14 @@ class Quat(var x: RealT, var y: RealT, var z: RealT, var w: RealT) : CoreType {
     operator fun minus(q2: Quat) = Quat(this.x - q2.x, this.y - q2.y, this.z - q2.z, this.w - q2.w)
 
     operator fun times(q2: Quat) = Quat(this.x * q2.x, this.y * q2.y, this.z * q2.z, this.w * q2.w)
-
-    operator fun unaryMinus() = Quat(-this.x, -this.y, -this.z, -this.w)
-
-    operator fun times(f: RealT) = Quat(x * f, y * f, z * f, w * f)
+    operator fun times(scalar: Int) = Quat(x * scalar, y * scalar, z * scalar, w * scalar)
+    operator fun times(scalar: Long) = Quat(x * scalar, y * scalar, z * scalar, w * scalar)
+    operator fun times(scalar: Float) = Quat(x * scalar, y * scalar, z * scalar, w * scalar)
+    operator fun times(scalar: Double) = Quat(x * scalar, y * scalar, z * scalar, w * scalar)
 
     operator fun div(f: RealT) = Quat(x / f, y / f, z / f, w / f)
+
+    operator fun unaryMinus() = Quat(-this.x, -this.y, -this.z, -this.w)
 
     override fun equals(other: Any?): Boolean =
         when (other) {
@@ -422,3 +431,8 @@ class Quat(var x: RealT, var y: RealT, var z: RealT, var w: RealT) : CoreType {
         return result
     }
 }
+
+operator fun Int.times(quat: Quat) = quat * this
+operator fun Long.times(quat: Quat) = quat * this
+operator fun Float.times(quat: Quat) = quat * this
+operator fun Double.times(quat: Quat) = quat * this

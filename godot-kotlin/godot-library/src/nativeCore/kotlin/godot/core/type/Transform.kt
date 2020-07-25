@@ -4,11 +4,52 @@ package godot.core
 
 import godot.gdnative.godot_transform
 import godot.gdnative.godot_transform_layout
-import godot.internal.type.*
+import godot.internal.type.CoreType
+import godot.internal.type.RealT
+import godot.internal.type.toGodotReal
 import kotlinx.cinterop.*
-import godot.internal.*
 
-class Transform(var basis: Basis, var origin: Vector3 = Vector3()) : CoreType {
+class Transform(
+    p_basis: Basis,
+    p_origin: Vector3 = Vector3()
+) : CoreType {
+
+    @PublishedApi
+    internal var _basis = Basis(p_basis)
+    @PublishedApi
+    internal var _origin = Vector3(p_origin)
+
+
+    //PROPERTIES
+    /** Return a copy of the basis Basis.
+     * Warning: Writing basis.x = 2 will only modify a copy, not the actual object.
+     * To modify it, use basis().
+     * */
+    var basis
+        get() = Basis(_basis)
+        set(value) {
+            _basis = Basis(value)
+        }
+
+    inline fun <T> basis(block: Basis.() -> T): T {
+        return _basis.block()
+    }
+
+    /** Return a copy of the origin Vector3
+     * Warning: Writing origin.x = 2 will only modify a copy, not the actual object.
+     * To modify it, use origin().
+     * */
+    var origin
+        get() = Vector3(_origin)
+        set(value) {
+            _origin = Vector3(value)
+        }
+
+    inline fun <T> origin(block: Vector3.() -> T): T {
+        return _origin.block()
+    }
+
+
     //CONSTANTS
     companion object {
         inline val IDENTITY: Transform
@@ -23,6 +64,12 @@ class Transform(var basis: Basis, var origin: Vector3 = Vector3()) : CoreType {
 
 
     //CONSTRUCTOR
+    constructor() :
+        this(Basis(1, 0, 0, 0, 1, 0, 0, 0, 1), Vector3(0, 0, 0))
+
+    constructor(other: Transform) :
+        this(other._basis, other._origin)
+
     constructor(
         xx: Number,
         xy: Number,
@@ -45,12 +92,9 @@ class Transform(var basis: Basis, var origin: Vector3 = Vector3()) : CoreType {
     constructor(from: Quat) :
         this(Basis(from))
 
-    constructor() :
-        this(Basis(1, 0, 0, 0, 1, 0, 0, 0, 1), Vector3(0, 0, 0))
-
     internal constructor(native: CValue<godot_transform>) : this() {
-        basis = Basis()
-        origin = Vector3()
+        _basis = Basis()
+        _origin = Vector3()
 
         memScoped {
             this@Transform.setRawMemory(native.ptr)
@@ -58,8 +102,8 @@ class Transform(var basis: Basis, var origin: Vector3 = Vector3()) : CoreType {
     }
 
     internal constructor(mem: COpaquePointer) : this() {
-        basis = Basis()
-        origin = Vector3()
+        _basis = Basis()
+        _origin = Vector3()
 
         this.setRawMemory(mem)
     }
@@ -67,26 +111,26 @@ class Transform(var basis: Basis, var origin: Vector3 = Vector3()) : CoreType {
     //INTEROP
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
         val value = cValue<godot_transform_layout> {
-            basis.x.x = this@Transform.basis.x.x.toGodotReal()
-            basis.x.y = this@Transform.basis.x.y.toGodotReal()
-            basis.x.z = this@Transform.basis.x.z.toGodotReal()
-            basis.y.x = this@Transform.basis.y.x.toGodotReal()
-            basis.y.y = this@Transform.basis.y.y.toGodotReal()
-            basis.y.z = this@Transform.basis.y.z.toGodotReal()
-            basis.z.x = this@Transform.basis.z.x.toGodotReal()
-            basis.z.y = this@Transform.basis.z.y.toGodotReal()
-            basis.z.z = this@Transform.basis.z.z.toGodotReal()
-            origin.x = this@Transform.origin.x.toGodotReal()
-            origin.y = this@Transform.origin.y.toGodotReal()
-            origin.z = this@Transform.origin.z.toGodotReal()
+            basis.x.x = this@Transform._basis._x.x.toGodotReal()
+            basis.x.y = this@Transform._basis._x.y.toGodotReal()
+            basis.x.z = this@Transform._basis._x.z.toGodotReal()
+            basis.y.x = this@Transform._basis._y.x.toGodotReal()
+            basis.y.y = this@Transform._basis._y.y.toGodotReal()
+            basis.y.z = this@Transform._basis._y.z.toGodotReal()
+            basis.z.x = this@Transform._basis._z.x.toGodotReal()
+            basis.z.y = this@Transform._basis._z.y.toGodotReal()
+            basis.z.z = this@Transform._basis._z.z.toGodotReal()
+            origin.x = this@Transform._origin.x.toGodotReal()
+            origin.y = this@Transform._origin.y.toGodotReal()
+            origin.z = this@Transform._origin.z.toGodotReal()
         }
         return value.getPointer(memScope)
     }
 
     override fun setRawMemory(mem: COpaquePointer) {
         val value = mem.reinterpret<godot_transform_layout>().pointed
-        basis.setRawMemory(value.basis.ptr)
-        origin.setRawMemory(value.origin.ptr)
+        _basis.setRawMemory(value.basis.ptr)
+        _origin.setRawMemory(value.origin.ptr)
     }
 
 
@@ -95,32 +139,32 @@ class Transform(var basis: Basis, var origin: Vector3 = Vector3()) : CoreType {
      * Returns the inverse of the transform, under the assumption that the transformation is composed of rotation, scaling and translation.
      */
     fun affineInverse(): Transform {
-        val ret = Transform(this.basis, this.origin)
+        val ret = Transform(this._basis, this._origin)
         ret.affineInvert()
         return ret
     }
 
     internal fun affineInvert() {
-        basis.invert()
-        origin = basis.xform(-origin)
+        _basis.invert()
+        _origin = _basis.xform(-_origin)
     }
 
     /**
      * Interpolates the transform to other Transform by weight amount (0-1).
      */
     fun interpolateWith(transform: Transform, c: RealT): Transform {
-        val srcScale = basis.getScale()
-        val srcRot = Quat(basis)
-        val srcLoc = origin
+        val srcScale = _basis.getScale()
+        val srcRot = Quat(_basis)
+        val srcLoc = _origin
 
-        val dstScale = transform.basis.getScale()
-        val dstRot = Quat(transform.basis)
-        val dstLoc = transform.origin
+        val dstScale = transform._basis.getScale()
+        val dstRot = Quat(transform._basis)
+        val dstLoc = transform._origin
 
         val dst = Transform()
-        dst.basis = Basis(srcRot.slerp(dstRot, c))
-        dst.basis.scale(srcScale.linearInterpolate(dstScale, c))
-        dst.origin = srcLoc.linearInterpolate(dstLoc, c)
+        dst._basis = Basis(srcRot.slerp(dstRot, c))
+        dst._basis.scale(srcScale.linearInterpolate(dstScale, c))
+        dst._origin = srcLoc.linearInterpolate(dstLoc, c)
 
         return dst
     }
@@ -129,21 +173,21 @@ class Transform(var basis: Basis, var origin: Vector3 = Vector3()) : CoreType {
      * Returns the inverse of the transform, under the assumption that the transformation is composed of rotation and translation (no scaling, use affine_inverse for transforms with scaling).
      */
     fun inverse(): Transform {
-        val ret = Transform(this.basis, this.origin)
+        val ret = Transform(this._basis, this._origin)
         ret.invert()
         return ret
     }
 
     internal fun invert() {
-        basis.transpose()
-        origin = basis.xform(-origin)
+        _basis.transpose()
+        _origin = _basis.xform(-_origin)
     }
 
     /**
      * Returns true if this transform and transform are approximately equal, by calling is_equal_approx on each component.
      */
     fun isEqualApprox(transform: Transform): Boolean {
-        return transform.basis.isEqualApprox(this.basis) && transform.origin.isEqualApprox(this.origin)
+        return transform._basis.isEqualApprox(this._basis) && transform._origin.isEqualApprox(this._origin)
     }
 
     /**
@@ -152,8 +196,8 @@ class Transform(var basis: Basis, var origin: Vector3 = Vector3()) : CoreType {
      * Operations take place in global space.
      */
     fun lookingAt(target: Vector3, up: Vector3): Transform {
-        val t = Transform(this.basis, this.origin)
-        t.setLookAt(origin, target, up)
+        val t = Transform(this._basis, this._origin)
+        t.setLookAt(_origin, target, up)
         return t
     }
 
@@ -168,23 +212,23 @@ class Transform(var basis: Basis, var origin: Vector3 = Vector3()) : CoreType {
         x.normalize()
         y.normalize()
 
-        basis.x = x
-        basis.y = y
-        basis.z = z
-        origin = eye
+        _basis._x = x
+        _basis._y = y
+        _basis._z = z
+        _origin = eye
     }
 
     /**
      * Returns the transform with the basis orthogonal (90 degrees), and normalized axis vectors.
      */
     fun orthonormalized(): Transform {
-        val t = Transform(this.basis, this.origin)
+        val t = Transform(this._basis, this._origin)
         t.orthonormalize()
         return t
     }
 
     internal fun orthonormalize() {
-        basis.orthonormalize()
+        _basis.orthonormalize()
     }
 
 
@@ -197,22 +241,22 @@ class Transform(var basis: Basis, var origin: Vector3 = Vector3()) : CoreType {
 
     internal fun rotate(axis: Vector3, phi: RealT) {
         val t = rotated(axis, phi)
-        this.basis = t.basis
-        this.origin = t.origin
+        this._basis = t._basis
+        this._origin = t._origin
     }
 
     /**
      * Scales basis and origin of the transform by the given scale factor, using matrix multiplication.
      */
     fun scaled(scale: Vector3): Transform {
-        val t = Transform(this.basis, this.origin)
+        val t = Transform(this._basis, this._origin)
         t.scale(scale)
         return t
     }
 
     fun scale(scale: Vector3) {
-        basis.scale(scale)
-        origin *= scale
+        _basis.scale(scale)
+        _origin *= scale
     }
 
     /**
@@ -220,15 +264,15 @@ class Transform(var basis: Basis, var origin: Vector3 = Vector3()) : CoreType {
      * Unlike rotated and scaled, this does not use matrix multiplication.
      */
     fun translated(translation: Vector3): Transform {
-        val t = Transform(this.basis, this.origin)
+        val t = Transform(this._basis, this._origin)
         t.translate(translation)
         return t
     }
 
     fun translate(translation: Vector3) {
-        origin.x += basis.x.dot(translation)
-        origin.y += basis.y.dot(translation)
-        origin.z += basis.z.dot(translation)
+        _origin.x += _basis._x.dot(translation)
+        _origin.y += _basis._y.dot(translation)
+        _origin.z += _basis._z.dot(translation)
     }
 
     /**
@@ -236,22 +280,22 @@ class Transform(var basis: Basis, var origin: Vector3 = Vector3()) : CoreType {
      */
     fun xform(vector: Vector3): Vector3 =
         Vector3(
-            basis[0].dot(vector) + origin.x,
-            basis[1].dot(vector) + origin.y,
-            basis[2].dot(vector) + origin.z
+            _basis.x.dot(vector) + _origin.x,
+            _basis.y.dot(vector) + _origin.y,
+            _basis.z.dot(vector) + _origin.z
         )
 
     /**
      * Transforms the given AABB by this transform.
      */
     fun xform(aabb: AABB): AABB {
-        val x = basis.x * aabb.size.x
-        val y = basis.y * aabb.size.y
-        val z = basis.z * aabb.size.z
-        val pos = xform(aabb.position)
+        val x = _basis._x * aabb._size.x
+        val y = _basis._y * aabb._size.y
+        val z = _basis._z * aabb._size.z
+        val pos = xform(aabb._position)
 
         val newAabb = AABB()
-        newAabb.position = pos
+        newAabb._position = pos
         newAabb.expandTo(pos + x)
         newAabb.expandTo(pos + y)
         newAabb.expandTo(pos + z)
@@ -266,8 +310,8 @@ class Transform(var basis: Basis, var origin: Vector3 = Vector3()) : CoreType {
      * Transforms the given Plane by this transform.
      */
     fun xform(plane: Plane): Plane {
-        var point = plane.normal * plane.d
-        var pointDir = point + plane.normal
+        var point = plane._normal * plane.d
+        var pointDir = point + plane._normal
         point = xform(point)
         pointDir = xform(pointDir)
 
@@ -281,11 +325,11 @@ class Transform(var basis: Basis, var origin: Vector3 = Vector3()) : CoreType {
      * Inverse-transforms the given Vector3 by this transform.
      */
     fun xformInv(vector: Vector3): Vector3 {
-        val v = vector - origin
+        val v = vector - _origin
         return Vector3(
-            (basis[0][0] * v.x) + (basis[1][0] * v.y) + (basis[2][0] * v.z),
-            (basis[0][1] * v.x) + (basis[1][1] * v.y) + (basis[2][1] * v.z),
-            (basis[0][2] * v.x) + (basis[1][2] * v.y) + (basis[2][2] * v.z)
+            (_basis.x.x * v.x) + (_basis.y.x * v.y) + (_basis.z.x * v.z),
+            (_basis.x.y * v.x) + (_basis.y.y * v.y) + (_basis.z.y * v.z),
+            (_basis.x.z * v.x) + (_basis.y.z * v.y) + (_basis.z.z * v.z)
         )
     }
 
@@ -293,8 +337,8 @@ class Transform(var basis: Basis, var origin: Vector3 = Vector3()) : CoreType {
      * Inverse-transforms the given Plane by this transform.
      */
     fun xformInv(plane: Plane): Plane {
-        var point = plane.normal * plane.d
-        var pointDir = point + plane.normal
+        var point = plane._normal * plane.d
+        var pointDir = point + plane._normal
         point = xformInv(point)
         pointDir = xformInv(pointDir)
 
@@ -309,18 +353,18 @@ class Transform(var basis: Basis, var origin: Vector3 = Vector3()) : CoreType {
      */
     fun xformInv(aabb: AABB): AABB {
         val vertices = arrayOf(
-            Vector3(aabb.position.x + aabb.size.x, aabb.position.y + aabb.size.y, aabb.position.z + aabb.size.z),
-            Vector3(aabb.position.x + aabb.size.x, aabb.position.y + aabb.size.y, aabb.position.z),
-            Vector3(aabb.position.x + aabb.size.x, aabb.position.y, aabb.position.z + aabb.size.z),
-            Vector3(aabb.position.x + aabb.size.x, aabb.position.y, aabb.position.z),
-            Vector3(aabb.position.x, aabb.position.y + aabb.size.y, aabb.position.z + aabb.size.z),
-            Vector3(aabb.position.x, aabb.position.y + aabb.size.y, aabb.position.z),
-            Vector3(aabb.position.x, aabb.position.y, aabb.position.z + aabb.size.z),
-            Vector3(aabb.position.x, aabb.position.y, aabb.position.z)
+            Vector3(aabb._position.x + aabb._size.x, aabb._position.y + aabb._size.y, aabb._position.z + aabb._size.z),
+            Vector3(aabb._position.x + aabb._size.x, aabb._position.y + aabb._size.y, aabb._position.z),
+            Vector3(aabb._position.x + aabb._size.x, aabb._position.y, aabb._position.z + aabb._size.z),
+            Vector3(aabb._position.x + aabb._size.x, aabb._position.y, aabb._position.z),
+            Vector3(aabb._position.x, aabb._position.y + aabb._size.y, aabb._position.z + aabb._size.z),
+            Vector3(aabb._position.x, aabb._position.y + aabb._size.y, aabb._position.z),
+            Vector3(aabb._position.x, aabb._position.y, aabb._position.z + aabb._size.z),
+            Vector3(aabb._position.x, aabb._position.y, aabb._position.z)
         )
 
         val ret = AABB()
-        ret.position = xformInv(vertices[0])
+        ret._position = xformInv(vertices[0])
         for (i in 1..7)
             ret.expandTo(xformInv(vertices[i]))
 
@@ -333,25 +377,25 @@ class Transform(var basis: Basis, var origin: Vector3 = Vector3()) : CoreType {
 
     operator fun times(transform: Transform): Transform {
         val t = this
-        t.origin = xform(transform.origin)
-        t.basis *= transform.basis
+        t._origin = xform(transform._origin)
+        t._basis *= transform._basis
         return t
     }
 
     override fun equals(other: Any?): Boolean {
         return when (other) {
-            is Transform -> basis == other.basis && origin == other.origin
+            is Transform -> _basis == other._basis && _origin == other._origin
             else -> false
         }
     }
 
     override fun toString(): String {
-        return "$basis - $origin"
+        return "$_basis - $_origin"
     }
 
     override fun hashCode(): Int {
-        var result = basis.hashCode()
-        result = 31 * result + origin.hashCode()
+        var result = _basis.hashCode()
+        result = 31 * result + _origin.hashCode()
         return result
     }
 }

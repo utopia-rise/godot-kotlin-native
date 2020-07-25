@@ -4,27 +4,29 @@ package godot.core
 
 import godot.gdnative.godot_vector3
 import godot.gdnative.godot_vector3_layout
-import godot.internal.type.CMP_EPSILON
 import godot.internal.type.*
 import kotlinx.cinterop.*
 import kotlin.math.*
-import godot.internal.*
 
 
-class Vector3(var x: RealT, var y: RealT, var z: RealT) : Comparable<Vector3>,
-    CoreType {
+class Vector3(
+    var x: RealT,
+    var y: RealT,
+    var z: RealT
+) : Comparable<Vector3>, CoreType {
+
     //CONSTANTS
-    enum class Axis(val value: Int) {
+    enum class Axis(val value: NaturalT) {
         X(0),
         Y(1),
         Z(2);
 
         companion object {
-            fun from(longVal: Long) = when(longVal) {
+            fun from(value: NaturalT) = when (value) {
                 0L -> X
                 1L -> Y
                 2L -> Z
-                else -> throw AssertionError("Unknown axis for Vector3: $longVal")
+                else -> throw AssertionError("Unknown axis for Vector3: $value")
             }
         }
     }
@@ -58,9 +60,11 @@ class Vector3(var x: RealT, var y: RealT, var z: RealT) : Comparable<Vector3>,
     constructor() :
         this(0.0, 0.0, 0.0)
 
-    constructor(x: Number, y: Number, z: Number) :
-        this(x.toDouble(), y.toDouble(), z.toDouble())
+    constructor(vec: Vector3) :
+        this(vec.x, vec.y, vec.z)
 
+    constructor(x: Number, y: Number, z: Number) :
+        this(x.toRealT(), y.toRealT(), z.toRealT())
 
     internal constructor(native: CValue<godot_vector3>) : this() {
         memScoped {
@@ -288,14 +292,14 @@ class Vector3(var x: RealT, var y: RealT, var z: RealT) : Comparable<Vector3>,
      * Returns the vector scaled to unit length. Equivalent to v / v.length().
      */
     fun normalized(): Vector3 {
-        val v: Vector3 = this
+        val v: Vector3 = Vector3(this)
         v.normalize()
         return v
     }
 
     internal fun normalize() {
         val l = this.length()
-        if (l == 0.0) {
+        if (isEqualApprox(l, 0.0)) {
             x = 0.0
             y = 0.0
             z = 0.0
@@ -352,7 +356,7 @@ class Vector3(var x: RealT, var y: RealT, var z: RealT) : Comparable<Vector3>,
         if (!axis.isNormalized()) {
             Godot.printError("Axis not normalized", "rotated()", "Vector3.kt", 251)
         }
-        val v = this
+        val v = Vector3(this)
         v.rotate(axis, phi)
         return v
     }
@@ -403,16 +407,16 @@ class Vector3(var x: RealT, var y: RealT, var z: RealT) : Comparable<Vector3>,
      * Returns a copy of the vector snapped to the lowest neared multiple.
      */
     fun snapped(by: RealT): Vector3 {
-        val v: Vector3 = this
+        val v: Vector3 = Vector3(this)
         v.snap(by)
         return v
     }
 
     internal fun snap(vecal: RealT) {
-        if (vecal != 0.0) {
-            x = floor(x / vecal + 0.5) * vecal
-            y = floor(y / vecal + 0.5) * vecal
-            z = floor(z / vecal + 0.5) * vecal
+        if (isEqualApprox(vecal, 0.0)) {
+            x = (floor(x / vecal + 0.5) * vecal)
+            y = (floor(y / vecal + 0.5) * vecal)
+            z = (floor(z / vecal + 0.5) * vecal)
         }
     }
 
@@ -444,16 +448,28 @@ class Vector3(var x: RealT, var y: RealT, var z: RealT) : Comparable<Vector3>,
         }
 
     operator fun plus(vec: Vector3) = Vector3(x + vec.x, y + vec.y, z + vec.z)
+    operator fun plus(scalar: Int) = Vector3(x + scalar, y + scalar, z + scalar)
+    operator fun plus(scalar: Long) = Vector3(x + scalar, y + scalar, z + scalar)
+    operator fun plus(scalar: Float) = Vector3(x + scalar, y + scalar, z + scalar)
+    operator fun plus(scalar: Double) = Vector3(x + scalar, y + scalar, z + scalar)
 
     operator fun minus(vec: Vector3) = Vector3(x - vec.x, y - vec.y, z - vec.z)
+    operator fun minus(scalar: Int) = Vector3(x - scalar, y - scalar, z - scalar)
+    operator fun minus(scalar: Long) = Vector3(x - scalar, y - scalar, z - scalar)
+    operator fun minus(scalar: Float) = Vector3(x - scalar, y - scalar, z - scalar)
+    operator fun minus(scalar: Double) = Vector3(x - scalar, y - scalar, z - scalar)
 
     operator fun times(vec: Vector3) = Vector3(x * vec.x, y * vec.y, z * vec.z)
+    operator fun times(scalar: Int) = Vector3(x * scalar, y * scalar, z * scalar)
+    operator fun times(scalar: Long) = Vector3(x * scalar, y * scalar, z * scalar)
+    operator fun times(scalar: Float) = Vector3(x * scalar, y * scalar, z * scalar)
+    operator fun times(scalar: Double) = Vector3(x * scalar, y * scalar, z * scalar)
 
     operator fun div(vec: Vector3) = Vector3(x / vec.x, y / vec.y, z / vec.z)
-
-    operator fun times(scalar: RealT) = Vector3(x * scalar, y * scalar, z * scalar)
-
-    operator fun div(scalar: RealT) = Vector3(x / scalar, y / scalar, z / scalar)
+    operator fun div(scalar: Int) = Vector3(x / scalar, y / scalar, z / scalar)
+    operator fun div(scalar: Long) = Vector3(x / scalar, y / scalar, z / scalar)
+    operator fun div(scalar: Float) = Vector3(x / scalar, y / scalar, z / scalar)
+    operator fun div(scalar: Double) = Vector3(x / scalar, y / scalar, z / scalar)
 
     operator fun unaryMinus() = Vector3(-x, -y, -z)
 
@@ -492,6 +508,17 @@ class Vector3(var x: RealT, var y: RealT, var z: RealT) : Comparable<Vector3>,
     }
 }
 
-operator fun RealT.times(vecec: Vector3) = vecec * this
+operator fun Int.plus(vec: Vector3) = vec + this
+operator fun Long.plus(vec: Vector3) = vec + this
+operator fun Float.plus(vec: Vector3) = vec + this
+operator fun Double.plus(vec: Vector3) = vec + this
 
+operator fun Int.minus(vec: Vector3) = Vector3(this - vec.x, this - vec.y, this - vec.z)
+operator fun Long.minus(vec: Vector3) = Vector3(this - vec.x, this - vec.y, this - vec.z)
+operator fun Float.minus(vec: Vector3) = Vector3(this - vec.x, this - vec.y, this - vec.z)
+operator fun Double.minus(vec: Vector3) = Vector3(this - vec.x, this - vec.y, this - vec.z)
 
+operator fun Int.times(vec: Vector3) = vec * this
+operator fun Long.times(vec: Vector3) = vec * this
+operator fun Float.times(vec: Vector3) = vec * this
+operator fun Double.times(vec: Vector3) = vec * this

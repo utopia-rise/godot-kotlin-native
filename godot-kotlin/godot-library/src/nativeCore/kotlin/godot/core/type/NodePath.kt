@@ -3,11 +3,14 @@
 package godot.core
 
 import godot.gdnative.godot_node_path_layout
-import godot.internal.type.*
+import godot.internal.type.NativeCoreType
+import godot.internal.type.callNative
+import godot.internal.type.nullSafe
 import kotlinx.cinterop.*
 
 
 class NodePath : NativeCoreType<godot_node_path_layout> {
+
     //PROPERTIES
     val path: String
         get() {
@@ -18,23 +21,23 @@ class NodePath : NativeCoreType<godot_node_path_layout> {
 
     //CONSTRUCTOR
     constructor() {
-        _handle = cValue{}
+        _handle = cValue {}
         callNative {
             nullSafe(Godot.gdnative.godot_node_path_new)(it, "".toGDString().ptr)
         }
     }
 
     constructor(from: String) {
-        _handle = cValue{}
+        _handle = cValue {}
         callNative {
             nullSafe(Godot.gdnative.godot_node_path_new)(it, from.toGDString().ptr)
         }
     }
 
     constructor(from: NodePath) {
-        _handle = cValue{}
+        _handle = cValue {}
         callNative {
-            val str =  nullSafe(Godot.gdnative.godot_node_path_as_string)(from._handle.ptr)
+            val str = nullSafe(Godot.gdnative.godot_node_path_as_string)(from._handle.ptr)
             nullSafe(Godot.gdnative.godot_node_path_new)(it, str.ptr)
         }
     }
@@ -141,7 +144,7 @@ class NodePath : NativeCoreType<godot_node_path_layout> {
 
     override fun equals(other: Any?): Boolean {
         return if (other is NodePath) {
-            callNative{
+            callNative {
                 nullSafe(Godot.gdnative.godot_node_path_operator_equal)(it, other._handle.ptr)
             }
         } else {
