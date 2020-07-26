@@ -7,16 +7,19 @@ import godot.gdnative.godot_vector2_layout
 import godot.internal.type.*
 import kotlinx.cinterop.*
 import kotlin.math.*
-import godot.internal.*
 
-class Vector2(var x: RealT, var y: RealT) : Comparable<Vector2>, CoreType {
+class Vector2(
+    var x: RealT,
+    var y: RealT
+) : Comparable<Vector2>, CoreType {
+
     //CONSTANTS
     enum class Axis(val value: Int) {
         X(0),
         Y(1);
 
         companion object {
-            fun from(value: Int) = when(value) {
+            fun from(value: Int) = when (value) {
                 0 -> X
                 1 -> Y
                 else -> throw AssertionError("Unknown axis for Vector2: $value")
@@ -47,6 +50,9 @@ class Vector2(var x: RealT, var y: RealT) : Comparable<Vector2>, CoreType {
     //CONSTRUCTOR
     constructor() :
         this(0.0, 0.0)
+
+    constructor(vec: Vector2) :
+        this(vec.x, vec.y)
 
     constructor(x: Number, y: Number) :
         this(x.toRealT(), y.toRealT())
@@ -135,7 +141,7 @@ class Vector2(var x: RealT, var y: RealT) : Comparable<Vector2>, CoreType {
      */
     fun clamped(len: RealT): Vector2 {
         val l: RealT = this.length()
-        var v: Vector2 = this
+        var v = Vector2(this)
         if (l > 0 && len < l) {
             v /= l
             v *= len
@@ -244,7 +250,7 @@ class Vector2(var x: RealT, var y: RealT) : Comparable<Vector2>, CoreType {
      * t is in the range of 0.0 - 1.0, representing the amount of interpolation.
      */
     fun linearInterpolate(v: Vector2, t: RealT): Vector2 {
-        val res: Vector2 = this
+        val res = Vector2(this)
         res.x += (t * (v.x - x))
         res.y += (t * (v.y - y))
         return res
@@ -266,14 +272,15 @@ class Vector2(var x: RealT, var y: RealT) : Comparable<Vector2>, CoreType {
      * Returns the vector scaled to unit length. Equivalent to v / v.length().
      */
     fun normalized(): Vector2 {
-        val v: Vector2 = this
+        val v: Vector2 = Vector2(this)
+
         v.normalize()
         return v
     }
 
     internal fun normalize() {
         val l: RealT = length()
-        if (l == 0.0) {
+        if (isEqualApprox(l, 0.0)) {
             x = 0.0
             y = 0.0
         } else {
@@ -366,8 +373,16 @@ class Vector2(var x: RealT, var y: RealT) : Comparable<Vector2>, CoreType {
      * Returns the vector snapped to a grid with the given size.
      */
     fun snapped(by: Vector2): Vector2 {
-        val newX: RealT = if (by.x != 0.0) floor(x / by.x + 0.5) else x
-        val newY = if (by.y != 0.0) floor(y / by.y + 0.5) else y
+        val newX = if (isEqualApprox(by.x, 0.0)) {
+            floor(x / by.x + 0.5).toRealT()
+        } else {
+            x
+        }
+        val newY = if (isEqualApprox(by.x, 0.0)) {
+            floor(y / by.y + 0.5).toRealT()
+        } else {
+            y
+        }
         return Vector2(newX, newY)
     }
 
@@ -397,30 +412,42 @@ class Vector2(var x: RealT, var y: RealT) : Comparable<Vector2>, CoreType {
         }
 
     operator fun plus(v: Vector2) = Vector2(x + v.x, y + v.y)
+    operator fun plus(scalar: Int) = Vector2(x + scalar, y + scalar)
+    operator fun plus(scalar: Long) = Vector2(x + scalar, y + scalar)
+    operator fun plus(scalar: Float) = Vector2(x + scalar, y + scalar)
+    operator fun plus(scalar: Double) = Vector2(x + scalar, y + scalar)
 
     operator fun minus(v: Vector2) = Vector2(x - v.x, y - v.y)
+    operator fun minus(scalar: Int) = Vector2(x - scalar, y - scalar)
+    operator fun minus(scalar: Long) = Vector2(x - scalar, y - scalar)
+    operator fun minus(scalar: Float) = Vector2(x - scalar, y - scalar)
+    operator fun minus(scalar: Double) = Vector2(x - scalar, y - scalar)
 
     operator fun times(v1: Vector2) = Vector2(x * v1.x, y * v1.y)
-
-    operator fun times(rvalue: RealT) = Vector2(x * rvalue, y * rvalue)
+    operator fun times(scalar: Int) = Vector2(x * scalar, y * scalar)
+    operator fun times(scalar: Long) = Vector2(x * scalar, y * scalar)
+    operator fun times(scalar: Float) = Vector2(x * scalar, y * scalar)
+    operator fun times(scalar: Double) = Vector2(x * scalar, y * scalar)
 
     operator fun div(v1: Vector2) = Vector2(x / v1.x, y / v1.y)
-
-    operator fun div(rvalue: RealT) = Vector2(x / rvalue, y / rvalue)
+    operator fun div(scalar: Int) = Vector2(x / scalar, y / scalar)
+    operator fun div(scalar: Long) = Vector2(x / scalar, y / scalar)
+    operator fun div(scalar: Float) = Vector2(x / scalar, y / scalar)
+    operator fun div(scalar: Double) = Vector2(x / scalar, y / scalar)
 
     operator fun unaryMinus() = Vector2(-x, -y)
 
     override fun equals(other: Any?): Boolean =
         when (other) {
-            is Vector2 -> (x == other.x && y == other.y)
+            is Vector2 -> (isEqualApprox(x, other.x) && isEqualApprox(y, other.y))
             else -> false
         }
 
     override fun compareTo(other: Vector2): Int =
-        if (x == other.x) {
+        if (isEqualApprox(x, other.x)) {
             when {
                 y < other.y -> -1
-                y == other.y -> 0
+                isEqualApprox(y, other.y) -> 0
                 else -> 1
             }
         } else {
@@ -441,4 +468,17 @@ class Vector2(var x: RealT, var y: RealT) : Comparable<Vector2>, CoreType {
     }
 }
 
-operator fun RealT.times(vec: Vector2) = vec * this
+operator fun Int.plus(vec: Vector2) = vec + this
+operator fun Long.plus(vec: Vector2) = vec + this
+operator fun Float.plus(vec: Vector2) = vec + this
+operator fun Double.plus(vec: Vector2) = vec + this
+
+operator fun Int.minus(vec: Vector2) = Vector2(this - vec.x, this - vec.y)
+operator fun Long.minus(vec: Vector2) = Vector2(this - vec.x, this - vec.y)
+operator fun Float.minus(vec: Vector2) = Vector2(this - vec.x, this - vec.y)
+operator fun Double.minus(vec: Vector2) = Vector2(this - vec.x, this - vec.y)
+
+operator fun Int.times(vec: Vector2) = vec * this
+operator fun Long.times(vec: Vector2) = vec * this
+operator fun Float.times(vec: Vector2) = vec * this
+operator fun Double.times(vec: Vector2) = vec * this

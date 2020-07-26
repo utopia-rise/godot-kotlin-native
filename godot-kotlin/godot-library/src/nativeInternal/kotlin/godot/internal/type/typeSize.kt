@@ -8,15 +8,18 @@ import kotlin.math.abs
 //Those typealias and extensions are there to simplify the process when we wish to switch to either Float or Double
 internal typealias RealT = Double
 internal typealias RealTVar = DoubleVar
+
 internal const val RealTName = "Double"
 
 @PublishedApi
 internal inline fun Number.toRealT(): RealT = this.toDouble()
+
 @PublishedApi
 internal inline fun Double.toRealT(): RealT = this
 
 @PublishedApi
 internal inline fun Number.toGodotReal(): Float = this.toFloat()
+
 @PublishedApi
 internal inline fun Float.toGodotReal(): Float = this
 
@@ -24,17 +27,21 @@ internal inline fun Float.toGodotReal(): Float = this
 //Those typealias and extensions are there to simplify the process when we wish to switch to either Int or Long
 internal typealias NaturalT = Long
 internal typealias NaturalTVar = LongVar
+
 internal const val NaturalTName = "Long"
 
 @PublishedApi
 internal inline fun Number.toNaturalT(): NaturalT = this.toLong()
+
 @PublishedApi
 internal inline fun Long.toNaturalT(): NaturalT = this
+
 @PublishedApi
 internal inline fun UInt.toNaturalT(): NaturalT = this.toLong()
 
 @PublishedApi
 internal inline fun Number.toGodotNatural(): Int = this.toInt()
+
 @PublishedApi
 internal inline fun Int.toGodotNatural(): Int = this
 

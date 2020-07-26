@@ -8,6 +8,7 @@ import kotlinx.cinterop.*
 
 @ExperimentalUnsignedTypes
 class Dictionary : NativeCoreType<godot_dictionary_layout>, Iterable<Entry<Variant, Variant>> {
+
     //PROPERTIES
     val size: Int
         get() = this.size()
@@ -20,7 +21,7 @@ class Dictionary : NativeCoreType<godot_dictionary_layout>, Iterable<Entry<Varia
 
     //CONSTRUCTOR
     constructor() {
-        _handle = cValue{}
+        _handle = cValue {}
         callNative {
             nullSafe(Godot.gdnative.godot_dictionary_new)(it)
         }
@@ -83,6 +84,7 @@ class Dictionary : NativeCoreType<godot_dictionary_layout>, Iterable<Entry<Varia
             nullSafe(Godot.gdnative.godot_dictionary_erase)(it, key._handle.ptr)
         }
     }
+
     fun erase(key: Int) = erase(Variant(key))
     fun erase(key: Float) = erase(Variant(key))
     fun erase(key: String) = erase(Variant(key))

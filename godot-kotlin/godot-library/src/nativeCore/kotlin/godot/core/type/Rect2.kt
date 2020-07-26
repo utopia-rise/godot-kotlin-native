@@ -4,19 +4,69 @@ package godot.core
 
 import godot.gdnative.godot_rect2
 import godot.gdnative.godot_rect2_layout
-import godot.internal.type.*
+import godot.internal.type.CoreType
+import godot.internal.type.RealT
+import godot.internal.type.toGodotReal
 import kotlinx.cinterop.*
 import kotlin.math.max
 import kotlin.math.min
-import godot.internal.*
 
-class Rect2(var position: Vector2, var size: Vector2) : CoreType {
+class Rect2(
+    p_position: Vector2,
+    p_size: Vector2
+) : CoreType {
+
+    @PublishedApi
+    internal var _position = Vector2(p_position)
+    @PublishedApi
+    internal var _size = Vector2(p_size)
+
+
     //PROPERTIES
-    inline var end: Vector2
-        get() = position + size
+    /** Return a copy of the position Vector3
+     * Warning: Writing position.x = 2 will only modify a copy, not the actual object.
+     * To modify it, use position().
+     * */
+    var position
+        get() = Vector2(_position)
         set(value) {
-            size = value - position
+            _position = Vector2(value)
         }
+
+    inline fun <T> position(block: Vector2.() -> T): T {
+        return _position.block()
+    }
+
+    /** Return a copy of the size Vector2
+     * Warning: Writing size.x = 2 will only modify a copy, not the actual object.
+     * To modify it, use size().
+     * */
+    var size
+        get() = Vector2(_size)
+        set(value) {
+            _size = Vector2(value)
+        }
+
+    inline fun <T> size(block: Vector2.() -> T): T {
+        return _size.block()
+    }
+
+    /** Return a copy of the end Vector2
+     * Warning: Writing end.x = 2 will only modify a copy, not the actual object.
+     * To modify it, use end().
+     * */
+    inline var end: Vector2
+        get() = _position + _size
+        set(value) {
+            _size = value - _position
+        }
+
+    inline fun <T> end(block: Vector2.() -> T): T {
+        val vec = end
+        val ret = vec.block()
+        end = vec
+        return ret
+    }
 
     //CONSTANTS
     enum class Margin(val value: Int) {
@@ -37,6 +87,9 @@ class Rect2(var position: Vector2, var size: Vector2) : CoreType {
     constructor() :
         this(Vector2(), Vector2())
 
+    constructor(other: Rect2) :
+        this(other._position, other._size)
+
     constructor(x: RealT, y: RealT, width: RealT, height: RealT) :
         this(Vector2(x, y), Vector2(width, height))
 
@@ -55,18 +108,18 @@ class Rect2(var position: Vector2, var size: Vector2) : CoreType {
     //INTEROP
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
         val value = cValue<godot_rect2_layout> {
-            position.x = this@Rect2.position.x.toGodotReal()
-            position.y = this@Rect2.position.y.toGodotReal()
-            size.x = this@Rect2.size.x.toGodotReal()
-            size.y = this@Rect2.size.y.toGodotReal()
+            position.x = this@Rect2._position.x.toGodotReal()
+            position.y = this@Rect2._position.y.toGodotReal()
+            size.x = this@Rect2._size.x.toGodotReal()
+            size.y = this@Rect2._size.y.toGodotReal()
         }
         return value.getPointer(memScope)
     }
 
     override fun setRawMemory(mem: COpaquePointer) {
         val value = mem.reinterpret<godot_rect2_layout>().pointed
-        position.setRawMemory(value.position.ptr)
-        size.setRawMemory(value.size.ptr)
+        _position.setRawMemory(value.position.ptr)
+        _size.setRawMemory(value.size.ptr)
     }
 
     //API
@@ -76,10 +129,10 @@ class Rect2(var position: Vector2, var size: Vector2) : CoreType {
      */
     fun abs(): Rect2 {
         return Rect2(
-            position.x - min(size.x, 0.0),
-            position.x - min(size.x, 0.0),
-            kotlin.math.abs(size.x),
-            kotlin.math.abs(size.y)
+            _position.x - min(_size.x, 0.0),
+            _position.x - min(_size.x, 0.0),
+            kotlin.math.abs(_size.x),
+            kotlin.math.abs(_size.y)
         )
     }
 
@@ -89,14 +142,14 @@ class Rect2(var position: Vector2, var size: Vector2) : CoreType {
     fun clip(b: Rect2): Rect2 {
         if (!intersects(b)) return Rect2()
 
-        b.position.x = max(b.position.x, position.x)
-        b.position.y = max(b.position.y, position.y)
+        b._position.x = max(b._position.x, _position.x)
+        b._position.y = max(b._position.y, _position.y)
 
-        val rectEnd = b.position + b.size
-        val end = position + size
+        val rectEnd = b._position + b._size
+        val end = _position + _size
 
-        b.size.x = min(rectEnd.x, end.x) - b.position.x
-        b.size.y = min(rectEnd.y, end.y) - b.position.y
+        b._size.x = min(rectEnd.x, end.x) - b._position.x
+        b._size.y = min(rectEnd.y, end.y) - b._position.y
 
         return b
     }
@@ -105,24 +158,24 @@ class Rect2(var position: Vector2, var size: Vector2) : CoreType {
      * Returns true if this Rect2 completely encloses another one.
      */
     fun encloses(b: Rect2): Boolean {
-        return (b.position.x >= position.x) && (b.position.y >= position.y) &&
-            ((b.position.x + b.size.x) < (position.x + size.x)) &&
-            ((b.position.y + b.size.y) < (position.y + size.y))
+        return (b._position.x >= _position.x) && (b._position.y >= _position.y) &&
+            ((b._position.x + b._size.x) < (_position.x + _size.x)) &&
+            ((b._position.y + b._size.y) < (_position.y + _size.y))
     }
 
     /**
      * Returns this Rect2 expanded to include a given point.
      */
     fun expand(vector: Vector2): Rect2 {
-        val r = Rect2(this.position, this.size)
+        val r = Rect2(this._position, this._size)
         r.expandTo(vector)
         return r
     }
 
 
     internal fun expandTo(vector: Vector2) {
-        val begin = position
-        val end = position + size
+        val begin = _position
+        val end = _position + _size
 
         if (vector.x < begin.x) {
             begin.x = vector.x
@@ -137,26 +190,26 @@ class Rect2(var position: Vector2, var size: Vector2) : CoreType {
             end.y = vector.y
         }
 
-        position = begin
-        size = end - begin
+        _position = begin
+        _size = end - begin
     }
 
     /**
      * Returns the area of the Rect2.
      */
     fun getArea(): RealT {
-        return size.x * size.y
+        return _size.x * _size.y
     }
 
     /**
      * Returns a copy of the Rect2 grown a given amount of units towards all the sides.
      */
     fun grow(by: RealT): Rect2 {
-        val g = Rect2(this.position, this.size)
-        g.position.x -= by
-        g.position.y -= by
-        g.size.x += by * 2
-        g.size.y += by * 2
+        val g = Rect2(this._position, this._size)
+        g._position.x -= by
+        g._position.y -= by
+        g._size.x += by * 2
+        g._size.y += by * 2
         return g
     }
 
@@ -164,11 +217,11 @@ class Rect2(var position: Vector2, var size: Vector2) : CoreType {
      * Returns a copy of the Rect2 grown a given amount of units towards all the sides.
      */
     fun growIndividual(left: RealT, top: RealT, right: RealT, bottom: RealT): Rect2 {
-        val g = Rect2(this.position, this.size)
-        g.position.x -= left
-        g.position.y -= top
-        g.size.x += left + right
-        g.size.y += top + bottom
+        val g = Rect2(this._position, this._size)
+        g._position.x -= left
+        g._position.y -= top
+        g._size.x += left + right
+        g._size.y += top + bottom
         return g
     }
 
@@ -176,21 +229,21 @@ class Rect2(var position: Vector2, var size: Vector2) : CoreType {
      * Returns a copy of the Rect2 grown a given amount of units towards all the sides.
      */
     fun growMargin(margin: Margin, by: RealT): Rect2 {
-        val g = Rect2(this.position, this.size)
-        when(margin){
+        val g = Rect2(this._position, this._size)
+        when (margin) {
             Margin.LEFT -> {
-                g.position.x -= by
-                g.size.x += by
+                g._position.x -= by
+                g._size.x += by
             }
             Margin.RIGHT -> {
-                g.size.x += by
+                g._size.x += by
             }
             Margin.TOP -> {
-                g.position.y -= by
-                g.size.y += by
+                g._position.y -= by
+                g._size.y += by
             }
             Margin.BOTTOM -> {
-                g.size.y += by
+                g._size.y += by
             }
         }
         return g
@@ -200,7 +253,7 @@ class Rect2(var position: Vector2, var size: Vector2) : CoreType {
      * Returns true if the Rect2 is flat or empty.
      */
     fun hasNoArea(): Boolean {
-        return size.x <= 0 || size.y <= 0
+        return _size.x <= 0 || _size.y <= 0
     }
 
     /**
@@ -208,10 +261,10 @@ class Rect2(var position: Vector2, var size: Vector2) : CoreType {
      */
     fun hasPoint(point: Vector2): Boolean {
         return when {
-            point.x < position.x -> false
-            point.y < position.y -> false
-            point.x >= (position.x + size.x) -> false
-            point.y >= (position.y + size.y) -> false
+            point.x < _position.x -> false
+            point.y < _position.y -> false
+            point.x >= (_position.x + _size.x) -> false
+            point.y >= (_position.y + _size.y) -> false
             else -> true
         }
     }
@@ -223,18 +276,18 @@ class Rect2(var position: Vector2, var size: Vector2) : CoreType {
     fun intersects(b: Rect2, includeBorders: Boolean = false): Boolean {
         if (includeBorders) {
             return when {
-                position.x > (b.position.x + b.size.x) -> false
-                (position.x + size.x) < b.position.x -> false
-                position.y > (b.position.y + b.size.y) -> false
-                (position.y + size.y) < b.position.y -> false
+                _position.x > (b._position.x + b._size.x) -> false
+                (_position.x + _size.x) < b._position.x -> false
+                _position.y > (b._position.y + b._size.y) -> false
+                (_position.y + _size.y) < b._position.y -> false
                 else -> true
             }
         } else {
             return when {
-                position.x >= (b.position.x + b.size.x) -> false
-                (position.x + size.x) <= b.position.x -> false
-                position.y >= (b.position.y + b.size.y) -> false
-                (position.y + size.y) <= b.position.y -> false
+                _position.x >= (b._position.x + b._size.x) -> false
+                (_position.x + _size.x) <= b._position.x -> false
+                _position.y >= (b._position.y + b._size.y) -> false
+                (_position.y + _size.y) <= b._position.y -> false
                 else -> true
             }
         }
@@ -244,7 +297,7 @@ class Rect2(var position: Vector2, var size: Vector2) : CoreType {
      * Returns true if this Rect2 and rect are approximately equal, by calling is_equal_approx on each component.
      */
     fun isEqualApprox(b: Rect2): Boolean {
-        return b.position.isEqualApprox(this.position) && b.size.isEqualApprox(this.size)
+        return b._position.isEqualApprox(this._position) && b._size.isEqualApprox(this._size)
     }
 
     /**
@@ -253,13 +306,13 @@ class Rect2(var position: Vector2, var size: Vector2) : CoreType {
     fun merge(b: Rect2): Rect2 {
         val ret = Rect2()
 
-        ret.position.x = min(b.position.x, position.x)
-        ret.position.y = min(b.position.y, position.y)
+        ret._position.x = min(b._position.x, _position.x)
+        ret._position.y = min(b._position.y, _position.y)
 
-        ret.size.x = max(b.position.x + b.size.x, position.x + size.x)
-        ret.size.y = max(b.position.y + b.size.y, position.y + size.y)
+        ret._size.x = max(b._position.x + b._size.x, _position.x + _size.x)
+        ret._size.y = max(b._position.y + b._size.y, _position.y + _size.y)
 
-        ret.size = b.size - b.position //make relative again
+        ret._size = b._size - b._position //make relative again
 
         return ret
     }
@@ -270,19 +323,19 @@ class Rect2(var position: Vector2, var size: Vector2) : CoreType {
 
     override fun equals(other: Any?): Boolean {
         return when (other) {
-            is Rect2 -> position == other.position && size == other.size
+            is Rect2 -> _position == other._position && _size == other._size
             else -> false
         }
     }
 
     override fun toString(): String {
-        return "$position, $size"
+        return "$_position, $_size"
     }
 
 
     override fun hashCode(): Int {
-        var result = position.hashCode()
-        result = 31 * result + size.hashCode()
+        var result = _position.hashCode()
+        result = 31 * result + _size.hashCode()
         return result
     }
 }

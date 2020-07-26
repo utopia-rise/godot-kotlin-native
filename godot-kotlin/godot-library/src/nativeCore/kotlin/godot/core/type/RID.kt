@@ -4,7 +4,9 @@ package godot.core
 
 import godot.Object
 import godot.gdnative.godot_rid_layout
-import godot.internal.type.*
+import godot.internal.type.NativeCoreType
+import godot.internal.type.callNative
+import godot.internal.type.nullSafe
 import kotlinx.cinterop.*
 
 class RID : NativeCoreType<godot_rid_layout>, Comparable<RID> {
@@ -14,7 +16,7 @@ class RID : NativeCoreType<godot_rid_layout>, Comparable<RID> {
 
     //CONSTRUCTOR
     constructor() {
-        _handle = cValue{}
+        _handle = cValue {}
         callNative {
             nullSafe(Godot.gdnative.godot_rid_new)(it)
         }
@@ -22,7 +24,7 @@ class RID : NativeCoreType<godot_rid_layout>, Comparable<RID> {
 
 
     constructor(from: Object) {
-        _handle = cValue{}
+        _handle = cValue {}
         callNative {
             nullSafe(Godot.gdnative.godot_rid_new_with_resource)(it, from.ptr)
         }

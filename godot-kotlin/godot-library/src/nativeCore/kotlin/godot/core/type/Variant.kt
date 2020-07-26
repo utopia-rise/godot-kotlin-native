@@ -4,7 +4,10 @@ package godot.core
 import godot.Object
 import godot.gdnative.godot_variant
 import godot.gdnative.godot_variant_type
-import godot.internal.type.*
+import godot.internal.type.CoreType
+import godot.internal.type.NaturalT
+import godot.internal.type.nullSafe
+import godot.internal.type.toNaturalT
 import kotlinx.cinterop.*
 
 @Suppress("NON_PUBLIC_PRIMARY_CONSTRUCTOR_OF_INLINE_CLASS", "IMPLICIT_CAST_TO_ANY")
@@ -124,7 +127,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
         OP_MAX(25);
 
         companion object {
-            fun from(value: NaturalT) = when(value) {
+            fun from(value: NaturalT) = when (value) {
                 0L -> OP_EQUAL
                 1L -> OP_NOT_EQUAL
                 2L -> OP_LESS
