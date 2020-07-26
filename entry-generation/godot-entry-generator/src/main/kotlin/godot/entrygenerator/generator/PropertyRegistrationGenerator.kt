@@ -4,6 +4,7 @@ import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.MemberName.Companion.member
 import godot.entrygenerator.extension.getAnnotationValue
+import godot.entrygenerator.extension.getFirstRegistrableTypeAsFqNameStringOrNull
 import godot.entrygenerator.extension.isCompatibleList
 import godot.entrygenerator.generator.provider.DefaultValueHandlerProvider
 import godot.entrygenerator.mapper.RpcModeAnnotationMapper.mapRpcModeAnnotationToClassName
@@ -17,6 +18,7 @@ import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.resolve.BindingContext
+import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
 import org.jetbrains.kotlin.types.typeUtil.isEnum
 
 object PropertyRegistrationGenerator {
@@ -115,13 +117,15 @@ object PropertyRegistrationGenerator {
             bindingContext
         )
         val (defaultValueStringTemplate, defaultValueStringTemplateValues) = defaultValueProvider.getDefaultValue()
+        val (variantConverterTemplate, variantConverterTemplateValue) = getTypeConverter(propertyDescriptor)
         val hintString = defaultValueProvider.getHintString()
 
         registerClassControlFlow
             .addStatement(
-                "property(%S,·%L,·%T,·${defaultValueStringTemplate.replace(" ", "·")},·%L,·%T,·%T,·%S)",
+                "property(%S,·%L,·$variantConverterTemplate,·%T,·${defaultValueStringTemplate.replace(" ", "·")},·%L,·%T,·%T,·%S)",
                 propertyDescriptor.name,
                 className.member(propertyDescriptor.name.asString()).reference(),
+                variantConverterTemplateValue,
                 TypeToVariantAsClassNameMapper.mapTypeToVariantAsClassName(
                     propertyDescriptor.type.toString(),
                     propertyDescriptor.type,
@@ -160,5 +164,29 @@ object PropertyRegistrationGenerator {
                 REGISTER_PROPERTY_ANNOTATION_RPC_MODE_ARGUMENT,
                 Pair(ClassId(FqName("godot.registration"), Name.identifier("RPCMode")), Name.identifier("DISABLED"))
             )
+    }
+
+    private fun getTypeConverter(propertyDescriptor: PropertyDescriptor): Pair<String, ClassName> {
+        val firstRegistrableType = propertyDescriptor.type.getFirstRegistrableTypeAsFqNameStringOrNull()
+            ?: throw IllegalArgumentException("Registered property \"${propertyDescriptor.fqNameSafe}\" is of unregistrable type: ${propertyDescriptor.type}. You can only register properties which are either primitive or derive from a Godot type")
+
+        if (firstRegistrableType == "godot.core.ObjectArray") {
+            throw IllegalArgumentException("Registered property \"${propertyDescriptor.fqNameSafe}\" is of type ObjectArray. ObjectArray cannot be registered directly. Use VariantArray instead and use the asObjectArray() function for conversion.")
+        }
+
+        val typeAsString = firstRegistrableType
+            .replaceBeforeLast(".", "")
+            .replace(".", "")
+
+        val packageAsString = firstRegistrableType
+            .replaceAfterLast(".", "")
+
+        val argumentTemplateString = if (typeAsString == "GodotArray") {
+            "getTypeConversionLambda<%T<*>>()"
+        } else {
+            "getTypeConversionLambda<%T>()"
+        }
+
+        return argumentTemplateString to ClassName(packageAsString, typeAsString)
     }
 }

@@ -101,9 +101,6 @@ class TestingClass : Node() {
     var aabbVariantArray = AABBArray(listOf(AABB(Vector3(), Vector3())))
 
     @RegisterProperty
-    var aabbVariantArrayOfOther = AABBArray(AABBArray(listOf(AABB(Vector3(), Vector3()))))
-
-    @RegisterProperty
     var basisVariantArray = BasisArray(listOf(Basis()))
 
     @RegisterProperty

@@ -117,6 +117,7 @@ class ClassBuilder<T : Object> internal constructor(val classHandle: ClassHandle
     fun <K : Any> property(
         name: String,
         property: KMutableProperty1<T, K>,
+        argumentConverter: (Variant) -> Any?,
         type: Variant.Type,
         default: Variant? = null,
         isVisibleInEditor: Boolean = true,
@@ -124,7 +125,7 @@ class ClassBuilder<T : Object> internal constructor(val classHandle: ClassHandle
         hintType: godot_property_hint = godot_property_hint.GODOT_PROPERTY_HINT_NONE,
         hintString: String = ""
     ) {
-        val propertyHandler = MutablePropertyHandler(property)
+        val propertyHandler = MutablePropertyHandler(property, argumentConverter)
         classHandle.registerProperty(
             name,
             StableRef.create(propertyHandler).asCPointer(),
@@ -171,7 +172,7 @@ class ClassBuilder<T : Object> internal constructor(val classHandle: ClassHandle
                 variantArray.append(it.ordinal.toNaturalT())
             }
         }
-        val propertyHandler = MutablePropertyHandler(property)
+        val propertyHandler = MutablePropertyHandler(property, typeConversionFunctions[Int::class] as (Variant) -> Int?)
         classHandle.registerProperty(
             name,
             StableRef.create(propertyHandler).asCPointer(),
