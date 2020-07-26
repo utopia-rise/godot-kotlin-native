@@ -208,8 +208,12 @@ class ICall(
 
                     returnTypeClassSimpleName == "String" -> {
                         codeBlockBuilder.add(
-                            "    retVar.%M()\n",
-                            MemberName("kotlinx.cinterop", "toKString")
+                            "    retVar.%M<%T>().%M.%M().%M()\n",
+                            MemberName("kotlinx.cinterop", "reinterpret"),
+                            ClassName("godot.gdnative", "godot_string"),
+                            MemberName("kotlinx.cinterop", "pointed"),
+                            MemberName("kotlinx.cinterop", "readValue"),
+                            MemberName("godot.core", "toKString")
                         )
                     }
 
