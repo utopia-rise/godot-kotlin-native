@@ -8,7 +8,7 @@ class RotatingCube: Spatial() {
     
     @RegisterFunction  
     override fun _ready() {
-        gprint("I am ready!")
+        GD.print("I am ready!")
     }
 }
 ```

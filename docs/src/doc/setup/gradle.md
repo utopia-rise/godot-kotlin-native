@@ -34,14 +34,6 @@ repositories {
 godot {
     // Build a debug binary
     debug.set(true)
-
-    configureTargets {
-        compilations.getByName("main") {
-            cinterops {
-                // create cinterop here
-            }
-        }
-    }
 }
 ```
 
@@ -56,7 +48,7 @@ class Simple: Spatial() {
 
     @RegisterFunction
     override fun _ready() {
-        gprint("Hello Godot from Kotlin!")
+        GD.print("Hello Godot from Kotlin!")
     }
 }
 ```
