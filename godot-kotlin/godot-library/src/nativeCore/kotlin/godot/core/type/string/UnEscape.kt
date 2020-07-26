@@ -54,6 +54,6 @@ fun String.percentDecode() = asGDString {
 }
 
 /** Percent-encodes a string. Encodes parameters in a URL when sending a HTTP GET request (and bodies of form-urlencoded POST requests). */
-fun String.percentEncone() = asGDString {
+fun String.percentEncode() = asGDString {
     nullSafe(Godot.gdnative.godot_string_percent_encode)(it.ptr).toKString()
 }

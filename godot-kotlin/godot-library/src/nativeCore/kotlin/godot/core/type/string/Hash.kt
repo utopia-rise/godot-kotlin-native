@@ -8,7 +8,7 @@ fun String.hash() = asGDString {
     nullSafe(Godot.gdnative.godot_string_hash)(it.ptr).toInt()
 }
 
-/** Hashes the string and returns a 32-bit integer. */
+/** Hashes the string and returns a 64-bit integer. */
 fun String.hash64() = asGDString {
     nullSafe(Godot.gdnative.godot_string_hash64)(it.ptr).toLong()
 }
