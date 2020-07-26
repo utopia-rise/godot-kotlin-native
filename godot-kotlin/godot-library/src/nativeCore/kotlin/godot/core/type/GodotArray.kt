@@ -6,6 +6,7 @@ import godot.internal.type.*
 import kotlinx.cinterop.*
 
 abstract class GodotArray<T> internal constructor() : NativeCoreType<godot_array_layout>(), Iterable<T> {
+
     //PROPERTIES
     val size: Int
         get() = this.size()

@@ -4,13 +4,21 @@ package godot.core
 
 import godot.gdnative.godot_color
 import godot.gdnative.godot_color_layout
-import godot.internal.type.*
+import godot.internal.type.CoreType
+import godot.internal.type.RealT
+import godot.internal.type.isEqualApprox
+import godot.internal.type.toRealT
 import kotlinx.cinterop.*
 import kotlin.math.*
 
 
-class Color(var r: RealT, var g: RealT, var b: RealT, var a: RealT) : Comparable<Color>,
-    CoreType {
+class Color(
+    var r: RealT,
+    var g: RealT,
+    var b: RealT,
+    var a: RealT
+) : Comparable<Color>, CoreType {
+
     //PROPERTIES
     var r8: Int
         get() = (r * 255).roundToInt()
@@ -473,6 +481,8 @@ class Color(var r: RealT, var g: RealT, var b: RealT, var a: RealT) : Comparable
 
     constructor() : this(0.0, 0.0, 0.0, 1.0)
 
+    constructor(other: Color) : this(other.r, other.g, other.b, other.a)
+
     constructor(r: Number, g: Number, b: Number, a: Number = 1.0) :
         this(r.toRealT(), g.toRealT(), b.toRealT(), a.toRealT())
 
@@ -772,16 +782,20 @@ class Color(var r: RealT, var g: RealT, var b: RealT, var a: RealT) : Comparable
     override fun toVariant() = Variant(this)
 
     operator fun plus(c: Color) = Color(r + c.r, g + c.g, b + c.b, a + c.a)
-    operator fun plus(value: RealT) = Color(r + value, g + value, b + value, a + value)
+    operator fun plus(scalar: Float) = Color(r + scalar, g + scalar, b + scalar, a + scalar)
+    operator fun plus(scalar: Double) = Color(r + scalar, g + scalar, b + scalar, a + scalar)
 
     operator fun minus(c: Color) = Color(r - c.r, g - c.g, b - c.b, a - c.a)
-    operator fun minus(value: RealT) = Color(r - value, g - value, b - value, a - value)
+    operator fun minus(scalar: Float) = Color(r - scalar, g - scalar, b - scalar, a - scalar)
+    operator fun minus(scalar: Double) = Color(r - scalar, g - scalar, b - scalar, a - scalar)
 
     operator fun times(c: Color) = Color(r * c.r, g * c.g, b * c.b, a * c.a)
-    operator fun times(value: RealT) = Color(r * value, g * value, b * value, a * value)
+    operator fun times(scalar: Float) = Color(r * scalar, g * scalar, b * scalar, a * scalar)
+    operator fun times(scalar: Double) = Color(r * scalar, g * scalar, b * scalar, a * scalar)
 
     operator fun div(c: Color) = Color(r / c.r, g / c.g, b / c.b, a / c.a)
-    operator fun div(value: RealT) = Color(r / value, g / value, b / value, a / value)
+    operator fun div(scalar: Float) = Color(r / scalar, g / scalar, b / scalar, a / scalar)
+    operator fun div(scalar: Double) = Color(r / scalar, g / scalar, b / scalar, a / scalar)
 
     override fun compareTo(other: Color): Int {
         return when {

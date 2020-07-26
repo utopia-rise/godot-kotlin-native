@@ -7,6 +7,7 @@ interface CoreType {
     fun getRawMemory(memScope: MemScope): COpaquePointer
     fun setRawMemory(mem: COpaquePointer)
 
+    /** Cast the coretype to a Variant */
     fun toVariant(): Variant
 }
 
