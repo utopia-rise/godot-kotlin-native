@@ -10,9 +10,7 @@ import kotlinx.cinterop.*
 typealias GdString = CValue<godot_string_layout>
 
 //From Godot to Kotlin
-internal fun String(ptr: COpaquePointer): String {
-    return ptr.reinterpret<godot_string_layout>().pointed.readValue().toKString()
-}
+internal fun String(ptr: COpaquePointer) = String(ptr.reinterpret())
 
 internal fun String(ptr: CPointer<godot_string>) = ptr.pointed.readValue().toKString()
 
