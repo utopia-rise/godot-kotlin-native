@@ -12,6 +12,12 @@ import java.io.File
 class EntryFileBuilder(val bindingContext: BindingContext) {
     private val entryFileSpec = FileSpec
         .builder("godot", "Entry")
+        .addAnnotation(
+            AnnotationSpec
+                .builder(ClassName("kotlin", "Suppress"))
+                .addMember("%S", "EXPERIMENTAL_API_USAGE")
+                .build()
+        )
         .addFunction(generateGDNativeInitFunction())
         .addFunction(generateGDNativeTerminateFunction())
 

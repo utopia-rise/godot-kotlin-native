@@ -3,7 +3,10 @@ package godot.core
 import godot.Object
 import kotlin.reflect.KMutableProperty1
 
-open class MutablePropertyHandler<T : Object, R>(protected val property: KMutableProperty1<T, R>) {
+open class MutablePropertyHandler<T : Object, R>(
+    protected val property: KMutableProperty1<T, R>,
+    val argumentTypeConverter: (Variant) -> Any?
+) {
     open fun get(instance: T): Variant {
         return Variant.wrap(
             property.get(instance)
@@ -11,14 +14,14 @@ open class MutablePropertyHandler<T : Object, R>(protected val property: KMutabl
     }
 
     open fun set(instance: T, value: Variant) {
-        property.set(instance, value.unwrap())
+        property.set(instance, argumentTypeConverter(value) as R)
     }
 }
 
 class MutableEnumPropertyHandler<T : Object, R : Enum<R>>(
     property: KMutableProperty1<T, R>,
     private val converter: (Int) -> R
-) : MutablePropertyHandler<T, R>(property) {
+) : MutablePropertyHandler<T, R>(property, { {null} }) {
     override fun get(instance: T): Variant {
         return Variant(
             property.get(instance).ordinal
@@ -33,7 +36,7 @@ class MutableEnumPropertyHandler<T : Object, R : Enum<R>>(
 class MutableEnumFlagPropertyHandler<T : Object, R : Enum<R>>(
     property: KMutableProperty1<T, Set<R>>,
     private val converter: (Int) -> R?
-) : MutablePropertyHandler<T, Set<R>>(property) {
+) : MutablePropertyHandler<T, Set<R>>(property, typeConversionFunctions[Int::class] as (Variant) -> Int?) {
     override fun get(instance: T): Variant {
         var intFlag = 0
         property.get(instance).forEach { enum ->

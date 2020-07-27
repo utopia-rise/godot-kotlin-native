@@ -2,6 +2,7 @@ package example
 
 import godot.Curve
 import godot.Node
+import godot.Texture
 import godot.annotation.*
 import godot.core.*
 import godot.registration.RPCMode
@@ -100,9 +101,6 @@ class TestingClass : Node() {
     var aabbVariantArray = AABBArray(listOf(AABB(Vector3(), Vector3())))
 
     @RegisterProperty
-    var aabbVariantArrayOfOther = AABBArray(AABBArray(listOf(AABB(Vector3(), Vector3()))))
-
-    @RegisterProperty
     var basisVariantArray = BasisArray(listOf(Basis()))
 
     @RegisterProperty
@@ -137,13 +135,16 @@ class TestingClass : Node() {
 
 
     @RegisterProperty
-    var variantArrayDifferentTypes = variantArrayOf(variantArrayOf(1, "a")) //should not generate typed array hint string
+    var variantArrayDifferentTypes =
+        variantArrayOf(variantArrayOf(1, "a")) //should not generate typed array hint string
 
     @RegisterProperty
     var variantArrayAnyDifferentTypes = variantArrayOf(1, 2, "a", "b") //should not generate typed array hint string
 
     @RegisterProperty
-    lateinit var twoDimensionalArrayVariantArray: VariantArray //can not generate typed array hint string
+    var twoDimensionalArrayVariantArray = variantArrayOf(
+        variantArrayOf(1, 2), variantArrayOf(3, 4)
+    )
 
     @RegisterProperty
     var threeDimensionalArrayVariantArray = variantArrayOf( //can not generate typed array hint string
@@ -157,7 +158,11 @@ class TestingClass : Node() {
     }
 
     @RegisterProperty
-    var enumArray2 = EnumArray(listOf(TestEnum.ENUM1, TestEnum.ENUM2), { enumAsInt -> TestEnum.values().first { it.ordinal == enumAsInt }}) //not moved out of parenthesis on purpose! To test the behaviour this way as well!
+    var enumArray2 = EnumArray(
+        listOf(TestEnum.ENUM1, TestEnum.ENUM2),
+        { enumAsInt ->
+            TestEnum.values().first { it.ordinal == enumAsInt }
+        }) //not moved out of parenthesis on purpose! To test the behaviour this way as well!
 
 
     @RegisterProperty
@@ -171,7 +176,11 @@ class TestingClass : Node() {
     }
 
     @RegisterProperty
-    var enumArray5 = enumVariantArrayOf({ enumAsInt -> TestEnum.values().first { it.ordinal == enumAsInt }}, TestEnum.ENUM1, TestEnum.ENUM2)
+    var enumArray5 = enumVariantArrayOf(
+        { enumAsInt -> TestEnum.values().first { it.ordinal == enumAsInt } },
+        TestEnum.ENUM1,
+        TestEnum.ENUM2
+    )
 
     @RegisterProperty
     @EnumFlag
@@ -227,5 +236,36 @@ class TestingClass : Node() {
         enumFlag.forEach {
             GD.print("    $it is set")
         }
+    }
+
+    @RegisterFunction
+    override fun _process(delta: Double) {
+        GD.print("process delta: $delta")
+    }
+
+    @RegisterFunction
+    fun testFunctionWithManyParams(
+        p0: Float,
+        p1: Int,
+        p2: Boolean,
+        p3: Vector3,
+        p4: Plane,
+        p5: Transform,
+        p6: Curve,
+        p7: Texture,
+        p8: String,
+        p9: VariantArray
+    ) {
+        GD.print("testFunctionWithManyParams called with:")
+        GD.print("p0: $p0")
+        GD.print("p1: $p1")
+        GD.print("p2: $p2")
+        GD.print("p3: $p3")
+        GD.print("p4: $p4")
+        GD.print("p5: $p5")
+        GD.print("p6: $p6")
+        GD.print("p7: $p7")
+        GD.print("p8: $p8")
+        GD.print("p9: $p9")
     }
 }
