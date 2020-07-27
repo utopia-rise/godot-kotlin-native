@@ -83,31 +83,24 @@ class ICall(
         }
 
         if (shouldReturn) {
-            when {
-                isPrimitive -> {
-                    codeBlockBuilder.add(
-                        "    val retVar = %M<%T>()\n",
-                        MemberName("kotlinx.cinterop", "alloc"),
-                        ClassName(
-                            if (returnType == "RealT") "godot.internal.type" else "kotlinx.cinterop",
-                            "${returnType}Var"
-                        )
+            if (isPrimitive) {
+                codeBlockBuilder.add(
+                    "    val retVar = %M<%T>()\n",
+                    MemberName("kotlinx.cinterop", "alloc"),
+                    ClassName(
+                        if (returnType == "RealT") "godot.internal.type" else "kotlinx.cinterop",
+                        "${returnType}Var"
                     )
-                }
-                returnType == "VariantArray" -> {
-                    codeBlockBuilder.add(
-                        "    val retVar = %M<%T>()\n",
-                        MemberName("kotlinx.cinterop", "alloc"),
-                        ClassName("godot.gdnative", "godot_array")
-                    )
-                }
-                else -> {
-                    codeBlockBuilder.add(
-                        "    val retVar = %M<%T>(20)\n",
-                        MemberName("kotlinx.cinterop", "allocArray"),
-                        ClassName("kotlinx.cinterop", "ByteVar")
-                    )
-                }
+                )
+            } else {
+                codeBlockBuilder.add(
+                    "    val retVar = %M<%T>().ptr\n",
+                    MemberName("kotlinx.cinterop", "alloc"),
+                    if (returnType.isCoreType()) {
+                        ClassName("godot.gdnative", "godot_${returnType.convertToSnakeCase()}")
+                    }
+                    else ClassName("kotlinx.cinterop", "COpaquePointerVar")
+                )
             }
         }
 
@@ -165,20 +158,11 @@ class ICall(
                     MemberName("kotlinx.cinterop", "value")
                 )
             } else {
-                if (returnType == "VariantArray") {
-                    codeBlockBuilder.add(
-                        "    %T.gdnative.godot_method_bind_ptrcall!!.%M(mb, inst, args, retVar.%M)\n",
-                        ClassName("godot.core", "Godot"),
-                        MemberName("kotlinx.cinterop", "invoke"),
-                        MemberName("kotlinx.cinterop", "ptr")
-                    )
-                } else {
-                    codeBlockBuilder.add(
-                        "    %T.gdnative.godot_method_bind_ptrcall!!.%M(mb, inst, args, retVar)\n",
-                        ClassName("godot.core", "Godot"),
-                        MemberName("kotlinx.cinterop", "invoke")
-                    )
-                }
+                codeBlockBuilder.add(
+                    "    %T.gdnative.godot_method_bind_ptrcall!!.%M(mb, inst, args, retVar)\n",
+                    ClassName("godot.core", "Godot"),
+                    MemberName("kotlinx.cinterop", "invoke")
+                )
                 val returnTypeClassSimpleName = returnTypeClass.simpleName
 
                 when {
@@ -198,22 +182,10 @@ class ICall(
                         }
                     }
 
-                    returnTypeClassSimpleName == "VariantArray" -> {
-                        codeBlockBuilder.add(
-                            "    %T(retVar.%M())\n",
-                            returnTypeClass,
-                            MemberName("kotlinx.cinterop", "readValue")
-                        )
-                    }
-
                     returnTypeClassSimpleName == "String" -> {
                         codeBlockBuilder.add(
-                            "    retVar.%M<%T>().%M.%M().%M()\n",
-                            MemberName("kotlinx.cinterop", "reinterpret"),
-                            ClassName("godot.gdnative", "godot_string"),
-                            MemberName("kotlinx.cinterop", "pointed"),
-                            MemberName("kotlinx.cinterop", "readValue"),
-                            MemberName("godot.core", "toKString")
+                            "    %M(retVar)\n",
+                            MemberName("godot.core", "String")
                         )
                     }
 

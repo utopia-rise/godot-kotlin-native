@@ -2,6 +2,7 @@
 
 package godot.core
 
+import godot.gdnative.godot_string
 import godot.gdnative.godot_string_layout
 import godot.internal.type.nullSafe
 import kotlinx.cinterop.*
@@ -12,6 +13,8 @@ typealias GdString = CValue<godot_string_layout>
 internal fun String(ptr: COpaquePointer): String {
     return ptr.reinterpret<godot_string_layout>().pointed.readValue().toKString()
 }
+
+internal fun String(ptr: CPointer<godot_string>) = ptr.pointed.readValue().toKString()
 
 internal fun GdString.toKString(): String {
     return memScoped {
