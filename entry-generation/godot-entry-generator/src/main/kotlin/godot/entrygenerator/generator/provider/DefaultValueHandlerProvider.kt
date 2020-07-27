@@ -54,7 +54,7 @@ object DefaultValueHandlerProvider {
                 bindingContext
             )
             propertyDescriptor.type.isEnum() -> EnumRegistrationValuesHandler(propertyDescriptor, bindingContext)
-            propertyDescriptor.type.isCoreType() -> CoreTypeRegistrationValuesHandler(
+            propertyDescriptor.type.isCoreType() && !propertyDescriptor.type.isCompatibleList() -> CoreTypeRegistrationValuesHandler(
                 propertyDescriptor,
                 bindingContext
             )

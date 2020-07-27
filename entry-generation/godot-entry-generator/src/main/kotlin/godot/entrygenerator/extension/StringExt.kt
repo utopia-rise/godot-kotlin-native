@@ -10,7 +10,8 @@ fun String.isGodotPrimitive() =
         "kotlin.Double",
         "kotlin.Boolean",
         "kotlin.Byte",
-        "kotlin.Short" -> true
+        "kotlin.Short",
+        "kotlin.String" -> true
         else -> false
     }
 

@@ -2,7 +2,8 @@ package godot.core
 
 import godot.Object
 import godot.gdnative.godot_array
-import godot.internal.type.*
+import godot.internal.type.CoreType
+import godot.internal.type.nullSafe
 import kotlinx.cinterop.*
 
 @ExperimentalUnsignedTypes
@@ -381,8 +382,8 @@ class VariantArray : GodotArray<Variant> {
     fun asFloatVariantArray() = RealVariantArray(_handle)
     fun asStringVariantArray() = StringVariantArray(_handle)
     fun asBoolVariantArray() = BoolVariantArray(_handle)
-    fun <T : Object> asObjectVariantArray() = ObjectArray<T>(_handle)
-    fun <E: Enum<E>> asObjectVariantArray(mapper: (Int) -> E) = EnumArray(_handle, mapper)
+    fun <T : Object> asObjectArray() = ObjectArray<T>(_handle)
+    fun <E: Enum<E>> asObjectArray(mapper: (Int) -> E) = EnumArray(_handle, mapper)
     fun asAABBArray() = AABBArray(_handle)
     fun asBasisArray() = BasisArray(_handle)
     fun asColorArray() = ColorArray(_handle)
@@ -393,8 +394,8 @@ class VariantArray : GodotArray<Variant> {
     fun asRIDArray() = RIDArray(_handle)
     fun asTransformArray() = TransformArray(_handle)
     fun asTransform2DArray() = Transform2DArray(_handle)
-    fun asAVector2Array() = Vector2Array(_handle)
-    fun asAVector3Array() = Vector3Array(_handle)
+    fun asVector2Array() = Vector2Array(_handle)
+    fun asVector3Array() = Vector3Array(_handle)
 
     override fun iterator(): Iterator<Variant> {
         return IndexedIterator(size(), this::get)
