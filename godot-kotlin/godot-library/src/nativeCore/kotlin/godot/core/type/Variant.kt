@@ -316,10 +316,10 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      * Cast the Variant to a String.
      */
     fun asString(): String {
-        val gdString = memScoped {
-            nullSafe(Godot.gdnative.godot_variant_as_string)(_handle.ptr)
+        return memScoped {
+            val gdString = nullSafe(Godot.gdnative.godot_variant_as_string)(_handle.ptr)
+            gdString.toKString()
         }
-        return gdString.toKString()
     }
 
     /**
