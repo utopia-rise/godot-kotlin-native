@@ -87,10 +87,7 @@ class ICall(
                 codeBlockBuilder.add(
                     "    val retVar = %M<%T>()\n",
                     MemberName("kotlinx.cinterop", "alloc"),
-                    ClassName(
-                        if (returnType == "RealT") "godot.internal.type" else "kotlinx.cinterop",
-                        "${returnType}Var"
-                    )
+                    ClassName("kotlinx.cinterop", "${returnType}Var")
                 )
             } else {
                 codeBlockBuilder.add(
