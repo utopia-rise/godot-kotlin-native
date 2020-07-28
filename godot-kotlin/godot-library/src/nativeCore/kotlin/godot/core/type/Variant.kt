@@ -864,6 +864,8 @@ fun Variant(from: PoolVector2Array) = wrapCore(Godot.gdnative.godot_variant_new_
 fun Variant(from: PoolVector3Array) = wrapCore(Godot.gdnative.godot_variant_new_pool_vector3_array, from)
 fun <T> Variant(from: GodotArray<T>) = wrapCore(Godot.gdnative.godot_variant_new_array, from)
 
+internal fun Variant(from: CPointer<godot_variant>) = Variant(from.pointed.readValue())
+
 //Throw an exception for the types not supported by Godot
 fun Variant(from: Any?): Variant = throw UnsupportedOperationException("Unknown variant class")
 
