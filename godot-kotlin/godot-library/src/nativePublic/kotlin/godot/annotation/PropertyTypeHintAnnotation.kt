@@ -62,6 +62,8 @@ annotation class ExpEasing(val attenuation: Boolean = false, val inout: Boolean 
  * Flag Property hint supporting enums
  *
  * Can only be used on Set<Enum> or MutableSet<Enum> properties!
+ *
+ * **Note:** The used enum can not have more than 32 Entries!
  */
 @Target(AnnotationTarget.PROPERTY)
 @Retention(AnnotationRetention.RUNTIME)
