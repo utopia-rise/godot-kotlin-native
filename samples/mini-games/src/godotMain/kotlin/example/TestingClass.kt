@@ -37,6 +37,27 @@ class TestingClass : Node() {
     @RegisterSignal
     val signal2 by signal<Boolean, String>("param1", "param2")
 
+    init {
+        signal0.connect(this, this::signal0Receiver)
+        signal1.connect(this, this::signal1Receiver)
+        signal2.connect(this, this::signal2Receiver)
+    }
+
+    @RegisterFunction
+    fun signal0Receiver() {
+
+    }
+
+    @RegisterFunction
+    fun signal1Receiver(arg: Boolean) {
+
+    }
+
+    @RegisterFunction
+    fun signal2Receiver(arg0: Boolean, arg1: String) {
+
+    }
+
     @RegisterFunction(RPCMode.PUPPET_SYNC)
     fun foo() = 1
 

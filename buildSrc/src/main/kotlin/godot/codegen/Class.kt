@@ -168,7 +168,8 @@ class Class @JsonCreator constructor(
                 "K",
                 bounds = *arrayOf(
                     LambdaTypeName.get(
-                        returnType = UNIT
+                        returnType = UNIT,
+                        parameters = *typeVariablesNames.toTypedArray()
                     )
                 )
             ).copy(reified = true)
