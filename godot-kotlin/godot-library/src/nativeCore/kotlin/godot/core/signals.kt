@@ -14,12 +14,10 @@ abstract class Signal(
         instance: Object,
         target: Object,
         method: String,
-        binds: List<Any>?,
+        binds: VariantArray?,
         flags: Long
     ) {
-        val extraArgs = VariantArray()
-        binds?.forEach { extraArgs.append(Variant.wrap(it)) }
-        instance.connect(name, target, method, extraArgs, flags)
+        instance.connect(name, target, method, binds ?: VariantArray(), flags)
     }
 }
 
