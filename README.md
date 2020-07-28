@@ -1,106 +1,34 @@
-**TODO:** replace this README once the rework is ready to be merged!
+![Kotlin GDNative Logo](docs/src/doc/assets/img/logo.png)
 
-# Merge Development branch
-This is the Development Branch for the merge of our binding with the one from @raniejade at 
-https://github.com/raniejade/godot-kotlin
+# Kotlin/Native binding for the Godot Game Engine
 
 ## Overview
 
-**Project Structure:**
-```
-.
-├── buildSrc
-│   └── src/main/kotlin
-│       ├── DependenciesVersions.kt
-│       └── godot/codegen
-├── entry-generation
-│   ├── godot-entry-generator
-│   ├── godot-annotation-processor
-│   ├── godot-compiler-native-plugin
-│   └── godot-compiler-plugin
-├── plugins
-│   ├── godot-gradle-plugin
-│   └── godot-idea-plugin
-├── godot-kotlin
-│   ├── godot-headers (git submodule)
-│   ├── godot-library
-│   ├── godot-coroutines
-│   ├── godot-analytics
-│   └── more-extensions
-└── samples
-    ├── mini-games
-    ├── bunny-benchmark
-    ├── platformer-3d
-    └── follow-coroutines
-```
+This is a **Kotlin** language binding for the [**Godot**](https://godotengine.org/) game engine. It uses [**GDNative**](https://godotengine.org/article/dlscript-here) to interact with **Godot**'s core api's. The binding provides you Godot API's as Kotlin classes, so you can write your game logic completely in Kotlin. It will be compiled into a dynamic library using [*Kotlin/Native*](https://kotlinlang.org/docs/reference/native-overview.html).
+You don't have to worry about any binding logic. Just write your game scripts like you would for [GDScript](https://docs.godotengine.org/en/3.1/getting_started/scripting/gdscript/gdscript_basics.html) or [C#](https://docs.godotengine.org/en/3.1/getting_started/scripting/c_sharp/) but with all the syntactic sugar of kotlin.
 
-## Contribution
-If you want to contribute to the merge look at the issues page and filter for the label 
-[merge](https://github.com/utopia-rise/godot-kotlin/issues?q=is%3Aissue+is%3Aopen+label%3Amerge+). Search for an issue 
-you want to implement and comment on it. We'll assign it to you if appropriate and add you to our merge discord channel.  
-All merge relevant discussions and decisions will be made there so we recommend having it.
+[![GitHub](https://img.shields.io/github/license/utopia-rise/godot-kotlin?style=flat-square)](LICENSE)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/utopia-rise/godot-kotlin/CI?style=flat-square)](https://github.com/utopia-rise/godot-kotlin/actions?query=workflow%3ACI)
 
-### Guidelines:
+## Important notes
+
+This version of the binding is currently in **Alpha** state and by no means production ready!
+
+## Documentation
+
+One can find the documentation for this binding [here](https://godot-kotl.in).
+
+
+## Developer discussion
+
+Ask questions and collaborate on Discord:
+https://discord.gg/qSU2EQs
+
+## Contribution Guidelines:
 - **CodeStyle:**  
-We enforce the code style do match the official kotlin [coding conventions](https://kotlinlang.org/docs/reference/coding-conventions.html). Read there on how to set those up for your IDE.  
+We enforce the code style to match the official kotlin [coding conventions](https://kotlinlang.org/docs/reference/coding-conventions.html). Read there on how to set those up for your IDE.  
 We will enforce this later on through CI and linting.  
 - **Branching:**  
 We do branching like described in `git-flow`.
 
 Each Issue has a Maintainer that is the "supervisor" for the general topic the issue belongs to. Discuss implementation details with this maintainer.
-
-
-## Discussed topics
-These topics are here for documentation purpose. They will be converted to individual issues:
-
-- Registration  
-    Using the existing annotation processing logic with some minor changes:  
-      
-    Adding TypeHint annotations:  
-    ```kotlin
-    @RegisterProperty
-    @IntRange(start = 10, end = 100, step = 2) 
-    val myProperty: Int = 100
-    ```  
-- Annotations as part of core
-- Signals  
-    Signals defined with generic functions with the number of arguments the signal has:  
-    ```kotlin
-    fun signal()  
-    fun <TYPE1> signal(paramName1: String)  
-    fun <TYPE1, TYPE2> signal(paramName1: String, paramName2: String)
-    ...
-    ```
-    Signals as parameters like in @raniejade's binding. Possible to define signal emition after property change:
-    ```kotlin
-     val signalReverseChanged by signal<Boolean>("someName") 
-    var reverse by Delegates.observable(signalReverseChanged.asListener())
-    ```
-- Gradle Build Script  
-    Build script setup like in @raniejade's binding but with parameter support:  
-    ```kotlin
-    val platform by extra
-    val signingIdenty by extra 
-    
-    godot {
-        platforms(platform, android32, android64)
-        libraries {
-          val nameOfTheProject by creating {
-            //individual configurations
-          }
-        }
-    }
-  
-    val signingIdenty by extra 
-    val signIos by tasks.getting<SigningWhatever> { 
-        identity = signingIdentity 
-    } 
-    ```
-- Intellij plugin with signal navigation
-- Versioning:  
-    Semantic, with supported godot version in artefact name:  
-    `com.utopia-rise:godot-library-godot_version:x.y.z`
-    
-    
-## IntelliJ IDEA Setup
-IntelliJ IDEA is our IDE of choice for developing `godot-kotlin`. Before importing, please run the following command: `./gradlew publishToMavenLocal -PignoreSamples`. This command is required to import the samples into IntelliJ IDEA. Once done, open Intellij IDEA and click `Import Project` then select the `build.gradle.kts` file found in the root of the repository. The initial import will take a while, but once done you are ready to hack away!
