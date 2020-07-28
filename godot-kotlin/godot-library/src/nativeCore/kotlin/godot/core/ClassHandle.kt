@@ -98,7 +98,7 @@ internal class ClassHandle<T : Object>(
                     argInfo.type = value.value.toInt()
                 }
                 args = argInfos.getPointer(this@memScoped)
-                nullSafe(Godot.gdnative.godot_string_parse_utf8)(name.ptr, signalName.cstr.ptr)
+                nullSafe(Godot.gdnative.godot_string_parse_utf8)(name.ptr, signalName.removePrefix("signal").decapitalize().cstr.ptr)
                 num_args = parameters.size
             }
             nullSafe(Godot.nativescript.godot_nativescript_register_signal)(
