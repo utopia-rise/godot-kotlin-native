@@ -9,10 +9,11 @@ abstract class Function<T : Object, R>(
 }
 
 class Function0<T : Object, R>(
-    val method: T.() -> R
+    val method: T.() -> R,
+    val typeToVariantConverter: (R) -> Variant
 ) : Function<T, R>(0) {
     override fun invoke(instance: T, args: List<Variant>): Variant {
-        return Variant.wrap(
+        return typeToVariantConverter.invoke(
             method(
                 instance
             )
@@ -22,13 +23,14 @@ class Function0<T : Object, R>(
 
 class Function1<T : Object, P0, R>(
     val method: T.(P0) -> R,
-    val argumentTypeConverters: List<(Variant) -> Any?>
+    val typeToVariantConverter: (R) -> Variant,
+    val variantToTypeConverters: List<(Variant) -> Any?>
 ) : Function<T, R>(1) {
     override fun invoke(instance: T, args: List<Variant>): Variant {
-        return Variant.wrap(
+        return typeToVariantConverter.invoke(
             method(
                 instance,
-                argumentTypeConverters[0].invoke(args[0]) as P0
+                variantToTypeConverters[0].invoke(args[0]) as P0
             )
         )
     }
@@ -36,14 +38,15 @@ class Function1<T : Object, P0, R>(
 
 class Function2<T : Object, P0, P1, R>(
     val method: T.(P0, P1) -> R,
-    val argumentTypeConverters: List<(Variant) -> Any?>
+    val typeToVariantConverter: (R) -> Variant,
+    val variantToTypeConverters: List<(Variant) -> Any?>
 ) : Function<T, R>(2) {
     override fun invoke(instance: T, args: List<Variant>): Variant {
-        return Variant.wrap(
+        return typeToVariantConverter.invoke(
             method(
                 instance,
-                argumentTypeConverters[0].invoke(args[0]) as P0,
-                argumentTypeConverters[1].invoke(args[1]) as P1
+                variantToTypeConverters[0].invoke(args[0]) as P0,
+                variantToTypeConverters[1].invoke(args[1]) as P1
             )
         )
     }
@@ -51,15 +54,16 @@ class Function2<T : Object, P0, P1, R>(
 
 class Function3<T : Object, P0, P1, P2, R>(
     val method: T.(P0, P1, P2) -> R,
-    val argumentTypeConverters: List<(Variant) -> Any?>
+    val typeToVariantConverter: (R) -> Variant,
+    val variantToTypeConverters: List<(Variant) -> Any?>
 ) : Function<T, R>(3) {
     override fun invoke(instance: T, args: List<Variant>): Variant {
-        return Variant.wrap(
+        return typeToVariantConverter.invoke(
             method(
                 instance,
-                argumentTypeConverters[0].invoke(args[0]) as P0,
-                argumentTypeConverters[1].invoke(args[1]) as P1,
-                argumentTypeConverters[2].invoke(args[2]) as P2
+                variantToTypeConverters[0].invoke(args[0]) as P0,
+                variantToTypeConverters[1].invoke(args[1]) as P1,
+                variantToTypeConverters[2].invoke(args[2]) as P2
             )
         )
     }
@@ -67,16 +71,17 @@ class Function3<T : Object, P0, P1, P2, R>(
 
 class Function4<T : Object, P0, P1, P2, P3, R>(
     val method: T.(P0, P1, P2, P3) -> R,
-    val argumentTypeConverters: List<(Variant) -> Any?>
+    val typeToVariantConverter: (R) -> Variant,
+    val variantToTypeConverters: List<(Variant) -> Any?>
 ) : Function<T, R>(4) {
     override fun invoke(instance: T, args: List<Variant>): Variant {
-        return Variant.wrap(
+        return typeToVariantConverter.invoke(
             method(
                 instance,
-                argumentTypeConverters[0].invoke(args[0]) as P0,
-                argumentTypeConverters[1].invoke(args[1]) as P1,
-                argumentTypeConverters[2].invoke(args[2]) as P2,
-                argumentTypeConverters[3].invoke(args[3]) as P3
+                variantToTypeConverters[0].invoke(args[0]) as P0,
+                variantToTypeConverters[1].invoke(args[1]) as P1,
+                variantToTypeConverters[2].invoke(args[2]) as P2,
+                variantToTypeConverters[3].invoke(args[3]) as P3
             )
         )
     }
@@ -84,17 +89,18 @@ class Function4<T : Object, P0, P1, P2, P3, R>(
 
 class Function5<T : Object, P0, P1, P2, P3, P4, R>(
     val method: T.(P0, P1, P2, P3, P4) -> R,
-    val argumentTypeConverters: List<(Variant) -> Any?>
+    val typeToVariantConverter: (R) -> Variant,
+    val variantToTypeConverters: List<(Variant) -> Any?>
 ) : Function<T, R>(5) {
     override fun invoke(instance: T, args: List<Variant>): Variant {
-        return Variant.wrap(
+        return typeToVariantConverter.invoke(
             method(
                 instance,
-                argumentTypeConverters[0].invoke(args[0]) as P0,
-                argumentTypeConverters[1].invoke(args[1]) as P1,
-                argumentTypeConverters[2].invoke(args[2]) as P2,
-                argumentTypeConverters[3].invoke(args[3]) as P3,
-                argumentTypeConverters[4].invoke(args[4]) as P4
+                variantToTypeConverters[0].invoke(args[0]) as P0,
+                variantToTypeConverters[1].invoke(args[1]) as P1,
+                variantToTypeConverters[2].invoke(args[2]) as P2,
+                variantToTypeConverters[3].invoke(args[3]) as P3,
+                variantToTypeConverters[4].invoke(args[4]) as P4
             )
         )
     }
@@ -102,18 +108,19 @@ class Function5<T : Object, P0, P1, P2, P3, P4, R>(
 
 class Function6<T : Object, P0, P1, P2, P3, P4, P5, R>(
     val method: T.(P0, P1, P2, P3, P4, P5) -> R,
-    val argumentTypeConverters: List<(Variant) -> Any?>
+    val typeToVariantConverter: (R) -> Variant,
+    val variantToTypeConverters: List<(Variant) -> Any?>
 ) : Function<T, R>(6) {
     override fun invoke(instance: T, args: List<Variant>): Variant {
-        return Variant.wrap(
+        return typeToVariantConverter.invoke(
             method(
                 instance,
-                argumentTypeConverters[0].invoke(args[0]) as P0,
-                argumentTypeConverters[1].invoke(args[1]) as P1,
-                argumentTypeConverters[2].invoke(args[2]) as P2,
-                argumentTypeConverters[3].invoke(args[3]) as P3,
-                argumentTypeConverters[4].invoke(args[4]) as P4,
-                argumentTypeConverters[5].invoke(args[5]) as P5
+                variantToTypeConverters[0].invoke(args[0]) as P0,
+                variantToTypeConverters[1].invoke(args[1]) as P1,
+                variantToTypeConverters[2].invoke(args[2]) as P2,
+                variantToTypeConverters[3].invoke(args[3]) as P3,
+                variantToTypeConverters[4].invoke(args[4]) as P4,
+                variantToTypeConverters[5].invoke(args[5]) as P5
             )
         )
     }
@@ -121,19 +128,20 @@ class Function6<T : Object, P0, P1, P2, P3, P4, P5, R>(
 
 class Function7<T : Object, P0, P1, P2, P3, P4, P5, P6, R>(
     val method: T.(P0, P1, P2, P3, P4, P5, P6) -> R,
-    val argumentTypeConverters: List<(Variant) -> Any?>
+    val typeToVariantConverter: (R) -> Variant,
+    val variantToTypeConverters: List<(Variant) -> Any?>
 ) : Function<T, R>(7) {
     override fun invoke(instance: T, args: List<Variant>): Variant {
-        return Variant.wrap(
+        return typeToVariantConverter.invoke(
             method(
                 instance,
-                argumentTypeConverters[0].invoke(args[0]) as P0,
-                argumentTypeConverters[1].invoke(args[1]) as P1,
-                argumentTypeConverters[2].invoke(args[2]) as P2,
-                argumentTypeConverters[3].invoke(args[3]) as P3,
-                argumentTypeConverters[4].invoke(args[4]) as P4,
-                argumentTypeConverters[5].invoke(args[5]) as P5,
-                argumentTypeConverters[6].invoke(args[6]) as P6
+                variantToTypeConverters[0].invoke(args[0]) as P0,
+                variantToTypeConverters[1].invoke(args[1]) as P1,
+                variantToTypeConverters[2].invoke(args[2]) as P2,
+                variantToTypeConverters[3].invoke(args[3]) as P3,
+                variantToTypeConverters[4].invoke(args[4]) as P4,
+                variantToTypeConverters[5].invoke(args[5]) as P5,
+                variantToTypeConverters[6].invoke(args[6]) as P6
             )
         )
     }
@@ -141,20 +149,21 @@ class Function7<T : Object, P0, P1, P2, P3, P4, P5, P6, R>(
 
 class Function8<T : Object, P0, P1, P2, P3, P4, P5, P6, P7, R>(
     val method: T.(P0, P1, P2, P3, P4, P5, P6, P7) -> R,
-    val argumentTypeConverters: List<(Variant) -> Any?>
+    val typeToVariantConverter: (R) -> Variant,
+    val variantToTypeConverters: List<(Variant) -> Any?>
 ) : Function<T, R>(8) {
     override fun invoke(instance: T, args: List<Variant>): Variant {
-        return Variant.wrap(
+        return typeToVariantConverter.invoke(
             method(
                 instance,
-                argumentTypeConverters[0].invoke(args[0]) as P0,
-                argumentTypeConverters[1].invoke(args[1]) as P1,
-                argumentTypeConverters[2].invoke(args[2]) as P2,
-                argumentTypeConverters[3].invoke(args[3]) as P3,
-                argumentTypeConverters[4].invoke(args[4]) as P4,
-                argumentTypeConverters[5].invoke(args[5]) as P5,
-                argumentTypeConverters[6].invoke(args[6]) as P6,
-                argumentTypeConverters[7].invoke(args[7]) as P7
+                variantToTypeConverters[0].invoke(args[0]) as P0,
+                variantToTypeConverters[1].invoke(args[1]) as P1,
+                variantToTypeConverters[2].invoke(args[2]) as P2,
+                variantToTypeConverters[3].invoke(args[3]) as P3,
+                variantToTypeConverters[4].invoke(args[4]) as P4,
+                variantToTypeConverters[5].invoke(args[5]) as P5,
+                variantToTypeConverters[6].invoke(args[6]) as P6,
+                variantToTypeConverters[7].invoke(args[7]) as P7
             )
         )
     }
@@ -162,21 +171,22 @@ class Function8<T : Object, P0, P1, P2, P3, P4, P5, P6, P7, R>(
 
 class Function9<T : Object, P0, P1, P2, P3, P4, P5, P6, P7, P8, R>(
     val method: T.(P0, P1, P2, P3, P4, P5, P6, P7, P8) -> R,
-    val argumentTypeConverters: List<(Variant) -> Any?>
+    val typeToVariantConverter: (R) -> Variant,
+    val variantToTypeConverters: List<(Variant) -> Any?>
 ) : Function<T, R>(9) {
     override fun invoke(instance: T, args: List<Variant>): Variant {
-        return Variant.wrap(
+        return typeToVariantConverter.invoke(
             method(
                 instance,
-                argumentTypeConverters[0].invoke(args[0]) as P0,
-                argumentTypeConverters[1].invoke(args[1]) as P1,
-                argumentTypeConverters[2].invoke(args[2]) as P2,
-                argumentTypeConverters[3].invoke(args[3]) as P3,
-                argumentTypeConverters[4].invoke(args[4]) as P4,
-                argumentTypeConverters[5].invoke(args[5]) as P5,
-                argumentTypeConverters[6].invoke(args[6]) as P6,
-                argumentTypeConverters[7].invoke(args[7]) as P7,
-                argumentTypeConverters[8].invoke(args[8]) as P8
+                variantToTypeConverters[0].invoke(args[0]) as P0,
+                variantToTypeConverters[1].invoke(args[1]) as P1,
+                variantToTypeConverters[2].invoke(args[2]) as P2,
+                variantToTypeConverters[3].invoke(args[3]) as P3,
+                variantToTypeConverters[4].invoke(args[4]) as P4,
+                variantToTypeConverters[5].invoke(args[5]) as P5,
+                variantToTypeConverters[6].invoke(args[6]) as P6,
+                variantToTypeConverters[7].invoke(args[7]) as P7,
+                variantToTypeConverters[8].invoke(args[8]) as P8
             )
         )
     }
@@ -184,22 +194,23 @@ class Function9<T : Object, P0, P1, P2, P3, P4, P5, P6, P7, P8, R>(
 
 class Function10<T : Object, P0, P1, P2, P3, P4, P5, P6, P7, P8, P9, R>(
     val method: T.(P0, P1, P2, P3, P4, P5, P6, P7, P8, P9) -> R,
-    val argumentTypeConverters: List<(Variant) -> Any?>
+    val typeToVariantConverter: (R) -> Variant,
+    val variantToTypeConverters: List<(Variant) -> Any?>
 ) : Function<T, R>(10) {
     override fun invoke(instance: T, args: List<Variant>): Variant {
-        return Variant.wrap(
+        return typeToVariantConverter.invoke(
             method(
                 instance,
-                argumentTypeConverters[0].invoke(args[0]) as P0,
-                argumentTypeConverters[1].invoke(args[1]) as P1,
-                argumentTypeConverters[2].invoke(args[2]) as P2,
-                argumentTypeConverters[3].invoke(args[3]) as P3,
-                argumentTypeConverters[4].invoke(args[4]) as P4,
-                argumentTypeConverters[5].invoke(args[5]) as P5,
-                argumentTypeConverters[6].invoke(args[6]) as P6,
-                argumentTypeConverters[7].invoke(args[7]) as P7,
-                argumentTypeConverters[8].invoke(args[8]) as P8,
-                argumentTypeConverters[9].invoke(args[9]) as P9
+                variantToTypeConverters[0].invoke(args[0]) as P0,
+                variantToTypeConverters[1].invoke(args[1]) as P1,
+                variantToTypeConverters[2].invoke(args[2]) as P2,
+                variantToTypeConverters[3].invoke(args[3]) as P3,
+                variantToTypeConverters[4].invoke(args[4]) as P4,
+                variantToTypeConverters[5].invoke(args[5]) as P5,
+                variantToTypeConverters[6].invoke(args[6]) as P6,
+                variantToTypeConverters[7].invoke(args[7]) as P7,
+                variantToTypeConverters[8].invoke(args[8]) as P8,
+                variantToTypeConverters[9].invoke(args[9]) as P9
             )
         )
     }

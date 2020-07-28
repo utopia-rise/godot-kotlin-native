@@ -16,13 +16,25 @@ annotation class ClassBuilderDSL
 
 @ClassBuilderDSL
 class ClassBuilder<T : Object> internal constructor(val classHandle: ClassHandle<T>) {
-    fun <R> function(name: String, rpcMode: RPCMode, body: T.() -> R) {
-        val function = Function0(body)
+
+    fun <R> function(
+        name: String,
+        rpcMode: RPCMode,
+        body: T.() -> R,
+        typeToVariantConverter: (R) -> Variant
+    ) {
+        val function = Function0(body, typeToVariantConverter)
         classHandle.registerFunction(name, StableRef.create(function).asCPointer(), rpcMode)
     }
 
-    fun <P0, R> function(name: String, rpcMode: RPCMode, body: T.(P0) -> R, argumentConverters: List<(Variant) -> Any?>) {
-        val function = Function1(body, argumentConverters)
+    fun <P0, R> function(
+        name: String,
+        rpcMode: RPCMode,
+        body: T.(P0) -> R,
+        typeToVariantConverter: (R) -> Variant,
+        variantToTypeConverters: List<(Variant) -> Any?>
+    ) {
+        val function = Function1(body, typeToVariantConverter, variantToTypeConverters)
         classHandle.registerFunction(name, StableRef.create(function).asCPointer(), rpcMode)
     }
 
@@ -30,9 +42,10 @@ class ClassBuilder<T : Object> internal constructor(val classHandle: ClassHandle
         name: String,
         rpcMode: RPCMode,
         body: T.(P0, P1) -> R,
-        argumentConverters: List<(Variant) -> Any?>
+        typeToVariantConverter: (R) -> Variant,
+        variantToTypeConverters: List<(Variant) -> Any?>
     ) {
-        val function = Function2(body, argumentConverters)
+        val function = Function2(body, typeToVariantConverter, variantToTypeConverters)
         classHandle.registerFunction(name, StableRef.create(function).asCPointer(), rpcMode)
     }
 
@@ -40,9 +53,10 @@ class ClassBuilder<T : Object> internal constructor(val classHandle: ClassHandle
         name: String,
         rpcMode: RPCMode,
         body: T.(P0, P1, P2) -> R,
-        argumentConverters: List<(Variant) -> Any?>
+        typeToVariantConverter: (R) -> Variant,
+        variantToTypeConverters: List<(Variant) -> Any?>
     ) {
-        val function = Function3(body, argumentConverters)
+        val function = Function3(body, typeToVariantConverter, variantToTypeConverters)
         classHandle.registerFunction(name, StableRef.create(function).asCPointer(), rpcMode)
     }
 
@@ -50,63 +64,76 @@ class ClassBuilder<T : Object> internal constructor(val classHandle: ClassHandle
         name: String,
         rpcMode: RPCMode,
         body: T.(P0, P1, P2, P3) -> R,
-        argumentConverters: List<(Variant) -> Any?>
+        typeToVariantConverter: (R) -> Variant,
+        variantToTypeConverters: List<(Variant) -> Any?>
     ) {
-        val function = Function4(body, argumentConverters)
+        val function = Function4(body, typeToVariantConverter, variantToTypeConverters)
         classHandle.registerFunction(name, StableRef.create(function).asCPointer(), rpcMode)
     }
 
     fun <P0, P1, P2, P3, P4, R> function(
         name: String,
         rpcMode: RPCMode,
-        body: T.(P0, P1, P2, P3, P4) -> R, argumentConverters: List<(Variant) -> Any?>
+        body: T.(P0, P1, P2, P3, P4) -> R,
+        typeToVariantConverter: (R) -> Variant,
+        variantToTypeConverters: List<(Variant) -> Any?>
     ) {
-        val function = Function5(body, argumentConverters)
+        val function = Function5(body, typeToVariantConverter, variantToTypeConverters)
         classHandle.registerFunction(name, StableRef.create(function).asCPointer(), rpcMode)
     }
 
     fun <P0, P1, P2, P3, P4, P5, R> function(
         name: String,
         rpcMode: RPCMode,
-        body: T.(P0, P1, P2, P3, P4, P5) -> R, argumentConverters: List<(Variant) -> Any?>
+        body: T.(P0, P1, P2, P3, P4, P5) -> R,
+        typeToVariantConverter: (R) -> Variant,
+        variantToTypeConverters: List<(Variant) -> Any?>
     ) {
-        val function = Function6(body, argumentConverters)
+        val function = Function6(body, typeToVariantConverter, variantToTypeConverters)
         classHandle.registerFunction(name, StableRef.create(function).asCPointer(), rpcMode)
     }
 
     fun <P0, P1, P2, P3, P4, P5, P6, R> function(
         name: String,
         rpcMode: RPCMode,
-        body: T.(P0, P1, P2, P3, P4, P5, P6) -> R, argumentConverters: List<(Variant) -> Any?>
+        body: T.(P0, P1, P2, P3, P4, P5, P6) -> R,
+        typeToVariantConverter: (R) -> Variant,
+        variantToTypeConverters: List<(Variant) -> Any?>
     ) {
-        val function = Function7(body, argumentConverters)
+        val function = Function7(body, typeToVariantConverter, variantToTypeConverters)
         classHandle.registerFunction(name, StableRef.create(function).asCPointer(), rpcMode)
     }
 
     fun <P0, P1, P2, P3, P4, P5, P6, P7, R> function(
         name: String,
         rpcMode: RPCMode,
-        body: T.(P0, P1, P2, P3, P4, P5, P6, P7) -> R, argumentConverters: List<(Variant) -> Any?>
+        body: T.(P0, P1, P2, P3, P4, P5, P6, P7) -> R,
+        typeToVariantConverter: (R) -> Variant,
+        variantToTypeConverters: List<(Variant) -> Any?>
     ) {
-        val function = Function8(body, argumentConverters)
+        val function = Function8(body, typeToVariantConverter, variantToTypeConverters)
         classHandle.registerFunction(name, StableRef.create(function).asCPointer(), rpcMode)
     }
 
     fun <P0, P1, P2, P3, P4, P5, P6, P7, P8, R> function(
         name: String,
         rpcMode: RPCMode,
-        body: T.(P0, P1, P2, P3, P4, P5, P6, P7, P8) -> R, argumentConverters: List<(Variant) -> Any?>
+        body: T.(P0, P1, P2, P3, P4, P5, P6, P7, P8) -> R,
+        typeToVariantConverter: (R) -> Variant,
+        variantToTypeConverters: List<(Variant) -> Any?>
     ) {
-        val function = Function9(body, argumentConverters)
+        val function = Function9(body, typeToVariantConverter, variantToTypeConverters)
         classHandle.registerFunction(name, StableRef.create(function).asCPointer(), rpcMode)
     }
 
     fun <P0, P1, P2, P3, P4, P5, P6, P7, P8, P9, R> function(
         name: String,
         rpcMode: RPCMode,
-        body: T.(P0, P1, P2, P3, P4, P5, P6, P7, P8, P9) -> R, argumentConverters: List<(Variant) -> Any?>
+        body: T.(P0, P1, P2, P3, P4, P5, P6, P7, P8, P9) -> R,
+        typeToVariantConverter: (R) -> Variant,
+        variantToTypeConverters: List<(Variant) -> Any?>
     ) {
-        val function = Function10(body, argumentConverters)
+        val function = Function10(body, typeToVariantConverter, variantToTypeConverters)
         classHandle.registerFunction(name, StableRef.create(function).asCPointer(), rpcMode)
     }
 
@@ -117,7 +144,8 @@ class ClassBuilder<T : Object> internal constructor(val classHandle: ClassHandle
     fun <K : Any> property(
         name: String,
         property: KMutableProperty1<T, K>,
-        argumentConverter: (Variant) -> Any?,
+        typeToVariantConverter: (K) -> Variant,
+        variantToTypeConverter: (Variant) -> Any?,
         type: Variant.Type,
         default: Variant? = null,
         isVisibleInEditor: Boolean = true,
@@ -125,7 +153,7 @@ class ClassBuilder<T : Object> internal constructor(val classHandle: ClassHandle
         hintType: godot_property_hint = godot_property_hint.GODOT_PROPERTY_HINT_NONE,
         hintString: String = ""
     ) {
-        val propertyHandler = MutablePropertyHandler(property, argumentConverter)
+        val propertyHandler = MutablePropertyHandler(property, typeToVariantConverter, variantToTypeConverter)
         classHandle.registerProperty(
             name,
             StableRef.create(propertyHandler).asCPointer(),
@@ -172,7 +200,11 @@ class ClassBuilder<T : Object> internal constructor(val classHandle: ClassHandle
                 variantArray.append(it.ordinal.toNaturalT())
             }
         }
-        val propertyHandler = MutablePropertyHandler(property, typeConversionFunctions[Int::class] as (Variant) -> Int?)
+        val propertyHandler = MutablePropertyHandler(
+            property,
+            typeToVariantConversionFunctions[Int::class] ?: error("Could not find intToVariant conversion function. This should never happen. Was it removed/renamed recently?"),
+            variantToTypeConversionFunctions[Int::class] as (Variant) -> Int?
+        )
         classHandle.registerProperty(
             name,
             StableRef.create(propertyHandler).asCPointer(),
@@ -211,6 +243,10 @@ class ClassBuilder<T : Object> internal constructor(val classHandle: ClassHandle
     }
 
     @Suppress("UNCHECKED_CAST")
-    inline fun <reified CONVERTED> getTypeConversionLambda(): (Variant) -> CONVERTED? =
-            (typeConversionFunctions[CONVERTED::class] ?: throw IllegalArgumentException("There is no type conversion function for type ${CONVERTED::class}")) as (Variant) -> CONVERTED?
+    inline fun <reified CONVERTED> getTypeToVariantConversionFunction(): (CONVERTED) -> Variant =
+        (typeToVariantConversionFunctions[CONVERTED::class] ?: throw IllegalArgumentException("There is no variant conversion function from type ${CONVERTED::class}"))
+
+    @Suppress("UNCHECKED_CAST")
+    inline fun <reified CONVERTED> getVariantToTypeConversionFunction(): (Variant) -> CONVERTED? =
+            (variantToTypeConversionFunctions[CONVERTED::class] ?: throw IllegalArgumentException("There is no type conversion function for type ${CONVERTED::class}")) as (Variant) -> CONVERTED?
 }
