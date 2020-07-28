@@ -132,6 +132,15 @@ fun String.convertToCamelCase(): String {
     return prefix + first + split.joinToString("") { it.capitalize() }
 }
 
+fun String.convertToSnakeCase(): String =
+    if (this == "VariantArray") "array"
+    else if (this == "AABB" || this == "RID" || this == "Transform2D") this.toLowerCase()
+    else fold(StringBuilder()) { accumulator, character ->
+        if (character in 'A'..'Z')
+            (if (accumulator.isNotEmpty()) accumulator.append('_') else accumulator)
+            .append(character + ('a' - 'A'))
+        else accumulator.append(character)
+    }.toString()
 
 fun String.convertTypeToKotlin(): String {
     return when {
