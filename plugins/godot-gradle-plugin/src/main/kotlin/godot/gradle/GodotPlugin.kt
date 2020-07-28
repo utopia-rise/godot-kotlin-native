@@ -9,7 +9,6 @@ import org.gradle.kotlin.dsl.getByType
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
-import org.jetbrains.kotlin.konan.target.HostManager
 import java.io.File
 
 class GodotPlugin : Plugin<Project> {
@@ -21,17 +20,11 @@ class GodotPlugin : Plugin<Project> {
             setupExtensionDefaults(project, godot)
             setupKotlinPlugin(project, mpp, godot)
         }
+        project.pluginManager.apply(GodotCompilerPlugin::class.java)
     }
 
     private fun setupExtensionDefaults(project: Project, godot: GodotExtension) {
         with(godot) {
-            // we don't have godot-library in the mobile targets yet, limit these to desktop for now
-            //has to be change in `build.gradle.kts` of `godot-library` as well
-            platforms(
-                Platform.LINUX_X64,
-                Platform.WINDOWS_X64,
-                Platform.OSX_X64
-            )
             debug.set(true)
             cleanupGeneratedFiles.set(true)
             gdnsDir.set(project.file("src/gdns/kotlin"))
@@ -44,7 +37,7 @@ class GodotPlugin : Plugin<Project> {
     }
 
     private fun setupKotlinPlugin(project: Project, mpp: KotlinMultiplatformExtension, godot: GodotExtension) {
-        project.afterEvaluate {
+        with(project) {
             // create the main source set
             // val godotMain = mpp.sourceSets.create(MAIN_SOURCE_SET_NAME)
             // val godotTest = mpp.sourceSets.create(TEST_SOURCE_SET_NAME)
@@ -59,7 +52,7 @@ class GodotPlugin : Plugin<Project> {
                     dependencies {
                         // TODO: remove this once we have published the godot-library artifact.
                         // don't add dependencies to targets not buildable in the current host
-                        if (HostManager().isEnabled(this@configureSourceSets.konanTarget)) {
+                        if (this@configureSourceSets.publishable) {
                             implementation("com.utopia-rise:godot-library:${GodotBuildProperties.godotKotlinVersion}")
                         }
                     }
@@ -105,7 +98,7 @@ class GodotPlugin : Plugin<Project> {
             }
 
             // create the targets and connect it to the main source set
-            godot.platforms.get().forEach { platform ->
+            godot.configurePlatform = { platform ->
                 val target = when (platform) {
                     Platform.LINUX_X64 -> mpp.linuxX64("linuxX64")
                     Platform.WINDOWS_X64 -> mpp.mingwX64("windowsX64")

@@ -5,10 +5,6 @@ plugins {
     `maven-publish`
 }
 
-dependencies {
-    compileOnly(kotlin("stdlib"))
-}
-
 tasks {
     val sourceJar by creating(Jar::class) {
         archiveBaseName.set(project.name)

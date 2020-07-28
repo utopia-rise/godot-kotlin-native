@@ -11,6 +11,8 @@ pluginManagement {
         jcenter()
         gradlePluginPortal()
         maven("https://dl.bintray.com/utopia-rise/godot-kotlin-dev")
+        maven("https://dl.bintray.com/kotlin/kotlin-eap")
+        maven("https://kotlin.bintray.com/kotlinx")
     }
 
     resolutionStrategy.eachPlugin {

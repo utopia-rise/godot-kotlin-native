@@ -4,7 +4,6 @@ plugins {
 }
 
 dependencies {
-    implementation(kotlin("stdlib"))
     compileOnly(kotlin("compiler"))
     implementation("com.squareup:kotlinpoet:${DependenciesVersions.kotlinPoetVersion}")
 }
