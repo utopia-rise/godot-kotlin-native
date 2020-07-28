@@ -101,6 +101,10 @@ abstract class RegistrationValuesHandler(
                         val pkg = fqName.parent().asString()
                         val className = fqName.shortName().asString()
                         return "%T.%L" to arrayOf(ClassName(pkg, className), expression.selectorExpression!!.text)
+                    } else if (receiverRef.isCompanionObject()) { //static ref like Vector3.UP
+                        val packagePath = requireNotNull(receiverRef.containingDeclaration).fqNameSafe.asString()
+                        val expr = expression.text.substringAfter(".")
+                        return "%T.%L" to arrayOf(ClassName(packagePath.substringBeforeLast("."), packagePath.substringAfterLast(".")), expr)
                     }
                     //multiline strings
                 } else if (receiver is KtStringTemplateExpression) {

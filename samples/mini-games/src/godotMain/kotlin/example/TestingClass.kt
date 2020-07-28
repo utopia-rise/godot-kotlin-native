@@ -12,6 +12,19 @@ const val FLAG_1 = 1
 const val FLAG_2 = 2
 internal const val FLAG_3 = 4
 
+class OtherClass {
+    companion object {
+        val blubb = 2
+        fun blubbablubb() = AnotherClass.blubb
+    }
+}
+
+class AnotherClass {
+    companion object {
+        val blubb = 2
+    }
+}
+
 @RegisterClass
 class TestingClass : Node() {
 
@@ -26,6 +39,15 @@ class TestingClass : Node() {
 
     @RegisterFunction(RPCMode.PUPPET_SYNC)
     fun foo() = 1
+
+    @RegisterProperty
+    var vector2Test = Vector2.UP
+
+    @RegisterProperty
+    var companionTest = OtherClass.blubb
+
+    @RegisterProperty
+    var companionTestAnother = OtherClass.blubbablubb()
 
     @IntRange(0, 20, 2, Range.OR_GREATER)
     @RegisterProperty
