@@ -5,23 +5,28 @@ import kotlin.reflect.KMutableProperty1
 
 open class MutablePropertyHandler<T : Object, R>(
     protected val property: KMutableProperty1<T, R>,
-    val argumentTypeConverter: (Variant) -> Any?
+    val typeToVariantConverter: (R) -> Variant?,
+    val variantToTypeConverter: (Variant) -> Any?
 ) {
     open fun get(instance: T): Variant {
-        return Variant.wrap(
+        return typeToVariantConverter(
             property.get(instance)
-        )
+        ) ?: Variant()
     }
 
     open fun set(instance: T, value: Variant) {
-        property.set(instance, argumentTypeConverter(value) as R)
+        property.set(instance, variantToTypeConverter(value) as R)
     }
 }
 
 class MutableEnumPropertyHandler<T : Object, R : Enum<R>>(
     property: KMutableProperty1<T, R>,
     private val converter: (Int) -> R
-) : MutablePropertyHandler<T, R>(property, { {null} }) {
+) : MutablePropertyHandler<T, R>(
+    property,
+    typeToVariantConversionFunctions[Int::class] ?: error("Could not find intToVariant conversion function. This should never happen. Was it removed/renamed recently?"),
+    { {null} }
+) {
     override fun get(instance: T): Variant {
         return Variant(
             property.get(instance).ordinal
@@ -36,14 +41,18 @@ class MutableEnumPropertyHandler<T : Object, R : Enum<R>>(
 class MutableEnumFlagPropertyHandler<T : Object, R : Enum<R>>(
     property: KMutableProperty1<T, Set<R>>,
     private val converter: (Int) -> R?
-) : MutablePropertyHandler<T, Set<R>>(property, typeConversionFunctions[Int::class] as (Variant) -> Int?) {
+) : MutablePropertyHandler<T, Set<R>>(
+    property,
+    typeToVariantConversionFunctions[Int::class] ?: error("Could not find intToVariant conversion function. This should never happen. Was it removed/renamed recently?"),
+    variantToTypeConversionFunctions[Int::class] as (Variant) -> Int?
+) {
     override fun get(instance: T): Variant {
         var intFlag = 0
         property.get(instance).forEach { enum ->
             intFlag += 1 shl enum.ordinal
         }
 
-        return Variant.wrap(
+        return Variant(
             intFlag
         )
     }

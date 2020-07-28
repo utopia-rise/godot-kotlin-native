@@ -3,10 +3,30 @@
 package godot.core
 
 import godot.Object
+import godot.internal.type.CoreType
 import kotlin.reflect.KClass
 
+fun directConversionToVariant(obj: Any?) = obj?.let { Variant(obj) } ?: Variant()
+fun intToVariant(obj: Any?) = obj?.let { Variant((obj as Int).toLong()) } ?: Variant()
+fun floatToVariant(obj: Any?) = obj?.let { Variant((obj as Float).toDouble()) } ?: Variant()
+fun variantToVariant(obj: Any?) = obj?.let { obj as Variant } ?: Variant()
+fun coreTypeToVariant(obj: Any?) = obj?.let { (obj as CoreType).toVariant() } ?: Variant()
+
 @PublishedApi
-internal val typeConversionFunctions: Map<KClass<out Any>, (Variant) -> Any?> = mapOf(
+internal val typeToVariantConversionFunctions: Map<KClass<out Any>, (Any?) -> Variant> = mapOf(
+    Boolean::class to ::directConversionToVariant,
+    Int::class to ::intToVariant,
+    Long::class to ::directConversionToVariant,
+    Float::class to ::floatToVariant,
+    Double::class to ::directConversionToVariant,
+    String::class to ::directConversionToVariant,
+    CoreType::class to ::coreTypeToVariant,
+    Variant::class to ::variantToVariant,
+    Object::class to ::directConversionToVariant
+)
+
+@PublishedApi
+internal val variantToTypeConversionFunctions: Map<KClass<out Any>, (Variant) -> Any?> = mapOf(
     Boolean::class to Variant::asBoolean,
     Int::class to Variant::asInt,
     Long::class to Variant::asLong,
