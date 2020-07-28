@@ -1,3 +1,0 @@
-[submodule "wrapper/lib/godot_headers"]
-	path = wrapper/lib/godot_headers
-	url = https://github.com/GodotNativeTools/godot_headers.git
