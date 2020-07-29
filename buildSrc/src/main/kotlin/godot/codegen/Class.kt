@@ -190,7 +190,7 @@ class Class @JsonCreator constructor(
                                 .build(),
                             ParameterSpec.builder("method", kTypeVariable)
                                 .build(),
-                            ParameterSpec.builder("binds", List::class.asTypeName().parameterizedBy(ANY).copy(nullable = true))
+                            ParameterSpec.builder("binds", ClassName("godot.core", "VariantArray").copy(nullable = true))
                                 .defaultValue("null")
                                 .build(),
                             ParameterSpec.builder("flags", Long::class)
