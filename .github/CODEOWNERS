@@ -1,5 +1,5 @@
 # fallback to everyone if there is no match
-* godot-kotlin-maintainers
+* @utopia-rise/godot-kotlin-maintainers
 
 # entry generator
 entry-generation/* @chippmann @raniejade
