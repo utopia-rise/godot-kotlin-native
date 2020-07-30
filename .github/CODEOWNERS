@@ -1,0 +1,15 @@
+# fallback to everyone if there is no match
+* godot-kotlin-maintainers
+
+# entry generator
+entry-generation/* @chippmann @raniejade
+
+# gradle plugin
+plugins/godot-gradle-plugin/* @raniejade
+
+# core types
+godot-kotlin/godot-library/src/nativeCore/kotlin/godot/core/type/*.kt @CedNaru
+
+# api generation
+buildSrc/src/main/kotlin/godot/codegen/*.kt @piiertho
+buildSrc/src/main/kotlin/godot/tasks/GenerateApiTask.kt @piiertho
