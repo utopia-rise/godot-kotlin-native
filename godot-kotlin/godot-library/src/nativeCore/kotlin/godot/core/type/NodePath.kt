@@ -44,6 +44,7 @@ class NodePath : NativeCoreType<godot_node_path_layout> {
 
 
     internal constructor(native: CValue<godot_node_path_layout>) {
+        _handle = cValue {} // not here before
         callNative {
             nullSafe(Godot.gdnative.godot_node_path_new_copy)(it, native.ptr)
         }

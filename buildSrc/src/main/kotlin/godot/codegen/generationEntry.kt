@@ -20,7 +20,7 @@ infix fun File.generateApiFrom(jsonSource: File) {
     val iCallFileSpec = FileSpec
         .builder("godot.icalls", "__icalls")
         .addFunction(generateICallsVarargsFunction())
-        .addImport("kotlinx.cinterop", "set", "get")
+        .addImport("kotlinx.cinterop", "set", "get", "pointed")
 
     icalls.forEach { iCallFileSpec.addFunction(it generateICall tree) }
 

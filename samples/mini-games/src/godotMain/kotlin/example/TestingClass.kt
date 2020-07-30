@@ -37,11 +37,11 @@ class TestingClass : Node() {
     @RegisterSignal
     val signal2 by signal<Boolean, String>("param1", "param2")
 
-    init {
-        signal0.connect(this, this::signal0Receiver)
-        signal1.connect(this, this::signal1Receiver)
-        signal2.connect(this, this::signal2Receiver)
-    }
+//    init {
+//        signal0.connect(this, this::signal0Receiver)
+//        signal1.connect(this, this::signal1Receiver)
+//        signal2.connect(this, this::signal2Receiver)
+//    }
 
     @RegisterFunction
     fun signal0Receiver() {
