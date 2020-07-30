@@ -184,8 +184,8 @@ class ICall(
 
                     returnTypeClassSimpleName == "String" -> {
                         codeBlockBuilder.add(
-                            "    %M(retVar)\n",
-                            MemberName("godot.core", "String")
+                            "    %M(retVar).toKString()\n",
+                            MemberName("godot.core", "from")
                         )
                     }
 

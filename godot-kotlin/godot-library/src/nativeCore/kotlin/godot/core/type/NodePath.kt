@@ -15,7 +15,7 @@ class NodePath : NativeCoreType<godot_node_path_layout> {
     val path: String
         get() {
             return callNative {
-                nullSafe(Godot.gdnative.godot_node_path_as_string)(it)
+                GdString(nullSafe(Godot.gdnative.godot_node_path_as_string)(it))
             }.toKString()
         }
 
@@ -23,14 +23,14 @@ class NodePath : NativeCoreType<godot_node_path_layout> {
     constructor() {
         _handle = cValue {}
         callNative {
-            nullSafe(Godot.gdnative.godot_node_path_new)(it, "".toGDString().ptr)
+            nullSafe(Godot.gdnative.godot_node_path_new)(it, "".toGDString().value.ptr)
         }
     }
 
     constructor(from: String) {
         _handle = cValue {}
         callNative {
-            nullSafe(Godot.gdnative.godot_node_path_new)(it, from.toGDString().ptr)
+            nullSafe(Godot.gdnative.godot_node_path_new)(it, from.toGDString().value.ptr)
         }
     }
 
@@ -69,7 +69,7 @@ class NodePath : NativeCoreType<godot_node_path_layout> {
      */
     fun getName(idx: Int): String {
         return callNative {
-            nullSafe(Godot.gdnative.godot_node_path_get_name)(it, idx)
+            GdString(nullSafe(Godot.gdnative.godot_node_path_get_name)(it, idx))
         }.toKString()
 
     }
@@ -98,7 +98,7 @@ class NodePath : NativeCoreType<godot_node_path_layout> {
      */
     fun getSubname(idx: Int): String {
         return callNative {
-            nullSafe(Godot.gdnative.godot_node_path_get_subname)(it, idx).toKString()
+            GdString(nullSafe(Godot.gdnative.godot_node_path_get_subname)(it, idx)).toKString()
         }
     }
 
@@ -134,7 +134,7 @@ class NodePath : NativeCoreType<godot_node_path_layout> {
      */
     fun getConcatenatedSubnames(): String {
         return callNative {
-            nullSafe(Godot.gdnative.godot_node_path_get_concatenated_subnames)(it).toKString()
+            GdString(nullSafe(Godot.gdnative.godot_node_path_get_concatenated_subnames)(it)).toKString()
         }
     }
 

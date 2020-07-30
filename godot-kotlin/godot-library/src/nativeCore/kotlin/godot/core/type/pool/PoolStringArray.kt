@@ -53,7 +53,7 @@ class PoolStringArray : NativeCoreType<godot_pool_string_array_layout>, Iterable
      */
     fun append(s: String) {
         callNative {
-            nullSafe(Godot.gdnative.godot_pool_string_array_append)(it, s.toGDString().ptr)
+            nullSafe(Godot.gdnative.godot_pool_string_array_append)(it, s.toGDString().value.ptr)
         }
     }
 
@@ -81,7 +81,7 @@ class PoolStringArray : NativeCoreType<godot_pool_string_array_layout>, Iterable
      */
     operator fun get(idx: Int): String {
         return callNative {
-            nullSafe(Godot.gdnative.godot_pool_string_array_get)(it, idx)
+            GdString(nullSafe(Godot.gdnative.godot_pool_string_array_get)(it, idx))
         }.toKString()
     }
 
@@ -91,7 +91,7 @@ class PoolStringArray : NativeCoreType<godot_pool_string_array_layout>, Iterable
      */
     fun insert(idx: Int, data: String) {
         callNative {
-            nullSafe(Godot.gdnative.godot_pool_string_array_insert)(it, idx, data.toGDString().ptr)
+            nullSafe(Godot.gdnative.godot_pool_string_array_insert)(it, idx, data.toGDString().value.ptr)
         }
     }
 
@@ -109,7 +109,7 @@ class PoolStringArray : NativeCoreType<godot_pool_string_array_layout>, Iterable
      */
     fun pushBack(data: String) {
         callNative {
-            nullSafe(Godot.gdnative.godot_pool_string_array_push_back)(it, data.toGDString().ptr)
+            nullSafe(Godot.gdnative.godot_pool_string_array_push_back)(it, data.toGDString().value.ptr)
         }
     }
 
@@ -137,7 +137,7 @@ class PoolStringArray : NativeCoreType<godot_pool_string_array_layout>, Iterable
      */
     operator fun set(idx: Int, data: String) {
         callNative {
-            nullSafe(Godot.gdnative.godot_pool_string_array_set)(it, idx, data.toGDString().ptr)
+            nullSafe(Godot.gdnative.godot_pool_string_array_set)(it, idx, data.toGDString().value.ptr)
         }
     }
 
