@@ -187,7 +187,7 @@ class ICall(
                     returnTypeClassSimpleName == "String" -> {
                         codeBlockBuilder.add(
                             "    %M(retVar).toKString()\n",
-                            MemberName("godot.core", "from")
+                            MemberName("godot.core", "String")
                         )
                     }
 
@@ -241,7 +241,7 @@ class ICall(
         if (it.value.type == "String") {
             codeBlockBuilder.add(
                 "    %M(args[${it.index}]!!).destroy(this)\n",
-                MemberName("godot.core", "from")
+                MemberName("godot.core", "String")
             )
         }
     }
