@@ -1,8 +1,9 @@
-Any property of a registered class can be registered as long as it meets all of the following requirements:
- - Defined inside a registered class
- - Mutable
- - Annotated with `@RegisterProperty`
- - Type can be converted to `Variant`
+Any property of a registered class can be registered as long as it meets all of the following requirements:  
+ 
+ - Defined inside a registered class  
+ - Mutable  
+ - Annotated with `@RegisterProperty`  
+ - Type can be converted to `Variant`  
  
 
 
@@ -26,9 +27,10 @@ We try to catch all wrong references during compilation and throw a correspondin
 
 
 ## Registration Configuration
-You can customize to some extent how your class should be registered in Godot:
+You can customize to some extent how your property should be registered in Godot:
 
-The `@RegisterProperty` annotation takes one argument:
+The `@RegisterProperty` annotation takes two arguments:
+
 - **visibleInEditor**: If set to `true` the property is visible in the `inspector`. Default: `true`
 - **rpcMode**: Default: `RPCMode.DISABLED`
 

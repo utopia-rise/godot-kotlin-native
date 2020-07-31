@@ -18,7 +18,8 @@ Virtual methods (like `_ready`, `_process` and `_physics_process`) are declared 
 Remember; just overriding is not enough to use that function. You have to explicitly register it as well with `@RegisterFunction` like you have to with your own methods.
 
 ## Registration Configuration
-You can customize to some extent how your class should be registered in Godot:
+You can customize to some extent how your function should be registered in Godot:
 
 The `@RegisterFunction` annotation takes one argument:
+
 - **rpcMode**: Default: `RPCMode.DISABLED`
