@@ -55,6 +55,15 @@ override fun _ready() {
 }
 ```
 
+
+## Registration Configuration
+You can customize to some extent how your class should be registered in Godot:
+
+The `@RegisterClass` annotation can take one argument:
+- **isTool**: If set to true, this class is treated as a tool class. Similar to the `tool` of GDScript. **Default:** false
+
+
+
 ## What's next?
  - [Registering properties](properties.md)
  - [Registering functions](methods.md)
