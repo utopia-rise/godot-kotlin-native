@@ -186,16 +186,16 @@ class AABB(
      * Returns the normalized longest axis of the AABB.
      */
     fun getLongestAxis(): Vector3 {
-        var axis = Vector3(1.0, 0.0, 0.0)
+        var axis = Vector3(1.0f, 0.0f, 0.0f)
         var maxSize = _size._x
 
         if (_size._y > maxSize) {
-            axis = Vector3(0.0, 1.0, 0.0)
+            axis = Vector3(0.0f, 1.0f, 0.0f)
             maxSize = _size._y
         }
 
         if (_size._z > maxSize) {
-            axis = Vector3(0.0, 0.0, 1.0)
+            axis = Vector3(0.0f, 0.0f, 1.0f)
         }
 
         return axis
@@ -239,16 +239,16 @@ class AABB(
      *  Returns the scalar length of the longest axis of the AABB.
      */
     fun getShortestAxis(): Vector3 {
-        var axis = Vector3(1.0, 0.0, 0.0)
+        var axis = Vector3(1.0f, 0.0f, 0.0f)
         var minSize = _size._x
 
         if (_size._y < minSize) {
-            axis = Vector3(0.0, 1.0, 0.0)
+            axis = Vector3(0.0f, 1.0f, 0.0f)
             minSize = _size._y
         }
 
         if (_size._z < minSize) {
-            axis = Vector3(0.0, 0.0, 1.0)
+            axis = Vector3(0.0f, 0.0f, 1.0f)
         }
 
         return axis
@@ -293,13 +293,13 @@ class AABB(
      * Returns the support point in a given direction. This is useful for collision detection algorithms.
      */
     fun getSupport(normal: Vector3): Vector3 {
-        val halfExtents = _size * 0.5
+        val halfExtents = _size * 0.5f
         val ofs = _position + halfExtents
 
         return Vector3(
-            if (normal._x > 0.0) -halfExtents._x else halfExtents._x,
-            if (normal._y > 0.0) -halfExtents._y else halfExtents._y,
-            if (normal._z > 0.0) -halfExtents._z else halfExtents._z
+            if (normal._x > 0.0f) -halfExtents._x else halfExtents._x,
+            if (normal._y > 0.0f) -halfExtents._y else halfExtents._y,
+            if (normal._z > 0.0f) -halfExtents._z else halfExtents._z
         ) + ofs
     }
 

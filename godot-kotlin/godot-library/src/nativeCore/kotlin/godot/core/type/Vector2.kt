@@ -69,7 +69,7 @@ class Vector2(
 
     //CONSTRUCTOR
     constructor() :
-        this(0.0, 0.0)
+        this(0.0f, 0.0f)
 
     constructor(vec: Vector2) :
         this(vec._x, vec._y)
@@ -78,7 +78,7 @@ class Vector2(
         this(x.toKotlinReal(), y.toKotlinReal())
 
 
-    internal constructor(native: CValue<godot_vector2>) : this(0.0, 0.0) {
+    internal constructor(native: CValue<godot_vector2>) : this(0.0f, 0.0f) {
         memScoped {
             this@Vector2.setRawMemory(native.ptr)
         }
@@ -178,7 +178,7 @@ class Vector2(
 
     /**
      * Cubicly interpolates between this vector and b using pre_a and post_b as handles, and returns the result at position t.
-     * t is in the range of 0.0 - 1.0, representing the amount of interpolation.
+     * t is in the range of 0.0f - 1.0f, representing the amount of interpolation.
      */
     fun cubicInterpolate(v: Vector2, pre: Vector2, post: Vector2, t: KotlinReal): Vector2 {
         val p0: Vector2 = pre
@@ -189,10 +189,10 @@ class Vector2(
         val t2 = t * t
         val t3 = t2 * t
 
-        return ((p1 * 2.0) +
+        return ((p1 * 2.0f) +
             (-p0 + p2) * t +
-            (p0 * 2.0 - p1 * 5.0 + p2 * 4.0 - p3) * t2 +
-            (-p0 + p1 * 3.0 - p2 * 3.0 + p3) * t3) * 0.5
+            (p0 * 2.0f - p1 * 5.0f + p2 * 4.0f - p3) * t2 +
+            (-p0 + p1 * 3.0f - p2 * 3.0f + p3) * t3) * 0.5f
     }
 
     /**
@@ -267,7 +267,7 @@ class Vector2(
 
     /**
      * Returns the result of the linear interpolation between this vector and b by amount t.
-     * t is in the range of 0.0 - 1.0, representing the amount of interpolation.
+     * t is in the range of 0.0f - 1.0f, representing the amount of interpolation.
      */
     fun linearInterpolate(v: Vector2, t: KotlinReal): Vector2 {
         val res = Vector2(this)
@@ -336,14 +336,14 @@ class Vector2(
      * Returns the vector reflected from a plane defined by the given normal.
      */
     fun reflect(vec: Vector2): Vector2 {
-        return vec * this.dot(vec) * 2.0 - this
+        return vec * this.dot(vec) * 2.0f - this
     }
 
     /**
      * Returns the vector rotated by phi radians.
      */
     fun rotated(by: KotlinReal): Vector2 {
-        var v = Vector2(0.0, 0.0)
+        var v = Vector2(0.0f, 0.0f)
         v.rotate(this.angle() + by)
         v *= length()
         return v
@@ -370,7 +370,7 @@ class Vector2(
 
     /**
      * Returns the result of spherical linear interpolation between this vector and b, by amount t.
-     * t is in the range of 0.0 - 1.0, representing the amount of interpolation.
+     * t is in the range of 0.0f - 1.0f, representing the amount of interpolation.
      *
      * Note: Both vectors must be normalized.
      */

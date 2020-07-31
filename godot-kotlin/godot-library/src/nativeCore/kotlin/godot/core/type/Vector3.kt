@@ -87,7 +87,7 @@ class Vector3(
 
     //CONSTRUCTOR
     constructor() :
-        this(0.0, 0.0, 0.0)
+        this(0.0f, 0.0f, 0.0f)
 
     constructor(vec: Vector3) :
         this(vec._x, vec._y, vec._z)
@@ -161,7 +161,7 @@ class Vector3(
 
     /**
      * Performs a cubic interpolation between vectors pre_a, a, b, post_b (a is current), by the given amount t.
-     * t is in the range of 0.0 - 1.0, representing the amount of interpolation.
+     * t is in the range of 0.0f - 1.0f, representing the amount of interpolation.
      */
     fun cubicInterpolate(b: Vector3, pre: Vector3, post: Vector3, t: KotlinReal): Vector3 {
         val p0: Vector3 = pre
@@ -172,10 +172,10 @@ class Vector3(
         val t2 = t * t
         val t3 = t2 * t
 
-        return ((p1 * 2.0) +
+        return ((p1 * 2.0f) +
             (-p0 + p2) * t +
-            (p0 * 2.0 - p1 * 5.0 + p2 * 4.0 - p3) * t2 +
-            (-p0 + p1 * 3.0 - p2 * 3.0 + p3) * t3) * 0.5
+            (p0 * 2.0f - p1 * 5.0f + p2 * 4.0f - p3) * t2 +
+            (-p0 + p1 * 3.0f - p2 * 3.0f + p3) * t3) * 0.5f
     }
 
     /**
@@ -217,10 +217,10 @@ class Vector3(
     }
 
     /**
-     * Returns the inverse of the vector. This is the same as Vector3( 1.0 / v.x, 1.0 / v.y, 1.0 / v.z ).
+     * Returns the inverse of the vector. This is the same as Vector3( 1.0f / v.x, 1.0f / v.y, 1.0f / v.z ).
      */
     fun inverse(): Vector3 {
-        return Vector3(1.0 / _x, 1.0 / _y, 1.0 / _z)
+        return Vector3(1.0f / _x, 1.0f / _y, 1.0f / _z)
     }
 
     /**
@@ -260,7 +260,7 @@ class Vector3(
 
     /**
      * Returns the result of the linear interpolation between this vector and b by amount t.
-     * t is in the range of 0.0 - 1.0, representing the amount of interpolation.
+     * t is in the range of 0.0f - 1.0f, representing the amount of interpolation.
      */
     fun linearInterpolate(b: Vector3, t: KotlinReal): Vector3 {
         return Vector3(_x + (t * (b._x - _x)), _y + (t * (b._y - _y)), _z + (t * (b._z - _z)))
@@ -375,7 +375,7 @@ class Vector3(
      * Returns the vector reflected from a plane defined by the given normal.
      */
     fun reflect(by: Vector3): Vector3 {
-        return by - this * this.dot(by) * 2.0
+        return by - this * this.dot(by) * 2.0f
     }
 
     /**
@@ -413,7 +413,7 @@ class Vector3(
 
     /**
      * Returns the result of spherical linear interpolation between this vector and b, by amount t.
-     * t is in the range of 0.0 - 1.0, representing the amount of interpolation.
+     * t is in the range of 0.0f - 1.0f, representing the amount of interpolation.
      *
      * Note: Both vectors must be normalized.
      */

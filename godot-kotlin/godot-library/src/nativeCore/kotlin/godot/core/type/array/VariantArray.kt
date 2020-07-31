@@ -3,6 +3,8 @@ package godot.core
 import godot.Object
 import godot.gdnative.godot_array
 import godot.internal.type.CoreType
+import godot.internal.type.KotlinInt
+import godot.internal.type.KotlinReal
 import godot.internal.type.nullSafe
 import kotlinx.cinterop.*
 
@@ -86,8 +88,8 @@ class VariantArray : GodotArray<Variant> {
         }
     }
 
-    fun append(value: Int) = append(Variant(value))
-    fun append(value: Float) = append(Variant(value))
+    fun append(value : KotlinInt) = append(Variant(value))
+    fun append(value : KotlinReal) = append(Variant(value))
     fun append(value: Boolean) = append(Variant(value))
     fun append(value: String) = append(Variant(value))
     fun append(value: Dictionary) = append(value.toVariant())
@@ -101,8 +103,8 @@ class VariantArray : GodotArray<Variant> {
         }
     }
 
-    fun bsearch(value: Int, before: Boolean = true) = bsearch(Variant(value), before)
-    fun bsearch(value: Float, before: Boolean = true) = bsearch(Variant(value), before)
+    fun bsearch(value : KotlinInt, before: Boolean = true) = bsearch(Variant(value), before)
+    fun bsearch(value : KotlinReal, before: Boolean = true) = bsearch(Variant(value), before)
     fun bsearch(value: String, before: Boolean = true) = bsearch(Variant(value), before)
     fun bsearch(value: Boolean, before: Boolean = true) = bsearch(Variant(value), before)
     fun bsearch(value: Dictionary, before: Boolean = true) = bsearch(Variant(value), before)
@@ -122,10 +124,10 @@ class VariantArray : GodotArray<Variant> {
         }
     }
 
-    fun bsearchCustom(value: Int, obj: Object, func: String, before: Boolean) =
+    fun bsearchCustom(value : KotlinInt, obj: Object, func: String, before: Boolean) =
         bsearchCustom(Variant(value), obj, func, before)
 
-    fun bsearchCustom(value: Float, obj: Object, func: String, before: Boolean) =
+    fun bsearchCustom(value : KotlinReal, obj: Object, func: String, before: Boolean) =
         bsearchCustom(Variant(value), obj, func, before)
 
     fun bsearchCustom(value: String, obj: Object, func: String, before: Boolean) =
@@ -152,8 +154,8 @@ class VariantArray : GodotArray<Variant> {
         }
     }
 
-    fun count(value: Int) = count(Variant(value))
-    fun count(value: Float) = count(Variant(value))
+    fun count(value : KotlinInt) = count(Variant(value))
+    fun count(value : KotlinReal) = count(Variant(value))
     fun count(value: String) = count(Variant(value))
     fun count(value: Boolean) = count(Variant(value))
     fun count(value: Dictionary) = count(Variant(value))
@@ -175,8 +177,8 @@ class VariantArray : GodotArray<Variant> {
         }
     }
 
-    fun erase(value: Int) = erase(Variant(value))
-    fun erase(value: Float) = erase(Variant(value))
+    fun erase(value : KotlinInt) = erase(Variant(value))
+    fun erase(value : KotlinReal) = erase(Variant(value))
     fun erase(value: String) = erase(Variant(value))
     fun erase(value: Boolean) = erase(Variant(value))
     fun erase(value: Dictionary) = erase(Variant(value))
@@ -190,8 +192,8 @@ class VariantArray : GodotArray<Variant> {
         }
     }
 
-    fun find(value: Int, from: Int = 0) = find(Variant(value))
-    fun find(value: Float, from: Int = 0) = find(Variant(value))
+    fun find(value : KotlinInt, from: Int = 0) = find(Variant(value))
+    fun find(value : KotlinReal, from: Int = 0) = find(Variant(value))
     fun find(value: String, from: Int = 0) = find(Variant(value))
     fun find(value: Boolean, from: Int = 0) = find(Variant(value))
     fun find(value: Dictionary, from: Int = 0) = find(Variant(value))
@@ -205,8 +207,8 @@ class VariantArray : GodotArray<Variant> {
         }
     }
 
-    fun findLast(value: Int) = findLast(Variant(value))
-    fun findLast(value: Float) = findLast(Variant(value))
+    fun findLast(value : KotlinInt) = findLast(Variant(value))
+    fun findLast(value : KotlinReal) = findLast(Variant(value))
     fun findLast(value: String) = findLast(Variant(value))
     fun findLast(value: Boolean) = findLast(Variant(value))
     fun findLast(value: Dictionary) = findLast(Variant(value))
@@ -228,8 +230,8 @@ class VariantArray : GodotArray<Variant> {
         }
     }
 
-    fun has(value: Int) = has(Variant(value))
-    fun has(value: Float) = has(Variant(value))
+    fun has(value : KotlinInt) = has(Variant(value))
+    fun has(value : KotlinReal) = has(Variant(value))
     fun has(value: String) = has(Variant(value))
     fun has(value: Boolean) = has(Variant(value))
     fun has(value: Dictionary) = has(Variant(value))
@@ -243,8 +245,8 @@ class VariantArray : GodotArray<Variant> {
         }
     }
 
-    fun insert(index: Int, value: Int) = insert(index, Variant(value))
-    fun insert(index: Int, value: Float) = insert(index, Variant(value))
+    fun insert(index: Int, value : KotlinInt) = insert(index, Variant(value))
+    fun insert(index: Int, value : KotlinReal) = insert(index, Variant(value))
     fun insert(index: Int, value: String) = insert(index, Variant(value))
     fun insert(index: Int, value: Boolean) = insert(index, Variant(value))
     fun insert(index: Int, value: Dictionary) = insert(index, Variant(value))
@@ -290,8 +292,8 @@ class VariantArray : GodotArray<Variant> {
         }
     }
 
-    fun pushBack(value: Int) = pushBack(Variant(value))
-    fun pushBack(value: Float) = pushBack(Variant(value))
+    fun pushBack(value : KotlinInt) = pushBack(Variant(value))
+    fun pushBack(value : KotlinReal) = pushBack(Variant(value))
     fun pushBack(value: String) = pushBack(Variant(value))
     fun pushBack(value: Boolean) = pushBack(Variant(value))
     fun pushBack(value: Dictionary) = pushBack(Variant(value))
@@ -305,8 +307,8 @@ class VariantArray : GodotArray<Variant> {
         }
     }
 
-    fun pushFront(value: Int) = pushFront(Variant(value))
-    fun pushFront(value: Float) = pushFront(Variant(value))
+    fun pushFront(value : KotlinInt) = pushFront(Variant(value))
+    fun pushFront(value : KotlinReal) = pushFront(Variant(value))
     fun pushFront(value: String) = pushFront(Variant(value))
     fun pushFront(value: Boolean) = pushFront(Variant(value))
     fun pushFront(value: Dictionary) = pushFront(Variant(value))
