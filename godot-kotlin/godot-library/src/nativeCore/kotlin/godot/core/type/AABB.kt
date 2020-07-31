@@ -4,10 +4,7 @@ package godot.core
 
 import godot.gdnative.godot_aabb
 import godot.gdnative.godot_aabb_layout
-import godot.internal.type.CMP_EPSILON
-import godot.internal.type.CoreType
-import godot.internal.type.RealT
-import godot.internal.type.toGodotReal
+import godot.internal.type.*
 import kotlinx.cinterop.*
 
 
@@ -16,8 +13,11 @@ class AABB(
     p_size: Vector3
 ) : CoreType {
 
-    @PublishedApi internal var _position = Vector3(p_position)
-    @PublishedApi internal var _size  = Vector3(p_size)
+    @PublishedApi
+    internal var _position = Vector3(p_position)
+
+    @PublishedApi
+    internal var _size = Vector3(p_size)
 
 
     //PROPERTIES
@@ -25,7 +25,7 @@ class AABB(
      * Warning: Writing position.x = 2 will only modify a copy, not the actual object.
      * To modify it, use position().
      * */
-    var position
+    inline var position
         get() = Vector3(_position)
         set(value) {
             _position = Vector3(value)
@@ -39,13 +39,13 @@ class AABB(
      * Warning: Writing size.x = 2 will only modify a copy, not the actual object.
      * To modify it, use size().
      * */
-    var size
+    inline var size
         get() = Vector3(_size)
         set(value) {
             _size = Vector3(value)
         }
 
-    inline fun <T> size(block: Vector3.() -> T): T{
+    inline fun <T> size(block: Vector3.() -> T): T {
         return _size.block()
     }
 
@@ -59,7 +59,7 @@ class AABB(
             _size = value - _position
         }
 
-    inline fun <T> end(block: Vector3.() -> T): T{
+    inline fun <T> end(block: Vector3.() -> T): T {
         val vec = end
         val ret = vec.block()
         end = vec
@@ -88,12 +88,12 @@ class AABB(
     //INTEROP
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
         val value = cValue<godot_aabb_layout> {
-            position.x = this@AABB._position.x.toGodotReal()
-            position.y = this@AABB._position.y.toGodotReal()
-            position.z = this@AABB._position.z.toGodotReal()
-            size.x = this@AABB._size.x.toGodotReal()
-            size.y = this@AABB._size.y.toGodotReal()
-            size.z = this@AABB._size.z.toGodotReal()
+            position.x = this@AABB._position._x.toGodotReal()
+            position.y = this@AABB._position._y.toGodotReal()
+            position.z = this@AABB._position._z.toGodotReal()
+            size.x = this@AABB._size._x.toGodotReal()
+            size.y = this@AABB._size._y.toGodotReal()
+            size.z = this@AABB._size._z.toGodotReal()
         }
         return value.getPointer(memScope)
     }
@@ -113,12 +113,12 @@ class AABB(
         val srcMax = _position + _size
         val dstMin = other._position
         val dstMax = other._position + other._size
-        return ((srcMin.x <= dstMin.x) &&
-            (srcMax.x > dstMax.x) &&
-            (srcMin.y <= dstMin.y) &&
-            (srcMax.y > dstMax.y) &&
-            (srcMin.z <= dstMin.z) &&
-            (srcMax.z > dstMax.z))
+        return ((srcMin._x <= dstMin._x) &&
+            (srcMax._x > dstMax._x) &&
+            (srcMin._y <= dstMin._y) &&
+            (srcMax._y > dstMax._y) &&
+            (srcMin._z <= dstMin._z) &&
+            (srcMax._z > dstMax._z))
     }
 
     /**
@@ -134,24 +134,24 @@ class AABB(
         val begin = _position
         val end = _position + _size
 
-        if (vector.x < begin.x) {
-            begin.x = vector.x
+        if (vector._x < begin._x) {
+            begin._x = vector._x
         }
-        if (vector.y < begin.y) {
-            begin.y = vector.y
+        if (vector._y < begin._y) {
+            begin._y = vector._y
         }
-        if (vector.z < begin.z) {
-            begin.z = vector.z
+        if (vector._z < begin._z) {
+            begin._z = vector._z
         }
 
-        if (vector.x > end.x) {
-            end.x = vector.x
+        if (vector._x > end._x) {
+            end._x = vector._x
         }
-        if (vector.y > end.y) {
-            end.y = vector.y
+        if (vector._y > end._y) {
+            end._y = vector._y
         }
-        if (vector.z > end.z) {
-            end.z = vector.z
+        if (vector._z > end._z) {
+            end._z = vector._z
         }
 
         _position = begin
@@ -161,8 +161,8 @@ class AABB(
     /**
      * Returns the volume of the AABB.
      */
-    fun getArea(): RealT {
-        return _size.x * _size.y * _size.z
+    fun getArea(): KotlinReal {
+        return (_size._x * _size._y * _size._z).toKotlinReal()
     }
 
     /**
@@ -170,14 +170,14 @@ class AABB(
      */
     fun getEndpoint(point: Int): Vector3 {
         return when (point) {
-            0 -> Vector3(_position.x, _position.y, _position.z)
-            1 -> Vector3(_position.x, _position.y, _position.z + _size.z)
-            2 -> Vector3(_position.x, _position.y + _size.y, _position.z)
-            3 -> Vector3(_position.x, _position.y + _size.y, _position.z + _size.z)
-            4 -> Vector3(_position.x + _size.x, _position.y, _position.z)
-            5 -> Vector3(_position.x + _size.x, _position.y, _position.z + _size.z)
-            6 -> Vector3(_position.x + _size.x, _position.y + _size.y, _position.z)
-            7 -> Vector3(_position.x + _size.x, _position.y + _size.y, _position.z + _size.z)
+            0 -> Vector3(_position._x, _position._y, _position._z)
+            1 -> Vector3(_position._x, _position._y, _position._z + _size._z)
+            2 -> Vector3(_position._x, _position._y + _size._y, _position._z)
+            3 -> Vector3(_position._x, _position._y + _size._y, _position._z + _size._z)
+            4 -> Vector3(_position._x + _size._x, _position._y, _position._z)
+            5 -> Vector3(_position._x + _size._x, _position._y, _position._z + _size._z)
+            6 -> Vector3(_position._x + _size._x, _position._y + _size._y, _position._z)
+            7 -> Vector3(_position._x + _size._x, _position._y + _size._y, _position._z + _size._z)
             else -> Vector3()
         }
     }
@@ -187,14 +187,14 @@ class AABB(
      */
     fun getLongestAxis(): Vector3 {
         var axis = Vector3(1.0, 0.0, 0.0)
-        var maxSize = _size.x
+        var maxSize = _size._x
 
-        if (_size.y > maxSize) {
+        if (_size._y > maxSize) {
             axis = Vector3(0.0, 1.0, 0.0)
-            maxSize = _size.y
+            maxSize = _size._y
         }
 
-        if (_size.z > maxSize) {
+        if (_size._z > maxSize) {
             axis = Vector3(0.0, 0.0, 1.0)
         }
 
@@ -206,14 +206,14 @@ class AABB(
      */
     fun getLongestAxisIndex(): Int {
         var axis = 0
-        var maxSize = _size.x
+        var maxSize = _size._x
 
-        if (_size.y > maxSize) {
+        if (_size._y > maxSize) {
             axis = 1
-            maxSize = _size.y
+            maxSize = _size._y
         }
 
-        if (_size.z > maxSize) {
+        if (_size._z > maxSize) {
             axis = 2
         }
 
@@ -223,15 +223,15 @@ class AABB(
     /**
      *  Returns the scalar length of the longest axis of the AABB.
      */
-    fun getLongestAxisSize(): RealT {
-        var maxSize = _size.x
-        if (_size.y > maxSize) {
-            maxSize = _size.y
+    fun getLongestAxisSize(): KotlinReal {
+        var maxSize = _size._x
+        if (_size._y > maxSize) {
+            maxSize = _size._y
         }
-        if (_size.z > maxSize) {
-            maxSize = _size.z
+        if (_size._z > maxSize) {
+            maxSize = _size._z
         }
-        return maxSize
+        return maxSize.toKotlinReal()
     }
 
 
@@ -240,14 +240,14 @@ class AABB(
      */
     fun getShortestAxis(): Vector3 {
         var axis = Vector3(1.0, 0.0, 0.0)
-        var minSize = _size.x
+        var minSize = _size._x
 
-        if (_size.y < minSize) {
+        if (_size._y < minSize) {
             axis = Vector3(0.0, 1.0, 0.0)
-            minSize = _size.y
+            minSize = _size._y
         }
 
-        if (_size.z < minSize) {
+        if (_size._z < minSize) {
             axis = Vector3(0.0, 0.0, 1.0)
         }
 
@@ -259,14 +259,14 @@ class AABB(
      */
     fun getShortestAxisIndex(): Int {
         var axis = 0
-        var maxSize = _size.x
+        var maxSize = _size._x
 
-        if (_size.y < maxSize) {
+        if (_size._y < maxSize) {
             axis = 1
-            maxSize = _size.y
+            maxSize = _size._y
         }
 
-        if (_size.z < maxSize) {
+        if (_size._z < maxSize) {
             axis = 2
         }
 
@@ -276,17 +276,17 @@ class AABB(
     /**
      * Gets the position of the 8 endpoints of the AABB in space.
      */
-    fun getShortestAxisSize(): RealT {
-        var minSize = _size.x
-        if (_size.y < minSize) {
-            minSize = _size.y
+    fun getShortestAxisSize(): KotlinReal {
+        var minSize = _size._x
+        if (_size._y < minSize) {
+            minSize = _size._y
         }
 
-        if (_size.z < minSize) {
-            minSize = _size.z
+        if (_size._z < minSize) {
+            minSize = _size._z
         }
 
-        return minSize
+        return minSize.toKotlinReal()
     }
 
     /**
@@ -297,42 +297,43 @@ class AABB(
         val ofs = _position + halfExtents
 
         return Vector3(
-            if (normal.x > 0.0) -halfExtents.x else halfExtents.x,
-            if (normal.y > 0.0) -halfExtents.y else halfExtents.y,
-            if (normal.z > 0.0) -halfExtents.z else halfExtents.z
+            if (normal._x > 0.0) -halfExtents._x else halfExtents._x,
+            if (normal._y > 0.0) -halfExtents._y else halfExtents._y,
+            if (normal._z > 0.0) -halfExtents._z else halfExtents._z
         ) + ofs
     }
 
     /**
      * Returns a copy of the AABB grown a given amount of units towards all the sides.
      */
-    fun grow(p_by: RealT): AABB {
+    fun grow(p_by: KotlinReal): AABB {
         val aabb = this
         aabb.growBy(p_by)
         return aabb
     }
 
-    internal fun growBy(amount: RealT) {
-        _position.x -= amount
-        _position.y -= amount
-        _position.z -= amount
-        _size.x += 2.0 * amount
-        _size.y += 2.0 * amount
-        _size.z += 2.0 * amount
+    internal fun growBy(p_amount: KotlinReal) {
+        val amount = p_amount.toGodotReal()
+        _position._x -= amount
+        _position._y -= amount
+        _position._z -= amount
+        _size._x += 2.0f * amount
+        _size._y += 2.0f * amount
+        _size._z += 2.0f * amount
     }
 
     /**
      * Returns true if the AABB is flat or empty.
      */
     fun hasNoArea(): Boolean {
-        return (_size.x <= CMP_EPSILON || _size.y <= CMP_EPSILON || _size.z <= CMP_EPSILON)
+        return (_size._x <= CMP_EPSILON || _size._y <= CMP_EPSILON || _size._z <= CMP_EPSILON)
     }
 
     /**
      * Returns true if the AABB is empty.
      */
     fun hasNoSurface(): Boolean {
-        return (_size.x <= CMP_EPSILON && _size.y <= CMP_EPSILON && _size.z <= CMP_EPSILON)
+        return (_size._x <= CMP_EPSILON && _size._y <= CMP_EPSILON && _size._z <= CMP_EPSILON)
     }
 
     /**
@@ -340,12 +341,12 @@ class AABB(
      */
     fun hasPoint(point: Vector3): Boolean {
         return when {
-            point.x < _position.x -> false
-            point.y < _position.y -> false
-            point.z < _position.z -> false
-            point.x > _position.x + _size.x -> false
-            point.y > _position.y + _size.y -> false
-            point.z > _position.z + _size.z -> false
+            point._x < _position._x -> false
+            point._y < _position._y -> false
+            point._z < _position._z -> false
+            point._x > _position._x + _size._x -> false
+            point._y > _position._y + _size._y -> false
+            point._z > _position._z + _size._z -> false
             else -> true
         }
     }
@@ -362,25 +363,25 @@ class AABB(
         val min = Vector3()
         val max = Vector3()
 
-        if (srcMin.x > dstMax.x || srcMax.x < dstMin.x) {
+        if (srcMin._x > dstMax._x || srcMax._x < dstMin._x) {
             return AABB()
         } else {
-            min.x = if (srcMin.x > dstMin.x) srcMin.x else dstMin.x
-            max.x = if (srcMax.x < dstMax.x) srcMax.x else dstMax.x
+            min._x = if (srcMin._x > dstMin._x) srcMin._x else dstMin._x
+            max._x = if (srcMax._x < dstMax._x) srcMax._x else dstMax._x
         }
 
-        if (srcMin.y > dstMax.y || srcMax.y < dstMin.y) {
+        if (srcMin._y > dstMax._y || srcMax._y < dstMin._y) {
             return AABB()
         } else {
-            min.y = if (srcMin.y > dstMin.y) srcMin.y else dstMin.y
-            max.y = if (srcMax.y < dstMax.y) srcMax.y else dstMax.y
+            min._y = if (srcMin._y > dstMin._y) srcMin._y else dstMin._y
+            max._y = if (srcMax._y < dstMax._y) srcMax._y else dstMax._y
         }
 
-        if (srcMin.z > dstMax.z || srcMax.z < dstMin.z) {
+        if (srcMin._z > dstMax._z || srcMax._z < dstMin._z) {
             return AABB()
         } else {
-            min.z = if (srcMin.z > dstMin.z) srcMin.z else dstMin.z
-            max.z = if (srcMax.z < dstMax.z) srcMax.z else dstMax.z
+            min._z = if (srcMin._z > dstMin._z) srcMin._z else dstMin._z
+            max._z = if (srcMax._z < dstMax._z) srcMax._z else dstMax._z
         }
 
         return AABB(min, max - min)
@@ -391,12 +392,12 @@ class AABB(
      */
     fun intersects(other: AABB): Boolean {
         return when {
-            _position.x >= (other._position.x + other._size.x) -> false
-            (_position.x + _size.x) <= other._position.x -> false
-            _position.y >= (other._position.y + other._size.y) -> false
-            (_position.y + _size.y) <= other._position.y -> false
-            _position.z >= (other._position.z + other._size.z) -> false
-            (_position.z + _size.z) <= other._position.z -> false
+            _position._x >= (other._position._x + other._size._x) -> false
+            (_position._x + _size._x) <= other._position._x -> false
+            _position._y >= (other._position._y + other._size._y) -> false
+            (_position._y + _size._y) <= other._position._y -> false
+            _position._z >= (other._position._z + other._size._z) -> false
+            (_position._z + _size._z) <= other._position._z -> false
             else -> true
         }
     }
@@ -406,14 +407,14 @@ class AABB(
      */
     fun intersectsPlane(p_plane: Plane): Boolean {
         val points = arrayOf(
-            Vector3(_position.x, _position.y, _position.z),
-            Vector3(_position.x, _position.y, _position.z + _size.z),
-            Vector3(_position.x, _position.y + _size.y, _position.z),
-            Vector3(_position.x, _position.y + _size.y, _position.z + _size.z),
-            Vector3(_position.x + _size.x, _position.y, _position.z),
-            Vector3(_position.x + _size.x, _position.y, _position.z + _size.z),
-            Vector3(_position.x + _size.x, _position.y + _size.y, _position.z),
-            Vector3(_position.x + _size.x, _position.y + _size.y, _position.z + _size.z)
+            Vector3(_position._x, _position._y, _position._z),
+            Vector3(_position._x, _position._y, _position._z + _size._z),
+            Vector3(_position._x, _position._y + _size._y, _position._z),
+            Vector3(_position._x, _position._y + _size._y, _position._z + _size._z),
+            Vector3(_position._x + _size._x, _position._y, _position._z),
+            Vector3(_position._x + _size._x, _position._y, _position._z + _size._z),
+            Vector3(_position._x + _size._x, _position._y + _size._y, _position._z),
+            Vector3(_position._x + _size._x, _position._y + _size._y, _position._z + _size._z)
         )
 
         var over = false
@@ -432,31 +433,31 @@ class AABB(
      * Returns true if the AABB intersects the line segment between from and to.
      */
     fun intersectsSegment(from: Vector3, to: Vector3): Boolean {
-        var min = 0.0
-        var max = 0.0
+        var min = 0.0f
+        var max = 0.0f
 
         for (i in 0..2) {
-            val segFrom = from[i]
-            val segTo = to[i]
-            val boxBegin = _position[i]
-            val boxEnd = boxBegin + _size[i]
-            val cmin: RealT
-            val cmax: RealT
+            val segFrom = from[i].toGodotReal()
+            val segTo = to[i].toGodotReal()
+            val boxBegin = _position[i].toGodotReal()
+            val boxEnd = boxBegin + _size[i].toGodotReal()
+            val cmin: GodotReal
+            val cmax: GodotReal
 
             if (segFrom < segTo) {
                 if (segFrom > boxEnd || segTo < boxBegin) {
                     return false
                 }
-                val length = segTo - segFrom
-                cmin = if (segFrom < boxBegin) ((boxBegin - segFrom) / length) else 0.0
-                cmax = if (segTo > boxEnd) ((boxEnd - segFrom) / length) else 1.0
+                val length = (segTo - segFrom).toGodotReal()
+                cmin = if (segFrom < boxBegin) ((boxBegin - segFrom) / length) else 0.0f
+                cmax = if (segTo > boxEnd) ((boxEnd - segFrom) / length) else 1.0f
             } else {
                 if (segTo > boxEnd || segFrom < boxBegin) {
                     return false
                 }
                 val length = segTo - segFrom
-                cmin = if (segFrom > boxEnd) (boxEnd - segFrom) / length else 0.0
-                cmax = if (segTo < boxBegin) (boxBegin - segFrom) / length else 1.0
+                cmin = if (segFrom > boxEnd) (boxEnd - segFrom) / length else 0.0f
+                cmax = if (segTo < boxBegin) (boxBegin - segFrom) / length else 1.0f
             }
             if (cmin > min) {
                 min = cmin
@@ -495,13 +496,13 @@ class AABB(
         val min = Vector3()
         val max = Vector3()
 
-        min.x = if (beg1.x < beg2.x) beg1.x else beg2.x
-        min.y = if (beg1.y < beg2.y) beg1.y else beg2.y
-        min.z = if (beg1.z < beg2.z) beg1.z else beg2.z
+        min._x = if (beg1._x < beg2._x) beg1._x else beg2._x
+        min._y = if (beg1._y < beg2._y) beg1._y else beg2._y
+        min._z = if (beg1._z < beg2._z) beg1._z else beg2._z
 
-        max.x = if (end1.x > end2.x) end1.x else end2.x
-        max.y = if (end1.y > end2.y) end1.y else end2.y
-        max.z = if (end1.z > end2.z) end1.z else end2.z
+        max._x = if (end1._x > end2._x) end1._x else end2._x
+        max._y = if (end1._y > end2._y) end1._y else end2._y
+        max._z = if (end1._z > end2._z) end1._z else end2._z
 
         _position = min
         _size = max - min

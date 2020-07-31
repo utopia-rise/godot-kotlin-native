@@ -9,56 +9,94 @@ import kotlinx.cinterop.*
 import kotlin.math.*
 
 class Quat(
-    var x: RealT,
-    var y: RealT,
-    var z: RealT,
-    var w: RealT
+    p_x: KotlinReal,
+    p_y: KotlinReal,
+    p_z: KotlinReal,
+    p_w: KotlinReal
 ) : CoreType {
+
+    @PublishedApi
+    internal var _x: GodotReal = p_x.toGodotReal()
+
+    @PublishedApi
+    internal var _y: GodotReal = p_y.toGodotReal()
+
+    @PublishedApi
+    internal var _z: GodotReal = p_z.toGodotReal()
+
+    @PublishedApi
+    internal var _w: GodotReal = p_w.toGodotReal()
+
+    //PROPERTIES
+    inline var x: KotlinReal
+        get() = _x.toKotlinReal()
+        set(value) {
+            _x = value.toGodotReal()
+        }
+
+    inline var y: KotlinReal
+        get() = _y.toKotlinReal()
+        set(value) {
+            _y = value.toGodotReal()
+        }
+
+    inline var z: KotlinReal
+        get() = _z.toKotlinReal()
+        set(value) {
+            _z = value.toGodotReal()
+        }
+
+    inline var w: KotlinReal
+        get() = _w.toKotlinReal()
+        set(value) {
+            _w = value.toGodotReal()
+        }
 
     //CONSTANTS
     companion object {
         val IDENTITY: Quat
-            get() = Quat(0.0, 0.0, 0.0, 1.0)
+            get() = Quat(0.0f, 0.0f, 0.0f, 1.0f)
     }
 
 
     //CONSTRUCTOR
     constructor() :
-        this(0.0, 0.0, 0.0, 1.0)
+        this(0.0f, 0.0f, 0.0f, 1.0f)
 
-    constructor(other: Quat) : this(other.x, other.y, other.z, other.w)
+    constructor(other: Quat) : this(other._x, other._y, other._z, other._w)
 
-    constructor(x: Number, y: Number, z: Number, w: Number = 1.0) :
-        this(x.toRealT(), y.toRealT(), z.toRealT(), w.toRealT())
+    constructor(x: Number, y: Number, z: Number, w: Number = 1.0f) :
+        this(x.toKotlinReal(), y.toKotlinReal(), z.toKotlinReal(), w.toKotlinReal())
 
     constructor(axis: Vector3, angle: RealT) : this() {
-        val d: RealT = axis.length()
-        if (d == 0.0) {
-            set(0.0, 0.0, 0.0, 0.0)
+        val d = axis.length().toGodotReal()
+        if (isEqualApprox(d, 0f)) {
+            set(0.0f, 0.0f, 0.0f, 0.0f)
         } else {
-            val sinAngle: RealT = sin(angle * 0.5)
-            val cosAngle: RealT = cos(angle * 0.5)
-            val s: RealT = sinAngle / d
-            set(axis.x * s, axis.y * s, axis.z * s, cosAngle)
+            val angle2 = angle.toGodotReal()
+            val sinAngle = sin(angle2 * 0.5f)
+            val cosAngle = cos(angle2 * 0.5f)
+            val s = sinAngle / d
+            set(axis._x * s, axis._y * s, axis._z * s, cosAngle)
         }
     }
 
     constructor(v0: Vector3, v1: Vector3) : this() {
         val c = v0.cross(v1)
-        val d = v0.dot(v1)
+        val d = v0.dot(v1).toGodotReal()
 
-        if (d < -1.0 + CMP_EPSILON) {
-            x = 0.0
-            y = 1.0
-            z = 0.0
-            w = 0.0
+        if (d < -1.0f + CMP_EPSILON) {
+            _x = 0.0f
+            _y = 1.0f
+            _z = 0.0f
+            _w = 0.0f
         } else {
-            val s = sqrt((1.0 + d) * 2.0)
-            val rs = 1.0 / s
-            x = c.x * rs
-            y = c.y * rs
-            z = c.z * rs
-            w = s * 0.5
+            val s = sqrt((1.0f + d) * 2.0f)
+            val rs = 1.0f / s
+            _x = c._x * rs
+            _y = c._y * rs
+            _z = c._z * rs
+            _w = s * 0.5f
         }
     }
 
@@ -77,20 +115,20 @@ class Quat(
     //INTEROP
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
         val value = cValue<godot_quat_layout> {
-            x = this@Quat.x.toGodotReal()
-            y = this@Quat.y.toGodotReal()
-            z = this@Quat.z.toGodotReal()
-            w = this@Quat.w.toGodotReal()
+            x = this@Quat._x.toGodotReal()
+            y = this@Quat._y.toGodotReal()
+            z = this@Quat._z.toGodotReal()
+            w = this@Quat._w.toGodotReal()
         }
         return value.getPointer(memScope)
     }
 
     override fun setRawMemory(mem: COpaquePointer) {
         val value = mem.reinterpret<godot_quat_layout>().pointed
-        x = value.x.toRealT()
-        y = value.y.toRealT()
-        z = value.z.toRealT()
-        w = value.w.toRealT()
+        _x = value.x.toGodotReal()
+        _y = value.y.toGodotReal()
+        _z = value.z.toGodotReal()
+        _w = value.w.toGodotReal()
     }
 
 
@@ -98,8 +136,8 @@ class Quat(
     /**
      * Performs a cubic spherical-linear interpolation with another quaternion.
      */
-    fun cubicSlerp(q: Quat, prep: Quat, postq: Quat, t: RealT): Quat {
-        val t2: RealT = (1.0 - t) * t * 2
+    fun cubicSlerp(q: Quat, prep: Quat, postq: Quat, t: KotlinReal): Quat {
+        val t2: KotlinReal = (1.0f - t) * t * 2
         val sp = this.slerp(q, t)
         val sq = prep.slerpni(postq, t)
         return sp.slerpni(sq, t2)
@@ -108,8 +146,8 @@ class Quat(
     /**
      * Returns the dot product of two quaternions.5
      */
-    fun dot(q: Quat): RealT {
-        return x * q.x + y * q.y + z * q.z + w * q.w
+    fun dot(q: Quat): KotlinReal {
+        return (_x * q._x + _y * q._y + _z * q._z + _w * q._w).toKotlinReal()
     }
 
     /**
@@ -139,37 +177,37 @@ class Quat(
      * Returns the inverse of the quaternion.
      */
     fun inverse(): Quat {
-        return Quat(-x, -y, -z, -w)
+        return Quat(-_x, -_y, -_z, -_w)
     }
 
     /**
      * Returns true if this quaterion and quat are approximately equal, by running isEqualApprox on each component.
      */
     fun isEqualApprox(other: Quat): Boolean {
-        return isEqualApprox(other.x, x)
-            && isEqualApprox(other.y, y)
-            && isEqualApprox(other.z, z)
-            && isEqualApprox(other.w, w)
+        return isEqualApprox(other._x, _x)
+            && isEqualApprox(other._y, _y)
+            && isEqualApprox(other._z, _z)
+            && isEqualApprox(other._w, _w)
     }
 
     /**
      * Returns whether the quaternion is normalized or not.
      */
     fun isNormalized(): Boolean {
-        return abs(lengthSquared() - 1.0) < CMP_EPSILON
+        return abs(lengthSquared() - 1.0f) < CMP_EPSILON
     }
 
     /**
      * Returns the length of the quaternion.
      */
-    fun length(): RealT {
+    fun length(): KotlinReal {
         return sqrt(this.lengthSquared())
     }
 
     /**
      * Returns the length of the quaternion, squared.
      */
-    fun lengthSquared(): RealT {
+    fun lengthSquared(): KotlinReal {
         return dot(this)
     }
 
@@ -181,29 +219,29 @@ class Quat(
     }
 
     internal fun normalize() {
-        val l = this.length()
-        x /= l
-        y /= l
-        z /= l
-        w /= l
+        val l = this.length().toGodotReal()
+        _x /= l
+        _y /= l
+        _z /= l
+        _w /= l
     }
 
     /**
      * Sets the quaternion to a rotation which rotates around axis by the specified angle, in radians. The axis must be a normalized vector.
      */
-    fun setAxisAndAngle(axis: Vector3, angle: RealT) {
+    fun setAxisAndAngle(axis: Vector3, angle: KotlinReal) {
         if (!axis.isNormalized()) {
             Godot.printError("Vector $axis is not normalized", "setAxisAndAngle", "Quat.kt", 192)
         }
 
-        val d = axis.length()
-        if (isEqualApprox(d, 0.0)) {
-            set(0.0, 0.0, 0.0, 0.0)
+        val d = axis.length().toGodotReal()
+        if (isEqualApprox(d, 0.0f)) {
+            set(0.0f, 0.0f, 0.0f, 0.0f)
         } else {
-            val sin = sin(angle * 0.5)
-            val cos = cos(angle * 0.5)
+            val sin = sin(angle.toGodotReal() * 0.5f)
+            val cos = cos(angle.toGodotReal() * 0.5f)
             val s = sin / d
-            set(axis.x * s, axis.y * s, axis.z * s, cos)
+            set(axis._x * s, axis._y * s, axis._z * s, cos)
         }
     }
 
@@ -221,20 +259,20 @@ class Quat(
      * This implementation uses XYZ convention (Z is the first rotation).
      */
     internal fun setEulerXyz(p_euler: Vector3) {
-        val half1: RealT = p_euler.x * 0.5
-        val half2: RealT = p_euler.y * 0.5
-        val half3: RealT = p_euler.z * 0.5
+        val half1 = p_euler._x * 0.5f
+        val half2 = p_euler._y * 0.5f
+        val half3 = p_euler._z * 0.5f
 
         // R = X(a1).Y(a2).Z(a3) convention for Euler angles.
         // Conversion to quaternion as listed in https://ntrs.nasa.gov/archive/nasa/casi.ntrs.nasa.gov/19770024290.pdf (page A-2)
         // a3 is the angle of the first rotation, following the notation in this reference.
 
-        val cos1: RealT = cos(half1)
-        val cos2: RealT = cos(half2)
-        val cos3: RealT = cos(half3)
-        val sin1: RealT = sin(half1)
-        val sin2: RealT = sin(half2)
-        val sin3: RealT = sin(half3)
+        val cos1 = cos(half1)
+        val cos2 = cos(half2)
+        val cos3 = cos(half3)
+        val sin1 = sin(half1)
+        val sin2 = sin(half2)
+        val sin3 = sin(half3)
 
         set(
             sin1 * cos2 * sin3 + cos1 * sin2 * cos3,
@@ -245,20 +283,20 @@ class Quat(
     }
 
     internal fun setEulerYxz(p_euler: Vector3) {
-        val half1: RealT = p_euler.y * 0.5
-        val half2: RealT = p_euler.x * 0.5
-        val half3: RealT = p_euler.z * 0.5
+        val half1 = p_euler._y * 0.5f
+        val half2 = p_euler._x * 0.5f
+        val half3 = p_euler._z * 0.5f
 
         // R = X(a1).Y(a2).Z(a3) convention for Euler angles.
         // Conversion to quaternion as listed in https://ntrs.nasa.gov/archive/nasa/casi.ntrs.nasa.gov/19770024290.pdf (page A-2)
         // a3 is the angle of the first rotation, following the notation in this reference.
 
-        val cos1: RealT = cos(half1)
-        val cos2: RealT = cos(half2)
-        val cos3: RealT = cos(half3)
-        val sin1: RealT = sin(half1)
-        val sin2: RealT = sin(half2)
-        val sin3: RealT = sin(half3)
+        val cos1 = cos(half1)
+        val cos2 = cos(half2)
+        val cos3 = cos(half3)
+        val sin1 = sin(half1)
+        val sin2 = sin(half2)
+        val sin3 = sin(half3)
 
         set(
             sin1 * cos2 * sin3 + cos1 * sin2 * cos3,
@@ -271,69 +309,69 @@ class Quat(
     /**
      * Performs a spherical-linear interpolation with another quaternion.
      */
-    fun slerp(q: Quat, t: RealT): Quat {
+    fun slerp(q: Quat, t: KotlinReal): Quat {
         val to1 = Quat()
-        val omega: RealT
-        var cosom: RealT
-        val sinom: RealT
-        val scale0: RealT
-        val scale1: RealT
+        val omega: KotlinReal
+        var cosom: KotlinReal
+        val sinom: KotlinReal
+        val scale0: KotlinReal
+        val scale1: KotlinReal
 
         cosom = dot(q)
 
         if (cosom < 0) {
             cosom = -cosom
-            to1.x = -q.x
-            to1.y = -q.y
-            to1.z = -q.z
-            to1.w = -q.w
+            to1._x = -q._x
+            to1._y = -q._y
+            to1._z = -q._z
+            to1._w = -q._w
         } else {
-            to1.x = q.x
-            to1.y = q.y
-            to1.z = q.z
-            to1.w = q.w
+            to1._x = q._x
+            to1._y = q._y
+            to1._z = q._z
+            to1._w = q._w
         }
 
-        if ((1.0 - cosom) > CMP_EPSILON) {
+        if ((1.0f - cosom) > CMP_EPSILON) {
             // standard case (slerp)
             omega = acos(cosom)
             sinom = sin(omega)
-            scale0 = sin((1.0 - t) * omega) / sinom
+            scale0 = sin((1.0f - t) * omega) / sinom
             scale1 = sin(t * omega) / sinom
         } else {
             // "from" and "to" quaternions are very close
             //  ... so we can do a linear interpolation
-            scale0 = 1.0 - t
+            scale0 = 1.0f - t
             scale1 = t
         }
         // calculate final values
         return Quat(
-            scale0 * x + scale1 * to1.x,
-            scale0 * y + scale1 * to1.y,
-            scale0 * z + scale1 * to1.z,
-            scale0 * w + scale1 * to1.w
+            scale0 * _x + scale1 * to1._x,
+            scale0 * _y + scale1 * to1._y,
+            scale0 * _z + scale1 * to1._z,
+            scale0 * _w + scale1 * to1._w
         )
     }
 
     /**
      * Performs a spherical-linear interpolation with another quaterion without checking if the rotation path is not bigger than 90°.
      */
-    fun slerpni(q: Quat, t: RealT): Quat {
+    fun slerpni(q: Quat, t: KotlinReal): Quat {
         val from = this
-        val dot: RealT = from.dot(q)
+        val dot: KotlinReal = from.dot(q)
 
-        if (abs(dot) > 0.9999) return from
+        if (abs(dot) > 0.9999f) return from
 
         val theta = acos(dot)
-        val sinT = 1.0 / sin(theta)
-        val newFactor: RealT = sin(t * theta) * sinT
-        val invFactor: RealT = sin((1.0 - t) * theta) * sinT
+        val sinT = 1.0f / sin(theta)
+        val newFactor: KotlinReal = sin(t * theta) * sinT
+        val invFactor: KotlinReal = sin((1.0f - t) * theta) * sinT
 
         return Quat(
-            invFactor * from.x + newFactor * q.x,
-            invFactor * from.y + newFactor * q.y,
-            invFactor * from.z + newFactor * q.z,
-            invFactor * from.w + newFactor * q.w
+            invFactor * from._x + newFactor * q._x,
+            invFactor * from._y + newFactor * q._y,
+            invFactor * from._z + newFactor * q._z,
+            invFactor * from._w + newFactor * q._w
         )
     }
 
@@ -343,57 +381,57 @@ class Quat(
     fun xform(v: Vector3): Vector3 {
         var q = this * v
         q *= this.inverse()
-        return Vector3(q.x, q.y, q.z)
+        return Vector3(q._x, q._y, q._z)
     }
 
 
     //UTILITIES
     override fun toVariant() = Variant(this)
 
-    fun set(px: RealT, py: RealT, pz: RealT, pw: RealT) {
-        x = px
-        y = py
-        z = pz
-        w = pw
+    private fun set(px: GodotReal, py: GodotReal, pz: GodotReal, pw: GodotReal) {
+        _x = px
+        _y = py
+        _z = pz
+        _w = pw
     }
 
     operator fun times(v: Vector3) =
         Quat(
-            w * v.x + y * v.z - z * v.y,
-            w * v.y + z * v.x - x * v.z,
-            w * v.z + x * v.y - y * v.x,
-            -x * v.x - y * v.y - z * v.z
+            _w * v._x + _y * v._z - _z * v._y,
+            _w * v._y + _z * v._x - _x * v._z,
+            _w * v._z + _x * v._y - _y * v._x,
+            -_x * v._x - _y * v._y - _z * v._z
         )
 
-    operator fun plus(q2: Quat) = Quat(this.x + q2.x, this.y + q2.y, this.z + q2.z, this.w + q2.w)
+    operator fun plus(q2: Quat) = Quat(this._x + q2._x, this._y + q2._y, this._z + q2._z, this._w + q2._w)
 
-    operator fun minus(q2: Quat) = Quat(this.x - q2.x, this.y - q2.y, this.z - q2.z, this.w - q2.w)
+    operator fun minus(q2: Quat) = Quat(this._x - q2._x, this._y - q2._y, this._z - q2._z, this._w - q2._w)
 
-    operator fun times(q2: Quat) = Quat(this.x * q2.x, this.y * q2.y, this.z * q2.z, this.w * q2.w)
-    operator fun times(scalar: Int) = Quat(x * scalar, y * scalar, z * scalar, w * scalar)
-    operator fun times(scalar: Long) = Quat(x * scalar, y * scalar, z * scalar, w * scalar)
-    operator fun times(scalar: Float) = Quat(x * scalar, y * scalar, z * scalar, w * scalar)
-    operator fun times(scalar: Double) = Quat(x * scalar, y * scalar, z * scalar, w * scalar)
+    operator fun times(q2: Quat) = Quat(this._x * q2._x, this._y * q2._y, this._z * q2._z, this._w * q2._w)
+    operator fun times(scalar: Int) = Quat(_x * scalar, _y * scalar, _z * scalar, _w * scalar)
+    operator fun times(scalar: Long) = Quat(_x * scalar, _y * scalar, _z * scalar, _w * scalar)
+    operator fun times(scalar: Float) = Quat(_x * scalar, _y * scalar, _z * scalar, _w * scalar)
+    operator fun times(scalar: Double) = Quat(_x * scalar, _y * scalar, _z * scalar, _w * scalar)
 
-    operator fun div(f: RealT) = Quat(x / f, y / f, z / f, w / f)
+    operator fun div(f: KotlinReal) = Quat(_x / f, _y / f, _z / f, _w / f)
 
-    operator fun unaryMinus() = Quat(-this.x, -this.y, -this.z, -this.w)
+    operator fun unaryMinus() = Quat(-this._x, -this._y, -this._z, -this._w)
 
     override fun equals(other: Any?): Boolean =
         when (other) {
-            is Quat -> (x == other.x && y == other.y && z == other.z && w == other.w)
+            is Quat -> (_x == other._x && _y == other._y && _z == other._z && _w == other._w)
             else -> false
         }
 
     override fun toString(): String {
-        return "($x, $y, $z, $w)"
+        return "($_x, $_y, $_z, $_w)"
     }
 
     override fun hashCode(): Int {
-        var result = x.hashCode()
-        result = 31 * result + y.hashCode()
-        result = 31 * result + z.hashCode()
-        result = 31 * result + w.hashCode()
+        var result = _x.hashCode()
+        result = 31 * result + _y.hashCode()
+        result = 31 * result + _z.hashCode()
+        result = 31 * result + _w.hashCode()
         return result
     }
 

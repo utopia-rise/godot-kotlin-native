@@ -6,7 +6,7 @@ import godot.gdnative.godot_pool_int_array_layout
 import godot.internal.type.*
 import kotlinx.cinterop.*
 
-class PoolIntArray : NativeCoreType<godot_pool_int_array_layout>, Iterable<NaturalT> {
+class PoolIntArray : NativeCoreType<godot_pool_int_array_layout>, Iterable<KotlinInt> {
     //PROPERTIES
     val size: Int
         get() = this.size()
@@ -14,7 +14,7 @@ class PoolIntArray : NativeCoreType<godot_pool_int_array_layout>, Iterable<Natur
 
     //CONSTRUCTOR
     constructor() {
-        _handle = cValue{}
+        _handle = cValue {}
         callNative {
             nullSafe(Godot.gdnative.godot_pool_int_array_new)(it)
         }
@@ -44,9 +44,9 @@ class PoolIntArray : NativeCoreType<godot_pool_int_array_layout>, Iterable<Natur
     /**
      * Appends an element at the end of the array (alias of push_back).
      */
-    fun append(i: NaturalT) {
+    fun append(i: KotlinInt) {
         callNative {
-            nullSafe(Godot.gdnative.godot_pool_int_array_append)(it, i.toGodotNatural())
+            nullSafe(Godot.gdnative.godot_pool_int_array_append)(it, i.toGodotInt())
         }
     }
 
@@ -72,9 +72,9 @@ class PoolIntArray : NativeCoreType<godot_pool_int_array_layout>, Iterable<Natur
     /**
      *  Retrieve the element at the given index.
      */
-    operator fun get(idx: Int): NaturalT {
+    operator fun get(idx: Int): KotlinInt {
         return callNative {
-            nullSafe(Godot.gdnative.godot_pool_int_array_get)(it, idx).toNaturalT()
+            nullSafe(Godot.gdnative.godot_pool_int_array_get)(it, idx).toKotlinInt()
         }
     }
 
@@ -82,9 +82,9 @@ class PoolIntArray : NativeCoreType<godot_pool_int_array_layout>, Iterable<Natur
      * Inserts a new element at a given position in the array.
      * The position must be valid, or at the end of the array (idx == size()).
      */
-    fun insert(idx: Int, data: NaturalT) {
+    fun insert(idx: Int, data: KotlinInt) {
         callNative {
-            nullSafe(Godot.gdnative.godot_pool_int_array_insert)(it, idx, data.toGodotNatural())
+            nullSafe(Godot.gdnative.godot_pool_int_array_insert)(it, idx, data.toGodotInt())
         }
     }
 
@@ -100,9 +100,9 @@ class PoolIntArray : NativeCoreType<godot_pool_int_array_layout>, Iterable<Natur
     /**
      * Appends a value to the array.
      */
-    fun pushBack(data: NaturalT) {
+    fun pushBack(data: KotlinInt) {
         callNative {
-            nullSafe(Godot.gdnative.godot_pool_int_array_push_back)(it, data.toGodotNatural())
+            nullSafe(Godot.gdnative.godot_pool_int_array_push_back)(it, data.toGodotInt())
         }
     }
 
@@ -128,9 +128,9 @@ class PoolIntArray : NativeCoreType<godot_pool_int_array_layout>, Iterable<Natur
     /**
      * Changes the integer at the given index.
      */
-    operator fun set(idx: Int, data: NaturalT) {
+    operator fun set(idx: Int, data: KotlinInt) {
         callNative {
-            nullSafe(Godot.gdnative.godot_pool_int_array_set)(it, idx, data.toGodotNatural())
+            nullSafe(Godot.gdnative.godot_pool_int_array_set)(it, idx, data.toGodotInt())
         }
     }
 
@@ -146,7 +146,7 @@ class PoolIntArray : NativeCoreType<godot_pool_int_array_layout>, Iterable<Natur
     //UTILITIES
     override fun toVariant() = Variant(this)
 
-    operator fun plus(other: NaturalT) {
+    operator fun plus(other: KotlinInt) {
         this.append(other)
     }
 
@@ -158,7 +158,7 @@ class PoolIntArray : NativeCoreType<godot_pool_int_array_layout>, Iterable<Natur
         return "PoolIntArray(${size()})"
     }
 
-    override fun iterator(): Iterator<NaturalT> {
+    override fun iterator(): Iterator<KotlinInt> {
         return IndexedIterator(size(), this::get)
     }
 

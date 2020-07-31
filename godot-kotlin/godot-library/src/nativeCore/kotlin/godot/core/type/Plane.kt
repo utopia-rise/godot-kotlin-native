@@ -10,12 +10,14 @@ import kotlin.math.abs
 
 class Plane(
     p_normal: Vector3,
-    var d: RealT = 0.0
+    p_d: KotlinReal = 0.0
 ) : CoreType {
 
     @PublishedApi
     internal var _normal = Vector3(p_normal)
 
+    @PublishedApi
+    internal var _d: GodotReal = p_d.toGodotReal()
 
     //PROPERTIES
     /** Return a copy of the normal Vector3
@@ -32,6 +34,11 @@ class Plane(
         return _normal.block()
     }
 
+    var d: KotlinReal
+        get() = _d.toKotlinReal()
+        set(value) {
+            _d = value.toGodotReal()
+        }
 
     //CONSTANTS
     companion object {
@@ -49,19 +56,19 @@ class Plane(
         this(Vector3(0, 0, 0), 0)
 
     constructor(other: Plane) :
-        this(other._normal, other.d)
+        this(other._normal, other._d)
 
     constructor(p1: Number, p2: Number, p3: Number, p4: Number) :
-        this(Vector3(p1.toRealT(), p2.toRealT(), p3.toRealT()), p4.toRealT())
+        this(Vector3(p1.toKotlinReal(), p2.toKotlinReal(), p3.toKotlinReal()), p4.toKotlinReal())
 
     constructor(point1: Vector3, point2: Vector3, point3: Vector3) : this() {
         _normal = (point1 - point3).cross(point1 - point2)
         _normal.normalize()
-        d = _normal.dot(point1)
+        _d = _normal.dot(point1).toGodotReal()
     }
 
     constructor(normal: Vector3, d: Number) :
-        this(normal, d.toRealT())
+        this(normal, d.toKotlinReal())
 
     constructor(point: Vector3, normal: Vector3) :
         this(normal, normal.dot(point))
@@ -80,10 +87,10 @@ class Plane(
     //INTEROP
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
         val value = cValue<godot_plane_layout> {
-            normal.x = this@Plane._normal.x.toFloat()
-            normal.y = this@Plane._normal.y.toFloat()
-            normal.z = this@Plane._normal.z.toFloat()
-            d = this@Plane.d.toFloat()
+            normal.x = this@Plane._normal._x.toFloat()
+            normal.y = this@Plane._normal._y.toFloat()
+            normal.z = this@Plane._normal._z.toFloat()
+            d = this@Plane._d.toFloat()
 
         }
         return value.getPointer(memScope)
@@ -92,7 +99,7 @@ class Plane(
     override fun setRawMemory(mem: COpaquePointer) {
         val value = mem.reinterpret<godot_plane_layout>().pointed
         _normal.setRawMemory(value.normal.ptr)
-        d = value.d.toRealT()
+        _d = value.d.toGodotReal()
     }
 
 
@@ -101,21 +108,21 @@ class Plane(
      * Returns the center of the plane.
      */
     fun center(): Vector3 {
-        return _normal * d;
+        return _normal * _d
     }
 
     /**
      * Returns the shortest distance from the plane to the position point.
      */
-    fun distanceTo(point: Vector3): RealT {
-        return _normal.dot(point) - d
+    fun distanceTo(point: Vector3): KotlinReal {
+        return _normal.dot(point) - _d
     }
 
     /**
      * Returns a point on the plane.
      */
     fun getAnyPoint(): Vector3 {
-        return _normal * d
+        return _normal * _d
     }
 
     /**
@@ -136,8 +143,8 @@ class Plane(
     /**
      * Returns true if point is inside the plane (by a very minimum epsilon threshold).
      */
-    fun hasPoint(point: Vector3, epsilon: RealT): Boolean {
-        val dist = abs(_normal.dot(point) - d)
+    fun hasPoint(point: Vector3, epsilon: KotlinReal): Boolean {
+        val dist = abs(_normal.dot(point) - _d)
         return dist <= epsilon
     }
 
@@ -158,9 +165,9 @@ class Plane(
         }
 
         val result: Vector3?
-        result = (normal1.cross(normal2) * plane0.d) +
-            (normal2.cross(normal0) * plane1.d) +
-            (normal0.cross(normal1) * plane2.d) / denom
+        result = (normal1.cross(normal2) * plane0._d) +
+            (normal2.cross(normal0) * plane1._d) +
+            (normal0.cross(normal1) * plane2._d) / denom
         return result
     }
 
@@ -175,7 +182,7 @@ class Plane(
             return null
         }
 
-        val dist = (_normal.dot(from) - d) / den
+        val dist = (_normal.dot(from) - _d) / den
 
         if (dist > CMP_EPSILON) {
             return null
@@ -196,7 +203,7 @@ class Plane(
             return null
         }
 
-        val dist = (_normal.dot(p_begin) - d) / den
+        val dist = (_normal.dot(p_begin) - _d) / den
 
         if (dist < -CMP_EPSILON || dist > (1.0 + CMP_EPSILON)) {
             return null
@@ -210,8 +217,8 @@ class Plane(
      */
     fun isEqualApprox(other: Plane): Boolean {
         return this._normal.isEqualApprox(other._normal) && isEqualApprox(
-            this.d,
-            other.d
+            this._d,
+            other._d
         )
     }
 
@@ -219,7 +226,7 @@ class Plane(
      * Returns true if point is located above the plane.
      */
     fun isPointOver(point: Vector3): Boolean {
-        return _normal.dot(point) > d
+        return _normal.dot(point) > _d
     }
 
     /**
@@ -232,14 +239,14 @@ class Plane(
     }
 
     internal fun normalize() {
-        val l = _normal.length()
-        if (isEqualApprox(l, 0.0)) {
+        val l = _normal.length().toGodotReal()
+        if (isEqualApprox(l, 0.0f)) {
             this._normal = Vector3()
-            this.d = 0.0
+            this._d = 0.0f
             return
         }
         _normal /= l
-        d /= l
+        _d /= l
     }
 
     /**
@@ -254,19 +261,19 @@ class Plane(
     override fun toVariant() = Variant(this)
 
     override fun toString(): String {
-        return "Plane(normal=$_normal, d=$d)"
+        return "Plane(normal=$_normal, d=$_d)"
     }
 
     override fun equals(other: Any?): Boolean {
         return when (other) {
-            is Plane -> _normal == other._normal && d == other.d
+            is Plane -> _normal == other._normal && _d == other._d
             else -> false
         }
     }
 
     override fun hashCode(): Int {
         var result = _normal.hashCode()
-        result = 31 * result + d.hashCode()
+        result = 31 * result + _d.hashCode()
         return result
     }
 }

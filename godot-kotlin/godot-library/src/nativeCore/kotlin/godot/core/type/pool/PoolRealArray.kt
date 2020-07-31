@@ -6,7 +6,7 @@ import godot.gdnative.godot_pool_real_array_layout
 import godot.internal.type.*
 import kotlinx.cinterop.*
 
-class PoolRealArray : NativeCoreType<godot_pool_real_array_layout>, Iterable<RealT> {
+class PoolRealArray : NativeCoreType<godot_pool_real_array_layout>, Iterable<KotlinReal> {
     //PROPERTIES
     val size: Int
         get() = this.size()
@@ -14,7 +14,7 @@ class PoolRealArray : NativeCoreType<godot_pool_real_array_layout>, Iterable<Rea
 
     //CONSTRUCTOR
     constructor() {
-        _handle = cValue{}
+        _handle = cValue {}
         callNative {
             nullSafe(Godot.gdnative.godot_pool_real_array_new)(it)
         }
@@ -44,9 +44,9 @@ class PoolRealArray : NativeCoreType<godot_pool_real_array_layout>, Iterable<Rea
     /**
      * Appends an element at the end of the array (alias of push_back).
      */
-    fun append(real: RealT) {
+    fun append(real: KotlinReal) {
         callNative {
-            nullSafe(Godot.gdnative.godot_pool_real_array_append)(it, real.toFloat())
+            nullSafe(Godot.gdnative.godot_pool_real_array_append)(it, real.toGodotReal())
         }
     }
 
@@ -72,19 +72,19 @@ class PoolRealArray : NativeCoreType<godot_pool_real_array_layout>, Iterable<Rea
     /**
      *  Retrieve the element at the given index.
      */
-    operator fun get(idx: Int): RealT {
+    operator fun get(idx: Int): KotlinReal {
         return callNative {
             nullSafe(Godot.gdnative.godot_pool_real_array_get)(it, idx)
-        }.toRealT()
+        }.toKotlinReal()
     }
 
     /**
      * Inserts a new element at a given position in the array.
      * The position must be valid, or at the end of the array (idx == size()).
      */
-    fun insert(idx: Int, data: RealT) {
+    fun insert(idx: Int, data: KotlinReal) {
         callNative {
-            nullSafe(Godot.gdnative.godot_pool_real_array_insert)(it, idx, data.toFloat())
+            nullSafe(Godot.gdnative.godot_pool_real_array_insert)(it, idx, data.toGodotReal())
         }
     }
 
@@ -100,9 +100,9 @@ class PoolRealArray : NativeCoreType<godot_pool_real_array_layout>, Iterable<Rea
     /**
      * Appends a value to the array.
      */
-    fun pushBack(data: RealT) {
+    fun pushBack(data: KotlinReal) {
         callNative {
-            nullSafe(Godot.gdnative.godot_pool_real_array_push_back)(it, data.toFloat())
+            nullSafe(Godot.gdnative.godot_pool_real_array_push_back)(it, data.toGodotReal())
         }
     }
 
@@ -128,9 +128,9 @@ class PoolRealArray : NativeCoreType<godot_pool_real_array_layout>, Iterable<Rea
     /**
      * Changes the real at the given index.
      */
-    operator fun set(idx: Int, data: RealT) {
+    operator fun set(idx: Int, data: KotlinReal) {
         callNative {
-            nullSafe(Godot.gdnative.godot_pool_real_array_set)(it, idx, data.toFloat())
+            nullSafe(Godot.gdnative.godot_pool_real_array_set)(it, idx, data.toGodotReal())
         }
     }
 
@@ -146,7 +146,7 @@ class PoolRealArray : NativeCoreType<godot_pool_real_array_layout>, Iterable<Rea
     //UTILITIES
     override fun toVariant() = Variant(this)
 
-    operator fun plus(other: RealT) {
+    operator fun plus(other: KotlinReal) {
         this.append(other)
     }
 
@@ -158,7 +158,7 @@ class PoolRealArray : NativeCoreType<godot_pool_real_array_layout>, Iterable<Rea
         return "PoolRealArray(${size()})"
     }
 
-    override fun iterator(): Iterator<RealT> {
+    override fun iterator(): Iterator<KotlinReal> {
         return IndexedIterator(size(), this::get)
     }
 

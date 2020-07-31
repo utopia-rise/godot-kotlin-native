@@ -58,7 +58,7 @@ object Godot {
 
     fun nativescriptInit(handle: COpaquePointer) {
         memScoped {
-            val info = cValue<godot_instance_binding_functions>() {
+            val info = cValue<godot_instance_binding_functions> {
                 alloc_instance_binding_data = staticCFunction(::createWrapper)
                 free_instance_binding_data = staticCFunction(::destroyWrapper)
             }

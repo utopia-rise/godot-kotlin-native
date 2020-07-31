@@ -2,37 +2,37 @@ package godot.core
 
 import godot.Object
 import godot.gdnative.godot_array
-import godot.internal.type.NaturalT
+import godot.internal.type.KotlinInt
 import godot.internal.type.nullSafe
-import godot.internal.type.toNaturalT
+import godot.internal.type.toKotlinInt
 import kotlinx.cinterop.*
 
-class IntVariantArray : GodotArray<NaturalT> {
+class IntVariantArray : GodotArray<KotlinInt> {
 
     //CONSTRUCTOR
     constructor() {
-        _handle = cValue{}
+        _handle = cValue {}
         callNative {
             nullSafe(Godot.gdnative.godot_array_new)(it)
         }
     }
 
     constructor(other: IntVariantArray) {
-        _handle = cValue{}
+        _handle = cValue {}
         callNative {
             nullSafe(Godot.gdnative.godot_array_new_copy)(it, other._handle.ptr)
         }
     }
 
     constructor(other: PoolByteArray) {
-        _handle = cValue{}
+        _handle = cValue {}
         callNative {
             nullSafe(Godot.gdnative.godot_array_new_pool_byte_array)(it, other._handle.ptr)
         }
     }
 
     constructor(other: PoolIntArray) {
-        _handle = cValue{}
+        _handle = cValue {}
         callNative {
             nullSafe(Godot.gdnative.godot_array_new_pool_int_array)(it, other._handle.ptr)
         }
@@ -51,19 +51,19 @@ class IntVariantArray : GodotArray<NaturalT> {
 
     //API
 
-    override fun append(value: NaturalT) {
+    override fun append(value: KotlinInt) {
         return callNative {
             nullSafe(Godot.gdnative.godot_array_append)(it, value.toVariant()._handle.ptr)
         }
     }
 
-    override fun bsearch(value: NaturalT, before: Boolean): Int {
+    override fun bsearch(value: KotlinInt, before: Boolean): Int {
         return callNative {
             nullSafe(Godot.gdnative.godot_array_bsearch)(it, value.toVariant()._handle.ptr, before)
         }
     }
 
-    override fun bsearchCustom(value: NaturalT, obj: Object, func: String, before: Boolean): Int {
+    override fun bsearchCustom(value: KotlinInt, obj: Object, func: String, before: Boolean): Int {
         return callNative {
             nullSafe(Godot.gdnative.godot_array_bsearch_custom)(
                 it,
@@ -75,7 +75,7 @@ class IntVariantArray : GodotArray<NaturalT> {
         }
     }
 
-    override fun count(value: NaturalT): Int {
+    override fun count(value: KotlinInt): Int {
         return callNative {
             nullSafe(Godot.gdnative.godot_array_count)(it, value.toVariant()._handle.ptr)
         }
@@ -89,89 +89,89 @@ class IntVariantArray : GodotArray<NaturalT> {
         )
     }
 
-    override fun erase(value: NaturalT) {
+    override fun erase(value: KotlinInt) {
         callNative {
             nullSafe(Godot.gdnative.godot_array_erase)(it, value.toVariant()._handle.ptr)
         }
     }
 
-    override fun find(what: NaturalT, from: Int): Int {
+    override fun find(what: KotlinInt, from: Int): Int {
         return callNative {
             nullSafe(Godot.gdnative.godot_array_find)(it, what.toVariant()._handle.ptr, from)
         }
     }
 
-    override fun findLast(value: NaturalT): Int {
+    override fun findLast(value: KotlinInt): Int {
         return callNative {
             nullSafe(Godot.gdnative.godot_array_find_last)(it, value.toVariant()._handle.ptr)
         }
     }
 
-    override fun front(): NaturalT {
+    override fun front(): KotlinInt {
         return Variant(
             callNative {
                 nullSafe(Godot.gdnative.godot_array_front)(it)
             }
-        ).asLong().toNaturalT()
+        ).asLong().toKotlinInt()
     }
 
-    override fun has(value: NaturalT): Boolean {
+    override fun has(value: KotlinInt): Boolean {
         return callNative {
             nullSafe(Godot.gdnative.godot_array_has)(it, value.toVariant()._handle.ptr)
         }
     }
 
-    override fun insert(position: Int, value: NaturalT) {
+    override fun insert(position: Int, value: KotlinInt) {
         return callNative {
             nullSafe(Godot.gdnative.godot_array_insert)(it, position, value.toVariant()._handle.ptr)
         }
     }
 
-    override fun max(): NaturalT {
+    override fun max(): KotlinInt {
         return Variant(
             callNative {
                 nullSafe(Godot.gdnative11.godot_array_max)(it)
             }
-        ).asLong().toNaturalT()
+        ).asLong().toKotlinInt()
     }
 
-    override fun min(): NaturalT {
+    override fun min(): KotlinInt {
         return Variant(
             callNative {
                 nullSafe(Godot.gdnative11.godot_array_min)(it)
             }
-        ).asInt().toNaturalT()
+        ).asInt().toKotlinInt()
     }
 
-    override fun popBack(): NaturalT {
+    override fun popBack(): KotlinInt {
         return Variant(
             callNative {
                 nullSafe(Godot.gdnative.godot_array_pop_back)(it)
             }
-        ).asInt().toNaturalT()
+        ).asInt().toKotlinInt()
     }
 
-    override fun popFront(): NaturalT {
+    override fun popFront(): KotlinInt {
         return Variant(
             callNative {
                 nullSafe(Godot.gdnative.godot_array_pop_front)(it)
             }
-        ).asInt().toNaturalT()
+        ).asInt().toKotlinInt()
     }
 
-    override fun pushBack(value: NaturalT) {
+    override fun pushBack(value: KotlinInt) {
         return callNative {
             nullSafe(Godot.gdnative.godot_array_push_back)(it, value.toVariant()._handle.ptr)
         }
     }
 
-    override fun pushFront(value: NaturalT) {
+    override fun pushFront(value: KotlinInt) {
         return callNative {
             nullSafe(Godot.gdnative.godot_array_push_front)(it, value.toVariant()._handle.ptr)
         }
     }
 
-    override fun rfind(what: NaturalT, from: Int): Int {
+    override fun rfind(what: KotlinInt, from: Int): Int {
         return callNative {
             nullSafe(Godot.gdnative.godot_array_rfind)(it, what.toVariant()._handle.ptr, from)
         }
@@ -193,30 +193,30 @@ class IntVariantArray : GodotArray<NaturalT> {
 
     //UTILITIES
 
-    override operator fun set(idx: Int, data: NaturalT) {
+    override operator fun set(idx: Int, data: KotlinInt) {
         callNative {
             nullSafe(Godot.gdnative.godot_array_set)(it, idx, Variant(data)._handle.ptr)
         }
     }
 
-    override operator fun get(idx: Int): NaturalT {
+    override operator fun get(idx: Int): KotlinInt {
         return Variant(
             callNative {
                 nullSafe(Godot.gdnative.godot_array_get)(it, idx)
             }
-        ).asInt().toNaturalT()
+        ).asInt().toKotlinInt()
     }
 
-    override fun plus(other: NaturalT) {
+    override fun plus(other: KotlinInt) {
         this.append(other)
     }
 
-    override fun iterator(): Iterator<NaturalT> {
+    override fun iterator(): Iterator<KotlinInt> {
         return IndexedIterator(size(), this::get)
     }
 }
 
-fun intVariantArrayOf(vararg elements: NaturalT): IntVariantArray {
+fun intVariantArrayOf(vararg elements: KotlinInt): IntVariantArray {
     return IntVariantArray().also {
         for (arg in elements) {
             it.append(arg)

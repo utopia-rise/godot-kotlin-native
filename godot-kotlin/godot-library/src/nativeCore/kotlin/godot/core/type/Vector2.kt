@@ -9,9 +9,29 @@ import kotlinx.cinterop.*
 import kotlin.math.*
 
 class Vector2(
-    var x: RealT,
-    var y: RealT
+    p_x: KotlinReal,
+    p_y: KotlinReal,
 ) : Comparable<Vector2>, CoreType {
+
+    @PublishedApi
+    internal var _x: GodotReal = p_x.toGodotReal()
+
+    @PublishedApi
+    internal var _y: GodotReal = p_y.toGodotReal()
+
+
+    //PROPERTIES
+    inline var x: KotlinReal
+        get() = _x.toKotlinReal()
+        set(value) {
+            _x = value.toGodotReal()
+        }
+
+    inline var y: KotlinReal
+        get() = _y.toKotlinReal()
+        set(value) {
+            _y = value.toGodotReal()
+        }
 
     //CONSTANTS
     enum class Axis(val value: Int) {
@@ -35,7 +55,7 @@ class Vector2(
         val ONE: Vector2
             get() = Vector2(1, 1)
         val INF: Vector2
-            get() = Vector2(RealT.POSITIVE_INFINITY, RealT.POSITIVE_INFINITY)
+            get() = Vector2(KotlinReal.POSITIVE_INFINITY, KotlinReal.POSITIVE_INFINITY)
         val LEFT: Vector2
             get() = Vector2(-1, 0)
         val RIGHT: Vector2
@@ -52,10 +72,10 @@ class Vector2(
         this(0.0, 0.0)
 
     constructor(vec: Vector2) :
-        this(vec.x, vec.y)
+        this(vec._x, vec._y)
 
     constructor(x: Number, y: Number) :
-        this(x.toRealT(), y.toRealT())
+        this(x.toKotlinReal(), y.toKotlinReal())
 
 
     internal constructor(native: CValue<godot_vector2>) : this(0.0, 0.0) {
@@ -72,16 +92,16 @@ class Vector2(
     //INTEROP
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
         val value = cValue<godot_vector2_layout> {
-            x = this@Vector2.x.toFloat()
-            y = this@Vector2.y.toFloat()
+            x = this@Vector2._x.toFloat()
+            y = this@Vector2._y.toFloat()
         }
         return value.getPointer(memScope)
     }
 
     override fun setRawMemory(mem: COpaquePointer) {
         val value = mem.reinterpret<godot_vector2_layout>().pointed
-        x = value.x.toRealT()
-        y = value.y.toRealT()
+        _x = value.x.toGodotReal()
+        _y = value.y.toGodotReal()
     }
 
 
@@ -90,36 +110,36 @@ class Vector2(
      * Returns a new vector with all components in absolute values (i.e. positive).
      */
     fun abs(): Vector2 {
-        return Vector2(abs(x), abs(y))
+        return Vector2(abs(_x), abs(_y))
     }
 
     /**
      * Returns the vector’s angle in radians with respect to the x-axis, or (1, 0) vector.
      * Equivalent to the result of atan2 when called with the vector’s x and y as parameters: atan2(x, y).
      */
-    fun angle(): RealT {
-        return atan2(y, x)
+    fun angle(): KotlinReal {
+        return atan2(_y, _x).toKotlinReal()
     }
 
     /**
      * Returns the angle in radians between the two vectors.
      */
-    fun angleTo(to: Vector2): RealT {
+    fun angleTo(to: Vector2): KotlinReal {
         return atan2(cross(to), dot(to))
     }
 
     /**
      * Returns the angle in radians between the line connecting the two points and the x coordinate.
      */
-    fun angleToPoint(other: Vector2): RealT {
-        return atan2(y - other.y, x - other.x)
+    fun angleToPoint(other: Vector2): KotlinReal {
+        return atan2(_y - other._y, _x - other._x).toKotlinReal()
     }
 
     /**
      * Returns the ratio of x to y.
      */
-    fun aspect(): RealT {
-        return this.x / this.y
+    fun aspect(): KotlinReal {
+        return (this._x / this._y).toKotlinReal()
     }
 
     /**
@@ -133,14 +153,14 @@ class Vector2(
      * Returns the vector with all components rounded up.
      */
     fun ceil(): Vector2 {
-        return Vector2(ceil(x), ceil(y))
+        return Vector2(ceil(_x), ceil(_y))
     }
 
     /**
      * Returns the vector with a maximum length.
      */
-    fun clamped(len: RealT): Vector2 {
-        val l: RealT = this.length()
+    fun clamped(len: KotlinReal): Vector2 {
+        val l = this.length()
         var v = Vector2(this)
         if (l > 0 && len < l) {
             v /= l
@@ -152,22 +172,22 @@ class Vector2(
     /**
      * Returns the 2 dimensional analog of the cross product with the given vector.
      */
-    fun cross(other: Vector2): RealT {
-        return x * other.y - y * other.x
+    fun cross(other: Vector2): KotlinReal {
+        return (_x * other._y - _y * other._x).toKotlinReal()
     }
 
     /**
      * Cubicly interpolates between this vector and b using pre_a and post_b as handles, and returns the result at position t.
      * t is in the range of 0.0 - 1.0, representing the amount of interpolation.
      */
-    fun cubicInterpolate(v: Vector2, pre: Vector2, post: Vector2, t: RealT): Vector2 {
+    fun cubicInterpolate(v: Vector2, pre: Vector2, post: Vector2, t: KotlinReal): Vector2 {
         val p0: Vector2 = pre
         val p1: Vector2 = this
         val p2: Vector2 = v
         val p3: Vector2 = post
 
-        val t2: RealT = t * t
-        val t3: RealT = t2 * t
+        val t2 = t * t
+        val t3 = t2 * t
 
         return ((p1 * 2.0) +
             (-p0 + p2) * t +
@@ -179,7 +199,7 @@ class Vector2(
      * Returns the normalized vector pointing from this vector to b.
      */
     fun directionTo(other: Vector2): Vector2 {
-        val ret = Vector2(other.x - x, other.y - y)
+        val ret = Vector2(other._x - _x, other._y - _y)
         ret.normalize()
         return ret
     }
@@ -188,29 +208,29 @@ class Vector2(
      * Returns the squared distance to vector b.
      * Prefer this function over distance_to if you need to sort vectors or need the squared distance for some formula.
      */
-    fun distanceSquaredTo(other: Vector2): RealT {
-        return (x - other.x) * (x - other.x) + (y - other.y) * (y - other.y)
+    fun distanceSquaredTo(other: Vector2): KotlinReal {
+        return ((_x - other._x) * (_x - other._x) + (_y - other._y) * (_y - other._y)).toKotlinReal()
     }
 
     /**
      * Returns the distance to vector b.
      */
-    fun distanceTo(other: Vector2): RealT {
-        return sqrt((x - other.x) * (x - other.x) + (y - other.y) * (y - other.y))
+    fun distanceTo(other: Vector2): KotlinReal {
+        return sqrt((_x - other._x) * (_x - other._x) + (_y - other._y) * (_y - other._y)).toKotlinReal()
     }
 
     /**
      * Returns the dot product with vector b.
      */
-    fun dot(other: Vector2): RealT {
-        return x * other.x + y * other.y
+    fun dot(other: Vector2): KotlinReal {
+        return (_x * other._x + _y * other._y).toKotlinReal()
     }
 
     /**
      * Returns the vector with all components rounded down.
      */
     fun floor(): Vector2 {
-        return Vector2(floor(x), floor(y))
+        return Vector2(floor(_x), floor(_y))
     }
 
     /**
@@ -218,48 +238,48 @@ class Vector2(
      */
     fun isEqualApprox(other: Vector2): Boolean {
         return isEqualApprox(
-            other.x,
-            x
-        ) && isEqualApprox(other.y, y)
+            other._x,
+            _x
+        ) && isEqualApprox(other._y, _y)
     }
 
     /**
      * Returns true if the vector is normalized.
      */
     fun isNormalized(): Boolean {
-        return isEqualApprox(this.length(), 1.0)
+        return isEqualApprox(this.length().toGodotReal(), 1.0f)
     }
 
     /**
      * Returns the vector’s length.
      */
-    fun length(): RealT {
-        return sqrt(x * x + y * y)
+    fun length(): KotlinReal {
+        return sqrt(_x * _x + _y * _y).toKotlinReal()
     }
 
     /**
      * Returns the vector’s length squared.
      * Prefer this method over length if you need to sort vectors or need the squared length for some formula.
      */
-    fun lengthSquared(): RealT {
-        return x * x + y * y
+    fun lengthSquared(): KotlinReal {
+        return (_x * _x + _y * _y).toKotlinReal()
     }
 
     /**
      * Returns the result of the linear interpolation between this vector and b by amount t.
      * t is in the range of 0.0 - 1.0, representing the amount of interpolation.
      */
-    fun linearInterpolate(v: Vector2, t: RealT): Vector2 {
+    fun linearInterpolate(v: Vector2, t: KotlinReal): Vector2 {
         val res = Vector2(this)
-        res.x += (t * (v.x - x))
-        res.y += (t * (v.y - y))
+        res._x += (t * (v._x - _x)).toGodotReal()
+        res._y += (t * (v._y - _y)).toGodotReal()
         return res
     }
 
     /**
      * Moves the vector toward to by the fixed delta amount.
      */
-    fun moveToward(to: Vector2, delta: RealT): Vector2 {
+    fun moveToward(to: Vector2, delta: KotlinReal): Vector2 {
         val vd = to - this
         val len = vd.length()
         return if (len <= delta || len < CMP_EPSILON)
@@ -279,28 +299,28 @@ class Vector2(
     }
 
     internal fun normalize() {
-        val l: RealT = length()
-        if (isEqualApprox(l, 0.0)) {
-            x = 0.0
-            y = 0.0
+        val l = length().toGodotReal()
+        if (isEqualApprox(l, 0.0f)) {
+            _x = 0.0f
+            _y = 0.0f
         } else {
-            x /= l
-            y /= l
+            _x /= l
+            _y /= l
         }
     }
 
     /**
      * Returns a vector composed of the fposmod of this vector’s components and mod.
      */
-    fun posmod(mod: RealT): Vector2 {
-        return Vector2(x.rem(mod), y.rem(mod))
+    fun posmod(mod: KotlinReal): Vector2 {
+        return Vector2(_x.rem(mod), _y.rem(mod))
     }
 
     /**
      * Returns a vector composed of the fposmod of this vector’s components and modv’s components.
      */
     fun posmodv(modv: Vector2): Vector2 {
-        return Vector2(x.rem(modv.x), y.rem(modv.y))
+        return Vector2(_x.rem(modv._x), _y.rem(modv._y))
     }
 
     /**
@@ -322,30 +342,30 @@ class Vector2(
     /**
      * Returns the vector rotated by phi radians.
      */
-    fun rotated(by: RealT): Vector2 {
+    fun rotated(by: KotlinReal): Vector2 {
         var v = Vector2(0.0, 0.0)
         v.rotate(this.angle() + by)
         v *= length()
         return v
     }
 
-    internal fun rotate(radians: RealT) {
-        x = cos(radians)
-        y = sin(radians)
+    internal fun rotate(radians: KotlinReal) {
+        _x = cos(radians).toGodotReal()
+        _y = sin(radians).toGodotReal()
     }
 
     /**
      * Returns the vector with all components rounded to the nearest integer, with halfway cases rounded away from zero.
      */
     fun round(): Vector2 {
-        return Vector2(round(x), round(y))
+        return Vector2(round(_x), round(_y))
     }
 
     /**
      * Returns the vector with each component set to one or negative one, depending on the signs of the components.
      */
     fun sign(): Vector2 {
-        return Vector2(sign(x), sign(y))
+        return Vector2(sign(_x), sign(_y))
     }
 
     /**
@@ -354,11 +374,11 @@ class Vector2(
      *
      * Note: Both vectors must be normalized.
      */
-    fun slerp(b: Vector2, t: RealT): Vector2 {
+    fun slerp(b: Vector2, t: KotlinReal): Vector2 {
         if (!this.isNormalized() || !b.isNormalized()) {
             Godot.printError("Vectors not normalized", "slerp()", "Vector2.kt", 240)
         }
-        val theta: RealT = angleTo(b)
+        val theta: KotlinReal = angleTo(b)
         return rotated((theta * t))
     }
 
@@ -373,15 +393,15 @@ class Vector2(
      * Returns the vector snapped to a grid with the given size.
      */
     fun snapped(by: Vector2): Vector2 {
-        val newX = if (isEqualApprox(by.x, 0.0)) {
-            floor(x / by.x + 0.5).toRealT()
+        val newX = if (isEqualApprox(by._x, 0.0f)) {
+            floor(_x / by._x + 0.5f)
         } else {
-            x
+            _x
         }
-        val newY = if (isEqualApprox(by.x, 0.0)) {
-            floor(y / by.y + 0.5).toRealT()
+        val newY = if (isEqualApprox(by._x, 0.0f)) {
+            floor(_y / by._y + 0.5f)
         } else {
-            y
+            _y
         }
         return Vector2(newX, newY)
     }
@@ -390,81 +410,81 @@ class Vector2(
      * Returns a perpendicular vector.
      */
     fun tangent(): Vector2 {
-        return Vector2(y, -x)
+        return Vector2(_y, -_x)
     }
 
 
     //UTILITIES
     override fun toVariant() = Variant(this)
 
-    operator fun get(idx: Int): RealT =
+    internal operator fun get(idx: Int): GodotReal =
         when (idx) {
-            0 -> x
-            1 -> y
+            0 -> _x
+            1 -> _y
             else -> throw IndexOutOfBoundsException()
         }
 
-    operator fun set(n: Int, f: RealT) =
+    internal operator fun set(n: Int, f: GodotReal) =
         when (n) {
-            0 -> x = f
-            1 -> y = f
+            0 -> _x = f.toGodotReal()
+            1 -> _y = f.toGodotReal()
             else -> throw IndexOutOfBoundsException()
         }
 
-    operator fun plus(v: Vector2) = Vector2(x + v.x, y + v.y)
-    operator fun plus(scalar: Int) = Vector2(x + scalar, y + scalar)
-    operator fun plus(scalar: Long) = Vector2(x + scalar, y + scalar)
-    operator fun plus(scalar: Float) = Vector2(x + scalar, y + scalar)
-    operator fun plus(scalar: Double) = Vector2(x + scalar, y + scalar)
+    operator fun plus(v: Vector2) = Vector2(_x + v._x, _y + v._y)
+    operator fun plus(scalar: Int) = Vector2(_x + scalar, _y + scalar)
+    operator fun plus(scalar: Long) = Vector2(_x + scalar, _y + scalar)
+    operator fun plus(scalar: Float) = Vector2(_x + scalar, _y + scalar)
+    operator fun plus(scalar: Double) = Vector2(_x + scalar, _y + scalar)
 
-    operator fun minus(v: Vector2) = Vector2(x - v.x, y - v.y)
-    operator fun minus(scalar: Int) = Vector2(x - scalar, y - scalar)
-    operator fun minus(scalar: Long) = Vector2(x - scalar, y - scalar)
-    operator fun minus(scalar: Float) = Vector2(x - scalar, y - scalar)
-    operator fun minus(scalar: Double) = Vector2(x - scalar, y - scalar)
+    operator fun minus(v: Vector2) = Vector2(_x - v._x, _y - v._y)
+    operator fun minus(scalar: Int) = Vector2(_x - scalar, _y - scalar)
+    operator fun minus(scalar: Long) = Vector2(_x - scalar, _y - scalar)
+    operator fun minus(scalar: Float) = Vector2(_x - scalar, _y - scalar)
+    operator fun minus(scalar: Double) = Vector2(_x - scalar, _y - scalar)
 
-    operator fun times(v1: Vector2) = Vector2(x * v1.x, y * v1.y)
-    operator fun times(scalar: Int) = Vector2(x * scalar, y * scalar)
-    operator fun times(scalar: Long) = Vector2(x * scalar, y * scalar)
-    operator fun times(scalar: Float) = Vector2(x * scalar, y * scalar)
-    operator fun times(scalar: Double) = Vector2(x * scalar, y * scalar)
+    operator fun times(v1: Vector2) = Vector2(_x * v1._x, _y * v1._y)
+    operator fun times(scalar: Int) = Vector2(_x * scalar, _y * scalar)
+    operator fun times(scalar: Long) = Vector2(_x * scalar, _y * scalar)
+    operator fun times(scalar: Float) = Vector2(_x * scalar, _y * scalar)
+    operator fun times(scalar: Double) = Vector2(_x * scalar, _y * scalar)
 
-    operator fun div(v1: Vector2) = Vector2(x / v1.x, y / v1.y)
-    operator fun div(scalar: Int) = Vector2(x / scalar, y / scalar)
-    operator fun div(scalar: Long) = Vector2(x / scalar, y / scalar)
-    operator fun div(scalar: Float) = Vector2(x / scalar, y / scalar)
-    operator fun div(scalar: Double) = Vector2(x / scalar, y / scalar)
+    operator fun div(v1: Vector2) = Vector2(_x / v1._x, _y / v1._y)
+    operator fun div(scalar: Int) = Vector2(_x / scalar, _y / scalar)
+    operator fun div(scalar: Long) = Vector2(_x / scalar, _y / scalar)
+    operator fun div(scalar: Float) = Vector2(_x / scalar, _y / scalar)
+    operator fun div(scalar: Double) = Vector2(_x / scalar, _y / scalar)
 
-    operator fun unaryMinus() = Vector2(-x, -y)
+    operator fun unaryMinus() = Vector2(-_x, -_y)
 
     override fun equals(other: Any?): Boolean =
         when (other) {
-            is Vector2 -> (isEqualApprox(x, other.x) && isEqualApprox(y, other.y))
+            is Vector2 -> (isEqualApprox(_x, other._x) && isEqualApprox(_y, other._y))
             else -> false
         }
 
     override fun compareTo(other: Vector2): Int =
-        if (isEqualApprox(x, other.x)) {
+        if (isEqualApprox(_x, other._x)) {
             when {
-                y < other.y -> -1
-                isEqualApprox(y, other.y) -> 0
+                _y < other._y -> -1
+                isEqualApprox(_y, other._y) -> 0
                 else -> 1
             }
         } else {
             when {
-                x < other.x -> -1
+                _x < other._x -> -1
                 else -> 1
             }
         }
 
     override fun hashCode(): Int {
-        var result = x.hashCode()
-        result = 31 * result + y.hashCode()
+        var result = _x.hashCode()
+        result = 31 * result + _y.hashCode()
         return result
     }
 
     override fun toString(): String {
-        return "($x, $y)"
+        return "($_x, $_y)"
     }
 }
 
@@ -473,10 +493,10 @@ operator fun Long.plus(vec: Vector2) = vec + this
 operator fun Float.plus(vec: Vector2) = vec + this
 operator fun Double.plus(vec: Vector2) = vec + this
 
-operator fun Int.minus(vec: Vector2) = Vector2(this - vec.x, this - vec.y)
-operator fun Long.minus(vec: Vector2) = Vector2(this - vec.x, this - vec.y)
-operator fun Float.minus(vec: Vector2) = Vector2(this - vec.x, this - vec.y)
-operator fun Double.minus(vec: Vector2) = Vector2(this - vec.x, this - vec.y)
+operator fun Int.minus(vec: Vector2) = Vector2(this - vec._x, this - vec._y)
+operator fun Long.minus(vec: Vector2) = Vector2(this - vec._x, this - vec._y)
+operator fun Float.minus(vec: Vector2) = Vector2(this - vec._x, this - vec._y)
+operator fun Double.minus(vec: Vector2) = Vector2(this - vec._x, this - vec._y)
 
 operator fun Int.times(vec: Vector2) = vec * this
 operator fun Long.times(vec: Vector2) = vec * this

@@ -5,9 +5,9 @@ import godot.Object
 import godot.gdnative.godot_variant
 import godot.gdnative.godot_variant_type
 import godot.internal.type.CoreType
-import godot.internal.type.NaturalT
+import godot.internal.type.VariantInt
 import godot.internal.type.nullSafe
-import godot.internal.type.toNaturalT
+import godot.internal.type.toVariantInt
 import kotlinx.cinterop.*
 
 @Suppress("NON_PUBLIC_PRIMARY_CONSTRUCTOR_OF_INLINE_CLASS", "IMPLICIT_CAST_TO_ANY")
@@ -17,7 +17,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
     val type: Type
         get() {
             return memScoped {
-                Type.from(nullSafe(Godot.gdnative.godot_variant_get_type)(_handle.ptr).value.toNaturalT())
+                Type.from(nullSafe(Godot.gdnative.godot_variant_get_type)(_handle.ptr).value.toVariantInt())
             }
         }
 
@@ -28,34 +28,34 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
     }
 
     //TYPE
-    enum class Type(val value: NaturalT) {
-        NIL(godot_variant_type.GODOT_VARIANT_TYPE_NIL.value.toNaturalT()),
-        BOOL(godot_variant_type.GODOT_VARIANT_TYPE_BOOL.value.toNaturalT()),
-        INT(godot_variant_type.GODOT_VARIANT_TYPE_INT.value.toNaturalT()),
-        REAL(godot_variant_type.GODOT_VARIANT_TYPE_REAL.value.toNaturalT()),
-        STRING(godot_variant_type.GODOT_VARIANT_TYPE_STRING.value.toNaturalT()),
-        VECTOR2(godot_variant_type.GODOT_VARIANT_TYPE_VECTOR2.value.toNaturalT()),
-        RECT2(godot_variant_type.GODOT_VARIANT_TYPE_RECT2.value.toNaturalT()),
-        VECTOR3(godot_variant_type.GODOT_VARIANT_TYPE_VECTOR3.value.toNaturalT()),
-        TRANSFORM2D(godot_variant_type.GODOT_VARIANT_TYPE_TRANSFORM2D.value.toNaturalT()),
-        PLANE(godot_variant_type.GODOT_VARIANT_TYPE_PLANE.value.toNaturalT()),
-        QUAT(godot_variant_type.GODOT_VARIANT_TYPE_QUAT.value.toNaturalT()),
-        AABB(godot_variant_type.GODOT_VARIANT_TYPE_AABB.value.toNaturalT()),
-        BASIS(godot_variant_type.GODOT_VARIANT_TYPE_BASIS.value.toNaturalT()),
-        TRANSFORM(godot_variant_type.GODOT_VARIANT_TYPE_TRANSFORM.value.toNaturalT()),
-        COLOR(godot_variant_type.GODOT_VARIANT_TYPE_COLOR.value.toNaturalT()),
-        NODE_PATH(godot_variant_type.GODOT_VARIANT_TYPE_NODE_PATH.value.toNaturalT()),
-        RID(godot_variant_type.GODOT_VARIANT_TYPE_RID.value.toNaturalT()),
-        OBJECT(godot_variant_type.GODOT_VARIANT_TYPE_OBJECT.value.toNaturalT()),
-        DICTIONARY(godot_variant_type.GODOT_VARIANT_TYPE_DICTIONARY.value.toNaturalT()),
-        ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_ARRAY.value.toNaturalT()),
-        POOL_BYTE_ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_POOL_BYTE_ARRAY.value.toNaturalT()),
-        POOL_INT_ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_POOL_INT_ARRAY.value.toNaturalT()),
-        POOL_REAL_ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_POOL_REAL_ARRAY.value.toNaturalT()),
-        POOL_STRING_ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_POOL_STRING_ARRAY.value.toNaturalT()),
-        POOL_COLOR_ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_POOL_COLOR_ARRAY.value.toNaturalT()),
-        POOL_VECTOR2_ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_POOL_VECTOR2_ARRAY.value.toNaturalT()),
-        POOL_VECTOR3_ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_POOL_VECTOR3_ARRAY.value.toNaturalT());
+    enum class Type(val value: VariantInt) {
+        NIL(godot_variant_type.GODOT_VARIANT_TYPE_NIL.value.toVariantInt()),
+        BOOL(godot_variant_type.GODOT_VARIANT_TYPE_BOOL.value.toVariantInt()),
+        INT(godot_variant_type.GODOT_VARIANT_TYPE_INT.value.toVariantInt()),
+        REAL(godot_variant_type.GODOT_VARIANT_TYPE_REAL.value.toVariantInt()),
+        STRING(godot_variant_type.GODOT_VARIANT_TYPE_STRING.value.toVariantInt()),
+        VECTOR2(godot_variant_type.GODOT_VARIANT_TYPE_VECTOR2.value.toVariantInt()),
+        RECT2(godot_variant_type.GODOT_VARIANT_TYPE_RECT2.value.toVariantInt()),
+        VECTOR3(godot_variant_type.GODOT_VARIANT_TYPE_VECTOR3.value.toVariantInt()),
+        TRANSFORM2D(godot_variant_type.GODOT_VARIANT_TYPE_TRANSFORM2D.value.toVariantInt()),
+        PLANE(godot_variant_type.GODOT_VARIANT_TYPE_PLANE.value.toVariantInt()),
+        QUAT(godot_variant_type.GODOT_VARIANT_TYPE_QUAT.value.toVariantInt()),
+        AABB(godot_variant_type.GODOT_VARIANT_TYPE_AABB.value.toVariantInt()),
+        BASIS(godot_variant_type.GODOT_VARIANT_TYPE_BASIS.value.toVariantInt()),
+        TRANSFORM(godot_variant_type.GODOT_VARIANT_TYPE_TRANSFORM.value.toVariantInt()),
+        COLOR(godot_variant_type.GODOT_VARIANT_TYPE_COLOR.value.toVariantInt()),
+        NODE_PATH(godot_variant_type.GODOT_VARIANT_TYPE_NODE_PATH.value.toVariantInt()),
+        RID(godot_variant_type.GODOT_VARIANT_TYPE_RID.value.toVariantInt()),
+        OBJECT(godot_variant_type.GODOT_VARIANT_TYPE_OBJECT.value.toVariantInt()),
+        DICTIONARY(godot_variant_type.GODOT_VARIANT_TYPE_DICTIONARY.value.toVariantInt()),
+        ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_ARRAY.value.toVariantInt()),
+        POOL_BYTE_ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_POOL_BYTE_ARRAY.value.toVariantInt()),
+        POOL_INT_ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_POOL_INT_ARRAY.value.toVariantInt()),
+        POOL_REAL_ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_POOL_REAL_ARRAY.value.toVariantInt()),
+        POOL_STRING_ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_POOL_STRING_ARRAY.value.toVariantInt()),
+        POOL_COLOR_ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_POOL_COLOR_ARRAY.value.toVariantInt()),
+        POOL_VECTOR2_ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_POOL_VECTOR2_ARRAY.value.toVariantInt()),
+        POOL_VECTOR3_ARRAY(godot_variant_type.GODOT_VARIANT_TYPE_POOL_VECTOR3_ARRAY.value.toVariantInt());
 
         companion object {
             private val types = mapOf(
@@ -88,13 +88,13 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
                 POOL_COLOR_ARRAY.value to POOL_COLOR_ARRAY
             )
 
-            fun from(value: NaturalT): Type {
+            fun from(value: VariantInt): Type {
                 return types[value] ?: throw NoSuchElementException("Unknown value: $value")
             }
         }
     }
 
-    enum class Operator(val id: NaturalT) {
+    enum class Operator(val id: VariantInt) {
         OP_EQUAL(0),
         OP_NOT_EQUAL(1),
         OP_LESS(2),
@@ -127,7 +127,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
         OP_MAX(25);
 
         companion object {
-            fun from(value: NaturalT) = when (value) {
+            fun from(value: VariantInt) = when (value) {
                 0L -> OP_EQUAL
                 1L -> OP_NOT_EQUAL
                 2L -> OP_LESS

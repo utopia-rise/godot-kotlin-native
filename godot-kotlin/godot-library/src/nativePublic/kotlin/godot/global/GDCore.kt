@@ -1,6 +1,7 @@
 package godot.core
 
-import godot.internal.type.toRealT
+import godot.internal.type.KotlinReal
+import godot.internal.type.toGodotReal
 
 internal interface GDCore {
 
@@ -12,7 +13,7 @@ internal interface GDCore {
     fun Color8(r8: Int, g8: Int, b8: Int, a8: Int = 255) = Color(r8 / 256f, g8 / 256f, b8 / 256f, a8 / 256f)
 
     /** Returns a color according to the standardized name with alpha ranging from 0 to 1.*/
-    fun ColorN(name: String, alpha: Float = 1.0f): Color {
+    fun ColorN(name: String, alpha: KotlinReal = 1.0): Color {
         return when (name) {
             "aliceblue" -> Color.aliceblue
             "aqua" -> Color.aqua
@@ -161,7 +162,7 @@ internal interface GDCore {
             "yellowgreen" -> Color.yellowgreen
             else -> throw NoSuchElementException("$name is not a valid color name.")
         }.also {
-            it.a = alpha.toRealT()
+            it._a = alpha.toGodotReal()
         }
     }
 

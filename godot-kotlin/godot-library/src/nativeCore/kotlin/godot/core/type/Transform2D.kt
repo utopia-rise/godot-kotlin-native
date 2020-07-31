@@ -87,14 +87,14 @@ class Transform2D(
     constructor(other: Transform2D) : this(other._x, other._y, other._origin)
 
     constructor(xx: Number, xy: Number, yx: Number, yy: Number, ox: Number, oy: Number) : this(
-        Vector2(xx.toRealT(), xy.toRealT()),
-        Vector2(yx.toRealT(), yy.toRealT()),
-        Vector2(ox.toRealT(), oy.toRealT())
+        Vector2(xx.toGodotReal(), xy.toGodotReal()),
+        Vector2(yx.toGodotReal(), yy.toGodotReal()),
+        Vector2(ox.toGodotReal(), oy.toGodotReal())
     )
 
     constructor(rot: Number, pos: Vector2) : this(
-        Vector2(cos(rot.toRealT()), sin(rot.toRealT())),
-        Vector2(-sin(rot.toRealT()), cos(rot.toRealT())),
+        Vector2(cos(rot.toGodotReal()), sin(rot.toGodotReal())),
+        Vector2(-sin(rot.toGodotReal()), cos(rot.toGodotReal())),
         pos
     )
 
@@ -112,12 +112,12 @@ class Transform2D(
     //INTEROP
     override fun getRawMemory(memScope: MemScope): COpaquePointer {
         val value = cValue<godot_transform2d_layout> {
-            x.x = this@Transform2D._x.x.toGodotReal()
-            x.y = this@Transform2D._x.y.toGodotReal()
-            y.x = this@Transform2D._y.x.toGodotReal()
-            y.y = this@Transform2D._y.y.toGodotReal()
-            origin.x = this@Transform2D._origin.x.toGodotReal()
-            origin.y = this@Transform2D._origin.y.toGodotReal()
+            x.x = this@Transform2D._x._x.toGodotReal()
+            x.y = this@Transform2D._x._y.toGodotReal()
+            y.x = this@Transform2D._y._x.toGodotReal()
+            y.y = this@Transform2D._y._y.toGodotReal()
+            origin.x = this@Transform2D._origin._x.toGodotReal()
+            origin.y = this@Transform2D._origin._y.toGodotReal()
         }
         return value.getPointer(memScope)
     }
@@ -144,23 +144,23 @@ class Transform2D(
      * Returns the inverse of the matrix.
      */
     internal fun affineInvert() {
-        val det = basisDeterminant()
-        if (isEqualApprox(det, 0.0)) {
+        val det = basisDeterminant().toGodotReal()
+        if (isEqualApprox(det, 0.0f)) {
             Godot.printError("determinant == 0", "affineInvert()", "Transform2D.kt", 84)
             return
         }
-        val idet = -1.0 / det
-        val copy = _x.x
-        _x.x = _y.y
-        _y.y = copy
+        val idet = -1.0f / det
+        val copy = _x._x
+        _x._x = _y._y
+        _y._y = copy
         this._x *= Vector2(idet, -idet)
         this._y *= Vector2(-idet, idet)
 
         this._origin = basisXform(-this._origin)
     }
 
-    private fun basisDeterminant(): RealT {
-        return this._x.x * this._y.y - this._x.y * this._y.x
+    private fun basisDeterminant(): KotlinReal {
+        return (this._x._x * this._y._y - this._x._y * this._y._x).toKotlinReal()
     }
 
     /**
@@ -181,27 +181,27 @@ class Transform2D(
     /**
      * Returns the transform’s rotation (in radians).
      */
-    fun getRotation(): RealT {
+    fun getRotation(): KotlinReal {
         val det = basisDeterminant()
         val m = orthonormalized()
         if (det < 0) {
             m.scaleBasis(Vector2(-1, -1))
         }
-        return atan2(m._x.y, m._x.x)
+        return atan2(m._x._y, m._x._x).toKotlinReal()
     }
 
     /**
      * Returns the scale.
      */
     fun getScale(): Vector2 {
-        val detSign: RealT = if (basisDeterminant() > 0.0) 1.0 else -1.0
+        val detSign: KotlinReal = if (basisDeterminant() > 0.0) 1.0 else -1.0
         return detSign * Vector2(this._x.length(), this._y.length())
     }
 
     /**
      * Returns a transform interpolated between this transform and another by a given weight (0-1).
      */
-    fun interpolateWith(transform: Transform2D, c: RealT): Transform2D {
+    fun interpolateWith(transform: Transform2D, c: KotlinReal): Transform2D {
         val p1 = getOrigin()
         val p2 = transform.getOrigin()
 
@@ -229,7 +229,7 @@ class Transform2D(
             v1 * cos(angle) + v3 * sin(angle)
         }
 
-        val res = Transform2D(atan2(v.y, v.x), (Vector2::linearInterpolate)(p1, p2, c))
+        val res = Transform2D(atan2(v._y, v._x), (Vector2::linearInterpolate)(p1, p2, c))
         res.scaleBasis((Vector2::linearInterpolate)(s1, s2, c))
         return res
     }
@@ -244,9 +244,9 @@ class Transform2D(
     }
 
     internal fun invert() {
-        val copy = _x.y
-        _x.y = _y.x
-        _y.x = copy
+        val copy = _x._y
+        _x._y = _y._x
+        _y._x = copy
         _origin = basisXform(-_origin)
     }
 
@@ -283,13 +283,13 @@ class Transform2D(
     /**
      * Rotates the transform by the given angle (in radians), using matrix multiplication.
      */
-    fun rotated(phi: RealT): Transform2D {
+    fun rotated(phi: KotlinReal): Transform2D {
         val copy = Transform2D(this._x, this._y, this._origin)
         copy.rotate(phi)
         return copy
     }
 
-    internal fun rotate(phi: RealT) {
+    internal fun rotate(phi: KotlinReal) {
         val transform2D = Transform2D(phi, Vector2()) * this
         this._x = transform2D._x
         this._y = transform2D._y
@@ -326,10 +326,10 @@ class Transform2D(
     }
 
     private fun scaleBasis(scale: Vector2) {
-        _x.x *= scale.x
-        _x.y *= scale.y
-        this._y[0] *= scale.x
-        _y.y *= scale.y
+        _x._x *= scale._x
+        _x._y *= scale._y
+        this._y._x *= scale._x
+        _y._y *= scale._y
     }
 
     /**
@@ -343,8 +343,8 @@ class Transform2D(
      * Transforms the given Rect2 by this transform.
      */
     fun xform(rect: Rect2): Rect2 {
-        val x = this._x * rect._size.x
-        val y = this._y * rect._size.y
+        val x = this._x * rect._size._x
+        val y = this._y * rect._size._y
         val pos = xform(rect._position)
 
         val newRect = Rect2()
@@ -369,9 +369,9 @@ class Transform2D(
     fun xformInv(rect: Rect2): Rect2 {
         val ends = arrayOf(
             xformInv(rect._position),
-            xformInv(Vector2(rect._position.x, rect._position.y + rect._size.y)),
-            xformInv(Vector2(rect._position.x + rect._size.x, rect._position.y + rect._size.y)),
-            xformInv(Vector2(rect._position.x + rect._size.x, rect._position.y))
+            xformInv(Vector2(rect._position._x, rect._position._y + rect._size._y)),
+            xformInv(Vector2(rect._position._x + rect._size._x, rect._position._y + rect._size._y)),
+            xformInv(Vector2(rect._position._x + rect._size._x, rect._position._y))
         )
 
         val newRect = Rect2()
@@ -383,12 +383,12 @@ class Transform2D(
         return newRect
     }
 
-    private fun tdotx(v: Vector2): RealT {
-        return _x.x * v.x + _y.x * v.y
+    private fun tdotx(v: Vector2): KotlinReal {
+        return (_x._x * v._x + _y._x * v._y).toKotlinReal()
     }
 
-    private fun tdoty(v: Vector2): RealT {
-        return _x.y * v.x + _y.y * v.y
+    private fun tdoty(v: Vector2): KotlinReal {
+        return (_x._y * v._x + _y._y * v._y).toKotlinReal()
     }
 
 
@@ -402,7 +402,7 @@ class Transform2D(
         val y0 = tdotx(other._y)
         val y1 = tdoty(other._y)
 
-        return Transform2D(x0, x1, y0, y1, origin.x, origin.y)
+        return Transform2D(x0, x1, y0, y1, origin._x, origin._y)
     }
 
     override fun toString(): String {

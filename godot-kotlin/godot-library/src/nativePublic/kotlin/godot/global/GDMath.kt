@@ -1,6 +1,6 @@
 package godot.core
 
-import godot.internal.type.toRealT
+import godot.internal.type.toGodotReal
 import kotlin.math.pow
 
 private const val NEPER2DB = 8.6858896380650365530225783783321
@@ -220,11 +220,11 @@ internal interface GDMath {
 
     /** Returns true if a and b are approximately equal to each other. */
     fun isEqualApprox(a: Float, b: Float) =
-        godot.internal.type.isEqualApprox(a.toRealT(), b.toRealT())
+        godot.internal.type.isEqualApprox(a.toGodotReal(), b.toGodotReal())
 
     /** Returns true if a and b are approximately equal to each other. */
     fun isEqualApprox(a: Double, b: Double) =
-        godot.internal.type.isEqualApprox(a.toRealT(), b.toRealT())
+        godot.internal.type.isEqualApprox(a.toGodotReal(), b.toGodotReal())
 
 
     /** Returns whether s is an infinity value (either positive infinity or negative infinity). */
@@ -260,22 +260,22 @@ internal interface GDMath {
     fun lerp(from: Double, to: Double, weight: Double) = from + weight * (to - from)
 
     /** Linearly interpolates between two values by a normalized value. This is the opposite of inverse_lerp. */
-    fun lerp(from: Color, to: Color, weight: Float) = from + (to - from) * weight.toRealT()
+    fun lerp(from: Color, to: Color, weight: Float) = from + (to - from) * weight.toGodotReal()
 
     /** Linearly interpolates between two values by a normalized value. This is the opposite of inverse_lerp. */
-    fun lerp(from: Color, to: Color, weight: Double) = from + (to - from) * weight
+    fun lerp(from: Color, to: Color, weight: Double) = from + (to - from) * weight.toGodotReal()
 
     /** Linearly interpolates between two values by a normalized value. This is the opposite of inverse_lerp. */
-    fun lerp(from: Vector2, to: Vector2, weight: Float) = from + (to - from) * weight.toRealT()
+    fun lerp(from: Vector2, to: Vector2, weight: Float) = from + (to - from) * weight.toGodotReal()
 
     /** Linearly interpolates between two values by a normalized value. This is the opposite of inverse_lerp. */
-    fun lerp(from: Vector2, to: Vector2, weight: Double) = from + (to - from) * weight
+    fun lerp(from: Vector2, to: Vector2, weight: Double) = from + (to - from) * weight.toGodotReal()
 
     /** Linearly interpolates between two values by a normalized value. This is the opposite of inverse_lerp. */
-    fun lerp(from: Vector3, to: Vector3, weight: Float) = from + (to - from) * weight.toRealT()
+    fun lerp(from: Vector3, to: Vector3, weight: Float) = from + (to - from) * weight.toGodotReal()
 
     /** Linearly interpolates between two values by a normalized value. This is the opposite of inverse_lerp. */
-    fun lerp(from: Vector3, to: Vector3, weight: Double) = from + (to - from) * weight
+    fun lerp(from: Vector3, to: Vector3, weight: Double) = from + (to - from) * weight.toGodotReal()
 
 
     /** Linearly interpolates between two angles (in radians) by a normalized value.
