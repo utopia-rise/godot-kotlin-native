@@ -2,15 +2,16 @@ package godot.core
 
 import godot.Object
 import godot.RandomNumberGenerator
+import godot.Resource
+import godot.ResourceLoader
 import godot.global.GDPrint
-import godot.global.GDResource
 import godot.internal.type.nullSafe
 import kotlinx.cinterop.invoke
 import kotlinx.cinterop.memScoped
 import kotlin.test.assertTrue
 
 
-object GD : GDMath, GDCore, GDRandom, GDPrint, GDResource {
+object GD : GDMath, GDCore, GDRandom, GDPrint {
     override val rng = RandomNumberGenerator()
 
     /** Asserts that the condition is true.
@@ -86,5 +87,15 @@ object GD : GDMath, GDCore, GDRandom, GDPrint, GDResource {
             Variant.Type.POOL_COLOR_ARRAY -> len(variant.asPoolColorArray())
             else -> throw IllegalArgumentException("This type doesn't have a length. It must be a compatible Variant, Collection or Map")
         }
+    }
+
+    /**
+     * Loads a resource from the filesystem located at path.
+     * The resource is loaded on the method call (unless it's referenced already elsewhere, e.g. in another script or in the scene), which might cause slight delay, especially when loading scenes.
+     * Important: The path must be absolute, a local path will just return null.
+     * */
+    @Suppress("NOTHING_TO_INLINE", "UNCHECKED_CAST")
+    inline fun <T : Resource> load(path: String, typeHint: String = "", noCache: Boolean = false): Resource {
+        return ResourceLoader.load(path, typeHint, noCache) as T
     }
 }
