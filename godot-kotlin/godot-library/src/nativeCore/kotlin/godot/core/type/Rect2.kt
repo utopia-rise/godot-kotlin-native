@@ -100,17 +100,17 @@ class Rect2(
 
     internal constructor(native: CValue<godot_rect2>) : this() {
         memScoped {
-            this@Rect2.setRawMemory(native.ptr)
+            this@Rect2._setRawMemory(native.ptr)
         }
     }
 
     internal constructor(mem: COpaquePointer) : this() {
-        this.setRawMemory(mem)
+        this._setRawMemory(mem)
     }
 
 
     //INTEROP
-    override fun getRawMemory(memScope: MemScope): COpaquePointer {
+    override fun _getRawMemory(memScope: MemScope): COpaquePointer {
         val value = cValue<godot_rect2_layout> {
             position.x = this@Rect2._position._x.toGodotReal()
             position.y = this@Rect2._position._y.toGodotReal()
@@ -120,10 +120,10 @@ class Rect2(
         return value.getPointer(memScope)
     }
 
-    override fun setRawMemory(mem: COpaquePointer) {
+    override fun _setRawMemory(mem: COpaquePointer) {
         val value = mem.reinterpret<godot_rect2_layout>().pointed
-        _position.setRawMemory(value.position.ptr)
-        _size.setRawMemory(value.size.ptr)
+        _position._setRawMemory(value.position.ptr)
+        _size._setRawMemory(value.size.ptr)
     }
 
     //API
@@ -325,7 +325,7 @@ class Rect2(
 
 
     //UTILITIES
-    override fun toVariant() = Variant(this)
+    override fun _toVariant() = Variant(this)
 
     override fun equals(other: Any?): Boolean {
         return when (other) {

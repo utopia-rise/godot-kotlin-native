@@ -41,12 +41,12 @@ class IntVariantArray : GodotArray<KotlinInt> {
 
     internal constructor(native: CValue<godot_array>) {
         memScoped {
-            this@IntVariantArray.setRawMemory(native.ptr)
+            this@IntVariantArray._setRawMemory(native.ptr)
         }
     }
 
     internal constructor(mem: COpaquePointer) {
-        this.setRawMemory(mem)
+        this._setRawMemory(mem)
     }
 
     //API

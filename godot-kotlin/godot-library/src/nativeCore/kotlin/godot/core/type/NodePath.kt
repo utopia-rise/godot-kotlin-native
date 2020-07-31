@@ -10,6 +10,7 @@ import kotlinx.cinterop.*
 
 
 class NodePath : NativeCoreType<godot_node_path_layout> {
+    override var _handle = cValue<godot_node_path_layout>{}
 
     //PROPERTIES
     val path: String
@@ -21,21 +22,18 @@ class NodePath : NativeCoreType<godot_node_path_layout> {
 
     //CONSTRUCTOR
     constructor() {
-        _handle = cValue {}
         callNative {
             nullSafe(Godot.gdnative.godot_node_path_new)(it, "".toGDString().value.ptr)
         }
     }
 
     constructor(from: String) {
-        _handle = cValue {}
         callNative {
             nullSafe(Godot.gdnative.godot_node_path_new)(it, from.toGDString().value.ptr)
         }
     }
 
     constructor(from: NodePath) {
-        _handle = cValue {}
         callNative {
             val str = nullSafe(Godot.gdnative.godot_node_path_as_string)(from._handle.ptr)
             nullSafe(Godot.gdnative.godot_node_path_new)(it, str.ptr)
@@ -51,15 +49,15 @@ class NodePath : NativeCoreType<godot_node_path_layout> {
     }
 
     internal constructor(mem: COpaquePointer) {
-        this.setRawMemory(mem)
+        this._setRawMemory(mem)
     }
 
     //INTEROP
-    override fun getRawMemory(memScope: MemScope): COpaquePointer {
+    override fun _getRawMemory(memScope: MemScope): COpaquePointer {
         return _handle.getPointer(memScope)
     }
 
-    override fun setRawMemory(mem: COpaquePointer) {
+    override fun _setRawMemory(mem: COpaquePointer) {
         _handle = mem.reinterpret<godot_node_path_layout>().pointed.readValue()
     }
 
@@ -141,7 +139,7 @@ class NodePath : NativeCoreType<godot_node_path_layout> {
 
 
     //UTILITIES
-    override fun toVariant() = Variant(this)
+    override fun _toVariant() = Variant(this)
 
     override fun equals(other: Any?): Boolean {
         return if (other is NodePath) {

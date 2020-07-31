@@ -76,17 +76,17 @@ class AABB(
 
     internal constructor(native: CValue<godot_aabb>) : this() {
         memScoped {
-            this@AABB.setRawMemory(native.ptr)
+            this@AABB._setRawMemory(native.ptr)
         }
     }
 
     internal constructor(mem: COpaquePointer) : this() {
-        this.setRawMemory(mem)
+        this._setRawMemory(mem)
     }
 
 
     //INTEROP
-    override fun getRawMemory(memScope: MemScope): COpaquePointer {
+    override fun _getRawMemory(memScope: MemScope): COpaquePointer {
         val value = cValue<godot_aabb_layout> {
             position.x = this@AABB._position._x.toGodotReal()
             position.y = this@AABB._position._y.toGodotReal()
@@ -98,10 +98,10 @@ class AABB(
         return value.getPointer(memScope)
     }
 
-    override fun setRawMemory(mem: COpaquePointer) {
+    override fun _setRawMemory(mem: COpaquePointer) {
         val value = mem.reinterpret<godot_aabb_layout>().pointed
-        _position.setRawMemory(value.position.ptr)
-        _size.setRawMemory(value.size.ptr)
+        _position._setRawMemory(value.position.ptr)
+        _size._setRawMemory(value.size.ptr)
     }
 
     //API
@@ -509,7 +509,7 @@ class AABB(
     }
 
     //UTILITIES
-    override fun toVariant() = Variant(this)
+    override fun _toVariant() = Variant(this)
 
     override fun equals(other: Any?): Boolean =
         when (other) {

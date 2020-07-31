@@ -101,16 +101,16 @@ class Transform2D(
 
     internal constructor(native: CValue<godot_transform2d>) : this() {
         memScoped {
-            this@Transform2D.setRawMemory(native.ptr)
+            this@Transform2D._setRawMemory(native.ptr)
         }
     }
 
     internal constructor(mem: COpaquePointer) : this() {
-        this.setRawMemory(mem)
+        this._setRawMemory(mem)
     }
 
     //INTEROP
-    override fun getRawMemory(memScope: MemScope): COpaquePointer {
+    override fun _getRawMemory(memScope: MemScope): COpaquePointer {
         val value = cValue<godot_transform2d_layout> {
             x.x = this@Transform2D._x._x.toGodotReal()
             x.y = this@Transform2D._x._y.toGodotReal()
@@ -122,11 +122,11 @@ class Transform2D(
         return value.getPointer(memScope)
     }
 
-    override fun setRawMemory(mem: COpaquePointer) {
+    override fun _setRawMemory(mem: COpaquePointer) {
         val value = mem.reinterpret<godot_transform2d_layout>().pointed
-        _x.setRawMemory(value.x.ptr)
-        _x.setRawMemory(value.y.ptr)
-        _x.setRawMemory(value.origin.ptr)
+        _x._setRawMemory(value.x.ptr)
+        _x._setRawMemory(value.y.ptr)
+        _x._setRawMemory(value.origin.ptr)
     }
 
 
@@ -393,7 +393,7 @@ class Transform2D(
 
 
     //UTILITIES
-    override fun toVariant() = Variant(this)
+    override fun _toVariant() = Variant(this)
 
     operator fun times(other: Transform2D): Transform2D {
         val origin = xform(other._origin)

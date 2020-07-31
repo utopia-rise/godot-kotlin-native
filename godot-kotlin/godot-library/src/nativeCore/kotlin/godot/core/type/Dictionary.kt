@@ -8,6 +8,7 @@ import kotlinx.cinterop.*
 
 @ExperimentalUnsignedTypes
 class Dictionary : NativeCoreType<godot_dictionary_layout>, Iterable<Entry<Variant, Variant>> {
+    override var _handle = cValue<godot_dictionary_layout>{}
 
     //PROPERTIES
     val size: Int
@@ -21,7 +22,6 @@ class Dictionary : NativeCoreType<godot_dictionary_layout>, Iterable<Entry<Varia
 
     //CONSTRUCTOR
     constructor() {
-        _handle = cValue {}
         callNative {
             nullSafe(Godot.gdnative.godot_dictionary_new)(it)
         }
@@ -29,20 +29,20 @@ class Dictionary : NativeCoreType<godot_dictionary_layout>, Iterable<Entry<Varia
 
     internal constructor(native: CValue<godot_dictionary_layout>) {
         memScoped {
-            this@Dictionary.setRawMemory(native.ptr)
+            this@Dictionary._setRawMemory(native.ptr)
         }
     }
 
     internal constructor(mem: COpaquePointer) {
-        this.setRawMemory(mem)
+        this._setRawMemory(mem)
     }
 
     //INTEROP
-    override fun getRawMemory(memScope: MemScope): COpaquePointer {
+    override fun _getRawMemory(memScope: MemScope): COpaquePointer {
         return _handle.getPointer(memScope)
     }
 
-    override fun setRawMemory(mem: COpaquePointer) {
+    override fun _setRawMemory(mem: COpaquePointer) {
         _handle = mem.reinterpret<godot_dictionary_layout>().pointed.readValue()
     }
 
@@ -90,7 +90,7 @@ class Dictionary : NativeCoreType<godot_dictionary_layout>, Iterable<Entry<Varia
     fun erase(key: String) = erase(Variant(key))
     fun erase(key: Boolean) = erase(Variant(key))
     fun erase(key: Object) = erase(key.toVariant())
-    fun erase(key: CoreType) = erase(key.toVariant())
+    fun erase(key: CoreType) = erase(key._toVariant())
 
     /**
      * Returns the current value for the specified key in the Dictionary.
@@ -114,7 +114,7 @@ class Dictionary : NativeCoreType<godot_dictionary_layout>, Iterable<Entry<Varia
     fun get(key: KotlinInt, default: String) = get(Variant(key), Variant(default))
     fun get(key: KotlinInt, default: Boolean) = get(Variant(key), Variant(default))
     fun get(key: KotlinInt, default: Object) = get(Variant(key), default.toVariant())
-    fun get(key: KotlinInt, default: CoreType) = get(Variant(key), default.toVariant())
+    fun get(key: KotlinInt, default: CoreType) = get(Variant(key), default._toVariant())
 
     fun get(key: KotlinReal, default: Variant = Variant()) = get(Variant(key), default)
     fun get(key: KotlinReal, default: KotlinInt) = get(Variant(key), Variant(default))
@@ -122,7 +122,7 @@ class Dictionary : NativeCoreType<godot_dictionary_layout>, Iterable<Entry<Varia
     fun get(key: KotlinReal, default: String) = get(Variant(key), Variant(default))
     fun get(key: KotlinReal, default: Boolean) = get(Variant(key), Variant(default))
     fun get(key: KotlinReal, default: Object) = get(Variant(key), default.toVariant())
-    fun get(key: KotlinReal, default: CoreType) = get(Variant(key), default.toVariant())
+    fun get(key: KotlinReal, default: CoreType) = get(Variant(key), default._toVariant())
 
     fun get(key: String, default: Variant = Variant()) = get(Variant(key), default)
     fun get(key: String, default: KotlinInt) = get(Variant(key), Variant(default))
@@ -130,7 +130,7 @@ class Dictionary : NativeCoreType<godot_dictionary_layout>, Iterable<Entry<Varia
     fun get(key: String, default: String) = get(Variant(key), Variant(default))
     fun get(key: String, default: Boolean) = get(Variant(key), Variant(default))
     fun get(key: String, default: Object) = get(Variant(key), default.toVariant())
-    fun get(key: String, default: CoreType) = get(Variant(key), default.toVariant())
+    fun get(key: String, default: CoreType) = get(Variant(key), default._toVariant())
 
     fun get(key: Boolean, default: Variant = Variant()) = get(Variant(key), default)
     fun get(key: Boolean, default: KotlinInt) = get(Variant(key), Variant(default))
@@ -138,7 +138,7 @@ class Dictionary : NativeCoreType<godot_dictionary_layout>, Iterable<Entry<Varia
     fun get(key: Boolean, default: String) = get(Variant(key), Variant(default))
     fun get(key: Boolean, default: Boolean) = get(Variant(key), Variant(default))
     fun get(key: Boolean, default: Object) = get(Variant(key), default.toVariant())
-    fun get(key: Boolean, default: CoreType) = get(Variant(key), default.toVariant())
+    fun get(key: Boolean, default: CoreType) = get(Variant(key), default._toVariant())
 
     fun get(key: Object, default: Variant = Variant()) = get(key.toVariant(), default)
     fun get(key: Object, default: KotlinInt) = get(key.toVariant(), Variant(default))
@@ -146,15 +146,15 @@ class Dictionary : NativeCoreType<godot_dictionary_layout>, Iterable<Entry<Varia
     fun get(key: Object, default: String) = get(key.toVariant(), Variant(default))
     fun get(key: Object, default: Boolean) = get(key.toVariant(), Variant(default))
     fun get(key: Object, default: Object) = get(key.toVariant(), default.toVariant())
-    fun get(key: Object, default: CoreType) = get(key.toVariant(), default.toVariant())
+    fun get(key: Object, default: CoreType) = get(key.toVariant(), default._toVariant())
 
-    fun get(key: CoreType, default: Variant = Variant()) = get(key.toVariant(), default)
-    fun get(key: CoreType, default: KotlinInt) = get(key.toVariant(), Variant(default))
-    fun get(key: CoreType, default: KotlinReal) = get(key.toVariant(), Variant(default))
-    fun get(key: CoreType, default: String) = get(key.toVariant(), Variant(default))
-    fun get(key: CoreType, default: Boolean) = get(key.toVariant(), Variant(default))
-    fun get(key: CoreType, default: Object) = get(key.toVariant(), default.toVariant())
-    fun get(key: CoreType, default: CoreType) = get(key.toVariant(), default.toVariant())
+    fun get(key: CoreType, default: Variant = Variant()) = get(key._toVariant(), default)
+    fun get(key: CoreType, default: KotlinInt) = get(key._toVariant(), Variant(default))
+    fun get(key: CoreType, default: KotlinReal) = get(key._toVariant(), Variant(default))
+    fun get(key: CoreType, default: String) = get(key._toVariant(), Variant(default))
+    fun get(key: CoreType, default: Boolean) = get(key._toVariant(), Variant(default))
+    fun get(key: CoreType, default: Object) = get(key._toVariant(), default.toVariant())
+    fun get(key: CoreType, default: CoreType) = get(key._toVariant(), default._toVariant())
 
     /**
      * Returns true if the dictionary has a given key.
@@ -171,7 +171,7 @@ class Dictionary : NativeCoreType<godot_dictionary_layout>, Iterable<Entry<Varia
     fun has(key: String) = has(Variant(key))
     fun has(key: Boolean) = has(Variant(key))
     fun has(key: Object) = has(key.toVariant())
-    fun has(key: CoreType) = has(key.toVariant())
+    fun has(key: CoreType) = has(key._toVariant())
 
     /**
      * Returns true if the dictionary has all of the keys in the given array.
@@ -237,7 +237,7 @@ class Dictionary : NativeCoreType<godot_dictionary_layout>, Iterable<Entry<Varia
     operator fun get(key: String) = get(Variant(key))
     operator fun get(key: Boolean) = get(Variant(key))
     operator fun get(key: Object) = get(key.toVariant())
-    operator fun get(key: CoreType) = get(key.toVariant())
+    operator fun get(key: CoreType) = get(key._toVariant())
 
     operator fun set(key: Variant, value: Variant) {
         callNative {
@@ -251,7 +251,7 @@ class Dictionary : NativeCoreType<godot_dictionary_layout>, Iterable<Entry<Varia
     operator fun set(key: KotlinInt, value: String) = set(Variant(key), Variant(value))
     operator fun set(key: KotlinInt, value: Boolean) = set(Variant(key), Variant(value))
     operator fun set(key: KotlinInt, value: Object) = set(Variant(key), value.toVariant())
-    operator fun set(key: KotlinInt, value: CoreType) = set(Variant(key), value.toVariant())
+    operator fun set(key: KotlinInt, value: CoreType) = set(Variant(key), value._toVariant())
 
     operator fun set(key: KotlinReal, value: Variant) = set(Variant(key), value)
     operator fun set(key: KotlinReal, value: KotlinInt) = set(Variant(key), Variant(value))
@@ -259,7 +259,7 @@ class Dictionary : NativeCoreType<godot_dictionary_layout>, Iterable<Entry<Varia
     operator fun set(key: KotlinReal, value: String) = set(Variant(key), Variant(value))
     operator fun set(key: KotlinReal, value: Boolean) = set(Variant(key), Variant(value))
     operator fun set(key: KotlinReal, value: Object) = set(Variant(key), value.toVariant())
-    operator fun set(key: KotlinReal, value: CoreType) = set(Variant(key), value.toVariant())
+    operator fun set(key: KotlinReal, value: CoreType) = set(Variant(key), value._toVariant())
 
     operator fun set(key: String, value: Variant) = set(Variant(key), value)
     operator fun set(key: String, value: KotlinInt) = set(Variant(key), Variant(value))
@@ -267,7 +267,7 @@ class Dictionary : NativeCoreType<godot_dictionary_layout>, Iterable<Entry<Varia
     operator fun set(key: String, value: String) = set(Variant(key), Variant(value))
     operator fun set(key: String, value: Boolean) = set(Variant(key), Variant(value))
     operator fun set(key: String, value: Object) = set(Variant(key), value.toVariant())
-    operator fun set(key: String, value: CoreType) = set(Variant(key), value.toVariant())
+    operator fun set(key: String, value: CoreType) = set(Variant(key), value._toVariant())
 
     operator fun set(key: Boolean, value: Variant) = set(Variant(key), value)
     operator fun set(key: Boolean, value: KotlinInt) = set(Variant(key), Variant(value))
@@ -275,7 +275,7 @@ class Dictionary : NativeCoreType<godot_dictionary_layout>, Iterable<Entry<Varia
     operator fun set(key: Boolean, value: String) = set(Variant(key), Variant(value))
     operator fun set(key: Boolean, value: Boolean) = set(Variant(key), Variant(value))
     operator fun set(key: Boolean, value: Object) = set(Variant(key), value.toVariant())
-    operator fun set(key: Boolean, value: CoreType) = set(Variant(key), value.toVariant())
+    operator fun set(key: Boolean, value: CoreType) = set(Variant(key), value._toVariant())
 
     operator fun set(key: Object, value: Variant) = set(key.toVariant(), value)
     operator fun set(key: Object, value: KotlinInt) = set(Variant(key), Variant(value))
@@ -283,15 +283,15 @@ class Dictionary : NativeCoreType<godot_dictionary_layout>, Iterable<Entry<Varia
     operator fun set(key: Object, value: String) = set(Variant(key), Variant(value))
     operator fun set(key: Object, value: Boolean) = set(Variant(key), Variant(value))
     operator fun set(key: Object, value: Object) = set(Variant(key), value.toVariant())
-    operator fun set(key: Object, value: CoreType) = set(Variant(key), value.toVariant())
+    operator fun set(key: Object, value: CoreType) = set(Variant(key), value._toVariant())
 
-    operator fun set(key: CoreType, value: Variant) = set(key.toVariant(), value)
-    operator fun set(key: CoreType, value: KotlinInt) = set(key.toVariant(), Variant(value))
-    operator fun set(key: CoreType, value: KotlinReal) = set(key.toVariant(), Variant(value))
-    operator fun set(key: CoreType, value: String) = set(key.toVariant(), Variant(value))
-    operator fun set(key: CoreType, value: Boolean) = set(key.toVariant(), Variant(value))
-    operator fun set(key: CoreType, value: Object) = set(key.toVariant(), value.toVariant())
-    operator fun set(key: CoreType, value: CoreType) = set(key.toVariant(), value.toVariant())
+    operator fun set(key: CoreType, value: Variant) = set(key._toVariant(), value)
+    operator fun set(key: CoreType, value: KotlinInt) = set(key._toVariant(), Variant(value))
+    operator fun set(key: CoreType, value: KotlinReal) = set(key._toVariant(), Variant(value))
+    operator fun set(key: CoreType, value: String) = set(key._toVariant(), Variant(value))
+    operator fun set(key: CoreType, value: Boolean) = set(key._toVariant(), Variant(value))
+    operator fun set(key: CoreType, value: Object) = set(key._toVariant(), value.toVariant())
+    operator fun set(key: CoreType, value: CoreType) = set(key._toVariant(), value._toVariant())
 
     operator fun contains(key: Variant): Boolean = has(Variant(key))
     operator fun contains(key: KotlinInt): Boolean = has(Variant(key))
@@ -299,9 +299,9 @@ class Dictionary : NativeCoreType<godot_dictionary_layout>, Iterable<Entry<Varia
     operator fun contains(key: String): Boolean = has(Variant(key))
     operator fun contains(key: Boolean): Boolean = has(Variant(key))
     operator fun contains(key: Object): Boolean = has(key.toVariant())
-    operator fun contains(key: CoreType): Boolean = has(key.toVariant())
+    operator fun contains(key: CoreType): Boolean = has(key._toVariant())
 
-    override fun toVariant(): Variant = Variant(this)
+    override fun _toVariant(): Variant = Variant(this)
 
     override fun equals(other: Any?): Boolean {
         if (other == null || other !is Dictionary) {

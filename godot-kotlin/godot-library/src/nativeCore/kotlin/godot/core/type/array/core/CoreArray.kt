@@ -6,18 +6,16 @@ import godot.internal.type.*
 import kotlinx.cinterop.*
 
 @ExperimentalUnsignedTypes
-abstract class CoreArray<T : CoreType> : GodotArray<T> {
+internal abstract class CoreArray<T : CoreType> : GodotArray<T> {
 
     //CONSTRUCTOR
     constructor() {
-        _handle = cValue{}
         callNative {
             nullSafe(Godot.gdnative.godot_array_new)(it)
         }
     }
 
     constructor(other: CoreArray<T>) {
-        _handle = cValue{}
         callNative {
             nullSafe(Godot.gdnative.godot_array_new_copy)(it, other._handle.ptr)
         }
@@ -25,25 +23,25 @@ abstract class CoreArray<T : CoreType> : GodotArray<T> {
 
     internal constructor(native: CValue<godot_array>) {
         memScoped {
-            this@CoreArray.setRawMemory(native.ptr)
+            this@CoreArray._setRawMemory(native.ptr)
         }
     }
 
     internal constructor(mem: COpaquePointer) {
-        this.setRawMemory(mem)
+        this._setRawMemory(mem)
     }
 
     //API
 
     override fun append(value: T) {
         callNative {
-            nullSafe(Godot.gdnative.godot_array_append)(it, value.toVariant()._handle.ptr)
+            nullSafe(Godot.gdnative.godot_array_append)(it, value._toVariant()._handle.ptr)
         }
     }
 
     override fun bsearch(value: T, before: Boolean): Int {
         return callNative {
-            nullSafe(Godot.gdnative.godot_array_bsearch)(it, value.toVariant()._handle.ptr, before)
+            nullSafe(Godot.gdnative.godot_array_bsearch)(it, value._toVariant()._handle.ptr, before)
         }
     }
 
@@ -51,7 +49,7 @@ abstract class CoreArray<T : CoreType> : GodotArray<T> {
         return callNative {
             nullSafe(Godot.gdnative.godot_array_bsearch_custom)(
                 it,
-                value.toVariant()._handle.ptr,
+                value._toVariant()._handle.ptr,
                 obj.ptr,
                 func.toGDString().value.ptr,
                 before
@@ -61,7 +59,7 @@ abstract class CoreArray<T : CoreType> : GodotArray<T> {
 
     override fun count(value: T): Int {
         return callNative {
-            nullSafe(Godot.gdnative.godot_array_count)(it, value.toVariant()._handle.ptr)
+            nullSafe(Godot.gdnative.godot_array_count)(it, value._toVariant()._handle.ptr)
         }
     }
 
@@ -75,19 +73,19 @@ abstract class CoreArray<T : CoreType> : GodotArray<T> {
 
     override fun erase(value: T) {
         callNative {
-            nullSafe(Godot.gdnative.godot_array_erase)(it, value.toVariant()._handle.ptr)
+            nullSafe(Godot.gdnative.godot_array_erase)(it, value._toVariant()._handle.ptr)
         }
     }
 
     override fun find(what: T, from: Int): Int {
         return callNative {
-            nullSafe(Godot.gdnative.godot_array_find)(it, what.toVariant()._handle.ptr, from)
+            nullSafe(Godot.gdnative.godot_array_find)(it, what._toVariant()._handle.ptr, from)
         }
     }
 
     override fun findLast(value: T): Int {
         return callNative {
-            nullSafe(Godot.gdnative.godot_array_find_last)(it, value.toVariant()._handle.ptr)
+            nullSafe(Godot.gdnative.godot_array_find_last)(it, value._toVariant()._handle.ptr)
         }
     }
 
@@ -103,13 +101,13 @@ abstract class CoreArray<T : CoreType> : GodotArray<T> {
 
     override fun has(value: T): Boolean {
         return callNative {
-            nullSafe(Godot.gdnative.godot_array_has)(it, value.toVariant()._handle.ptr)
+            nullSafe(Godot.gdnative.godot_array_has)(it, value._toVariant()._handle.ptr)
         }
     }
 
     override fun insert(position: Int, value: T) {
         return callNative {
-            nullSafe(Godot.gdnative.godot_array_insert)(it, position, value.toVariant()._handle.ptr)
+            nullSafe(Godot.gdnative.godot_array_insert)(it, position, value._toVariant()._handle.ptr)
         }
     }
 
@@ -156,19 +154,19 @@ abstract class CoreArray<T : CoreType> : GodotArray<T> {
 
     override fun pushBack(value: T) {
         return callNative {
-            nullSafe(Godot.gdnative.godot_array_push_back)(it, value.toVariant()._handle.ptr)
+            nullSafe(Godot.gdnative.godot_array_push_back)(it, value._toVariant()._handle.ptr)
         }
     }
 
     override fun pushFront(value: T) {
         return callNative {
-            nullSafe(Godot.gdnative.godot_array_push_front)(it, value.toVariant()._handle.ptr)
+            nullSafe(Godot.gdnative.godot_array_push_front)(it, value._toVariant()._handle.ptr)
         }
     }
 
     override fun rfind(what: T, from: Int): Int {
         return callNative {
-            nullSafe(Godot.gdnative.godot_array_rfind)(it, what.toVariant()._handle.ptr, from)
+            nullSafe(Godot.gdnative.godot_array_rfind)(it, what._toVariant()._handle.ptr, from)
         }
     }
 
@@ -186,7 +184,7 @@ abstract class CoreArray<T : CoreType> : GodotArray<T> {
 
     override operator fun set(idx: Int, data: T) {
         callNative {
-            nullSafe(Godot.gdnative.godot_array_set)(it, idx, data.toVariant()._handle.ptr)
+            nullSafe(Godot.gdnative.godot_array_set)(it, idx, data._toVariant()._handle.ptr)
         }
     }
 

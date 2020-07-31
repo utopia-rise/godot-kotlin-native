@@ -13,56 +13,48 @@ class VariantArray : GodotArray<Variant> {
 
     //CONSTRUCTOR
     constructor() {
-        _handle = cValue{}
         callNative {
             nullSafe(Godot.gdnative.godot_array_new)(it)
         }
     }
 
     constructor(other: PoolByteArray) {
-        _handle = cValue{}
         callNative {
             nullSafe(Godot.gdnative.godot_array_new_pool_byte_array)(it, other._handle.ptr)
         }
     }
 
     constructor(other: PoolColorArray) {
-        _handle = cValue{}
         callNative {
             nullSafe(Godot.gdnative.godot_array_new_pool_color_array)(it, other._handle.ptr)
         }
     }
 
     constructor(other: PoolIntArray) {
-        _handle = cValue{}
         callNative {
             nullSafe(Godot.gdnative.godot_array_new_pool_int_array)(it, other._handle.ptr)
         }
     }
 
     constructor(other: PoolRealArray) {
-        _handle = cValue{}
         callNative {
             nullSafe(Godot.gdnative.godot_array_new_pool_real_array)(it, other._handle.ptr)
         }
     }
 
     constructor(other: PoolStringArray) {
-        _handle = cValue{}
         callNative {
             nullSafe(Godot.gdnative.godot_array_new_pool_string_array)(it, other._handle.ptr)
         }
     }
 
     constructor(other: PoolVector2Array) {
-        _handle = cValue{}
         callNative {
             nullSafe(Godot.gdnative.godot_array_new_pool_vector2_array)(it, other._handle.ptr)
         }
     }
 
     constructor(other: PoolVector3Array) {
-        _handle = cValue{}
         callNative {
             nullSafe(Godot.gdnative.godot_array_new_pool_vector3_array)(it, other._handle.ptr)
         }
@@ -71,12 +63,12 @@ class VariantArray : GodotArray<Variant> {
 
     internal constructor(native: CValue<godot_array>) {
         memScoped {
-            this@VariantArray.setRawMemory(native.ptr)
+            this@VariantArray._setRawMemory(native.ptr)
         }
     }
 
     internal constructor(mem: COpaquePointer) {
-        this.setRawMemory(mem)
+        this._setRawMemory(mem)
     }
 
 
@@ -92,10 +84,10 @@ class VariantArray : GodotArray<Variant> {
     fun append(value : KotlinReal) = append(Variant(value))
     fun append(value: Boolean) = append(Variant(value))
     fun append(value: String) = append(Variant(value))
-    fun append(value: Dictionary) = append(value.toVariant())
-    fun <T> append(value: GodotArray<T>) = append(value.toVariant())
+    fun append(value: Dictionary) = append(value._toVariant())
+    fun <T> append(value: GodotArray<T>) = append(value._toVariant())
     fun append(value: Object) = append(value.toVariant())
-    fun append(value: CoreType) = append(value.toVariant())
+    fun append(value: CoreType) = append(value._toVariant())
 
     override fun bsearch(value: Variant, before: Boolean): Int {
         return callNative {
@@ -110,7 +102,7 @@ class VariantArray : GodotArray<Variant> {
     fun bsearch(value: Dictionary, before: Boolean = true) = bsearch(Variant(value), before)
     fun <T> bsearch(value: GodotArray<T>, before: Boolean = true) = bsearch(Variant(value), before)
     fun bsearch(value: Object, before: Boolean = true) = bsearch(value.toVariant(), before)
-    fun bsearch(value: CoreType, before: Boolean = true) = bsearch(value.toVariant(), before)
+    fun bsearch(value: CoreType, before: Boolean = true) = bsearch(value._toVariant(), before)
 
     override fun bsearchCustom(value: Variant, obj: Object, func: String, before: Boolean): Int {
         return callNative {
@@ -146,7 +138,7 @@ class VariantArray : GodotArray<Variant> {
         bsearchCustom(value.toVariant(), obj, func, before)
 
     fun bsearchCustom(value: CoreType, obj: Object, func: String, before: Boolean) =
-        bsearchCustom(value.toVariant(), obj, func, before)
+        bsearchCustom(value._toVariant(), obj, func, before)
 
     override fun count(value: Variant): Int {
         return callNative {
@@ -161,7 +153,7 @@ class VariantArray : GodotArray<Variant> {
     fun count(value: Dictionary) = count(Variant(value))
     fun <T> count(value: GodotArray<T>) = count(Variant(value))
     fun count(value: Object) = count(value.toVariant())
-    fun count(value: CoreType) = count(value.toVariant())
+    fun count(value: CoreType) = count(value._toVariant())
 
     override fun duplicate(deep: Boolean): VariantArray {
         return VariantArray(
@@ -184,7 +176,7 @@ class VariantArray : GodotArray<Variant> {
     fun erase(value: Dictionary) = erase(Variant(value))
     fun <T> erase(value: GodotArray<T>) = erase(Variant(value))
     fun erase(value: Object) = erase(value.toVariant())
-    fun erase(value: CoreType) = erase(value.toVariant())
+    fun erase(value: CoreType) = erase(value._toVariant())
 
     override fun find(what: Variant, from: Int): Int {
         return callNative {
@@ -199,7 +191,7 @@ class VariantArray : GodotArray<Variant> {
     fun find(value: Dictionary, from: Int = 0) = find(Variant(value))
     fun <T> find(value: GodotArray<T>, from: Int = 0) = find(Variant(value))
     fun find(value: Object, from: Int = 0) = find(value.toVariant())
-    fun find(value: CoreType, from: Int = 0) = find(value.toVariant())
+    fun find(value: CoreType, from: Int = 0) = find(value._toVariant())
 
     override fun findLast(value: Variant): Int {
         return callNative {
@@ -214,7 +206,7 @@ class VariantArray : GodotArray<Variant> {
     fun findLast(value: Dictionary) = findLast(Variant(value))
     fun <T> findLast(value: GodotArray<T>) = findLast(Variant(value))
     fun findLast(value: Object) = findLast(value.toVariant())
-    fun findLast(value: CoreType) = findLast(value.toVariant())
+    fun findLast(value: CoreType) = findLast(value._toVariant())
 
     override fun front(): Variant {
         return Variant(
@@ -237,7 +229,7 @@ class VariantArray : GodotArray<Variant> {
     fun has(value: Dictionary) = has(Variant(value))
     fun <T> has(value: GodotArray<T>) = has(Variant(value))
     fun has(value: Object) = has(value.toVariant())
-    fun has(value: CoreType) = has(value.toVariant())
+    fun has(value: CoreType) = has(value._toVariant())
 
     override fun insert(position: Int, value: Variant) {
         return callNative {
@@ -252,7 +244,7 @@ class VariantArray : GodotArray<Variant> {
     fun insert(index: Int, value: Dictionary) = insert(index, Variant(value))
     fun <T> insert(index: Int, value: GodotArray<T>) = insert(index, Variant(value))
     fun insert(index: Int, value: Object) = insert(index, value.toVariant())
-    fun insert(index: Int, value: CoreType) = insert(index, value.toVariant())
+    fun insert(index: Int, value: CoreType) = insert(index, value._toVariant())
 
     override fun max(): Variant {
         return Variant(
@@ -299,7 +291,7 @@ class VariantArray : GodotArray<Variant> {
     fun pushBack(value: Dictionary) = pushBack(Variant(value))
     fun <T> pushBack(value: GodotArray<T>) = pushBack(Variant(value))
     fun pushBack(value: Object) = pushBack(value.toVariant())
-    fun pushBack(value: CoreType) = pushBack(value.toVariant())
+    fun pushBack(value: CoreType) = pushBack(value._toVariant())
 
     override fun pushFront(value: Variant) {
         return callNative {
@@ -314,7 +306,7 @@ class VariantArray : GodotArray<Variant> {
     fun pushFront(value: Dictionary) = pushFront(Variant(value))
     fun <T> pushFront(value: GodotArray<T>) = pushFront(Variant(value))
     fun pushFront(value: Object) = pushFront(value.toVariant())
-    fun pushFront(value: CoreType) = pushFront(value.toVariant())
+    fun pushFront(value: CoreType) = pushFront(value._toVariant())
 
     override fun rfind(what: Variant, from: Int): Int {
         return callNative {
@@ -329,7 +321,7 @@ class VariantArray : GodotArray<Variant> {
     fun rfind(what: Dictionary, from: Int) = rfind(Variant(what), from)
     fun <T> rfind(what: GodotArray<T>, from: Int) = rfind(Variant(what), from)
     fun rfind(what: Object, from: Int) = rfind(what.toVariant(), from)
-    fun rfind(what: CoreType, from: Int) = rfind(what.toVariant(), from)
+    fun rfind(what: CoreType, from: Int) = rfind(what._toVariant(), from)
 
     override fun slice(begin: Int, end: Int, step: Int, deep: Boolean): VariantArray {
         return VariantArray(
@@ -341,7 +333,7 @@ class VariantArray : GodotArray<Variant> {
 
 
     //UTILITIES
-    override fun toVariant() = Variant(this)
+    override fun _toVariant() = Variant(this)
 
     override operator fun set(idx: Int, data: Variant) {
         callNative {
@@ -356,7 +348,7 @@ class VariantArray : GodotArray<Variant> {
     operator fun set(idx: Int, data: Dictionary) = set(idx, Variant(data))
     operator fun <T> set(idx: Int, data: GodotArray<T>) = set(idx, Variant(data))
     operator fun set(idx: Int, data: Object) = set(idx, data.toVariant())
-    operator fun set(idx: Int, data: CoreType) = set(idx, data.toVariant())
+    operator fun set(idx: Int, data: CoreType) = set(idx, data._toVariant())
 
 
     override operator fun get(idx: Int): Variant {
@@ -378,7 +370,7 @@ class VariantArray : GodotArray<Variant> {
     operator fun plus(data: Dictionary) = plus(Variant(data))
     operator fun <T> plus(data: GodotArray<T>) = plus(Variant(data))
     operator fun plus(data: Object) = plus(data.toVariant())
-    operator fun plus(data: CoreType) = plus(data.toVariant())
+    operator fun plus(data: CoreType) = plus(data._toVariant())
 
     fun asIntVariantArray() = IntVariantArray(_handle)
     fun asFloatVariantArray() = RealVariantArray(_handle)

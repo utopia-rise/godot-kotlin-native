@@ -10,7 +10,6 @@ class ObjectArray<T : Object> : GodotArray<T> {
 
     //CONSTRUCTOR
     constructor() {
-        _handle = cValue{}
         callNative {
             nullSafe(Godot.gdnative.godot_array_new)(it)
         }
@@ -19,12 +18,12 @@ class ObjectArray<T : Object> : GodotArray<T> {
 
     internal constructor(native: CValue<godot_array>) {
         memScoped {
-            this@ObjectArray.setRawMemory(native.ptr)
+            this@ObjectArray._setRawMemory(native.ptr)
         }
     }
 
     internal constructor(mem: COpaquePointer) {
-        this.setRawMemory(mem)
+        this._setRawMemory(mem)
     }
 
     //API

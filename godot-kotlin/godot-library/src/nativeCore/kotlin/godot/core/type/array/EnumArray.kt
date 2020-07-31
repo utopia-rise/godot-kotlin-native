@@ -8,7 +8,6 @@ import kotlinx.cinterop.*
 class EnumArray<E : Enum<E>>(val mapper: (Int) -> E) : GodotArray<E>() {
     //CONSTRUCTOR
     init {
-        _handle = cValue{}
         callNative {
             nullSafe(Godot.gdnative.godot_array_new)(it)
         }
@@ -16,12 +15,12 @@ class EnumArray<E : Enum<E>>(val mapper: (Int) -> E) : GodotArray<E>() {
 
     internal constructor(native: CValue<godot_array>, mapper: (Int) -> E) : this(mapper) {
         memScoped {
-            this@EnumArray.setRawMemory(native.ptr)
+            this@EnumArray._setRawMemory(native.ptr)
         }
     }
 
     internal constructor(mem: COpaquePointer, mapper: (Int) -> E) : this(mapper) {
-        this.setRawMemory(mem)
+        this._setRawMemory(mem)
     }
 
     //API

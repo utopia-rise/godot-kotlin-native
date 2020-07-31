@@ -215,7 +215,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
                 is Float -> Variant(obj.toDouble())
                 is Double -> Variant(obj)
                 is String -> Variant(obj)
-                is CoreType -> obj.toVariant()
+                is CoreType -> obj._toVariant()
                 is Variant -> obj
                 is Object -> Variant(obj)
                 else -> throw UnsupportedOperationException("Can't convert type ${obj::class} to Variant")
@@ -829,7 +829,7 @@ internal fun <T : CPointed> wrapCore(
 ): Variant {
     return Variant(
         memScoped {
-            val ptr = core.getRawMemory(this).reinterpret<T>()
+            val ptr = core._getRawMemory(this).reinterpret<T>()
             cValue<godot_variant> {
                 nullSafe(block)(this.ptr, ptr)
             }

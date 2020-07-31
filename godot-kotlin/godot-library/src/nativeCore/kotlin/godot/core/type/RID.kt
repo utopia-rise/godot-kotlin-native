@@ -10,13 +10,14 @@ import godot.internal.type.nullSafe
 import kotlinx.cinterop.*
 
 class RID : NativeCoreType<godot_rid_layout>, Comparable<RID> {
+    override var _handle = cValue<godot_rid_layout>{}
+
     //PROPERTIES
     val id: Int
         get() = getID()
 
     //CONSTRUCTOR
     constructor() {
-        _handle = cValue {}
         callNative {
             nullSafe(Godot.gdnative.godot_rid_new)(it)
         }
@@ -24,7 +25,6 @@ class RID : NativeCoreType<godot_rid_layout>, Comparable<RID> {
 
 
     constructor(from: Object) {
-        _handle = cValue {}
         callNative {
             nullSafe(Godot.gdnative.godot_rid_new_with_resource)(it, from.ptr)
         }
@@ -33,20 +33,20 @@ class RID : NativeCoreType<godot_rid_layout>, Comparable<RID> {
 
     internal constructor(native: CValue<godot_rid_layout>) {
         memScoped {
-            this@RID.setRawMemory(native.ptr)
+            this@RID._setRawMemory(native.ptr)
         }
     }
 
     internal constructor(mem: COpaquePointer) : this() {
-        this.setRawMemory(mem)
+        this._setRawMemory(mem)
     }
 
     //INTEROP
-    override fun getRawMemory(memScope: MemScope): COpaquePointer {
+    override fun _getRawMemory(memScope: MemScope): COpaquePointer {
         return _handle.getPointer(memScope)
     }
 
-    override fun setRawMemory(mem: COpaquePointer) {
+    override fun _setRawMemory(mem: COpaquePointer) {
         _handle = mem.reinterpret<godot_rid_layout>().pointed.readValue()
     }
 
@@ -63,7 +63,7 @@ class RID : NativeCoreType<godot_rid_layout>, Comparable<RID> {
 
 
     //UTILITIES
-    override fun toVariant() = Variant(this)
+    override fun _toVariant() = Variant(this)
 
     override fun compareTo(other: RID): Int {
         return when {

@@ -32,12 +32,12 @@ class StringVariantArray : GodotArray<String> {
 
     internal constructor(native: CValue<godot_array>) {
         memScoped {
-            this@StringVariantArray.setRawMemory(native.ptr)
+            this@StringVariantArray._setRawMemory(native.ptr)
         }
     }
 
     internal constructor(mem: COpaquePointer) {
-        this.setRawMemory(mem)
+        this._setRawMemory(mem)
     }
 
     //API

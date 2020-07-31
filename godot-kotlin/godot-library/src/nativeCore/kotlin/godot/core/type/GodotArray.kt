@@ -5,18 +5,19 @@ import godot.gdnative.godot_array_layout
 import godot.internal.type.*
 import kotlinx.cinterop.*
 
-abstract class GodotArray<T> internal constructor() : NativeCoreType<godot_array_layout>(), Iterable<T> {
+abstract class GodotArray<T> internal constructor() : NativeCoreType<godot_array_layout>, Iterable<T> {
+    override var _handle = cValue<godot_array_layout>{}
 
     //PROPERTIES
     val size: Int
         get() = this.size()
 
     //INTEROP
-    override fun getRawMemory(memScope: MemScope): COpaquePointer {
+    override fun _getRawMemory(memScope: MemScope): COpaquePointer {
         return _handle.getPointer(memScope)
     }
 
-    override fun setRawMemory(mem: COpaquePointer) {
+    override fun _setRawMemory(mem: COpaquePointer) {
         _handle = mem.reinterpret<godot_array_layout>().pointed.readValue()
     }
 
@@ -236,7 +237,7 @@ abstract class GodotArray<T> internal constructor() : NativeCoreType<godot_array
 
 
     //UTILITIES
-    override fun toVariant() = Variant(this)
+    override fun _toVariant() = Variant(this)
 
     /**
      * Changes the element at the given index.

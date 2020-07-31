@@ -103,17 +103,17 @@ class Quat(
 
     internal constructor(native: CValue<godot_quat>) : this() {
         memScoped {
-            this@Quat.setRawMemory(native.ptr)
+            this@Quat._setRawMemory(native.ptr)
         }
     }
 
     internal constructor(mem: COpaquePointer) : this() {
-        this.setRawMemory(mem)
+        this._setRawMemory(mem)
     }
 
 
     //INTEROP
-    override fun getRawMemory(memScope: MemScope): COpaquePointer {
+    override fun _getRawMemory(memScope: MemScope): COpaquePointer {
         val value = cValue<godot_quat_layout> {
             x = this@Quat._x.toGodotReal()
             y = this@Quat._y.toGodotReal()
@@ -123,7 +123,7 @@ class Quat(
         return value.getPointer(memScope)
     }
 
-    override fun setRawMemory(mem: COpaquePointer) {
+    override fun _setRawMemory(mem: COpaquePointer) {
         val value = mem.reinterpret<godot_quat_layout>().pointed
         _x = value.x.toGodotReal()
         _y = value.y.toGodotReal()
@@ -386,7 +386,7 @@ class Quat(
 
 
     //UTILITIES
-    override fun toVariant() = Variant(this)
+    override fun _toVariant() = Variant(this)
 
     private fun set(px: GodotReal, py: GodotReal, pz: GodotReal, pw: GodotReal) {
         _x = px
