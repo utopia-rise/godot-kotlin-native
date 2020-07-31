@@ -170,13 +170,13 @@ class ICall(
                         val typeManagerClass = ClassName("godot.core", "TypeManager")
                         if (returnTypeClassSimpleName != "Object") {
                             codeBlockBuilder.add(
-                                "    %M(retVar) as %T\n",
+                                "    %M(retVar.pointed.value!!) as %T\n",
                                 MemberName(typeManagerClass, "wrap"),
                                 returnTypeClass
                             )
                         } else {
                             codeBlockBuilder.add(
-                                "    %M(retVar)\n",
+                                "    %M(retVar.pointed.value!!)\n",
                                 MemberName(typeManagerClass, "wrap")
                             )
                         }

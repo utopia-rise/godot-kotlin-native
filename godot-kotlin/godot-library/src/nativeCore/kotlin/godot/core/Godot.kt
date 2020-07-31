@@ -54,7 +54,6 @@ object Godot {
 
         gdnativeWrapper.compareAndSwap(null, gdnative)
         nativescriptWrapper.compareAndSwap(null, nativescript)
-        TypeManager.registerEngineTypes()
     }
 
     fun nativescriptInit(handle: COpaquePointer) {
@@ -68,14 +67,15 @@ object Godot {
             )
             languageIndexRef.compareAndSet(languageIndexRef.value, index)
         }
+        TypeManager.registerEngineTypes()
     }
 
     fun nativescriptTerminate(handle: COpaquePointer) {
+        TypeManager.dispose()
         nullSafe(nativescript11.godot_nativescript_unregister_instance_binding_data_functions)(languageIndex)
     }
 
     fun terminate(options: godot_gdnative_terminate_options) {
-        TypeManager.dispose()
         gdnativeWrapper.compareAndSwap(gdnativeWrapper.value, null)
         nativescriptWrapper.compareAndSwap(nativescriptWrapper.value, null)
     }
