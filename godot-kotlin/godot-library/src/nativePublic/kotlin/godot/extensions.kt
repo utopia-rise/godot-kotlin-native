@@ -2,8 +2,5 @@ package godot
 
 import godot.core.NodePath
 
-inline fun <T: Resource> ResourceLoader.load(path: String, typeHint: String = "", noCache: Boolean = false) = load(
-    path, typeHint, noCache
-) as T
-
+@Suppress("NOTHING_TO_INLINE", "UNCHECKED_CAST")
 inline fun <T: Node> Node.getNode(path: String) = getNode(NodePath(path)) as T
