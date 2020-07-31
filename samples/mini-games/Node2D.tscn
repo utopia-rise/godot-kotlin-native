@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/gdns/kotlin/example/TestingClass.gdns" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://Sprite.gd" type="Script" id=3]
+[ext_resource path="res://src/gdns/kotlin/example/TextureSample.gdns" type="Script" id=4]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
@@ -12,3 +13,8 @@ twoDimensionalArrayVariantArray = [  ]
 position = Vector2( 765.992, 462.985 )
 texture = ExtResource( 2 )
 script = ExtResource( 3 )
+
+[node name="Spatial" type="Spatial" parent="."]
+script = ExtResource( 4 )
+nodePath = NodePath("../Sprite")
+texture = ExtResource( 2 )

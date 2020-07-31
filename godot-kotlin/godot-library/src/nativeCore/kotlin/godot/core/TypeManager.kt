@@ -1,14 +1,11 @@
 package godot.core
 
+import godot.ClassDB
 import godot.Object
 import godot.internal.type.nullSafe
 import kotlinx.cinterop.*
 import kotlin.native.concurrent.AtomicReference
 import kotlin.native.concurrent.freeze
-
-object ClassDB {
-    fun getParentClass(cls: String): String = ""
-}
 
 internal object TypeManager {
     private val tags = AtomicReference(mutableListOf<COpaquePointer>().freeze())
@@ -67,6 +64,7 @@ internal object TypeManager {
         val copy = mutableListOf<COpaquePointer>()
         copy.addAll(tags.value)
         copy.add(tag)
+        tags.compareAndSet(tags.value, copy.freeze())
         return tag
     }
 
