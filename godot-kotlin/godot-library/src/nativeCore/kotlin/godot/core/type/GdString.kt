@@ -25,8 +25,8 @@ inline class GdString(val value: CValue<godot_string_layout>) {
 }
 
 //From Godot to Kotlin
-internal fun String(ptr: COpaquePointer) = String(ptr.reinterpret())
-internal fun String(ptr: CPointer<godot_string>) = GdString(ptr.pointed.readValue())
+internal fun GdString(ptr: COpaquePointer) = GdString(ptr.reinterpret())
+internal fun GdString(ptr: CPointer<godot_string>) = GdString(ptr.pointed.readValue())
 
 //From Kotlin to Godot
 internal fun String.getRawMemory(memScope: MemScope) =
