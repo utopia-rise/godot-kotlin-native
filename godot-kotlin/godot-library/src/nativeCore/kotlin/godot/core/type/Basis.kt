@@ -76,9 +76,15 @@ class Basis() : CoreType {
 
     //CONSTRUCTOR
     constructor(other: Basis) : this() {
-        _x = Vector3(other._x)
-        _y = Vector3(other._y)
-        _z = Vector3(other._z)
+        _x.x = other._x.x
+        _x.y = other._x.y
+        _x.z = other._x.z
+        _y.x = other._y.x
+        _y.y = other._y.y
+        _y.z = other._y.z
+        _z.x = other._z.x
+        _z.y = other._z.y
+        _z.z = other._z.z
     }
 
     constructor(
@@ -735,15 +741,15 @@ class Basis() : CoreType {
 
 
     operator fun plus(matrix: Basis) = Basis().also {
-        it._x += matrix._x
-        it._y += matrix._y
-        it._z += matrix._z
+        it._x = this._x + matrix._x
+        it._y = this._y + matrix._y
+        it._z = this._z + matrix._z
     }
 
     operator fun minus(matrix: Basis) = Basis().also {
-        it._x -= matrix._x
-        it._y -= matrix._y
-        it._z -= matrix._z
+        it._x = this._x - matrix._x
+        it._y = this._y - matrix._y
+        it._z = this._z - matrix._z
     }
 
     operator fun times(matrix: Basis) = Basis(
@@ -753,24 +759,24 @@ class Basis() : CoreType {
     )
 
     operator fun times(scalar: Int) = Basis().also {
-        it._x *= scalar
-        it._y *= scalar
-        it._z *= scalar
+        it._x = this._x * scalar
+        it._y = this._y * scalar
+        it._z = this._z * scalar
     }
     operator fun times(scalar: Long) = Basis().also {
-        it._x *= scalar
-        it._y *= scalar
-        it._z *= scalar
+        it._x = this._x * scalar
+        it._y = this._y * scalar
+        it._z = this._z * scalar
     }
     operator fun times(scalar: Float) = Basis().also {
-        it._x *= scalar
-        it._y *= scalar
-        it._z *= scalar
+        it._x = this._x * scalar
+        it._y = this._y * scalar
+        it._z = this._z * scalar
     }
     operator fun times(scalar: Double) = Basis().also {
-        it._x *= scalar
-        it._y *= scalar
-        it._z *= scalar
+        it._x = this._x * scalar
+        it._y = this._y * scalar
+        it._z = this._z * scalar
     }
 
     override fun toString(): String {
