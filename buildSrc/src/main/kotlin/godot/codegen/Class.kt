@@ -239,18 +239,23 @@ class Class @JsonCreator constructor(
             )
         }
         else {
-            val noArgConstructor = FunSpec.constructorBuilder()
-                .callThisConstructor("null")
-                .addStatement(
-                    """if (%M()) {
+
+            val noArgConstructor = if (!isInstanciable) {
+                FunSpec.constructorBuilder()
+                    .addModifiers(KModifier.INTERNAL)
+                    .callThisConstructor("null")
+            } else {
+                FunSpec.constructorBuilder()
+                    .callThisConstructor("null")
+                    .addStatement(
+                        """if (%M()) {
                    |    this.ptr = %M("$newName", "$oldName")
                    |}
                    |""".trimMargin(),
-                    MemberName(ClassName("godot.core", "Godot"), "shouldInitPtr"),
-                    MemberName("godot.internal.utils", "getConstructor")
-                )
-
-            if (!isInstanciable) noArgConstructor.addModifiers(KModifier.INTERNAL)
+                        MemberName(ClassName("godot.core", "Godot"), "shouldInitPtr"),
+                        MemberName("godot.internal.utils", "getConstructor")
+                    )
+            }
 
             typeBuilder.addFunction(noArgConstructor.build())
 
