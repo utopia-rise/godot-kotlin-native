@@ -61,13 +61,13 @@ class Class @JsonCreator constructor(
 
         generateEnums(classTypeBuilder)
 
-        val baseCompanion = if (!isSingleton && constants.isNotEmpty()) createBaseCompanion() else null
+        val baseCompanion = if (!isSingleton) createBaseCompanion() else null
 
         generateConstants(baseCompanion ?: classTypeBuilder)
 
         generateSignals(classTypeBuilder)
         generateProperties(tree, icalls, classTypeBuilder)
-        generateMethods(classTypeBuilder, tree, icalls)
+        generateMethods(classTypeBuilder, baseCompanion ?: classTypeBuilder, tree, icalls)
 
         baseCompanion?.build()?.let { classTypeBuilder.addType(it) }
 
@@ -278,19 +278,7 @@ class Class @JsonCreator constructor(
     private fun createBaseCompanion(): TypeSpec.Builder {
         return TypeSpec.companionObjectBuilder().apply {
             this.addAnnotation(ClassName("kotlin.native", "ThreadLocal"))
-            this.addProperty(createSingletonProperty(ClassName("kotlinx.cinterop", "COpaquePointer")))
         }
-    }
-
-    private fun createSingletonProperty(cOpaquePointerClass: ClassName): PropertySpec {
-        return PropertySpec
-            .builder(
-                "ptr",
-                cOpaquePointerClass,
-                KModifier.FINAL
-            )
-            .delegate("lazy{ %M(\"$newName\", \"$oldName\") }", MemberName("godot.internal.utils", "getSingleton"))
-            .build()
     }
 
     private fun generateConstants(baseCompanion: TypeSpec.Builder) {
@@ -358,12 +346,13 @@ class Class @JsonCreator constructor(
 
     private fun generateMethods(
         propertiesReceiverType: TypeSpec.Builder,
+        methodBindReceiverType: TypeSpec.Builder,
         tree: Graph<Class>,
         icalls: MutableSet<ICall>
     ) {
         methods.forEach { method ->
             if (!method.isVirtual) {
-                propertiesReceiverType.addProperty(
+                methodBindReceiverType.addProperty(
                     PropertySpec.builder(
                         "${method.newName}MethodBind",
                         ClassName("kotlinx.cinterop", "CPointer")
