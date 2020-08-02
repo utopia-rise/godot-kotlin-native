@@ -35,3 +35,6 @@ build
 
 
 /samples/mini-games/.import/
+
+# OSX
+.DS_Store

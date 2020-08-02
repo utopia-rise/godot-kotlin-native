@@ -116,8 +116,8 @@ class ICall(
             when {
                 value.type == "String" -> {
                     codeBlockBuilder.add(
-                        "    args[$i] = arg$i$nullInstruction.%M$nullInstruction.ptr\n",
-                        MemberName("kotlinx.cinterop", "cstr")
+                        "    args[$i] = arg$i$nullInstruction.%M()$nullInstruction.value$nullInstruction.ptr\n",
+                        MemberName("godot.core", "toGDString")
                     )
                 }
                 value.type == "VariantArray" || value.type == "Variant" -> {
@@ -153,6 +153,7 @@ class ICall(
                     MemberName("kotlinx.cinterop", "invoke"),
                     MemberName("kotlinx.cinterop", "ptr")
                 )
+                destroyStringArgs(codeBlockBuilder)
                 codeBlockBuilder.add(
                     "    ret = retVar.%M\n",
                     MemberName("kotlinx.cinterop", "value")
@@ -163,6 +164,7 @@ class ICall(
                     ClassName("godot.core", "Godot"),
                     MemberName("kotlinx.cinterop", "invoke")
                 )
+                destroyStringArgs(codeBlockBuilder)
                 val returnTypeClassSimpleName = returnTypeClass.simpleName
 
                 when {
@@ -184,8 +186,8 @@ class ICall(
 
                     returnTypeClassSimpleName == "String" -> {
                         codeBlockBuilder.add(
-                            "    %M(retVar)\n",
-                            MemberName("godot.core", "String")
+                            "    %M(retVar).toKString()\n",
+                            MemberName("godot.core", "GdString")
                         )
                     }
 
@@ -203,6 +205,7 @@ class ICall(
                 ClassName("godot.core", "Godot"),
                 MemberName("kotlinx.cinterop", "invoke")
             )
+            destroyStringArgs(codeBlockBuilder)
         }
 
         codeBlockBuilder.add("}\n")
@@ -231,6 +234,15 @@ class ICall(
             }
 
             spec.addParameter("arg${it.index}", argumentType)
+        }
+    }
+
+    private fun destroyStringArgs(codeBlockBuilder: CodeBlock.Builder) = arguments.withIndex().forEach {
+        if (it.value.type == "String") {
+            codeBlockBuilder.add(
+                "    %M(args[${it.index}]!!).destroy(this)\n",
+                MemberName("godot.core", "GdString")
+            )
         }
     }
 

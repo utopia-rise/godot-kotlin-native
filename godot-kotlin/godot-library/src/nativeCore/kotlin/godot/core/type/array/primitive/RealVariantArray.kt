@@ -62,7 +62,7 @@ class RealVariantArray : GodotArray<RealT> {
                 it,
                 value.toVariant()._handle.ptr,
                 obj.ptr,
-                func.toGDString().ptr,
+                func.toGDString().value.ptr,
                 before
             )
         }

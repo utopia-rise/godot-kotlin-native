@@ -91,7 +91,7 @@ object Godot {
 
     internal fun print(message: String) {
         memScoped {
-            nullSafe(gdnative.godot_print)(message.toGDString().ptr)
+            nullSafe(gdnative.godot_print)(message.toGDString().value.ptr)
         }
     }
 
