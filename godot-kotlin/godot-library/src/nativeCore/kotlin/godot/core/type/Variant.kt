@@ -317,7 +317,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
      */
     fun asString(): String {
         return memScoped {
-            val gdString = nullSafe(Godot.gdnative.godot_variant_as_string)(_handle.ptr)
+            val gdString = GdString(nullSafe(Godot.gdnative.godot_variant_as_string)(_handle.ptr))
             gdString.toKString()
         }
     }
@@ -805,7 +805,7 @@ fun Variant(from: Double) = Variant(
 fun Variant(from: String) = Variant(
     memScoped {
         cValue<godot_variant> {
-            nullSafe(Godot.gdnative.godot_variant_new_string)(this.ptr, from.toGDString().ptr)
+            nullSafe(Godot.gdnative.godot_variant_new_string)(this.ptr, from.toGDString().value.ptr)
         }
     }
 )

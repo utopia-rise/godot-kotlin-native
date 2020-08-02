@@ -69,7 +69,7 @@ class IntVariantArray : GodotArray<NaturalT> {
                 it,
                 value.toVariant()._handle.ptr,
                 obj.ptr,
-                func.toGDString().ptr,
+                func.toGDString().value.ptr,
                 before
             )
         }

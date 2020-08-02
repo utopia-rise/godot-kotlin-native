@@ -116,7 +116,7 @@ class VariantArray : GodotArray<Variant> {
                 it,
                 value._handle.ptr,
                 obj.ptr,
-                func.toGDString().ptr,
+                func.toGDString().value.ptr,
                 before
             )
         }

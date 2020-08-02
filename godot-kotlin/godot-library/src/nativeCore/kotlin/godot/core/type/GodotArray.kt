@@ -112,7 +112,7 @@ abstract class GodotArray<T> internal constructor() : NativeCoreType<godot_array
      */
     fun sortCustom(obj: Object, func: String) {
         return callNative {
-            nullSafe(Godot.gdnative.godot_array_sort_custom)(it, obj.ptr, func.toGDString().ptr)
+            nullSafe(Godot.gdnative.godot_array_sort_custom)(it, obj.ptr, func.toGDString().value.ptr)
         }
     }
 
