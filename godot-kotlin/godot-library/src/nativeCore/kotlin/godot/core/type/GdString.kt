@@ -12,9 +12,10 @@ inline class GdString(val value: CValue<godot_string_layout>) {
     internal fun toKString(): String {
         return memScoped {
             val charString = nullSafe(Godot.gdnative.godot_string_utf8)(this@GdString.value.ptr)
-            val ret = nullSafe(Godot.gdnative.godot_char_string_get_data)(charString.ptr)?.toKString()
+            val charPtr = charString.ptr
+            val ret = nullSafe(Godot.gdnative.godot_char_string_get_data)(charPtr)?.toKString()
                 ?: throw NullPointerException("Failed to convert Godot-string to Kotlin-string")
-            nullSafe(Godot.gdnative.godot_char_string_destroy)(charString.ptr)
+            nullSafe(Godot.gdnative.godot_char_string_destroy)(charPtr)
             destroy(this@memScoped)
             ret
         }
@@ -34,9 +35,10 @@ internal fun String.getRawMemory(memScope: MemScope) =
 
 internal fun String.toGDString() = memScoped {
     GdString(cValue {
-        nullSafe(Godot.gdnative.godot_string_new)(this.ptr)
+        val ptr = this.ptr
+        nullSafe(Godot.gdnative.godot_string_new)(ptr)
         nullSafe(Godot.gdnative.godot_string_parse_utf8)(
-            this.ptr,
+            ptr,
             this@toGDString.cstr.ptr
         )
     })
@@ -45,9 +47,10 @@ internal fun String.toGDString() = memScoped {
 internal fun <T> String.asGDString(block: MemScope.(GdString) -> T): T {
     return memScoped {
         val gdString = GdString(cValue {
-            nullSafe(Godot.gdnative.godot_string_new)(this.ptr)
+            val ptr = this.ptr
+            nullSafe(Godot.gdnative.godot_string_new)(ptr)
             nullSafe(Godot.gdnative.godot_string_parse_utf8)(
-                this.ptr,
+                ptr,
                 this@asGDString.cstr.ptr
             )
         })
