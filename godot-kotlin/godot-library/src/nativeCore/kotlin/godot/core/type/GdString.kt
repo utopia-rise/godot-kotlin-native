@@ -34,9 +34,10 @@ internal fun String.getRawMemory(memScope: MemScope) =
 
 internal fun String.toGDString() = memScoped {
     GdString(cValue {
-        nullSafe(Godot.gdnative.godot_string_new)(this.ptr)
+        val ptr = this.ptr
+        nullSafe(Godot.gdnative.godot_string_new)(ptr)
         nullSafe(Godot.gdnative.godot_string_parse_utf8)(
-            this.ptr,
+            ptr,
             this@toGDString.cstr.ptr
         )
     })

@@ -31,40 +31,6 @@ class Quat(
     constructor(x: Number, y: Number, z: Number, w: Number = 1.0) :
         this(x.toRealT(), y.toRealT(), z.toRealT(), w.toRealT())
 
-    constructor(from: Basis) : this() {
-        val trace = from.x.x + from.y.y + from.z.z
-        val temp: Array<RealT>
-
-        if (trace > 0.0) {
-            var s = sqrt(trace + 1.0)
-            val temp3 = s * 0.5
-            s = 0.5 / s
-            temp = arrayOf(
-                ((from.z.y - from.y.z) * s),
-                ((from.x.z - from.z.x) * s),
-                ((from.y.x - from.x.y) * s),
-                temp3
-            )
-        } else {
-            temp = arrayOf(0.0, 0.0, 0.0, 0.0)
-            val i = if (from.x.x < from.y.y) {
-                if (from.y.y < from.z.z) 2 else 1
-            } else {
-                if (from.x.x < from.z.z) 2 else 0
-            }
-            val j = (i + 1) % 3
-            val k = (i + 2) % 3
-
-            var s = sqrt(from[i][i] - from[j][j] - from[k][k] + 1.0)
-            temp[i] = s * 0.5
-            s = 0.5 / s
-            temp[3] = (from[k][j] - from[j][k]) * s
-            temp[j] = (from[j][i] + from[i][j]) * s
-            temp[k] = (from[k][i] + from[i][k]) * s
-        }
-        set(temp[0], temp[1], temp[2], temp[3])
-    }
-
     constructor(axis: Vector3, angle: RealT) : this() {
         val d: RealT = axis.length()
         if (d == 0.0) {
@@ -429,6 +395,15 @@ class Quat(
         result = 31 * result + z.hashCode()
         result = 31 * result + w.hashCode()
         return result
+    }
+
+    /*
+     * GDScript related members
+     */
+    constructor(from: Basis) : this() {
+        from.getQuat().also {
+            set(it.x, it.y, it.z, it.w)
+        }
     }
 }
 

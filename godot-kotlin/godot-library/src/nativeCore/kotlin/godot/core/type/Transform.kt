@@ -65,7 +65,7 @@ class Transform(
 
     //CONSTRUCTOR
     constructor() :
-        this(Basis(1, 0, 0, 0, 1, 0, 0, 0, 1), Vector3(0, 0, 0))
+        this(Basis(), Vector3(0, 0, 0))
 
     constructor(other: Transform) :
         this(other._basis, other._origin)
@@ -85,9 +85,6 @@ class Transform(
         tz: Number
     ) :
         this(Basis(xx, xy, xz, yx, yy, yz, zx, zy, zz), Vector3(tx, ty, tz))
-
-    constructor(x: Vector3, y: Vector3, z: Vector3, origin: Vector3) :
-        this(Basis(x, y, z), origin)
 
     constructor(from: Quat) :
         this(Basis(from))
@@ -212,10 +209,13 @@ class Transform(
         x.normalize()
         y.normalize()
 
-        _basis._x = x
-        _basis._y = y
-        _basis._z = z
-        _origin = eye
+        // on cpp, this calls basis.set(x, y, z)
+        // which basically does:
+        //  setAxis(0, x)
+        //  setAxis(1, y)
+        //  setAxis(2, z)
+        _basis.set(x, y, z)
+        _origin = Vector3(eye)
     }
 
     /**
@@ -280,9 +280,9 @@ class Transform(
      */
     fun xform(vector: Vector3): Vector3 =
         Vector3(
-            _basis.x.dot(vector) + _origin.x,
-            _basis.y.dot(vector) + _origin.y,
-            _basis.z.dot(vector) + _origin.z
+            _basis._x.dot(vector) + _origin.x,
+            _basis._y.dot(vector) + _origin.y,
+            _basis._z.dot(vector) + _origin.z
         )
 
     /**
@@ -327,9 +327,9 @@ class Transform(
     fun xformInv(vector: Vector3): Vector3 {
         val v = vector - _origin
         return Vector3(
-            (_basis.x.x * v.x) + (_basis.y.x * v.y) + (_basis.z.x * v.z),
-            (_basis.x.y * v.x) + (_basis.y.y * v.y) + (_basis.z.y * v.z),
-            (_basis.x.z * v.x) + (_basis.y.z * v.y) + (_basis.z.z * v.z)
+            (_basis._x.x * v.x) + (_basis._y.x * v.y) + (_basis._z.x * v.z),
+            (_basis._x.y * v.x) + (_basis._y.y * v.y) + (_basis._z.y * v.z),
+            (_basis._x.z * v.x) + (_basis._y.z * v.y) + (_basis._z.z * v.z)
         )
     }
 
@@ -398,4 +398,10 @@ class Transform(
         result = 31 * result + _origin.hashCode()
         return result
     }
+
+    /*
+     * GDScript related members
+     */
+    constructor(x: Vector3, y: Vector3, z: Vector3, origin: Vector3) :
+        this(Basis(x, y, z), origin)
 }

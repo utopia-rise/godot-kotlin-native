@@ -9,64 +9,27 @@ import kotlinx.cinterop.*
 import kotlin.math.*
 
 
-class Basis(
-    p_x: Vector3,
-    p_y: Vector3,
-    p_z: Vector3
-) : CoreType {
+class Basis() : CoreType {
 
     @PublishedApi
-    internal var _x = Vector3(p_x)
+    internal var _x = Vector3()
 
     @PublishedApi
-    internal var _y = Vector3(p_y)
+    internal var _y = Vector3()
 
     @PublishedApi
-    internal var _z = Vector3(p_z)
+    internal var _z = Vector3()
 
-
-    //PROPERTIES
-    /** Return a copy of the x Vector3
-     * Warning: Writing x.x = 2 will only modify a copy, not the actual object.
-     * To modify it, use x().
-     * */
-    var x
-        get() = Vector3(_x)
-        set(value) {
-            _x = Vector3(value)
-        }
-
-    inline fun <T> x(block: Vector3.() -> T): T {
-        return _x.block()
-    }
-
-    /** Return a copy of the y Vector3
-     * Warning: Writing y.x = 2 will only modify a copy, not the actual object.
-     * To modify it, use y().
-     * */
-    var y
-        get() = Vector3(_y)
-        set(value) {
-            _y = Vector3(value)
-        }
-
-
-    inline fun <T> y(block: Vector3.() -> T): T {
-        return _y.block()
-    }
-
-    /** Return a copy of the z Vector3
-     * Warning: Writing z.x = 2 will only modify a copy, not the actual object.
-     * To modify it, use z().
-     * */
-    var z
-        get() = Vector3(_z)
-        set(value) {
-            _z = Vector3(value)
-        }
-
-    inline fun <T> z(block: Vector3.() -> T): T {
-        return _z.block()
+    init {
+        _x[0] = 1.0
+        _x[1] = 0.0
+        _x[2] = 0.0
+        _y[0] = 0.0
+        _y[1] = 1.0
+        _y[2] = 0.0
+        _z[0] = 0.0
+        _z[1] = 0.1
+        _z[2] = 1.0
     }
 
     //CONSTANTS
@@ -112,11 +75,11 @@ class Basis(
 
 
     //CONSTRUCTOR
-    constructor() :
-        this(Vector3(1, 0, 0), Vector3(1, 1, 0), Vector3(1, 0, 1))
-
-    constructor(other: Basis) :
-        this(other._x, other._y, other._z)
+    constructor(other: Basis) : this() {
+        _x = Vector3(other._x)
+        _y = Vector3(other._y)
+        _z = Vector3(other._z)
+    }
 
     constructor(
         xx: Number,
@@ -128,7 +91,17 @@ class Basis(
         zx: Number,
         zy: Number,
         zz: Number
-    ) : this(Vector3(xx, xy, xz), Vector3(yx, yy, yz), Vector3(zx, zy, zz))
+    ) : this() {
+        _x[0] = xx.toRealT()
+        _x[1] = xy.toRealT()
+        _x[2] = xz.toRealT()
+        _y[0] = yx.toRealT()
+        _y[1] = yy.toRealT()
+        _y[2] = yz.toRealT()
+        _z[0] = zx.toRealT()
+        _z[1] = zy.toRealT()
+        _z[2] = zz.toRealT()
+    }
 
 
     constructor(from: Vector3) : this() {
@@ -353,13 +326,13 @@ class Basis(
         val orth = this
         for (i in 0..2) {
             for (j in 0..2) {
-                var v = orth[i][j]
+                var v = orth._get(i)[j]
                 v = when {
                     v > 0.5 -> 1.0
                     v < -0.5 -> -1.0
                     else -> 0.0
                 }
-                orth[i][j] = v
+                orth._get(i)[j] = v
             }
         }
 
@@ -417,7 +390,7 @@ class Basis(
 
     internal fun invert() {
         inline fun cofac(row1: Int, col1: Int, row2: Int, col2: Int): RealT {
-            return this[row1][col1] * this[row2][col2] - this[row1][col2] * this[row2][col1]
+            return this._get(row1)[col1] * this._get(row2)[col2] - this._get(row1)[col2] * this._get(row2)[col1]
         }
 
         val co1 = _y.y * _z.z - _y.z * _z.y
@@ -440,21 +413,57 @@ class Basis(
         )
     }
 
+    fun getQuat(): Quat {
+        require(isRotation()) { "Basis must be normalized in order to be casted to a Quaternion. Use get_rotation_quat() or call orthonormalized() instead." }
+        val trace = this._x.x + this._y.y + this._z.z
+        val temp: Array<RealT>
+
+        if (trace > 0.0) {
+            var s = sqrt(trace + 1.0)
+            val temp3 = s * 0.5
+            s = 0.5 / s
+            temp = arrayOf(
+                ((this._z.y - this._y.z) * s),
+                ((this._x.z - this._z.x) * s),
+                ((this._y.x - this._x.y) * s),
+                temp3
+            )
+        } else {
+            temp = arrayOf(0.0, 0.0, 0.0, 0.0)
+            val i = if (this._x.x < this._y.y) {
+                if (this._y.y < this._z.z) 2 else 1
+            } else {
+                if (this._x.x < this._z.z) 2 else 0
+            }
+            val j = (i + 1) % 3
+            val k = (i + 2) % 3
+
+            var s = sqrt(this._get(i)[i] - this._get(j)[j] - this._get(k)[k] + 1.0)
+            temp[i] = s * 0.5
+            s = 0.5 / s
+            temp[3] = (this._get(k)[j] - this._get(j)[k]) * s
+            temp[j] = (this._get(j)[i] + this._get(i)[j]) * s
+            temp[k] = (this._get(k)[i] + this._get(i)[k]) * s
+        }
+
+        return Quat(temp[0], temp[1], temp[2], temp[3]);
+    }
+
     /**
      *
      */
     fun isEqualApprox(a: Basis, epsilon: RealT = CMP_EPSILON): Boolean {
-        if (isEqualApprox(this.x.x, a.x.x, epsilon)) return false
-        if (isEqualApprox(this.x.y, a.x.y, epsilon)) return false
-        if (isEqualApprox(this.x.z, a.x.z, epsilon)) return false
+        if (isEqualApprox(this._x.x, a._x.x, epsilon)) return false
+        if (isEqualApprox(this._x.y, a._x.y, epsilon)) return false
+        if (isEqualApprox(this._x.z, a._x.z, epsilon)) return false
 
-        if (isEqualApprox(this.y.x, a.y.x, epsilon)) return false
-        if (isEqualApprox(this.y.y, a.y.y, epsilon)) return false
-        if (isEqualApprox(this.y.x, a.y.x, epsilon)) return false
+        if (isEqualApprox(this._y.x, a._y.x, epsilon)) return false
+        if (isEqualApprox(this._y.y, a._y.y, epsilon)) return false
+        if (isEqualApprox(this._y.x, a._y.x, epsilon)) return false
 
-        if (isEqualApprox(this.z.x, a.z.x, epsilon)) return false
-        if (isEqualApprox(this.z.y, a.z.y, epsilon)) return false
-        if (isEqualApprox(this.z.z, a.z.z, epsilon)) return false
+        if (isEqualApprox(this._z.x, a._z.x, epsilon)) return false
+        if (isEqualApprox(this._z.y, a._z.y, epsilon)) return false
+        if (isEqualApprox(this._z.z, a._z.z, epsilon)) return false
 
         return true
     }
@@ -690,7 +699,7 @@ class Basis(
     //UTILITIES
     override fun toVariant() = Variant(this)
 
-    operator fun get(n: Int): Vector3 {
+    internal fun _get(n: Int): Vector3 {
         return when (n) {
             0 -> _x
             1 -> _y
@@ -699,7 +708,7 @@ class Basis(
         }
     }
 
-    operator fun set(n: Int, f: Vector3) {
+    internal fun _set(n: Int, f: Vector3) {
         when (n) {
             0 -> _x = f
             1 -> _y = f
@@ -725,9 +734,17 @@ class Basis(
     }
 
 
-    operator fun plus(matrix: Basis) = Basis(this._x + matrix._x, this._y + matrix._y, this._z + matrix._z)
+    operator fun plus(matrix: Basis) = Basis().also {
+        it._x += matrix._x
+        it._y += matrix._y
+        it._z += matrix._z
+    }
 
-    operator fun minus(matrix: Basis) = Basis(this._x - matrix._x, this._y - matrix._y, this._z - matrix._z)
+    operator fun minus(matrix: Basis) = Basis().also {
+        it._x -= matrix._x
+        it._y -= matrix._y
+        it._z -= matrix._z
+    }
 
     operator fun times(matrix: Basis) = Basis(
         matrix.tdotx(this._x), matrix.tdoty(this._x), matrix.tdotz(this._x),
@@ -735,10 +752,26 @@ class Basis(
         matrix.tdotx(this._z), matrix.tdoty(this._z), matrix.tdotz(this._z)
     )
 
-    operator fun times(scalar: Int) = Basis(this._x * scalar, this._y * scalar, this._z * scalar)
-    operator fun times(scalar: Long) = Basis(this._x * scalar, this._y * scalar, this._z * scalar)
-    operator fun times(scalar: Float) = Basis(this._x * scalar, this._y * scalar, this._z * scalar)
-    operator fun times(scalar: Double) = Basis(this._x * scalar, this._y * scalar, this._z * scalar)
+    operator fun times(scalar: Int) = Basis().also {
+        it._x *= scalar
+        it._y *= scalar
+        it._z *= scalar
+    }
+    operator fun times(scalar: Long) = Basis().also {
+        it._x *= scalar
+        it._y *= scalar
+        it._z *= scalar
+    }
+    operator fun times(scalar: Float) = Basis().also {
+        it._x *= scalar
+        it._y *= scalar
+        it._z *= scalar
+    }
+    operator fun times(scalar: Double) = Basis().also {
+        it._x *= scalar
+        it._y *= scalar
+        it._z *= scalar
+    }
 
     override fun toString(): String {
         return buildString {
@@ -761,6 +794,72 @@ class Basis(
         result = 31 * result + _y.hashCode()
         result = 31 * result + _z.hashCode()
         return result
+    }
+
+
+    fun set(xAxis: Vector3, yAxis: Vector3, zAxis: Vector3) {
+        setAxis(0, xAxis)
+        setAxis(1, yAxis)
+        setAxis(2, zAxis)
+    }
+
+    /*
+     * GDScript related members
+     */
+    constructor(xAxis: Vector3, yAxis: Vector3, zAxis: Vector3) : this() {
+        set(xAxis, yAxis, zAxis)
+    }
+
+    //PROPERTIES
+    /** Return a copy of the x Vector3
+     * Warning: Writing x.x = 2 will only modify a copy, not the actual object.
+     * To modify it, use x().
+     * */
+    var x
+        get() = getAxis(0)
+        set(value) {
+            setAxis(0, value)
+        }
+
+    inline fun <T> x(block: Vector3.() -> T): T {
+        return _x.block()
+    }
+
+    /** Return a copy of the y Vector3
+     * Warning: Writing y.x = 2 will only modify a copy, not the actual object.
+     * To modify it, use y().
+     * */
+    var y
+        get() = getAxis(1)
+        set(value) {
+            setAxis(1, value)
+        }
+
+
+    inline fun <T> y(block: Vector3.() -> T): T {
+        return _y.block()
+    }
+
+    /** Return a copy of the z Vector3
+     * Warning: Writing z.x = 2 will only modify a copy, not the actual object.
+     * To modify it, use z().
+     * */
+    var z
+        get() = getAxis(2)
+        set(value) {
+            setAxis(2, value)
+        }
+
+    inline fun <T> z(block: Vector3.() -> T): T {
+        return _z.block()
+    }
+
+    operator fun get(index: Int): Vector3 {
+        return getAxis(index)
+    }
+
+    operator fun set(index: Int, value: Vector3) {
+        return setAxis(index, value)
     }
 }
 
