@@ -16,6 +16,8 @@ class Class @JsonCreator constructor(
     var baseClass: String,
     @JsonProperty("singleton")
     val isSingleton: Boolean,
+    @JsonProperty("singleton_name")
+    val singletonName: String,
     @JsonProperty("instanciable")
     val isInstanciable: Boolean,
     @JsonProperty("constants")
@@ -57,7 +59,7 @@ class Class @JsonCreator constructor(
             generateToVariantMethod(classTypeBuilder)
         }
 
-        if (!isSingleton) generateConstructors(classTypeBuilder)
+        generateConstructors(classTypeBuilder)
 
         generateEnums(classTypeBuilder)
 
@@ -212,28 +214,54 @@ class Class @JsonCreator constructor(
     }
 
     private fun generateConstructors(typeBuilder: TypeSpec.Builder) {
-        val noArgConstructor = FunSpec.constructorBuilder()
-            .callThisConstructor("null")
-            .addStatement(
-                """if (%M()) {
+        if (isSingleton) {
+//            init {
+//                memScoped {
+//                    val ptr = nullSafe(Godot.gdnative.godot_global_get_singleton)("Input".cstr.ptr)
+//                    requireNotNull(ptr) { "No instance found for singleton Input" }
+//                    this@Input.ptr = ptr
+//                }}
+            typeBuilder.addInitializerBlock(
+                CodeBlock.of("""
+                            |%M {
+                            |    val ptr = %M(%T.gdnative.godot_global_get_singleton).%M("$singletonName".%M.ptr)
+                            |    %M(ptr) { "No instance found for singleton $singletonName" }
+                            |    this@$newName.ptr = ptr
+                            |}
+                            |""".trimMargin(),
+                    MemberName("kotlinx.cinterop", "memScoped"),
+                    MemberName("godot.internal.type", "nullSafe"),
+                    ClassName("godot.core", "Godot"),
+                    MemberName("kotlinx.cinterop", "invoke"),
+                    MemberName("kotlinx.cinterop", "cstr"),
+                    MemberName("kotlin", "requireNotNull")
+                )
+            )
+        }
+        else {
+            val noArgConstructor = FunSpec.constructorBuilder()
+                .callThisConstructor("null")
+                .addStatement(
+                    """if (%M()) {
                    |    this.ptr = %M("$newName", "$oldName")
                    |}
                    |""".trimMargin(),
-                MemberName(ClassName("godot.core", "Godot"), "shouldInitPtr"),
-                MemberName("godot.internal.utils", "getConstructor")
-            )
+                    MemberName(ClassName("godot.core", "Godot"), "shouldInitPtr"),
+                    MemberName("godot.internal.utils", "getConstructor")
+                )
 
-        if (!isInstanciable) noArgConstructor.addModifiers(KModifier.INTERNAL)
+            if (!isInstanciable) noArgConstructor.addModifiers(KModifier.INTERNAL)
 
-        typeBuilder.addFunction(noArgConstructor.build())
+            typeBuilder.addFunction(noArgConstructor.build())
 
-        typeBuilder.primaryConstructor(
-            FunSpec.constructorBuilder()
-                .addParameter(ParameterSpec("_ignore", Any::class.asTypeName().copy(nullable = true)))
-                .callSuperConstructor()
-                .addModifiers(KModifier.INTERNAL)
-                .build()
-        ).addSuperclassConstructorParameter("_ignore")
+            typeBuilder.primaryConstructor(
+                FunSpec.constructorBuilder()
+                    .addParameter(ParameterSpec("_ignore", Any::class.asTypeName().copy(nullable = true)))
+                    .callSuperConstructor()
+                    .addModifiers(KModifier.INTERNAL)
+                    .build()
+            ).addSuperclassConstructorParameter("_ignore")
+        }
     }
 
     private fun generateEnums(typeBuilder: TypeSpec.Builder) {
