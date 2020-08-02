@@ -50,7 +50,7 @@ private val kotlinReservedNames = listOf(
     "object"
 )
 
-private val primitives = listOf("Long", "RealT", "Boolean", "Unit")
+private val primitives = listOf("Long", "Double", "Boolean", "Unit")
 
 fun String.escapeUnderscore(): String {
     if (this == "") return this
@@ -88,14 +88,12 @@ fun String.getPackage() =
             } else {
                 thisString = thisString.replace("::", ".").split(".")[0]
                 when {
-                    this == "RealT" -> "godot.internal.type"
                     thisString.isPrimitive() || thisString == "String" -> "kotlin"
                     thisString.isCoreType() -> "godot.core"
                     else -> "godot"
                 }
             }
         }
-        this == "RealT" -> "godot.internal.type"
         isPrimitive() || this == "String" -> "kotlin"
         isCoreType()  -> "godot.core"
         else -> "godot"
@@ -145,7 +143,7 @@ fun String.convertToSnakeCase(): String =
 fun String.convertTypeToKotlin(): String {
     return when {
         this == "int" -> "Long"
-        this == "float" -> "RealT"
+        this == "float" -> "Double"
         this == "bool" -> "Boolean"
         this == "void" -> "Unit"
         this == "Array" -> "VariantArray"
@@ -166,7 +164,7 @@ fun String.convertTypeForICalls(): String {
 
 fun String.defaultValue(): String = when (this) {
     "Long" -> "0"
-    "RealT" -> "0.0"
+    "Double" -> "0.0"
     "Boolean" -> "false"
     else -> throw Exception("$this is not a primitive type.")
 }
