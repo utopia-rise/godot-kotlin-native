@@ -95,7 +95,7 @@ object GD : GDMath, GDCore, GDRandom, GDPrint {
      * Important: The path must be absolute, a local path will just return null.
      * */
     @Suppress("NOTHING_TO_INLINE", "UNCHECKED_CAST")
-    inline fun <T : Resource> load(path: String, typeHint: String = "", noCache: Boolean = false): Resource {
+    inline fun <T : Resource> load(path: String, typeHint: String = "", noCache: Boolean = false): T {
         return ResourceLoader.load(path, typeHint, noCache) as T
     }
 }
