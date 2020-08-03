@@ -21,15 +21,15 @@ class Basis() : CoreType {
     internal var _z = Vector3()
 
     init {
-        _x[0] = 1.0
-        _x[1] = 0.0
-        _x[2] = 0.0
-        _y[0] = 0.0
-        _y[1] = 1.0
-        _y[2] = 0.0
-        _z[0] = 0.0
-        _z[1] = 0.1
-        _z[2] = 1.0
+        _x.x = 1.0
+        _x.y = 0.0
+        _x.z = 0.0
+        _y.x = 0.0
+        _y.y = 1.0
+        _y.z = 0.0
+        _z.x = 0.0
+        _z.y = 0.1
+        _z.z = 1.0
     }
 
     //CONSTANTS
