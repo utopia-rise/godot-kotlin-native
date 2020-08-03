@@ -37,7 +37,7 @@ class Argument @JsonCreator constructor(
             when (type) {
                 "Color", "Variant" -> "$type($defaultValue)"
                 "Boolean" -> defaultValue.toLowerCase()
-                "RealT" -> intToFloat(defaultValue)
+                "Double" -> intToFloat(defaultValue)
                 "Vector2", "Vector3", "Rect2" -> "$type${defaultValue.replace(",", ".0,")
                     .replace(")", ".0)")}"
                 "Dictionary", "Transform", "Transform2D", "VariantArray", "RID", "PoolVector2Array", "PoolStringArray",
