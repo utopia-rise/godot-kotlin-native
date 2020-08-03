@@ -13,3 +13,6 @@ godot-kotlin/godot-library/src/nativeCore/kotlin/godot/core/type/*.kt @CedNaru
 # api generation
 buildSrc/src/main/kotlin/godot/codegen/*.kt @piiertho
 buildSrc/src/main/kotlin/godot/tasks/GenerateApiTask.kt @piiertho
+
+# samples/demos
+samples/3d-platformer @raniejade

@@ -16,6 +16,8 @@ class Class @JsonCreator constructor(
     var baseClass: String,
     @JsonProperty("singleton")
     val isSingleton: Boolean,
+    @JsonProperty("singleton_name")
+    val singletonName: String,
     @JsonProperty("instanciable")
     val isInstanciable: Boolean,
     @JsonProperty("constants")
@@ -222,8 +224,8 @@ class Class @JsonCreator constructor(
             typeBuilder.addInitializerBlock(
                 CodeBlock.of("""
                             |%M {
-                            |    val ptr = %M(%T.gdnative.godot_global_get_singleton).%M("$oldName".%M.ptr)
-                            |    %M(ptr) { "No instance found for singleton $newName" }
+                            |    val ptr = %M(%T.gdnative.godot_global_get_singleton).%M("$singletonName".%M.ptr)
+                            |    %M(ptr) { "No instance found for singleton $singletonName" }
                             |    this@$newName.ptr = ptr
                             |}
                             |""".trimMargin(),
@@ -237,18 +239,23 @@ class Class @JsonCreator constructor(
             )
         }
         else {
-            val noArgConstructor = FunSpec.constructorBuilder()
-                .callThisConstructor("null")
-                .addStatement(
-                    """if (%M()) {
+
+            val noArgConstructor = if (!isInstanciable) {
+                FunSpec.constructorBuilder()
+                    .addModifiers(KModifier.INTERNAL)
+                    .callThisConstructor("null")
+            } else {
+                FunSpec.constructorBuilder()
+                    .callThisConstructor("null")
+                    .addStatement(
+                        """if (%M()) {
                    |    this.ptr = %M("$newName", "$oldName")
                    |}
                    |""".trimMargin(),
-                    MemberName(ClassName("godot.core", "Godot"), "shouldInitPtr"),
-                    MemberName("godot.internal.utils", "getConstructor")
-                )
-
-            if (!isInstanciable) noArgConstructor.addModifiers(KModifier.INTERNAL)
+                        MemberName(ClassName("godot.core", "Godot"), "shouldInitPtr"),
+                        MemberName("godot.internal.utils", "getConstructor")
+                    )
+            }
 
             typeBuilder.addFunction(noArgConstructor.build())
 
