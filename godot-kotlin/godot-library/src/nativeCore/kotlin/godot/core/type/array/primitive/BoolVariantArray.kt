@@ -25,12 +25,12 @@ class BoolVariantArray : GodotArray<Boolean> {
 
     internal constructor(native: CValue<godot_array>) {
         memScoped {
-            this@BoolVariantArray._setRawMemory(native.ptr)
+            this@BoolVariantArray.setRawMemory(native.ptr)
         }
     }
 
     internal constructor(mem: COpaquePointer) {
-        this._setRawMemory(mem)
+        this.setRawMemory(mem)
     }
 
     //API
@@ -190,14 +190,6 @@ class BoolVariantArray : GodotArray<Boolean> {
                 nullSafe(Godot.gdnative.godot_array_get)(it, idx)
             }
         ).asBoolean()
-    }
-
-    override fun plus(other: Boolean) {
-        this.append(other)
-    }
-
-    override fun iterator(): Iterator<Boolean> {
-        return IndexedIterator(size(), this::get)
     }
 }
 

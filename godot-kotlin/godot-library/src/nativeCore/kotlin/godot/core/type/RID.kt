@@ -33,20 +33,20 @@ class RID : NativeCoreType<godot_rid_layout>, Comparable<RID> {
 
     internal constructor(native: CValue<godot_rid_layout>) {
         memScoped {
-            this@RID._setRawMemory(native.ptr)
+            this@RID.setRawMemory(native.ptr)
         }
     }
 
     internal constructor(mem: COpaquePointer) : this() {
-        this._setRawMemory(mem)
+        this.setRawMemory(mem)
     }
 
     //INTEROP
-    override fun _getRawMemory(memScope: MemScope): COpaquePointer {
+    override fun getRawMemory(memScope: MemScope): COpaquePointer {
         return _handle.getPointer(memScope)
     }
 
-    override fun _setRawMemory(mem: COpaquePointer) {
+    override fun setRawMemory(mem: COpaquePointer) {
         _handle = mem.reinterpret<godot_rid_layout>().pointed.readValue()
     }
 
@@ -63,7 +63,7 @@ class RID : NativeCoreType<godot_rid_layout>, Comparable<RID> {
 
 
     //UTILITIES
-    override fun _toVariant() = Variant(this)
+    override fun toVariant() = Variant(this)
 
     override fun compareTo(other: RID): Int {
         return when {

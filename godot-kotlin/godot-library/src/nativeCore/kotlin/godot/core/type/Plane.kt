@@ -11,7 +11,7 @@ import kotlin.math.abs
 class Plane(
     p_normal: Vector3,
     p_d: KotlinReal = 0.0
-) : CoreType {
+) : CoreType() {
 
     @PublishedApi
     internal var _normal = Vector3(p_normal)
@@ -76,16 +76,16 @@ class Plane(
 
     internal constructor(native: CValue<godot_plane>) : this() {
         memScoped {
-            this@Plane._setRawMemory(native.ptr)
+            this@Plane.setRawMemory(native.ptr)
         }
     }
 
     internal constructor(mem: COpaquePointer) : this() {
-        this._setRawMemory(mem)
+        this.setRawMemory(mem)
     }
 
     //INTEROP
-    override fun _getRawMemory(memScope: MemScope): COpaquePointer {
+    override fun getRawMemory(memScope: MemScope): COpaquePointer {
         val value = cValue<godot_plane_layout> {
             normal.x = this@Plane._normal._x.toFloat()
             normal.y = this@Plane._normal._y.toFloat()
@@ -96,9 +96,9 @@ class Plane(
         return value.getPointer(memScope)
     }
 
-    override fun _setRawMemory(mem: COpaquePointer) {
+    override fun setRawMemory(mem: COpaquePointer) {
         val value = mem.reinterpret<godot_plane_layout>().pointed
-        _normal._setRawMemory(value.normal.ptr)
+        _normal.setRawMemory(value.normal.ptr)
         _d = value.d.toGodotReal()
     }
 
@@ -258,7 +258,7 @@ class Plane(
 
 
     //UTILITIES
-    override fun _toVariant() = Variant(this)
+    override fun toVariant() = Variant(this)
 
     override fun toString(): String {
         return "Plane(normal=$_normal, d=$_d)"

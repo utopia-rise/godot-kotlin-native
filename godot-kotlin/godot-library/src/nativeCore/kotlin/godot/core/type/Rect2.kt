@@ -15,7 +15,7 @@ import kotlin.math.min
 class Rect2(
     p_position: Vector2,
     p_size: Vector2
-) : CoreType {
+) : CoreType() {
 
     @PublishedApi
     internal var _position = Vector2(p_position)
@@ -100,17 +100,17 @@ class Rect2(
 
     internal constructor(native: CValue<godot_rect2>) : this() {
         memScoped {
-            this@Rect2._setRawMemory(native.ptr)
+            this@Rect2.setRawMemory(native.ptr)
         }
     }
 
     internal constructor(mem: COpaquePointer) : this() {
-        this._setRawMemory(mem)
+        this.setRawMemory(mem)
     }
 
 
     //INTEROP
-    override fun _getRawMemory(memScope: MemScope): COpaquePointer {
+    override fun getRawMemory(memScope: MemScope): COpaquePointer {
         val value = cValue<godot_rect2_layout> {
             position.x = this@Rect2._position._x.toGodotReal()
             position.y = this@Rect2._position._y.toGodotReal()
@@ -120,10 +120,10 @@ class Rect2(
         return value.getPointer(memScope)
     }
 
-    override fun _setRawMemory(mem: COpaquePointer) {
+    override fun setRawMemory(mem: COpaquePointer) {
         val value = mem.reinterpret<godot_rect2_layout>().pointed
-        _position._setRawMemory(value.position.ptr)
-        _size._setRawMemory(value.size.ptr)
+        _position.setRawMemory(value.position.ptr)
+        _size.setRawMemory(value.size.ptr)
     }
 
     //API
@@ -325,7 +325,7 @@ class Rect2(
 
 
     //UTILITIES
-    override fun _toVariant() = Variant(this)
+    override fun toVariant() = Variant(this)
 
     override fun equals(other: Any?): Boolean {
         return when (other) {

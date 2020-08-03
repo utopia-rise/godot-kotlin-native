@@ -49,15 +49,15 @@ class NodePath : NativeCoreType<godot_node_path_layout> {
     }
 
     internal constructor(mem: COpaquePointer) {
-        this._setRawMemory(mem)
+        this.setRawMemory(mem)
     }
 
     //INTEROP
-    override fun _getRawMemory(memScope: MemScope): COpaquePointer {
+    override fun getRawMemory(memScope: MemScope): COpaquePointer {
         return _handle.getPointer(memScope)
     }
 
-    override fun _setRawMemory(mem: COpaquePointer) {
+    override fun setRawMemory(mem: COpaquePointer) {
         _handle = mem.reinterpret<godot_node_path_layout>().pointed.readValue()
     }
 
@@ -139,7 +139,7 @@ class NodePath : NativeCoreType<godot_node_path_layout> {
 
 
     //UTILITIES
-    override fun _toVariant() = Variant(this)
+    override fun toVariant() = Variant(this)
 
     override fun equals(other: Any?): Boolean {
         return if (other is NodePath) {

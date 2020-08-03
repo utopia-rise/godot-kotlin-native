@@ -15,12 +15,12 @@ class EnumArray<E : Enum<E>>(val mapper: (Int) -> E) : GodotArray<E>() {
 
     internal constructor(native: CValue<godot_array>, mapper: (Int) -> E) : this(mapper) {
         memScoped {
-            this@EnumArray._setRawMemory(native.ptr)
+            this@EnumArray.setRawMemory(native.ptr)
         }
     }
 
     internal constructor(mem: COpaquePointer, mapper: (Int) -> E) : this(mapper) {
-        this._setRawMemory(mem)
+        this.setRawMemory(mem)
     }
 
     //API
@@ -184,14 +184,6 @@ class EnumArray<E : Enum<E>>(val mapper: (Int) -> E) : GodotArray<E>() {
                 nullSafe(Godot.gdnative.godot_array_get)(it, idx)
             }
         ))
-    }
-
-    override fun plus(other: E) {
-        this.append(other)
-    }
-
-    override fun iterator(): Iterator<E> {
-        return IndexedIterator(size(), this::get)
     }
 }
 

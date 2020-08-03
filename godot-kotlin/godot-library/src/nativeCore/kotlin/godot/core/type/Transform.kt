@@ -12,7 +12,7 @@ import kotlinx.cinterop.*
 class Transform(
     p_basis: Basis,
     p_origin: Vector3 = Vector3()
-) : CoreType {
+) : CoreType() {
 
     @PublishedApi
     internal var _basis = Basis(p_basis)
@@ -98,7 +98,7 @@ class Transform(
         _origin = Vector3()
 
         memScoped {
-            this@Transform._setRawMemory(native.ptr)
+            this@Transform.setRawMemory(native.ptr)
         }
     }
 
@@ -106,11 +106,11 @@ class Transform(
         _basis = Basis()
         _origin = Vector3()
 
-        this._setRawMemory(mem)
+        this.setRawMemory(mem)
     }
 
     //INTEROP
-    override fun _getRawMemory(memScope: MemScope): COpaquePointer {
+    override fun getRawMemory(memScope: MemScope): COpaquePointer {
         val value = cValue<godot_transform_layout> {
             basis.x.x = this@Transform._basis._x._x.toGodotReal()
             basis.x.y = this@Transform._basis._x._y.toGodotReal()
@@ -128,10 +128,10 @@ class Transform(
         return value.getPointer(memScope)
     }
 
-    override fun _setRawMemory(mem: COpaquePointer) {
+    override fun setRawMemory(mem: COpaquePointer) {
         val value = mem.reinterpret<godot_transform_layout>().pointed
-        _basis._setRawMemory(value.basis.ptr)
-        _origin._setRawMemory(value.origin.ptr)
+        _basis.setRawMemory(value.basis.ptr)
+        _origin.setRawMemory(value.origin.ptr)
     }
 
 
@@ -381,7 +381,7 @@ class Transform(
 
 
     //UTILITIES
-    override fun _toVariant() = Variant(this)
+    override fun toVariant() = Variant(this)
 
     operator fun times(transform: Transform): Transform {
         val t = this

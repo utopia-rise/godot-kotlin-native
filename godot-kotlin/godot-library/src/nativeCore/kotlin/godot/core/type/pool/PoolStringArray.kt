@@ -29,20 +29,20 @@ class PoolStringArray : NativeCoreType<godot_pool_string_array_layout>, Iterable
 
     internal constructor(native: CValue<godot_pool_string_array_layout>) {
         memScoped {
-            this@PoolStringArray._setRawMemory(native.ptr)
+            this@PoolStringArray.setRawMemory(native.ptr)
         }
     }
 
     internal constructor(mem: COpaquePointer) {
-        this._setRawMemory(mem)
+        this.setRawMemory(mem)
     }
 
     //INTEROP
-    override fun _getRawMemory(memScope: MemScope): COpaquePointer {
+    override fun getRawMemory(memScope: MemScope): COpaquePointer {
         return _handle.getPointer(memScope)
     }
 
-    override fun _setRawMemory(mem: COpaquePointer) {
+    override fun setRawMemory(mem: COpaquePointer) {
         _handle = mem.reinterpret<godot_pool_string_array_layout>().pointed.readValue()
     }
 
@@ -151,7 +151,7 @@ class PoolStringArray : NativeCoreType<godot_pool_string_array_layout>, Iterable
     }
 
     //UTILITIES
-    override fun _toVariant() = Variant(this)
+    override fun toVariant() = Variant(this)
 
     operator fun plus(other: String) {
         this.append(other)

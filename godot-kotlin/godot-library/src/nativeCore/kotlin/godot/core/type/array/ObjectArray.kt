@@ -18,12 +18,12 @@ class ObjectArray<T : Object> : GodotArray<T> {
 
     internal constructor(native: CValue<godot_array>) {
         memScoped {
-            this@ObjectArray._setRawMemory(native.ptr)
+            this@ObjectArray.setRawMemory(native.ptr)
         }
     }
 
     internal constructor(mem: COpaquePointer) {
-        this._setRawMemory(mem)
+        this.setRawMemory(mem)
     }
 
     //API
@@ -179,13 +179,6 @@ class ObjectArray<T : Object> : GodotArray<T> {
         ).asObject() as T
     }
 
-    override fun plus(other: T) {
-        this.append(other)
-    }
-
-    override fun iterator(): Iterator<T> {
-        return IndexedIterator(size(), this::get)
-    }
 }
 
 /**

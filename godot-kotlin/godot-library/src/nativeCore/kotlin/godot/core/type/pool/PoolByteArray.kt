@@ -29,20 +29,20 @@ class PoolByteArray : NativeCoreType<godot_pool_byte_array_layout>, Iterable<UBy
 
     internal constructor(native: CValue<godot_pool_byte_array_layout>) {
         memScoped {
-            this@PoolByteArray._setRawMemory(native.ptr)
+            this@PoolByteArray.setRawMemory(native.ptr)
         }
     }
 
     internal constructor(mem: COpaquePointer) {
-        this._setRawMemory(mem)
+        this.setRawMemory(mem)
     }
 
     //INTEROP
-    override fun _getRawMemory(memScope: MemScope): COpaquePointer {
+    override fun getRawMemory(memScope: MemScope): COpaquePointer {
         return _handle.getPointer(memScope)
     }
 
-    override fun _setRawMemory(mem: COpaquePointer) {
+    override fun setRawMemory(mem: COpaquePointer) {
         _handle = mem.reinterpret<godot_pool_byte_array_layout>().pointed.readValue()
     }
 
@@ -180,7 +180,7 @@ class PoolByteArray : NativeCoreType<godot_pool_byte_array_layout>, Iterable<UBy
     }
 
     //UTILITIES
-    override fun _toVariant() = Variant(this)
+    override fun toVariant() = Variant(this)
 
     operator fun plus(other: UByte) {
         this.append(other)

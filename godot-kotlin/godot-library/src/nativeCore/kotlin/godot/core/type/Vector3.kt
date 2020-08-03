@@ -13,7 +13,7 @@ class Vector3(
     p_x: KotlinReal,
     p_y: KotlinReal,
     p_z: KotlinReal
-) : Comparable<Vector3>, CoreType {
+) : Comparable<Vector3>, CoreType() {
 
     @PublishedApi
     internal var _x: GodotReal = p_x.toGodotReal()
@@ -97,16 +97,16 @@ class Vector3(
 
     internal constructor(native: CValue<godot_vector3>) : this() {
         memScoped {
-            this@Vector3._setRawMemory(native.ptr)
+            this@Vector3.setRawMemory(native.ptr)
         }
     }
 
     internal constructor(mem: COpaquePointer) : this() {
-        this._setRawMemory(mem)
+        this.setRawMemory(mem)
     }
 
     //INTEROP
-    override fun _getRawMemory(memScope: MemScope): COpaquePointer {
+    override fun getRawMemory(memScope: MemScope): COpaquePointer {
         val value = cValue<godot_vector3_layout> {
             x = this@Vector3._x.toFloat()
             y = this@Vector3._y.toFloat()
@@ -115,7 +115,7 @@ class Vector3(
         return value.getPointer(memScope)
     }
 
-    override fun _setRawMemory(mem: COpaquePointer) {
+    override fun setRawMemory(mem: COpaquePointer) {
         val value = mem.reinterpret<godot_vector3_layout>().pointed
         _x = value.x.toGodotReal()
         _y = value.y.toGodotReal()
@@ -459,7 +459,7 @@ class Vector3(
 
 
     //UTILITIES
-    override fun _toVariant() = Variant(this)
+    override fun toVariant() = Variant(this)
 
     operator fun get(n: Int): GodotReal =
         when (n) {

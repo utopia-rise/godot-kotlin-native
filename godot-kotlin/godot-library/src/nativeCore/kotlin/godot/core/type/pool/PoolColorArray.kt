@@ -23,20 +23,20 @@ class PoolColorArray : NativeCoreType<godot_pool_color_array_layout>, Iterable<C
 
     internal constructor(native: CValue<godot_pool_color_array_layout>) {
         memScoped {
-            this@PoolColorArray._setRawMemory(native.ptr)
+            this@PoolColorArray.setRawMemory(native.ptr)
         }
     }
     
     internal constructor(mem: COpaquePointer) {
-        this._setRawMemory(mem)
+        this.setRawMemory(mem)
     }
 
     //INTEROP
-    override fun _getRawMemory(memScope: MemScope): COpaquePointer {
+    override fun getRawMemory(memScope: MemScope): COpaquePointer {
         return _handle.getPointer(memScope)
     }
 
-    override fun _setRawMemory(mem: COpaquePointer) {
+    override fun setRawMemory(mem: COpaquePointer) {
         _handle = mem.reinterpret<godot_pool_color_array_layout>().pointed.readValue()
     }
 
@@ -47,7 +47,7 @@ class PoolColorArray : NativeCoreType<godot_pool_color_array_layout>, Iterable<C
      */
     fun append(color: Color) {
         callNative {
-            nullSafe(Godot.gdnative.godot_pool_color_array_append)(it, color._getRawMemory(this).reinterpret())
+            nullSafe(Godot.gdnative.godot_pool_color_array_append)(it, color.getRawMemory(this).reinterpret())
         }
     }
 
@@ -87,7 +87,7 @@ class PoolColorArray : NativeCoreType<godot_pool_color_array_layout>, Iterable<C
      */
     fun insert(idx: Int, data: Color) {
         callNative {
-            nullSafe(Godot.gdnative.godot_pool_color_array_insert)(it, idx, data._getRawMemory(this).reinterpret())
+            nullSafe(Godot.gdnative.godot_pool_color_array_insert)(it, idx, data.getRawMemory(this).reinterpret())
         }
     }
 
@@ -105,7 +105,7 @@ class PoolColorArray : NativeCoreType<godot_pool_color_array_layout>, Iterable<C
      */
     fun pushBack(data: Color) {
         callNative {
-            nullSafe(Godot.gdnative.godot_pool_color_array_push_back)(it, data._getRawMemory(this).reinterpret())
+            nullSafe(Godot.gdnative.godot_pool_color_array_push_back)(it, data.getRawMemory(this).reinterpret())
         }
     }
 
@@ -133,7 +133,7 @@ class PoolColorArray : NativeCoreType<godot_pool_color_array_layout>, Iterable<C
      */
     operator fun set(idx: Int, data: Color) {
         callNative {
-            nullSafe(Godot.gdnative.godot_pool_color_array_set)(it, idx, data._getRawMemory(this).reinterpret())
+            nullSafe(Godot.gdnative.godot_pool_color_array_set)(it, idx, data.getRawMemory(this).reinterpret())
         }
     }
 
@@ -147,7 +147,7 @@ class PoolColorArray : NativeCoreType<godot_pool_color_array_layout>, Iterable<C
     }
 
     //UTILITIES
-    override fun _toVariant() = Variant(this)
+    override fun toVariant() = Variant(this)
 
     operator fun plus(other: Color) {
         this.append(other)

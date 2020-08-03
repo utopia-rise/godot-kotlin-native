@@ -4,16 +4,14 @@ import godot.core.Variant
 import kotlinx.cinterop.*
 
 
-interface CoreType {
-    fun _getRawMemory(memScope: MemScope): COpaquePointer
-    fun _setRawMemory(mem: COpaquePointer)
-
-    /** Cast the coretype to a Variant */
-    fun _toVariant(): Variant
+abstract class CoreType {
+    internal abstract fun getRawMemory(memScope: MemScope): COpaquePointer
+    internal abstract fun setRawMemory(mem: COpaquePointer)
+    internal abstract fun toVariant(): Variant
 }
 
-interface NativeCoreType<C : CStructVar> : CoreType {
-    var _handle: CValue<C>
+abstract class NativeCoreType<C : CStructVar> : CoreType() {
+    internal abstract var _handle: CValue<C>
 }
 
 internal inline fun <T, reified C : CStructVar> callNative(
@@ -29,20 +27,20 @@ internal inline fun <T, reified C : CStructVar> callNative(
 }
 
 
-internal fun Long._getRawMemory(memScope: MemScope): COpaquePointer {
+internal fun Long.getRawMemory(memScope: MemScope): COpaquePointer {
     return memScope.alloc<LongVar>().apply {
-        this.value = this@_getRawMemory
+        this.value = this@getRawMemory
     }.ptr
 }
 
-internal fun Double._getRawMemory(memScope: MemScope): COpaquePointer {
+internal fun Double.getRawMemory(memScope: MemScope): COpaquePointer {
     return memScope.alloc<DoubleVar>().apply {
-        this.value = this@_getRawMemory
+        this.value = this@getRawMemory
     }.ptr
 }
 
-internal fun Boolean._getRawMemory(memScope: MemScope): COpaquePointer {
+internal fun Boolean.getRawMemory(memScope: MemScope): COpaquePointer {
     return memScope.alloc<BooleanVar>().apply {
-        this.value = this@_getRawMemory
+        this.value = this@getRawMemory
     }.ptr
 }

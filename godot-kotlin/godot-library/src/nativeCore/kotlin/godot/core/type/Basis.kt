@@ -160,17 +160,17 @@ class Basis() : CoreType {
 
     internal constructor(native: CValue<godot_basis>) : this() {
         memScoped {
-            this@Basis._setRawMemory(native.ptr)
+            this@Basis.setRawMemory(native.ptr)
         }
     }
 
     internal constructor(mem: COpaquePointer) : this() {
-        this._setRawMemory(mem)
+        this.setRawMemory(mem)
     }
 
 
     //INTEROP
-    override fun _getRawMemory(memScope: MemScope): COpaquePointer {
+    override fun getRawMemory(memScope: MemScope): COpaquePointer {
         val value = cValue<godot_basis_layout> {
             x.x = this@Basis._x._x.toGodotReal()
             x.y = this@Basis._x._y.toGodotReal()
@@ -185,11 +185,11 @@ class Basis() : CoreType {
         return value.getPointer(memScope)
     }
 
-    override fun _setRawMemory(mem: COpaquePointer) {
+    override fun setRawMemory(mem: COpaquePointer) {
         val value = mem.reinterpret<godot_basis_layout>().pointed
-        _x._setRawMemory(value.x.ptr)
-        _y._setRawMemory(value.y.ptr)
-        _z._setRawMemory(value.z.ptr)
+        _x.setRawMemory(value.x.ptr)
+        _y.setRawMemory(value.y.ptr)
+        _z.setRawMemory(value.z.ptr)
     }
 
 
@@ -703,7 +703,7 @@ class Basis() : CoreType {
 
 
     //UTILITIES
-    override fun _toVariant() = Variant(this)
+    override fun toVariant() = Variant(this)
 
     internal fun _get(n: Int): Vector3 {
         return when (n) {

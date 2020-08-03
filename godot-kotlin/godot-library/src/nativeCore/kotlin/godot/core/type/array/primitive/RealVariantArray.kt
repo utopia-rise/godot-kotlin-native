@@ -34,12 +34,12 @@ class RealVariantArray : GodotArray<KotlinReal> {
 
     internal constructor(native: CValue<godot_array>) {
         memScoped {
-            this@RealVariantArray._setRawMemory(native.ptr)
+            this@RealVariantArray.setRawMemory(native.ptr)
         }
     }
 
     internal constructor(mem: COpaquePointer) {
-        this._setRawMemory(mem)
+        this.setRawMemory(mem)
     }
 
     //API
@@ -199,14 +199,6 @@ class RealVariantArray : GodotArray<KotlinReal> {
                 nullSafe(Godot.gdnative.godot_array_get)(it, idx)
             }
         ).asDouble().toKotlinReal()
-    }
-
-    override fun plus(other: KotlinReal) {
-        this.append(other)
-    }
-
-    override fun iterator(): Iterator<KotlinReal> {
-        return IndexedIterator(size(), this::get)
     }
 }
 

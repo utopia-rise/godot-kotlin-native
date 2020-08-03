@@ -12,7 +12,8 @@ import kotlinx.cinterop.*
 
 @Suppress("NON_PUBLIC_PRIMARY_CONSTRUCTOR_OF_INLINE_CLASS", "IMPLICIT_CAST_TO_ANY")
 @ExperimentalUnsignedTypes
-inline class Variant internal constructor(internal val _handle: CValue<godot_variant>) {
+@PublishedApi
+internal inline class Variant internal constructor(internal val _handle: CValue<godot_variant>) {
     //PROPERTIES
     val type: Type
         get() {
@@ -162,6 +163,7 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
             }
         }
 
+
     }
 
     companion object {
@@ -203,11 +205,13 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
 
 
         //WRAPPING
+
         fun wrap(obj: Any?): Variant {
             if (obj == null) {
                 return Variant()
             }
             return when (obj) {
+                //Primitives
                 is Unit -> Variant()
                 is Boolean -> Variant(obj)
                 is Int -> Variant(obj.toLong())
@@ -215,9 +219,11 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
                 is Float -> Variant(obj.toDouble())
                 is Double -> Variant(obj)
                 is String -> Variant(obj)
-                is CoreType -> obj._toVariant()
-                is Variant -> obj
+                //Godot
+                is CoreType -> obj.toVariant()
                 is Object -> Variant(obj)
+                is Variant -> obj
+                //Non valid objects
                 else -> throw UnsupportedOperationException("Can't convert type ${obj::class} to Variant")
             }
         }
@@ -225,9 +231,9 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
 
     //UNWRAPPING
     /**
-     * cast the variant to the right type. Warning: It's unsafe
+     * Cast the variant to the right type. Warning: It's unsafe
      */
-    fun <T> unwrap(): T {
+    fun unwrap(): Any? {
         val ret = when (type) {
             Type.NIL -> null
             Type.BOOL -> asBoolean()
@@ -257,7 +263,15 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
             Type.POOL_VECTOR3_ARRAY -> asPoolVector3Array()
             Type.POOL_COLOR_ARRAY -> asPoolColorArray()
         }
-        return ret as T
+        return ret
+    }
+
+    /**
+     * Cast the variant to the right type. Warning: It's unsafe
+     */
+    inline fun <reified T> unwrap(block: (Any?) -> T): T {
+        val value = unwrap()
+        return block(value)
     }
 
     /**
@@ -710,42 +724,11 @@ inline class Variant internal constructor(internal val _handle: CValue<godot_var
 
     //UTILITIES
     fun toVariant() = this
-
-    // hack to get default values of core types
-    // nil variants will always attempt to convert to a sane value of the
-    // target type
-    internal inline fun <reified T : CoreType> defaultValue(): T {
-        val nil = Variant()
-        return when (T::class) {
-            AABB::class -> nil.asAABB()
-            GodotArray::class -> nil.asVariantArray()
-            Basis::class -> nil.asBasis()
-            Color::class -> nil.asColor()
-            Dictionary::class -> nil.asDictionary()
-            NodePath::class -> nil.asNodePath()
-            Plane::class -> nil.asPlane()
-            PoolByteArray::class -> nil.asPoolByteArray()
-            PoolColorArray::class -> nil.asPoolColorArray()
-            PoolIntArray::class -> nil.asPoolIntArray()
-            PoolRealArray::class -> nil.asPoolRealArray()
-            PoolStringArray::class -> nil.asPoolStringArray()
-            PoolVector2Array::class -> nil.asPoolVector2Array()
-            PoolVector3Array::class -> nil.asPoolVector3Array()
-            Quat::class -> nil.asQuat()
-            Rect2::class -> nil.asRect2()
-            RID::class -> nil.asRID()
-            Transform::class -> nil.asTransform()
-            Transform2D::class -> nil.asTransform2D()
-            Vector2::class -> nil.asVector2()
-            Vector3::class -> nil.asVector3()
-            else -> throw UnsupportedOperationException("Unknown variant class ${T::class}")
-        } as T
-    }
 }
 
 //FAKE CONSTRUCTORS. Necessary because inline classes don't support secondary constructors yet.
 //NULL
-fun Variant() = Variant(
+internal fun Variant() = Variant(
     memScoped {
         cValue<godot_variant> {
             nullSafe(Godot.gdnative.godot_variant_new_nil)(this.ptr)
@@ -754,7 +737,7 @@ fun Variant() = Variant(
 )
 
 //PRIMITIVES
-fun Variant(from: Boolean) = Variant(
+internal fun Variant(from: Boolean) = Variant(
     memScoped {
         cValue<godot_variant> {
             nullSafe(Godot.gdnative.godot_variant_new_bool)(this.ptr, from)
@@ -762,7 +745,7 @@ fun Variant(from: Boolean) = Variant(
     }
 )
 
-fun Variant(from: Int) = Variant(
+internal fun Variant(from: Int) = Variant(
     memScoped {
         cValue<godot_variant> {
             nullSafe(Godot.gdnative.godot_variant_new_int)(this.ptr, from.toLong())
@@ -770,7 +753,7 @@ fun Variant(from: Int) = Variant(
     }
 )
 
-fun <T : Enum<T>> Variant(from: Enum<T>) = Variant(
+internal fun <T : Enum<T>> Variant(from: Enum<T>) = Variant(
     memScoped {
         cValue<godot_variant> {
             nullSafe(Godot.gdnative.godot_variant_new_int)(this.ptr, from.ordinal.toLong())
@@ -778,7 +761,7 @@ fun <T : Enum<T>> Variant(from: Enum<T>) = Variant(
     }
 )
 
-fun Variant(from: Long) = Variant(
+internal fun Variant(from: Long) = Variant(
     memScoped {
         cValue<godot_variant> {
             nullSafe(Godot.gdnative.godot_variant_new_int)(this.ptr, from)
@@ -786,7 +769,7 @@ fun Variant(from: Long) = Variant(
     }
 )
 
-fun Variant(from: Float) = Variant(
+internal fun Variant(from: Float) = Variant(
     memScoped {
         cValue<godot_variant> {
             nullSafe(Godot.gdnative.godot_variant_new_real)(this.ptr, from.toDouble())
@@ -794,7 +777,7 @@ fun Variant(from: Float) = Variant(
     }
 )
 
-fun Variant(from: Double) = Variant(
+internal fun Variant(from: Double) = Variant(
     memScoped {
         cValue<godot_variant> {
             nullSafe(Godot.gdnative.godot_variant_new_real)(this.ptr, from)
@@ -802,7 +785,7 @@ fun Variant(from: Double) = Variant(
     }
 )
 
-fun Variant(from: String) = Variant(
+internal fun Variant(from: String) = Variant(
     memScoped {
         cValue<godot_variant> {
             nullSafe(Godot.gdnative.godot_variant_new_string)(this.ptr, from.toGDString().value.ptr)
@@ -812,7 +795,7 @@ fun Variant(from: String) = Variant(
 
 
 //OBJECT
-fun Variant(from: Object) = Variant(
+internal fun Variant(from: Object) = Variant(
     memScoped {
         cValue<godot_variant> {
             nullSafe(Godot.gdnative.godot_variant_new_object)(this.ptr, from.ptr)
@@ -829,7 +812,7 @@ internal fun <T : CPointed> wrapCore(
 ): Variant {
     return Variant(
         memScoped {
-            val ptr = core._getRawMemory(this).reinterpret<T>()
+            val ptr = core.getRawMemory(this).reinterpret<T>()
             cValue<godot_variant> {
                 nullSafe(block)(this.ptr, ptr)
             }
@@ -839,42 +822,42 @@ internal fun <T : CPointed> wrapCore(
 
 
 //CORE
-fun Variant(from: AABB) = wrapCore(Godot.gdnative.godot_variant_new_aabb, from)
-fun Variant(from: Basis) = wrapCore(Godot.gdnative.godot_variant_new_basis, from)
-fun Variant(from: Color) = wrapCore(Godot.gdnative.godot_variant_new_color, from)
-fun Variant(from: NodePath) = wrapCore(Godot.gdnative.godot_variant_new_node_path, from)
-fun Variant(from: Plane) = wrapCore(Godot.gdnative.godot_variant_new_plane, from)
-fun Variant(from: Quat) = wrapCore(Godot.gdnative.godot_variant_new_quat, from)
-fun Variant(from: RID) = wrapCore(Godot.gdnative.godot_variant_new_rid, from)
-fun Variant(from: Vector2) = wrapCore(Godot.gdnative.godot_variant_new_vector2, from)
-fun Variant(from: Vector3) = wrapCore(Godot.gdnative.godot_variant_new_vector3, from)
-fun Variant(from: Transform2D) = wrapCore(Godot.gdnative.godot_variant_new_transform2d, from)
-fun Variant(from: Transform) = wrapCore(Godot.gdnative.godot_variant_new_transform, from)
-fun Variant(from: Rect2) = wrapCore(Godot.gdnative.godot_variant_new_rect2, from)
-fun Variant(from: Dictionary) = wrapCore(Godot.gdnative.godot_variant_new_dictionary, from)
-fun Variant(from: Variant) = from
+internal fun Variant(from: AABB) = wrapCore(Godot.gdnative.godot_variant_new_aabb, from)
+internal fun Variant(from: Basis) = wrapCore(Godot.gdnative.godot_variant_new_basis, from)
+internal fun Variant(from: Color) = wrapCore(Godot.gdnative.godot_variant_new_color, from)
+internal fun Variant(from: NodePath) = wrapCore(Godot.gdnative.godot_variant_new_node_path, from)
+internal fun Variant(from: Plane) = wrapCore(Godot.gdnative.godot_variant_new_plane, from)
+internal fun Variant(from: Quat) = wrapCore(Godot.gdnative.godot_variant_new_quat, from)
+internal fun Variant(from: RID) = wrapCore(Godot.gdnative.godot_variant_new_rid, from)
+internal fun Variant(from: Vector2) = wrapCore(Godot.gdnative.godot_variant_new_vector2, from)
+internal fun Variant(from: Vector3) = wrapCore(Godot.gdnative.godot_variant_new_vector3, from)
+internal fun Variant(from: Transform2D) = wrapCore(Godot.gdnative.godot_variant_new_transform2d, from)
+internal fun Variant(from: Transform) = wrapCore(Godot.gdnative.godot_variant_new_transform, from)
+internal fun Variant(from: Rect2) = wrapCore(Godot.gdnative.godot_variant_new_rect2, from)
+internal fun Variant(from: Dictionary) = wrapCore(Godot.gdnative.godot_variant_new_dictionary, from)
+internal fun Variant(from: Variant) = from
 
 //CONTAINER CORE
-fun Variant(from: PoolByteArray) = wrapCore(Godot.gdnative.godot_variant_new_pool_byte_array, from)
-fun Variant(from: PoolColorArray) = wrapCore(Godot.gdnative.godot_variant_new_pool_color_array, from)
-fun Variant(from: PoolIntArray) = wrapCore(Godot.gdnative.godot_variant_new_pool_int_array, from)
-fun Variant(from: PoolRealArray) = wrapCore(Godot.gdnative.godot_variant_new_pool_real_array, from)
-fun Variant(from: PoolStringArray) = wrapCore(Godot.gdnative.godot_variant_new_pool_string_array, from)
-fun Variant(from: PoolVector2Array) = wrapCore(Godot.gdnative.godot_variant_new_pool_vector2_array, from)
-fun Variant(from: PoolVector3Array) = wrapCore(Godot.gdnative.godot_variant_new_pool_vector3_array, from)
-fun <T> Variant(from: GodotArray<T>) = wrapCore(Godot.gdnative.godot_variant_new_array, from)
+internal fun Variant(from: PoolByteArray) = wrapCore(Godot.gdnative.godot_variant_new_pool_byte_array, from)
+internal fun Variant(from: PoolColorArray) = wrapCore(Godot.gdnative.godot_variant_new_pool_color_array, from)
+internal fun Variant(from: PoolIntArray) = wrapCore(Godot.gdnative.godot_variant_new_pool_int_array, from)
+internal fun Variant(from: PoolRealArray) = wrapCore(Godot.gdnative.godot_variant_new_pool_real_array, from)
+internal fun Variant(from: PoolStringArray) = wrapCore(Godot.gdnative.godot_variant_new_pool_string_array, from)
+internal fun Variant(from: PoolVector2Array) = wrapCore(Godot.gdnative.godot_variant_new_pool_vector2_array, from)
+internal fun Variant(from: PoolVector3Array) = wrapCore(Godot.gdnative.godot_variant_new_pool_vector3_array, from)
+internal fun <T> Variant(from: GodotArray<T>) = wrapCore(Godot.gdnative.godot_variant_new_array, from)
 
 internal fun Variant(from: CPointer<godot_variant>) = Variant(from.pointed.readValue())
 
-//Throw an exception for the types not supported by Godot
-fun Variant(from: Any?): Variant = throw UnsupportedOperationException("Unknown variant class")
+//Use the wrap function to check if the type of the parameter is valid
+internal fun Variant(from: Any?): Variant = Variant.wrap(from)
 
 //EXTENSION METHOD TO CAST PRIMITIVES TO VARIANT
-fun Any?.toVariant() = Variant(this)
-fun Boolean.toVariant() = Variant(this)
-fun Int.toVariant() = Variant(this)
-fun Long.toVariant() = Variant(this)
-fun Float.toVariant() = Variant(this)
-fun Double.toVariant() = Variant(this)
-fun String.toVariant() = Variant(this)
-fun <T : Enum<T>> Enum<T>.toVariant() = Variant(this)
+internal fun Any?.toVariant() = Variant(this)
+internal fun Boolean.toVariant() = Variant(this)
+internal fun Int.toVariant() = Variant(this)
+internal fun Long.toVariant() = Variant(this)
+internal fun Float.toVariant() = Variant(this)
+internal fun Double.toVariant() = Variant(this)
+internal fun String.toVariant() = Variant(this)
+internal fun <T : Enum<T>> Enum<T>.toVariant() = Variant(this)

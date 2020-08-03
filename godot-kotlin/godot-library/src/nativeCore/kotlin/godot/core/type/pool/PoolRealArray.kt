@@ -23,20 +23,20 @@ class PoolRealArray : NativeCoreType<godot_pool_real_array_layout>, Iterable<Kot
 
     internal constructor(native: CValue<godot_pool_real_array_layout>) {
         memScoped {
-            this@PoolRealArray._setRawMemory(native.ptr)
+            this@PoolRealArray.setRawMemory(native.ptr)
         }
     }
 
     internal constructor(mem: COpaquePointer) {
-        this._setRawMemory(mem)
+        this.setRawMemory(mem)
     }
 
     //INTEROP
-    override fun _getRawMemory(memScope: MemScope): COpaquePointer {
+    override fun getRawMemory(memScope: MemScope): COpaquePointer {
         return _handle.getPointer(memScope)
     }
 
-    override fun _setRawMemory(mem: COpaquePointer) {
+    override fun setRawMemory(mem: COpaquePointer) {
         _handle = mem.reinterpret<godot_pool_real_array_layout>().pointed.readValue()
     }
 
@@ -145,7 +145,7 @@ class PoolRealArray : NativeCoreType<godot_pool_real_array_layout>, Iterable<Kot
     }
 
     //UTILITIES
-    override fun _toVariant() = Variant(this)
+    override fun toVariant() = Variant(this)
 
     operator fun plus(other: KotlinReal) {
         this.append(other)

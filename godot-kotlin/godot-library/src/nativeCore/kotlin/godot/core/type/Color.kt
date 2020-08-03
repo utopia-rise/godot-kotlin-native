@@ -14,7 +14,7 @@ class Color(
     p_g: KotlinReal,
     p_b: KotlinReal,
     p_a: KotlinReal
-) : Comparable<Color>, CoreType {
+) : Comparable<Color>, CoreType() {
 
     @PublishedApi
     internal var _r: GodotReal = p_r.toGodotReal()
@@ -567,17 +567,17 @@ class Color(
 
     internal constructor(native: CValue<godot_color>) : this() {
         memScoped {
-            this@Color._setRawMemory(native.ptr)
+            this@Color.setRawMemory(native.ptr)
         }
     }
 
     internal constructor(mem: COpaquePointer) : this() {
-        this._setRawMemory(mem)
+        this.setRawMemory(mem)
     }
 
 
     //INTEROP
-    override fun _getRawMemory(memScope: MemScope): COpaquePointer {
+    override fun getRawMemory(memScope: MemScope): COpaquePointer {
         val value = cValue<godot_color_layout> {
             r = this@Color._r.toFloat()
             g = this@Color._g.toFloat()
@@ -587,7 +587,7 @@ class Color(
         return value.getPointer(memScope)
     }
 
-    override fun _setRawMemory(mem: COpaquePointer) {
+    override fun setRawMemory(mem: COpaquePointer) {
         val value = mem.reinterpret<godot_color_layout>().pointed
         _r = value.r
         _g = value.g
@@ -819,7 +819,7 @@ class Color(
     }
 
     //Utilities
-    override fun _toVariant() = Variant(this)
+    override fun toVariant() = Variant(this)
 
     operator fun plus(c: Color) = Color(_r + c._r, _g + c._g, _b + c._b, _a + c._a)
     operator fun plus(scalar: Float) = Color(_r + scalar, _g + scalar, _b + scalar, _a + scalar)

@@ -5,19 +5,24 @@ import godot.gdnative.godot_array_layout
 import godot.internal.type.*
 import kotlinx.cinterop.*
 
-abstract class GodotArray<T> internal constructor() : NativeCoreType<godot_array_layout>, Iterable<T> {
-    override var _handle = cValue<godot_array_layout>{}
+abstract class GodotArray<T> internal constructor() : NativeCoreType<godot_array_layout>(), MutableCollection<T> {
+    override var _handle = cValue<godot_array_layout> {}
 
     //PROPERTIES
-    val size: Int
-        get() = this.size()
+    /**
+     * Returns the number of elements in the array.
+     */
+    override val size: Int
+        get() = callNative {
+            nullSafe(Godot.gdnative.godot_array_size)(it)
+        }
 
     //INTEROP
-    override fun _getRawMemory(memScope: MemScope): COpaquePointer {
+    override fun getRawMemory(memScope: MemScope): COpaquePointer {
         return _handle.getPointer(memScope)
     }
 
-    override fun _setRawMemory(mem: COpaquePointer) {
+    override fun setRawMemory(mem: COpaquePointer) {
         _handle = mem.reinterpret<godot_array_layout>().pointed.readValue()
     }
 
@@ -26,7 +31,7 @@ abstract class GodotArray<T> internal constructor() : NativeCoreType<godot_array
     /**
      * Clears the array. This is equivalent to using resize with a size of 0.
      */
-    fun clear() {
+    override fun clear() {
         callNative {
             nullSafe(Godot.gdnative.godot_array_clear)(it)
         }
@@ -89,14 +94,6 @@ abstract class GodotArray<T> internal constructor() : NativeCoreType<godot_array
         }
     }
 
-    /**
-     * Returns the number of elements in the array.
-     */
-    fun size(): Int {
-        return callNative {
-            nullSafe(Godot.gdnative.godot_array_size)(it)
-        }
-    }
 
     /**
      * Sorts the array.
@@ -237,7 +234,7 @@ abstract class GodotArray<T> internal constructor() : NativeCoreType<godot_array
 
 
     //UTILITIES
-    override fun _toVariant() = Variant(this)
+    override fun toVariant() = Variant(this)
 
     /**
      * Changes the element at the given index.
@@ -249,7 +246,24 @@ abstract class GodotArray<T> internal constructor() : NativeCoreType<godot_array
      */
     abstract operator fun get(idx: Int): T
 
-    abstract operator fun plus(other: T)
+    operator fun plus(other: T) {
+        this.append(other)
+    }
+
+    override operator fun contains(element: T) = has(element)
+
+    override fun containsAll(elements: Collection<T>): Boolean {
+        for (element in elements) {
+            if (!has(element)) return false
+        }
+        return true
+    }
+
+    override fun isEmpty() = this.empty()
+
+    override fun iterator(): MutableIterator<T> {
+        return IndexedIterator(this::size, this::get, this::remove)
+    }
 
     /**
      * WARNING: no equals function is available in the Gdnative API for this Coretype.
@@ -270,11 +284,10 @@ abstract class GodotArray<T> internal constructor() : NativeCoreType<godot_array
     }
 
     override fun toString(): String {
-        return "Array(${size()})"
+        return "Array(${size})"
     }
 
     internal inline fun <C> callNative(block: MemScope.(CPointer<godot_array_layout>) -> C): C {
         return callNative(this, block)
     }
-
 }

@@ -41,12 +41,12 @@ class IntVariantArray : GodotArray<KotlinInt> {
 
     internal constructor(native: CValue<godot_array>) {
         memScoped {
-            this@IntVariantArray._setRawMemory(native.ptr)
+            this@IntVariantArray.setRawMemory(native.ptr)
         }
     }
 
     internal constructor(mem: COpaquePointer) {
-        this._setRawMemory(mem)
+        this.setRawMemory(mem)
     }
 
     //API
@@ -205,14 +205,6 @@ class IntVariantArray : GodotArray<KotlinInt> {
                 nullSafe(Godot.gdnative.godot_array_get)(it, idx)
             }
         ).asInt().toKotlinInt()
-    }
-
-    override fun plus(other: KotlinInt) {
-        this.append(other)
-    }
-
-    override fun iterator(): Iterator<KotlinInt> {
-        return IndexedIterator(size(), this::get)
     }
 }
 

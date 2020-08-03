@@ -11,7 +11,7 @@ import kotlinx.cinterop.*
 class AABB(
     p_position: Vector3,
     p_size: Vector3
-) : CoreType {
+) : CoreType() {
 
     @PublishedApi
     internal var _position = Vector3(p_position)
@@ -76,17 +76,17 @@ class AABB(
 
     internal constructor(native: CValue<godot_aabb>) : this() {
         memScoped {
-            this@AABB._setRawMemory(native.ptr)
+            this@AABB.setRawMemory(native.ptr)
         }
     }
 
     internal constructor(mem: COpaquePointer) : this() {
-        this._setRawMemory(mem)
+        this.setRawMemory(mem)
     }
 
 
     //INTEROP
-    override fun _getRawMemory(memScope: MemScope): COpaquePointer {
+    override fun getRawMemory(memScope: MemScope): COpaquePointer {
         val value = cValue<godot_aabb_layout> {
             position.x = this@AABB._position._x.toGodotReal()
             position.y = this@AABB._position._y.toGodotReal()
@@ -98,10 +98,10 @@ class AABB(
         return value.getPointer(memScope)
     }
 
-    override fun _setRawMemory(mem: COpaquePointer) {
+    override fun setRawMemory(mem: COpaquePointer) {
         val value = mem.reinterpret<godot_aabb_layout>().pointed
-        _position._setRawMemory(value.position.ptr)
-        _size._setRawMemory(value.size.ptr)
+        _position.setRawMemory(value.position.ptr)
+        _size.setRawMemory(value.size.ptr)
     }
 
     //API
@@ -509,7 +509,7 @@ class AABB(
     }
 
     //UTILITIES
-    override fun _toVariant() = Variant(this)
+    override fun toVariant() = Variant(this)
 
     override fun equals(other: Any?): Boolean =
         when (other) {
