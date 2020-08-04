@@ -161,12 +161,18 @@ fun String.convertTypeForICalls(): String {
     return "Object"
 }
 
-
 fun String.defaultValue(): String = when (this) {
     "Long" -> "0"
     "Double" -> "0.0"
     "Boolean" -> "false"
     else -> throw Exception("$this is not a primitive type.")
+}
+
+fun String.toICallName() = when {
+    isEnum() -> "Long"
+    isCoreType() -> "Core"
+    tree.isObjectOrItsChild(this) -> "Object"
+    else -> this
 }
 
 private class TypeException(override val message: String) : Exception()

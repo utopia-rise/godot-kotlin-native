@@ -6,15 +6,16 @@ import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import java.io.File
 
+lateinit var tree: Graph<Class>
 
 infix fun File.generateApiFrom(jsonSource: File) {
     val classes: List<Class> = ObjectMapper().readValue(jsonSource, object : TypeReference<ArrayList<Class>>() {})
 
-    val tree = classes.buildTree()
+    tree = classes.buildTree()
     val icalls = mutableSetOf<ICall>()
 
     classes.forEach { clazz ->
-        clazz.generate(this, tree, icalls)
+        clazz.generate(this, icalls)
     }
 
     val iCallFileSpec = FileSpec
@@ -22,7 +23,7 @@ infix fun File.generateApiFrom(jsonSource: File) {
         .addFunction(generateICallsVarargsFunction())
         .addImport("kotlinx.cinterop", "set", "get", "pointed")
 
-    icalls.forEach { iCallFileSpec.addFunction(it generateICall tree) }
+    icalls.forEach { iCallFileSpec.addFunction(it.generated) }
 
     this.parentFile.mkdirs()
 

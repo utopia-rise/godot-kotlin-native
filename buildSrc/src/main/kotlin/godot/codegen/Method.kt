@@ -29,13 +29,13 @@ open class Method @JsonCreator constructor(
 
     var isGetterOrSetter: Boolean = false
 
-    fun generate(clazz: Class, tree: Graph<Class>, icalls: MutableSet<ICall>): FunSpec {
+    fun generate(clazz: Class, icalls: MutableSet<ICall>): FunSpec {
         // Uncomment to disable method implementation generation
         //if (isGetterOrSetter) return null
         val modifiers = mutableListOf<KModifier>()
 
         if (!clazz.isSingleton) {
-            modifiers.add(getModifier(tree, clazz))
+            modifiers.add(getModifier(clazz))
         }
 
         val generatedFunBuilder = FunSpec
@@ -58,7 +58,6 @@ open class Method @JsonCreator constructor(
 
         //TODO: move adding arguments to generatedFunBuilder to separate function
         val callArgumentsAsString = buildCallArgumentsString(
-            tree,
             clazz,
             generatedFunBuilder
         ) //cannot be inlined as it also adds the arguments to the generatedFunBuilder
@@ -112,7 +111,7 @@ open class Method @JsonCreator constructor(
         return generatedFunBuilder.build()
     }
 
-    private fun buildCallArgumentsString(tree: Graph<Class>, cl: Class, generatedFunBuilder: FunSpec.Builder): String {
+    private fun buildCallArgumentsString(cl: Class, generatedFunBuilder: FunSpec.Builder): String {
         return buildString {
             arguments.withIndex().forEach {
                 val index = it.index
@@ -141,7 +140,7 @@ open class Method @JsonCreator constructor(
         }
     }
 
-    private fun getModifier(tree: Graph<Class>, cl: Class) =
+    private fun getModifier(cl: Class) =
         if (tree.doAncestorsHaveMethod(cl, this)) KModifier.OVERRIDE else KModifier.OPEN
 
     private fun constructICall(methodArguments: String, icalls: MutableSet<ICall>): Pair<String, String> {

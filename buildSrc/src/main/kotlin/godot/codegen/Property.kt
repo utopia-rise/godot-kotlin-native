@@ -41,7 +41,7 @@ class Property @JsonCreator constructor(
         }
     }
 
-    fun generate(clazz: Class, tree: Graph<Class>, icalls: MutableSet<ICall>): PropertySpec? {
+    fun generate(clazz: Class, icalls: MutableSet<ICall>): PropertySpec? {
         if (!hasValidGetter && !hasValidSetter) return null
 
         if (hasValidGetter && !validGetter.returnType.isEnum() && type != validGetter.returnType) {
