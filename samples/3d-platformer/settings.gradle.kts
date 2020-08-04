@@ -1,3 +1,5 @@
+rootProject.name = "platformer3d"
+
 // without this doing:
 //  plugin { id("com.utopia-rise.godot-kotlin") version "0.1.0" }
 // won't work  as gradle does not know how to map the plugin id to an actual artifact.
