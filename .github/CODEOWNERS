@@ -16,3 +16,7 @@ buildSrc/src/main/kotlin/godot/tasks/GenerateApiTask.kt @piiertho
 
 # samples/demos
 samples/3d-platformer @raniejade
+
+# documentation
+docs/* @raniejade
+.readthedocs.yml @raniejade
