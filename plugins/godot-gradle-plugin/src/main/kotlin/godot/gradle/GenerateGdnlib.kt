@@ -32,7 +32,13 @@ open class GenerateGdnlib : DefaultTask() {
             writer.appendln("[entry]")
             writer.appendln()
             libraries.get().forEach { (platform, path) ->
-                writer.appendln("${platformToKey(platform)}=\"res://$path\"")
+                var normalizedPath = path.toString()
+                // on Windows the path separator used is \ but Godot doesn't like it.
+                // replace all instances of \ with / (unix path separator)
+                if (File.separator == "\\") {
+                    normalizedPath = normalizedPath.replace("\\", "/")
+                }
+                writer.appendln("${platformToKey(platform)}=\"res://$normalizedPath\"")
             }
             writer.appendln()
 
