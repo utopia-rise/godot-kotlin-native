@@ -2,6 +2,7 @@ rootProject.name = "godot-kotlin"
 
 subdir("godot-kotlin") {
     include("godot-library")
+    include("godot-extension-injection")
 }
 
 subdir("plugins") {

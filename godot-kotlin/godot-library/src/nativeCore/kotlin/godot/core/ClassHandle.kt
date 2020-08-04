@@ -6,8 +6,7 @@ import godot.internal.type.nullSafe
 import godot.registration.RPCMode
 import kotlinx.cinterop.*
 
-@PublishedApi
-internal class ClassHandle<T : Object>(
+class ClassHandle<T : Object>(
     private val nativescriptHandle: COpaquePointer,
     private val className: String,
     private val parentClassName: String,
