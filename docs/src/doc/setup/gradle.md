@@ -72,7 +72,7 @@ Once the build completes, a file `src/gdns/Simple.gdns` is generated. You can us
 
 ## Configuring target platforms
 
-By default, the plugin configures the build to build all [supported platforms](supported-platforms.md). This can be changed via the `platforms` property of `godot`.
+By default, the plugin configures the build to build all supported platforms. This can be changed via the `platforms` property of `godot`.
 
 ```kotlin
 godot {
@@ -80,7 +80,15 @@ godot {
 }
 ```
 
-## Running godot
-The gradle plugin also provides a task that will download and run a specific version of Godot. By default, this version is set to the version of Godot this binding is built against. The version can be customized via the `godotVersion` property of the `godot` extension.
+## All Godot plugin configurations
 
-TBD
+| Property              | Type           | Description                                                                                                                                                                                                                                                                                                          |
+|-----------------------|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| debug                 | Boolean        | Sets if a debug or a release build should be built. **Note:** as of kotlin version `1.3.72` release builds are broken on the kotlin side!                                                                                                                                                                            |
+| cleanupGeneratedFiles | Boolean        | Deletes the generated gdns files (the ones you attach in the Godot Editor as Native script classes) on each build. Especially useful when you remove classes so they get removed from Godot automatically as well.    **Note:** You still have to remove the reference of the script in the Node hierarchy yourself! |
+| gdnsDir               | File           | Changes the default (`src/gdns/`) output dir for generated gdns files                                                                                                                                                                                                                                                |
+| gdnlibFile            | File           | You can set the name `gdnlib` file yourself if you want to create it yourself or don't want the generated one to be named `lowercasedProjectName.gdnlib`                                                                                                                                                             |
+| singleton             | Boolean        | Sets the `singleton` property inside the generated `gdnlib` file                                                                                                                                                                                                                                                     |
+| loadOnce              | Boolean        | Sets the `load_once` property inside the generated `gdnlib` file                                                                                                                                                                                                                                                     |
+| reloadable            | Boolean        | Sets the `reloadable` property inside the generated `gdnlib` file                                                                                                                                                                                                                                                    |
+| platforms             | List<Platform> | Sets the targets platforms                                                                                                                                                                                                                                                                                           |

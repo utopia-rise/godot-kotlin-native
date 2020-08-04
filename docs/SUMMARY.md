@@ -9,3 +9,4 @@
     * [Methods](src/doc/user-guide/methods.md)
     * [Signals](src/doc/user-guide/signals.md)
     * [Properties](src/doc/user-guide/properties.md)
+* [Contribution](src/doc/contribution.md)

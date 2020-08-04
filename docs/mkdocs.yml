@@ -36,3 +36,4 @@ nav:
     - Methods: user-guide/methods.md
     - Signals: user-guide/signals.md
     - Properties: user-guide/properties.md
+  - Contribution: contribution.md
