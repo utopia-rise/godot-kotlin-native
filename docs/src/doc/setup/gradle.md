@@ -72,7 +72,7 @@ Once the build completes, a file `src/gdns/Simple.gdns` is generated. You can us
 
 ## Configuring target platforms
 
-By default, the plugin configures the build to build all [supported platforms](supported-platforms.md). This can be changed via the `platforms` property of `godot`.
+By default, the plugin configures the build to build all supported platforms. This can be changed via the `platforms` property of `godot`.
 
 ```kotlin
 godot {
