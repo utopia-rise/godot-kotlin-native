@@ -4,6 +4,8 @@ import com.squareup.kotlinpoet.ANY
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.TypeName
+import godot.codegen.tree
+import godot.codegen.isObjectOrItsChild
 
 private val coreTypes = listOf(
     "GodotArray",
@@ -180,10 +182,11 @@ fun String.convertTypeForICalls(): String {
     return "Object"
 }
 
-
 fun String.defaultValue(): String = when (this) {
     "Long" -> "0"
     "Double" -> "0.0"
     "Boolean" -> "false"
     else -> throw Exception("$this is not a primitive type.")
 }
+
+private class TypeException(override val message: String) : Exception()

@@ -43,7 +43,7 @@ class Class @JsonCreator constructor(
         baseClass = baseClass.escapeUnderscore()
     }
 
-    fun generate(outputDir: File, tree: Graph<Class>, icalls: MutableSet<ICall>) {
+    fun generate(outputDir: File, icalls: MutableSet<ICall>) {
         shouldGenerate = newName != "GlobalConstants" && tree.getBaseClass(this)?.isSingleton == false
             || isInstanciable || isSingleton
 
@@ -71,8 +71,8 @@ class Class @JsonCreator constructor(
         generateConstants(baseCompanion ?: classTypeBuilder)
 
         generateSignals(classTypeBuilder)
-        generateProperties(tree, icalls, classTypeBuilder)
-        generateMethods(classTypeBuilder, tree, icalls)
+        generateProperties(icalls, classTypeBuilder)
+        generateMethods(classTypeBuilder, icalls)
 
         baseCompanion?.build()?.let { classTypeBuilder.addType(it) }
 
@@ -294,12 +294,11 @@ class Class @JsonCreator constructor(
     }
 
     private fun generateProperties(
-        tree: Graph<Class>,
         icalls: MutableSet<ICall>,
         propertiesReceiverType: TypeSpec.Builder
     ) {
         properties.forEach { property ->
-            val propertySpec = property.generate(this, tree, icalls)
+            val propertySpec = property.generate(this, icalls)
             if (propertySpec != null) {
                 propertiesReceiverType.addProperty(propertySpec)
 
@@ -346,11 +345,10 @@ class Class @JsonCreator constructor(
 
     private fun generateMethods(
         propertiesReceiverType: TypeSpec.Builder,
-        tree: Graph<Class>,
         icalls: MutableSet<ICall>
     ) {
         methods.forEach { method ->
-            propertiesReceiverType.addFunction(method.generate(this, tree, icalls))
+            propertiesReceiverType.addFunction(method.generate(this, icalls))
         }
     }
 

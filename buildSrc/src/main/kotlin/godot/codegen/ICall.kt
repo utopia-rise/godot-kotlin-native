@@ -9,26 +9,47 @@ class ICall(
     private val arguments: List<Argument>
 ) {
     private val returnTypeClass = createReturnTypeClass()
-    val name: String = createICallName()
+    val name: String = buildString {
+        append("_icall_${if (returnType.isEnum()) "Long" else returnType}")
+
+        for (arg in arguments) {
+            append('_')
+
+            if (arg.nullable) {
+                append('n')
+            }
+
+            append(arg.type.convertTypeForICalls())
+        }
+    }
+
+    val generated: FunSpec
+        get() {
+            val spec = FunSpec
+                .builder(name)
+                .addModifiers(KModifier.INTERNAL)
+                .addParameter(
+                    ParameterSpec(
+                        "mb",
+                        ClassName("kotlinx.cinterop", "CPointer")
+                            .parameterizedBy(ClassName("godot.gdnative", "godot_method_bind"))
+                    )
+                )
+                .addParameter("inst", ClassName("kotlinx.cinterop", "COpaquePointer"))
+
+            addArgumentsToICall(spec)
+
+
+            val shouldReturn = returnType != "Unit"
+
+            addReturnTypeForICall(shouldReturn, spec)
+            generateICallMethodBlock(shouldReturn, spec)
+
+            return spec.build()
+        }
 
     init {
         if (returnType.isEnum()) returnType = "Long"
-    }
-
-    private fun createICallName(): String {
-        return buildString {
-            append("_icall_${if (returnType.isEnum()) "Long" else returnType}")
-
-            for (arg in arguments) {
-                append('_')
-
-                if (arg.nullable) {
-                    append('n')
-                }
-
-                append(arg.type.convertTypeForICalls())
-            }
-        }
     }
 
     private fun createReturnTypeClass(): TypeName = when (returnType) {
@@ -52,31 +73,7 @@ class ICall(
         }
     }
 
-    infix fun generateICall(tree: Graph<Class>): FunSpec {
-        val spec = FunSpec
-            .builder(name)
-            .addModifiers(KModifier.INTERNAL)
-            .addParameter(
-                ParameterSpec(
-                    "mb",
-                    ClassName("kotlinx.cinterop", "CPointer")
-                        .parameterizedBy(ClassName("godot.gdnative", "godot_method_bind"))
-                )
-            )
-            .addParameter("inst", ClassName("kotlinx.cinterop", "COpaquePointer"))
-
-        addArgumentsToICall(spec)
-
-
-        val shouldReturn = returnType != "Unit"
-
-        addReturnTypeForICall(shouldReturn, spec)
-        generateICallMethodBlock(shouldReturn, spec, tree)
-
-        return spec.build()
-    }
-
-    private fun generateICallMethodBlock(shouldReturn: Boolean, spec: FunSpec.Builder, tree: Graph<Class>) {
+    private fun generateICallMethodBlock(shouldReturn: Boolean, spec: FunSpec.Builder) {
         val codeBlockBuilder = CodeBlock.builder()
 
         val isPrimitive = returnType.isPrimitive()
