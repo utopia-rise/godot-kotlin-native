@@ -69,7 +69,7 @@ class Class @JsonCreator constructor(
 
         generateSignals(classTypeBuilder)
         generateProperties(tree, icalls, classTypeBuilder)
-        generateMethods(classTypeBuilder, baseCompanion ?: classTypeBuilder, tree, icalls)
+        generateMethods(classTypeBuilder, tree, icalls)
 
         baseCompanion?.build()?.let { classTypeBuilder.addType(it) }
 
@@ -353,25 +353,10 @@ class Class @JsonCreator constructor(
 
     private fun generateMethods(
         propertiesReceiverType: TypeSpec.Builder,
-        methodBindReceiverType: TypeSpec.Builder,
         tree: Graph<Class>,
         icalls: MutableSet<ICall>
     ) {
         methods.forEach { method ->
-            if (!method.isVirtual) {
-                methodBindReceiverType.addProperty(
-                    PropertySpec.builder(
-                        "${method.newName}MethodBind",
-                        ClassName("kotlinx.cinterop", "CPointer")
-                            .parameterizedBy(ClassName("godot.gdnative", "godot_method_bind"))
-                    ).delegate(
-                        "%L%M(\"${oldName}\",\"${method.oldName}\")%L",
-                        "lazy{ ",
-                        MemberName("godot.internal.utils", "getMethodBind"),
-                        " }"
-                    ).addModifiers(KModifier.PRIVATE, KModifier.FINAL).build()
-                )
-            }
             propertiesReceiverType.addFunction(method.generate(this, tree, icalls))
         }
     }

@@ -72,6 +72,7 @@ open class Method @JsonCreator constructor(
         }
 
         if (!isVirtual) {
+            generatedFunBuilder.addStatement("val mb = %M(\"${clazz.oldName}\",\"${oldName}\")", MemberName("godot.internal.utils", "getMethodBind"))
             val constructedICall = constructICall(callArgumentsAsString, icalls)
             generatedFunBuilder.addStatement(
                 "%L%L%M%L%L",
@@ -146,12 +147,12 @@ open class Method @JsonCreator constructor(
     private fun constructICall(methodArguments: String, icalls: MutableSet<ICall>): Pair<String, String> {
         if (hasVarargs) {
             return "_icall_varargs" to
-                "( ${newName}MethodBind, this.ptr, " +
+                "( mb, this.ptr, " +
                 if (methodArguments.isNotEmpty()) "arrayOf($methodArguments*__var_args))" else "__var_args)"
         }
 
         val icall = ICall(returnType, arguments)
         icalls.add(icall)
-        return icall.name to "( ${newName}MethodBind, this.ptr$methodArguments)"
+        return icall.name to "( mb, this.ptr$methodArguments)"
     }
 }
