@@ -75,8 +75,9 @@ class Property @JsonCreator constructor(
             propertySpecBuilder.setter(
                 FunSpec.setterBuilder()
                     .addParameter("value", propertyType)
+                    .addStatement("val mb = %M(\"${clazz.oldName}\",\"${validSetter.oldName}\")", MemberName("godot.internal.utils", "getMethodBind"))
                     .addStatement(
-                        "%M(${validSetter.newName}MethodBind, this.ptr${if (index != -1) ", $index, value)" else ", value)"}",
+                        "%M(mb, this.ptr${if (index != -1) ", $index, value)" else ", value)"}",
                         MemberName("godot.icalls", icall.name)
                     )
                     .build()
@@ -92,9 +93,10 @@ class Property @JsonCreator constructor(
             icalls.add(icall)
             propertySpecBuilder.getter(
                 FunSpec.getterBuilder()
+                    .addStatement("val mb = %M(\"${clazz.oldName}\",\"${validGetter.oldName}\")", MemberName("godot.internal.utils", "getMethodBind"))
                     //Hard to maintain but do not see how to do better (Pierre-Thomas Meisels)
                     .addStatement(
-                        "return %M(${validGetter.newName}MethodBind, this.ptr${if (index != -1) ", $index)" else ")"}",
+                        "return %M(mb, this.ptr${if (index != -1) ", $index)" else ")"}",
                         MemberName("godot.icalls", icall.name)
                     )
                     .build()
