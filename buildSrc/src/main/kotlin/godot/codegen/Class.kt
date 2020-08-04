@@ -63,7 +63,7 @@ class Class @JsonCreator constructor(
 
         generateEnums(classTypeBuilder)
 
-        val baseCompanion = if (!isSingleton) createBaseCompanion() else null
+        val baseCompanion = if (!isSingleton) TypeSpec.companionObjectBuilder() else null
 
         generateConstants(baseCompanion ?: classTypeBuilder)
 
@@ -215,12 +215,6 @@ class Class @JsonCreator constructor(
 
     private fun generateConstructors(typeBuilder: TypeSpec.Builder) {
         if (isSingleton) {
-//            init {
-//                memScoped {
-//                    val ptr = nullSafe(Godot.gdnative.godot_global_get_singleton)("Input".cstr.ptr)
-//                    requireNotNull(ptr) { "No instance found for singleton Input" }
-//                    this@Input.ptr = ptr
-//                }}
             typeBuilder.addInitializerBlock(
                 CodeBlock.of("""
                             |%M {
@@ -279,12 +273,6 @@ class Class @JsonCreator constructor(
         signals.forEach {
             if (properties.map { p -> p.name }.contains(it.name)) it.name = "signal${it.name.capitalize()}"
             typeBuilder.addProperty(it.generated)
-        }
-    }
-
-    private fun createBaseCompanion(): TypeSpec.Builder {
-        return TypeSpec.companionObjectBuilder().apply {
-            this.addAnnotation(ClassName("kotlin.native", "ThreadLocal"))
         }
     }
 
