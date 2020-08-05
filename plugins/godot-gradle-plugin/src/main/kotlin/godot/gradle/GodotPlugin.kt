@@ -11,7 +11,6 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
 import org.jetbrains.kotlin.konan.target.HostManager
 import java.io.File
-import kotlin.reflect.full.createType
 
 class GodotPlugin : Plugin<Project> {
     override fun apply(project: Project) {
