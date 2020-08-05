@@ -4,11 +4,11 @@ plugins {
 }
 
 repositories {
-    mavenLocal()
     jcenter()
 }
 
 
 godot {
     debug.set(true)
+    defaultPlatforms()
 }

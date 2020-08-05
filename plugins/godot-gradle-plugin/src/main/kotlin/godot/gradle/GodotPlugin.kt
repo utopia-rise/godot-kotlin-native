@@ -11,6 +11,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
 import org.jetbrains.kotlin.konan.target.HostManager
 import java.io.File
+import kotlin.reflect.full.createType
 
 class GodotPlugin : Plugin<Project> {
     override fun apply(project: Project) {
@@ -25,13 +26,6 @@ class GodotPlugin : Plugin<Project> {
 
     private fun setupExtensionDefaults(project: Project, godot: GodotExtension) {
         with(godot) {
-            // we don't have godot-library in the mobile targets yet, limit these to desktop for now
-            //has to be change in `build.gradle.kts` of `godot-library` as well
-            platforms(
-                Platform.LINUX_X64,
-                Platform.WINDOWS_X64,
-                Platform.OSX_X64
-            )
             debug.set(true)
             cleanupGeneratedFiles.set(true)
             gdnsDir.set(project.file("src/gdns/kotlin"))
@@ -44,48 +38,47 @@ class GodotPlugin : Plugin<Project> {
     }
 
     private fun setupKotlinPlugin(project: Project, mpp: KotlinMultiplatformExtension, godot: GodotExtension) {
-        project.afterEvaluate {
-            // create the main source set
-            // val godotMain = mpp.sourceSets.create(MAIN_SOURCE_SET_NAME)
-            // val godotTest = mpp.sourceSets.create(TEST_SOURCE_SET_NAME)
+        // create the main source set
+        // val godotMain = mpp.sourceSets.create(MAIN_SOURCE_SET_NAME)
+        // val godotTest = mpp.sourceSets.create(TEST_SOURCE_SET_NAME)
 
-            fun KotlinNativeTarget.configureSourceSets(includeEntrySourceDir: Boolean) {
-                compilations.getByName("main").defaultSourceSet {
-                    kotlin.srcDirs("src/$MAIN_SOURCE_SET_NAME/kotlin")
-                    if (includeEntrySourceDir) {
-                        kotlin.srcDirs(godot.entrySourceDir.get().asFile)
-                    }
-
-                    dependencies {
-                        // TODO: remove this once we have published the godot-library artifact.
-                        // don't add dependencies to targets not buildable in the current host
-                        if (HostManager().isEnabled(this@configureSourceSets.konanTarget)) {
-                            implementation("com.utopia-rise:godot-library:${GodotBuildProperties.godotKotlinVersion}")
-                        }
-                    }
+        fun KotlinNativeTarget.configureSourceSets(includeEntrySourceDir: Boolean) {
+            compilations.getByName("main").defaultSourceSet {
+                kotlin.srcDirs("src/$MAIN_SOURCE_SET_NAME/kotlin")
+                if (includeEntrySourceDir) {
+                    kotlin.srcDirs(godot.entrySourceDir.get().asFile)
                 }
 
-                compilations.getByName("test").defaultSourceSet {
-                    kotlin.srcDirs("src/$TEST_SOURCE_SET_NAME/kotlin")
+                dependencies {
+                    // TODO: remove this once we have published the godot-library artifact.
+                    // don't add dependencies to targets not buildable in the current host
+                    if (HostManager().isEnabled(this@configureSourceSets.konanTarget)) {
+                        implementation("com.utopia-rise:godot-library:${GodotBuildProperties.godotKotlinVersion}")
+                    }
                 }
             }
 
-            // create dummy target and connect it to the main source set
-            // this target is only used for generating entry source files.
-            val os = OperatingSystem.current()
-            val dummyTarget = when {
-                os.isLinux -> mpp.linuxX64("dummyTarget")
-                os.isWindows -> mpp.mingwX64("dummyTarget")
-                os.isMacOsX -> mpp.macosX64("dummyTarget")
-                else -> throw AssertionError("Unsupported operating system: $os")
+            compilations.getByName("test").defaultSourceSet {
+                kotlin.srcDirs("src/$TEST_SOURCE_SET_NAME/kotlin")
             }
-            dummyTarget.configureSourceSets(false)
-            godot.configureTarget(dummyTarget)
+        }
 
-            val buildTask = project.tasks.getByName("build")
+        // create dummy target and connect it to the main source set
+        // this target is only used for generating entry source files.
+        val os = OperatingSystem.current()
+        val dummyTarget = when {
+            os.isLinux -> mpp.linuxX64("dummyTarget")
+            os.isWindows -> mpp.mingwX64("dummyTarget")
+            os.isMacOsX -> mpp.macosX64("dummyTarget")
+            else -> throw AssertionError("Unsupported operating system: $os")
+        }
+        dummyTarget.configureSourceSets(false)
+        godot.configureTarget(dummyTarget)
 
-            //commented out in favor of the cleanup inside the GdnsGenerator, but left here for reference and to easily enable it again -> as discussed on discord
-            // clean up task
+        val buildTask = project.tasks.getByName("build")
+
+        //commented out in favor of the cleanup inside the GdnsGenerator, but left here for reference and to easily enable it again -> as discussed on discord
+        // clean up task
 //            if (godot.cleanupGeneratedFiles.get()) {
 //                val cleanGeneratedFilesTask = project.tasks.register<Delete>("cleanGeneratedFiles") {
 //                    group = GODOT_TASK_GROUP
@@ -94,9 +87,11 @@ class GodotPlugin : Plugin<Project> {
 //                buildTask.dependsOn(cleanGeneratedFilesTask)
 //            }
 
+        // create the targets and connect it to the main source set
+        godot.configure = { platforms ->
             val librariesToBeGenerated = mutableMapOf<Platform, File>()
 
-            val generateGdnlibTask = project.tasks.register("generateGdnlib", GenerateGdnlib::class.java) {
+            val generateGdnlibTask = project.tasks.create("generateGdnlib", GenerateGdnlib::class.java) {
                 singleton.set(godot.singleton)
                 loadOnce.set(godot.loadOnce)
                 reloadable.set(godot.reloadable)
@@ -104,8 +99,7 @@ class GodotPlugin : Plugin<Project> {
                 libraries.set(project.provider { librariesToBeGenerated })
             }
 
-            // create the targets and connect it to the main source set
-            godot.platforms.get().forEach { platform ->
+            platforms.forEach { platform ->
                 val target = when (platform) {
                     Platform.LINUX_X64 -> mpp.linuxX64("linuxX64")
                     Platform.WINDOWS_X64 -> mpp.mingwX64("windowsX64")
@@ -131,13 +125,14 @@ class GodotPlugin : Plugin<Project> {
                             NativeBuildType.RELEASE
                         }
                         sharedLib(buildTypes = listOf(buildType)) {
+                            generateGdnlibTask.dependsOn(linkTask)
                             // this will create a task dependency
                             // build -> build<Target> -> link<BuildType><Target>
-                            project.tasks.register("build${target.name.capitalize()}") {
+                            project.tasks.create("build${target.name.capitalize()}") {
                                 group = GODOT_TASK_GROUP
-                                dependsOn(linkTask, generateGdnlibTask)
+                                dependsOn(generateGdnlibTask)
                                 buildTask.dependsOn(this)
-                                librariesToBeGenerated[platform] = outputFile.relativeTo(projectDir)
+                                librariesToBeGenerated[platform] = outputFile.relativeTo(project.projectDir)
                             }
                         }
                     }
