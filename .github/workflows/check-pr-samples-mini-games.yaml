@@ -22,9 +22,9 @@ jobs:
           - os: ubuntu-latest
             task: buildLinuxX64
           - os: macos-latest
-            task: buildMacosX64
+            task: -x linkDebugSharedLinuxX64 buildMacosX64
           - os: windows-latest
-            task: buildWindowsX64
+            task: -x linkDebugSharedLinuxX64 buildWindowsX64
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
