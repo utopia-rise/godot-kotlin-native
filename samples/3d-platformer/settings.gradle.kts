@@ -20,8 +20,7 @@ includeBuild("../../") {
 pluginManagement {
     resolutionStrategy.eachPlugin {
         when (requested.id.id) {
-            // version is not the actual version used, it is only specified so that gradle won't complain
-            "com.utopia-rise.godot-kotlin" -> useModule("com.utopia-rise:godot-gradle-plugin:0.1.0")
+            "com.utopia-rise.godot-kotlin" -> useModule("com.utopia-rise:godot-gradle-plugin:${requested.version}")
         }
     }
 }
