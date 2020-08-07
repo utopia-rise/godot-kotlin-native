@@ -29,6 +29,9 @@ class AnotherClass {
 class TestingClass : Node() {
 
     @RegisterSignal
+    val signalSomeTestSignal by signal()
+
+    @RegisterSignal
     val signal0 by signal()
 
     @RegisterSignal

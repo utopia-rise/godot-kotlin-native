@@ -65,7 +65,7 @@ internal class ClassHandle<T : Object>(
             nullSafe(Godot.nativescript.godot_nativescript_register_method)(
                 nativescriptHandle,
                 className.cstr.ptr,
-                methodName.cstr.ptr,
+                methodName.camelToSnakeCase().cstr.ptr, //not using `camelcaseToUnderscore` to prevent a call to godot for each function
                 attribs,
                 instanceMethod
             )
@@ -98,7 +98,7 @@ internal class ClassHandle<T : Object>(
                     argInfo.type = value.value.toInt()
                 }
                 args = argInfos.getPointer(this@memScoped)
-                nullSafe(Godot.gdnative.godot_string_parse_utf8)(name.ptr, signalName.removePrefix("signal").decapitalize().cstr.ptr)
+                nullSafe(Godot.gdnative.godot_string_parse_utf8)(name.ptr, signalName.removePrefix("signal").decapitalize().camelToSnakeCase().cstr.ptr) //not using `camelcaseToUnderscore` to prevent a call to godot for each signal
                 num_args = parameters.size
             }
             nullSafe(Godot.nativescript.godot_nativescript_register_signal)(
@@ -151,7 +151,7 @@ internal class ClassHandle<T : Object>(
             nullSafe(Godot.nativescript.godot_nativescript_register_property)(
                 nativescriptHandle,
                 className.cstr.ptr,
-                propertyName.cstr.ptr,
+                propertyName.camelToSnakeCase().cstr.ptr, //not using `camelcaseToUnderscore` to prevent a call to godot for each property
                 attribs.ptr,
                 setter,
                 getter
