@@ -36,5 +36,5 @@ jobs:
           java-version: 11
       - uses: eskatos/gradle-command-action@v1
         with:
-          build-root-directory: samples/min-games
+          build-root-directory: samples/mini-games
           arguments: ${{ matrix.task }}
