@@ -6,9 +6,7 @@ buildscript {
 }
 
 repositories {
-    mavenLocal()
     jcenter()
-    maven("https://dl.bintray.com/utopia-rise/godot-kotlin-dev")
 }
 
 plugins {
@@ -20,6 +18,7 @@ plugins {
 godot {
     debug.set(true)
     cleanupGeneratedFiles.set(true)
+    defaultPlatforms()
 
     configureTargets {
         compilations.getByName("main") {

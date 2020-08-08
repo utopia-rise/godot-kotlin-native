@@ -21,16 +21,7 @@ subdir("entry-generation") {
 
 subdir("utils") {
     include("godot-build-props")
-}
-
-// TODO: remove this once the samples are not using the local artifacts
-val ignoreSamples: String? by extra
-
-// include the samples as composite builds
-// so they get included in IntelliJ IDEA!
-if (ignoreSamples == null) {
-    includeBuild("samples/mini-games")
-    includeBuild("samples/3d-platformer")
+    include("composite-build-support")
 }
 
 class IncludeDsl(val root: String) {

@@ -6,6 +6,7 @@ import godot.gradle.GodotPlugin
 import godot.utils.GodotBuildProperties
 import org.gradle.api.Project
 import org.gradle.api.tasks.compile.AbstractCompile
+import org.gradle.kotlin.dsl.findByType
 import org.jetbrains.kotlin.gradle.dsl.KotlinCommonOptions
 import org.jetbrains.kotlin.gradle.plugin.KotlinCompilation
 import org.jetbrains.kotlin.gradle.plugin.KotlinGradleSubplugin
@@ -52,7 +53,7 @@ class GodotSubPlugin : KotlinGradleSubplugin<AbstractCompile> {
         //&& task is KotlinNativeCompile -> we cannot do this check here as the compiler plugin get's called in the
         // linking stage again, which then fails as the subPlugin is disabled for it and thus does not provide the
         // needed command line arguments
-        project.plugins.hasPlugin(GodotPlugin::class.java)
+        project.extensions.findByType<GodotExtension>() != null
 
     override fun getPluginArtifact(): SubpluginArtifact = SubpluginArtifact(
         groupId = CompilerPluginConst.compilerPluginGroupId,

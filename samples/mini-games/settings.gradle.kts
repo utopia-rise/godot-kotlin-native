@@ -1,18 +1,21 @@
-// without this doing:
-//  plugin { id("com.utopia-rise.godot-kotlin") version "0.1.0" }
-// won't work  as gradle does not know how to map the plugin id to an actual artifact.
-// this is only required when trying out local builds. Comment this out when trying out a plugin published
-// in the gradle plugin portal.
-// TODO: remove this once we have the artifacts published
+// The following is used for configuring composite builds, which we use for developing this binding.
+// Normally as a user, you should not need it.
+includeBuild("../../") {
+    dependencySubstitution {
+        substitute(module("com.utopia-rise:godot-build-props")).with(project(":godot-build-props"))
+        substitute(module("com.utopia-rise:godot-annotation-processor")).with(project(":godot-annotation-processor"))
+        substitute(module("com.utopia-rise:godot-compiler-plugin")).with(project(":godot-compiler-plugin"))
+        substitute(module("com.utopia-rise:godot-compiler-plugin-common")).with(project(":godot-compiler-plugin-common"))
+        substitute(module("com.utopia-rise:godot-entry-generator")).with(project(":godot-entry-generator"))
+        substitute(module("com.utopia-rise:godot-gradle-plugin")).with(project(":godot-gradle-plugin"))
+        substitute(module("com.utopia-rise:godot-library")).with(project(":godot-library"))
+        // gradle doesn't support targeting a specific configuration (i.e shadow) when substituting a dependency in a composite build.
+        // composite-build-support depends on project(":godot-compiler-native-plugin", configuration = "shadow")
+        substitute(module("com.utopia-rise:godot-compiler-native-plugin")).with(project(":composite-build-support"))
+    }
+}
 
 pluginManagement {
-    repositories {
-        mavenLocal()
-        jcenter()
-        gradlePluginPortal()
-        maven("https://dl.bintray.com/utopia-rise/godot-kotlin-dev")
-    }
-
     resolutionStrategy.eachPlugin {
         when (requested.id.id) {
             "com.utopia-rise.godot-kotlin" -> useModule("com.utopia-rise:godot-gradle-plugin:${requested.version}")

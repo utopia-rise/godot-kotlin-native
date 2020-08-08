@@ -1,10 +1,14 @@
 [entry]
 
+X11.64="res://build/bin/linuxX64/debugShared/libplatformer3d.so"
 Windows.64="res://build/bin/windowsX64/debugShared/platformer3d.dll"
+OSX.64="res://build/bin/macosX64/debugShared/libplatformer3d.dylib"
 
 [dependencies]
 
+X11.64=[  ]
 Windows.64=[  ]
+OSX.64=[  ]
 
 [general]
 

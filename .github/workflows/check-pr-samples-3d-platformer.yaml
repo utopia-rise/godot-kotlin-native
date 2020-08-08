@@ -1,0 +1,40 @@
+name: Check PR - samples-3d-platformer
+on:
+  pull_request:
+    paths:
+      - 'entry-generation/godot-compiler-native-plugin/**'
+      - 'entry-generation/godot-compiler-plugin-common/**'
+      - 'entry-generation/godot-entry-generator/**'
+      - 'entry-generation/godot-annotation-processor/**'
+      - 'godot-kotlin/**'
+      - 'build.gradle.kts'
+      - 'buildSrc/**'
+      - 'gradle.properties'
+      - 'samples/3d-platformer/**'
+      - '.github/workflows/check-pr-samples-3d-platform.yaml'
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        include:
+          - os: ubuntu-latest
+            task: buildLinuxX64
+          - os: macos-latest
+            task: -x linkDebugSharedLinuxX64 buildMacosX64
+          - os: windows-latest
+            task: -x linkDebugSharedLinuxX64 buildWindowsX64
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Checkout submodules
+        uses: snickerbockers/submodules-init@v4
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - uses: eskatos/gradle-command-action@v1
+        with:
+          build-root-directory: samples/3d-platformer
+          arguments: ${{ matrix.task }}
