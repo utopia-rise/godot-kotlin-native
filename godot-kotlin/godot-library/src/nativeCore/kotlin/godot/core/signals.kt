@@ -6,7 +6,7 @@ abstract class Signal(
     val name: String
 ) {
     protected fun emitSignal(instance: Object, vararg args: Any?) {
-        instance.emitSignal(name.camelToSnakeCase(), *args) //not using `camelcaseToUnderscore` to prevent a call to godot for each signal emission
+        instance.emitSignal(name, *args)
     }
 
     @PublishedApi
@@ -17,7 +17,7 @@ abstract class Signal(
         binds: VariantArray?,
         flags: Long
     ) {
-        instance.connect(name.camelToSnakeCase(), target, method, binds ?: VariantArray(), flags) //not using `camelcaseToUnderscore` to prevent a call to godot for each signal connection
+        instance.connect(name, target, method, binds ?: VariantArray(), flags)
     }
 }
 
