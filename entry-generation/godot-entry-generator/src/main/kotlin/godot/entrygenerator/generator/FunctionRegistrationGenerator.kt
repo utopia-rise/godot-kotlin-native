@@ -67,7 +67,7 @@ object FunctionRegistrationGenerator {
             .getAnnotationValue(
                 REGISTER_FUNCTION_ANNOTATION,
                 REGISTER_FUNCTION_ANNOTATION_RPC_MODE_ARGUMENT,
-                Pair(ClassId(FqName("godot.registration"), Name.identifier("RPCMode")), Name.identifier("DISABLED"))
+                Pair(ClassId(FqName("godot.MultiplayerAPI"), Name.identifier("RPCMode")), Name.identifier("DISABLED"))
             )
     }
 
