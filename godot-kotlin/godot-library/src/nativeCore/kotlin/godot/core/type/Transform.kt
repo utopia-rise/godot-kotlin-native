@@ -2,24 +2,117 @@
 
 package godot.core
 
+import godot.gdnative.godot_basis
 import godot.gdnative.godot_transform
 import godot.gdnative.godot_transform_layout
+import godot.gdnative.godot_vector3
 import godot.internal.type.CoreType
+import godot.internal.type.GodotReal
 import godot.internal.type.KotlinReal
 import godot.internal.type.toGodotReal
-import kotlinx.cinterop.*
+import kotlinx.cinterop.CValue
+import kotlinx.cinterop.cValue
+import kotlinx.cinterop.readValue
+import kotlinx.cinterop.useContents
 
-class Transform(
-    p_basis: Basis,
-    p_origin: Vector3 = Vector3()
-) : CoreType() {
+class Transform : CoreType<godot_transform> {
+
+    //########################INTERNAL#############################
+
+    //FIELD
+    @PublishedApi
+    internal var _basis: Basis
 
     @PublishedApi
-    internal var _basis = Basis(p_basis)
+    internal var _origin: Vector3
 
-    @PublishedApi
-    internal var _origin = Vector3(p_origin)
 
+    //CONSTRUCTOR
+    internal constructor(native: CValue<godot_transform>) : this() {
+        this.setRawMemory(native)
+    }
+
+
+    //INTEROP
+    override fun getRawMemory(): CValue<godot_transform> {
+        return cValue<godot_transform_layout> {
+            basis.x.x = this@Transform._basis._x._x
+            basis.x.y = this@Transform._basis._x._y
+            basis.x.z = this@Transform._basis._x._z
+            basis.y.x = this@Transform._basis._y._x
+            basis.y.y = this@Transform._basis._y._y
+            basis.y.z = this@Transform._basis._y._z
+            basis.z.x = this@Transform._basis._z._x
+            basis.z.y = this@Transform._basis._z._y
+            basis.z.z = this@Transform._basis._z._z
+            origin.x = this@Transform._origin._x
+            origin.y = this@Transform._origin._y
+            origin.z = this@Transform._origin._z
+        } as CValue<godot_transform>
+    }
+
+    override fun setRawMemory(native: CValue<godot_transform>) {
+        (native as CValue<godot_transform_layout>).useContents {
+            _basis.setRawMemory(basis.readValue() as CValue<godot_basis>)
+            _origin.setRawMemory(origin.readValue() as CValue<godot_vector3>)
+        }
+    }
+
+
+    //HELPER
+    internal fun affineInvert() {
+        _basis.invert()
+        _origin = _basis.xform(-_origin)
+    }
+
+    internal fun invert() {
+        _basis.transpose()
+        _origin = _basis.xform(-_origin)
+    }
+
+    internal fun setLookAt(eye: Vector3, target: Vector3, up: Vector3) {
+        val x: Vector3
+        var y = up
+        val z = eye - target
+
+        z.normalize()
+        x = y.cross(z)
+        y = z.cross(x)
+        x.normalize()
+        y.normalize()
+
+        // on cpp, this calls basis.set(x, y, z)
+        // which basically does:
+        //  setAxis(0, x)
+        //  setAxis(1, y)
+        //  setAxis(2, z)
+        _basis.set(x, y, z)
+        _origin = Vector3(eye)
+    }
+
+    internal fun orthonormalize() {
+        _basis.orthonormalize()
+    }
+
+    internal fun rotate(axis: Vector3, phi: KotlinReal) {
+        val t = rotated(axis, phi)
+        this._basis = t._basis
+        this._origin = t._origin
+    }
+
+    internal fun scale(scale: Vector3) {
+        _basis.scale(scale)
+        _origin *= scale
+    }
+
+    internal fun translate(translation: Vector3) {
+        _origin._x += _basis._x.dot(translation).toGodotReal()
+        _origin._y += _basis._y.dot(translation).toGodotReal()
+        _origin._z += _basis._z.dot(translation).toGodotReal()
+    }
+
+
+    //########################PUBLIC###############################
 
     //PROPERTIES
     /** Return a copy of the basis Basis.
@@ -65,11 +158,15 @@ class Transform(
 
 
     //CONSTRUCTOR
-    constructor() :
-        this(Basis(), Vector3(0, 0, 0))
+    constructor() {
+        _basis = Basis()
+        _origin = Vector3(0, 0, 0)
+    }
 
-    constructor(other: Transform) :
-        this(other._basis, other._origin)
+    constructor(other: Transform) {
+        _basis = Basis(other.basis)
+        _origin = Vector3(other._origin)
+    }
 
     constructor(
         xx: Number,
@@ -84,58 +181,45 @@ class Transform(
         tx: Number,
         ty: Number,
         tz: Number
-    ) :
-        this(Basis(xx, xy, xz, yx, yy, yz, zx, zy, zz), Vector3(tx, ty, tz))
-
-    constructor(x: Vector3, y: Vector3, z: Vector3, origin: Vector3) :
-        this(Basis(x, y, z), origin)
-
-    constructor(from: Quat) :
-        this(Basis(from))
-
-    internal constructor(native: CValue<godot_transform>) : this() {
-        _basis = Basis()
-        _origin = Vector3()
-
-        memScoped {
-            this@Transform.setRawMemory(native.ptr)
-        }
+    ) {
+        _basis = Basis(xx, xy, xz, yx, yy, yz, zx, zy, zz)
+        _origin = Vector3(tx, ty, tz)
     }
 
-    internal constructor(mem: COpaquePointer) : this() {
-        _basis = Basis()
-        _origin = Vector3()
-
-        this.setRawMemory(mem)
+    constructor(
+        xx: GodotReal,
+        xy: GodotReal,
+        xz: GodotReal,
+        yx: GodotReal,
+        yy: GodotReal,
+        yz: GodotReal,
+        zx: GodotReal,
+        zy: GodotReal,
+        zz: GodotReal,
+        tx: GodotReal,
+        ty: GodotReal,
+        tz: GodotReal
+    ) {
+        _basis = Basis(xx, xy, xz, yx, yy, yz, zx, zy, zz)
+        _origin = Vector3(tx, ty, tz)
     }
 
-    //INTEROP
-    override fun getRawMemory(memScope: MemScope): COpaquePointer {
-        val value = cValue<godot_transform_layout> {
-            basis.x.x = this@Transform._basis._x._x.toGodotReal()
-            basis.x.y = this@Transform._basis._x._y.toGodotReal()
-            basis.x.z = this@Transform._basis._x._z.toGodotReal()
-            basis.y.x = this@Transform._basis._y._x.toGodotReal()
-            basis.y.y = this@Transform._basis._y._y.toGodotReal()
-            basis.y.z = this@Transform._basis._y._z.toGodotReal()
-            basis.z.x = this@Transform._basis._z._x.toGodotReal()
-            basis.z.y = this@Transform._basis._z._y.toGodotReal()
-            basis.z.z = this@Transform._basis._z._z.toGodotReal()
-            origin.x = this@Transform._origin._x.toGodotReal()
-            origin.y = this@Transform._origin._y.toGodotReal()
-            origin.z = this@Transform._origin._z.toGodotReal()
-        }
-        return value.getPointer(memScope)
+    constructor(p_basis: Basis, p_origin: Vector3 = Vector3()) {
+        _basis = Basis(p_basis)
+        _origin = Vector3(p_origin)
     }
 
-    override fun setRawMemory(mem: COpaquePointer) {
-        val value = mem.reinterpret<godot_transform_layout>().pointed
-        _basis.setRawMemory(value.basis.ptr)
-        _origin.setRawMemory(value.origin.ptr)
+    /* GDScript related members */
+    constructor(x: Vector3, y: Vector3, z: Vector3, origin: Vector3) {
+        _basis = Basis(x, y, z)
+        _origin = Vector3(origin)
     }
+
+    constructor(from: Quat) : this(Basis(from))
 
 
     //API
+
     /**
      * Returns the inverse of the transform, under the assumption that the transformation is composed of rotation, scaling and translation.
      */
@@ -143,11 +227,6 @@ class Transform(
         val ret = Transform(this._basis, this._origin)
         ret.affineInvert()
         return ret
-    }
-
-    internal fun affineInvert() {
-        _basis.invert()
-        _origin = _basis.xform(-_origin)
     }
 
     /**
@@ -179,11 +258,6 @@ class Transform(
         return ret
     }
 
-    internal fun invert() {
-        _basis.transpose()
-        _origin = _basis.xform(-_origin)
-    }
-
     /**
      * Returns true if this transform and transform are approximately equal, by calling is_equal_approx on each component.
      */
@@ -202,26 +276,6 @@ class Transform(
         return t
     }
 
-    internal fun setLookAt(eye: Vector3, target: Vector3, up: Vector3) {
-        val x: Vector3
-        var y = up
-        val z = eye - target
-
-        z.normalize()
-        x = y.cross(z)
-        y = z.cross(x)
-        x.normalize()
-        y.normalize()
-
-        // on cpp, this calls basis.set(x, y, z)
-        // which basically does:
-        //  setAxis(0, x)
-        //  setAxis(1, y)
-        //  setAxis(2, z)
-        _basis.set(x, y, z)
-        _origin = Vector3(eye)
-    }
-
     /**
      * Returns the transform with the basis orthogonal (90 degrees), and normalized axis vectors.
      */
@@ -231,22 +285,11 @@ class Transform(
         return t
     }
 
-    internal fun orthonormalize() {
-        _basis.orthonormalize()
-    }
-
-
     /**
      * Rotates the transform around the given axis by the given angle (in radians), using matrix multiplication. The axis must be a normalized vector.
      */
     fun rotated(axis: Vector3, phi: KotlinReal): Transform {
         return Transform(Basis(axis, phi), Vector3()) * this
-    }
-
-    internal fun rotate(axis: Vector3, phi: KotlinReal) {
-        val t = rotated(axis, phi)
-        this._basis = t._basis
-        this._origin = t._origin
     }
 
     /**
@@ -258,11 +301,6 @@ class Transform(
         return t
     }
 
-    fun scale(scale: Vector3) {
-        _basis.scale(scale)
-        _origin *= scale
-    }
-
     /**
      * Translates the transform by the given offset, relative to the transform’s basis vectors.
      * Unlike rotated and scaled, this does not use matrix multiplication.
@@ -271,12 +309,6 @@ class Transform(
         val t = Transform(this._basis, this._origin)
         t.translate(translation)
         return t
-    }
-
-    fun translate(translation: Vector3) {
-        _origin._x += _basis._x.dot(translation).toGodotReal()
-        _origin._y += _basis._y.dot(translation).toGodotReal()
-        _origin._z += _basis._z.dot(translation).toGodotReal()
     }
 
     /**
@@ -393,7 +425,7 @@ class Transform(
     override fun equals(other: Any?): Boolean {
         return when (other) {
             is Transform -> _basis == other._basis && _origin == other._origin
-            else -> false
+            else         -> false
         }
     }
 
@@ -406,10 +438,4 @@ class Transform(
         result = 31 * result + _origin.hashCode()
         return result
     }
-
-    /*
-     * GDScript related members
-     */
-    constructor(x: Vector3, y: Vector3, z: Vector3, origin: Vector3) :
-        this(Basis(x, y, z), origin)
 }

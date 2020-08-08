@@ -4,25 +4,74 @@ package godot.core
 
 import godot.gdnative.godot_rect2
 import godot.gdnative.godot_rect2_layout
-import godot.internal.type.CoreType
-import godot.internal.type.KotlinReal
-import godot.internal.type.toGodotReal
-import godot.internal.type.toKotlinReal
-import kotlinx.cinterop.*
+import godot.gdnative.godot_vector2
+import godot.internal.type.*
+import kotlinx.cinterop.CValue
+import kotlinx.cinterop.cValue
+import kotlinx.cinterop.readValue
+import kotlinx.cinterop.useContents
 import kotlin.math.max
 import kotlin.math.min
 
-class Rect2(
-    p_position: Vector2,
-    p_size: Vector2
-) : CoreType() {
+class Rect2 : CoreType<godot_rect2> {
+
+    //########################INTERNAL#############################
+
+    //FIELD
+    @PublishedApi
+    internal var _position: Vector2
 
     @PublishedApi
-    internal var _position = Vector2(p_position)
+    internal var _size: Vector2
 
-    @PublishedApi
-    internal var _size = Vector2(p_size)
 
+    //CONSTRUCTOR
+    internal constructor(native: CValue<godot_rect2>) : this() {
+        this.setRawMemory(native)
+    }
+
+
+    //INTEROP
+    override fun getRawMemory(): CValue<godot_rect2> {
+        return cValue<godot_rect2_layout> {
+            position.x = this@Rect2._position._x
+            position.y = this@Rect2._position._y
+            size.x = this@Rect2._size._x
+            size.y = this@Rect2._size._y
+        } as CValue<godot_rect2>
+    }
+
+    override fun setRawMemory(native: CValue<godot_rect2>) {
+        (native as CValue<godot_rect2_layout>).useContents {
+            _position.setRawMemory(position.readValue() as CValue<godot_vector2>)
+            _size.setRawMemory(size.readValue() as CValue<godot_vector2>)
+        }
+    }
+
+
+    //HELPER
+    internal fun expandTo(vector: Vector2) {
+        val begin = _position
+        val end = _position + _size
+
+        if (vector._x < begin._x) {
+            begin._x = vector._x
+        }
+        if (vector._y < begin._y) {
+            begin._y = vector._y
+        }
+        if (vector._x > end._x) {
+            end._x = vector._x
+        }
+        if (vector._y > end._y) {
+            end._y = vector._y
+        }
+
+        _position = begin
+        _size = end - begin
+    }
+
+    //########################PUBLIC###############################
 
     //PROPERTIES
     /** Return a copy of the position Vector3
@@ -76,6 +125,7 @@ class Rect2(
         TOP(1),
         RIGHT(2),
         BOTTOM(3)
+
     }
 
     companion object {
@@ -83,48 +133,35 @@ class Rect2(
         val MARGIN_TOP = Margin.TOP.value
         val MARGIN_RIGHT = Margin.RIGHT.value
         val MARGIN_BOTTOM = Margin.BOTTOM.value
+
     }
 
     //CONSTRUCTOR
-    constructor() :
-        this(Vector2(), Vector2())
-
-    constructor(other: Rect2) :
-        this(other._position, other._size)
-
-    constructor(x: KotlinReal, y: KotlinReal, width: KotlinReal, height: KotlinReal) :
-        this(Vector2(x, y), Vector2(width, height))
-
-    constructor(x: Number, y: Number, width: Number, height: Number) :
-        this(Vector2(x, y), Vector2(width, height))
-
-    internal constructor(native: CValue<godot_rect2>) : this() {
-        memScoped {
-            this@Rect2.setRawMemory(native.ptr)
-        }
+    constructor() {
+        _position = Vector2()
+        _size = Vector2()
     }
 
-    internal constructor(mem: COpaquePointer) : this() {
-        this.setRawMemory(mem)
+    constructor(other: Rect2) {
+        _position = Vector2(other._position)
+        _size = Vector2(other._size)
     }
 
-
-    //INTEROP
-    override fun getRawMemory(memScope: MemScope): COpaquePointer {
-        val value = cValue<godot_rect2_layout> {
-            position.x = this@Rect2._position._x.toGodotReal()
-            position.y = this@Rect2._position._y.toGodotReal()
-            size.x = this@Rect2._size._x.toGodotReal()
-            size.y = this@Rect2._size._y.toGodotReal()
-        }
-        return value.getPointer(memScope)
+    constructor(position: Vector2, size: Vector2) {
+        _position = Vector2(position)
+        _size = Vector2(size)
     }
 
-    override fun setRawMemory(mem: COpaquePointer) {
-        val value = mem.reinterpret<godot_rect2_layout>().pointed
-        _position.setRawMemory(value.position.ptr)
-        _size.setRawMemory(value.size.ptr)
+    constructor(x: GodotReal, y: GodotReal, width: GodotReal, height: GodotReal) {
+        _position = Vector2(x, y)
+        _size = Vector2(width, height)
     }
+
+    constructor(x: Number, y: Number, width: Number, height: Number) {
+        _position = Vector2(x, y)
+        _size = Vector2(width, height)
+    }
+
 
     //API
     /**
@@ -167,6 +204,7 @@ class Rect2(
             ((b._position._y + b._size._y) < (_position._y + _size._y))
     }
 
+
     /**
      * Returns this Rect2 expanded to include a given point.
      */
@@ -174,28 +212,6 @@ class Rect2(
         val r = Rect2(this._position, this._size)
         r.expandTo(vector)
         return r
-    }
-
-
-    internal fun expandTo(vector: Vector2) {
-        val begin = _position
-        val end = _position + _size
-
-        if (vector._x < begin._x) {
-            begin._x = vector._x
-        }
-        if (vector._y < begin._y) {
-            begin._y = vector._y
-        }
-        if (vector._x > end._x) {
-            end._x = vector._x
-        }
-        if (vector._y > end._y) {
-            end._y = vector._y
-        }
-
-        _position = begin
-        _size = end - begin
     }
 
     /**
@@ -237,14 +253,14 @@ class Rect2(
         val amount = by.toGodotReal()
         val g = Rect2(this)
         when (margin) {
-            Margin.LEFT -> {
+            Margin.LEFT   -> {
                 g._position._x -= amount
                 g._size._x += amount
             }
-            Margin.RIGHT -> {
+            Margin.RIGHT  -> {
                 g._size._x += amount
             }
-            Margin.TOP -> {
+            Margin.TOP    -> {
                 g._position._y -= amount
                 g._size._y += amount
             }
@@ -267,11 +283,11 @@ class Rect2(
      */
     fun hasPoint(point: Vector2): Boolean {
         return when {
-            point._x < _position._x -> false
-            point._y < _position._y -> false
+            point._x < _position._x               -> false
+            point._y < _position._y               -> false
             point._x >= (_position._x + _size._x) -> false
             point._y >= (_position._y + _size._y) -> false
-            else -> true
+            else                                  -> true
         }
     }
 
@@ -283,18 +299,18 @@ class Rect2(
         if (includeBorders) {
             return when {
                 _position._x > (b._position._x + b._size._x) -> false
-                (_position._x + _size._x) < b._position._x -> false
+                (_position._x + _size._x) < b._position._x   -> false
                 _position._y > (b._position._y + b._size._y) -> false
-                (_position._y + _size._y) < b._position._y -> false
-                else -> true
+                (_position._y + _size._y) < b._position._y   -> false
+                else                                         -> true
             }
         } else {
             return when {
                 _position._x >= (b._position._x + b._size._x) -> false
-                (_position._x + _size._x) <= b._position._x -> false
+                (_position._x + _size._x) <= b._position._x   -> false
                 _position._y >= (b._position._y + b._size._y) -> false
-                (_position._y + _size._y) <= b._position._y -> false
-                else -> true
+                (_position._y + _size._y) <= b._position._y   -> false
+                else                                          -> true
             }
         }
     }
@@ -330,7 +346,7 @@ class Rect2(
     override fun equals(other: Any?): Boolean {
         return when (other) {
             is Rect2 -> _position == other._position && _size == other._size
-            else -> false
+            else     -> false
         }
     }
 

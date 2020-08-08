@@ -22,23 +22,39 @@ internal class IndexedIterator<T>(
     }
 }
 
-data class Entry<out K, out V>(override val key: K, override val value: V): Map.Entry<K, V>
+internal class Entry<K, V>(
+    override val key: K,
+    private val getter: (K) -> V,
+    private val setter: (K, V) -> Unit
+) : MutableMap.MutableEntry<K, V> {
 
-internal class MapIterator<K, V>(
+    override val value: V
+        get() {
+            return getter(key)
+        }
+
+    override fun setValue(newValue: V): V {
+        val ret = value
+        setter(key, newValue)
+        return ret
+    }
+}
+
+internal class MapIterator<K : Any, V : Any>(
     private val keyIterator: MutableIterator<K>,
     private val getter: (K) -> V,
+    private val setter: (K, V) -> Unit,
     private val eraser: (K) -> Unit
-) : MutableIterator<Map.Entry<K, V>> {
+) : MutableIterator<MutableMap.MutableEntry<K, V>> {
     lateinit var key: K
 
     override fun hasNext(): Boolean {
         return keyIterator.hasNext()
     }
 
-    override fun next(): Map.Entry<K, V> {
+    override fun next(): MutableMap.MutableEntry<K, V> {
         key = keyIterator.next()
-        val value = getter(key)
-        return Entry(key, value)
+        return Entry(key, getter, setter)
     }
 
     override fun remove() {

@@ -5,25 +5,98 @@ package godot.core
 import godot.gdnative.godot_vector3
 import godot.gdnative.godot_vector3_layout
 import godot.internal.type.*
-import kotlinx.cinterop.*
+import kotlinx.cinterop.CValue
+import kotlinx.cinterop.cValue
+import kotlinx.cinterop.useContents
 import kotlin.math.*
 
 
-class Vector3(
-    p_x: KotlinReal,
-    p_y: KotlinReal,
-    p_z: KotlinReal
-) : Comparable<Vector3>, CoreType() {
+class Vector3 : Comparable<Vector3>, CoreType<godot_vector3> {
+
+    //########################INTERNAL#############################
+
+    //FIELD
+    @PublishedApi
+    internal var _x: GodotReal
 
     @PublishedApi
-    internal var _x: GodotReal = p_x.toGodotReal()
+    internal var _y: GodotReal
 
     @PublishedApi
-    internal var _y: GodotReal = p_y.toGodotReal()
+    internal var _z: GodotReal
 
-    @PublishedApi
-    internal var _z: GodotReal = p_z.toGodotReal()
+    //CONSTRUCTOR
+    internal constructor(native: CValue<godot_vector3>) : this() {
+        this.setRawMemory(native)
+    }
 
+
+    //INTEROP
+    override fun getRawMemory(): CValue<godot_vector3> {
+        return cValue<godot_vector3_layout> {
+            x = this@Vector3._x
+            y = this@Vector3._y
+            z = this@Vector3._z
+        } as CValue<godot_vector3>
+    }
+
+    override fun setRawMemory(native: CValue<godot_vector3>) {
+        (native as CValue<godot_vector3_layout>).useContents {
+            _x = x
+            _y = y
+            _z = z
+        }
+    }
+
+    //HELPER
+    internal fun normalize() {
+        val l = this.length().toGodotReal()
+        if (isEqualApprox(l, 0.0f)) {
+            _x = 0.0f
+            _y = 0.0f
+            _z = 0.0f
+        } else {
+            _x /= l
+            _y /= l
+            _z /= l
+        }
+    }
+
+    internal fun rotate(axis: Vector3, phi: KotlinReal) {
+        val ret = Basis(axis, phi).xform(this)
+        this._x = ret._x
+        this._y = ret._y
+        this._z = ret._z
+    }
+
+    internal fun snap(vecal: KotlinReal) {
+        val vecal2 = vecal.toGodotReal()
+        if (isEqualApprox(vecal2, 0.0f)) {
+            _x = (floor(_x / vecal2 + 0.5f) * vecal2)
+            _y = (floor(_y / vecal2 + 0.5f) * vecal2)
+            _z = (floor(_z / vecal2 + 0.5f) * vecal2)
+        }
+    }
+
+    internal fun _get(n: Int): GodotReal {
+        return when (n) {
+            0    -> _x
+            1    -> _y
+            2    -> _z
+            else -> throw IndexOutOfBoundsException()
+        }
+    }
+
+    internal fun _set(n: Int, f: GodotReal) {
+        return when (n) {
+            0    -> _x = f
+            1    -> _y = f
+            2    -> _z = f
+            else -> throw IndexOutOfBoundsException()
+        }
+    }
+
+    //########################PUBLIC###############################
 
     //PROPERTIES
     inline var x: KotlinReal
@@ -48,16 +121,18 @@ class Vector3(
     enum class Axis(val value: Int) {
         X(0),
         Y(1),
+
         Z(2);
 
         companion object {
             fun from(value: Int) = when (value) {
-                0 -> X
-                1 -> Y
-                2 -> Z
+                0    -> X
+                1    -> Y
+                2    -> Z
                 else -> throw AssertionError("Unknown axis for Vector3: $value")
             }
         }
+
     }
 
     companion object {
@@ -82,44 +157,34 @@ class Vector3(
             get() = Vector3(0, 0, -1)
         val BACK: Vector3
             get() = Vector3(0, 0, 1)
+
+
     }
 
 
     //CONSTRUCTOR
-    constructor() :
-        this(0.0f, 0.0f, 0.0f)
-
-    constructor(vec: Vector3) :
-        this(vec._x, vec._y, vec._z)
-
-    constructor(x: Number, y: Number, z: Number) :
-        this(x.toKotlinReal(), y.toKotlinReal(), z.toKotlinReal())
-
-    internal constructor(native: CValue<godot_vector3>) : this() {
-        memScoped {
-            this@Vector3.setRawMemory(native.ptr)
-        }
+    constructor() {
+        _x = 0f
+        _y = 0f
+        _z = 0f
     }
 
-    internal constructor(mem: COpaquePointer) : this() {
-        this.setRawMemory(mem)
+    constructor(vec: Vector3) {
+        _x = vec._x
+        _y = vec._y
+        _z = vec._z
     }
 
-    //INTEROP
-    override fun getRawMemory(memScope: MemScope): COpaquePointer {
-        val value = cValue<godot_vector3_layout> {
-            x = this@Vector3._x.toFloat()
-            y = this@Vector3._y.toFloat()
-            z = this@Vector3._z.toFloat()
-        }
-        return value.getPointer(memScope)
+    constructor(x: GodotReal, y: GodotReal, z: GodotReal) {
+        _x = x
+        _y = y
+        _z = z
     }
 
-    override fun setRawMemory(mem: COpaquePointer) {
-        val value = mem.reinterpret<godot_vector3_layout>().pointed
-        _x = value.x.toGodotReal()
-        _y = value.y.toGodotReal()
-        _z = value.z.toGodotReal()
+    constructor(x: Number, y: Number, z: Number) {
+        _x = x.toGodotReal()
+        _y = y.toGodotReal()
+        _z = z.toGodotReal()
     }
 
 
@@ -326,19 +391,6 @@ class Vector3(
         return v
     }
 
-    internal fun normalize() {
-        val l = this.length().toGodotReal()
-        if (isEqualApprox(l, 0.0f)) {
-            _x = 0.0f
-            _y = 0.0f
-            _z = 0.0f
-        } else {
-            _x /= l
-            _y /= l
-            _z /= l
-        }
-    }
-
     /**
      * Returns the outer product with b.
      */
@@ -390,13 +442,6 @@ class Vector3(
         return v
     }
 
-    internal fun rotate(axis: Vector3, phi: KotlinReal) {
-        val ret = Basis(axis, phi).xform(this)
-        this._x = ret._x
-        this._y = ret._y
-        this._z = ret._z
-    }
-
     /**
      * Returns the vector with all components rounded to the nearest integer, with halfway cases rounded away from zero.
      */
@@ -441,14 +486,6 @@ class Vector3(
         return v
     }
 
-    internal fun snap(vecal: KotlinReal) {
-        val vecal2 = vecal.toGodotReal()
-        if (isEqualApprox(vecal2, 0.0f)) {
-            _x = (floor(_x / vecal2 + 0.5f) * vecal2)
-            _y = (floor(_y / vecal2 + 0.5f) * vecal2)
-            _z = (floor(_z / vecal2 + 0.5f) * vecal2)
-        }
-    }
 
     /**
      * Returns a diagonal matrix with the vector as main diagonal.
@@ -457,25 +494,27 @@ class Vector3(
         return Basis()
     }
 
-
     //UTILITIES
     override fun toVariant() = Variant(this)
 
-    operator fun get(n: Int): GodotReal =
-        when (n) {
-            0 -> _x
-            1 -> _y
-            2 -> _z
-            else -> throw IndexOutOfBoundsException()
-        }
 
-    operator fun set(n: Int, f: GodotReal): Unit =
-        when (n) {
-            0 -> _x = f
-            1 -> _y = f
-            2 -> _z = f
+    operator fun get(n: Int): KotlinReal {
+        return when (n) {
+            0    -> _x.toKotlinReal()
+            1    -> _y.toKotlinReal()
+            2    -> _z.toKotlinReal()
             else -> throw IndexOutOfBoundsException()
         }
+    }
+
+    operator fun set(n: Int, f: KotlinReal) {
+        return when (n) {
+            0    -> _x = f.toGodotReal()
+            1    -> _y = f.toGodotReal()
+            2    -> _z = f.toGodotReal()
+            else -> throw IndexOutOfBoundsException()
+        }
+    }
 
     operator fun plus(vec: Vector3) = Vector3(_x + vec._x, _y + vec._y, _z + vec._z)
     operator fun plus(scalar: Int) = Vector3(_x + scalar, _y + scalar, _z + scalar)
@@ -506,26 +545,26 @@ class Vector3(
     override fun equals(other: Any?): Boolean =
         when (other) {
             is Vector3 -> (_x == other._x && _y == other._y && _z == other._z)
-            else -> false
+            else       -> false
         }
 
     override fun compareTo(other: Vector3): Int {
         if (_x == other._x) {
             return if (_y == other._y)
                 when {
-                    _z < other._z -> -1
+                    _z < other._z  -> -1
                     _z == other._z -> 0
-                    else -> 1
+                    else           -> 1
                 }
             else
                 when {
                     _y < other._y -> -1
-                    else -> 1
+                    else          -> 1
                 }
         } else
             return when {
                 _x < other._x -> -1
-                else -> 1
+                else          -> 1
             }
     }
 

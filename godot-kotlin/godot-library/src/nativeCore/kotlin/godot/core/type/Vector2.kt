@@ -5,20 +5,62 @@ package godot.core
 import godot.gdnative.godot_vector2
 import godot.gdnative.godot_vector2_layout
 import godot.internal.type.*
-import kotlinx.cinterop.*
+import kotlinx.cinterop.CValue
+import kotlinx.cinterop.cValue
+import kotlinx.cinterop.useContents
 import kotlin.math.*
 
-class Vector2(
-    p_x: KotlinReal,
-    p_y: KotlinReal,
-) : Comparable<Vector2>, CoreType() {
+class Vector2 : Comparable<Vector2>, CoreType<godot_vector2> {
+
+    //########################INTERNAL#############################
+
+    //FIELD
+    @PublishedApi
+    internal var _x: GodotReal
 
     @PublishedApi
-    internal var _x: GodotReal = p_x.toGodotReal()
+    internal var _y: GodotReal
 
-    @PublishedApi
-    internal var _y: GodotReal = p_y.toGodotReal()
+    //CONSTRUCTOR
+    internal constructor(native: CValue<godot_vector2>) : this() {
+        this.setRawMemory(native)
+    }
 
+
+    //INTEROP
+    override fun getRawMemory(): CValue<godot_vector2> {
+        return cValue<godot_vector2_layout> {
+            x = this@Vector2._x
+            y = this@Vector2._y
+        } as CValue<godot_vector2>
+    }
+
+    override fun setRawMemory(native: CValue<godot_vector2>) {
+        (native as CValue<godot_vector2_layout>).useContents {
+            _x = x
+            _y = y
+        }
+    }
+
+
+    //HELPER
+    internal fun normalize() {
+        val l = length().toGodotReal()
+        if (isEqualApprox(l, 0.0f)) {
+            _x = 0.0f
+            _y = 0.0f
+        } else {
+            _x /= l
+            _y /= l
+        }
+    }
+
+    internal fun rotate(radians: KotlinReal) {
+        _x = cos(radians).toGodotReal()
+        _y = sin(radians).toGodotReal()
+    }
+
+    //########################PUBLIC###############################
 
     //PROPERTIES
     inline var x: KotlinReal
@@ -36,15 +78,17 @@ class Vector2(
     //CONSTANTS
     enum class Axis(val value: Int) {
         X(0),
+
         Y(1);
 
         companion object {
             fun from(value: Int) = when (value) {
-                0 -> X
-                1 -> Y
+                0    -> X
+                1    -> Y
                 else -> throw AssertionError("Unknown axis for Vector2: $value")
             }
         }
+
     }
 
     companion object {
@@ -64,46 +108,30 @@ class Vector2(
             get() = Vector2(0, -1)
         val DOWN: Vector2
             get() = Vector2(0, 1)
-    }
 
+
+    }
 
     //CONSTRUCTOR
-    constructor() :
-        this(0.0f, 0.0f)
-
-    constructor(vec: Vector2) :
-        this(vec._x, vec._y)
-
-    constructor(x: Number, y: Number) :
-        this(x.toKotlinReal(), y.toKotlinReal())
-
-
-    internal constructor(native: CValue<godot_vector2>) : this(0.0f, 0.0f) {
-        memScoped {
-            this@Vector2.setRawMemory(native.ptr)
-        }
+    constructor() {
+        _x = 0f
+        _y = 0f
     }
 
-    internal constructor(mem: COpaquePointer) : this() {
-        this.setRawMemory(mem)
+    constructor(vec: Vector2) {
+        _x = vec._x
+        _y = vec._y
     }
 
-
-    //INTEROP
-    override fun getRawMemory(memScope: MemScope): COpaquePointer {
-        val value = cValue<godot_vector2_layout> {
-            x = this@Vector2._x.toFloat()
-            y = this@Vector2._y.toFloat()
-        }
-        return value.getPointer(memScope)
+    constructor(x: GodotReal, y: GodotReal) {
+        _x = x
+        _y = y
     }
 
-    override fun setRawMemory(mem: COpaquePointer) {
-        val value = mem.reinterpret<godot_vector2_layout>().pointed
-        _x = value.x.toGodotReal()
-        _y = value.y.toGodotReal()
+    constructor(x: Number, y: Number) {
+        _x = x.toGodotReal()
+        _y = y.toGodotReal()
     }
-
 
     //API
     /**
@@ -298,17 +326,6 @@ class Vector2(
         return v
     }
 
-    internal fun normalize() {
-        val l = length().toGodotReal()
-        if (isEqualApprox(l, 0.0f)) {
-            _x = 0.0f
-            _y = 0.0f
-        } else {
-            _x /= l
-            _y /= l
-        }
-    }
-
     /**
      * Returns a vector composed of the fposmod of this vector’s components and mod.
      */
@@ -347,11 +364,6 @@ class Vector2(
         v.rotate(this.angle() + by)
         v *= length()
         return v
-    }
-
-    internal fun rotate(radians: KotlinReal) {
-        _x = cos(radians).toGodotReal()
-        _y = sin(radians).toGodotReal()
     }
 
     /**
@@ -419,15 +431,15 @@ class Vector2(
 
     operator fun get(idx: Int): GodotReal =
         when (idx) {
-            0 -> _x
-            1 -> _y
+            0    -> _x
+            1    -> _y
             else -> throw IndexOutOfBoundsException()
         }
 
     operator fun set(n: Int, f: GodotReal) =
         when (n) {
-            0 -> _x = f.toGodotReal()
-            1 -> _y = f.toGodotReal()
+            0    -> _x = f.toGodotReal()
+            1    -> _y = f.toGodotReal()
             else -> throw IndexOutOfBoundsException()
         }
 
@@ -460,20 +472,20 @@ class Vector2(
     override fun equals(other: Any?): Boolean =
         when (other) {
             is Vector2 -> (isEqualApprox(_x, other._x) && isEqualApprox(_y, other._y))
-            else -> false
+            else       -> false
         }
 
     override fun compareTo(other: Vector2): Int =
         if (isEqualApprox(_x, other._x)) {
             when {
-                _y < other._y -> -1
+                _y < other._y               -> -1
                 isEqualApprox(_y, other._y) -> 0
-                else -> 1
+                else                        -> 1
             }
         } else {
             when {
                 _x < other._x -> -1
-                else -> 1
+                else          -> 1
             }
         }
 

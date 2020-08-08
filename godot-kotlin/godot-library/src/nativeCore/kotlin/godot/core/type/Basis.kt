@@ -4,12 +4,15 @@ package godot.core
 
 import godot.gdnative.godot_basis
 import godot.gdnative.godot_basis_layout
+import godot.gdnative.godot_vector3
 import godot.internal.type.*
 import kotlinx.cinterop.*
 import kotlin.math.*
 
 
-class Basis() : CoreType {
+class Basis : CoreType<godot_basis> {
+
+    //########################INTERNAL#############################
 
     @PublishedApi
     internal var _x = Vector3()
@@ -20,196 +23,38 @@ class Basis() : CoreType {
     @PublishedApi
     internal var _z = Vector3()
 
-    init {
-        _x.x = 1.0
-        _x.y = 0.0
-        _x.z = 0.0
-        _y.x = 0.0
-        _y.y = 1.0
-        _y.z = 0.0
-        _z.x = 0.0
-        _z.y = 0.1
-        _z.z = 1.0
-    }
 
-    //CONSTANTS
-    companion object {
-        val IDENTITY: Basis
-            get() = Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)
-        val FLIP_X: Basis
-            get() = Basis(-1, 0, 0, 0, 1, 0, 0, 0, 1)
-        val FLIP_Y: Basis
-            get() = Basis(1, 0, 0, 0, -1, 0, 0, 0, 1)
-        val FLIP_Z: Basis
-            get() = Basis(1, 0, 0, 0, 1, 0, 0, 0, -1)
-
-        //used internally by a few methods
-        private val orthoBases: Array<Basis> =
-            arrayOf(
-                Basis(1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f),
-                Basis(0.0f, -1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f),
-                Basis(-1.0f, 0.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f),
-                Basis(0.0f, 1.0f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f),
-                Basis(1.0f, 0.0f, 0.0f, 0.0f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f),
-                Basis(0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f),
-                Basis(-1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f),
-                Basis(0.0f, 0.0f, -1.0f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f),
-                Basis(1.0f, 0.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f, -1.0f),
-                Basis(0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, -1.0f),
-                Basis(-1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, -1.0f),
-                Basis(0.0f, -1.0f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, -1.0f),
-                Basis(1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, -1.0f, 0.0f),
-                Basis(0.0f, 0.0f, -1.0f, 1.0f, 0.0f, 0.0f, 0.0f, -1.0f, 0.0f),
-                Basis(-1.0f, 0.0f, 0.0f, 0.0f, 0.0f, -1.0f, 0.0f, -1.0f, 0.0f),
-                Basis(0.0f, 0.0f, 1.0f, -1.0f, 0.0f, 0.0f, 0.0f, -1.0f, 0.0f),
-                Basis(0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, -1.0f, 0.0f, 0.0f),
-                Basis(0.0f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f, -1.0f, 0.0f, 0.0f),
-                Basis(0.0f, 0.0f, -1.0f, 0.0f, -1.0f, 0.0f, -1.0f, 0.0f, 0.0f),
-                Basis(0.0f, 1.0f, 0.0f, 0.0f, 0.0f, -1.0f, -1.0f, 0.0f, 0.0f),
-                Basis(0.0f, 0.0f, 1.0f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f, 0.0f),
-                Basis(0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f),
-                Basis(0.0f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f),
-                Basis(0.0f, -1.0f, 0.0f, 0.0f, 0.0f, -1.0f, 1.0f, 0.0f, 0.0f)
-            )
-    }
-
-
-    //CONSTRUCTOR
-    constructor(other: Basis) : this() {
-        _x.x = other._x.x
-        _x.y = other._x.y
-        _x.z = other._x.z
-        _y.x = other._y.x
-        _y.y = other._y.y
-        _y.z = other._y.z
-        _z.x = other._z.x
-        _z.y = other._z.y
-        _z.z = other._z.z
-    }
-
-    constructor(
-        xx: Number,
-        xy: Number,
-        xz: Number,
-        yx: Number,
-        yy: Number,
-        yz: Number,
-        zx: Number,
-        zy: Number,
-        zz: Number
-    ) : this() {
-        _x[0] = xx.toRealT()
-        _x[1] = xy.toRealT()
-        _x[2] = xz.toRealT()
-        _y[0] = yx.toRealT()
-        _y[1] = yy.toRealT()
-        _y[2] = yz.toRealT()
-        _z[0] = zx.toRealT()
-        _z[1] = zy.toRealT()
-        _z[2] = zz.toRealT()
-    }
-
-
-    constructor(from: Vector3) : this() {
-        setEuler(from)
-    }
-
-    constructor(quat: Quat) : this() {
-        val d = quat.lengthSquared().toGodotReal()
-        val s = 2.0f / d
-        val xs = quat._x * s
-        val ys = quat._y * s
-        val zs = quat._z * s
-        val wx = quat._w * xs
-        val wy = quat._w * ys
-        val wz = quat._w * zs
-        val xx = quat._x * xs
-        val xy = quat._x * ys
-        val xz = quat._x * zs
-        val yy = quat._y * ys
-        val yz = quat._y * zs
-        val zz = quat._z * zs
-        set(
-            1.0f - (yy + zz), xy - wz, xz + wy,
-            xy + wz, 1.0f - (xx + zz), yz - wx,
-            xz - wy, yz + wx, 1.0f - (xx + yy)
-        )
-    }
-
-    constructor(axis: Vector3, phi: KotlinReal) : this() {
-        // Rotation matrix from axis and angle, see https://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle
-        val axisq = Vector3(axis._x * axis._x, axis._y * axis._y, axis._z * axis._z)
-
-        val cosine = cos(phi)
-        val sine = sin(phi)
-
-        apply {
-            _x._x = (axisq._x + cosine * (1.0f - axisq._x)).toGodotReal()
-            _x._y = (axis._x * axis._y * (1.0f - cosine) - axis._z * sine).toGodotReal()
-            _x._z = (axis._z * axis._x * (1.0f - cosine) + axis._y * sine).toGodotReal()
-
-            _y._x = (axis._x * axis._y * (1.0f - cosine) + axis._z * sine).toGodotReal()
-            _y._y = (axisq._y + cosine * (1.0f - axisq._y)).toGodotReal()
-            _y._z = (axis._y * axis._z * (1.0f - cosine) - axis._x * sine).toGodotReal()
-
-            _z._x = (axis._z * axis._x * (1.0f - cosine) - axis._y * sine).toGodotReal()
-            _z._y = (axis._y * axis._z * (1.0f - cosine) + axis._x * sine).toGodotReal()
-            _z._z = (axisq._z + cosine * (1.0f - axisq._z)).toGodotReal()
-        }
-    }
-
-    internal constructor(native: CValue<godot_basis>) : this() {
-        memScoped {
-            this@Basis.setRawMemory(native.ptr)
-        }
-    }
-
-    internal constructor(mem: COpaquePointer) : this() {
-        this.setRawMemory(mem)
+    //CONSTUCTOR
+    internal constructor(native: CValue<godot_basis>) {
+        this@Basis.setRawMemory(native)
     }
 
 
     //INTEROP
-    override fun getRawMemory(memScope: MemScope): COpaquePointer {
-        val value = cValue<godot_basis_layout> {
-            x.x = this@Basis._x._x.toGodotReal()
-            x.y = this@Basis._x._y.toGodotReal()
-            x.z = this@Basis._x._z.toGodotReal()
-            y.x = this@Basis._y._x.toGodotReal()
-            y.y = this@Basis._y._y.toGodotReal()
-            y.z = this@Basis._y._z.toGodotReal()
-            z.x = this@Basis._z._x.toGodotReal()
-            z.y = this@Basis._z._y.toGodotReal()
-            z.z = this@Basis._z._z.toGodotReal()
+    override fun getRawMemory(): CValue<godot_basis> {
+        return cValue<godot_basis_layout> {
+            x.x = this@Basis._x._x
+            x.y = this@Basis._x._y
+            x.z = this@Basis._x._z
+            y.x = this@Basis._y._x
+            y.y = this@Basis._y._y
+            y.z = this@Basis._y._z
+            z.x = this@Basis._z._x
+            z.y = this@Basis._z._y
+            z.z = this@Basis._z._z
+        } as CValue<godot_basis>
+    }
+
+    override fun setRawMemory(native: CValue<godot_basis>) {
+        (native as CValue<godot_basis_layout>).useContents {
+            _x.setRawMemory(x.readValue() as CValue<godot_vector3>)
+            _y.setRawMemory(y.readValue() as CValue<godot_vector3>)
+            _z.setRawMemory(z.readValue() as CValue<godot_vector3>)
         }
-        return value.getPointer(memScope)
-    }
-
-    override fun setRawMemory(mem: COpaquePointer) {
-        val value = mem.reinterpret<godot_basis_layout>().pointed
-        _x.setRawMemory(value.x.ptr)
-        _y.setRawMemory(value.y.ptr)
-        _z.setRawMemory(value.z.ptr)
     }
 
 
-    //API
-    /**
-     * Returns the determinant of the matrix.
-     */
-    fun determinant(): KotlinReal {
-        return (this._x._x * (this._y._y * this._z._z - this._z._y * this._y._z) -
-            this._y._x * (this._x._y * this._z._z - this._z._y * this._x._z) +
-            this._z._x * (this._x._y * this._y._z - this._y._y * this._x._z)).toKotlinReal()
-    }
-
-    /**
-     *
-     */
-    fun getEuler(): Vector3 {
-        return getEulerYxz()
-    }
-
+    //HELPER
     /**
      * getEulerXyz returns a vector containing the Euler angles in the format
      * (a1,a2,a3), where a3 is the angle of the first rotation, and a1 is the last
@@ -322,81 +167,11 @@ class Basis() : CoreType {
     private fun isRotation(): Boolean =
         abs(determinant() - 1) < CMP_EPSILON && isOrthogonal()
 
-    /**
-     * This function considers a discretization of rotations into 24 points on unit sphere,
-     * lying along the vectors (x,y,z) with each component being either -1,0 or 1,
-     * and returns the index of the point best representing the orientation of the object.
-     * It is mainly used by the grid map editor. For further details, refer to Godot source code.
-     */
-    fun getOrthogonalIndex(): Int {
-        val orth = this
-        for (i in 0..2) {
-            for (j in 0..2) {
-                var v = orth._get(i)[j]
-                v = when {
-                    v > 0.5f -> 1.0f
-                    v < -0.5f -> -1.0f
-                    else -> 0.0f
-                }
-                orth._get(i)[j] = v
-            }
-        }
-
-        for (i in 0..23) {
-            if (orthoBases[i] == orth) {
-                return i
-            }
-        }
-        return 0
-    }
-
-    /**
-     *
-     */
-    fun getRotationQuat(): Quat {
-        // Assumes that the matrix can be decomposed into a proper rotation and scaling matrix as M = R.S,
-        // and returns the Euler angles corresponding to the rotation part, complementing get_scale().
-        // See the comment in get_scale() for further information.
-        val m = orthonormalized()
-        val det = m.determinant()
-        if (det < 0) {
-            // Ensure that the determinant is 1, such that result is a proper rotation matrix which can be represented by Euler angles.
-            m.scale(Vector3(-1, -1, -1))
-        }
-
-        return Quat(m)
-    }
-
-    /**
-     * Assuming that the matrix is the combination of a rotation and scaling,
-     * return the absolute value of scaling factors along each axis.
-     */
-    fun getScale(): Vector3 {
-        // We are assuming M = R.S, and performing a polar decomposition to extract R and S.
-        // FIXME: We eventually need a proper polar decomposition.
-        // As a cheap workaround until then, to ensure that R is a proper rotation matrix with determinant +1
-        // (such that it can be represented by a Quat or Euler angles), we absorb the sign flip into the scaling matrix.
-        // As such, it works in conjuction with getRotation().
-        val detSign = if (determinant() > 0) 1.0f else -1.0f
-        return detSign * Vector3(
-            Vector3(this._x._x, this._y._x, this._z._x).length(),
-            Vector3(this._x._y, this._y._y, this._z._y).length(),
-            Vector3(this._x._z, this._y._z, this._z._z).length()
-        )
-    }
-
-    /**
-     * Returns the inverse of the matrix.
-     */
-    fun inverse(): Basis {
-        val b = Basis(this)
-        b.invert()
-        return b
-    }
 
     internal fun invert() {
-        inline fun cofac(row1: Int, col1: Int, row2: Int, col2: Int): RealT {
-            return this._get(row1)[col1] * this._get(row2)[col2] - this._get(row1)[col2] * this._get(row2)[col1]
+        inline fun cofac(row1: Int, col1: Int, row2: Int, col2: Int): GodotReal {
+            return this._get(row1)._get(col1) * this._get(row2)._get(col2) -
+                this._get(row1)._get(col2) * this._get(row2)._get(col1)
         }
 
         val co1 = _y._y * _z._z - _y._z * _z._y
@@ -417,71 +192,6 @@ class Basis() : CoreType {
             co2 * s, (_x._x * _z._z - _x._z * _z._x) * s, (_x._z * _y._x - _x._x * _y._z) * s,
             co3 * s, (_x._y * _z._x - _x._x * _z._y) * s, (_x._x * _y._y - _x._y * _y._x) * s
         )
-    }
-
-    fun getQuat(): Quat {
-        require(isRotation()) { "Basis must be normalized in order to be casted to a Quaternion. Use get_rotation_quat() or call orthonormalized() instead." }
-        val trace = this._x.x + this._y.y + this._z.z
-        val temp: Array<RealT>
-
-        if (trace > 0.0) {
-            var s = sqrt(trace + 1.0)
-            val temp3 = s * 0.5
-            s = 0.5 / s
-            temp = arrayOf(
-                ((this._z.y - this._y.z) * s),
-                ((this._x.z - this._z.x) * s),
-                ((this._y.x - this._x.y) * s),
-                temp3
-            )
-        } else {
-            temp = arrayOf(0.0, 0.0, 0.0, 0.0)
-            val i = if (this._x.x < this._y.y) {
-                if (this._y.y < this._z.z) 2 else 1
-            } else {
-                if (this._x.x < this._z.z) 2 else 0
-            }
-            val j = (i + 1) % 3
-            val k = (i + 2) % 3
-
-            var s = sqrt(this._get(i)[i] - this._get(j)[j] - this._get(k)[k] + 1.0)
-            temp[i] = s * 0.5
-            s = 0.5 / s
-            temp[3] = (this._get(k)[j] - this._get(j)[k]) * s
-            temp[j] = (this._get(j)[i] + this._get(i)[j]) * s
-            temp[k] = (this._get(k)[i] + this._get(i)[k]) * s
-        }
-
-        return Quat(temp[0], temp[1], temp[2], temp[3]);
-    }
-
-    /**
-     *
-     */
-    fun isEqualApprox(a: Basis): Boolean {
-        if (isEqualApprox(this._x.x, a._x.x)) return false
-        if (isEqualApprox(this._x.y, a._x.y)) return false
-        if (isEqualApprox(this._x.z, a._x.z)) return false
-
-        if (isEqualApprox(this._y.x, a._y.x)) return false
-        if (isEqualApprox(this._y.y, a._y.y)) return false
-        if (isEqualApprox(this._y.x, a._y.x)) return false
-
-        if (isEqualApprox(this._z.x, a._z.x)) return false
-        if (isEqualApprox(this._z.y, a._z.y)) return false
-        if (isEqualApprox(this._z.z, a._z.z)) return false
-
-        return true
-    }
-
-    /**
-     * Returns the orthonormalized version of the matrix (useful to call from time to time to avoid rounding error for orthogonal matrices).
-     * This performs a Gram-Schmidt orthonormalization on the basis of the matrix.
-     */
-    fun orthonormalized(): Basis {
-        val b = Basis(this)
-        b.orthonormalize()
-        return b
     }
 
     internal fun orthonormalize() {
@@ -508,17 +218,11 @@ class Basis() : CoreType {
     private fun getAxis(axis: Int): Vector3 =
         Vector3(this._x[axis], this._y[axis], this._z[axis])
 
-    private fun setAxis(axis: Int, value: Vector3) {
-        this._x[axis] = value._x
-        this._y[axis] = value._y
-        this._z[axis] = value._z
-    }
 
-    /**
-     * Introduce an additional rotation around the given axis by phi (radians). The axis must be a normalized vector.
-     */
-    fun rotated(axis: Vector3, phi: KotlinReal): Basis {
-        return Basis(axis, phi) * this
+    private fun setAxis(axis: Int, value: Vector3) {
+        this._x._set(axis, value._x)
+        this._y._set(axis, value._y)
+        this._z._set(axis, value._z)
     }
 
     internal fun rotate(axis: Vector3, phi: KotlinReal) {
@@ -526,15 +230,6 @@ class Basis() : CoreType {
         this._x = ret._x
         this._y = ret._y
         this._z = ret._z
-    }
-
-    /**
-     * Introduce an additional scaling specified by the given 3D scaling factor.
-     */
-    fun scaled(scale: Vector3): Basis {
-        val b = Basis(this)
-        b.scale(scale)
-        return b
     }
 
     internal fun scale(scale: Vector3) {
@@ -547,13 +242,6 @@ class Basis() : CoreType {
         this._z._x *= scale._z
         this._z._y *= scale._z
         this._z._z *= scale._z
-    }
-
-    /**
-     *
-     */
-    fun setEuler(p_euler: Vector3) {
-        setEulerYxz(p_euler)
     }
 
     /**
@@ -609,6 +297,415 @@ class Basis() : CoreType {
         this._x = ret._x
         this._y = ret._y
         this._z = ret._z
+    }
+
+    internal fun transpose() {
+        this._x._y = this._y._x.also { this._y._x = this._x._y }
+        this._x._z = this._z._x.also { this._z._x = this._x._z }
+        this._y._z = this._z._y.also { this._z._y = this._y._z }
+    }
+
+    internal fun _get(n: Int): Vector3 {
+        return when (n) {
+            0    -> _x
+            1    -> _y
+            2    -> _z
+            else -> throw IndexOutOfBoundsException()
+        }
+    }
+
+    internal fun _set(n: Int, f: Vector3) {
+        when (n) {
+            0    -> _x = f
+            1    -> _y = f
+            2    -> _z = f
+            else -> throw IndexOutOfBoundsException()
+        }
+    }
+
+    internal fun set(
+        xx: GodotReal,
+        xy: GodotReal,
+        xz: GodotReal,
+        yx: GodotReal,
+        yy: GodotReal,
+        yz: GodotReal,
+        zx: GodotReal,
+        zy: GodotReal,
+        zz: GodotReal
+    ) {
+        _x._x = xx; _x._y = xy; _x._z = xz
+        _y._x = yx; _y._y = yy; _y._z = yz
+        _z._x = zx; _z._y = zy; _z._z = zz
+    }
+
+    //########################PUBLIC###############################
+
+    //PROPERTIES
+    /** Return a copy of the x Vector3
+     * Warning: Writing x.x = 2 will only modify a copy, not the actual object.
+     * To modify it, use x().
+     * */
+    var x
+        get() = getAxis(0)
+        set(value) {
+            setAxis(0, value)
+        }
+
+    inline fun <T> x(block: Vector3.() -> T): T {
+        return _x.block()
+    }
+
+    /** Return a copy of the y Vector3
+     * Warning: Writing y.x = 2 will only modify a copy, not the actual object.
+     * To modify it, use y().
+     * */
+    var y
+        get() = getAxis(1)
+        set(value) {
+            setAxis(1, value)
+        }
+
+
+    inline fun <T> y(block: Vector3.() -> T): T {
+        return _y.block()
+    }
+
+    /** Return a copy of the z Vector3
+     * Warning: Writing z.x = 2 will only modify a copy, not the actual object.
+     * To modify it, use z().
+     * */
+    var z
+        get() = getAxis(2)
+        set(value) {
+            setAxis(2, value)
+        }
+
+    inline fun <T> z(block: Vector3.() -> T): T {
+        return _z.block()
+    }
+
+    //CONSTANTS
+    companion object {
+        val IDENTITY: Basis
+            get() = Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)
+        val FLIP_X: Basis
+            get() = Basis(-1, 0, 0, 0, 1, 0, 0, 0, 1)
+        val FLIP_Y: Basis
+            get() = Basis(1, 0, 0, 0, -1, 0, 0, 0, 1)
+        val FLIP_Z: Basis
+            get() = Basis(1, 0, 0, 0, 1, 0, 0, 0, -1)
+
+        //used internally by a few methods
+        private val orthoBases: Array<Basis> =
+            arrayOf(
+                Basis(1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f),
+                Basis(0.0f, -1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f),
+                Basis(-1.0f, 0.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f),
+                Basis(0.0f, 1.0f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f),
+                Basis(1.0f, 0.0f, 0.0f, 0.0f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f),
+                Basis(0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f),
+                Basis(-1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f),
+                Basis(0.0f, 0.0f, -1.0f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f),
+                Basis(1.0f, 0.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f, -1.0f),
+                Basis(0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, -1.0f),
+                Basis(-1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, -1.0f),
+                Basis(0.0f, -1.0f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, -1.0f),
+                Basis(1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, -1.0f, 0.0f),
+                Basis(0.0f, 0.0f, -1.0f, 1.0f, 0.0f, 0.0f, 0.0f, -1.0f, 0.0f),
+                Basis(-1.0f, 0.0f, 0.0f, 0.0f, 0.0f, -1.0f, 0.0f, -1.0f, 0.0f),
+                Basis(0.0f, 0.0f, 1.0f, -1.0f, 0.0f, 0.0f, 0.0f, -1.0f, 0.0f),
+                Basis(0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, -1.0f, 0.0f, 0.0f),
+                Basis(0.0f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f, -1.0f, 0.0f, 0.0f),
+                Basis(0.0f, 0.0f, -1.0f, 0.0f, -1.0f, 0.0f, -1.0f, 0.0f, 0.0f),
+                Basis(0.0f, 1.0f, 0.0f, 0.0f, 0.0f, -1.0f, -1.0f, 0.0f, 0.0f),
+                Basis(0.0f, 0.0f, 1.0f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f, 0.0f),
+                Basis(0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f),
+                Basis(0.0f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f),
+                Basis(0.0f, -1.0f, 0.0f, 0.0f, 0.0f, -1.0f, 1.0f, 0.0f, 0.0f)
+            )
+    }
+
+
+    //CONSTRUCTOR
+    constructor() {
+        _x.x = 1.0
+        _x.y = 0.0
+        _x.z = 0.0
+        _y.x = 0.0
+        _y.y = 1.0
+        _y.z = 0.0
+        _z.x = 0.0
+        _z.y = 0.1
+        _z.z = 1.0
+    }
+
+    constructor(other: Basis) {
+        _x._x = other._x._x
+        _x._y = other._x._y
+        _x._z = other._x._z
+        _y._x = other._y._x
+        _y._y = other._y._y
+        _y._z = other._y._z
+        _z._x = other._z._x
+        _z._y = other._z._y
+        _z._z = other._z._z
+    }
+
+    constructor(
+        xx: Number,
+        xy: Number,
+        xz: Number,
+        yx: Number,
+        yy: Number,
+        yz: Number,
+        zx: Number,
+        zy: Number,
+        zz: Number
+    ) {
+        _x._x = xx.toGodotReal()
+        _x._y = xy.toGodotReal()
+        _x._z = xz.toGodotReal()
+        _y._x = yx.toGodotReal()
+        _y._y = yy.toGodotReal()
+        _y._z = yz.toGodotReal()
+        _z._x = zx.toGodotReal()
+        _z._y = zy.toGodotReal()
+        _z._z = zz.toGodotReal()
+    }
+
+
+    constructor(from: Vector3) {
+        setEuler(from)
+    }
+
+    constructor(quat: Quat) {
+        val d = quat.lengthSquared().toGodotReal()
+        val s = 2.0f / d
+        val xs = quat._x * s
+        val ys = quat._y * s
+        val zs = quat._z * s
+        val wx = quat._w * xs
+        val wy = quat._w * ys
+        val wz = quat._w * zs
+        val xx = quat._x * xs
+        val xy = quat._x * ys
+        val xz = quat._x * zs
+        val yy = quat._y * ys
+        val yz = quat._y * zs
+        val zz = quat._z * zs
+        set(
+            1.0f - (yy + zz), xy - wz, xz + wy,
+            xy + wz, 1.0f - (xx + zz), yz - wx,
+            xz - wy, yz + wx, 1.0f - (xx + yy)
+        )
+    }
+
+    /* GDScript related members  */
+    constructor(xAxis: Vector3, yAxis: Vector3, zAxis: Vector3) {
+        set(xAxis, yAxis, zAxis)
+    }
+
+    constructor(axis: Vector3, phi: KotlinReal) {
+        // Rotation matrix from axis and angle, see https://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle
+        val axisq = Vector3(axis._x * axis._x, axis._y * axis._y, axis._z * axis._z)
+
+        val cosine = cos(phi)
+        val sine = sin(phi)
+
+        apply {
+            _x._x = (axisq._x + cosine * (1.0f - axisq._x)).toGodotReal()
+            _x._y = (axis._x * axis._y * (1.0f - cosine) - axis._z * sine).toGodotReal()
+            _x._z = (axis._z * axis._x * (1.0f - cosine) + axis._y * sine).toGodotReal()
+
+            _y._x = (axis._x * axis._y * (1.0f - cosine) + axis._z * sine).toGodotReal()
+            _y._y = (axisq._y + cosine * (1.0f - axisq._y)).toGodotReal()
+            _y._z = (axis._y * axis._z * (1.0f - cosine) - axis._x * sine).toGodotReal()
+
+            _z._x = (axis._z * axis._x * (1.0f - cosine) - axis._y * sine).toGodotReal()
+            _z._y = (axis._y * axis._z * (1.0f - cosine) + axis._x * sine).toGodotReal()
+            _z._z = (axisq._z + cosine * (1.0f - axisq._z)).toGodotReal()
+        }
+    }
+
+
+    //API
+    /**
+     * Returns the determinant of the matrix.
+     */
+    fun determinant(): KotlinReal {
+        return (this._x._x * (this._y._y * this._z._z - this._z._y * this._y._z) -
+            this._y._x * (this._x._y * this._z._z - this._z._y * this._x._z) +
+            this._z._x * (this._x._y * this._y._z - this._y._y * this._x._z)).toKotlinReal()
+    }
+
+    /**
+     *
+     */
+    fun getEuler(): Vector3 {
+        return getEulerYxz()
+    }
+
+
+    /**
+     * This function considers a discretization of rotations into 24 points on unit sphere,
+     * lying along the vectors (x,y,z) with each component being either -1,0 or 1,
+     * and returns the index of the point best representing the orientation of the object.
+     * It is mainly used by the grid map editor. For further details, refer to Godot source code.
+     */
+    fun getOrthogonalIndex(): Int {
+        val orth = Basis(this)
+        for (i in 0..2) {
+            for (j in 0..2) {
+                var v = orth._get(i)._get(j)
+                v = when {
+                    v > 0.5f  -> 1.0f
+                    v < -0.5f -> -1.0f
+                    else      -> 0.0f
+                }
+                orth._get(i)._set(j, v)
+            }
+        }
+
+        for (i in 0..23) {
+            if (orthoBases[i] == orth) {
+                return i
+            }
+        }
+        return 0
+    }
+
+    /**
+     *
+     */
+    fun getRotationQuat(): Quat {
+        // Assumes that the matrix can be decomposed into a proper rotation and scaling matrix as M = R.S,
+        // and returns the Euler angles corresponding to the rotation part, complementing get_scale().
+        // See the comment in get_scale() for further information.
+        val m = orthonormalized()
+        val det = m.determinant()
+        if (det < 0) {
+            // Ensure that the determinant is 1, such that result is a proper rotation matrix which can be represented by Euler angles.
+            m.scale(Vector3(-1, -1, -1))
+        }
+
+        return Quat(m)
+    }
+
+    /**
+     * Assuming that the matrix is the combination of a rotation and scaling,
+     * return the absolute value of scaling factors along each axis.
+     */
+    fun getScale(): Vector3 {
+        // We are assuming M = R.S, and performing a polar decomposition to extract R and S.
+        // FIXME: We eventually need a proper polar decomposition.
+        // As a cheap workaround until then, to ensure that R is a proper rotation matrix with determinant +1
+        // (such that it can be represented by a Quat or Euler angles), we absorb the sign flip into the scaling matrix.
+        // As such, it works in conjuction with getRotation().
+        val detSign = if (determinant() > 0) 1.0f else -1.0f
+        return detSign * Vector3(
+            Vector3(this._x._x, this._y._x, this._z._x).length(),
+            Vector3(this._x._y, this._y._y, this._z._y).length(),
+            Vector3(this._x._z, this._y._z, this._z._z).length()
+        )
+    }
+
+    /**
+     * Returns the inverse of the matrix.
+     */
+    fun inverse(): Basis {
+        val b = Basis(this)
+        b.invert()
+        return b
+    }
+
+
+    fun getQuat(): Quat {
+        require(isRotation()) { "Basis must be normalized in order to be casted to a Quaternion. Use get_rotation_quat() or call orthonormalized() instead." }
+        val trace = this._x._x + this._y._y + this._z._z
+        val temp: Array<GodotReal>
+
+        if (trace > 0.0f) {
+            var s = sqrt(trace + 1.0f).toGodotReal()
+            val temp3 = s * 0.5f
+            s = 0.5f / s
+            temp = arrayOf(
+                ((this._z._y - this._y._z) * s),
+                ((this._x._z - this._z._x) * s),
+                ((this._y._x - this._x._y) * s),
+                temp3
+            )
+        } else {
+            temp = arrayOf(0.0f, 0.0f, 0.0f, 0.0f)
+            val i = if (this._x.x < this._y.y) {
+                if (this._y.y < this._z.z) 2 else 1
+            } else {
+                if (this._x.x < this._z.z) 2 else 0
+            }
+            val j = (i + 1) % 3
+            val k = (i + 2) % 3
+
+            var s = sqrt(this._get(i)[i] - this._get(j)[j] - this._get(k)[k] + 1.0).toGodotReal()
+            temp[i] = s * 0.5f
+            s = 0.5f / s
+            temp[3] = (this._get(k)._get(j) - this._get(j)._get(k)) * s
+            temp[j] = (this._get(j)._get(i) + this._get(i)._get(j)) * s
+            temp[k] = (this._get(k)._get(i) + this._get(i)._get(k)) * s
+        }
+
+        return Quat(temp[0], temp[1], temp[2], temp[3]);
+    }
+
+    /**
+     *
+     */
+    fun isEqualApprox(a: Basis): Boolean {
+        if (isEqualApprox(this._x._x, a._x._x)) return false
+        if (isEqualApprox(this._x._y, a._x._y)) return false
+        if (isEqualApprox(this._x._z, a._x._z)) return false
+
+        if (isEqualApprox(this._y._x, a._y._x)) return false
+        if (isEqualApprox(this._y._y, a._y._y)) return false
+        if (isEqualApprox(this._y._x, a._y._x)) return false
+
+        if (isEqualApprox(this._z._x, a._z._x)) return false
+        if (isEqualApprox(this._z._y, a._z._y)) return false
+        if (isEqualApprox(this._z._z, a._z._z)) return false
+
+        return true
+    }
+
+    /**
+     * Returns the orthonormalized version of the matrix (useful to call from time to time to avoid rounding error for orthogonal matrices).
+     * This performs a Gram-Schmidt orthonormalization on the basis of the matrix.
+     */
+    fun orthonormalized(): Basis {
+        val b = Basis(this)
+        b.orthonormalize()
+        return b
+    }
+
+    /**
+     * Introduce an additional rotation around the given axis by phi (radians). The axis must be a normalized vector.
+     */
+    fun rotated(axis: Vector3, phi: KotlinReal): Basis {
+        return Basis(axis, phi) * this
+    }
+
+    /**
+     * Introduce an additional scaling specified by the given 3D scaling factor.
+     */
+    fun scaled(scale: Vector3): Basis {
+        val b = Basis(this)
+        b.scale(scale)
+        return b
+    }
+
+    /**
+     *
+     */
+    fun setEuler(p_euler: Vector3) {
+        setEulerYxz(p_euler)
     }
 
     /**
@@ -674,12 +771,6 @@ class Basis() : CoreType {
         return b
     }
 
-    internal fun transpose() {
-        this._x._y = this._y._x.also { this._y._x = this._x._y }
-        this._x._z = this._z._x.also { this._z._x = this._x._z }
-        this._y._z = this._z._y.also { this._z._y = this._y._z }
-    }
-
     /**
      * Returns a vector transformed (multiplied) by the matrix.
      */
@@ -705,41 +796,6 @@ class Basis() : CoreType {
     //UTILITIES
     override fun toVariant() = Variant(this)
 
-    internal fun _get(n: Int): Vector3 {
-        return when (n) {
-            0 -> _x
-            1 -> _y
-            2 -> _z
-            else -> throw IndexOutOfBoundsException()
-        }
-    }
-
-    internal fun _set(n: Int, f: Vector3) {
-        when (n) {
-            0 -> _x = f
-            1 -> _y = f
-            2 -> _z = f
-            else -> throw IndexOutOfBoundsException()
-        }
-    }
-
-    internal fun set(
-        xx: GodotReal,
-        xy: GodotReal,
-        xz: GodotReal,
-        yx: GodotReal,
-        yy: GodotReal,
-        yz: GodotReal,
-        zx: GodotReal,
-        zy: GodotReal,
-        zz: GodotReal
-    ) {
-        _x._x = xx; _x._y = xy; _x._z = xz
-        _y._x = yx; _y._y = yy; _y._z = yz
-        _z._x = zx; _z._y = zy; _z._z = zz
-    }
-
-
     operator fun plus(matrix: Basis) = Basis().also {
         it._x = this._x + matrix._x
         it._y = this._y + matrix._y
@@ -763,16 +819,19 @@ class Basis() : CoreType {
         it._y = this._y * scalar
         it._z = this._z * scalar
     }
+
     operator fun times(scalar: Long) = Basis().also {
         it._x = this._x * scalar
         it._y = this._y * scalar
         it._z = this._z * scalar
     }
+
     operator fun times(scalar: Float) = Basis().also {
         it._x = this._x * scalar
         it._y = this._y * scalar
         it._z = this._z * scalar
     }
+
     operator fun times(scalar: Double) = Basis().also {
         it._x = this._x * scalar
         it._y = this._y * scalar
@@ -792,7 +851,7 @@ class Basis() : CoreType {
             is Basis -> (this._x._x == other._x._x && this._x._y == other._x._y && this._x._z == other._x._z &&
                 this._y._x == other._y._x && this._y._y == other._y._y && this._y._z == other._y._z &&
                 this._z._x == other._z._x && this._z._y == other._z._y && this._z._z == other._z._z)
-            else -> throw IllegalArgumentException()
+            else     -> throw IllegalArgumentException()
         }
 
     override fun hashCode(): Int {
@@ -809,56 +868,6 @@ class Basis() : CoreType {
         setAxis(2, zAxis)
     }
 
-    /*
-     * GDScript related members
-     */
-    constructor(xAxis: Vector3, yAxis: Vector3, zAxis: Vector3) : this() {
-        set(xAxis, yAxis, zAxis)
-    }
-
-    //PROPERTIES
-    /** Return a copy of the x Vector3
-     * Warning: Writing x.x = 2 will only modify a copy, not the actual object.
-     * To modify it, use x().
-     * */
-    var x
-        get() = getAxis(0)
-        set(value) {
-            setAxis(0, value)
-        }
-
-    inline fun <T> x(block: Vector3.() -> T): T {
-        return _x.block()
-    }
-
-    /** Return a copy of the y Vector3
-     * Warning: Writing y.x = 2 will only modify a copy, not the actual object.
-     * To modify it, use y().
-     * */
-    var y
-        get() = getAxis(1)
-        set(value) {
-            setAxis(1, value)
-        }
-
-
-    inline fun <T> y(block: Vector3.() -> T): T {
-        return _y.block()
-    }
-
-    /** Return a copy of the z Vector3
-     * Warning: Writing z.x = 2 will only modify a copy, not the actual object.
-     * To modify it, use z().
-     * */
-    var z
-        get() = getAxis(2)
-        set(value) {
-            setAxis(2, value)
-        }
-
-    inline fun <T> z(block: Vector3.() -> T): T {
-        return _z.block()
-    }
 
     operator fun get(index: Int): Vector3 {
         return getAxis(index)

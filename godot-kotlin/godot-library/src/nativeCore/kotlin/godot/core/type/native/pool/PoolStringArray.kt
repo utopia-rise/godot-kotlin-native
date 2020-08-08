@@ -1,18 +1,20 @@
-@file:Suppress("unused", "MemberVisibilityCanBePrivate")
-
 package godot.core
 
-import godot.gdnative.godot_pool_string_array_layout
-import godot.internal.type.*
+import godot.gdnative.godot_pool_string_array
+import godot.internal.type.NativeCoreType
+import godot.internal.type.nullSafe
+import godot.internal.utils.GodotScope
 import kotlinx.cinterop.*
 
-class PoolStringArray : NativeCoreType<godot_pool_string_array_layout>, Iterable<String> {
-    override var _handle = cValue<godot_pool_string_array_layout>{}
+class PoolStringArray : NativeCoreType<godot_pool_string_array>, Iterable<String> {
+    override var _handle =
+        cValue<godot_pool_string_array> {}
 
     //PROPERTIES
     val size: Int
-        get() = this.size()
-
+        get() = callNative {
+            nullSafe(Godot.gdnative.godot_pool_string_array_size)(it)
+        }
 
     //CONSTRUCTOR
     constructor() {
@@ -23,27 +25,22 @@ class PoolStringArray : NativeCoreType<godot_pool_string_array_layout>, Iterable
 
     constructor(other: PoolStringArray) {
         callNative {
-            nullSafe(Godot.gdnative.godot_pool_string_array_new_copy)(it, other._handle.ptr)
+            nullSafe(Godot.gdnative.godot_pool_string_array_new_copy)(it, other.ptr)
         }
     }
 
-    internal constructor(native: CValue<godot_pool_string_array_layout>) {
-        memScoped {
-            this@PoolStringArray.setRawMemory(native.ptr)
-        }
+    internal constructor(native: CValue<godot_pool_string_array>) {
+        setRawMemory(native)
     }
 
-    internal constructor(mem: COpaquePointer) {
-        this.setRawMemory(mem)
-    }
 
     //INTEROP
-    override fun getRawMemory(memScope: MemScope): COpaquePointer {
-        return _handle.getPointer(memScope)
+    override fun getRawMemory(): CValue<godot_pool_string_array> {
+        return _handle
     }
 
-    override fun setRawMemory(mem: COpaquePointer) {
-        _handle = mem.reinterpret<godot_pool_string_array_layout>().pointed.readValue()
+    override fun setRawMemory(value: CValue<godot_pool_string_array>) {
+        _handle = value
     }
 
 
@@ -53,7 +50,7 @@ class PoolStringArray : NativeCoreType<godot_pool_string_array_layout>, Iterable
      */
     fun append(s: String) {
         callNative {
-            nullSafe(Godot.gdnative.godot_pool_string_array_append)(it, s.toGDString().value.ptr)
+            nullSafe(Godot.gdnative.godot_pool_string_array_append)(it, s.ptr)
         }
     }
 
@@ -63,7 +60,7 @@ class PoolStringArray : NativeCoreType<godot_pool_string_array_layout>, Iterable
      */
     fun appendArray(array: PoolStringArray) {
         callNative {
-            nullSafe(Godot.gdnative.godot_pool_string_array_append_array)(it, array._handle.ptr)
+            nullSafe(Godot.gdnative.godot_pool_string_array_append_array)(it, array.ptr)
         }
     }
 
@@ -81,8 +78,8 @@ class PoolStringArray : NativeCoreType<godot_pool_string_array_layout>, Iterable
      */
     operator fun get(idx: Int): String {
         return callNative {
-            GdString(nullSafe(Godot.gdnative.godot_pool_string_array_get)(it, idx))
-        }.toKString()
+            nullSafe(Godot.gdnative.godot_pool_string_array_get)(it, idx).string
+        }
     }
 
     /**
@@ -91,7 +88,7 @@ class PoolStringArray : NativeCoreType<godot_pool_string_array_layout>, Iterable
      */
     fun insert(idx: Int, data: String) {
         callNative {
-            nullSafe(Godot.gdnative.godot_pool_string_array_insert)(it, idx, data.toGDString().value.ptr)
+            nullSafe(Godot.gdnative.godot_pool_string_array_insert)(it, idx, data.ptr)
         }
     }
 
@@ -109,7 +106,7 @@ class PoolStringArray : NativeCoreType<godot_pool_string_array_layout>, Iterable
      */
     fun pushBack(data: String) {
         callNative {
-            nullSafe(Godot.gdnative.godot_pool_string_array_push_back)(it, data.toGDString().value.ptr)
+            nullSafe(Godot.gdnative.godot_pool_string_array_push_back)(it, data.ptr)
         }
     }
 
@@ -137,18 +134,10 @@ class PoolStringArray : NativeCoreType<godot_pool_string_array_layout>, Iterable
      */
     operator fun set(idx: Int, data: String) {
         callNative {
-            nullSafe(Godot.gdnative.godot_pool_string_array_set)(it, idx, data.toGDString().value.ptr)
+            nullSafe(Godot.gdnative.godot_pool_string_array_set)(it, idx, data.ptr)
         }
     }
 
-    /**
-     * Returns the size of the array.
-     */
-    fun size(): Int {
-        return callNative {
-            nullSafe(Godot.gdnative.godot_pool_string_array_size)(it)
-        }
-    }
 
     //UTILITIES
     override fun toVariant() = Variant(this)
@@ -162,11 +151,11 @@ class PoolStringArray : NativeCoreType<godot_pool_string_array_layout>, Iterable
     }
 
     override fun toString(): String {
-        return "PoolStringArray(${size()})"
+        return "PoolStringArray(${size})"
     }
 
     override fun iterator(): Iterator<String> {
-        return IndexedIterator(size(), this::get)
+        return IndexedIterator(this::size, this::get, this::remove)
     }
 
     /**
@@ -184,10 +173,10 @@ class PoolStringArray : NativeCoreType<godot_pool_string_array_layout>, Iterable
     }
 
     override fun hashCode(): Int {
-        return _handle.hashCode()
+        return hashCode()
     }
 
-    internal inline fun <T> callNative(block: MemScope.(CPointer<godot_pool_string_array_layout>) -> T): T {
-        return callNative(this, block)
+    internal inline fun <T> callNative(block: GodotScope.(CPointer<godot_pool_string_array>) -> T): T {
+        return godot.internal.type.callNative(this, block)
     }
 }

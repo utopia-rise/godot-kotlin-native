@@ -85,7 +85,7 @@ internal class ClassHandle<T : Object>(
     }
 
     @ExperimentalUnsignedTypes
-    fun registerSignal(signalName: String, parameters: Map<String, Variant.Type>) {
+    fun registerSignal(signalName: String, parameters: Map<String, VariantType>) {
         memScoped {
             val gdSignal = alloc<godot_signal> {
                 val argInfos = allocArray<godot_signal_argument>(parameters.size)
@@ -113,7 +113,7 @@ internal class ClassHandle<T : Object>(
     fun registerProperty(
         propertyName: String,
         propertyHandleRef: COpaquePointer,
-        propertyType: Variant.Type,
+        propertyType: VariantType,
         default: Variant?,
         isVisibleInEditor: Boolean,
         rpcMode: RPCMode,

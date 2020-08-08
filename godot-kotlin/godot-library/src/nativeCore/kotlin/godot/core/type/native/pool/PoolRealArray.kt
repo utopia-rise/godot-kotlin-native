@@ -1,18 +1,19 @@
-@file:Suppress("unused", "MemberVisibilityCanBePrivate")
-
 package godot.core
 
-import godot.gdnative.godot_pool_real_array_layout
+import godot.gdnative.godot_pool_real_array
 import godot.internal.type.*
+import godot.internal.utils.GodotScope
 import kotlinx.cinterop.*
 
-class PoolRealArray : NativeCoreType<godot_pool_real_array_layout>, Iterable<KotlinReal> {
-    override var _handle = cValue<godot_pool_real_array_layout>{}
+class PoolRealArray : NativeCoreType<godot_pool_real_array>, Iterable<KotlinReal> {
+    override var _handle =
+        cValue<godot_pool_real_array> {}
 
     //PROPERTIES
     val size: Int
-        get() = this.size()
-
+        get() = callNative {
+            nullSafe(Godot.gdnative.godot_pool_real_array_size)(it)
+        }
 
     //CONSTRUCTOR
     constructor() {
@@ -21,23 +22,18 @@ class PoolRealArray : NativeCoreType<godot_pool_real_array_layout>, Iterable<Kot
         }
     }
 
-    internal constructor(native: CValue<godot_pool_real_array_layout>) {
-        memScoped {
-            this@PoolRealArray.setRawMemory(native.ptr)
-        }
+    internal constructor(native: CValue<godot_pool_real_array>) {
+        setRawMemory(native)
     }
 
-    internal constructor(mem: COpaquePointer) {
-        this.setRawMemory(mem)
-    }
 
     //INTEROP
-    override fun getRawMemory(memScope: MemScope): COpaquePointer {
-        return _handle.getPointer(memScope)
+    override fun getRawMemory(): CValue<godot_pool_real_array> {
+        return _handle
     }
 
-    override fun setRawMemory(mem: COpaquePointer) {
-        _handle = mem.reinterpret<godot_pool_real_array_layout>().pointed.readValue()
+    override fun setRawMemory(value: CValue<godot_pool_real_array>) {
+        _handle = value
     }
 
 
@@ -57,7 +53,7 @@ class PoolRealArray : NativeCoreType<godot_pool_real_array_layout>, Iterable<Kot
      */
     fun appendArray(array: PoolRealArray) {
         callNative {
-            nullSafe(Godot.gdnative.godot_pool_real_array_append_array)(it, array._handle.ptr)
+            nullSafe(Godot.gdnative.godot_pool_real_array_append_array)(it, array.ptr)
         }
     }
 
@@ -135,15 +131,6 @@ class PoolRealArray : NativeCoreType<godot_pool_real_array_layout>, Iterable<Kot
         }
     }
 
-    /**
-     * Returns the size of the array.
-     */
-    fun size(): Int {
-        return callNative {
-            nullSafe(Godot.gdnative.godot_pool_real_array_size)(it)
-        }
-    }
-
     //UTILITIES
     override fun toVariant() = Variant(this)
 
@@ -156,11 +143,11 @@ class PoolRealArray : NativeCoreType<godot_pool_real_array_layout>, Iterable<Kot
     }
 
     override fun toString(): String {
-        return "PoolRealArray(${size()})"
+        return "PoolRealArray(${size})"
     }
 
     override fun iterator(): Iterator<KotlinReal> {
-        return IndexedIterator(size(), this::get)
+        return IndexedIterator(this::size, this::get, this::remove)
     }
 
     /**
@@ -178,10 +165,10 @@ class PoolRealArray : NativeCoreType<godot_pool_real_array_layout>, Iterable<Kot
     }
 
     override fun hashCode(): Int {
-        return _handle.hashCode()
+        return hashCode()
     }
 
-    internal inline fun <T> callNative(block: MemScope.(CPointer<godot_pool_real_array_layout>) -> T): T {
-        return callNative(this, block)
+    internal inline fun <T> callNative(block: GodotScope.(CPointer<godot_pool_real_array>) -> T): T {
+        return godot.internal.type.callNative(this, block)
     }
 }

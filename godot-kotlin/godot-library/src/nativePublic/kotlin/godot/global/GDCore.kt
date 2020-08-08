@@ -176,7 +176,7 @@ internal interface GDCore {
     fun <T> len(s: GodotArray<T>): Int = s.size
 
     /** Returns length of Variant var */
-    fun len(s: Dictionary): Int = s.size
+    fun len(s: Dictionary<*, *>): Int = s.size
 
     /** Returns length of Variant var */
     fun len(s: PoolByteArray): Int = s.size

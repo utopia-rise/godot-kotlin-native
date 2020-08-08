@@ -1,64 +1,56 @@
-@file:Suppress("unused", "MemberVisibilityCanBePrivate")
-
 package godot.core
 
-import godot.gdnative.godot_node_path_layout
+import godot.gdnative.godot_node_path
 import godot.internal.type.NativeCoreType
-import godot.internal.type.callNative
 import godot.internal.type.nullSafe
+import godot.internal.utils.GodotScope
 import kotlinx.cinterop.*
 
-
-class NodePath : NativeCoreType<godot_node_path_layout> {
-    override var _handle = cValue<godot_node_path_layout>{}
+class NodePath : NativeCoreType<godot_node_path> {
+    override var _handle = cValue<godot_node_path> {}
 
     //PROPERTIES
     val path: String
         get() {
             return callNative {
-                GdString(nullSafe(Godot.gdnative.godot_node_path_as_string)(it))
-            }.toKString()
+                nullSafe(Godot.gdnative.godot_node_path_as_string)(it).string
+            }
         }
 
     //CONSTRUCTOR
     constructor() {
         callNative {
-            nullSafe(Godot.gdnative.godot_node_path_new)(it, "".toGDString().value.ptr)
+            nullSafe(Godot.gdnative.godot_node_path_new)(it, "".ptr)
         }
     }
 
     constructor(from: String) {
         callNative {
-            nullSafe(Godot.gdnative.godot_node_path_new)(it, from.toGDString().value.ptr)
+            nullSafe(Godot.gdnative.godot_node_path_new)(it, from.ptr)
         }
     }
 
     constructor(from: NodePath) {
         callNative {
-            val str = nullSafe(Godot.gdnative.godot_node_path_as_string)(from._handle.ptr)
+            val str = nullSafe(Godot.gdnative.godot_node_path_as_string)(from.ptr)
             nullSafe(Godot.gdnative.godot_node_path_new)(it, str.ptr)
         }
     }
 
-
-    internal constructor(native: CValue<godot_node_path_layout>) {
-        _handle = cValue {}
-        callNative {
-            nullSafe(Godot.gdnative.godot_node_path_new_copy)(it, native.ptr)
-        }
+    internal constructor(native: CValue<godot_node_path>) {
+        setRawMemory(native)
     }
 
-    internal constructor(mem: COpaquePointer) {
-        this.setRawMemory(mem)
-    }
 
     //INTEROP
-    override fun getRawMemory(memScope: MemScope): COpaquePointer {
-        return _handle.getPointer(memScope)
+    override fun getRawMemory(): CValue<godot_node_path> {
+        return _handle
     }
 
-    override fun setRawMemory(mem: COpaquePointer) {
-        _handle = mem.reinterpret<godot_node_path_layout>().pointed.readValue()
+    override fun setRawMemory(value: CValue<godot_node_path>) {
+        callNative {
+            nullSafe(Godot.gdnative.godot_node_path_new_copy)(it, value.ptr)
+        }
     }
 
 
@@ -68,8 +60,8 @@ class NodePath : NativeCoreType<godot_node_path_layout> {
      */
     fun getName(idx: Int): String {
         return callNative {
-            GdString(nullSafe(Godot.gdnative.godot_node_path_get_name)(it, idx))
-        }.toKString()
+            nullSafe(Godot.gdnative.godot_node_path_get_name)(it, idx).string
+        }
 
     }
 
@@ -86,10 +78,11 @@ class NodePath : NativeCoreType<godot_node_path_layout> {
      * Get the path’s property name, or an empty string if the path doesn’t have a property.
      */
     fun getProperty(): String {
-        return NodePath(
-            callNative {
+        return NodePath().also {
+            _handle = callNative {
                 nullSafe(Godot.gdnative11.godot_node_path_get_as_property_path)(it)
-            }).toString()
+            }
+        }.toString()
     }
 
     /**
@@ -97,7 +90,8 @@ class NodePath : NativeCoreType<godot_node_path_layout> {
      */
     fun getSubname(idx: Int): String {
         return callNative {
-            GdString(nullSafe(Godot.gdnative.godot_node_path_get_subname)(it, idx)).toKString()
+            nullSafe(Godot.gdnative.godot_node_path_get_subname)(it, idx).string
+
         }
     }
 
@@ -133,7 +127,7 @@ class NodePath : NativeCoreType<godot_node_path_layout> {
      */
     fun getConcatenatedSubnames(): String {
         return callNative {
-            GdString(nullSafe(Godot.gdnative.godot_node_path_get_concatenated_subnames)(it)).toKString()
+            nullSafe(Godot.gdnative.godot_node_path_get_concatenated_subnames)(it).string
         }
     }
 
@@ -144,7 +138,7 @@ class NodePath : NativeCoreType<godot_node_path_layout> {
     override fun equals(other: Any?): Boolean {
         return if (other is NodePath) {
             callNative {
-                nullSafe(Godot.gdnative.godot_node_path_operator_equal)(it, other._handle.ptr)
+                nullSafe(Godot.gdnative.godot_node_path_operator_equal)(it, other.ptr)
             }
         } else {
             false
@@ -159,7 +153,7 @@ class NodePath : NativeCoreType<godot_node_path_layout> {
         return "NodePath($path)"
     }
 
-    internal inline fun <T> callNative(block: MemScope.(CPointer<godot_node_path_layout>) -> T): T {
-        return callNative(this, block)
+    internal inline fun <T> callNative(block: GodotScope.(CPointer<godot_node_path>) -> T): T {
+        return godot.internal.type.callNative(this, block)
     }
 }

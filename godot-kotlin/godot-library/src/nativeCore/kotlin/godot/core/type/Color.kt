@@ -5,28 +5,115 @@ package godot.core
 import godot.gdnative.godot_color
 import godot.gdnative.godot_color_layout
 import godot.internal.type.*
-import kotlinx.cinterop.*
+import kotlinx.cinterop.CValue
+import kotlinx.cinterop.cValue
+import kotlinx.cinterop.useContents
 import kotlin.math.*
 
 
-class Color(
-    p_r: KotlinReal,
-    p_g: KotlinReal,
-    p_b: KotlinReal,
-    p_a: KotlinReal
-) : Comparable<Color>, CoreType() {
+class Color : Comparable<Color>, CoreType<godot_color> {
+
+    //########################INTERNAL#############################
+
+    //FIELD
+    @PublishedApi
+    internal var _r: GodotReal
 
     @PublishedApi
-    internal var _r: GodotReal = p_r.toGodotReal()
+    internal var _g: GodotReal
 
     @PublishedApi
-    internal var _g: GodotReal = p_g.toGodotReal()
+    internal var _b: GodotReal
 
     @PublishedApi
-    internal var _b: GodotReal = p_b.toGodotReal()
+    internal var _a: GodotReal
 
-    @PublishedApi
-    internal var _a: GodotReal = p_a.toGodotReal()
+
+    //CONSTRUCTOR
+    internal constructor(native: CValue<godot_color>) : this() {
+        this@Color.setRawMemory(native)
+    }
+
+
+    //INTEROP
+    override fun getRawMemory(): CValue<godot_color> {
+        return cValue<godot_color_layout> {
+            r = this@Color._r
+            g = this@Color._g
+            b = this@Color._b
+            a = this@Color._a
+        } as CValue<godot_color>
+    }
+
+    override fun setRawMemory(native: CValue<godot_color>) {
+        (native as CValue<godot_color_layout>).useContents {
+            _r = r
+            _g = g
+            _b = b
+            _a = a
+        }
+    }
+
+
+    //HELPER
+    internal fun contrast() {
+        _r = (_r + 0.5f).rem(1.0f)
+        _g = (_g + 0.5f).rem(1.0f)
+        _b = (_b + 0.5f).rem(1.0f)
+    }
+
+    internal fun invert() {
+        _r = 1.0f - _r
+        _g = 1.0f - _g
+        _b = 1.0f - _b
+    }
+
+    private fun toByteColorCode(
+        first: KotlinReal,
+        second: KotlinReal,
+        third: KotlinReal,
+        fourth: KotlinReal,
+        colorByte: ColorByte
+    ): Long {
+        val size = colorByte.size
+        val shift = colorByte.shift
+        var c: Long = (first * size).roundToLong()
+        c = c shl shift
+        c = c or (second * size).roundToLong()
+        c = c shl shift
+        c = c or (third * size).roundToLong()
+        c = c shl shift
+        c = c or (fourth * size).roundToLong()
+
+        return c
+    }
+
+    private fun toHex(p_val: KotlinReal): String {
+        var v = (p_val * 255).toInt()
+        v = when {
+            v < 0   -> 0
+            v > 255 -> 255
+            else    -> v
+        }
+        var ret = ""
+
+        for (i in 0..1) {
+            val c = shortArrayOf(0, 0)
+            val lv = v and 0xF
+            if (lv < 10) {
+                c[0] = ('0'.toInt() + lv).toShort()
+            } else {
+                c[0] = ('a'.toInt() + lv - 10).toShort()
+            }
+
+            v = v shr 4
+            val cs = String(charArrayOf(c[0].toChar()))
+            ret = cs + ret
+        }
+        return ret
+    }
+
+    //########################PUBLIC###############################
 
     //PROPERTIES
     inline var r: KotlinReal
@@ -52,7 +139,6 @@ class Color(
         set(value) {
             _a = value.toGodotReal()
         }
-
     var r8: Int
         get() = (_r * 255).roundToInt()
         set(value) {
@@ -68,6 +154,7 @@ class Color(
         set(value) {
             _b = value / 255f
         }
+
     var a8: Int
         get() = (_a * 255).roundToInt()
         set(value) {
@@ -88,7 +175,7 @@ class Color(
             var h = when {
                 _r == max -> ((_g - _b) / delta) // between yellow & magenta
                 _g == max -> (2 + (_b - _r) / delta) // between cyan & yellow
-                else -> (4 + (_r - _g) / delta) // between magenta & cyan
+                else      -> (4 + (_r - _g) / delta) // between magenta & cyan
             }
 
             h /= 6.0f
@@ -151,27 +238,27 @@ class Color(
         t = v * (1 - s * (1 - f))
 
         when (i) {
-            0 -> { // Red is the dominant color
+            0    -> { // Red is the dominant color
                 _r = v.toGodotReal()
                 _g = t.toGodotReal()
                 _b = p.toGodotReal()
             }
-            1 -> { // Green is the dominant color
+            1    -> { // Green is the dominant color
                 _r = q.toGodotReal()
                 _g = v.toGodotReal()
                 _b = p.toGodotReal()
             }
-            2 -> {
+            2    -> {
                 _r = p.toGodotReal()
                 _g = v.toGodotReal()
                 _b = t.toGodotReal()
             }
-            3 -> { // Blue is the dominant color
+            3    -> { // Blue is the dominant color
                 _r = p.toGodotReal()
                 _g = q.toGodotReal()
                 _b = v.toGodotReal()
             }
-            4 -> {
+            4    -> {
                 _r = t.toGodotReal()
                 _g = p.toGodotReal()
                 _b = v.toGodotReal()
@@ -188,6 +275,7 @@ class Color(
     private enum class ColorByte(val size: Int, val shift: Int) {
         BITS32(255, 8),
         BITS64(65535, 16)
+
     }
 
     companion object {
@@ -481,6 +569,7 @@ class Color(
             get() = Color(0.96f, 0.96f, 0.96f)
         inline val yellow: Color
             get() = Color(1.00f, 1.00f, 0.00f)
+
         inline val yellowgreen: Color
             get() = Color(0.60f, 0.80f, 0.20f)
 
@@ -499,7 +588,7 @@ class Color(
                         v = c.toInt() - 'A'.toInt()
                         v += 10
                     }
-                    else -> return -1.0
+                    else        -> return -1.0
                 }
 
                 ig += if (i == 0)
@@ -509,16 +598,38 @@ class Color(
             }
             return ig.toKotlinReal()
         }
+
     }
 
     //CONSTRUCTOR
 
-    constructor() : this(0.0f, 0.0f, 0.0f, 1.0f)
+    constructor() {
+        _r = 0f
+        _g = 0f
+        _b = 0f
+        _a = 1f
+    }
 
-    constructor(other: Color) : this(other._r, other._g, other._b, other._a)
+    constructor(other: Color) {
+        _r = other._r
+        _g = other._g
+        _b = other._b
+        _a = other._a
+    }
 
-    constructor(r: Number, g: Number, b: Number, a: Number = 1.0f) :
-        this(r.toKotlinReal(), g.toKotlinReal(), b.toKotlinReal(), a.toKotlinReal())
+    constructor(r: GodotReal, g: GodotReal, b: GodotReal, a: GodotReal = 1f) {
+        _r = r
+        _g = g
+        _b = b
+        _a = a
+    }
+
+    constructor(r: Number, g: Number, b: Number, a: Number = 1.0f) {
+        _r = r.toGodotReal()
+        _g = g.toGodotReal()
+        _b = b.toGodotReal()
+        _a = a.toGodotReal()
+    }
 
     constructor(from: String) : this() {
         var color = from
@@ -530,7 +641,7 @@ class Color(
         val alpha = when {
             color.length == 8 -> true
             color.length == 6 -> false
-            else -> return
+            else              -> return
         }
 
         var a = 255
@@ -555,7 +666,8 @@ class Color(
         this._a = a / 255f
     }
 
-    constructor(from: Int) : this() {
+
+    constructor(from: Int) {
         _a = (from and 0xFF) / 255f
         var hex = from shr 8
         _b = (hex and 0xFF) / 255f
@@ -565,35 +677,6 @@ class Color(
         _r = (hex and 0xFF) / 255f
     }
 
-    internal constructor(native: CValue<godot_color>) : this() {
-        memScoped {
-            this@Color.setRawMemory(native.ptr)
-        }
-    }
-
-    internal constructor(mem: COpaquePointer) : this() {
-        this.setRawMemory(mem)
-    }
-
-
-    //INTEROP
-    override fun getRawMemory(memScope: MemScope): COpaquePointer {
-        val value = cValue<godot_color_layout> {
-            r = this@Color._r.toFloat()
-            g = this@Color._g.toFloat()
-            b = this@Color._b.toFloat()
-            a = this@Color._a.toFloat()
-        }
-        return value.getPointer(memScope)
-    }
-
-    override fun setRawMemory(mem: COpaquePointer) {
-        val value = mem.reinterpret<godot_color_layout>().pointed
-        _r = value.r
-        _g = value.g
-        _b = value.b
-        _a = value.a
-    }
 
     //API
     /**
@@ -613,6 +696,7 @@ class Color(
         return res
     }
 
+
     /**
      * Returns the most contrasting color.
      */
@@ -620,13 +704,6 @@ class Color(
         val c = Color(_r, _g, _b, _a)
         c.contrast()
         return c
-    }
-
-
-    internal fun contrast() {
-        _r = (_r + 0.5f).rem(1.0f)
-        _g = (_g + 0.5f).rem(1.0f)
-        _b = (_b + 0.5f).rem(1.0f)
     }
 
     /**
@@ -653,12 +730,12 @@ class Color(
         val c = v * s
         val x = c * (1.0f - (finalH.rem(2) - 1))
         val rgbTriple = when (finalH.toInt()) {
-            0 -> Triple(c, x, 0.0)
-            1 -> Triple(x, c, 0.0)
-            2 -> Triple(0.0, c, x)
-            3 -> Triple(0.0, x, c)
-            4 -> Triple(x, 0.0, c)
-            5 -> Triple(c, 0.0, x)
+            0    -> Triple(c, x, 0.0)
+            1    -> Triple(x, c, 0.0)
+            2    -> Triple(0.0, c, x)
+            3    -> Triple(0.0, x, c)
+            4    -> Triple(x, 0.0, c)
+            5    -> Triple(c, 0.0, x)
             else -> Triple(0.0, 0.0, 0.0)
         }
 
@@ -679,12 +756,6 @@ class Color(
         val c = Color(_r, _g, _b, _a)
         c.invert()
         return c
-    }
-
-    internal fun invert() {
-        _r = 1.0f - _r
-        _g = 1.0f - _g
-        _b = 1.0f - _b
     }
 
     /**
@@ -709,6 +780,7 @@ class Color(
         )
     }
 
+
     /**
      * Returns the linear interpolation with another color. The interpolation factor t is between 0 and 1.f
      */
@@ -720,7 +792,6 @@ class Color(
         res._a += (t.toGodotReal() * (otherColor._a - _a))
         return res
     }
-
 
     /**
      * Returns the color’s 32-bit integer in ABGR format (each byte represents a component of the ABGR profile).
@@ -758,26 +829,6 @@ class Color(
      */
     fun toRGBA64(): Long = toByteColorCode(r, g, b, a, ColorByte.BITS64)
 
-    private fun toByteColorCode(
-        first: KotlinReal,
-        second: KotlinReal,
-        third: KotlinReal,
-        fourth: KotlinReal,
-        colorByte: ColorByte
-    ): Long {
-        val size = colorByte.size
-        val shift = colorByte.shift
-        var c: Long = (first * size).roundToLong()
-        c = c shl shift
-        c = c or (second * size).roundToLong()
-        c = c shl shift
-        c = c or (third * size).roundToLong()
-        c = c shl shift
-        c = c or (fourth * size).roundToLong()
-
-        return c
-    }
-
     /**
      * Returns the color’s HTML hexadecimal color string in ARGB format (ex: ff34f822).
      * Setting with_alpha to false excludes alpha from the hexadecimal string.
@@ -791,31 +842,6 @@ class Color(
             txt = toHex(a) + txt
         }
         return txt
-    }
-
-    private fun toHex(p_val: KotlinReal): String {
-        var v = (p_val * 255).toInt()
-        v = when {
-            v < 0 -> 0
-            v > 255 -> 255
-            else -> v
-        }
-        var ret = ""
-
-        for (i in 0..1) {
-            val c = shortArrayOf(0, 0)
-            val lv = v and 0xF
-            if (lv < 10) {
-                c[0] = ('0'.toInt() + lv).toShort()
-            } else {
-                c[0] = ('a'.toInt() + lv - 10).toShort()
-            }
-
-            v = v shr 4
-            val cs = String(charArrayOf(c[0].toChar()))
-            ret = cs + ret
-        }
-        return ret
     }
 
     //Utilities
@@ -842,18 +868,18 @@ class Color(
             _r == other._r -> when {
                 _g == other._g -> when {
                     _b == other._b -> when {
-                        _a < other._a -> -1
+                        _a < other._a  -> -1
                         _a == other._a -> 0
-                        else -> 1
+                        else           -> 1
                     }
-                    _b < other._b -> -1
-                    else -> 1
+                    _b < other._b  -> -1
+                    else           -> 1
                 }
-                _g < other._g -> -1
-                else -> 1
+                _g < other._g  -> -1
+                else           -> 1
             }
-            _r < other._r -> -1
-            else -> 1
+            _r < other._r  -> -1
+            else           -> 1
         }
     }
 

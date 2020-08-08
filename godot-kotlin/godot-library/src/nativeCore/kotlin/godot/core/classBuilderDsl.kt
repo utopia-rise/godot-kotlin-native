@@ -4,7 +4,9 @@ package godot.core
 
 import godot.Object
 import godot.gdnative.godot_property_hint
-import godot.internal.type.toNaturalT
+import godot.internal.type.toGodotInt
+import godot.internal.type.toKotlinInt
+import godot.internal.type.toVariantInt
 import godot.registration.RPCMode
 import kotlinx.cinterop.StableRef
 import kotlin.reflect.KMutableProperty1
@@ -137,7 +139,7 @@ class ClassBuilder<T : Object> internal constructor(val classHandle: ClassHandle
         classHandle.registerFunction(name, StableRef.create(function).asCPointer(), rpcMode)
     }
 
-    fun signal(name: String, parameters: Map<String, Variant.Type>) {
+    fun signal(name: String, parameters: Map<String, VariantType>) {
         classHandle.registerSignal(name, parameters)
     }
 
@@ -146,7 +148,7 @@ class ClassBuilder<T : Object> internal constructor(val classHandle: ClassHandle
         property: KMutableProperty1<T, K>,
         typeToVariantConverter: (K) -> Variant,
         variantToTypeConverter: (Variant) -> Any?,
-        type: Variant.Type,
+        type: VariantType,
         default: Variant? = null,
         isVisibleInEditor: Boolean = true,
         rpcMode: RPCMode,
@@ -177,7 +179,7 @@ class ClassBuilder<T : Object> internal constructor(val classHandle: ClassHandle
         classHandle.registerProperty(
             name,
             StableRef.create(propertyHandler).asCPointer(),
-            Variant.Type.STRING,
+            VariantType.STRING,
             default,
             isVisibleInEditor,
             rpcMode,
@@ -189,16 +191,14 @@ class ClassBuilder<T : Object> internal constructor(val classHandle: ClassHandle
 
     inline fun <reified K : Enum<K>> enumListProperty(
         name: String,
-        property: KMutableProperty1<T, EnumArray<K>>,
-        default: EnumArray<K>? = null,
+        property: KMutableProperty1<T, Set<K>>,
+        default: Set<K>? = null,
         isVisibleInEditor: Boolean = true,
         rpcMode: RPCMode
     ) {
-        val variantArray = IntVariantArray()
-        if (default != null) {
-            default.forEach {
-                variantArray.append(it.ordinal.toNaturalT())
-            }
+        val variantArray = GodotArray<Int>()
+        default?.forEach {
+            variantArray.append(it.ordinal)
         }
         val propertyHandler = MutablePropertyHandler(
             property,
@@ -208,7 +208,7 @@ class ClassBuilder<T : Object> internal constructor(val classHandle: ClassHandle
         classHandle.registerProperty(
             name,
             StableRef.create(propertyHandler).asCPointer(),
-            Variant.Type.ARRAY,
+            VariantType.ARRAY,
             Variant(variantArray),
             isVisibleInEditor,
             rpcMode,
@@ -233,7 +233,7 @@ class ClassBuilder<T : Object> internal constructor(val classHandle: ClassHandle
         classHandle.registerProperty(
             name,
             StableRef.create(propertyHandler).asCPointer(),
-            Variant.Type.INT,
+            VariantType.INT,
             Variant(intFlag),
             isVisibleInEditor,
             rpcMode,

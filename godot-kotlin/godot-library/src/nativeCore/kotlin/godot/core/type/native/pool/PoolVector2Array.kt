@@ -1,18 +1,21 @@
-@file:Suppress("unused", "MemberVisibilityCanBePrivate")
-
 package godot.core
 
-import godot.gdnative.godot_pool_vector2_array_layout
-import godot.internal.type.*
+import godot.gdnative.godot_pool_vector2_array
+import godot.gdnative.godot_vector2
+import godot.internal.type.NativeCoreType
+import godot.internal.type.nullSafe
+import godot.internal.utils.GodotScope
 import kotlinx.cinterop.*
 
-class PoolVector2Array : NativeCoreType<godot_pool_vector2_array_layout>, Iterable<Vector2> {
-    override var _handle = cValue<godot_pool_vector2_array_layout>{}
+class PoolVector2Array : NativeCoreType<godot_pool_vector2_array>, Iterable<Vector2> {
+    override var _handle =
+        cValue<godot_pool_vector2_array> {}
 
     //PROPERTIES
     val size: Int
-        get() = this.size()
-
+        get() = callNative {
+            nullSafe(Godot.gdnative.godot_pool_vector2_array_size)(it)
+        }
 
     //CONSTRUCTOR
     constructor() {
@@ -23,27 +26,22 @@ class PoolVector2Array : NativeCoreType<godot_pool_vector2_array_layout>, Iterab
 
     constructor(other: PoolVector2Array) {
         callNative {
-            nullSafe(Godot.gdnative.godot_pool_vector2_array_new_copy)(it, other._handle.ptr)
+            nullSafe(Godot.gdnative.godot_pool_vector2_array_new_copy)(it, other.ptr)
         }
     }
 
-    internal constructor(native: CValue<godot_pool_vector2_array_layout>) {
-        memScoped {
-            this@PoolVector2Array.setRawMemory(native.ptr)
-        }
+    internal constructor(native: CValue<godot_pool_vector2_array>) {
+        setRawMemory(native)
     }
 
-    internal constructor(mem: COpaquePointer) {
-        this.setRawMemory(mem)
-    }
 
     //INTEROP
-    override fun getRawMemory(memScope: MemScope): COpaquePointer {
-        return _handle.getPointer(memScope)
+    override fun getRawMemory(): CValue<godot_pool_vector2_array> {
+        return _handle
     }
 
-    override fun setRawMemory(mem: COpaquePointer) {
-        _handle = mem.reinterpret<godot_pool_vector2_array_layout>().pointed.readValue()
+    override fun setRawMemory(value: CValue<godot_pool_vector2_array>) {
+        _handle = value
     }
 
 
@@ -53,7 +51,7 @@ class PoolVector2Array : NativeCoreType<godot_pool_vector2_array_layout>, Iterab
      */
     fun append(vector: Vector2) {
         callNative {
-            nullSafe(Godot.gdnative.godot_pool_vector2_array_append)(it, vector.getRawMemory(this).reinterpret())
+            nullSafe(Godot.gdnative.godot_pool_vector2_array_append)(it, vector.ptr as CPointer<godot_vector2>)
         }
     }
 
@@ -63,7 +61,7 @@ class PoolVector2Array : NativeCoreType<godot_pool_vector2_array_layout>, Iterab
      */
     fun appendArray(array: PoolVector2Array) {
         callNative {
-            nullSafe(Godot.gdnative.godot_pool_vector2_array_append_array)(it, array._handle.ptr)
+            nullSafe(Godot.gdnative.godot_pool_vector2_array_append_array)(it, array.ptr)
         }
     }
 
@@ -93,7 +91,7 @@ class PoolVector2Array : NativeCoreType<godot_pool_vector2_array_layout>, Iterab
      */
     fun insert(idx: Int, data: Vector2) {
         callNative {
-            nullSafe(Godot.gdnative.godot_pool_vector2_array_insert)(it, idx, data.getRawMemory(this).reinterpret())
+            nullSafe(Godot.gdnative.godot_pool_vector2_array_insert)(it, idx, data.ptr as CPointer<godot_vector2>)
         }
     }
 
@@ -111,7 +109,7 @@ class PoolVector2Array : NativeCoreType<godot_pool_vector2_array_layout>, Iterab
      */
     fun pushBack(data: Vector2) {
         callNative {
-            nullSafe(Godot.gdnative.godot_pool_vector2_array_push_back)(it, data.getRawMemory(this).reinterpret())
+            nullSafe(Godot.gdnative.godot_pool_vector2_array_push_back)(it, data.ptr as CPointer<godot_vector2>)
         }
     }
 
@@ -139,16 +137,7 @@ class PoolVector2Array : NativeCoreType<godot_pool_vector2_array_layout>, Iterab
      */
     operator fun set(idx: Int, data: Vector2) {
         callNative {
-            nullSafe(Godot.gdnative.godot_pool_vector2_array_set)(it, idx, data.getRawMemory(this).reinterpret())
-        }
-    }
-
-    /**
-     * Returns the size of the array.
-     */
-    fun size(): Int {
-        return callNative {
-            nullSafe(Godot.gdnative.godot_pool_vector2_array_size)(it)
+            nullSafe(Godot.gdnative.godot_pool_vector2_array_set)(it, idx, data.ptr as CPointer<godot_vector2>)
         }
     }
 
@@ -164,11 +153,11 @@ class PoolVector2Array : NativeCoreType<godot_pool_vector2_array_layout>, Iterab
     }
 
     override fun toString(): String {
-        return "PoolVector2Array(${size()})"
+        return "PoolVector2Array(${size})"
     }
 
     override fun iterator(): Iterator<Vector2> {
-        return IndexedIterator(size(), this::get)
+        return IndexedIterator(this::size, this::get, this::remove)
     }
 
     /**
@@ -186,10 +175,10 @@ class PoolVector2Array : NativeCoreType<godot_pool_vector2_array_layout>, Iterab
     }
 
     override fun hashCode(): Int {
-        return _handle.hashCode()
+        return hashCode()
     }
 
-    internal inline fun <T> callNative(block: MemScope.(CPointer<godot_pool_vector2_array_layout>) -> T): T {
-        return callNative(this, block)
+    internal inline fun <T> callNative(block: GodotScope.(CPointer<godot_pool_vector2_array>) -> T): T {
+        return godot.internal.type.callNative(this, block)
     }
 }

@@ -2,6 +2,7 @@ package godot.core
 
 import godot.gdnative.*
 import godot.internal.type.nullSafe
+import godot.internal.utils.godotScoped
 import godot.registerEngineTypes
 import kotlinx.cinterop.*
 import kotlin.native.concurrent.AtomicInt
@@ -11,12 +12,15 @@ object Godot {
     private val gdnativeWrapper = AtomicReference<CPointer<godot_gdnative_core_api_struct>?>(null)
     private val nativescriptWrapper = AtomicReference<CPointer<godot_gdnative_ext_nativescript_api_struct>?>(null)
 
+    @PublishedApi
     internal val gdnative: godot_gdnative_core_api_struct
         get() = nullSafe(gdnativeWrapper.value).pointed
 
+    @PublishedApi
     internal val gdnative11: godot_gdnative_core_1_1_api_struct
         get() = nullSafe(gdnative.next).reinterpret<godot_gdnative_core_1_1_api_struct>().pointed
 
+    @PublishedApi
     internal val gdnative12: godot_gdnative_core_1_2_api_struct
         get() = nullSafe(gdnative11.next).reinterpret<godot_gdnative_core_1_2_api_struct>().pointed
 
@@ -90,19 +94,19 @@ object Godot {
     }
 
     internal fun print(message: String) {
-        memScoped {
-            nullSafe(gdnative.godot_print)(message.toGDString().value.ptr)
+        godotScoped {
+            nullSafe(gdnative.godot_print)(message.ptr)
         }
     }
 
     internal fun printWarning(description: String, function: String, file: String, line: Int) {
-        memScoped {
+        godotScoped {
             nullSafe(gdnative.godot_print_warning)(description.cstr.ptr, function.cstr.ptr, file.cstr.ptr, line)
         }
     }
 
     internal fun printError(description: String, function: String, file: String, line: Int) {
-        memScoped {
+        godotScoped {
             nullSafe(gdnative.godot_print_error)(description.cstr.ptr, function.cstr.ptr, file.cstr.ptr, line)
         }
     }

@@ -1,46 +1,47 @@
 package godot.internal.type
 
 import godot.core.Variant
-import kotlinx.cinterop.*
+import godot.internal.utils.GodotScope
+import godot.internal.utils.godotScoped
+import kotlinx.cinterop.CPointer
+import kotlinx.cinterop.CStructVar
+import kotlinx.cinterop.CValue
 
 
-abstract class CoreType {
-    internal abstract fun getRawMemory(memScope: MemScope): COpaquePointer
-    internal abstract fun setRawMemory(mem: COpaquePointer)
+abstract class CoreType<C : CStructVar> {
+
+    @PublishedApi
+    internal abstract fun getRawMemory(): CValue<C>
+
+    @PublishedApi
+    internal abstract fun setRawMemory(native: CValue<C>)
+
+    @PublishedApi
     internal abstract fun toVariant(): Variant
 }
 
-abstract class NativeCoreType<C : CStructVar> : CoreType() {
+abstract class NativeCoreType<C : CStructVar> : CoreType<C>() {
+    @PublishedApi
     internal abstract var _handle: CValue<C>
+
+    @PublishedApi
+    override fun  getRawMemory(): CValue<C>{
+        return _handle
+    }
+
+    @PublishedApi
+    override fun setRawMemory(native: CValue<C>){
+        _handle = native
+    }
 }
 
 internal inline fun <T, reified C : CStructVar> callNative(
     nativeCore: NativeCoreType<C>,
-    block: MemScope.(CPointer<C>) -> T
+    block: GodotScope.(CPointer<C>) -> T
 ): T {
-    return memScoped {
-        val ptr = nativeCore._handle.ptr
+    return godotScoped {
+        val ptr = nativeCore.ptr
         val ret: T = block(ptr)
-        nativeCore._handle = ptr.pointed.readValue()
         ret
     }
-}
-
-
-internal fun Long.getRawMemory(memScope: MemScope): COpaquePointer {
-    return memScope.alloc<LongVar>().apply {
-        this.value = this@getRawMemory
-    }.ptr
-}
-
-internal fun Double.getRawMemory(memScope: MemScope): COpaquePointer {
-    return memScope.alloc<DoubleVar>().apply {
-        this.value = this@getRawMemory
-    }.ptr
-}
-
-internal fun Boolean.getRawMemory(memScope: MemScope): COpaquePointer {
-    return memScope.alloc<BooleanVar>().apply {
-        this.value = this@getRawMemory
-    }.ptr
 }

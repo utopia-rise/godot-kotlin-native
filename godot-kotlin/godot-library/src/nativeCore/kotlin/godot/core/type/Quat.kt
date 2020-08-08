@@ -5,156 +5,61 @@ package godot.core
 import godot.gdnative.godot_quat
 import godot.gdnative.godot_quat_layout
 import godot.internal.type.*
-import kotlinx.cinterop.*
+import kotlinx.cinterop.CValue
+import kotlinx.cinterop.cValue
+import kotlinx.cinterop.useContents
 import kotlin.math.*
 
-class Quat(
-    p_x: KotlinReal,
-    p_y: KotlinReal,
-    p_z: KotlinReal,
-    p_w: KotlinReal
-) : CoreType() {
+class Quat : CoreType<godot_quat> {
+
+    //########################INTERNAL#############################
+
+    //FIELD
+    @PublishedApi
+    internal var _x: GodotReal = 0f
 
     @PublishedApi
-    internal var _x: GodotReal = p_x.toGodotReal()
+    internal var _y: GodotReal = 0f
 
     @PublishedApi
-    internal var _y: GodotReal = p_y.toGodotReal()
+    internal var _z: GodotReal = 0f
 
     @PublishedApi
-    internal var _z: GodotReal = p_z.toGodotReal()
-
-    @PublishedApi
-    internal var _w: GodotReal = p_w.toGodotReal()
-
-    //PROPERTIES
-    inline var x: KotlinReal
-        get() = _x.toKotlinReal()
-        set(value) {
-            _x = value.toGodotReal()
-        }
-
-    inline var y: KotlinReal
-        get() = _y.toKotlinReal()
-        set(value) {
-            _y = value.toGodotReal()
-        }
-
-    inline var z: KotlinReal
-        get() = _z.toKotlinReal()
-        set(value) {
-            _z = value.toGodotReal()
-        }
-
-    inline var w: KotlinReal
-        get() = _w.toKotlinReal()
-        set(value) {
-            _w = value.toGodotReal()
-        }
-
-    //CONSTANTS
-    companion object {
-        val IDENTITY: Quat
-            get() = Quat(0.0f, 0.0f, 0.0f, 1.0f)
-    }
+    internal var _w: GodotReal = 1f
 
 
     //CONSTRUCTOR
-    constructor() :
-        this(0.0f, 0.0f, 0.0f, 1.0f)
-
-    constructor(other: Quat) : this(other._x, other._y, other._z, other._w)
-
-    constructor(x: Number, y: Number, z: Number, w: Number = 1.0f) :
-        this(x.toKotlinReal(), y.toKotlinReal(), z.toKotlinReal(), w.toKotlinReal())
-
-    constructor(axis: Vector3, angle: RealT) : this() {
-        val d = axis.length().toGodotReal()
-        if (isEqualApprox(d, 0f)) {
-            set(0.0f, 0.0f, 0.0f, 0.0f)
-        } else {
-            val angle2 = angle.toGodotReal()
-            val sinAngle = sin(angle2 * 0.5f)
-            val cosAngle = cos(angle2 * 0.5f)
-            val s = sinAngle / d
-            set(axis._x * s, axis._y * s, axis._z * s, cosAngle)
-        }
-    }
-
-    constructor(v0: Vector3, v1: Vector3) : this() {
-        val c = v0.cross(v1)
-        val d = v0.dot(v1).toGodotReal()
-
-        if (d < -1.0f + CMP_EPSILON) {
-            _x = 0.0f
-            _y = 1.0f
-            _z = 0.0f
-            _w = 0.0f
-        } else {
-            val s = sqrt((1.0f + d) * 2.0f)
-            val rs = 1.0f / s
-            _x = c._x * rs
-            _y = c._y * rs
-            _z = c._z * rs
-            _w = s * 0.5f
-        }
-    }
-
-
-    internal constructor(native: CValue<godot_quat>) : this() {
-        memScoped {
-            this@Quat.setRawMemory(native.ptr)
-        }
-    }
-
-    internal constructor(mem: COpaquePointer) : this() {
-        this.setRawMemory(mem)
+    internal constructor(native: CValue<godot_quat>) {
+        this.setRawMemory(native)
     }
 
 
     //INTEROP
-    override fun getRawMemory(memScope: MemScope): COpaquePointer {
-        val value = cValue<godot_quat_layout> {
-            x = this@Quat._x.toGodotReal()
-            y = this@Quat._y.toGodotReal()
-            z = this@Quat._z.toGodotReal()
-            w = this@Quat._w.toGodotReal()
+    override fun getRawMemory(): CValue<godot_quat> {
+        return cValue<godot_quat_layout> {
+            x = this@Quat._x
+            y = this@Quat._y
+            z = this@Quat._z
+            w = this@Quat._w
+        } as CValue<godot_quat>
+    }
+
+    override fun setRawMemory(native: CValue<godot_quat>) {
+        (native as CValue<godot_quat_layout>).useContents {
+            _x = x
+            _y = y
+            _z = z
+            _w = w
         }
-        return value.getPointer(memScope)
-    }
-
-    override fun setRawMemory(mem: COpaquePointer) {
-        val value = mem.reinterpret<godot_quat_layout>().pointed
-        _x = value.x.toGodotReal()
-        _y = value.y.toGodotReal()
-        _z = value.z.toGodotReal()
-        _w = value.w.toGodotReal()
     }
 
 
-    //API
-    /**
-     * Performs a cubic spherical-linear interpolation with another quaternion.
-     */
-    fun cubicSlerp(q: Quat, prep: Quat, postq: Quat, t: KotlinReal): Quat {
-        val t2: KotlinReal = (1.0f - t) * t * 2
-        val sp = this.slerp(q, t)
-        val sq = prep.slerpni(postq, t)
-        return sp.slerpni(sq, t2)
-    }
-
-    /**
-     * Returns the dot product of two quaternions.5
-     */
-    fun dot(q: Quat): KotlinReal {
-        return (_x * q._x + _y * q._y + _z * q._z + _w * q._w).toKotlinReal()
-    }
-
-    /**
-     * Returns Euler angles (in the YXZ convention: first Z, then X, and Y last) corresponding to the rotation represented by the unit quaternion. Returned vector contains the rotation angles in the format (X angle, Y angle, Z angle).
-     */
-    fun getEuler(): Vector3 {
-        return getEulerYxz()
+    //HELPER
+    private fun set(px: GodotReal, py: GodotReal, pz: GodotReal, pw: GodotReal) {
+        _x = px
+        _y = py
+        _z = pz
+        _w = pw
     }
 
     /**
@@ -163,6 +68,7 @@ class Quat(
      * and similar for other axes.
      * This implementation uses YXZ convention (Z is the first rotation).
      */
+
     internal fun getEulerYxz(): Vector3 {
         val m = Basis(this)
         return m.getEulerYxz()
@@ -173,83 +79,12 @@ class Quat(
         return m.getEulerXyz()
     }
 
-    /**
-     * Returns the inverse of the quaternion.
-     */
-    fun inverse(): Quat {
-        return Quat(-_x, -_y, -_z, -_w)
-    }
-
-    /**
-     * Returns true if this quaterion and quat are approximately equal, by running isEqualApprox on each component.
-     */
-    fun isEqualApprox(other: Quat): Boolean {
-        return isEqualApprox(other._x, _x)
-            && isEqualApprox(other._y, _y)
-            && isEqualApprox(other._z, _z)
-            && isEqualApprox(other._w, _w)
-    }
-
-    /**
-     * Returns whether the quaternion is normalized or not.
-     */
-    fun isNormalized(): Boolean {
-        return abs(lengthSquared() - 1.0f) < CMP_EPSILON
-    }
-
-    /**
-     * Returns the length of the quaternion.
-     */
-    fun length(): KotlinReal {
-        return sqrt(this.lengthSquared())
-    }
-
-    /**
-     * Returns the length of the quaternion, squared.
-     */
-    fun lengthSquared(): KotlinReal {
-        return dot(this)
-    }
-
-    /**
-     * Returns a copy of the quaternion, normalized to unit length.
-     */
-    fun normalized(): Quat {
-        return this / this.length()
-    }
-
     internal fun normalize() {
         val l = this.length().toGodotReal()
         _x /= l
         _y /= l
         _z /= l
         _w /= l
-    }
-
-    /**
-     * Sets the quaternion to a rotation which rotates around axis by the specified angle, in radians. The axis must be a normalized vector.
-     */
-    fun setAxisAndAngle(axis: Vector3, angle: KotlinReal) {
-        if (!axis.isNormalized()) {
-            Godot.printError("Vector $axis is not normalized", "setAxisAndAngle", "Quat.kt", 192)
-        }
-
-        val d = axis.length().toGodotReal()
-        if (isEqualApprox(d, 0.0f)) {
-            set(0.0f, 0.0f, 0.0f, 0.0f)
-        } else {
-            val sin = sin(angle.toGodotReal() * 0.5f)
-            val cos = cos(angle.toGodotReal() * 0.5f)
-            val s = sin / d
-            set(axis._x * s, axis._y * s, axis._z * s, cos)
-        }
-    }
-
-    /**
-     * Sets the quaternion to a rotation specified by Euler angles (in the YXZ convention: first Z, then X, and Y last), given in the vector format as (X angle, Y angle, Z angle).
-     */
-    fun setEuler(p_euler: Vector3) {
-        setEulerYxz(p_euler)
     }
 
     /**
@@ -305,6 +140,202 @@ class Quat(
             sin1 * sin2 * sin3 + cos1 * cos2 * cos3
         )
     }
+
+
+    //########################PUBLIC###############################
+
+    //PROPERTIES
+    inline var x: KotlinReal
+        get() = _x.toKotlinReal()
+        set(value) {
+            _x = value.toGodotReal()
+        }
+
+    inline var y: KotlinReal
+        get() = _y.toKotlinReal()
+        set(value) {
+            _y = value.toGodotReal()
+        }
+
+    inline var z: KotlinReal
+        get() = _z.toKotlinReal()
+        set(value) {
+            _z = value.toGodotReal()
+        }
+
+    inline var w: KotlinReal
+        get() = _w.toKotlinReal()
+        set(value) {
+            _w = value.toGodotReal()
+        }
+
+    //CONSTANTS
+    companion object {
+        val IDENTITY: Quat
+            get() = Quat(0.0f, 0.0f, 0.0f, 1.0f)
+    }
+
+
+    //CONSTRUCTOR
+    constructor()
+
+    constructor(other: Quat) {
+        _x = other._x
+        _y = other._y
+        _z = other._z
+        _w = other._w
+    }
+
+    constructor(from: Basis) {
+        from.getQuat().also {
+            set(it._x, it._y, it._z, it._w)
+        }
+    }
+
+    constructor(x: GodotReal, y: GodotReal, z: GodotReal, w: GodotReal = 1.0f) {
+        _x = x
+        _y = y
+        _z = z
+        _w = w
+    }
+
+    constructor(x: Number, y: Number, z: Number, w: Number = 1.0f) {
+        _x = x.toGodotReal()
+        _y = y.toGodotReal()
+        _z = z.toGodotReal()
+        _w = w.toGodotReal()
+    }
+
+    constructor(axis: Vector3, angle: KotlinReal) {
+        val d = axis.length().toGodotReal()
+        if (isEqualApprox(d, 0f)) {
+            set(0.0f, 0.0f, 0.0f, 0.0f)
+        } else {
+            val angle2 = angle.toGodotReal()
+            val sinAngle = sin(angle2 * 0.5f)
+            val cosAngle = cos(angle2 * 0.5f)
+            val s = sinAngle / d
+            set(axis._x * s, axis._y * s, axis._z * s, cosAngle)
+        }
+    }
+
+    constructor(v0: Vector3, v1: Vector3) {
+        val c = v0.cross(v1)
+        val d = v0.dot(v1).toGodotReal()
+
+        if (d < -1.0f + CMP_EPSILON) {
+            _x = 0.0f
+            _y = 1.0f
+            _z = 0.0f
+            _w = 0.0f
+        } else {
+            val s = sqrt((1.0f + d) * 2.0f)
+            val rs = 1.0f / s
+            _x = c._x * rs
+            _y = c._y * rs
+            _z = c._z * rs
+            _w = s * 0.5f
+        }
+    }
+
+
+    //API
+    /**
+     * Performs a cubic spherical-linear interpolation with another quaternion.
+     */
+    fun cubicSlerp(q: Quat, prep: Quat, postq: Quat, t: KotlinReal): Quat {
+        val t2: KotlinReal = (1.0f - t) * t * 2
+        val sp = this.slerp(q, t)
+        val sq = prep.slerpni(postq, t)
+        return sp.slerpni(sq, t2)
+    }
+
+    /**
+     * Returns the dot product of two quaternions.5
+     */
+    fun dot(q: Quat): KotlinReal {
+        return (_x * q._x + _y * q._y + _z * q._z + _w * q._w).toKotlinReal()
+    }
+
+    /**
+     * Returns Euler angles (in the YXZ convention: first Z, then X, and Y last) corresponding to the rotation represented by the unit quaternion. Returned vector contains the rotation angles in the format (X angle, Y angle, Z angle).
+     */
+    fun getEuler(): Vector3 {
+        return getEulerYxz()
+    }
+
+
+    /**
+     * Returns the inverse of the quaternion.
+     */
+    fun inverse(): Quat {
+        return Quat(-_x, -_y, -_z, -_w)
+    }
+
+    /**
+     * Returns true if this quaterion and quat are approximately equal, by running isEqualApprox on each component.
+     */
+    fun isEqualApprox(other: Quat): Boolean {
+        return isEqualApprox(other._x, _x)
+            && isEqualApprox(other._y, _y)
+            && isEqualApprox(other._z, _z)
+            && isEqualApprox(other._w, _w)
+    }
+
+    /**
+     * Returns whether the quaternion is normalized or not.
+     */
+    fun isNormalized(): Boolean {
+        return abs(lengthSquared() - 1.0f) < CMP_EPSILON
+    }
+
+    /**
+     * Returns the length of the quaternion.
+     */
+    fun length(): KotlinReal {
+        return sqrt(this.lengthSquared())
+    }
+
+    /**
+     * Returns the length of the quaternion, squared.
+     */
+    fun lengthSquared(): KotlinReal {
+        return dot(this)
+    }
+
+    /**
+     * Returns a copy of the quaternion, normalized to unit length.
+     */
+    fun normalized(): Quat {
+        return this / this.length()
+    }
+
+    /**
+     * Sets the quaternion to a rotation which rotates around axis by the specified angle, in radians. The axis must be a normalized vector.
+     */
+    fun setAxisAndAngle(axis: Vector3, angle: KotlinReal) {
+        if (!axis.isNormalized()) {
+            Godot.printError("Vector $axis is not normalized", "setAxisAndAngle", "Quat.kt", 192)
+        }
+
+        val d = axis.length().toGodotReal()
+        if (isEqualApprox(d, 0.0f)) {
+            set(0.0f, 0.0f, 0.0f, 0.0f)
+        } else {
+            val sin = sin(angle.toGodotReal() * 0.5f)
+            val cos = cos(angle.toGodotReal() * 0.5f)
+            val s = sin / d
+            set(axis._x * s, axis._y * s, axis._z * s, cos)
+        }
+    }
+
+    /**
+     * Sets the quaternion to a rotation specified by Euler angles (in the YXZ convention: first Z, then X, and Y last), given in the vector format as (X angle, Y angle, Z angle).
+     */
+    fun setEuler(p_euler: Vector3) {
+        setEulerYxz(p_euler)
+    }
+
 
     /**
      * Performs a spherical-linear interpolation with another quaternion.
@@ -388,13 +419,6 @@ class Quat(
     //UTILITIES
     override fun toVariant() = Variant(this)
 
-    private fun set(px: GodotReal, py: GodotReal, pz: GodotReal, pw: GodotReal) {
-        _x = px
-        _y = py
-        _z = pz
-        _w = pw
-    }
-
     operator fun times(v: Vector3) =
         Quat(
             _w * v._x + _y * v._z - _z * v._y,
@@ -420,7 +444,7 @@ class Quat(
     override fun equals(other: Any?): Boolean =
         when (other) {
             is Quat -> (_x == other._x && _y == other._y && _z == other._z && _w == other._w)
-            else -> false
+            else    -> false
         }
 
     override fun toString(): String {
@@ -433,15 +457,6 @@ class Quat(
         result = 31 * result + _z.hashCode()
         result = 31 * result + _w.hashCode()
         return result
-    }
-
-    /*
-     * GDScript related members
-     */
-    constructor(from: Basis) : this() {
-        from.getQuat().also {
-            set(it.x, it.y, it.z, it.w)
-        }
     }
 }
 

@@ -4,28 +4,127 @@ package godot.core
 
 import godot.gdnative.godot_transform2d
 import godot.gdnative.godot_transform2d_layout
+import godot.gdnative.godot_vector2
 import godot.internal.type.*
-import kotlinx.cinterop.*
+import kotlinx.cinterop.CValue
+import kotlinx.cinterop.cValue
+import kotlinx.cinterop.readValue
+import kotlinx.cinterop.useContents
 import kotlin.math.acos
 import kotlin.math.atan2
 import kotlin.math.cos
 import kotlin.math.sin
 
-class Transform2D(
-    p_x: Vector2,
-    p_y: Vector2,
-    p_origin: Vector2
-) : CoreType() {
+class Transform2D : CoreType<godot_transform2d> {
+
+    //########################INTERNAL#############################
+
+    //FIELD
+    @PublishedApi
+    internal var _x: Vector2
 
     @PublishedApi
-    internal var _x = Vector2(p_x)
+    internal var _y: Vector2
 
     @PublishedApi
-    internal var _y = Vector2(p_y)
+    internal var _origin: Vector2
 
-    @PublishedApi
-    internal var _origin = Vector2(p_origin)
 
+    //CONSTRUCTOR
+    internal constructor(native: CValue<godot_transform2d>) : this() {
+        return this.setRawMemory(native)
+    }
+
+
+    //INTEROP
+    override fun getRawMemory(): CValue<godot_transform2d> {
+        return cValue<godot_transform2d_layout> {
+            x.x = this@Transform2D._x._x
+            x.y = this@Transform2D._x._y
+            y.x = this@Transform2D._y._x
+            y.y = this@Transform2D._y._y
+            origin.x = this@Transform2D._origin._x
+            origin.y = this@Transform2D._origin._y
+        } as CValue<godot_transform2d>
+    }
+
+    override fun setRawMemory(native: CValue<godot_transform2d>) {
+        (native as CValue<godot_transform2d_layout>).useContents {
+            _x.setRawMemory(x.readValue() as CValue<godot_vector2>)
+            _y.setRawMemory(y.readValue() as CValue<godot_vector2>)
+            _origin.setRawMemory(origin.readValue() as CValue<godot_vector2>)
+        }
+    }
+
+
+    //HELPER
+    /**
+     * Returns the inverse of the matrix.
+     */
+    internal fun affineInvert() {
+        val det = basisDeterminant().toGodotReal()
+        if (isEqualApprox(det, 0.0f)) {
+            Godot.printError("determinant == 0", "affineInvert()", "Transform2D.kt", 84)
+            return
+        }
+        val idet = -1.0f / det
+        val copy = _x._x
+        _x._x = _y._y
+        _y._y = copy
+        this._x *= Vector2(idet, -idet)
+        this._y *= Vector2(-idet, idet)
+
+        this._origin = basisXform(-this._origin)
+    }
+
+    private fun basisDeterminant(): KotlinReal {
+        return (this._x._x * this._y._y - this._x._y * this._y._x).toKotlinReal()
+    }
+
+    internal fun invert() {
+        val copy = _x._y
+        _x._y = _y._x
+        _y._x = copy
+        _origin = basisXform(-_origin)
+    }
+
+    internal fun orthonormalize() {
+        val x = this._x
+        var y = this._y
+
+        x.normalize()
+        y = (y - x * (x.dot(y)))
+        y.normalize()
+
+        this._x = x
+        this._y = y
+    }
+
+    internal fun rotate(phi: KotlinReal) {
+        val transform2D = Transform2D(phi, Vector2()) * this
+        this._x = transform2D._x
+        this._y = transform2D._y
+        this._origin = transform2D._origin
+    }
+
+    internal fun scale(scale: Vector2) {
+        scaleBasis(scale)
+        this._origin *= scale
+    }
+
+
+    internal fun translate(offset: Vector2) {
+        this._origin += offset
+    }
+
+    private fun scaleBasis(scale: Vector2) {
+        _x._x *= scale._x
+        _x._y *= scale._y
+        this._y._x *= scale._x
+        _y._y *= scale._y
+    }
+
+    //########################PUBLIC###############################
     //PROPERTIES
     /** Return a copy of the x Vector2
      * Warning: Writing x.x = 2 will only modify a copy, not the actual object.
@@ -65,10 +164,10 @@ class Transform2D(
             _origin = Vector2(value)
         }
 
+
     inline fun <T> origin(block: Vector2.() -> T): T {
         return _origin.block()
     }
-
 
     //CONSTANTS
     companion object {
@@ -78,55 +177,46 @@ class Transform2D(
             get() = Transform2D(-1, 0, 0, 1, 0, 0)
         inline val FLIP_Y: Transform2D
             get() = Transform2D(1, 0, 0, -1, 0, 0)
-    }
 
+
+    }
 
     //CONSTRUCTOR
-    constructor() : this(Vector2(1, 0), Vector2(0, 1), Vector2())
-
-    constructor(other: Transform2D) : this(other._x, other._y, other._origin)
-
-    constructor(xx: Number, xy: Number, yx: Number, yy: Number, ox: Number, oy: Number) : this(
-        Vector2(xx.toGodotReal(), xy.toGodotReal()),
-        Vector2(yx.toGodotReal(), yy.toGodotReal()),
-        Vector2(ox.toGodotReal(), oy.toGodotReal())
-    )
-
-    constructor(rot: Number, pos: Vector2) : this(
-        Vector2(cos(rot.toGodotReal()), sin(rot.toGodotReal())),
-        Vector2(-sin(rot.toGodotReal()), cos(rot.toGodotReal())),
-        pos
-    )
-
-
-    internal constructor(native: CValue<godot_transform2d>) : this() {
-        memScoped {
-            this@Transform2D.setRawMemory(native.ptr)
-        }
+    constructor() {
+        _x = Vector2(1, 0)
+        _y = Vector2(0, 1)
+        _origin = Vector2()
     }
 
-    internal constructor(mem: COpaquePointer) : this() {
-        this.setRawMemory(mem)
+    constructor(other: Transform2D) {
+        _x = Vector2(other._x)
+        _y = Vector2(other._y)
+        _origin = Vector2(other._origin)
     }
 
-    //INTEROP
-    override fun getRawMemory(memScope: MemScope): COpaquePointer {
-        val value = cValue<godot_transform2d_layout> {
-            x.x = this@Transform2D._x._x.toGodotReal()
-            x.y = this@Transform2D._x._y.toGodotReal()
-            y.x = this@Transform2D._y._x.toGodotReal()
-            y.y = this@Transform2D._y._y.toGodotReal()
-            origin.x = this@Transform2D._origin._x.toGodotReal()
-            origin.y = this@Transform2D._origin._y.toGodotReal()
-        }
-        return value.getPointer(memScope)
+    constructor(xx: GodotReal, xy: GodotReal, yx: GodotReal, yy: GodotReal, ox: GodotReal, oy: GodotReal) {
+        _x = Vector2(xx, xy)
+        _y = Vector2(yx, yy)
+        _origin = Vector2(ox, oy)
     }
 
-    override fun setRawMemory(mem: COpaquePointer) {
-        val value = mem.reinterpret<godot_transform2d_layout>().pointed
-        _x.setRawMemory(value.x.ptr)
-        _x.setRawMemory(value.y.ptr)
-        _x.setRawMemory(value.origin.ptr)
+    constructor(xx: Number, xy: Number, yx: Number, yy: Number, ox: Number, oy: Number) {
+        _x = Vector2(xx, xy)
+        _y = Vector2(yx, yy)
+        _origin = Vector2(ox, oy)
+    }
+
+    constructor(p_x: Vector2, p_y: Vector2, p_origin: Vector2) {
+        _x = Vector2(p_x)
+        _y = Vector2(p_y)
+        _origin = Vector2(p_origin)
+    }
+
+    constructor(rot: Number, pos: Vector2) {
+        val gd_rot = rot.toGodotReal()
+        _x = Vector2(cos(gd_rot), sin(gd_rot))
+        _y = Vector2(-sin(gd_rot), cos(gd_rot))
+        _origin = Vector2(pos)
     }
 
 
@@ -138,29 +228,6 @@ class Transform2D(
         val inv = Transform2D(this._x, this._y, this._origin)
         inv.affineInvert()
         return inv
-    }
-
-    /**
-     * Returns the inverse of the matrix.
-     */
-    internal fun affineInvert() {
-        val det = basisDeterminant().toGodotReal()
-        if (isEqualApprox(det, 0.0f)) {
-            Godot.printError("determinant == 0", "affineInvert()", "Transform2D.kt", 84)
-            return
-        }
-        val idet = -1.0f / det
-        val copy = _x._x
-        _x._x = _y._y
-        _y._y = copy
-        this._x *= Vector2(idet, -idet)
-        this._y *= Vector2(-idet, idet)
-
-        this._origin = basisXform(-this._origin)
-    }
-
-    private fun basisDeterminant(): KotlinReal {
-        return (this._x._x * this._y._y - this._x._y * this._y._x).toKotlinReal()
     }
 
     /**
@@ -217,8 +284,8 @@ class Transform2D(
         var dot = v1.dot(v2)
         dot = when {
             dot < -1.0 -> -1.0
-            dot > 1.0 -> 1.0
-            else -> dot
+            dot > 1.0  -> 1.0
+            else       -> dot
         }
 
         val v = if (dot > 0.9995)
@@ -243,13 +310,6 @@ class Transform2D(
         return inv
     }
 
-    internal fun invert() {
-        val copy = _x._y
-        _x._y = _y._x
-        _y._x = copy
-        _origin = basisXform(-_origin)
-    }
-
     /**
      * Returns true if this transform and transform are approximately equal, by calling is_equal_approx on each component.
      */
@@ -268,18 +328,6 @@ class Transform2D(
         return on
     }
 
-    internal fun orthonormalize() {
-        val x = this._x
-        var y = this._y
-
-        x.normalize()
-        y = (y - x * (x.dot(y)))
-        y.normalize()
-
-        this._x = x
-        this._y = y
-    }
-
     /**
      * Rotates the transform by the given angle (in radians), using matrix multiplication.
      */
@@ -287,13 +335,6 @@ class Transform2D(
         val copy = Transform2D(this._x, this._y, this._origin)
         copy.rotate(phi)
         return copy
-    }
-
-    internal fun rotate(phi: KotlinReal) {
-        val transform2D = Transform2D(phi, Vector2()) * this
-        this._x = transform2D._x
-        this._y = transform2D._y
-        this._origin = transform2D._origin
     }
 
     /**
@@ -305,12 +346,6 @@ class Transform2D(
         return copy
     }
 
-    internal fun scale(scale: Vector2) {
-        scaleBasis(scale)
-        this._origin *= scale
-    }
-
-
     /**
      * Translates the transform by the given offset, relative to the transform’s basis vectors.
      * Unlike rotated and scaled, this does not use matrix multiplication.
@@ -319,17 +354,6 @@ class Transform2D(
         val copy = Transform2D(this._x, this._y, this._origin)
         copy.translate(offset)
         return copy
-    }
-
-    internal fun translate(offset: Vector2) {
-        this._origin += offset
-    }
-
-    private fun scaleBasis(scale: Vector2) {
-        _x._x *= scale._x
-        _x._y *= scale._y
-        this._y._x *= scale._x
-        _y._y *= scale._y
     }
 
     /**
@@ -412,7 +436,7 @@ class Transform2D(
     override fun equals(other: Any?): Boolean {
         return when (other) {
             is Transform2D -> this._x == other._x && this._y == other._y && this._origin == other._origin
-            else -> false
+            else           -> false
         }
     }
 

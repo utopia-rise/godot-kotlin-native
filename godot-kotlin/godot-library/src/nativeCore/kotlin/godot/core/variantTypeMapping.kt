@@ -10,7 +10,7 @@ fun directConversionToVariant(obj: Any?) = obj?.let { Variant(obj) } ?: Variant(
 fun intToVariant(obj: Any?) = obj?.let { Variant((obj as Int).toLong()) } ?: Variant()
 fun floatToVariant(obj: Any?) = obj?.let { Variant((obj as Float).toDouble()) } ?: Variant()
 fun variantToVariant(obj: Any?) = obj?.let { obj as Variant } ?: Variant()
-fun coreTypeToVariant(obj: Any?) = obj?.let { (obj as CoreType).toVariant() } ?: Variant()
+fun coreTypeToVariant(obj: Any?) = obj?.let { (obj as CoreType<*>).toVariant() } ?: Variant()
 
 @PublishedApi
 internal val typeToVariantConversionFunctions: Map<KClass<out Any>, (Any?) -> Variant> = mapOf(
@@ -47,23 +47,7 @@ internal val variantToTypeConversionFunctions: Map<KClass<out Any>, (Variant) ->
     RID::class to Variant::asRID,
     Object::class to Variant::asObject,
     Dictionary::class to Variant::asDictionary,
-    VariantArray::class to Variant::asVariantArray,
-    BoolVariantArray::class to Variant::asBoolVariantArray,
-    IntVariantArray::class to Variant::asIntVariantArray,
-    RealVariantArray::class to Variant::asRealVariantArray,
-    StringVariantArray::class to Variant::asStringVariantArray,
-    AABBArray::class to Variant::asAABBArray,
-    BasisArray::class to Variant::asBasisArray,
-    ColorArray::class to Variant::asColorArray,
-    NodePathArray::class to Variant::asNodePathArray,
-    PlaneArray::class to Variant::asPlaneArray,
-    QuatArray::class to Variant::asQuatArray,
-    Rect2Array::class to Variant::asRect2Array,
-    RIDArray::class to Variant::asRIDArray,
-    Transform2DArray::class to Variant::asTransform2DArray,
-    TransformArray::class to Variant::asTransformArray,
-    Vector2Array::class to Variant::asVector2Array,
-    Vector3Array::class to Variant::asVector3Array,
+    GodotArray::class to Variant::asArray,
     PoolByteArray::class to Variant::asPoolByteArray,
     PoolIntArray::class to Variant::asPoolIntArray,
     PoolRealArray::class to Variant::asPoolRealArray,

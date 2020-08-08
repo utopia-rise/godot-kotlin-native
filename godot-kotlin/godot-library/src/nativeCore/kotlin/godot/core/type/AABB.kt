@@ -4,21 +4,112 @@ package godot.core
 
 import godot.gdnative.godot_aabb
 import godot.gdnative.godot_aabb_layout
+import godot.gdnative.godot_vector3
 import godot.internal.type.*
-import kotlinx.cinterop.*
+import kotlinx.cinterop.CValue
+import kotlinx.cinterop.cValue
+import kotlinx.cinterop.readValue
+import kotlinx.cinterop.useContents
 
 
-class AABB(
-    p_position: Vector3,
-    p_size: Vector3
-) : CoreType() {
+class AABB : CoreType<godot_aabb> {
+
+    //########################INTERNAL#############################
 
     @PublishedApi
-    internal var _position = Vector3(p_position)
+    internal var _position: Vector3
 
     @PublishedApi
-    internal var _size = Vector3(p_size)
+    internal var _size: Vector3
 
+
+    //CONSTRUCTOR
+    internal constructor(native: CValue<godot_aabb>): this()  {
+        this.setRawMemory(native)
+    }
+
+
+    //INTEROP
+    override fun getRawMemory(): CValue<godot_aabb> {
+        return cValue<godot_aabb_layout> {
+            position.x = this@AABB._position._x
+            position.y = this@AABB._position._y
+            position.z = this@AABB._position._z
+            size.x = this@AABB._size._x
+            size.y = this@AABB._size._y
+            size.z = this@AABB._size._z
+        } as CValue<godot_aabb>
+    }
+
+    override fun setRawMemory(native: CValue<godot_aabb>) {
+        (native as CValue<godot_aabb_layout>).useContents {
+            _position.setRawMemory(position.readValue() as CValue<godot_vector3>)
+            _size.setRawMemory(size.readValue() as CValue<godot_vector3>)
+        }
+    }
+
+
+    //HELPER
+    internal fun expandTo(vector: Vector3) {
+        val begin = _position
+        val end = _position + _size
+
+        if (vector._x < begin._x) {
+            begin._x = vector._x
+        }
+        if (vector._y < begin._y) {
+            begin._y = vector._y
+        }
+        if (vector._z < begin._z) {
+            begin._z = vector._z
+        }
+
+        if (vector._x > end._x) {
+            end._x = vector._x
+        }
+        if (vector._y > end._y) {
+            end._y = vector._y
+        }
+        if (vector._z > end._z) {
+            end._z = vector._z
+        }
+
+        _position = begin
+        _size = end - begin
+    }
+
+    internal fun growBy(p_amount: KotlinReal) {
+        val amount = p_amount.toGodotReal()
+        _position._x -= amount
+        _position._y -= amount
+        _position._z -= amount
+        _size._x += 2.0f * amount
+        _size._y += 2.0f * amount
+        _size._z += 2.0f * amount
+    }
+
+    internal fun mergeWith(other: AABB) {
+        val beg1 = _position
+        val beg2 = other._position
+        val end1 = _position + _size
+        val end2 = other._position + other._size
+
+        val min = Vector3()
+        val max = Vector3()
+
+        min._x = if (beg1._x < beg2._x) beg1._x else beg2._x
+        min._y = if (beg1._y < beg2._y) beg1._y else beg2._y
+        min._z = if (beg1._z < beg2._z) beg1._z else beg2._z
+
+        max._x = if (end1._x > end2._x) end1._x else end2._x
+        max._y = if (end1._y > end2._y) end1._y else end2._y
+        max._z = if (end1._z > end2._z) end1._z else end2._z
+
+        _position = min
+        _size = max - min
+    }
+
+    //########################PUBLIC###############################
 
     //PROPERTIES
     /** Return a copy of the position Vector3
@@ -59,6 +150,7 @@ class AABB(
             _size = value - _position
         }
 
+
     inline fun <T> end(block: Vector3.() -> T): T {
         val vec = end
         val ret = vec.block()
@@ -66,43 +158,20 @@ class AABB(
         return ret
     }
 
-
     //CONSTRUCTOR
-    constructor() :
-        this(Vector3(), Vector3())
-
-    constructor(other: AABB) :
-        this(other._position, other._size)
-
-    internal constructor(native: CValue<godot_aabb>) : this() {
-        memScoped {
-            this@AABB.setRawMemory(native.ptr)
-        }
+    constructor() {
+        _position = Vector3()
+        _size = Vector3()
     }
 
-    internal constructor(mem: COpaquePointer) : this() {
-        this.setRawMemory(mem)
-    }
+    constructor(other: AABB) :  this(other._position, other._size)
 
 
-    //INTEROP
-    override fun getRawMemory(memScope: MemScope): COpaquePointer {
-        val value = cValue<godot_aabb_layout> {
-            position.x = this@AABB._position._x.toGodotReal()
-            position.y = this@AABB._position._y.toGodotReal()
-            position.z = this@AABB._position._z.toGodotReal()
-            size.x = this@AABB._size._x.toGodotReal()
-            size.y = this@AABB._size._y.toGodotReal()
-            size.z = this@AABB._size._z.toGodotReal()
-        }
-        return value.getPointer(memScope)
+    constructor(p_position: Vector3, p_size: Vector3) {
+        _position = p_position
+        _size = p_size
     }
 
-    override fun setRawMemory(mem: COpaquePointer) {
-        val value = mem.reinterpret<godot_aabb_layout>().pointed
-        _position.setRawMemory(value.position.ptr)
-        _size.setRawMemory(value.size.ptr)
-    }
 
     //API
     /**
@@ -125,37 +194,9 @@ class AABB(
      * Returns this AABB expanded to include a given point.
      */
     fun expand(p_vector: Vector3): AABB {
-        val aabb = this
+        val aabb = AABB(this)
         aabb.expandTo(p_vector)
         return aabb
-    }
-
-    internal fun expandTo(vector: Vector3) {
-        val begin = _position
-        val end = _position + _size
-
-        if (vector._x < begin._x) {
-            begin._x = vector._x
-        }
-        if (vector._y < begin._y) {
-            begin._y = vector._y
-        }
-        if (vector._z < begin._z) {
-            begin._z = vector._z
-        }
-
-        if (vector._x > end._x) {
-            end._x = vector._x
-        }
-        if (vector._y > end._y) {
-            end._y = vector._y
-        }
-        if (vector._z > end._z) {
-            end._z = vector._z
-        }
-
-        _position = begin
-        _size = end - begin
     }
 
     /**
@@ -170,14 +211,14 @@ class AABB(
      */
     fun getEndpoint(point: Int): Vector3 {
         return when (point) {
-            0 -> Vector3(_position._x, _position._y, _position._z)
-            1 -> Vector3(_position._x, _position._y, _position._z + _size._z)
-            2 -> Vector3(_position._x, _position._y + _size._y, _position._z)
-            3 -> Vector3(_position._x, _position._y + _size._y, _position._z + _size._z)
-            4 -> Vector3(_position._x + _size._x, _position._y, _position._z)
-            5 -> Vector3(_position._x + _size._x, _position._y, _position._z + _size._z)
-            6 -> Vector3(_position._x + _size._x, _position._y + _size._y, _position._z)
-            7 -> Vector3(_position._x + _size._x, _position._y + _size._y, _position._z + _size._z)
+            0    -> Vector3(_position._x, _position._y, _position._z)
+            1    -> Vector3(_position._x, _position._y, _position._z + _size._z)
+            2    -> Vector3(_position._x, _position._y + _size._y, _position._z)
+            3    -> Vector3(_position._x, _position._y + _size._y, _position._z + _size._z)
+            4    -> Vector3(_position._x + _size._x, _position._y, _position._z)
+            5    -> Vector3(_position._x + _size._x, _position._y, _position._z + _size._z)
+            6    -> Vector3(_position._x + _size._x, _position._y + _size._y, _position._z)
+            7    -> Vector3(_position._x + _size._x, _position._y + _size._y, _position._z + _size._z)
             else -> Vector3()
         }
     }
@@ -220,6 +261,7 @@ class AABB(
         return axis
     }
 
+
     /**
      *  Returns the scalar length of the longest axis of the AABB.
      */
@@ -233,7 +275,6 @@ class AABB(
         }
         return maxSize.toKotlinReal()
     }
-
 
     /**
      *  Returns the scalar length of the longest axis of the AABB.
@@ -312,16 +353,6 @@ class AABB(
         return aabb
     }
 
-    internal fun growBy(p_amount: KotlinReal) {
-        val amount = p_amount.toGodotReal()
-        _position._x -= amount
-        _position._y -= amount
-        _position._z -= amount
-        _size._x += 2.0f * amount
-        _size._y += 2.0f * amount
-        _size._z += 2.0f * amount
-    }
-
     /**
      * Returns true if the AABB is flat or empty.
      */
@@ -341,13 +372,13 @@ class AABB(
      */
     fun hasPoint(point: Vector3): Boolean {
         return when {
-            point._x < _position._x -> false
-            point._y < _position._y -> false
-            point._z < _position._z -> false
+            point._x < _position._x            -> false
+            point._y < _position._y            -> false
+            point._z < _position._z            -> false
             point._x > _position._x + _size._x -> false
             point._y > _position._y + _size._y -> false
             point._z > _position._z + _size._z -> false
-            else -> true
+            else                               -> true
         }
     }
 
@@ -393,12 +424,12 @@ class AABB(
     fun intersects(other: AABB): Boolean {
         return when {
             _position._x >= (other._position._x + other._size._x) -> false
-            (_position._x + _size._x) <= other._position._x -> false
+            (_position._x + _size._x) <= other._position._x       -> false
             _position._y >= (other._position._y + other._size._y) -> false
-            (_position._y + _size._y) <= other._position._y -> false
+            (_position._y + _size._y) <= other._position._y       -> false
             _position._z >= (other._position._z + other._size._z) -> false
-            (_position._z + _size._z) <= other._position._z -> false
-            else -> true
+            (_position._z + _size._z) <= other._position._z       -> false
+            else                                                  -> true
         }
     }
 
@@ -487,34 +518,13 @@ class AABB(
         return aabb
     }
 
-    internal fun mergeWith(other: AABB) {
-        val beg1 = _position
-        val beg2 = other._position
-        val end1 = _position + _size
-        val end2 = other._position + other._size
-
-        val min = Vector3()
-        val max = Vector3()
-
-        min._x = if (beg1._x < beg2._x) beg1._x else beg2._x
-        min._y = if (beg1._y < beg2._y) beg1._y else beg2._y
-        min._z = if (beg1._z < beg2._z) beg1._z else beg2._z
-
-        max._x = if (end1._x > end2._x) end1._x else end2._x
-        max._y = if (end1._y > end2._y) end1._y else end2._y
-        max._z = if (end1._z > end2._z) end1._z else end2._z
-
-        _position = min
-        _size = max - min
-    }
-
     //UTILITIES
     override fun toVariant() = Variant(this)
 
     override fun equals(other: Any?): Boolean =
         when (other) {
             is AABB -> (_position == other._position && _size == other._size)
-            else -> false
+            else    -> false
         }
 
     override fun toString(): String {

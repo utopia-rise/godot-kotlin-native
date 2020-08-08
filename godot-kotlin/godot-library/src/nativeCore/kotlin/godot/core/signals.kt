@@ -14,10 +14,10 @@ abstract class Signal(
         instance: Object,
         target: Object,
         method: String,
-        binds: VariantArray?,
+        binds: GodotArray<Any?>?,
         flags: Long
     ) {
-        instance.connect(name, target, method, binds ?: VariantArray(), flags)
+        instance.connect(name, target, method, binds ?: GodotArray(), flags)
     }
 }
 

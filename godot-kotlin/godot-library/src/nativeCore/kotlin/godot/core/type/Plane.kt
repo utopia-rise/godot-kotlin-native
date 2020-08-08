@@ -4,20 +4,63 @@ package godot.core
 
 import godot.gdnative.godot_plane
 import godot.gdnative.godot_plane_layout
+import godot.gdnative.godot_vector3
 import godot.internal.type.*
+import godot.internal.utils.GodotScope
+import godot.internal.utils.godotScoped
 import kotlinx.cinterop.*
 import kotlin.math.abs
 
-class Plane(
-    p_normal: Vector3,
-    p_d: KotlinReal = 0.0
-) : CoreType() {
+class Plane : CoreType<godot_plane> {
+
+    //########################INTERNAL#############################
+
+    //FIELD
+    @PublishedApi
+    internal var _normal: Vector3
 
     @PublishedApi
-    internal var _normal = Vector3(p_normal)
+    internal var _d: GodotReal = 0f
 
-    @PublishedApi
-    internal var _d: GodotReal = p_d.toGodotReal()
+
+    //CONSTRUCTOR
+    internal constructor(native: CValue<godot_plane>) : this() {
+        this.setRawMemory(native)
+    }
+
+
+    //INTEROP
+    override fun getRawMemory(): CValue<godot_plane> {
+        return cValue<godot_plane_layout> {
+            normal.x = this@Plane._normal._x
+            normal.y = this@Plane._normal._y
+            normal.z = this@Plane._normal._z
+            d = this@Plane._d
+        } as CValue<godot_plane>
+    }
+
+    override fun setRawMemory(native: CValue<godot_plane>) {
+        (native as CValue<godot_plane_layout>).useContents {
+            _normal.setRawMemory(normal.readValue() as CValue<godot_vector3>)
+            _d = d
+        }
+    }
+
+
+    //HELPER
+    internal fun normalize() {
+        val l = _normal.length().toGodotReal()
+        if (isEqualApprox(l, 0.0f)) {
+            this._normal = Vector3()
+            this._d = 0.0f
+            return
+        }
+        _normal /= l
+        _d /= l
+    }
+
+    //########################PUBLIC###############################
+
 
     //PROPERTIES
     /** Return a copy of the normal Vector3
@@ -48,58 +91,44 @@ class Plane(
             get() = Plane(0, 1, 0, 0)
         val PLANE_XY: Plane
             get() = Plane(0, 0, 1, 0)
+
+
     }
 
-
     //CONSTRUCTOR
-    constructor() :
-        this(Vector3(0, 0, 0), 0)
+    constructor() {
+        _normal = Vector3()
+    }
 
-    constructor(other: Plane) :
-        this(other._normal, other._d)
+    constructor(other: Plane) {
+        _normal = Vector3(other._normal)
+        _d = other._d
+    }
 
-    constructor(p1: Number, p2: Number, p3: Number, p4: Number) :
-        this(Vector3(p1.toKotlinReal(), p2.toKotlinReal(), p3.toKotlinReal()), p4.toKotlinReal())
+    constructor(p1: GodotReal, p2: GodotReal, p3: GodotReal, p4: GodotReal) {
+        _normal = Vector3(p1, p2, p3)
+        _d = p4
+    }
 
-    constructor(point1: Vector3, point2: Vector3, point3: Vector3) : this() {
+    constructor(p1: Number, p2: Number, p3: Number, p4: Number) {
+        _normal = Vector3(p1.toGodotReal(), p2.toGodotReal(), p3.toGodotReal())
+        _d = p4.toGodotReal()
+    }
+
+    constructor(point1: Vector3, point2: Vector3, point3: Vector3) {
         _normal = (point1 - point3).cross(point1 - point2)
         _normal.normalize()
         _d = _normal.dot(point1).toGodotReal()
     }
 
-    constructor(normal: Vector3, d: Number) :
-        this(normal, d.toKotlinReal())
-
-    constructor(point: Vector3, normal: Vector3) :
-        this(normal, normal.dot(point))
-
-
-    internal constructor(native: CValue<godot_plane>) : this() {
-        memScoped {
-            this@Plane.setRawMemory(native.ptr)
-        }
+    constructor(normal: Vector3, d: Number) {
+        _normal = Vector3(normal)
+        _d = d.toGodotReal()
     }
 
-    internal constructor(mem: COpaquePointer) : this() {
-        this.setRawMemory(mem)
-    }
-
-    //INTEROP
-    override fun getRawMemory(memScope: MemScope): COpaquePointer {
-        val value = cValue<godot_plane_layout> {
-            normal.x = this@Plane._normal._x.toFloat()
-            normal.y = this@Plane._normal._y.toFloat()
-            normal.z = this@Plane._normal._z.toFloat()
-            d = this@Plane._d.toFloat()
-
-        }
-        return value.getPointer(memScope)
-    }
-
-    override fun setRawMemory(mem: COpaquePointer) {
-        val value = mem.reinterpret<godot_plane_layout>().pointed
-        _normal.setRawMemory(value.normal.ptr)
-        _d = value.d.toGodotReal()
+    constructor(point: Vector3, normal: Vector3) {
+        _normal = Vector3(normal)
+        _d = normal.dot(point).toGodotReal()
     }
 
 
@@ -238,17 +267,6 @@ class Plane(
         return p
     }
 
-    internal fun normalize() {
-        val l = _normal.length().toGodotReal()
-        if (isEqualApprox(l, 0.0f)) {
-            this._normal = Vector3()
-            this._d = 0.0f
-            return
-        }
-        _normal /= l
-        _d /= l
-    }
-
     /**
      * Returns the orthogonal projection of point p into a point in the plane.
      */
@@ -267,7 +285,7 @@ class Plane(
     override fun equals(other: Any?): Boolean {
         return when (other) {
             is Plane -> _normal == other._normal && _d == other._d
-            else -> false
+            else     -> false
         }
     }
 
