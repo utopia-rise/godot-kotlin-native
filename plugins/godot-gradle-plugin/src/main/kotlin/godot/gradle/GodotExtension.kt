@@ -1,7 +1,6 @@
 package godot.gradle
 
 import org.gradle.api.model.ObjectFactory
-import org.gradle.kotlin.dsl.listProperty
 import org.gradle.kotlin.dsl.property
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
@@ -13,13 +12,13 @@ open class GodotExtension(objects: ObjectFactory) {
     val singleton = objects.property<Boolean>()
     val loadOnce = objects.property<Boolean>()
     val reloadable = objects.property<Boolean>()
-    internal lateinit var configure: (List<Platform>) -> Unit
+    internal lateinit var configure: (List<GodotPlatform>) -> Unit
 
     internal val entrySourceDir = objects.directoryProperty()
 
     private var configureTargets: KotlinNativeTarget.() -> Unit = {}
 
-    fun platforms(vararg platforms: Platform) {
+    fun platforms(vararg platforms: GodotPlatform) {
         configure(platforms.toList())
     }
 
@@ -27,9 +26,9 @@ open class GodotExtension(objects: ObjectFactory) {
         // we don't have godot-library in the mobile targets yet, limit these to desktop for now
         //has to be change in `build.gradle.kts` of `godot-library` as well
         platforms(
-            Platform.LINUX_X64,
-            Platform.WINDOWS_X64,
-            Platform.OSX_X64
+            GodotPlatform.LINUX_X64,
+            GodotPlatform.WINDOWS_X64,
+            GodotPlatform.OSX_X64
         )
     }
 

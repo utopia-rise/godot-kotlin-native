@@ -15,33 +15,62 @@ The above command will create three files, which will be empty for now.
 gradle wrapper --gradle-version=6.5.1
 ```
 
-That is it, you have the wrapper installed! The command will produce several files but the important ones are `gradlew` and `gradlew.bat`. Moving forward we will be using `gradlew` to run gradle (`gradlew.bat` on Windows). The first time `gradlew` is used it will download the gradle version you have specified before.
+That is it, you have the wrapper installed! The command will produce several files, but the important ones are `gradlew` and `gradlew.bat`. Moving forward we will be using `gradlew` to run gradle (`gradlew.bat` on Windows). The first time `gradlew` is used it will download the gradle version you have specified before.
 
-## Setup
-Once you have the wrapper installed, we need to setup the Gradle plugin this binding provides. Without the plugin, you will have to manually generate the entry point, `.gdnlib` and `.gdns` files.
+## Configuring gradle
+Once you have the wrapper installed, we need to set up the Gradle plugin provided by this binding. Without the plugin, you will have to manually generate the entry point, `.gdnlib` and `.gdns` files.
 
+**build.gradle.kts**
+!!! important ""
+    Replace `<kotlin-version>` and `godot-kotlin-version>` with the appropriate kotlin and godot-kotlin versions, respectively.
 ```kotlin
 plugins {
-    kotlin("multiplatform") version "$kotlinVersion"
-    id("com.utopia-rise.godot-kotlin") version "$godotKotlinVersion"
+    kotlin("multiplatform") version "<kotlin-version>"
+    id("com.utopia-rise.godot-kotlin") version "<godot-kotlin-version>"
 }
 
 repositories {
     jcenter()
     mavenCentral()
+    // if you want to use bleeding edge builds
+    maven("https://dl.bintray.com/utopia-rise/godot-kotlin-dev")
 }
 
 godot {
     // Build a debug binary
     debug.set(true)
+    // Configure to build for all supported platforms.
+    defaultPlatforms()
 }
 ```
+
+    
+**settings.gradle.kts**
+
+!!! danger ""
+    This section is optional and is only required if you are using a bleeding edge build.
+    
+```kotlin
+pluginManagement {
+    resolutionStrategy.eachPlugin {
+        when (requested.id.id) {
+            "com.utopia-rise.godot-kotlin" -> useModule("com.utopia-rise:godot-gradle-plugin:${requested.version}")
+        }
+    }
+}
+```
+    
+## Importing project in IntelliJ IDEA
+Before proceeding to the next section, follow [this guide](ide.md) on how to import your project in IntelliJ IDEA.
+
+## Creating your first class
 
 Let's create a file `src/godotMain/kotlin/Simple.kt` with the following contents.
 
 ```kotlin
 import godot.*
-import godot.core.*
+import godot.annotation.*
+import godot.global.*
 
 @RegisterClass
 class Simple: Spatial() {
@@ -55,9 +84,6 @@ class Simple: Spatial() {
 
 More will be explained in the [classes](../user-guide/classes.md) section of user guide, but for now `@RegisterClass` will register
 the annotated class to Godot.
-
-!!! note ""
-    The plugin automatically generates the appropriate `gdns` files which can be found at `src/gdns`. It is up to you whether you want to include those files in source control or not.
     
 Now we can trigger a build.
 
@@ -65,6 +91,8 @@ Now we can trigger a build.
 ./gradlew build
 ``` 
 
+!!! note ""
+    The plugin automatically generates the appropriate `gdns` files which can be found at `src/gdns`. It is up to you whether you want to include those files in source control or not.
 
 Once the build completes, a file `src/gdns/Simple.gdns` is generated. You can use `Simple.gdns` in Godot when assigning a script to a node.
 
@@ -75,20 +103,21 @@ Once the build completes, a file `src/gdns/Simple.gdns` is generated. You can us
 By default, the plugin configures the build to build all supported platforms. This can be changed via the `platforms` property of `godot`.
 
 ```kotlin
+import godot.gradle.GodotPlatform
+
 godot {
-  platforms(Platform.WINDOWS)
+  platforms(GodotPlatform.WINDOWS)
 }
 ```
 
 ## All Godot plugin configurations
 
-| Property              | Type           | Description                                                                                                                                                                                                                                                                                                          |
-|-----------------------|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| debug                 | Boolean        | Sets if a debug or a release build should be built. **Note:** as of kotlin version `1.3.72` release builds are broken on the kotlin side!                                                                                                                                                                            |
-| cleanupGeneratedFiles | Boolean        | Deletes the generated gdns files (the ones you attach in the Godot Editor as Native script classes) on each build. Especially useful when you remove classes so they get removed from Godot automatically as well.    **Note:** You still have to remove the reference of the script in the Node hierarchy yourself! |
-| gdnsDir               | File           | Changes the default (`src/gdns/`) output dir for generated gdns files                                                                                                                                                                                                                                                |
-| gdnlibFile            | File           | You can set the name `gdnlib` file yourself if you want to create it yourself or don't want the generated one to be named `lowercasedProjectName.gdnlib`                                                                                                                                                             |
-| singleton             | Boolean        | Sets the `singleton` property inside the generated `gdnlib` file                                                                                                                                                                                                                                                     |
-| loadOnce              | Boolean        | Sets the `load_once` property inside the generated `gdnlib` file                                                                                                                                                                                                                                                     |
-| reloadable            | Boolean        | Sets the `reloadable` property inside the generated `gdnlib` file                                                                                                                                                                                                                                                    |
-| platforms             | List<Platform> | Sets the targets platforms                                                                                                                                                                                                                                                                                           |
+| Property              | Type                | Description                                                                                                                                                                                                                                                                                                          |
+|-----------------------|---------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| debug                 | Boolean             | Sets if a debug or a release build should be built. **Note:** as of kotlin version `1.3.72` release builds are broken on the kotlin side!                                                                                                                                                                            |
+| gdnsDir               | File                | Changes the default (`src/gdns/`) output dir for generated gdns files                                                                                                                                                                                                                                                |
+| gdnlibFile            | File                | You can set the name `gdnlib` file yourself if you want to create it yourself or don't want the generated one to be named `lowercasedProjectName.gdnlib`                                                                                                                                                             |
+| singleton             | Boolean             | Sets the `singleton` property inside the generated `gdnlib` file                                                                                                                                                                                                                                                     |
+| loadOnce              | Boolean             | Sets the `load_once` property inside the generated `gdnlib` file                                                                                                                                                                                                                                                     |
+| reloadable            | Boolean             | Sets the `reloadable` property inside the generated `gdnlib` file                                                                                                                                                                                                                                                    |
+| platforms             | List<GodotPlatform> | Sets the targets platforms                                                                                                                                                                                                                                                                                           |

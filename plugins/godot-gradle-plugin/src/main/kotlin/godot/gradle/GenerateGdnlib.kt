@@ -10,7 +10,7 @@ import java.io.File
 
 open class GenerateGdnlib : DefaultTask() {
     @Input
-    val libraries = project.objects.mapProperty<Platform, File>()
+    val libraries = project.objects.mapProperty<GodotPlatform, File>()
 
     @Input
     val singleton = project.objects.property<Boolean>()
@@ -58,15 +58,15 @@ open class GenerateGdnlib : DefaultTask() {
         }
     }
 
-    private fun platformToKey(platform: Platform): String {
+    private fun platformToKey(platform: GodotPlatform): String {
         return when (platform) {
-            Platform.WINDOWS_X64 -> "Windows.64"
-            Platform.LINUX_X64 -> "X11.64"
-            Platform.OSX_X64 -> "OSX.64"
-            Platform.ANDROID_X64 -> "Android.x86_64"
-            Platform.ANDROID_ARM64 -> "Android.arm64-v8a"
-            Platform.IOS_X64 -> "iOS.64"
-            Platform.IOS_ARM64 -> "iOS.arm64"
+            GodotPlatform.WINDOWS_X64 -> "Windows.64"
+            GodotPlatform.LINUX_X64 -> "X11.64"
+            GodotPlatform.OSX_X64 -> "OSX.64"
+            GodotPlatform.ANDROID_X64 -> "Android.x86_64"
+            GodotPlatform.ANDROID_ARM64 -> "Android.arm64-v8a"
+            GodotPlatform.IOS_X64 -> "iOS.64"
+            GodotPlatform.IOS_ARM64 -> "iOS.arm64"
         }
     }
 }
