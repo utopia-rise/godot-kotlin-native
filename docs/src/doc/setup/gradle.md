@@ -52,6 +52,9 @@ godot {
     
 ```kotlin
 pluginManagement {
+    repositories {
+        maven("https://dl.bintray.com/utopia-rise/godot-kotlin-dev")
+    }
     resolutionStrategy.eachPlugin {
         when (requested.id.id) {
             "com.utopia-rise.godot-kotlin" -> useModule("com.utopia-rise:godot-gradle-plugin:${requested.version}")
