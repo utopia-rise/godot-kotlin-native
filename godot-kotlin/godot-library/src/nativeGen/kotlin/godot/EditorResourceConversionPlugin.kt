@@ -1,0 +1,21 @@
+package godot
+
+import kotlin.Any
+import kotlin.NotImplementedError
+import kotlin.String
+
+open class EditorResourceConversionPlugin internal constructor(
+  _ignore: Any?
+) : Reference(_ignore) {
+  internal constructor() : this(null)
+
+  open fun _convert(resource: Resource): Resource {
+    throw NotImplementedError("_convert is not implemented for EditorResourceConversionPlugin")
+  }
+
+  open fun _converts_to(): String {
+    throw NotImplementedError("_converts_to is not implemented for EditorResourceConversionPlugin")
+  }
+
+  companion object
+}
