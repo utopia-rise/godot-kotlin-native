@@ -53,6 +53,8 @@ godot {
 ```kotlin
 pluginManagement {
     repositories {
+        jcenter()
+        gradlePluginPortal()
         maven("https://dl.bintray.com/utopia-rise/godot-kotlin-dev")
     }
     resolutionStrategy.eachPlugin {
