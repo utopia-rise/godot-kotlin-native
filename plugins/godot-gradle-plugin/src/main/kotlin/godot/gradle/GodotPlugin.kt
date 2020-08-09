@@ -88,7 +88,7 @@ class GodotPlugin : Plugin<Project> {
 
         // create the targets and connect it to the main source set
         godot.configure = { platforms ->
-            val librariesToBeGenerated = mutableMapOf<Platform, File>()
+            val librariesToBeGenerated = mutableMapOf<GodotPlatform, File>()
 
             val generateGdnlibTask = project.tasks.create("generateGdnlib", GenerateGdnlib::class.java) {
                 singleton.set(godot.singleton)
@@ -100,13 +100,13 @@ class GodotPlugin : Plugin<Project> {
 
             platforms.forEach { platform ->
                 val target = when (platform) {
-                    Platform.LINUX_X64 -> mpp.linuxX64("linuxX64")
-                    Platform.WINDOWS_X64 -> mpp.mingwX64("windowsX64")
-                    Platform.OSX_X64 -> mpp.macosX64("macosX64")
-                    Platform.ANDROID_X64 -> mpp.androidNativeX64("androidX64")
-                    Platform.ANDROID_ARM64 -> mpp.androidNativeArm64("androidArm64")
-                    Platform.IOS_X64 -> mpp.iosX64("iosX64")
-                    Platform.IOS_ARM64 -> mpp.iosArm64("iosArm64")
+                    GodotPlatform.LINUX_X64 -> mpp.linuxX64("linuxX64")
+                    GodotPlatform.WINDOWS_X64 -> mpp.mingwX64("windowsX64")
+                    GodotPlatform.OSX_X64 -> mpp.macosX64("macosX64")
+                    GodotPlatform.ANDROID_X64 -> mpp.androidNativeX64("androidX64")
+                    GodotPlatform.ANDROID_ARM64 -> mpp.androidNativeArm64("androidArm64")
+                    GodotPlatform.IOS_X64 -> mpp.iosX64("iosX64")
+                    GodotPlatform.IOS_ARM64 -> mpp.iosArm64("iosArm64")
                     else -> throw AssertionError("Unsupported platform: $platform")
                 }
                 target.configureSourceSets(true)

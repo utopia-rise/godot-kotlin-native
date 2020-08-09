@@ -3,7 +3,7 @@ package godot.gradle
 /**
  * Platforms that Godot supports.
  */
-enum class Platform {
+enum class GodotPlatform {
     LINUX_X64,
     WINDOWS_X64,
     OSX_X64,
