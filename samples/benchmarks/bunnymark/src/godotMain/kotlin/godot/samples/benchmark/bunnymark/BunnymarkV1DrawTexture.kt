@@ -1,10 +1,5 @@
 package godot.samples.benchmark.bunnymark
 
-import godot.core.*
-import godot.*
-import org.godotengine.kotlin.annotation.RegisterClass
-import org.godotengine.kotlin.annotation.RegisterFunction
-
 @RegisterClass("benchmarks/BunnymarkV1DrawTexture/kot")
 class BunnymarkV1DrawTexture : Node2D() {
 
