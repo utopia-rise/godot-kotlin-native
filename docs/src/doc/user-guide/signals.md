@@ -10,6 +10,13 @@ class RotatingCube: Spatial() {
 }
 ```
 
+!!! danger ""
+    All signals that you register, are registered in `snake_case`!  
+    Also the `signal` prefix will be dropped (like described in [API differences](../api-differences.md)).  
+    So `signalVeryCoolSignal` will become `very_cool_signal`  
+    This is done for easier GDScript integration. Also in GDScript signals can have the same name as properties, which is not possible in kotlin as signals **are** properties.  
+    Keep this in mind when interacting with in kotlin defined signals from other languages or when using functions like `emit` from an `Object` rather from the signal property. 
+
 ## Emitting
 Every signal has a `emit` method which can be used to emit it.
 
