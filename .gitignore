@@ -4,7 +4,8 @@
 # Ignore Gradle build output directory
 build
 
-!.idea/codeStyles/*.xml
+build-root/.idea/*
+!build-root/.idea/codeStyles/*
 
 /samples/mini-games/.import/
 
