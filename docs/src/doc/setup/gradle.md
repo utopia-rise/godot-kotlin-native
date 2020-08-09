@@ -21,6 +21,7 @@ That is it, you have the wrapper installed! The command will produce several fil
 Once you have the wrapper installed, we need to set up the Gradle plugin provided by this binding. Without the plugin, you will have to manually generate the entry point, `.gdnlib` and `.gdns` files.
 
 **build.gradle.kts**
+
 !!! important ""
     Replace `<kotlin-version>` and `godot-kotlin-version>` with the appropriate kotlin and godot-kotlin versions, respectively.
 ```kotlin
@@ -44,6 +45,15 @@ godot {
 }
 ```
 
+**gradle.properties**
+
+!!! important ""
+    We need to give the gradle enough memory as the default settings is not enough for the Kotlin Native compiler.
+    
+```properties
+org.gradle.jvmargs=-Xmx3G
+```
+
     
 **settings.gradle.kts**
 
@@ -65,8 +75,8 @@ pluginManagement {
 }
 ```
     
-## Importing project in IntelliJ IDEA
-Before proceeding to the next section, follow [this guide](ide.md) on how to import your project in IntelliJ IDEA.
+## Importing project into IntelliJ IDEA
+Before proceeding to the next section, follow [this guide](ide.md) on how to import your project into IntelliJ IDEA.
 
 ## Creating your first class
 
@@ -75,7 +85,7 @@ Let's create a file `src/godotMain/kotlin/Simple.kt` with the following contents
 ```kotlin
 import godot.*
 import godot.annotation.*
-import godot.global.*
+import godot.core.*
 
 @RegisterClass
 class Simple: Spatial() {
@@ -87,8 +97,7 @@ class Simple: Spatial() {
 }
 ```
 
-More will be explained in the [classes](../user-guide/classes.md) section of user guide, but for now `@RegisterClass` will register
-the annotated class to Godot.
+`@RegisterClass` will register the annotated class to Godot. More details can be found in the [classes](../user-guide/classes.md) section of the user guide
     
 Now we can trigger a build.
 
@@ -111,7 +120,7 @@ By default, the plugin configures the build to build all supported platforms. Th
 import godot.gradle.GodotPlatform
 
 godot {
-  platforms(GodotPlatform.WINDOWS)
+  platforms(GodotPlatform.WINDOWS_X64)
 }
 ```
 
