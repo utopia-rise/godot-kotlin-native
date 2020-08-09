@@ -23,4 +23,3 @@ pluginManagement {
 
 includeBuild("../samples/3d-platformer")
 includeBuild("../samples/mini-games")
-includeBuild("../samples/benchmarks/bunnymark")
