@@ -31,11 +31,6 @@
                   <project path="$PROJECT_DIR$/../samples/mini-games" />
                 </projects>
               </build>
-              <build path="$PROJECT_DIR$/../samples/benchmarks/bunnymark" name="bunnymark">
-                <projects>
-                  <project path="$PROJECT_DIR$/../samples/benchmarks/bunnymark" />
-                </projects>
-              </build>
             </builds>
           </compositeBuild>
         </compositeConfiguration>
@@ -55,7 +50,6 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/../plugins/godot-gradle-plugin" />
             <option value="$PROJECT_DIR$/../samples/3d-platformer" />
-            <option value="$PROJECT_DIR$/../samples/benchmarks/bunnymark" />
             <option value="$PROJECT_DIR$/../samples/mini-games" />
             <option value="$PROJECT_DIR$/../utils/composite-build-support" />
             <option value="$PROJECT_DIR$/../utils/godot-build-props" />
