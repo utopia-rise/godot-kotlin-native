@@ -27,6 +27,7 @@ infix fun File.generateApiFrom(jsonSource: File) {
     this.parentFile.mkdirs()
 
     iCallFileSpec
+        .addComment("THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD")
         .build()
         .writeTo(this)
 
