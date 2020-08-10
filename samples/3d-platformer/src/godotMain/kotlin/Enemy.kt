@@ -37,7 +37,7 @@ class Enemy : RigidBody() {
     }
 
     @RegisterFunction
-    override fun _integrate_forces(state: PhysicsDirectBodyState) {
+    override fun _integrateForces(state: PhysicsDirectBodyState) {
         val delta = state.step
         var lv = state.linearVelocity
         var g = state.totalGravity
