@@ -13,6 +13,4 @@ open class Position3D internal constructor(
         }
 
   }
-
-  companion object
 }

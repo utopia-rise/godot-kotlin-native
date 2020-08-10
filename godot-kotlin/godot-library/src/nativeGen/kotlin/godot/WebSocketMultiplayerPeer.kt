@@ -31,6 +31,4 @@ open class WebSocketMultiplayerPeer internal constructor(
     return GodotError.byValue( _icall_Long_Long_Long_Long_Long( mb, this.ptr, inputBufferSizeKb,
         inputMaxPackets, outputBufferSizeKb, outputMaxPackets).toUInt())
   }
-
-  companion object
 }

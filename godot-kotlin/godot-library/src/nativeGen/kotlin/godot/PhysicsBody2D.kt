@@ -99,6 +99,4 @@ open class PhysicsBody2D internal constructor(
     val mb = getMethodBind("PhysicsBody2D","set_collision_mask_bit")
     _icall_Unit_Long_Boolean( mb, this.ptr, bit, value)
   }
-
-  companion object
 }

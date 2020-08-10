@@ -156,6 +156,4 @@ open class EditorInterface internal constructor(
     val mb = getMethodBind("EditorInterface","set_plugin_enabled")
     _icall_Unit_String_Boolean( mb, this.ptr, plugin, enabled)
   }
-
-  companion object
 }

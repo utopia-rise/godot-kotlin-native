@@ -13,6 +13,4 @@ open class AudioBusLayout internal constructor(
         }
 
   }
-
-  companion object
 }

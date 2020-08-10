@@ -726,6 +726,4 @@ open class AnimationNodeTransition internal constructor(
     val mb = getMethodBind("AnimationNodeTransition","set_input_caption")
     _icall_Unit_Long_String( mb, this.ptr, input, caption)
   }
-
-  companion object
 }

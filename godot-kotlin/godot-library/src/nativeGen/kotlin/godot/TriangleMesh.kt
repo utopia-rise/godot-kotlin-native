@@ -13,6 +13,4 @@ open class TriangleMesh internal constructor(
         }
 
   }
-
-  companion object
 }

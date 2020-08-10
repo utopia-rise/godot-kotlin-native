@@ -250,6 +250,4 @@ open class ScriptEditor internal constructor(
     val mb = getMethodBind("ScriptEditor","open_script_create_dialog")
     _icall_Unit_String_String( mb, this.ptr, baseName, basePath)
   }
-
-  companion object
 }

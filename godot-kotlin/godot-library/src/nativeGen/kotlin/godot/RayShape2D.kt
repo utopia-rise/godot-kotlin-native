@@ -60,6 +60,4 @@ open class RayShape2D internal constructor(
     val mb = getMethodBind("RayShape2D","set_slips_on_slope")
     _icall_Unit_Boolean( mb, this.ptr, active)
   }
-
-  companion object
 }

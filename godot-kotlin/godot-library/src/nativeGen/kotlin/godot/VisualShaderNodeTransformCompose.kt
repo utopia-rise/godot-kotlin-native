@@ -14,6 +14,4 @@ open class VisualShaderNodeTransformCompose internal constructor(
         }
 
   }
-
-  companion object
 }

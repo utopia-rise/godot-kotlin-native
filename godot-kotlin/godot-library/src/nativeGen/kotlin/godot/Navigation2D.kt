@@ -63,6 +63,4 @@ open class Navigation2D internal constructor(
     val mb = getMethodBind("Navigation2D","navpoly_set_transform")
     _icall_Unit_Long_Transform2D( mb, this.ptr, id, xform)
   }
-
-  companion object
 }

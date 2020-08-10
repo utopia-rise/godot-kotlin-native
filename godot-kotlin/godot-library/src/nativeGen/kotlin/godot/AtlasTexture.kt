@@ -115,6 +115,4 @@ open class AtlasTexture internal constructor(
     val mb = getMethodBind("AtlasTexture","set_region")
     _icall_Unit_Rect2( mb, this.ptr, region)
   }
-
-  companion object
 }

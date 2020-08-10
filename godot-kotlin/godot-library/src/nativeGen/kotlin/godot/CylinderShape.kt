@@ -57,6 +57,4 @@ open class CylinderShape internal constructor(
     val mb = getMethodBind("CylinderShape","set_radius")
     _icall_Unit_Double( mb, this.ptr, radius)
   }
-
-  companion object
 }

@@ -98,6 +98,4 @@ open class InputEventMouseButton internal constructor(
     val mb = getMethodBind("InputEventMouseButton","set_pressed")
     _icall_Unit_Boolean( mb, this.ptr, pressed)
   }
-
-  companion object
 }

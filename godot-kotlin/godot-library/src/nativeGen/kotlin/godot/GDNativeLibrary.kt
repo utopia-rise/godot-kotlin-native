@@ -134,6 +134,4 @@ open class GDNativeLibrary internal constructor(
     val mb = getMethodBind("GDNativeLibrary","should_load_once")
     return _icall_Boolean( mb, this.ptr)
   }
-
-  companion object
 }

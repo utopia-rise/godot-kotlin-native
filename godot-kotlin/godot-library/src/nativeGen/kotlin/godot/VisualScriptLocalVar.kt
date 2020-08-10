@@ -62,6 +62,4 @@ open class VisualScriptLocalVar internal constructor(
     val mb = getMethodBind("VisualScriptLocalVar","set_var_type")
     _icall_Unit_Long( mb, this.ptr, type)
   }
-
-  companion object
 }

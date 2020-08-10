@@ -13,6 +13,4 @@ open class AnimationRootNode internal constructor(
         }
 
   }
-
-  companion object
 }

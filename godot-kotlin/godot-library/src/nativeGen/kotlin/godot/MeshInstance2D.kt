@@ -81,6 +81,4 @@ open class MeshInstance2D internal constructor(
     val mb = getMethodBind("MeshInstance2D","set_texture")
     _icall_Unit_Object( mb, this.ptr, texture)
   }
-
-  companion object
 }

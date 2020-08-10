@@ -65,6 +65,4 @@ open class ShaderMaterial internal constructor(
     val mb = getMethodBind("ShaderMaterial","set_shader_param")
     _icall_Unit_String_Variant( mb, this.ptr, param, value)
   }
-
-  companion object
 }

@@ -82,6 +82,4 @@ open class Shape2D internal constructor(
     val mb = getMethodBind("Shape2D","set_custom_solver_bias")
     _icall_Unit_Double( mb, this.ptr, bias)
   }
-
-  companion object
 }

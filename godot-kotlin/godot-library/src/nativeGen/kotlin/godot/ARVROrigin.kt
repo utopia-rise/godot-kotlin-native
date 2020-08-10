@@ -37,6 +37,4 @@ open class ARVROrigin internal constructor(
     val mb = getMethodBind("ARVROrigin","set_world_scale")
     _icall_Unit_Double( mb, this.ptr, worldScale)
   }
-
-  companion object
 }

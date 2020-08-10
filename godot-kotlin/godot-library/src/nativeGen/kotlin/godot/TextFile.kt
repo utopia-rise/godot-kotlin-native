@@ -13,6 +13,4 @@ open class TextFile internal constructor(
         }
 
   }
-
-  companion object
 }

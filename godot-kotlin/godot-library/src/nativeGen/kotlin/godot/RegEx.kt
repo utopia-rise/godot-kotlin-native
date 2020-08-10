@@ -88,6 +88,4 @@ open class RegEx internal constructor(
     return _icall_String_String_String_Boolean_Long_Long( mb, this.ptr, subject, replacement, all,
         offset, end)
   }
-
-  companion object
 }

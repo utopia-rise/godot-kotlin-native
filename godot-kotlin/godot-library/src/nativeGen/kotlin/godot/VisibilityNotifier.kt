@@ -62,6 +62,4 @@ open class VisibilityNotifier internal constructor(
     val mb = getMethodBind("VisibilityNotifier","set_aabb")
     _icall_Unit_AABB( mb, this.ptr, rect)
   }
-
-  companion object
 }

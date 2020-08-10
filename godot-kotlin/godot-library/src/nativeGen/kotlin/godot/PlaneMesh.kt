@@ -87,6 +87,4 @@ open class PlaneMesh internal constructor(
     val mb = getMethodBind("PlaneMesh","set_subdivide_width")
     _icall_Unit_Long( mb, this.ptr, subdivide)
   }
-
-  companion object
 }

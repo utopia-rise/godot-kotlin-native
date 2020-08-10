@@ -100,6 +100,4 @@ open class PhysicsMaterial internal constructor(
     val mb = getMethodBind("PhysicsMaterial","set_rough")
     _icall_Unit_Boolean( mb, this.ptr, rough)
   }
-
-  companion object
 }

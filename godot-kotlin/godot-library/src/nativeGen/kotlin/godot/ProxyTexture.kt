@@ -36,6 +36,4 @@ open class ProxyTexture internal constructor(
     val mb = getMethodBind("ProxyTexture","set_base")
     _icall_Unit_Object( mb, this.ptr, base)
   }
-
-  companion object
 }

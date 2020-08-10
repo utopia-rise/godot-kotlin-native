@@ -37,6 +37,4 @@ open class ConcavePolygonShape internal constructor(
     val mb = getMethodBind("ConcavePolygonShape","set_faces")
     _icall_Unit_PoolVector3Array( mb, this.ptr, faces)
   }
-
-  companion object
 }

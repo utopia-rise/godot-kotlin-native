@@ -14,6 +14,4 @@ open class VisualShaderNodeOuterProduct internal constructor(
         }
 
   }
-
-  companion object
 }

@@ -450,6 +450,4 @@ open class StyleBoxFlat internal constructor(
     val mb = getMethodBind("StyleBoxFlat","set_shadow_size")
     _icall_Unit_Long( mb, this.ptr, size)
   }
-
-  companion object
 }

@@ -60,6 +60,4 @@ open class CSGMesh internal constructor(
     val mb = getMethodBind("CSGMesh","set_mesh")
     _icall_Unit_Object( mb, this.ptr, mesh)
   }
-
-  companion object
 }

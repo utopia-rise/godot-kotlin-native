@@ -56,6 +56,4 @@ open class GradientTexture internal constructor(
     val mb = getMethodBind("GradientTexture","set_width")
     _icall_Unit_Long( mb, this.ptr, width)
   }
-
-  companion object
 }

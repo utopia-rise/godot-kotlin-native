@@ -91,6 +91,4 @@ open class PacketPeer internal constructor(
     val mb = getMethodBind("PacketPeer","set_encode_buffer_max_size")
     _icall_Unit_Long( mb, this.ptr, maxSize)
   }
-
-  companion object
 }

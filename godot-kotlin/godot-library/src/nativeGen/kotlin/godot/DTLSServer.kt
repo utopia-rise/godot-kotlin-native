@@ -32,6 +32,4 @@ open class DTLSServer internal constructor(
     val mb = getMethodBind("DTLSServer","take_connection")
     return _icall_PacketPeerDTLS_Object( mb, this.ptr, udpPeer)
   }
-
-  companion object
 }

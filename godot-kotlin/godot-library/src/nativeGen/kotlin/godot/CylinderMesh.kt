@@ -120,6 +120,4 @@ open class CylinderMesh internal constructor(
     val mb = getMethodBind("CylinderMesh","set_top_radius")
     _icall_Unit_Double( mb, this.ptr, radius)
   }
-
-  companion object
 }

@@ -53,6 +53,4 @@ open class AnimationNodeStateMachinePlayback internal constructor(
     val mb = getMethodBind("AnimationNodeStateMachinePlayback","travel")
     _icall_Unit_String( mb, this.ptr, toNode)
   }
-
-  companion object
 }

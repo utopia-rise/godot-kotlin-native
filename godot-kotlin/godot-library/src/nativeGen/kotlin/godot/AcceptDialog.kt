@@ -130,6 +130,4 @@ open class AcceptDialog internal constructor(
     val mb = getMethodBind("AcceptDialog","set_text")
     _icall_Unit_String( mb, this.ptr, text)
   }
-
-  companion object
 }

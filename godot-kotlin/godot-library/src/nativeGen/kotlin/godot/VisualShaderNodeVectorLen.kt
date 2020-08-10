@@ -13,6 +13,4 @@ open class VisualShaderNodeVectorLen internal constructor(
         }
 
   }
-
-  companion object
 }

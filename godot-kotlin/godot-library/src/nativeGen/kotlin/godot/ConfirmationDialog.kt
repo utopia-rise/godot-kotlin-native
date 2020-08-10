@@ -20,6 +20,4 @@ open class ConfirmationDialog internal constructor(
     val mb = getMethodBind("ConfirmationDialog","get_cancel")
     return _icall_Button( mb, this.ptr)
   }
-
-  companion object
 }

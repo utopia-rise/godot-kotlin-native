@@ -215,6 +215,4 @@ open class Physics2DShapeQueryParameters internal constructor(
     val mb = getMethodBind("Physics2DShapeQueryParameters","set_transform")
     _icall_Unit_Transform2D( mb, this.ptr, transform)
   }
-
-  companion object
 }

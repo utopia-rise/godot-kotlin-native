@@ -34,6 +34,4 @@ open class SceneTreeTimer internal constructor(
     val mb = getMethodBind("SceneTreeTimer","set_time_left")
     _icall_Unit_Double( mb, this.ptr, time)
   }
-
-  companion object
 }

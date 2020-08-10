@@ -14,6 +14,4 @@ open class VisualShaderNodeBooleanUniform internal constructor(
         }
 
   }
-
-  companion object
 }

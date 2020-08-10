@@ -97,6 +97,4 @@ open class DampedSpringJoint2D internal constructor(
     val mb = getMethodBind("DampedSpringJoint2D","set_stiffness")
     _icall_Unit_Double( mb, this.ptr, stiffness)
   }
-
-  companion object
 }

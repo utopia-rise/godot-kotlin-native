@@ -57,6 +57,4 @@ open class CapsuleShape internal constructor(
     val mb = getMethodBind("CapsuleShape","set_radius")
     _icall_Unit_Double( mb, this.ptr, radius)
   }
-
-  companion object
 }

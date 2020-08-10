@@ -34,6 +34,4 @@ open class AudioEffectEQ internal constructor(
     val mb = getMethodBind("AudioEffectEQ","set_band_gain_db")
     _icall_Unit_Long_Double( mb, this.ptr, bandIdx, volumeDb)
   }
-
-  companion object
 }

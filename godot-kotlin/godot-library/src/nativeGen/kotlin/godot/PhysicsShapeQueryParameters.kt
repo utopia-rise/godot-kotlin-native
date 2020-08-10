@@ -185,6 +185,4 @@ open class PhysicsShapeQueryParameters internal constructor(
     val mb = getMethodBind("PhysicsShapeQueryParameters","set_transform")
     _icall_Unit_Transform( mb, this.ptr, transform)
   }
-
-  companion object
 }

@@ -62,6 +62,4 @@ open class LightOccluder2D internal constructor(
     val mb = getMethodBind("LightOccluder2D","set_occluder_polygon")
     _icall_Unit_Object( mb, this.ptr, polygon)
   }
-
-  companion object
 }

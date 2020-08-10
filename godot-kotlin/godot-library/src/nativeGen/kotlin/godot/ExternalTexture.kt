@@ -45,6 +45,4 @@ open class ExternalTexture internal constructor(
     val mb = getMethodBind("ExternalTexture","set_size")
     _icall_Unit_Vector2( mb, this.ptr, size)
   }
-
-  companion object
 }

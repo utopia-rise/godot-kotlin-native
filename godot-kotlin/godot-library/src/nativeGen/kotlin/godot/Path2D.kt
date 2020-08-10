@@ -39,6 +39,4 @@ open class Path2D internal constructor(
     val mb = getMethodBind("Path2D","set_curve")
     _icall_Unit_Object( mb, this.ptr, curve)
   }
-
-  companion object
 }

@@ -13,6 +13,4 @@ open class Panel internal constructor(
         }
 
   }
-
-  companion object
 }

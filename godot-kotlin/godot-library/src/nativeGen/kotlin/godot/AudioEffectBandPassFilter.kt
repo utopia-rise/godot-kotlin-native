@@ -13,6 +13,4 @@ open class AudioEffectBandPassFilter internal constructor(
         }
 
   }
-
-  companion object
 }

@@ -170,6 +170,4 @@ open class VisualShaderNodeGroupBase internal constructor(
     val mb = getMethodBind("VisualShaderNodeGroupBase","set_size")
     _icall_Unit_Vector2( mb, this.ptr, size)
   }
-
-  companion object
 }

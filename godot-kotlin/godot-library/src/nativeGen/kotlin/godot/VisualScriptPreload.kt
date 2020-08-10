@@ -36,6 +36,4 @@ open class VisualScriptPreload internal constructor(
     val mb = getMethodBind("VisualScriptPreload","set_preload")
     _icall_Unit_Object( mb, this.ptr, resource)
   }
-
-  companion object
 }

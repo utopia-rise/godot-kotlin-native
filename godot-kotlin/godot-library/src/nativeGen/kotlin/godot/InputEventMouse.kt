@@ -86,6 +86,4 @@ open class InputEventMouse internal constructor(
     val mb = getMethodBind("InputEventMouse","set_position")
     _icall_Unit_Vector2( mb, this.ptr, position)
   }
-
-  companion object
 }

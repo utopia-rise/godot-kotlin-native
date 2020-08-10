@@ -37,6 +37,4 @@ open class GridContainer internal constructor(
     val mb = getMethodBind("GridContainer","set_columns")
     _icall_Unit_Long( mb, this.ptr, columns)
   }
-
-  companion object
 }

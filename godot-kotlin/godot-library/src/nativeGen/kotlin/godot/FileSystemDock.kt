@@ -193,6 +193,4 @@ open class FileSystemDock internal constructor(
     val mb = getMethodBind("FileSystemDock","navigate_to_path")
     _icall_Unit_String( mb, this.ptr, arg0)
   }
-
-  companion object
 }

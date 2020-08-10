@@ -83,6 +83,4 @@ open class EditorExportPlugin internal constructor(
     val mb = getMethodBind("EditorExportPlugin","skip")
     _icall_Unit( mb, this.ptr)
   }
-
-  companion object
 }

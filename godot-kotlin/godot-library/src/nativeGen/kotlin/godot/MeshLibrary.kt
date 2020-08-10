@@ -124,6 +124,4 @@ open class MeshLibrary internal constructor(
     val mb = getMethodBind("MeshLibrary","set_item_shapes")
     _icall_Unit_Long_VariantArray( mb, this.ptr, id, shapes)
   }
-
-  companion object
 }

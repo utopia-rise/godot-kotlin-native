@@ -13,6 +13,4 @@ open class HSlider internal constructor(
         }
 
   }
-
-  companion object
 }

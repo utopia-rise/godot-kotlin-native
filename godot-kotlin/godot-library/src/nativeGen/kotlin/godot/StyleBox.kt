@@ -104,6 +104,4 @@ open class StyleBox internal constructor(
     val mb = getMethodBind("StyleBox","test_mask")
     return _icall_Boolean_Vector2_Rect2( mb, this.ptr, point, rect)
   }
-
-  companion object
 }

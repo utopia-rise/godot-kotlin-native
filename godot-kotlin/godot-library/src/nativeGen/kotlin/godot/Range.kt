@@ -232,6 +232,4 @@ open class Range internal constructor(
     val mb = getMethodBind("Range","unshare")
     _icall_Unit( mb, this.ptr)
   }
-
-  companion object
 }

@@ -13,6 +13,4 @@ open class AnimationNodeTimeSeek internal constructor(
         }
 
   }
-
-  companion object
 }

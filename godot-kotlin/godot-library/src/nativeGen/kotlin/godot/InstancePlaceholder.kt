@@ -34,6 +34,4 @@ open class InstancePlaceholder internal constructor(
     val mb = getMethodBind("InstancePlaceholder","replace_by_instance")
     _icall_Unit_nObject( mb, this.ptr, customScene)
   }
-
-  companion object
 }

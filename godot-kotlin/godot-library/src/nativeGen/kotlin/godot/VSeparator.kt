@@ -13,6 +13,4 @@ open class VSeparator internal constructor(
         }
 
   }
-
-  companion object
 }

@@ -14,6 +14,4 @@ open class VisualShaderNodeGlobalExpression internal constructor(
         }
 
   }
-
-  companion object
 }

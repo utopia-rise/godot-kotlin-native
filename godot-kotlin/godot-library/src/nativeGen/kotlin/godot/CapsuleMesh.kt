@@ -100,6 +100,4 @@ open class CapsuleMesh internal constructor(
     val mb = getMethodBind("CapsuleMesh","set_rings")
     _icall_Unit_Long( mb, this.ptr, rings)
   }
-
-  companion object
 }

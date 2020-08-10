@@ -97,6 +97,4 @@ open class AudioEffectLimiter internal constructor(
     val mb = getMethodBind("AudioEffectLimiter","set_threshold_db")
     _icall_Unit_Double( mb, this.ptr, threshold)
   }
-
-  companion object
 }

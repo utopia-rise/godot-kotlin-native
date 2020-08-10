@@ -76,6 +76,4 @@ open class Skin internal constructor(
     val mb = getMethodBind("Skin","set_bind_pose")
     _icall_Unit_Long_Transform( mb, this.ptr, bindIndex, pose)
   }
-
-  companion object
 }

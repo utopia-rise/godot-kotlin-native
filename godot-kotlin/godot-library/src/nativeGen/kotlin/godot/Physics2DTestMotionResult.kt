@@ -120,6 +120,4 @@ open class Physics2DTestMotionResult internal constructor(
     val mb = getMethodBind("Physics2DTestMotionResult","get_motion_remainder")
     return _icall_Vector2( mb, this.ptr)
   }
-
-  companion object
 }

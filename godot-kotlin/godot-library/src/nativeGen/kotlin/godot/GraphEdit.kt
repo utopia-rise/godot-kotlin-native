@@ -319,6 +319,4 @@ open class GraphEdit internal constructor(
     val mb = getMethodBind("GraphEdit","set_zoom")
     _icall_Unit_Double( mb, this.ptr, pZoom)
   }
-
-  companion object
 }

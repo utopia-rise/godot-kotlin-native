@@ -47,6 +47,4 @@ open class UDPServer internal constructor(
     val mb = getMethodBind("UDPServer","take_connection")
     return _icall_PacketPeerUDP( mb, this.ptr)
   }
-
-  companion object
 }

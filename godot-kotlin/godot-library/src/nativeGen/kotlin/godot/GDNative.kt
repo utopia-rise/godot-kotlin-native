@@ -62,6 +62,4 @@ open class GDNative internal constructor(
     val mb = getMethodBind("GDNative","terminate")
     return _icall_Boolean( mb, this.ptr)
   }
-
-  companion object
 }

@@ -107,6 +107,4 @@ open class WebSocketClient internal constructor(
     val mb = getMethodBind("WebSocketClient","set_verify_ssl_enabled")
     _icall_Unit_Boolean( mb, this.ptr, enabled)
   }
-
-  companion object
 }

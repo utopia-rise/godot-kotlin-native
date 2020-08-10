@@ -37,6 +37,4 @@ open class VisualScriptVariableGet internal constructor(
     val mb = getMethodBind("VisualScriptVariableGet","set_variable")
     _icall_Unit_String( mb, this.ptr, name)
   }
-
-  companion object
 }

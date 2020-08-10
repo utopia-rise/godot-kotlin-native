@@ -14,6 +14,4 @@ open class AudioStream internal constructor(
     val mb = getMethodBind("AudioStream","get_length")
     return _icall_Double( mb, this.ptr)
   }
-
-  companion object
 }

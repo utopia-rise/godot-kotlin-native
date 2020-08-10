@@ -13,6 +13,4 @@ open class PopupPanel internal constructor(
         }
 
   }
-
-  companion object
 }

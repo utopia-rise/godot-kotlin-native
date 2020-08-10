@@ -446,6 +446,4 @@ open class Polygon2D internal constructor(
     val mb = getMethodBind("Polygon2D","set_vertex_colors")
     _icall_Unit_PoolColorArray( mb, this.ptr, vertexColors)
   }
-
-  companion object
 }

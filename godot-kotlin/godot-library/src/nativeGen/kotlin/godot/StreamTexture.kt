@@ -34,6 +34,4 @@ open class StreamTexture internal constructor(
     val mb = getMethodBind("StreamTexture","load")
     return GodotError.byValue( _icall_Long_String( mb, this.ptr, path).toUInt())
   }
-
-  companion object
 }

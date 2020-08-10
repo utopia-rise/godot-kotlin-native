@@ -94,6 +94,4 @@ open class EditorSpinSlider internal constructor(
     val mb = getMethodBind("EditorSpinSlider","set_read_only")
     _icall_Unit_Boolean( mb, this.ptr, readOnly)
   }
-
-  companion object
 }

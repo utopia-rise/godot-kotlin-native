@@ -61,6 +61,4 @@ open class VisualScriptLists internal constructor(
     val mb = getMethodBind("VisualScriptLists","set_output_data_port_type")
     _icall_Unit_Long_Long( mb, this.ptr, index, type)
   }
-
-  companion object
 }

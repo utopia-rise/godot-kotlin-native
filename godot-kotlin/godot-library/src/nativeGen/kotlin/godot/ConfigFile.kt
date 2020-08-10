@@ -114,6 +114,4 @@ open class ConfigFile internal constructor(
     val mb = getMethodBind("ConfigFile","set_value")
     _icall_Unit_String_String_Variant( mb, this.ptr, section, key, value)
   }
-
-  companion object
 }

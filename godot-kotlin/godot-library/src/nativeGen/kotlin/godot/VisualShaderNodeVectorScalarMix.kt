@@ -14,6 +14,4 @@ open class VisualShaderNodeVectorScalarMix internal constructor(
         }
 
   }
-
-  companion object
 }

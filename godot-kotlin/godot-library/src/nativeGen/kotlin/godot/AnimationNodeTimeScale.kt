@@ -13,6 +13,4 @@ open class AnimationNodeTimeScale internal constructor(
         }
 
   }
-
-  companion object
 }

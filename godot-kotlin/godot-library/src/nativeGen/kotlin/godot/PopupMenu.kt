@@ -501,6 +501,4 @@ open class PopupMenu internal constructor(
     val mb = getMethodBind("PopupMenu","toggle_item_multistate")
     _icall_Unit_Long( mb, this.ptr, idx)
   }
-
-  companion object
 }

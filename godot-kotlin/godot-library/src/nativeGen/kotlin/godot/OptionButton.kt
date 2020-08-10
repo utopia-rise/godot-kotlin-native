@@ -179,6 +179,4 @@ open class OptionButton internal constructor(
     val mb = getMethodBind("OptionButton","set_item_text")
     _icall_Unit_Long_String( mb, this.ptr, idx, text)
   }
-
-  companion object
 }

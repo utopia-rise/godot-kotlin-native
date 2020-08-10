@@ -37,6 +37,4 @@ open class PCKPacker internal constructor(
     val mb = getMethodBind("PCKPacker","pck_start")
     return GodotError.byValue( _icall_Long_String_Long( mb, this.ptr, pckName, alignment).toUInt())
   }
-
-  companion object
 }

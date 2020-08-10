@@ -34,6 +34,4 @@ open class PackedDataContainerRef internal constructor(
     val mb = getMethodBind("PackedDataContainerRef","size")
     return _icall_Long( mb, this.ptr)
   }
-
-  companion object
 }

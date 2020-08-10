@@ -13,6 +13,4 @@ open class AudioEffectLowShelfFilter internal constructor(
         }
 
   }
-
-  companion object
 }

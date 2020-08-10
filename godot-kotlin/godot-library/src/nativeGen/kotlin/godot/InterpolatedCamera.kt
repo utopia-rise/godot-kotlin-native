@@ -89,6 +89,4 @@ open class InterpolatedCamera internal constructor(
     val mb = getMethodBind("InterpolatedCamera","set_target_path")
     _icall_Unit_NodePath( mb, this.ptr, targetPath)
   }
-
-  companion object
 }

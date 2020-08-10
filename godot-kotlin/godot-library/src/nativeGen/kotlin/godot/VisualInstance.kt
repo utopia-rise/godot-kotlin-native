@@ -78,6 +78,4 @@ open class VisualInstance internal constructor(
     val mb = getMethodBind("VisualInstance","set_layer_mask_bit")
     _icall_Unit_Long_Boolean( mb, this.ptr, layer, enabled)
   }
-
-  companion object
 }

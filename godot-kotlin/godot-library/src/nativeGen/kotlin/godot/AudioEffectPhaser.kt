@@ -117,6 +117,4 @@ open class AudioEffectPhaser internal constructor(
     val mb = getMethodBind("AudioEffectPhaser","set_rate_hz")
     _icall_Unit_Double( mb, this.ptr, hz)
   }
-
-  companion object
 }

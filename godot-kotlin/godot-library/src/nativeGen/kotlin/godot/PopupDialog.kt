@@ -13,6 +13,4 @@ open class PopupDialog internal constructor(
         }
 
   }
-
-  companion object
 }

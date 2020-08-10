@@ -37,6 +37,4 @@ open class AudioEffectAmplify internal constructor(
     val mb = getMethodBind("AudioEffectAmplify","set_volume_db")
     _icall_Unit_Double( mb, this.ptr, volume)
   }
-
-  companion object
 }

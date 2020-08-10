@@ -63,7 +63,7 @@ class Class @JsonCreator constructor(
 
         generateEnums(classTypeBuilder)
 
-        val baseCompanion = if (!isSingleton) TypeSpec.companionObjectBuilder() else null
+        val baseCompanion = if (!isSingleton && constants.isNotEmpty()) TypeSpec.companionObjectBuilder() else null
 
         generateConstants(baseCompanion ?: classTypeBuilder)
 

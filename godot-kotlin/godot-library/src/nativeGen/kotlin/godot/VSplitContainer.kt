@@ -13,6 +13,4 @@ open class VSplitContainer internal constructor(
         }
 
   }
-
-  companion object
 }

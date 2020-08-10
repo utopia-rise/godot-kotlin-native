@@ -60,6 +60,4 @@ open class VisualScriptOperator internal constructor(
     val mb = getMethodBind("VisualScriptOperator","set_typed")
     _icall_Unit_Long( mb, this.ptr, type)
   }
-
-  companion object
 }

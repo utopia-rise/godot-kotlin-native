@@ -13,6 +13,4 @@ open class ARVRInterfaceGDNative internal constructor(
         }
 
   }
-
-  companion object
 }

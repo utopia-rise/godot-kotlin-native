@@ -394,6 +394,4 @@ open class Node2D internal constructor(
     val mb = getMethodBind("Node2D","translate")
     _icall_Unit_Vector2( mb, this.ptr, offset)
   }
-
-  companion object
 }

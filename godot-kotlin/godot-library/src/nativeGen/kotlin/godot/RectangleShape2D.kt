@@ -44,6 +44,4 @@ open class RectangleShape2D internal constructor(
     val mb = getMethodBind("RectangleShape2D","set_extents")
     _icall_Unit_Vector2( mb, this.ptr, extents)
   }
-
-  companion object
 }

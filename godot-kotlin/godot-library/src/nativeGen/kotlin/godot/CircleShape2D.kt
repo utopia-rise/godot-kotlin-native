@@ -37,6 +37,4 @@ open class CircleShape2D internal constructor(
     val mb = getMethodBind("CircleShape2D","set_radius")
     _icall_Unit_Double( mb, this.ptr, radius)
   }
-
-  companion object
 }

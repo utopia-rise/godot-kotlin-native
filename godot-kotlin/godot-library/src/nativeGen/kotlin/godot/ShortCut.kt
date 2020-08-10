@@ -56,6 +56,4 @@ open class ShortCut internal constructor(
     val mb = getMethodBind("ShortCut","set_shortcut")
     _icall_Unit_Object( mb, this.ptr, event)
   }
-
-  companion object
 }

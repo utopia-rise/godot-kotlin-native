@@ -118,6 +118,4 @@ open class MeshInstance internal constructor(
     val mb = getMethodBind("MeshInstance","set_surface_material")
     _icall_Unit_Long_Object( mb, this.ptr, surface, material)
   }
-
-  companion object
 }

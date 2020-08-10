@@ -72,6 +72,4 @@ open class StreamPeerBuffer internal constructor(
     val mb = getMethodBind("StreamPeerBuffer","set_data_array")
     _icall_Unit_PoolByteArray( mb, this.ptr, data)
   }
-
-  companion object
 }

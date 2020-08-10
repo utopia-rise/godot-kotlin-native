@@ -14,6 +14,4 @@ open class VisualShaderNodeVectorDecompose internal constructor(
         }
 
   }
-
-  companion object
 }

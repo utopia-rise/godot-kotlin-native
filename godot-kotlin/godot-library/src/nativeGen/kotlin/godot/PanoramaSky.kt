@@ -36,6 +36,4 @@ open class PanoramaSky internal constructor(
     val mb = getMethodBind("PanoramaSky","set_panorama")
     _icall_Unit_Object( mb, this.ptr, texture)
   }
-
-  companion object
 }

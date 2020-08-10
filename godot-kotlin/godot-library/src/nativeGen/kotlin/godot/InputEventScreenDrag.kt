@@ -119,6 +119,4 @@ open class InputEventScreenDrag internal constructor(
     val mb = getMethodBind("InputEventScreenDrag","set_speed")
     _icall_Unit_Vector2( mb, this.ptr, speed)
   }
-
-  companion object
 }

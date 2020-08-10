@@ -110,6 +110,4 @@ open class InputEventWithModifiers internal constructor(
     val mb = getMethodBind("InputEventWithModifiers","set_shift")
     _icall_Unit_Boolean( mb, this.ptr, enable)
   }
-
-  companion object
 }

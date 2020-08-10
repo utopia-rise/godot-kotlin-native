@@ -180,6 +180,4 @@ open class PathFollow2D internal constructor(
     val mb = getMethodBind("PathFollow2D","set_v_offset")
     _icall_Unit_Double( mb, this.ptr, vOffset)
   }
-
-  companion object
 }

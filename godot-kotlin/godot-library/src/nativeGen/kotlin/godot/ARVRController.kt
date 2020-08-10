@@ -111,6 +111,4 @@ open class ARVRController internal constructor(
     val mb = getMethodBind("ARVRController","set_rumble")
     _icall_Unit_Double( mb, this.ptr, rumble)
   }
-
-  companion object
 }

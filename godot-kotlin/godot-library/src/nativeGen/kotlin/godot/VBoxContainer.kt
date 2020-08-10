@@ -13,6 +13,4 @@ open class VBoxContainer internal constructor(
         }
 
   }
-
-  companion object
 }

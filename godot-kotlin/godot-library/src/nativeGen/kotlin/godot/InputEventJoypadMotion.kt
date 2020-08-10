@@ -60,6 +60,4 @@ open class InputEventJoypadMotion internal constructor(
     val mb = getMethodBind("InputEventJoypadMotion","set_axis_value")
     _icall_Unit_Double( mb, this.ptr, axisValue)
   }
-
-  companion object
 }

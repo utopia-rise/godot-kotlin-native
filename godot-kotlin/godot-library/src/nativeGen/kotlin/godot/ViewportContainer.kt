@@ -66,6 +66,4 @@ open class ViewportContainer internal constructor(
     val mb = getMethodBind("ViewportContainer","set_stretch_shrink")
     _icall_Unit_Long( mb, this.ptr, amount)
   }
-
-  companion object
 }

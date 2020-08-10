@@ -315,6 +315,4 @@ open class VehicleWheel internal constructor(
     val mb = getMethodBind("VehicleWheel","set_use_as_traction")
     _icall_Unit_Boolean( mb, this.ptr, enable)
   }
-
-  companion object
 }

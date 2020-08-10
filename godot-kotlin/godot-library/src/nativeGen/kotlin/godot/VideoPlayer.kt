@@ -259,6 +259,4 @@ open class VideoPlayer internal constructor(
     val mb = getMethodBind("VideoPlayer","stop")
     _icall_Unit( mb, this.ptr)
   }
-
-  companion object
 }

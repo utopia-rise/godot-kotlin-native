@@ -37,6 +37,4 @@ open class BoneAttachment internal constructor(
     val mb = getMethodBind("BoneAttachment","set_bone_name")
     _icall_Unit_String( mb, this.ptr, boneName)
   }
-
-  companion object
 }

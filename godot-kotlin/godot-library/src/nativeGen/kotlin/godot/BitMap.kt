@@ -83,6 +83,4 @@ open class BitMap internal constructor(
     val mb = getMethodBind("BitMap","set_bit_rect")
     _icall_Unit_Rect2_Boolean( mb, this.ptr, rect, bit)
   }
-
-  companion object
 }

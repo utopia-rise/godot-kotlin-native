@@ -13,6 +13,4 @@ open class VisualShaderNodeDeterminant internal constructor(
         }
 
   }
-
-  companion object
 }

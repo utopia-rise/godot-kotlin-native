@@ -59,6 +59,4 @@ open class AudioStreamRandomPitch internal constructor(
     val mb = getMethodBind("AudioStreamRandomPitch","set_random_pitch")
     _icall_Unit_Double( mb, this.ptr, scale)
   }
-
-  companion object
 }

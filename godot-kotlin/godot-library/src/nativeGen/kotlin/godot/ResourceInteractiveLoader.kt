@@ -36,6 +36,4 @@ open class ResourceInteractiveLoader internal constructor(
     val mb = getMethodBind("ResourceInteractiveLoader","wait")
     return GodotError.byValue( _icall_Long( mb, this.ptr).toUInt())
   }
-
-  companion object
 }

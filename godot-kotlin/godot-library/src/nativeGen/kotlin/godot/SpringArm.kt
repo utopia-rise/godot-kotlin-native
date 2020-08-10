@@ -127,6 +127,4 @@ open class SpringArm internal constructor(
     val mb = getMethodBind("SpringArm","set_shape")
     _icall_Unit_Object( mb, this.ptr, shape)
   }
-
-  companion object
 }

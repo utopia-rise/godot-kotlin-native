@@ -106,6 +106,4 @@ open class JSONParseResult internal constructor(
     val mb = getMethodBind("JSONParseResult","set_result")
     _icall_Unit_Variant( mb, this.ptr, result)
   }
-
-  companion object
 }

@@ -13,6 +13,4 @@ open class CheckBox internal constructor(
         }
 
   }
-
-  companion object
 }

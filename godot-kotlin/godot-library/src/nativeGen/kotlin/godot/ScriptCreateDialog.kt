@@ -62,6 +62,4 @@ open class ScriptCreateDialog internal constructor(
     _icall_Unit_String_String_Boolean_Boolean( mb, this.ptr, inherits, path, builtInEnabled,
         loadEnabled)
   }
-
-  companion object
 }

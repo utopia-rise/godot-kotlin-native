@@ -13,6 +13,4 @@ open class VisualShaderNodeDotProduct internal constructor(
         }
 
   }
-
-  companion object
 }

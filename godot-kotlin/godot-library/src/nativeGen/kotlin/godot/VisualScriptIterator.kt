@@ -13,6 +13,4 @@ open class VisualScriptIterator internal constructor(
         }
 
   }
-
-  companion object
 }

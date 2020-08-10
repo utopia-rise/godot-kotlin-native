@@ -125,6 +125,4 @@ open class CSGSphere internal constructor(
     val mb = getMethodBind("CSGSphere","set_smooth_faces")
     _icall_Unit_Boolean( mb, this.ptr, smoothFaces)
   }
-
-  companion object
 }

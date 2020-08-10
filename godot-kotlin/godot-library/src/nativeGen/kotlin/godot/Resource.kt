@@ -117,6 +117,4 @@ open class Resource internal constructor(
     val mb = getMethodBind("Resource","take_over_path")
     _icall_Unit_String( mb, this.ptr, path)
   }
-
-  companion object
 }

@@ -140,6 +140,4 @@ open class StaticBody internal constructor(
     val mb = getMethodBind("StaticBody","set_physics_material_override")
     _icall_Unit_Object( mb, this.ptr, physicsMaterialOverride)
   }
-
-  companion object
 }

@@ -37,6 +37,4 @@ open class PinJoint2D internal constructor(
     val mb = getMethodBind("PinJoint2D","set_softness")
     _icall_Unit_Double( mb, this.ptr, softness)
   }
-
-  companion object
 }

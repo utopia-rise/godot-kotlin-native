@@ -22,6 +22,4 @@ open class Position2D internal constructor(
 
   open fun _set_gizmo_extents(extents: Double) {
   }
-
-  companion object
 }

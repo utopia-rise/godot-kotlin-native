@@ -119,6 +119,4 @@ open class Directory internal constructor(
     val mb = getMethodBind("_Directory","rename")
     return GodotError.byValue( _icall_Long_String_String( mb, this.ptr, from, to).toUInt())
   }
-
-  companion object
 }

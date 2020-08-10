@@ -84,6 +84,4 @@ open class InputEventScreenTouch internal constructor(
     val mb = getMethodBind("InputEventScreenTouch","set_pressed")
     _icall_Unit_Boolean( mb, this.ptr, pressed)
   }
-
-  companion object
 }

@@ -43,6 +43,4 @@ open class ScrollBar internal constructor(
     val mb = getMethodBind("ScrollBar","set_custom_step")
     _icall_Unit_Double( mb, this.ptr, step)
   }
-
-  companion object
 }

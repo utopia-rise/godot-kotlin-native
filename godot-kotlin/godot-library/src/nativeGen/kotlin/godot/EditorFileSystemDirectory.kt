@@ -87,6 +87,4 @@ open class EditorFileSystemDirectory internal constructor(
     val mb = getMethodBind("EditorFileSystemDirectory","get_subdir_count")
     return _icall_Long( mb, this.ptr)
   }
-
-  companion object
 }

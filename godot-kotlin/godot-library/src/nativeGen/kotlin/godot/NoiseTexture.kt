@@ -147,6 +147,4 @@ open class NoiseTexture internal constructor(
     val mb = getMethodBind("NoiseTexture","set_width")
     _icall_Unit_Long( mb, this.ptr, width)
   }
-
-  companion object
 }

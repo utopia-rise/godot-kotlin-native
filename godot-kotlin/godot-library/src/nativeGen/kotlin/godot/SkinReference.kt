@@ -23,6 +23,4 @@ open class SkinReference internal constructor(
     val mb = getMethodBind("SkinReference","get_skin")
     return _icall_Skin( mb, this.ptr)
   }
-
-  companion object
 }

@@ -41,6 +41,4 @@ open class Crypto internal constructor(
     return _icall_X509Certificate_Object_String_String_String( mb, this.ptr, key, issuerName,
         notBefore, notAfter)
   }
-
-  companion object
 }

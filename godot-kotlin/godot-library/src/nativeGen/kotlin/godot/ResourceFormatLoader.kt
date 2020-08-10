@@ -43,6 +43,4 @@ open class ResourceFormatLoader internal constructor(
   open fun rename_dependencies(path: String, renames: String): Long {
     throw NotImplementedError("rename_dependencies is not implemented for ResourceFormatLoader")
   }
-
-  companion object
 }

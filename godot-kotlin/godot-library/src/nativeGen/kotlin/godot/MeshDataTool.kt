@@ -234,6 +234,4 @@ open class MeshDataTool internal constructor(
     val mb = getMethodBind("MeshDataTool","set_vertex_weights")
     _icall_Unit_Long_PoolRealArray( mb, this.ptr, idx, weights)
   }
-
-  companion object
 }

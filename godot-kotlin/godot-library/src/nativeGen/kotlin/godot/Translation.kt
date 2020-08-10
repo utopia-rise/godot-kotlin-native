@@ -76,6 +76,4 @@ open class Translation internal constructor(
     val mb = getMethodBind("Translation","set_locale")
     _icall_Unit_String( mb, this.ptr, locale)
   }
-
-  companion object
 }

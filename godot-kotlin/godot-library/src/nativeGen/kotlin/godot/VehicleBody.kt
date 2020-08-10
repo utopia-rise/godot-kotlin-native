@@ -77,6 +77,4 @@ open class VehicleBody internal constructor(
     val mb = getMethodBind("VehicleBody","set_steering")
     _icall_Unit_Double( mb, this.ptr, steering)
   }
-
-  companion object
 }

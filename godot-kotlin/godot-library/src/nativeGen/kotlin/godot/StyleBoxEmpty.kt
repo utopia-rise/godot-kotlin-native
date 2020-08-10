@@ -13,6 +13,4 @@ open class StyleBoxEmpty internal constructor(
         }
 
   }
-
-  companion object
 }

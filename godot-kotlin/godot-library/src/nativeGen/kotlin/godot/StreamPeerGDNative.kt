@@ -13,6 +13,4 @@ open class StreamPeerGDNative internal constructor(
         }
 
   }
-
-  companion object
 }

@@ -13,6 +13,4 @@ open class VisualScriptComposeArray internal constructor(
         }
 
   }
-
-  companion object
 }

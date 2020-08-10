@@ -175,6 +175,4 @@ open class ParallaxBackground internal constructor(
     val mb = getMethodBind("ParallaxBackground","set_scroll_offset")
     _icall_Unit_Vector2( mb, this.ptr, ofs)
   }
-
-  companion object
 }

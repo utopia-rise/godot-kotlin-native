@@ -75,6 +75,4 @@ open class ARVRAnchor internal constructor(
     val mb = getMethodBind("ARVRAnchor","set_anchor_id")
     _icall_Unit_Long( mb, this.ptr, anchorId)
   }
-
-  companion object
 }

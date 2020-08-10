@@ -28,6 +28,4 @@ open class GDScript internal constructor(
     val mb = getMethodBind("GDScript","new")
     return _icall_varargs( mb, this.ptr, __var_args)
   }
-
-  companion object
 }

@@ -38,6 +38,4 @@ open class VisualShaderNodeScalarConstant internal constructor(
     val mb = getMethodBind("VisualShaderNodeScalarConstant","set_constant")
     _icall_Unit_Double( mb, this.ptr, value)
   }
-
-  companion object
 }

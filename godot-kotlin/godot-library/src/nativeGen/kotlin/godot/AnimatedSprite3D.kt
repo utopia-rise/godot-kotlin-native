@@ -115,6 +115,4 @@ open class AnimatedSprite3D internal constructor(
     val mb = getMethodBind("AnimatedSprite3D","stop")
     _icall_Unit( mb, this.ptr)
   }
-
-  companion object
 }

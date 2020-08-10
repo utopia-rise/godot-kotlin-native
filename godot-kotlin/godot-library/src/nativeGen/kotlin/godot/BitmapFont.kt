@@ -177,6 +177,4 @@ open class BitmapFont internal constructor(
     val mb = getMethodBind("BitmapFont","set_height")
     _icall_Unit_Double( mb, this.ptr, px)
   }
-
-  companion object
 }

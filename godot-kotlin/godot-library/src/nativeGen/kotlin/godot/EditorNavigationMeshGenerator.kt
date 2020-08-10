@@ -19,6 +19,4 @@ open class EditorNavigationMeshGenerator internal constructor(
     val mb = getMethodBind("EditorNavigationMeshGenerator","clear")
     _icall_Unit_Object( mb, this.ptr, navMesh)
   }
-
-  companion object
 }

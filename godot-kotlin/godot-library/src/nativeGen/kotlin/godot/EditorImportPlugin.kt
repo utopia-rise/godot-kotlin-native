@@ -67,6 +67,4 @@ open class EditorImportPlugin internal constructor(
   ): Long {
     throw NotImplementedError("import is not implemented for EditorImportPlugin")
   }
-
-  companion object
 }

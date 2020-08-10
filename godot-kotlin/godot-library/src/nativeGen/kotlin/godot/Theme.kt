@@ -227,6 +227,4 @@ open class Theme internal constructor(
     val mb = getMethodBind("Theme","set_stylebox")
     _icall_Unit_String_String_Object( mb, this.ptr, name, type, texture)
   }
-
-  companion object
 }

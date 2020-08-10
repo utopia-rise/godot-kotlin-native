@@ -14,6 +14,4 @@ open class VisualShaderNodeVectorRefract internal constructor(
         }
 
   }
-
-  companion object
 }

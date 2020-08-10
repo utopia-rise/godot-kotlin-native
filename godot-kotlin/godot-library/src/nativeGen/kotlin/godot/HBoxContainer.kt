@@ -13,6 +13,4 @@ open class HBoxContainer internal constructor(
         }
 
   }
-
-  companion object
 }

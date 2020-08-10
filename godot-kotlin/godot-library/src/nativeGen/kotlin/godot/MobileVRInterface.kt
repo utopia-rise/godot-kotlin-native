@@ -157,6 +157,4 @@ open class MobileVRInterface internal constructor(
     val mb = getMethodBind("MobileVRInterface","set_oversample")
     _icall_Unit_Double( mb, this.ptr, oversample)
   }
-
-  companion object
 }

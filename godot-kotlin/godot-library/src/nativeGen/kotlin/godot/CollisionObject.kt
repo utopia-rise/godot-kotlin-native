@@ -168,6 +168,4 @@ open class CollisionObject internal constructor(
     val mb = getMethodBind("CollisionObject","shape_owner_set_transform")
     _icall_Unit_Long_Transform( mb, this.ptr, ownerId, transform)
   }
-
-  companion object
 }

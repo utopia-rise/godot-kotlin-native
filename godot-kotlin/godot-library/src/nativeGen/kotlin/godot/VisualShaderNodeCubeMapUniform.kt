@@ -14,6 +14,4 @@ open class VisualShaderNodeCubeMapUniform internal constructor(
         }
 
   }
-
-  companion object
 }

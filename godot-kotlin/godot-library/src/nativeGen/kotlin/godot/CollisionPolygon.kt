@@ -88,6 +88,4 @@ open class CollisionPolygon internal constructor(
     val mb = getMethodBind("CollisionPolygon","set_polygon")
     _icall_Unit_PoolVector2Array( mb, this.ptr, polygon)
   }
-
-  companion object
 }

@@ -107,6 +107,4 @@ open class CubeMesh internal constructor(
     val mb = getMethodBind("CubeMesh","set_subdivide_width")
     _icall_Unit_Long( mb, this.ptr, subdivide)
   }
-
-  companion object
 }

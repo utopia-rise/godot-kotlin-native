@@ -13,6 +13,4 @@ open class ARVRCamera internal constructor(
         }
 
   }
-
-  companion object
 }

@@ -77,6 +77,4 @@ open class AudioEffectStereoEnhance internal constructor(
     val mb = getMethodBind("AudioEffectStereoEnhance","set_time_pullout")
     _icall_Unit_Double( mb, this.ptr, amount)
   }
-
-  companion object
 }

@@ -38,6 +38,4 @@ open class VisualShaderNodeBooleanConstant internal constructor(
     val mb = getMethodBind("VisualShaderNodeBooleanConstant","set_constant")
     _icall_Unit_Boolean( mb, this.ptr, value)
   }
-
-  companion object
 }

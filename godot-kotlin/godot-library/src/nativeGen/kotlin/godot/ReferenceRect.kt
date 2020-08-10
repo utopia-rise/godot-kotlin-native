@@ -67,6 +67,4 @@ open class ReferenceRect internal constructor(
     val mb = getMethodBind("ReferenceRect","set_editor_only")
     _icall_Unit_Boolean( mb, this.ptr, enabled)
   }
-
-  companion object
 }

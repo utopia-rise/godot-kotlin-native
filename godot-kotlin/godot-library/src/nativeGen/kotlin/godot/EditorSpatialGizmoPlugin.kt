@@ -113,6 +113,4 @@ open class EditorSpatialGizmoPlugin internal constructor(
     point: Vector2
   ) {
   }
-
-  companion object
 }

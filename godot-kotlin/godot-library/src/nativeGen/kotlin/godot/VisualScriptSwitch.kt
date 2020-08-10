@@ -13,6 +13,4 @@ open class VisualScriptSwitch internal constructor(
         }
 
   }
-
-  companion object
 }

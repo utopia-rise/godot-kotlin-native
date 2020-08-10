@@ -105,6 +105,4 @@ open class CollisionShape2D internal constructor(
     val mb = getMethodBind("CollisionShape2D","set_shape")
     _icall_Unit_Object( mb, this.ptr, shape)
   }
-
-  companion object
 }

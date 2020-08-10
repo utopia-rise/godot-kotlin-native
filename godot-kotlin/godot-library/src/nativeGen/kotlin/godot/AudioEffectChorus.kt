@@ -382,6 +382,4 @@ open class AudioEffectChorus internal constructor(
     val mb = getMethodBind("AudioEffectChorus","set_wet")
     _icall_Unit_Double( mb, this.ptr, amount)
   }
-
-  companion object
 }

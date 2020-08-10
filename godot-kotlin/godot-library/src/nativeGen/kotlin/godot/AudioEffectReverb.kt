@@ -177,6 +177,4 @@ open class AudioEffectReverb internal constructor(
     val mb = getMethodBind("AudioEffectReverb","set_wet")
     _icall_Unit_Double( mb, this.ptr, amount)
   }
-
-  companion object
 }

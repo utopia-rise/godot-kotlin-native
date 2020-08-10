@@ -66,6 +66,4 @@ open class WebRTCMultiplayer internal constructor(
     val mb = getMethodBind("WebRTCMultiplayer","remove_peer")
     _icall_Unit_Long( mb, this.ptr, peerId)
   }
-
-  companion object
 }

@@ -44,6 +44,4 @@ open class InputEventPanGesture internal constructor(
     val mb = getMethodBind("InputEventPanGesture","set_delta")
     _icall_Unit_Vector2( mb, this.ptr, delta)
   }
-
-  companion object
 }

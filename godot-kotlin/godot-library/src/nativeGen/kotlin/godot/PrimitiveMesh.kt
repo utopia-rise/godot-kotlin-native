@@ -92,6 +92,4 @@ open class PrimitiveMesh internal constructor(
     val mb = getMethodBind("PrimitiveMesh","set_material")
     _icall_Unit_Object( mb, this.ptr, material)
   }
-
-  companion object
 }

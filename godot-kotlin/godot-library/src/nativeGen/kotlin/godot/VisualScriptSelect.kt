@@ -39,6 +39,4 @@ open class VisualScriptSelect internal constructor(
     val mb = getMethodBind("VisualScriptSelect","set_typed")
     _icall_Unit_Long( mb, this.ptr, type)
   }
-
-  companion object
 }

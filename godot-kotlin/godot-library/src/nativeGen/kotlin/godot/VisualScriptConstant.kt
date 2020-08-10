@@ -61,6 +61,4 @@ open class VisualScriptConstant internal constructor(
     val mb = getMethodBind("VisualScriptConstant","set_constant_value")
     _icall_Unit_Variant( mb, this.ptr, value)
   }
-
-  companion object
 }

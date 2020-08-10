@@ -72,6 +72,4 @@ open class WindowDialog internal constructor(
     val mb = getMethodBind("WindowDialog","set_title")
     _icall_Unit_String( mb, this.ptr, title)
   }
-
-  companion object
 }

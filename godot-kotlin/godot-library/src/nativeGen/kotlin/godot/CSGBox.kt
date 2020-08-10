@@ -99,6 +99,4 @@ open class CSGBox internal constructor(
     val mb = getMethodBind("CSGBox","set_width")
     _icall_Unit_Double( mb, this.ptr, width)
   }
-
-  companion object
 }

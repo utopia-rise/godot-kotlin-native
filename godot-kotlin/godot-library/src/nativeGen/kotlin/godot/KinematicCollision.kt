@@ -142,6 +142,4 @@ open class KinematicCollision internal constructor(
     val mb = getMethodBind("KinematicCollision","get_travel")
     return _icall_Vector3( mb, this.ptr)
   }
-
-  companion object
 }

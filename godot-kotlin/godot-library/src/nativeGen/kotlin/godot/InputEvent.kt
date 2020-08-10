@@ -97,6 +97,4 @@ open class InputEvent internal constructor(
     val mb = getMethodBind("InputEvent","xformed_by")
     return _icall_InputEvent_Transform2D_Vector2( mb, this.ptr, xform, localOfs)
   }
-
-  companion object
 }

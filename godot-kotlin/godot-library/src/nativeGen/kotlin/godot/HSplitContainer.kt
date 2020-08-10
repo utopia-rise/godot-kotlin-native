@@ -13,6 +13,4 @@ open class HSplitContainer internal constructor(
         }
 
   }
-
-  companion object
 }

@@ -13,6 +13,4 @@ open class AudioStreamMicrophone internal constructor(
         }
 
   }
-
-  companion object
 }

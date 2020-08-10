@@ -13,6 +13,4 @@ open class VSlider internal constructor(
         }
 
   }
-
-  companion object
 }

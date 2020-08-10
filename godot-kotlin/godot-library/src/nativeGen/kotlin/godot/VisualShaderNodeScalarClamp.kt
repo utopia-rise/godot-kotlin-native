@@ -13,6 +13,4 @@ open class VisualShaderNodeScalarClamp internal constructor(
         }
 
   }
-
-  companion object
 }

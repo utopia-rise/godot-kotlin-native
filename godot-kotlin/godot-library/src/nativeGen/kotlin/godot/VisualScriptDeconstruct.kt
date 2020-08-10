@@ -48,6 +48,4 @@ open class VisualScriptDeconstruct internal constructor(
     val mb = getMethodBind("VisualScriptDeconstruct","set_deconstruct_type")
     _icall_Unit_Long( mb, this.ptr, type)
   }
-
-  companion object
 }

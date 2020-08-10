@@ -27,6 +27,4 @@ open class CryptoKey internal constructor(
     val mb = getMethodBind("CryptoKey","save")
     return GodotError.byValue( _icall_Long_String( mb, this.ptr, path).toUInt())
   }
-
-  companion object
 }

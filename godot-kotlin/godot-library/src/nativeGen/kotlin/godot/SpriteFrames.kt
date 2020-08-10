@@ -136,6 +136,4 @@ open class SpriteFrames internal constructor(
     val mb = getMethodBind("SpriteFrames","set_frame")
     _icall_Unit_String_Long_Object( mb, this.ptr, anim, idx, txt)
   }
-
-  companion object
 }

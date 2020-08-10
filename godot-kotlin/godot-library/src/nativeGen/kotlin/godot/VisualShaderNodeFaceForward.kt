@@ -13,6 +13,4 @@ open class VisualShaderNodeFaceForward internal constructor(
         }
 
   }
-
-  companion object
 }

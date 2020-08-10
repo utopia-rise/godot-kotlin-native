@@ -30,6 +30,4 @@ open class VisualShaderNodeUniform internal constructor(
     val mb = getMethodBind("VisualShaderNodeUniform","set_uniform_name")
     _icall_Unit_String( mb, this.ptr, name)
   }
-
-  companion object
 }

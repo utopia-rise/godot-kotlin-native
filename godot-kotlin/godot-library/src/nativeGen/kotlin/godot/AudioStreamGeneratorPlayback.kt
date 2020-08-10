@@ -46,6 +46,4 @@ open class AudioStreamGeneratorPlayback internal constructor(
     val mb = getMethodBind("AudioStreamGeneratorPlayback","push_frame")
     return _icall_Boolean_Vector2( mb, this.ptr, frame)
   }
-
-  companion object
 }

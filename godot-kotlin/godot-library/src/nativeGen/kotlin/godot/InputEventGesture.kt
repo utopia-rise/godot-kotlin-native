@@ -37,6 +37,4 @@ open class InputEventGesture internal constructor(
     val mb = getMethodBind("InputEventGesture","set_position")
     _icall_Unit_Vector2( mb, this.ptr, position)
   }
-
-  companion object
 }

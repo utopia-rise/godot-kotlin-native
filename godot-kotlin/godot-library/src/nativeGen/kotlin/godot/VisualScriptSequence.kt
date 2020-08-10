@@ -37,6 +37,4 @@ open class VisualScriptSequence internal constructor(
     val mb = getMethodBind("VisualScriptSequence","set_steps")
     _icall_Unit_Long( mb, this.ptr, steps)
   }
-
-  companion object
 }

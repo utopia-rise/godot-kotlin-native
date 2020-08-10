@@ -13,6 +13,4 @@ open class VisualScriptSceneTree internal constructor(
         }
 
   }
-
-  companion object
 }

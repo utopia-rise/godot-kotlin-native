@@ -27,6 +27,4 @@ open class ButtonGroup internal constructor(
     val mb = getMethodBind("ButtonGroup","get_pressed_button")
     return _icall_BaseButton( mb, this.ptr)
   }
-
-  companion object
 }

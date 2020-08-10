@@ -83,6 +83,4 @@ open class AudioStreamOGGVorbis internal constructor(
     val mb = getMethodBind("AudioStreamOGGVorbis","set_loop_offset")
     _icall_Unit_Double( mb, this.ptr, seconds)
   }
-
-  companion object
 }

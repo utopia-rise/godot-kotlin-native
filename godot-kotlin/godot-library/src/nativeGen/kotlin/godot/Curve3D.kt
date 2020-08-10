@@ -209,6 +209,4 @@ open class Curve3D internal constructor(
     val mb = getMethodBind("Curve3D","tessellate")
     return _icall_PoolVector3Array_Long_Double( mb, this.ptr, maxStages, toleranceDegrees)
   }
-
-  companion object
 }

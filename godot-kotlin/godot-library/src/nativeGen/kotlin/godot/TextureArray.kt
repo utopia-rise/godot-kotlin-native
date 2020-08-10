@@ -13,6 +13,4 @@ open class TextureArray internal constructor(
         }
 
   }
-
-  companion object
 }

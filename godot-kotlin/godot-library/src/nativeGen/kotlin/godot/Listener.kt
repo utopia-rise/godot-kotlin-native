@@ -39,6 +39,4 @@ open class Listener internal constructor(
     val mb = getMethodBind("Listener","make_current")
     _icall_Unit( mb, this.ptr)
   }
-
-  companion object
 }

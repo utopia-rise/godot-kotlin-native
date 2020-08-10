@@ -327,6 +327,4 @@ open class Sprite internal constructor(
     val mb = getMethodBind("Sprite","set_vframes")
     _icall_Unit_Long( mb, this.ptr, vframes)
   }
-
-  companion object
 }

@@ -96,6 +96,4 @@ open class Joint2D internal constructor(
     val mb = getMethodBind("Joint2D","set_node_b")
     _icall_Unit_NodePath( mb, this.ptr, node)
   }
-
-  companion object
 }

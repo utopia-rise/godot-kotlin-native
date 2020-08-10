@@ -37,6 +37,4 @@ open class YSort internal constructor(
     val mb = getMethodBind("YSort","set_sort_enabled")
     _icall_Unit_Boolean( mb, this.ptr, enabled)
   }
-
-  companion object
 }

@@ -79,6 +79,4 @@ open class PacketPeerStream internal constructor(
     val mb = getMethodBind("PacketPeerStream","set_stream_peer")
     _icall_Unit_Object( mb, this.ptr, peer)
   }
-
-  companion object
 }

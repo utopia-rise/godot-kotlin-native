@@ -240,6 +240,4 @@ open class ColorPicker internal constructor(
     val mb = getMethodBind("ColorPicker","set_raw_mode")
     _icall_Unit_Boolean( mb, this.ptr, mode)
   }
-
-  companion object
 }

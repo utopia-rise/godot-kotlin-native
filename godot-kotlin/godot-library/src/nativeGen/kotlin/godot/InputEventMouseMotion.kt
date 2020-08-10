@@ -119,6 +119,4 @@ open class InputEventMouseMotion internal constructor(
     val mb = getMethodBind("InputEventMouseMotion","set_tilt")
     _icall_Unit_Vector2( mb, this.ptr, tilt)
   }
-
-  companion object
 }

@@ -13,6 +13,4 @@ open class AudioEffectNotchFilter internal constructor(
         }
 
   }
-
-  companion object
 }

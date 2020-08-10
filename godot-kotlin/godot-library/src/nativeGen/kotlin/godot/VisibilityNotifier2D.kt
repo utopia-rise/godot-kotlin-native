@@ -62,6 +62,4 @@ open class VisibilityNotifier2D internal constructor(
     val mb = getMethodBind("VisibilityNotifier2D","set_rect")
     _icall_Unit_Rect2( mb, this.ptr, rect)
   }
-
-  companion object
 }

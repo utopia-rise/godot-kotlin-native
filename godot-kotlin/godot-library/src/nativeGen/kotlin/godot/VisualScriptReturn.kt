@@ -62,6 +62,4 @@ open class VisualScriptReturn internal constructor(
     val mb = getMethodBind("VisualScriptReturn","set_return_type")
     _icall_Unit_Long( mb, this.ptr, type)
   }
-
-  companion object
 }

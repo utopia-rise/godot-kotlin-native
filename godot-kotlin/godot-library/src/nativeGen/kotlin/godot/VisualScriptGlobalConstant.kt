@@ -37,6 +37,4 @@ open class VisualScriptGlobalConstant internal constructor(
     val mb = getMethodBind("VisualScriptGlobalConstant","set_global_constant")
     _icall_Unit_Long( mb, this.ptr, index)
   }
-
-  companion object
 }

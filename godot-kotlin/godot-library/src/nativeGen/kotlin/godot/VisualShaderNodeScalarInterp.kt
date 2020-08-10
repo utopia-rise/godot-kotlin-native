@@ -14,6 +14,4 @@ open class VisualShaderNodeScalarInterp internal constructor(
         }
 
   }
-
-  companion object
 }

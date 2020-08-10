@@ -64,6 +64,4 @@ open class EditorResourcePreview internal constructor(
     val mb = getMethodBind("EditorResourcePreview","remove_preview_generator")
     _icall_Unit_Object( mb, this.ptr, generator)
   }
-
-  companion object
 }

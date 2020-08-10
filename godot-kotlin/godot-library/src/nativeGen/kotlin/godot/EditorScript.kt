@@ -28,6 +28,4 @@ open class EditorScript internal constructor(
     val mb = getMethodBind("EditorScript","get_scene")
     return _icall_Node( mb, this.ptr)
   }
-
-  companion object
 }

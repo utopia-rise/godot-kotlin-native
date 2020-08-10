@@ -55,6 +55,4 @@ open class SpatialVelocityTracker internal constructor(
     val mb = getMethodBind("SpatialVelocityTracker","update_position")
     _icall_Unit_Vector3( mb, this.ptr, position)
   }
-
-  companion object
 }

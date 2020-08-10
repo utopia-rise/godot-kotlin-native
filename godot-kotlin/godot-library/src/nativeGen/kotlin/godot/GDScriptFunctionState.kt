@@ -30,6 +30,4 @@ open class GDScriptFunctionState internal constructor(
     val mb = getMethodBind("GDScriptFunctionState","resume")
     return _icall_Variant_nVariant( mb, this.ptr, arg)
   }
-
-  companion object
 }

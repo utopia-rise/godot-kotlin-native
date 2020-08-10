@@ -37,6 +37,4 @@ open class EncodedObjectAsID internal constructor(
     val mb = getMethodBind("EncodedObjectAsID","set_object_id")
     _icall_Unit_Long( mb, this.ptr, id)
   }
-
-  companion object
 }

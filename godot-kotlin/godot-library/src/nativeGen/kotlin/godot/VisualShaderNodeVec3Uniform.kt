@@ -13,6 +13,4 @@ open class VisualShaderNodeVec3Uniform internal constructor(
         }
 
   }
-
-  companion object
 }

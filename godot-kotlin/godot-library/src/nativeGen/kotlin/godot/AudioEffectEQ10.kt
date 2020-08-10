@@ -13,6 +13,4 @@ open class AudioEffectEQ10 internal constructor(
         }
 
   }
-
-  companion object
 }

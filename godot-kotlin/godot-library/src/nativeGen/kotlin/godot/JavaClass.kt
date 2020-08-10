@@ -13,6 +13,4 @@ open class JavaClass internal constructor(
         }
 
   }
-
-  companion object
 }

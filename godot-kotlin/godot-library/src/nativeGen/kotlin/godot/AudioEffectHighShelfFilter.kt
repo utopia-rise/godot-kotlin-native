@@ -13,6 +13,4 @@ open class AudioEffectHighShelfFilter internal constructor(
         }
 
   }
-
-  companion object
 }

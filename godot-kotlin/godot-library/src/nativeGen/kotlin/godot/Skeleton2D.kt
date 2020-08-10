@@ -44,6 +44,4 @@ open class Skeleton2D internal constructor(
     val mb = getMethodBind("Skeleton2D","get_skeleton")
     return _icall_RID( mb, this.ptr)
   }
-
-  companion object
 }

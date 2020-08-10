@@ -96,6 +96,4 @@ open class ParallaxLayer internal constructor(
     val mb = getMethodBind("ParallaxLayer","set_motion_scale")
     _icall_Unit_Vector2( mb, this.ptr, scale)
   }
-
-  companion object
 }

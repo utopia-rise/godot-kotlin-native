@@ -13,6 +13,4 @@ open class VScrollBar internal constructor(
         }
 
   }
-
-  companion object
 }

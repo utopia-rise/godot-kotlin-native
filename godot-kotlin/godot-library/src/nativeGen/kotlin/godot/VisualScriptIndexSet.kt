@@ -13,6 +13,4 @@ open class VisualScriptIndexSet internal constructor(
         }
 
   }
-
-  companion object
 }

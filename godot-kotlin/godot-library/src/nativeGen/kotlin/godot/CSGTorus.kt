@@ -145,6 +145,4 @@ open class CSGTorus internal constructor(
     val mb = getMethodBind("CSGTorus","set_smooth_faces")
     _icall_Unit_Boolean( mb, this.ptr, smoothFaces)
   }
-
-  companion object
 }

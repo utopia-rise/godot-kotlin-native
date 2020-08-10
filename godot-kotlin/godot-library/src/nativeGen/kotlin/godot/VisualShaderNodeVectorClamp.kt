@@ -13,6 +13,4 @@ open class VisualShaderNodeVectorClamp internal constructor(
         }
 
   }
-
-  companion object
 }

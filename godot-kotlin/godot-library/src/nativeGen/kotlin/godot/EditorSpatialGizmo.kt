@@ -131,6 +131,4 @@ open class EditorSpatialGizmo internal constructor(
     val mb = getMethodBind("EditorSpatialGizmo","set_spatial_node")
     _icall_Unit_Object( mb, this.ptr, node)
   }
-
-  companion object
 }

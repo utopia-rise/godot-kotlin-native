@@ -14,6 +14,4 @@ open class VisualShaderNodeColorUniform internal constructor(
         }
 
   }
-
-  companion object
 }

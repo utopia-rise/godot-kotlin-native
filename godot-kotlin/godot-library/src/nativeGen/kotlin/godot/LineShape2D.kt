@@ -67,6 +67,4 @@ open class LineShape2D internal constructor(
     val mb = getMethodBind("LineShape2D","set_normal")
     _icall_Unit_Vector2( mb, this.ptr, normal)
   }
-
-  companion object
 }

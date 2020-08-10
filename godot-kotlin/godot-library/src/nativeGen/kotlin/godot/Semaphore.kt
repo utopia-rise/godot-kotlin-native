@@ -26,6 +26,4 @@ open class Semaphore internal constructor(
     val mb = getMethodBind("_Semaphore","wait")
     return GodotError.byValue( _icall_Long( mb, this.ptr).toUInt())
   }
-
-  companion object
 }

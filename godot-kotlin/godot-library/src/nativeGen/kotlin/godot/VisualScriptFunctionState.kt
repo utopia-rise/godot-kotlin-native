@@ -45,6 +45,4 @@ open class VisualScriptFunctionState internal constructor(
     val mb = getMethodBind("VisualScriptFunctionState","resume")
     return _icall_Variant_nVariantArray( mb, this.ptr, args)
   }
-
-  companion object
 }

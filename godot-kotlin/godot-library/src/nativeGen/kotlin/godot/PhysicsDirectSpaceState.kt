@@ -49,6 +49,4 @@ open class PhysicsDirectSpaceState internal constructor(
     val mb = getMethodBind("PhysicsDirectSpaceState","intersect_shape")
     return _icall_VariantArray_Object_Long( mb, this.ptr, shape, maxResults)
   }
-
-  companion object
 }

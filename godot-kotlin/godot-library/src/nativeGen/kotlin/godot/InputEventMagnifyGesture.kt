@@ -37,6 +37,4 @@ open class InputEventMagnifyGesture internal constructor(
     val mb = getMethodBind("InputEventMagnifyGesture","set_factor")
     _icall_Unit_Double( mb, this.ptr, factor)
   }
-
-  companion object
 }

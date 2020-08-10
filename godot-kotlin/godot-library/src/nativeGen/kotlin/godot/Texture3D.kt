@@ -13,6 +13,4 @@ open class Texture3D internal constructor(
         }
 
   }
-
-  companion object
 }

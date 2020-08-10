@@ -96,6 +96,4 @@ open class Slider internal constructor(
     val mb = getMethodBind("Slider","set_ticks_on_borders")
     _icall_Unit_Boolean( mb, this.ptr, ticksOnBorder)
   }
-
-  companion object
 }

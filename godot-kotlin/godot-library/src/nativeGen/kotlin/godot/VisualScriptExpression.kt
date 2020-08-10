@@ -13,6 +13,4 @@ open class VisualScriptExpression internal constructor(
         }
 
   }
-
-  companion object
 }

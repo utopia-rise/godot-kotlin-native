@@ -72,6 +72,4 @@ open class RandomNumberGenerator internal constructor(
     val mb = getMethodBind("RandomNumberGenerator","set_seed")
     _icall_Unit_Long( mb, this.ptr, seed)
   }
-
-  companion object
 }

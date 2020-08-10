@@ -59,6 +59,4 @@ open class NavigationMeshInstance internal constructor(
     val mb = getMethodBind("NavigationMeshInstance","set_navigation_mesh")
     _icall_Unit_Object( mb, this.ptr, navmesh)
   }
-
-  companion object
 }

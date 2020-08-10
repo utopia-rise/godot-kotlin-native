@@ -237,6 +237,4 @@ open class CanvasLayer internal constructor(
     val mb = getMethodBind("CanvasLayer","set_transform")
     _icall_Unit_Transform2D( mb, this.ptr, transform)
   }
-
-  companion object
 }

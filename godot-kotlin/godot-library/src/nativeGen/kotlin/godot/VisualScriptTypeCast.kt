@@ -57,6 +57,4 @@ open class VisualScriptTypeCast internal constructor(
     val mb = getMethodBind("VisualScriptTypeCast","set_base_type")
     _icall_Unit_String( mb, this.ptr, type)
   }
-
-  companion object
 }

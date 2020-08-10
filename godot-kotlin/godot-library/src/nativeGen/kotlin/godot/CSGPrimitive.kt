@@ -30,6 +30,4 @@ open class CSGPrimitive internal constructor(
     val mb = getMethodBind("CSGPrimitive","set_invert_faces")
     _icall_Unit_Boolean( mb, this.ptr, invertFaces)
   }
-
-  companion object
 }

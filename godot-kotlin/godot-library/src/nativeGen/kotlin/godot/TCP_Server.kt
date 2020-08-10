@@ -47,6 +47,4 @@ open class TCP_Server internal constructor(
     val mb = getMethodBind("TCP_Server","take_connection")
     return _icall_StreamPeerTCP( mb, this.ptr)
   }
-
-  companion object
 }

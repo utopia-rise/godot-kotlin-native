@@ -14,6 +14,4 @@ open class VisualShaderNodeTextureUniformTriplanar internal constructor(
         }
 
   }
-
-  companion object
 }

@@ -37,6 +37,4 @@ open class AudioEffectPanner internal constructor(
     val mb = getMethodBind("AudioEffectPanner","set_pan")
     _icall_Unit_Double( mb, this.ptr, cpanume)
   }
-
-  companion object
 }

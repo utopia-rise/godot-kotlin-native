@@ -37,6 +37,4 @@ open class AnimationNodeAnimation internal constructor(
     val mb = getMethodBind("AnimationNodeAnimation","set_animation")
     _icall_Unit_String( mb, this.ptr, name)
   }
-
-  companion object
 }

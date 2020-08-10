@@ -44,6 +44,4 @@ open class PlaneShape internal constructor(
     val mb = getMethodBind("PlaneShape","set_plane")
     _icall_Unit_Plane( mb, this.ptr, plane)
   }
-
-  companion object
 }

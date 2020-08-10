@@ -37,6 +37,4 @@ open class ViewportTexture internal constructor(
     val mb = getMethodBind("ViewportTexture","set_viewport_path_in_scene")
     _icall_Unit_NodePath( mb, this.ptr, path)
   }
-
-  companion object
 }

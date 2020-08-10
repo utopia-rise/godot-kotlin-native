@@ -35,6 +35,4 @@ open class ResourceFormatSaver internal constructor(
   ): Long {
     throw NotImplementedError("save is not implemented for ResourceFormatSaver")
   }
-
-  companion object
 }

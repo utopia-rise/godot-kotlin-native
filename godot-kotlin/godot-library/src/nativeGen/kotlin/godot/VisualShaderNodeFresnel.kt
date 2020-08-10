@@ -13,6 +13,4 @@ open class VisualShaderNodeFresnel internal constructor(
         }
 
   }
-
-  companion object
 }

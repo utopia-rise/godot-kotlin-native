@@ -37,6 +37,4 @@ open class AnimationNodeBlend2 internal constructor(
     val mb = getMethodBind("AnimationNodeBlend2","set_use_sync")
     _icall_Unit_Boolean( mb, this.ptr, enable)
   }
-
-  companion object
 }

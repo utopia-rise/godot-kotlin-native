@@ -50,6 +50,4 @@ open class World2D internal constructor(
     val mb = getMethodBind("World2D","get_space")
     return _icall_RID( mb, this.ptr)
   }
-
-  companion object
 }

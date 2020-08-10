@@ -50,6 +50,4 @@ open class Expression internal constructor(
     return GodotError.byValue( _icall_Long_String_PoolStringArray( mb, this.ptr, expression,
         inputNames).toUInt())
   }
-
-  companion object
 }

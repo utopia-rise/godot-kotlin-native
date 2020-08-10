@@ -130,6 +130,4 @@ open class PrismMesh internal constructor(
     val mb = getMethodBind("PrismMesh","set_subdivide_width")
     _icall_Unit_Long( mb, this.ptr, segments)
   }
-
-  companion object
 }

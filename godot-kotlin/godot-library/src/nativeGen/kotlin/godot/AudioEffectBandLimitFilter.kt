@@ -13,6 +13,4 @@ open class AudioEffectBandLimitFilter internal constructor(
         }
 
   }
-
-  companion object
 }

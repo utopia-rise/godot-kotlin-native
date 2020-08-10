@@ -37,6 +37,4 @@ open class ConcavePolygonShape2D internal constructor(
     val mb = getMethodBind("ConcavePolygonShape2D","set_segments")
     _icall_Unit_PoolVector2Array( mb, this.ptr, segments)
   }
-
-  companion object
 }

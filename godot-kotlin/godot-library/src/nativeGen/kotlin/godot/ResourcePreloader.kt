@@ -62,6 +62,4 @@ open class ResourcePreloader internal constructor(
     val mb = getMethodBind("ResourcePreloader","rename_resource")
     _icall_Unit_String_String( mb, this.ptr, name, newname)
   }
-
-  companion object
 }

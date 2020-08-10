@@ -32,6 +32,4 @@ open class Mutex internal constructor(
     val mb = getMethodBind("_Mutex","unlock")
     _icall_Unit( mb, this.ptr)
   }
-
-  companion object
 }

@@ -93,6 +93,4 @@ open class InputEventKey internal constructor(
     val mb = getMethodBind("InputEventKey","set_unicode")
     _icall_Unit_Long( mb, this.ptr, unicode)
   }
-
-  companion object
 }

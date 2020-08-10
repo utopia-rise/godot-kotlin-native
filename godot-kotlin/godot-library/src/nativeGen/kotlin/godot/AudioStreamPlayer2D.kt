@@ -261,6 +261,4 @@ open class AudioStreamPlayer2D internal constructor(
     val mb = getMethodBind("AudioStreamPlayer2D","stop")
     _icall_Unit( mb, this.ptr)
   }
-
-  companion object
 }

@@ -38,6 +38,4 @@ open class PhysicsShapeQueryResult internal constructor(
     val mb = getMethodBind("PhysicsShapeQueryResult","get_result_rid")
     return _icall_RID_Long( mb, this.ptr, idx)
   }
-
-  companion object
 }

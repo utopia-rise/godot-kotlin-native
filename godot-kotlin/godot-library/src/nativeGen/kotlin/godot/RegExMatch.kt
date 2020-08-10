@@ -78,6 +78,4 @@ open class RegExMatch internal constructor(
     val mb = getMethodBind("RegExMatch","get_subject")
     return _icall_String( mb, this.ptr)
   }
-
-  companion object
 }

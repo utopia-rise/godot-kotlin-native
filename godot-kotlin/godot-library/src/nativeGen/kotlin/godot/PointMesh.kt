@@ -13,6 +13,4 @@ open class PointMesh internal constructor(
         }
 
   }
-
-  companion object
 }

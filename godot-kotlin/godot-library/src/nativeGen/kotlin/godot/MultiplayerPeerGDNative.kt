@@ -13,6 +13,4 @@ open class MultiplayerPeerGDNative internal constructor(
         }
 
   }
-
-  companion object
 }

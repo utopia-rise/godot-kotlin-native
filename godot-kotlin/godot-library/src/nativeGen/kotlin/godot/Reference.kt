@@ -31,6 +31,4 @@ open class Reference internal constructor(
     val mb = getMethodBind("Reference","unreference")
     return _icall_Boolean( mb, this.ptr)
   }
-
-  companion object
 }

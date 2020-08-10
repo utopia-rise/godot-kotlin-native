@@ -93,6 +93,4 @@ open class PacketPeerUDP internal constructor(
     val mb = getMethodBind("PacketPeerUDP","wait")
     return GodotError.byValue( _icall_Long( mb, this.ptr).toUInt())
   }
-
-  companion object
 }

@@ -160,6 +160,4 @@ open class AudioEffectCompressor internal constructor(
     val mb = getMethodBind("AudioEffectCompressor","set_threshold")
     _icall_Unit_Double( mb, this.ptr, threshold)
   }
-
-  companion object
 }

@@ -13,6 +13,4 @@ open class VisualShaderNodeIf internal constructor(
         }
 
   }
-
-  companion object
 }

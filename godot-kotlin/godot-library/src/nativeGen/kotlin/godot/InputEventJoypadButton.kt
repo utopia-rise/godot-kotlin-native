@@ -77,6 +77,4 @@ open class InputEventJoypadButton internal constructor(
     val mb = getMethodBind("InputEventJoypadButton","set_pressure")
     _icall_Unit_Double( mb, this.ptr, pressure)
   }
-
-  companion object
 }

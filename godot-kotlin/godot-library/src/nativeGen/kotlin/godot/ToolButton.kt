@@ -13,6 +13,4 @@ open class ToolButton internal constructor(
         }
 
   }
-
-  companion object
 }

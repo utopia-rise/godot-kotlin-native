@@ -74,6 +74,4 @@ open class EditorFileSystem internal constructor(
     val mb = getMethodBind("EditorFileSystem","update_script_classes")
     _icall_Unit( mb, this.ptr)
   }
-
-  companion object
 }

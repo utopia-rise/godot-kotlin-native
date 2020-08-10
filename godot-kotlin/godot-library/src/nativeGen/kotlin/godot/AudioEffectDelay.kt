@@ -280,6 +280,4 @@ open class AudioEffectDelay internal constructor(
     val mb = getMethodBind("AudioEffectDelay","set_tap2_pan")
     _icall_Unit_Double( mb, this.ptr, amount)
   }
-
-  companion object
 }

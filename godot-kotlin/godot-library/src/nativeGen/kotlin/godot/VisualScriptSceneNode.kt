@@ -37,6 +37,4 @@ open class VisualScriptSceneNode internal constructor(
     val mb = getMethodBind("VisualScriptSceneNode","set_node_path")
     _icall_Unit_NodePath( mb, this.ptr, path)
   }
-
-  companion object
 }

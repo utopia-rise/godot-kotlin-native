@@ -21,6 +21,4 @@ open class WeakRef internal constructor(
     val mb = getMethodBind("WeakRef","get_ref")
     return _icall_Variant( mb, this.ptr)
   }
-
-  companion object
 }

@@ -13,6 +13,4 @@ open class AnimationNodeOutput internal constructor(
         }
 
   }
-
-  companion object
 }

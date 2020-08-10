@@ -44,6 +44,4 @@ open class BoxShape internal constructor(
     val mb = getMethodBind("BoxShape","set_extents")
     _icall_Unit_Vector3( mb, this.ptr, extents)
   }
-
-  companion object
 }

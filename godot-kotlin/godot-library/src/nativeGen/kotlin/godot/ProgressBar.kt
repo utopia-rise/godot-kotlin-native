@@ -37,6 +37,4 @@ open class ProgressBar internal constructor(
     val mb = getMethodBind("ProgressBar","set_percent_visible")
     _icall_Unit_Boolean( mb, this.ptr, visible)
   }
-
-  companion object
 }

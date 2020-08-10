@@ -94,6 +94,4 @@ open class ColorPickerButton internal constructor(
     val mb = getMethodBind("ColorPickerButton","set_pick_color")
     _icall_Unit_Color( mb, this.ptr, color)
   }
-
-  companion object
 }

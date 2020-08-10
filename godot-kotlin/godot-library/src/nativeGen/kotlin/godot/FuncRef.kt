@@ -48,6 +48,4 @@ open class FuncRef internal constructor(
     val mb = getMethodBind("FuncRef","set_instance")
     _icall_Unit_Object( mb, this.ptr, instance)
   }
-
-  companion object
 }

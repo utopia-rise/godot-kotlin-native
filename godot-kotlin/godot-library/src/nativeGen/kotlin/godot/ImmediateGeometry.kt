@@ -83,6 +83,4 @@ open class ImmediateGeometry internal constructor(
     val mb = getMethodBind("ImmediateGeometry","set_uv2")
     _icall_Unit_Vector2( mb, this.ptr, uv)
   }
-
-  companion object
 }

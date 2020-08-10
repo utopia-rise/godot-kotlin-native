@@ -13,6 +13,4 @@ open class MarginContainer internal constructor(
         }
 
   }
-
-  companion object
 }

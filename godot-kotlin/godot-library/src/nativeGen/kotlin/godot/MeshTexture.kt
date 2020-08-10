@@ -87,6 +87,4 @@ open class MeshTexture internal constructor(
     val mb = getMethodBind("MeshTexture","set_mesh")
     _icall_Unit_Object( mb, this.ptr, mesh)
   }
-
-  companion object
 }

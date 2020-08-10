@@ -57,6 +57,4 @@ open class AudioEffectRecord internal constructor(
     val mb = getMethodBind("AudioEffectRecord","set_recording_active")
     _icall_Unit_Boolean( mb, this.ptr, record)
   }
-
-  companion object
 }

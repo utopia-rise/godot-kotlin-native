@@ -222,6 +222,4 @@ open class RayCast2D internal constructor(
     val mb = getMethodBind("RayCast2D","set_exclude_parent_body")
     _icall_Unit_Boolean( mb, this.ptr, mask)
   }
-
-  companion object
 }

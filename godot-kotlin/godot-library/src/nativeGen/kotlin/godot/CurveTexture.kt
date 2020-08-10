@@ -56,6 +56,4 @@ open class CurveTexture internal constructor(
     val mb = getMethodBind("CurveTexture","set_width")
     _icall_Unit_Long( mb, this.ptr, width)
   }
-
-  companion object
 }

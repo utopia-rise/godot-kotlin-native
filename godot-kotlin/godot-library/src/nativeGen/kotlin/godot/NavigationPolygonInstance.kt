@@ -62,6 +62,4 @@ open class NavigationPolygonInstance internal constructor(
     val mb = getMethodBind("NavigationPolygonInstance","set_navigation_polygon")
     _icall_Unit_Object( mb, this.ptr, navpoly)
   }
-
-  companion object
 }

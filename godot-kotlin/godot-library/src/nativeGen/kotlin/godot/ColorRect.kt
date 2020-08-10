@@ -44,6 +44,4 @@ open class ColorRect internal constructor(
     val mb = getMethodBind("ColorRect","set_frame_color")
     _icall_Unit_Color( mb, this.ptr, color)
   }
-
-  companion object
 }

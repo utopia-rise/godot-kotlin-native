@@ -27,6 +27,4 @@ open class X509Certificate internal constructor(
     val mb = getMethodBind("X509Certificate","save")
     return GodotError.byValue( _icall_Long_String( mb, this.ptr, path).toUInt())
   }
-
-  companion object
 }

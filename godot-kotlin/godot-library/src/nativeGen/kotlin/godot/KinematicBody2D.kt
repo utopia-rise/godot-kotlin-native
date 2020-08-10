@@ -155,6 +155,4 @@ open class KinematicBody2D internal constructor(
     val mb = getMethodBind("KinematicBody2D","test_move")
     return _icall_Boolean_Transform2D_Vector2_Boolean( mb, this.ptr, from, relVec, infiniteInertia)
   }
-
-  companion object
 }

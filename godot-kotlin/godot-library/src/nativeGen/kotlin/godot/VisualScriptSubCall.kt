@@ -19,6 +19,4 @@ open class VisualScriptSubCall internal constructor(
   open fun _subcall(arguments: Variant): Variant {
     throw NotImplementedError("_subcall is not implemented for VisualScriptSubCall")
   }
-
-  companion object
 }

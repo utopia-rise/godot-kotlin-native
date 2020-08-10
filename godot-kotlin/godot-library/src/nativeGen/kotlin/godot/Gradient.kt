@@ -111,6 +111,4 @@ open class Gradient internal constructor(
     val mb = getMethodBind("Gradient","set_offsets")
     _icall_Unit_PoolRealArray( mb, this.ptr, offsets)
   }
-
-  companion object
 }

@@ -85,6 +85,4 @@ open class Bone2D internal constructor(
     val mb = getMethodBind("Bone2D","set_rest")
     _icall_Unit_Transform2D( mb, this.ptr, rest)
   }
-
-  companion object
 }

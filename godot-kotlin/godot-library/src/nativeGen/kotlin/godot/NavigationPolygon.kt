@@ -123,6 +123,4 @@ open class NavigationPolygon internal constructor(
     val mb = getMethodBind("NavigationPolygon","set_vertices")
     _icall_Unit_PoolVector2Array( mb, this.ptr, vertices)
   }
-
-  companion object
 }

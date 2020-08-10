@@ -265,6 +265,4 @@ open class GIProbeData internal constructor(
     val mb = getMethodBind("GIProbeData","set_to_cell_xform")
     _icall_Unit_Transform( mb, this.ptr, toCellXform)
   }
-
-  companion object
 }

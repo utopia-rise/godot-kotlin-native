@@ -13,6 +13,4 @@ open class JNISingleton internal constructor(
         }
 
   }
-
-  companion object
 }

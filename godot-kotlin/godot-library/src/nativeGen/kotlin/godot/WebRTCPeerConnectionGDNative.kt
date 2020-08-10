@@ -14,6 +14,4 @@ open class WebRTCPeerConnectionGDNative internal constructor(
         }
 
   }
-
-  companion object
 }

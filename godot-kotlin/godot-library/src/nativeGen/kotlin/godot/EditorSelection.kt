@@ -46,6 +46,4 @@ open class EditorSelection internal constructor(
     val mb = getMethodBind("EditorSelection","remove_node")
     _icall_Unit_Object( mb, this.ptr, node)
   }
-
-  companion object
 }

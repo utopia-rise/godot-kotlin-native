@@ -76,6 +76,4 @@ open class CollisionShape internal constructor(
     val mb = getMethodBind("CollisionShape","set_shape")
     _icall_Unit_Object( mb, this.ptr, shape)
   }
-
-  companion object
 }

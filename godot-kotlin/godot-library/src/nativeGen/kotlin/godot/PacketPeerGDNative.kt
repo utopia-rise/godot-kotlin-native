@@ -13,6 +13,4 @@ open class PacketPeerGDNative internal constructor(
         }
 
   }
-
-  companion object
 }

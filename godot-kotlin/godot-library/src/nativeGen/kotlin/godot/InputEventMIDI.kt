@@ -177,6 +177,4 @@ open class InputEventMIDI internal constructor(
     val mb = getMethodBind("InputEventMIDI","set_velocity")
     _icall_Unit_Long( mb, this.ptr, velocity)
   }
-
-  companion object
 }

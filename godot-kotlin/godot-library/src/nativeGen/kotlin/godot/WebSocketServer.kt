@@ -167,6 +167,4 @@ open class WebSocketServer internal constructor(
     val mb = getMethodBind("WebSocketServer","stop")
     _icall_Unit( mb, this.ptr)
   }
-
-  companion object
 }

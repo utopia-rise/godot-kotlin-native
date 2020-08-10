@@ -36,6 +36,4 @@ open class MultiMeshInstance internal constructor(
     val mb = getMethodBind("MultiMeshInstance","set_multimesh")
     _icall_Unit_Object( mb, this.ptr, multimesh)
   }
-
-  companion object
 }

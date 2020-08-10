@@ -175,6 +175,4 @@ open class SurfaceTool internal constructor(
     val mb = getMethodBind("SurfaceTool","set_material")
     _icall_Unit_Object( mb, this.ptr, material)
   }
-
-  companion object
 }

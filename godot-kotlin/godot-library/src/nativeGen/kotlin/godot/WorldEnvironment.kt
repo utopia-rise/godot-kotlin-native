@@ -36,6 +36,4 @@ open class WorldEnvironment internal constructor(
     val mb = getMethodBind("WorldEnvironment","set_environment")
     _icall_Unit_Object( mb, this.ptr, env)
   }
-
-  companion object
 }

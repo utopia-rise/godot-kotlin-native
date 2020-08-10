@@ -13,6 +13,4 @@ open class CSGCombiner internal constructor(
         }
 
   }
-
-  companion object
 }

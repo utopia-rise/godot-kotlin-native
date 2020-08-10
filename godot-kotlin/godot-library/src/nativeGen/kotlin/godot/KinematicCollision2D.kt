@@ -142,6 +142,4 @@ open class KinematicCollision2D internal constructor(
     val mb = getMethodBind("KinematicCollision2D","get_travel")
     return _icall_Vector2( mb, this.ptr)
   }
-
-  companion object
 }

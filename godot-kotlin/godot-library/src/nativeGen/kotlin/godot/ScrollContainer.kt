@@ -171,6 +171,4 @@ open class ScrollContainer internal constructor(
     val mb = getMethodBind("ScrollContainer","set_v_scroll")
     _icall_Unit_Long( mb, this.ptr, value)
   }
-
-  companion object
 }

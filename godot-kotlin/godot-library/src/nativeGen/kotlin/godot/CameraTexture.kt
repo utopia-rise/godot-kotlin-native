@@ -81,6 +81,4 @@ open class CameraTexture internal constructor(
     val mb = getMethodBind("CameraTexture","set_which_feed")
     _icall_Unit_Long( mb, this.ptr, whichFeed)
   }
-
-  companion object
 }

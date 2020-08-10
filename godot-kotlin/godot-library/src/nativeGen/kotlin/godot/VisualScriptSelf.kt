@@ -13,6 +13,4 @@ open class VisualScriptSelf internal constructor(
         }
 
   }
-
-  companion object
 }

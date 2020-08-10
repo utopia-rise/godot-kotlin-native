@@ -64,6 +64,4 @@ open class MenuButton internal constructor(
     val mb = getMethodBind("MenuButton","set_switch_on_hover")
     _icall_Unit_Boolean( mb, this.ptr, enable)
   }
-
-  companion object
 }

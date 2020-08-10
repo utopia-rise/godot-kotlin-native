@@ -13,6 +13,4 @@ open class WebRTCDataChannelGDNative internal constructor(
         }
 
   }
-
-  companion object
 }

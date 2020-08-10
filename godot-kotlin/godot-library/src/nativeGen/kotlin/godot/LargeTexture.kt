@@ -73,6 +73,4 @@ open class LargeTexture internal constructor(
     val mb = getMethodBind("LargeTexture","set_size")
     _icall_Unit_Vector2( mb, this.ptr, size)
   }
-
-  companion object
 }

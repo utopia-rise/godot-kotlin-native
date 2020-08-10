@@ -77,6 +77,4 @@ open class InputEventAction internal constructor(
     val mb = getMethodBind("InputEventAction","set_strength")
     _icall_Unit_Double( mb, this.ptr, strength)
   }
-
-  companion object
 }

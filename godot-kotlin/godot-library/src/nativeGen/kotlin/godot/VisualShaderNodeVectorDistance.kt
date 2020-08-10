@@ -14,6 +14,4 @@ open class VisualShaderNodeVectorDistance internal constructor(
         }
 
   }
-
-  companion object
 }

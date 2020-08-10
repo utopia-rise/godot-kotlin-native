@@ -13,6 +13,4 @@ open class CheckButton internal constructor(
         }
 
   }
-
-  companion object
 }

@@ -96,6 +96,4 @@ open class Joint internal constructor(
     val mb = getMethodBind("Joint","set_solver_priority")
     _icall_Unit_Long( mb, this.ptr, priority)
   }
-
-  companion object
 }

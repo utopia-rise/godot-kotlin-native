@@ -337,6 +337,4 @@ open class VisualScript internal constructor(
     val mb = getMethodBind("VisualScript","set_variable_info")
     _icall_Unit_String_Dictionary( mb, this.ptr, name, value)
   }
-
-  companion object
 }

@@ -1177,6 +1177,4 @@ open class AnimationNodeBlendSpace1D internal constructor(
     val mb = getMethodBind("AnimationNodeBlendSpace1D","set_value_label")
     _icall_Unit_String( mb, this.ptr, text)
   }
-
-  companion object
 }

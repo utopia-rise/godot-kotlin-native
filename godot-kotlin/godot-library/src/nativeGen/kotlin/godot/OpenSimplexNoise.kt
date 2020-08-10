@@ -179,6 +179,4 @@ open class OpenSimplexNoise internal constructor(
     val mb = getMethodBind("OpenSimplexNoise","set_seed")
     _icall_Unit_Long( mb, this.ptr, seed)
   }
-
-  companion object
 }

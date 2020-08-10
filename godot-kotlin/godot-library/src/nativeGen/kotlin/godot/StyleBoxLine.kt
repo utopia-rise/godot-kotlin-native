@@ -133,6 +133,4 @@ open class StyleBoxLine internal constructor(
     val mb = getMethodBind("StyleBoxLine","set_vertical")
     _icall_Unit_Boolean( mb, this.ptr, vertical)
   }
-
-  companion object
 }

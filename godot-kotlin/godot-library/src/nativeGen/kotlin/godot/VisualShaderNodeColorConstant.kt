@@ -45,6 +45,4 @@ open class VisualShaderNodeColorConstant internal constructor(
     val mb = getMethodBind("VisualShaderNodeColorConstant","set_constant")
     _icall_Unit_Color( mb, this.ptr, value)
   }
-
-  companion object
 }

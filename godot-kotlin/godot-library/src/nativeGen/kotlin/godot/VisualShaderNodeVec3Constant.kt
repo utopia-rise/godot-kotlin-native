@@ -45,6 +45,4 @@ open class VisualShaderNodeVec3Constant internal constructor(
     val mb = getMethodBind("VisualShaderNodeVec3Constant","set_constant")
     _icall_Unit_Vector3( mb, this.ptr, value)
   }
-
-  companion object
 }

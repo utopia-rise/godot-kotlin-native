@@ -37,6 +37,4 @@ open class SphereShape internal constructor(
     val mb = getMethodBind("SphereShape","set_radius")
     _icall_Unit_Double( mb, this.ptr, radius)
   }
-
-  companion object
 }

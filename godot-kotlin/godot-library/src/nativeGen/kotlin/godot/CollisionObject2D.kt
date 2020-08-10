@@ -167,6 +167,4 @@ open class CollisionObject2D internal constructor(
     val mb = getMethodBind("CollisionObject2D","shape_owner_set_transform")
     _icall_Unit_Long_Transform2D( mb, this.ptr, ownerId, transform)
   }
-
-  companion object
 }

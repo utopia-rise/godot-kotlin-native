@@ -285,6 +285,4 @@ open class Physics2DDirectBodyState internal constructor(
     val mb = getMethodBind("Physics2DDirectBodyState","set_transform")
     _icall_Unit_Transform2D( mb, this.ptr, transform)
   }
-
-  companion object
 }

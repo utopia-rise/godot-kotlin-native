@@ -94,6 +94,4 @@ open class EditorInspector internal constructor(
     val mb = getMethodBind("EditorInspector","refresh")
     _icall_Unit( mb, this.ptr)
   }
-
-  companion object
 }

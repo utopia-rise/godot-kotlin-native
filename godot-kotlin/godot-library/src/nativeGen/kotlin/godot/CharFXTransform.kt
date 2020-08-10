@@ -205,6 +205,4 @@ open class CharFXTransform internal constructor(
     val mb = getMethodBind("CharFXTransform","set_visibility")
     _icall_Unit_Boolean( mb, this.ptr, visibility)
   }
-
-  companion object
 }

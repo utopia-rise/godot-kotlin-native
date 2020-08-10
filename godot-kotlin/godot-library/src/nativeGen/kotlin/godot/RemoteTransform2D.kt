@@ -126,6 +126,4 @@ open class RemoteTransform2D internal constructor(
     val mb = getMethodBind("RemoteTransform2D","set_use_global_coordinates")
     _icall_Unit_Boolean( mb, this.ptr, useGlobalCoordinates)
   }
-
-  companion object
 }

@@ -127,6 +127,4 @@ open class NativeScript internal constructor(
     val mb = getMethodBind("NativeScript","set_script_class_name")
     _icall_Unit_String( mb, this.ptr, className)
   }
-
-  companion object
 }

@@ -45,6 +45,4 @@ open class VisualShaderNodeTransformConstant internal constructor(
     val mb = getMethodBind("VisualShaderNodeTransformConstant","set_constant")
     _icall_Unit_Transform( mb, this.ptr, value)
   }
-
-  companion object
 }

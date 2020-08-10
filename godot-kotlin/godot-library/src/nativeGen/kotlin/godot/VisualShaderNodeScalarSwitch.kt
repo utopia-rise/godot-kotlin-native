@@ -14,6 +14,4 @@ open class VisualShaderNodeScalarSwitch internal constructor(
         }
 
   }
-
-  companion object
 }

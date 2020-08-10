@@ -77,6 +77,4 @@ open class PolygonPathFinder internal constructor(
     val mb = getMethodBind("PolygonPathFinder","setup")
     _icall_Unit_PoolVector2Array_PoolIntArray( mb, this.ptr, points, connections)
   }
-
-  companion object
 }

@@ -13,6 +13,4 @@ open class VisualScriptCondition internal constructor(
         }
 
   }
-
-  companion object
 }

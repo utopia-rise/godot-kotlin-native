@@ -87,6 +87,4 @@ open class Font internal constructor(
     val mb = getMethodBind("Font","update_changes")
     _icall_Unit( mb, this.ptr)
   }
-
-  companion object
 }

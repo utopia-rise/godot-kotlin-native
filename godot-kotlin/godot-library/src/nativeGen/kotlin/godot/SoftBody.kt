@@ -329,6 +329,4 @@ open class SoftBody internal constructor(
     val mb = getMethodBind("SoftBody","set_volume_stiffness")
     _icall_Unit_Double( mb, this.ptr, volumeStiffness)
   }
-
-  companion object
 }

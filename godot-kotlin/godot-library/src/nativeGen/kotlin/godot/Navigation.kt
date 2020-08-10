@@ -107,6 +107,4 @@ open class Navigation internal constructor(
     val mb = getMethodBind("Navigation","set_up_vector")
     _icall_Unit_Vector3( mb, this.ptr, up)
   }
-
-  companion object
 }

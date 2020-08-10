@@ -13,6 +13,4 @@ open class HSeparator internal constructor(
         }
 
   }
-
-  companion object
 }

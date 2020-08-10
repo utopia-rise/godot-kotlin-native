@@ -203,6 +203,4 @@ open class StreamPeer internal constructor(
     val mb = getMethodBind("StreamPeer","set_big_endian")
     _icall_Unit_Boolean( mb, this.ptr, enable)
   }
-
-  companion object
 }

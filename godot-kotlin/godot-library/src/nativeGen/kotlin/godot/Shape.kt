@@ -30,6 +30,4 @@ open class Shape internal constructor(
     val mb = getMethodBind("Shape","set_margin")
     _icall_Unit_Double( mb, this.ptr, margin)
   }
-
-  companion object
 }

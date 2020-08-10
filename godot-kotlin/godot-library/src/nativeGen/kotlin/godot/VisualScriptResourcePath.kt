@@ -37,6 +37,4 @@ open class VisualScriptResourcePath internal constructor(
     val mb = getMethodBind("VisualScriptResourcePath","set_resource_path")
     _icall_Unit_String( mb, this.ptr, path)
   }
-
-  companion object
 }

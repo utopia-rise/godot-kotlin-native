@@ -46,6 +46,4 @@ open class VisualScriptNode internal constructor(
     val mb = getMethodBind("VisualScriptNode","set_default_input_value")
     _icall_Unit_Long_Variant( mb, this.ptr, portIdx, value)
   }
-
-  companion object
 }

@@ -80,6 +80,4 @@ open class HeightMapShape internal constructor(
     val mb = getMethodBind("HeightMapShape","set_map_width")
     _icall_Unit_Long( mb, this.ptr, width)
   }
-
-  companion object
 }

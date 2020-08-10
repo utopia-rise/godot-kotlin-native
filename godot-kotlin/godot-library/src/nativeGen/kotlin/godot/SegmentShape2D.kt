@@ -70,6 +70,4 @@ open class SegmentShape2D internal constructor(
     val mb = getMethodBind("SegmentShape2D","set_b")
     _icall_Unit_Vector2( mb, this.ptr, b)
   }
-
-  companion object
 }

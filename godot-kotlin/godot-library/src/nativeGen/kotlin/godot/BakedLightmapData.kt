@@ -185,6 +185,4 @@ open class BakedLightmapData internal constructor(
     val mb = getMethodBind("BakedLightmapData","set_octree")
     _icall_Unit_PoolByteArray( mb, this.ptr, octree)
   }
-
-  companion object
 }

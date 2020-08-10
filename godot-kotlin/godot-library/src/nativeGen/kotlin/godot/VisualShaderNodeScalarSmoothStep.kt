@@ -14,6 +14,4 @@ open class VisualShaderNodeScalarSmoothStep internal constructor(
         }
 
   }
-
-  companion object
 }

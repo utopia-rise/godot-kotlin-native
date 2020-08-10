@@ -42,6 +42,4 @@ open class ConvexPolygonShape2D internal constructor(
     val mb = getMethodBind("ConvexPolygonShape2D","set_points")
     _icall_Unit_PoolVector2Array( mb, this.ptr, points)
   }
-
-  companion object
 }

@@ -20,6 +20,4 @@ open class PHashTranslation internal constructor(
     val mb = getMethodBind("PHashTranslation","generate")
     _icall_Unit_Object( mb, this.ptr, from)
   }
-
-  companion object
 }

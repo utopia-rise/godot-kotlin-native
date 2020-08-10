@@ -21,6 +21,4 @@ open class PluginScript internal constructor(
     val mb = getMethodBind("PluginScript","new")
     return _icall_varargs( mb, this.ptr, __var_args)
   }
-
-  companion object
 }

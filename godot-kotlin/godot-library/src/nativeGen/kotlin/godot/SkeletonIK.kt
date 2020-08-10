@@ -270,6 +270,4 @@ open class SkeletonIK internal constructor(
     val mb = getMethodBind("SkeletonIK","stop")
     _icall_Unit( mb, this.ptr)
   }
-
-  companion object
 }

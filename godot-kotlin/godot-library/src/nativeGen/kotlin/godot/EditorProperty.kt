@@ -204,6 +204,4 @@ open class EditorProperty internal constructor(
 
   open fun update_property() {
   }
-
-  companion object
 }

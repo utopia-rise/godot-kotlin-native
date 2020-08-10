@@ -123,6 +123,4 @@ open class SphereMesh internal constructor(
     val mb = getMethodBind("SphereMesh","set_rings")
     _icall_Unit_Long( mb, this.ptr, rings)
   }
-
-  companion object
 }

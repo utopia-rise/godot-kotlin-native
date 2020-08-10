@@ -13,6 +13,4 @@ open class SpotLight internal constructor(
         }
 
   }
-
-  companion object
 }

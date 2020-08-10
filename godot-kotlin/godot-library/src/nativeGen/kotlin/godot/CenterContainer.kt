@@ -37,6 +37,4 @@ open class CenterContainer internal constructor(
     val mb = getMethodBind("CenterContainer","set_use_top_left")
     _icall_Unit_Boolean( mb, this.ptr, enable)
   }
-
-  companion object
 }

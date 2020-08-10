@@ -44,6 +44,4 @@ open class CanvasModulate internal constructor(
     val mb = getMethodBind("CanvasModulate","set_color")
     _icall_Unit_Color( mb, this.ptr, color)
   }
-
-  companion object
 }

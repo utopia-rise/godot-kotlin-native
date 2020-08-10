@@ -110,6 +110,4 @@ open class EditorVCSInterface internal constructor(
     val mb = getMethodBind("EditorVCSInterface","unstage_file")
     _icall_Unit_String( mb, this.ptr, filePath)
   }
-
-  companion object
 }

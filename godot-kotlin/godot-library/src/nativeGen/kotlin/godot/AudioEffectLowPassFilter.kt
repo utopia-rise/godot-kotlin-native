@@ -13,6 +13,4 @@ open class AudioEffectLowPassFilter internal constructor(
         }
 
   }
-
-  companion object
 }

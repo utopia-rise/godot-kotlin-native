@@ -57,6 +57,4 @@ open class GrooveJoint2D internal constructor(
     val mb = getMethodBind("GrooveJoint2D","set_length")
     _icall_Unit_Double( mb, this.ptr, length)
   }
-
-  companion object
 }

@@ -13,6 +13,4 @@ open class PanelContainer internal constructor(
         }
 
   }
-
-  companion object
 }

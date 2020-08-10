@@ -24,6 +24,4 @@ open class EditorScenePostImport internal constructor(
   open fun post_import(scene: Object): Object {
     throw NotImplementedError("post_import is not implemented for EditorScenePostImport")
   }
-
-  companion object
 }

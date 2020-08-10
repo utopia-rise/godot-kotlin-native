@@ -57,6 +57,4 @@ open class AudioStreamGenerator internal constructor(
     val mb = getMethodBind("AudioStreamGenerator","set_mix_rate")
     _icall_Unit_Double( mb, this.ptr, hz)
   }
-
-  companion object
 }

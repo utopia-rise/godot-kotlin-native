@@ -37,6 +37,4 @@ open class VideoStreamGDNative internal constructor(
     val mb = getMethodBind("VideoStreamGDNative","set_file")
     _icall_Unit_String( mb, this.ptr, file)
   }
-
-  companion object
 }

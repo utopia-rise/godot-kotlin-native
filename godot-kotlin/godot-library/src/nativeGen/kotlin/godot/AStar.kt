@@ -179,6 +179,4 @@ open class AStar internal constructor(
     val mb = getMethodBind("AStar","set_point_weight_scale")
     _icall_Unit_Long_Double( mb, this.ptr, id, weightScale)
   }
-
-  companion object
 }
