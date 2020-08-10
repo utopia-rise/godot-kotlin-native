@@ -18,6 +18,7 @@ class EntryFileBuilder(val bindingContext: BindingContext) {
                 .addMember("%S", "EXPERIMENTAL_API_USAGE")
                 .build()
         )
+        .addComment("THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD")
         .addFunction(generateGDNativeInitFunction())
         .addFunction(generateGDNativeTerminateFunction())
 
