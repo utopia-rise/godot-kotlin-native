@@ -25,8 +25,9 @@ class Enum @JsonCreator constructor(
         )
         enumBuilder.addProperty("id", Long::class)
         values.forEach { (key, value) ->
+            val valueName = if (name == "RPCMode") key.removePrefix("RPC_MODE_") else key
             enumBuilder.addEnumConstant(
-                key, TypeSpec.anonymousClassBuilder()
+                valueName, TypeSpec.anonymousClassBuilder()
                     .addSuperclassConstructorParameter("%L", value)
                     .build()
             )

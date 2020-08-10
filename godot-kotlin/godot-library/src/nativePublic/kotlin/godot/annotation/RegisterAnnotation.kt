@@ -1,6 +1,6 @@
 package godot.annotation
 
-import godot.registration.RPCMode
+import godot.MultiplayerAPI.RPCMode
 
 /*
 If a change is made to a annotation name or the package path has changed,

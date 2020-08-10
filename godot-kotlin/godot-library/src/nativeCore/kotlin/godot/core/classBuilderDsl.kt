@@ -2,10 +2,10 @@
 
 package godot.core
 
+import godot.MultiplayerAPI.RPCMode
 import godot.Object
 import godot.gdnative.godot_property_hint
 import godot.internal.type.toNaturalT
-import godot.registration.RPCMode
 import kotlinx.cinterop.StableRef
 import kotlin.reflect.KMutableProperty1
 

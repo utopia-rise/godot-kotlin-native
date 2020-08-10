@@ -1,11 +1,11 @@
 package example
 
 import godot.Curve
+import godot.MultiplayerAPI.RPCMode
 import godot.Node
 import godot.Texture
 import godot.annotation.*
 import godot.core.*
-import godot.registration.RPCMode
 import godot.registration.Range
 
 const val FLAG_1 = 1
@@ -55,7 +55,7 @@ class TestingClass : Node() {
 
     }
 
-    @RegisterFunction(RPCMode.PUPPET_SYNC)
+    @RegisterFunction(RPCMode.PUPPETSYNC)
     fun foo() = 1
 
     @RegisterProperty

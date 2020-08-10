@@ -168,7 +168,7 @@ object PropertyRegistrationGenerator {
             .getAnnotationValue(
                 REGISTER_PROPERTY_ANNOTATION,
                 REGISTER_PROPERTY_ANNOTATION_RPC_MODE_ARGUMENT,
-                Pair(ClassId(FqName("godot.registration"), Name.identifier("RPCMode")), Name.identifier("DISABLED"))
+                Pair(ClassId(FqName("godot.MultiplayerAPI"), Name.identifier("RPCMode")), Name.identifier("DISABLED"))
             )
     }
 

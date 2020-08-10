@@ -1,9 +1,9 @@
 package godot.core
 
+import godot.MultiplayerAPI.RPCMode
 import godot.Object
 import godot.gdnative.*
 import godot.internal.type.nullSafe
-import godot.registration.RPCMode
 import kotlinx.cinterop.*
 
 @PublishedApi
@@ -78,9 +78,11 @@ internal class ClassHandle<T : Object>(
             RPCMode.REMOTE -> GODOT_METHOD_RPC_MODE_REMOTE
             RPCMode.MASTER -> GODOT_METHOD_RPC_MODE_MASTER
             RPCMode.PUPPET -> GODOT_METHOD_RPC_MODE_PUPPET
-            RPCMode.REMOTE_SYNC -> GODOT_METHOD_RPC_MODE_REMOTESYNC
-            RPCMode.MASTER_SYNC -> GODOT_METHOD_RPC_MODE_MASTERSYNC
-            RPCMode.PUPPET_SYNC -> GODOT_METHOD_RPC_MODE_PUPPETSYNC
+            RPCMode.REMOTESYNC -> GODOT_METHOD_RPC_MODE_REMOTESYNC
+            RPCMode.MASTERSYNC -> GODOT_METHOD_RPC_MODE_MASTERSYNC
+            RPCMode.PUPPETSYNC -> GODOT_METHOD_RPC_MODE_PUPPETSYNC
+            RPCMode.SLAVE -> throw IllegalArgumentException("RPCMode.SLAVE is deprecated in godot! Use RPCMode.PUPPET instead")
+            RPCMode.SYNC -> throw IllegalArgumentException("RPCMode.SYNC is deprecated in godot! Use one of the other sync enums instead")
         }
     }
 
