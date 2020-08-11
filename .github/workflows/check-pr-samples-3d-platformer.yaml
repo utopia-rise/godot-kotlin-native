@@ -21,10 +21,13 @@ jobs:
         include:
           - os: ubuntu-latest
             task: buildLinuxX64
+            publish_task: publishToMavenLocal
           - os: macos-latest
             task: -x linkDebugSharedLinuxX64 buildMacosX64
+            publish_task: -x publishLinuxPublicationToMavenLocal publishToMavenLocal
           - os: windows-latest
             task: -x linkDebugSharedLinuxX64 buildWindowsX64
+            publish_task: -x publishLinuxPublicationToMavenLocal publishToMavenLocal
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
@@ -34,7 +37,11 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
+      - name: Publish artifacts locally
+        uses: eskatos/gradle-command-action@v1
+        with:
+          arguments: ${{ matrix.publish_task }} -Pgodot.kotlin.dev
       - uses: eskatos/gradle-command-action@v1
         with:
           build-root-directory: samples/3d-platformer
-          arguments: ${{ matrix.task }}
+          arguments: ${{ matrix.task }} -Pgodot.kotlin.dev

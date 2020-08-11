@@ -5,6 +5,8 @@ plugins {
 
 repositories {
     jcenter()
+    // used for developing this binding, omit if not needed.
+    mavenLocal()
 }
 
 
