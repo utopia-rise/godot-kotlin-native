@@ -277,7 +277,11 @@ class Class @JsonCreator constructor(
     }
 
     private fun generateConstants(baseCompanion: TypeSpec.Builder) {
-        constants.forEach { (key, value) ->
+        // for easy lookup
+        val allEnumValues = enums.flatMap { it.values.keys }
+            .toSet()
+        constants.filter { !allEnumValues.contains(it.key) }
+            .forEach { (key, value) ->
             baseCompanion.addProperty(
                 PropertySpec
                     .builder(key, Long::class)
