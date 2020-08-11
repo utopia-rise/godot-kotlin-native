@@ -4,3 +4,4 @@
 # These are explicitly windows files and should use crlf
 *.bat           text eol=crlf
 old/*           linguist-generated=true
+godot-kotlin/godot-library/src/nativeGen/kotlin/*           linguist-generated=true
