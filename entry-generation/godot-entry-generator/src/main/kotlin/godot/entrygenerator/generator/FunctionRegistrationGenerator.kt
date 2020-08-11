@@ -129,8 +129,8 @@ object FunctionRegistrationGenerator {
 
             className?.let {
                 "getTypeToVariantConversionFunction<%T>()" to className
-            } ?: "{ %T() }" to ClassName("godot.core", "Variant")
-        } ?: "{ %T() }" to ClassName("godot.core", "Variant")
+            } ?: "{·%T()·}" to ClassName("godot.core", "Variant")
+        } ?: "{·%T()·}" to ClassName("godot.core", "Variant")
     }
 
     private fun isOfType(type: KotlinType, typeFqName: String): Boolean {
