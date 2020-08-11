@@ -30,7 +30,7 @@ class ICall(
         }
     }
 
-    private fun createReturnTypeClass() = if (returnType == "VariantArray") {
+    private fun createReturnTypeClass() = if (returnType == "GodotArray") {
         ClassName(
             returnType.getPackage(),
             returnType
@@ -74,12 +74,12 @@ class ICall(
         if (shouldReturn) {
             if (isPrimitive) {
                 spec.addStatement("var ret: %T = ${returnType.defaultValue()}", returnTypeClass)
-                codeBlockBuilder.add("%M {\n", MemberName("kotlinx.cinterop", "memScoped"))
+                codeBlockBuilder.add("%M {\n", MemberName("godot.internal.utils", "godotScoped"))
             } else {
-                codeBlockBuilder.add("val ret = %M {\n", MemberName("kotlinx.cinterop", "memScoped"))
+                codeBlockBuilder.add("val ret = %M {\n", MemberName("godot.internal.utils", "godotScoped"))
             }
         } else {
-            codeBlockBuilder.add("%M {\n", MemberName("kotlinx.cinterop", "memScoped"))
+            codeBlockBuilder.add("%M {\n", MemberName("godot.internal.utils", "godotScoped"))
         }
 
         if (shouldReturn) {
@@ -102,8 +102,7 @@ class ICall(
         }
 
         codeBlockBuilder.add(
-                "    val args = %M<%T>(${arguments.size + 1})\n",
-                MemberName("kotlinx.cinterop", "allocArray"),
+                "    val args = allocArray<%T>(${arguments.size + 1})\n",
                 ClassName("kotlinx.cinterop", "COpaquePointerVar")
             )
         arguments.withIndex().forEach {
@@ -113,24 +112,22 @@ class ICall(
             when {
                 value.type == "String" -> {
                     codeBlockBuilder.add(
-                        "    args[$i] = arg$i$nullInstruction.%M()$nullInstruction.value$nullInstruction.ptr\n",
-                        MemberName("godot.core", "toGDString")
+                        "    args[$i] = arg$i$nullInstruction.ptr\n"
                     )
                 }
-                value.type == "VariantArray" || value.type == "Variant" -> {
+                value.type == "GodotArray" || value.type == "Variant" -> {
                     codeBlockBuilder.add(
                         "    args[$i] = arg$i$nullInstruction._handle$nullInstruction.ptr\n"
                     )
                 }
                 value.type.isCoreType() -> {
                     codeBlockBuilder.add(
-                        "    args[$i] = arg$i$nullInstruction.getRawMemory(this)\n"
+                        "    args[$i] = arg$i$nullInstruction.ptr\n"
                     )
                 }
                 value.type.isPrimitive() -> {
                     codeBlockBuilder.add(
-                        "    args[$i] = arg$i.%M(this)\n",
-                        MemberName("godot.internal.type", "getRawMemory")
+                        "    args[$i] = arg$i.ptr\n"
                     )
                 }
                 else -> {
@@ -150,7 +147,6 @@ class ICall(
                     MemberName("kotlinx.cinterop", "invoke"),
                     MemberName("kotlinx.cinterop", "ptr")
                 )
-                destroyStringArgs(codeBlockBuilder)
                 codeBlockBuilder.add(
                     "    ret = retVar.%M\n",
                     MemberName("kotlinx.cinterop", "value")
@@ -161,7 +157,6 @@ class ICall(
                     ClassName("godot.core", "Godot"),
                     MemberName("kotlinx.cinterop", "invoke")
                 )
-                destroyStringArgs(codeBlockBuilder)
                 val returnTypeClassSimpleName = returnTypeClass.simpleName
 
                 when {
@@ -183,15 +178,18 @@ class ICall(
 
                     returnTypeClassSimpleName == "String" -> {
                         codeBlockBuilder.add(
-                            "    %M(retVar).toKString()\n",
-                            MemberName("godot.core", "GdString")
+                            "    retVar.%M.%M()\n",
+                            MemberName("kotlinx.cinterop", "pointed"),
+                            MemberName("kotlinx.cinterop", "readValue")
                         )
                     }
 
                     else -> {
                         codeBlockBuilder.add(
-                            "    %T(retVar)\n",
-                            returnTypeClass
+                            "    %T(retVar.%M.%M())\n",
+                            returnTypeClass,
+                            MemberName("kotlinx.cinterop", "pointed"),
+                            MemberName("kotlinx.cinterop", "readValue")
                         )
                     }
                 }
@@ -202,7 +200,6 @@ class ICall(
                 ClassName("godot.core", "Godot"),
                 MemberName("kotlinx.cinterop", "invoke")
             )
-            destroyStringArgs(codeBlockBuilder)
         }
 
         codeBlockBuilder.add("}\n")
@@ -231,15 +228,6 @@ class ICall(
             }
 
             spec.addParameter("arg${it.index}", argumentType)
-        }
-    }
-
-    private fun destroyStringArgs(codeBlockBuilder: CodeBlock.Builder) = arguments.withIndex().forEach {
-        if (it.value.type == "String") {
-            codeBlockBuilder.add(
-                "    %M(args[${it.index}]!!).destroy(this)\n",
-                MemberName("godot.core", "GdString")
-            )
         }
     }
 

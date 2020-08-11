@@ -192,7 +192,9 @@ class Class @JsonCreator constructor(
                                 .build(),
                             ParameterSpec.builder("method", kTypeVariable)
                                 .build(),
-                            ParameterSpec.builder("binds", ClassName("godot.core", "VariantArray").copy(nullable = true))
+                            ParameterSpec.builder("binds", ClassName("godot.core", "GodotArray")
+                                .parameterizedBy(Any::class.asTypeName())
+                                .copy(nullable = true))
                                 .defaultValue("null")
                                 .build(),
                             ParameterSpec.builder("flags", Long::class)
@@ -223,7 +225,7 @@ class Class @JsonCreator constructor(
                             |    this@$newName.ptr = ptr
                             |}
                             |""".trimMargin(),
-                    MemberName("kotlinx.cinterop", "memScoped"),
+                    MemberName("godot.internal.utils", "godotScoped"),
                     MemberName("godot.internal.type", "nullSafe"),
                     ClassName("godot.core", "Godot"),
                     MemberName("kotlinx.cinterop", "invoke"),

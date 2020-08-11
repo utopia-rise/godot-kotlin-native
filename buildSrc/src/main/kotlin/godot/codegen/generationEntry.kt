@@ -53,15 +53,14 @@ private fun generateICallsVarargsFunction(): FunSpec {
         )
         .addStatement(
             """return %M {
-                            |    val args = %M<%T<%M>>(arguments.size)
+                            |    val args = allocArray<%T<%M>>(arguments.size)
                             |    for ((i,arg) in arguments.withIndex()) args[i] = %T.wrap(arg)._handle.ptr
                             |    val result = %T.gdnative.godot_method_bind_call!!.%M(mb, inst, args, arguments.size, null)
                             |    for (i in arguments.indices) %T.gdnative.godot_variant_destroy!!.%M(args[i])
                             |    %T(result)
                             |}
                             |""".trimMargin(),
-            MemberName("kotlinx.cinterop", "memScoped"),
-            MemberName("kotlinx.cinterop", "allocArray"),
+            MemberName("godot.internal.utils", "godotScoped"),
             ClassName("kotlinx.cinterop", "CPointerVar"),
             MemberName("godot.gdnative", "godot_variant"),
             ClassName("godot.core", "Variant"),

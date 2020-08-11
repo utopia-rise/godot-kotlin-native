@@ -1,7 +1,7 @@
 package godot.codegen
 
 private val coreTypes = listOf(
-    "VariantArray",
+    "GodotArray",
     "Basis",
     "Color",
     "Dictionary",
@@ -131,7 +131,7 @@ fun String.convertToCamelCase(): String {
 }
 
 fun String.convertToSnakeCase(): String =
-    if (this == "VariantArray") "array"
+    if (this == "GodotArray") "array"
     else if (this == "AABB" || this == "RID" || this == "Transform2D") this.toLowerCase()
     else fold(StringBuilder()) { accumulator, character ->
         if (character in 'A'..'Z')
@@ -146,7 +146,7 @@ fun String.convertTypeToKotlin(): String {
         this == "float" -> "Double"
         this == "bool" -> "Boolean"
         this == "void" -> "Unit"
-        this == "Array" -> "VariantArray"
+        this == "Array" -> "GodotArray"
         else -> this
     }
 }

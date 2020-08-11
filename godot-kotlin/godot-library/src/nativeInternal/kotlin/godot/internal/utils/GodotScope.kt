@@ -21,6 +21,8 @@ internal inline class GodotScope(@PublishedApi internal inline val scope: MemSco
 
     inline fun alloc(size: Long, align: Int) = scope.alloc(size, align)
 
+    inline fun <reified T : CVariable> allocArray(length: Int): CArrayPointer<T> = scope.allocArray(length)
+
     inline val <T : CVariable> CValues<T>.ptr: CPointer<T>
         get() = this@ptr.getPointer(this@GodotScope.scope)
 
