@@ -30,7 +30,7 @@ class FollowCamera : Camera() {
     private val minHeight = 0.0
 
     @RegisterFunction
-    override fun _physics_process(dt: Double) {
+    override fun _physicsProcess(dt: Double) {
         val target = (getParent() as Spatial).globalTransform.origin
         var pos = globalTransform.origin
         val up = Vector3(0f, 1f, 0f)

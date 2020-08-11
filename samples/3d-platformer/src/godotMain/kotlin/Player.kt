@@ -24,7 +24,7 @@ class Player : KinematicBody() {
     private var shootBlend = 0.0
 
     @RegisterFunction
-    override fun _physics_process(delta: Double) {
+    override fun _physicsProcess(delta: Double) {
         var lv = linearVelocity
         val g = Vector3(0f, -9.8f, 0f)
         // apply gravity

@@ -23,7 +23,7 @@ open class Method @JsonCreator constructor(
     val newName: String
 
     init {
-        newName = if (!isVirtual) oldName.convertToCamelCase() else oldName
+        newName = oldName.convertToCamelCase()
         returnType = returnType.convertTypeToKotlin()
     }
 
