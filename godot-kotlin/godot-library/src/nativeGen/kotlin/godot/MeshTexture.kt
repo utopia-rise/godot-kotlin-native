@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Vector2
 import godot.icalls._icall_Mesh
 import godot.icalls._icall_Texture
@@ -10,12 +9,10 @@ import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_Vector2
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class MeshTexture internal constructor(
-  _ignore: Any?
-) : Texture(_ignore) {
+open class MeshTexture : Texture() {
   open var baseTexture: Texture
     get() {
       val mb = getMethodBind("MeshTexture","get_base_texture")
@@ -46,12 +43,7 @@ open class MeshTexture internal constructor(
       _icall_Unit_Object(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("MeshTexture", "MeshTexture")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("MeshTexture", "MeshTexture")
 
   open fun imageSize(schedule: Vector2.() -> Unit): Vector2 = imageSize.apply{
       schedule(this)

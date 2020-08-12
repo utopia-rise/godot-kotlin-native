@@ -2,17 +2,14 @@
 package godot
 
 import godot.VisualShaderNodeScalarOp
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class VisualShaderNodeScalarOp internal constructor(
-  _ignore: Any?
-) : VisualShaderNode(_ignore) {
+open class VisualShaderNodeScalarOp : VisualShaderNode() {
   open var operator: Long
     get() {
       val mb = getMethodBind("VisualShaderNodeScalarOp","get_operator")
@@ -23,12 +20,8 @@ open class VisualShaderNodeScalarOp internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("VisualShaderNodeScalarOp", "VisualShaderNodeScalarOp")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("VisualShaderNodeScalarOp",
+      "VisualShaderNodeScalarOp")
 
   open fun getOperator(): VisualShaderNodeScalarOp.Operator {
     val mb = getMethodBind("VisualShaderNodeScalarOp","get_operator")

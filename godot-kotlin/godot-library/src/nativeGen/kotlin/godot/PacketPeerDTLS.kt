@@ -2,27 +2,19 @@
 package godot
 
 import godot.PacketPeerDTLS
-import godot.core.Godot.shouldInitPtr
 import godot.core.GodotError
 import godot.icalls._icall_Long
 import godot.icalls._icall_Long_Object_Boolean_String_nObject
 import godot.icalls._icall_Unit
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class PacketPeerDTLS internal constructor(
-  _ignore: Any?
-) : PacketPeer(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("PacketPeerDTLS", "PacketPeerDTLS")
-        }
-
-  }
+open class PacketPeerDTLS : PacketPeer() {
+  override fun __new(): COpaquePointer = invokeConstructor("PacketPeerDTLS", "PacketPeerDTLS")
 
   open fun connectToPeer(
     packetPeer: PacketPeerUDP,

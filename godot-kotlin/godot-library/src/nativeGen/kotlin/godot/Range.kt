@@ -11,13 +11,10 @@ import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_Object
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 
-open class Range internal constructor(
-  _ignore: Any?
-) : Control(_ignore) {
+open class Range internal constructor() : Control() {
   val changed: Signal0 by signal()
 
   val valueChanged: Signal1<Double> by signal("value")
@@ -121,8 +118,6 @@ open class Range internal constructor(
       val mb = getMethodBind("Range","set_value")
       _icall_Unit_Double(mb, this.ptr, value)
     }
-
-  internal constructor() : this(null)
 
   open fun getAsRatio(): Double {
     val mb = getMethodBind("Range","get_as_ratio")

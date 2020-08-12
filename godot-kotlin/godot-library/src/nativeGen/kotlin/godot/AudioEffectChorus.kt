@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Double
 import godot.icalls._icall_Double_Long
 import godot.icalls._icall_Long
@@ -10,13 +9,11 @@ import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Long_Double
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Double
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class AudioEffectChorus internal constructor(
-  _ignore: Any?
-) : AudioEffect(_ignore) {
+open class AudioEffectChorus : AudioEffect() {
   open var dry: Double
     get() {
       val mb = getMethodBind("AudioEffectChorus","get_dry")
@@ -287,12 +284,7 @@ open class AudioEffectChorus internal constructor(
       _icall_Unit_Double(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("AudioEffectChorus", "AudioEffectChorus")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("AudioEffectChorus", "AudioEffectChorus")
 
   open fun getDry(): Double {
     val mb = getMethodBind("AudioEffectChorus","get_dry")

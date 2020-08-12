@@ -15,14 +15,11 @@ import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_String
 import godot.icalls._icall_Unit_String_Variant_String_Boolean
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
 
-open class EditorProperty internal constructor(
-  _ignore: Any?
-) : Container(_ignore) {
+open class EditorProperty internal constructor() : Container() {
   val multiplePropertiesChanged: Signal2<PoolStringArray, VariantArray> by signal("properties",
       "value")
 
@@ -99,8 +96,6 @@ open class EditorProperty internal constructor(
       val mb = getMethodBind("EditorProperty","set_read_only")
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
-
-  internal constructor() : this(null)
 
   open fun _focusableFocused(arg0: Long) {
   }

@@ -2,7 +2,6 @@
 package godot
 
 import godot.core.Color
-import godot.core.Godot.shouldInitPtr
 import godot.core.Plane
 import godot.core.Vector2
 import godot.core.Vector3
@@ -15,20 +14,13 @@ import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_Unit_Vector3
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class ImmediateGeometry internal constructor(
-  _ignore: Any?
-) : GeometryInstance(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("ImmediateGeometry", "ImmediateGeometry")
-        }
-
-  }
+open class ImmediateGeometry : GeometryInstance() {
+  override fun __new(): COpaquePointer = invokeConstructor("ImmediateGeometry", "ImmediateGeometry")
 
   open fun addSphere(
     lats: Long,

@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.RID
 import godot.core.Transform
 import godot.core.VariantArray
@@ -20,15 +19,13 @@ import godot.icalls._icall_Unit_VariantArray
 import godot.icalls._icall_VariantArray
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class PhysicsShapeQueryParameters internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
+open class PhysicsShapeQueryParameters : Reference() {
   open var collideWithAreas: Boolean
     get() {
       val mb = getMethodBind("PhysicsShapeQueryParameters","is_collide_with_areas_enabled")
@@ -99,13 +96,8 @@ open class PhysicsShapeQueryParameters internal constructor(
       _icall_Unit_Transform(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("PhysicsShapeQueryParameters",
-            "PhysicsShapeQueryParameters")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("PhysicsShapeQueryParameters",
+      "PhysicsShapeQueryParameters")
 
   open fun transform(schedule: Transform.() -> Unit): Transform = transform.apply{
       schedule(this)

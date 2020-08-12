@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.VariantArray
 import godot.core.Vector2
 import godot.icalls._icall_Long
@@ -14,19 +13,12 @@ import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_Vector2_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Long
 import kotlin.NotImplementedError
+import kotlinx.cinterop.COpaquePointer
 
-open class LargeTexture internal constructor(
-  _ignore: Any?
-) : Texture(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("LargeTexture", "LargeTexture")
-        }
-
-  }
+open class LargeTexture : Texture() {
+  override fun __new(): COpaquePointer = invokeConstructor("LargeTexture", "LargeTexture")
 
   open fun _getData(): VariantArray {
     throw NotImplementedError("_get_data is not implemented for LargeTexture")

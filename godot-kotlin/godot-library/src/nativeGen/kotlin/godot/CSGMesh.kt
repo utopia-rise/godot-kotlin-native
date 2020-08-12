@@ -1,17 +1,14 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Material
 import godot.icalls._icall_Mesh
 import godot.icalls._icall_Unit_Object
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
+import kotlinx.cinterop.COpaquePointer
 
-open class CSGMesh internal constructor(
-  _ignore: Any?
-) : CSGPrimitive(_ignore) {
+open class CSGMesh : CSGPrimitive() {
   open var material: Material
     get() {
       val mb = getMethodBind("CSGMesh","get_material")
@@ -32,12 +29,7 @@ open class CSGMesh internal constructor(
       _icall_Unit_Object(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("CSGMesh", "CSGMesh")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("CSGMesh", "CSGMesh")
 
   open fun _meshChanged() {
   }

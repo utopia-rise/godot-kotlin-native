@@ -2,17 +2,14 @@
 package godot
 
 import godot.VisualShaderNodeVectorDerivativeFunc
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class VisualShaderNodeVectorDerivativeFunc internal constructor(
-  _ignore: Any?
-) : VisualShaderNode(_ignore) {
+open class VisualShaderNodeVectorDerivativeFunc : VisualShaderNode() {
   open var function: Long
     get() {
       val mb = getMethodBind("VisualShaderNodeVectorDerivativeFunc","get_function")
@@ -23,13 +20,8 @@ open class VisualShaderNodeVectorDerivativeFunc internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("VisualShaderNodeVectorDerivativeFunc",
-            "VisualShaderNodeVectorDerivativeFunc")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("VisualShaderNodeVectorDerivativeFunc",
+      "VisualShaderNodeVectorDerivativeFunc")
 
   open fun getFunction(): VisualShaderNodeVectorDerivativeFunc.Function {
     val mb = getMethodBind("VisualShaderNodeVectorDerivativeFunc","get_function")

@@ -1,17 +1,14 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Unit_Boolean
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
+import kotlinx.cinterop.COpaquePointer
 
-open class YSort internal constructor(
-  _ignore: Any?
-) : Node2D(_ignore) {
+open class YSort : Node2D() {
   open var sortEnabled: Boolean
     get() {
       val mb = getMethodBind("YSort","is_sort_enabled")
@@ -22,12 +19,7 @@ open class YSort internal constructor(
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("YSort", "YSort")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("YSort", "YSort")
 
   open fun isSortEnabled(): Boolean {
     val mb = getMethodBind("YSort","is_sort_enabled")

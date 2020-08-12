@@ -12,12 +12,9 @@ import godot.icalls._icall_Unit_VariantArray
 import godot.icalls._icall_VariantArray
 import godot.icalls._icall_Variant_Long
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Long
 
-open class VisualShaderNode internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
+open class VisualShaderNode internal constructor() : Resource() {
   val editorRefreshRequest: Signal0 by signal()
 
   open var defaultInputValues: VariantArray
@@ -39,8 +36,6 @@ open class VisualShaderNode internal constructor(
       val mb = getMethodBind("VisualShaderNode","set_output_port_for_preview")
       _icall_Unit_Long(mb, this.ptr, value)
     }
-
-  internal constructor() : this(null)
 
   open fun getDefaultInputValues(): VariantArray {
     val mb = getMethodBind("VisualShaderNode","get_default_input_values")

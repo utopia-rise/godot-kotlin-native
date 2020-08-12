@@ -2,7 +2,6 @@
 package godot
 
 import godot.core.Color
-import godot.core.Godot.shouldInitPtr
 import godot.core.PoolIntArray
 import godot.core.Signal0
 import godot.core.Signal1
@@ -34,15 +33,13 @@ import godot.icalls._icall_Unit_String_String_Color_Boolean
 import godot.icalls._icall_VariantArray
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class TextEdit internal constructor(
-  _ignore: Any?
-) : Control(_ignore) {
+open class TextEdit : Control() {
   val breakpointToggled: Signal1<Long> by signal("row")
 
   val cursorChanged: Signal0 by signal()
@@ -315,12 +312,7 @@ open class TextEdit internal constructor(
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("TextEdit", "TextEdit")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("TextEdit", "TextEdit")
 
   open fun _clickSelectionHeld() {
   }

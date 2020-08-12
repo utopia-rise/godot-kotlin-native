@@ -15,21 +15,16 @@ import godot.icalls._icall_Unit_Vector2_Variant_Object
 import godot.icalls._icall_VariantArray
 import godot.icalls._icall_Variant_Vector2_Object
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.NotImplementedError
 import kotlin.String
 
-open class ScriptEditor internal constructor(
-  _ignore: Any?
-) : PanelContainer(_ignore) {
+open class ScriptEditor internal constructor() : PanelContainer() {
   val editorScriptChanged: Signal1<Script> by signal("script")
 
   val scriptClose: Signal1<Script> by signal("script")
-
-  internal constructor() : this(null)
 
   open fun _addCallback(
     arg0: Object,

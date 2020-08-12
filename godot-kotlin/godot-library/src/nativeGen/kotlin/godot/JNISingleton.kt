@@ -1,17 +1,9 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
+import kotlinx.cinterop.COpaquePointer
 
-open class JNISingleton internal constructor(
-  _ignore: Any?
-) : Object(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("JNISingleton", "JNISingleton")
-        }
-
-  }
+open class JNISingleton : Object() {
+  override fun __new(): COpaquePointer = invokeConstructor("JNISingleton", "JNISingleton")
 }

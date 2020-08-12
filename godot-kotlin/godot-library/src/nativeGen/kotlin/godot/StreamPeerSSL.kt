@@ -2,7 +2,6 @@
 package godot
 
 import godot.StreamPeerSSL
-import godot.core.Godot.shouldInitPtr
 import godot.core.GodotError
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Long
@@ -12,14 +11,12 @@ import godot.icalls._icall_Unit
 import godot.icalls._icall_Unit_Boolean
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class StreamPeerSSL internal constructor(
-  _ignore: Any?
-) : StreamPeer(_ignore) {
+open class StreamPeerSSL : StreamPeer() {
   open var blockingHandshake: Boolean
     get() {
       val mb = getMethodBind("StreamPeerSSL","is_blocking_handshake_enabled")
@@ -30,12 +27,7 @@ open class StreamPeerSSL internal constructor(
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("StreamPeerSSL", "StreamPeerSSL")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("StreamPeerSSL", "StreamPeerSSL")
 
   open fun acceptStream(
     stream: StreamPeer,

@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.GodotError
 import godot.core.PoolByteArray
 import godot.core.PoolStringArray
@@ -30,15 +29,13 @@ import godot.icalls._icall_Unit_Variant_Boolean
 import godot.icalls._icall_Variant_Boolean
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class File internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
+open class File : Reference() {
   open var endianSwap: Boolean
     get() {
       val mb = getMethodBind("_File","get_endian_swap")
@@ -49,12 +46,7 @@ open class File internal constructor(
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("File", "_File")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("File", "_File")
 
   open fun close() {
     val mb = getMethodBind("_File","close")

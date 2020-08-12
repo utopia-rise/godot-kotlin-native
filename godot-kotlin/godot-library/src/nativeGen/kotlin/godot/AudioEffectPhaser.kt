@@ -1,17 +1,14 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Double
 import godot.icalls._icall_Unit_Double
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Double
+import kotlinx.cinterop.COpaquePointer
 
-open class AudioEffectPhaser internal constructor(
-  _ignore: Any?
-) : AudioEffect(_ignore) {
+open class AudioEffectPhaser : AudioEffect() {
   open var depth: Double
     get() {
       val mb = getMethodBind("AudioEffectPhaser","get_depth")
@@ -62,12 +59,7 @@ open class AudioEffectPhaser internal constructor(
       _icall_Unit_Double(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("AudioEffectPhaser", "AudioEffectPhaser")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("AudioEffectPhaser", "AudioEffectPhaser")
 
   open fun getDepth(): Double {
     val mb = getMethodBind("AudioEffectPhaser","get_depth")

@@ -2,7 +2,6 @@
 package godot
 
 import godot.BakedLightmap
-import godot.core.Godot.shouldInitPtr
 import godot.core.Vector3
 import godot.icalls._icall_BakedLightmapData
 import godot.icalls._icall_Boolean
@@ -20,16 +19,14 @@ import godot.icalls._icall_Unit_Vector3
 import godot.icalls._icall_Vector3
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.String
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class BakedLightmap internal constructor(
-  _ignore: Any?
-) : VisualInstance(_ignore) {
+open class BakedLightmap : VisualInstance() {
   open var bakeCellSize: Double
     get() {
       val mb = getMethodBind("BakedLightmap","get_bake_cell_size")
@@ -140,12 +137,7 @@ open class BakedLightmap internal constructor(
       _icall_Unit_Object(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("BakedLightmap", "BakedLightmap")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("BakedLightmap", "BakedLightmap")
 
   open fun bakeExtents(schedule: Vector3.() -> Unit): Vector3 = bakeExtents.apply{
       schedule(this)

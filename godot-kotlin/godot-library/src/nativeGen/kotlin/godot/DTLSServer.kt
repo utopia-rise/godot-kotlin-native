@@ -1,23 +1,15 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.GodotError
 import godot.icalls._icall_Long_Object_Object_nObject
 import godot.icalls._icall_PacketPeerDTLS_Object
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
+import kotlinx.cinterop.COpaquePointer
 
-open class DTLSServer internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("DTLSServer", "DTLSServer")
-        }
-
-  }
+open class DTLSServer : Reference() {
+  override fun __new(): COpaquePointer = invokeConstructor("DTLSServer", "DTLSServer")
 
   open fun setup(
     key: CryptoKey,

@@ -11,13 +11,10 @@ import godot.icalls._icall_Unit
 import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Long
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 
-open class NetworkedMultiplayerPeer internal constructor(
-  _ignore: Any?
-) : PacketPeer(_ignore) {
+open class NetworkedMultiplayerPeer internal constructor() : PacketPeer() {
   val connectionFailed: Signal0 by signal()
 
   val connectionSucceeded: Signal0 by signal()
@@ -47,8 +44,6 @@ open class NetworkedMultiplayerPeer internal constructor(
       val mb = getMethodBind("NetworkedMultiplayerPeer","set_transfer_mode")
       _icall_Unit_Long(mb, this.ptr, value)
     }
-
-  internal constructor() : this(null)
 
   open fun getConnectionStatus(): NetworkedMultiplayerPeer.ConnectionStatus {
     val mb = getMethodBind("NetworkedMultiplayerPeer","get_connection_status")

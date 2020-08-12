@@ -25,19 +25,12 @@ import kotlin.Double
 import kotlin.Long
 import kotlin.String
 import kotlin.requireNotNull
+import kotlinx.cinterop.COpaquePointer
 import kotlinx.cinterop.cstr
 import kotlinx.cinterop.invoke
 import kotlinx.cinterop.memScoped
 
 object ARVRServer : Object() {
-  init {
-    memScoped {
-        val ptr = nullSafe(Godot.gdnative.godot_global_get_singleton).invoke("ARVRServer".cstr.ptr)
-        requireNotNull(ptr) { "No instance found for singleton ARVRServer" }
-        this@ARVRServer.ptr = ptr
-    }
-  }
-
   val interfaceAdded: Signal1<String> by signal("interface_name")
 
   val interfaceRemoved: Signal1<String> by signal("interface_name")
@@ -65,6 +58,12 @@ object ARVRServer : Object() {
       val mb = getMethodBind("ARVRServer","set_world_scale")
       _icall_Unit_Double(mb, this.ptr, value)
     }
+
+  override fun __new(): COpaquePointer = memScoped {
+      val ptr = nullSafe(Godot.gdnative.godot_global_get_singleton).invoke("ARVRServer".cstr.ptr)
+      requireNotNull(ptr) { "No instance found for singleton ARVRServer" }
+      ptr
+  }
 
   fun centerOnHmd(rotationMode: Long, keepHeight: Boolean) {
     val mb = getMethodBind("ARVRServer","center_on_hmd")

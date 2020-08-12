@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Signal0
 import godot.core.VariantArray
 import godot.core.signal
@@ -10,13 +9,11 @@ import godot.icalls._icall_PopupMenu
 import godot.icalls._icall_Unit_Boolean
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.NotImplementedError
+import kotlinx.cinterop.COpaquePointer
 
-open class MenuButton internal constructor(
-  _ignore: Any?
-) : Button(_ignore) {
+open class MenuButton : Button() {
   val aboutToShow: Signal0 by signal()
 
   open var switchOnHover: Boolean
@@ -29,12 +26,7 @@ open class MenuButton internal constructor(
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("MenuButton", "MenuButton")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("MenuButton", "MenuButton")
 
   open fun _getItems(): VariantArray {
     throw NotImplementedError("_get_items is not implemented for MenuButton")

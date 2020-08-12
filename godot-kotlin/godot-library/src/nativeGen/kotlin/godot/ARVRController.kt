@@ -2,7 +2,6 @@
 package godot
 
 import godot.ARVRPositionalTracker
-import godot.core.Godot.shouldInitPtr
 import godot.core.Signal1
 import godot.core.signal
 import godot.icalls._icall_Boolean
@@ -16,15 +15,13 @@ import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class ARVRController internal constructor(
-  _ignore: Any?
-) : Spatial(_ignore) {
+open class ARVRController : Spatial() {
   val buttonPressed: Signal1<Long> by signal("button")
 
   val buttonRelease: Signal1<Long> by signal("button")
@@ -51,12 +48,7 @@ open class ARVRController internal constructor(
       _icall_Unit_Double(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("ARVRController", "ARVRController")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("ARVRController", "ARVRController")
 
   open fun getControllerId(): Long {
     val mb = getMethodBind("ARVRController","get_controller_id")

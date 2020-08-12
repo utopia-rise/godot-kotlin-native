@@ -38,20 +38,19 @@ import kotlin.Double
 import kotlin.Long
 import kotlin.String
 import kotlin.requireNotNull
+import kotlinx.cinterop.COpaquePointer
 import kotlinx.cinterop.cstr
 import kotlinx.cinterop.invoke
 import kotlinx.cinterop.memScoped
 
 object Input : Object() {
-  init {
-    memScoped {
-        val ptr = nullSafe(Godot.gdnative.godot_global_get_singleton).invoke("Input".cstr.ptr)
-        requireNotNull(ptr) { "No instance found for singleton Input" }
-        this@Input.ptr = ptr
-    }
-  }
-
   val joyConnectionChanged: Signal2<Long, Boolean> by signal("device", "connected")
+
+  override fun __new(): COpaquePointer = memScoped {
+      val ptr = nullSafe(Godot.gdnative.godot_global_get_singleton).invoke("Input".cstr.ptr)
+      requireNotNull(ptr) { "No instance found for singleton Input" }
+      ptr
+  }
 
   fun actionPress(action: String, strength: Double = 1.0) {
     val mb = getMethodBind("Input","action_press")

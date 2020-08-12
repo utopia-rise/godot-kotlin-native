@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.PoolRealArray
 import godot.icalls._icall_Long
 import godot.icalls._icall_PoolRealArray
@@ -9,12 +8,10 @@ import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_PoolRealArray
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class HeightMapShape internal constructor(
-  _ignore: Any?
-) : Shape(_ignore) {
+open class HeightMapShape : Shape() {
   open var mapData: PoolRealArray
     get() {
       val mb = getMethodBind("HeightMapShape","get_map_data")
@@ -45,12 +42,7 @@ open class HeightMapShape internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("HeightMapShape", "HeightMapShape")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("HeightMapShape", "HeightMapShape")
 
   open fun getMapData(): PoolRealArray {
     val mb = getMethodBind("HeightMapShape","get_map_data")

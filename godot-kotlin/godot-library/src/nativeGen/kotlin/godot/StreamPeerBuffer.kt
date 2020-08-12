@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.PoolByteArray
 import godot.icalls._icall_Long
 import godot.icalls._icall_PoolByteArray
@@ -11,12 +10,10 @@ import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_PoolByteArray
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class StreamPeerBuffer internal constructor(
-  _ignore: Any?
-) : StreamPeer(_ignore) {
+open class StreamPeerBuffer : StreamPeer() {
   open var dataArray: PoolByteArray
     get() {
       val mb = getMethodBind("StreamPeerBuffer","get_data_array")
@@ -27,12 +24,7 @@ open class StreamPeerBuffer internal constructor(
       _icall_Unit_PoolByteArray(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("StreamPeerBuffer", "StreamPeerBuffer")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("StreamPeerBuffer", "StreamPeerBuffer")
 
   open fun clear() {
     val mb = getMethodBind("StreamPeerBuffer","clear")

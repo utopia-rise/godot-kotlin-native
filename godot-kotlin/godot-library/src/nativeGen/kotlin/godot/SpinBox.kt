@@ -2,7 +2,6 @@
 package godot
 
 import godot.LineEdit
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_LineEdit
 import godot.icalls._icall_Long
@@ -13,14 +12,12 @@ import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class SpinBox internal constructor(
-  _ignore: Any?
-) : Range(_ignore) {
+open class SpinBox : Range() {
   open var align: Long
     get() {
       val mb = getMethodBind("SpinBox","get_align")
@@ -61,12 +58,7 @@ open class SpinBox internal constructor(
       _icall_Unit_String(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("SpinBox", "SpinBox")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("SpinBox", "SpinBox")
 
   override fun _guiInput(arg0: InputEvent) {
   }

@@ -2,7 +2,6 @@
 package godot
 
 import godot.TabContainer
-import godot.core.Godot.shouldInitPtr
 import godot.core.Signal0
 import godot.core.Signal1
 import godot.core.signal
@@ -22,14 +21,12 @@ import godot.icalls._icall_Unit_Long_String
 import godot.icalls._icall_Unit_Object
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class TabContainer internal constructor(
-  _ignore: Any?
-) : Container(_ignore) {
+open class TabContainer : Container() {
   val prePopupPressed: Signal0 by signal()
 
   val tabChanged: Signal1<Long> by signal("tab")
@@ -86,12 +83,7 @@ open class TabContainer internal constructor(
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("TabContainer", "TabContainer")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("TabContainer", "TabContainer")
 
   open fun _childRenamedCallback() {
   }

@@ -1,18 +1,15 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Transform
 import godot.icalls._icall_Transform
 import godot.icalls._icall_Unit_Transform
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class VisualShaderNodeTransformConstant internal constructor(
-  _ignore: Any?
-) : VisualShaderNode(_ignore) {
+open class VisualShaderNodeTransformConstant : VisualShaderNode() {
   open var constant: Transform
     get() {
       val mb = getMethodBind("VisualShaderNodeTransformConstant","get_constant")
@@ -23,13 +20,8 @@ open class VisualShaderNodeTransformConstant internal constructor(
       _icall_Unit_Transform(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("VisualShaderNodeTransformConstant",
-            "VisualShaderNodeTransformConstant")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("VisualShaderNodeTransformConstant",
+      "VisualShaderNodeTransformConstant")
 
   open fun constant(schedule: Transform.() -> Unit): Transform = constant.apply{
       schedule(this)

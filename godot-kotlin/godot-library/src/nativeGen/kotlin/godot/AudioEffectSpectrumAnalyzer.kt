@@ -2,20 +2,17 @@
 package godot
 
 import godot.AudioEffectSpectrumAnalyzer
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Double
 import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Double
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class AudioEffectSpectrumAnalyzer internal constructor(
-  _ignore: Any?
-) : AudioEffect(_ignore) {
+open class AudioEffectSpectrumAnalyzer : AudioEffect() {
   open var bufferLength: Double
     get() {
       val mb = getMethodBind("AudioEffectSpectrumAnalyzer","get_buffer_length")
@@ -46,13 +43,8 @@ open class AudioEffectSpectrumAnalyzer internal constructor(
       _icall_Unit_Double(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("AudioEffectSpectrumAnalyzer",
-            "AudioEffectSpectrumAnalyzer")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("AudioEffectSpectrumAnalyzer",
+      "AudioEffectSpectrumAnalyzer")
 
   open fun getBufferLength(): Double {
     val mb = getMethodBind("AudioEffectSpectrumAnalyzer","get_buffer_length")

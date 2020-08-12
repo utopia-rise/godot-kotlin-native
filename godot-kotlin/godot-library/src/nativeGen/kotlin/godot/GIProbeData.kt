@@ -2,7 +2,6 @@
 package godot
 
 import godot.core.AABB
-import godot.core.Godot.shouldInitPtr
 import godot.core.PoolIntArray
 import godot.core.Transform
 import godot.icalls._icall_AABB
@@ -19,15 +18,13 @@ import godot.icalls._icall_Unit_PoolIntArray
 import godot.icalls._icall_Unit_Transform
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class GIProbeData internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
+open class GIProbeData : Resource() {
   open var bias: Double
     get() {
       val mb = getMethodBind("GIProbeData","get_bias")
@@ -138,12 +135,7 @@ open class GIProbeData internal constructor(
       _icall_Unit_Transform(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("GIProbeData", "GIProbeData")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("GIProbeData", "GIProbeData")
 
   open fun bounds(schedule: AABB.() -> Unit): AABB = bounds.apply{
       schedule(this)

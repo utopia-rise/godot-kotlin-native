@@ -1,17 +1,9 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
+import kotlinx.cinterop.COpaquePointer
 
-open class CheckBox internal constructor(
-  _ignore: Any?
-) : Button(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("CheckBox", "CheckBox")
-        }
-
-  }
+open class CheckBox : Button() {
+  override fun __new(): COpaquePointer = invokeConstructor("CheckBox", "CheckBox")
 }

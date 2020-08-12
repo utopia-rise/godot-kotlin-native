@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Transform2D
 import godot.core.Vector2
 import godot.icalls._icall_Boolean
@@ -10,13 +9,11 @@ import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_Vector2
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class ParallaxBackground internal constructor(
-  _ignore: Any?
-) : CanvasLayer(_ignore) {
+open class ParallaxBackground : CanvasLayer() {
   open var scrollBaseOffset: Vector2
     get() {
       val mb = getMethodBind("ParallaxBackground","get_scroll_base_offset")
@@ -77,12 +74,8 @@ open class ParallaxBackground internal constructor(
       _icall_Unit_Vector2(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("ParallaxBackground", "ParallaxBackground")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("ParallaxBackground",
+      "ParallaxBackground")
 
   open fun scrollBaseOffset(schedule: Vector2.() -> Unit): Vector2 = scrollBaseOffset.apply{
       schedule(this)

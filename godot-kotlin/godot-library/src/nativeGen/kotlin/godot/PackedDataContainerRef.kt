@@ -5,16 +5,11 @@ import godot.core.Variant
 import godot.core.VariantArray
 import godot.icalls._icall_Long
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.NotImplementedError
 
-open class PackedDataContainerRef internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
-  internal constructor() : this(null)
-
+open class PackedDataContainerRef internal constructor() : Reference() {
   open fun _isDictionary(): Boolean {
     throw NotImplementedError("_is_dictionary is not implemented for PackedDataContainerRef")
   }

@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Rect2
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Rect2
@@ -11,13 +10,11 @@ import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_Rect2
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class AtlasTexture internal constructor(
-  _ignore: Any?
-) : Texture(_ignore) {
+open class AtlasTexture : Texture() {
   open var atlas: Texture
     get() {
       val mb = getMethodBind("AtlasTexture","get_atlas")
@@ -58,12 +55,7 @@ open class AtlasTexture internal constructor(
       _icall_Unit_Rect2(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("AtlasTexture", "AtlasTexture")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("AtlasTexture", "AtlasTexture")
 
   open fun margin(schedule: Rect2.() -> Unit): Rect2 = margin.apply{
       schedule(this)

@@ -1,16 +1,13 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Resource
 import godot.icalls._icall_Unit_Object
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
+import kotlinx.cinterop.COpaquePointer
 
-open class VisualScriptPreload internal constructor(
-  _ignore: Any?
-) : VisualScriptNode(_ignore) {
+open class VisualScriptPreload : VisualScriptNode() {
   open var resource: Resource
     get() {
       val mb = getMethodBind("VisualScriptPreload","get_preload")
@@ -21,12 +18,8 @@ open class VisualScriptPreload internal constructor(
       _icall_Unit_Object(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("VisualScriptPreload", "VisualScriptPreload")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("VisualScriptPreload",
+      "VisualScriptPreload")
 
   open fun getPreload(): Resource {
     val mb = getMethodBind("VisualScriptPreload","get_preload")

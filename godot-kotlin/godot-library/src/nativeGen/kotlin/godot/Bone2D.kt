@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Transform2D
 import godot.icalls._icall_Double
 import godot.icalls._icall_Long
@@ -11,14 +10,12 @@ import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_Transform2D
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Double
 import kotlin.Long
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class Bone2D internal constructor(
-  _ignore: Any?
-) : Node2D(_ignore) {
+open class Bone2D : Node2D() {
   open var defaultLength: Double
     get() {
       val mb = getMethodBind("Bone2D","get_default_length")
@@ -39,12 +36,7 @@ open class Bone2D internal constructor(
       _icall_Unit_Transform2D(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Bone2D", "Bone2D")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("Bone2D", "Bone2D")
 
   open fun rest(schedule: Transform2D.() -> Unit): Transform2D = rest.apply{
       schedule(this)

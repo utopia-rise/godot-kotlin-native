@@ -3,7 +3,6 @@ package godot
 
 import godot.Line2D
 import godot.core.Color
-import godot.core.Godot.shouldInitPtr
 import godot.core.PoolVector2Array
 import godot.core.Vector2
 import godot.icalls._icall_Boolean
@@ -26,15 +25,13 @@ import godot.icalls._icall_Unit_Vector2_Long
 import godot.icalls._icall_Vector2_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class Line2D internal constructor(
-  _ignore: Any?
-) : Node2D(_ignore) {
+open class Line2D : Node2D() {
   open var antialiased: Boolean
     get() {
       val mb = getMethodBind("Line2D","get_antialiased")
@@ -165,12 +162,7 @@ open class Line2D internal constructor(
       _icall_Unit_Object(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Line2D", "Line2D")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("Line2D", "Line2D")
 
   open fun defaultColor(schedule: Color.() -> Unit): Color = defaultColor.apply{
       schedule(this)

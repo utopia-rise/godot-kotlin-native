@@ -2,7 +2,6 @@
 package godot
 
 import godot.Label
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Double
 import godot.icalls._icall_Long
@@ -13,15 +12,13 @@ import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class Label internal constructor(
-  _ignore: Any?
-) : Control(_ignore) {
+open class Label : Control() {
   open var align: Long
     get() {
       val mb = getMethodBind("Label","get_align")
@@ -122,12 +119,7 @@ open class Label internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Label", "Label")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("Label", "Label")
 
   open fun getAlign(): Label.Align {
     val mb = getMethodBind("Label","get_align")

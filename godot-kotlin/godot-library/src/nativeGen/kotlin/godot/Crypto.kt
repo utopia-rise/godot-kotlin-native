@@ -1,26 +1,18 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.PoolByteArray
 import godot.icalls._icall_CryptoKey_Long
 import godot.icalls._icall_PoolByteArray_Long
 import godot.icalls._icall_X509Certificate_Object_String_String_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class Crypto internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Crypto", "Crypto")
-        }
-
-  }
+open class Crypto : Reference() {
+  override fun __new(): COpaquePointer = invokeConstructor("Crypto", "Crypto")
 
   open fun generateRandomBytes(size: Long): PoolByteArray {
     val mb = getMethodBind("Crypto","generate_random_bytes")

@@ -2,7 +2,6 @@
 package godot
 
 import godot.WebSocketPeer
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Long
 import godot.icalls._icall_String
@@ -11,20 +10,13 @@ import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Long_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class WebSocketPeer internal constructor(
-  _ignore: Any?
-) : PacketPeer(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("WebSocketPeer", "WebSocketPeer")
-        }
-
-  }
+open class WebSocketPeer : PacketPeer() {
+  override fun __new(): COpaquePointer = invokeConstructor("WebSocketPeer", "WebSocketPeer")
 
   open fun close(code: Long = 1000, reason: String = "") {
     val mb = getMethodBind("WebSocketPeer","close")

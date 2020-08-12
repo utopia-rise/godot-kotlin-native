@@ -6,15 +6,10 @@ import godot.icalls._icall_Unit_Long_Long
 import godot.icalls._icall_Unit_Long_String
 import godot.icalls._icall_Unit_Long_String_Long
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Long
 import kotlin.String
 
-open class VisualScriptLists internal constructor(
-  _ignore: Any?
-) : VisualScriptNode(_ignore) {
-  internal constructor() : this(null)
-
+open class VisualScriptLists internal constructor() : VisualScriptNode() {
   open fun addInputDataPort(
     type: Long,
     name: String,

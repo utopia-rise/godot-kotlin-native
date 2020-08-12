@@ -25,13 +25,10 @@ import godot.icalls._icall_Unit_Long_Object
 import godot.icalls._icall_Unit_Long_Transform
 import godot.icalls._icall_VariantArray
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 
-open class CollisionObject internal constructor(
-  _ignore: Any?
-) : Spatial(_ignore) {
+open class CollisionObject internal constructor() : Spatial() {
   val inputEvent: Signal5<Node, InputEvent, Vector3, Vector3, Long> by signal("camera", "event",
       "click_position", "click_normal", "shape_idx")
 
@@ -58,8 +55,6 @@ open class CollisionObject internal constructor(
       val mb = getMethodBind("CollisionObject","set_ray_pickable")
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
-
-  internal constructor() : this(null)
 
   open fun _inputEvent(
     camera: Object,

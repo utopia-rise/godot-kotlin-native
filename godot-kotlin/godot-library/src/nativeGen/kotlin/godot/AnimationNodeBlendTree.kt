@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Vector2
 import godot.icalls._icall_AnimationNode_String
 import godot.icalls._icall_Boolean_String
@@ -16,15 +15,13 @@ import godot.icalls._icall_Vector2
 import godot.icalls._icall_Vector2_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class AnimationNodeBlendTree internal constructor(
-  _ignore: Any?
-) : AnimationRootNode(_ignore) {
+open class AnimationNodeBlendTree : AnimationRootNode() {
   open var graphOffset: Vector2
     get() {
       val mb = getMethodBind("AnimationNodeBlendTree","get_graph_offset")
@@ -35,12 +32,8 @@ open class AnimationNodeBlendTree internal constructor(
       _icall_Unit_Vector2(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("AnimationNodeBlendTree", "AnimationNodeBlendTree")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("AnimationNodeBlendTree",
+      "AnimationNodeBlendTree")
 
   open fun graphOffset(schedule: Vector2.() -> Unit): Vector2 = graphOffset.apply{
       schedule(this)

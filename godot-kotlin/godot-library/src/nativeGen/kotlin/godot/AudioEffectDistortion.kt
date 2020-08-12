@@ -2,20 +2,17 @@
 package godot
 
 import godot.AudioEffectDistortion
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Double
 import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Double
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class AudioEffectDistortion internal constructor(
-  _ignore: Any?
-) : AudioEffect(_ignore) {
+open class AudioEffectDistortion : AudioEffect() {
   open var drive: Double
     get() {
       val mb = getMethodBind("AudioEffectDistortion","get_drive")
@@ -66,12 +63,8 @@ open class AudioEffectDistortion internal constructor(
       _icall_Unit_Double(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("AudioEffectDistortion", "AudioEffectDistortion")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("AudioEffectDistortion",
+      "AudioEffectDistortion")
 
   open fun getDrive(): Double {
     val mb = getMethodBind("AudioEffectDistortion","get_drive")

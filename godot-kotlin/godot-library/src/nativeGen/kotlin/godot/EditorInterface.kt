@@ -23,16 +23,11 @@ import godot.icalls._icall_Unit_String_Boolean
 import godot.icalls._icall_VariantArray
 import godot.icalls._icall_VariantArray_VariantArray_Long
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
 
-open class EditorInterface internal constructor(
-  _ignore: Any?
-) : Node(_ignore) {
-  internal constructor() : this(null)
-
+open class EditorInterface internal constructor() : Node() {
   open fun editResource(resource: Resource) {
     val mb = getMethodBind("EditorInterface","edit_resource")
     _icall_Unit_Object( mb, this.ptr, resource)

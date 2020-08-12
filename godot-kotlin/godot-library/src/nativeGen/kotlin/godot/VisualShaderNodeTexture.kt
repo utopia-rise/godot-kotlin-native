@@ -2,19 +2,16 @@
 package godot
 
 import godot.VisualShaderNodeTexture
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Long
 import godot.icalls._icall_Texture
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Object
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class VisualShaderNodeTexture internal constructor(
-  _ignore: Any?
-) : VisualShaderNode(_ignore) {
+open class VisualShaderNodeTexture : VisualShaderNode() {
   open var source: Long
     get() {
       val mb = getMethodBind("VisualShaderNodeTexture","get_source")
@@ -45,12 +42,8 @@ open class VisualShaderNodeTexture internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("VisualShaderNodeTexture", "VisualShaderNodeTexture")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("VisualShaderNodeTexture",
+      "VisualShaderNodeTexture")
 
   open fun getSource(): VisualShaderNodeTexture.Source {
     val mb = getMethodBind("VisualShaderNodeTexture","get_source")

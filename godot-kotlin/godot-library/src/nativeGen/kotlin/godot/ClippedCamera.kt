@@ -2,7 +2,6 @@
 package godot
 
 import godot.ClippedCamera
-import godot.core.Godot.shouldInitPtr
 import godot.core.RID
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Boolean_Long
@@ -17,14 +16,12 @@ import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_RID
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class ClippedCamera internal constructor(
-  _ignore: Any?
-) : Camera(_ignore) {
+open class ClippedCamera : Camera() {
   open var clipToAreas: Boolean
     get() {
       val mb = getMethodBind("ClippedCamera","is_clip_to_areas_enabled")
@@ -75,12 +72,7 @@ open class ClippedCamera internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("ClippedCamera", "ClippedCamera")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("ClippedCamera", "ClippedCamera")
 
   open fun addException(node: Object) {
     val mb = getMethodBind("ClippedCamera","add_exception")

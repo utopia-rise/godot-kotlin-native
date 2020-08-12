@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.NodePath
 import godot.icalls._icall_Long
 import godot.icalls._icall_Material_Long
@@ -14,12 +13,10 @@ import godot.icalls._icall_Unit_NodePath
 import godot.icalls._icall_Unit_Object
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class MeshInstance internal constructor(
-  _ignore: Any?
-) : GeometryInstance(_ignore) {
+open class MeshInstance : GeometryInstance() {
   open var mesh: Mesh
     get() {
       val mb = getMethodBind("MeshInstance","get_mesh")
@@ -50,12 +47,7 @@ open class MeshInstance internal constructor(
       _icall_Unit_Object(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("MeshInstance", "MeshInstance")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("MeshInstance", "MeshInstance")
 
   open fun _meshChanged() {
   }

@@ -2,7 +2,6 @@
 package godot
 
 import godot.CameraFeed
-import godot.core.Godot.shouldInitPtr
 import godot.core.Transform2D
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Long
@@ -12,15 +11,13 @@ import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Transform2D
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class CameraFeed internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
+open class CameraFeed : Reference() {
   open var feedIsActive: Boolean
     get() {
       val mb = getMethodBind("CameraFeed","is_active")
@@ -41,12 +38,7 @@ open class CameraFeed internal constructor(
       _icall_Unit_Transform2D(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("CameraFeed", "CameraFeed")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("CameraFeed", "CameraFeed")
 
   open fun feedTransform(schedule: Transform2D.() -> Unit): Transform2D = feedTransform.apply{
       schedule(this)

@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.GodotError
 import godot.core.Variant
 import godot.icalls._icall_Long
@@ -14,13 +13,11 @@ import godot.icalls._icall_Unit_Variant
 import godot.icalls._icall_Variant
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class JSONParseResult internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
+open class JSONParseResult : Reference() {
   open var error: Object
     get() {
       val mb = getMethodBind("JSONParseResult","get_error")
@@ -61,12 +58,7 @@ open class JSONParseResult internal constructor(
       _icall_Unit_Variant(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("JSONParseResult", "JSONParseResult")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("JSONParseResult", "JSONParseResult")
 
   open fun getError(): GodotError {
     val mb = getMethodBind("JSONParseResult","get_error")

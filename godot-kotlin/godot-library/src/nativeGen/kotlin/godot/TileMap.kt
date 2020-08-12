@@ -3,7 +3,6 @@ package godot
 
 import godot.TileMap
 import godot.core.Dictionary
-import godot.core.Godot.shouldInitPtr
 import godot.core.PoolIntArray
 import godot.core.Rect2
 import godot.core.Signal0
@@ -40,16 +39,14 @@ import godot.icalls._icall_Vector2_Vector2
 import godot.icalls._icall_Vector2_Vector2_Boolean
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.NotImplementedError
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class TileMap internal constructor(
-  _ignore: Any?
-) : Node2D(_ignore) {
+open class TileMap : Node2D() {
   val settingsChanged: Signal0 by signal()
 
   open var cellClipUv: Boolean
@@ -232,12 +229,7 @@ open class TileMap internal constructor(
       _icall_Unit_Object(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("TileMap", "TileMap")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("TileMap", "TileMap")
 
   open fun cellCustomTransform(schedule: Transform2D.() -> Unit): Transform2D =
       cellCustomTransform.apply{

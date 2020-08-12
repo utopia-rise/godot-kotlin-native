@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.PoolIntArray
 import godot.core.PoolVector3Array
 import godot.core.VariantArray
@@ -23,16 +22,14 @@ import godot.icalls._icall_Unit_PoolVector3Array
 import godot.icalls._icall_Unit_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.NotImplementedError
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class NavigationMesh internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
+open class NavigationMesh : Resource() {
   open var agent_height: Double
     get() {
       val mb = getMethodBind("NavigationMesh","get_agent_height")
@@ -253,12 +250,7 @@ open class NavigationMesh internal constructor(
       _icall_Unit_PoolVector3Array(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("NavigationMesh", "NavigationMesh")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("NavigationMesh", "NavigationMesh")
 
   open fun _getPolygons(): VariantArray {
     throw NotImplementedError("_get_polygons is not implemented for NavigationMesh")

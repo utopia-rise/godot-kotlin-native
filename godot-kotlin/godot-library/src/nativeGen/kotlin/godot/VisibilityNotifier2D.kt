@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Rect2
 import godot.core.Signal0
 import godot.core.Signal1
@@ -11,13 +10,11 @@ import godot.icalls._icall_Rect2
 import godot.icalls._icall_Unit_Rect2
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class VisibilityNotifier2D internal constructor(
-  _ignore: Any?
-) : Node2D(_ignore) {
+open class VisibilityNotifier2D : Node2D() {
   val screenEntered: Signal0 by signal()
 
   val screenExited: Signal0 by signal()
@@ -36,12 +33,8 @@ open class VisibilityNotifier2D internal constructor(
       _icall_Unit_Rect2(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("VisibilityNotifier2D", "VisibilityNotifier2D")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("VisibilityNotifier2D",
+      "VisibilityNotifier2D")
 
   open fun rect(schedule: Rect2.() -> Unit): Rect2 = rect.apply{
       schedule(this)

@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.RID
 import godot.core.Transform2D
 import godot.core.Vector2
@@ -20,15 +19,13 @@ import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_Vector2
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class CanvasLayer internal constructor(
-  _ignore: Any?
-) : Node(_ignore) {
+open class CanvasLayer : Node() {
   open var customViewport: Node
     get() {
       val mb = getMethodBind("CanvasLayer","get_custom_viewport")
@@ -119,12 +116,7 @@ open class CanvasLayer internal constructor(
       _icall_Unit_Transform2D(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("CanvasLayer", "CanvasLayer")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("CanvasLayer", "CanvasLayer")
 
   open fun offset(schedule: Vector2.() -> Unit): Vector2 = offset.apply{
       schedule(this)

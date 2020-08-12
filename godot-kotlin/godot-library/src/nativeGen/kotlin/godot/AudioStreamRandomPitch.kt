@@ -1,19 +1,16 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_AudioStream
 import godot.icalls._icall_Double
 import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_Object
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Double
+import kotlinx.cinterop.COpaquePointer
 
-open class AudioStreamRandomPitch internal constructor(
-  _ignore: Any?
-) : AudioStream(_ignore) {
+open class AudioStreamRandomPitch : AudioStream() {
   open var audioStream: AudioStream
     get() {
       val mb = getMethodBind("AudioStreamRandomPitch","get_audio_stream")
@@ -34,12 +31,8 @@ open class AudioStreamRandomPitch internal constructor(
       _icall_Unit_Double(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("AudioStreamRandomPitch", "AudioStreamRandomPitch")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("AudioStreamRandomPitch",
+      "AudioStreamRandomPitch")
 
   open fun getAudioStream(): AudioStream {
     val mb = getMethodBind("AudioStreamRandomPitch","get_audio_stream")

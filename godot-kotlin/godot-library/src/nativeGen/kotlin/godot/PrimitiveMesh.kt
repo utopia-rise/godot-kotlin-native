@@ -11,13 +11,10 @@ import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_VariantArray
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Unit
 
-open class PrimitiveMesh internal constructor(
-  _ignore: Any?
-) : Mesh(_ignore) {
+open class PrimitiveMesh internal constructor() : Mesh() {
   open var customAabb: AABB
     get() {
       val mb = getMethodBind("PrimitiveMesh","get_custom_aabb")
@@ -47,8 +44,6 @@ open class PrimitiveMesh internal constructor(
       val mb = getMethodBind("PrimitiveMesh","set_material")
       _icall_Unit_Object(mb, this.ptr, value)
     }
-
-  internal constructor() : this(null)
 
   open fun customAabb(schedule: AABB.() -> Unit): AABB = customAabb.apply{
       schedule(this)

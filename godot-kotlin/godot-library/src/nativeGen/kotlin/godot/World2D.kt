@@ -1,17 +1,14 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.RID
 import godot.icalls._icall_Physics2DDirectSpaceState
 import godot.icalls._icall_RID
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
+import kotlinx.cinterop.COpaquePointer
 
-open class World2D internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
+open class World2D : Resource() {
   open val canvas: RID
     get() {
       val mb = getMethodBind("World2D","get_canvas")
@@ -30,12 +27,7 @@ open class World2D internal constructor(
       return _icall_RID(mb, this.ptr)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("World2D", "World2D")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("World2D", "World2D")
 
   open fun getCanvas(): RID {
     val mb = getMethodBind("World2D","get_canvas")

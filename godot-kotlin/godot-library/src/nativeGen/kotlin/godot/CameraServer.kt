@@ -13,23 +13,21 @@ import godot.internal.type.nullSafe
 import godot.internal.utils.getMethodBind
 import kotlin.Long
 import kotlin.requireNotNull
+import kotlinx.cinterop.COpaquePointer
 import kotlinx.cinterop.cstr
 import kotlinx.cinterop.invoke
 import kotlinx.cinterop.memScoped
 
 object CameraServer : Object() {
-  init {
-    memScoped {
-        val ptr =
-        nullSafe(Godot.gdnative.godot_global_get_singleton).invoke("CameraServer".cstr.ptr)
-        requireNotNull(ptr) { "No instance found for singleton CameraServer" }
-        this@CameraServer.ptr = ptr
-    }
-  }
-
   val cameraFeedAdded: Signal1<Long> by signal("id")
 
   val cameraFeedRemoved: Signal1<Long> by signal("id")
+
+  override fun __new(): COpaquePointer = memScoped {
+      val ptr = nullSafe(Godot.gdnative.godot_global_get_singleton).invoke("CameraServer".cstr.ptr)
+      requireNotNull(ptr) { "No instance found for singleton CameraServer" }
+      ptr
+  }
 
   fun addFeed(feed: CameraFeed) {
     val mb = getMethodBind("CameraServer","add_feed")

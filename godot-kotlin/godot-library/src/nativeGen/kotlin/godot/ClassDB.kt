@@ -26,17 +26,16 @@ import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
 import kotlin.requireNotNull
+import kotlinx.cinterop.COpaquePointer
 import kotlinx.cinterop.cstr
 import kotlinx.cinterop.invoke
 import kotlinx.cinterop.memScoped
 
 object ClassDB : Object() {
-  init {
-    memScoped {
-        val ptr = nullSafe(Godot.gdnative.godot_global_get_singleton).invoke("ClassDB".cstr.ptr)
-        requireNotNull(ptr) { "No instance found for singleton ClassDB" }
-        this@ClassDB.ptr = ptr
-    }
+  override fun __new(): COpaquePointer = memScoped {
+      val ptr = nullSafe(Godot.gdnative.godot_global_get_singleton).invoke("ClassDB".cstr.ptr)
+      requireNotNull(ptr) { "No instance found for singleton ClassDB" }
+      ptr
   }
 
   fun canInstance(_class: String): Boolean {

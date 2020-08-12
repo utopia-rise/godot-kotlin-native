@@ -5,16 +5,11 @@ import godot.core.VariantArray
 import godot.icalls._icall_Animation_String_Long_Long
 import godot.icalls._icall_Node_String_Long_Long
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Long
 import kotlin.NotImplementedError
 import kotlin.String
 
-open class EditorSceneImporter internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
-  internal constructor() : this(null)
-
+open class EditorSceneImporter internal constructor() : Reference() {
   open fun _getExtensions(): VariantArray {
     throw NotImplementedError("_get_extensions is not implemented for EditorSceneImporter")
   }

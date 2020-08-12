@@ -6,12 +6,9 @@ import godot.icalls._icall_Material
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Object
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Long
 
-open class Material internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
+open class Material internal constructor() : Resource() {
   open var nextPass: Material
     get() {
       val mb = getMethodBind("Material","get_next_pass")
@@ -31,8 +28,6 @@ open class Material internal constructor(
       val mb = getMethodBind("Material","set_render_priority")
       _icall_Unit_Long(mb, this.ptr, value)
     }
-
-  internal constructor() : this(null)
 
   open fun getNextPass(): Material {
     val mb = getMethodBind("Material","get_next_pass")

@@ -47,19 +47,12 @@ import kotlin.Long
 import kotlin.String
 import kotlin.Unit
 import kotlin.requireNotNull
+import kotlinx.cinterop.COpaquePointer
 import kotlinx.cinterop.cstr
 import kotlinx.cinterop.invoke
 import kotlinx.cinterop.memScoped
 
 object OS : Object() {
-  init {
-    memScoped {
-        val ptr = nullSafe(Godot.gdnative.godot_global_get_singleton).invoke("OS".cstr.ptr)
-        requireNotNull(ptr) { "No instance found for singleton OS" }
-        this@OS.ptr = ptr
-    }
-  }
-
   var clipboard: String
     get() {
       val mb = getMethodBind("_OS","get_clipboard")
@@ -259,6 +252,12 @@ object OS : Object() {
       val mb = getMethodBind("_OS","set_window_size")
       _icall_Unit_Vector2(mb, this.ptr, value)
     }
+
+  override fun __new(): COpaquePointer = memScoped {
+      val ptr = nullSafe(Godot.gdnative.godot_global_get_singleton).invoke("OS".cstr.ptr)
+      requireNotNull(ptr) { "No instance found for singleton OS" }
+      ptr
+  }
 
   fun maxWindowSize(schedule: Vector2.() -> Unit): Vector2 = maxWindowSize.apply{
       schedule(this)

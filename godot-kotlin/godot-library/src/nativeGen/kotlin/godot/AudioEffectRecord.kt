@@ -2,7 +2,6 @@
 package godot
 
 import godot.AudioStreamSample
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_AudioStreamSample
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Long
@@ -10,13 +9,11 @@ import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class AudioEffectRecord internal constructor(
-  _ignore: Any?
-) : AudioEffect(_ignore) {
+open class AudioEffectRecord : AudioEffect() {
   open var format: Long
     get() {
       val mb = getMethodBind("AudioEffectRecord","get_format")
@@ -27,12 +24,7 @@ open class AudioEffectRecord internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("AudioEffectRecord", "AudioEffectRecord")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("AudioEffectRecord", "AudioEffectRecord")
 
   open fun getFormat(): AudioStreamSample.Format {
     val mb = getMethodBind("AudioEffectRecord","get_format")

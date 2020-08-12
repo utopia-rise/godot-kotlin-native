@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.NodePath
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_NodePath
@@ -10,12 +9,10 @@ import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_NodePath
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
+import kotlinx.cinterop.COpaquePointer
 
-open class RemoteTransform2D internal constructor(
-  _ignore: Any?
-) : Node2D(_ignore) {
+open class RemoteTransform2D : Node2D() {
   open var remotePath: NodePath
     get() {
       val mb = getMethodBind("RemoteTransform2D","get_remote_node")
@@ -66,12 +63,7 @@ open class RemoteTransform2D internal constructor(
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("RemoteTransform2D", "RemoteTransform2D")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("RemoteTransform2D", "RemoteTransform2D")
 
   open fun forceUpdateCache() {
     val mb = getMethodBind("RemoteTransform2D","force_update_cache")

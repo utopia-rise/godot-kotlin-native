@@ -2,16 +2,11 @@
 package godot
 
 import godot.core.Vector2
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.NotImplementedError
 import kotlin.String
 
-open class EditorResourcePreviewGenerator internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
-  internal constructor() : this(null)
-
+open class EditorResourcePreviewGenerator internal constructor() : Reference() {
   open fun canGenerateSmallPreview(): Boolean {
     throw
         NotImplementedError("can_generate_small_preview is not implemented for EditorResourcePreviewGenerator")

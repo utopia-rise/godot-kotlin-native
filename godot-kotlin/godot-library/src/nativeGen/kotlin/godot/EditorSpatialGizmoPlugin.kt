@@ -10,17 +10,12 @@ import godot.icalls._icall_Unit_String_Color_Boolean_Boolean_Boolean
 import godot.icalls._icall_Unit_String_Object
 import godot.icalls._icall_Unit_String_Object_Boolean_Color
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.NotImplementedError
 import kotlin.String
 
-open class EditorSpatialGizmoPlugin internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
-  internal constructor() : this(null)
-
+open class EditorSpatialGizmoPlugin internal constructor() : Resource() {
   open fun addMaterial(name: String, material: SpatialMaterial) {
     val mb = getMethodBind("EditorSpatialGizmoPlugin","add_material")
     _icall_Unit_String_Object( mb, this.ptr, name, material)

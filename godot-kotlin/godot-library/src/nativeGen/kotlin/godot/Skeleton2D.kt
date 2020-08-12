@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.RID
 import godot.core.Signal0
 import godot.core.signal
@@ -10,20 +9,13 @@ import godot.icalls._icall_Long
 import godot.icalls._icall_RID
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class Skeleton2D internal constructor(
-  _ignore: Any?
-) : Node2D(_ignore) {
+open class Skeleton2D : Node2D() {
   val boneSetupChanged: Signal0 by signal()
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Skeleton2D", "Skeleton2D")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("Skeleton2D", "Skeleton2D")
 
   open fun _updateBoneSetup() {
   }

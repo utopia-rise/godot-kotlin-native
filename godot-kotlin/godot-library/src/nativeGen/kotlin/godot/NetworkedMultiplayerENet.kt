@@ -2,7 +2,6 @@
 package godot
 
 import godot.NetworkedMultiplayerENet
-import godot.core.Godot.shouldInitPtr
 import godot.core.GodotError
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Long
@@ -17,14 +16,12 @@ import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class NetworkedMultiplayerENet internal constructor(
-  _ignore: Any?
-) : NetworkedMultiplayerPeer(_ignore) {
+open class NetworkedMultiplayerENet : NetworkedMultiplayerPeer() {
   open var alwaysOrdered: Boolean
     get() {
       val mb = getMethodBind("NetworkedMultiplayerENet","is_always_ordered")
@@ -95,12 +92,8 @@ open class NetworkedMultiplayerENet internal constructor(
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("NetworkedMultiplayerENet", "NetworkedMultiplayerENet")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("NetworkedMultiplayerENet",
+      "NetworkedMultiplayerENet")
 
   open fun closeConnection(waitUsec: Long = 100) {
     val mb = getMethodBind("NetworkedMultiplayerENet","close_connection")

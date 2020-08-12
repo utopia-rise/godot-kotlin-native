@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Signal0
 import godot.core.signal
 import godot.icalls._icall_AudioStream
@@ -18,16 +17,14 @@ import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.NotImplementedError
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class AudioStreamPlayer2D internal constructor(
-  _ignore: Any?
-) : Node2D(_ignore) {
+open class AudioStreamPlayer2D : Node2D() {
   val finished: Signal0 by signal()
 
   open var areaMask: Long
@@ -126,12 +123,8 @@ open class AudioStreamPlayer2D internal constructor(
       _icall_Unit_Double(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("AudioStreamPlayer2D", "AudioStreamPlayer2D")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("AudioStreamPlayer2D",
+      "AudioStreamPlayer2D")
 
   open fun _busLayoutChanged() {
   }

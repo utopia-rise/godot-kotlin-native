@@ -13,14 +13,11 @@ import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Long_Boolean
 import godot.icalls._icall_Unit_Object
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 
-open class GeometryInstance internal constructor(
-  _ignore: Any?
-) : VisualInstance(_ignore) {
+open class GeometryInstance internal constructor() : VisualInstance() {
   open var castShadow: Long
     get() {
       val mb = getMethodBind("GeometryInstance","get_cast_shadows_setting")
@@ -100,8 +97,6 @@ open class GeometryInstance internal constructor(
       val mb = getMethodBind("GeometryInstance","set_flag")
       _icall_Unit_Long_Boolean(mb, this.ptr, 0, value)
     }
-
-  internal constructor() : this(null)
 
   open fun getCastShadowsSetting(): GeometryInstance.ShadowCastingSetting {
     val mb = getMethodBind("GeometryInstance","get_cast_shadows_setting")

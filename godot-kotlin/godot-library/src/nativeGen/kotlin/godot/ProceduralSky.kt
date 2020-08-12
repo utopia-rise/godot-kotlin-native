@@ -3,7 +3,6 @@ package godot
 
 import godot.ProceduralSky
 import godot.core.Color
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Color
 import godot.icalls._icall_Double
 import godot.icalls._icall_Long
@@ -12,14 +11,12 @@ import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Double
 import kotlin.Long
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class ProceduralSky internal constructor(
-  _ignore: Any?
-) : Sky(_ignore) {
+open class ProceduralSky : Sky() {
   open var groundBottomColor: Color
     get() {
       val mb = getMethodBind("ProceduralSky","get_ground_bottom_color")
@@ -180,12 +177,7 @@ open class ProceduralSky internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("ProceduralSky", "ProceduralSky")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("ProceduralSky", "ProceduralSky")
 
   open fun groundBottomColor(schedule: Color.() -> Unit): Color = groundBottomColor.apply{
       schedule(this)

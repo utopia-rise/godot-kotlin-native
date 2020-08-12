@@ -2,7 +2,6 @@
 package godot
 
 import godot.core.Color
-import godot.core.Godot.shouldInitPtr
 import godot.core.GodotError
 import godot.core.Plane
 import godot.core.PoolIntArray
@@ -33,18 +32,11 @@ import godot.icalls._icall_Vector2_Long
 import godot.icalls._icall_Vector3_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class MeshDataTool internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("MeshDataTool", "MeshDataTool")
-        }
-
-  }
+open class MeshDataTool : Reference() {
+  override fun __new(): COpaquePointer = invokeConstructor("MeshDataTool", "MeshDataTool")
 
   open fun clear() {
     val mb = getMethodBind("MeshDataTool","clear")

@@ -4,12 +4,9 @@ package godot
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Unit_Boolean
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 
-open class InputEventWithModifiers internal constructor(
-  _ignore: Any?
-) : InputEvent(_ignore) {
+open class InputEventWithModifiers internal constructor() : InputEvent() {
   open var alt: Boolean
     get() {
       val mb = getMethodBind("InputEventWithModifiers","get_alt")
@@ -59,8 +56,6 @@ open class InputEventWithModifiers internal constructor(
       val mb = getMethodBind("InputEventWithModifiers","set_shift")
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
-
-  internal constructor() : this(null)
 
   open fun getAlt(): Boolean {
     val mb = getMethodBind("InputEventWithModifiers","get_alt")

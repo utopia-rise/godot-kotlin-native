@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Variant
 import godot.core.Vector3
 import godot.icalls._icall_Long
@@ -10,12 +9,10 @@ import godot.icalls._icall_Variant
 import godot.icalls._icall_Vector3
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class KinematicCollision internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
+open class KinematicCollision : Reference() {
   open val collider: Object
     get() {
       val mb = getMethodBind("KinematicCollision","get_collider")
@@ -82,12 +79,8 @@ open class KinematicCollision internal constructor(
       return _icall_Vector3(mb, this.ptr)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("KinematicCollision", "KinematicCollision")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("KinematicCollision",
+      "KinematicCollision")
 
   open fun getCollider(): Object {
     val mb = getMethodBind("KinematicCollision","get_collider")

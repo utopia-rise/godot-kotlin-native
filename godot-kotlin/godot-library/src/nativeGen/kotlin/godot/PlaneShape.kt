@@ -1,18 +1,15 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Plane
 import godot.icalls._icall_Plane
 import godot.icalls._icall_Unit_Plane
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class PlaneShape internal constructor(
-  _ignore: Any?
-) : Shape(_ignore) {
+open class PlaneShape : Shape() {
   open var plane: Plane
     get() {
       val mb = getMethodBind("PlaneShape","get_plane")
@@ -23,12 +20,7 @@ open class PlaneShape internal constructor(
       _icall_Unit_Plane(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("PlaneShape", "PlaneShape")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("PlaneShape", "PlaneShape")
 
   open fun plane(schedule: Plane.() -> Unit): Plane = plane.apply{
       schedule(this)

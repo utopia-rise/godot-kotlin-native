@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Variant
 import godot.core.VariantArray
 import godot.icalls._icall_Boolean
@@ -14,16 +13,10 @@ import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class FuncRef internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("FuncRef", "FuncRef")
-        }
-
-  }
+open class FuncRef : Reference() {
+  override fun __new(): COpaquePointer = invokeConstructor("FuncRef", "FuncRef")
 
   open fun callFunc(vararg __var_args: Any?): Variant {
     val mb = getMethodBind("FuncRef","call_func")

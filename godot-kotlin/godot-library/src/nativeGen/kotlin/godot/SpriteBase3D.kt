@@ -23,15 +23,12 @@ import godot.icalls._icall_Unit_Long_Boolean
 import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_Vector2
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.Unit
 
-open class SpriteBase3D internal constructor(
-  _ignore: Any?
-) : GeometryInstance(_ignore) {
+open class SpriteBase3D internal constructor() : GeometryInstance() {
   open var alphaCut: Long
     get() {
       val mb = getMethodBind("SpriteBase3D","get_alpha_cut_mode")
@@ -161,8 +158,6 @@ open class SpriteBase3D internal constructor(
       val mb = getMethodBind("SpriteBase3D","set_draw_flag")
       _icall_Unit_Long_Boolean(mb, this.ptr, 0, value)
     }
-
-  internal constructor() : this(null)
 
   open fun modulate(schedule: Color.() -> Unit): Color = modulate.apply{
       schedule(this)

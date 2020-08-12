@@ -140,20 +140,12 @@ import kotlin.Double
 import kotlin.Long
 import kotlin.String
 import kotlin.requireNotNull
+import kotlinx.cinterop.COpaquePointer
 import kotlinx.cinterop.cstr
 import kotlinx.cinterop.invoke
 import kotlinx.cinterop.memScoped
 
 object VisualServer : Object() {
-  init {
-    memScoped {
-        val ptr =
-        nullSafe(Godot.gdnative.godot_global_get_singleton).invoke("VisualServer".cstr.ptr)
-        requireNotNull(ptr) { "No instance found for singleton VisualServer" }
-        this@VisualServer.ptr = ptr
-    }
-  }
-
   final const val ARRAY_WEIGHTS_SIZE: Long = 4
 
   final const val CANVAS_ITEM_Z_MAX: Long = 4096
@@ -173,6 +165,12 @@ object VisualServer : Object() {
   val framePostDraw: Signal0 by signal()
 
   val framePreDraw: Signal0 by signal()
+
+  override fun __new(): COpaquePointer = memScoped {
+      val ptr = nullSafe(Godot.gdnative.godot_global_get_singleton).invoke("VisualServer".cstr.ptr)
+      requireNotNull(ptr) { "No instance found for singleton VisualServer" }
+      ptr
+  }
 
   fun blackBarsSetImages(
     left: RID,

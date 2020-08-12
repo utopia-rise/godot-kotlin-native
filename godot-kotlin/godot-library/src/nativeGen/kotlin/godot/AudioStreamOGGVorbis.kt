@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.PoolByteArray
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Double
@@ -11,13 +10,11 @@ import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_PoolByteArray
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
+import kotlinx.cinterop.COpaquePointer
 
-open class AudioStreamOGGVorbis internal constructor(
-  _ignore: Any?
-) : AudioStream(_ignore) {
+open class AudioStreamOGGVorbis : AudioStream() {
   open var data: PoolByteArray
     get() {
       val mb = getMethodBind("AudioStreamOGGVorbis","get_data")
@@ -48,12 +45,8 @@ open class AudioStreamOGGVorbis internal constructor(
       _icall_Unit_Double(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("AudioStreamOGGVorbis", "AudioStreamOGGVorbis")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("AudioStreamOGGVorbis",
+      "AudioStreamOGGVorbis")
 
   open fun getData(): PoolByteArray {
     val mb = getMethodBind("AudioStreamOGGVorbis","get_data")

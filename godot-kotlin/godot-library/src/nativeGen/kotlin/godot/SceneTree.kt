@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.GodotError
 import godot.core.PoolIntArray
 import godot.core.PoolStringArray
@@ -42,10 +41,9 @@ import kotlin.Double
 import kotlin.Long
 import kotlin.String
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class SceneTree internal constructor(
-  _ignore: Any?
-) : MainLoop(_ignore) {
+open class SceneTree : MainLoop() {
   val connectedToServer: Signal0 by signal()
 
   val connectionFailed: Signal0 by signal()
@@ -182,12 +180,7 @@ open class SceneTree internal constructor(
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("SceneTree", "SceneTree")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("SceneTree", "SceneTree")
 
   open fun _changeScene(arg0: Node) {
   }

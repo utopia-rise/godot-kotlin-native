@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.GodotError
 import godot.core.PoolByteArray
 import godot.core.Variant
@@ -10,19 +9,13 @@ import godot.icalls._icall_Long
 import godot.icalls._icall_Long_Variant
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Long
 import kotlin.NotImplementedError
+import kotlinx.cinterop.COpaquePointer
 
-open class PackedDataContainer internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("PackedDataContainer", "PackedDataContainer")
-        }
-
-  }
+open class PackedDataContainer : Resource() {
+  override fun __new(): COpaquePointer = invokeConstructor("PackedDataContainer",
+      "PackedDataContainer")
 
   open fun _getData(): PoolByteArray {
     throw NotImplementedError("_get_data is not implemented for PackedDataContainer")

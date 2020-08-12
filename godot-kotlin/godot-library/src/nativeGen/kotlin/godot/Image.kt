@@ -4,7 +4,6 @@ package godot
 import godot.Image
 import godot.core.Color
 import godot.core.Dictionary
-import godot.core.Godot.shouldInitPtr
 import godot.core.GodotError
 import godot.core.PoolByteArray
 import godot.core.Rect2
@@ -40,22 +39,15 @@ import godot.icalls._icall_Unit_Vector2_Color
 import godot.icalls._icall_Vector2
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.NotImplementedError
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class Image internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Image", "Image")
-        }
-
-  }
+open class Image : Resource() {
+  override fun __new(): COpaquePointer = invokeConstructor("Image", "Image")
 
   open fun _getData(): Dictionary {
     throw NotImplementedError("_get_data is not implemented for Image")

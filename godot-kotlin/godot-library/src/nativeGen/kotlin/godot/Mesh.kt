@@ -17,14 +17,11 @@ import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_VariantArray_Long
 import godot.icalls._icall_Vector2
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Double
 import kotlin.Long
 import kotlin.Unit
 
-open class Mesh internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
+open class Mesh internal constructor() : Resource() {
   open var lightmapSizeHint: Vector2
     get() {
       val mb = getMethodBind("Mesh","get_lightmap_size_hint")
@@ -34,8 +31,6 @@ open class Mesh internal constructor(
       val mb = getMethodBind("Mesh","set_lightmap_size_hint")
       _icall_Unit_Vector2(mb, this.ptr, value)
     }
-
-  internal constructor() : this(null)
 
   open fun lightmapSizeHint(schedule: Vector2.() -> Unit): Vector2 = lightmapSizeHint.apply{
       schedule(this)

@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.GodotError
 import godot.core.PoolByteArray
 import godot.core.PoolIntArray
@@ -19,13 +18,11 @@ import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Object
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class MultiplayerAPI internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
+open class MultiplayerAPI : Reference() {
   val connectedToServer: Signal0 by signal()
 
   val connectionFailed: Signal0 by signal()
@@ -68,12 +65,7 @@ open class MultiplayerAPI internal constructor(
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("MultiplayerAPI", "MultiplayerAPI")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("MultiplayerAPI", "MultiplayerAPI")
 
   open fun _addPeer(id: Long) {
   }

@@ -3,7 +3,6 @@ package godot
 
 import godot.WebRTCPeerConnection
 import godot.core.Dictionary
-import godot.core.Godot.shouldInitPtr
 import godot.core.GodotError
 import godot.core.Signal1
 import godot.core.Signal2
@@ -17,25 +16,19 @@ import godot.icalls._icall_Unit
 import godot.icalls._icall_WebRTCDataChannel_String_Dictionary
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class WebRTCPeerConnection internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
+open class WebRTCPeerConnection : Reference() {
   val dataChannelReceived: Signal1<Object> by signal("channel")
 
   val iceCandidateCreated: Signal3<String, Long, String> by signal("media", "index", "name")
 
   val sessionDescriptionCreated: Signal2<String, String> by signal("type", "sdp")
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("WebRTCPeerConnection", "WebRTCPeerConnection")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("WebRTCPeerConnection",
+      "WebRTCPeerConnection")
 
   open fun addIceCandidate(
     media: String,

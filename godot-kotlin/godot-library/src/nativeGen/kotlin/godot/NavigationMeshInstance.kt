@@ -1,19 +1,16 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_NavigationMesh
 import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Object
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
+import kotlinx.cinterop.COpaquePointer
 
-open class NavigationMeshInstance internal constructor(
-  _ignore: Any?
-) : Spatial(_ignore) {
+open class NavigationMeshInstance : Spatial() {
   open var enabled: Boolean
     get() {
       val mb = getMethodBind("NavigationMeshInstance","is_enabled")
@@ -34,12 +31,8 @@ open class NavigationMeshInstance internal constructor(
       _icall_Unit_Object(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("NavigationMeshInstance", "NavigationMeshInstance")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("NavigationMeshInstance",
+      "NavigationMeshInstance")
 
   open fun getNavigationMesh(): NavigationMesh {
     val mb = getMethodBind("NavigationMeshInstance","get_navigation_mesh")

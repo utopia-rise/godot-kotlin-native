@@ -10,16 +10,11 @@ import godot.icalls._icall_String
 import godot.icalls._icall_Unit_String
 import godot.icalls._icall_VariantArray_String
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.NotImplementedError
 import kotlin.String
 
-open class EditorVCSInterface internal constructor(
-  _ignore: Any?
-) : Object(_ignore) {
-  internal constructor() : this(null)
-
+open class EditorVCSInterface internal constructor() : Object() {
   open fun _commit(msg: String) {
   }
 

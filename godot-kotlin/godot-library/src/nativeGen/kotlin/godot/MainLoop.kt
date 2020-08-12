@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.PoolStringArray
 import godot.core.Signal2
 import godot.core.Variant
@@ -12,24 +11,17 @@ import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.NotImplementedError
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class MainLoop internal constructor(
-  _ignore: Any?
-) : Object(_ignore) {
+open class MainLoop : Object() {
   val onRequestPermissionsResult: Signal2<String, Boolean> by signal("permission", "granted")
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("MainLoop", "MainLoop")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("MainLoop", "MainLoop")
 
   open fun _dropFiles(files: PoolStringArray, fromScreen: Long) {
   }

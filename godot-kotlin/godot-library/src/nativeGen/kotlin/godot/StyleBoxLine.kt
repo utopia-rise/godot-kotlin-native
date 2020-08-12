@@ -2,7 +2,6 @@
 package godot
 
 import godot.core.Color
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Color
 import godot.icalls._icall_Double
@@ -13,15 +12,13 @@ import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class StyleBoxLine internal constructor(
-  _ignore: Any?
-) : StyleBox(_ignore) {
+open class StyleBoxLine : StyleBox() {
   open var color: Color
     get() {
       val mb = getMethodBind("StyleBoxLine","get_color")
@@ -72,12 +69,7 @@ open class StyleBoxLine internal constructor(
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("StyleBoxLine", "StyleBoxLine")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("StyleBoxLine", "StyleBoxLine")
 
   open fun color(schedule: Color.() -> Unit): Color = color.apply{
       schedule(this)

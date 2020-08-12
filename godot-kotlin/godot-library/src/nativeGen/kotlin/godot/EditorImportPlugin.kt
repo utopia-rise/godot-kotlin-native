@@ -3,18 +3,13 @@ package godot
 
 import godot.core.Dictionary
 import godot.core.VariantArray
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.NotImplementedError
 import kotlin.String
 
-open class EditorImportPlugin internal constructor(
-  _ignore: Any?
-) : ResourceImporter(_ignore) {
-  internal constructor() : this(null)
-
+open class EditorImportPlugin internal constructor() : ResourceImporter() {
   open fun getImportOptions(preset: Long): VariantArray {
     throw NotImplementedError("get_import_options is not implemented for EditorImportPlugin")
   }

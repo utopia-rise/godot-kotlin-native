@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.PoolStringArray
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_PoolStringArray
@@ -10,20 +9,13 @@ import godot.icalls._icall_Unit
 import godot.icalls._icall_Unit_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class AnimationNodeStateMachinePlayback internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("AnimationNodeStateMachinePlayback",
-            "AnimationNodeStateMachinePlayback")
-        }
-
-  }
+open class AnimationNodeStateMachinePlayback : Resource() {
+  override fun __new(): COpaquePointer = invokeConstructor("AnimationNodeStateMachinePlayback",
+      "AnimationNodeStateMachinePlayback")
 
   open fun getCurrentNode(): String {
     val mb = getMethodBind("AnimationNodeStateMachinePlayback","get_current_node")

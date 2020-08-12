@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.PoolStringArray
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_ConfigFile
@@ -12,13 +11,11 @@ import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class GDNativeLibrary internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
+open class GDNativeLibrary : Resource() {
   open var configFile: ConfigFile
     get() {
       val mb = getMethodBind("GDNativeLibrary","get_config_file")
@@ -69,12 +66,7 @@ open class GDNativeLibrary internal constructor(
       _icall_Unit_String(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("GDNativeLibrary", "GDNativeLibrary")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("GDNativeLibrary", "GDNativeLibrary")
 
   open fun getConfigFile(): ConfigFile {
     val mb = getMethodBind("GDNativeLibrary","get_config_file")

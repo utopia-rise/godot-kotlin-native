@@ -1,18 +1,15 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Signal0
 import godot.core.signal
 import godot.icalls._icall_Curve3D
 import godot.icalls._icall_Unit_Object
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
+import kotlinx.cinterop.COpaquePointer
 
-open class Path internal constructor(
-  _ignore: Any?
-) : Spatial(_ignore) {
+open class Path : Spatial() {
   val curveChanged: Signal0 by signal()
 
   open var curve: Curve3D
@@ -25,12 +22,7 @@ open class Path internal constructor(
       _icall_Unit_Object(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Path", "Path")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("Path", "Path")
 
   open fun _curveChanged() {
   }

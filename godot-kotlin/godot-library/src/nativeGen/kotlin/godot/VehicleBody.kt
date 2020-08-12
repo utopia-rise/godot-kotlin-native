@@ -1,17 +1,14 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Double
 import godot.icalls._icall_Unit_Double
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Double
+import kotlinx.cinterop.COpaquePointer
 
-open class VehicleBody internal constructor(
-  _ignore: Any?
-) : RigidBody(_ignore) {
+open class VehicleBody : RigidBody() {
   open var brake: Double
     get() {
       val mb = getMethodBind("VehicleBody","get_brake")
@@ -42,12 +39,7 @@ open class VehicleBody internal constructor(
       _icall_Unit_Double(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("VehicleBody", "VehicleBody")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("VehicleBody", "VehicleBody")
 
   open fun getBrake(): Double {
     val mb = getMethodBind("VehicleBody","get_brake")

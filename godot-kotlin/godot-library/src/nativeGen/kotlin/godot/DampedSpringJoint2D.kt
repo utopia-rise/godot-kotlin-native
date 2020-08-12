@@ -1,17 +1,14 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Double
 import godot.icalls._icall_Unit_Double
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Double
+import kotlinx.cinterop.COpaquePointer
 
-open class DampedSpringJoint2D internal constructor(
-  _ignore: Any?
-) : Joint2D(_ignore) {
+open class DampedSpringJoint2D : Joint2D() {
   open var damping: Double
     get() {
       val mb = getMethodBind("DampedSpringJoint2D","get_damping")
@@ -52,12 +49,8 @@ open class DampedSpringJoint2D internal constructor(
       _icall_Unit_Double(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("DampedSpringJoint2D", "DampedSpringJoint2D")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("DampedSpringJoint2D",
+      "DampedSpringJoint2D")
 
   open fun getDamping(): Double {
     val mb = getMethodBind("DampedSpringJoint2D","get_damping")

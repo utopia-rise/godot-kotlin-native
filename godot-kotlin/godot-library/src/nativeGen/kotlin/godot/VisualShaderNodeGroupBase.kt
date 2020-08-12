@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Vector2
 import godot.icalls._icall_Boolean_Long
 import godot.icalls._icall_Boolean_String
@@ -17,15 +16,13 @@ import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_Vector2
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class VisualShaderNodeGroupBase internal constructor(
-  _ignore: Any?
-) : VisualShaderNode(_ignore) {
+open class VisualShaderNodeGroupBase : VisualShaderNode() {
   open var size: Vector2
     get() {
       val mb = getMethodBind("VisualShaderNodeGroupBase","get_size")
@@ -36,12 +33,8 @@ open class VisualShaderNodeGroupBase internal constructor(
       _icall_Unit_Vector2(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("VisualShaderNodeGroupBase", "VisualShaderNodeGroupBase")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("VisualShaderNodeGroupBase",
+      "VisualShaderNodeGroupBase")
 
   open fun size(schedule: Vector2.() -> Unit): Vector2 = size.apply{
       schedule(this)

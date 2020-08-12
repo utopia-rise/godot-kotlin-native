@@ -1,17 +1,14 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_String
 import godot.icalls._icall_Unit_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class VideoStreamWebm internal constructor(
-  _ignore: Any?
-) : VideoStream(_ignore) {
+open class VideoStreamWebm : VideoStream() {
   open var file: String
     get() {
       val mb = getMethodBind("VideoStreamWebm","get_file")
@@ -22,12 +19,7 @@ open class VideoStreamWebm internal constructor(
       _icall_Unit_String(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("VideoStreamWebm", "VideoStreamWebm")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("VideoStreamWebm", "VideoStreamWebm")
 
   open fun getFile(): String {
     val mb = getMethodBind("VideoStreamWebm","get_file")

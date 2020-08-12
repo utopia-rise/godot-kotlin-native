@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Boolean_Object
 import godot.icalls._icall_InputEvent
@@ -9,13 +8,11 @@ import godot.icalls._icall_String
 import godot.icalls._icall_Unit_Object
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class ShortCut internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
+open class ShortCut : Resource() {
   open var shortcut: InputEvent
     get() {
       val mb = getMethodBind("ShortCut","get_shortcut")
@@ -26,12 +23,7 @@ open class ShortCut internal constructor(
       _icall_Unit_Object(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("ShortCut", "ShortCut")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("ShortCut", "ShortCut")
 
   open fun getAsText(): String {
     val mb = getMethodBind("ShortCut","get_as_text")

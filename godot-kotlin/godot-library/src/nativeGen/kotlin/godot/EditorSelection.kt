@@ -8,14 +8,9 @@ import godot.icalls._icall_Unit
 import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_VariantArray
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 
-open class EditorSelection internal constructor(
-  _ignore: Any?
-) : Object(_ignore) {
+open class EditorSelection internal constructor() : Object() {
   val selectionChanged: Signal0 by signal()
-
-  internal constructor() : this(null)
 
   open fun _emitChange() {
   }

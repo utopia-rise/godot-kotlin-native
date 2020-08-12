@@ -1,17 +1,14 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Unit_Boolean
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
+import kotlinx.cinterop.COpaquePointer
 
-open class AnimationNodeAdd2 internal constructor(
-  _ignore: Any?
-) : AnimationNode(_ignore) {
+open class AnimationNodeAdd2 : AnimationNode() {
   open var sync: Boolean
     get() {
       val mb = getMethodBind("AnimationNodeAdd2","is_using_sync")
@@ -22,12 +19,7 @@ open class AnimationNodeAdd2 internal constructor(
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("AnimationNodeAdd2", "AnimationNodeAdd2")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("AnimationNodeAdd2", "AnimationNodeAdd2")
 
   open fun isUsingSync(): Boolean {
     val mb = getMethodBind("AnimationNodeAdd2","is_using_sync")

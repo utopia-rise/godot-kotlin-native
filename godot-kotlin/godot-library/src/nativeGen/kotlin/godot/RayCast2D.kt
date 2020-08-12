@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.RID
 import godot.core.Vector2
 import godot.icalls._icall_Boolean
@@ -18,14 +17,12 @@ import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_Vector2
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class RayCast2D internal constructor(
-  _ignore: Any?
-) : Node2D(_ignore) {
+open class RayCast2D : Node2D() {
   open var castTo: Vector2
     get() {
       val mb = getMethodBind("RayCast2D","get_cast_to")
@@ -86,12 +83,7 @@ open class RayCast2D internal constructor(
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("RayCast2D", "RayCast2D")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("RayCast2D", "RayCast2D")
 
   open fun castTo(schedule: Vector2.() -> Unit): Vector2 = castTo.apply{
       schedule(this)

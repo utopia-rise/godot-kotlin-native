@@ -1,23 +1,15 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.GodotError
 import godot.icalls._icall_Long_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class CryptoKey internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("CryptoKey", "CryptoKey")
-        }
-
-  }
+open class CryptoKey : Resource() {
+  override fun __new(): COpaquePointer = invokeConstructor("CryptoKey", "CryptoKey")
 
   open fun load(path: String): GodotError {
     val mb = getMethodBind("CryptoKey","load")

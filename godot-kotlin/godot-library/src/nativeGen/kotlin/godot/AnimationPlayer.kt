@@ -2,7 +2,6 @@
 package godot
 
 import godot.AnimationPlayer
-import godot.core.Godot.shouldInitPtr
 import godot.core.GodotError
 import godot.core.NodePath
 import godot.core.PoolStringArray
@@ -35,15 +34,13 @@ import godot.icalls._icall_Unit_String_String
 import godot.icalls._icall_Unit_String_String_Double
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class AnimationPlayer internal constructor(
-  _ignore: Any?
-) : Node(_ignore) {
+open class AnimationPlayer : Node() {
   val animationChanged: Signal2<String, String> by signal("old_name", "new_name")
 
   val animationFinished: Signal1<String> by signal("anim_name")
@@ -154,12 +151,7 @@ open class AnimationPlayer internal constructor(
       _icall_Unit_NodePath(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("AnimationPlayer", "AnimationPlayer")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("AnimationPlayer", "AnimationPlayer")
 
   open fun _animationChanged() {
   }

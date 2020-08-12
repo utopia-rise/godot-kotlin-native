@@ -2,7 +2,6 @@
 package godot
 
 import godot.FileDialog
-import godot.core.Godot.shouldInitPtr
 import godot.core.PoolStringArray
 import godot.core.Signal1
 import godot.core.signal
@@ -19,14 +18,12 @@ import godot.icalls._icall_Unit_String
 import godot.icalls._icall_VBoxContainer
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class FileDialog internal constructor(
-  _ignore: Any?
-) : ConfirmationDialog(_ignore) {
+open class FileDialog : ConfirmationDialog() {
   val dirSelected: Signal1<String> by signal("dir")
 
   val fileSelected: Signal1<String> by signal("path")
@@ -113,12 +110,7 @@ open class FileDialog internal constructor(
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("FileDialog", "FileDialog")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("FileDialog", "FileDialog")
 
   open fun _actionPressed() {
   }

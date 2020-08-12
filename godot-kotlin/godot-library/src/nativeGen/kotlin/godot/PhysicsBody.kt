@@ -9,14 +9,11 @@ import godot.icalls._icall_Unit_Long_Boolean
 import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_VariantArray
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.NotImplementedError
 
-open class PhysicsBody internal constructor(
-  _ignore: Any?
-) : CollisionObject(_ignore) {
+open class PhysicsBody internal constructor() : CollisionObject() {
   open var collisionLayer: Long
     get() {
       val mb = getMethodBind("PhysicsBody","get_collision_layer")
@@ -36,8 +33,6 @@ open class PhysicsBody internal constructor(
       val mb = getMethodBind("PhysicsBody","set_collision_mask")
       _icall_Unit_Long(mb, this.ptr, value)
     }
-
-  internal constructor() : this(null)
 
   open fun _getLayers(): Long {
     throw NotImplementedError("_get_layers is not implemented for PhysicsBody")

@@ -2,7 +2,6 @@
 package godot
 
 import godot.Particles2D
-import godot.core.Godot.shouldInitPtr
 import godot.core.Rect2
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Double
@@ -18,15 +17,13 @@ import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_Rect2
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class Particles2D internal constructor(
-  _ignore: Any?
-) : Node2D(_ignore) {
+open class Particles2D : Node2D() {
   open var amount: Long
     get() {
       val mb = getMethodBind("Particles2D","get_amount")
@@ -187,12 +184,7 @@ open class Particles2D internal constructor(
       _icall_Unit_Rect2(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Particles2D", "Particles2D")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("Particles2D", "Particles2D")
 
   open fun visibilityRect(schedule: Rect2.() -> Unit): Rect2 = visibilityRect.apply{
       schedule(this)

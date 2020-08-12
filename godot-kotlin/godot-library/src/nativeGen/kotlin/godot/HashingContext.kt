@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.GodotError
 import godot.core.PoolByteArray
 import godot.icalls._icall_Long_Long
@@ -9,18 +8,11 @@ import godot.icalls._icall_Long_PoolByteArray
 import godot.icalls._icall_PoolByteArray
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class HashingContext internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("HashingContext", "HashingContext")
-        }
-
-  }
+open class HashingContext : Reference() {
+  override fun __new(): COpaquePointer = invokeConstructor("HashingContext", "HashingContext")
 
   open fun finish(): PoolByteArray {
     val mb = getMethodBind("HashingContext","finish")

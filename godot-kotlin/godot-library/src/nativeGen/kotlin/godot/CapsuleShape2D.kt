@@ -1,17 +1,14 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Double
 import godot.icalls._icall_Unit_Double
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Double
+import kotlinx.cinterop.COpaquePointer
 
-open class CapsuleShape2D internal constructor(
-  _ignore: Any?
-) : Shape2D(_ignore) {
+open class CapsuleShape2D : Shape2D() {
   open var height: Double
     get() {
       val mb = getMethodBind("CapsuleShape2D","get_height")
@@ -32,12 +29,7 @@ open class CapsuleShape2D internal constructor(
       _icall_Unit_Double(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("CapsuleShape2D", "CapsuleShape2D")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("CapsuleShape2D", "CapsuleShape2D")
 
   open fun getHeight(): Double {
     val mb = getMethodBind("CapsuleShape2D","get_height")

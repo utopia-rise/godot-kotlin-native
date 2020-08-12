@@ -5,17 +5,12 @@ import godot.core.Signal1
 import godot.core.signal
 import godot.icalls._icall_Unit_String_String_Boolean_Boolean
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
 
-open class ScriptCreateDialog internal constructor(
-  _ignore: Any?
-) : ConfirmationDialog(_ignore) {
+open class ScriptCreateDialog internal constructor() : ConfirmationDialog() {
   val scriptCreated: Signal1<Script> by signal("script")
-
-  internal constructor() : this(null)
 
   open fun _browseClassInTree() {
   }

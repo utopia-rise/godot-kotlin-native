@@ -2,7 +2,6 @@
 package godot
 
 import godot.core.Color
-import godot.core.Godot.shouldInitPtr
 import godot.core.PoolStringArray
 import godot.icalls._icall_Boolean_String_String
 import godot.icalls._icall_Color_String_String
@@ -21,14 +20,12 @@ import godot.icalls._icall_Unit_String_String_Long
 import godot.icalls._icall_Unit_String_String_Object
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class Theme internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
+open class Theme : Resource() {
   open var defaultFont: Font
     get() {
       val mb = getMethodBind("Theme","get_default_font")
@@ -39,12 +36,7 @@ open class Theme internal constructor(
       _icall_Unit_Object(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Theme", "Theme")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("Theme", "Theme")
 
   open fun _emitThemeChanged() {
   }

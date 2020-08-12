@@ -3,7 +3,6 @@ package godot
 
 import godot.ItemList
 import godot.core.Color
-import godot.core.Godot.shouldInitPtr
 import godot.core.PoolIntArray
 import godot.core.Rect2
 import godot.core.Signal0
@@ -42,17 +41,15 @@ import godot.icalls._icall_Variant_Long
 import godot.icalls._icall_Vector2
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.NotImplementedError
 import kotlin.String
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class ItemList internal constructor(
-  _ignore: Any?
-) : Control(_ignore) {
+open class ItemList : Control() {
   val itemActivated: Signal1<Long> by signal("index")
 
   val itemRmbSelected: Signal2<Long, Vector2> by signal("index", "at_position")
@@ -175,12 +172,7 @@ open class ItemList internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("ItemList", "ItemList")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("ItemList", "ItemList")
 
   open fun fixedIconSize(schedule: Vector2.() -> Unit): Vector2 = fixedIconSize.apply{
       schedule(this)

@@ -2,7 +2,6 @@
 package godot
 
 import godot.HTTPClient
-import godot.core.Godot.shouldInitPtr
 import godot.core.GodotError
 import godot.core.PoolByteArray
 import godot.core.PoolStringArray
@@ -18,14 +17,12 @@ import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class HTTPRequest internal constructor(
-  _ignore: Any?
-) : Node(_ignore) {
+open class HTTPRequest : Node() {
   val requestCompleted: Signal4<Long, Long, PoolStringArray, PoolByteArray> by signal("result",
       "response_code", "headers", "body")
 
@@ -89,12 +86,7 @@ open class HTTPRequest internal constructor(
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("HTTPRequest", "HTTPRequest")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("HTTPRequest", "HTTPRequest")
 
   open fun _redirectRequest(arg0: String) {
   }

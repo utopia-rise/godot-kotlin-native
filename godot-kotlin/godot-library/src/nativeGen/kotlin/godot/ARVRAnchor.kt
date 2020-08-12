@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Plane
 import godot.core.Signal1
 import godot.core.Vector3
@@ -15,14 +14,12 @@ import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Vector3
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class ARVRAnchor internal constructor(
-  _ignore: Any?
-) : Spatial(_ignore) {
+open class ARVRAnchor : Spatial() {
   val meshUpdated: Signal1<Mesh> by signal("mesh")
 
   open var anchorId: Long
@@ -35,12 +32,7 @@ open class ARVRAnchor internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("ARVRAnchor", "ARVRAnchor")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("ARVRAnchor", "ARVRAnchor")
 
   open fun getAnchorId(): Long {
     val mb = getMethodBind("ARVRAnchor","get_anchor_id")
