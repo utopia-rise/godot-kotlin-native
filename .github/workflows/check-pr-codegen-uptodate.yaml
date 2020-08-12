@@ -15,4 +15,8 @@ jobs:
       - uses: eskatos/gradle-command-action@v1
         with:
           arguments: godot-library:generateAPI
-      - run: .github/bin/check-repo-is-clean.sh
+      - run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "Generated code is stale, please commit them!"
+            exit 1
+          fi
