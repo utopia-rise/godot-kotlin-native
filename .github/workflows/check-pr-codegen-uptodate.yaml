@@ -1,4 +1,4 @@
-name: Check PR - godot-build-props
+name: Check PR - codegen-uptodate
 on:
   pull_request:
     paths: '*'
