@@ -1,5 +1,6 @@
 package godot.core
 
+import godot.Object
 import godot.gdnative.*
 import godot.internal.type.nullSafe
 import godot.registerEngineTypes
@@ -33,7 +34,7 @@ object Godot {
 
     private val languageIndexRef = AtomicInt(-1)
 
-    private val initHandle = AtomicInt(0)
+    private var shouldInit = AtomicInt(1)
 
     fun init(options: godot_gdnative_init_options) {
         val gdnative = nullSafe(options.api_struct)
@@ -80,13 +81,22 @@ object Godot {
         nativescriptWrapper.compareAndSwap(nativescriptWrapper.value, null)
     }
 
-    fun shouldInitPtr(): Boolean = initHandle.value == 0
+    /**
+     * Check if the we should initialized the ptr to an object. It also reverts the value of shouldInit
+     * to true. This method is used in conjunction with [instantiateWith] to provide us a mechanism to provide
+     * our own ptr when instantiating an object.
+     */
+    fun shouldInitPtr(): Boolean {
+        val current = shouldInit.value
+        shouldInit.compareAndSet(current, 0)
+        return current == 0
+    }
 
-    fun <T> noInitZone(cb: () -> T): T {
-        initHandle.compareAndSet(initHandle.value, 1)
-        val ret = cb()
-        initHandle.compareAndSet(initHandle.value, 0)
-        return ret
+    fun <T: Object> instantiateWith(ptr: COpaquePointer, constructor: () -> T): T {
+        shouldInit.compareAndSet(shouldInit.value, 1)
+        val instance = constructor()
+        instance.ptr = ptr
+        return instance
     }
 
     internal fun print(message: String) {
