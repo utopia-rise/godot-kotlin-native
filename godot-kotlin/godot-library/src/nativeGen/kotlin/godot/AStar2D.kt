@@ -43,11 +43,11 @@ open class AStar2D internal constructor(
 
   }
 
-  open fun _compute_cost(fromId: Long, toId: Long): Double {
+  open fun _computeCost(fromId: Long, toId: Long): Double {
     throw NotImplementedError("_compute_cost is not implemented for AStar2D")
   }
 
-  open fun _estimate_cost(fromId: Long, toId: Long): Double {
+  open fun _estimateCost(fromId: Long, toId: Long): Double {
     throw NotImplementedError("_estimate_cost is not implemented for AStar2D")
   }
 

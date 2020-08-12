@@ -105,11 +105,5 @@ open class OccluderPolygon2D internal constructor(
     }
   }
 
-  companion object {
-    final const val CULL_CLOCKWISE: Long = 1
-
-    final const val CULL_COUNTER_CLOCKWISE: Long = 2
-
-    final const val CULL_DISABLED: Long = 0
-  }
+  companion object
 }

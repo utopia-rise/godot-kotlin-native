@@ -163,7 +163,7 @@ open class SoftBody internal constructor(
 
   }
 
-  open fun _draw_soft_mesh() {
+  open fun _drawSoftMesh() {
   }
 
   open fun addCollisionExceptionWith(body: Node) {

@@ -38,7 +38,7 @@ open class AnimationNodeStateMachine internal constructor(
 
   }
 
-  open fun _tree_changed() {
+  open fun _treeChanged() {
   }
 
   open fun addNode(

@@ -260,11 +260,11 @@ open class NavigationMesh internal constructor(
 
   }
 
-  open fun _get_polygons(): VariantArray {
+  open fun _getPolygons(): VariantArray {
     throw NotImplementedError("_get_polygons is not implemented for NavigationMesh")
   }
 
-  open fun _set_polygons(polygons: VariantArray) {
+  open fun _setPolygons(polygons: VariantArray) {
   }
 
   open fun addPolygon(polygon: PoolIntArray) {

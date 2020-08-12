@@ -124,13 +124,5 @@ open class AudioEffectFilter internal constructor(
     }
   }
 
-  companion object {
-    final const val FILTER_12DB: Long = 1
-
-    final const val FILTER_18DB: Long = 2
-
-    final const val FILTER_24DB: Long = 3
-
-    final const val FILTER_6DB: Long = 0
-  }
+  companion object
 }

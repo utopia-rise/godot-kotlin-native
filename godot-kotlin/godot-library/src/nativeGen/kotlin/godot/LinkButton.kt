@@ -82,11 +82,5 @@ open class LinkButton internal constructor(
     }
   }
 
-  companion object {
-    final const val UNDERLINE_MODE_ALWAYS: Long = 0
-
-    final const val UNDERLINE_MODE_NEVER: Long = 2
-
-    final const val UNDERLINE_MODE_ON_HOVER: Long = 1
-  }
+  companion object
 }

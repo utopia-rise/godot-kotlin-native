@@ -374,28 +374,28 @@ open class Viewport internal constructor(
   }
 
 
-  open fun _gui_remove_focus() {
+  open fun _guiRemoveFocus() {
   }
 
-  open fun _gui_show_tooltip() {
+  open fun _guiShowTooltip() {
   }
 
-  open fun _own_world_changed() {
+  open fun _ownWorldChanged() {
   }
 
-  open fun _post_gui_grab_click_focus() {
+  open fun _postGuiGrabClickFocus() {
   }
 
-  open fun _subwindow_visibility_changed() {
+  open fun _subwindowVisibilityChanged() {
   }
 
-  open fun _vp_input(arg0: InputEvent) {
+  open fun _vpInput(arg0: InputEvent) {
   }
 
-  open fun _vp_input_text(text: String) {
+  open fun _vpInputText(text: String) {
   }
 
-  open fun _vp_unhandled_input(arg0: InputEvent) {
+  open fun _vpUnhandledInput(arg0: InputEvent) {
   }
 
   open fun findWorld(): World {
@@ -952,79 +952,5 @@ open class Viewport internal constructor(
     }
   }
 
-  companion object {
-    final const val CLEAR_MODE_ALWAYS: Long = 0
-
-    final const val CLEAR_MODE_NEVER: Long = 1
-
-    final const val CLEAR_MODE_ONLY_NEXT_FRAME: Long = 2
-
-    final const val DEBUG_DRAW_DISABLED: Long = 0
-
-    final const val DEBUG_DRAW_OVERDRAW: Long = 2
-
-    final const val DEBUG_DRAW_UNSHADED: Long = 1
-
-    final const val DEBUG_DRAW_WIREFRAME: Long = 3
-
-    final const val MSAA_16X: Long = 4
-
-    final const val MSAA_2X: Long = 1
-
-    final const val MSAA_4X: Long = 2
-
-    final const val MSAA_8X: Long = 3
-
-    final const val MSAA_DISABLED: Long = 0
-
-    final const val RENDER_INFO_2D_DRAW_CALLS_IN_FRAME: Long = 7
-
-    final const val RENDER_INFO_2D_ITEMS_IN_FRAME: Long = 6
-
-    final const val RENDER_INFO_DRAW_CALLS_IN_FRAME: Long = 5
-
-    final const val RENDER_INFO_MATERIAL_CHANGES_IN_FRAME: Long = 2
-
-    final const val RENDER_INFO_MAX: Long = 8
-
-    final const val RENDER_INFO_OBJECTS_IN_FRAME: Long = 0
-
-    final const val RENDER_INFO_SHADER_CHANGES_IN_FRAME: Long = 3
-
-    final const val RENDER_INFO_SURFACE_CHANGES_IN_FRAME: Long = 4
-
-    final const val RENDER_INFO_VERTICES_IN_FRAME: Long = 1
-
-    final const val SHADOW_ATLAS_QUADRANT_SUBDIV_1: Long = 1
-
-    final const val SHADOW_ATLAS_QUADRANT_SUBDIV_1024: Long = 6
-
-    final const val SHADOW_ATLAS_QUADRANT_SUBDIV_16: Long = 3
-
-    final const val SHADOW_ATLAS_QUADRANT_SUBDIV_256: Long = 5
-
-    final const val SHADOW_ATLAS_QUADRANT_SUBDIV_4: Long = 2
-
-    final const val SHADOW_ATLAS_QUADRANT_SUBDIV_64: Long = 4
-
-    final const val SHADOW_ATLAS_QUADRANT_SUBDIV_DISABLED: Long = 0
-
-    final const val SHADOW_ATLAS_QUADRANT_SUBDIV_MAX: Long = 7
-
-    final const val UPDATE_ALWAYS: Long = 3
-
-    final const val UPDATE_DISABLED: Long = 0
-
-    final const val UPDATE_ONCE: Long = 1
-
-    final const val UPDATE_WHEN_VISIBLE: Long = 2
-
-    final const val USAGE_2D: Long = 0
-
-    final const val USAGE_2D_NO_SAMPLING: Long = 1
-
-    final const val USAGE_3D: Long = 2
-
-    final const val USAGE_3D_NO_EFFECTS: Long = 3
-  }
+  companion object
 }

@@ -24,7 +24,7 @@ open class VisualScriptFunctionState internal constructor(
 
   }
 
-  open fun _signal_callback(vararg __var_args: Any?): Variant {
+  open fun _signalCallback(vararg __var_args: Any?): Variant {
     throw NotImplementedError("_signal_callback is not implemented for VisualScriptFunctionState")
   }
 

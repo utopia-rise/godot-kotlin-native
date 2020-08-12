@@ -291,21 +291,5 @@ open class Label internal constructor(
     }
   }
 
-  companion object {
-    final const val ALIGN_CENTER: Long = 1
-
-    final const val ALIGN_FILL: Long = 3
-
-    final const val ALIGN_LEFT: Long = 0
-
-    final const val ALIGN_RIGHT: Long = 2
-
-    final const val VALIGN_BOTTOM: Long = 2
-
-    final const val VALIGN_CENTER: Long = 1
-
-    final const val VALIGN_FILL: Long = 3
-
-    final const val VALIGN_TOP: Long = 0
-  }
+  companion object
 }

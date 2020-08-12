@@ -73,15 +73,5 @@ open class PacketPeerDTLS internal constructor(
     }
   }
 
-  companion object {
-    final const val STATUS_CONNECTED: Long = 2
-
-    final const val STATUS_DISCONNECTED: Long = 0
-
-    final const val STATUS_ERROR: Long = 3
-
-    final const val STATUS_ERROR_HOSTNAME_MISMATCH: Long = 4
-
-    final const val STATUS_HANDSHAKING: Long = 1
-  }
+  companion object
 }

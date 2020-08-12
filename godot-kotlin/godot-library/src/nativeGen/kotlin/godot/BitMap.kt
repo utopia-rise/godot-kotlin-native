@@ -33,11 +33,11 @@ open class BitMap internal constructor(
 
   }
 
-  open fun _get_data(): Dictionary {
+  open fun _getData(): Dictionary {
     throw NotImplementedError("_get_data is not implemented for BitMap")
   }
 
-  open fun _set_data(arg0: Dictionary) {
+  open fun _setData(arg0: Dictionary) {
   }
 
   open fun create(size: Vector2) {

@@ -57,7 +57,7 @@ open class MeshInstance internal constructor(
 
   }
 
-  open fun _mesh_changed() {
+  open fun _meshChanged() {
   }
 
   open fun createConvexCollision() {

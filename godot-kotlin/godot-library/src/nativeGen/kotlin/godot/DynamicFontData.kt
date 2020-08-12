@@ -105,11 +105,5 @@ open class DynamicFontData internal constructor(
     }
   }
 
-  companion object {
-    final const val HINTING_LIGHT: Long = 1
-
-    final const val HINTING_NONE: Long = 0
-
-    final const val HINTING_NORMAL: Long = 2
-  }
+  companion object
 }

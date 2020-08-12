@@ -59,11 +59,5 @@ open class BoxContainer internal constructor(
     }
   }
 
-  companion object {
-    final const val ALIGN_BEGIN: Long = 0
-
-    final const val ALIGN_CENTER: Long = 1
-
-    final const val ALIGN_END: Long = 2
-  }
+  companion object
 }

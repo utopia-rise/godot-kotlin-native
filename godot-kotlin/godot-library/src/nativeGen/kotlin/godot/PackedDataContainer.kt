@@ -24,23 +24,23 @@ open class PackedDataContainer internal constructor(
 
   }
 
-  open fun _get_data(): PoolByteArray {
+  open fun _getData(): PoolByteArray {
     throw NotImplementedError("_get_data is not implemented for PackedDataContainer")
   }
 
-  open fun _iter_get(arg0: Variant): Variant {
+  open fun _iterGet(arg0: Variant): Variant {
     throw NotImplementedError("_iter_get is not implemented for PackedDataContainer")
   }
 
-  open fun _iter_init(arg0: VariantArray): Variant {
+  open fun _iterInit(arg0: VariantArray): Variant {
     throw NotImplementedError("_iter_init is not implemented for PackedDataContainer")
   }
 
-  open fun _iter_next(arg0: VariantArray): Variant {
+  open fun _iterNext(arg0: VariantArray): Variant {
     throw NotImplementedError("_iter_next is not implemented for PackedDataContainer")
   }
 
-  open fun _set_data(arg0: PoolByteArray) {
+  open fun _setData(arg0: PoolByteArray) {
   }
 
   open fun pack(value: Variant): GodotError {

@@ -18,7 +18,7 @@ open class EditorExportPlugin internal constructor(
 ) : Reference(_ignore) {
   internal constructor() : this(null)
 
-  open fun _export_begin(
+  open fun _exportBegin(
     features: PoolStringArray,
     isDebug: Boolean,
     path: String,
@@ -26,10 +26,10 @@ open class EditorExportPlugin internal constructor(
   ) {
   }
 
-  open fun _export_end() {
+  open fun _exportEnd() {
   }
 
-  open fun _export_file(
+  open fun _exportFile(
     path: String,
     type: String,
     features: PoolStringArray

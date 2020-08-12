@@ -68,19 +68,19 @@ open class SpinBox internal constructor(
 
   }
 
-  override fun _gui_input(arg0: InputEvent) {
+  override fun _guiInput(arg0: InputEvent) {
   }
 
-  open fun _line_edit_focus_exit() {
+  open fun _lineEditFocusExit() {
   }
 
-  open fun _line_edit_input(arg0: InputEvent) {
+  open fun _lineEditInput(arg0: InputEvent) {
   }
 
-  open fun _range_click_timeout() {
+  open fun _rangeClickTimeout() {
   }
 
-  open fun _text_entered(arg0: String) {
+  open fun _textEntered(arg0: String) {
   }
 
   open fun apply() {

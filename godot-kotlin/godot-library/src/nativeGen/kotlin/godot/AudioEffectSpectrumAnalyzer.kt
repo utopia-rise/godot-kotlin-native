@@ -108,17 +108,5 @@ open class AudioEffectSpectrumAnalyzer internal constructor(
     }
   }
 
-  companion object {
-    final const val FFT_SIZE_1024: Long = 2
-
-    final const val FFT_SIZE_2048: Long = 3
-
-    final const val FFT_SIZE_256: Long = 0
-
-    final const val FFT_SIZE_4096: Long = 4
-
-    final const val FFT_SIZE_512: Long = 1
-
-    final const val FFT_SIZE_MAX: Long = 5
-  }
+  companion object
 }

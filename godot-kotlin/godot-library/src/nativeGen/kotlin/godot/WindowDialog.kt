@@ -46,7 +46,7 @@ open class WindowDialog internal constructor(
   open fun _closed() {
   }
 
-  override fun _gui_input(arg0: InputEvent) {
+  override fun _guiInput(arg0: InputEvent) {
   }
 
   open fun getCloseButton(): TextureButton {

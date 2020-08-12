@@ -53,7 +53,7 @@ open class ImageTexture internal constructor(
 
   }
 
-  open fun _reload_hook(rid: RID) {
+  open fun _reloadHook(rid: RID) {
   }
 
   open fun create(
@@ -130,11 +130,5 @@ open class ImageTexture internal constructor(
     }
   }
 
-  companion object {
-    final const val STORAGE_COMPRESS_LOSSLESS: Long = 2
-
-    final const val STORAGE_COMPRESS_LOSSY: Long = 1
-
-    final const val STORAGE_RAW: Long = 0
-  }
+  companion object
 }

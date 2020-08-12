@@ -69,11 +69,11 @@ open class Curve internal constructor(
 
   }
 
-  open fun _get_data(): VariantArray {
+  open fun _getData(): VariantArray {
     throw NotImplementedError("_get_data is not implemented for Curve")
   }
 
-  open fun _set_data(data: VariantArray) {
+  open fun _setData(data: VariantArray) {
   }
 
   open fun addPoint(
@@ -227,11 +227,5 @@ open class Curve internal constructor(
     }
   }
 
-  companion object {
-    final const val TANGENT_FREE: Long = 0
-
-    final const val TANGENT_LINEAR: Long = 1
-
-    final const val TANGENT_MODE_COUNT: Long = 2
-  }
+  companion object
 }

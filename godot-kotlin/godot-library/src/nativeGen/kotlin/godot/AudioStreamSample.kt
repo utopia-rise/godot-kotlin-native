@@ -214,19 +214,5 @@ open class AudioStreamSample internal constructor(
     }
   }
 
-  companion object {
-    final const val FORMAT_16_BITS: Long = 1
-
-    final const val FORMAT_8_BITS: Long = 0
-
-    final const val FORMAT_IMA_ADPCM: Long = 2
-
-    final const val LOOP_BACKWARD: Long = 3
-
-    final const val LOOP_DISABLED: Long = 0
-
-    final const val LOOP_FORWARD: Long = 1
-
-    final const val LOOP_PING_PONG: Long = 2
-  }
+  companion object
 }

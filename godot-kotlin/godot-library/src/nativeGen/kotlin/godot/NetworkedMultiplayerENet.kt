@@ -263,15 +263,5 @@ open class NetworkedMultiplayerENet internal constructor(
     }
   }
 
-  companion object {
-    final const val COMPRESS_FASTLZ: Long = 2
-
-    final const val COMPRESS_NONE: Long = 0
-
-    final const val COMPRESS_RANGE_CODER: Long = 1
-
-    final const val COMPRESS_ZLIB: Long = 3
-
-    final const val COMPRESS_ZSTD: Long = 4
-  }
+  companion object
 }

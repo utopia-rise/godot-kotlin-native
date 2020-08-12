@@ -56,7 +56,7 @@ open class CollisionPolygon internal constructor(
 
   }
 
-  open fun _is_editable_3d_polygon(): Boolean {
+  open fun _isEditable3dPolygon(): Boolean {
     throw NotImplementedError("_is_editable_3d_polygon is not implemented for CollisionPolygon")
   }
 

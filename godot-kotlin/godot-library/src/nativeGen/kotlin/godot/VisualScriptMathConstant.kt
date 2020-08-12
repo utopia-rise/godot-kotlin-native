@@ -71,23 +71,5 @@ open class VisualScriptMathConstant internal constructor(
     }
   }
 
-  companion object {
-    final const val MATH_CONSTANT_E: Long = 4
-
-    final const val MATH_CONSTANT_HALF_PI: Long = 2
-
-    final const val MATH_CONSTANT_INF: Long = 6
-
-    final const val MATH_CONSTANT_MAX: Long = 8
-
-    final const val MATH_CONSTANT_NAN: Long = 7
-
-    final const val MATH_CONSTANT_ONE: Long = 0
-
-    final const val MATH_CONSTANT_PI: Long = 1
-
-    final const val MATH_CONSTANT_SQRT2: Long = 5
-
-    final const val MATH_CONSTANT_TAU: Long = 3
-  }
+  companion object
 }

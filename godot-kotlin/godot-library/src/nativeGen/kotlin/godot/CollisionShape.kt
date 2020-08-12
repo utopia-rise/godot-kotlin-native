@@ -42,10 +42,10 @@ open class CollisionShape internal constructor(
 
   }
 
-  open fun _shape_changed() {
+  open fun _shapeChanged() {
   }
 
-  open fun _update_debug_shape() {
+  open fun _updateDebugShape() {
   }
 
   open fun getShape(): Shape {

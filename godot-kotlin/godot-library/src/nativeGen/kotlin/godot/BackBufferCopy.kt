@@ -89,11 +89,5 @@ open class BackBufferCopy internal constructor(
     }
   }
 
-  companion object {
-    final const val COPY_MODE_DISABLED: Long = 0
-
-    final const val COPY_MODE_RECT: Long = 1
-
-    final const val COPY_MODE_VIEWPORT: Long = 2
-  }
+  companion object
 }

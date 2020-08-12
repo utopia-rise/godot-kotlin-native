@@ -57,9 +57,5 @@ open class VisualShaderNodeIs internal constructor(
     }
   }
 
-  companion object {
-    final const val FUNC_IS_INF: Long = 0
-
-    final const val FUNC_IS_NAN: Long = 1
-  }
+  companion object
 }

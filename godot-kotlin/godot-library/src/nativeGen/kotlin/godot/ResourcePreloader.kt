@@ -27,11 +27,11 @@ open class ResourcePreloader internal constructor(
 
   }
 
-  open fun _get_resources(): VariantArray {
+  open fun _getResources(): VariantArray {
     throw NotImplementedError("_get_resources is not implemented for ResourcePreloader")
   }
 
-  open fun _set_resources(arg0: VariantArray) {
+  open fun _setResources(arg0: VariantArray) {
   }
 
   open fun addResource(name: String, resource: Resource) {

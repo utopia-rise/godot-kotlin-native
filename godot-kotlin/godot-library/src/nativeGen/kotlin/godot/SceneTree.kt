@@ -189,22 +189,22 @@ open class SceneTree internal constructor(
 
   }
 
-  open fun _change_scene(arg0: Node) {
+  open fun _changeScene(arg0: Node) {
   }
 
-  open fun _connected_to_server() {
+  open fun _connectedToServer() {
   }
 
-  open fun _connection_failed() {
+  open fun _connectionFailed() {
   }
 
-  open fun _network_peer_connected(arg0: Long) {
+  open fun _networkPeerConnected(arg0: Long) {
   }
 
-  open fun _network_peer_disconnected(arg0: Long) {
+  open fun _networkPeerDisconnected(arg0: Long) {
   }
 
-  open fun _server_disconnected() {
+  open fun _serverDisconnected() {
   }
 
   open fun callGroup(
@@ -532,29 +532,5 @@ open class SceneTree internal constructor(
     }
   }
 
-  companion object {
-    final const val GROUP_CALL_DEFAULT: Long = 0
-
-    final const val GROUP_CALL_REALTIME: Long = 2
-
-    final const val GROUP_CALL_REVERSE: Long = 1
-
-    final const val GROUP_CALL_UNIQUE: Long = 4
-
-    final const val STRETCH_ASPECT_EXPAND: Long = 4
-
-    final const val STRETCH_ASPECT_IGNORE: Long = 0
-
-    final const val STRETCH_ASPECT_KEEP: Long = 1
-
-    final const val STRETCH_ASPECT_KEEP_HEIGHT: Long = 3
-
-    final const val STRETCH_ASPECT_KEEP_WIDTH: Long = 2
-
-    final const val STRETCH_MODE_2D: Long = 1
-
-    final const val STRETCH_MODE_DISABLED: Long = 0
-
-    final const val STRETCH_MODE_VIEWPORT: Long = 2
-  }
+  companion object
 }

@@ -86,17 +86,17 @@ open class NoiseTexture internal constructor(
 
   }
 
-  open fun _generate_texture(): Image {
+  open fun _generateTexture(): Image {
     throw NotImplementedError("_generate_texture is not implemented for NoiseTexture")
   }
 
-  open fun _queue_update() {
+  open fun _queueUpdate() {
   }
 
-  open fun _thread_done(image: Image) {
+  open fun _threadDone(image: Image) {
   }
 
-  open fun _update_texture() {
+  open fun _updateTexture() {
   }
 
   open fun getBumpStrength(): Double {

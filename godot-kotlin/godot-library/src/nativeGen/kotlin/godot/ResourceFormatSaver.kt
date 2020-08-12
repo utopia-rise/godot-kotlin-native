@@ -20,7 +20,7 @@ open class ResourceFormatSaver internal constructor(
 
   }
 
-  open fun get_recognized_extensions(resource: Resource): PoolStringArray {
+  open fun getRecognizedExtensions(resource: Resource): PoolStringArray {
     throw
         NotImplementedError("get_recognized_extensions is not implemented for ResourceFormatSaver")
   }

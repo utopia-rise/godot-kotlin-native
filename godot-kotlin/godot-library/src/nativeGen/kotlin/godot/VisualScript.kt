@@ -55,14 +55,14 @@ open class VisualScript internal constructor(
 
   }
 
-  open fun _get_data(): Dictionary {
+  open fun _getData(): Dictionary {
     throw NotImplementedError("_get_data is not implemented for VisualScript")
   }
 
-  open fun _node_ports_changed(arg0: Long) {
+  open fun _nodePortsChanged(arg0: Long) {
   }
 
-  open fun _set_data(data: Dictionary) {
+  open fun _setData(data: Dictionary) {
   }
 
   open fun addCustomSignal(name: String) {

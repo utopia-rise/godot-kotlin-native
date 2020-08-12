@@ -64,10 +64,10 @@ open class AcceptDialog internal constructor(
 
   }
 
-  open fun _builtin_text_entered(arg0: String) {
+  open fun _builtinTextEntered(arg0: String) {
   }
 
-  open fun _custom_action(arg0: String) {
+  open fun _customAction(arg0: String) {
   }
 
   open fun _ok() {

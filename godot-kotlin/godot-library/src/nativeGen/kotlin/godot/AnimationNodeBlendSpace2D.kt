@@ -1539,20 +1539,20 @@ open class AnimationNodeBlendSpace2D internal constructor(
   }
 
 
-  open fun _add_blend_point(index: Long, node: AnimationRootNode) {
+  open fun _addBlendPoint(index: Long, node: AnimationRootNode) {
   }
 
-  open fun _get_triangles(): PoolIntArray {
+  open fun _getTriangles(): PoolIntArray {
     throw NotImplementedError("_get_triangles is not implemented for AnimationNodeBlendSpace2D")
   }
 
-  open fun _set_triangles(triangles: PoolIntArray) {
+  open fun _setTriangles(triangles: PoolIntArray) {
   }
 
-  open fun _tree_changed() {
+  open fun _treeChanged() {
   }
 
-  open fun _update_triangles() {
+  open fun _updateTriangles() {
   }
 
   open fun addBlendPoint(
@@ -1708,11 +1708,5 @@ open class AnimationNodeBlendSpace2D internal constructor(
     }
   }
 
-  companion object {
-    final const val BLEND_MODE_DISCRETE: Long = 1
-
-    final const val BLEND_MODE_DISCRETE_CARRY: Long = 2
-
-    final const val BLEND_MODE_INTERPOLATED: Long = 0
-  }
+  companion object
 }

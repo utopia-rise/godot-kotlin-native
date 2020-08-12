@@ -217,10 +217,10 @@ open class ProceduralSky internal constructor(
   }
 
 
-  open fun _thread_done(image: Image) {
+  open fun _threadDone(image: Image) {
   }
 
-  open fun _update_sky() {
+  open fun _updateSky() {
   }
 
   open fun getGroundBottomColor(): Color {
@@ -408,17 +408,5 @@ open class ProceduralSky internal constructor(
     }
   }
 
-  companion object {
-    final const val TEXTURE_SIZE_1024: Long = 2
-
-    final const val TEXTURE_SIZE_2048: Long = 3
-
-    final const val TEXTURE_SIZE_256: Long = 0
-
-    final const val TEXTURE_SIZE_4096: Long = 4
-
-    final const val TEXTURE_SIZE_512: Long = 1
-
-    final const val TEXTURE_SIZE_MAX: Long = 5
-  }
+  companion object
 }

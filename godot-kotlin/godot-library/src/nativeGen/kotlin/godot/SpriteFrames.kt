@@ -36,18 +36,18 @@ open class SpriteFrames internal constructor(
 
   }
 
-  open fun _get_animations(): VariantArray {
+  open fun _getAnimations(): VariantArray {
     throw NotImplementedError("_get_animations is not implemented for SpriteFrames")
   }
 
-  open fun _get_frames(): VariantArray {
+  open fun _getFrames(): VariantArray {
     throw NotImplementedError("_get_frames is not implemented for SpriteFrames")
   }
 
-  open fun _set_animations(arg0: VariantArray) {
+  open fun _setAnimations(arg0: VariantArray) {
   }
 
-  open fun _set_frames(arg0: VariantArray) {
+  open fun _setFrames(arg0: VariantArray) {
   }
 
   open fun addAnimation(anim: String) {

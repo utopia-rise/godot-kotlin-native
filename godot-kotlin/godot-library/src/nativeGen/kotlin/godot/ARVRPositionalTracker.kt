@@ -44,22 +44,22 @@ open class ARVRPositionalTracker internal constructor(
 
   }
 
-  open fun _set_joy_id(joyId: Long) {
+  open fun _setJoyId(joyId: Long) {
   }
 
-  open fun _set_mesh(mesh: Mesh) {
+  open fun _setMesh(mesh: Mesh) {
   }
 
-  open fun _set_name(name: String) {
+  open fun _setName(name: String) {
   }
 
-  open fun _set_orientation(orientation: Basis) {
+  open fun _setOrientation(orientation: Basis) {
   }
 
-  open fun _set_rw_position(rwPosition: Vector3) {
+  open fun _setRwPosition(rwPosition: Vector3) {
   }
 
-  open fun _set_type(type: Long) {
+  open fun _setType(type: Long) {
   }
 
   open fun getHand(): ARVRPositionalTracker.TrackerHand {
@@ -146,11 +146,5 @@ open class ARVRPositionalTracker internal constructor(
     }
   }
 
-  companion object {
-    final const val TRACKER_HAND_UNKNOWN: Long = 0
-
-    final const val TRACKER_LEFT_HAND: Long = 1
-
-    final const val TRACKER_RIGHT_HAND: Long = 2
-  }
+  companion object
 }

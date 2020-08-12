@@ -94,15 +94,5 @@ open class JSONRPC internal constructor(
     }
   }
 
-  companion object {
-    final const val INTERNAL_ERROR: Long = -32603
-
-    final const val INVALID_PARAMS: Long = -32602
-
-    final const val INVALID_REQUEST: Long = -32600
-
-    final const val METHOD_NOT_FOUND: Long = -32601
-
-    final const val PARSE_ERROR: Long = -32700
-  }
+  companion object
 }

@@ -308,9 +308,5 @@ open class ReflectionProbe internal constructor(
     }
   }
 
-  companion object {
-    final const val UPDATE_ALWAYS: Long = 1
-
-    final const val UPDATE_ONCE: Long = 0
-  }
+  companion object
 }

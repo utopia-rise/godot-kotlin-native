@@ -15,15 +15,15 @@ open class EditorSceneImporter internal constructor(
 ) : Reference(_ignore) {
   internal constructor() : this(null)
 
-  open fun _get_extensions(): VariantArray {
+  open fun _getExtensions(): VariantArray {
     throw NotImplementedError("_get_extensions is not implemented for EditorSceneImporter")
   }
 
-  open fun _get_import_flags(): Long {
+  open fun _getImportFlags(): Long {
     throw NotImplementedError("_get_import_flags is not implemented for EditorSceneImporter")
   }
 
-  open fun _import_animation(
+  open fun _importAnimation(
     path: String,
     flags: Long,
     bakeFps: Long
@@ -31,7 +31,7 @@ open class EditorSceneImporter internal constructor(
     throw NotImplementedError("_import_animation is not implemented for EditorSceneImporter")
   }
 
-  open fun _import_scene(
+  open fun _importScene(
     path: String,
     flags: Long,
     bakeFps: Long

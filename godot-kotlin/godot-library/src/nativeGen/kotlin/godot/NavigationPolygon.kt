@@ -41,18 +41,18 @@ open class NavigationPolygon internal constructor(
 
   }
 
-  open fun _get_outlines(): VariantArray {
+  open fun _getOutlines(): VariantArray {
     throw NotImplementedError("_get_outlines is not implemented for NavigationPolygon")
   }
 
-  open fun _get_polygons(): VariantArray {
+  open fun _getPolygons(): VariantArray {
     throw NotImplementedError("_get_polygons is not implemented for NavigationPolygon")
   }
 
-  open fun _set_outlines(outlines: VariantArray) {
+  open fun _setOutlines(outlines: VariantArray) {
   }
 
-  open fun _set_polygons(polygons: VariantArray) {
+  open fun _setPolygons(polygons: VariantArray) {
   }
 
   open fun addOutline(outline: PoolVector2Array) {

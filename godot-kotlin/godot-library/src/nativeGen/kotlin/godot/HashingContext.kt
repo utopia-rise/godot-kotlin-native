@@ -56,11 +56,5 @@ open class HashingContext internal constructor(
     }
   }
 
-  companion object {
-    final const val HASH_MD5: Long = 0
-
-    final const val HASH_SHA1: Long = 1
-
-    final const val HASH_SHA256: Long = 2
-  }
+  companion object
 }

@@ -70,7 +70,7 @@ open class ProximityGroup internal constructor(
   }
 
 
-  open fun _proximity_group_broadcast(name: String, params: Variant) {
+  open fun _proximityGroupBroadcast(name: String, params: Variant) {
   }
 
   open fun broadcast(name: String, parameters: Variant) {
@@ -125,9 +125,5 @@ open class ProximityGroup internal constructor(
     }
   }
 
-  companion object {
-    final const val MODE_PROXY: Long = 0
-
-    final const val MODE_SIGNAL: Long = 1
-  }
+  companion object
 }

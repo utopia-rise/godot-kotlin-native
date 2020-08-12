@@ -98,13 +98,13 @@ open class Tabs internal constructor(
 
   }
 
-  override fun _gui_input(arg0: InputEvent) {
+  override fun _guiInput(arg0: InputEvent) {
   }
 
-  open fun _on_mouse_exited() {
+  open fun _onMouseExited() {
   }
 
-  open fun _update_hover() {
+  open fun _updateHover() {
   }
 
   open fun addTab(title: String = "", icon: Texture? = null) {
@@ -289,21 +289,5 @@ open class Tabs internal constructor(
     }
   }
 
-  companion object {
-    final const val ALIGN_CENTER: Long = 1
-
-    final const val ALIGN_LEFT: Long = 0
-
-    final const val ALIGN_MAX: Long = 3
-
-    final const val ALIGN_RIGHT: Long = 2
-
-    final const val CLOSE_BUTTON_MAX: Long = 3
-
-    final const val CLOSE_BUTTON_SHOW_ACTIVE_ONLY: Long = 1
-
-    final const val CLOSE_BUTTON_SHOW_ALWAYS: Long = 2
-
-    final const val CLOSE_BUTTON_SHOW_NEVER: Long = 0
-  }
+  companion object
 }

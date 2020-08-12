@@ -173,11 +173,5 @@ open class AnimationNodeStateMachineTransition internal constructor(
     }
   }
 
-  companion object {
-    final const val SWITCH_MODE_AT_END: Long = 2
-
-    final const val SWITCH_MODE_IMMEDIATE: Long = 0
-
-    final const val SWITCH_MODE_SYNC: Long = 1
-  }
+  companion object
 }

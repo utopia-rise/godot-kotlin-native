@@ -17,7 +17,7 @@ open class RichTextEffect internal constructor(
 
   }
 
-  open fun _process_custom_fx(charFx: CharFXTransform): Boolean {
+  open fun _processCustomFx(charFx: CharFXTransform): Boolean {
     throw NotImplementedError("_process_custom_fx is not implemented for RichTextEffect")
   }
 }

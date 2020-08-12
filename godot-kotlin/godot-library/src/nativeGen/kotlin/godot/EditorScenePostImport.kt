@@ -22,7 +22,7 @@ open class EditorScenePostImport internal constructor(
     return _icall_String( mb, this.ptr)
   }
 
-  open fun post_import(scene: Object): Object {
+  open fun postImport(scene: Object): Object {
     throw NotImplementedError("post_import is not implemented for EditorScenePostImport")
   }
 }

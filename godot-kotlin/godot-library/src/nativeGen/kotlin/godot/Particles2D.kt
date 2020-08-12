@@ -387,9 +387,5 @@ open class Particles2D internal constructor(
     }
   }
 
-  companion object {
-    final const val DRAW_ORDER_INDEX: Long = 0
-
-    final const val DRAW_ORDER_LIFETIME: Long = 1
-  }
+  companion object
 }

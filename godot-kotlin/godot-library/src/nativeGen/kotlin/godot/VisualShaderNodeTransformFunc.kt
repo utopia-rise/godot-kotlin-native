@@ -58,9 +58,5 @@ open class VisualShaderNodeTransformFunc internal constructor(
     }
   }
 
-  companion object {
-    final const val FUNC_INVERSE: Long = 0
-
-    final const val FUNC_TRANSPOSE: Long = 1
-  }
+  companion object
 }

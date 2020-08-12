@@ -144,7 +144,7 @@ open class GridMap internal constructor(
   }
 
 
-  open fun _update_octants_callback() {
+  open fun _updateOctantsCallback() {
   }
 
   open fun clear() {

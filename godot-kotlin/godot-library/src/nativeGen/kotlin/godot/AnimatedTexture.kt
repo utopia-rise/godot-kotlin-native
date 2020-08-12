@@ -5199,7 +5199,7 @@ open class AnimatedTexture internal constructor(
 
   }
 
-  open fun _update_proxy() {
+  open fun _updateProxy() {
   }
 
   open fun getCurrentFrame(): Long {

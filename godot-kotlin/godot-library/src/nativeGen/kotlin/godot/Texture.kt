@@ -136,21 +136,5 @@ open class Texture internal constructor(
     }
   }
 
-  companion object {
-    final const val FLAGS_DEFAULT: Long = 7
-
-    final const val FLAG_ANISOTROPIC_FILTER: Long = 8
-
-    final const val FLAG_CONVERT_TO_LINEAR: Long = 16
-
-    final const val FLAG_FILTER: Long = 4
-
-    final const val FLAG_MIPMAPS: Long = 1
-
-    final const val FLAG_MIRRORED_REPEAT: Long = 32
-
-    final const val FLAG_REPEAT: Long = 2
-
-    final const val FLAG_VIDEO_SURFACE: Long = 2048
-  }
+  companion object
 }

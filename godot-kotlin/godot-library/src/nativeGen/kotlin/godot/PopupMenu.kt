@@ -107,17 +107,17 @@ open class PopupMenu internal constructor(
 
   }
 
-  open fun _get_items(): VariantArray {
+  open fun _getItems(): VariantArray {
     throw NotImplementedError("_get_items is not implemented for PopupMenu")
   }
 
-  override fun _gui_input(arg0: InputEvent) {
+  override fun _guiInput(arg0: InputEvent) {
   }
 
-  open fun _set_items(arg0: VariantArray) {
+  open fun _setItems(arg0: VariantArray) {
   }
 
-  open fun _submenu_timeout() {
+  open fun _submenuTimeout() {
   }
 
   open fun addCheckItem(

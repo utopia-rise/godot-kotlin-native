@@ -34,7 +34,7 @@ open class ShaderMaterial internal constructor(
 
   }
 
-  open fun _shader_changed() {
+  open fun _shaderChanged() {
   }
 
   open fun getShader(): Shader {

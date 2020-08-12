@@ -81,7 +81,7 @@ open class Tween internal constructor(
 
   }
 
-  open fun _remove_by_uid(uid: Long) {
+  open fun _removeByUid(uid: Long) {
   }
 
   open fun followMethod(
@@ -383,39 +383,5 @@ open class Tween internal constructor(
     }
   }
 
-  companion object {
-    final const val EASE_IN: Long = 0
-
-    final const val EASE_IN_OUT: Long = 2
-
-    final const val EASE_OUT: Long = 1
-
-    final const val EASE_OUT_IN: Long = 3
-
-    final const val TRANS_BACK: Long = 10
-
-    final const val TRANS_BOUNCE: Long = 9
-
-    final const val TRANS_CIRC: Long = 8
-
-    final const val TRANS_CUBIC: Long = 7
-
-    final const val TRANS_ELASTIC: Long = 6
-
-    final const val TRANS_EXPO: Long = 5
-
-    final const val TRANS_LINEAR: Long = 0
-
-    final const val TRANS_QUAD: Long = 4
-
-    final const val TRANS_QUART: Long = 3
-
-    final const val TRANS_QUINT: Long = 2
-
-    final const val TRANS_SINE: Long = 1
-
-    final const val TWEEN_PROCESS_IDLE: Long = 1
-
-    final const val TWEEN_PROCESS_PHYSICS: Long = 0
-  }
+  companion object
 }

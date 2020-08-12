@@ -82,7 +82,7 @@ open class StaticBody2D internal constructor(
   }
 
 
-  open fun _reload_physics_characteristics() {
+  open fun _reloadPhysicsCharacteristics() {
   }
 
   open fun getBounce(): Double {

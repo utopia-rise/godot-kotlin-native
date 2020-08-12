@@ -32,11 +32,11 @@ open class PolygonPathFinder internal constructor(
 
   }
 
-  open fun _get_data(): Dictionary {
+  open fun _getData(): Dictionary {
     throw NotImplementedError("_get_data is not implemented for PolygonPathFinder")
   }
 
-  open fun _set_data(arg0: Dictionary) {
+  open fun _setData(arg0: Dictionary) {
   }
 
   open fun findPath(from: Vector2, to: Vector2): PoolVector2Array {

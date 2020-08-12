@@ -99,32 +99,32 @@ open class MultiMesh internal constructor(
 
   }
 
-  open fun _get_color_array(): PoolColorArray {
+  open fun _getColorArray(): PoolColorArray {
     throw NotImplementedError("_get_color_array is not implemented for MultiMesh")
   }
 
-  open fun _get_custom_data_array(): PoolColorArray {
+  open fun _getCustomDataArray(): PoolColorArray {
     throw NotImplementedError("_get_custom_data_array is not implemented for MultiMesh")
   }
 
-  open fun _get_transform_2d_array(): PoolVector2Array {
+  open fun _getTransform2dArray(): PoolVector2Array {
     throw NotImplementedError("_get_transform_2d_array is not implemented for MultiMesh")
   }
 
-  open fun _get_transform_array(): PoolVector3Array {
+  open fun _getTransformArray(): PoolVector3Array {
     throw NotImplementedError("_get_transform_array is not implemented for MultiMesh")
   }
 
-  open fun _set_color_array(arg0: PoolColorArray) {
+  open fun _setColorArray(arg0: PoolColorArray) {
   }
 
-  open fun _set_custom_data_array(arg0: PoolColorArray) {
+  open fun _setCustomDataArray(arg0: PoolColorArray) {
   }
 
-  open fun _set_transform_2d_array(arg0: PoolVector2Array) {
+  open fun _setTransform2dArray(arg0: PoolVector2Array) {
   }
 
-  open fun _set_transform_array(arg0: PoolVector3Array) {
+  open fun _setTransformArray(arg0: PoolVector3Array) {
   }
 
   open fun getAabb(): AABB {
@@ -292,21 +292,5 @@ open class MultiMesh internal constructor(
     }
   }
 
-  companion object {
-    final const val COLOR_8BIT: Long = 1
-
-    final const val COLOR_FLOAT: Long = 2
-
-    final const val COLOR_NONE: Long = 0
-
-    final const val CUSTOM_DATA_8BIT: Long = 1
-
-    final const val CUSTOM_DATA_FLOAT: Long = 2
-
-    final const val CUSTOM_DATA_NONE: Long = 0
-
-    final const val TRANSFORM_2D: Long = 0
-
-    final const val TRANSFORM_3D: Long = 1
-  }
+  companion object
 }

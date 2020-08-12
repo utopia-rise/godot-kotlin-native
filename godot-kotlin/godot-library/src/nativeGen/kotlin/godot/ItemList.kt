@@ -188,17 +188,17 @@ open class ItemList internal constructor(
   }
 
 
-  open fun _get_items(): VariantArray {
+  open fun _getItems(): VariantArray {
     throw NotImplementedError("_get_items is not implemented for ItemList")
   }
 
-  override fun _gui_input(arg0: InputEvent) {
+  override fun _guiInput(arg0: InputEvent) {
   }
 
-  open fun _scroll_changed(arg0: Double) {
+  open fun _scrollChanged(arg0: Double) {
   }
 
-  open fun _set_items(arg0: VariantArray) {
+  open fun _setItems(arg0: VariantArray) {
   }
 
   open fun addIconItem(icon: Texture, selectable: Boolean = true) {
@@ -549,13 +549,5 @@ open class ItemList internal constructor(
     }
   }
 
-  companion object {
-    final const val ICON_MODE_LEFT: Long = 1
-
-    final const val ICON_MODE_TOP: Long = 0
-
-    final const val SELECT_MULTI: Long = 1
-
-    final const val SELECT_SINGLE: Long = 0
-  }
+  companion object
 }

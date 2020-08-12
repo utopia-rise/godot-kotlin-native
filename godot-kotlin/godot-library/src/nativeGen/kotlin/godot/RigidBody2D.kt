@@ -264,19 +264,19 @@ open class RigidBody2D internal constructor(
   }
 
 
-  open fun _body_enter_tree(arg0: Long) {
+  open fun _bodyEnterTree(arg0: Long) {
   }
 
-  open fun _body_exit_tree(arg0: Long) {
+  open fun _bodyExitTree(arg0: Long) {
   }
 
-  open fun _direct_state_changed(arg0: Object) {
+  open fun _directStateChanged(arg0: Object) {
   }
 
-  open fun _integrate_forces(state: Physics2DDirectBodyState) {
+  open fun _integrateForces(state: Physics2DDirectBodyState) {
   }
 
-  open fun _reload_physics_characteristics() {
+  open fun _reloadPhysicsCharacteristics() {
   }
 
   open fun addCentralForce(force: Vector2) {
@@ -570,19 +570,5 @@ open class RigidBody2D internal constructor(
     }
   }
 
-  companion object {
-    final const val CCD_MODE_CAST_RAY: Long = 1
-
-    final const val CCD_MODE_CAST_SHAPE: Long = 2
-
-    final const val CCD_MODE_DISABLED: Long = 0
-
-    final const val MODE_CHARACTER: Long = 2
-
-    final const val MODE_KINEMATIC: Long = 3
-
-    final const val MODE_RIGID: Long = 0
-
-    final const val MODE_STATIC: Long = 1
-  }
+  companion object
 }

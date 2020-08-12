@@ -124,7 +124,7 @@ open class PhysicalBone internal constructor(
   }
 
 
-  open fun _direct_state_changed(arg0: Object) {
+  open fun _directStateChanged(arg0: Object) {
   }
 
   open fun applyCentralImpulse(impulse: Vector3) {
@@ -262,17 +262,5 @@ open class PhysicalBone internal constructor(
     }
   }
 
-  companion object {
-    final const val JOINT_TYPE_6DOF: Long = 5
-
-    final const val JOINT_TYPE_CONE: Long = 2
-
-    final const val JOINT_TYPE_HINGE: Long = 3
-
-    final const val JOINT_TYPE_NONE: Long = 0
-
-    final const val JOINT_TYPE_PIN: Long = 1
-
-    final const val JOINT_TYPE_SLIDER: Long = 4
-  }
+  companion object
 }

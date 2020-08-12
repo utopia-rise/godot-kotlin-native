@@ -36,14 +36,14 @@ open class MenuButton internal constructor(
 
   }
 
-  open fun _get_items(): VariantArray {
+  open fun _getItems(): VariantArray {
     throw NotImplementedError("_get_items is not implemented for MenuButton")
   }
 
-  open fun _set_items(arg0: VariantArray) {
+  open fun _setItems(arg0: VariantArray) {
   }
 
-  open fun _unhandled_key_input(arg0: InputEvent) {
+  open fun _unhandledKeyInput(arg0: InputEvent) {
   }
 
   open fun getPopup(): PopupMenu {

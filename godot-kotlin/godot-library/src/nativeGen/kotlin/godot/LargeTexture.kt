@@ -28,11 +28,11 @@ open class LargeTexture internal constructor(
 
   }
 
-  open fun _get_data(): VariantArray {
+  open fun _getData(): VariantArray {
     throw NotImplementedError("_get_data is not implemented for LargeTexture")
   }
 
-  open fun _set_data(data: VariantArray) {
+  open fun _setData(data: VariantArray) {
   }
 
   open fun addPiece(ofs: Vector2, texture: Texture): Long {

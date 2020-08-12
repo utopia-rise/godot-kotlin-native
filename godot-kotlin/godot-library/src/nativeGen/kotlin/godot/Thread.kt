@@ -70,11 +70,5 @@ open class Thread internal constructor(
     }
   }
 
-  companion object {
-    final const val PRIORITY_HIGH: Long = 2
-
-    final const val PRIORITY_LOW: Long = 0
-
-    final const val PRIORITY_NORMAL: Long = 1
-  }
+  companion object
 }

@@ -186,7 +186,7 @@ open class Sprite internal constructor(
   }
 
 
-  open fun _texture_changed() {
+  open fun _textureChanged() {
   }
 
   open fun getFrame(): Long {

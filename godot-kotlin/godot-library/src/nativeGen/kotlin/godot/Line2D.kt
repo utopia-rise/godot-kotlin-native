@@ -178,10 +178,10 @@ open class Line2D internal constructor(
   }
 
 
-  open fun _curve_changed() {
+  open fun _curveChanged() {
   }
 
-  open fun _gradient_changed() {
+  open fun _gradientChanged() {
   }
 
   open fun addPoint(position: Vector2, atPosition: Long = -1) {
@@ -401,23 +401,5 @@ open class Line2D internal constructor(
     }
   }
 
-  companion object {
-    final const val LINE_CAP_BOX: Long = 1
-
-    final const val LINE_CAP_NONE: Long = 0
-
-    final const val LINE_CAP_ROUND: Long = 2
-
-    final const val LINE_JOINT_BEVEL: Long = 1
-
-    final const val LINE_JOINT_ROUND: Long = 2
-
-    final const val LINE_JOINT_SHARP: Long = 0
-
-    final const val LINE_TEXTURE_NONE: Long = 0
-
-    final const val LINE_TEXTURE_STRETCH: Long = 2
-
-    final const val LINE_TEXTURE_TILE: Long = 1
-  }
+  companion object
 }

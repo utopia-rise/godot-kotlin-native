@@ -41,7 +41,7 @@ open class LightOccluder2D internal constructor(
 
   }
 
-  open fun _poly_changed() {
+  open fun _polyChanged() {
   }
 
   open fun getOccluderLightMask(): Long {

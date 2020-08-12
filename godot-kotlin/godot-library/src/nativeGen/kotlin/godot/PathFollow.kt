@@ -189,15 +189,5 @@ open class PathFollow internal constructor(
     }
   }
 
-  companion object {
-    final const val ROTATION_NONE: Long = 0
-
-    final const val ROTATION_ORIENTED: Long = 4
-
-    final const val ROTATION_XY: Long = 2
-
-    final const val ROTATION_XYZ: Long = 3
-
-    final const val ROTATION_Y: Long = 1
-  }
+  companion object
 }

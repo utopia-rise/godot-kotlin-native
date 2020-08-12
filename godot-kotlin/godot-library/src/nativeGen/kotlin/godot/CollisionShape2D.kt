@@ -64,7 +64,7 @@ open class CollisionShape2D internal constructor(
 
   }
 
-  open fun _shape_changed() {
+  open fun _shapeChanged() {
   }
 
   open fun getOneWayCollisionMargin(): Double {

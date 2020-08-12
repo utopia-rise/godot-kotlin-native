@@ -39,7 +39,7 @@ open class CSGMesh internal constructor(
 
   }
 
-  open fun _mesh_changed() {
+  open fun _meshChanged() {
   }
 
   open fun getMaterial(): Material {

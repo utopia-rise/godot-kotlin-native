@@ -210,11 +210,5 @@ open class NinePatchRect internal constructor(
     }
   }
 
-  companion object {
-    final const val AXIS_STRETCH_MODE_STRETCH: Long = 0
-
-    final const val AXIS_STRETCH_MODE_TILE: Long = 1
-
-    final const val AXIS_STRETCH_MODE_TILE_FIT: Long = 2
-  }
+  companion object
 }

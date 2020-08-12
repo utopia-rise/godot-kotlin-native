@@ -207,25 +207,5 @@ open class UPNPDevice internal constructor(
     }
   }
 
-  companion object {
-    final const val IGD_STATUS_DISCONNECTED: Long = 5
-
-    final const val IGD_STATUS_HTTP_EMPTY: Long = 2
-
-    final const val IGD_STATUS_HTTP_ERROR: Long = 1
-
-    final const val IGD_STATUS_INVALID_CONTROL: Long = 7
-
-    final const val IGD_STATUS_MALLOC_ERROR: Long = 8
-
-    final const val IGD_STATUS_NO_IGD: Long = 4
-
-    final const val IGD_STATUS_NO_URLS: Long = 3
-
-    final const val IGD_STATUS_OK: Long = 0
-
-    final const val IGD_STATUS_UNKNOWN_DEVICE: Long = 6
-
-    final const val IGD_STATUS_UNKNOWN_ERROR: Long = 9
-  }
+  companion object
 }

@@ -57,9 +57,5 @@ open class VisualShaderNodeColorFunc internal constructor(
     }
   }
 
-  companion object {
-    final const val FUNC_GRAYSCALE: Long = 0
-
-    final const val FUNC_SEPIA: Long = 1
-  }
+  companion object
 }

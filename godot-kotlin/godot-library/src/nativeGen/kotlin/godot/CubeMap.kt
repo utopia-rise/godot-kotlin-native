@@ -170,31 +170,5 @@ open class CubeMap internal constructor(
     }
   }
 
-  companion object {
-    final const val FLAGS_DEFAULT: Long = 7
-
-    final const val FLAG_FILTER: Long = 4
-
-    final const val FLAG_MIPMAPS: Long = 1
-
-    final const val FLAG_REPEAT: Long = 2
-
-    final const val SIDE_BACK: Long = 5
-
-    final const val SIDE_BOTTOM: Long = 2
-
-    final const val SIDE_FRONT: Long = 4
-
-    final const val SIDE_LEFT: Long = 0
-
-    final const val SIDE_RIGHT: Long = 1
-
-    final const val SIDE_TOP: Long = 3
-
-    final const val STORAGE_COMPRESS_LOSSLESS: Long = 2
-
-    final const val STORAGE_COMPRESS_LOSSY: Long = 1
-
-    final const val STORAGE_RAW: Long = 0
-  }
+  companion object
 }

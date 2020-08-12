@@ -462,21 +462,5 @@ open class Camera internal constructor(
     }
   }
 
-  companion object {
-    final const val DOPPLER_TRACKING_DISABLED: Long = 0
-
-    final const val DOPPLER_TRACKING_IDLE_STEP: Long = 1
-
-    final const val DOPPLER_TRACKING_PHYSICS_STEP: Long = 2
-
-    final const val KEEP_HEIGHT: Long = 1
-
-    final const val KEEP_WIDTH: Long = 0
-
-    final const val PROJECTION_FRUSTUM: Long = 2
-
-    final const val PROJECTION_ORTHOGONAL: Long = 1
-
-    final const val PROJECTION_PERSPECTIVE: Long = 0
-  }
+  companion object
 }

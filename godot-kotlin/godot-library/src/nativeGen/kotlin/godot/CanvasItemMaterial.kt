@@ -185,21 +185,5 @@ open class CanvasItemMaterial internal constructor(
     }
   }
 
-  companion object {
-    final const val BLEND_MODE_ADD: Long = 1
-
-    final const val BLEND_MODE_MIX: Long = 0
-
-    final const val BLEND_MODE_MUL: Long = 3
-
-    final const val BLEND_MODE_PREMULT_ALPHA: Long = 4
-
-    final const val BLEND_MODE_SUB: Long = 2
-
-    final const val LIGHT_MODE_LIGHT_ONLY: Long = 2
-
-    final const val LIGHT_MODE_NORMAL: Long = 0
-
-    final const val LIGHT_MODE_UNSHADED: Long = 1
-  }
+  companion object
 }

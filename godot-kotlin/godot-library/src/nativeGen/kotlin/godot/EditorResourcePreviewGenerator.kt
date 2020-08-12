@@ -12,7 +12,7 @@ open class EditorResourcePreviewGenerator internal constructor(
 ) : Reference(_ignore) {
   internal constructor() : this(null)
 
-  open fun can_generate_small_preview(): Boolean {
+  open fun canGenerateSmallPreview(): Boolean {
     throw
         NotImplementedError("can_generate_small_preview is not implemented for EditorResourcePreviewGenerator")
   }
@@ -21,12 +21,12 @@ open class EditorResourcePreviewGenerator internal constructor(
     throw NotImplementedError("generate is not implemented for EditorResourcePreviewGenerator")
   }
 
-  open fun generate_from_path(path: String, size: Vector2): Texture {
+  open fun generateFromPath(path: String, size: Vector2): Texture {
     throw
         NotImplementedError("generate_from_path is not implemented for EditorResourcePreviewGenerator")
   }
 
-  open fun generate_small_preview_automatically(): Boolean {
+  open fun generateSmallPreviewAutomatically(): Boolean {
     throw
         NotImplementedError("generate_small_preview_automatically is not implemented for EditorResourcePreviewGenerator")
   }

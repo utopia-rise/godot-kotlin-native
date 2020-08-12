@@ -213,19 +213,5 @@ open class TextureButton internal constructor(
     }
   }
 
-  companion object {
-    final const val STRETCH_KEEP: Long = 2
-
-    final const val STRETCH_KEEP_ASPECT: Long = 4
-
-    final const val STRETCH_KEEP_ASPECT_CENTERED: Long = 5
-
-    final const val STRETCH_KEEP_ASPECT_COVERED: Long = 6
-
-    final const val STRETCH_KEEP_CENTERED: Long = 3
-
-    final const val STRETCH_SCALE: Long = 0
-
-    final const val STRETCH_TILE: Long = 1
-  }
+  companion object
 }

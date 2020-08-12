@@ -40,7 +40,7 @@ open class VisibilityEnabler internal constructor(
 
   }
 
-  open fun _node_removed(arg0: Node) {
+  open fun _nodeRemoved(arg0: Node) {
   }
 
   open fun isEnablerEnabled(enabler: Long): Boolean {
@@ -72,11 +72,5 @@ open class VisibilityEnabler internal constructor(
     }
   }
 
-  companion object {
-    final const val ENABLER_FREEZE_BODIES: Long = 1
-
-    final const val ENABLER_MAX: Long = 2
-
-    final const val ENABLER_PAUSE_ANIMATIONS: Long = 0
-  }
+  companion object
 }

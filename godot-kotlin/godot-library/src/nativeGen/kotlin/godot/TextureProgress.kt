@@ -361,23 +361,5 @@ open class TextureProgress internal constructor(
     }
   }
 
-  companion object {
-    final const val FILL_BILINEAR_LEFT_AND_RIGHT: Long = 6
-
-    final const val FILL_BILINEAR_TOP_AND_BOTTOM: Long = 7
-
-    final const val FILL_BOTTOM_TO_TOP: Long = 3
-
-    final const val FILL_CLOCKWISE: Long = 4
-
-    final const val FILL_CLOCKWISE_AND_COUNTER_CLOCKWISE: Long = 8
-
-    final const val FILL_COUNTER_CLOCKWISE: Long = 5
-
-    final const val FILL_LEFT_TO_RIGHT: Long = 0
-
-    final const val FILL_RIGHT_TO_LEFT: Long = 1
-
-    final const val FILL_TOP_TO_BOTTOM: Long = 2
-  }
+  companion object
 }

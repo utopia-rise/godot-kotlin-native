@@ -241,9 +241,5 @@ open class TouchScreenButton internal constructor(
     }
   }
 
-  companion object {
-    final const val VISIBILITY_ALWAYS: Long = 0
-
-    final const val VISIBILITY_TOUCHSCREEN_ONLY: Long = 1
-  }
+  companion object
 }

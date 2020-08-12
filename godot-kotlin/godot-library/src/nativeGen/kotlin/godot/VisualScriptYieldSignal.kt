@@ -125,11 +125,5 @@ open class VisualScriptYieldSignal internal constructor(
     }
   }
 
-  companion object {
-    final const val CALL_MODE_INSTANCE: Long = 2
-
-    final const val CALL_MODE_NODE_PATH: Long = 1
-
-    final const val CALL_MODE_SELF: Long = 0
-  }
+  companion object
 }

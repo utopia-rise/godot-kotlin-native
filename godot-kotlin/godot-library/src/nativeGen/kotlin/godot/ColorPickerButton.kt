@@ -60,10 +60,10 @@ open class ColorPickerButton internal constructor(
   }
 
 
-  open fun _color_changed(arg0: Color) {
+  open fun _colorChanged(arg0: Color) {
   }
 
-  open fun _modal_closed() {
+  open fun _modalClosed() {
   }
 
   open fun getPickColor(): Color {

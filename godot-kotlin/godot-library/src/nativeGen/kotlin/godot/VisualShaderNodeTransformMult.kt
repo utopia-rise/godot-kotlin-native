@@ -62,13 +62,5 @@ open class VisualShaderNodeTransformMult internal constructor(
     }
   }
 
-  companion object {
-    final const val OP_AxB: Long = 0
-
-    final const val OP_AxB_COMP: Long = 2
-
-    final const val OP_BxA: Long = 1
-
-    final const val OP_BxA_COMP: Long = 3
-  }
+  companion object
 }

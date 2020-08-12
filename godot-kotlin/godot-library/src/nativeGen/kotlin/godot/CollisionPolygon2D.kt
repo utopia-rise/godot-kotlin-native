@@ -146,9 +146,5 @@ open class CollisionPolygon2D internal constructor(
     }
   }
 
-  companion object {
-    final const val BUILD_SEGMENTS: Long = 1
-
-    final const val BUILD_SOLIDS: Long = 0
-  }
+  companion object
 }

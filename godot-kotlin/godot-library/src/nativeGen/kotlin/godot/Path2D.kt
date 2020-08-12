@@ -28,7 +28,7 @@ open class Path2D internal constructor(
 
   }
 
-  open fun _curve_changed() {
+  open fun _curveChanged() {
   }
 
   open fun getCurve(): Curve2D {

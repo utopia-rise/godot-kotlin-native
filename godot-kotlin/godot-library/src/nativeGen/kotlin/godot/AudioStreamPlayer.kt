@@ -114,14 +114,14 @@ open class AudioStreamPlayer internal constructor(
 
   }
 
-  open fun _bus_layout_changed() {
+  open fun _busLayoutChanged() {
   }
 
-  open fun _is_active(): Boolean {
+  open fun _isActive(): Boolean {
     throw NotImplementedError("_is_active is not implemented for AudioStreamPlayer")
   }
 
-  open fun _set_playing(enable: Boolean) {
+  open fun _setPlaying(enable: Boolean) {
   }
 
   open fun getBus(): String {
@@ -243,11 +243,5 @@ open class AudioStreamPlayer internal constructor(
     }
   }
 
-  companion object {
-    final const val MIX_TARGET_CENTER: Long = 2
-
-    final const val MIX_TARGET_STEREO: Long = 0
-
-    final const val MIX_TARGET_SURROUND: Long = 1
-  }
+  companion object
 }

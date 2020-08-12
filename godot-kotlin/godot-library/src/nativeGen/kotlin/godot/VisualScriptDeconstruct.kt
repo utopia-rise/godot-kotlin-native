@@ -33,11 +33,11 @@ open class VisualScriptDeconstruct internal constructor(
 
   }
 
-  open fun _get_elem_cache(): VariantArray {
+  open fun _getElemCache(): VariantArray {
     throw NotImplementedError("_get_elem_cache is not implemented for VisualScriptDeconstruct")
   }
 
-  open fun _set_elem_cache(_cache: VariantArray) {
+  open fun _setElemCache(_cache: VariantArray) {
   }
 
   open fun getDeconstructType(): Variant.Type {

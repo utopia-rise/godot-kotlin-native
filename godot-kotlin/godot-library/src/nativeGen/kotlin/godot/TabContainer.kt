@@ -93,19 +93,19 @@ open class TabContainer internal constructor(
 
   }
 
-  open fun _child_renamed_callback() {
+  open fun _childRenamedCallback() {
   }
 
-  override fun _gui_input(arg0: InputEvent) {
+  override fun _guiInput(arg0: InputEvent) {
   }
 
-  open fun _on_mouse_exited() {
+  open fun _onMouseExited() {
   }
 
-  open fun _on_theme_changed() {
+  open fun _onThemeChanged() {
   }
 
-  open fun _update_current_tab() {
+  open fun _updateCurrentTab() {
   }
 
   open fun areTabsVisible(): Boolean {
@@ -247,11 +247,5 @@ open class TabContainer internal constructor(
     }
   }
 
-  companion object {
-    final const val ALIGN_CENTER: Long = 1
-
-    final const val ALIGN_LEFT: Long = 0
-
-    final const val ALIGN_RIGHT: Long = 2
-  }
+  companion object
 }

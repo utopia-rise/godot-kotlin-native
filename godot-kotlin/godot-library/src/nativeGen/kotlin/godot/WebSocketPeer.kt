@@ -83,9 +83,5 @@ open class WebSocketPeer internal constructor(
     }
   }
 
-  companion object {
-    final const val WRITE_MODE_BINARY: Long = 1
-
-    final const val WRITE_MODE_TEXT: Long = 0
-  }
+  companion object
 }

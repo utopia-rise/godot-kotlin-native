@@ -83,13 +83,5 @@ open class StreamPeerTCP internal constructor(
     }
   }
 
-  companion object {
-    final const val STATUS_CONNECTED: Long = 2
-
-    final const val STATUS_CONNECTING: Long = 1
-
-    final const val STATUS_ERROR: Long = 3
-
-    final const val STATUS_NONE: Long = 0
-  }
+  companion object
 }

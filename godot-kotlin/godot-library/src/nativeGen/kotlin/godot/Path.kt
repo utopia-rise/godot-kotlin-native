@@ -32,7 +32,7 @@ open class Path internal constructor(
 
   }
 
-  open fun _curve_changed() {
+  open fun _curveChanged() {
   }
 
   open fun getCurve(): Curve3D {

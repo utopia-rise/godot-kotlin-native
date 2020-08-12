@@ -566,31 +566,5 @@ open class Animation internal constructor(
     }
   }
 
-  companion object {
-    final const val INTERPOLATION_CUBIC: Long = 2
-
-    final const val INTERPOLATION_LINEAR: Long = 1
-
-    final const val INTERPOLATION_NEAREST: Long = 0
-
-    final const val TYPE_ANIMATION: Long = 5
-
-    final const val TYPE_AUDIO: Long = 4
-
-    final const val TYPE_BEZIER: Long = 3
-
-    final const val TYPE_METHOD: Long = 2
-
-    final const val TYPE_TRANSFORM: Long = 1
-
-    final const val TYPE_VALUE: Long = 0
-
-    final const val UPDATE_CAPTURE: Long = 3
-
-    final const val UPDATE_CONTINUOUS: Long = 0
-
-    final const val UPDATE_DISCRETE: Long = 1
-
-    final const val UPDATE_TRIGGER: Long = 2
-  }
+  companion object
 }

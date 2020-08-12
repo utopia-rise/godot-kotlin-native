@@ -25,10 +25,10 @@ open class Skeleton2D internal constructor(
 
   }
 
-  open fun _update_bone_setup() {
+  open fun _updateBoneSetup() {
   }
 
-  open fun _update_transform() {
+  open fun _updateTransform() {
   }
 
   open fun getBone(idx: Long): Bone2D {

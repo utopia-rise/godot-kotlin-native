@@ -101,11 +101,11 @@ open class BakedLightmapData internal constructor(
   }
 
 
-  open fun _get_user_data(): VariantArray {
+  open fun _getUserData(): VariantArray {
     throw NotImplementedError("_get_user_data is not implemented for BakedLightmapData")
   }
 
-  open fun _set_user_data(data: VariantArray) {
+  open fun _setUserData(data: VariantArray) {
   }
 
   open fun addUser(

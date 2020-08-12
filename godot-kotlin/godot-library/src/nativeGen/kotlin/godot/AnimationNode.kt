@@ -54,11 +54,11 @@ open class AnimationNode internal constructor(
 
   }
 
-  open fun _get_filters(): VariantArray {
+  open fun _getFilters(): VariantArray {
     throw NotImplementedError("_get_filters is not implemented for AnimationNode")
   }
 
-  open fun _set_filters(filters: VariantArray) {
+  open fun _setFilters(filters: VariantArray) {
   }
 
   open fun addInput(name: String) {
@@ -105,15 +105,15 @@ open class AnimationNode internal constructor(
         time, seek, blend, filter, optimize)
   }
 
-  open fun get_caption(): String {
+  open fun getCaption(): String {
     throw NotImplementedError("get_caption is not implemented for AnimationNode")
   }
 
-  open fun get_child_by_name(name: String): Object {
+  open fun getChildByName(name: String): Object {
     throw NotImplementedError("get_child_by_name is not implemented for AnimationNode")
   }
 
-  open fun get_child_nodes(): Dictionary {
+  open fun getChildNodes(): Dictionary {
     throw NotImplementedError("get_child_nodes is not implemented for AnimationNode")
   }
 
@@ -132,15 +132,15 @@ open class AnimationNode internal constructor(
     return _icall_Variant_String( mb, this.ptr, name)
   }
 
-  open fun get_parameter_default_value(name: String): Variant {
+  open fun getParameterDefaultValue(name: String): Variant {
     throw NotImplementedError("get_parameter_default_value is not implemented for AnimationNode")
   }
 
-  open fun get_parameter_list(): VariantArray {
+  open fun getParameterList(): VariantArray {
     throw NotImplementedError("get_parameter_list is not implemented for AnimationNode")
   }
 
-  open fun has_filter(): String {
+  open fun hasFilter(): String {
     throw NotImplementedError("has_filter is not implemented for AnimationNode")
   }
 
@@ -198,13 +198,5 @@ open class AnimationNode internal constructor(
     }
   }
 
-  companion object {
-    final const val FILTER_BLEND: Long = 3
-
-    final const val FILTER_IGNORE: Long = 0
-
-    final const val FILTER_PASS: Long = 1
-
-    final const val FILTER_STOP: Long = 2
-  }
+  companion object
 }

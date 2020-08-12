@@ -1094,10 +1094,10 @@ open class AnimationNodeBlendSpace1D internal constructor(
 
   }
 
-  open fun _add_blend_point(index: Long, node: AnimationRootNode) {
+  open fun _addBlendPoint(index: Long, node: AnimationRootNode) {
   }
 
-  open fun _tree_changed() {
+  open fun _treeChanged() {
   }
 
   open fun addBlendPoint(

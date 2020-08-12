@@ -46,7 +46,7 @@ open class Theme internal constructor(
 
   }
 
-  open fun _emit_theme_changed() {
+  open fun _emitThemeChanged() {
   }
 
   open fun clear() {

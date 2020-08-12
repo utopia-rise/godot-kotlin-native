@@ -118,15 +118,5 @@ open class VisualShaderNodeCubeMap internal constructor(
     }
   }
 
-  companion object {
-    final const val SOURCE_PORT: Long = 1
-
-    final const val SOURCE_TEXTURE: Long = 0
-
-    final const val TYPE_COLOR: Long = 1
-
-    final const val TYPE_DATA: Long = 0
-
-    final const val TYPE_NORMALMAP: Long = 2
-  }
+  companion object
 }

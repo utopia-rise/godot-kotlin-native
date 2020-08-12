@@ -114,7 +114,7 @@ open class ParallaxBackground internal constructor(
   }
 
 
-  open fun _camera_moved(arg0: Transform2D, arg1: Vector2) {
+  open fun _cameraMoved(arg0: Transform2D, arg1: Vector2) {
   }
 
   open fun getLimitBegin(): Vector2 {

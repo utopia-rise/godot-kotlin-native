@@ -148,11 +148,5 @@ open class UndoRedo internal constructor(
     }
   }
 
-  companion object {
-    final const val MERGE_ALL: Long = 2
-
-    final const val MERGE_DISABLE: Long = 0
-
-    final const val MERGE_ENDS: Long = 1
-  }
+  companion object
 }

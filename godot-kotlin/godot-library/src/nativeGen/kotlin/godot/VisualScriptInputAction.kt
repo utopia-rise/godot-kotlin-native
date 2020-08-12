@@ -84,13 +84,5 @@ open class VisualScriptInputAction internal constructor(
     }
   }
 
-  companion object {
-    final const val MODE_JUST_PRESSED: Long = 2
-
-    final const val MODE_JUST_RELEASED: Long = 3
-
-    final const val MODE_PRESSED: Long = 0
-
-    final const val MODE_RELEASED: Long = 1
-  }
+  companion object
 }

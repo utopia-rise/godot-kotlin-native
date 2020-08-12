@@ -17,10 +17,10 @@ open class Position2D internal constructor(
 
   }
 
-  open fun _get_gizmo_extents(): Double {
+  open fun _getGizmoExtents(): Double {
     throw NotImplementedError("_get_gizmo_extents is not implemented for Position2D")
   }
 
-  open fun _set_gizmo_extents(extents: Double) {
+  open fun _setGizmoExtents(extents: Double) {
   }
 }

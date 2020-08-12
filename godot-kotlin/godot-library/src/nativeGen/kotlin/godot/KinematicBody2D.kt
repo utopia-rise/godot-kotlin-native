@@ -52,7 +52,7 @@ open class KinematicBody2D internal constructor(
 
   }
 
-  open fun _direct_state_changed(arg0: Object) {
+  open fun _directStateChanged(arg0: Object) {
   }
 
   open fun getFloorNormal(): Vector2 {

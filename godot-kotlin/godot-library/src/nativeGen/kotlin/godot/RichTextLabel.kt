@@ -174,10 +174,10 @@ open class RichTextLabel internal constructor(
 
   }
 
-  override fun _gui_input(arg0: InputEvent) {
+  override fun _guiInput(arg0: InputEvent) {
   }
 
-  open fun _scroll_changed(arg0: Double) {
+  open fun _scrollChanged(arg0: Double) {
   }
 
   open fun addImage(
@@ -559,57 +559,5 @@ open class RichTextLabel internal constructor(
     }
   }
 
-  companion object {
-    final const val ALIGN_CENTER: Long = 1
-
-    final const val ALIGN_FILL: Long = 3
-
-    final const val ALIGN_LEFT: Long = 0
-
-    final const val ALIGN_RIGHT: Long = 2
-
-    final const val ITEM_ALIGN: Long = 8
-
-    final const val ITEM_COLOR: Long = 5
-
-    final const val ITEM_CUSTOMFX: Long = 18
-
-    final const val ITEM_FADE: Long = 12
-
-    final const val ITEM_FONT: Long = 4
-
-    final const val ITEM_FRAME: Long = 0
-
-    final const val ITEM_IMAGE: Long = 2
-
-    final const val ITEM_INDENT: Long = 9
-
-    final const val ITEM_LIST: Long = 10
-
-    final const val ITEM_META: Long = 17
-
-    final const val ITEM_NEWLINE: Long = 3
-
-    final const val ITEM_RAINBOW: Long = 16
-
-    final const val ITEM_SHAKE: Long = 13
-
-    final const val ITEM_STRIKETHROUGH: Long = 7
-
-    final const val ITEM_TABLE: Long = 11
-
-    final const val ITEM_TEXT: Long = 1
-
-    final const val ITEM_TORNADO: Long = 15
-
-    final const val ITEM_UNDERLINE: Long = 6
-
-    final const val ITEM_WAVE: Long = 14
-
-    final const val LIST_DOTS: Long = 2
-
-    final const val LIST_LETTERS: Long = 1
-
-    final const val LIST_NUMBERS: Long = 0
-  }
+  companion object
 }

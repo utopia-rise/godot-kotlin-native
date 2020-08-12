@@ -102,10 +102,10 @@ open class EditorProperty internal constructor(
 
   internal constructor() : this(null)
 
-  open fun _focusable_focused(arg0: Long) {
+  open fun _focusableFocused(arg0: Long) {
   }
 
-  override fun _gui_input(arg0: InputEvent) {
+  override fun _guiInput(arg0: InputEvent) {
   }
 
   open fun addFocusable(control: Control) {
@@ -203,6 +203,6 @@ open class EditorProperty internal constructor(
     _icall_Unit_Boolean( mb, this.ptr, readOnly)
   }
 
-  open fun update_property() {
+  open fun updateProperty() {
   }
 }

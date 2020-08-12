@@ -143,29 +143,5 @@ open class VisualShaderNodeCompare internal constructor(
     }
   }
 
-  companion object {
-    final const val COND_ALL: Long = 0
-
-    final const val COND_ANY: Long = 1
-
-    final const val CTYPE_BOOLEAN: Long = 2
-
-    final const val CTYPE_SCALAR: Long = 0
-
-    final const val CTYPE_TRANSFORM: Long = 3
-
-    final const val CTYPE_VECTOR: Long = 1
-
-    final const val FUNC_EQUAL: Long = 0
-
-    final const val FUNC_GREATER_THAN: Long = 2
-
-    final const val FUNC_GREATER_THAN_EQUAL: Long = 3
-
-    final const val FUNC_LESS_THAN: Long = 4
-
-    final const val FUNC_LESS_THAN_EQUAL: Long = 5
-
-    final const val FUNC_NOT_EQUAL: Long = 1
-  }
+  companion object
 }

@@ -41,7 +41,7 @@ open class NavigationPolygonInstance internal constructor(
 
   }
 
-  open fun _navpoly_changed() {
+  open fun _navpolyChanged() {
   }
 
   open fun getNavigationPolygon(): NavigationPolygon {

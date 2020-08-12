@@ -112,17 +112,5 @@ open class WebRTCPeerConnection internal constructor(
     }
   }
 
-  companion object {
-    final const val STATE_CLOSED: Long = 5
-
-    final const val STATE_CONNECTED: Long = 2
-
-    final const val STATE_CONNECTING: Long = 1
-
-    final const val STATE_DISCONNECTED: Long = 3
-
-    final const val STATE_FAILED: Long = 4
-
-    final const val STATE_NEW: Long = 0
-  }
+  companion object
 }

@@ -133,11 +133,11 @@ open class VisualScriptFunctionCall internal constructor(
 
   }
 
-  open fun _get_argument_cache(): Dictionary {
+  open fun _getArgumentCache(): Dictionary {
     throw NotImplementedError("_get_argument_cache is not implemented for VisualScriptFunctionCall")
   }
 
-  open fun _set_argument_cache(argumentCache: Dictionary) {
+  open fun _setArgumentCache(argumentCache: Dictionary) {
   }
 
   open fun getBasePath(): NodePath {
@@ -286,25 +286,5 @@ open class VisualScriptFunctionCall internal constructor(
     }
   }
 
-  companion object {
-    final const val CALL_MODE_BASIC_TYPE: Long = 3
-
-    final const val CALL_MODE_INSTANCE: Long = 2
-
-    final const val CALL_MODE_NODE_PATH: Long = 1
-
-    final const val CALL_MODE_SELF: Long = 0
-
-    final const val CALL_MODE_SINGLETON: Long = 4
-
-    final const val RPC_DISABLED: Long = 0
-
-    final const val RPC_RELIABLE: Long = 1
-
-    final const val RPC_RELIABLE_TO_ID: Long = 3
-
-    final const val RPC_UNRELIABLE: Long = 2
-
-    final const val RPC_UNRELIABLE_TO_ID: Long = 4
-  }
+  companion object
 }

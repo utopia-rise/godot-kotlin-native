@@ -519,25 +519,5 @@ open class Light2D internal constructor(
     }
   }
 
-  companion object {
-    final const val MODE_ADD: Long = 0
-
-    final const val MODE_MASK: Long = 3
-
-    final const val MODE_MIX: Long = 2
-
-    final const val MODE_SUB: Long = 1
-
-    final const val SHADOW_FILTER_NONE: Long = 0
-
-    final const val SHADOW_FILTER_PCF13: Long = 5
-
-    final const val SHADOW_FILTER_PCF3: Long = 1
-
-    final const val SHADOW_FILTER_PCF5: Long = 2
-
-    final const val SHADOW_FILTER_PCF7: Long = 3
-
-    final const val SHADOW_FILTER_PCF9: Long = 4
-  }
+  companion object
 }

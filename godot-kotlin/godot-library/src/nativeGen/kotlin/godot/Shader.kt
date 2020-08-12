@@ -105,11 +105,5 @@ open class Shader internal constructor(
     }
   }
 
-  companion object {
-    final const val MODE_CANVAS_ITEM: Long = 1
-
-    final const val MODE_PARTICLES: Long = 2
-
-    final const val MODE_SPATIAL: Long = 0
-  }
+  companion object
 }

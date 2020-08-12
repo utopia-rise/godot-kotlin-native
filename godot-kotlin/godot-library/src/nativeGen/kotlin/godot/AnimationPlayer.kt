@@ -161,10 +161,10 @@ open class AnimationPlayer internal constructor(
 
   }
 
-  open fun _animation_changed() {
+  open fun _animationChanged() {
   }
 
-  open fun _node_removed(arg0: Node) {
+  open fun _nodeRemoved(arg0: Node) {
   }
 
   open fun addAnimation(name: String, animation: Animation): GodotError {
@@ -422,15 +422,5 @@ open class AnimationPlayer internal constructor(
     }
   }
 
-  companion object {
-    final const val ANIMATION_METHOD_CALL_DEFERRED: Long = 0
-
-    final const val ANIMATION_METHOD_CALL_IMMEDIATE: Long = 1
-
-    final const val ANIMATION_PROCESS_IDLE: Long = 1
-
-    final const val ANIMATION_PROCESS_MANUAL: Long = 2
-
-    final const val ANIMATION_PROCESS_PHYSICS: Long = 0
-  }
+  companion object
 }

@@ -147,25 +147,25 @@ open class Tree internal constructor(
 
   }
 
-  override fun _gui_input(arg0: InputEvent) {
+  override fun _guiInput(arg0: InputEvent) {
   }
 
-  open fun _popup_select(arg0: Long) {
+  open fun _popupSelect(arg0: Long) {
   }
 
-  open fun _range_click_timeout() {
+  open fun _rangeClickTimeout() {
   }
 
-  open fun _scroll_moved(arg0: Double) {
+  open fun _scrollMoved(arg0: Double) {
   }
 
-  open fun _text_editor_enter(arg0: String) {
+  open fun _textEditorEnter(arg0: String) {
   }
 
-  open fun _text_editor_modal_close() {
+  open fun _textEditorModalClose() {
   }
 
-  open fun _value_editor_changed(arg0: Double) {
+  open fun _valueEditorChanged(arg0: Double) {
   }
 
   open fun areColumnTitlesVisible(): Boolean {
@@ -391,17 +391,5 @@ open class Tree internal constructor(
     }
   }
 
-  companion object {
-    final const val DROP_MODE_DISABLED: Long = 0
-
-    final const val DROP_MODE_INBETWEEN: Long = 2
-
-    final const val DROP_MODE_ON_ITEM: Long = 1
-
-    final const val SELECT_MULTI: Long = 2
-
-    final const val SELECT_ROW: Long = 1
-
-    final const val SELECT_SINGLE: Long = 0
-  }
+  companion object
 }

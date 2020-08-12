@@ -173,9 +173,5 @@ open class AnimationNodeOneShot internal constructor(
     }
   }
 
-  companion object {
-    final const val MIX_MODE_ADD: Long = 1
-
-    final const val MIX_MODE_BLEND: Long = 0
-  }
+  companion object
 }

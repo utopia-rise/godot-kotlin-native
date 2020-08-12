@@ -254,13 +254,5 @@ open class DynamicFont internal constructor(
     }
   }
 
-  companion object {
-    final const val SPACING_BOTTOM: Long = 1
-
-    final const val SPACING_CHAR: Long = 2
-
-    final const val SPACING_SPACE: Long = 3
-
-    final const val SPACING_TOP: Long = 0
-  }
+  companion object
 }

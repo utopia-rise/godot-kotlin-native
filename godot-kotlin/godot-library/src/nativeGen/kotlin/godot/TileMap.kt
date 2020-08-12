@@ -252,27 +252,27 @@ open class TileMap internal constructor(
   }
 
 
-  open fun _clear_quadrants() {
+  open fun _clearQuadrants() {
   }
 
-  open fun _get_old_cell_size(): Long {
+  open fun _getOldCellSize(): Long {
     throw NotImplementedError("_get_old_cell_size is not implemented for TileMap")
   }
 
-  open fun _get_tile_data(): PoolIntArray {
+  open fun _getTileData(): PoolIntArray {
     throw NotImplementedError("_get_tile_data is not implemented for TileMap")
   }
 
-  open fun _recreate_quadrants() {
+  open fun _recreateQuadrants() {
   }
 
-  open fun _set_celld(position: Vector2, data: Dictionary) {
+  open fun _setCelld(position: Vector2, data: Dictionary) {
   }
 
-  open fun _set_old_cell_size(size: Long) {
+  open fun _setOldCellSize(size: Long) {
   }
 
-  open fun _set_tile_data(arg0: PoolIntArray) {
+  open fun _setTileData(arg0: PoolIntArray) {
   }
 
   open fun clear() {
@@ -644,28 +644,6 @@ open class TileMap internal constructor(
   }
 
   companion object {
-    final const val HALF_OFFSET_DISABLED: Long = 2
-
-    final const val HALF_OFFSET_NEGATIVE_X: Long = 3
-
-    final const val HALF_OFFSET_NEGATIVE_Y: Long = 4
-
-    final const val HALF_OFFSET_X: Long = 0
-
-    final const val HALF_OFFSET_Y: Long = 1
-
     final const val INVALID_CELL: Long = -1
-
-    final const val MODE_CUSTOM: Long = 2
-
-    final const val MODE_ISOMETRIC: Long = 1
-
-    final const val MODE_SQUARE: Long = 0
-
-    final const val TILE_ORIGIN_BOTTOM_LEFT: Long = 2
-
-    final const val TILE_ORIGIN_CENTER: Long = 1
-
-    final const val TILE_ORIGIN_TOP_LEFT: Long = 0
   }
 }

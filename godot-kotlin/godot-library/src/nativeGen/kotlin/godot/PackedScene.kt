@@ -25,11 +25,11 @@ open class PackedScene internal constructor(
 
   }
 
-  open fun _get_bundled_scene(): Dictionary {
+  open fun _getBundledScene(): Dictionary {
     throw NotImplementedError("_get_bundled_scene is not implemented for PackedScene")
   }
 
-  open fun _set_bundled_scene(arg0: Dictionary) {
+  open fun _setBundledScene(arg0: Dictionary) {
   }
 
   open fun canInstance(): Boolean {
@@ -71,11 +71,5 @@ open class PackedScene internal constructor(
     }
   }
 
-  companion object {
-    final const val GEN_EDIT_STATE_DISABLED: Long = 0
-
-    final const val GEN_EDIT_STATE_INSTANCE: Long = 1
-
-    final const val GEN_EDIT_STATE_MAIN: Long = 2
-  }
+  companion object
 }

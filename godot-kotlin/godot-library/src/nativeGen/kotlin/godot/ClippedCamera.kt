@@ -189,9 +189,5 @@ open class ClippedCamera internal constructor(
     }
   }
 
-  companion object {
-    final const val CLIP_PROCESS_IDLE: Long = 1
-
-    final const val CLIP_PROCESS_PHYSICS: Long = 0
-  }
+  companion object
 }

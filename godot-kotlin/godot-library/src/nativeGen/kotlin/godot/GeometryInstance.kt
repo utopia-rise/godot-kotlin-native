@@ -228,19 +228,5 @@ open class GeometryInstance internal constructor(
     }
   }
 
-  companion object {
-    final const val FLAG_DRAW_NEXT_FRAME_IF_VISIBLE: Long = 1
-
-    final const val FLAG_MAX: Long = 2
-
-    final const val FLAG_USE_BAKED_LIGHT: Long = 0
-
-    final const val SHADOW_CASTING_SETTING_DOUBLE_SIDED: Long = 2
-
-    final const val SHADOW_CASTING_SETTING_OFF: Long = 0
-
-    final const val SHADOW_CASTING_SETTING_ON: Long = 1
-
-    final const val SHADOW_CASTING_SETTING_SHADOWS_ONLY: Long = 3
-  }
+  companion object
 }

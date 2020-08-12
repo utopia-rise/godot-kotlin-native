@@ -97,17 +97,5 @@ open class VisualShaderNode internal constructor(
     }
   }
 
-  companion object {
-    final const val PORT_TYPE_BOOLEAN: Long = 2
-
-    final const val PORT_TYPE_MAX: Long = 5
-
-    final const val PORT_TYPE_SAMPLER: Long = 4
-
-    final const val PORT_TYPE_SCALAR: Long = 0
-
-    final const val PORT_TYPE_TRANSFORM: Long = 3
-
-    final const val PORT_TYPE_VECTOR: Long = 1
-  }
+  companion object
 }

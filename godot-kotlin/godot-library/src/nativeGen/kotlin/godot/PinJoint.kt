@@ -79,11 +79,5 @@ open class PinJoint internal constructor(
     }
   }
 
-  companion object {
-    final const val PARAM_BIAS: Long = 0
-
-    final const val PARAM_DAMPING: Long = 1
-
-    final const val PARAM_IMPULSE_CLAMP: Long = 2
-  }
+  companion object
 }

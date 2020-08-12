@@ -65,7 +65,7 @@ open class TileSet internal constructor(
 
   }
 
-  open fun _forward_atlas_subtile_selection(
+  open fun _forwardAtlasSubtileSelection(
     atlastileId: Long,
     tilemap: Object,
     tileLocation: Vector2
@@ -73,7 +73,7 @@ open class TileSet internal constructor(
     throw NotImplementedError("_forward_atlas_subtile_selection is not implemented for TileSet")
   }
 
-  open fun _forward_subtile_selection(
+  open fun _forwardSubtileSelection(
     autotileId: Long,
     bitmask: Long,
     tilemap: Object,
@@ -82,7 +82,7 @@ open class TileSet internal constructor(
     throw NotImplementedError("_forward_subtile_selection is not implemented for TileSet")
   }
 
-  open fun _is_tile_bound(drawnId: Long, neighborId: Long): Boolean {
+  open fun _isTileBound(drawnId: Long, neighborId: Long): Boolean {
     throw NotImplementedError("_is_tile_bound is not implemented for TileSet")
   }
 
@@ -527,35 +527,5 @@ open class TileSet internal constructor(
     }
   }
 
-  companion object {
-    final const val ATLAS_TILE: Long = 2
-
-    final const val AUTO_TILE: Long = 1
-
-    final const val BIND_BOTTOM: Long = 128
-
-    final const val BIND_BOTTOMLEFT: Long = 64
-
-    final const val BIND_BOTTOMRIGHT: Long = 256
-
-    final const val BIND_CENTER: Long = 16
-
-    final const val BIND_LEFT: Long = 8
-
-    final const val BIND_RIGHT: Long = 32
-
-    final const val BIND_TOP: Long = 2
-
-    final const val BIND_TOPLEFT: Long = 1
-
-    final const val BIND_TOPRIGHT: Long = 4
-
-    final const val BITMASK_2X2: Long = 0
-
-    final const val BITMASK_3X3: Long = 2
-
-    final const val BITMASK_3X3_MINIMAL: Long = 1
-
-    final const val SINGLE_TILE: Long = 0
-  }
+  companion object
 }

@@ -355,7 +355,7 @@ open class Object internal constructor(
     throw NotImplementedError("_get is not implemented for Object")
   }
 
-  open fun _get_property_list(): VariantArray {
+  open fun _getPropertyList(): VariantArray {
     throw NotImplementedError("_get_property_list is not implemented for Object")
   }
 
@@ -369,7 +369,7 @@ open class Object internal constructor(
     throw NotImplementedError("_set is not implemented for Object")
   }
 
-  open fun _to_string(): String {
+  open fun _toString(): String {
     throw NotImplementedError("_to_string is not implemented for Object")
   }
 
@@ -615,14 +615,6 @@ open class Object internal constructor(
   }
 
   companion object {
-    final const val CONNECT_DEFERRED: Long = 1
-
-    final const val CONNECT_ONESHOT: Long = 4
-
-    final const val CONNECT_PERSIST: Long = 2
-
-    final const val CONNECT_REFERENCE_COUNTED: Long = 8
-
     final const val NOTIFICATION_POSTINITIALIZE: Long = 0
 
     final const val NOTIFICATION_PREDELETE: Long = 1

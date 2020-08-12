@@ -273,15 +273,5 @@ open class GIProbe internal constructor(
     }
   }
 
-  companion object {
-    final const val SUBDIV_128: Long = 1
-
-    final const val SUBDIV_256: Long = 2
-
-    final const val SUBDIV_512: Long = 3
-
-    final const val SUBDIV_64: Long = 0
-
-    final const val SUBDIV_MAX: Long = 4
-  }
+  companion object
 }

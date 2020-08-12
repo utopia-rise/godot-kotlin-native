@@ -91,16 +91,16 @@ open class ScrollContainer internal constructor(
 
   }
 
-  open fun _ensure_focused_visible(arg0: Control) {
+  open fun _ensureFocusedVisible(arg0: Control) {
   }
 
-  override fun _gui_input(arg0: InputEvent) {
+  override fun _guiInput(arg0: InputEvent) {
   }
 
-  open fun _scroll_moved(arg0: Double) {
+  open fun _scrollMoved(arg0: Double) {
   }
 
-  open fun _update_scrollbar_position() {
+  open fun _updateScrollbarPosition() {
   }
 
   open fun getDeadzone(): Long {
