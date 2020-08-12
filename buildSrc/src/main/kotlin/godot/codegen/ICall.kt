@@ -30,16 +30,25 @@ class ICall(
         }
     }
 
-    private fun createReturnTypeClass() = if (returnType == "GodotArray") {
-        ClassName(
-            returnType.getPackage(),
-            returnType
-        )
-    } else {
-        ClassName(
-            if (returnType.isEnum()) "kotlin" else returnType.getPackage(),
-            if (returnType.isEnum()) "Long" else returnType
-        )
+    private fun createReturnTypeClass(): TypeName = when (returnType) {
+        "GodotArray" -> {
+            ClassName(
+                returnType.getPackage(),
+                returnType
+            ).parameterizedBy(ANY.copy(nullable = true))
+        }
+        "Dictionary" -> {
+            ClassName(
+                returnType.getPackage(),
+                returnType
+            ).parameterizedBy(ANY, ANY)
+        }
+        else -> {
+            ClassName(
+                if (returnType.isEnum()) "kotlin" else returnType.getPackage(),
+                if (returnType.isEnum()) "Long" else returnType
+            )
+        }
     }
 
     infix fun generateICall(tree: Graph<Class>): FunSpec {
@@ -157,7 +166,13 @@ class ICall(
                     ClassName("godot.core", "Godot"),
                     MemberName("kotlinx.cinterop", "invoke")
                 )
-                val returnTypeClassSimpleName = returnTypeClass.simpleName
+
+                val returnTypeClassSimpleName = when (returnTypeClass) {
+                    is ClassName -> returnTypeClass.simpleName
+                    is ParameterizedTypeName -> returnTypeClass.rawType.simpleName
+                    else -> throw UnexpectedTypeName("TypeName should be ClassName or ParameterizedTypeName, " +
+                        "not ${returnTypeClass.javaClass.name}")
+                }
 
                 when {
                     tree.isObjectOrItsChild(returnTypeClassSimpleName) -> {
@@ -178,7 +193,27 @@ class ICall(
 
                     returnTypeClassSimpleName == "String" -> {
                         codeBlockBuilder.add(
-                            "    retVar.%M.%M()\n",
+                            "    retVar.%M.%M().string\n",
+                            MemberName("kotlinx.cinterop", "pointed"),
+                            MemberName("kotlinx.cinterop", "readValue")
+                        )
+                    }
+
+                    returnTypeClassSimpleName == "GodotArray" -> {
+                        codeBlockBuilder.add(
+                            "    %M(retVar.%M.%M())\n",
+                            MemberName("godot.core", returnTypeClassSimpleName),
+                            MemberName("kotlinx.cinterop", "pointed"),
+                            MemberName("kotlinx.cinterop", "readValue")
+                        )
+                    }
+
+                    returnTypeClassSimpleName == "Dictionary" -> {
+                        codeBlockBuilder.add(
+                            "    %M<%T, %T>(retVar.%M.%M())\n",
+                            MemberName("godot.core", returnTypeClassSimpleName),
+                            ANY,
+                            ANY,
                             MemberName("kotlinx.cinterop", "pointed"),
                             MemberName("kotlinx.cinterop", "readValue")
                         )
@@ -221,12 +256,7 @@ class ICall(
         arguments.withIndex().forEach {
             val argument = it.value
             val argumentTypeAsString = argument.type.convertTypeForICalls()
-            var argumentType: TypeName = ClassName(argumentTypeAsString.getPackage(), argumentTypeAsString)
-
-            if (argument.nullable) {
-                argumentType = argumentType.copy(nullable = true)
-            }
-
+            val argumentType: TypeName = argumentTypeAsString.typeNameForICalls.copy(nullable = argument.nullable)
             spec.addParameter("arg${it.index}", argumentType)
         }
     }

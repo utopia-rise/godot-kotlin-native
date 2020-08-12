@@ -1,5 +1,10 @@
 package godot.codegen
 
+import com.squareup.kotlinpoet.ANY
+import com.squareup.kotlinpoet.ClassName
+import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
+import com.squareup.kotlinpoet.TypeName
+
 private val coreTypes = listOf(
     "GodotArray",
     "Basis",
@@ -151,6 +156,19 @@ fun String.convertTypeToKotlin(): String {
     }
 }
 
+val String.typeNameForICalls: TypeName
+    get() {
+        val icallType = convertTypeForICalls()
+        val className = ClassName(icallType.getPackage(), icallType)
+        return when (icallType) {
+            "GodotArray" -> className.parameterizedBy(ANY.copy(nullable = true))
+            "Dictionary" -> {
+                className.parameterizedBy(ANY, ANY)
+            }
+            else -> className
+        }
+    }
+
 fun String.convertTypeForICalls(): String {
     if (this == "enum.Error") return "UInt"
 
@@ -168,5 +186,3 @@ fun String.defaultValue(): String = when (this) {
     "Boolean" -> "false"
     else -> throw Exception("$this is not a primitive type.")
 }
-
-private class TypeException(override val message: String) : Exception()
