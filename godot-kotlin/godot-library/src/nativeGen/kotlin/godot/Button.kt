@@ -11,8 +11,8 @@ import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_String
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
@@ -83,7 +83,7 @@ open class Button internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("Button", "Button")
+            this.ptr = invokeConstructor("Button", "Button")
         }
 
   }
@@ -167,11 +167,5 @@ open class Button internal constructor(
     }
   }
 
-  companion object {
-    final const val ALIGN_CENTER: Long = 1
-
-    final const val ALIGN_LEFT: Long = 0
-
-    final const val ALIGN_RIGHT: Long = 2
-  }
+  companion object
 }

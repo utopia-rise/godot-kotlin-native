@@ -7,8 +7,8 @@ import godot.icalls._icall_Double
 import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_Long
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Double
 import kotlin.Long
@@ -68,7 +68,7 @@ open class AudioEffectDistortion internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("AudioEffectDistortion", "AudioEffectDistortion")
+            this.ptr = invokeConstructor("AudioEffectDistortion", "AudioEffectDistortion")
         }
 
   }
@@ -146,15 +146,5 @@ open class AudioEffectDistortion internal constructor(
     }
   }
 
-  companion object {
-    final const val MODE_ATAN: Long = 1
-
-    final const val MODE_CLIP: Long = 0
-
-    final const val MODE_LOFI: Long = 2
-
-    final const val MODE_OVERDRIVE: Long = 3
-
-    final const val MODE_WAVESHAPE: Long = 4
-  }
+  companion object
 }

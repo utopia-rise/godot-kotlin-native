@@ -18,8 +18,8 @@ import godot.icalls._icall_Unit_Long_Long
 import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_Vector2
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -181,7 +181,7 @@ open class TextureProgress internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("TextureProgress", "TextureProgress")
+            this.ptr = invokeConstructor("TextureProgress", "TextureProgress")
         }
 
   }
@@ -361,23 +361,5 @@ open class TextureProgress internal constructor(
     }
   }
 
-  companion object {
-    final const val FILL_BILINEAR_LEFT_AND_RIGHT: Long = 6
-
-    final const val FILL_BILINEAR_TOP_AND_BOTTOM: Long = 7
-
-    final const val FILL_BOTTOM_TO_TOP: Long = 3
-
-    final const val FILL_CLOCKWISE: Long = 4
-
-    final const val FILL_CLOCKWISE_AND_COUNTER_CLOCKWISE: Long = 8
-
-    final const val FILL_COUNTER_CLOCKWISE: Long = 5
-
-    final const val FILL_LEFT_TO_RIGHT: Long = 0
-
-    final const val FILL_RIGHT_TO_LEFT: Long = 1
-
-    final const val FILL_TOP_TO_BOTTOM: Long = 2
-  }
+  companion object
 }

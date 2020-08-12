@@ -15,8 +15,8 @@ import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_Unit_Vector2_Boolean
 import godot.icalls._icall_VariantArray_Rect2_Double
 import godot.icalls._icall_Vector2
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -28,16 +28,16 @@ open class BitMap internal constructor(
 ) : Resource(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("BitMap", "BitMap")
+            this.ptr = invokeConstructor("BitMap", "BitMap")
         }
 
   }
 
-  open fun _get_data(): Dictionary {
+  open fun _getData(): Dictionary {
     throw NotImplementedError("_get_data is not implemented for BitMap")
   }
 
-  open fun _set_data(arg0: Dictionary) {
+  open fun _setData(arg0: Dictionary) {
   }
 
   open fun create(size: Vector2) {

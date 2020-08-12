@@ -20,8 +20,8 @@ import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Long_Double
 import godot.icalls._icall_Unit_Long_Long
 import godot.icalls._icall_Vector2_Long
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Double
 import kotlin.Long
@@ -64,16 +64,16 @@ open class Curve internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("Curve", "Curve")
+            this.ptr = invokeConstructor("Curve", "Curve")
         }
 
   }
 
-  open fun _get_data(): VariantArray {
+  open fun _getData(): VariantArray {
     throw NotImplementedError("_get_data is not implemented for Curve")
   }
 
-  open fun _set_data(data: VariantArray) {
+  open fun _setData(data: VariantArray) {
   }
 
   open fun addPoint(
@@ -227,11 +227,5 @@ open class Curve internal constructor(
     }
   }
 
-  companion object {
-    final const val TANGENT_FREE: Long = 0
-
-    final const val TANGENT_LINEAR: Long = 1
-
-    final const val TANGENT_MODE_COUNT: Long = 2
-  }
+  companion object
 }

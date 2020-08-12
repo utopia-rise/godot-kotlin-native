@@ -23,8 +23,8 @@ import godot.icalls._icall_Unit_Long_Boolean
 import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_Vector3
 import godot.icalls._icall_Vector3
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -876,7 +876,7 @@ open class Environment internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("Environment", "Environment")
+            this.ptr = invokeConstructor("Environment", "Environment")
         }
 
   }
@@ -1842,57 +1842,5 @@ open class Environment internal constructor(
     }
   }
 
-  companion object {
-    final const val BG_CAMERA_FEED: Long = 6
-
-    final const val BG_CANVAS: Long = 4
-
-    final const val BG_CLEAR_COLOR: Long = 0
-
-    final const val BG_COLOR: Long = 1
-
-    final const val BG_COLOR_SKY: Long = 3
-
-    final const val BG_KEEP: Long = 5
-
-    final const val BG_MAX: Long = 7
-
-    final const val BG_SKY: Long = 2
-
-    final const val DOF_BLUR_QUALITY_HIGH: Long = 2
-
-    final const val DOF_BLUR_QUALITY_LOW: Long = 0
-
-    final const val DOF_BLUR_QUALITY_MEDIUM: Long = 1
-
-    final const val GLOW_BLEND_MODE_ADDITIVE: Long = 0
-
-    final const val GLOW_BLEND_MODE_REPLACE: Long = 3
-
-    final const val GLOW_BLEND_MODE_SCREEN: Long = 1
-
-    final const val GLOW_BLEND_MODE_SOFTLIGHT: Long = 2
-
-    final const val SSAO_BLUR_1x1: Long = 1
-
-    final const val SSAO_BLUR_2x2: Long = 2
-
-    final const val SSAO_BLUR_3x3: Long = 3
-
-    final const val SSAO_BLUR_DISABLED: Long = 0
-
-    final const val SSAO_QUALITY_HIGH: Long = 2
-
-    final const val SSAO_QUALITY_LOW: Long = 0
-
-    final const val SSAO_QUALITY_MEDIUM: Long = 1
-
-    final const val TONE_MAPPER_ACES: Long = 3
-
-    final const val TONE_MAPPER_FILMIC: Long = 2
-
-    final const val TONE_MAPPER_LINEAR: Long = 0
-
-    final const val TONE_MAPPER_REINHARDT: Long = 1
-  }
+  companion object
 }

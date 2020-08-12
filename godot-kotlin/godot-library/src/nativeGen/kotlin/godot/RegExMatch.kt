@@ -11,8 +11,8 @@ import godot.icalls._icall_Long_Variant
 import godot.icalls._icall_String
 import godot.icalls._icall_String_Variant
 import godot.icalls._icall_VariantArray
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Long
 import kotlin.String
@@ -40,7 +40,7 @@ open class RegExMatch internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("RegExMatch", "RegExMatch")
+            this.ptr = invokeConstructor("RegExMatch", "RegExMatch")
         }
 
   }

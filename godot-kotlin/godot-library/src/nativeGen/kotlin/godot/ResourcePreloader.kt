@@ -10,8 +10,8 @@ import godot.icalls._icall_Resource_String
 import godot.icalls._icall_Unit_String
 import godot.icalls._icall_Unit_String_Object
 import godot.icalls._icall_Unit_String_String
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.NotImplementedError
@@ -22,16 +22,16 @@ open class ResourcePreloader internal constructor(
 ) : Node(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("ResourcePreloader", "ResourcePreloader")
+            this.ptr = invokeConstructor("ResourcePreloader", "ResourcePreloader")
         }
 
   }
 
-  open fun _get_resources(): VariantArray {
+  open fun _getResources(): VariantArray {
     throw NotImplementedError("_get_resources is not implemented for ResourcePreloader")
   }
 
-  open fun _set_resources(arg0: VariantArray) {
+  open fun _setResources(arg0: VariantArray) {
   }
 
   open fun addResource(name: String, resource: Resource) {

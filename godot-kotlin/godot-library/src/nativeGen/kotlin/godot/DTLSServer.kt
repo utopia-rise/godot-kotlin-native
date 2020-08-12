@@ -5,8 +5,8 @@ import godot.core.Godot.shouldInitPtr
 import godot.core.GodotError
 import godot.icalls._icall_Long_Object_Object_nObject
 import godot.icalls._icall_PacketPeerDTLS_Object
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 
 open class DTLSServer internal constructor(
@@ -14,7 +14,7 @@ open class DTLSServer internal constructor(
 ) : Reference(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("DTLSServer", "DTLSServer")
+            this.ptr = invokeConstructor("DTLSServer", "DTLSServer")
         }
 
   }

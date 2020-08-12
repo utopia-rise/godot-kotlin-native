@@ -16,8 +16,8 @@ import godot.icalls._icall_Unit_Long_Long_Long_Long
 import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_Object_Long
 import godot.icalls._icall_Unit_Vector2
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Double
 import kotlin.Long
@@ -48,12 +48,12 @@ open class ImageTexture internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("ImageTexture", "ImageTexture")
+            this.ptr = invokeConstructor("ImageTexture", "ImageTexture")
         }
 
   }
 
-  open fun _reload_hook(rid: RID) {
+  open fun _reloadHook(rid: RID) {
   }
 
   open fun create(
@@ -130,11 +130,5 @@ open class ImageTexture internal constructor(
     }
   }
 
-  companion object {
-    final const val STORAGE_COMPRESS_LOSSLESS: Long = 2
-
-    final const val STORAGE_COMPRESS_LOSSY: Long = 1
-
-    final const val STORAGE_RAW: Long = 0
-  }
+  companion object
 }

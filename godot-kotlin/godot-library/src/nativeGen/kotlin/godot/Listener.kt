@@ -6,8 +6,8 @@ import godot.core.Transform
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Transform
 import godot.icalls._icall_Unit
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 
@@ -16,7 +16,7 @@ open class Listener internal constructor(
 ) : Spatial(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("Listener", "Listener")
+            this.ptr = invokeConstructor("Listener", "Listener")
         }
 
   }

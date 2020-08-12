@@ -45,25 +45,25 @@ open class EditorSpinSlider internal constructor(
 
   internal constructor() : this(null)
 
-  open fun _grabber_gui_input(arg0: InputEvent) {
+  open fun _grabberGuiInput(arg0: InputEvent) {
   }
 
-  open fun _grabber_mouse_entered() {
+  open fun _grabberMouseEntered() {
   }
 
-  open fun _grabber_mouse_exited() {
+  open fun _grabberMouseExited() {
   }
 
-  override fun _gui_input(arg0: InputEvent) {
+  override fun _guiInput(arg0: InputEvent) {
   }
 
-  open fun _value_focus_exited() {
+  open fun _valueFocusExited() {
   }
 
-  open fun _value_input_closed() {
+  open fun _valueInputClosed() {
   }
 
-  open fun _value_input_entered(arg0: String) {
+  open fun _valueInputEntered(arg0: String) {
   }
 
   open fun getLabel(): String {

@@ -7,8 +7,8 @@ import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Vector3
 import godot.icalls._icall_Vector3
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Long
 import kotlin.Unit
@@ -58,7 +58,7 @@ open class CubeMesh internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("CubeMesh", "CubeMesh")
+            this.ptr = invokeConstructor("CubeMesh", "CubeMesh")
         }
 
   }

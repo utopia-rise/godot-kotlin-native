@@ -12,8 +12,8 @@ import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Long_Double
 import godot.icalls._icall_Unit_Long_Object
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -5194,12 +5194,12 @@ open class AnimatedTexture internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("AnimatedTexture", "AnimatedTexture")
+            this.ptr = invokeConstructor("AnimatedTexture", "AnimatedTexture")
         }
 
   }
 
-  open fun _update_proxy() {
+  open fun _updateProxy() {
   }
 
   open fun getCurrentFrame(): Long {

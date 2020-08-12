@@ -248,7 +248,7 @@ class Class @JsonCreator constructor(
                    |}
                    |""".trimMargin(),
                         MemberName(ClassName("godot.core", "Godot"), "shouldInitPtr"),
-                        MemberName("godot.internal.utils", "getConstructor")
+                        MemberName("godot.internal.utils", "invokeConstructor")
                     )
             }
 

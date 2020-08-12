@@ -9,8 +9,8 @@ import godot.icalls._icall_String
 import godot.icalls._icall_String_String
 import godot.icalls._icall_Unit_String
 import godot.icalls._icall_Unit_String_String
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Long
 import kotlin.NotImplementedError
@@ -31,16 +31,16 @@ open class Translation internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("Translation", "Translation")
+            this.ptr = invokeConstructor("Translation", "Translation")
         }
 
   }
 
-  open fun _get_messages(): PoolStringArray {
+  open fun _getMessages(): PoolStringArray {
     throw NotImplementedError("_get_messages is not implemented for Translation")
   }
 
-  open fun _set_messages(arg0: PoolStringArray) {
+  open fun _setMessages(arg0: PoolStringArray) {
   }
 
   open fun addMessage(srcMessage: String, xlatedMessage: String) {

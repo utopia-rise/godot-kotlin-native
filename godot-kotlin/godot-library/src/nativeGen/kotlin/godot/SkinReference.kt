@@ -12,7 +12,7 @@ open class SkinReference internal constructor(
 ) : Reference(_ignore) {
   internal constructor() : this(null)
 
-  open fun _skin_changed() {
+  open fun _skinChanged() {
   }
 
   open fun getSkeleton(): RID {

@@ -23,8 +23,8 @@ import godot.icalls._icall_Unit_Vector3
 import godot.icalls._icall_Unit_Vector3_Vector3
 import godot.icalls._icall_VariantArray
 import godot.icalls._icall_Vector3
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -278,7 +278,7 @@ open class RigidBody internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("RigidBody", "RigidBody")
+            this.ptr = invokeConstructor("RigidBody", "RigidBody")
         }
 
   }
@@ -295,19 +295,19 @@ open class RigidBody internal constructor(
   }
 
 
-  open fun _body_enter_tree(arg0: Long) {
+  open fun _bodyEnterTree(arg0: Long) {
   }
 
-  open fun _body_exit_tree(arg0: Long) {
+  open fun _bodyExitTree(arg0: Long) {
   }
 
-  open fun _direct_state_changed(arg0: Object) {
+  open fun _directStateChanged(arg0: Object) {
   }
 
-  open fun _integrate_forces(state: PhysicsDirectBodyState) {
+  open fun _integrateForces(state: PhysicsDirectBodyState) {
   }
 
-  open fun _reload_physics_characteristics() {
+  open fun _reloadPhysicsCharacteristics() {
   }
 
   open fun addCentralForce(force: Vector3) {
@@ -551,13 +551,5 @@ open class RigidBody internal constructor(
     }
   }
 
-  companion object {
-    final const val MODE_CHARACTER: Long = 2
-
-    final const val MODE_KINEMATIC: Long = 3
-
-    final const val MODE_RIGID: Long = 0
-
-    final const val MODE_STATIC: Long = 1
-  }
+  companion object
 }

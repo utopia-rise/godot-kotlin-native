@@ -8,8 +8,8 @@ import godot.icalls._icall_Long
 import godot.icalls._icall_Rect2
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Rect2
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Long
 import kotlin.Unit
@@ -39,7 +39,7 @@ open class BackBufferCopy internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("BackBufferCopy", "BackBufferCopy")
+            this.ptr = invokeConstructor("BackBufferCopy", "BackBufferCopy")
         }
 
   }
@@ -89,11 +89,5 @@ open class BackBufferCopy internal constructor(
     }
   }
 
-  companion object {
-    final const val COPY_MODE_DISABLED: Long = 0
-
-    final const val COPY_MODE_RECT: Long = 1
-
-    final const val COPY_MODE_VIEWPORT: Long = 2
-  }
+  companion object
 }

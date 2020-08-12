@@ -17,8 +17,8 @@ import godot.icalls._icall_PoolIntArray
 import godot.icalls._icall_Unit
 import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Object
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
@@ -70,24 +70,24 @@ open class MultiplayerAPI internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("MultiplayerAPI", "MultiplayerAPI")
+            this.ptr = invokeConstructor("MultiplayerAPI", "MultiplayerAPI")
         }
 
   }
 
-  open fun _add_peer(id: Long) {
+  open fun _addPeer(id: Long) {
   }
 
-  open fun _connected_to_server() {
+  open fun _connectedToServer() {
   }
 
-  open fun _connection_failed() {
+  open fun _connectionFailed() {
   }
 
-  open fun _del_peer(id: Long) {
+  open fun _delPeer(id: Long) {
   }
 
-  open fun _server_disconnected() {
+  open fun _serverDisconnected() {
   }
 
   open fun clear() {
@@ -173,23 +173,23 @@ open class MultiplayerAPI internal constructor(
   enum class RPCMode(
     id: Long
   ) {
-    RPC_MODE_DISABLED(0),
+    DISABLED(0),
 
-    RPC_MODE_REMOTE(1),
+    REMOTE(1),
 
-    RPC_MODE_MASTER(2),
+    MASTER(2),
 
-    RPC_MODE_PUPPET(3),
+    PUPPET(3),
 
-    RPC_MODE_SLAVE(3),
+    SLAVE(3),
 
-    RPC_MODE_REMOTESYNC(4),
+    REMOTESYNC(4),
 
-    RPC_MODE_SYNC(4),
+    SYNC(4),
 
-    RPC_MODE_MASTERSYNC(5),
+    MASTERSYNC(5),
 
-    RPC_MODE_PUPPETSYNC(6);
+    PUPPETSYNC(6);
 
     val id: Long
     init {
@@ -201,23 +201,5 @@ open class MultiplayerAPI internal constructor(
     }
   }
 
-  companion object {
-    final const val RPC_MODE_DISABLED: Long = 0
-
-    final const val RPC_MODE_MASTER: Long = 2
-
-    final const val RPC_MODE_MASTERSYNC: Long = 5
-
-    final const val RPC_MODE_PUPPET: Long = 3
-
-    final const val RPC_MODE_PUPPETSYNC: Long = 6
-
-    final const val RPC_MODE_REMOTE: Long = 1
-
-    final const val RPC_MODE_REMOTESYNC: Long = 4
-
-    final const val RPC_MODE_SLAVE: Long = 3
-
-    final const val RPC_MODE_SYNC: Long = 4
-  }
+  companion object
 }

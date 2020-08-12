@@ -13,8 +13,8 @@ import godot.icalls._icall_String_String_String_Boolean_Long_Long
 import godot.icalls._icall_Unit
 import godot.icalls._icall_VariantArray
 import godot.icalls._icall_VariantArray_String_Long_Long
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
@@ -25,7 +25,7 @@ open class RegEx internal constructor(
 ) : Reference(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("RegEx", "RegEx")
+            this.ptr = invokeConstructor("RegEx", "RegEx")
         }
 
   }

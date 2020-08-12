@@ -8,8 +8,8 @@ import godot.icalls._icall_Shader
 import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_String_Variant
 import godot.icalls._icall_Variant_String
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.String
@@ -29,12 +29,12 @@ open class ShaderMaterial internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("ShaderMaterial", "ShaderMaterial")
+            this.ptr = invokeConstructor("ShaderMaterial", "ShaderMaterial")
         }
 
   }
 
-  open fun _shader_changed() {
+  open fun _shaderChanged() {
   }
 
   open fun getShader(): Shader {

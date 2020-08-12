@@ -12,8 +12,8 @@ import godot.icalls._icall_String
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_NodePath
 import godot.icalls._icall_Unit_String
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Long
 import kotlin.NotImplementedError
@@ -94,16 +94,16 @@ open class VisualScriptPropertyGet internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("VisualScriptPropertyGet", "VisualScriptPropertyGet")
+            this.ptr = invokeConstructor("VisualScriptPropertyGet", "VisualScriptPropertyGet")
         }
 
   }
 
-  open fun _get_type_cache(): Variant.Type {
+  open fun _getTypeCache(): Variant.Type {
     throw NotImplementedError("_get_type_cache is not implemented for VisualScriptPropertyGet")
   }
 
-  open fun _set_type_cache(typeCache: Long) {
+  open fun _setTypeCache(typeCache: Long) {
   }
 
   open fun getBasePath(): NodePath {
@@ -195,11 +195,5 @@ open class VisualScriptPropertyGet internal constructor(
     }
   }
 
-  companion object {
-    final const val CALL_MODE_INSTANCE: Long = 2
-
-    final const val CALL_MODE_NODE_PATH: Long = 1
-
-    final const val CALL_MODE_SELF: Long = 0
-  }
+  companion object
 }

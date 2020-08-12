@@ -6,8 +6,8 @@ import godot.icalls._icall_Boolean
 import godot.icalls._icall_NavigationPolygon
 import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Object
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 
@@ -36,12 +36,12 @@ open class NavigationPolygonInstance internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("NavigationPolygonInstance", "NavigationPolygonInstance")
+            this.ptr = invokeConstructor("NavigationPolygonInstance", "NavigationPolygonInstance")
         }
 
   }
 
-  open fun _navpoly_changed() {
+  open fun _navpolyChanged() {
   }
 
   open fun getNavigationPolygon(): NavigationPolygon {

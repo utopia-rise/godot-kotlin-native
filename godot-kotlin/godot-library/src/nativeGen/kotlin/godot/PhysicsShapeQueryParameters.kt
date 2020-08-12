@@ -18,8 +18,8 @@ import godot.icalls._icall_Unit_RID
 import godot.icalls._icall_Unit_Transform
 import godot.icalls._icall_Unit_VariantArray
 import godot.icalls._icall_VariantArray
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -101,7 +101,8 @@ open class PhysicsShapeQueryParameters internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("PhysicsShapeQueryParameters", "PhysicsShapeQueryParameters")
+            this.ptr = invokeConstructor("PhysicsShapeQueryParameters",
+            "PhysicsShapeQueryParameters")
         }
 
   }

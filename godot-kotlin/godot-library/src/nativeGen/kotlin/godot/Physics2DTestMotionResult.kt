@@ -8,8 +8,8 @@ import godot.icalls._icall_Long
 import godot.icalls._icall_Object
 import godot.icalls._icall_RID
 import godot.icalls._icall_Vector2
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Long
 
@@ -72,7 +72,7 @@ open class Physics2DTestMotionResult internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("Physics2DTestMotionResult", "Physics2DTestMotionResult")
+            this.ptr = invokeConstructor("Physics2DTestMotionResult", "Physics2DTestMotionResult")
         }
 
   }

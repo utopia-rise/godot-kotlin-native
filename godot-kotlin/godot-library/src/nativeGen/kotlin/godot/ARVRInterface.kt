@@ -185,31 +185,5 @@ open class ARVRInterface internal constructor(
     }
   }
 
-  companion object {
-    final const val ARVR_AR: Long = 4
-
-    final const val ARVR_EXCESSIVE_MOTION: Long = 1
-
-    final const val ARVR_EXTERNAL: Long = 8
-
-    final const val ARVR_INSUFFICIENT_FEATURES: Long = 2
-
-    final const val ARVR_MONO: Long = 1
-
-    final const val ARVR_NONE: Long = 0
-
-    final const val ARVR_NORMAL_TRACKING: Long = 0
-
-    final const val ARVR_NOT_TRACKING: Long = 4
-
-    final const val ARVR_STEREO: Long = 2
-
-    final const val ARVR_UNKNOWN_TRACKING: Long = 3
-
-    final const val EYE_LEFT: Long = 1
-
-    final const val EYE_MONO: Long = 0
-
-    final const val EYE_RIGHT: Long = 2
-  }
+  companion object
 }

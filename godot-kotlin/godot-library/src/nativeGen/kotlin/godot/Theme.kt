@@ -19,8 +19,8 @@ import godot.icalls._icall_Unit_String_String
 import godot.icalls._icall_Unit_String_String_Color
 import godot.icalls._icall_Unit_String_String_Long
 import godot.icalls._icall_Unit_String_String_Object
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
@@ -41,12 +41,12 @@ open class Theme internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("Theme", "Theme")
+            this.ptr = invokeConstructor("Theme", "Theme")
         }
 
   }
 
-  open fun _emit_theme_changed() {
+  open fun _emitThemeChanged() {
   }
 
   open fun clear() {

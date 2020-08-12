@@ -40,9 +40,5 @@ open class AudioEffectSpectrumAnalyzerInstance internal constructor(
     }
   }
 
-  companion object {
-    final const val MAGNITUDE_AVERAGE: Long = 0
-
-    final const val MAGNITUDE_MAX: Long = 1
-  }
+  companion object
 }

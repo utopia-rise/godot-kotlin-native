@@ -2,7 +2,7 @@
 package godot
 
 import godot.core.Godot.shouldInitPtr
-import godot.internal.utils.getConstructor
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 
 open class VisualShaderNodeTextureUniformTriplanar internal constructor(
@@ -10,7 +10,7 @@ open class VisualShaderNodeTextureUniformTriplanar internal constructor(
 ) : VisualShaderNodeTextureUniform(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("VisualShaderNodeTextureUniformTriplanar",
+            this.ptr = invokeConstructor("VisualShaderNodeTextureUniformTriplanar",
             "VisualShaderNodeTextureUniformTriplanar")
         }
 

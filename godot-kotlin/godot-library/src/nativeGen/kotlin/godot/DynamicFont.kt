@@ -15,8 +15,8 @@ import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Long_Long
 import godot.icalls._icall_Unit_Long_Object
 import godot.icalls._icall_Unit_Object
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
@@ -127,7 +127,7 @@ open class DynamicFont internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("DynamicFont", "DynamicFont")
+            this.ptr = invokeConstructor("DynamicFont", "DynamicFont")
         }
 
   }
@@ -254,13 +254,5 @@ open class DynamicFont internal constructor(
     }
   }
 
-  companion object {
-    final const val SPACING_BOTTOM: Long = 1
-
-    final const val SPACING_CHAR: Long = 2
-
-    final const val SPACING_SPACE: Long = 3
-
-    final const val SPACING_TOP: Long = 0
-  }
+  companion object
 }

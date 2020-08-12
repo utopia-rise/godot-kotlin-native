@@ -8,8 +8,8 @@ import godot.icalls._icall_Texture
 import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_Vector2
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Unit
 
@@ -48,7 +48,7 @@ open class MeshTexture internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("MeshTexture", "MeshTexture")
+            this.ptr = invokeConstructor("MeshTexture", "MeshTexture")
         }
 
   }

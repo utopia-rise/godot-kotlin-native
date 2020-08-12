@@ -7,8 +7,8 @@ import godot.icalls._icall_Long
 import godot.icalls._icall_String
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_String
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Long
 import kotlin.String
@@ -38,7 +38,7 @@ open class VisualScriptInputAction internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("VisualScriptInputAction", "VisualScriptInputAction")
+            this.ptr = invokeConstructor("VisualScriptInputAction", "VisualScriptInputAction")
         }
 
   }
@@ -84,13 +84,5 @@ open class VisualScriptInputAction internal constructor(
     }
   }
 
-  companion object {
-    final const val MODE_JUST_PRESSED: Long = 2
-
-    final const val MODE_JUST_RELEASED: Long = 3
-
-    final const val MODE_PRESSED: Long = 0
-
-    final const val MODE_RELEASED: Long = 1
-  }
+  companion object
 }

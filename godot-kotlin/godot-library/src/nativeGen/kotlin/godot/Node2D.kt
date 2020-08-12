@@ -17,8 +17,8 @@ import godot.icalls._icall_Unit_Transform2D
 import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_Vector2
 import godot.icalls._icall_Vector2_Vector2
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -170,7 +170,7 @@ open class Node2D internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("Node2D", "Node2D")
+            this.ptr = invokeConstructor("Node2D", "Node2D")
         }
 
   }

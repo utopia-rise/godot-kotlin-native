@@ -9,8 +9,8 @@ import godot.icalls._icall_PoolVector2Array
 import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_PoolVector2Array
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -51,12 +51,12 @@ open class CollisionPolygon internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("CollisionPolygon", "CollisionPolygon")
+            this.ptr = invokeConstructor("CollisionPolygon", "CollisionPolygon")
         }
 
   }
 
-  open fun _is_editable_3d_polygon(): Boolean {
+  open fun _isEditable3dPolygon(): Boolean {
     throw NotImplementedError("_is_editable_3d_polygon is not implemented for CollisionPolygon")
   }
 

@@ -5,8 +5,8 @@ import godot.VisualScriptBuiltinFunc
 import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Long
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Long
 
@@ -25,7 +25,7 @@ open class VisualScriptBuiltinFunc internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("VisualScriptBuiltinFunc", "VisualScriptBuiltinFunc")
+            this.ptr = invokeConstructor("VisualScriptBuiltinFunc", "VisualScriptBuiltinFunc")
         }
 
   }
@@ -191,143 +191,5 @@ open class VisualScriptBuiltinFunc internal constructor(
     }
   }
 
-  companion object {
-    final const val BYTES_TO_VAR: Long = 62
-
-    final const val COLORN: Long = 63
-
-    final const val FUNC_FUNCREF: Long = 50
-
-    final const val FUNC_MAX: Long = 68
-
-    final const val LOGIC_CLAMP: Long = 47
-
-    final const val LOGIC_MAX: Long = 45
-
-    final const val LOGIC_MIN: Long = 46
-
-    final const val LOGIC_NEAREST_PO2: Long = 48
-
-    final const val MATH_ABS: Long = 16
-
-    final const val MATH_ACOS: Long = 7
-
-    final const val MATH_ASIN: Long = 6
-
-    final const val MATH_ATAN: Long = 8
-
-    final const val MATH_ATAN2: Long = 9
-
-    final const val MATH_CARTESIAN2POLAR: Long = 42
-
-    final const val MATH_CEIL: Long = 14
-
-    final const val MATH_COS: Long = 1
-
-    final const val MATH_COSH: Long = 4
-
-    final const val MATH_DB2LINEAR: Long = 40
-
-    final const val MATH_DECIMALS: Long = 24
-
-    final const val MATH_DECTIME: Long = 30
-
-    final const val MATH_DEG2RAD: Long = 37
-
-    final const val MATH_EASE: Long = 23
-
-    final const val MATH_EXP: Long = 20
-
-    final const val MATH_FLOOR: Long = 13
-
-    final const val MATH_FMOD: Long = 11
-
-    final const val MATH_FPOSMOD: Long = 12
-
-    final const val MATH_INVERSE_LERP: Long = 27
-
-    final const val MATH_ISINF: Long = 22
-
-    final const val MATH_ISNAN: Long = 21
-
-    final const val MATH_LERP: Long = 26
-
-    final const val MATH_LERP_ANGLE: Long = 66
-
-    final const val MATH_LINEAR2DB: Long = 39
-
-    final const val MATH_LOG: Long = 19
-
-    final const val MATH_MOVE_TOWARD: Long = 29
-
-    final const val MATH_POLAR2CARTESIAN: Long = 41
-
-    final const val MATH_POSMOD: Long = 65
-
-    final const val MATH_POW: Long = 18
-
-    final const val MATH_RAD2DEG: Long = 38
-
-    final const val MATH_RAND: Long = 32
-
-    final const val MATH_RANDF: Long = 33
-
-    final const val MATH_RANDOM: Long = 34
-
-    final const val MATH_RANDOMIZE: Long = 31
-
-    final const val MATH_RANDSEED: Long = 36
-
-    final const val MATH_RANGE_LERP: Long = 28
-
-    final const val MATH_ROUND: Long = 15
-
-    final const val MATH_SEED: Long = 35
-
-    final const val MATH_SIGN: Long = 17
-
-    final const val MATH_SIN: Long = 0
-
-    final const val MATH_SINH: Long = 3
-
-    final const val MATH_SMOOTHSTEP: Long = 64
-
-    final const val MATH_SQRT: Long = 10
-
-    final const val MATH_STEPIFY: Long = 25
-
-    final const val MATH_TAN: Long = 2
-
-    final const val MATH_TANH: Long = 5
-
-    final const val MATH_WRAP: Long = 43
-
-    final const val MATH_WRAPF: Long = 44
-
-    final const val OBJ_WEAKREF: Long = 49
-
-    final const val STR_TO_VAR: Long = 60
-
-    final const val TEXT_CHAR: Long = 54
-
-    final const val TEXT_ORD: Long = 67
-
-    final const val TEXT_PRINT: Long = 56
-
-    final const val TEXT_PRINTERR: Long = 57
-
-    final const val TEXT_PRINTRAW: Long = 58
-
-    final const val TEXT_STR: Long = 55
-
-    final const val TYPE_CONVERT: Long = 51
-
-    final const val TYPE_EXISTS: Long = 53
-
-    final const val TYPE_OF: Long = 52
-
-    final const val VAR_TO_BYTES: Long = 61
-
-    final const val VAR_TO_STR: Long = 59
-  }
+  companion object
 }

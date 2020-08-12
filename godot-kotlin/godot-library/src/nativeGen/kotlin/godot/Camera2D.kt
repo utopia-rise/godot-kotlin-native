@@ -19,8 +19,8 @@ import godot.icalls._icall_Unit_Long_Long
 import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_Vector2
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -278,7 +278,7 @@ open class Camera2D internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("Camera2D", "Camera2D")
+            this.ptr = invokeConstructor("Camera2D", "Camera2D")
         }
 
   }
@@ -295,16 +295,16 @@ open class Camera2D internal constructor(
   }
 
 
-  open fun _make_current(arg0: Object) {
+  open fun _makeCurrent(arg0: Object) {
   }
 
-  open fun _set_current(current: Boolean) {
+  open fun _setCurrent(current: Boolean) {
   }
 
-  open fun _set_old_smoothing(followSmoothing: Double) {
+  open fun _setOldSmoothing(followSmoothing: Double) {
   }
 
-  open fun _update_scroll() {
+  open fun _updateScroll() {
   }
 
   open fun align() {
@@ -561,13 +561,5 @@ open class Camera2D internal constructor(
     }
   }
 
-  companion object {
-    final const val ANCHOR_MODE_DRAG_CENTER: Long = 1
-
-    final const val ANCHOR_MODE_FIXED_TOP_LEFT: Long = 0
-
-    final const val CAMERA2D_PROCESS_IDLE: Long = 1
-
-    final const val CAMERA2D_PROCESS_PHYSICS: Long = 0
-  }
+  companion object
 }

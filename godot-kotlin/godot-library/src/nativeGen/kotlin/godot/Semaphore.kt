@@ -4,8 +4,8 @@ package godot
 import godot.core.Godot.shouldInitPtr
 import godot.core.GodotError
 import godot.icalls._icall_Long
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 
 open class Semaphore internal constructor(
@@ -13,7 +13,7 @@ open class Semaphore internal constructor(
 ) : Reference(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("Semaphore", "_Semaphore")
+            this.ptr = invokeConstructor("Semaphore", "_Semaphore")
         }
 
   }

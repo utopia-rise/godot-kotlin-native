@@ -16,8 +16,8 @@ import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_Rect2
 import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_Vector2
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
@@ -100,7 +100,7 @@ open class Sprite3D internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("Sprite3D", "Sprite3D")
+            this.ptr = invokeConstructor("Sprite3D", "Sprite3D")
         }
 
   }

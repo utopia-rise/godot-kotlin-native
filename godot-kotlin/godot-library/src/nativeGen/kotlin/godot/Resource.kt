@@ -13,8 +13,8 @@ import godot.icalls._icall_String
 import godot.icalls._icall_Unit
 import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_String
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.String
@@ -56,12 +56,12 @@ open class Resource internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("Resource", "Resource")
+            this.ptr = invokeConstructor("Resource", "Resource")
         }
 
   }
 
-  open fun _setup_local_to_scene() {
+  open fun _setupLocalToScene() {
   }
 
   open fun duplicate(subresources: Boolean = false): Resource {

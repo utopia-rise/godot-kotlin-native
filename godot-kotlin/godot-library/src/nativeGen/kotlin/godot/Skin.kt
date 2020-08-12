@@ -12,8 +12,8 @@ import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Long_Long
 import godot.icalls._icall_Unit_Long_String
 import godot.icalls._icall_Unit_Long_Transform
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Long
 import kotlin.String
@@ -23,7 +23,7 @@ open class Skin internal constructor(
 ) : Resource(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("Skin", "Skin")
+            this.ptr = invokeConstructor("Skin", "Skin")
         }
 
   }

@@ -15,8 +15,8 @@ import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Long_Boolean
 import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_String
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
@@ -97,7 +97,7 @@ open class NetworkedMultiplayerENet internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("NetworkedMultiplayerENet", "NetworkedMultiplayerENet")
+            this.ptr = invokeConstructor("NetworkedMultiplayerENet", "NetworkedMultiplayerENet")
         }
 
   }
@@ -263,15 +263,5 @@ open class NetworkedMultiplayerENet internal constructor(
     }
   }
 
-  companion object {
-    final const val COMPRESS_FASTLZ: Long = 2
-
-    final const val COMPRESS_NONE: Long = 0
-
-    final const val COMPRESS_RANGE_CODER: Long = 1
-
-    final const val COMPRESS_ZLIB: Long = 3
-
-    final const val COMPRESS_ZSTD: Long = 4
-  }
+  companion object
 }

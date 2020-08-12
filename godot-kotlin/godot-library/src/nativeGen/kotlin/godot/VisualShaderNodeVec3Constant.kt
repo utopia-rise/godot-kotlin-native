@@ -5,8 +5,8 @@ import godot.core.Godot.shouldInitPtr
 import godot.core.Vector3
 import godot.icalls._icall_Unit_Vector3
 import godot.icalls._icall_Vector3
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Unit
 
@@ -25,7 +25,7 @@ open class VisualShaderNodeVec3Constant internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("VisualShaderNodeVec3Constant",
+            this.ptr = invokeConstructor("VisualShaderNodeVec3Constant",
             "VisualShaderNodeVec3Constant")
         }
 

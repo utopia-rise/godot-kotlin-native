@@ -27,14 +27,6 @@ object CameraServer : Object() {
     }
   }
 
-  final const val FEED_CBCR_IMAGE: Long = 1
-
-  final const val FEED_RGBA_IMAGE: Long = 0
-
-  final const val FEED_YCBCR_IMAGE: Long = 0
-
-  final const val FEED_Y_IMAGE: Long = 0
-
   val cameraFeedAdded: Signal1<Long> by signal("id")
 
   val cameraFeedRemoved: Signal1<Long> by signal("id")

@@ -7,8 +7,8 @@ import godot.core.PoolByteArray
 import godot.icalls._icall_Long_Long
 import godot.icalls._icall_Long_PoolByteArray
 import godot.icalls._icall_PoolByteArray
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Long
 
@@ -17,7 +17,7 @@ open class HashingContext internal constructor(
 ) : Reference(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("HashingContext", "HashingContext")
+            this.ptr = invokeConstructor("HashingContext", "HashingContext")
         }
 
   }
@@ -56,11 +56,5 @@ open class HashingContext internal constructor(
     }
   }
 
-  companion object {
-    final const val HASH_MD5: Long = 0
-
-    final const val HASH_SHA1: Long = 1
-
-    final const val HASH_SHA256: Long = 2
-  }
+  companion object
 }

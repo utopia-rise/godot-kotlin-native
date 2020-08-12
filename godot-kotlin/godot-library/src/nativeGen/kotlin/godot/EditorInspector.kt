@@ -35,25 +35,25 @@ open class EditorInspector internal constructor(
 
   internal constructor() : this(null)
 
-  open fun _edit_request_change(arg0: Object, arg1: String) {
+  open fun _editRequestChange(arg0: Object, arg1: String) {
   }
 
-  open fun _feature_profile_changed() {
+  open fun _featureProfileChanged() {
   }
 
-  open fun _filter_changed(arg0: String) {
+  open fun _filterChanged(arg0: String) {
   }
 
-  open fun _multiple_properties_changed(arg0: PoolStringArray, arg1: VariantArray) {
+  open fun _multiplePropertiesChanged(arg0: PoolStringArray, arg1: VariantArray) {
   }
 
-  open fun _node_removed(arg0: Node) {
+  open fun _nodeRemoved(arg0: Node) {
   }
 
-  open fun _object_id_selected(arg0: String, arg1: Long) {
+  open fun _objectIdSelected(arg0: String, arg1: Long) {
   }
 
-  open fun _property_changed(
+  open fun _propertyChanged(
     arg0: String,
     arg1: Variant,
     arg2: String = "",
@@ -61,7 +61,7 @@ open class EditorInspector internal constructor(
   ) {
   }
 
-  open fun _property_changed_update_all(
+  open fun _propertyChangedUpdateAll(
     arg0: String,
     arg1: Variant,
     arg2: String,
@@ -69,26 +69,26 @@ open class EditorInspector internal constructor(
   ) {
   }
 
-  open fun _property_checked(arg0: String, arg1: Boolean) {
+  open fun _propertyChecked(arg0: String, arg1: Boolean) {
   }
 
-  open fun _property_keyed(arg0: String, arg1: Boolean) {
+  open fun _propertyKeyed(arg0: String, arg1: Boolean) {
   }
 
-  open fun _property_keyed_with_value(
+  open fun _propertyKeyedWithValue(
     arg0: String,
     arg1: Variant,
     arg2: Boolean
   ) {
   }
 
-  open fun _property_selected(arg0: String, arg1: Long) {
+  open fun _propertySelected(arg0: String, arg1: Long) {
   }
 
-  open fun _resource_selected(arg0: String, arg1: Resource) {
+  open fun _resourceSelected(arg0: String, arg1: Resource) {
   }
 
-  open fun _vscroll_changed(arg0: Double) {
+  open fun _vscrollChanged(arg0: Double) {
   }
 
   open fun refresh() {

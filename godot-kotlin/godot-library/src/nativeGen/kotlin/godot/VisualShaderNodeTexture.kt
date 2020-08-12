@@ -7,8 +7,8 @@ import godot.icalls._icall_Long
 import godot.icalls._icall_Texture
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Object
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Long
 
@@ -47,7 +47,7 @@ open class VisualShaderNodeTexture internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("VisualShaderNodeTexture", "VisualShaderNodeTexture")
+            this.ptr = invokeConstructor("VisualShaderNodeTexture", "VisualShaderNodeTexture")
         }
 
   }
@@ -126,23 +126,5 @@ open class VisualShaderNodeTexture internal constructor(
     }
   }
 
-  companion object {
-    final const val SOURCE_2D_NORMAL: Long = 3
-
-    final const val SOURCE_2D_TEXTURE: Long = 2
-
-    final const val SOURCE_DEPTH: Long = 4
-
-    final const val SOURCE_PORT: Long = 5
-
-    final const val SOURCE_SCREEN: Long = 1
-
-    final const val SOURCE_TEXTURE: Long = 0
-
-    final const val TYPE_COLOR: Long = 1
-
-    final const val TYPE_DATA: Long = 0
-
-    final const val TYPE_NORMALMAP: Long = 2
-  }
+  companion object
 }

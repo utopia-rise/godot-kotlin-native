@@ -23,8 +23,8 @@ import godot.icalls._icall_Unit_Object_String_Long
 import godot.icalls._icall_Unit_String_Long
 import godot.icalls._icall_Variant
 import godot.icalls._icall_Variant_Long
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
@@ -46,7 +46,7 @@ open class OptionButton internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("OptionButton", "OptionButton")
+            this.ptr = invokeConstructor("OptionButton", "OptionButton")
         }
 
   }
@@ -54,17 +54,17 @@ open class OptionButton internal constructor(
   open fun _focused(arg0: Long) {
   }
 
-  open fun _get_items(): VariantArray {
+  open fun _getItems(): VariantArray {
     throw NotImplementedError("_get_items is not implemented for OptionButton")
   }
 
-  open fun _select_int(arg0: Long) {
+  open fun _selectInt(arg0: Long) {
   }
 
   open fun _selected(arg0: Long) {
   }
 
-  open fun _set_items(arg0: VariantArray) {
+  open fun _setItems(arg0: VariantArray) {
   }
 
   open fun addIconItem(

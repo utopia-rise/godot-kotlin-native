@@ -6,8 +6,8 @@ import godot.icalls._icall_Boolean
 import godot.icalls._icall_Double
 import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Double
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -57,7 +57,7 @@ open class PhysicsMaterial internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("PhysicsMaterial", "PhysicsMaterial")
+            this.ptr = invokeConstructor("PhysicsMaterial", "PhysicsMaterial")
         }
 
   }

@@ -19,8 +19,8 @@ import godot.icalls._icall_Unit_Long_Boolean
 import godot.icalls._icall_Unit_Long_Object
 import godot.icalls._icall_Unit_Vector3
 import godot.icalls._icall_Vector3
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -1042,7 +1042,7 @@ open class SpatialMaterial internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("SpatialMaterial", "SpatialMaterial")
+            this.ptr = invokeConstructor("SpatialMaterial", "SpatialMaterial")
         }
 
   }
@@ -2004,181 +2004,5 @@ open class SpatialMaterial internal constructor(
     }
   }
 
-  companion object {
-    final const val BILLBOARD_DISABLED: Long = 0
-
-    final const val BILLBOARD_ENABLED: Long = 1
-
-    final const val BILLBOARD_FIXED_Y: Long = 2
-
-    final const val BILLBOARD_PARTICLES: Long = 3
-
-    final const val BLEND_MODE_ADD: Long = 1
-
-    final const val BLEND_MODE_MIX: Long = 0
-
-    final const val BLEND_MODE_MUL: Long = 3
-
-    final const val BLEND_MODE_SUB: Long = 2
-
-    final const val CULL_BACK: Long = 0
-
-    final const val CULL_DISABLED: Long = 2
-
-    final const val CULL_FRONT: Long = 1
-
-    final const val DEPTH_DRAW_ALPHA_OPAQUE_PREPASS: Long = 3
-
-    final const val DEPTH_DRAW_ALWAYS: Long = 1
-
-    final const val DEPTH_DRAW_DISABLED: Long = 2
-
-    final const val DEPTH_DRAW_OPAQUE_ONLY: Long = 0
-
-    final const val DETAIL_UV_1: Long = 0
-
-    final const val DETAIL_UV_2: Long = 1
-
-    final const val DIFFUSE_BURLEY: Long = 0
-
-    final const val DIFFUSE_LAMBERT: Long = 1
-
-    final const val DIFFUSE_LAMBERT_WRAP: Long = 2
-
-    final const val DIFFUSE_OREN_NAYAR: Long = 3
-
-    final const val DIFFUSE_TOON: Long = 4
-
-    final const val DISTANCE_FADE_DISABLED: Long = 0
-
-    final const val DISTANCE_FADE_OBJECT_DITHER: Long = 3
-
-    final const val DISTANCE_FADE_PIXEL_ALPHA: Long = 1
-
-    final const val DISTANCE_FADE_PIXEL_DITHER: Long = 2
-
-    final const val EMISSION_OP_ADD: Long = 0
-
-    final const val EMISSION_OP_MULTIPLY: Long = 1
-
-    final const val FEATURE_AMBIENT_OCCLUSION: Long = 6
-
-    final const val FEATURE_ANISOTROPY: Long = 5
-
-    final const val FEATURE_CLEARCOAT: Long = 4
-
-    final const val FEATURE_DEPTH_MAPPING: Long = 7
-
-    final const val FEATURE_DETAIL: Long = 11
-
-    final const val FEATURE_EMISSION: Long = 1
-
-    final const val FEATURE_MAX: Long = 12
-
-    final const val FEATURE_NORMAL_MAPPING: Long = 2
-
-    final const val FEATURE_REFRACTION: Long = 10
-
-    final const val FEATURE_RIM: Long = 3
-
-    final const val FEATURE_SUBSURACE_SCATTERING: Long = 8
-
-    final const val FEATURE_TRANSMISSION: Long = 9
-
-    final const val FEATURE_TRANSPARENT: Long = 0
-
-    final const val FLAG_ALBEDO_FROM_VERTEX_COLOR: Long = 3
-
-    final const val FLAG_ALBEDO_TEXTURE_FORCE_SRGB: Long = 14
-
-    final const val FLAG_AO_ON_UV2: Long = 11
-
-    final const val FLAG_BILLBOARD_KEEP_SCALE: Long = 7
-
-    final const val FLAG_DISABLE_AMBIENT_LIGHT: Long = 17
-
-    final const val FLAG_DISABLE_DEPTH_TEST: Long = 2
-
-    final const val FLAG_DONT_RECEIVE_SHADOWS: Long = 15
-
-    final const val FLAG_EMISSION_ON_UV2: Long = 12
-
-    final const val FLAG_ENSURE_CORRECT_NORMALS: Long = 16
-
-    final const val FLAG_FIXED_SIZE: Long = 6
-
-    final const val FLAG_MAX: Long = 19
-
-    final const val FLAG_SRGB_VERTEX_COLOR: Long = 4
-
-    final const val FLAG_TRIPLANAR_USE_WORLD: Long = 10
-
-    final const val FLAG_UNSHADED: Long = 0
-
-    final const val FLAG_USE_ALPHA_SCISSOR: Long = 13
-
-    final const val FLAG_USE_POINT_SIZE: Long = 5
-
-    final const val FLAG_USE_SHADOW_TO_OPACITY: Long = 18
-
-    final const val FLAG_USE_VERTEX_LIGHTING: Long = 1
-
-    final const val FLAG_UV1_USE_TRIPLANAR: Long = 8
-
-    final const val FLAG_UV2_USE_TRIPLANAR: Long = 9
-
-    final const val SPECULAR_BLINN: Long = 1
-
-    final const val SPECULAR_DISABLED: Long = 4
-
-    final const val SPECULAR_PHONG: Long = 2
-
-    final const val SPECULAR_SCHLICK_GGX: Long = 0
-
-    final const val SPECULAR_TOON: Long = 3
-
-    final const val TEXTURE_ALBEDO: Long = 0
-
-    final const val TEXTURE_AMBIENT_OCCLUSION: Long = 8
-
-    final const val TEXTURE_CHANNEL_ALPHA: Long = 3
-
-    final const val TEXTURE_CHANNEL_BLUE: Long = 2
-
-    final const val TEXTURE_CHANNEL_GRAYSCALE: Long = 4
-
-    final const val TEXTURE_CHANNEL_GREEN: Long = 1
-
-    final const val TEXTURE_CHANNEL_RED: Long = 0
-
-    final const val TEXTURE_CLEARCOAT: Long = 6
-
-    final const val TEXTURE_DEPTH: Long = 9
-
-    final const val TEXTURE_DETAIL_ALBEDO: Long = 14
-
-    final const val TEXTURE_DETAIL_MASK: Long = 13
-
-    final const val TEXTURE_DETAIL_NORMAL: Long = 15
-
-    final const val TEXTURE_EMISSION: Long = 3
-
-    final const val TEXTURE_FLOWMAP: Long = 7
-
-    final const val TEXTURE_MAX: Long = 16
-
-    final const val TEXTURE_METALLIC: Long = 1
-
-    final const val TEXTURE_NORMAL: Long = 4
-
-    final const val TEXTURE_REFRACTION: Long = 12
-
-    final const val TEXTURE_RIM: Long = 5
-
-    final const val TEXTURE_ROUGHNESS: Long = 2
-
-    final const val TEXTURE_SUBSURFACE_SCATTERING: Long = 10
-
-    final const val TEXTURE_TRANSMISSION: Long = 11
-  }
+  companion object
 }

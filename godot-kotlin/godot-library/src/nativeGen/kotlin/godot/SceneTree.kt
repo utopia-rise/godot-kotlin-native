@@ -34,8 +34,8 @@ import godot.icalls._icall_Unit_String_String_Variant
 import godot.icalls._icall_VariantArray_String
 import godot.icalls._icall_Viewport
 import godot.icalls._icall_varargs
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -184,27 +184,27 @@ open class SceneTree internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("SceneTree", "SceneTree")
+            this.ptr = invokeConstructor("SceneTree", "SceneTree")
         }
 
   }
 
-  open fun _change_scene(arg0: Node) {
+  open fun _changeScene(arg0: Node) {
   }
 
-  open fun _connected_to_server() {
+  open fun _connectedToServer() {
   }
 
-  open fun _connection_failed() {
+  open fun _connectionFailed() {
   }
 
-  open fun _network_peer_connected(arg0: Long) {
+  open fun _networkPeerConnected(arg0: Long) {
   }
 
-  open fun _network_peer_disconnected(arg0: Long) {
+  open fun _networkPeerDisconnected(arg0: Long) {
   }
 
-  open fun _server_disconnected() {
+  open fun _serverDisconnected() {
   }
 
   open fun callGroup(
@@ -532,29 +532,5 @@ open class SceneTree internal constructor(
     }
   }
 
-  companion object {
-    final const val GROUP_CALL_DEFAULT: Long = 0
-
-    final const val GROUP_CALL_REALTIME: Long = 2
-
-    final const val GROUP_CALL_REVERSE: Long = 1
-
-    final const val GROUP_CALL_UNIQUE: Long = 4
-
-    final const val STRETCH_ASPECT_EXPAND: Long = 4
-
-    final const val STRETCH_ASPECT_IGNORE: Long = 0
-
-    final const val STRETCH_ASPECT_KEEP: Long = 1
-
-    final const val STRETCH_ASPECT_KEEP_HEIGHT: Long = 3
-
-    final const val STRETCH_ASPECT_KEEP_WIDTH: Long = 2
-
-    final const val STRETCH_MODE_2D: Long = 1
-
-    final const val STRETCH_MODE_DISABLED: Long = 0
-
-    final const val STRETCH_MODE_VIEWPORT: Long = 2
-  }
+  companion object
 }

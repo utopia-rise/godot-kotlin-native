@@ -8,8 +8,8 @@ import godot.icalls._icall_Shape2D
 import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_Object
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -59,12 +59,12 @@ open class CollisionShape2D internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("CollisionShape2D", "CollisionShape2D")
+            this.ptr = invokeConstructor("CollisionShape2D", "CollisionShape2D")
         }
 
   }
 
-  open fun _shape_changed() {
+  open fun _shapeChanged() {
   }
 
   open fun getOneWayCollisionMargin(): Double {

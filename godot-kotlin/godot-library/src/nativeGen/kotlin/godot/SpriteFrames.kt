@@ -17,8 +17,8 @@ import godot.icalls._icall_Unit_String_Long
 import godot.icalls._icall_Unit_String_Long_Object
 import godot.icalls._icall_Unit_String_Object_Long
 import godot.icalls._icall_Unit_String_String
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -31,23 +31,23 @@ open class SpriteFrames internal constructor(
 ) : Resource(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("SpriteFrames", "SpriteFrames")
+            this.ptr = invokeConstructor("SpriteFrames", "SpriteFrames")
         }
 
   }
 
-  open fun _get_animations(): VariantArray {
+  open fun _getAnimations(): VariantArray {
     throw NotImplementedError("_get_animations is not implemented for SpriteFrames")
   }
 
-  open fun _get_frames(): VariantArray {
+  open fun _getFrames(): VariantArray {
     throw NotImplementedError("_get_frames is not implemented for SpriteFrames")
   }
 
-  open fun _set_animations(arg0: VariantArray) {
+  open fun _setAnimations(arg0: VariantArray) {
   }
 
-  open fun _set_frames(arg0: VariantArray) {
+  open fun _setFrames(arg0: VariantArray) {
   }
 
   open fun addAnimation(anim: String) {

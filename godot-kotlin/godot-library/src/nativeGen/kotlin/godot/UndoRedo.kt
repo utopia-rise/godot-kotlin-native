@@ -14,8 +14,8 @@ import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_Object_String_Variant
 import godot.icalls._icall_Unit_String_Long
 import godot.icalls._icall_varargs
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
@@ -28,7 +28,7 @@ open class UndoRedo internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("UndoRedo", "UndoRedo")
+            this.ptr = invokeConstructor("UndoRedo", "UndoRedo")
         }
 
   }
@@ -148,11 +148,5 @@ open class UndoRedo internal constructor(
     }
   }
 
-  companion object {
-    final const val MERGE_ALL: Long = 2
-
-    final const val MERGE_DISABLE: Long = 0
-
-    final const val MERGE_ENDS: Long = 1
-  }
+  companion object
 }

@@ -7,8 +7,8 @@ import godot.icalls._icall_CubeMap
 import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Object
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Long
 
@@ -47,7 +47,7 @@ open class VisualShaderNodeCubeMap internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("VisualShaderNodeCubeMap", "VisualShaderNodeCubeMap")
+            this.ptr = invokeConstructor("VisualShaderNodeCubeMap", "VisualShaderNodeCubeMap")
         }
 
   }
@@ -118,15 +118,5 @@ open class VisualShaderNodeCubeMap internal constructor(
     }
   }
 
-  companion object {
-    final const val SOURCE_PORT: Long = 1
-
-    final const val SOURCE_TEXTURE: Long = 0
-
-    final const val TYPE_COLOR: Long = 1
-
-    final const val TYPE_DATA: Long = 0
-
-    final const val TYPE_NORMALMAP: Long = 2
-  }
+  companion object
 }

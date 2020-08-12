@@ -8,8 +8,8 @@ import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Long_Boolean
 import godot.icalls._icall_Unit_Long_Double
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -811,51 +811,51 @@ open class Generic6DOFJoint internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("Generic6DOFJoint", "Generic6DOFJoint")
+            this.ptr = invokeConstructor("Generic6DOFJoint", "Generic6DOFJoint")
         }
 
   }
 
-  open fun _get_angular_hi_limit_x(): Double {
+  open fun _getAngularHiLimitX(): Double {
     throw NotImplementedError("_get_angular_hi_limit_x is not implemented for Generic6DOFJoint")
   }
 
-  open fun _get_angular_hi_limit_y(): Double {
+  open fun _getAngularHiLimitY(): Double {
     throw NotImplementedError("_get_angular_hi_limit_y is not implemented for Generic6DOFJoint")
   }
 
-  open fun _get_angular_hi_limit_z(): Double {
+  open fun _getAngularHiLimitZ(): Double {
     throw NotImplementedError("_get_angular_hi_limit_z is not implemented for Generic6DOFJoint")
   }
 
-  open fun _get_angular_lo_limit_x(): Double {
+  open fun _getAngularLoLimitX(): Double {
     throw NotImplementedError("_get_angular_lo_limit_x is not implemented for Generic6DOFJoint")
   }
 
-  open fun _get_angular_lo_limit_y(): Double {
+  open fun _getAngularLoLimitY(): Double {
     throw NotImplementedError("_get_angular_lo_limit_y is not implemented for Generic6DOFJoint")
   }
 
-  open fun _get_angular_lo_limit_z(): Double {
+  open fun _getAngularLoLimitZ(): Double {
     throw NotImplementedError("_get_angular_lo_limit_z is not implemented for Generic6DOFJoint")
   }
 
-  open fun _set_angular_hi_limit_x(angle: Double) {
+  open fun _setAngularHiLimitX(angle: Double) {
   }
 
-  open fun _set_angular_hi_limit_y(angle: Double) {
+  open fun _setAngularHiLimitY(angle: Double) {
   }
 
-  open fun _set_angular_hi_limit_z(angle: Double) {
+  open fun _setAngularHiLimitZ(angle: Double) {
   }
 
-  open fun _set_angular_lo_limit_x(angle: Double) {
+  open fun _setAngularLoLimitX(angle: Double) {
   }
 
-  open fun _set_angular_lo_limit_y(angle: Double) {
+  open fun _setAngularLoLimitY(angle: Double) {
   }
 
-  open fun _set_angular_lo_limit_z(angle: Double) {
+  open fun _setAngularLoLimitZ(angle: Double) {
   }
 
   open fun getFlagX(flag: Long): Boolean {
@@ -1014,65 +1014,5 @@ open class Generic6DOFJoint internal constructor(
     }
   }
 
-  companion object {
-    final const val FLAG_ENABLE_ANGULAR_LIMIT: Long = 1
-
-    final const val FLAG_ENABLE_ANGULAR_SPRING: Long = 2
-
-    final const val FLAG_ENABLE_LINEAR_LIMIT: Long = 0
-
-    final const val FLAG_ENABLE_LINEAR_MOTOR: Long = 5
-
-    final const val FLAG_ENABLE_LINEAR_SPRING: Long = 3
-
-    final const val FLAG_ENABLE_MOTOR: Long = 4
-
-    final const val FLAG_MAX: Long = 6
-
-    final const val PARAM_ANGULAR_DAMPING: Long = 13
-
-    final const val PARAM_ANGULAR_ERP: Long = 16
-
-    final const val PARAM_ANGULAR_FORCE_LIMIT: Long = 15
-
-    final const val PARAM_ANGULAR_LIMIT_SOFTNESS: Long = 12
-
-    final const val PARAM_ANGULAR_LOWER_LIMIT: Long = 10
-
-    final const val PARAM_ANGULAR_MOTOR_FORCE_LIMIT: Long = 18
-
-    final const val PARAM_ANGULAR_MOTOR_TARGET_VELOCITY: Long = 17
-
-    final const val PARAM_ANGULAR_RESTITUTION: Long = 14
-
-    final const val PARAM_ANGULAR_SPRING_DAMPING: Long = 20
-
-    final const val PARAM_ANGULAR_SPRING_EQUILIBRIUM_POINT: Long = 21
-
-    final const val PARAM_ANGULAR_SPRING_STIFFNESS: Long = 19
-
-    final const val PARAM_ANGULAR_UPPER_LIMIT: Long = 11
-
-    final const val PARAM_LINEAR_DAMPING: Long = 4
-
-    final const val PARAM_LINEAR_LIMIT_SOFTNESS: Long = 2
-
-    final const val PARAM_LINEAR_LOWER_LIMIT: Long = 0
-
-    final const val PARAM_LINEAR_MOTOR_FORCE_LIMIT: Long = 6
-
-    final const val PARAM_LINEAR_MOTOR_TARGET_VELOCITY: Long = 5
-
-    final const val PARAM_LINEAR_RESTITUTION: Long = 3
-
-    final const val PARAM_LINEAR_SPRING_DAMPING: Long = 8
-
-    final const val PARAM_LINEAR_SPRING_EQUILIBRIUM_POINT: Long = 9
-
-    final const val PARAM_LINEAR_SPRING_STIFFNESS: Long = 7
-
-    final const val PARAM_LINEAR_UPPER_LIMIT: Long = 1
-
-    final const val PARAM_MAX: Long = 22
-  }
+  companion object
 }

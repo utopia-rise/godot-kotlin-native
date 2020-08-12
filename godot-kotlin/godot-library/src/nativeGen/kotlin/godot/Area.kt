@@ -23,8 +23,8 @@ import godot.icalls._icall_Unit_String
 import godot.icalls._icall_Unit_Vector3
 import godot.icalls._icall_VariantArray
 import godot.icalls._icall_Vector3
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -237,7 +237,7 @@ open class Area internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("Area", "Area")
+            this.ptr = invokeConstructor("Area", "Area")
         }
 
   }
@@ -248,13 +248,13 @@ open class Area internal constructor(
   }
 
 
-  open fun _area_enter_tree(id: Long) {
+  open fun _areaEnterTree(id: Long) {
   }
 
-  open fun _area_exit_tree(id: Long) {
+  open fun _areaExitTree(id: Long) {
   }
 
-  open fun _area_inout(
+  open fun _areaInout(
     arg0: Long,
     arg1: RID,
     arg2: Long,
@@ -263,13 +263,13 @@ open class Area internal constructor(
   ) {
   }
 
-  open fun _body_enter_tree(id: Long) {
+  open fun _bodyEnterTree(id: Long) {
   }
 
-  open fun _body_exit_tree(id: Long) {
+  open fun _bodyExitTree(id: Long) {
   }
 
-  open fun _body_inout(
+  open fun _bodyInout(
     arg0: Long,
     arg1: RID,
     arg2: Long,
@@ -521,15 +521,5 @@ open class Area internal constructor(
     }
   }
 
-  companion object {
-    final const val SPACE_OVERRIDE_COMBINE: Long = 1
-
-    final const val SPACE_OVERRIDE_COMBINE_REPLACE: Long = 2
-
-    final const val SPACE_OVERRIDE_DISABLED: Long = 0
-
-    final const val SPACE_OVERRIDE_REPLACE: Long = 3
-
-    final const val SPACE_OVERRIDE_REPLACE_COMBINE: Long = 4
-  }
+  companion object
 }

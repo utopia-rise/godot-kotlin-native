@@ -8,8 +8,8 @@ import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Variant
 import godot.icalls._icall_Variant
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Long
 
@@ -38,7 +38,7 @@ open class VisualScriptConstant internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("VisualScriptConstant", "VisualScriptConstant")
+            this.ptr = invokeConstructor("VisualScriptConstant", "VisualScriptConstant")
         }
 
   }

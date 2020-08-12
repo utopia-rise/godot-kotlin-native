@@ -12,8 +12,8 @@ import godot.icalls._icall_Unit_Long_Object
 import godot.icalls._icall_Unit_Long_Vector2
 import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_Vector2_Long
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Long
 import kotlin.NotImplementedError
@@ -23,16 +23,16 @@ open class LargeTexture internal constructor(
 ) : Texture(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("LargeTexture", "LargeTexture")
+            this.ptr = invokeConstructor("LargeTexture", "LargeTexture")
         }
 
   }
 
-  open fun _get_data(): VariantArray {
+  open fun _getData(): VariantArray {
     throw NotImplementedError("_get_data is not implemented for LargeTexture")
   }
 
-  open fun _set_data(data: VariantArray) {
+  open fun _setData(data: VariantArray) {
   }
 
   open fun addPiece(ofs: Vector2, texture: Texture): Long {

@@ -7,8 +7,8 @@ import godot.core.Signal0
 import godot.core.signal
 import godot.icalls._icall_Unit
 import godot.icalls._icall_Unit_Object_Rect2
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Long
 
@@ -19,15 +19,15 @@ open class Container internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("Container", "Container")
+            this.ptr = invokeConstructor("Container", "Container")
         }
 
   }
 
-  open fun _child_minsize_changed() {
+  open fun _childMinsizeChanged() {
   }
 
-  open fun _sort_children() {
+  open fun _sortChildren() {
   }
 
   open fun fitChildInRect(child: Control, rect: Rect2) {

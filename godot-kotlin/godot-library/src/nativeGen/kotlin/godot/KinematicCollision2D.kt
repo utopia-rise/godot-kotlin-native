@@ -8,8 +8,8 @@ import godot.icalls._icall_Long
 import godot.icalls._icall_Object
 import godot.icalls._icall_Variant
 import godot.icalls._icall_Vector2
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Long
 
@@ -84,7 +84,7 @@ open class KinematicCollision2D internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("KinematicCollision2D", "KinematicCollision2D")
+            this.ptr = invokeConstructor("KinematicCollision2D", "KinematicCollision2D")
         }
 
   }

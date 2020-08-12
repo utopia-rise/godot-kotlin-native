@@ -21,11 +21,11 @@ open class VisualScriptNode internal constructor(
 
   internal constructor() : this(null)
 
-  open fun _get_default_input_values(): VariantArray {
+  open fun _getDefaultInputValues(): VariantArray {
     throw NotImplementedError("_get_default_input_values is not implemented for VisualScriptNode")
   }
 
-  open fun _set_default_input_values(values: VariantArray) {
+  open fun _setDefaultInputValues(values: VariantArray) {
   }
 
   open fun getDefaultInputValue(portIdx: Long): Variant {

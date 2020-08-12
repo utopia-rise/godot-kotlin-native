@@ -11,8 +11,8 @@ import godot.icalls._icall_Dictionary_Variant_Variant
 import godot.icalls._icall_String_String
 import godot.icalls._icall_Unit_String_Object
 import godot.icalls._icall_Variant_Variant_Boolean
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
@@ -23,7 +23,7 @@ open class JSONRPC internal constructor(
 ) : Object(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("JSONRPC", "JSONRPC")
+            this.ptr = invokeConstructor("JSONRPC", "JSONRPC")
         }
 
   }
@@ -94,15 +94,5 @@ open class JSONRPC internal constructor(
     }
   }
 
-  companion object {
-    final const val INTERNAL_ERROR: Long = -32603
-
-    final const val INVALID_PARAMS: Long = -32602
-
-    final const val INVALID_REQUEST: Long = -32600
-
-    final const val METHOD_NOT_FOUND: Long = -32601
-
-    final const val PARSE_ERROR: Long = -32700
-  }
+  companion object
 }

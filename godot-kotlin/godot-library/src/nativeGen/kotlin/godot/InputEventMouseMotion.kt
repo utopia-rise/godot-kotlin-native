@@ -7,8 +7,8 @@ import godot.icalls._icall_Double
 import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_Vector2
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Double
 import kotlin.Unit
@@ -58,7 +58,7 @@ open class InputEventMouseMotion internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("InputEventMouseMotion", "InputEventMouseMotion")
+            this.ptr = invokeConstructor("InputEventMouseMotion", "InputEventMouseMotion")
         }
 
   }

@@ -15,8 +15,8 @@ import godot.icalls._icall_String
 import godot.icalls._icall_String_Long
 import godot.icalls._icall_String_String
 import godot.icalls._icall_Unit
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
@@ -27,7 +27,7 @@ open class XMLParser internal constructor(
 ) : Reference(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("XMLParser", "XMLParser")
+            this.ptr = invokeConstructor("XMLParser", "XMLParser")
         }
 
   }
@@ -144,19 +144,5 @@ open class XMLParser internal constructor(
     }
   }
 
-  companion object {
-    final const val NODE_CDATA: Long = 5
-
-    final const val NODE_COMMENT: Long = 4
-
-    final const val NODE_ELEMENT: Long = 1
-
-    final const val NODE_ELEMENT_END: Long = 2
-
-    final const val NODE_NONE: Long = 0
-
-    final const val NODE_TEXT: Long = 3
-
-    final const val NODE_UNKNOWN: Long = 6
-  }
+  companion object
 }

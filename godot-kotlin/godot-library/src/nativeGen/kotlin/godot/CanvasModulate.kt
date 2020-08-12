@@ -5,8 +5,8 @@ import godot.core.Color
 import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Color
 import godot.icalls._icall_Unit_Color
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Unit
 
@@ -25,7 +25,7 @@ open class CanvasModulate internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("CanvasModulate", "CanvasModulate")
+            this.ptr = invokeConstructor("CanvasModulate", "CanvasModulate")
         }
 
   }

@@ -6,8 +6,8 @@ import godot.icalls._icall_Double
 import godot.icalls._icall_Material
 import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_Object
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Double
 
@@ -56,7 +56,7 @@ open class CSGBox internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("CSGBox", "CSGBox")
+            this.ptr = invokeConstructor("CSGBox", "CSGBox")
         }
 
   }

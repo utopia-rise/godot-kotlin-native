@@ -5,8 +5,8 @@ import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Double_Long
 import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Long_Double
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Double
 import kotlin.Long
@@ -16,7 +16,7 @@ open class AudioEffectEQ internal constructor(
 ) : AudioEffect(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("AudioEffectEQ", "AudioEffectEQ")
+            this.ptr = invokeConstructor("AudioEffectEQ", "AudioEffectEQ")
         }
 
   }

@@ -319,43 +319,5 @@ open class Light internal constructor(
     }
   }
 
-  companion object {
-    final const val BAKE_ALL: Long = 2
-
-    final const val BAKE_DISABLED: Long = 0
-
-    final const val BAKE_INDIRECT: Long = 1
-
-    final const val PARAM_ATTENUATION: Long = 4
-
-    final const val PARAM_CONTACT_SHADOW_SIZE: Long = 7
-
-    final const val PARAM_ENERGY: Long = 0
-
-    final const val PARAM_INDIRECT_ENERGY: Long = 1
-
-    final const val PARAM_MAX: Long = 15
-
-    final const val PARAM_RANGE: Long = 3
-
-    final const val PARAM_SHADOW_BIAS: Long = 13
-
-    final const val PARAM_SHADOW_BIAS_SPLIT_SCALE: Long = 14
-
-    final const val PARAM_SHADOW_MAX_DISTANCE: Long = 8
-
-    final const val PARAM_SHADOW_NORMAL_BIAS: Long = 12
-
-    final const val PARAM_SHADOW_SPLIT_1_OFFSET: Long = 9
-
-    final const val PARAM_SHADOW_SPLIT_2_OFFSET: Long = 10
-
-    final const val PARAM_SHADOW_SPLIT_3_OFFSET: Long = 11
-
-    final const val PARAM_SPECULAR: Long = 2
-
-    final const val PARAM_SPOT_ANGLE: Long = 5
-
-    final const val PARAM_SPOT_ATTENUATION: Long = 6
-  }
+  companion object
 }

@@ -134,20 +134,8 @@ open class NetworkedMultiplayerPeer internal constructor(
   }
 
   companion object {
-    final const val CONNECTION_CONNECTED: Long = 2
-
-    final const val CONNECTION_CONNECTING: Long = 1
-
-    final const val CONNECTION_DISCONNECTED: Long = 0
-
     final const val TARGET_PEER_BROADCAST: Long = 0
 
     final const val TARGET_PEER_SERVER: Long = 1
-
-    final const val TRANSFER_MODE_RELIABLE: Long = 2
-
-    final const val TRANSFER_MODE_UNRELIABLE: Long = 0
-
-    final const val TRANSFER_MODE_UNRELIABLE_ORDERED: Long = 1
   }
 }

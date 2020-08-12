@@ -14,8 +14,8 @@ import godot.icalls._icall_String
 import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_String
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.String
@@ -59,15 +59,15 @@ open class AcceptDialog internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("AcceptDialog", "AcceptDialog")
+            this.ptr = invokeConstructor("AcceptDialog", "AcceptDialog")
         }
 
   }
 
-  open fun _builtin_text_entered(arg0: String) {
+  open fun _builtinTextEntered(arg0: String) {
   }
 
-  open fun _custom_action(arg0: String) {
+  open fun _customAction(arg0: String) {
   }
 
   open fun _ok() {

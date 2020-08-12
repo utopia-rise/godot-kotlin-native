@@ -5,8 +5,8 @@ import godot.core.Godot.shouldInitPtr
 import godot.core.RID
 import godot.icalls._icall_Physics2DDirectSpaceState
 import godot.icalls._icall_RID
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 
 open class World2D internal constructor(
@@ -32,7 +32,7 @@ open class World2D internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("World2D", "World2D")
+            this.ptr = invokeConstructor("World2D", "World2D")
         }
 
   }

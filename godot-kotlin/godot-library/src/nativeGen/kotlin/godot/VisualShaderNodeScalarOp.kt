@@ -5,8 +5,8 @@ import godot.VisualShaderNodeScalarOp
 import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Long
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Long
 
@@ -25,7 +25,7 @@ open class VisualShaderNodeScalarOp internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("VisualShaderNodeScalarOp", "VisualShaderNodeScalarOp")
+            this.ptr = invokeConstructor("VisualShaderNodeScalarOp", "VisualShaderNodeScalarOp")
         }
 
   }
@@ -73,25 +73,5 @@ open class VisualShaderNodeScalarOp internal constructor(
     }
   }
 
-  companion object {
-    final const val OP_ADD: Long = 0
-
-    final const val OP_ATAN2: Long = 8
-
-    final const val OP_DIV: Long = 3
-
-    final const val OP_MAX: Long = 6
-
-    final const val OP_MIN: Long = 7
-
-    final const val OP_MOD: Long = 4
-
-    final const val OP_MUL: Long = 2
-
-    final const val OP_POW: Long = 5
-
-    final const val OP_STEP: Long = 9
-
-    final const val OP_SUB: Long = 1
-  }
+  companion object
 }

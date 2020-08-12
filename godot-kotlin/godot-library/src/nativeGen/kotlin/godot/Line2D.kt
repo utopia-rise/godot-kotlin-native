@@ -24,8 +24,8 @@ import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_PoolVector2Array
 import godot.icalls._icall_Unit_Vector2_Long
 import godot.icalls._icall_Vector2_Long
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -167,7 +167,7 @@ open class Line2D internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("Line2D", "Line2D")
+            this.ptr = invokeConstructor("Line2D", "Line2D")
         }
 
   }
@@ -178,10 +178,10 @@ open class Line2D internal constructor(
   }
 
 
-  open fun _curve_changed() {
+  open fun _curveChanged() {
   }
 
-  open fun _gradient_changed() {
+  open fun _gradientChanged() {
   }
 
   open fun addPoint(position: Vector2, atPosition: Long = -1) {
@@ -401,23 +401,5 @@ open class Line2D internal constructor(
     }
   }
 
-  companion object {
-    final const val LINE_CAP_BOX: Long = 1
-
-    final const val LINE_CAP_NONE: Long = 0
-
-    final const val LINE_CAP_ROUND: Long = 2
-
-    final const val LINE_JOINT_BEVEL: Long = 1
-
-    final const val LINE_JOINT_ROUND: Long = 2
-
-    final const val LINE_JOINT_SHARP: Long = 0
-
-    final const val LINE_TEXTURE_NONE: Long = 0
-
-    final const val LINE_TEXTURE_STRETCH: Long = 2
-
-    final const val LINE_TEXTURE_TILE: Long = 1
-  }
+  companion object
 }

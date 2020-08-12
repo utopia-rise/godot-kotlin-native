@@ -5,8 +5,8 @@ import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Material
 import godot.icalls._icall_Mesh
 import godot.icalls._icall_Unit_Object
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 
 open class CSGMesh internal constructor(
@@ -34,12 +34,12 @@ open class CSGMesh internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("CSGMesh", "CSGMesh")
+            this.ptr = invokeConstructor("CSGMesh", "CSGMesh")
         }
 
   }
 
-  open fun _mesh_changed() {
+  open fun _meshChanged() {
   }
 
   open fun getMaterial(): Material {

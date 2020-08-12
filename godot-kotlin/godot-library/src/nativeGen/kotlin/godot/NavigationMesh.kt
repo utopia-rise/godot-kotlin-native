@@ -21,8 +21,8 @@ import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_PoolIntArray
 import godot.icalls._icall_Unit_PoolVector3Array
 import godot.icalls._icall_Unit_String
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -255,16 +255,16 @@ open class NavigationMesh internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("NavigationMesh", "NavigationMesh")
+            this.ptr = invokeConstructor("NavigationMesh", "NavigationMesh")
         }
 
   }
 
-  open fun _get_polygons(): VariantArray {
+  open fun _getPolygons(): VariantArray {
     throw NotImplementedError("_get_polygons is not implemented for NavigationMesh")
   }
 
-  open fun _set_polygons(polygons: VariantArray) {
+  open fun _setPolygons(polygons: VariantArray) {
   }
 
   open fun addPolygon(polygon: PoolIntArray) {

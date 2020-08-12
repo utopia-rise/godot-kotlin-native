@@ -28,8 +28,8 @@ import godot.icalls._icall_VariantArray
 import godot.icalls._icall_Vector3
 import godot.icalls._icall_Vector3_Long_Long_Long
 import godot.icalls._icall_Vector3_Vector3
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -133,7 +133,7 @@ open class GridMap internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("GridMap", "GridMap")
+            this.ptr = invokeConstructor("GridMap", "GridMap")
         }
 
   }
@@ -144,7 +144,7 @@ open class GridMap internal constructor(
   }
 
 
-  open fun _update_octants_callback() {
+  open fun _updateOctantsCallback() {
   }
 
   open fun clear() {

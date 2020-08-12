@@ -42,8 +42,8 @@ import godot.icalls._icall_VariantArray
 import godot.icalls._icall_VariantArray_NodePath
 import godot.icalls._icall_Viewport
 import godot.icalls._icall_varargs
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -132,33 +132,33 @@ open class Node internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("Node", "Node")
+            this.ptr = invokeConstructor("Node", "Node")
         }
 
   }
 
-  open fun _enter_tree() {
+  open fun _enterTree() {
   }
 
-  open fun _exit_tree() {
+  open fun _exitTree() {
   }
 
-  open fun _get_configuration_warning(): String {
+  open fun _getConfigurationWarning(): String {
     throw NotImplementedError("_get_configuration_warning is not implemented for Node")
   }
 
-  open fun _get_editor_description(): String {
+  open fun _getEditorDescription(): String {
     throw NotImplementedError("_get_editor_description is not implemented for Node")
   }
 
-  open fun _get_import_path(): NodePath {
+  open fun _getImportPath(): NodePath {
     throw NotImplementedError("_get_import_path is not implemented for Node")
   }
 
   open fun _input(event: InputEvent) {
   }
 
-  open fun _physics_process(delta: Double) {
+  open fun _physicsProcess(delta: Double) {
   }
 
   open fun _process(delta: Double) {
@@ -167,16 +167,16 @@ open class Node internal constructor(
   open fun _ready() {
   }
 
-  open fun _set_editor_description(editorDescription: String) {
+  open fun _setEditorDescription(editorDescription: String) {
   }
 
-  open fun _set_import_path(importPath: NodePath) {
+  open fun _setImportPath(importPath: NodePath) {
   }
 
-  open fun _unhandled_input(event: InputEvent) {
+  open fun _unhandledInput(event: InputEvent) {
   }
 
-  open fun _unhandled_key_input(event: InputEventKey) {
+  open fun _unhandledKeyInput(event: InputEventKey) {
   }
 
   open fun addChild(node: Node, legibleUniqueName: Boolean = false) {
@@ -683,14 +683,6 @@ open class Node internal constructor(
   }
 
   companion object {
-    final const val DUPLICATE_GROUPS: Long = 2
-
-    final const val DUPLICATE_SCRIPTS: Long = 4
-
-    final const val DUPLICATE_SIGNALS: Long = 1
-
-    final const val DUPLICATE_USE_INSTANCING: Long = 8
-
     final const val NOTIFICATION_APP_PAUSED: Long = 1015
 
     final const val NOTIFICATION_APP_RESUMED: Long = 1014
@@ -750,11 +742,5 @@ open class Node internal constructor(
     final const val NOTIFICATION_WM_QUIT_REQUEST: Long = 1006
 
     final const val NOTIFICATION_WM_UNFOCUS_REQUEST: Long = 1008
-
-    final const val PAUSE_MODE_INHERIT: Long = 0
-
-    final const val PAUSE_MODE_PROCESS: Long = 2
-
-    final const val PAUSE_MODE_STOP: Long = 1
   }
 }

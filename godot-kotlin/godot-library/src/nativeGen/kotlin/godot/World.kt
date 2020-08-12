@@ -7,8 +7,8 @@ import godot.icalls._icall_Environment
 import godot.icalls._icall_PhysicsDirectSpaceState
 import godot.icalls._icall_RID
 import godot.icalls._icall_Unit_Object
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 
 open class World internal constructor(
@@ -54,7 +54,7 @@ open class World internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("World", "World")
+            this.ptr = invokeConstructor("World", "World")
         }
 
   }

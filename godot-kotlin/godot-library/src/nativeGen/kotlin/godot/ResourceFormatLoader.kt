@@ -4,7 +4,7 @@ package godot
 import godot.core.Godot.shouldInitPtr
 import godot.core.PoolStringArray
 import godot.core.Variant
-import godot.internal.utils.getConstructor
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
@@ -16,24 +16,24 @@ open class ResourceFormatLoader internal constructor(
 ) : Reference(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("ResourceFormatLoader", "ResourceFormatLoader")
+            this.ptr = invokeConstructor("ResourceFormatLoader", "ResourceFormatLoader")
         }
 
   }
 
-  open fun get_dependencies(path: String, addTypes: String) {
+  open fun getDependencies(path: String, addTypes: String) {
   }
 
-  open fun get_recognized_extensions(): PoolStringArray {
+  open fun getRecognizedExtensions(): PoolStringArray {
     throw
         NotImplementedError("get_recognized_extensions is not implemented for ResourceFormatLoader")
   }
 
-  open fun get_resource_type(path: String): String {
+  open fun getResourceType(path: String): String {
     throw NotImplementedError("get_resource_type is not implemented for ResourceFormatLoader")
   }
 
-  open fun handles_type(typename: String): Boolean {
+  open fun handlesType(typename: String): Boolean {
     throw NotImplementedError("handles_type is not implemented for ResourceFormatLoader")
   }
 
@@ -41,7 +41,7 @@ open class ResourceFormatLoader internal constructor(
     throw NotImplementedError("load is not implemented for ResourceFormatLoader")
   }
 
-  open fun rename_dependencies(path: String, renames: String): Long {
+  open fun renameDependencies(path: String, renames: String): Long {
     throw NotImplementedError("rename_dependencies is not implemented for ResourceFormatLoader")
   }
 }

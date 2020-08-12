@@ -21,8 +21,8 @@ import godot.icalls._icall_Unit_Long_Long_PoolByteArray
 import godot.icalls._icall_Unit_Long_String
 import godot.icalls._icall_Unit_Long_VariantArray_VariantArray_Long
 import godot.icalls._icall_Unit_String
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Double
 import kotlin.Long
@@ -54,7 +54,7 @@ open class ArrayMesh internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("ArrayMesh", "ArrayMesh")
+            this.ptr = invokeConstructor("ArrayMesh", "ArrayMesh")
         }
 
   }
@@ -241,44 +241,6 @@ open class ArrayMesh internal constructor(
   }
 
   companion object {
-    final const val ARRAY_BONES: Long = 6
-
-    final const val ARRAY_COLOR: Long = 3
-
-    final const val ARRAY_FORMAT_BONES: Long = 64
-
-    final const val ARRAY_FORMAT_COLOR: Long = 8
-
-    final const val ARRAY_FORMAT_INDEX: Long = 256
-
-    final const val ARRAY_FORMAT_NORMAL: Long = 2
-
-    final const val ARRAY_FORMAT_TANGENT: Long = 4
-
-    final const val ARRAY_FORMAT_TEX_UV: Long = 16
-
-    final const val ARRAY_FORMAT_TEX_UV2: Long = 32
-
-    final const val ARRAY_FORMAT_VERTEX: Long = 1
-
-    final const val ARRAY_FORMAT_WEIGHTS: Long = 128
-
-    final const val ARRAY_INDEX: Long = 8
-
-    final const val ARRAY_MAX: Long = 9
-
-    final const val ARRAY_NORMAL: Long = 1
-
-    final const val ARRAY_TANGENT: Long = 2
-
-    final const val ARRAY_TEX_UV: Long = 4
-
-    final const val ARRAY_TEX_UV2: Long = 5
-
-    final const val ARRAY_VERTEX: Long = 0
-
-    final const val ARRAY_WEIGHTS: Long = 7
-
     final const val ARRAY_WEIGHTS_SIZE: Long = 4
 
     final const val NO_INDEX_ARRAY: Long = -1

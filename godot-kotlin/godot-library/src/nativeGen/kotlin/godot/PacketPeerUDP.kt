@@ -11,8 +11,8 @@ import godot.icalls._icall_Long_String_String
 import godot.icalls._icall_String
 import godot.icalls._icall_Unit
 import godot.icalls._icall_Unit_Boolean
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
@@ -23,7 +23,7 @@ open class PacketPeerUDP internal constructor(
 ) : PacketPeer(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("PacketPeerUDP", "PacketPeerUDP")
+            this.ptr = invokeConstructor("PacketPeerUDP", "PacketPeerUDP")
         }
 
   }

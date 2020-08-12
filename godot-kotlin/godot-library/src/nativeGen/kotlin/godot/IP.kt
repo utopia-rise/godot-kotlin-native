@@ -33,22 +33,6 @@ object IP : Object() {
 
   final const val RESOLVER_MAX_QUERIES: Long = 32
 
-  final const val RESOLVER_STATUS_DONE: Long = 2
-
-  final const val RESOLVER_STATUS_ERROR: Long = 3
-
-  final const val RESOLVER_STATUS_NONE: Long = 0
-
-  final const val RESOLVER_STATUS_WAITING: Long = 1
-
-  final const val TYPE_ANY: Long = 3
-
-  final const val TYPE_IPV4: Long = 1
-
-  final const val TYPE_IPV6: Long = 2
-
-  final const val TYPE_NONE: Long = 0
-
   fun clearCache(hostname: String = "") {
     val mb = getMethodBind("IP","clear_cache")
     _icall_Unit_String( mb, this.ptr, hostname)

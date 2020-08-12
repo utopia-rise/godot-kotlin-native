@@ -4,8 +4,8 @@ package godot
 import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Curve2D
 import godot.icalls._icall_Unit_Object
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 
 open class Path2D internal constructor(
@@ -23,12 +23,12 @@ open class Path2D internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("Path2D", "Path2D")
+            this.ptr = invokeConstructor("Path2D", "Path2D")
         }
 
   }
 
-  open fun _curve_changed() {
+  open fun _curveChanged() {
   }
 
   open fun getCurve(): Curve2D {

@@ -16,8 +16,8 @@ import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_String
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -128,19 +128,19 @@ open class AudioStreamPlayer2D internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("AudioStreamPlayer2D", "AudioStreamPlayer2D")
+            this.ptr = invokeConstructor("AudioStreamPlayer2D", "AudioStreamPlayer2D")
         }
 
   }
 
-  open fun _bus_layout_changed() {
+  open fun _busLayoutChanged() {
   }
 
-  open fun _is_active(): Boolean {
+  open fun _isActive(): Boolean {
     throw NotImplementedError("_is_active is not implemented for AudioStreamPlayer2D")
   }
 
-  open fun _set_playing(enable: Boolean) {
+  open fun _setPlaying(enable: Boolean) {
   }
 
   open fun getAreaMask(): Long {

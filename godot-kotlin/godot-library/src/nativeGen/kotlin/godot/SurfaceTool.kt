@@ -29,8 +29,8 @@ import godot.icalls._icall_Unit_PoolVector3Array_PoolVector2Array_PoolColorArray
 import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_Unit_Vector3
 import godot.icalls._icall_VariantArray
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
@@ -41,7 +41,7 @@ open class SurfaceTool internal constructor(
 ) : Reference(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("SurfaceTool", "SurfaceTool")
+            this.ptr = invokeConstructor("SurfaceTool", "SurfaceTool")
         }
 
   }

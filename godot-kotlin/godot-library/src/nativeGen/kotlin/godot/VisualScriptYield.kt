@@ -7,8 +7,8 @@ import godot.icalls._icall_Double
 import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_Long
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Double
 import kotlin.Long
@@ -38,7 +38,7 @@ open class VisualScriptYield internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("VisualScriptYield", "VisualScriptYield")
+            this.ptr = invokeConstructor("VisualScriptYield", "VisualScriptYield")
         }
 
   }
@@ -82,11 +82,5 @@ open class VisualScriptYield internal constructor(
     }
   }
 
-  companion object {
-    final const val YIELD_FRAME: Long = 1
-
-    final const val YIELD_PHYSICS_FRAME: Long = 2
-
-    final const val YIELD_WAIT: Long = 3
-  }
+  companion object
 }

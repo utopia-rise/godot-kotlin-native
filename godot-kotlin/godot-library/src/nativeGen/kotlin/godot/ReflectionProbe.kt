@@ -15,8 +15,8 @@ import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Vector3
 import godot.icalls._icall_Vector3
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -148,7 +148,7 @@ open class ReflectionProbe internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("ReflectionProbe", "ReflectionProbe")
+            this.ptr = invokeConstructor("ReflectionProbe", "ReflectionProbe")
         }
 
   }
@@ -308,9 +308,5 @@ open class ReflectionProbe internal constructor(
     }
   }
 
-  companion object {
-    final const val UPDATE_ALWAYS: Long = 1
-
-    final const val UPDATE_ONCE: Long = 0
-  }
+  companion object
 }

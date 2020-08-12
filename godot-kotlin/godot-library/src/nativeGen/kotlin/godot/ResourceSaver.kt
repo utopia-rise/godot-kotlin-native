@@ -25,20 +25,6 @@ object ResourceSaver : Object() {
     }
   }
 
-  final const val FLAG_BUNDLE_RESOURCES: Long = 2
-
-  final const val FLAG_CHANGE_PATH: Long = 4
-
-  final const val FLAG_COMPRESS: Long = 32
-
-  final const val FLAG_OMIT_EDITOR_PROPERTIES: Long = 8
-
-  final const val FLAG_RELATIVE_PATHS: Long = 1
-
-  final const val FLAG_REPLACE_SUBRESOURCE_PATHS: Long = 64
-
-  final const val FLAG_SAVE_BIG_ENDIAN: Long = 16
-
   fun getRecognizedExtensions(type: Resource): PoolStringArray {
     val mb = getMethodBind("_ResourceSaver","get_recognized_extensions")
     return _icall_PoolStringArray_Object( mb, this.ptr, type)

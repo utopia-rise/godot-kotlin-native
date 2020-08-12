@@ -19,8 +19,8 @@ import godot.icalls._icall_Unit_Long_Long_Long
 import godot.icalls._icall_Unit_Long_Long_Rect2_Vector2_Double
 import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Vector2_Long_Long
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -72,30 +72,30 @@ open class BitmapFont internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("BitmapFont", "BitmapFont")
+            this.ptr = invokeConstructor("BitmapFont", "BitmapFont")
         }
 
   }
 
-  open fun _get_chars(): PoolIntArray {
+  open fun _getChars(): PoolIntArray {
     throw NotImplementedError("_get_chars is not implemented for BitmapFont")
   }
 
-  open fun _get_kernings(): PoolIntArray {
+  open fun _getKernings(): PoolIntArray {
     throw NotImplementedError("_get_kernings is not implemented for BitmapFont")
   }
 
-  open fun _get_textures(): VariantArray {
+  open fun _getTextures(): VariantArray {
     throw NotImplementedError("_get_textures is not implemented for BitmapFont")
   }
 
-  open fun _set_chars(arg0: PoolIntArray) {
+  open fun _setChars(arg0: PoolIntArray) {
   }
 
-  open fun _set_kernings(arg0: PoolIntArray) {
+  open fun _setKernings(arg0: PoolIntArray) {
   }
 
-  open fun _set_textures(arg0: VariantArray) {
+  open fun _setTextures(arg0: VariantArray) {
   }
 
   open fun addChar(

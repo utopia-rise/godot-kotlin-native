@@ -9,8 +9,8 @@ import godot.icalls._icall_Transform2D
 import godot.icalls._icall_Unit
 import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_Transform2D
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Double
 import kotlin.Long
@@ -41,7 +41,7 @@ open class Bone2D internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("Bone2D", "Bone2D")
+            this.ptr = invokeConstructor("Bone2D", "Bone2D")
         }
 
   }

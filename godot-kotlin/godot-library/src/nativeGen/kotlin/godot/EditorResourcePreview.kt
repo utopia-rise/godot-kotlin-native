@@ -20,7 +20,7 @@ open class EditorResourcePreview internal constructor(
 
   internal constructor() : this(null)
 
-  open fun _preview_ready(
+  open fun _previewReady(
     arg0: String,
     arg1: Texture,
     arg2: Texture,

@@ -2,7 +2,7 @@
 package godot
 
 import godot.core.Godot.shouldInitPtr
-import godot.internal.utils.getConstructor
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 
 open class CSGCombiner internal constructor(
@@ -10,7 +10,7 @@ open class CSGCombiner internal constructor(
 ) : CSGShape(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("CSGCombiner", "CSGCombiner")
+            this.ptr = invokeConstructor("CSGCombiner", "CSGCombiner")
         }
 
   }

@@ -52,14 +52,6 @@ object AudioServer : Object() {
     }
   }
 
-  final const val SPEAKER_MODE_STEREO: Long = 0
-
-  final const val SPEAKER_SURROUND_31: Long = 1
-
-  final const val SPEAKER_SURROUND_51: Long = 2
-
-  final const val SPEAKER_SURROUND_71: Long = 3
-
   val busLayoutChanged: Signal0 by signal()
 
   var busCount: Long

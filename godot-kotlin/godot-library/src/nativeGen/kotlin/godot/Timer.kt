@@ -12,8 +12,8 @@ import godot.icalls._icall_Unit
 import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_Long
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -82,7 +82,7 @@ open class Timer internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("Timer", "Timer")
+            this.ptr = invokeConstructor("Timer", "Timer")
         }
 
   }
@@ -174,9 +174,5 @@ open class Timer internal constructor(
     }
   }
 
-  companion object {
-    final const val TIMER_PROCESS_IDLE: Long = 1
-
-    final const val TIMER_PROCESS_PHYSICS: Long = 0
-  }
+  companion object
 }

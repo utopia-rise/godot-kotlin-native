@@ -55,30 +55,6 @@ object Geometry : Object() {
     }
   }
 
-  final const val END_BUTT: Long = 2
-
-  final const val END_JOINED: Long = 1
-
-  final const val END_POLYGON: Long = 0
-
-  final const val END_ROUND: Long = 4
-
-  final const val END_SQUARE: Long = 3
-
-  final const val JOIN_MITER: Long = 2
-
-  final const val JOIN_ROUND: Long = 1
-
-  final const val JOIN_SQUARE: Long = 0
-
-  final const val OPERATION_DIFFERENCE: Long = 1
-
-  final const val OPERATION_INTERSECTION: Long = 2
-
-  final const val OPERATION_UNION: Long = 0
-
-  final const val OPERATION_XOR: Long = 3
-
   fun buildBoxPlanes(extents: Vector3): VariantArray {
     val mb = getMethodBind("_Geometry","build_box_planes")
     return _icall_VariantArray_Vector3( mb, this.ptr, extents)

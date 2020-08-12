@@ -51,48 +51,6 @@ object Input : Object() {
     }
   }
 
-  final const val CURSOR_ARROW: Long = 0
-
-  final const val CURSOR_BDIAGSIZE: Long = 11
-
-  final const val CURSOR_BUSY: Long = 5
-
-  final const val CURSOR_CAN_DROP: Long = 7
-
-  final const val CURSOR_CROSS: Long = 3
-
-  final const val CURSOR_DRAG: Long = 6
-
-  final const val CURSOR_FDIAGSIZE: Long = 12
-
-  final const val CURSOR_FORBIDDEN: Long = 8
-
-  final const val CURSOR_HELP: Long = 16
-
-  final const val CURSOR_HSIZE: Long = 10
-
-  final const val CURSOR_HSPLIT: Long = 15
-
-  final const val CURSOR_IBEAM: Long = 1
-
-  final const val CURSOR_MOVE: Long = 13
-
-  final const val CURSOR_POINTING_HAND: Long = 2
-
-  final const val CURSOR_VSIZE: Long = 9
-
-  final const val CURSOR_VSPLIT: Long = 14
-
-  final const val CURSOR_WAIT: Long = 4
-
-  final const val MOUSE_MODE_CAPTURED: Long = 2
-
-  final const val MOUSE_MODE_CONFINED: Long = 3
-
-  final const val MOUSE_MODE_HIDDEN: Long = 1
-
-  final const val MOUSE_MODE_VISIBLE: Long = 0
-
   val joyConnectionChanged: Signal2<Long, Boolean> by signal("device", "connected")
 
   fun actionPress(action: String, strength: Double = 1.0) {

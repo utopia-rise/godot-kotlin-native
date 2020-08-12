@@ -38,24 +38,6 @@ object ARVRServer : Object() {
     }
   }
 
-  final const val DONT_RESET_ROTATION: Long = 2
-
-  final const val RESET_BUT_KEEP_TILT: Long = 1
-
-  final const val RESET_FULL_ROTATION: Long = 0
-
-  final const val TRACKER_ANCHOR: Long = 4
-
-  final const val TRACKER_ANY: Long = 255
-
-  final const val TRACKER_ANY_KNOWN: Long = 127
-
-  final const val TRACKER_BASESTATION: Long = 2
-
-  final const val TRACKER_CONTROLLER: Long = 1
-
-  final const val TRACKER_UNKNOWN: Long = 128
-
   val interfaceAdded: Signal1<String> by signal("interface_name")
 
   val interfaceRemoved: Signal1<String> by signal("interface_name")

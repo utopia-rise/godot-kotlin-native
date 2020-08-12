@@ -132,17 +132,5 @@ open class WebRTCDataChannel internal constructor(
     }
   }
 
-  companion object {
-    final const val STATE_CLOSED: Long = 3
-
-    final const val STATE_CLOSING: Long = 2
-
-    final const val STATE_CONNECTING: Long = 0
-
-    final const val STATE_OPEN: Long = 1
-
-    final const val WRITE_MODE_BINARY: Long = 1
-
-    final const val WRITE_MODE_TEXT: Long = 0
-  }
+  companion object
 }

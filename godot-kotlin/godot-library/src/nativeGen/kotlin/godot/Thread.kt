@@ -8,8 +8,8 @@ import godot.icalls._icall_Boolean
 import godot.icalls._icall_Long_Object_String_nVariant_Long
 import godot.icalls._icall_String
 import godot.icalls._icall_Variant
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
@@ -20,7 +20,7 @@ open class Thread internal constructor(
 ) : Reference(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("Thread", "_Thread")
+            this.ptr = invokeConstructor("Thread", "_Thread")
         }
 
   }
@@ -70,11 +70,5 @@ open class Thread internal constructor(
     }
   }
 
-  companion object {
-    final const val PRIORITY_HIGH: Long = 2
-
-    final const val PRIORITY_LOW: Long = 0
-
-    final const val PRIORITY_NORMAL: Long = 1
-  }
+  companion object
 }
