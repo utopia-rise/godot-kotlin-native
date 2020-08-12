@@ -12,8 +12,8 @@ import godot.icalls._icall_ColorPicker
 import godot.icalls._icall_PopupPanel
 import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Color
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Unit
@@ -49,7 +49,7 @@ open class ColorPickerButton internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("ColorPickerButton", "ColorPickerButton")
+            this.ptr = invokeConstructor("ColorPickerButton", "ColorPickerButton")
         }
 
   }
@@ -60,10 +60,10 @@ open class ColorPickerButton internal constructor(
   }
 
 
-  open fun _color_changed(arg0: Color) {
+  open fun _colorChanged(arg0: Color) {
   }
 
-  open fun _modal_closed() {
+  open fun _modalClosed() {
   }
 
   open fun getPickColor(): Color {

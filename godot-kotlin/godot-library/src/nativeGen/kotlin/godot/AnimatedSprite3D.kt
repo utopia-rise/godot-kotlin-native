@@ -12,8 +12,8 @@ import godot.icalls._icall_Unit
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_String
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
@@ -57,19 +57,19 @@ open class AnimatedSprite3D internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("AnimatedSprite3D", "AnimatedSprite3D")
+            this.ptr = invokeConstructor("AnimatedSprite3D", "AnimatedSprite3D")
         }
 
   }
 
-  open fun _is_playing(): Boolean {
+  open fun _isPlaying(): Boolean {
     throw NotImplementedError("_is_playing is not implemented for AnimatedSprite3D")
   }
 
-  open fun _res_changed() {
+  open fun _resChanged() {
   }
 
-  open fun _set_playing(playing: Boolean) {
+  open fun _setPlaying(playing: Boolean) {
   }
 
   open fun getAnimation(): String {

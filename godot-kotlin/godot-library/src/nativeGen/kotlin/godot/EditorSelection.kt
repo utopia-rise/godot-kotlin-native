@@ -17,10 +17,10 @@ open class EditorSelection internal constructor(
 
   internal constructor() : this(null)
 
-  open fun _emit_change() {
+  open fun _emitChange() {
   }
 
-  open fun _node_removed(arg0: Node) {
+  open fun _nodeRemoved(arg0: Node) {
   }
 
   open fun addNode(node: Node) {

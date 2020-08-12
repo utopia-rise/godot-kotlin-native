@@ -5,8 +5,8 @@ import godot.core.Godot.shouldInitPtr
 import godot.core.Transform
 import godot.icalls._icall_Transform
 import godot.icalls._icall_Unit_Transform
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Unit
 
@@ -25,7 +25,7 @@ open class VisualShaderNodeTransformConstant internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("VisualShaderNodeTransformConstant",
+            this.ptr = invokeConstructor("VisualShaderNodeTransformConstant",
             "VisualShaderNodeTransformConstant")
         }
 

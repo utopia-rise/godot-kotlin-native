@@ -6,8 +6,8 @@ import godot.icalls._icall_AudioStream
 import godot.icalls._icall_Double
 import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_Object
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Double
 
@@ -36,7 +36,7 @@ open class AudioStreamRandomPitch internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("AudioStreamRandomPitch", "AudioStreamRandomPitch")
+            this.ptr = invokeConstructor("AudioStreamRandomPitch", "AudioStreamRandomPitch")
         }
 
   }

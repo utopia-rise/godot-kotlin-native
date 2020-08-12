@@ -7,8 +7,8 @@ import godot.core.Variant.Type
 import godot.core.VariantArray
 import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Long
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Long
 import kotlin.NotImplementedError
@@ -28,16 +28,16 @@ open class VisualScriptDeconstruct internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("VisualScriptDeconstruct", "VisualScriptDeconstruct")
+            this.ptr = invokeConstructor("VisualScriptDeconstruct", "VisualScriptDeconstruct")
         }
 
   }
 
-  open fun _get_elem_cache(): VariantArray {
+  open fun _getElemCache(): VariantArray {
     throw NotImplementedError("_get_elem_cache is not implemented for VisualScriptDeconstruct")
   }
 
-  open fun _set_elem_cache(_cache: VariantArray) {
+  open fun _setElemCache(_cache: VariantArray) {
   }
 
   open fun getDeconstructType(): Variant.Type {

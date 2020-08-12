@@ -61,7 +61,7 @@ open class CollisionObject internal constructor(
 
   internal constructor() : this(null)
 
-  open fun _input_event(
+  open fun _inputEvent(
     camera: Object,
     event: InputEvent,
     clickPosition: Vector3,

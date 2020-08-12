@@ -2,7 +2,7 @@
 package godot
 
 import godot.core.Godot.shouldInitPtr
-import godot.internal.utils.getConstructor
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 
 open class CheckButton internal constructor(
@@ -10,7 +10,7 @@ open class CheckButton internal constructor(
 ) : Button(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("CheckButton", "CheckButton")
+            this.ptr = invokeConstructor("CheckButton", "CheckButton")
         }
 
   }

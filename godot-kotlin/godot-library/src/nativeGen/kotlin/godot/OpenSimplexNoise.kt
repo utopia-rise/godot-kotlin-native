@@ -16,8 +16,8 @@ import godot.icalls._icall_Image_Long_Long
 import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_Long
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Double
 import kotlin.Long
@@ -77,7 +77,7 @@ open class OpenSimplexNoise internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("OpenSimplexNoise", "OpenSimplexNoise")
+            this.ptr = invokeConstructor("OpenSimplexNoise", "OpenSimplexNoise")
         }
 
   }

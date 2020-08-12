@@ -15,8 +15,8 @@ import godot.icalls._icall_Unit_Long_PoolVector2Array
 import godot.icalls._icall_Unit_PoolIntArray
 import godot.icalls._icall_Unit_PoolVector2Array
 import godot.icalls._icall_Unit_PoolVector2Array_Long
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Long
 import kotlin.NotImplementedError
@@ -36,23 +36,23 @@ open class NavigationPolygon internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("NavigationPolygon", "NavigationPolygon")
+            this.ptr = invokeConstructor("NavigationPolygon", "NavigationPolygon")
         }
 
   }
 
-  open fun _get_outlines(): VariantArray {
+  open fun _getOutlines(): VariantArray {
     throw NotImplementedError("_get_outlines is not implemented for NavigationPolygon")
   }
 
-  open fun _get_polygons(): VariantArray {
+  open fun _getPolygons(): VariantArray {
     throw NotImplementedError("_get_polygons is not implemented for NavigationPolygon")
   }
 
-  open fun _set_outlines(outlines: VariantArray) {
+  open fun _setOutlines(outlines: VariantArray) {
   }
 
-  open fun _set_polygons(polygons: VariantArray) {
+  open fun _setPolygons(polygons: VariantArray) {
   }
 
   open fun addOutline(outline: PoolVector2Array) {

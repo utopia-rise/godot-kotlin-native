@@ -109,7 +109,7 @@ open class EditorPlugin internal constructor(
     _icall_Unit_String_Object( mb, this.ptr, name, submenu)
   }
 
-  open fun apply_changes() {
+  open fun applyChanges() {
   }
 
   open fun build(): Boolean {
@@ -119,30 +119,30 @@ open class EditorPlugin internal constructor(
   open fun clear() {
   }
 
-  open fun disable_plugin() {
+  open fun disablePlugin() {
   }
 
   open fun edit(_object: Object) {
   }
 
-  open fun enable_plugin() {
+  open fun enablePlugin() {
   }
 
-  open fun forward_canvas_draw_over_viewport(overlay: Control) {
+  open fun forwardCanvasDrawOverViewport(overlay: Control) {
   }
 
-  open fun forward_canvas_force_draw_over_viewport(overlay: Control) {
+  open fun forwardCanvasForceDrawOverViewport(overlay: Control) {
   }
 
-  open fun forward_canvas_gui_input(event: InputEvent): Boolean {
+  open fun forwardCanvasGuiInput(event: InputEvent): Boolean {
     throw NotImplementedError("forward_canvas_gui_input is not implemented for EditorPlugin")
   }
 
-  open fun forward_spatial_gui_input(camera: Camera, event: InputEvent): Boolean {
+  open fun forwardSpatialGuiInput(camera: Camera, event: InputEvent): Boolean {
     throw NotImplementedError("forward_spatial_gui_input is not implemented for EditorPlugin")
   }
 
-  open fun get_breakpoints(): PoolStringArray {
+  open fun getBreakpoints(): PoolStringArray {
     throw NotImplementedError("get_breakpoints is not implemented for EditorPlugin")
   }
 
@@ -151,11 +151,11 @@ open class EditorPlugin internal constructor(
     return _icall_EditorInterface( mb, this.ptr)
   }
 
-  open fun get_plugin_icon(): Texture {
+  open fun getPluginIcon(): Texture {
     throw NotImplementedError("get_plugin_icon is not implemented for EditorPlugin")
   }
 
-  open fun get_plugin_name(): String {
+  open fun getPluginName(): String {
     throw NotImplementedError("get_plugin_name is not implemented for EditorPlugin")
   }
 
@@ -164,7 +164,7 @@ open class EditorPlugin internal constructor(
     return _icall_ScriptCreateDialog( mb, this.ptr)
   }
 
-  open fun get_state(): Dictionary {
+  open fun getState(): Dictionary {
     throw NotImplementedError("get_state is not implemented for EditorPlugin")
   }
 
@@ -173,14 +173,14 @@ open class EditorPlugin internal constructor(
     return _icall_UndoRedo( mb, this.ptr)
   }
 
-  open fun get_window_layout(layout: ConfigFile) {
+  open fun getWindowLayout(layout: ConfigFile) {
   }
 
   open fun handles(_object: Object): Boolean {
     throw NotImplementedError("handles is not implemented for EditorPlugin")
   }
 
-  open fun has_main_screen(): Boolean {
+  open fun hasMainScreen(): Boolean {
     throw NotImplementedError("has_main_screen is not implemented for EditorPlugin")
   }
 
@@ -194,7 +194,7 @@ open class EditorPlugin internal constructor(
     _icall_Unit_Object( mb, this.ptr, item)
   }
 
-  open fun make_visible(visible: Boolean) {
+  open fun makeVisible(visible: Boolean) {
   }
 
   open fun queueSaveLayout() {
@@ -257,7 +257,7 @@ open class EditorPlugin internal constructor(
     _icall_Unit_String( mb, this.ptr, name)
   }
 
-  open fun save_external_data() {
+  open fun saveExternalData() {
   }
 
   open fun setForceDrawOverForwardingEnabled() {
@@ -270,10 +270,10 @@ open class EditorPlugin internal constructor(
     _icall_Unit( mb, this.ptr)
   }
 
-  open fun set_state(state: Dictionary) {
+  open fun setState(state: Dictionary) {
   }
 
-  open fun set_window_layout(layout: ConfigFile) {
+  open fun setWindowLayout(layout: ConfigFile) {
   }
 
   open fun updateOverlays(): Long {
@@ -349,47 +349,5 @@ open class EditorPlugin internal constructor(
     }
   }
 
-  companion object {
-    final const val CONTAINER_CANVAS_EDITOR_BOTTOM: Long = 8
-
-    final const val CONTAINER_CANVAS_EDITOR_MENU: Long = 5
-
-    final const val CONTAINER_CANVAS_EDITOR_SIDE_LEFT: Long = 6
-
-    final const val CONTAINER_CANVAS_EDITOR_SIDE_RIGHT: Long = 7
-
-    final const val CONTAINER_PROJECT_SETTING_TAB_LEFT: Long = 10
-
-    final const val CONTAINER_PROJECT_SETTING_TAB_RIGHT: Long = 11
-
-    final const val CONTAINER_PROPERTY_EDITOR_BOTTOM: Long = 9
-
-    final const val CONTAINER_SPATIAL_EDITOR_BOTTOM: Long = 4
-
-    final const val CONTAINER_SPATIAL_EDITOR_MENU: Long = 1
-
-    final const val CONTAINER_SPATIAL_EDITOR_SIDE_LEFT: Long = 2
-
-    final const val CONTAINER_SPATIAL_EDITOR_SIDE_RIGHT: Long = 3
-
-    final const val CONTAINER_TOOLBAR: Long = 0
-
-    final const val DOCK_SLOT_LEFT_BL: Long = 1
-
-    final const val DOCK_SLOT_LEFT_BR: Long = 3
-
-    final const val DOCK_SLOT_LEFT_UL: Long = 0
-
-    final const val DOCK_SLOT_LEFT_UR: Long = 2
-
-    final const val DOCK_SLOT_MAX: Long = 8
-
-    final const val DOCK_SLOT_RIGHT_BL: Long = 5
-
-    final const val DOCK_SLOT_RIGHT_BR: Long = 7
-
-    final const val DOCK_SLOT_RIGHT_UL: Long = 4
-
-    final const val DOCK_SLOT_RIGHT_UR: Long = 6
-  }
+  companion object
 }

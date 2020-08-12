@@ -15,8 +15,8 @@ import godot.icalls._icall_Unit_String
 import godot.icalls._icall_Unit_String_Variant
 import godot.icalls._icall_Unit_Vector3
 import godot.icalls._icall_Vector3
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Long
 import kotlin.String
@@ -59,7 +59,7 @@ open class ProximityGroup internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("ProximityGroup", "ProximityGroup")
+            this.ptr = invokeConstructor("ProximityGroup", "ProximityGroup")
         }
 
   }
@@ -70,7 +70,7 @@ open class ProximityGroup internal constructor(
   }
 
 
-  open fun _proximity_group_broadcast(name: String, params: Variant) {
+  open fun _proximityGroupBroadcast(name: String, params: Variant) {
   }
 
   open fun broadcast(name: String, parameters: Variant) {
@@ -125,9 +125,5 @@ open class ProximityGroup internal constructor(
     }
   }
 
-  companion object {
-    final const val MODE_PROXY: Long = 0
-
-    final const val MODE_SIGNAL: Long = 1
-  }
+  companion object
 }

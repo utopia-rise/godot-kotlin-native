@@ -14,8 +14,8 @@ import godot.icalls._icall_Unit_String_Vector2
 import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_Vector2
 import godot.icalls._icall_Vector2_String
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
@@ -37,7 +37,7 @@ open class AnimationNodeBlendTree internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("AnimationNodeBlendTree", "AnimationNodeBlendTree")
+            this.ptr = invokeConstructor("AnimationNodeBlendTree", "AnimationNodeBlendTree")
         }
 
   }
@@ -48,10 +48,10 @@ open class AnimationNodeBlendTree internal constructor(
   }
 
 
-  open fun _node_changed(node: String) {
+  open fun _nodeChanged(node: String) {
   }
 
-  open fun _tree_changed() {
+  open fun _treeChanged() {
   }
 
   open fun addNode(

@@ -11,8 +11,8 @@ import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Color
 import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_Long
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -74,7 +74,7 @@ open class StyleBoxLine internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("StyleBoxLine", "StyleBoxLine")
+            this.ptr = invokeConstructor("StyleBoxLine", "StyleBoxLine")
         }
 
   }

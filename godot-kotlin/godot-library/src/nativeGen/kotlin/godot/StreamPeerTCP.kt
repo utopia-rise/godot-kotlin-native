@@ -10,8 +10,8 @@ import godot.icalls._icall_Long_String_Long
 import godot.icalls._icall_String
 import godot.icalls._icall_Unit
 import godot.icalls._icall_Unit_Boolean
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
@@ -22,7 +22,7 @@ open class StreamPeerTCP internal constructor(
 ) : StreamPeer(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("StreamPeerTCP", "StreamPeerTCP")
+            this.ptr = invokeConstructor("StreamPeerTCP", "StreamPeerTCP")
         }
 
   }
@@ -83,13 +83,5 @@ open class StreamPeerTCP internal constructor(
     }
   }
 
-  companion object {
-    final const val STATUS_CONNECTED: Long = 2
-
-    final const val STATUS_CONNECTING: Long = 1
-
-    final const val STATUS_ERROR: Long = 3
-
-    final const val STATUS_NONE: Long = 0
-  }
+  companion object
 }

@@ -32,8 +32,8 @@ import godot.icalls._icall_Unit_String_Long_Long
 import godot.icalls._icall_Unit_String_Long_Long_Long_Long
 import godot.icalls._icall_Unit_String_String_Long
 import godot.icalls._icall_Variant_Long
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -102,22 +102,22 @@ open class PopupMenu internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("PopupMenu", "PopupMenu")
+            this.ptr = invokeConstructor("PopupMenu", "PopupMenu")
         }
 
   }
 
-  open fun _get_items(): VariantArray {
+  open fun _getItems(): VariantArray {
     throw NotImplementedError("_get_items is not implemented for PopupMenu")
   }
 
-  override fun _gui_input(arg0: InputEvent) {
+  override fun _guiInput(arg0: InputEvent) {
   }
 
-  open fun _set_items(arg0: VariantArray) {
+  open fun _setItems(arg0: VariantArray) {
   }
 
-  open fun _submenu_timeout() {
+  open fun _submenuTimeout() {
   }
 
   open fun addCheckItem(

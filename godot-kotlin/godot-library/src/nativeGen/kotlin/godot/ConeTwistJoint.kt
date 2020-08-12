@@ -4,8 +4,8 @@ package godot
 import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Double_Long
 import godot.icalls._icall_Unit_Long_Double
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Double
 import kotlin.Long
@@ -46,23 +46,23 @@ open class ConeTwistJoint internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("ConeTwistJoint", "ConeTwistJoint")
+            this.ptr = invokeConstructor("ConeTwistJoint", "ConeTwistJoint")
         }
 
   }
 
-  open fun _get_swing_span(): Double {
+  open fun _getSwingSpan(): Double {
     throw NotImplementedError("_get_swing_span is not implemented for ConeTwistJoint")
   }
 
-  open fun _get_twist_span(): Double {
+  open fun _getTwistSpan(): Double {
     throw NotImplementedError("_get_twist_span is not implemented for ConeTwistJoint")
   }
 
-  open fun _set_swing_span(swingSpan: Double) {
+  open fun _setSwingSpan(swingSpan: Double) {
   }
 
-  open fun _set_twist_span(twistSpan: Double) {
+  open fun _setTwistSpan(twistSpan: Double) {
   }
 
   open fun getParam(param: Long): Double {
@@ -100,17 +100,5 @@ open class ConeTwistJoint internal constructor(
     }
   }
 
-  companion object {
-    final const val PARAM_BIAS: Long = 2
-
-    final const val PARAM_MAX: Long = 5
-
-    final const val PARAM_RELAXATION: Long = 4
-
-    final const val PARAM_SOFTNESS: Long = 3
-
-    final const val PARAM_SWING_SPAN: Long = 0
-
-    final const val PARAM_TWIST_SPAN: Long = 1
-  }
+  companion object
 }

@@ -2,7 +2,7 @@
 package godot
 
 import godot.core.Godot.shouldInitPtr
-import godot.internal.utils.getConstructor
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 
 open class AudioEffectEQ21 internal constructor(
@@ -10,7 +10,7 @@ open class AudioEffectEQ21 internal constructor(
 ) : AudioEffectEQ(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("AudioEffectEQ21", "AudioEffectEQ21")
+            this.ptr = invokeConstructor("AudioEffectEQ21", "AudioEffectEQ21")
         }
 
   }

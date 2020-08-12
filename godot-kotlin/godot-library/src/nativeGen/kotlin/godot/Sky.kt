@@ -62,21 +62,5 @@ open class Sky internal constructor(
     }
   }
 
-  companion object {
-    final const val RADIANCE_SIZE_1024: Long = 5
-
-    final const val RADIANCE_SIZE_128: Long = 2
-
-    final const val RADIANCE_SIZE_2048: Long = 6
-
-    final const val RADIANCE_SIZE_256: Long = 3
-
-    final const val RADIANCE_SIZE_32: Long = 0
-
-    final const val RADIANCE_SIZE_512: Long = 4
-
-    final const val RADIANCE_SIZE_64: Long = 1
-
-    final const val RADIANCE_SIZE_MAX: Long = 7
-  }
+  companion object
 }

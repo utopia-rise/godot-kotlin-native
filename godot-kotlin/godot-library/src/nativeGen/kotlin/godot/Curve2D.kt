@@ -20,8 +20,8 @@ import godot.icalls._icall_Vector2_Double_Boolean
 import godot.icalls._icall_Vector2_Long
 import godot.icalls._icall_Vector2_Long_Double
 import godot.icalls._icall_Vector2_Vector2
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -43,16 +43,16 @@ open class Curve2D internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("Curve2D", "Curve2D")
+            this.ptr = invokeConstructor("Curve2D", "Curve2D")
         }
 
   }
 
-  open fun _get_data(): Dictionary {
+  open fun _getData(): Dictionary {
     throw NotImplementedError("_get_data is not implemented for Curve2D")
   }
 
-  open fun _set_data(arg0: Dictionary) {
+  open fun _setData(arg0: Dictionary) {
   }
 
   open fun addPoint(

@@ -55,7 +55,7 @@ open class Slider internal constructor(
 
   internal constructor() : this(null)
 
-  override fun _gui_input(arg0: InputEvent) {
+  override fun _guiInput(arg0: InputEvent) {
   }
 
   open fun getTicks(): Long {

@@ -19,8 +19,8 @@ import godot.icalls._icall_Unit_String
 import godot.icalls._icall_Unit_String_Boolean
 import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_Vector2
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -118,7 +118,7 @@ open class AnimatedSprite internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("AnimatedSprite", "AnimatedSprite")
+            this.ptr = invokeConstructor("AnimatedSprite", "AnimatedSprite")
         }
 
   }
@@ -129,14 +129,14 @@ open class AnimatedSprite internal constructor(
   }
 
 
-  open fun _is_playing(): Boolean {
+  open fun _isPlaying(): Boolean {
     throw NotImplementedError("_is_playing is not implemented for AnimatedSprite")
   }
 
-  open fun _res_changed() {
+  open fun _resChanged() {
   }
 
-  open fun _set_playing(playing: Boolean) {
+  open fun _setPlaying(playing: Boolean) {
   }
 
   open fun getAnimation(): String {

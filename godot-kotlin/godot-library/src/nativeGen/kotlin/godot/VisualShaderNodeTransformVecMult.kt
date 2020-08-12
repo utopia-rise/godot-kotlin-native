@@ -5,8 +5,8 @@ import godot.VisualShaderNodeTransformVecMult
 import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Long
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Long
 
@@ -25,7 +25,7 @@ open class VisualShaderNodeTransformVecMult internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("VisualShaderNodeTransformVecMult",
+            this.ptr = invokeConstructor("VisualShaderNodeTransformVecMult",
             "VisualShaderNodeTransformVecMult")
         }
 
@@ -62,13 +62,5 @@ open class VisualShaderNodeTransformVecMult internal constructor(
     }
   }
 
-  companion object {
-    final const val OP_3x3_AxB: Long = 2
-
-    final const val OP_3x3_BxA: Long = 3
-
-    final const val OP_AxB: Long = 0
-
-    final const val OP_BxA: Long = 1
-  }
+  companion object
 }

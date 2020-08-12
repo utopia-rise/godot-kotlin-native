@@ -22,8 +22,8 @@ import godot.icalls._icall_Unit_Vector3_Vector3_Vector3
 import godot.icalls._icall_Vector3
 import godot.icalls._icall_Vector3_Vector3
 import godot.icalls._icall_World
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -117,7 +117,7 @@ open class Spatial internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("Spatial", "Spatial")
+            this.ptr = invokeConstructor("Spatial", "Spatial")
         }
 
   }
@@ -158,7 +158,7 @@ open class Spatial internal constructor(
   }
 
 
-  open fun _update_gizmo() {
+  open fun _updateGizmo() {
   }
 
   open fun forceUpdateTransform() {

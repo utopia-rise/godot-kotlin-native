@@ -10,8 +10,8 @@ import godot.icalls._icall_Boolean_Double
 import godot.icalls._icall_Unit
 import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_String
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -26,18 +26,18 @@ open class MainLoop internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("MainLoop", "MainLoop")
+            this.ptr = invokeConstructor("MainLoop", "MainLoop")
         }
 
   }
 
-  open fun _drop_files(files: PoolStringArray, fromScreen: Long) {
+  open fun _dropFiles(files: PoolStringArray, fromScreen: Long) {
   }
 
   open fun _finalize() {
   }
 
-  open fun _global_menu_action(id: Variant, meta: Variant) {
+  open fun _globalMenuAction(id: Variant, meta: Variant) {
   }
 
   open fun _idle(delta: Double): Boolean {
@@ -47,10 +47,10 @@ open class MainLoop internal constructor(
   open fun _initialize() {
   }
 
-  open fun _input_event(event: InputEvent) {
+  open fun _inputEvent(event: InputEvent) {
   }
 
-  open fun _input_text(text: String) {
+  open fun _inputText(text: String) {
   }
 
   open fun _iteration(delta: Double): Boolean {

@@ -4,8 +4,8 @@ package godot
 import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Resource
 import godot.icalls._icall_Unit_Object
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 
 open class VisualScriptPreload internal constructor(
@@ -23,7 +23,7 @@ open class VisualScriptPreload internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("VisualScriptPreload", "VisualScriptPreload")
+            this.ptr = invokeConstructor("VisualScriptPreload", "VisualScriptPreload")
         }
 
   }

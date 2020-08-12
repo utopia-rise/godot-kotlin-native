@@ -21,8 +21,8 @@ import godot.icalls._icall_Unit
 import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Object
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
@@ -63,7 +63,7 @@ open class HTTPClient internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("HTTPClient", "HTTPClient")
+            this.ptr = invokeConstructor("HTTPClient", "HTTPClient")
         }
 
   }
@@ -387,167 +387,5 @@ open class HTTPClient internal constructor(
     }
   }
 
-  companion object {
-    final const val METHOD_CONNECT: Long = 7
-
-    final const val METHOD_DELETE: Long = 4
-
-    final const val METHOD_GET: Long = 0
-
-    final const val METHOD_HEAD: Long = 1
-
-    final const val METHOD_MAX: Long = 9
-
-    final const val METHOD_OPTIONS: Long = 5
-
-    final const val METHOD_PATCH: Long = 8
-
-    final const val METHOD_POST: Long = 2
-
-    final const val METHOD_PUT: Long = 3
-
-    final const val METHOD_TRACE: Long = 6
-
-    final const val RESPONSE_ACCEPTED: Long = 202
-
-    final const val RESPONSE_ALREADY_REPORTED: Long = 208
-
-    final const val RESPONSE_BAD_GATEWAY: Long = 502
-
-    final const val RESPONSE_BAD_REQUEST: Long = 400
-
-    final const val RESPONSE_CONFLICT: Long = 409
-
-    final const val RESPONSE_CONTINUE: Long = 100
-
-    final const val RESPONSE_CREATED: Long = 201
-
-    final const val RESPONSE_EXPECTATION_FAILED: Long = 417
-
-    final const val RESPONSE_FAILED_DEPENDENCY: Long = 424
-
-    final const val RESPONSE_FORBIDDEN: Long = 403
-
-    final const val RESPONSE_FOUND: Long = 302
-
-    final const val RESPONSE_GATEWAY_TIMEOUT: Long = 504
-
-    final const val RESPONSE_GONE: Long = 410
-
-    final const val RESPONSE_HTTP_VERSION_NOT_SUPPORTED: Long = 505
-
-    final const val RESPONSE_IM_A_TEAPOT: Long = 418
-
-    final const val RESPONSE_IM_USED: Long = 226
-
-    final const val RESPONSE_INSUFFICIENT_STORAGE: Long = 507
-
-    final const val RESPONSE_INTERNAL_SERVER_ERROR: Long = 500
-
-    final const val RESPONSE_LENGTH_REQUIRED: Long = 411
-
-    final const val RESPONSE_LOCKED: Long = 423
-
-    final const val RESPONSE_LOOP_DETECTED: Long = 508
-
-    final const val RESPONSE_METHOD_NOT_ALLOWED: Long = 405
-
-    final const val RESPONSE_MISDIRECTED_REQUEST: Long = 421
-
-    final const val RESPONSE_MOVED_PERMANENTLY: Long = 301
-
-    final const val RESPONSE_MULTIPLE_CHOICES: Long = 300
-
-    final const val RESPONSE_MULTI_STATUS: Long = 207
-
-    final const val RESPONSE_NETWORK_AUTH_REQUIRED: Long = 511
-
-    final const val RESPONSE_NON_AUTHORITATIVE_INFORMATION: Long = 203
-
-    final const val RESPONSE_NOT_ACCEPTABLE: Long = 406
-
-    final const val RESPONSE_NOT_EXTENDED: Long = 510
-
-    final const val RESPONSE_NOT_FOUND: Long = 404
-
-    final const val RESPONSE_NOT_IMPLEMENTED: Long = 501
-
-    final const val RESPONSE_NOT_MODIFIED: Long = 304
-
-    final const val RESPONSE_NO_CONTENT: Long = 204
-
-    final const val RESPONSE_OK: Long = 200
-
-    final const val RESPONSE_PARTIAL_CONTENT: Long = 206
-
-    final const val RESPONSE_PAYMENT_REQUIRED: Long = 402
-
-    final const val RESPONSE_PERMANENT_REDIRECT: Long = 308
-
-    final const val RESPONSE_PRECONDITION_FAILED: Long = 412
-
-    final const val RESPONSE_PRECONDITION_REQUIRED: Long = 428
-
-    final const val RESPONSE_PROCESSING: Long = 102
-
-    final const val RESPONSE_PROXY_AUTHENTICATION_REQUIRED: Long = 407
-
-    final const val RESPONSE_REQUESTED_RANGE_NOT_SATISFIABLE: Long = 416
-
-    final const val RESPONSE_REQUEST_ENTITY_TOO_LARGE: Long = 413
-
-    final const val RESPONSE_REQUEST_HEADER_FIELDS_TOO_LARGE: Long = 431
-
-    final const val RESPONSE_REQUEST_TIMEOUT: Long = 408
-
-    final const val RESPONSE_REQUEST_URI_TOO_LONG: Long = 414
-
-    final const val RESPONSE_RESET_CONTENT: Long = 205
-
-    final const val RESPONSE_SEE_OTHER: Long = 303
-
-    final const val RESPONSE_SERVICE_UNAVAILABLE: Long = 503
-
-    final const val RESPONSE_SWITCHING_PROTOCOLS: Long = 101
-
-    final const val RESPONSE_SWITCH_PROXY: Long = 306
-
-    final const val RESPONSE_TEMPORARY_REDIRECT: Long = 307
-
-    final const val RESPONSE_TOO_MANY_REQUESTS: Long = 429
-
-    final const val RESPONSE_UNAUTHORIZED: Long = 401
-
-    final const val RESPONSE_UNAVAILABLE_FOR_LEGAL_REASONS: Long = 451
-
-    final const val RESPONSE_UNPROCESSABLE_ENTITY: Long = 422
-
-    final const val RESPONSE_UNSUPPORTED_MEDIA_TYPE: Long = 415
-
-    final const val RESPONSE_UPGRADE_REQUIRED: Long = 426
-
-    final const val RESPONSE_USE_PROXY: Long = 305
-
-    final const val RESPONSE_VARIANT_ALSO_NEGOTIATES: Long = 506
-
-    final const val STATUS_BODY: Long = 7
-
-    final const val STATUS_CANT_CONNECT: Long = 4
-
-    final const val STATUS_CANT_RESOLVE: Long = 2
-
-    final const val STATUS_CONNECTED: Long = 5
-
-    final const val STATUS_CONNECTING: Long = 3
-
-    final const val STATUS_CONNECTION_ERROR: Long = 8
-
-    final const val STATUS_DISCONNECTED: Long = 0
-
-    final const val STATUS_REQUESTING: Long = 6
-
-    final const val STATUS_RESOLVING: Long = 1
-
-    final const val STATUS_SSL_HANDSHAKE_ERROR: Long = 9
-  }
+  companion object
 }

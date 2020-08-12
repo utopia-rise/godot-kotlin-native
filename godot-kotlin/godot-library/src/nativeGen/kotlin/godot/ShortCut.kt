@@ -7,8 +7,8 @@ import godot.icalls._icall_Boolean_Object
 import godot.icalls._icall_InputEvent
 import godot.icalls._icall_String
 import godot.icalls._icall_Unit_Object
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.String
@@ -28,7 +28,7 @@ open class ShortCut internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("ShortCut", "ShortCut")
+            this.ptr = invokeConstructor("ShortCut", "ShortCut")
         }
 
   }

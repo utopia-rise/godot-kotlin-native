@@ -7,8 +7,8 @@ import godot.icalls._icall_Shape
 import godot.icalls._icall_Unit
 import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Object
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 
@@ -37,15 +37,15 @@ open class CollisionShape internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("CollisionShape", "CollisionShape")
+            this.ptr = invokeConstructor("CollisionShape", "CollisionShape")
         }
 
   }
 
-  open fun _shape_changed() {
+  open fun _shapeChanged() {
   }
 
-  open fun _update_debug_shape() {
+  open fun _updateDebugShape() {
   }
 
   open fun getShape(): Shape {

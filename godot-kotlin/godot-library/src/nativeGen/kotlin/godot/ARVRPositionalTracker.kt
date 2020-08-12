@@ -16,8 +16,8 @@ import godot.icalls._icall_String
 import godot.icalls._icall_Transform_Boolean
 import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Vector3
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -39,27 +39,27 @@ open class ARVRPositionalTracker internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("ARVRPositionalTracker", "ARVRPositionalTracker")
+            this.ptr = invokeConstructor("ARVRPositionalTracker", "ARVRPositionalTracker")
         }
 
   }
 
-  open fun _set_joy_id(joyId: Long) {
+  open fun _setJoyId(joyId: Long) {
   }
 
-  open fun _set_mesh(mesh: Mesh) {
+  open fun _setMesh(mesh: Mesh) {
   }
 
-  open fun _set_name(name: String) {
+  open fun _setName(name: String) {
   }
 
-  open fun _set_orientation(orientation: Basis) {
+  open fun _setOrientation(orientation: Basis) {
   }
 
-  open fun _set_rw_position(rwPosition: Vector3) {
+  open fun _setRwPosition(rwPosition: Vector3) {
   }
 
-  open fun _set_type(type: Long) {
+  open fun _setType(type: Long) {
   }
 
   open fun getHand(): ARVRPositionalTracker.TrackerHand {
@@ -146,11 +146,5 @@ open class ARVRPositionalTracker internal constructor(
     }
   }
 
-  companion object {
-    final const val TRACKER_HAND_UNKNOWN: Long = 0
-
-    final const val TRACKER_LEFT_HAND: Long = 1
-
-    final const val TRACKER_RIGHT_HAND: Long = 2
-  }
+  companion object
 }

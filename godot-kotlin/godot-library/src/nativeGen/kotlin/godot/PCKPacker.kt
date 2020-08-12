@@ -6,8 +6,8 @@ import godot.core.GodotError
 import godot.icalls._icall_Long_Boolean
 import godot.icalls._icall_Long_String_Long
 import godot.icalls._icall_Long_String_String
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
@@ -18,7 +18,7 @@ open class PCKPacker internal constructor(
 ) : Reference(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("PCKPacker", "PCKPacker")
+            this.ptr = invokeConstructor("PCKPacker", "PCKPacker")
         }
 
   }

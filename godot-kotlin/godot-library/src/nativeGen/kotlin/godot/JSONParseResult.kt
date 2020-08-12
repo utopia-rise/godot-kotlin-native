@@ -12,8 +12,8 @@ import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_String
 import godot.icalls._icall_Unit_Variant
 import godot.icalls._icall_Variant
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Long
 import kotlin.String
@@ -63,7 +63,7 @@ open class JSONParseResult internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("JSONParseResult", "JSONParseResult")
+            this.ptr = invokeConstructor("JSONParseResult", "JSONParseResult")
         }
 
   }

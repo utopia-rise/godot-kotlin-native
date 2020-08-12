@@ -6,8 +6,8 @@ import godot.icalls._icall_Boolean
 import godot.icalls._icall_NavigationMesh
 import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Object
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 
@@ -36,7 +36,7 @@ open class NavigationMeshInstance internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("NavigationMeshInstance", "NavigationMeshInstance")
+            this.ptr = invokeConstructor("NavigationMeshInstance", "NavigationMeshInstance")
         }
 
   }

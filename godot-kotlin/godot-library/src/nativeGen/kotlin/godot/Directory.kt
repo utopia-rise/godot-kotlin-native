@@ -12,8 +12,8 @@ import godot.icalls._icall_Long_String_String
 import godot.icalls._icall_String
 import godot.icalls._icall_String_Long
 import godot.icalls._icall_Unit
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
@@ -24,7 +24,7 @@ open class Directory internal constructor(
 ) : Reference(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("Directory", "_Directory")
+            this.ptr = invokeConstructor("Directory", "_Directory")
         }
 
   }

@@ -17,8 +17,8 @@ import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_Vector2
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -240,7 +240,7 @@ open class Light2D internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("Light2D", "Light2D")
+            this.ptr = invokeConstructor("Light2D", "Light2D")
         }
 
   }
@@ -519,25 +519,5 @@ open class Light2D internal constructor(
     }
   }
 
-  companion object {
-    final const val MODE_ADD: Long = 0
-
-    final const val MODE_MASK: Long = 3
-
-    final const val MODE_MIX: Long = 2
-
-    final const val MODE_SUB: Long = 1
-
-    final const val SHADOW_FILTER_NONE: Long = 0
-
-    final const val SHADOW_FILTER_PCF13: Long = 5
-
-    final const val SHADOW_FILTER_PCF3: Long = 1
-
-    final const val SHADOW_FILTER_PCF5: Long = 2
-
-    final const val SHADOW_FILTER_PCF7: Long = 3
-
-    final const val SHADOW_FILTER_PCF9: Long = 4
-  }
+  companion object
 }

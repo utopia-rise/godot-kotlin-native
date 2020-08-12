@@ -36,20 +36,20 @@ open class EditorInspectorPlugin internal constructor(
     _icall_Unit_String_PoolStringArray_Object( mb, this.ptr, label, properties, editor)
   }
 
-  open fun can_handle(_object: Object): Boolean {
+  open fun canHandle(_object: Object): Boolean {
     throw NotImplementedError("can_handle is not implemented for EditorInspectorPlugin")
   }
 
-  open fun parse_begin(_object: Object) {
+  open fun parseBegin(_object: Object) {
   }
 
-  open fun parse_category(_object: Object, category: String) {
+  open fun parseCategory(_object: Object, category: String) {
   }
 
-  open fun parse_end() {
+  open fun parseEnd() {
   }
 
-  open fun parse_property(
+  open fun parseProperty(
     _object: Object,
     type: Long,
     path: String,

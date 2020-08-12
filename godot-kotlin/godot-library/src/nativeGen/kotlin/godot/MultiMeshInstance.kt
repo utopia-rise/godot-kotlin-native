@@ -4,8 +4,8 @@ package godot
 import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_MultiMesh
 import godot.icalls._icall_Unit_Object
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 
 open class MultiMeshInstance internal constructor(
@@ -23,7 +23,7 @@ open class MultiMeshInstance internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("MultiMeshInstance", "MultiMeshInstance")
+            this.ptr = invokeConstructor("MultiMeshInstance", "MultiMeshInstance")
         }
 
   }

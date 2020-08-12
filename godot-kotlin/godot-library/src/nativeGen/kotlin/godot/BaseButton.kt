@@ -131,7 +131,7 @@ open class BaseButton internal constructor(
 
   internal constructor() : this(null)
 
-  override fun _gui_input(arg0: InputEvent) {
+  override fun _guiInput(arg0: InputEvent) {
   }
 
   open fun _pressed() {
@@ -140,7 +140,7 @@ open class BaseButton internal constructor(
   open fun _toggled(buttonPressed: Boolean) {
   }
 
-  override fun _unhandled_input(arg0: InputEvent) {
+  override fun _unhandledInput(arg0: InputEvent) {
   }
 
   open fun getActionMode(): BaseButton.ActionMode {
@@ -293,19 +293,5 @@ open class BaseButton internal constructor(
     }
   }
 
-  companion object {
-    final const val ACTION_MODE_BUTTON_PRESS: Long = 0
-
-    final const val ACTION_MODE_BUTTON_RELEASE: Long = 1
-
-    final const val DRAW_DISABLED: Long = 3
-
-    final const val DRAW_HOVER: Long = 2
-
-    final const val DRAW_HOVER_PRESSED: Long = 4
-
-    final const val DRAW_NORMAL: Long = 0
-
-    final const val DRAW_PRESSED: Long = 1
-  }
+  companion object
 }

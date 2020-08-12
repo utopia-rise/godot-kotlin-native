@@ -7,8 +7,8 @@ import godot.icalls._icall_String
 import godot.icalls._icall_TextureButton
 import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_String
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.String
@@ -38,7 +38,7 @@ open class WindowDialog internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("WindowDialog", "WindowDialog")
+            this.ptr = invokeConstructor("WindowDialog", "WindowDialog")
         }
 
   }
@@ -46,7 +46,7 @@ open class WindowDialog internal constructor(
   open fun _closed() {
   }
 
-  override fun _gui_input(arg0: InputEvent) {
+  override fun _guiInput(arg0: InputEvent) {
   }
 
   open fun getCloseButton(): TextureButton {

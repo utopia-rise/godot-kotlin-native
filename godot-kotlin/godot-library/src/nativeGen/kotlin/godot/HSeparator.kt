@@ -2,7 +2,7 @@
 package godot
 
 import godot.core.Godot.shouldInitPtr
-import godot.internal.utils.getConstructor
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 
 open class HSeparator internal constructor(
@@ -10,7 +10,7 @@ open class HSeparator internal constructor(
 ) : Separator(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("HSeparator", "HSeparator")
+            this.ptr = invokeConstructor("HSeparator", "HSeparator")
         }
 
   }

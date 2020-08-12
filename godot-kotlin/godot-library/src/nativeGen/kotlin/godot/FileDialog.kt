@@ -17,8 +17,8 @@ import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_PoolStringArray
 import godot.icalls._icall_Unit_String
 import godot.icalls._icall_VBoxContainer
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
@@ -115,64 +115,64 @@ open class FileDialog internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("FileDialog", "FileDialog")
+            this.ptr = invokeConstructor("FileDialog", "FileDialog")
         }
 
   }
 
-  open fun _action_pressed() {
+  open fun _actionPressed() {
   }
 
-  open fun _cancel_pressed() {
+  open fun _cancelPressed() {
   }
 
-  open fun _dir_entered(arg0: String) {
+  open fun _dirEntered(arg0: String) {
   }
 
-  open fun _file_entered(arg0: String) {
+  open fun _fileEntered(arg0: String) {
   }
 
-  open fun _filter_selected(arg0: Long) {
+  open fun _filterSelected(arg0: Long) {
   }
 
-  open fun _go_up() {
+  open fun _goUp() {
   }
 
-  open fun _make_dir() {
+  open fun _makeDir() {
   }
 
-  open fun _make_dir_confirm() {
+  open fun _makeDirConfirm() {
   }
 
-  open fun _save_confirm_pressed() {
+  open fun _saveConfirmPressed() {
   }
 
-  open fun _select_drive(arg0: Long) {
+  open fun _selectDrive(arg0: Long) {
   }
 
-  open fun _tree_item_activated() {
+  open fun _treeItemActivated() {
   }
 
-  open fun _tree_multi_selected(
+  open fun _treeMultiSelected(
     arg0: Object,
     arg1: Long,
     arg2: Boolean
   ) {
   }
 
-  open fun _tree_selected() {
+  open fun _treeSelected() {
   }
 
-  override fun _unhandled_input(arg0: InputEvent) {
+  override fun _unhandledInput(arg0: InputEvent) {
   }
 
-  open fun _update_dir() {
+  open fun _updateDir() {
   }
 
-  open fun _update_file_list() {
+  open fun _updateFileList() {
   }
 
-  open fun _update_file_name() {
+  open fun _updateFileName() {
   }
 
   open fun addFilter(filter: String) {
@@ -327,21 +327,5 @@ open class FileDialog internal constructor(
     }
   }
 
-  companion object {
-    final const val ACCESS_FILESYSTEM: Long = 2
-
-    final const val ACCESS_RESOURCES: Long = 0
-
-    final const val ACCESS_USERDATA: Long = 1
-
-    final const val MODE_OPEN_ANY: Long = 3
-
-    final const val MODE_OPEN_DIR: Long = 2
-
-    final const val MODE_OPEN_FILE: Long = 0
-
-    final const val MODE_OPEN_FILES: Long = 1
-
-    final const val MODE_SAVE_FILE: Long = 4
-  }
+  companion object
 }

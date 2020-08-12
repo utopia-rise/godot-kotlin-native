@@ -5,8 +5,8 @@ import godot.core.Godot.shouldInitPtr
 import godot.core.GodotError
 import godot.icalls._icall_Long_String
 import godot.icalls._icall_String
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.String
 
@@ -21,7 +21,7 @@ open class StreamTexture internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("StreamTexture", "StreamTexture")
+            this.ptr = invokeConstructor("StreamTexture", "StreamTexture")
         }
 
   }

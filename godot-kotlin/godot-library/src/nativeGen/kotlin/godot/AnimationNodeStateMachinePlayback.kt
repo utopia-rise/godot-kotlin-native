@@ -8,8 +8,8 @@ import godot.icalls._icall_PoolStringArray
 import godot.icalls._icall_String
 import godot.icalls._icall_Unit
 import godot.icalls._icall_Unit_String
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.String
@@ -19,7 +19,7 @@ open class AnimationNodeStateMachinePlayback internal constructor(
 ) : Resource(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("AnimationNodeStateMachinePlayback",
+            this.ptr = invokeConstructor("AnimationNodeStateMachinePlayback",
             "AnimationNodeStateMachinePlayback")
         }
 

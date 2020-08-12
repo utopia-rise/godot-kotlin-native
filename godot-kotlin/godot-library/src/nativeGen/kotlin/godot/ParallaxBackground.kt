@@ -8,8 +8,8 @@ import godot.icalls._icall_Boolean
 import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_Vector2
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Unit
@@ -79,7 +79,7 @@ open class ParallaxBackground internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("ParallaxBackground", "ParallaxBackground")
+            this.ptr = invokeConstructor("ParallaxBackground", "ParallaxBackground")
         }
 
   }
@@ -114,7 +114,7 @@ open class ParallaxBackground internal constructor(
   }
 
 
-  open fun _camera_moved(arg0: Transform2D, arg1: Vector2) {
+  open fun _cameraMoved(arg0: Transform2D, arg1: Vector2) {
   }
 
   open fun getLimitBegin(): Vector2 {

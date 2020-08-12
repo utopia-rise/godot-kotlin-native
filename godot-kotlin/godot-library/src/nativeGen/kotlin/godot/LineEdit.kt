@@ -19,8 +19,8 @@ import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Long_Long
 import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_String
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -208,21 +208,21 @@ open class LineEdit internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("LineEdit", "LineEdit")
+            this.ptr = invokeConstructor("LineEdit", "LineEdit")
         }
 
   }
 
-  open fun _editor_settings_changed() {
+  open fun _editorSettingsChanged() {
   }
 
-  override fun _gui_input(arg0: InputEvent) {
+  override fun _guiInput(arg0: InputEvent) {
   }
 
-  open fun _text_changed() {
+  open fun _textChanged() {
   }
 
-  open fun _toggle_draw_caret() {
+  open fun _toggleDrawCaret() {
   }
 
   open fun appendAtCursor(text: String) {
@@ -480,29 +480,5 @@ open class LineEdit internal constructor(
     }
   }
 
-  companion object {
-    final const val ALIGN_CENTER: Long = 1
-
-    final const val ALIGN_FILL: Long = 3
-
-    final const val ALIGN_LEFT: Long = 0
-
-    final const val ALIGN_RIGHT: Long = 2
-
-    final const val MENU_CLEAR: Long = 3
-
-    final const val MENU_COPY: Long = 1
-
-    final const val MENU_CUT: Long = 0
-
-    final const val MENU_MAX: Long = 7
-
-    final const val MENU_PASTE: Long = 2
-
-    final const val MENU_REDO: Long = 6
-
-    final const val MENU_SELECT_ALL: Long = 4
-
-    final const val MENU_UNDO: Long = 5
-  }
+  companion object
 }

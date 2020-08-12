@@ -13,8 +13,8 @@ import godot.icalls._icall_Plane
 import godot.icalls._icall_String
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Vector3
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
@@ -37,7 +37,7 @@ open class ARVRAnchor internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("ARVRAnchor", "ARVRAnchor")
+            this.ptr = invokeConstructor("ARVRAnchor", "ARVRAnchor")
         }
 
   }

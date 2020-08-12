@@ -38,8 +38,8 @@ import godot.icalls._icall_Unit_Object_Object_Rect2_Vector2
 import godot.icalls._icall_Unit_Object_Rect2_Vector2
 import godot.icalls._icall_Unit_Vector2_Color
 import godot.icalls._icall_Vector2
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -52,16 +52,16 @@ open class Image internal constructor(
 ) : Resource(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("Image", "Image")
+            this.ptr = invokeConstructor("Image", "Image")
         }
 
   }
 
-  open fun _get_data(): Dictionary {
+  open fun _getData(): Dictionary {
     throw NotImplementedError("_get_data is not implemented for Image")
   }
 
-  open fun _set_data(data: Dictionary) {
+  open fun _setData(data: Dictionary) {
   }
 
   open fun blendRect(
@@ -541,114 +541,6 @@ open class Image internal constructor(
   }
 
   companion object {
-    final const val ALPHA_BIT: Long = 1
-
-    final const val ALPHA_BLEND: Long = 2
-
-    final const val ALPHA_NONE: Long = 0
-
-    final const val COMPRESS_ETC: Long = 3
-
-    final const val COMPRESS_ETC2: Long = 4
-
-    final const val COMPRESS_PVRTC2: Long = 1
-
-    final const val COMPRESS_PVRTC4: Long = 2
-
-    final const val COMPRESS_S3TC: Long = 0
-
-    final const val COMPRESS_SOURCE_GENERIC: Long = 0
-
-    final const val COMPRESS_SOURCE_NORMAL: Long = 2
-
-    final const val COMPRESS_SOURCE_SRGB: Long = 1
-
-    final const val FORMAT_BPTC_RGBA: Long = 22
-
-    final const val FORMAT_BPTC_RGBF: Long = 23
-
-    final const val FORMAT_BPTC_RGBFU: Long = 24
-
-    final const val FORMAT_DXT1: Long = 17
-
-    final const val FORMAT_DXT3: Long = 18
-
-    final const val FORMAT_DXT5: Long = 19
-
-    final const val FORMAT_ETC: Long = 29
-
-    final const val FORMAT_ETC2_R11: Long = 30
-
-    final const val FORMAT_ETC2_R11S: Long = 31
-
-    final const val FORMAT_ETC2_RG11: Long = 32
-
-    final const val FORMAT_ETC2_RG11S: Long = 33
-
-    final const val FORMAT_ETC2_RGB8: Long = 34
-
-    final const val FORMAT_ETC2_RGB8A1: Long = 36
-
-    final const val FORMAT_ETC2_RGBA8: Long = 35
-
-    final const val FORMAT_L8: Long = 0
-
-    final const val FORMAT_LA8: Long = 1
-
-    final const val FORMAT_MAX: Long = 37
-
-    final const val FORMAT_PVRTC2: Long = 25
-
-    final const val FORMAT_PVRTC2A: Long = 26
-
-    final const val FORMAT_PVRTC4: Long = 27
-
-    final const val FORMAT_PVRTC4A: Long = 28
-
-    final const val FORMAT_R8: Long = 2
-
-    final const val FORMAT_RF: Long = 8
-
-    final const val FORMAT_RG8: Long = 3
-
-    final const val FORMAT_RGB8: Long = 4
-
-    final const val FORMAT_RGBA4444: Long = 6
-
-    final const val FORMAT_RGBA5551: Long = 7
-
-    final const val FORMAT_RGBA8: Long = 5
-
-    final const val FORMAT_RGBAF: Long = 11
-
-    final const val FORMAT_RGBAH: Long = 15
-
-    final const val FORMAT_RGBE9995: Long = 16
-
-    final const val FORMAT_RGBF: Long = 10
-
-    final const val FORMAT_RGBH: Long = 14
-
-    final const val FORMAT_RGF: Long = 9
-
-    final const val FORMAT_RGH: Long = 13
-
-    final const val FORMAT_RGTC_R: Long = 20
-
-    final const val FORMAT_RGTC_RG: Long = 21
-
-    final const val FORMAT_RH: Long = 12
-
-    final const val INTERPOLATE_BILINEAR: Long = 1
-
-    final const val INTERPOLATE_CUBIC: Long = 2
-
-    final const val INTERPOLATE_LANCZOS: Long = 4
-
-    final const val INTERPOLATE_NEAREST: Long = 0
-
-    final const val INTERPOLATE_TRILINEAR: Long = 3
-
     final const val MAX_HEIGHT: Long = 16384
 
     final const val MAX_WIDTH: Long = 16384

@@ -28,8 +28,8 @@ import godot.icalls._icall_Unit_PoolStringArray_String
 import godot.icalls._icall_Unit_String
 import godot.icalls._icall_Unit_Variant_Boolean
 import godot.icalls._icall_Variant_Boolean
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -51,7 +51,7 @@ open class File internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("File", "_File")
+            this.ptr = invokeConstructor("File", "_File")
         }
 
   }
@@ -343,21 +343,5 @@ open class File internal constructor(
     }
   }
 
-  companion object {
-    final const val COMPRESSION_DEFLATE: Long = 1
-
-    final const val COMPRESSION_FASTLZ: Long = 0
-
-    final const val COMPRESSION_GZIP: Long = 3
-
-    final const val COMPRESSION_ZSTD: Long = 2
-
-    final const val READ: Long = 1
-
-    final const val READ_WRITE: Long = 3
-
-    final const val WRITE: Long = 2
-
-    final const val WRITE_READ: Long = 7
-  }
+  companion object
 }

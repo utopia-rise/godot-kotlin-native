@@ -23,8 +23,8 @@ import godot.icalls._icall_Unit_String
 import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_Vector2
 import godot.icalls._icall_Vector2_Long
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
@@ -116,7 +116,7 @@ open class GraphNode internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("GraphNode", "GraphNode")
+            this.ptr = invokeConstructor("GraphNode", "GraphNode")
         }
 
   }
@@ -127,7 +127,7 @@ open class GraphNode internal constructor(
   }
 
 
-  override fun _gui_input(arg0: InputEvent) {
+  override fun _guiInput(arg0: InputEvent) {
   }
 
   open fun clearAllSlots() {
@@ -316,11 +316,5 @@ open class GraphNode internal constructor(
     }
   }
 
-  companion object {
-    final const val OVERLAY_BREAKPOINT: Long = 1
-
-    final const val OVERLAY_DISABLED: Long = 0
-
-    final const val OVERLAY_POSITION: Long = 2
-  }
+  companion object
 }

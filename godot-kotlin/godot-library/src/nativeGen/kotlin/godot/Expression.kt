@@ -10,8 +10,8 @@ import godot.icalls._icall_Boolean
 import godot.icalls._icall_Long_String_PoolStringArray
 import godot.icalls._icall_String
 import godot.icalls._icall_Variant_VariantArray_nObject_Boolean
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.String
@@ -21,7 +21,7 @@ open class Expression internal constructor(
 ) : Reference(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("Expression", "Expression")
+            this.ptr = invokeConstructor("Expression", "Expression")
         }
 
   }

@@ -9,8 +9,8 @@ import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_Long
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -81,7 +81,7 @@ open class AnimationNodeOneShot internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("AnimationNodeOneShot", "AnimationNodeOneShot")
+            this.ptr = invokeConstructor("AnimationNodeOneShot", "AnimationNodeOneShot")
         }
 
   }
@@ -173,9 +173,5 @@ open class AnimationNodeOneShot internal constructor(
     }
   }
 
-  companion object {
-    final const val MIX_MODE_ADD: Long = 1
-
-    final const val MIX_MODE_BLEND: Long = 0
-  }
+  companion object
 }

@@ -16,8 +16,8 @@ import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_Vector3
 import godot.icalls._icall_Unit_nObject_Boolean
 import godot.icalls._icall_Vector3
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -129,7 +129,7 @@ open class GIProbe internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("GIProbe", "GIProbe")
+            this.ptr = invokeConstructor("GIProbe", "GIProbe")
         }
 
   }
@@ -273,15 +273,5 @@ open class GIProbe internal constructor(
     }
   }
 
-  companion object {
-    final const val SUBDIV_128: Long = 1
-
-    final const val SUBDIV_256: Long = 2
-
-    final const val SUBDIV_512: Long = 3
-
-    final const val SUBDIV_64: Long = 0
-
-    final const val SUBDIV_MAX: Long = 4
-  }
+  companion object
 }

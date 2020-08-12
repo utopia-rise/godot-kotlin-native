@@ -10,8 +10,8 @@ import godot.icalls._icall_Texture
 import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Object
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
@@ -101,7 +101,7 @@ open class TextureButton internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("TextureButton", "TextureButton")
+            this.ptr = invokeConstructor("TextureButton", "TextureButton")
         }
 
   }
@@ -213,19 +213,5 @@ open class TextureButton internal constructor(
     }
   }
 
-  companion object {
-    final const val STRETCH_KEEP: Long = 2
-
-    final const val STRETCH_KEEP_ASPECT: Long = 4
-
-    final const val STRETCH_KEEP_ASPECT_CENTERED: Long = 5
-
-    final const val STRETCH_KEEP_ASPECT_COVERED: Long = 6
-
-    final const val STRETCH_KEEP_CENTERED: Long = 3
-
-    final const val STRETCH_SCALE: Long = 0
-
-    final const val STRETCH_TILE: Long = 1
-  }
+  companion object
 }

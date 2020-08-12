@@ -16,8 +16,8 @@ import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_String
 import godot.icalls._icall_VideoStream
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -131,7 +131,7 @@ open class VideoPlayer internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("VideoPlayer", "VideoPlayer")
+            this.ptr = invokeConstructor("VideoPlayer", "VideoPlayer")
         }
 
   }

@@ -146,11 +146,5 @@ open class SceneState internal constructor(
     }
   }
 
-  companion object {
-    final const val GEN_EDIT_STATE_DISABLED: Long = 0
-
-    final const val GEN_EDIT_STATE_INSTANCE: Long = 1
-
-    final const val GEN_EDIT_STATE_MAIN: Long = 2
-  }
+  companion object
 }

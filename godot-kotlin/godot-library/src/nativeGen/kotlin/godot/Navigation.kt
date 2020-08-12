@@ -14,8 +14,8 @@ import godot.icalls._icall_Unit_Vector3
 import godot.icalls._icall_Vector3
 import godot.icalls._icall_Vector3_Vector3
 import godot.icalls._icall_Vector3_Vector3_Vector3_Boolean
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
@@ -36,7 +36,7 @@ open class Navigation internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("Navigation", "Navigation")
+            this.ptr = invokeConstructor("Navigation", "Navigation")
         }
 
   }

@@ -7,8 +7,8 @@ import godot.icalls._icall_Long
 import godot.icalls._icall_PoolRealArray
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_PoolRealArray
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Long
 
@@ -47,7 +47,7 @@ open class HeightMapShape internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("HeightMapShape", "HeightMapShape")
+            this.ptr = invokeConstructor("HeightMapShape", "HeightMapShape")
         }
 
   }

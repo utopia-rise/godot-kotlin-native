@@ -7,8 +7,8 @@ import godot.core.signal
 import godot.icalls._icall_MultiMesh
 import godot.icalls._icall_Texture
 import godot.icalls._icall_Unit_Object
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 
 open class MultiMeshInstance2D internal constructor(
@@ -48,7 +48,7 @@ open class MultiMeshInstance2D internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("MultiMeshInstance2D", "MultiMeshInstance2D")
+            this.ptr = invokeConstructor("MultiMeshInstance2D", "MultiMeshInstance2D")
         }
 
   }

@@ -10,8 +10,8 @@ import godot.icalls._icall_Long_Long_String
 import godot.icalls._icall_String
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_String
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
@@ -82,7 +82,7 @@ open class UPNPDevice internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("UPNPDevice", "UPNPDevice")
+            this.ptr = invokeConstructor("UPNPDevice", "UPNPDevice")
         }
 
   }
@@ -207,25 +207,5 @@ open class UPNPDevice internal constructor(
     }
   }
 
-  companion object {
-    final const val IGD_STATUS_DISCONNECTED: Long = 5
-
-    final const val IGD_STATUS_HTTP_EMPTY: Long = 2
-
-    final const val IGD_STATUS_HTTP_ERROR: Long = 1
-
-    final const val IGD_STATUS_INVALID_CONTROL: Long = 7
-
-    final const val IGD_STATUS_MALLOC_ERROR: Long = 8
-
-    final const val IGD_STATUS_NO_IGD: Long = 4
-
-    final const val IGD_STATUS_NO_URLS: Long = 3
-
-    final const val IGD_STATUS_OK: Long = 0
-
-    final const val IGD_STATUS_UNKNOWN_DEVICE: Long = 6
-
-    final const val IGD_STATUS_UNKNOWN_ERROR: Long = 9
-  }
+  companion object
 }

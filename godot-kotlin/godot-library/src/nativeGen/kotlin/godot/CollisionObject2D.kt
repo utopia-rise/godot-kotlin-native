@@ -52,7 +52,7 @@ open class CollisionObject2D internal constructor(
 
   internal constructor() : this(null)
 
-  open fun _input_event(
+  open fun _inputEvent(
     viewport: Object,
     event: InputEvent,
     shapeIdx: Long

@@ -7,8 +7,8 @@ import godot.icalls._icall_Boolean
 import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Long
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
@@ -48,7 +48,7 @@ open class DirectionalLight internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("DirectionalLight", "DirectionalLight")
+            this.ptr = invokeConstructor("DirectionalLight", "DirectionalLight")
         }
 
   }
@@ -119,15 +119,5 @@ open class DirectionalLight internal constructor(
     }
   }
 
-  companion object {
-    final const val SHADOW_DEPTH_RANGE_OPTIMIZED: Long = 1
-
-    final const val SHADOW_DEPTH_RANGE_STABLE: Long = 0
-
-    final const val SHADOW_ORTHOGONAL: Long = 0
-
-    final const val SHADOW_PARALLEL_2_SPLITS: Long = 1
-
-    final const val SHADOW_PARALLEL_4_SPLITS: Long = 2
-  }
+  companion object
 }

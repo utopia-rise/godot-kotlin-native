@@ -5,8 +5,8 @@ import godot.VisualShaderNodeVectorFunc
 import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Long
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Long
 
@@ -25,7 +25,7 @@ open class VisualShaderNodeVectorFunc internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("VisualShaderNodeVectorFunc", "VisualShaderNodeVectorFunc")
+            this.ptr = invokeConstructor("VisualShaderNodeVectorFunc", "VisualShaderNodeVectorFunc")
         }
 
   }
@@ -123,75 +123,5 @@ open class VisualShaderNodeVectorFunc internal constructor(
     }
   }
 
-  companion object {
-    final const val FUNC_ABS: Long = 6
-
-    final const val FUNC_ACOS: Long = 7
-
-    final const val FUNC_ACOSH: Long = 8
-
-    final const val FUNC_ASIN: Long = 9
-
-    final const val FUNC_ASINH: Long = 10
-
-    final const val FUNC_ATAN: Long = 11
-
-    final const val FUNC_ATANH: Long = 12
-
-    final const val FUNC_CEIL: Long = 13
-
-    final const val FUNC_COS: Long = 14
-
-    final const val FUNC_COSH: Long = 15
-
-    final const val FUNC_DEGREES: Long = 16
-
-    final const val FUNC_EXP: Long = 17
-
-    final const val FUNC_EXP2: Long = 18
-
-    final const val FUNC_FLOOR: Long = 19
-
-    final const val FUNC_FRAC: Long = 20
-
-    final const val FUNC_HSV2RGB: Long = 5
-
-    final const val FUNC_INVERSE_SQRT: Long = 21
-
-    final const val FUNC_LOG: Long = 22
-
-    final const val FUNC_LOG2: Long = 23
-
-    final const val FUNC_NEGATE: Long = 2
-
-    final const val FUNC_NORMALIZE: Long = 0
-
-    final const val FUNC_ONEMINUS: Long = 34
-
-    final const val FUNC_RADIANS: Long = 24
-
-    final const val FUNC_RECIPROCAL: Long = 3
-
-    final const val FUNC_RGB2HSV: Long = 4
-
-    final const val FUNC_ROUND: Long = 25
-
-    final const val FUNC_ROUNDEVEN: Long = 26
-
-    final const val FUNC_SATURATE: Long = 1
-
-    final const val FUNC_SIGN: Long = 27
-
-    final const val FUNC_SIN: Long = 28
-
-    final const val FUNC_SINH: Long = 29
-
-    final const val FUNC_SQRT: Long = 30
-
-    final const val FUNC_TAN: Long = 31
-
-    final const val FUNC_TANH: Long = 32
-
-    final const val FUNC_TRUNC: Long = 33
-  }
+  companion object
 }

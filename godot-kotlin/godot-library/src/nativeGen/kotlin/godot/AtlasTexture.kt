@@ -9,8 +9,8 @@ import godot.icalls._icall_Texture
 import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_Rect2
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Unit
@@ -60,7 +60,7 @@ open class AtlasTexture internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("AtlasTexture", "AtlasTexture")
+            this.ptr = invokeConstructor("AtlasTexture", "AtlasTexture")
         }
 
   }

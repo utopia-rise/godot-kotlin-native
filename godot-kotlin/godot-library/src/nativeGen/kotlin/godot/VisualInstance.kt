@@ -31,7 +31,7 @@ open class VisualInstance internal constructor(
 
   internal constructor() : this(null)
 
-  open fun _get_visual_instance_rid(): RID {
+  open fun _getVisualInstanceRid(): RID {
     throw NotImplementedError("_get_visual_instance_rid is not implemented for VisualInstance")
   }
 

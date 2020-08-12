@@ -9,8 +9,8 @@ import godot.icalls._icall_String
 import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_String
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
@@ -51,7 +51,7 @@ open class DynamicFontData internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("DynamicFontData", "DynamicFontData")
+            this.ptr = invokeConstructor("DynamicFontData", "DynamicFontData")
         }
 
   }
@@ -105,11 +105,5 @@ open class DynamicFontData internal constructor(
     }
   }
 
-  companion object {
-    final const val HINTING_LIGHT: Long = 1
-
-    final const val HINTING_NONE: Long = 0
-
-    final const val HINTING_NORMAL: Long = 2
-  }
+  companion object
 }

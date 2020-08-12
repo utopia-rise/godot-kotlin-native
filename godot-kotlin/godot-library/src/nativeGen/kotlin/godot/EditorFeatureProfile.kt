@@ -109,21 +109,5 @@ open class EditorFeatureProfile internal constructor(
     }
   }
 
-  companion object {
-    final const val FEATURE_3D: Long = 0
-
-    final const val FEATURE_ASSET_LIB: Long = 2
-
-    final const val FEATURE_FILESYSTEM_DOCK: Long = 6
-
-    final const val FEATURE_IMPORT_DOCK: Long = 4
-
-    final const val FEATURE_MAX: Long = 7
-
-    final const val FEATURE_NODE_DOCK: Long = 5
-
-    final const val FEATURE_SCENE_TREE: Long = 3
-
-    final const val FEATURE_SCRIPT: Long = 1
-  }
+  companion object
 }

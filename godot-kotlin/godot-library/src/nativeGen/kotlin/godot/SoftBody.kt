@@ -16,8 +16,8 @@ import godot.icalls._icall_Unit_Long_Boolean
 import godot.icalls._icall_Unit_NodePath
 import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_VariantArray
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -158,12 +158,12 @@ open class SoftBody internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("SoftBody", "SoftBody")
+            this.ptr = invokeConstructor("SoftBody", "SoftBody")
         }
 
   }
 
-  open fun _draw_soft_mesh() {
+  open fun _drawSoftMesh() {
   }
 
   open fun addCollisionExceptionWith(body: Node) {

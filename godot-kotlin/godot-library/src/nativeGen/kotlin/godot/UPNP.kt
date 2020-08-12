@@ -16,8 +16,8 @@ import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Long_Object
 import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_String
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
@@ -58,7 +58,7 @@ open class UPNP internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("UPNP", "UPNP")
+            this.ptr = invokeConstructor("UPNP", "UPNP")
         }
 
   }
@@ -230,63 +230,5 @@ open class UPNP internal constructor(
     }
   }
 
-  companion object {
-    final const val UPNP_RESULT_ACTION_FAILED: Long = 5
-
-    final const val UPNP_RESULT_CONFLICT_WITH_OTHER_MAPPING: Long = 13
-
-    final const val UPNP_RESULT_CONFLICT_WITH_OTHER_MECHANISM: Long = 12
-
-    final const val UPNP_RESULT_EXT_PORT_MUST_BE_WILDCARD: Long = 10
-
-    final const val UPNP_RESULT_EXT_PORT_WILDCARD_NOT_PERMITTED: Long = 7
-
-    final const val UPNP_RESULT_HTTP_ERROR: Long = 23
-
-    final const val UPNP_RESULT_INCONSISTENT_PARAMETERS: Long = 3
-
-    final const val UPNP_RESULT_INT_PORT_WILDCARD_NOT_PERMITTED: Long = 8
-
-    final const val UPNP_RESULT_INVALID_ARGS: Long = 20
-
-    final const val UPNP_RESULT_INVALID_DURATION: Long = 19
-
-    final const val UPNP_RESULT_INVALID_GATEWAY: Long = 16
-
-    final const val UPNP_RESULT_INVALID_PARAM: Long = 22
-
-    final const val UPNP_RESULT_INVALID_PORT: Long = 17
-
-    final const val UPNP_RESULT_INVALID_PROTOCOL: Long = 18
-
-    final const val UPNP_RESULT_INVALID_RESPONSE: Long = 21
-
-    final const val UPNP_RESULT_MEM_ALLOC_ERROR: Long = 25
-
-    final const val UPNP_RESULT_NOT_AUTHORIZED: Long = 1
-
-    final const val UPNP_RESULT_NO_DEVICES: Long = 27
-
-    final const val UPNP_RESULT_NO_GATEWAY: Long = 26
-
-    final const val UPNP_RESULT_NO_PORT_MAPS_AVAILABLE: Long = 11
-
-    final const val UPNP_RESULT_NO_SUCH_ENTRY_IN_ARRAY: Long = 4
-
-    final const val UPNP_RESULT_ONLY_PERMANENT_LEASE_SUPPORTED: Long = 15
-
-    final const val UPNP_RESULT_PORT_MAPPING_NOT_FOUND: Long = 2
-
-    final const val UPNP_RESULT_REMOTE_HOST_MUST_BE_WILDCARD: Long = 9
-
-    final const val UPNP_RESULT_SAME_PORT_VALUES_REQUIRED: Long = 14
-
-    final const val UPNP_RESULT_SOCKET_ERROR: Long = 24
-
-    final const val UPNP_RESULT_SRC_IP_WILDCARD_NOT_PERMITTED: Long = 6
-
-    final const val UPNP_RESULT_SUCCESS: Long = 0
-
-    final const val UPNP_RESULT_UNKNOWN_ERROR: Long = 28
-  }
+  companion object
 }

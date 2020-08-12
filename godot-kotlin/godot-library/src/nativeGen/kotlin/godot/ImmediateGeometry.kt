@@ -13,8 +13,8 @@ import godot.icalls._icall_Unit_Long_nObject
 import godot.icalls._icall_Unit_Plane
 import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_Unit_Vector3
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -25,7 +25,7 @@ open class ImmediateGeometry internal constructor(
 ) : GeometryInstance(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("ImmediateGeometry", "ImmediateGeometry")
+            this.ptr = invokeConstructor("ImmediateGeometry", "ImmediateGeometry")
         }
 
   }
