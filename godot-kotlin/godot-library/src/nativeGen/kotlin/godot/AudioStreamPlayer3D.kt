@@ -17,8 +17,8 @@ import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_String
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -219,19 +219,19 @@ open class AudioStreamPlayer3D internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("AudioStreamPlayer3D", "AudioStreamPlayer3D")
+            this.ptr = invokeConstructor("AudioStreamPlayer3D", "AudioStreamPlayer3D")
         }
 
   }
 
-  open fun _bus_layout_changed() {
+  open fun _busLayoutChanged() {
   }
 
-  open fun _is_active(): Boolean {
+  open fun _isActive(): Boolean {
     throw NotImplementedError("_is_active is not implemented for AudioStreamPlayer3D")
   }
 
-  open fun _set_playing(enable: Boolean) {
+  open fun _setPlaying(enable: Boolean) {
   }
 
   open fun getAreaMask(): Long {
@@ -501,23 +501,5 @@ open class AudioStreamPlayer3D internal constructor(
     }
   }
 
-  companion object {
-    final const val ATTENUATION_DISABLED: Long = 3
-
-    final const val ATTENUATION_INVERSE_DISTANCE: Long = 0
-
-    final const val ATTENUATION_INVERSE_SQUARE_DISTANCE: Long = 1
-
-    final const val ATTENUATION_LOGARITHMIC: Long = 2
-
-    final const val DOPPLER_TRACKING_DISABLED: Long = 0
-
-    final const val DOPPLER_TRACKING_IDLE_STEP: Long = 1
-
-    final const val DOPPLER_TRACKING_PHYSICS_STEP: Long = 2
-
-    final const val OUT_OF_RANGE_MIX: Long = 0
-
-    final const val OUT_OF_RANGE_PAUSE: Long = 1
-  }
+  companion object
 }

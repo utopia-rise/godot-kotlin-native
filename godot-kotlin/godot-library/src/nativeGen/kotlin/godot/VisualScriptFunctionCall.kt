@@ -15,8 +15,8 @@ import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_NodePath
 import godot.icalls._icall_Unit_String
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
@@ -128,16 +128,16 @@ open class VisualScriptFunctionCall internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("VisualScriptFunctionCall", "VisualScriptFunctionCall")
+            this.ptr = invokeConstructor("VisualScriptFunctionCall", "VisualScriptFunctionCall")
         }
 
   }
 
-  open fun _get_argument_cache(): Dictionary {
+  open fun _getArgumentCache(): Dictionary {
     throw NotImplementedError("_get_argument_cache is not implemented for VisualScriptFunctionCall")
   }
 
-  open fun _set_argument_cache(argumentCache: Dictionary) {
+  open fun _setArgumentCache(argumentCache: Dictionary) {
   }
 
   open fun getBasePath(): NodePath {
@@ -286,25 +286,5 @@ open class VisualScriptFunctionCall internal constructor(
     }
   }
 
-  companion object {
-    final const val CALL_MODE_BASIC_TYPE: Long = 3
-
-    final const val CALL_MODE_INSTANCE: Long = 2
-
-    final const val CALL_MODE_NODE_PATH: Long = 1
-
-    final const val CALL_MODE_SELF: Long = 0
-
-    final const val CALL_MODE_SINGLETON: Long = 4
-
-    final const val RPC_DISABLED: Long = 0
-
-    final const val RPC_RELIABLE: Long = 1
-
-    final const val RPC_RELIABLE_TO_ID: Long = 3
-
-    final const val RPC_UNRELIABLE: Long = 2
-
-    final const val RPC_UNRELIABLE_TO_ID: Long = 4
-  }
+  companion object
 }

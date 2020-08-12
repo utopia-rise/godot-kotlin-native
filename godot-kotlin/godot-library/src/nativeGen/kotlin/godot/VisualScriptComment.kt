@@ -7,8 +7,8 @@ import godot.icalls._icall_String
 import godot.icalls._icall_Unit_String
 import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_Vector2
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.String
 import kotlin.Unit
@@ -48,7 +48,7 @@ open class VisualScriptComment internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("VisualScriptComment", "VisualScriptComment")
+            this.ptr = invokeConstructor("VisualScriptComment", "VisualScriptComment")
         }
 
   }

@@ -84,18 +84,18 @@ open class EditorSpatialGizmo internal constructor(
     _icall_Unit( mb, this.ptr)
   }
 
-  open fun commit_handle(
+  open fun commitHandle(
     index: Long,
     restore: Variant,
     cancel: Boolean
   ) {
   }
 
-  open fun get_handle_name(index: Long): String {
+  open fun getHandleName(index: Long): String {
     throw NotImplementedError("get_handle_name is not implemented for EditorSpatialGizmo")
   }
 
-  open fun get_handle_value(index: Long): Variant {
+  open fun getHandleValue(index: Long): Variant {
     throw NotImplementedError("get_handle_value is not implemented for EditorSpatialGizmo")
   }
 
@@ -109,14 +109,14 @@ open class EditorSpatialGizmo internal constructor(
     return _icall_Spatial( mb, this.ptr)
   }
 
-  open fun is_handle_highlighted(index: Long): Boolean {
+  open fun isHandleHighlighted(index: Long): Boolean {
     throw NotImplementedError("is_handle_highlighted is not implemented for EditorSpatialGizmo")
   }
 
   open fun redraw() {
   }
 
-  open fun set_handle(
+  open fun setHandle(
     index: Long,
     camera: Camera,
     point: Vector2

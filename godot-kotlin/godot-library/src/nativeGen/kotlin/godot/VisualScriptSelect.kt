@@ -6,8 +6,8 @@ import godot.core.Variant
 import godot.core.Variant.Type
 import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Long
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Long
 
@@ -26,7 +26,7 @@ open class VisualScriptSelect internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("VisualScriptSelect", "VisualScriptSelect")
+            this.ptr = invokeConstructor("VisualScriptSelect", "VisualScriptSelect")
         }
 
   }

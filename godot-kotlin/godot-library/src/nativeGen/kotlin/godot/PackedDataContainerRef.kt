@@ -15,19 +15,19 @@ open class PackedDataContainerRef internal constructor(
 ) : Reference(_ignore) {
   internal constructor() : this(null)
 
-  open fun _is_dictionary(): Boolean {
+  open fun _isDictionary(): Boolean {
     throw NotImplementedError("_is_dictionary is not implemented for PackedDataContainerRef")
   }
 
-  open fun _iter_get(arg0: Variant): Variant {
+  open fun _iterGet(arg0: Variant): Variant {
     throw NotImplementedError("_iter_get is not implemented for PackedDataContainerRef")
   }
 
-  open fun _iter_init(arg0: VariantArray): Variant {
+  open fun _iterInit(arg0: VariantArray): Variant {
     throw NotImplementedError("_iter_init is not implemented for PackedDataContainerRef")
   }
 
-  open fun _iter_next(arg0: VariantArray): Variant {
+  open fun _iterNext(arg0: VariantArray): Variant {
     throw NotImplementedError("_iter_next is not implemented for PackedDataContainerRef")
   }
 

@@ -15,8 +15,8 @@ import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Vector2
 import godot.icalls._icall_Vector2_Vector2_Vector2_Boolean_Long_Double_Boolean
 import godot.icalls._icall_Vector2_Vector2_Vector2_Vector2_Boolean_Long_Double_Boolean
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -47,12 +47,12 @@ open class KinematicBody2D internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("KinematicBody2D", "KinematicBody2D")
+            this.ptr = invokeConstructor("KinematicBody2D", "KinematicBody2D")
         }
 
   }
 
-  open fun _direct_state_changed(arg0: Object) {
+  open fun _directStateChanged(arg0: Object) {
   }
 
   open fun getFloorNormal(): Vector2 {

@@ -19,8 +19,8 @@ import godot.icalls._icall_Unit_Long_Long
 import godot.icalls._icall_Unit_Long_Long_Long_Long
 import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_Vector2
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -252,7 +252,7 @@ open class StyleBoxFlat internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("StyleBoxFlat", "StyleBoxFlat")
+            this.ptr = invokeConstructor("StyleBoxFlat", "StyleBoxFlat")
         }
 
   }

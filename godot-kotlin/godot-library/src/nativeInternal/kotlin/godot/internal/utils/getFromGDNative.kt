@@ -10,9 +10,13 @@ internal inline fun getMethodBind(className: String, methodName: String): CPoint
     return MethodBindCache.getMethodBind(className, methodName)
 }
 
-internal fun getConstructor(className: String, oldClassName: String): COpaquePointer {
+internal fun invokeConstructor(className: String, oldClassName: String): COpaquePointer {
     memScoped {
-        return Godot.gdnative.godot_get_class_constructor!!.invoke(oldClassName.cstr.ptr) ?: throw NotImplementedError("Cannot get constructor for class $className")
+        return Godot.gdnative.godot_get_class_constructor
+            ?.invoke(oldClassName.cstr.ptr)
+            ?.reinterpret<CFunction<() -> COpaquePointer>>()
+            ?.invoke()
+            ?: throw NotImplementedError("Cannot get constructor for class $className")
     }
 }
 

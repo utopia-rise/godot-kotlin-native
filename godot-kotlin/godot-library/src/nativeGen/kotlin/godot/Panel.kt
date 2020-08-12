@@ -2,7 +2,7 @@
 package godot
 
 import godot.core.Godot.shouldInitPtr
-import godot.internal.utils.getConstructor
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 
 open class Panel internal constructor(
@@ -10,7 +10,7 @@ open class Panel internal constructor(
 ) : Control(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("Panel", "Panel")
+            this.ptr = invokeConstructor("Panel", "Panel")
         }
 
   }

@@ -6,8 +6,8 @@ import godot.icalls._icall_Boolean_Long
 import godot.icalls._icall_Double_Long
 import godot.icalls._icall_Unit_Long_Boolean
 import godot.icalls._icall_Unit_Long_Double
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -99,23 +99,23 @@ open class HingeJoint internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("HingeJoint", "HingeJoint")
+            this.ptr = invokeConstructor("HingeJoint", "HingeJoint")
         }
 
   }
 
-  open fun _get_lower_limit(): Double {
+  open fun _getLowerLimit(): Double {
     throw NotImplementedError("_get_lower_limit is not implemented for HingeJoint")
   }
 
-  open fun _get_upper_limit(): Double {
+  open fun _getUpperLimit(): Double {
     throw NotImplementedError("_get_upper_limit is not implemented for HingeJoint")
   }
 
-  open fun _set_lower_limit(lowerLimit: Double) {
+  open fun _setLowerLimit(lowerLimit: Double) {
   }
 
-  open fun _set_upper_limit(upperLimit: Double) {
+  open fun _setUpperLimit(upperLimit: Double) {
   }
 
   open fun getFlag(flag: Long): Boolean {
@@ -188,29 +188,5 @@ open class HingeJoint internal constructor(
     }
   }
 
-  companion object {
-    final const val FLAG_ENABLE_MOTOR: Long = 1
-
-    final const val FLAG_MAX: Long = 2
-
-    final const val FLAG_USE_LIMIT: Long = 0
-
-    final const val PARAM_BIAS: Long = 0
-
-    final const val PARAM_LIMIT_BIAS: Long = 3
-
-    final const val PARAM_LIMIT_LOWER: Long = 2
-
-    final const val PARAM_LIMIT_RELAXATION: Long = 5
-
-    final const val PARAM_LIMIT_SOFTNESS: Long = 4
-
-    final const val PARAM_LIMIT_UPPER: Long = 1
-
-    final const val PARAM_MAX: Long = 8
-
-    final const val PARAM_MOTOR_MAX_IMPULSE: Long = 7
-
-    final const val PARAM_MOTOR_TARGET_VELOCITY: Long = 6
-  }
+  companion object
 }

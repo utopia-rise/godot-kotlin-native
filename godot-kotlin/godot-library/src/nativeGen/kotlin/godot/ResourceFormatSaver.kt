@@ -3,7 +3,7 @@ package godot
 
 import godot.core.Godot.shouldInitPtr
 import godot.core.PoolStringArray
-import godot.internal.utils.getConstructor
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
@@ -15,12 +15,12 @@ open class ResourceFormatSaver internal constructor(
 ) : Reference(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("ResourceFormatSaver", "ResourceFormatSaver")
+            this.ptr = invokeConstructor("ResourceFormatSaver", "ResourceFormatSaver")
         }
 
   }
 
-  open fun get_recognized_extensions(resource: Resource): PoolStringArray {
+  open fun getRecognizedExtensions(resource: Resource): PoolStringArray {
     throw
         NotImplementedError("get_recognized_extensions is not implemented for ResourceFormatSaver")
   }

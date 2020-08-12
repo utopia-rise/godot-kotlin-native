@@ -4,8 +4,8 @@ package godot
 import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Double_Long
 import godot.icalls._icall_Unit_Long_Double
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Double
 import kotlin.Long
@@ -45,7 +45,7 @@ open class PinJoint internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("PinJoint", "PinJoint")
+            this.ptr = invokeConstructor("PinJoint", "PinJoint")
         }
 
   }
@@ -79,11 +79,5 @@ open class PinJoint internal constructor(
     }
   }
 
-  companion object {
-    final const val PARAM_BIAS: Long = 0
-
-    final const val PARAM_DAMPING: Long = 1
-
-    final const val PARAM_IMPULSE_CLAMP: Long = 2
-  }
+  companion object
 }

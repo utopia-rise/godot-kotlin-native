@@ -5,8 +5,8 @@ import godot.VisualShaderNodeVectorDerivativeFunc
 import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Long
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Long
 
@@ -25,7 +25,7 @@ open class VisualShaderNodeVectorDerivativeFunc internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("VisualShaderNodeVectorDerivativeFunc",
+            this.ptr = invokeConstructor("VisualShaderNodeVectorDerivativeFunc",
             "VisualShaderNodeVectorDerivativeFunc")
         }
 
@@ -60,11 +60,5 @@ open class VisualShaderNodeVectorDerivativeFunc internal constructor(
     }
   }
 
-  companion object {
-    final const val FUNC_SUM: Long = 0
-
-    final const val FUNC_X: Long = 1
-
-    final const val FUNC_Y: Long = 2
-  }
+  companion object
 }

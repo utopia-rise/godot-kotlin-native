@@ -16,8 +16,8 @@ import godot.icalls._icall_Unit_Long_Boolean
 import godot.icalls._icall_Vector3
 import godot.icalls._icall_Vector3_Vector3_Vector3_Boolean_Long_Double_Boolean
 import godot.icalls._icall_Vector3_Vector3_Vector3_Vector3_Boolean_Long_Double_Boolean
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -68,7 +68,7 @@ open class KinematicBody internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("KinematicBody", "KinematicBody")
+            this.ptr = invokeConstructor("KinematicBody", "KinematicBody")
         }
 
   }

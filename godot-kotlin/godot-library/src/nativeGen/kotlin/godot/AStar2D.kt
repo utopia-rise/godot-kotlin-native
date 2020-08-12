@@ -25,8 +25,8 @@ import godot.icalls._icall_Unit_Long_Vector2_Double
 import godot.icalls._icall_VariantArray
 import godot.icalls._icall_Vector2_Long
 import godot.icalls._icall_Vector2_Vector2
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -38,16 +38,16 @@ open class AStar2D internal constructor(
 ) : Reference(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("AStar2D", "AStar2D")
+            this.ptr = invokeConstructor("AStar2D", "AStar2D")
         }
 
   }
 
-  open fun _compute_cost(fromId: Long, toId: Long): Double {
+  open fun _computeCost(fromId: Long, toId: Long): Double {
     throw NotImplementedError("_compute_cost is not implemented for AStar2D")
   }
 
-  open fun _estimate_cost(fromId: Long, toId: Long): Double {
+  open fun _estimateCost(fromId: Long, toId: Long): Double {
     throw NotImplementedError("_estimate_cost is not implemented for AStar2D")
   }
 

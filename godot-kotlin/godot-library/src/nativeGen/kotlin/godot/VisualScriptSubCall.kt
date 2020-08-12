@@ -3,7 +3,7 @@ package godot
 
 import godot.core.Godot.shouldInitPtr
 import godot.core.Variant
-import godot.internal.utils.getConstructor
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.NotImplementedError
 
@@ -12,7 +12,7 @@ open class VisualScriptSubCall internal constructor(
 ) : VisualScriptNode(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("VisualScriptSubCall", "VisualScriptSubCall")
+            this.ptr = invokeConstructor("VisualScriptSubCall", "VisualScriptSubCall")
         }
 
   }

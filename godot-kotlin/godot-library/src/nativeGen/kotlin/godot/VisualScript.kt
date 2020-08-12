@@ -35,8 +35,8 @@ import godot.icalls._icall_Variant_String
 import godot.icalls._icall_Vector2_String
 import godot.icalls._icall_Vector2_String_Long
 import godot.icalls._icall_VisualScriptNode_String_Long
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
@@ -50,19 +50,19 @@ open class VisualScript internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("VisualScript", "VisualScript")
+            this.ptr = invokeConstructor("VisualScript", "VisualScript")
         }
 
   }
 
-  open fun _get_data(): Dictionary {
+  open fun _getData(): Dictionary {
     throw NotImplementedError("_get_data is not implemented for VisualScript")
   }
 
-  open fun _node_ports_changed(arg0: Long) {
+  open fun _nodePortsChanged(arg0: Long) {
   }
 
-  open fun _set_data(data: Dictionary) {
+  open fun _setData(data: Dictionary) {
   }
 
   open fun addCustomSignal(name: String) {

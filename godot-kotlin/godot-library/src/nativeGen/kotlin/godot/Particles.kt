@@ -17,8 +17,8 @@ import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Long_Object
 import godot.icalls._icall_Unit_Object
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -220,7 +220,7 @@ open class Particles internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("Particles", "Particles")
+            this.ptr = invokeConstructor("Particles", "Particles")
         }
 
   }
@@ -421,12 +421,6 @@ open class Particles internal constructor(
   }
 
   companion object {
-    final const val DRAW_ORDER_INDEX: Long = 0
-
-    final const val DRAW_ORDER_LIFETIME: Long = 1
-
-    final const val DRAW_ORDER_VIEW_DEPTH: Long = 2
-
     final const val MAX_DRAW_PASSES: Long = 4
   }
 }

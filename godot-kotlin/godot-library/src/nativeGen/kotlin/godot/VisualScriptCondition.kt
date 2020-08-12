@@ -2,7 +2,7 @@
 package godot
 
 import godot.core.Godot.shouldInitPtr
-import godot.internal.utils.getConstructor
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 
 open class VisualScriptCondition internal constructor(
@@ -10,7 +10,7 @@ open class VisualScriptCondition internal constructor(
 ) : VisualScriptNode(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("VisualScriptCondition", "VisualScriptCondition")
+            this.ptr = invokeConstructor("VisualScriptCondition", "VisualScriptCondition")
         }
 
   }

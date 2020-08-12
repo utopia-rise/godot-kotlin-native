@@ -11,8 +11,8 @@ import godot.icalls._icall_Unit
 import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_String
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
@@ -63,24 +63,24 @@ open class SpinBox internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("SpinBox", "SpinBox")
+            this.ptr = invokeConstructor("SpinBox", "SpinBox")
         }
 
   }
 
-  override fun _gui_input(arg0: InputEvent) {
+  override fun _guiInput(arg0: InputEvent) {
   }
 
-  open fun _line_edit_focus_exit() {
+  open fun _lineEditFocusExit() {
   }
 
-  open fun _line_edit_input(arg0: InputEvent) {
+  open fun _lineEditInput(arg0: InputEvent) {
   }
 
-  open fun _range_click_timeout() {
+  open fun _rangeClickTimeout() {
   }
 
-  open fun _text_entered(arg0: String) {
+  open fun _textEntered(arg0: String) {
   }
 
   open fun apply() {

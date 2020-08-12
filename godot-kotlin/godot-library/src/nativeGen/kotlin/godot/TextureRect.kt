@@ -9,8 +9,8 @@ import godot.icalls._icall_Texture
 import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Object
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
@@ -70,12 +70,12 @@ open class TextureRect internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("TextureRect", "TextureRect")
+            this.ptr = invokeConstructor("TextureRect", "TextureRect")
         }
 
   }
 
-  open fun _texture_changed() {
+  open fun _textureChanged() {
   }
 
   open fun getStretchMode(): TextureRect.StretchMode {
@@ -157,21 +157,5 @@ open class TextureRect internal constructor(
     }
   }
 
-  companion object {
-    final const val STRETCH_KEEP: Long = 3
-
-    final const val STRETCH_KEEP_ASPECT: Long = 5
-
-    final const val STRETCH_KEEP_ASPECT_CENTERED: Long = 6
-
-    final const val STRETCH_KEEP_ASPECT_COVERED: Long = 7
-
-    final const val STRETCH_KEEP_CENTERED: Long = 4
-
-    final const val STRETCH_SCALE: Long = 1
-
-    final const val STRETCH_SCALE_ON_EXPAND: Long = 0
-
-    final const val STRETCH_TILE: Long = 2
-  }
+  companion object
 }

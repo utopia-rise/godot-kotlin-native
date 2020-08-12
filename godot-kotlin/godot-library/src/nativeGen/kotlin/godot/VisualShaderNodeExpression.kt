@@ -4,8 +4,8 @@ package godot
 import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_String
 import godot.icalls._icall_Unit_String
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.String
 
@@ -24,7 +24,7 @@ open class VisualShaderNodeExpression internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("VisualShaderNodeExpression", "VisualShaderNodeExpression")
+            this.ptr = invokeConstructor("VisualShaderNodeExpression", "VisualShaderNodeExpression")
         }
 
   }

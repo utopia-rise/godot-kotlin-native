@@ -9,8 +9,8 @@ import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Object
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -81,22 +81,22 @@ open class NoiseTexture internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("NoiseTexture", "NoiseTexture")
+            this.ptr = invokeConstructor("NoiseTexture", "NoiseTexture")
         }
 
   }
 
-  open fun _generate_texture(): Image {
+  open fun _generateTexture(): Image {
     throw NotImplementedError("_generate_texture is not implemented for NoiseTexture")
   }
 
-  open fun _queue_update() {
+  open fun _queueUpdate() {
   }
 
-  open fun _thread_done(image: Image) {
+  open fun _threadDone(image: Image) {
   }
 
-  open fun _update_texture() {
+  open fun _updateTexture() {
   }
 
   open fun getBumpStrength(): Double {

@@ -176,10 +176,10 @@ open class SpriteBase3D internal constructor(
   }
 
 
-  open fun _im_update() {
+  open fun _imUpdate() {
   }
 
-  open fun _queue_update() {
+  open fun _queueUpdate() {
   }
 
   open fun generateTriangleMesh(): TriangleMesh {
@@ -342,19 +342,5 @@ open class SpriteBase3D internal constructor(
     }
   }
 
-  companion object {
-    final const val ALPHA_CUT_DISABLED: Long = 0
-
-    final const val ALPHA_CUT_DISCARD: Long = 1
-
-    final const val ALPHA_CUT_OPAQUE_PREPASS: Long = 2
-
-    final const val FLAG_DOUBLE_SIDED: Long = 2
-
-    final const val FLAG_MAX: Long = 3
-
-    final const val FLAG_SHADED: Long = 1
-
-    final const val FLAG_TRANSPARENT: Long = 0
-  }
+  companion object
 }

@@ -29,11 +29,11 @@ open class TextureLayered internal constructor(
 
   internal constructor() : this(null)
 
-  open fun _get_data(): Dictionary {
+  open fun _getData(): Dictionary {
     throw NotImplementedError("_get_data is not implemented for TextureLayered")
   }
 
-  open fun _set_data(data: Dictionary) {
+  open fun _setData(data: Dictionary) {
   }
 
   open fun create(
@@ -119,13 +119,5 @@ open class TextureLayered internal constructor(
     }
   }
 
-  companion object {
-    final const val FLAGS_DEFAULT: Long = 4
-
-    final const val FLAG_FILTER: Long = 4
-
-    final const val FLAG_MIPMAPS: Long = 1
-
-    final const val FLAG_REPEAT: Long = 2
-  }
+  companion object
 }

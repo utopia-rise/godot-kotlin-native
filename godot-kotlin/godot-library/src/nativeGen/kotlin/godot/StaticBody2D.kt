@@ -9,8 +9,8 @@ import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_Vector2
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Double
 import kotlin.Unit
@@ -70,7 +70,7 @@ open class StaticBody2D internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("StaticBody2D", "StaticBody2D")
+            this.ptr = invokeConstructor("StaticBody2D", "StaticBody2D")
         }
 
   }
@@ -82,7 +82,7 @@ open class StaticBody2D internal constructor(
   }
 
 
-  open fun _reload_physics_characteristics() {
+  open fun _reloadPhysicsCharacteristics() {
   }
 
   open fun getBounce(): Double {

@@ -9,8 +9,8 @@ import godot.icalls._icall_String
 import godot.icalls._icall_Texture_String
 import godot.icalls._icall_Unit_String
 import godot.icalls._icall_Unit_String_Object
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
@@ -41,7 +41,7 @@ open class Shader internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("Shader", "Shader")
+            this.ptr = invokeConstructor("Shader", "Shader")
         }
 
   }
@@ -105,11 +105,5 @@ open class Shader internal constructor(
     }
   }
 
-  companion object {
-    final const val MODE_CANVAS_ITEM: Long = 1
-
-    final const val MODE_PARTICLES: Long = 2
-
-    final const val MODE_SPATIAL: Long = 0
-  }
+  companion object
 }

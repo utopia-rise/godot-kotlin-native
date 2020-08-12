@@ -13,8 +13,8 @@ import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_String
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -88,7 +88,7 @@ open class AnimationNodeStateMachineTransition internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("AnimationNodeStateMachineTransition",
+            this.ptr = invokeConstructor("AnimationNodeStateMachineTransition",
             "AnimationNodeStateMachineTransition")
         }
 
@@ -173,11 +173,5 @@ open class AnimationNodeStateMachineTransition internal constructor(
     }
   }
 
-  companion object {
-    final const val SWITCH_MODE_AT_END: Long = 2
-
-    final const val SWITCH_MODE_IMMEDIATE: Long = 0
-
-    final const val SWITCH_MODE_SYNC: Long = 1
-  }
+  companion object
 }

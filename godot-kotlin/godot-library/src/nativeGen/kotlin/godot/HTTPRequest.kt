@@ -16,8 +16,8 @@ import godot.icalls._icall_Unit
 import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_String
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
@@ -91,15 +91,15 @@ open class HTTPRequest internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("HTTPRequest", "HTTPRequest")
+            this.ptr = invokeConstructor("HTTPRequest", "HTTPRequest")
         }
 
   }
 
-  open fun _redirect_request(arg0: String) {
+  open fun _redirectRequest(arg0: String) {
   }
 
-  open fun _request_done(
+  open fun _requestDone(
     arg0: Long,
     arg1: Long,
     arg2: PoolStringArray,
@@ -241,31 +241,5 @@ open class HTTPRequest internal constructor(
     }
   }
 
-  companion object {
-    final const val RESULT_BODY_SIZE_LIMIT_EXCEEDED: Long = 7
-
-    final const val RESULT_CANT_CONNECT: Long = 2
-
-    final const val RESULT_CANT_RESOLVE: Long = 3
-
-    final const val RESULT_CHUNKED_BODY_SIZE_MISMATCH: Long = 1
-
-    final const val RESULT_CONNECTION_ERROR: Long = 4
-
-    final const val RESULT_DOWNLOAD_FILE_CANT_OPEN: Long = 9
-
-    final const val RESULT_DOWNLOAD_FILE_WRITE_ERROR: Long = 10
-
-    final const val RESULT_NO_RESPONSE: Long = 6
-
-    final const val RESULT_REDIRECT_LIMIT_REACHED: Long = 11
-
-    final const val RESULT_REQUEST_FAILED: Long = 8
-
-    final const val RESULT_SSL_HANDSHAKE_ERROR: Long = 5
-
-    final const val RESULT_SUCCESS: Long = 0
-
-    final const val RESULT_TIMEOUT: Long = 12
-  }
+  companion object
 }

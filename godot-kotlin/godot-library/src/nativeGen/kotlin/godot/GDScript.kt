@@ -6,8 +6,8 @@ import godot.core.PoolByteArray
 import godot.core.Variant
 import godot.icalls._icall_PoolByteArray
 import godot.icalls._icall_varargs
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 
 open class GDScript internal constructor(
@@ -15,7 +15,7 @@ open class GDScript internal constructor(
 ) : Script(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("GDScript", "GDScript")
+            this.ptr = invokeConstructor("GDScript", "GDScript")
         }
 
   }

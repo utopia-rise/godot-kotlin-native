@@ -8,8 +8,8 @@ import godot.core.signal
 import godot.icalls._icall_Bone2D_Long
 import godot.icalls._icall_Long
 import godot.icalls._icall_RID
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Long
 
@@ -20,15 +20,15 @@ open class Skeleton2D internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("Skeleton2D", "Skeleton2D")
+            this.ptr = invokeConstructor("Skeleton2D", "Skeleton2D")
         }
 
   }
 
-  open fun _update_bone_setup() {
+  open fun _updateBoneSetup() {
   }
 
-  open fun _update_transform() {
+  open fun _updateTransform() {
   }
 
   open fun getBone(idx: Long): Bone2D {

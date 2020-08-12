@@ -2,7 +2,7 @@
 package godot
 
 import godot.core.Godot.shouldInitPtr
-import godot.internal.utils.getConstructor
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 
 open class MarginContainer internal constructor(
@@ -10,7 +10,7 @@ open class MarginContainer internal constructor(
 ) : Container(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("MarginContainer", "MarginContainer")
+            this.ptr = invokeConstructor("MarginContainer", "MarginContainer")
         }
 
   }

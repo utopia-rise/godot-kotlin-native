@@ -5,8 +5,8 @@ import godot.VisualShaderNodeColorFunc
 import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Long
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Long
 
@@ -25,7 +25,7 @@ open class VisualShaderNodeColorFunc internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("VisualShaderNodeColorFunc", "VisualShaderNodeColorFunc")
+            this.ptr = invokeConstructor("VisualShaderNodeColorFunc", "VisualShaderNodeColorFunc")
         }
 
   }
@@ -57,9 +57,5 @@ open class VisualShaderNodeColorFunc internal constructor(
     }
   }
 
-  companion object {
-    final const val FUNC_GRAYSCALE: Long = 0
-
-    final const val FUNC_SEPIA: Long = 1
-  }
+  companion object
 }

@@ -10,8 +10,8 @@ import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_VScrollBar
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -86,21 +86,21 @@ open class ScrollContainer internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("ScrollContainer", "ScrollContainer")
+            this.ptr = invokeConstructor("ScrollContainer", "ScrollContainer")
         }
 
   }
 
-  open fun _ensure_focused_visible(arg0: Control) {
+  open fun _ensureFocusedVisible(arg0: Control) {
   }
 
-  override fun _gui_input(arg0: InputEvent) {
+  override fun _guiInput(arg0: InputEvent) {
   }
 
-  open fun _scroll_moved(arg0: Double) {
+  open fun _scrollMoved(arg0: Double) {
   }
 
-  open fun _update_scrollbar_position() {
+  open fun _updateScrollbarPosition() {
   }
 
   open fun getDeadzone(): Long {

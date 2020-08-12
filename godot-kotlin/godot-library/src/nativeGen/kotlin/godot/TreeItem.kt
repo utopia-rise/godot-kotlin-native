@@ -494,21 +494,5 @@ open class TreeItem internal constructor(
     }
   }
 
-  companion object {
-    final const val ALIGN_CENTER: Long = 1
-
-    final const val ALIGN_LEFT: Long = 0
-
-    final const val ALIGN_RIGHT: Long = 2
-
-    final const val CELL_MODE_CHECK: Long = 1
-
-    final const val CELL_MODE_CUSTOM: Long = 4
-
-    final const val CELL_MODE_ICON: Long = 3
-
-    final const val CELL_MODE_RANGE: Long = 2
-
-    final const val CELL_MODE_STRING: Long = 0
-  }
+  companion object
 }

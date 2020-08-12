@@ -31,8 +31,8 @@ import godot.icalls._icall_Unit_PoolColorArray
 import godot.icalls._icall_Unit_PoolVector2Array
 import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_Vector2
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -664,7 +664,7 @@ open class CPUParticles2D internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("CPUParticles2D", "CPUParticles2D")
+            this.ptr = invokeConstructor("CPUParticles2D", "CPUParticles2D")
         }
 
   }
@@ -693,10 +693,10 @@ open class CPUParticles2D internal constructor(
   }
 
 
-  open fun _texture_changed() {
+  open fun _textureChanged() {
   }
 
-  open fun _update_render_thread() {
+  open fun _updateRenderThread() {
   }
 
   open fun convertFromParticles(particles: Node) {
@@ -1111,55 +1111,5 @@ open class CPUParticles2D internal constructor(
     }
   }
 
-  companion object {
-    final const val DRAW_ORDER_INDEX: Long = 0
-
-    final const val DRAW_ORDER_LIFETIME: Long = 1
-
-    final const val EMISSION_SHAPE_DIRECTED_POINTS: Long = 4
-
-    final const val EMISSION_SHAPE_MAX: Long = 5
-
-    final const val EMISSION_SHAPE_POINT: Long = 0
-
-    final const val EMISSION_SHAPE_POINTS: Long = 3
-
-    final const val EMISSION_SHAPE_RECTANGLE: Long = 2
-
-    final const val EMISSION_SHAPE_SPHERE: Long = 1
-
-    final const val FLAG_ALIGN_Y_TO_VELOCITY: Long = 0
-
-    final const val FLAG_DISABLE_Z: Long = 2
-
-    final const val FLAG_MAX: Long = 3
-
-    final const val FLAG_ROTATE_Y: Long = 1
-
-    final const val PARAM_ANGLE: Long = 7
-
-    final const val PARAM_ANGULAR_VELOCITY: Long = 1
-
-    final const val PARAM_ANIM_OFFSET: Long = 11
-
-    final const val PARAM_ANIM_SPEED: Long = 10
-
-    final const val PARAM_DAMPING: Long = 6
-
-    final const val PARAM_HUE_VARIATION: Long = 9
-
-    final const val PARAM_INITIAL_LINEAR_VELOCITY: Long = 0
-
-    final const val PARAM_LINEAR_ACCEL: Long = 3
-
-    final const val PARAM_MAX: Long = 12
-
-    final const val PARAM_ORBIT_VELOCITY: Long = 2
-
-    final const val PARAM_RADIAL_ACCEL: Long = 4
-
-    final const val PARAM_SCALE: Long = 8
-
-    final const val PARAM_TANGENTIAL_ACCEL: Long = 5
-  }
+  companion object
 }

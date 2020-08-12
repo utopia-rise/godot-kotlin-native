@@ -5,8 +5,8 @@ import godot.OmniLight
 import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Long
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Long
 
@@ -35,7 +35,7 @@ open class OmniLight internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("OmniLight", "OmniLight")
+            this.ptr = invokeConstructor("OmniLight", "OmniLight")
         }
 
   }
@@ -94,13 +94,5 @@ open class OmniLight internal constructor(
     }
   }
 
-  companion object {
-    final const val SHADOW_CUBE: Long = 1
-
-    final const val SHADOW_DETAIL_HORIZONTAL: Long = 1
-
-    final const val SHADOW_DETAIL_VERTICAL: Long = 0
-
-    final const val SHADOW_DUAL_PARABOLOID: Long = 0
-  }
+  companion object
 }

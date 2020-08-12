@@ -18,8 +18,8 @@ import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_String
 import godot.icalls._icall_Unit_Vector3
 import godot.icalls._icall_Vector3
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -142,7 +142,7 @@ open class BakedLightmap internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("BakedLightmap", "BakedLightmap")
+            this.ptr = invokeConstructor("BakedLightmap", "BakedLightmap")
         }
 
   }
@@ -334,25 +334,5 @@ open class BakedLightmap internal constructor(
     }
   }
 
-  companion object {
-    final const val BAKE_ERROR_CANT_CREATE_IMAGE: Long = 3
-
-    final const val BAKE_ERROR_NO_MESHES: Long = 2
-
-    final const val BAKE_ERROR_NO_SAVE_PATH: Long = 1
-
-    final const val BAKE_ERROR_OK: Long = 0
-
-    final const val BAKE_ERROR_USER_ABORTED: Long = 4
-
-    final const val BAKE_MODE_CONE_TRACE: Long = 0
-
-    final const val BAKE_MODE_RAY_TRACE: Long = 1
-
-    final const val BAKE_QUALITY_HIGH: Long = 2
-
-    final const val BAKE_QUALITY_LOW: Long = 0
-
-    final const val BAKE_QUALITY_MEDIUM: Long = 1
-  }
+  companion object
 }

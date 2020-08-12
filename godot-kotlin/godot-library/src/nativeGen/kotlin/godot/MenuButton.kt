@@ -8,8 +8,8 @@ import godot.core.signal
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_PopupMenu
 import godot.icalls._icall_Unit_Boolean
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.NotImplementedError
@@ -31,19 +31,19 @@ open class MenuButton internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("MenuButton", "MenuButton")
+            this.ptr = invokeConstructor("MenuButton", "MenuButton")
         }
 
   }
 
-  open fun _get_items(): VariantArray {
+  open fun _getItems(): VariantArray {
     throw NotImplementedError("_get_items is not implemented for MenuButton")
   }
 
-  open fun _set_items(arg0: VariantArray) {
+  open fun _setItems(arg0: VariantArray) {
   }
 
-  open fun _unhandled_key_input(arg0: InputEvent) {
+  open fun _unhandledKeyInput(arg0: InputEvent) {
   }
 
   open fun getPopup(): PopupMenu {

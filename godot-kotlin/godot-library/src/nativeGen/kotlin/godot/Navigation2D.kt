@@ -11,8 +11,8 @@ import godot.icalls._icall_PoolVector2Array_Vector2_Vector2_Boolean
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Long_Transform2D
 import godot.icalls._icall_Vector2_Vector2
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
@@ -22,7 +22,7 @@ open class Navigation2D internal constructor(
 ) : Node2D(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("Navigation2D", "Navigation2D")
+            this.ptr = invokeConstructor("Navigation2D", "Navigation2D")
         }
 
   }

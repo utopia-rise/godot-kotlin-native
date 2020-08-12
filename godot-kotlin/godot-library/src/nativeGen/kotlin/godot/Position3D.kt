@@ -2,7 +2,7 @@
 package godot
 
 import godot.core.Godot.shouldInitPtr
-import godot.internal.utils.getConstructor
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 
 open class Position3D internal constructor(
@@ -10,7 +10,7 @@ open class Position3D internal constructor(
 ) : Spatial(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("Position3D", "Position3D")
+            this.ptr = invokeConstructor("Position3D", "Position3D")
         }
 
   }

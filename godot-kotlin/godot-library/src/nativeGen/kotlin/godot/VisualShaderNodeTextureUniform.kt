@@ -5,8 +5,8 @@ import godot.VisualShaderNodeTextureUniform
 import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Long
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Long
 
@@ -35,7 +35,7 @@ open class VisualShaderNodeTextureUniform internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("VisualShaderNodeTextureUniform",
+            this.ptr = invokeConstructor("VisualShaderNodeTextureUniform",
             "VisualShaderNodeTextureUniform")
         }
 
@@ -99,17 +99,5 @@ open class VisualShaderNodeTextureUniform internal constructor(
     }
   }
 
-  companion object {
-    final const val COLOR_DEFAULT_BLACK: Long = 1
-
-    final const val COLOR_DEFAULT_WHITE: Long = 0
-
-    final const val TYPE_ANISO: Long = 3
-
-    final const val TYPE_COLOR: Long = 1
-
-    final const val TYPE_DATA: Long = 0
-
-    final const val TYPE_NORMALMAP: Long = 2
-  }
+  companion object
 }

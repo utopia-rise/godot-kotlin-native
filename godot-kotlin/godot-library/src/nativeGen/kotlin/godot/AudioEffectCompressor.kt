@@ -6,8 +6,8 @@ import godot.icalls._icall_Double
 import godot.icalls._icall_String
 import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_String
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Double
 import kotlin.String
@@ -87,7 +87,7 @@ open class AudioEffectCompressor internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("AudioEffectCompressor", "AudioEffectCompressor")
+            this.ptr = invokeConstructor("AudioEffectCompressor", "AudioEffectCompressor")
         }
 
   }

@@ -13,8 +13,8 @@ import godot.icalls._icall_String
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_NodePath
 import godot.icalls._icall_Unit_String
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Long
 import kotlin.NotImplementedError
@@ -105,16 +105,16 @@ open class VisualScriptPropertySet internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("VisualScriptPropertySet", "VisualScriptPropertySet")
+            this.ptr = invokeConstructor("VisualScriptPropertySet", "VisualScriptPropertySet")
         }
 
   }
 
-  open fun _get_type_cache(): Dictionary {
+  open fun _getTypeCache(): Dictionary {
     throw NotImplementedError("_get_type_cache is not implemented for VisualScriptPropertySet")
   }
 
-  open fun _set_type_cache(typeCache: Dictionary) {
+  open fun _setTypeCache(typeCache: Dictionary) {
   }
 
   open fun getAssignOp(): VisualScriptPropertySet.AssignOp {
@@ -253,35 +253,5 @@ open class VisualScriptPropertySet internal constructor(
     }
   }
 
-  companion object {
-    final const val ASSIGN_OP_ADD: Long = 1
-
-    final const val ASSIGN_OP_BIT_AND: Long = 8
-
-    final const val ASSIGN_OP_BIT_OR: Long = 9
-
-    final const val ASSIGN_OP_BIT_XOR: Long = 10
-
-    final const val ASSIGN_OP_DIV: Long = 4
-
-    final const val ASSIGN_OP_MOD: Long = 5
-
-    final const val ASSIGN_OP_MUL: Long = 3
-
-    final const val ASSIGN_OP_NONE: Long = 0
-
-    final const val ASSIGN_OP_SHIFT_LEFT: Long = 6
-
-    final const val ASSIGN_OP_SHIFT_RIGHT: Long = 7
-
-    final const val ASSIGN_OP_SUB: Long = 2
-
-    final const val CALL_MODE_BASIC_TYPE: Long = 3
-
-    final const val CALL_MODE_INSTANCE: Long = 2
-
-    final const val CALL_MODE_NODE_PATH: Long = 1
-
-    final const val CALL_MODE_SELF: Long = 0
-  }
+  companion object
 }

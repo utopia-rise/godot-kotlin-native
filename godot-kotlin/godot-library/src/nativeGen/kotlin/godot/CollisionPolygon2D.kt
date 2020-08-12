@@ -12,8 +12,8 @@ import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_PoolVector2Array
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -74,7 +74,7 @@ open class CollisionPolygon2D internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("CollisionPolygon2D", "CollisionPolygon2D")
+            this.ptr = invokeConstructor("CollisionPolygon2D", "CollisionPolygon2D")
         }
 
   }
@@ -146,9 +146,5 @@ open class CollisionPolygon2D internal constructor(
     }
   }
 
-  companion object {
-    final const val BUILD_SEGMENTS: Long = 1
-
-    final const val BUILD_SOLIDS: Long = 0
-  }
+  companion object
 }

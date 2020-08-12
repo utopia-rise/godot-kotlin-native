@@ -17,8 +17,8 @@ import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_NodePath
 import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_PoolVector2Array
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -160,23 +160,23 @@ open class CSGPolygon internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("CSGPolygon", "CSGPolygon")
+            this.ptr = invokeConstructor("CSGPolygon", "CSGPolygon")
         }
 
   }
 
-  open fun _has_editable_3d_polygon_no_depth(): Boolean {
+  open fun _hasEditable3dPolygonNoDepth(): Boolean {
     throw NotImplementedError("_has_editable_3d_polygon_no_depth is not implemented for CSGPolygon")
   }
 
-  open fun _is_editable_3d_polygon(): Boolean {
+  open fun _isEditable3dPolygon(): Boolean {
     throw NotImplementedError("_is_editable_3d_polygon is not implemented for CSGPolygon")
   }
 
-  open fun _path_changed() {
+  open fun _pathChanged() {
   }
 
-  open fun _path_exited() {
+  open fun _pathExited() {
   }
 
   open fun getDepth(): Double {
@@ -347,17 +347,5 @@ open class CSGPolygon internal constructor(
     }
   }
 
-  companion object {
-    final const val MODE_DEPTH: Long = 0
-
-    final const val MODE_PATH: Long = 2
-
-    final const val MODE_SPIN: Long = 1
-
-    final const val PATH_ROTATION_PATH: Long = 1
-
-    final const val PATH_ROTATION_PATH_FOLLOW: Long = 2
-
-    final const val PATH_ROTATION_POLYGON: Long = 0
-  }
+  companion object
 }

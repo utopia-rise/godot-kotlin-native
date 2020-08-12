@@ -5,8 +5,8 @@ import godot.core.Godot.shouldInitPtr
 import godot.core.GodotError
 import godot.icalls._icall_Long
 import godot.icalls._icall_Unit
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 
 open class Mutex internal constructor(
@@ -14,7 +14,7 @@ open class Mutex internal constructor(
 ) : Reference(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("Mutex", "_Mutex")
+            this.ptr = invokeConstructor("Mutex", "_Mutex")
         }
 
   }

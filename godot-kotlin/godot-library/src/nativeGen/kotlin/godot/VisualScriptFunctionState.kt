@@ -7,8 +7,8 @@ import godot.core.VariantArray
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Unit_Object_String_VariantArray
 import godot.icalls._icall_Variant_nVariantArray
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.NotImplementedError
@@ -19,12 +19,12 @@ open class VisualScriptFunctionState internal constructor(
 ) : Reference(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("VisualScriptFunctionState", "VisualScriptFunctionState")
+            this.ptr = invokeConstructor("VisualScriptFunctionState", "VisualScriptFunctionState")
         }
 
   }
 
-  open fun _signal_callback(vararg __var_args: Any?): Variant {
+  open fun _signalCallback(vararg __var_args: Any?): Variant {
     throw NotImplementedError("_signal_callback is not implemented for VisualScriptFunctionState")
   }
 

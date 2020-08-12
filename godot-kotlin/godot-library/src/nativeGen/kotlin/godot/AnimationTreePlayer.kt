@@ -37,8 +37,8 @@ import godot.icalls._icall_Unit_String_Object
 import godot.icalls._icall_Unit_String_String
 import godot.icalls._icall_Unit_String_Vector2
 import godot.icalls._icall_Vector2_String
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -90,7 +90,7 @@ open class AnimationTreePlayer internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("AnimationTreePlayer", "AnimationTreePlayer")
+            this.ptr = invokeConstructor("AnimationTreePlayer", "AnimationTreePlayer")
         }
 
   }
@@ -495,29 +495,5 @@ open class AnimationTreePlayer internal constructor(
     }
   }
 
-  companion object {
-    final const val ANIMATION_PROCESS_IDLE: Long = 1
-
-    final const val ANIMATION_PROCESS_PHYSICS: Long = 0
-
-    final const val NODE_ANIMATION: Long = 1
-
-    final const val NODE_BLEND2: Long = 4
-
-    final const val NODE_BLEND3: Long = 5
-
-    final const val NODE_BLEND4: Long = 6
-
-    final const val NODE_MIX: Long = 3
-
-    final const val NODE_ONESHOT: Long = 2
-
-    final const val NODE_OUTPUT: Long = 0
-
-    final const val NODE_TIMESCALE: Long = 7
-
-    final const val NODE_TIMESEEK: Long = 8
-
-    final const val NODE_TRANSITION: Long = 9
-  }
+  companion object
 }

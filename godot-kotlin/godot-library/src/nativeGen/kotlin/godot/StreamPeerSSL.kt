@@ -10,8 +10,8 @@ import godot.icalls._icall_Long_Object_Boolean_String_nObject
 import godot.icalls._icall_Long_Object_Object_Object_nObject
 import godot.icalls._icall_Unit
 import godot.icalls._icall_Unit_Boolean
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
@@ -32,7 +32,7 @@ open class StreamPeerSSL internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("StreamPeerSSL", "StreamPeerSSL")
+            this.ptr = invokeConstructor("StreamPeerSSL", "StreamPeerSSL")
         }
 
   }
@@ -107,15 +107,5 @@ open class StreamPeerSSL internal constructor(
     }
   }
 
-  companion object {
-    final const val STATUS_CONNECTED: Long = 2
-
-    final const val STATUS_DISCONNECTED: Long = 0
-
-    final const val STATUS_ERROR: Long = 3
-
-    final const val STATUS_ERROR_HOSTNAME_MISMATCH: Long = 4
-
-    final const val STATUS_HANDSHAKING: Long = 1
-  }
+  companion object
 }

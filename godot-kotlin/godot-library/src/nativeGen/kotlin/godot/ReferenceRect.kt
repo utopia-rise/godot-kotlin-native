@@ -7,8 +7,8 @@ import godot.icalls._icall_Boolean
 import godot.icalls._icall_Color
 import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Color
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Unit
@@ -38,7 +38,7 @@ open class ReferenceRect internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("ReferenceRect", "ReferenceRect")
+            this.ptr = invokeConstructor("ReferenceRect", "ReferenceRect")
         }
 
   }

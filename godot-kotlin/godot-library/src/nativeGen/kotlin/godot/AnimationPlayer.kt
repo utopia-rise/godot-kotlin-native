@@ -33,8 +33,8 @@ import godot.icalls._icall_Unit_String_Double
 import godot.icalls._icall_Unit_String_Double_Double_Boolean
 import godot.icalls._icall_Unit_String_String
 import godot.icalls._icall_Unit_String_String_Double
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -156,15 +156,15 @@ open class AnimationPlayer internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("AnimationPlayer", "AnimationPlayer")
+            this.ptr = invokeConstructor("AnimationPlayer", "AnimationPlayer")
         }
 
   }
 
-  open fun _animation_changed() {
+  open fun _animationChanged() {
   }
 
-  open fun _node_removed(arg0: Node) {
+  open fun _nodeRemoved(arg0: Node) {
   }
 
   open fun addAnimation(name: String, animation: Animation): GodotError {
@@ -422,15 +422,5 @@ open class AnimationPlayer internal constructor(
     }
   }
 
-  companion object {
-    final const val ANIMATION_METHOD_CALL_DEFERRED: Long = 0
-
-    final const val ANIMATION_METHOD_CALL_IMMEDIATE: Long = 1
-
-    final const val ANIMATION_PROCESS_IDLE: Long = 1
-
-    final const val ANIMATION_PROCESS_MANUAL: Long = 2
-
-    final const val ANIMATION_PROCESS_PHYSICS: Long = 0
-  }
+  companion object
 }

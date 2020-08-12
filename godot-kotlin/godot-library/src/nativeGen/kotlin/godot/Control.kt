@@ -49,8 +49,8 @@ import godot.icalls._icall_Unit_Variant_Object
 import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_Unit_Vector2_Boolean
 import godot.icalls._icall_Vector2
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -375,7 +375,7 @@ open class Control internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("Control", "Control")
+            this.ptr = invokeConstructor("Control", "Control")
         }
 
   }
@@ -398,47 +398,47 @@ open class Control internal constructor(
   }
 
 
-  open fun _clips_input(): Boolean {
+  open fun _clipsInput(): Boolean {
     throw NotImplementedError("_clips_input is not implemented for Control")
   }
 
-  open fun _get_minimum_size(): Vector2 {
+  open fun _getMinimumSize(): Vector2 {
     throw NotImplementedError("_get_minimum_size is not implemented for Control")
   }
 
-  open fun _get_tooltip(): String {
+  open fun _getTooltip(): String {
     throw NotImplementedError("_get_tooltip is not implemented for Control")
   }
 
-  open fun _gui_input(event: InputEvent) {
+  open fun _guiInput(event: InputEvent) {
   }
 
-  open fun _make_custom_tooltip(forText: String): Object {
+  open fun _makeCustomTooltip(forText: String): Object {
     throw NotImplementedError("_make_custom_tooltip is not implemented for Control")
   }
 
-  open fun _override_changed() {
+  open fun _overrideChanged() {
   }
 
-  open fun _set_anchor(margin: Long, anchor: Double) {
+  open fun _setAnchor(margin: Long, anchor: Double) {
   }
 
-  open fun _set_global_position(position: Vector2) {
+  open fun _setGlobalPosition(position: Vector2) {
   }
 
-  open fun _set_position(margin: Vector2) {
+  open fun _setPosition(margin: Vector2) {
   }
 
-  open fun _set_size(size: Vector2) {
+  open fun _setSize(size: Vector2) {
   }
 
-  open fun _size_changed() {
+  open fun _sizeChanged() {
   }
 
-  open fun _theme_changed() {
+  open fun _themeChanged() {
   }
 
-  open fun _update_minimum_size() {
+  open fun _updateMinimumSize() {
   }
 
   open fun acceptEvent() {
@@ -476,11 +476,11 @@ open class Control internal constructor(
     _icall_Unit_String_Object( mb, this.ptr, name, stylebox)
   }
 
-  open fun can_drop_data(position: Vector2, data: Variant): Boolean {
+  open fun canDropData(position: Vector2, data: Variant): Boolean {
     throw NotImplementedError("can_drop_data is not implemented for Control")
   }
 
-  open fun drop_data(position: Vector2, data: Variant) {
+  open fun dropData(position: Vector2, data: Variant) {
   }
 
   open fun forceDrag(data: Variant, preview: Control) {
@@ -528,7 +528,7 @@ open class Control internal constructor(
     return Control.CursorShape.from( _icall_Long( mb, this.ptr))
   }
 
-  open fun get_drag_data(position: Vector2): Variant {
+  open fun getDragData(position: Vector2): Variant {
     throw NotImplementedError("get_drag_data is not implemented for Control")
   }
 
@@ -737,7 +737,7 @@ open class Control internal constructor(
     return _icall_Boolean_String( mb, this.ptr, name)
   }
 
-  open fun has_point(point: Vector2): Boolean {
+  open fun hasPoint(point: Vector2): Boolean {
     throw NotImplementedError("has_point is not implemented for Control")
   }
 
@@ -1172,62 +1172,6 @@ open class Control internal constructor(
   }
 
   companion object {
-    final const val ANCHOR_BEGIN: Long = 0
-
-    final const val ANCHOR_END: Long = 1
-
-    final const val CURSOR_ARROW: Long = 0
-
-    final const val CURSOR_BDIAGSIZE: Long = 11
-
-    final const val CURSOR_BUSY: Long = 5
-
-    final const val CURSOR_CAN_DROP: Long = 7
-
-    final const val CURSOR_CROSS: Long = 3
-
-    final const val CURSOR_DRAG: Long = 6
-
-    final const val CURSOR_FDIAGSIZE: Long = 12
-
-    final const val CURSOR_FORBIDDEN: Long = 8
-
-    final const val CURSOR_HELP: Long = 16
-
-    final const val CURSOR_HSIZE: Long = 10
-
-    final const val CURSOR_HSPLIT: Long = 15
-
-    final const val CURSOR_IBEAM: Long = 1
-
-    final const val CURSOR_MOVE: Long = 13
-
-    final const val CURSOR_POINTING_HAND: Long = 2
-
-    final const val CURSOR_VSIZE: Long = 9
-
-    final const val CURSOR_VSPLIT: Long = 14
-
-    final const val CURSOR_WAIT: Long = 4
-
-    final const val FOCUS_ALL: Long = 2
-
-    final const val FOCUS_CLICK: Long = 1
-
-    final const val FOCUS_NONE: Long = 0
-
-    final const val GROW_DIRECTION_BEGIN: Long = 0
-
-    final const val GROW_DIRECTION_BOTH: Long = 2
-
-    final const val GROW_DIRECTION_END: Long = 1
-
-    final const val MOUSE_FILTER_IGNORE: Long = 2
-
-    final const val MOUSE_FILTER_PASS: Long = 1
-
-    final const val MOUSE_FILTER_STOP: Long = 0
-
     final const val NOTIFICATION_FOCUS_ENTER: Long = 43
 
     final const val NOTIFICATION_FOCUS_EXIT: Long = 44
@@ -1245,55 +1189,5 @@ open class Control internal constructor(
     final const val NOTIFICATION_SCROLL_END: Long = 48
 
     final const val NOTIFICATION_THEME_CHANGED: Long = 45
-
-    final const val PRESET_BOTTOM_LEFT: Long = 2
-
-    final const val PRESET_BOTTOM_RIGHT: Long = 3
-
-    final const val PRESET_BOTTOM_WIDE: Long = 12
-
-    final const val PRESET_CENTER: Long = 8
-
-    final const val PRESET_CENTER_BOTTOM: Long = 7
-
-    final const val PRESET_CENTER_LEFT: Long = 4
-
-    final const val PRESET_CENTER_RIGHT: Long = 6
-
-    final const val PRESET_CENTER_TOP: Long = 5
-
-    final const val PRESET_HCENTER_WIDE: Long = 14
-
-    final const val PRESET_LEFT_WIDE: Long = 9
-
-    final const val PRESET_MODE_KEEP_HEIGHT: Long = 2
-
-    final const val PRESET_MODE_KEEP_SIZE: Long = 3
-
-    final const val PRESET_MODE_KEEP_WIDTH: Long = 1
-
-    final const val PRESET_MODE_MINSIZE: Long = 0
-
-    final const val PRESET_RIGHT_WIDE: Long = 11
-
-    final const val PRESET_TOP_LEFT: Long = 0
-
-    final const val PRESET_TOP_RIGHT: Long = 1
-
-    final const val PRESET_TOP_WIDE: Long = 10
-
-    final const val PRESET_VCENTER_WIDE: Long = 13
-
-    final const val PRESET_WIDE: Long = 15
-
-    final const val SIZE_EXPAND: Long = 2
-
-    final const val SIZE_EXPAND_FILL: Long = 3
-
-    final const val SIZE_FILL: Long = 1
-
-    final const val SIZE_SHRINK_CENTER: Long = 4
-
-    final const val SIZE_SHRINK_END: Long = 8
   }
 }

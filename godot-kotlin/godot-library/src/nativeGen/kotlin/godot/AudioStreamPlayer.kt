@@ -17,8 +17,8 @@ import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_String
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -109,19 +109,19 @@ open class AudioStreamPlayer internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("AudioStreamPlayer", "AudioStreamPlayer")
+            this.ptr = invokeConstructor("AudioStreamPlayer", "AudioStreamPlayer")
         }
 
   }
 
-  open fun _bus_layout_changed() {
+  open fun _busLayoutChanged() {
   }
 
-  open fun _is_active(): Boolean {
+  open fun _isActive(): Boolean {
     throw NotImplementedError("_is_active is not implemented for AudioStreamPlayer")
   }
 
-  open fun _set_playing(enable: Boolean) {
+  open fun _setPlaying(enable: Boolean) {
   }
 
   open fun getBus(): String {
@@ -243,11 +243,5 @@ open class AudioStreamPlayer internal constructor(
     }
   }
 
-  companion object {
-    final const val MIX_TARGET_CENTER: Long = 2
-
-    final const val MIX_TARGET_STEREO: Long = 0
-
-    final const val MIX_TARGET_SURROUND: Long = 1
-  }
+  companion object
 }

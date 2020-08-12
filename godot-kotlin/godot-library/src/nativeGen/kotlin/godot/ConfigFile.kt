@@ -17,8 +17,8 @@ import godot.icalls._icall_Unit_String
 import godot.icalls._icall_Unit_String_String
 import godot.icalls._icall_Unit_String_String_Variant
 import godot.icalls._icall_Variant_String_String_nVariant
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.String
@@ -28,7 +28,7 @@ open class ConfigFile internal constructor(
 ) : Reference(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("ConfigFile", "ConfigFile")
+            this.ptr = invokeConstructor("ConfigFile", "ConfigFile")
         }
 
   }

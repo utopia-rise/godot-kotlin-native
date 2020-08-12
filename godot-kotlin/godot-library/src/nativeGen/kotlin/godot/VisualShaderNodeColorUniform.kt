@@ -2,7 +2,7 @@
 package godot
 
 import godot.core.Godot.shouldInitPtr
-import godot.internal.utils.getConstructor
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 
 open class VisualShaderNodeColorUniform internal constructor(
@@ -10,7 +10,7 @@ open class VisualShaderNodeColorUniform internal constructor(
 ) : VisualShaderNodeUniform(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("VisualShaderNodeColorUniform",
+            this.ptr = invokeConstructor("VisualShaderNodeColorUniform",
             "VisualShaderNodeColorUniform")
         }
 

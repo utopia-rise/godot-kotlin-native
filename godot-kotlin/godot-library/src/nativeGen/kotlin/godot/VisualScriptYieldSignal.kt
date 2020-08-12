@@ -10,8 +10,8 @@ import godot.icalls._icall_String
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_NodePath
 import godot.icalls._icall_Unit_String
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Long
 import kotlin.String
@@ -61,7 +61,7 @@ open class VisualScriptYieldSignal internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("VisualScriptYieldSignal", "VisualScriptYieldSignal")
+            this.ptr = invokeConstructor("VisualScriptYieldSignal", "VisualScriptYieldSignal")
         }
 
   }
@@ -125,11 +125,5 @@ open class VisualScriptYieldSignal internal constructor(
     }
   }
 
-  companion object {
-    final const val CALL_MODE_INSTANCE: Long = 2
-
-    final const val CALL_MODE_NODE_PATH: Long = 1
-
-    final const val CALL_MODE_SELF: Long = 0
-  }
+  companion object
 }

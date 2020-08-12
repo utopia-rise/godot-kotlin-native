@@ -18,7 +18,7 @@ open class GDScriptFunctionState internal constructor(
 
   internal constructor() : this(null)
 
-  open fun _signal_callback(vararg __var_args: Any?): Variant {
+  open fun _signalCallback(vararg __var_args: Any?): Variant {
     throw NotImplementedError("_signal_callback is not implemented for GDScriptFunctionState")
   }
 

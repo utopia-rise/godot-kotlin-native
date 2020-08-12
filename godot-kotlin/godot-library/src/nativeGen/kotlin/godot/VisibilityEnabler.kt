@@ -4,8 +4,8 @@ package godot
 import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Boolean_Long
 import godot.icalls._icall_Unit_Long_Boolean
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
@@ -35,12 +35,12 @@ open class VisibilityEnabler internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("VisibilityEnabler", "VisibilityEnabler")
+            this.ptr = invokeConstructor("VisibilityEnabler", "VisibilityEnabler")
         }
 
   }
 
-  open fun _node_removed(arg0: Node) {
+  open fun _nodeRemoved(arg0: Node) {
   }
 
   open fun isEnablerEnabled(enabler: Long): Boolean {
@@ -72,11 +72,5 @@ open class VisibilityEnabler internal constructor(
     }
   }
 
-  companion object {
-    final const val ENABLER_FREEZE_BODIES: Long = 1
-
-    final const val ENABLER_MAX: Long = 2
-
-    final const val ENABLER_PAUSE_ANIMATIONS: Long = 0
-  }
+  companion object
 }

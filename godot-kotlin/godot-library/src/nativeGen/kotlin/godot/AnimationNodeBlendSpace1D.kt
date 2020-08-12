@@ -13,8 +13,8 @@ import godot.icalls._icall_Unit_Long_Double
 import godot.icalls._icall_Unit_Long_Object
 import godot.icalls._icall_Unit_Object_Double_Long
 import godot.icalls._icall_Unit_String
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Double
 import kotlin.Long
@@ -1089,15 +1089,15 @@ open class AnimationNodeBlendSpace1D internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("AnimationNodeBlendSpace1D", "AnimationNodeBlendSpace1D")
+            this.ptr = invokeConstructor("AnimationNodeBlendSpace1D", "AnimationNodeBlendSpace1D")
         }
 
   }
 
-  open fun _add_blend_point(index: Long, node: AnimationRootNode) {
+  open fun _addBlendPoint(index: Long, node: AnimationRootNode) {
   }
 
-  open fun _tree_changed() {
+  open fun _treeChanged() {
   }
 
   open fun addBlendPoint(

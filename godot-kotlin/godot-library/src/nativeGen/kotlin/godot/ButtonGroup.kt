@@ -5,8 +5,8 @@ import godot.core.Godot.shouldInitPtr
 import godot.core.VariantArray
 import godot.icalls._icall_BaseButton
 import godot.icalls._icall_VariantArray
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 
 open class ButtonGroup internal constructor(
@@ -14,7 +14,7 @@ open class ButtonGroup internal constructor(
 ) : Resource(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("ButtonGroup", "ButtonGroup")
+            this.ptr = invokeConstructor("ButtonGroup", "ButtonGroup")
         }
 
   }

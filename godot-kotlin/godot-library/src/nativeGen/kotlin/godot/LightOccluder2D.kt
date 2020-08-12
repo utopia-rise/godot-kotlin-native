@@ -6,8 +6,8 @@ import godot.icalls._icall_Long
 import godot.icalls._icall_OccluderPolygon2D
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Object
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Long
 
@@ -36,12 +36,12 @@ open class LightOccluder2D internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("LightOccluder2D", "LightOccluder2D")
+            this.ptr = invokeConstructor("LightOccluder2D", "LightOccluder2D")
         }
 
   }
 
-  open fun _poly_changed() {
+  open fun _polyChanged() {
   }
 
   open fun getOccluderLightMask(): Long {

@@ -51,7 +51,7 @@ open class SplitContainer internal constructor(
 
   internal constructor() : this(null)
 
-  override fun _gui_input(arg0: InputEvent) {
+  override fun _guiInput(arg0: InputEvent) {
   }
 
   open fun clampSplitOffset() {
@@ -108,11 +108,5 @@ open class SplitContainer internal constructor(
     }
   }
 
-  companion object {
-    final const val DRAGGER_HIDDEN: Long = 1
-
-    final const val DRAGGER_HIDDEN_COLLAPSED: Long = 2
-
-    final const val DRAGGER_VISIBLE: Long = 0
-  }
+  companion object
 }

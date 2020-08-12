@@ -15,8 +15,8 @@ import godot.icalls._icall_Long_String_Long_String
 import godot.icalls._icall_Long_String_String
 import godot.icalls._icall_Unit
 import godot.icalls._icall_WebRTCDataChannel_String_Dictionary
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Long
 import kotlin.String
@@ -32,7 +32,7 @@ open class WebRTCPeerConnection internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("WebRTCPeerConnection", "WebRTCPeerConnection")
+            this.ptr = invokeConstructor("WebRTCPeerConnection", "WebRTCPeerConnection")
         }
 
   }
@@ -112,17 +112,5 @@ open class WebRTCPeerConnection internal constructor(
     }
   }
 
-  companion object {
-    final const val STATE_CLOSED: Long = 5
-
-    final const val STATE_CONNECTED: Long = 2
-
-    final const val STATE_CONNECTING: Long = 1
-
-    final const val STATE_DISCONNECTED: Long = 3
-
-    final const val STATE_FAILED: Long = 4
-
-    final const val STATE_NEW: Long = 0
-  }
+  companion object
 }

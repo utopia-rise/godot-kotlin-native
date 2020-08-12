@@ -7,8 +7,8 @@ import godot.icalls._icall_Boolean
 import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Vector3
 import godot.icalls._icall_Vector3
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 
@@ -27,7 +27,7 @@ open class SpatialVelocityTracker internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("SpatialVelocityTracker", "SpatialVelocityTracker")
+            this.ptr = invokeConstructor("SpatialVelocityTracker", "SpatialVelocityTracker")
         }
 
   }

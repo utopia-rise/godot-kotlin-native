@@ -5,8 +5,8 @@ import godot.core.Godot.shouldInitPtr
 import godot.core.PoolVector2Array
 import godot.icalls._icall_PoolVector2Array
 import godot.icalls._icall_Unit_PoolVector2Array
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 
 open class ConcavePolygonShape2D internal constructor(
@@ -24,7 +24,7 @@ open class ConcavePolygonShape2D internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("ConcavePolygonShape2D", "ConcavePolygonShape2D")
+            this.ptr = invokeConstructor("ConcavePolygonShape2D", "ConcavePolygonShape2D")
         }
 
   }

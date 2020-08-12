@@ -8,8 +8,8 @@ import godot.icalls._icall_Boolean
 import godot.icalls._icall_GDNativeLibrary
 import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Variant_String_String_VariantArray
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.String
@@ -29,7 +29,7 @@ open class GDNative internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("GDNative", "GDNative")
+            this.ptr = invokeConstructor("GDNative", "GDNative")
         }
 
   }

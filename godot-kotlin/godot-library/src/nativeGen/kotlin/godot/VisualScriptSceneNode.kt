@@ -5,8 +5,8 @@ import godot.core.Godot.shouldInitPtr
 import godot.core.NodePath
 import godot.icalls._icall_NodePath
 import godot.icalls._icall_Unit_NodePath
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 
 open class VisualScriptSceneNode internal constructor(
@@ -24,7 +24,7 @@ open class VisualScriptSceneNode internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("VisualScriptSceneNode", "VisualScriptSceneNode")
+            this.ptr = invokeConstructor("VisualScriptSceneNode", "VisualScriptSceneNode")
         }
 
   }

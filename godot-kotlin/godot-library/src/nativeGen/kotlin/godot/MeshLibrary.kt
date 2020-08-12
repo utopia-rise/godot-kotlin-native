@@ -20,8 +20,8 @@ import godot.icalls._icall_Unit_Long_String
 import godot.icalls._icall_Unit_Long_Transform
 import godot.icalls._icall_Unit_Long_VariantArray
 import godot.icalls._icall_VariantArray_Long
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Long
 import kotlin.String
@@ -31,7 +31,7 @@ open class MeshLibrary internal constructor(
 ) : Resource(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("MeshLibrary", "MeshLibrary")
+            this.ptr = invokeConstructor("MeshLibrary", "MeshLibrary")
         }
 
   }

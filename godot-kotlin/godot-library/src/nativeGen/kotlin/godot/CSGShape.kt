@@ -83,7 +83,7 @@ open class CSGShape internal constructor(
 
   internal constructor() : this(null)
 
-  open fun _update_shape() {
+  open fun _updateShape() {
   }
 
   open fun getCollisionLayer(): Long {
@@ -195,11 +195,5 @@ open class CSGShape internal constructor(
     }
   }
 
-  companion object {
-    final const val OPERATION_INTERSECTION: Long = 1
-
-    final const val OPERATION_SUBTRACTION: Long = 2
-
-    final const val OPERATION_UNION: Long = 0
-  }
+  companion object
 }

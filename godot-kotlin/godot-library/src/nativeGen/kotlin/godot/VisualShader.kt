@@ -20,8 +20,8 @@ import godot.icalls._icall_VariantArray_Long
 import godot.icalls._icall_Vector2
 import godot.icalls._icall_Vector2_Long_Long
 import godot.icalls._icall_VisualShaderNode_Long_Long
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
@@ -42,7 +42,7 @@ open class VisualShader internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("VisualShader", "VisualShader")
+            this.ptr = invokeConstructor("VisualShader", "VisualShader")
         }
 
   }
@@ -53,13 +53,13 @@ open class VisualShader internal constructor(
   }
 
 
-  open fun _input_type_changed(arg0: Long, arg1: Long) {
+  open fun _inputTypeChanged(arg0: Long, arg1: Long) {
   }
 
-  open fun _queue_update() {
+  open fun _queueUpdate() {
   }
 
-  open fun _update_shader() {
+  open fun _updateShader() {
   }
 
   open fun addNode(
@@ -209,13 +209,5 @@ open class VisualShader internal constructor(
     final const val NODE_ID_INVALID: Long = -1
 
     final const val NODE_ID_OUTPUT: Long = 0
-
-    final const val TYPE_FRAGMENT: Long = 1
-
-    final const val TYPE_LIGHT: Long = 2
-
-    final const val TYPE_MAX: Long = 3
-
-    final const val TYPE_VERTEX: Long = 0
   }
 }

@@ -32,8 +32,8 @@ import godot.icalls._icall_Unit_String
 import godot.icalls._icall_Unit_String_Color
 import godot.icalls._icall_Unit_String_String_Color_Boolean
 import godot.icalls._icall_VariantArray
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -317,36 +317,36 @@ open class TextEdit internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("TextEdit", "TextEdit")
+            this.ptr = invokeConstructor("TextEdit", "TextEdit")
         }
 
   }
 
-  open fun _click_selection_held() {
+  open fun _clickSelectionHeld() {
   }
 
-  open fun _cursor_changed_emit() {
+  open fun _cursorChangedEmit() {
   }
 
-  override fun _gui_input(arg0: InputEvent) {
+  override fun _guiInput(arg0: InputEvent) {
   }
 
-  open fun _push_current_op() {
+  open fun _pushCurrentOp() {
   }
 
-  open fun _scroll_moved(arg0: Double) {
+  open fun _scrollMoved(arg0: Double) {
   }
 
-  open fun _text_changed_emit() {
+  open fun _textChangedEmit() {
   }
 
-  open fun _toggle_draw_caret() {
+  open fun _toggleDrawCaret() {
   }
 
-  open fun _update_wrap_at() {
+  open fun _updateWrapAt() {
   }
 
-  open fun _v_scroll_input() {
+  open fun _vScrollInput() {
   }
 
   open fun addColorRegion(
@@ -916,31 +916,5 @@ open class TextEdit internal constructor(
     }
   }
 
-  companion object {
-    final const val MENU_CLEAR: Long = 3
-
-    final const val MENU_COPY: Long = 1
-
-    final const val MENU_CUT: Long = 0
-
-    final const val MENU_MAX: Long = 7
-
-    final const val MENU_PASTE: Long = 2
-
-    final const val MENU_REDO: Long = 6
-
-    final const val MENU_SELECT_ALL: Long = 4
-
-    final const val MENU_UNDO: Long = 5
-
-    final const val SEARCH_BACKWARDS: Long = 4
-
-    final const val SEARCH_MATCH_CASE: Long = 1
-
-    final const val SEARCH_RESULT_COLUMN: Long = 0
-
-    final const val SEARCH_RESULT_LINE: Long = 1
-
-    final const val SEARCH_WHOLE_WORDS: Long = 2
-  }
+  companion object
 }

@@ -9,8 +9,8 @@ import godot.core.signal
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Rect2
 import godot.icalls._icall_Unit_Rect2
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Unit
@@ -38,7 +38,7 @@ open class VisibilityNotifier2D internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("VisibilityNotifier2D", "VisibilityNotifier2D")
+            this.ptr = invokeConstructor("VisibilityNotifier2D", "VisibilityNotifier2D")
         }
 
   }

@@ -10,8 +10,8 @@ import godot.icalls._icall_PoolVector2Array
 import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_PoolVector2Array
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
@@ -51,7 +51,7 @@ open class OccluderPolygon2D internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("OccluderPolygon2D", "OccluderPolygon2D")
+            this.ptr = invokeConstructor("OccluderPolygon2D", "OccluderPolygon2D")
         }
 
   }
@@ -105,11 +105,5 @@ open class OccluderPolygon2D internal constructor(
     }
   }
 
-  companion object {
-    final const val CULL_CLOCKWISE: Long = 1
-
-    final const val CULL_COUNTER_CLOCKWISE: Long = 2
-
-    final const val CULL_DISABLED: Long = 0
-  }
+  companion object
 }

@@ -5,8 +5,8 @@ import godot.VisualShaderNodeColorOp
 import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Long
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Long
 
@@ -25,7 +25,7 @@ open class VisualShaderNodeColorOp internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("VisualShaderNodeColorOp", "VisualShaderNodeColorOp")
+            this.ptr = invokeConstructor("VisualShaderNodeColorOp", "VisualShaderNodeColorOp")
         }
 
   }
@@ -71,23 +71,5 @@ open class VisualShaderNodeColorOp internal constructor(
     }
   }
 
-  companion object {
-    final const val OP_BURN: Long = 6
-
-    final const val OP_DARKEN: Long = 2
-
-    final const val OP_DIFFERENCE: Long = 1
-
-    final const val OP_DODGE: Long = 5
-
-    final const val OP_HARD_LIGHT: Long = 8
-
-    final const val OP_LIGHTEN: Long = 3
-
-    final const val OP_OVERLAY: Long = 4
-
-    final const val OP_SCREEN: Long = 0
-
-    final const val OP_SOFT_LIGHT: Long = 7
-  }
+  companion object
 }

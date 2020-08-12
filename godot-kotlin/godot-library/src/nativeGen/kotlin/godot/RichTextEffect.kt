@@ -2,7 +2,7 @@
 package godot
 
 import godot.core.Godot.shouldInitPtr
-import godot.internal.utils.getConstructor
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.NotImplementedError
@@ -12,12 +12,12 @@ open class RichTextEffect internal constructor(
 ) : Resource(_ignore) {
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("RichTextEffect", "RichTextEffect")
+            this.ptr = invokeConstructor("RichTextEffect", "RichTextEffect")
         }
 
   }
 
-  open fun _process_custom_fx(charFx: CharFXTransform): Boolean {
+  open fun _processCustomFx(charFx: CharFXTransform): Boolean {
     throw NotImplementedError("_process_custom_fx is not implemented for RichTextEffect")
   }
 }

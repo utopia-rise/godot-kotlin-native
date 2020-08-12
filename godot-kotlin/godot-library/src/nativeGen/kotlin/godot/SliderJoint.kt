@@ -4,8 +4,8 @@ package godot
 import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Double_Long
 import godot.icalls._icall_Unit_Long_Double
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Double
 import kotlin.Long
@@ -216,23 +216,23 @@ open class SliderJoint internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("SliderJoint", "SliderJoint")
+            this.ptr = invokeConstructor("SliderJoint", "SliderJoint")
         }
 
   }
 
-  open fun _get_lower_limit_angular(): Double {
+  open fun _getLowerLimitAngular(): Double {
     throw NotImplementedError("_get_lower_limit_angular is not implemented for SliderJoint")
   }
 
-  open fun _get_upper_limit_angular(): Double {
+  open fun _getUpperLimitAngular(): Double {
     throw NotImplementedError("_get_upper_limit_angular is not implemented for SliderJoint")
   }
 
-  open fun _set_lower_limit_angular(lowerLimitAngular: Double) {
+  open fun _setLowerLimitAngular(lowerLimitAngular: Double) {
   }
 
-  open fun _set_upper_limit_angular(upperLimitAngular: Double) {
+  open fun _setUpperLimitAngular(upperLimitAngular: Double) {
   }
 
   open fun getParam(param: Long): Double {
@@ -304,51 +304,5 @@ open class SliderJoint internal constructor(
     }
   }
 
-  companion object {
-    final const val PARAM_ANGULAR_LIMIT_DAMPING: Long = 15
-
-    final const val PARAM_ANGULAR_LIMIT_LOWER: Long = 12
-
-    final const val PARAM_ANGULAR_LIMIT_RESTITUTION: Long = 14
-
-    final const val PARAM_ANGULAR_LIMIT_SOFTNESS: Long = 13
-
-    final const val PARAM_ANGULAR_LIMIT_UPPER: Long = 11
-
-    final const val PARAM_ANGULAR_MOTION_DAMPING: Long = 18
-
-    final const val PARAM_ANGULAR_MOTION_RESTITUTION: Long = 17
-
-    final const val PARAM_ANGULAR_MOTION_SOFTNESS: Long = 16
-
-    final const val PARAM_ANGULAR_ORTHOGONAL_DAMPING: Long = 21
-
-    final const val PARAM_ANGULAR_ORTHOGONAL_RESTITUTION: Long = 20
-
-    final const val PARAM_ANGULAR_ORTHOGONAL_SOFTNESS: Long = 19
-
-    final const val PARAM_LINEAR_LIMIT_DAMPING: Long = 4
-
-    final const val PARAM_LINEAR_LIMIT_LOWER: Long = 1
-
-    final const val PARAM_LINEAR_LIMIT_RESTITUTION: Long = 3
-
-    final const val PARAM_LINEAR_LIMIT_SOFTNESS: Long = 2
-
-    final const val PARAM_LINEAR_LIMIT_UPPER: Long = 0
-
-    final const val PARAM_LINEAR_MOTION_DAMPING: Long = 7
-
-    final const val PARAM_LINEAR_MOTION_RESTITUTION: Long = 6
-
-    final const val PARAM_LINEAR_MOTION_SOFTNESS: Long = 5
-
-    final const val PARAM_LINEAR_ORTHOGONAL_DAMPING: Long = 10
-
-    final const val PARAM_LINEAR_ORTHOGONAL_RESTITUTION: Long = 9
-
-    final const val PARAM_LINEAR_ORTHOGONAL_SOFTNESS: Long = 8
-
-    final const val PARAM_MAX: Long = 22
-  }
+  companion object
 }

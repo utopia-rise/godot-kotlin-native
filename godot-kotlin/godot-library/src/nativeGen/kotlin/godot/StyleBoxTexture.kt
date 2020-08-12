@@ -21,8 +21,8 @@ import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Long_Double
 import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_Rect2
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
@@ -186,7 +186,7 @@ open class StyleBoxTexture internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("StyleBoxTexture", "StyleBoxTexture")
+            this.ptr = invokeConstructor("StyleBoxTexture", "StyleBoxTexture")
         }
 
   }
@@ -327,11 +327,5 @@ open class StyleBoxTexture internal constructor(
     }
   }
 
-  companion object {
-    final const val AXIS_STRETCH_MODE_STRETCH: Long = 0
-
-    final const val AXIS_STRETCH_MODE_TILE: Long = 1
-
-    final const val AXIS_STRETCH_MODE_TILE_FIT: Long = 2
-  }
+  companion object
 }

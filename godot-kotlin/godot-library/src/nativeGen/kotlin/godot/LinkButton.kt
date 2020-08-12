@@ -7,8 +7,8 @@ import godot.icalls._icall_Long
 import godot.icalls._icall_String
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_String
-import godot.internal.utils.getConstructor
 import godot.internal.utils.getMethodBind
+import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.Long
 import kotlin.String
@@ -38,7 +38,7 @@ open class LinkButton internal constructor(
 
   constructor() : this(null) {
     if (shouldInitPtr()) {
-            this.ptr = getConstructor("LinkButton", "LinkButton")
+            this.ptr = invokeConstructor("LinkButton", "LinkButton")
         }
 
   }
@@ -82,11 +82,5 @@ open class LinkButton internal constructor(
     }
   }
 
-  companion object {
-    final const val UNDERLINE_MODE_ALWAYS: Long = 0
-
-    final const val UNDERLINE_MODE_NEVER: Long = 2
-
-    final const val UNDERLINE_MODE_ON_HOVER: Long = 1
-  }
+  companion object
 }
