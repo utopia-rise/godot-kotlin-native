@@ -3,15 +3,21 @@ package godot.core
 import godot.Object
 import kotlin.reflect.KProperty
 
-class SignalDelegate<T : Signal>(val signal: T) {
+class SignalDelegate<T : Signal>(val factory: () -> T) {
+    @PublishedApi
+    internal var signal: T? = null
     inline operator fun getValue(thisRef: Object, property: KProperty<*>): T {
-        return signal
+        if (signal == null) {
+            signal = factory()
+        }
+        return signal!!
     }
 }
 
 class SignalDelegateProvider<T : Signal>(private val factory: (String) -> T) {
     operator fun provideDelegate(thisRef: Object, property: KProperty<*>): SignalDelegate<T> {
-        return SignalDelegate(factory(property.name.camelToSnakeCase())) //not using `camelcaseToUnderscore` to prevent a call to godot for each signal emission
+        // not using `camelcaseToUnderscore` to prevent a call to godot for each signal emission
+        return SignalDelegate { factory(property.name.camelToSnakeCase()) }
     }
 }
 
