@@ -19,6 +19,9 @@ class RotatingCube: Spatial() {
 }
 ```
 
+!!! important ""
+    All properties that you register, are registered in `snake_case`! So `myVeryCoolProperty` will become `my_very_cool_property`. This is done for easier GDScript integration. Keep this in mind when interacting with kotlin properties from other languages.
+
 ## Default Values
 If you define a default value for a property and `visibleInEditor` (more on that later) is set to `true`, the default value will be set in the `inspector`.   
 **Note:** If you set a default value in code and a different value in the `inspector` the value of the `inspector` will override the value in code after `init` and before `_ready`!  

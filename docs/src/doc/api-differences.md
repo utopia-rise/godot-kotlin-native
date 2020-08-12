@@ -64,7 +64,7 @@ Godot enums are mapped to Kotlin enums, the generated enum exposes a `value` pro
 ## Signals and exposed methods
 In GDScript, signals and methods can have any number of arguments, this is not possible in Kotlin as it is a statically typed language. At the moment, you can create signals and expose methods to Godot with at most 10 parameters.
 
-Additionally, signals are mapped to properties of type `Signal` and must start with a prefix `signal` (check [Signals](user-guide/signals.md) section for more details). The prefix is dropped during registration, so the signal `signalReverseChanged` is known in Godot as `reverseChanged`. This is done to avoid naming conflicts with other members of a class. There is no signal type in GDScript, signals are only referenced by name so they can have the same name as methods and/or properties in the same class. 
+Additionally, signals are mapped to properties of type `Signal` and must start with a prefix `signal` (check [Signals](user-guide/signals.md) section for more details). The prefix is dropped during registration, so the signal `signalReverseChanged` is known in Godot as `reverse_changed`. This is done to avoid naming conflicts with other members of a class. There is no signal type in GDScript, signals are only referenced by name so they can have the same name as methods and/or properties in the same class. 
 
 ## Renamed symbols
 To avoid confusion and conflict with Kotlin types, the following Godot symbols are renamed.
