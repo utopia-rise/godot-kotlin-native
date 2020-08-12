@@ -53,10 +53,8 @@ internal object TypeManager {
      */
     fun wrap(ptr: COpaquePointer): Object {
         val tag = getTagFromInstancePtr(ptr)
-        val factory = tag ?: { Godot.noInitZone { Object(null) } }
-        val instance = factory()
-        instance.ptr = ptr
-        return instance
+        val factory = tag ?: ::Object
+        return Godot.instantiateWith(ptr, factory)
     }
 
     private fun createAndRegisterTag(factory: () -> Object): COpaquePointer {
@@ -70,8 +68,7 @@ internal object TypeManager {
 
     private fun getTagFromInstancePtr(ptr: COpaquePointer): (() -> Object)? {
         return memScoped {
-            val obj = Godot.noInitZone { Object() }
-            obj.ptr = ptr
+            val obj = Godot.instantiateWith(ptr, ::Object)
             val className = obj.getClass()
             // user defined type
             // this should be first otherwise casting to a user defined type won't work!

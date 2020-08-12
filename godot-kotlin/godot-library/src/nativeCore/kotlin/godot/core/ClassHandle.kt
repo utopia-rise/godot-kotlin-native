@@ -17,9 +17,7 @@ internal class ClassHandle<T : Object>(
     private val disposables = mutableListOf<COpaquePointer>()
 
     fun wrap(instance: COpaquePointer): T {
-        return Godot.noInitZone {
-            factory().also { it.ptr = instance }
-        }
+        return Godot.instantiateWith(instance, factory)
     }
 
     fun init() {
