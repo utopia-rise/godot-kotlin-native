@@ -18,6 +18,11 @@ This version of the binding is currently in **Alpha** state and by no means prod
 
 One can find the documentation for this binding [here](https://godot-kotl.in).
 
+## Setting up IntelliJ IDEA
+1. Add `godot.kotlin.dev` to `~/.gradle/gradle.properties` (on Windows you might need to stop any Gradle daemons running for this property to be picked up)
+2. Run the initial build: `./gradlew publishToMavenLocal`  (this will take a while)
+3. In IntelliJ IDEA, import the root `build.gradle.kts`.
+4. After importing the main binding, in the Gradle sidebar in IntelliJ IDEA, import the `build.gradle.kts` of the sample you want to import. (repeat for every sample you want to develop)
 
 ## Developer discussion
 

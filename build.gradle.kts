@@ -5,9 +5,15 @@ plugins {
 val currentCommit = grgit.head()
 // check if the current commit is tagged
 var releaseMode = grgit.tag.list().firstOrNull { tag -> tag.commit.id == currentCommit.id } != null
-version = "0.1.0-${DependenciesVersions.godotVersion}"
-if (!releaseMode) {
-    version = "$version-${currentCommit.abbreviatedId}"
+val devMode = project.hasProperty("godot.kotlin.dev")
+if (devMode && !releaseMode) {
+    println("Dev mode detected, using static versioning")
+    version = "0.0.1"
+} else {
+    version = "0.1.0-${DependenciesVersions.godotVersion}"
+    if (!releaseMode) {
+        version = "$version-${currentCommit.abbreviatedId}"
+    }
 }
 
 val versionString = project.version.toString()
