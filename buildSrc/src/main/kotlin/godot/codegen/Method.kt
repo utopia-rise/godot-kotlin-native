@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.squareup.kotlinpoet.*
 
+import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
+
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 open class Method @JsonCreator constructor(
@@ -45,7 +47,14 @@ open class Method @JsonCreator constructor(
         val shouldReturn = returnType != "Unit"
         if (shouldReturn) {
             val simpleName = returnType.removeEnumPrefix()
-            val returnClassName = ClassName(returnType.getPackage(), simpleName)
+            val baseClassName = ClassName(returnType.getPackage(), simpleName)
+            val returnClassName = when(simpleName) {
+                "GodotArray" -> baseClassName
+                    .parameterizedBy(ANY.copy(nullable = true))
+                "Dictionary" -> baseClassName
+                    .parameterizedBy(ANY, ANY)
+                else -> baseClassName
+            }
             generatedFunBuilder.returns(returnClassName)
         }
 
@@ -125,12 +134,17 @@ open class Method @JsonCreator constructor(
 
                 if (argument.type.isEnum()) append(".id")
 
+                val baseClassName = ClassName(
+                    argument.type.getPackage(),
+                    argument.type.removeEnumPrefix()
+                )
                 val parameterBuilder = ParameterSpec.builder(
                     argument.name,
-                    ClassName(
-                        argument.type.getPackage(),
-                        argument.type.removeEnumPrefix()
-                    ).copy(nullable = argument.nullable)
+                    when(argument.type) {
+                        "GodotArray" -> baseClassName.parameterizedBy(ANY.copy(nullable = true))
+                        "Dictionary" -> baseClassName.parameterizedBy(ANY, ANY)
+                        else -> baseClassName
+                    }.copy(nullable = argument.nullable)
                 )
 
                 if (argument.applyDefault != null) parameterBuilder.defaultValue(argument.applyDefault)
