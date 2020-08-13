@@ -1,0 +1,18 @@
+[entry]
+
+X11.64="res://build/bin/linuxX64/debugShared/libbenchmarks.so"
+Windows.64="res://build/bin/windowsX64/debugShared/benchmarks.dll"
+OSX.64="res://build/bin/macosX64/debugShared/libbenchmarks.dylib"
+
+[dependencies]
+
+X11.64=[  ]
+Windows.64=[  ]
+OSX.64=[  ]
+
+[general]
+
+singleton=false
+load_once=true
+symbol_prefix="godot_"
+reloadable=true
