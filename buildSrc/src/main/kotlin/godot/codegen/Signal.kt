@@ -7,6 +7,11 @@ import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.MemberName
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.PropertySpec
+import godot.codegen.utils.convertToCamelCase
+import godot.codegen.utils.escapeKotlinReservedNames
+import godot.codegen.utils.getPackage
+
+import godot.codegen.utils.convertIfTypeParameter
 
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -34,7 +39,13 @@ class Signal @JsonCreator constructor(
                     .builder(
                         name.convertToCamelCase().escapeKotlinReservedNames(),
                         ClassName("godot.core", "Signal${arguments.size}")
-                            .parameterizedBy(*arguments.map { ClassName(it.type.getPackage(), it.type) }.toTypedArray())
+                            .parameterizedBy(
+                                *arguments
+                                    .map {
+                                        ClassName(it.type.getPackage(), it.type).convertIfTypeParameter()
+                                    }
+                                    .toTypedArray()
+                            )
                     )
                     .delegate("%M(${
                         arguments

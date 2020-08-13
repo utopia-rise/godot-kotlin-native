@@ -4,6 +4,13 @@ import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.squareup.kotlinpoet.*
+import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
+import godot.codegen.utils.convertToCamelCase
+import godot.codegen.utils.convertTypeToKotlin
+import godot.codegen.utils.getPackage
+import godot.codegen.utils.isEnum
+
+import godot.codegen.utils.convertIfTypeParameter
 
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -56,7 +63,7 @@ class Property @JsonCreator constructor(
             modifiers.add(if (tree.doAncestorsHaveProperty(clazz, this)) KModifier.OVERRIDE else KModifier.OPEN)
         }
 
-        val propertyType = ClassName(type.getPackage(), type)
+        val propertyType = ClassName(type.getPackage(), type).convertIfTypeParameter()
         val propertySpecBuilder = PropertySpec
             .builder(
                 name,

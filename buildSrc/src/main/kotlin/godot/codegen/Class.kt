@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
+import godot.codegen.utils.escapeUnderscore
+import godot.codegen.utils.isCoreType
+import godot.codegen.utils.isCoreTypeAdaptedForKotlin
 import java.io.File
 
 
@@ -193,7 +196,7 @@ class Class @JsonCreator constructor(
                             ParameterSpec.builder("method", kTypeVariable)
                                 .build(),
                             ParameterSpec.builder("binds", ClassName("godot.core", "GodotArray")
-                                .parameterizedBy(Any::class.asTypeName())
+                                .parameterizedBy(ANY.copy(nullable = true))
                                 .copy(nullable = true))
                                 .defaultValue("null")
                                 .build(),
@@ -257,7 +260,7 @@ class Class @JsonCreator constructor(
 
             typeBuilder.primaryConstructor(
                 FunSpec.constructorBuilder()
-                    .addParameter(ParameterSpec("_ignore", Any::class.asTypeName().copy(nullable = true)))
+                    .addParameter(ParameterSpec("_ignore", ANY.copy(nullable = true)))
                     .callSuperConstructor()
                     .addModifiers(KModifier.INTERNAL)
                     .build()

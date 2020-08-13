@@ -2,6 +2,7 @@ package godot.codegen
 
 import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
+import godot.codegen.utils.*
 
 class ICall(
     var returnType: String,

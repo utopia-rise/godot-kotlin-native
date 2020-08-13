@@ -131,6 +131,12 @@ class Vector3 : Comparable<Vector3>, CoreType<godot_vector3> {
                 2    -> Z
                 else -> throw AssertionError("Unknown axis for Vector3: $value")
             }
+            fun from(value: Long) = when(value) {
+                0L -> X
+                1L -> Y
+                2L -> Z
+                else -> throw AssertionError("Unknown axis for Vector3: $value")
+            }
         }
 
     }

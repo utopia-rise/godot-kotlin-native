@@ -1,4 +1,4 @@
-package godot.codegen
+package godot.codegen.utils
 
 import com.squareup.kotlinpoet.ANY
 import com.squareup.kotlinpoet.ClassName
@@ -77,7 +77,8 @@ fun String.removeEnumPrefix(): String {
 
     if (thisString == "Error") return "GodotError"
 
-    return thisString.replace("::", ".").escapeUnderscore()
+    val type = thisString.replace("::", ".").escapeUnderscore()
+    return if (type.matches(Regex("Variant\\.\\w+"))) type.replace(".", "") else type
 }
 
 fun String.getPackage() =
