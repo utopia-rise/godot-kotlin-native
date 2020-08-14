@@ -13,7 +13,9 @@ var languages = [
 ]
 
 func _init():
-    var report = Report.new()
+    var args = __parse_args()
+    print("Parsed arguments: %s" % str(args))
+    var report = Report.new(args.commit)
     var factory = Benchmarks.new()
     for cls in classes:
         for lang in languages:
@@ -47,3 +49,11 @@ func __save_report(report):
     f.open("res://build/benchmark-results.json", File.WRITE_READ)
     f.store_string(report.to_json())
     f.close()
+
+func __parse_args():
+    var arguments = {}
+    for argument in OS.get_cmdline_args():
+        if argument.find("=") > -1:
+            var key_value = argument.split("=")
+            arguments[key_value[0].lstrip("--")] = key_value[1]
+    return arguments

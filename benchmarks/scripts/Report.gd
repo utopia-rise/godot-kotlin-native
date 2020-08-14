@@ -1,4 +1,8 @@
 var data = {}
+var commit
+
+func _init(commit):
+    self.commit = commit
 
 func add(benchmark, results):
     var name = benchmark.name
@@ -9,4 +13,7 @@ func add(benchmark, results):
     data[name][lang] =  results
 
 func to_json():
-    return JSON.print(data)
+    var json = {}
+    json["commit"] = self.commit
+    json["data"]= self.data
+    return JSON.print(json)

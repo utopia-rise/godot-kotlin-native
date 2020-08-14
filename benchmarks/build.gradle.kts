@@ -6,6 +6,7 @@ plugins {
     kotlin("multiplatform") version "1.3.72"
     id("com.utopia-rise.godot-kotlin") version "0.1.0-3.2-b1e88e7"
     id("de.undercouch.download") version "4.1.1"
+    id("org.ajoberstar.grgit") version "4.0.2"
 }
 
 repositories {
@@ -53,9 +54,11 @@ tasks {
             current.isWindows -> TODO()
             else -> throw AssertionError("Unsupported os: ${current.name}")
         }
+        val currentCommit = grgit.head()
         args(mutableListOf(
             "--no-window",
             "-q",
+            "--commit=${currentCommit.abbreviatedId}",
             "-s",
             "${file("scripts/Main.gd")}"
         ))
