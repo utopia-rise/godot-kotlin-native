@@ -1,8 +1,8 @@
-name: CI
+name: benchmarks
 on: pull_request
 
 jobs:
-  build:
+  run:
     strategy:
       matrix:
         os: [ubuntu-latest] # todo re-add osx and windows
