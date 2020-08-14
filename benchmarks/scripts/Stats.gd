@@ -28,25 +28,39 @@ func get_percentile(percentile):
     var index = int(percentile * len(copy))
     return copy[index]
 
+func get_min():
+    var copy = data.duplicate()
+    copy.sort()
+    return copy[0]
+
+func get_max():
+    var copy = data.duplicate()
+    copy.sort()
+    return copy[-1]
+
 func get_results():
     var result = {}
     result["raw"] = data.duplicate()
-    result["avg"] = SEC_IN_USEC / get_avg()
-    # avoid division by zero
-    var m = get_median()
-    if m == 0:
-        m = 1
-    result["median"] = SEC_IN_USEC / m
-    result["p95"] = SEC_IN_USEC / get_percentile(0.95)
-    result["p99"] = SEC_IN_USEC / get_percentile(0.99)
+    result["min"] = __to_op_per_s(get_min())
+    result["max"] = __to_op_per_s(get_max())
+    result["avg"] = __to_op_per_s(get_avg())
+    result["median"] = __to_op_per_s(get_median())
+    result["p95"] = __to_op_per_s(get_percentile(0.95))
+    result["p99"] = __to_op_per_s(get_percentile(0.95))
     return result
 
+func __to_op_per_s(value):
+    if value == 0:
+        return value
+    return SEC_IN_USEC / value
 
 func _to_string():
     var results = get_results()
+    var _min = results.min
+    var _max = results.max
     var avg = results.avg
     var median = results.median
     var pc95 = results.p95
     var pc99 = results.p99
-    var args = [avg, median, pc95, pc99]
-    return "avg=%d op/s, median=%d op/s, 95pc=%d op/s, 99pc=%d op/s" % args
+    var args = [_min, _max, avg, median, pc95, pc99]
+    return "min=%d, max=%d avg=%d op/s, median=%d op/s, 95pc=%d op/s, 99pc=%d op/s" % args
