@@ -101,6 +101,7 @@ class GodotPlugin : Plugin<Project> {
             platforms.forEach { platform ->
                 val target = when (platform) {
                     GodotPlatform.LINUX_X64 -> mpp.linuxX64("linuxX64")
+                    GodotPlatform.SERVER_X64 -> mpp.linuxX64("serverX64")
                     GodotPlatform.WINDOWS_X64 -> mpp.mingwX64("windowsX64")
                     GodotPlatform.OSX_X64 -> mpp.macosX64("macosX64")
                     GodotPlatform.ANDROID_X64 -> mpp.androidNativeX64("androidX64")
