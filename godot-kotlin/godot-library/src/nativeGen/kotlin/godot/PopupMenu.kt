@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Signal1
 import godot.core.Variant
 import godot.core.VariantArray
@@ -34,16 +33,14 @@ import godot.icalls._icall_Unit_String_String_Long
 import godot.icalls._icall_Variant_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.NotImplementedError
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class PopupMenu internal constructor(
-  _ignore: Any?
-) : Popup(_ignore) {
+open class PopupMenu : Popup() {
   val idFocused: Signal1<Long> by signal("id")
 
   val idPressed: Signal1<Long> by signal("id")
@@ -100,12 +97,7 @@ open class PopupMenu internal constructor(
       _icall_Unit_Double(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("PopupMenu", "PopupMenu")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("PopupMenu", "PopupMenu")
 
   open fun _getItems(): VariantArray {
     throw NotImplementedError("_get_items is not implemented for PopupMenu")

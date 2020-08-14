@@ -8,16 +8,11 @@ import godot.icalls._icall_Unit_String
 import godot.icalls._icall_Unit_String_PoolByteArray_Boolean
 import godot.icalls._icall_Unit_String_PoolStringArray
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
 
-open class EditorExportPlugin internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
-  internal constructor() : this(null)
-
+open class EditorExportPlugin internal constructor() : Reference() {
   open fun _exportBegin(
     features: PoolStringArray,
     isDebug: Boolean,

@@ -3,7 +3,6 @@ package godot
 
 import godot.TileSet
 import godot.core.Color
-import godot.core.Godot.shouldInitPtr
 import godot.core.Rect2
 import godot.core.Transform2D
 import godot.core.VariantArray
@@ -48,22 +47,15 @@ import godot.icalls._icall_Vector2_Long
 import godot.icalls._icall_Vector2_Long_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.NotImplementedError
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class TileSet internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("TileSet", "TileSet")
-        }
-
-  }
+open class TileSet : Resource() {
+  override fun __new(): COpaquePointer = invokeConstructor("TileSet", "TileSet")
 
   open fun _forwardAtlasSubtileSelection(
     atlastileId: Long,

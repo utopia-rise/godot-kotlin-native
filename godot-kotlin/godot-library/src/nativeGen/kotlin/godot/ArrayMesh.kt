@@ -3,7 +3,6 @@ package godot
 
 import godot.Mesh
 import godot.core.AABB
-import godot.core.Godot.shouldInitPtr
 import godot.core.GodotError
 import godot.core.PoolByteArray
 import godot.core.Transform
@@ -23,15 +22,13 @@ import godot.icalls._icall_Unit_Long_VariantArray_VariantArray_Long
 import godot.icalls._icall_Unit_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Double
 import kotlin.Long
 import kotlin.String
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class ArrayMesh internal constructor(
-  _ignore: Any?
-) : Mesh(_ignore) {
+open class ArrayMesh : Mesh() {
   open var blendShapeMode: Long
     get() {
       val mb = getMethodBind("ArrayMesh","get_blend_shape_mode")
@@ -52,12 +49,7 @@ open class ArrayMesh internal constructor(
       _icall_Unit_AABB(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("ArrayMesh", "ArrayMesh")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("ArrayMesh", "ArrayMesh")
 
   open fun customAabb(schedule: AABB.() -> Unit): AABB = customAabb.apply{
       schedule(this)

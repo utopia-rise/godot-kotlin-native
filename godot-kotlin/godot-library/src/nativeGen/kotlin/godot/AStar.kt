@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.PoolIntArray
 import godot.core.PoolVector3Array
 import godot.core.VariantArray
@@ -26,21 +25,14 @@ import godot.icalls._icall_Vector3_Long
 import godot.icalls._icall_Vector3_Vector3
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.NotImplementedError
+import kotlinx.cinterop.COpaquePointer
 
-open class AStar internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("AStar", "AStar")
-        }
-
-  }
+open class AStar : Reference() {
+  override fun __new(): COpaquePointer = invokeConstructor("AStar", "AStar")
 
   open fun _computeCost(fromId: Long, toId: Long): Double {
     throw NotImplementedError("_compute_cost is not implemented for AStar")

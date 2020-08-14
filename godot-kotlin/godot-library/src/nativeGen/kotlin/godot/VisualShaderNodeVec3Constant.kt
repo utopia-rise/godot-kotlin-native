@@ -1,18 +1,15 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Vector3
 import godot.icalls._icall_Unit_Vector3
 import godot.icalls._icall_Vector3
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class VisualShaderNodeVec3Constant internal constructor(
-  _ignore: Any?
-) : VisualShaderNode(_ignore) {
+open class VisualShaderNodeVec3Constant : VisualShaderNode() {
   open var constant: Vector3
     get() {
       val mb = getMethodBind("VisualShaderNodeVec3Constant","get_constant")
@@ -23,13 +20,8 @@ open class VisualShaderNodeVec3Constant internal constructor(
       _icall_Unit_Vector3(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("VisualShaderNodeVec3Constant",
-            "VisualShaderNodeVec3Constant")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("VisualShaderNodeVec3Constant",
+      "VisualShaderNodeVec3Constant")
 
   open fun constant(schedule: Vector3.() -> Unit): Vector3 = constant.apply{
       schedule(this)

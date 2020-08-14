@@ -2,17 +2,14 @@
 package godot
 
 import godot.VisualShaderNodeTransformVecMult
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class VisualShaderNodeTransformVecMult internal constructor(
-  _ignore: Any?
-) : VisualShaderNode(_ignore) {
+open class VisualShaderNodeTransformVecMult : VisualShaderNode() {
   open var operator: Long
     get() {
       val mb = getMethodBind("VisualShaderNodeTransformVecMult","get_operator")
@@ -23,13 +20,8 @@ open class VisualShaderNodeTransformVecMult internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("VisualShaderNodeTransformVecMult",
-            "VisualShaderNodeTransformVecMult")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("VisualShaderNodeTransformVecMult",
+      "VisualShaderNodeTransformVecMult")
 
   open fun getOperator(): VisualShaderNodeTransformVecMult.Operator {
     val mb = getMethodBind("VisualShaderNodeTransformVecMult","get_operator")

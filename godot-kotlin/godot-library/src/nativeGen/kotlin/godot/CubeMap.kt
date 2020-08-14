@@ -2,7 +2,6 @@
 package godot
 
 import godot.CubeMap
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Double
 import godot.icalls._icall_Image_Long
 import godot.icalls._icall_Long
@@ -11,13 +10,11 @@ import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Long_Object
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Double
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class CubeMap internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
+open class CubeMap : Resource() {
   open var flags: Long
     get() {
       val mb = getMethodBind("CubeMap","get_flags")
@@ -48,12 +45,7 @@ open class CubeMap internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("CubeMap", "CubeMap")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("CubeMap", "CubeMap")
 
   open fun getFlags(): Long {
     val mb = getMethodBind("CubeMap","get_flags")

@@ -4,7 +4,6 @@ package godot
 import godot.ARVRPositionalTracker
 import godot.ARVRServer
 import godot.core.Basis
-import godot.core.Godot.shouldInitPtr
 import godot.core.Transform
 import godot.core.Vector3
 import godot.icalls._icall_Basis
@@ -18,15 +17,13 @@ import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Vector3
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class ARVRPositionalTracker internal constructor(
-  _ignore: Any?
-) : Object(_ignore) {
+open class ARVRPositionalTracker : Object() {
   open var rumble: Double
     get() {
       val mb = getMethodBind("ARVRPositionalTracker","get_rumble")
@@ -37,12 +34,8 @@ open class ARVRPositionalTracker internal constructor(
       _icall_Unit_Double(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("ARVRPositionalTracker", "ARVRPositionalTracker")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("ARVRPositionalTracker",
+      "ARVRPositionalTracker")
 
   open fun _setJoyId(joyId: Long) {
   }

@@ -1,17 +1,14 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class GridContainer internal constructor(
-  _ignore: Any?
-) : Container(_ignore) {
+open class GridContainer : Container() {
   open var columns: Long
     get() {
       val mb = getMethodBind("GridContainer","get_columns")
@@ -22,12 +19,7 @@ open class GridContainer internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("GridContainer", "GridContainer")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("GridContainer", "GridContainer")
 
   open fun getColumns(): Long {
     val mb = getMethodBind("GridContainer","get_columns")

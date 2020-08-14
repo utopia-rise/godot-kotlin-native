@@ -2,7 +2,6 @@
 package godot
 
 import godot.core.Dictionary
-import godot.core.Godot.shouldInitPtr
 import godot.core.Variant
 import godot.icalls._icall_Dictionary_Long_String_nVariant
 import godot.icalls._icall_Dictionary_String_Variant
@@ -13,20 +12,13 @@ import godot.icalls._icall_Unit_String_Object
 import godot.icalls._icall_Variant_Variant_Boolean
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class JSONRPC internal constructor(
-  _ignore: Any?
-) : Object(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("JSONRPC", "JSONRPC")
-        }
-
-  }
+open class JSONRPC : Object() {
+  override fun __new(): COpaquePointer = invokeConstructor("JSONRPC", "JSONRPC")
 
   open fun makeNotification(method: String, params: Variant): Dictionary {
     val mb = getMethodBind("JSONRPC","make_notification")

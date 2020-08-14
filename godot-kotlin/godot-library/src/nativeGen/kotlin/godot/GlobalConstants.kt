@@ -5,20 +5,12 @@ import godot.core.Godot
 import godot.internal.type.nullSafe
 import kotlin.Long
 import kotlin.requireNotNull
+import kotlinx.cinterop.COpaquePointer
 import kotlinx.cinterop.cstr
 import kotlinx.cinterop.invoke
 import kotlinx.cinterop.memScoped
 
 object GlobalConstants : Object() {
-  init {
-    memScoped {
-        val ptr =
-        nullSafe(Godot.gdnative.godot_global_get_singleton).invoke("GlobalConstants".cstr.ptr)
-        requireNotNull(ptr) { "No instance found for singleton GlobalConstants" }
-        this@GlobalConstants.ptr = ptr
-    }
-  }
-
   final const val BUTTON_LEFT: Long = 1
 
   final const val BUTTON_MASK_LEFT: Long = 1
@@ -1030,4 +1022,11 @@ object GlobalConstants : Object() {
   final const val VALIGN_TOP: Long = 0
 
   final const val VERTICAL: Long = 1
+
+  override fun __new(): COpaquePointer = memScoped {
+      val ptr =
+      nullSafe(Godot.gdnative.godot_global_get_singleton).invoke("GlobalConstants".cstr.ptr)
+      requireNotNull(ptr) { "No instance found for singleton GlobalConstants" }
+      ptr
+  }
 }

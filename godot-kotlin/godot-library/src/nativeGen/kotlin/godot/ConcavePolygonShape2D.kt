@@ -1,17 +1,14 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.PoolVector2Array
 import godot.icalls._icall_PoolVector2Array
 import godot.icalls._icall_Unit_PoolVector2Array
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
+import kotlinx.cinterop.COpaquePointer
 
-open class ConcavePolygonShape2D internal constructor(
-  _ignore: Any?
-) : Shape2D(_ignore) {
+open class ConcavePolygonShape2D : Shape2D() {
   open var segments: PoolVector2Array
     get() {
       val mb = getMethodBind("ConcavePolygonShape2D","get_segments")
@@ -22,12 +19,8 @@ open class ConcavePolygonShape2D internal constructor(
       _icall_Unit_PoolVector2Array(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("ConcavePolygonShape2D", "ConcavePolygonShape2D")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("ConcavePolygonShape2D",
+      "ConcavePolygonShape2D")
 
   open fun getSegments(): PoolVector2Array {
     val mb = getMethodBind("ConcavePolygonShape2D","get_segments")

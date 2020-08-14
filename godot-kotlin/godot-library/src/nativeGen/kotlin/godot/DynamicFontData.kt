@@ -2,7 +2,6 @@
 package godot
 
 import godot.DynamicFontData
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Long
 import godot.icalls._icall_String
@@ -11,14 +10,12 @@ import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class DynamicFontData internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
+open class DynamicFontData : Resource() {
   open var antialiased: Boolean
     get() {
       val mb = getMethodBind("DynamicFontData","is_antialiased")
@@ -49,12 +46,7 @@ open class DynamicFontData internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("DynamicFontData", "DynamicFontData")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("DynamicFontData", "DynamicFontData")
 
   open fun getFontPath(): String {
     val mb = getMethodBind("DynamicFontData","get_font_path")

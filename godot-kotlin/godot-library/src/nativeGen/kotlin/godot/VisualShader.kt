@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.GodotError
 import godot.core.PoolIntArray
 import godot.core.VariantArray
@@ -22,14 +21,12 @@ import godot.icalls._icall_Vector2_Long_Long
 import godot.icalls._icall_VisualShaderNode_Long_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class VisualShader internal constructor(
-  _ignore: Any?
-) : Shader(_ignore) {
+open class VisualShader : Shader() {
   open var graphOffset: Vector2
     get() {
       val mb = getMethodBind("VisualShader","get_graph_offset")
@@ -40,12 +37,7 @@ open class VisualShader internal constructor(
       _icall_Unit_Vector2(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("VisualShader", "VisualShader")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("VisualShader", "VisualShader")
 
   open fun graphOffset(schedule: Vector2.() -> Unit): Vector2 = graphOffset.apply{
       schedule(this)

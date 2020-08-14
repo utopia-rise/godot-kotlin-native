@@ -23,19 +23,12 @@ import kotlin.Double
 import kotlin.Long
 import kotlin.String
 import kotlin.requireNotNull
+import kotlinx.cinterop.COpaquePointer
 import kotlinx.cinterop.cstr
 import kotlinx.cinterop.invoke
 import kotlinx.cinterop.memScoped
 
 object Engine : Object() {
-  init {
-    memScoped {
-        val ptr = nullSafe(Godot.gdnative.godot_global_get_singleton).invoke("Engine".cstr.ptr)
-        requireNotNull(ptr) { "No instance found for singleton Engine" }
-        this@Engine.ptr = ptr
-    }
-  }
-
   var editorHint: Boolean
     get() {
       val mb = getMethodBind("_Engine","is_editor_hint")
@@ -85,6 +78,12 @@ object Engine : Object() {
       val mb = getMethodBind("_Engine","set_time_scale")
       _icall_Unit_Double(mb, this.ptr, value)
     }
+
+  override fun __new(): COpaquePointer = memScoped {
+      val ptr = nullSafe(Godot.gdnative.godot_global_get_singleton).invoke("Engine".cstr.ptr)
+      requireNotNull(ptr) { "No instance found for singleton Engine" }
+      ptr
+  }
 
   fun getAuthorInfo(): Dictionary {
     val mb = getMethodBind("_Engine","get_author_info")

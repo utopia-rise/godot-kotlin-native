@@ -2,7 +2,6 @@
 package godot
 
 import godot.core.Dictionary
-import godot.core.Godot.shouldInitPtr
 import godot.core.Variant
 import godot.core.Variant.Type
 import godot.icalls._icall_Dictionary
@@ -11,12 +10,10 @@ import godot.icalls._icall_Unit_Dictionary
 import godot.icalls._icall_Unit_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class VisualScriptConstructor internal constructor(
-  _ignore: Any?
-) : VisualScriptNode(_ignore) {
+open class VisualScriptConstructor : VisualScriptNode() {
   open var constructor: Dictionary
     get() {
       val mb = getMethodBind("VisualScriptConstructor","get_constructor")
@@ -37,12 +34,8 @@ open class VisualScriptConstructor internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("VisualScriptConstructor", "VisualScriptConstructor")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("VisualScriptConstructor",
+      "VisualScriptConstructor")
 
   open fun getConstructor(): Dictionary {
     val mb = getMethodBind("VisualScriptConstructor","get_constructor")

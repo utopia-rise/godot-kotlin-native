@@ -2,7 +2,6 @@
 package godot
 
 import godot.core.Color
-import godot.core.Godot.shouldInitPtr
 import godot.core.Plane
 import godot.core.PoolColorArray
 import godot.core.PoolIntArray
@@ -31,20 +30,13 @@ import godot.icalls._icall_Unit_Vector3
 import godot.icalls._icall_VariantArray
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class SurfaceTool internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("SurfaceTool", "SurfaceTool")
-        }
-
-  }
+open class SurfaceTool : Reference() {
+  override fun __new(): COpaquePointer = invokeConstructor("SurfaceTool", "SurfaceTool")
 
   open fun addBones(bones: PoolIntArray) {
     val mb = getMethodBind("SurfaceTool","add_bones")

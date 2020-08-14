@@ -11,16 +11,11 @@ import godot.icalls._icall_Unit_Long_Boolean
 import godot.icalls._icall_Unit_String_Boolean
 import godot.icalls._icall_Unit_String_String_Boolean
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
 
-open class EditorFeatureProfile internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
-  internal constructor() : this(null)
-
+open class EditorFeatureProfile internal constructor() : Reference() {
   open fun getFeatureName(feature: Long): String {
     val mb = getMethodBind("EditorFeatureProfile","get_feature_name")
     return _icall_String_Long( mb, this.ptr, feature)

@@ -4,7 +4,6 @@ package godot
 import godot.MultiMesh
 import godot.core.AABB
 import godot.core.Color
-import godot.core.Godot.shouldInitPtr
 import godot.core.PoolColorArray
 import godot.core.PoolRealArray
 import godot.core.PoolVector2Array
@@ -25,13 +24,11 @@ import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_PoolRealArray
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Long
 import kotlin.NotImplementedError
+import kotlinx.cinterop.COpaquePointer
 
-open class MultiMesh internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
+open class MultiMesh : Resource() {
   open var colorFormat: Long
     get() {
       val mb = getMethodBind("MultiMesh","get_color_format")
@@ -92,12 +89,7 @@ open class MultiMesh internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("MultiMesh", "MultiMesh")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("MultiMesh", "MultiMesh")
 
   open fun _getColorArray(): PoolColorArray {
     throw NotImplementedError("_get_color_array is not implemented for MultiMesh")

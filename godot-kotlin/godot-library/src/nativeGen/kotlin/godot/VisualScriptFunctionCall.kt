@@ -3,7 +3,6 @@ package godot
 
 import godot.VisualScriptFunctionCall
 import godot.core.Dictionary
-import godot.core.Godot.shouldInitPtr
 import godot.core.NodePath
 import godot.core.Variant
 import godot.core.Variant.Type
@@ -17,15 +16,13 @@ import godot.icalls._icall_Unit_NodePath
 import godot.icalls._icall_Unit_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.NotImplementedError
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class VisualScriptFunctionCall internal constructor(
-  _ignore: Any?
-) : VisualScriptNode(_ignore) {
+open class VisualScriptFunctionCall : VisualScriptNode() {
   open var baseScript: String
     get() {
       val mb = getMethodBind("VisualScriptFunctionCall","get_base_script")
@@ -126,12 +123,8 @@ open class VisualScriptFunctionCall internal constructor(
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("VisualScriptFunctionCall", "VisualScriptFunctionCall")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("VisualScriptFunctionCall",
+      "VisualScriptFunctionCall")
 
   open fun _getArgumentCache(): Dictionary {
     throw NotImplementedError("_get_argument_cache is not implemented for VisualScriptFunctionCall")

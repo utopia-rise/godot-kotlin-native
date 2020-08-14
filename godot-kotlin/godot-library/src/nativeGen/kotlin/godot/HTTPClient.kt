@@ -3,7 +3,6 @@ package godot
 
 import godot.HTTPClient
 import godot.core.Dictionary
-import godot.core.Godot.shouldInitPtr
 import godot.core.GodotError
 import godot.core.PoolByteArray
 import godot.core.PoolStringArray
@@ -23,14 +22,12 @@ import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Object
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class HTTPClient internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
+open class HTTPClient : Reference() {
   open var blockingModeEnabled: Boolean
     get() {
       val mb = getMethodBind("HTTPClient","is_blocking_mode_enabled")
@@ -61,12 +58,7 @@ open class HTTPClient internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("HTTPClient", "HTTPClient")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("HTTPClient", "HTTPClient")
 
   open fun close() {
     val mb = getMethodBind("HTTPClient","close")

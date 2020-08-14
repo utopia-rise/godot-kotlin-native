@@ -1,17 +1,14 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_String
 import godot.icalls._icall_Unit_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class BoneAttachment internal constructor(
-  _ignore: Any?
-) : Spatial(_ignore) {
+open class BoneAttachment : Spatial() {
   open var boneName: String
     get() {
       val mb = getMethodBind("BoneAttachment","get_bone_name")
@@ -22,12 +19,7 @@ open class BoneAttachment internal constructor(
       _icall_Unit_String(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("BoneAttachment", "BoneAttachment")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("BoneAttachment", "BoneAttachment")
 
   open fun getBoneName(): String {
     val mb = getMethodBind("BoneAttachment","get_bone_name")

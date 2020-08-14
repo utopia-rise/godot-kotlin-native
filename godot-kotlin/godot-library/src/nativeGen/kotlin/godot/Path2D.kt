@@ -1,16 +1,13 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Curve2D
 import godot.icalls._icall_Unit_Object
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
+import kotlinx.cinterop.COpaquePointer
 
-open class Path2D internal constructor(
-  _ignore: Any?
-) : Node2D(_ignore) {
+open class Path2D : Node2D() {
   open var curve: Curve2D
     get() {
       val mb = getMethodBind("Path2D","get_curve")
@@ -21,12 +18,7 @@ open class Path2D internal constructor(
       _icall_Unit_Object(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Path2D", "Path2D")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("Path2D", "Path2D")
 
   open fun _curveChanged() {
   }

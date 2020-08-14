@@ -13,14 +13,11 @@ import godot.icalls._icall_String_String
 import godot.icalls._icall_Unit
 import godot.icalls._icall_Unit_String
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.String
 
-open class EditorFileSystem internal constructor(
-  _ignore: Any?
-) : Node(_ignore) {
+open class EditorFileSystem internal constructor() : Node() {
   val filesystemChanged: Signal0 by signal()
 
   val resourcesReimported: Signal1<PoolStringArray> by signal("resources")
@@ -28,8 +25,6 @@ open class EditorFileSystem internal constructor(
   val resourcesReload: Signal1<PoolStringArray> by signal("resources")
 
   val sourcesChanged: Signal1<Boolean> by signal("exist")
-
-  internal constructor() : this(null)
 
   open fun getFileType(path: String): String {
     val mb = getMethodBind("EditorFileSystem","get_file_type")

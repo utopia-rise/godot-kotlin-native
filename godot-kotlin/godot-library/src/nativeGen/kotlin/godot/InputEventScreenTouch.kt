@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Vector2
 import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Boolean
@@ -10,15 +9,13 @@ import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_Vector2
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.UninitializedPropertyAccessException
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class InputEventScreenTouch internal constructor(
-  _ignore: Any?
-) : InputEvent(_ignore) {
+open class InputEventScreenTouch : InputEvent() {
   open var index: Long
     get() {
       val mb = getMethodBind("InputEventScreenTouch","get_index")
@@ -48,12 +45,8 @@ open class InputEventScreenTouch internal constructor(
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("InputEventScreenTouch", "InputEventScreenTouch")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("InputEventScreenTouch",
+      "InputEventScreenTouch")
 
   open fun position(schedule: Vector2.() -> Unit): Vector2 = position.apply{
       schedule(this)

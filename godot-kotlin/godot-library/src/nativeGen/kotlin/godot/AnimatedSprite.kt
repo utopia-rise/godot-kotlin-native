@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Signal0
 import godot.core.Vector2
 import godot.core.signal
@@ -21,17 +20,15 @@ import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_Vector2
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.NotImplementedError
 import kotlin.String
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class AnimatedSprite internal constructor(
-  _ignore: Any?
-) : Node2D(_ignore) {
+open class AnimatedSprite : Node2D() {
   val animationFinished: Signal0 by signal()
 
   val frameChanged: Signal0 by signal()
@@ -116,12 +113,7 @@ open class AnimatedSprite internal constructor(
       _icall_Unit_Double(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("AnimatedSprite", "AnimatedSprite")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("AnimatedSprite", "AnimatedSprite")
 
   open fun offset(schedule: Vector2.() -> Unit): Vector2 = offset.apply{
       schedule(this)

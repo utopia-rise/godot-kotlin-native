@@ -1,25 +1,18 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.PoolStringArray
 import godot.core.Variant
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.NotImplementedError
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class ResourceFormatLoader internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("ResourceFormatLoader", "ResourceFormatLoader")
-        }
-
-  }
+open class ResourceFormatLoader : Reference() {
+  override fun __new(): COpaquePointer = invokeConstructor("ResourceFormatLoader",
+      "ResourceFormatLoader")
 
   open fun getDependencies(path: String, addTypes: String) {
   }

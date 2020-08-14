@@ -1,23 +1,16 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.VariantArray
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Long
 import kotlin.NotImplementedError
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class VisualShaderNodeCustom internal constructor(
-  _ignore: Any?
-) : VisualShaderNode(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("VisualShaderNodeCustom", "VisualShaderNodeCustom")
-        }
-
-  }
+open class VisualShaderNodeCustom : VisualShaderNode() {
+  override fun __new(): COpaquePointer = invokeConstructor("VisualShaderNodeCustom",
+      "VisualShaderNodeCustom")
 
   open fun _getCategory(): String {
     throw NotImplementedError("_get_category is not implemented for VisualShaderNodeCustom")

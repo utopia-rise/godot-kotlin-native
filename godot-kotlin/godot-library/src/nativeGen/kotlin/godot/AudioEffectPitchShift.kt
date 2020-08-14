@@ -2,20 +2,17 @@
 package godot
 
 import godot.AudioEffectPitchShift
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Double
 import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Double
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class AudioEffectPitchShift internal constructor(
-  _ignore: Any?
-) : AudioEffect(_ignore) {
+open class AudioEffectPitchShift : AudioEffect() {
   open var fftSize: Long
     get() {
       val mb = getMethodBind("AudioEffectPitchShift","get_fft_size")
@@ -46,12 +43,8 @@ open class AudioEffectPitchShift internal constructor(
       _icall_Unit_Double(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("AudioEffectPitchShift", "AudioEffectPitchShift")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("AudioEffectPitchShift",
+      "AudioEffectPitchShift")
 
   open fun getFftSize(): AudioEffectPitchShift.FFT_Size {
     val mb = getMethodBind("AudioEffectPitchShift","get_fft_size")

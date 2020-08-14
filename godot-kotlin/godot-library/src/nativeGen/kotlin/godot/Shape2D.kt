@@ -11,13 +11,10 @@ import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_VariantArray_Transform2D_Object_Transform2D
 import godot.icalls._icall_VariantArray_Transform2D_Vector2_Object_Transform2D_Vector2
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 
-open class Shape2D internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
+open class Shape2D internal constructor() : Resource() {
   open var customSolverBias: Double
     get() {
       val mb = getMethodBind("Shape2D","get_custom_solver_bias")
@@ -27,8 +24,6 @@ open class Shape2D internal constructor(
       val mb = getMethodBind("Shape2D","set_custom_solver_bias")
       _icall_Unit_Double(mb, this.ptr, value)
     }
-
-  internal constructor() : this(null)
 
   open fun collide(
     localXform: Transform2D,

@@ -1,18 +1,15 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Vector2
 import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_Vector2
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class QuadMesh internal constructor(
-  _ignore: Any?
-) : PrimitiveMesh(_ignore) {
+open class QuadMesh : PrimitiveMesh() {
   open var size: Vector2
     get() {
       val mb = getMethodBind("QuadMesh","get_size")
@@ -23,12 +20,7 @@ open class QuadMesh internal constructor(
       _icall_Unit_Vector2(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("QuadMesh", "QuadMesh")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("QuadMesh", "QuadMesh")
 
   open fun size(schedule: Vector2.() -> Unit): Vector2 = size.apply{
       schedule(this)

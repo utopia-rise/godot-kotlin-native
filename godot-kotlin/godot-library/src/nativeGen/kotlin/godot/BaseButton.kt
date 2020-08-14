@@ -14,13 +14,10 @@ import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Object
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 
-open class BaseButton internal constructor(
-  _ignore: Any?
-) : Control(_ignore) {
+open class BaseButton internal constructor() : Control() {
   val buttonDown: Signal0 by signal()
 
   val buttonUp: Signal0 by signal()
@@ -128,8 +125,6 @@ open class BaseButton internal constructor(
       val mb = getMethodBind("BaseButton","set_toggle_mode")
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
-
-  internal constructor() : this(null)
 
   override fun _guiInput(arg0: InputEvent) {
   }

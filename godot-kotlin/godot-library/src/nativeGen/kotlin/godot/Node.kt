@@ -2,7 +2,6 @@
 package godot
 
 import godot.Node
-import godot.core.Godot.shouldInitPtr
 import godot.core.NodePath
 import godot.core.Signal0
 import godot.core.Variant
@@ -50,10 +49,9 @@ import kotlin.Double
 import kotlin.Long
 import kotlin.NotImplementedError
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class Node internal constructor(
-  _ignore: Any?
-) : Object(_ignore) {
+open class Node : Object() {
   val ready: Signal0 by signal()
 
   val renamed: Signal0 by signal()
@@ -130,12 +128,7 @@ open class Node internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Node", "Node")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("Node", "Node")
 
   open fun _enterTree() {
   }

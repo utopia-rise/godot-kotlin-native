@@ -1,22 +1,15 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Variant
 import godot.icalls._icall_varargs
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
 import kotlin.Any
+import kotlinx.cinterop.COpaquePointer
 
-open class PluginScript internal constructor(
-  _ignore: Any?
-) : Script(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("PluginScript", "PluginScript")
-        }
-
-  }
+open class PluginScript : Script() {
+  override fun __new(): COpaquePointer = invokeConstructor("PluginScript", "PluginScript")
 
   open fun new(vararg __var_args: Any?): Variant {
     val mb = getMethodBind("PluginScript","new")

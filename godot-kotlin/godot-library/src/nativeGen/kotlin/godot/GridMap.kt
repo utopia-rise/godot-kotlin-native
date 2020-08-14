@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.RID
 import godot.core.Signal1
 import godot.core.VariantArray
@@ -30,15 +29,13 @@ import godot.icalls._icall_Vector3_Long_Long_Long
 import godot.icalls._icall_Vector3_Vector3
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class GridMap internal constructor(
-  _ignore: Any?
-) : Spatial(_ignore) {
+open class GridMap : Spatial() {
   val cellSizeChanged: Signal1<Vector3> by signal("cell_size")
 
   open var cellCenterX: Boolean
@@ -131,12 +128,7 @@ open class GridMap internal constructor(
       _icall_Unit_Object(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("GridMap", "GridMap")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("GridMap", "GridMap")
 
   open fun cellSize(schedule: Vector3.() -> Unit): Vector3 = cellSize.apply{
       schedule(this)

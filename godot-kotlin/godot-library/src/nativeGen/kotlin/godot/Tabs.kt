@@ -2,7 +2,6 @@
 package godot
 
 import godot.Tabs
-import godot.core.Godot.shouldInitPtr
 import godot.core.Rect2
 import godot.core.Signal1
 import godot.core.signal
@@ -21,14 +20,12 @@ import godot.icalls._icall_Unit_Long_String
 import godot.icalls._icall_Unit_String_nObject
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class Tabs internal constructor(
-  _ignore: Any?
-) : Control(_ignore) {
+open class Tabs : Control() {
   val repositionActiveTabRequest: Signal1<Long> by signal("idx_to")
 
   val rightButtonPressed: Signal1<Long> by signal("tab")
@@ -91,12 +88,7 @@ open class Tabs internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Tabs", "Tabs")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("Tabs", "Tabs")
 
   override fun _guiInput(arg0: InputEvent) {
   }

@@ -7,14 +7,9 @@ import godot.icalls._icall_Long_Long
 import godot.icalls._icall_Object_Long
 import godot.icalls._icall_RID_Long
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Long
 
-open class Physics2DShapeQueryResult internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
-  internal constructor() : this(null)
-
+open class Physics2DShapeQueryResult internal constructor() : Reference() {
   open fun getResultCount(): Long {
     val mb = getMethodBind("Physics2DShapeQueryResult","get_result_count")
     return _icall_Long( mb, this.ptr)

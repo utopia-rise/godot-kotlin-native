@@ -6,13 +6,10 @@ import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Long
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 
-open class BoxContainer internal constructor(
-  _ignore: Any?
-) : Container(_ignore) {
+open class BoxContainer internal constructor() : Container() {
   open var alignment: Long
     get() {
       val mb = getMethodBind("BoxContainer","get_alignment")
@@ -22,8 +19,6 @@ open class BoxContainer internal constructor(
       val mb = getMethodBind("BoxContainer","set_alignment")
       _icall_Unit_Long(mb, this.ptr, value)
     }
-
-  internal constructor() : this(null)
 
   open fun addSpacer(begin: Boolean) {
     val mb = getMethodBind("BoxContainer","add_spacer")

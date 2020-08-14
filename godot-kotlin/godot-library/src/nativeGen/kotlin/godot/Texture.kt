@@ -14,13 +14,10 @@ import godot.icalls._icall_Unit_RID_Rect2_Rect2_Color_Boolean_nObject_Boolean
 import godot.icalls._icall_Unit_RID_Vector2_Color_Boolean_nObject
 import godot.icalls._icall_Vector2
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 
-open class Texture internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
+open class Texture internal constructor() : Resource() {
   open var flags: Long
     get() {
       val mb = getMethodBind("Texture","get_flags")
@@ -30,8 +27,6 @@ open class Texture internal constructor(
       val mb = getMethodBind("Texture","set_flags")
       _icall_Unit_Long(mb, this.ptr, value)
     }
-
-  internal constructor() : this(null)
 
   open fun draw(
     canvasItem: RID,

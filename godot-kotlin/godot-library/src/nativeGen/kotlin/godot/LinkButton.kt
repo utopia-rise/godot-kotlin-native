@@ -2,20 +2,17 @@
 package godot
 
 import godot.LinkButton
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Long
 import godot.icalls._icall_String
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class LinkButton internal constructor(
-  _ignore: Any?
-) : BaseButton(_ignore) {
+open class LinkButton : BaseButton() {
   open var text: String
     get() {
       val mb = getMethodBind("LinkButton","get_text")
@@ -36,12 +33,7 @@ open class LinkButton internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("LinkButton", "LinkButton")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("LinkButton", "LinkButton")
 
   open fun getText(): String {
     val mb = getMethodBind("LinkButton","get_text")

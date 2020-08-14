@@ -2,7 +2,6 @@
 package godot
 
 import godot.core.Dictionary
-import godot.core.Godot.shouldInitPtr
 import godot.core.NodePath
 import godot.core.Signal0
 import godot.core.Variant
@@ -23,16 +22,14 @@ import godot.icalls._icall_Unit_String_Variant
 import godot.icalls._icall_Variant_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.NotImplementedError
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class AnimationNode internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
+open class AnimationNode : Resource() {
   val removedFromGraph: Signal0 by signal()
 
   val treeChanged: Signal0 by signal()
@@ -47,12 +44,7 @@ open class AnimationNode internal constructor(
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("AnimationNode", "AnimationNode")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("AnimationNode", "AnimationNode")
 
   open fun _getFilters(): VariantArray {
     throw NotImplementedError("_get_filters is not implemented for AnimationNode")

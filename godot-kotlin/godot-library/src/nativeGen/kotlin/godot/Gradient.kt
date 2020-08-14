@@ -2,7 +2,6 @@
 package godot
 
 import godot.core.Color
-import godot.core.Godot.shouldInitPtr
 import godot.core.PoolColorArray
 import godot.core.PoolRealArray
 import godot.icalls._icall_Color_Double
@@ -19,13 +18,11 @@ import godot.icalls._icall_Unit_PoolColorArray
 import godot.icalls._icall_Unit_PoolRealArray
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Double
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class Gradient internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
+open class Gradient : Resource() {
   open var colors: PoolColorArray
     get() {
       val mb = getMethodBind("Gradient","get_colors")
@@ -46,12 +43,7 @@ open class Gradient internal constructor(
       _icall_Unit_PoolRealArray(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Gradient", "Gradient")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("Gradient", "Gradient")
 
   open fun addPoint(offset: Double, color: Color) {
     val mb = getMethodBind("Gradient","add_point")

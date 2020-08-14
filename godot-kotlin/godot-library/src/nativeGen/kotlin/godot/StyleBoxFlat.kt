@@ -2,7 +2,6 @@
 package godot
 
 import godot.core.Color
-import godot.core.Godot.shouldInitPtr
 import godot.core.Vector2
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Color
@@ -21,15 +20,13 @@ import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_Vector2
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class StyleBoxFlat internal constructor(
-  _ignore: Any?
-) : StyleBox(_ignore) {
+open class StyleBoxFlat : StyleBox() {
   open var antiAliasing: Boolean
     get() {
       val mb = getMethodBind("StyleBoxFlat","is_anti_aliased")
@@ -250,12 +247,7 @@ open class StyleBoxFlat internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("StyleBoxFlat", "StyleBoxFlat")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("StyleBoxFlat", "StyleBoxFlat")
 
   open fun bgColor(schedule: Color.() -> Unit): Color = bgColor.apply{
       schedule(this)

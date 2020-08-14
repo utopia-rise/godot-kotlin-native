@@ -1,19 +1,16 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Double_Long
 import godot.icalls._icall_Unit_Long_Double
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Double
 import kotlin.Long
 import kotlin.NotImplementedError
+import kotlinx.cinterop.COpaquePointer
 
-open class ConeTwistJoint internal constructor(
-  _ignore: Any?
-) : Joint(_ignore) {
+open class ConeTwistJoint : Joint() {
   open var bias: Double
     get() {
       val mb = getMethodBind("ConeTwistJoint","get_param")
@@ -44,12 +41,7 @@ open class ConeTwistJoint internal constructor(
       _icall_Unit_Long_Double(mb, this.ptr, 3, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("ConeTwistJoint", "ConeTwistJoint")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("ConeTwistJoint", "ConeTwistJoint")
 
   open fun _getSwingSpan(): Double {
     throw NotImplementedError("_get_swing_span is not implemented for ConeTwistJoint")

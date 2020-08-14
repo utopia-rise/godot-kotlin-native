@@ -3,7 +3,6 @@ package godot
 
 import godot.Light2D
 import godot.core.Color
-import godot.core.Godot.shouldInitPtr
 import godot.core.Vector2
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Color
@@ -19,15 +18,13 @@ import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_Vector2
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class Light2D internal constructor(
-  _ignore: Any?
-) : Node2D(_ignore) {
+open class Light2D : Node2D() {
   open var color: Color
     get() {
       val mb = getMethodBind("Light2D","get_color")
@@ -238,12 +235,7 @@ open class Light2D internal constructor(
       _icall_Unit_Double(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Light2D", "Light2D")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("Light2D", "Light2D")
 
   open fun color(schedule: Color.() -> Unit): Color = color.apply{
       schedule(this)

@@ -1,17 +1,14 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.PoolVector3Array
 import godot.icalls._icall_PoolVector3Array
 import godot.icalls._icall_Unit_PoolVector3Array
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
+import kotlinx.cinterop.COpaquePointer
 
-open class ConcavePolygonShape internal constructor(
-  _ignore: Any?
-) : Shape(_ignore) {
+open class ConcavePolygonShape : Shape() {
   open var data: PoolVector3Array
     get() {
       val mb = getMethodBind("ConcavePolygonShape","get_faces")
@@ -22,12 +19,8 @@ open class ConcavePolygonShape internal constructor(
       _icall_Unit_PoolVector3Array(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("ConcavePolygonShape", "ConcavePolygonShape")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("ConcavePolygonShape",
+      "ConcavePolygonShape")
 
   open fun getFaces(): PoolVector3Array {
     val mb = getMethodBind("ConcavePolygonShape","get_faces")

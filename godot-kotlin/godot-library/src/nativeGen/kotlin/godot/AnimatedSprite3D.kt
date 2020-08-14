@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Signal0
 import godot.core.signal
 import godot.icalls._icall_Boolean
@@ -14,15 +13,13 @@ import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.NotImplementedError
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class AnimatedSprite3D internal constructor(
-  _ignore: Any?
-) : SpriteBase3D(_ignore) {
+open class AnimatedSprite3D : SpriteBase3D() {
   val frameChanged: Signal0 by signal()
 
   open var animation: String
@@ -55,12 +52,7 @@ open class AnimatedSprite3D internal constructor(
       _icall_Unit_Object(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("AnimatedSprite3D", "AnimatedSprite3D")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("AnimatedSprite3D", "AnimatedSprite3D")
 
   open fun _isPlaying(): Boolean {
     throw NotImplementedError("_is_playing is not implemented for AnimatedSprite3D")

@@ -1,18 +1,15 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Boolean_Long
 import godot.icalls._icall_Unit_Long_Boolean
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class VisibilityEnabler2D internal constructor(
-  _ignore: Any?
-) : VisibilityNotifier2D(_ignore) {
+open class VisibilityEnabler2D : VisibilityNotifier2D() {
   open var freezeBodies: Boolean
     get() {
       val mb = getMethodBind("VisibilityEnabler2D","is_enabler_enabled")
@@ -73,12 +70,8 @@ open class VisibilityEnabler2D internal constructor(
       _icall_Unit_Long_Boolean(mb, this.ptr, 3, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("VisibilityEnabler2D", "VisibilityEnabler2D")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("VisibilityEnabler2D",
+      "VisibilityEnabler2D")
 
   open fun _nodeRemoved(arg0: Node) {
   }

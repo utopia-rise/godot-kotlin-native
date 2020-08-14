@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Transform
 import godot.core.Vector3
 import godot.icalls._icall_Boolean
@@ -18,14 +17,12 @@ import godot.icalls._icall_Vector3_Vector3_Vector3_Boolean_Long_Double_Boolean
 import godot.icalls._icall_Vector3_Vector3_Vector3_Vector3_Boolean_Long_Double_Boolean
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class KinematicBody internal constructor(
-  _ignore: Any?
-) : PhysicsBody(_ignore) {
+open class KinematicBody : PhysicsBody() {
   open var collision_safeMargin: Double
     get() {
       val mb = getMethodBind("KinematicBody","get_safe_margin")
@@ -66,12 +63,7 @@ open class KinematicBody internal constructor(
       _icall_Unit_Long_Boolean(mb, this.ptr, 4, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("KinematicBody", "KinematicBody")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("KinematicBody", "KinematicBody")
 
   open fun getAxisLock(axis: Long): Boolean {
     val mb = getMethodBind("KinematicBody","get_axis_lock")

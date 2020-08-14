@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Vector3
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Unit_Boolean
@@ -9,12 +8,10 @@ import godot.icalls._icall_Unit_Vector3
 import godot.icalls._icall_Vector3
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
+import kotlinx.cinterop.COpaquePointer
 
-open class SpatialVelocityTracker internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
+open class SpatialVelocityTracker : Reference() {
   open var trackPhysicsStep: Boolean
     get() {
       val mb = getMethodBind("SpatialVelocityTracker","is_tracking_physics_step")
@@ -25,12 +22,8 @@ open class SpatialVelocityTracker internal constructor(
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("SpatialVelocityTracker", "SpatialVelocityTracker")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("SpatialVelocityTracker",
+      "SpatialVelocityTracker")
 
   open fun getTrackedLinearVelocity(): Vector3 {
     val mb = getMethodBind("SpatialVelocityTracker","get_tracked_linear_velocity")

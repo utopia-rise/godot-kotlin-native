@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.GodotError
 import godot.core.NodePath
 import godot.core.PoolStringArray
@@ -43,6 +42,7 @@ import godot.icalls._icall_Variant_NodePath
 import godot.icalls._icall_Variant_String
 import godot.icalls._icall_Variant_String_VariantArray
 import godot.icalls._icall_varargs
+import godot.internal.KObject
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
 import kotlin.Any
@@ -54,25 +54,8 @@ import kotlin.Unit
 import kotlin.reflect.KCallable
 import kotlinx.cinterop.COpaquePointer
 
-open class Object internal constructor(
-  _ignore: Any?
-) {
-  internal lateinit var ptr: COpaquePointer
-
+open class Object : KObject() {
   val scriptChanged: Signal0 by signal()
-
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Object", "Object")
-        }
-
-  }
-
-  open fun _onInit() {
-  }
-
-  open fun _onDestroy() {
-  }
 
   fun Signal0.emit() {
     emit(this@Object)
@@ -350,6 +333,8 @@ open class Object internal constructor(
   }
 
   fun toVariant(): Variant = Variant(this)
+
+  override fun __new(): COpaquePointer = invokeConstructor("Object", "Object")
 
   open fun _get(property: String): Variant {
     throw NotImplementedError("_get is not implemented for Object")

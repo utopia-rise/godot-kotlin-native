@@ -7,15 +7,10 @@ import godot.icalls._icall_Node_Boolean_nObject
 import godot.icalls._icall_String
 import godot.icalls._icall_Unit_nObject
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.String
 
-open class InstancePlaceholder internal constructor(
-  _ignore: Any?
-) : Node(_ignore) {
-  internal constructor() : this(null)
-
+open class InstancePlaceholder internal constructor() : Node() {
   open fun createInstance(replace: Boolean = false, customScene: PackedScene? = null): Node {
     val mb = getMethodBind("InstancePlaceholder","create_instance")
     return _icall_Node_Boolean_nObject( mb, this.ptr, replace, customScene)

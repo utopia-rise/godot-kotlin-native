@@ -3,7 +3,6 @@ package godot
 
 import godot.core.Color
 import godot.core.Dictionary
-import godot.core.Godot.shouldInitPtr
 import godot.core.Vector2
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Color
@@ -19,15 +18,13 @@ import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_Vector2
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class CharFXTransform internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
+open class CharFXTransform : Reference() {
   open var absoluteIndex: Long
     get() {
       val mb = getMethodBind("CharFXTransform","get_absolute_index")
@@ -108,12 +105,7 @@ open class CharFXTransform internal constructor(
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("CharFXTransform", "CharFXTransform")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("CharFXTransform", "CharFXTransform")
 
   open fun color(schedule: Color.() -> Unit): Color = color.apply{
       schedule(this)

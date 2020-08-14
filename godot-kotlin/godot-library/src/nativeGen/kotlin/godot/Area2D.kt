@@ -2,7 +2,6 @@
 package godot
 
 import godot.Area2D
-import godot.core.Godot.shouldInitPtr
 import godot.core.RID
 import godot.core.Signal1
 import godot.core.Signal4
@@ -25,16 +24,14 @@ import godot.icalls._icall_VariantArray
 import godot.icalls._icall_Vector2
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.String
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class Area2D internal constructor(
-  _ignore: Any?
-) : CollisionObject2D(_ignore) {
+open class Area2D : CollisionObject2D() {
   val areaEntered: Signal1<Area2D> by signal("area")
 
   val areaExited: Signal1<Area2D> by signal("area")
@@ -195,12 +192,7 @@ open class Area2D internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Area2D", "Area2D")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("Area2D", "Area2D")
 
   open fun gravityVec(schedule: Vector2.() -> Unit): Vector2 = gravityVec.apply{
       schedule(this)

@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Rect2
 import godot.core.Signal0
 import godot.core.signal
@@ -9,20 +8,13 @@ import godot.icalls._icall_Unit
 import godot.icalls._icall_Unit_Object_Rect2
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class Container internal constructor(
-  _ignore: Any?
-) : Control(_ignore) {
+open class Container : Control() {
   val sortChildren: Signal0 by signal()
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Container", "Container")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("Container", "Container")
 
   open fun _childMinsizeChanged() {
   }

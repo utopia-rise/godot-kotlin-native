@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Variant
 import godot.icalls._icall_Boolean_String
 import godot.icalls._icall_Shader
@@ -10,13 +9,11 @@ import godot.icalls._icall_Unit_String_Variant
 import godot.icalls._icall_Variant_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class ShaderMaterial internal constructor(
-  _ignore: Any?
-) : Material(_ignore) {
+open class ShaderMaterial : Material() {
   open var shader: Shader
     get() {
       val mb = getMethodBind("ShaderMaterial","get_shader")
@@ -27,12 +24,7 @@ open class ShaderMaterial internal constructor(
       _icall_Unit_Object(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("ShaderMaterial", "ShaderMaterial")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("ShaderMaterial", "ShaderMaterial")
 
   open fun _shaderChanged() {
   }

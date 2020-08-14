@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_AnimationRootNode_Long
 import godot.icalls._icall_Double
 import godot.icalls._icall_Double_Long
@@ -15,14 +14,12 @@ import godot.icalls._icall_Unit_Object_Double_Long
 import godot.icalls._icall_Unit_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Double
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class AnimationNodeBlendSpace1D internal constructor(
-  _ignore: Any?
-) : AnimationRootNode(_ignore) {
+open class AnimationNodeBlendSpace1D : AnimationRootNode() {
   open val blendPoint0_node: AnimationRootNode
     get() {
       val mb = getMethodBind("AnimationNodeBlendSpace1D","get_blend_point_node")
@@ -1087,12 +1084,8 @@ open class AnimationNodeBlendSpace1D internal constructor(
       _icall_Unit_String(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("AnimationNodeBlendSpace1D", "AnimationNodeBlendSpace1D")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("AnimationNodeBlendSpace1D",
+      "AnimationNodeBlendSpace1D")
 
   open fun _addBlendPoint(index: Long, node: AnimationRootNode) {
   }

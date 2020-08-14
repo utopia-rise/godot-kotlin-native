@@ -2,7 +2,6 @@
 package godot
 
 import godot.TouchScreenButton
-import godot.core.Godot.shouldInitPtr
 import godot.core.Signal0
 import godot.core.signal
 import godot.icalls._icall_BitMap
@@ -17,14 +16,12 @@ import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class TouchScreenButton internal constructor(
-  _ignore: Any?
-) : Node2D(_ignore) {
+open class TouchScreenButton : Node2D() {
   val signalPressed: Signal0 by signal()
 
   val released: Signal0 by signal()
@@ -119,12 +116,7 @@ open class TouchScreenButton internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("TouchScreenButton", "TouchScreenButton")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("TouchScreenButton", "TouchScreenButton")
 
   override fun _input(arg0: InputEvent) {
   }

@@ -2,7 +2,6 @@
 package godot
 
 import godot.core.Color
-import godot.core.Godot.shouldInitPtr
 import godot.core.NodePath
 import godot.core.PoolColorArray
 import godot.core.PoolRealArray
@@ -37,16 +36,14 @@ import godot.icalls._icall_VariantArray
 import godot.icalls._icall_Vector2
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.NotImplementedError
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class Polygon2D internal constructor(
-  _ignore: Any?
-) : Node2D(_ignore) {
+open class Polygon2D : Node2D() {
   open var antialiased: Boolean
     get() {
       val mb = getMethodBind("Polygon2D","get_antialiased")
@@ -207,12 +204,7 @@ open class Polygon2D internal constructor(
       _icall_Unit_PoolColorArray(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Polygon2D", "Polygon2D")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("Polygon2D", "Polygon2D")
 
   open fun color(schedule: Color.() -> Unit): Color = color.apply{
       schedule(this)

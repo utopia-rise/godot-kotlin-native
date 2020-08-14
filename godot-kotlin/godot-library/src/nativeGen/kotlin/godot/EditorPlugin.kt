@@ -20,15 +20,12 @@ import godot.icalls._icall_Unit_String_Object_String_nVariant
 import godot.icalls._icall_Unit_String_String
 import godot.icalls._icall_Unit_String_String_Object_Object
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.NotImplementedError
 import kotlin.String
 
-open class EditorPlugin internal constructor(
-  _ignore: Any?
-) : Node(_ignore) {
+open class EditorPlugin internal constructor() : Node() {
   val mainScreenChanged: Signal1<String> by signal("screen_name")
 
   val resourceSaved: Signal1<Resource> by signal("resource")
@@ -36,8 +33,6 @@ open class EditorPlugin internal constructor(
   val sceneChanged: Signal1<Node> by signal("scene_root")
 
   val sceneClosed: Signal1<String> by signal("filepath")
-
-  internal constructor() : this(null)
 
   open fun addAutoloadSingleton(name: String, path: String) {
     val mb = getMethodBind("EditorPlugin","add_autoload_singleton")

@@ -9,16 +9,11 @@ import godot.icalls._icall_Long_String
 import godot.icalls._icall_String
 import godot.icalls._icall_String_Long
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
 
-open class EditorFileSystemDirectory internal constructor(
-  _ignore: Any?
-) : Object(_ignore) {
-  internal constructor() : this(null)
-
+open class EditorFileSystemDirectory internal constructor() : Object() {
   open fun findDirIndex(name: String): Long {
     val mb = getMethodBind("EditorFileSystemDirectory","find_dir_index")
     return _icall_Long_String( mb, this.ptr, name)

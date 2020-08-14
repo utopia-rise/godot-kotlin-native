@@ -1,17 +1,9 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
+import kotlinx.cinterop.COpaquePointer
 
-open class HSplitContainer internal constructor(
-  _ignore: Any?
-) : SplitContainer(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("HSplitContainer", "HSplitContainer")
-        }
-
-  }
+open class HSplitContainer : SplitContainer() {
+  override fun __new(): COpaquePointer = invokeConstructor("HSplitContainer", "HSplitContainer")
 }

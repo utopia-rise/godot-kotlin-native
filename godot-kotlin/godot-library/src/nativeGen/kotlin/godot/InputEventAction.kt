@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Double
 import godot.icalls._icall_String
 import godot.icalls._icall_Unit_Boolean
@@ -9,15 +8,13 @@ import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.String
 import kotlin.UninitializedPropertyAccessException
+import kotlinx.cinterop.COpaquePointer
 
-open class InputEventAction internal constructor(
-  _ignore: Any?
-) : InputEvent(_ignore) {
+open class InputEventAction : InputEvent() {
   open var action: String
     get() {
       val mb = getMethodBind("InputEventAction","get_action")
@@ -47,12 +44,7 @@ open class InputEventAction internal constructor(
       _icall_Unit_Double(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("InputEventAction", "InputEventAction")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("InputEventAction", "InputEventAction")
 
   open fun getAction(): String {
     val mb = getMethodBind("InputEventAction","get_action")

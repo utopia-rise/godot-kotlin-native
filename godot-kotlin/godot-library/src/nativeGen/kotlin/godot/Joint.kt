@@ -9,13 +9,10 @@ import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_NodePath
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 
-open class Joint internal constructor(
-  _ignore: Any?
-) : Spatial(_ignore) {
+open class Joint internal constructor() : Spatial() {
   open var collision_excludeNodes: Boolean
     get() {
       val mb = getMethodBind("Joint","get_exclude_nodes_from_collision")
@@ -55,8 +52,6 @@ open class Joint internal constructor(
       val mb = getMethodBind("Joint","set_solver_priority")
       _icall_Unit_Long(mb, this.ptr, value)
     }
-
-  internal constructor() : this(null)
 
   open fun getExcludeNodesFromCollision(): Boolean {
     val mb = getMethodBind("Joint","get_exclude_nodes_from_collision")

@@ -2,7 +2,6 @@
 package godot
 
 import godot.TextureRect
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Long
 import godot.icalls._icall_Texture
@@ -11,13 +10,11 @@ import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Object
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class TextureRect internal constructor(
-  _ignore: Any?
-) : Control(_ignore) {
+open class TextureRect : Control() {
   open var expand: Boolean
     get() {
       val mb = getMethodBind("TextureRect","has_expand")
@@ -68,12 +65,7 @@ open class TextureRect internal constructor(
       _icall_Unit_Object(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("TextureRect", "TextureRect")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("TextureRect", "TextureRect")
 
   open fun _textureChanged() {
   }

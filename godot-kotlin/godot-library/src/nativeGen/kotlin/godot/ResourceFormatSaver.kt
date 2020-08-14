@@ -1,24 +1,17 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.PoolStringArray
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.NotImplementedError
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class ResourceFormatSaver internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("ResourceFormatSaver", "ResourceFormatSaver")
-        }
-
-  }
+open class ResourceFormatSaver : Reference() {
+  override fun __new(): COpaquePointer = invokeConstructor("ResourceFormatSaver",
+      "ResourceFormatSaver")
 
   open fun getRecognizedExtensions(resource: Resource): PoolStringArray {
     throw

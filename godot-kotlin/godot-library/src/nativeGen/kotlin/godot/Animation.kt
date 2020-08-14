@@ -2,7 +2,6 @@
 package godot
 
 import godot.Animation
-import godot.core.Godot.shouldInitPtr
 import godot.core.NodePath
 import godot.core.PoolIntArray
 import godot.core.Quat
@@ -51,15 +50,13 @@ import godot.icalls._icall_Variant_Long_Long
 import godot.icalls._icall_Vector2_Long_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class Animation internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
+open class Animation : Resource() {
   val tracksChanged: Signal0 by signal()
 
   open var length: Double
@@ -92,12 +89,7 @@ open class Animation internal constructor(
       _icall_Unit_Double(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Animation", "Animation")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("Animation", "Animation")
 
   open fun addTrack(type: Long, atPosition: Long = -1): Long {
     val mb = getMethodBind("Animation","add_track")

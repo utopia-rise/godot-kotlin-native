@@ -2,7 +2,6 @@
 package godot
 
 import godot.core.AABB
-import godot.core.Godot.shouldInitPtr
 import godot.core.Signal0
 import godot.core.Signal1
 import godot.core.signal
@@ -11,13 +10,11 @@ import godot.icalls._icall_Boolean
 import godot.icalls._icall_Unit_AABB
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class VisibilityNotifier internal constructor(
-  _ignore: Any?
-) : Spatial(_ignore) {
+open class VisibilityNotifier : Spatial() {
   val cameraEntered: Signal1<Camera> by signal("camera")
 
   val cameraExited: Signal1<Camera> by signal("camera")
@@ -36,12 +33,8 @@ open class VisibilityNotifier internal constructor(
       _icall_Unit_AABB(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("VisibilityNotifier", "VisibilityNotifier")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("VisibilityNotifier",
+      "VisibilityNotifier")
 
   open fun aabb(schedule: AABB.() -> Unit): AABB = aabb.apply{
       schedule(this)

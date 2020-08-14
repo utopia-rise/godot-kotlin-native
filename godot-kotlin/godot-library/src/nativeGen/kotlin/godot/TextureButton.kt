@@ -2,7 +2,6 @@
 package godot
 
 import godot.TextureButton
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_BitMap
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Long
@@ -12,13 +11,11 @@ import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Object
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class TextureButton internal constructor(
-  _ignore: Any?
-) : BaseButton(_ignore) {
+open class TextureButton : BaseButton() {
   open var expand: Boolean
     get() {
       val mb = getMethodBind("TextureButton","get_expand")
@@ -99,12 +96,7 @@ open class TextureButton internal constructor(
       _icall_Unit_Object(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("TextureButton", "TextureButton")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("TextureButton", "TextureButton")
 
   open fun getClickMask(): BitMap {
     val mb = getMethodBind("TextureButton","get_click_mask")

@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.PoolStringArray
 import godot.icalls._icall_Long
 import godot.icalls._icall_PoolStringArray
@@ -11,14 +10,12 @@ import godot.icalls._icall_Unit_String
 import godot.icalls._icall_Unit_String_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Long
 import kotlin.NotImplementedError
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class Translation internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
+open class Translation : Resource() {
   open var locale: String
     get() {
       val mb = getMethodBind("Translation","get_locale")
@@ -29,12 +26,7 @@ open class Translation internal constructor(
       _icall_Unit_String(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Translation", "Translation")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("Translation", "Translation")
 
   open fun _getMessages(): PoolStringArray {
     throw NotImplementedError("_get_messages is not implemented for Translation")

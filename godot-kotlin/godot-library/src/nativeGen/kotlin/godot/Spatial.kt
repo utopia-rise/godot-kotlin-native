@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Signal0
 import godot.core.Transform
 import godot.core.Vector3
@@ -24,15 +23,13 @@ import godot.icalls._icall_Vector3_Vector3
 import godot.icalls._icall_World
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class Spatial internal constructor(
-  _ignore: Any?
-) : Node(_ignore) {
+open class Spatial : Node() {
   val visibilityChanged: Signal0 by signal()
 
   open var gizmo: SpatialGizmo
@@ -115,12 +112,7 @@ open class Spatial internal constructor(
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Spatial", "Spatial")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("Spatial", "Spatial")
 
   open fun globalTransform(schedule: Transform.() -> Unit): Transform = globalTransform.apply{
       schedule(this)

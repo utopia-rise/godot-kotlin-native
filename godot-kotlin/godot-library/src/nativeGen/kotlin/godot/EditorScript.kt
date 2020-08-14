@@ -5,13 +5,8 @@ import godot.icalls._icall_EditorInterface
 import godot.icalls._icall_Node
 import godot.icalls._icall_Unit_Object
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 
-open class EditorScript internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
-  internal constructor() : this(null)
-
+open class EditorScript internal constructor() : Reference() {
   open fun _run() {
   }
 

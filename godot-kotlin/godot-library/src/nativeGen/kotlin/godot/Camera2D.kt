@@ -2,7 +2,6 @@
 package godot
 
 import godot.Camera2D
-import godot.core.Godot.shouldInitPtr
 import godot.core.Vector2
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Double
@@ -21,15 +20,13 @@ import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_Vector2
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class Camera2D internal constructor(
-  _ignore: Any?
-) : Node2D(_ignore) {
+open class Camera2D : Node2D() {
   open var anchorMode: Long
     get() {
       val mb = getMethodBind("Camera2D","get_anchor_mode")
@@ -276,12 +273,7 @@ open class Camera2D internal constructor(
       _icall_Unit_Vector2(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Camera2D", "Camera2D")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("Camera2D", "Camera2D")
 
   open fun offset(schedule: Vector2.() -> Unit): Vector2 = offset.apply{
       schedule(this)

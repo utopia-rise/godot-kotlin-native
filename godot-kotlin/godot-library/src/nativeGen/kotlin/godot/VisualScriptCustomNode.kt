@@ -1,25 +1,18 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Variant
 import godot.core.VariantArray
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.NotImplementedError
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class VisualScriptCustomNode internal constructor(
-  _ignore: Any?
-) : VisualScriptNode(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("VisualScriptCustomNode", "VisualScriptCustomNode")
-        }
-
-  }
+open class VisualScriptCustomNode : VisualScriptNode() {
+  override fun __new(): COpaquePointer = invokeConstructor("VisualScriptCustomNode",
+      "VisualScriptCustomNode")
 
   open fun _getCaption(): String {
     throw NotImplementedError("_get_caption is not implemented for VisualScriptCustomNode")

@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Variant
 import godot.core.VariantArray
 import godot.icalls._icall_Boolean
@@ -10,13 +9,11 @@ import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Variant_String_String_VariantArray
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class GDNative internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
+open class GDNative : Reference() {
   open var library: GDNativeLibrary
     get() {
       val mb = getMethodBind("GDNative","get_library")
@@ -27,12 +24,7 @@ open class GDNative internal constructor(
       _icall_Unit_Object(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("GDNative", "GDNative")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("GDNative", "GDNative")
 
   open fun callNative(
     callingType: String,

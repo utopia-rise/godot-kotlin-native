@@ -2,7 +2,6 @@
 package godot
 
 import godot.core.AABB
-import godot.core.Godot.shouldInitPtr
 import godot.core.NodePath
 import godot.core.PoolByteArray
 import godot.core.Transform
@@ -23,15 +22,13 @@ import godot.icalls._icall_Unit_PoolByteArray
 import godot.icalls._icall_Unit_Transform
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Double
 import kotlin.Long
 import kotlin.NotImplementedError
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class BakedLightmapData internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
+open class BakedLightmapData : Resource() {
   open var bounds: AABB
     get() {
       val mb = getMethodBind("BakedLightmapData","get_bounds")
@@ -82,12 +79,7 @@ open class BakedLightmapData internal constructor(
       _icall_Unit_PoolByteArray(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("BakedLightmapData", "BakedLightmapData")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("BakedLightmapData", "BakedLightmapData")
 
   open fun bounds(schedule: AABB.() -> Unit): AABB = bounds.apply{
       schedule(this)

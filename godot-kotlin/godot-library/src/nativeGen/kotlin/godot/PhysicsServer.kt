@@ -56,18 +56,16 @@ import kotlin.Double
 import kotlin.Long
 import kotlin.String
 import kotlin.requireNotNull
+import kotlinx.cinterop.COpaquePointer
 import kotlinx.cinterop.cstr
 import kotlinx.cinterop.invoke
 import kotlinx.cinterop.memScoped
 
 object PhysicsServer : Object() {
-  init {
-    memScoped {
-        val ptr =
-        nullSafe(Godot.gdnative.godot_global_get_singleton).invoke("PhysicsServer".cstr.ptr)
-        requireNotNull(ptr) { "No instance found for singleton PhysicsServer" }
-        this@PhysicsServer.ptr = ptr
-    }
+  override fun __new(): COpaquePointer = memScoped {
+      val ptr = nullSafe(Godot.gdnative.godot_global_get_singleton).invoke("PhysicsServer".cstr.ptr)
+      requireNotNull(ptr) { "No instance found for singleton PhysicsServer" }
+      ptr
   }
 
   fun areaAddShape(

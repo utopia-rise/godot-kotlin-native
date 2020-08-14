@@ -2,17 +2,14 @@
 package godot
 
 import godot.VisualShaderNodeCompare
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class VisualShaderNodeCompare internal constructor(
-  _ignore: Any?
-) : VisualShaderNode(_ignore) {
+open class VisualShaderNodeCompare : VisualShaderNode() {
   open var condition: Long
     get() {
       val mb = getMethodBind("VisualShaderNodeCompare","get_condition")
@@ -43,12 +40,8 @@ open class VisualShaderNodeCompare internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("VisualShaderNodeCompare", "VisualShaderNodeCompare")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("VisualShaderNodeCompare",
+      "VisualShaderNodeCompare")
 
   open fun getComparisonType(): VisualShaderNodeCompare.ComparisonType {
     val mb = getMethodBind("VisualShaderNodeCompare","get_comparison_type")

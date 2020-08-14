@@ -2,7 +2,6 @@
 package godot
 
 import godot.GIProbe
-import godot.core.Godot.shouldInitPtr
 import godot.core.Vector3
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Double
@@ -18,15 +17,13 @@ import godot.icalls._icall_Unit_nObject_Boolean
 import godot.icalls._icall_Vector3
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class GIProbe internal constructor(
-  _ignore: Any?
-) : VisualInstance(_ignore) {
+open class GIProbe : VisualInstance() {
   open var bias: Double
     get() {
       val mb = getMethodBind("GIProbe","get_bias")
@@ -127,12 +124,7 @@ open class GIProbe internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("GIProbe", "GIProbe")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("GIProbe", "GIProbe")
 
   open fun extents(schedule: Vector3.() -> Unit): Vector3 = extents.apply{
       schedule(this)

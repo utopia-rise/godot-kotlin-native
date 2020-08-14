@@ -2,7 +2,6 @@
 package godot
 
 import godot.AnimationNodeStateMachineTransition
-import godot.core.Godot.shouldInitPtr
 import godot.core.Signal0
 import godot.core.signal
 import godot.icalls._icall_Boolean
@@ -15,15 +14,13 @@ import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class AnimationNodeStateMachineTransition internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
+open class AnimationNodeStateMachineTransition : Resource() {
   val advanceConditionChanged: Signal0 by signal()
 
   open var advanceCondition: String
@@ -86,13 +83,8 @@ open class AnimationNodeStateMachineTransition internal constructor(
       _icall_Unit_Double(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("AnimationNodeStateMachineTransition",
-            "AnimationNodeStateMachineTransition")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("AnimationNodeStateMachineTransition",
+      "AnimationNodeStateMachineTransition")
 
   open fun getAdvanceCondition(): String {
     val mb = getMethodBind("AnimationNodeStateMachineTransition","get_advance_condition")

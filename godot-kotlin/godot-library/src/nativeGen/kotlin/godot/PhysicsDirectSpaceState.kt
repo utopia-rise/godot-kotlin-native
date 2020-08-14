@@ -9,15 +9,10 @@ import godot.icalls._icall_Dictionary_Vector3_Vector3_VariantArray_Long_Boolean_
 import godot.icalls._icall_VariantArray_Object_Long
 import godot.icalls._icall_VariantArray_Object_Vector3
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 
-open class PhysicsDirectSpaceState internal constructor(
-  _ignore: Any?
-) : Object(_ignore) {
-  internal constructor() : this(null)
-
+open class PhysicsDirectSpaceState internal constructor() : Object() {
   open fun castMotion(shape: PhysicsShapeQueryParameters, motion: Vector3): VariantArray {
     val mb = getMethodBind("PhysicsDirectSpaceState","cast_motion")
     return _icall_VariantArray_Object_Vector3( mb, this.ptr, shape, motion)

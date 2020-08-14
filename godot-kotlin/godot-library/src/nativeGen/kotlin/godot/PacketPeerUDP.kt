@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.GodotError
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Long
@@ -13,20 +12,13 @@ import godot.icalls._icall_Unit
 import godot.icalls._icall_Unit_Boolean
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class PacketPeerUDP internal constructor(
-  _ignore: Any?
-) : PacketPeer(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("PacketPeerUDP", "PacketPeerUDP")
-        }
-
-  }
+open class PacketPeerUDP : PacketPeer() {
+  override fun __new(): COpaquePointer = invokeConstructor("PacketPeerUDP", "PacketPeerUDP")
 
   open fun close() {
     val mb = getMethodBind("PacketPeerUDP","close")

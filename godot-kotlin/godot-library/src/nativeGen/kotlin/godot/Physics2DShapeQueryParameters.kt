@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.RID
 import godot.core.Transform2D
 import godot.core.VariantArray
@@ -23,15 +22,13 @@ import godot.icalls._icall_VariantArray
 import godot.icalls._icall_Vector2
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class Physics2DShapeQueryParameters internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
+open class Physics2DShapeQueryParameters : Reference() {
   open var collideWithAreas: Boolean
     get() {
       val mb = getMethodBind("Physics2DShapeQueryParameters","is_collide_with_areas_enabled")
@@ -112,13 +109,8 @@ open class Physics2DShapeQueryParameters internal constructor(
       _icall_Unit_Transform2D(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Physics2DShapeQueryParameters",
-            "Physics2DShapeQueryParameters")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("Physics2DShapeQueryParameters",
+      "Physics2DShapeQueryParameters")
 
   open fun motion(schedule: Vector2.() -> Unit): Vector2 = motion.apply{
       schedule(this)

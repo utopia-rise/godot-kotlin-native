@@ -2,17 +2,14 @@
 package godot
 
 import godot.VisualShaderNodeIs
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class VisualShaderNodeIs internal constructor(
-  _ignore: Any?
-) : VisualShaderNode(_ignore) {
+open class VisualShaderNodeIs : VisualShaderNode() {
   open var function: Long
     get() {
       val mb = getMethodBind("VisualShaderNodeIs","get_function")
@@ -23,12 +20,8 @@ open class VisualShaderNodeIs internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("VisualShaderNodeIs", "VisualShaderNodeIs")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("VisualShaderNodeIs",
+      "VisualShaderNodeIs")
 
   open fun getFunction(): VisualShaderNodeIs.Function {
     val mb = getMethodBind("VisualShaderNodeIs","get_function")

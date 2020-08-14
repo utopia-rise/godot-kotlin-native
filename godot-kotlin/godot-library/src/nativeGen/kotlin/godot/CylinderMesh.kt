@@ -1,20 +1,17 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Double
 import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Double
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class CylinderMesh internal constructor(
-  _ignore: Any?
-) : PrimitiveMesh(_ignore) {
+open class CylinderMesh : PrimitiveMesh() {
   open var bottomRadius: Double
     get() {
       val mb = getMethodBind("CylinderMesh","get_bottom_radius")
@@ -65,12 +62,7 @@ open class CylinderMesh internal constructor(
       _icall_Unit_Double(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("CylinderMesh", "CylinderMesh")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("CylinderMesh", "CylinderMesh")
 
   open fun getBottomRadius(): Double {
     val mb = getMethodBind("CylinderMesh","get_bottom_radius")

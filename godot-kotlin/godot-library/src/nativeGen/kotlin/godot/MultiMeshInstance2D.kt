@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Signal0
 import godot.core.signal
 import godot.icalls._icall_MultiMesh
@@ -9,11 +8,9 @@ import godot.icalls._icall_Texture
 import godot.icalls._icall_Unit_Object
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
+import kotlinx.cinterop.COpaquePointer
 
-open class MultiMeshInstance2D internal constructor(
-  _ignore: Any?
-) : Node2D(_ignore) {
+open class MultiMeshInstance2D : Node2D() {
   val textureChanged: Signal0 by signal()
 
   open var multimesh: MultiMesh
@@ -46,12 +43,8 @@ open class MultiMeshInstance2D internal constructor(
       _icall_Unit_Object(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("MultiMeshInstance2D", "MultiMeshInstance2D")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("MultiMeshInstance2D",
+      "MultiMeshInstance2D")
 
   open fun getMultimesh(): MultiMesh {
     val mb = getMethodBind("MultiMeshInstance2D","get_multimesh")

@@ -2,20 +2,17 @@
 package godot
 
 import godot.core.Color
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Color
 import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Color
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class ReferenceRect internal constructor(
-  _ignore: Any?
-) : Control(_ignore) {
+open class ReferenceRect : Control() {
   open var borderColor: Color
     get() {
       val mb = getMethodBind("ReferenceRect","get_border_color")
@@ -36,12 +33,7 @@ open class ReferenceRect internal constructor(
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("ReferenceRect", "ReferenceRect")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("ReferenceRect", "ReferenceRect")
 
   open fun borderColor(schedule: Color.() -> Unit): Color = borderColor.apply{
       schedule(this)

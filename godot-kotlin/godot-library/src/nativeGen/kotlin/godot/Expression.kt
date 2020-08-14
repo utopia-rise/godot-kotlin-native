@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.GodotError
 import godot.core.PoolStringArray
 import godot.core.Variant
@@ -12,19 +11,12 @@ import godot.icalls._icall_String
 import godot.icalls._icall_Variant_VariantArray_nObject_Boolean
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class Expression internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Expression", "Expression")
-        }
-
-  }
+open class Expression : Reference() {
+  override fun __new(): COpaquePointer = invokeConstructor("Expression", "Expression")
 
   open fun execute(
     inputs: VariantArray = VariantArray(),

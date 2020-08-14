@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Signal0
 import godot.core.signal
 import godot.icalls._icall_Boolean
@@ -18,15 +17,13 @@ import godot.icalls._icall_Unit_String
 import godot.icalls._icall_VideoStream
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class VideoPlayer internal constructor(
-  _ignore: Any?
-) : Control(_ignore) {
+open class VideoPlayer : Control() {
   val finished: Signal0 by signal()
 
   open var audioTrack: Long
@@ -129,12 +126,7 @@ open class VideoPlayer internal constructor(
       _icall_Unit_Double(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("VideoPlayer", "VideoPlayer")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("VideoPlayer", "VideoPlayer")
 
   open fun getAudioTrack(): Long {
     val mb = getMethodBind("VideoPlayer","get_audio_track")

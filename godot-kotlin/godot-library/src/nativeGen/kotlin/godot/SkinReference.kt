@@ -5,13 +5,8 @@ import godot.core.RID
 import godot.icalls._icall_RID
 import godot.icalls._icall_Skin
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 
-open class SkinReference internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
-  internal constructor() : this(null)
-
+open class SkinReference internal constructor() : Reference() {
   open fun _skinChanged() {
   }
 

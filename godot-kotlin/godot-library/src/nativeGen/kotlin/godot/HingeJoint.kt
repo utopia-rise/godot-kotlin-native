@@ -1,22 +1,19 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Boolean_Long
 import godot.icalls._icall_Double_Long
 import godot.icalls._icall_Unit_Long_Boolean
 import godot.icalls._icall_Unit_Long_Double
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.NotImplementedError
+import kotlinx.cinterop.COpaquePointer
 
-open class HingeJoint internal constructor(
-  _ignore: Any?
-) : Joint(_ignore) {
+open class HingeJoint : Joint() {
   open var angularLimit_bias: Double
     get() {
       val mb = getMethodBind("HingeJoint","get_param")
@@ -97,12 +94,7 @@ open class HingeJoint internal constructor(
       _icall_Unit_Long_Double(mb, this.ptr, 0, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("HingeJoint", "HingeJoint")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("HingeJoint", "HingeJoint")
 
   open fun _getLowerLimit(): Double {
     throw NotImplementedError("_get_lower_limit is not implemented for HingeJoint")

@@ -47,7 +47,6 @@ import godot.icalls._icall_Vector2
 import godot.icalls._icall_Vector2_Vector2
 import godot.icalls._icall_World2D
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
@@ -55,9 +54,7 @@ import kotlin.NotImplementedError
 import kotlin.String
 import kotlin.Unit
 
-open class CanvasItem internal constructor(
-  _ignore: Any?
-) : Node(_ignore) {
+open class CanvasItem internal constructor() : Node() {
   val draw: Signal0 by signal()
 
   val hide: Signal0 by signal()
@@ -135,8 +132,6 @@ open class CanvasItem internal constructor(
       val mb = getMethodBind("CanvasItem","set_visible")
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
-
-  internal constructor() : this(null)
 
   open fun modulate(schedule: Color.() -> Unit): Color = modulate.apply{
       schedule(this)

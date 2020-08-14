@@ -1,17 +1,9 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
+import kotlinx.cinterop.COpaquePointer
 
-open class VisualScriptSelf internal constructor(
-  _ignore: Any?
-) : VisualScriptNode(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("VisualScriptSelf", "VisualScriptSelf")
-        }
-
-  }
+open class VisualScriptSelf : VisualScriptNode() {
+  override fun __new(): COpaquePointer = invokeConstructor("VisualScriptSelf", "VisualScriptSelf")
 }

@@ -2,7 +2,6 @@
 package godot
 
 import godot.Tween
-import godot.core.Godot.shouldInitPtr
 import godot.core.NodePath
 import godot.core.Signal0
 import godot.core.Signal2
@@ -26,15 +25,13 @@ import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class Tween internal constructor(
-  _ignore: Any?
-) : Node(_ignore) {
+open class Tween : Node() {
   val tweenAllCompleted: Signal0 by signal()
 
   val tweenCompleted: Signal2<Object, NodePath> by signal("object", "key")
@@ -74,12 +71,7 @@ open class Tween internal constructor(
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Tween", "Tween")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("Tween", "Tween")
 
   open fun _removeByUid(uid: Long) {
   }

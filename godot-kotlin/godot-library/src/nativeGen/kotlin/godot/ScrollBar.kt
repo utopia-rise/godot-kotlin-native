@@ -6,12 +6,9 @@ import godot.core.signal
 import godot.icalls._icall_Double
 import godot.icalls._icall_Unit_Double
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Double
 
-open class ScrollBar internal constructor(
-  _ignore: Any?
-) : Range(_ignore) {
+open class ScrollBar internal constructor() : Range() {
   val scrolling: Signal0 by signal()
 
   open var customStep: Double
@@ -23,8 +20,6 @@ open class ScrollBar internal constructor(
       val mb = getMethodBind("ScrollBar","set_custom_step")
       _icall_Unit_Double(mb, this.ptr, value)
     }
-
-  internal constructor() : this(null)
 
   open fun _dragNodeExit() {
   }

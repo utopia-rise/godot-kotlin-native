@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.PoolIntArray
 import godot.core.Transform
 import godot.core.VariantArray
@@ -22,19 +21,12 @@ import godot.icalls._icall_Unit_Long_VariantArray
 import godot.icalls._icall_VariantArray_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class MeshLibrary internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("MeshLibrary", "MeshLibrary")
-        }
-
-  }
+open class MeshLibrary : Resource() {
+  override fun __new(): COpaquePointer = invokeConstructor("MeshLibrary", "MeshLibrary")
 
   open fun clear() {
     val mb = getMethodBind("MeshLibrary","clear")

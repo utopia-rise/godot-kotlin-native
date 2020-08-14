@@ -2,7 +2,6 @@
 package godot
 
 import godot.AudioStreamSample
-import godot.core.Godot.shouldInitPtr
 import godot.core.GodotError
 import godot.core.PoolByteArray
 import godot.icalls._icall_Boolean
@@ -14,14 +13,12 @@ import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_PoolByteArray
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class AudioStreamSample internal constructor(
-  _ignore: Any?
-) : AudioStream(_ignore) {
+open class AudioStreamSample : AudioStream() {
   open var data: PoolByteArray
     get() {
       val mb = getMethodBind("AudioStreamSample","get_data")
@@ -92,12 +89,7 @@ open class AudioStreamSample internal constructor(
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("AudioStreamSample", "AudioStreamSample")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("AudioStreamSample", "AudioStreamSample")
 
   open fun getData(): PoolByteArray {
     val mb = getMethodBind("AudioStreamSample","get_data")

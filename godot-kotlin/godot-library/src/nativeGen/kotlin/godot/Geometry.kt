@@ -42,17 +42,16 @@ import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.requireNotNull
+import kotlinx.cinterop.COpaquePointer
 import kotlinx.cinterop.cstr
 import kotlinx.cinterop.invoke
 import kotlinx.cinterop.memScoped
 
 object Geometry : Object() {
-  init {
-    memScoped {
-        val ptr = nullSafe(Godot.gdnative.godot_global_get_singleton).invoke("Geometry".cstr.ptr)
-        requireNotNull(ptr) { "No instance found for singleton Geometry" }
-        this@Geometry.ptr = ptr
-    }
+  override fun __new(): COpaquePointer = memScoped {
+      val ptr = nullSafe(Godot.gdnative.godot_global_get_singleton).invoke("Geometry".cstr.ptr)
+      requireNotNull(ptr) { "No instance found for singleton Geometry" }
+      ptr
   }
 
   fun buildBoxPlanes(extents: Vector3): VariantArray {

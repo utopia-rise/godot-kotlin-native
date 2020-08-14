@@ -5,14 +5,9 @@ import godot.core.GodotError
 import godot.icalls._icall_Long
 import godot.icalls._icall_Resource
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Long
 
-open class ResourceInteractiveLoader internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
-  internal constructor() : this(null)
-
+open class ResourceInteractiveLoader internal constructor() : Reference() {
   open fun getResource(): Resource {
     val mb = getMethodBind("ResourceInteractiveLoader","get_resource")
     return _icall_Resource( mb, this.ptr)

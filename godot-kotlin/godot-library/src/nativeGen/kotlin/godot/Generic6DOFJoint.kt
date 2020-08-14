@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Boolean_Long
 import godot.icalls._icall_Double_Long
 import godot.icalls._icall_Long
@@ -10,15 +9,13 @@ import godot.icalls._icall_Unit_Long_Boolean
 import godot.icalls._icall_Unit_Long_Double
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.NotImplementedError
+import kotlinx.cinterop.COpaquePointer
 
-open class Generic6DOFJoint internal constructor(
-  _ignore: Any?
-) : Joint(_ignore) {
+open class Generic6DOFJoint : Joint() {
   open var angularLimitX_damping: Double
     get() {
       val mb = getMethodBind("Generic6DOFJoint","get_param_x")
@@ -809,12 +806,7 @@ open class Generic6DOFJoint internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Generic6DOFJoint", "Generic6DOFJoint")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("Generic6DOFJoint", "Generic6DOFJoint")
 
   open fun _getAngularHiLimitX(): Double {
     throw NotImplementedError("_get_angular_hi_limit_x is not implemented for Generic6DOFJoint")

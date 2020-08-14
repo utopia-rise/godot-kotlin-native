@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Variant
 import godot.icalls._icall_GDNativeLibrary
 import godot.icalls._icall_String
@@ -13,10 +12,9 @@ import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
 import kotlin.Any
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class NativeScript internal constructor(
-  _ignore: Any?
-) : Script(_ignore) {
+open class NativeScript : Script() {
   open var className: String
     get() {
       val mb = getMethodBind("NativeScript","get_class_name")
@@ -57,12 +55,7 @@ open class NativeScript internal constructor(
       _icall_Unit_String(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("NativeScript", "NativeScript")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("NativeScript", "NativeScript")
 
   open fun getClassDocumentation(): String {
     val mb = getMethodBind("NativeScript","get_class_documentation")

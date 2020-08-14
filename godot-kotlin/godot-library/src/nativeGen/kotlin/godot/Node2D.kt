@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Transform2D
 import godot.core.Vector2
 import godot.icalls._icall_Boolean
@@ -19,16 +18,14 @@ import godot.icalls._icall_Vector2
 import godot.icalls._icall_Vector2_Vector2
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.UninitializedPropertyAccessException
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class Node2D internal constructor(
-  _ignore: Any?
-) : CanvasItem(_ignore) {
+open class Node2D : CanvasItem() {
   open var globalPosition: Vector2
     get() {
       val mb = getMethodBind("Node2D","get_global_position")
@@ -168,12 +165,7 @@ open class Node2D internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Node2D", "Node2D")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("Node2D", "Node2D")
 
   open fun globalPosition(schedule: Vector2.() -> Unit): Vector2 = globalPosition.apply{
       schedule(this)

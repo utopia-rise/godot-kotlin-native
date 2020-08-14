@@ -2,7 +2,6 @@
 package godot
 
 import godot.CSGPolygon
-import godot.core.Godot.shouldInitPtr
 import godot.core.NodePath
 import godot.core.PoolVector2Array
 import godot.icalls._icall_Boolean
@@ -19,15 +18,13 @@ import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_PoolVector2Array
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.NotImplementedError
+import kotlinx.cinterop.COpaquePointer
 
-open class CSGPolygon internal constructor(
-  _ignore: Any?
-) : CSGPrimitive(_ignore) {
+open class CSGPolygon : CSGPrimitive() {
   open var depth: Double
     get() {
       val mb = getMethodBind("CSGPolygon","get_depth")
@@ -158,12 +155,7 @@ open class CSGPolygon internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("CSGPolygon", "CSGPolygon")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("CSGPolygon", "CSGPolygon")
 
   open fun _hasEditable3dPolygonNoDepth(): Boolean {
     throw NotImplementedError("_has_editable_3d_polygon_no_depth is not implemented for CSGPolygon")

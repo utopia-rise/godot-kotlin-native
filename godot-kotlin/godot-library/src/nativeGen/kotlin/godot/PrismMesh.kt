@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Vector3
 import godot.icalls._icall_Double
 import godot.icalls._icall_Long
@@ -11,14 +10,12 @@ import godot.icalls._icall_Unit_Vector3
 import godot.icalls._icall_Vector3
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Double
 import kotlin.Long
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class PrismMesh internal constructor(
-  _ignore: Any?
-) : PrimitiveMesh(_ignore) {
+open class PrismMesh : PrimitiveMesh() {
   open var leftToRight: Double
     get() {
       val mb = getMethodBind("PrismMesh","get_left_to_right")
@@ -69,12 +66,7 @@ open class PrismMesh internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("PrismMesh", "PrismMesh")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("PrismMesh", "PrismMesh")
 
   open fun size(schedule: Vector3.() -> Unit): Vector3 = size.apply{
       schedule(this)

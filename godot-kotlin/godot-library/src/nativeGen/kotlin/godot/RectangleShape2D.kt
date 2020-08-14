@@ -1,18 +1,15 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Vector2
 import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_Vector2
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class RectangleShape2D internal constructor(
-  _ignore: Any?
-) : Shape2D(_ignore) {
+open class RectangleShape2D : Shape2D() {
   open var extents: Vector2
     get() {
       val mb = getMethodBind("RectangleShape2D","get_extents")
@@ -23,12 +20,7 @@ open class RectangleShape2D internal constructor(
       _icall_Unit_Vector2(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("RectangleShape2D", "RectangleShape2D")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("RectangleShape2D", "RectangleShape2D")
 
   open fun extents(schedule: Vector2.() -> Unit): Vector2 = extents.apply{
       schedule(this)

@@ -1,19 +1,16 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Double
 import godot.icalls._icall_Material
 import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_Object
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Double
+import kotlinx.cinterop.COpaquePointer
 
-open class CSGBox internal constructor(
-  _ignore: Any?
-) : CSGPrimitive(_ignore) {
+open class CSGBox : CSGPrimitive() {
   open var depth: Double
     get() {
       val mb = getMethodBind("CSGBox","get_depth")
@@ -54,12 +51,7 @@ open class CSGBox internal constructor(
       _icall_Unit_Double(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("CSGBox", "CSGBox")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("CSGBox", "CSGBox")
 
   open fun getDepth(): Double {
     val mb = getMethodBind("CSGBox","get_depth")

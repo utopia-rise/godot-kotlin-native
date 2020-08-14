@@ -9,14 +9,11 @@ import godot.icalls._icall_String
 import godot.icalls._icall_Unit
 import godot.icalls._icall_Unit_Long
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
 
-open class WebRTCDataChannel internal constructor(
-  _ignore: Any?
-) : PacketPeer(_ignore) {
+open class WebRTCDataChannel internal constructor() : PacketPeer() {
   open var writeMode: Long
     get() {
       val mb = getMethodBind("WebRTCDataChannel","get_write_mode")
@@ -26,8 +23,6 @@ open class WebRTCDataChannel internal constructor(
       val mb = getMethodBind("WebRTCDataChannel","set_write_mode")
       _icall_Unit_Long(mb, this.ptr, value)
     }
-
-  internal constructor() : this(null)
 
   open fun close() {
     val mb = getMethodBind("WebRTCDataChannel","close")

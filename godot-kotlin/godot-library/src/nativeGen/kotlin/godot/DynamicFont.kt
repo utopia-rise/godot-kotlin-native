@@ -2,7 +2,6 @@
 package godot
 
 import godot.core.Color
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Color
 import godot.icalls._icall_DynamicFontData
@@ -17,14 +16,12 @@ import godot.icalls._icall_Unit_Long_Object
 import godot.icalls._icall_Unit_Object
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class DynamicFont internal constructor(
-  _ignore: Any?
-) : Font(_ignore) {
+open class DynamicFont : Font() {
   open var extraSpacingBottom: Long
     get() {
       val mb = getMethodBind("DynamicFont","get_spacing")
@@ -125,12 +122,7 @@ open class DynamicFont internal constructor(
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("DynamicFont", "DynamicFont")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("DynamicFont", "DynamicFont")
 
   open fun outlineColor(schedule: Color.() -> Unit): Color = outlineColor.apply{
       schedule(this)

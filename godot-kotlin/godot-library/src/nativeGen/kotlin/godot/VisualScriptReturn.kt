@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Variant
 import godot.core.Variant.Type
 import godot.icalls._icall_Boolean
@@ -10,13 +9,11 @@ import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class VisualScriptReturn internal constructor(
-  _ignore: Any?
-) : VisualScriptNode(_ignore) {
+open class VisualScriptReturn : VisualScriptNode() {
   open var returnEnabled: Boolean
     get() {
       val mb = getMethodBind("VisualScriptReturn","is_return_value_enabled")
@@ -37,12 +34,8 @@ open class VisualScriptReturn internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("VisualScriptReturn", "VisualScriptReturn")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("VisualScriptReturn",
+      "VisualScriptReturn")
 
   open fun getReturnType(): Variant.Type {
     val mb = getMethodBind("VisualScriptReturn","get_return_type")

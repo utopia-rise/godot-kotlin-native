@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Vector2
 import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Long
@@ -9,13 +8,11 @@ import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_Vector2
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Long
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class InputEventScreenDrag internal constructor(
-  _ignore: Any?
-) : InputEvent(_ignore) {
+open class InputEventScreenDrag : InputEvent() {
   open var index: Long
     get() {
       val mb = getMethodBind("InputEventScreenDrag","get_index")
@@ -56,12 +53,8 @@ open class InputEventScreenDrag internal constructor(
       _icall_Unit_Vector2(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("InputEventScreenDrag", "InputEventScreenDrag")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("InputEventScreenDrag",
+      "InputEventScreenDrag")
 
   open fun position(schedule: Vector2.() -> Unit): Vector2 = position.apply{
       schedule(this)

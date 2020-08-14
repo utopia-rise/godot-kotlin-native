@@ -7,15 +7,10 @@ import godot.core.signal
 import godot.icalls._icall_Long_Long_Long_Long_Long
 import godot.icalls._icall_WebSocketPeer_Long
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Long
 
-open class WebSocketMultiplayerPeer internal constructor(
-  _ignore: Any?
-) : NetworkedMultiplayerPeer(_ignore) {
+open class WebSocketMultiplayerPeer internal constructor() : NetworkedMultiplayerPeer() {
   val peerPacket: Signal1<Long> by signal("peer_source")
-
-  internal constructor() : this(null)
 
   open fun getPeer(peerId: Long): WebSocketPeer {
     val mb = getMethodBind("WebSocketMultiplayerPeer","get_peer")

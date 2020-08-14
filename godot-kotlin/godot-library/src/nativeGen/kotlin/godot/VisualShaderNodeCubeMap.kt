@@ -2,19 +2,16 @@
 package godot
 
 import godot.VisualShaderNodeCubeMap
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_CubeMap
 import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Object
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class VisualShaderNodeCubeMap internal constructor(
-  _ignore: Any?
-) : VisualShaderNode(_ignore) {
+open class VisualShaderNodeCubeMap : VisualShaderNode() {
   open var cubeMap: CubeMap
     get() {
       val mb = getMethodBind("VisualShaderNodeCubeMap","get_cube_map")
@@ -45,12 +42,8 @@ open class VisualShaderNodeCubeMap internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("VisualShaderNodeCubeMap", "VisualShaderNodeCubeMap")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("VisualShaderNodeCubeMap",
+      "VisualShaderNodeCubeMap")
 
   open fun getCubeMap(): CubeMap {
     val mb = getMethodBind("VisualShaderNodeCubeMap","get_cube_map")

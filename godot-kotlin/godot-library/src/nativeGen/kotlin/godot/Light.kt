@@ -12,15 +12,12 @@ import godot.icalls._icall_Unit_Color
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Long_Double
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.Unit
 
-open class Light internal constructor(
-  _ignore: Any?
-) : VisualInstance(_ignore) {
+open class Light internal constructor() : VisualInstance() {
   open var editorOnly: Boolean
     get() {
       val mb = getMethodBind("Light","is_editor_only")
@@ -150,8 +147,6 @@ open class Light internal constructor(
       val mb = getMethodBind("Light","set_shadow_reverse_cull_face")
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
-
-  internal constructor() : this(null)
 
   open fun lightColor(schedule: Color.() -> Unit): Color = lightColor.apply{
       schedule(this)

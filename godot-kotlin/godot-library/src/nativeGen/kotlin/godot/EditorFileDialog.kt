@@ -16,14 +16,11 @@ import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_String
 import godot.icalls._icall_VBoxContainer
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
 
-open class EditorFileDialog internal constructor(
-  _ignore: Any?
-) : ConfirmationDialog(_ignore) {
+open class EditorFileDialog internal constructor() : ConfirmationDialog() {
   val dirSelected: Signal1<String> by signal("dir")
 
   val fileSelected: Signal1<String> by signal("path")
@@ -109,8 +106,6 @@ open class EditorFileDialog internal constructor(
       val mb = getMethodBind("EditorFileDialog","set_show_hidden_files")
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
-
-  internal constructor() : this(null)
 
   open fun _actionPressed() {
   }

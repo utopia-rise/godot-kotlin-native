@@ -2,7 +2,6 @@
 package godot
 
 import godot.AnimationNodeBlendSpace2D
-import godot.core.Godot.shouldInitPtr
 import godot.core.PoolIntArray
 import godot.core.Signal0
 import godot.core.Vector2
@@ -24,16 +23,14 @@ import godot.icalls._icall_Vector2
 import godot.icalls._icall_Vector2_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.NotImplementedError
 import kotlin.String
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class AnimationNodeBlendSpace2D internal constructor(
-  _ignore: Any?
-) : AnimationRootNode(_ignore) {
+open class AnimationNodeBlendSpace2D : AnimationRootNode() {
   val trianglesUpdated: Signal0 by signal()
 
   open var autoTriangles: Boolean
@@ -1130,12 +1127,8 @@ open class AnimationNodeBlendSpace2D internal constructor(
       _icall_Unit_String(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("AnimationNodeBlendSpace2D", "AnimationNodeBlendSpace2D")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("AnimationNodeBlendSpace2D",
+      "AnimationNodeBlendSpace2D")
 
   open fun blendPoint0_pos(schedule: Vector2.() -> Unit): Vector2 = blendPoint0_pos.apply{
       schedule(this)

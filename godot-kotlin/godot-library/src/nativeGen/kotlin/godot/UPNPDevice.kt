@@ -2,7 +2,6 @@
 package godot
 
 import godot.UPNPDevice
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Long
 import godot.icalls._icall_Long_Long_Long_String_String_Long
@@ -12,14 +11,12 @@ import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class UPNPDevice internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
+open class UPNPDevice : Reference() {
   open var descriptionUrl: String
     get() {
       val mb = getMethodBind("UPNPDevice","get_description_url")
@@ -80,12 +77,7 @@ open class UPNPDevice internal constructor(
       _icall_Unit_String(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("UPNPDevice", "UPNPDevice")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("UPNPDevice", "UPNPDevice")
 
   open fun addPortMapping(
     port: Long,

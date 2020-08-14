@@ -3,15 +3,10 @@ package godot
 
 import godot.icalls._icall_String
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.NotImplementedError
 import kotlin.String
 
-open class EditorScenePostImport internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
-  internal constructor() : this(null)
-
+open class EditorScenePostImport internal constructor() : Reference() {
   open fun getSourceFile(): String {
     val mb = getMethodBind("EditorScenePostImport","get_source_file")
     return _icall_String( mb, this.ptr)

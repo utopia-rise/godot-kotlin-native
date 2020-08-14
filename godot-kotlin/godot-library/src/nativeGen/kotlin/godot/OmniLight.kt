@@ -2,17 +2,14 @@
 package godot
 
 import godot.OmniLight
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class OmniLight internal constructor(
-  _ignore: Any?
-) : Light(_ignore) {
+open class OmniLight : Light() {
   open var omniShadowDetail: Long
     get() {
       val mb = getMethodBind("OmniLight","get_shadow_detail")
@@ -33,12 +30,7 @@ open class OmniLight internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("OmniLight", "OmniLight")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("OmniLight", "OmniLight")
 
   open fun getShadowDetail(): OmniLight.ShadowDetail {
     val mb = getMethodBind("OmniLight","get_shadow_detail")

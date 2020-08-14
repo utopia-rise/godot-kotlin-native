@@ -10,15 +10,12 @@ import godot.core.VariantArray
 import godot.core.signal
 import godot.icalls._icall_Unit
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.String
 
-open class EditorInspector internal constructor(
-  _ignore: Any?
-) : ScrollContainer(_ignore) {
+open class EditorInspector internal constructor() : ScrollContainer() {
   val objectIdSelected: Signal1<Long> by signal("id")
 
   val propertyEdited: Signal1<String> by signal("property")
@@ -32,8 +29,6 @@ open class EditorInspector internal constructor(
   val resourceSelected: Signal2<Object, String> by signal("res", "prop")
 
   val restartRequested: Signal0 by signal()
-
-  internal constructor() : this(null)
 
   open fun _editRequestChange(arg0: Object, arg1: String) {
   }

@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.NodePath
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Double
@@ -12,13 +11,11 @@ import godot.icalls._icall_Unit_NodePath
 import godot.icalls._icall_Unit_Object
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
+import kotlinx.cinterop.COpaquePointer
 
-open class InterpolatedCamera internal constructor(
-  _ignore: Any?
-) : Camera(_ignore) {
+open class InterpolatedCamera : Camera() {
   open var enabled: Boolean
     get() {
       val mb = getMethodBind("InterpolatedCamera","is_interpolation_enabled")
@@ -49,12 +46,8 @@ open class InterpolatedCamera internal constructor(
       _icall_Unit_NodePath(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("InterpolatedCamera", "InterpolatedCamera")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("InterpolatedCamera",
+      "InterpolatedCamera")
 
   open fun getSpeed(): Double {
     val mb = getMethodBind("InterpolatedCamera","get_speed")

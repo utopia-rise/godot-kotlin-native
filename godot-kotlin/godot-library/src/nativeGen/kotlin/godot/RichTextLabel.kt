@@ -3,7 +3,6 @@ package godot
 
 import godot.core.Color
 import godot.core.Dictionary
-import godot.core.Godot.shouldInitPtr
 import godot.core.GodotError
 import godot.core.PoolStringArray
 import godot.core.Signal1
@@ -32,15 +31,13 @@ import godot.icalls._icall_VScrollBar
 import godot.icalls._icall_VariantArray
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class RichTextLabel internal constructor(
-  _ignore: Any?
-) : Control(_ignore) {
+open class RichTextLabel : Control() {
   val metaClicked: Signal1<Variant> by signal("meta")
 
   val metaHoverEnded: Signal1<Variant> by signal("meta")
@@ -167,12 +164,7 @@ open class RichTextLabel internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("RichTextLabel", "RichTextLabel")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("RichTextLabel", "RichTextLabel")
 
   override fun _guiInput(arg0: InputEvent) {
   }

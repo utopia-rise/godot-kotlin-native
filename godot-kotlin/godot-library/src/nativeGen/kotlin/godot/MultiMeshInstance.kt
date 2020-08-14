@@ -1,16 +1,13 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_MultiMesh
 import godot.icalls._icall_Unit_Object
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
+import kotlinx.cinterop.COpaquePointer
 
-open class MultiMeshInstance internal constructor(
-  _ignore: Any?
-) : GeometryInstance(_ignore) {
+open class MultiMeshInstance : GeometryInstance() {
   open var multimesh: MultiMesh
     get() {
       val mb = getMethodBind("MultiMeshInstance","get_multimesh")
@@ -21,12 +18,7 @@ open class MultiMeshInstance internal constructor(
       _icall_Unit_Object(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("MultiMeshInstance", "MultiMeshInstance")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("MultiMeshInstance", "MultiMeshInstance")
 
   open fun getMultimesh(): MultiMesh {
     val mb = getMethodBind("MultiMeshInstance","get_multimesh")

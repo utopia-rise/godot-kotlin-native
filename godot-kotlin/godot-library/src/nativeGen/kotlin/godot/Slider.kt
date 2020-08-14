@@ -6,13 +6,10 @@ import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Long
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 
-open class Slider internal constructor(
-  _ignore: Any?
-) : Range(_ignore) {
+open class Slider internal constructor() : Range() {
   open var editable: Boolean
     get() {
       val mb = getMethodBind("Slider","is_editable")
@@ -52,8 +49,6 @@ open class Slider internal constructor(
       val mb = getMethodBind("Slider","set_ticks_on_borders")
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
-
-  internal constructor() : this(null)
 
   override fun _guiInput(arg0: InputEvent) {
   }

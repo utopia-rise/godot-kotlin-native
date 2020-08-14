@@ -13,14 +13,11 @@ import godot.icalls._icall_Unit_String
 import godot.icalls._icall_Unit_Vector2_Variant_Object
 import godot.icalls._icall_Variant_Vector2_Object
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
 
-open class FileSystemDock internal constructor(
-  _ignore: Any?
-) : VBoxContainer(_ignore) {
+open class FileSystemDock internal constructor() : VBoxContainer() {
   val displayModeChanged: Signal0 by signal()
 
   val fileRemoved: Signal1<String> by signal("file")
@@ -34,8 +31,6 @@ open class FileSystemDock internal constructor(
   val inherit: Signal1<String> by signal("file")
 
   val instance: Signal1<PoolStringArray> by signal("files")
-
-  internal constructor() : this(null)
 
   open fun _bwHistory() {
   }

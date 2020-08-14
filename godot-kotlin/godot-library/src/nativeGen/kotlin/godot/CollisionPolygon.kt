@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.PoolVector2Array
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Double
@@ -11,14 +10,12 @@ import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_PoolVector2Array
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.NotImplementedError
+import kotlinx.cinterop.COpaquePointer
 
-open class CollisionPolygon internal constructor(
-  _ignore: Any?
-) : Spatial(_ignore) {
+open class CollisionPolygon : Spatial() {
   open var depth: Double
     get() {
       val mb = getMethodBind("CollisionPolygon","get_depth")
@@ -49,12 +46,7 @@ open class CollisionPolygon internal constructor(
       _icall_Unit_PoolVector2Array(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("CollisionPolygon", "CollisionPolygon")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("CollisionPolygon", "CollisionPolygon")
 
   open fun _isEditable3dPolygon(): Boolean {
     throw NotImplementedError("_is_editable_3d_polygon is not implemented for CollisionPolygon")

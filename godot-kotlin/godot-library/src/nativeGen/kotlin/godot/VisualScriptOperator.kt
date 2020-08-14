@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Variant
 import godot.core.Variant.Operator
 import godot.core.Variant.Type
@@ -9,12 +8,10 @@ import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class VisualScriptOperator internal constructor(
-  _ignore: Any?
-) : VisualScriptNode(_ignore) {
+open class VisualScriptOperator : VisualScriptNode() {
   open var operator: Long
     get() {
       val mb = getMethodBind("VisualScriptOperator","get_operator")
@@ -35,12 +32,8 @@ open class VisualScriptOperator internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("VisualScriptOperator", "VisualScriptOperator")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("VisualScriptOperator",
+      "VisualScriptOperator")
 
   open fun getOperator(): Variant.Operator {
     val mb = getMethodBind("VisualScriptOperator","get_operator")

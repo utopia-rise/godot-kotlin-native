@@ -2,20 +2,17 @@
 package godot
 
 import godot.CameraServer
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class CameraTexture internal constructor(
-  _ignore: Any?
-) : Texture(_ignore) {
+open class CameraTexture : Texture() {
   open var cameraFeedId: Long
     get() {
       val mb = getMethodBind("CameraTexture","get_camera_feed_id")
@@ -46,12 +43,7 @@ open class CameraTexture internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("CameraTexture", "CameraTexture")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("CameraTexture", "CameraTexture")
 
   open fun getCameraActive(): Boolean {
     val mb = getMethodBind("CameraTexture","get_camera_active")

@@ -3,7 +3,6 @@ package godot
 
 import godot.ParticlesMaterial
 import godot.core.Color
-import godot.core.Godot.shouldInitPtr
 import godot.core.Vector3
 import godot.icalls._icall_Boolean_Long
 import godot.icalls._icall_Color
@@ -25,15 +24,13 @@ import godot.icalls._icall_Unit_Vector3
 import godot.icalls._icall_Vector3
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class ParticlesMaterial internal constructor(
-  _ignore: Any?
-) : Material(_ignore) {
+open class ParticlesMaterial : Material() {
   open var angle: Double
     get() {
       val mb = getMethodBind("ParticlesMaterial","get_param")
@@ -584,12 +581,7 @@ open class ParticlesMaterial internal constructor(
       _icall_Unit_Object(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("ParticlesMaterial", "ParticlesMaterial")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("ParticlesMaterial", "ParticlesMaterial")
 
   open fun color(schedule: Color.() -> Unit): Color = color.apply{
       schedule(this)

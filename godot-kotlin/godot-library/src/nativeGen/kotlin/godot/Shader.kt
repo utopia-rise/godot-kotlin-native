@@ -2,7 +2,6 @@
 package godot
 
 import godot.Shader
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Boolean_String
 import godot.icalls._icall_Long
 import godot.icalls._icall_String
@@ -11,14 +10,12 @@ import godot.icalls._icall_Unit_String
 import godot.icalls._icall_Unit_String_Object
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class Shader internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
+open class Shader : Resource() {
   open var code: String
     get() {
       val mb = getMethodBind("Shader","get_code")
@@ -39,12 +36,7 @@ open class Shader internal constructor(
       _icall_Unit_String(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Shader", "Shader")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("Shader", "Shader")
 
   open fun getCode(): String {
     val mb = getMethodBind("Shader","get_code")

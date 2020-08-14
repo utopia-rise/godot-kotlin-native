@@ -17,16 +17,11 @@ import godot.icalls._icall_String_Long_Long
 import godot.icalls._icall_VariantArray_Long
 import godot.icalls._icall_Variant_Long_Long
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
 
-open class SceneState internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
-  internal constructor() : this(null)
-
+open class SceneState internal constructor() : Reference() {
   open fun getConnectionBinds(idx: Long): VariantArray {
     val mb = getMethodBind("SceneState","get_connection_binds")
     return _icall_VariantArray_Long( mb, this.ptr, idx)

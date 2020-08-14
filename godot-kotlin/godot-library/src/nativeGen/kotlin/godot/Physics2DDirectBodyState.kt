@@ -23,15 +23,12 @@ import godot.icalls._icall_Variant_Long
 import godot.icalls._icall_Vector2
 import godot.icalls._icall_Vector2_Long
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.Unit
 
-open class Physics2DDirectBodyState internal constructor(
-  _ignore: Any?
-) : Object(_ignore) {
+open class Physics2DDirectBodyState internal constructor() : Object() {
   open var angularVelocity: Double
     get() {
       val mb = getMethodBind("Physics2DDirectBodyState","get_angular_velocity")
@@ -107,8 +104,6 @@ open class Physics2DDirectBodyState internal constructor(
       val mb = getMethodBind("Physics2DDirectBodyState","set_transform")
       _icall_Unit_Transform2D(mb, this.ptr, value)
     }
-
-  internal constructor() : this(null)
 
   open fun linearVelocity(schedule: Vector2.() -> Unit): Vector2 = linearVelocity.apply{
       schedule(this)

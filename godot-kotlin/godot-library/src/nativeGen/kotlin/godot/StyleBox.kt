@@ -11,14 +11,11 @@ import godot.icalls._icall_Unit_Long_Double
 import godot.icalls._icall_Unit_RID_Rect2
 import godot.icalls._icall_Vector2
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 
-open class StyleBox internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
+open class StyleBox internal constructor() : Resource() {
   open var contentMarginBottom: Double
     get() {
       val mb = getMethodBind("StyleBox","get_default_margin")
@@ -58,8 +55,6 @@ open class StyleBox internal constructor(
       val mb = getMethodBind("StyleBox","set_default_margin")
       _icall_Unit_Long_Double(mb, this.ptr, 1, value)
     }
-
-  internal constructor() : this(null)
 
   open fun draw(canvasItem: RID, rect: Rect2) {
     val mb = getMethodBind("StyleBox","draw")

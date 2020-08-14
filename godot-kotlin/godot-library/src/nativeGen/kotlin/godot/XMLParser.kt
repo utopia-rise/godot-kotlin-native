@@ -2,7 +2,6 @@
 package godot
 
 import godot.XMLParser
-import godot.core.Godot.shouldInitPtr
 import godot.core.GodotError
 import godot.core.PoolByteArray
 import godot.icalls._icall_Boolean
@@ -17,20 +16,13 @@ import godot.icalls._icall_String_String
 import godot.icalls._icall_Unit
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class XMLParser internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("XMLParser", "XMLParser")
-        }
-
-  }
+open class XMLParser : Reference() {
+  override fun __new(): COpaquePointer = invokeConstructor("XMLParser", "XMLParser")
 
   open fun getAttributeCount(): Long {
     val mb = getMethodBind("XMLParser","get_attribute_count")

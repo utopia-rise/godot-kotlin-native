@@ -2,7 +2,6 @@
 package godot
 
 import godot.CollisionPolygon2D
-import godot.core.Godot.shouldInitPtr
 import godot.core.PoolVector2Array
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Double
@@ -14,14 +13,12 @@ import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_PoolVector2Array
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class CollisionPolygon2D internal constructor(
-  _ignore: Any?
-) : Node2D(_ignore) {
+open class CollisionPolygon2D : Node2D() {
   open var buildMode: Long
     get() {
       val mb = getMethodBind("CollisionPolygon2D","get_build_mode")
@@ -72,12 +69,8 @@ open class CollisionPolygon2D internal constructor(
       _icall_Unit_PoolVector2Array(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("CollisionPolygon2D", "CollisionPolygon2D")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("CollisionPolygon2D",
+      "CollisionPolygon2D")
 
   open fun getBuildMode(): CollisionPolygon2D.BuildMode {
     val mb = getMethodBind("CollisionPolygon2D","get_build_mode")

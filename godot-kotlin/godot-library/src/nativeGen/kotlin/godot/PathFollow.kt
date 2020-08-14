@@ -2,7 +2,6 @@
 package godot
 
 import godot.PathFollow
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Double
 import godot.icalls._icall_Long
@@ -11,14 +10,12 @@ import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class PathFollow internal constructor(
-  _ignore: Any?
-) : Spatial(_ignore) {
+open class PathFollow : Spatial() {
   open var cubicInterp: Boolean
     get() {
       val mb = getMethodBind("PathFollow","get_cubic_interpolation")
@@ -89,12 +86,7 @@ open class PathFollow internal constructor(
       _icall_Unit_Double(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("PathFollow", "PathFollow")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("PathFollow", "PathFollow")
 
   open fun getCubicInterpolation(): Boolean {
     val mb = getMethodBind("PathFollow","get_cubic_interpolation")
