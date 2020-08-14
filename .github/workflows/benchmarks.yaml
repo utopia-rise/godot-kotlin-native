@@ -1,5 +1,5 @@
 name: CI
-on: pull-request
+on: pull_request
 
 jobs:
   build:
@@ -31,5 +31,5 @@ jobs:
       - uses: eskatos/gradle-command-action@v1
         with:
           build-root-directory: benchmarks
-          arguments: runBenchmark -Pgodot.kotlin.dev
+          arguments: runBenchmarks -Pgodot.kotlin.dev
 
