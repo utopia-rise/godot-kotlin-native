@@ -32,4 +32,8 @@ jobs:
         with:
           build-root-directory: benchmarks
           arguments: runBenchmarks -Pgodot.kotlin.dev
+      - uses: actions/upload-artifact@v2
+        with:
+          name: benchmark-results
+          path: benchmarks/build/benchmark-results.json
 
