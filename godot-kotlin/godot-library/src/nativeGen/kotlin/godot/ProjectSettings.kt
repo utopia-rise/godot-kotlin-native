@@ -21,18 +21,17 @@ import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
 import kotlin.requireNotNull
+import kotlinx.cinterop.COpaquePointer
 import kotlinx.cinterop.cstr
 import kotlinx.cinterop.invoke
 import kotlinx.cinterop.memScoped
 
 object ProjectSettings : Object() {
-  init {
-    memScoped {
-        val ptr =
-        nullSafe(Godot.gdnative.godot_global_get_singleton).invoke("ProjectSettings".cstr.ptr)
-        requireNotNull(ptr) { "No instance found for singleton ProjectSettings" }
-        this@ProjectSettings.ptr = ptr
-    }
+  override fun __new(): COpaquePointer = memScoped {
+      val ptr =
+      nullSafe(Godot.gdnative.godot_global_get_singleton).invoke("ProjectSettings".cstr.ptr)
+      requireNotNull(ptr) { "No instance found for singleton ProjectSettings" }
+      ptr
   }
 
   fun addPropertyInfo(hint: Dictionary) {

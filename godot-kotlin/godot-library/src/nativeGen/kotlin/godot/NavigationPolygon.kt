@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.PoolIntArray
 import godot.core.PoolVector2Array
 import godot.core.VariantArray
@@ -17,13 +16,11 @@ import godot.icalls._icall_Unit_PoolVector2Array
 import godot.icalls._icall_Unit_PoolVector2Array_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Long
 import kotlin.NotImplementedError
+import kotlinx.cinterop.COpaquePointer
 
-open class NavigationPolygon internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
+open class NavigationPolygon : Resource() {
   open var vertices: PoolVector2Array
     get() {
       val mb = getMethodBind("NavigationPolygon","get_vertices")
@@ -34,12 +31,7 @@ open class NavigationPolygon internal constructor(
       _icall_Unit_PoolVector2Array(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("NavigationPolygon", "NavigationPolygon")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("NavigationPolygon", "NavigationPolygon")
 
   open fun _getOutlines(): VariantArray {
     throw NotImplementedError("_get_outlines is not implemented for NavigationPolygon")

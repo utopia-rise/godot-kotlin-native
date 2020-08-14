@@ -2,7 +2,6 @@
 package godot
 
 import godot.VisualScriptYieldSignal
-import godot.core.Godot.shouldInitPtr
 import godot.core.NodePath
 import godot.icalls._icall_Long
 import godot.icalls._icall_NodePath
@@ -12,13 +11,11 @@ import godot.icalls._icall_Unit_NodePath
 import godot.icalls._icall_Unit_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class VisualScriptYieldSignal internal constructor(
-  _ignore: Any?
-) : VisualScriptNode(_ignore) {
+open class VisualScriptYieldSignal : VisualScriptNode() {
   open var baseType: String
     get() {
       val mb = getMethodBind("VisualScriptYieldSignal","get_base_type")
@@ -59,12 +56,8 @@ open class VisualScriptYieldSignal internal constructor(
       _icall_Unit_String(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("VisualScriptYieldSignal", "VisualScriptYieldSignal")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("VisualScriptYieldSignal",
+      "VisualScriptYieldSignal")
 
   open fun getBasePath(): NodePath {
     val mb = getMethodBind("VisualScriptYieldSignal","get_base_path")

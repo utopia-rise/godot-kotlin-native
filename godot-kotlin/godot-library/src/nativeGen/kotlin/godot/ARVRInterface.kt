@@ -10,14 +10,11 @@ import godot.icalls._icall_Unit
 import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Vector2
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
 
-open class ARVRInterface internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
+open class ARVRInterface internal constructor() : Reference() {
   open var arIsAnchorDetectionEnabled: Boolean
     get() {
       val mb = getMethodBind("ARVRInterface","get_anchor_detection_is_enabled")
@@ -47,8 +44,6 @@ open class ARVRInterface internal constructor(
       val mb = getMethodBind("ARVRInterface","set_is_primary")
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
-
-  internal constructor() : this(null)
 
   open fun getAnchorDetectionIsEnabled(): Boolean {
     val mb = getMethodBind("ARVRInterface","get_anchor_detection_is_enabled")

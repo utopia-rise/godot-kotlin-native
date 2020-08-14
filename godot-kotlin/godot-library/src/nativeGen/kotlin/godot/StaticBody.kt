@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Vector3
 import godot.icalls._icall_Double
 import godot.icalls._icall_PhysicsMaterial
@@ -11,13 +10,11 @@ import godot.icalls._icall_Unit_Vector3
 import godot.icalls._icall_Vector3
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Double
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class StaticBody internal constructor(
-  _ignore: Any?
-) : PhysicsBody(_ignore) {
+open class StaticBody : PhysicsBody() {
   open var bounce: Double
     get() {
       val mb = getMethodBind("StaticBody","get_bounce")
@@ -68,12 +65,7 @@ open class StaticBody internal constructor(
       _icall_Unit_Object(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("StaticBody", "StaticBody")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("StaticBody", "StaticBody")
 
   open fun constantAngularVelocity(schedule: Vector3.() -> Unit): Vector3 =
       constantAngularVelocity.apply{

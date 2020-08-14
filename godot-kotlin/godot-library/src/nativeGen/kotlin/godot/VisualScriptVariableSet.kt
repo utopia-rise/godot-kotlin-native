@@ -1,17 +1,14 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_String
 import godot.icalls._icall_Unit_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class VisualScriptVariableSet internal constructor(
-  _ignore: Any?
-) : VisualScriptNode(_ignore) {
+open class VisualScriptVariableSet : VisualScriptNode() {
   open var varName: String
     get() {
       val mb = getMethodBind("VisualScriptVariableSet","get_variable")
@@ -22,12 +19,8 @@ open class VisualScriptVariableSet internal constructor(
       _icall_Unit_String(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("VisualScriptVariableSet", "VisualScriptVariableSet")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("VisualScriptVariableSet",
+      "VisualScriptVariableSet")
 
   open fun getVariable(): String {
     val mb = getMethodBind("VisualScriptVariableSet","get_variable")

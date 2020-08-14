@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.RID
 import godot.icalls._icall_Boolean_RID
 import godot.icalls._icall_Double
@@ -14,14 +13,12 @@ import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_RID
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class SpringArm internal constructor(
-  _ignore: Any?
-) : Spatial(_ignore) {
+open class SpringArm : Spatial() {
   open var collisionMask: Long
     get() {
       val mb = getMethodBind("SpringArm","get_collision_mask")
@@ -62,12 +59,7 @@ open class SpringArm internal constructor(
       _icall_Unit_Double(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("SpringArm", "SpringArm")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("SpringArm", "SpringArm")
 
   open fun addExcludedObject(RID: RID) {
     val mb = getMethodBind("SpringArm","add_excluded_object")

@@ -2,7 +2,6 @@
 package godot
 
 import godot.AnimationTree
-import godot.core.Godot.shouldInitPtr
 import godot.core.NodePath
 import godot.core.Transform
 import godot.icalls._icall_AnimationNode
@@ -18,15 +17,13 @@ import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_String_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class AnimationTree internal constructor(
-  _ignore: Any?
-) : Node(_ignore) {
+open class AnimationTree : Node() {
   open var active: Boolean
     get() {
       val mb = getMethodBind("AnimationTree","is_active")
@@ -77,12 +74,7 @@ open class AnimationTree internal constructor(
       _icall_Unit_Object(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("AnimationTree", "AnimationTree")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("AnimationTree", "AnimationTree")
 
   open fun _clearCaches() {
   }

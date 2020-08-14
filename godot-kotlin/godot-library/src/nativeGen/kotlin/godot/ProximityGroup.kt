@@ -2,7 +2,6 @@
 package godot
 
 import godot.ProximityGroup
-import godot.core.Godot.shouldInitPtr
 import godot.core.Signal2
 import godot.core.Variant
 import godot.core.VariantArray
@@ -17,14 +16,12 @@ import godot.icalls._icall_Unit_Vector3
 import godot.icalls._icall_Vector3
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Long
 import kotlin.String
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class ProximityGroup internal constructor(
-  _ignore: Any?
-) : Spatial(_ignore) {
+open class ProximityGroup : Spatial() {
   val broadcast: Signal2<String, VariantArray> by signal("group_name", "parameters")
 
   open var dispatchMode: Long
@@ -57,12 +54,7 @@ open class ProximityGroup internal constructor(
       _icall_Unit_String(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("ProximityGroup", "ProximityGroup")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("ProximityGroup", "ProximityGroup")
 
   open fun gridRadius(schedule: Vector3.() -> Unit): Vector3 = gridRadius.apply{
       schedule(this)

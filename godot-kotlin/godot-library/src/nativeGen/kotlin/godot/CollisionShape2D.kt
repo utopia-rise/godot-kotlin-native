@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Double
 import godot.icalls._icall_Shape2D
@@ -10,13 +9,11 @@ import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_Object
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
+import kotlinx.cinterop.COpaquePointer
 
-open class CollisionShape2D internal constructor(
-  _ignore: Any?
-) : Node2D(_ignore) {
+open class CollisionShape2D : Node2D() {
   open var disabled: Boolean
     get() {
       val mb = getMethodBind("CollisionShape2D","is_disabled")
@@ -57,12 +54,7 @@ open class CollisionShape2D internal constructor(
       _icall_Unit_Object(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("CollisionShape2D", "CollisionShape2D")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("CollisionShape2D", "CollisionShape2D")
 
   open fun _shapeChanged() {
   }

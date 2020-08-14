@@ -2,7 +2,6 @@
 package godot
 
 import godot.Button
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Long
 import godot.icalls._icall_String
@@ -13,14 +12,12 @@ import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class Button internal constructor(
-  _ignore: Any?
-) : BaseButton(_ignore) {
+open class Button : BaseButton() {
   open var align: Long
     get() {
       val mb = getMethodBind("Button","get_text_align")
@@ -81,12 +78,7 @@ open class Button internal constructor(
       _icall_Unit_String(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Button", "Button")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("Button", "Button")
 
   open fun getButtonIcon(): Texture {
     val mb = getMethodBind("Button","get_button_icon")

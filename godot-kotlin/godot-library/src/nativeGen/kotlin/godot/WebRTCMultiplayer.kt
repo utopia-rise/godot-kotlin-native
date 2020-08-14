@@ -2,7 +2,6 @@
 package godot
 
 import godot.core.Dictionary
-import godot.core.Godot.shouldInitPtr
 import godot.core.GodotError
 import godot.icalls._icall_Boolean_Long
 import godot.icalls._icall_Dictionary
@@ -13,19 +12,12 @@ import godot.icalls._icall_Unit
 import godot.icalls._icall_Unit_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class WebRTCMultiplayer internal constructor(
-  _ignore: Any?
-) : NetworkedMultiplayerPeer(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("WebRTCMultiplayer", "WebRTCMultiplayer")
-        }
-
-  }
+open class WebRTCMultiplayer : NetworkedMultiplayerPeer() {
+  override fun __new(): COpaquePointer = invokeConstructor("WebRTCMultiplayer", "WebRTCMultiplayer")
 
   open fun addPeer(
     peer: WebRTCPeerConnection,

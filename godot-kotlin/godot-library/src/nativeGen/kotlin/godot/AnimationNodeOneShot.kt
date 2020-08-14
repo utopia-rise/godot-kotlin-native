@@ -2,7 +2,6 @@
 package godot
 
 import godot.AnimationNodeOneShot
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Double
 import godot.icalls._icall_Long
@@ -11,14 +10,12 @@ import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class AnimationNodeOneShot internal constructor(
-  _ignore: Any?
-) : AnimationNode(_ignore) {
+open class AnimationNodeOneShot : AnimationNode() {
   open var autorestart: Boolean
     get() {
       val mb = getMethodBind("AnimationNodeOneShot","has_autorestart")
@@ -79,12 +76,8 @@ open class AnimationNodeOneShot internal constructor(
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("AnimationNodeOneShot", "AnimationNodeOneShot")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("AnimationNodeOneShot",
+      "AnimationNodeOneShot")
 
   open fun getAutorestartDelay(): Double {
     val mb = getMethodBind("AnimationNodeOneShot","get_autorestart_delay")

@@ -2,7 +2,6 @@
 package godot
 
 import godot.core.Dictionary
-import godot.core.Godot.shouldInitPtr
 import godot.core.Rect2
 import godot.core.VariantArray
 import godot.core.Vector2
@@ -17,21 +16,14 @@ import godot.icalls._icall_VariantArray_Rect2_Double
 import godot.icalls._icall_Vector2
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.NotImplementedError
+import kotlinx.cinterop.COpaquePointer
 
-open class BitMap internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("BitMap", "BitMap")
-        }
-
-  }
+open class BitMap : Resource() {
+  override fun __new(): COpaquePointer = invokeConstructor("BitMap", "BitMap")
 
   open fun _getData(): Dictionary {
     throw NotImplementedError("_get_data is not implemented for BitMap")

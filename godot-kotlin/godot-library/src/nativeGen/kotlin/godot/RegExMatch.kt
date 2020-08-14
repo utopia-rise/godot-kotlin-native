@@ -2,7 +2,6 @@
 package godot
 
 import godot.core.Dictionary
-import godot.core.Godot.shouldInitPtr
 import godot.core.Variant
 import godot.core.VariantArray
 import godot.icalls._icall_Dictionary
@@ -13,13 +12,11 @@ import godot.icalls._icall_String_Variant
 import godot.icalls._icall_VariantArray
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class RegExMatch internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
+open class RegExMatch : Reference() {
   open val names: Dictionary
     get() {
       val mb = getMethodBind("RegExMatch","get_names")
@@ -38,12 +35,7 @@ open class RegExMatch internal constructor(
       return _icall_String(mb, this.ptr)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("RegExMatch", "RegExMatch")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("RegExMatch", "RegExMatch")
 
   open fun getEnd(name: Variant = Variant(0)): Long {
     val mb = getMethodBind("RegExMatch","get_end")

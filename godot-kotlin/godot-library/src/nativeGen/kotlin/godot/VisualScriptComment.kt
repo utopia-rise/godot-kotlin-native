@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Vector2
 import godot.icalls._icall_String
 import godot.icalls._icall_Unit_String
@@ -9,13 +8,11 @@ import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_Vector2
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.String
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class VisualScriptComment internal constructor(
-  _ignore: Any?
-) : VisualScriptNode(_ignore) {
+open class VisualScriptComment : VisualScriptNode() {
   open var description: String
     get() {
       val mb = getMethodBind("VisualScriptComment","get_description")
@@ -46,12 +43,8 @@ open class VisualScriptComment internal constructor(
       _icall_Unit_String(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("VisualScriptComment", "VisualScriptComment")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("VisualScriptComment",
+      "VisualScriptComment")
 
   open fun size(schedule: Vector2.() -> Unit): Vector2 = size.apply{
       schedule(this)

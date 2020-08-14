@@ -1,18 +1,15 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Vector3
 import godot.icalls._icall_Unit_Vector3
 import godot.icalls._icall_Vector3
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class BoxShape internal constructor(
-  _ignore: Any?
-) : Shape(_ignore) {
+open class BoxShape : Shape() {
   open var extents: Vector3
     get() {
       val mb = getMethodBind("BoxShape","get_extents")
@@ -23,12 +20,7 @@ open class BoxShape internal constructor(
       _icall_Unit_Vector3(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("BoxShape", "BoxShape")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("BoxShape", "BoxShape")
 
   open fun extents(schedule: Vector3.() -> Unit): Vector3 = extents.apply{
       schedule(this)

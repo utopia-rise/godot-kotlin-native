@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.PoolVector3Array
 import godot.core.Transform
 import godot.core.Vector3
@@ -16,14 +15,12 @@ import godot.icalls._icall_Vector3_Vector3
 import godot.icalls._icall_Vector3_Vector3_Vector3_Boolean
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class Navigation internal constructor(
-  _ignore: Any?
-) : Spatial(_ignore) {
+open class Navigation : Spatial() {
   open var upVector: Vector3
     get() {
       val mb = getMethodBind("Navigation","get_up_vector")
@@ -34,12 +31,7 @@ open class Navigation internal constructor(
       _icall_Unit_Vector3(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Navigation", "Navigation")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("Navigation", "Navigation")
 
   open fun upVector(schedule: Vector3.() -> Unit): Vector3 = upVector.apply{
       schedule(this)

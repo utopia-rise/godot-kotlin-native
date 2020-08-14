@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Signal0
 import godot.core.Variant
 import godot.core.signal
@@ -20,18 +19,12 @@ import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class UndoRedo internal constructor(
-  _ignore: Any?
-) : Object(_ignore) {
+open class UndoRedo : Object() {
   val versionChanged: Signal0 by signal()
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("UndoRedo", "UndoRedo")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("UndoRedo", "UndoRedo")
 
   open fun addDoMethod(
     _object: Object,

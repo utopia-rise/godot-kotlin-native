@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Double
 import godot.icalls._icall_Long
@@ -10,15 +9,13 @@ import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.UninitializedPropertyAccessException
+import kotlinx.cinterop.COpaquePointer
 
-open class InputEventMouseButton internal constructor(
-  _ignore: Any?
-) : InputEventMouse(_ignore) {
+open class InputEventMouseButton : InputEventMouse() {
   open var buttonIndex: Long
     get() {
       val mb = getMethodBind("InputEventMouseButton","get_button_index")
@@ -58,12 +55,8 @@ open class InputEventMouseButton internal constructor(
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("InputEventMouseButton", "InputEventMouseButton")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("InputEventMouseButton",
+      "InputEventMouseButton")
 
   open fun getButtonIndex(): Long {
     val mb = getMethodBind("InputEventMouseButton","get_button_index")

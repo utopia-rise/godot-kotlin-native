@@ -4,15 +4,10 @@ package godot
 import godot.core.Vector2
 import godot.icalls._icall_Vector2_Double_Double_Long
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Double
 import kotlin.Long
 
-open class AudioEffectSpectrumAnalyzerInstance internal constructor(
-  _ignore: Any?
-) : AudioEffectInstance(_ignore) {
-  internal constructor() : this(null)
-
+open class AudioEffectSpectrumAnalyzerInstance internal constructor() : AudioEffectInstance() {
   open fun getMagnitudeForFrequencyRange(
     fromHz: Double,
     toHz: Double,

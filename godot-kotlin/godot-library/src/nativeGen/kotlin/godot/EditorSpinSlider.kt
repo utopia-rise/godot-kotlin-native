@@ -6,13 +6,10 @@ import godot.icalls._icall_String
 import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_String
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.String
 
-open class EditorSpinSlider internal constructor(
-  _ignore: Any?
-) : Range(_ignore) {
+open class EditorSpinSlider internal constructor() : Range() {
   open var flat: Boolean
     get() {
       val mb = getMethodBind("EditorSpinSlider","is_flat")
@@ -42,8 +39,6 @@ open class EditorSpinSlider internal constructor(
       val mb = getMethodBind("EditorSpinSlider","set_read_only")
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
-
-  internal constructor() : this(null)
 
   open fun _grabberGuiInput(arg0: InputEvent) {
   }

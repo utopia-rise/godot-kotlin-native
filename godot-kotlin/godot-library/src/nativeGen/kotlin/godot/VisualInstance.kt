@@ -11,14 +11,11 @@ import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Long_Boolean
 import godot.icalls._icall_Unit_RID
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.NotImplementedError
 
-open class VisualInstance internal constructor(
-  _ignore: Any?
-) : Spatial(_ignore) {
+open class VisualInstance internal constructor() : Spatial() {
   open var layers: Long
     get() {
       val mb = getMethodBind("VisualInstance","get_layer_mask")
@@ -28,8 +25,6 @@ open class VisualInstance internal constructor(
       val mb = getMethodBind("VisualInstance","set_layer_mask")
       _icall_Unit_Long(mb, this.ptr, value)
     }
-
-  internal constructor() : this(null)
 
   open fun _getVisualInstanceRid(): RID {
     throw NotImplementedError("_get_visual_instance_rid is not implemented for VisualInstance")

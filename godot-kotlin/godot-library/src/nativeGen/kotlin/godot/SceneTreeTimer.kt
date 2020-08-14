@@ -6,12 +6,9 @@ import godot.core.signal
 import godot.icalls._icall_Double
 import godot.icalls._icall_Unit_Double
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Double
 
-open class SceneTreeTimer internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
+open class SceneTreeTimer internal constructor() : Reference() {
   val timeout: Signal0 by signal()
 
   open var timeLeft: Double
@@ -23,8 +20,6 @@ open class SceneTreeTimer internal constructor(
       val mb = getMethodBind("SceneTreeTimer","set_time_left")
       _icall_Unit_Double(mb, this.ptr, value)
     }
-
-  internal constructor() : this(null)
 
   open fun getTimeLeft(): Double {
     val mb = getMethodBind("SceneTreeTimer","get_time_left")

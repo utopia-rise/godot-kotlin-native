@@ -2,7 +2,6 @@
 package godot
 
 import godot.Timer
-import godot.core.Godot.shouldInitPtr
 import godot.core.Signal0
 import godot.core.signal
 import godot.icalls._icall_Boolean
@@ -14,14 +13,12 @@ import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class Timer internal constructor(
-  _ignore: Any?
-) : Node(_ignore) {
+open class Timer : Node() {
   val timeout: Signal0 by signal()
 
   open var autostart: Boolean
@@ -80,12 +77,7 @@ open class Timer internal constructor(
       _icall_Unit_Double(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Timer", "Timer")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("Timer", "Timer")
 
   open fun getTimeLeft(): Double {
     val mb = getMethodBind("Timer","get_time_left")

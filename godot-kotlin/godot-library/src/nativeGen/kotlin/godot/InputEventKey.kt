@@ -1,20 +1,17 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.UninitializedPropertyAccessException
+import kotlinx.cinterop.COpaquePointer
 
-open class InputEventKey internal constructor(
-  _ignore: Any?
-) : InputEventWithModifiers(_ignore) {
+open class InputEventKey : InputEventWithModifiers() {
   open var echo: Boolean
     get() {
       throw UninitializedPropertyAccessException("Cannot access property echo: has no getter")
@@ -53,12 +50,7 @@ open class InputEventKey internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("InputEventKey", "InputEventKey")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("InputEventKey", "InputEventKey")
 
   open fun getScancode(): Long {
     val mb = getMethodBind("InputEventKey","get_scancode")

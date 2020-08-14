@@ -1,27 +1,19 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.GodotError
 import godot.icalls._icall_Long_Boolean
 import godot.icalls._icall_Long_String_Long
 import godot.icalls._icall_Long_String_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class PCKPacker internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("PCKPacker", "PCKPacker")
-        }
-
-  }
+open class PCKPacker : Reference() {
+  override fun __new(): COpaquePointer = invokeConstructor("PCKPacker", "PCKPacker")
 
   open fun addFile(pckPath: String, sourcePath: String): GodotError {
     val mb = getMethodBind("PCKPacker","add_file")

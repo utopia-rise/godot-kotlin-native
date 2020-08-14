@@ -10,16 +10,11 @@ import godot.icalls._icall_Unit_Long_Variant
 import godot.icalls._icall_Variant_Long
 import godot.icalls._icall_VisualScript
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Long
 import kotlin.NotImplementedError
 
-open class VisualScriptNode internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
+open class VisualScriptNode internal constructor() : Resource() {
   val portsChanged: Signal0 by signal()
-
-  internal constructor() : this(null)
 
   open fun _getDefaultInputValues(): VariantArray {
     throw NotImplementedError("_get_default_input_values is not implemented for VisualScriptNode")

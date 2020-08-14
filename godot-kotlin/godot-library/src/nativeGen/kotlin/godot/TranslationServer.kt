@@ -13,18 +13,17 @@ import godot.internal.type.nullSafe
 import godot.internal.utils.getMethodBind
 import kotlin.String
 import kotlin.requireNotNull
+import kotlinx.cinterop.COpaquePointer
 import kotlinx.cinterop.cstr
 import kotlinx.cinterop.invoke
 import kotlinx.cinterop.memScoped
 
 object TranslationServer : Object() {
-  init {
-    memScoped {
-        val ptr =
-        nullSafe(Godot.gdnative.godot_global_get_singleton).invoke("TranslationServer".cstr.ptr)
-        requireNotNull(ptr) { "No instance found for singleton TranslationServer" }
-        this@TranslationServer.ptr = ptr
-    }
+  override fun __new(): COpaquePointer = memScoped {
+      val ptr =
+      nullSafe(Godot.gdnative.godot_global_get_singleton).invoke("TranslationServer".cstr.ptr)
+      requireNotNull(ptr) { "No instance found for singleton TranslationServer" }
+      ptr
   }
 
   fun addTranslation(translation: Translation) {

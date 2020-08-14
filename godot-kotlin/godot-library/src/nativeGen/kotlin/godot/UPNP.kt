@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Long
 import godot.icalls._icall_Long_Long_Long_String
@@ -18,14 +17,12 @@ import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class UPNP internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
+open class UPNP : Reference() {
   open var discoverIpv6: Boolean
     get() {
       val mb = getMethodBind("UPNP","is_discover_ipv6")
@@ -56,12 +53,7 @@ open class UPNP internal constructor(
       _icall_Unit_String(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("UPNP", "UPNP")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("UPNP", "UPNP")
 
   open fun addDevice(device: UPNPDevice) {
     val mb = getMethodBind("UPNP","add_device")

@@ -39,19 +39,12 @@ import kotlin.Double
 import kotlin.Long
 import kotlin.String
 import kotlin.requireNotNull
+import kotlinx.cinterop.COpaquePointer
 import kotlinx.cinterop.cstr
 import kotlinx.cinterop.invoke
 import kotlinx.cinterop.memScoped
 
 object AudioServer : Object() {
-  init {
-    memScoped {
-        val ptr = nullSafe(Godot.gdnative.godot_global_get_singleton).invoke("AudioServer".cstr.ptr)
-        requireNotNull(ptr) { "No instance found for singleton AudioServer" }
-        this@AudioServer.ptr = ptr
-    }
-  }
-
   val busLayoutChanged: Signal0 by signal()
 
   var busCount: Long
@@ -83,6 +76,12 @@ object AudioServer : Object() {
       val mb = getMethodBind("AudioServer","set_global_rate_scale")
       _icall_Unit_Double(mb, this.ptr, value)
     }
+
+  override fun __new(): COpaquePointer = memScoped {
+      val ptr = nullSafe(Godot.gdnative.godot_global_get_singleton).invoke("AudioServer".cstr.ptr)
+      requireNotNull(ptr) { "No instance found for singleton AudioServer" }
+      ptr
+  }
 
   fun addBus(atPosition: Long = -1) {
     val mb = getMethodBind("AudioServer","add_bus")

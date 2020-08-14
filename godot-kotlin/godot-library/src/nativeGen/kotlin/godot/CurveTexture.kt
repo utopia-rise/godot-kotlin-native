@@ -1,19 +1,16 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Curve
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Object
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Long
 import kotlin.UninitializedPropertyAccessException
+import kotlinx.cinterop.COpaquePointer
 
-open class CurveTexture internal constructor(
-  _ignore: Any?
-) : Texture(_ignore) {
+open class CurveTexture : Texture() {
   open var curve: Curve
     get() {
       val mb = getMethodBind("CurveTexture","get_curve")
@@ -33,12 +30,7 @@ open class CurveTexture internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("CurveTexture", "CurveTexture")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("CurveTexture", "CurveTexture")
 
   open fun _update() {
   }

@@ -2,7 +2,6 @@
 package godot
 
 import godot.Viewport
-import godot.core.Godot.shouldInitPtr
 import godot.core.RID
 import godot.core.Rect2
 import godot.core.Signal0
@@ -35,15 +34,13 @@ import godot.icalls._icall_World
 import godot.icalls._icall_World2D
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class Viewport internal constructor(
-  _ignore: Any?
-) : Node(_ignore) {
+open class Viewport : Node() {
   val guiFocusChanged: Signal1<Control> by signal("node")
 
   val sizeChanged: Signal0 by signal()
@@ -348,12 +345,7 @@ open class Viewport internal constructor(
       _icall_Unit_Object(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Viewport", "Viewport")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("Viewport", "Viewport")
 
   open fun canvasTransform(schedule: Transform2D.() -> Unit): Transform2D = canvasTransform.apply{
       schedule(this)

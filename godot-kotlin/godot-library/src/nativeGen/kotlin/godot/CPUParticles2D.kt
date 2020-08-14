@@ -3,7 +3,6 @@ package godot
 
 import godot.CPUParticles2D
 import godot.core.Color
-import godot.core.Godot.shouldInitPtr
 import godot.core.PoolColorArray
 import godot.core.PoolVector2Array
 import godot.core.Vector2
@@ -33,15 +32,13 @@ import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_Vector2
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class CPUParticles2D internal constructor(
-  _ignore: Any?
-) : Node2D(_ignore) {
+open class CPUParticles2D : Node2D() {
   open var amount: Long
     get() {
       val mb = getMethodBind("CPUParticles2D","get_amount")
@@ -662,12 +659,7 @@ open class CPUParticles2D internal constructor(
       _icall_Unit_Object(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("CPUParticles2D", "CPUParticles2D")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("CPUParticles2D", "CPUParticles2D")
 
   open fun color(schedule: Color.() -> Unit): Color = color.apply{
       schedule(this)

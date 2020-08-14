@@ -9,15 +9,10 @@ import godot.icalls._icall_Boolean_Vector2
 import godot.icalls._icall_Long
 import godot.icalls._icall_Unit
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 
-open class AudioStreamGeneratorPlayback internal constructor(
-  _ignore: Any?
-) : AudioStreamPlaybackResampled(_ignore) {
-  internal constructor() : this(null)
-
+open class AudioStreamGeneratorPlayback internal constructor() : AudioStreamPlaybackResampled() {
   open fun canPushBuffer(amount: Long): Boolean {
     val mb = getMethodBind("AudioStreamGeneratorPlayback","can_push_buffer")
     return _icall_Boolean_Long( mb, this.ptr, amount)

@@ -1,19 +1,16 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Double_Long
 import godot.icalls._icall_Unit_Long_Double
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Double
 import kotlin.Long
 import kotlin.NotImplementedError
+import kotlinx.cinterop.COpaquePointer
 
-open class SliderJoint internal constructor(
-  _ignore: Any?
-) : Joint(_ignore) {
+open class SliderJoint : Joint() {
   open var angularLimit_damping: Double
     get() {
       val mb = getMethodBind("SliderJoint","get_param")
@@ -214,12 +211,7 @@ open class SliderJoint internal constructor(
       _icall_Unit_Long_Double(mb, this.ptr, 8, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("SliderJoint", "SliderJoint")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("SliderJoint", "SliderJoint")
 
   open fun _getLowerLimitAngular(): Double {
     throw NotImplementedError("_get_lower_limit_angular is not implemented for SliderJoint")

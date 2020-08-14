@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Rect2
 import godot.core.Signal0
 import godot.core.Vector2
@@ -18,14 +17,12 @@ import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_Vector2
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class Sprite3D internal constructor(
-  _ignore: Any?
-) : SpriteBase3D(_ignore) {
+open class Sprite3D : SpriteBase3D() {
   val frameChanged: Signal0 by signal()
 
   open var frame: Long
@@ -98,12 +95,7 @@ open class Sprite3D internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Sprite3D", "Sprite3D")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("Sprite3D", "Sprite3D")
 
   open fun frameCoords(schedule: Vector2.() -> Unit): Vector2 = frameCoords.apply{
       schedule(this)

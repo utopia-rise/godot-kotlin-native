@@ -2,20 +2,17 @@
 package godot
 
 import godot.VisualScriptYield
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Double
 import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Double
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class VisualScriptYield internal constructor(
-  _ignore: Any?
-) : VisualScriptNode(_ignore) {
+open class VisualScriptYield : VisualScriptNode() {
   open var mode: Long
     get() {
       val mb = getMethodBind("VisualScriptYield","get_yield_mode")
@@ -36,12 +33,7 @@ open class VisualScriptYield internal constructor(
       _icall_Unit_Double(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("VisualScriptYield", "VisualScriptYield")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("VisualScriptYield", "VisualScriptYield")
 
   open fun getWaitTime(): Double {
     val mb = getMethodBind("VisualScriptYield","get_wait_time")

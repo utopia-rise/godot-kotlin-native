@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Transform
 import godot.icalls._icall_Long
 import godot.icalls._icall_Long_Long
@@ -14,19 +13,12 @@ import godot.icalls._icall_Unit_Long_String
 import godot.icalls._icall_Unit_Long_Transform
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class Skin internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Skin", "Skin")
-        }
-
-  }
+open class Skin : Resource() {
+  override fun __new(): COpaquePointer = invokeConstructor("Skin", "Skin")
 
   open fun addBind(bone: Long, pose: Transform) {
     val mb = getMethodBind("Skin","add_bind")

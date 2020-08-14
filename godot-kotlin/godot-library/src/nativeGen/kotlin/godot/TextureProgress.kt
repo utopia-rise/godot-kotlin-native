@@ -2,7 +2,6 @@
 package godot
 
 import godot.core.Color
-import godot.core.Godot.shouldInitPtr
 import godot.core.Vector2
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Color
@@ -20,15 +19,13 @@ import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_Vector2
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class TextureProgress internal constructor(
-  _ignore: Any?
-) : Range(_ignore) {
+open class TextureProgress : Range() {
   open var fillMode: Long
     get() {
       val mb = getMethodBind("TextureProgress","get_fill_mode")
@@ -179,12 +176,7 @@ open class TextureProgress internal constructor(
       _icall_Unit_Color(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("TextureProgress", "TextureProgress")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("TextureProgress", "TextureProgress")
 
   open fun radialCenterOffset(schedule: Vector2.() -> Unit): Vector2 = radialCenterOffset.apply{
       schedule(this)

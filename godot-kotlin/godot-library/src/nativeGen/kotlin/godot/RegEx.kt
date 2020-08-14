@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.GodotError
 import godot.core.VariantArray
 import godot.icalls._icall_Boolean
@@ -15,20 +14,13 @@ import godot.icalls._icall_VariantArray
 import godot.icalls._icall_VariantArray_String_Long_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class RegEx internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("RegEx", "RegEx")
-        }
-
-  }
+open class RegEx : Reference() {
+  override fun __new(): COpaquePointer = invokeConstructor("RegEx", "RegEx")
 
   open fun clear() {
     val mb = getMethodBind("RegEx","clear")

@@ -2,7 +2,6 @@
 package godot
 
 import godot.RigidBody
-import godot.core.Godot.shouldInitPtr
 import godot.core.Signal0
 import godot.core.Signal1
 import godot.core.Signal4
@@ -25,15 +24,13 @@ import godot.icalls._icall_VariantArray
 import godot.icalls._icall_Vector3
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class RigidBody internal constructor(
-  _ignore: Any?
-) : PhysicsBody(_ignore) {
+open class RigidBody : PhysicsBody() {
   val bodyEntered: Signal1<Node> by signal("body")
 
   val bodyExited: Signal1<Node> by signal("body")
@@ -276,12 +273,7 @@ open class RigidBody internal constructor(
       _icall_Unit_Double(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("RigidBody", "RigidBody")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("RigidBody", "RigidBody")
 
   open fun angularVelocity(schedule: Vector3.() -> Unit): Vector3 = angularVelocity.apply{
       schedule(this)

@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.GodotError
 import godot.core.PoolStringArray
 import godot.core.Signal0
@@ -18,14 +17,12 @@ import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_X509Certificate
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class WebSocketClient internal constructor(
-  _ignore: Any?
-) : WebSocketMultiplayerPeer(_ignore) {
+open class WebSocketClient : WebSocketMultiplayerPeer() {
   val connectionClosed: Signal1<Boolean> by signal("was_clean_close")
 
   val connectionError: Signal0 by signal()
@@ -56,12 +53,7 @@ open class WebSocketClient internal constructor(
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("WebSocketClient", "WebSocketClient")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("WebSocketClient", "WebSocketClient")
 
   open fun connectToUrl(
     url: String,

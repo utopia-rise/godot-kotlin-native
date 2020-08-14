@@ -13,15 +13,12 @@ import godot.icalls._icall_Long
 import godot.icalls._icall_String
 import godot.icalls._icall_Unit_Long
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.String
 
-open class InputEvent internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
+open class InputEvent internal constructor() : Resource() {
   open var device: Long
     get() {
       val mb = getMethodBind("InputEvent","get_device")
@@ -31,8 +28,6 @@ open class InputEvent internal constructor(
       val mb = getMethodBind("InputEvent","set_device")
       _icall_Unit_Long(mb, this.ptr, value)
     }
-
-  internal constructor() : this(null)
 
   open fun accumulate(withEvent: InputEvent): Boolean {
     val mb = getMethodBind("InputEvent","accumulate")

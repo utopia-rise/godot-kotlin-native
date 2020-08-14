@@ -3,7 +3,6 @@ package godot
 
 import godot.VisualScriptPropertySet
 import godot.core.Dictionary
-import godot.core.Godot.shouldInitPtr
 import godot.core.NodePath
 import godot.core.Variant
 import godot.core.Variant.Type
@@ -15,14 +14,12 @@ import godot.icalls._icall_Unit_NodePath
 import godot.icalls._icall_Unit_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Long
 import kotlin.NotImplementedError
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class VisualScriptPropertySet internal constructor(
-  _ignore: Any?
-) : VisualScriptNode(_ignore) {
+open class VisualScriptPropertySet : VisualScriptNode() {
   open var assignOp: Long
     get() {
       val mb = getMethodBind("VisualScriptPropertySet","get_assign_op")
@@ -103,12 +100,8 @@ open class VisualScriptPropertySet internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("VisualScriptPropertySet", "VisualScriptPropertySet")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("VisualScriptPropertySet",
+      "VisualScriptPropertySet")
 
   open fun _getTypeCache(): Dictionary {
     throw NotImplementedError("_get_type_cache is not implemented for VisualScriptPropertySet")

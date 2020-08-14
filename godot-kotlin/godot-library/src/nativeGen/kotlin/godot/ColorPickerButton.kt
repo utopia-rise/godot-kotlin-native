@@ -2,7 +2,6 @@
 package godot
 
 import godot.core.Color
-import godot.core.Godot.shouldInitPtr
 import godot.core.Signal0
 import godot.core.Signal1
 import godot.core.signal
@@ -14,13 +13,11 @@ import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Color
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class ColorPickerButton internal constructor(
-  _ignore: Any?
-) : Button(_ignore) {
+open class ColorPickerButton : Button() {
   val colorChanged: Signal1<Color> by signal("color")
 
   val pickerCreated: Signal0 by signal()
@@ -47,12 +44,7 @@ open class ColorPickerButton internal constructor(
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("ColorPickerButton", "ColorPickerButton")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("ColorPickerButton", "ColorPickerButton")
 
   open fun color(schedule: Color.() -> Unit): Color = color.apply{
       schedule(this)

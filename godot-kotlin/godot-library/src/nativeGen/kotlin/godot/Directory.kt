@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.GodotError
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Boolean_String
@@ -14,20 +13,13 @@ import godot.icalls._icall_String_Long
 import godot.icalls._icall_Unit
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class Directory internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Directory", "_Directory")
-        }
-
-  }
+open class Directory : Reference() {
+  override fun __new(): COpaquePointer = invokeConstructor("Directory", "_Directory")
 
   open fun changeDir(todir: String): GodotError {
     val mb = getMethodBind("_Directory","change_dir")

@@ -2,7 +2,6 @@
 package godot
 
 import godot.OccluderPolygon2D
-import godot.core.Godot.shouldInitPtr
 import godot.core.PoolVector2Array
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Long
@@ -12,13 +11,11 @@ import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_PoolVector2Array
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class OccluderPolygon2D internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
+open class OccluderPolygon2D : Resource() {
   open var closed: Boolean
     get() {
       val mb = getMethodBind("OccluderPolygon2D","is_closed")
@@ -49,12 +46,7 @@ open class OccluderPolygon2D internal constructor(
       _icall_Unit_PoolVector2Array(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("OccluderPolygon2D", "OccluderPolygon2D")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("OccluderPolygon2D", "OccluderPolygon2D")
 
   open fun getCullMode(): OccluderPolygon2D.CullMode {
     val mb = getMethodBind("OccluderPolygon2D","get_cull_mode")

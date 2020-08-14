@@ -26,14 +26,11 @@ import godot.icalls._icall_Unit_Long_Object
 import godot.icalls._icall_Unit_Long_Transform2D
 import godot.icalls._icall_VariantArray
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 
-open class CollisionObject2D internal constructor(
-  _ignore: Any?
-) : Node2D(_ignore) {
+open class CollisionObject2D internal constructor() : Node2D() {
   val inputEvent: Signal3<Node, InputEvent, Long> by signal("viewport", "event", "shape_idx")
 
   val mouseEntered: Signal0 by signal()
@@ -49,8 +46,6 @@ open class CollisionObject2D internal constructor(
       val mb = getMethodBind("CollisionObject2D","set_pickable")
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
-
-  internal constructor() : this(null)
 
   open fun _inputEvent(
     viewport: Object,

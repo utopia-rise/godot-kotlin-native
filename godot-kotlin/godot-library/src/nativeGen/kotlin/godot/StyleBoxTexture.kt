@@ -3,7 +3,6 @@ package godot
 
 import godot.StyleBoxTexture
 import godot.core.Color
-import godot.core.Godot.shouldInitPtr
 import godot.core.Rect2
 import godot.core.Signal0
 import godot.core.signal
@@ -23,15 +22,13 @@ import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_Rect2
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class StyleBoxTexture internal constructor(
-  _ignore: Any?
-) : StyleBox(_ignore) {
+open class StyleBoxTexture : StyleBox() {
   val textureChanged: Signal0 by signal()
 
   open var axisStretchHorizontal: Long
@@ -184,12 +181,7 @@ open class StyleBoxTexture internal constructor(
       _icall_Unit_Object(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("StyleBoxTexture", "StyleBoxTexture")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("StyleBoxTexture", "StyleBoxTexture")
 
   open fun modulateColor(schedule: Color.() -> Unit): Color = modulateColor.apply{
       schedule(this)

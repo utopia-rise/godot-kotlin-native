@@ -2,20 +2,17 @@
 package godot
 
 import godot.CanvasItemMaterial
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class CanvasItemMaterial internal constructor(
-  _ignore: Any?
-) : Material(_ignore) {
+open class CanvasItemMaterial : Material() {
   open var blendMode: Long
     get() {
       val mb = getMethodBind("CanvasItemMaterial","get_blend_mode")
@@ -76,12 +73,8 @@ open class CanvasItemMaterial internal constructor(
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("CanvasItemMaterial", "CanvasItemMaterial")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("CanvasItemMaterial",
+      "CanvasItemMaterial")
 
   open fun getBlendMode(): CanvasItemMaterial.BlendMode {
     val mb = getMethodBind("CanvasItemMaterial","get_blend_mode")

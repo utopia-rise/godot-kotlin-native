@@ -7,13 +7,10 @@ import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_Vector2
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Long
 import kotlin.Unit
 
-open class InputEventMouse internal constructor(
-  _ignore: Any?
-) : InputEventWithModifiers(_ignore) {
+open class InputEventMouse internal constructor() : InputEventWithModifiers() {
   open var buttonMask: Long
     get() {
       val mb = getMethodBind("InputEventMouse","get_button_mask")
@@ -43,8 +40,6 @@ open class InputEventMouse internal constructor(
       val mb = getMethodBind("InputEventMouse","set_position")
       _icall_Unit_Vector2(mb, this.ptr, value)
     }
-
-  internal constructor() : this(null)
 
   open fun globalPosition(schedule: Vector2.() -> Unit): Vector2 = globalPosition.apply{
       schedule(this)

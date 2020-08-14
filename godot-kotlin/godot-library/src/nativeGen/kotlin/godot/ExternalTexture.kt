@@ -1,20 +1,17 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Vector2
 import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Vector2
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Long
 import kotlin.UninitializedPropertyAccessException
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class ExternalTexture internal constructor(
-  _ignore: Any?
-) : Texture(_ignore) {
+open class ExternalTexture : Texture() {
   open var size: Vector2
     get() {
       throw UninitializedPropertyAccessException("Cannot access property size: has no getter")
@@ -24,12 +21,7 @@ open class ExternalTexture internal constructor(
       _icall_Unit_Vector2(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("ExternalTexture", "ExternalTexture")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("ExternalTexture", "ExternalTexture")
 
   open fun size(schedule: Vector2.() -> Unit): Vector2 = size.apply{
       schedule(this)

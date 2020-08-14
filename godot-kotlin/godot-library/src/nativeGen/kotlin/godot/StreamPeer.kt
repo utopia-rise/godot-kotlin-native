@@ -19,15 +19,12 @@ import godot.icalls._icall_VariantArray_Long
 import godot.icalls._icall_VariantArray_PoolByteArray
 import godot.icalls._icall_Variant_Boolean
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.String
 
-open class StreamPeer internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
+open class StreamPeer internal constructor() : Reference() {
   open var bigEndian: Boolean
     get() {
       val mb = getMethodBind("StreamPeer","is_big_endian_enabled")
@@ -37,8 +34,6 @@ open class StreamPeer internal constructor(
       val mb = getMethodBind("StreamPeer","set_big_endian")
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
-
-  internal constructor() : this(null)
 
   open fun get16(): Long {
     val mb = getMethodBind("StreamPeer","get_16")

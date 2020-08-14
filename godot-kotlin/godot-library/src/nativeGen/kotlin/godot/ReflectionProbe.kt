@@ -3,7 +3,6 @@ package godot
 
 import godot.ReflectionProbe
 import godot.core.Color
-import godot.core.Godot.shouldInitPtr
 import godot.core.Vector3
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Color
@@ -17,15 +16,13 @@ import godot.icalls._icall_Unit_Vector3
 import godot.icalls._icall_Vector3
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class ReflectionProbe internal constructor(
-  _ignore: Any?
-) : VisualInstance(_ignore) {
+open class ReflectionProbe : VisualInstance() {
   open var boxProjection: Boolean
     get() {
       val mb = getMethodBind("ReflectionProbe","is_box_projection_enabled")
@@ -146,12 +143,7 @@ open class ReflectionProbe internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("ReflectionProbe", "ReflectionProbe")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("ReflectionProbe", "ReflectionProbe")
 
   open fun extents(schedule: Vector3.() -> Unit): Vector3 = extents.apply{
       schedule(this)

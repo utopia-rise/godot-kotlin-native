@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Signal0
 import godot.core.Signal1
 import godot.core.signal
@@ -16,13 +15,11 @@ import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class AcceptDialog internal constructor(
-  _ignore: Any?
-) : WindowDialog(_ignore) {
+open class AcceptDialog : WindowDialog() {
   val confirmed: Signal0 by signal()
 
   val customAction: Signal1<String> by signal("action")
@@ -57,12 +54,7 @@ open class AcceptDialog internal constructor(
       _icall_Unit_String(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("AcceptDialog", "AcceptDialog")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("AcceptDialog", "AcceptDialog")
 
   open fun _builtinTextEntered(arg0: String) {
   }

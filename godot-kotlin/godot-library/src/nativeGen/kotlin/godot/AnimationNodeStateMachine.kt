@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Vector2
 import godot.icalls._icall_AnimationNodeStateMachineTransition_Long
 import godot.icalls._icall_AnimationNode_String
@@ -23,20 +22,14 @@ import godot.icalls._icall_Vector2
 import godot.icalls._icall_Vector2_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class AnimationNodeStateMachine internal constructor(
-  _ignore: Any?
-) : AnimationRootNode(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("AnimationNodeStateMachine", "AnimationNodeStateMachine")
-        }
-
-  }
+open class AnimationNodeStateMachine : AnimationRootNode() {
+  override fun __new(): COpaquePointer = invokeConstructor("AnimationNodeStateMachine",
+      "AnimationNodeStateMachine")
 
   open fun _treeChanged() {
   }

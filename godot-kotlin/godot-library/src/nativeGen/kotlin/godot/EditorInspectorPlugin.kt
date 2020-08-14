@@ -6,17 +6,12 @@ import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_String_Object
 import godot.icalls._icall_Unit_String_PoolStringArray_Object
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.NotImplementedError
 import kotlin.String
 
-open class EditorInspectorPlugin internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
-  internal constructor() : this(null)
-
+open class EditorInspectorPlugin internal constructor() : Reference() {
   open fun addCustomControl(control: Control) {
     val mb = getMethodBind("EditorInspectorPlugin","add_custom_control")
     _icall_Unit_Object( mb, this.ptr, control)

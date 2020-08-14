@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.PoolVector2Array
 import godot.core.Transform2D
 import godot.core.Vector2
@@ -13,19 +12,12 @@ import godot.icalls._icall_Unit_Long_Transform2D
 import godot.icalls._icall_Vector2_Vector2
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class Navigation2D internal constructor(
-  _ignore: Any?
-) : Node2D(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Navigation2D", "Navigation2D")
-        }
-
-  }
+open class Navigation2D : Node2D() {
+  override fun __new(): COpaquePointer = invokeConstructor("Navigation2D", "Navigation2D")
 
   open fun getClosestPoint(toPoint: Vector2): Vector2 {
     val mb = getMethodBind("Navigation2D","get_closest_point")

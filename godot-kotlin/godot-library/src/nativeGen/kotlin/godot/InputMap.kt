@@ -18,17 +18,16 @@ import kotlin.Boolean
 import kotlin.Double
 import kotlin.String
 import kotlin.requireNotNull
+import kotlinx.cinterop.COpaquePointer
 import kotlinx.cinterop.cstr
 import kotlinx.cinterop.invoke
 import kotlinx.cinterop.memScoped
 
 object InputMap : Object() {
-  init {
-    memScoped {
-        val ptr = nullSafe(Godot.gdnative.godot_global_get_singleton).invoke("InputMap".cstr.ptr)
-        requireNotNull(ptr) { "No instance found for singleton InputMap" }
-        this@InputMap.ptr = ptr
-    }
+  override fun __new(): COpaquePointer = memScoped {
+      val ptr = nullSafe(Godot.gdnative.godot_global_get_singleton).invoke("InputMap".cstr.ptr)
+      requireNotNull(ptr) { "No instance found for singleton InputMap" }
+      ptr
   }
 
   fun actionAddEvent(action: String, event: InputEvent) {

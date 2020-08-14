@@ -23,15 +23,12 @@ import godot.icalls._icall_Unit_Vector3_Vector3
 import godot.icalls._icall_Vector3
 import godot.icalls._icall_Vector3_Long
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.Unit
 
-open class PhysicsDirectBodyState internal constructor(
-  _ignore: Any?
-) : Object(_ignore) {
+open class PhysicsDirectBodyState internal constructor() : Object() {
   open var angularVelocity: Vector3
     get() {
       val mb = getMethodBind("PhysicsDirectBodyState","get_angular_velocity")
@@ -119,8 +116,6 @@ open class PhysicsDirectBodyState internal constructor(
       val mb = getMethodBind("PhysicsDirectBodyState","set_transform")
       _icall_Unit_Transform(mb, this.ptr, value)
     }
-
-  internal constructor() : this(null)
 
   open fun angularVelocity(schedule: Vector3.() -> Unit): Vector3 = angularVelocity.apply{
       schedule(this)

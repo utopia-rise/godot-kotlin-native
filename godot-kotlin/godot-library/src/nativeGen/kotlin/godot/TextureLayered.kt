@@ -10,13 +10,10 @@ import godot.icalls._icall_Unit_Long_Long_Long_Long_Long
 import godot.icalls._icall_Unit_Object_Long
 import godot.icalls._icall_Unit_Object_Long_Long_Long_Long
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Long
 import kotlin.NotImplementedError
 
-open class TextureLayered internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
+open class TextureLayered internal constructor() : Resource() {
   open var flags: Long
     get() {
       val mb = getMethodBind("TextureLayered","get_flags")
@@ -26,8 +23,6 @@ open class TextureLayered internal constructor(
       val mb = getMethodBind("TextureLayered","set_flags")
       _icall_Unit_Long(mb, this.ptr, value)
     }
-
-  internal constructor() : this(null)
 
   open fun _getData(): Dictionary {
     throw NotImplementedError("_get_data is not implemented for TextureLayered")

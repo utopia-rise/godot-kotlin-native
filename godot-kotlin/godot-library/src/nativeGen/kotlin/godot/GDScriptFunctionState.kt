@@ -11,12 +11,8 @@ import kotlin.Any
 import kotlin.Boolean
 import kotlin.NotImplementedError
 
-open class GDScriptFunctionState internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
+open class GDScriptFunctionState internal constructor() : Reference() {
   val completed: Signal1<Variant> by signal("result")
-
-  internal constructor() : this(null)
 
   open fun _signalCallback(vararg __var_args: Any?): Variant {
     throw NotImplementedError("_signal_callback is not implemented for GDScriptFunctionState")

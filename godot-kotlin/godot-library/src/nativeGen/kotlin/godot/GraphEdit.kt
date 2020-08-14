@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.GodotError
 import godot.core.Signal0
 import godot.core.Signal1
@@ -30,16 +29,14 @@ import godot.icalls._icall_VariantArray
 import godot.icalls._icall_Vector2
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.String
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class GraphEdit internal constructor(
-  _ignore: Any?
-) : Control(_ignore) {
+open class GraphEdit : Control() {
   val _beginNodeMove: Signal0 by signal()
 
   val _endNodeMove: Signal0 by signal()
@@ -122,12 +119,7 @@ open class GraphEdit internal constructor(
       _icall_Unit_Double(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("GraphEdit", "GraphEdit")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("GraphEdit", "GraphEdit")
 
   open fun scrollOffset(schedule: Vector2.() -> Unit): Vector2 = scrollOffset.apply{
       schedule(this)

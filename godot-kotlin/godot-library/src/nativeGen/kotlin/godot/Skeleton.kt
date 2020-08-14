@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.RID
 import godot.core.Transform
 import godot.core.VariantArray
@@ -25,21 +24,14 @@ import godot.icalls._icall_Unit_VariantArray
 import godot.icalls._icall_VariantArray_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class Skeleton internal constructor(
-  _ignore: Any?
-) : Spatial(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Skeleton", "Skeleton")
-        }
-
-  }
+open class Skeleton : Spatial() {
+  override fun __new(): COpaquePointer = invokeConstructor("Skeleton", "Skeleton")
 
   open fun addBone(name: String) {
     val mb = getMethodBind("Skeleton","add_bone")

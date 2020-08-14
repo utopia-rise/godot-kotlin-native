@@ -48,9 +48,7 @@ import kotlin.Double
 import kotlin.Long
 import kotlin.String
 
-open class TreeItem internal constructor(
-  _ignore: Any?
-) : Object(_ignore) {
+open class TreeItem internal constructor() : Object() {
   open var collapsed: Boolean
     get() {
       val mb = getMethodBind("TreeItem","is_collapsed")
@@ -80,8 +78,6 @@ open class TreeItem internal constructor(
       val mb = getMethodBind("TreeItem","set_disable_folding")
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
-
-  internal constructor() : this(null)
 
   open fun addButton(
     column: Long,

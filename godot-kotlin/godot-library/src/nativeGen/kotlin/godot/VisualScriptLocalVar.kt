@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Variant
 import godot.core.Variant.Type
 import godot.icalls._icall_Long
@@ -10,13 +9,11 @@ import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class VisualScriptLocalVar internal constructor(
-  _ignore: Any?
-) : VisualScriptNode(_ignore) {
+open class VisualScriptLocalVar : VisualScriptNode() {
   open var type: Long
     get() {
       val mb = getMethodBind("VisualScriptLocalVar","get_var_type")
@@ -37,12 +34,8 @@ open class VisualScriptLocalVar internal constructor(
       _icall_Unit_String(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("VisualScriptLocalVar", "VisualScriptLocalVar")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("VisualScriptLocalVar",
+      "VisualScriptLocalVar")
 
   open fun getVarName(): String {
     val mb = getMethodBind("VisualScriptLocalVar","get_var_name")

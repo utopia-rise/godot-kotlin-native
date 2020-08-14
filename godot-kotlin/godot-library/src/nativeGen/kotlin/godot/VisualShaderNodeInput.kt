@@ -1,19 +1,16 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Signal0
 import godot.core.signal
 import godot.icalls._icall_String
 import godot.icalls._icall_Unit_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class VisualShaderNodeInput internal constructor(
-  _ignore: Any?
-) : VisualShaderNode(_ignore) {
+open class VisualShaderNodeInput : VisualShaderNode() {
   val inputTypeChanged: Signal0 by signal()
 
   open var inputName: String
@@ -26,12 +23,8 @@ open class VisualShaderNodeInput internal constructor(
       _icall_Unit_String(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("VisualShaderNodeInput", "VisualShaderNodeInput")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("VisualShaderNodeInput",
+      "VisualShaderNodeInput")
 
   open fun getInputName(): String {
     val mb = getMethodBind("VisualShaderNodeInput","get_input_name")

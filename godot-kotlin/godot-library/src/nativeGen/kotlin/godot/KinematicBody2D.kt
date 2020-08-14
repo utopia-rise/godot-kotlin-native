@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Transform2D
 import godot.core.Vector2
 import godot.icalls._icall_Boolean
@@ -17,14 +16,12 @@ import godot.icalls._icall_Vector2_Vector2_Vector2_Boolean_Long_Double_Boolean
 import godot.icalls._icall_Vector2_Vector2_Vector2_Vector2_Boolean_Long_Double_Boolean
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class KinematicBody2D internal constructor(
-  _ignore: Any?
-) : PhysicsBody2D(_ignore) {
+open class KinematicBody2D : PhysicsBody2D() {
   open var collision_safeMargin: Double
     get() {
       val mb = getMethodBind("KinematicBody2D","get_safe_margin")
@@ -45,12 +42,7 @@ open class KinematicBody2D internal constructor(
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("KinematicBody2D", "KinematicBody2D")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("KinematicBody2D", "KinematicBody2D")
 
   open fun _directStateChanged(arg0: Object) {
   }

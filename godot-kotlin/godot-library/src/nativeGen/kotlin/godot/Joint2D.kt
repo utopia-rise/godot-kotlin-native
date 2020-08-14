@@ -9,13 +9,10 @@ import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_NodePath
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 
-open class Joint2D internal constructor(
-  _ignore: Any?
-) : Node2D(_ignore) {
+open class Joint2D internal constructor() : Node2D() {
   open var bias: Double
     get() {
       val mb = getMethodBind("Joint2D","get_bias")
@@ -55,8 +52,6 @@ open class Joint2D internal constructor(
       val mb = getMethodBind("Joint2D","set_node_b")
       _icall_Unit_NodePath(mb, this.ptr, value)
     }
-
-  internal constructor() : this(null)
 
   open fun getBias(): Double {
     val mb = getMethodBind("Joint2D","get_bias")

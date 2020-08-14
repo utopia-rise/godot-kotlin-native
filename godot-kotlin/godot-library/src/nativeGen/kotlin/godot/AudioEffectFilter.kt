@@ -2,20 +2,17 @@
 package godot
 
 import godot.AudioEffectFilter
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Double
 import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Double
 import godot.icalls._icall_Unit_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Double
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class AudioEffectFilter internal constructor(
-  _ignore: Any?
-) : AudioEffect(_ignore) {
+open class AudioEffectFilter : AudioEffect() {
   open var cutoffHz: Double
     get() {
       val mb = getMethodBind("AudioEffectFilter","get_cutoff")
@@ -56,12 +53,7 @@ open class AudioEffectFilter internal constructor(
       _icall_Unit_Double(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("AudioEffectFilter", "AudioEffectFilter")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("AudioEffectFilter", "AudioEffectFilter")
 
   open fun getCutoff(): Double {
     val mb = getMethodBind("AudioEffectFilter","get_cutoff")

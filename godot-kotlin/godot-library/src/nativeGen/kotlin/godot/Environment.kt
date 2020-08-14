@@ -4,7 +4,6 @@ package godot
 import godot.Environment
 import godot.core.Basis
 import godot.core.Color
-import godot.core.Godot.shouldInitPtr
 import godot.core.Vector3
 import godot.icalls._icall_Basis
 import godot.icalls._icall_Boolean
@@ -25,15 +24,13 @@ import godot.icalls._icall_Unit_Vector3
 import godot.icalls._icall_Vector3
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class Environment internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
+open class Environment : Resource() {
   open var adjustmentBrightness: Double
     get() {
       val mb = getMethodBind("Environment","get_adjustment_brightness")
@@ -874,12 +871,7 @@ open class Environment internal constructor(
       _icall_Unit_Double(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Environment", "Environment")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("Environment", "Environment")
 
   open fun ambientLightColor(schedule: Color.() -> Unit): Color = ambientLightColor.apply{
       schedule(this)

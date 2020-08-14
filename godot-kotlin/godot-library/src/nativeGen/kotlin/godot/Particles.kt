@@ -3,7 +3,6 @@ package godot
 
 import godot.Particles
 import godot.core.AABB
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_AABB
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Double
@@ -19,15 +18,13 @@ import godot.icalls._icall_Unit_Long_Object
 import godot.icalls._icall_Unit_Object
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class Particles internal constructor(
-  _ignore: Any?
-) : GeometryInstance(_ignore) {
+open class Particles : GeometryInstance() {
   open var amount: Long
     get() {
       val mb = getMethodBind("Particles","get_amount")
@@ -218,12 +215,7 @@ open class Particles internal constructor(
       _icall_Unit_AABB(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Particles", "Particles")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("Particles", "Particles")
 
   open fun visibilityAabb(schedule: AABB.() -> Unit): AABB = visibilityAabb.apply{
       schedule(this)

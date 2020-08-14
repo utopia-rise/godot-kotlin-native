@@ -3,7 +3,6 @@ package godot
 
 import godot.SpatialMaterial
 import godot.core.Color
-import godot.core.Godot.shouldInitPtr
 import godot.core.Vector3
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Boolean_Long
@@ -21,15 +20,13 @@ import godot.icalls._icall_Unit_Vector3
 import godot.icalls._icall_Vector3
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class SpatialMaterial internal constructor(
-  _ignore: Any?
-) : Material(_ignore) {
+open class SpatialMaterial : Material() {
   open var albedoColor: Color
     get() {
       val mb = getMethodBind("SpatialMaterial","get_albedo")
@@ -1040,12 +1037,7 @@ open class SpatialMaterial internal constructor(
       _icall_Unit_Long_Boolean(mb, this.ptr, 3, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("SpatialMaterial", "SpatialMaterial")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("SpatialMaterial", "SpatialMaterial")
 
   open fun albedoColor(schedule: Color.() -> Unit): Color = albedoColor.apply{
       schedule(this)

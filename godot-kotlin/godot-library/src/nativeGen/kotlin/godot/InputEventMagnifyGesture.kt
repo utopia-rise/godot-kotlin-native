@@ -1,17 +1,14 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Double
 import godot.icalls._icall_Unit_Double
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Double
+import kotlinx.cinterop.COpaquePointer
 
-open class InputEventMagnifyGesture internal constructor(
-  _ignore: Any?
-) : InputEventGesture(_ignore) {
+open class InputEventMagnifyGesture : InputEventGesture() {
   open var factor: Double
     get() {
       val mb = getMethodBind("InputEventMagnifyGesture","get_factor")
@@ -22,12 +19,8 @@ open class InputEventMagnifyGesture internal constructor(
       _icall_Unit_Double(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("InputEventMagnifyGesture", "InputEventMagnifyGesture")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("InputEventMagnifyGesture",
+      "InputEventMagnifyGesture")
 
   open fun getFactor(): Double {
     val mb = getMethodBind("InputEventMagnifyGesture","get_factor")

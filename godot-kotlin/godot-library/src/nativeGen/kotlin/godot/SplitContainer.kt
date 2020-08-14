@@ -10,13 +10,10 @@ import godot.icalls._icall_Unit
 import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Long
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 
-open class SplitContainer internal constructor(
-  _ignore: Any?
-) : Container(_ignore) {
+open class SplitContainer internal constructor() : Container() {
   val dragged: Signal1<Long> by signal("offset")
 
   open var collapsed: Boolean
@@ -48,8 +45,6 @@ open class SplitContainer internal constructor(
       val mb = getMethodBind("SplitContainer","set_split_offset")
       _icall_Unit_Long(mb, this.ptr, value)
     }
-
-  internal constructor() : this(null)
 
   override fun _guiInput(arg0: InputEvent) {
   }

@@ -2,7 +2,6 @@
 package godot
 
 import godot.Tree
-import godot.core.Godot.shouldInitPtr
 import godot.core.Rect2
 import godot.core.Signal0
 import godot.core.Signal1
@@ -29,15 +28,13 @@ import godot.icalls._icall_Unit_Long_String
 import godot.icalls._icall_Vector2
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class Tree internal constructor(
-  _ignore: Any?
-) : Control(_ignore) {
+open class Tree : Control() {
   val buttonPressed: Signal3<TreeItem, Long, Long> by signal("item", "column", "id")
 
   val cellSelected: Signal0 by signal()
@@ -140,12 +137,7 @@ open class Tree internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Tree", "Tree")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("Tree", "Tree")
 
   override fun _guiInput(arg0: InputEvent) {
   }

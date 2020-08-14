@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.NodePath
 import godot.core.Transform
 import godot.core.Vector3
@@ -23,16 +22,14 @@ import godot.icalls._icall_Unit_Vector3
 import godot.icalls._icall_Vector3
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.String
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class SkeletonIK internal constructor(
-  _ignore: Any?
-) : Node(_ignore) {
+open class SkeletonIK : Node() {
   open var interpolation: Double
     get() {
       val mb = getMethodBind("SkeletonIK","get_interpolation")
@@ -133,12 +130,7 @@ open class SkeletonIK internal constructor(
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("SkeletonIK", "SkeletonIK")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("SkeletonIK", "SkeletonIK")
 
   open fun magnet(schedule: Vector3.() -> Unit): Vector3 = magnet.apply{
       schedule(this)

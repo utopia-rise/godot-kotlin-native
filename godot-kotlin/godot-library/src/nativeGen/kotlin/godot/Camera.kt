@@ -2,7 +2,6 @@
 package godot
 
 import godot.Camera
-import godot.core.Godot.shouldInitPtr
 import godot.core.RID
 import godot.core.Transform
 import godot.core.VariantArray
@@ -32,15 +31,13 @@ import godot.icalls._icall_Vector3_Vector2
 import godot.icalls._icall_Vector3_Vector2_Double
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class Camera internal constructor(
-  _ignore: Any?
-) : Spatial(_ignore) {
+open class Camera : Spatial() {
   open var cullMask: Long
     get() {
       val mb = getMethodBind("Camera","get_cull_mask")
@@ -171,12 +168,7 @@ open class Camera internal constructor(
       _icall_Unit_Double(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Camera", "Camera")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("Camera", "Camera")
 
   open fun frustumOffset(schedule: Vector2.() -> Unit): Vector2 = frustumOffset.apply{
       schedule(this)

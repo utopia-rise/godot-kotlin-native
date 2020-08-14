@@ -2,7 +2,6 @@
 package godot
 
 import godot.NinePatchRect
-import godot.core.Godot.shouldInitPtr
 import godot.core.Rect2
 import godot.core.Signal0
 import godot.core.signal
@@ -18,14 +17,12 @@ import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_Rect2
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class NinePatchRect internal constructor(
-  _ignore: Any?
-) : Control(_ignore) {
+open class NinePatchRect : Control() {
   val textureChanged: Signal0 by signal()
 
   open var axisStretchHorizontal: Long
@@ -118,12 +115,7 @@ open class NinePatchRect internal constructor(
       _icall_Unit_Object(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("NinePatchRect", "NinePatchRect")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("NinePatchRect", "NinePatchRect")
 
   open fun regionRect(schedule: Rect2.() -> Unit): Rect2 = regionRect.apply{
       schedule(this)

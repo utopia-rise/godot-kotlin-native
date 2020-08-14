@@ -10,21 +10,20 @@ import godot.internal.type.nullSafe
 import godot.internal.utils.getMethodBind
 import kotlin.String
 import kotlin.requireNotNull
+import kotlinx.cinterop.COpaquePointer
 import kotlinx.cinterop.cstr
 import kotlinx.cinterop.invoke
 import kotlinx.cinterop.memScoped
 
 object VisualScriptEditor : Object() {
-  init {
-    memScoped {
-        val ptr =
-        nullSafe(Godot.gdnative.godot_global_get_singleton).invoke("VisualScriptEditor".cstr.ptr)
-        requireNotNull(ptr) { "No instance found for singleton VisualScriptEditor" }
-        this@VisualScriptEditor.ptr = ptr
-    }
-  }
-
   val customNodesUpdated: Signal0 by signal()
+
+  override fun __new(): COpaquePointer = memScoped {
+      val ptr =
+      nullSafe(Godot.gdnative.godot_global_get_singleton).invoke("VisualScriptEditor".cstr.ptr)
+      requireNotNull(ptr) { "No instance found for singleton VisualScriptEditor" }
+      ptr
+  }
 
   fun addCustomNode(
     name: String,

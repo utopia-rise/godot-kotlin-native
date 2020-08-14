@@ -16,22 +16,21 @@ import godot.internal.utils.getMethodBind
 import kotlin.Long
 import kotlin.String
 import kotlin.requireNotNull
+import kotlinx.cinterop.COpaquePointer
 import kotlinx.cinterop.cstr
 import kotlinx.cinterop.invoke
 import kotlinx.cinterop.memScoped
 
 object IP : Object() {
-  init {
-    memScoped {
-        val ptr = nullSafe(Godot.gdnative.godot_global_get_singleton).invoke("IP".cstr.ptr)
-        requireNotNull(ptr) { "No instance found for singleton IP" }
-        this@IP.ptr = ptr
-    }
-  }
-
   final const val RESOLVER_INVALID_ID: Long = -1
 
   final const val RESOLVER_MAX_QUERIES: Long = 32
+
+  override fun __new(): COpaquePointer = memScoped {
+      val ptr = nullSafe(Godot.gdnative.godot_global_get_singleton).invoke("IP".cstr.ptr)
+      requireNotNull(ptr) { "No instance found for singleton IP" }
+      ptr
+  }
 
   fun clearCache(hostname: String = "") {
     val mb = getMethodBind("IP","clear_cache")

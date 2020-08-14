@@ -2,7 +2,6 @@
 package godot
 
 import godot.core.Dictionary
-import godot.core.Godot.shouldInitPtr
 import godot.core.PoolVector2Array
 import godot.core.Vector2
 import godot.icalls._icall_Double
@@ -22,15 +21,13 @@ import godot.icalls._icall_Vector2_Long_Double
 import godot.icalls._icall_Vector2_Vector2
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.NotImplementedError
+import kotlinx.cinterop.COpaquePointer
 
-open class Curve2D internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
+open class Curve2D : Resource() {
   open var bakeInterval: Double
     get() {
       val mb = getMethodBind("Curve2D","get_bake_interval")
@@ -41,12 +38,7 @@ open class Curve2D internal constructor(
       _icall_Unit_Double(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Curve2D", "Curve2D")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("Curve2D", "Curve2D")
 
   open fun _getData(): Dictionary {
     throw NotImplementedError("_get_data is not implemented for Curve2D")

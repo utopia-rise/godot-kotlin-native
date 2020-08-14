@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.PoolStringArray
 import godot.core.VariantArray
 import godot.icalls._icall_Boolean_String
@@ -12,20 +11,13 @@ import godot.icalls._icall_Unit_String_Object
 import godot.icalls._icall_Unit_String_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.NotImplementedError
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class ResourcePreloader internal constructor(
-  _ignore: Any?
-) : Node(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("ResourcePreloader", "ResourcePreloader")
-        }
-
-  }
+open class ResourcePreloader : Node() {
+  override fun __new(): COpaquePointer = invokeConstructor("ResourcePreloader", "ResourcePreloader")
 
   open fun _getResources(): VariantArray {
     throw NotImplementedError("_get_resources is not implemented for ResourcePreloader")

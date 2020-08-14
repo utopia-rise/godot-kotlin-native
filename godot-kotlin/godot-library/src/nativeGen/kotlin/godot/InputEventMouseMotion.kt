@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Vector2
 import godot.icalls._icall_Double
 import godot.icalls._icall_Unit_Double
@@ -9,13 +8,11 @@ import godot.icalls._icall_Unit_Vector2
 import godot.icalls._icall_Vector2
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Double
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class InputEventMouseMotion internal constructor(
-  _ignore: Any?
-) : InputEventMouse(_ignore) {
+open class InputEventMouseMotion : InputEventMouse() {
   open var pressure: Double
     get() {
       val mb = getMethodBind("InputEventMouseMotion","get_pressure")
@@ -56,12 +53,8 @@ open class InputEventMouseMotion internal constructor(
       _icall_Unit_Vector2(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("InputEventMouseMotion", "InputEventMouseMotion")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("InputEventMouseMotion",
+      "InputEventMouseMotion")
 
   open fun relative(schedule: Vector2.() -> Unit): Vector2 = relative.apply{
       schedule(this)

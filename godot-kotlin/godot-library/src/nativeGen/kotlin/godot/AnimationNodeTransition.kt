@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Boolean_Long
 import godot.icalls._icall_Double
 import godot.icalls._icall_Long
@@ -12,15 +11,13 @@ import godot.icalls._icall_Unit_Long_Boolean
 import godot.icalls._icall_Unit_Long_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class AnimationNodeTransition internal constructor(
-  _ignore: Any?
-) : AnimationNode(_ignore) {
+open class AnimationNodeTransition : AnimationNode() {
   open var input0_autoAdvance: Boolean
     get() {
       val mb = getMethodBind("AnimationNodeTransition","is_input_set_as_auto_advance")
@@ -681,12 +678,8 @@ open class AnimationNodeTransition internal constructor(
       _icall_Unit_Double(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("AnimationNodeTransition", "AnimationNodeTransition")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("AnimationNodeTransition",
+      "AnimationNodeTransition")
 
   open fun getCrossFadeTime(): Double {
     val mb = getMethodBind("AnimationNodeTransition","get_cross_fade_time")

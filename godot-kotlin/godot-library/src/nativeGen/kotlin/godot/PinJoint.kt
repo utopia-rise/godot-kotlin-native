@@ -1,18 +1,15 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Double_Long
 import godot.icalls._icall_Unit_Long_Double
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Double
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class PinJoint internal constructor(
-  _ignore: Any?
-) : Joint(_ignore) {
+open class PinJoint : Joint() {
   open var params_bias: Double
     get() {
       val mb = getMethodBind("PinJoint","get_param")
@@ -43,12 +40,7 @@ open class PinJoint internal constructor(
       _icall_Unit_Long_Double(mb, this.ptr, 2, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("PinJoint", "PinJoint")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("PinJoint", "PinJoint")
 
   open fun getParam(param: Long): Double {
     val mb = getMethodBind("PinJoint","get_param")

@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.GodotError
 import godot.core.PoolIntArray
 import godot.core.Rect2
@@ -21,17 +20,15 @@ import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Vector2_Long_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.NotImplementedError
 import kotlin.String
 import kotlin.UninitializedPropertyAccessException
+import kotlinx.cinterop.COpaquePointer
 
-open class BitmapFont internal constructor(
-  _ignore: Any?
-) : Font(_ignore) {
+open class BitmapFont : Font() {
   open var ascent: Double
     get() {
       throw UninitializedPropertyAccessException("Cannot access property ascent: has no getter")
@@ -70,12 +67,7 @@ open class BitmapFont internal constructor(
       _icall_Unit_Double(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("BitmapFont", "BitmapFont")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("BitmapFont", "BitmapFont")
 
   open fun _getChars(): PoolIntArray {
     throw NotImplementedError("_get_chars is not implemented for BitmapFont")

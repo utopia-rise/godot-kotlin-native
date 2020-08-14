@@ -18,17 +18,12 @@ import godot.icalls._icall_Unit_String_Variant_Boolean
 import godot.icalls._icall_Variant_String
 import godot.icalls._icall_Variant_String_String_nVariant
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.String
 
-open class EditorSettings internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
+open class EditorSettings internal constructor() : Resource() {
   val settingsChanged: Signal0 by signal()
-
-  internal constructor() : this(null)
 
   open fun addPropertyInfo(info: Dictionary) {
     val mb = getMethodBind("EditorSettings","add_property_info")

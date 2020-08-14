@@ -5,12 +5,9 @@ import godot.Sky
 import godot.icalls._icall_Long
 import godot.icalls._icall_Unit_Long
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Long
 
-open class Sky internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
+open class Sky internal constructor() : Resource() {
   open var radianceSize: Long
     get() {
       val mb = getMethodBind("Sky","get_radiance_size")
@@ -20,8 +17,6 @@ open class Sky internal constructor(
       val mb = getMethodBind("Sky","set_radiance_size")
       _icall_Unit_Long(mb, this.ptr, value)
     }
-
-  internal constructor() : this(null)
 
   open fun getRadianceSize(): Sky.RadianceSize {
     val mb = getMethodBind("Sky","get_radiance_size")

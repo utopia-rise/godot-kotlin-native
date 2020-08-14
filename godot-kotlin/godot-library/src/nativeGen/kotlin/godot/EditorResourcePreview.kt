@@ -9,16 +9,11 @@ import godot.icalls._icall_Unit_Object_Object_String_Variant
 import godot.icalls._icall_Unit_String
 import godot.icalls._icall_Unit_String_Object_String_Variant
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Long
 import kotlin.String
 
-open class EditorResourcePreview internal constructor(
-  _ignore: Any?
-) : Node(_ignore) {
+open class EditorResourcePreview internal constructor() : Node() {
   val previewInvalidated: Signal1<String> by signal("path")
-
-  internal constructor() : this(null)
 
   open fun _previewReady(
     arg0: String,

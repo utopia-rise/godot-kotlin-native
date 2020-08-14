@@ -2,7 +2,6 @@
 package godot
 
 import godot.core.Dictionary
-import godot.core.Godot.shouldInitPtr
 import godot.core.PoolIntArray
 import godot.core.PoolVector2Array
 import godot.core.Rect2
@@ -16,21 +15,14 @@ import godot.icalls._icall_Unit_PoolVector2Array_PoolIntArray
 import godot.icalls._icall_Vector2_Vector2
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.NotImplementedError
+import kotlinx.cinterop.COpaquePointer
 
-open class PolygonPathFinder internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("PolygonPathFinder", "PolygonPathFinder")
-        }
-
-  }
+open class PolygonPathFinder : Resource() {
+  override fun __new(): COpaquePointer = invokeConstructor("PolygonPathFinder", "PolygonPathFinder")
 
   open fun _getData(): Dictionary {
     throw NotImplementedError("_get_data is not implemented for PolygonPathFinder")

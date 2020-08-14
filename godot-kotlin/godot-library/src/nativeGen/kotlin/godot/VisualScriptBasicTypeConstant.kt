@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Variant
 import godot.core.Variant.Type
 import godot.icalls._icall_Long
@@ -10,13 +9,11 @@ import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class VisualScriptBasicTypeConstant internal constructor(
-  _ignore: Any?
-) : VisualScriptNode(_ignore) {
+open class VisualScriptBasicTypeConstant : VisualScriptNode() {
   open var basicType: Long
     get() {
       val mb = getMethodBind("VisualScriptBasicTypeConstant","get_basic_type")
@@ -37,13 +34,8 @@ open class VisualScriptBasicTypeConstant internal constructor(
       _icall_Unit_String(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("VisualScriptBasicTypeConstant",
-            "VisualScriptBasicTypeConstant")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("VisualScriptBasicTypeConstant",
+      "VisualScriptBasicTypeConstant")
 
   open fun getBasicType(): Variant.Type {
     val mb = getMethodBind("VisualScriptBasicTypeConstant","get_basic_type")

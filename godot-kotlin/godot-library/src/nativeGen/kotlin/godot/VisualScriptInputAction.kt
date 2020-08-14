@@ -2,20 +2,17 @@
 package godot
 
 import godot.VisualScriptInputAction
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Long
 import godot.icalls._icall_String
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class VisualScriptInputAction internal constructor(
-  _ignore: Any?
-) : VisualScriptNode(_ignore) {
+open class VisualScriptInputAction : VisualScriptNode() {
   open var action: String
     get() {
       val mb = getMethodBind("VisualScriptInputAction","get_action_name")
@@ -36,12 +33,8 @@ open class VisualScriptInputAction internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("VisualScriptInputAction", "VisualScriptInputAction")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("VisualScriptInputAction",
+      "VisualScriptInputAction")
 
   open fun getActionMode(): VisualScriptInputAction.Mode {
     val mb = getMethodBind("VisualScriptInputAction","get_action_mode")

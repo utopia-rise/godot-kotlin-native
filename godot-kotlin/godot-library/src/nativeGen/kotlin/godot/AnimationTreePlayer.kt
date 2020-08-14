@@ -2,7 +2,6 @@
 package godot
 
 import godot.AnimationTreePlayer
-import godot.core.Godot.shouldInitPtr
 import godot.core.GodotError
 import godot.core.NodePath
 import godot.core.PoolStringArray
@@ -39,15 +38,13 @@ import godot.icalls._icall_Unit_String_Vector2
 import godot.icalls._icall_Vector2_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class AnimationTreePlayer internal constructor(
-  _ignore: Any?
-) : Node(_ignore) {
+open class AnimationTreePlayer : Node() {
   open var active: Boolean
     get() {
       val mb = getMethodBind("AnimationTreePlayer","is_active")
@@ -88,12 +85,8 @@ open class AnimationTreePlayer internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("AnimationTreePlayer", "AnimationTreePlayer")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("AnimationTreePlayer",
+      "AnimationTreePlayer")
 
   open fun addNode(type: Long, id: String) {
     val mb = getMethodBind("AnimationTreePlayer","add_node")

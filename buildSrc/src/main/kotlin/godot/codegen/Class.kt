@@ -53,8 +53,7 @@ class Class @JsonCreator constructor(
         val classTypeBuilder = createTypeBuilder(className)
 
         if (newName == "Object") {
-            generatePointerVariable(classTypeBuilder)
-            generateInitAndDestroy(classTypeBuilder)
+            classTypeBuilder.superclass(ClassName("godot.internal", "KObject"))
             generateSignalExtensions(classTypeBuilder)
             generateToVariantMethod(classTypeBuilder)
         }
@@ -104,27 +103,6 @@ class Class @JsonCreator constructor(
         else if (baseClass.isNotEmpty()) typeSpec.superclass(ClassName("godot", baseClass))
 
         return typeSpec
-    }
-
-    private fun generatePointerVariable(typeBuilder: TypeSpec.Builder) {
-        typeBuilder.addProperty(
-            PropertySpec.builder(
-                "ptr",
-                ClassName("kotlinx.cinterop", "COpaquePointer")
-            )
-                .addModifiers(KModifier.INTERNAL, KModifier.LATEINIT)
-                .mutable(true)
-                .build()
-        )
-    }
-
-    private fun generateInitAndDestroy(typeBuilder: TypeSpec.Builder) {
-        typeBuilder.addFunctions(
-            listOf(
-                FunSpec.builder("_onInit").addModifiers(KModifier.OPEN).build(),
-                FunSpec.builder("_onDestroy").addModifiers(KModifier.OPEN).build()
-            )
-        )
     }
 
     private fun generateSignalExtensions(typeBuilder: TypeSpec.Builder) {
@@ -215,13 +193,17 @@ class Class @JsonCreator constructor(
     }
 
     private fun generateConstructors(typeBuilder: TypeSpec.Builder) {
+        val newFunBuilder = FunSpec.builder("__new")
+            .returns(ClassName("kotlinx.cinterop", "COpaquePointer"))
+            .addModifiers(KModifier.OVERRIDE)
+
         if (isSingleton) {
-            typeBuilder.addInitializerBlock(
+            newFunBuilder.addCode(
                 CodeBlock.of("""
-                            |%M {
+                            |return %M {
                             |    val ptr = %M(%T.gdnative.godot_global_get_singleton).%M("$singletonName".%M.ptr)
                             |    %M(ptr) { "No instance found for singleton $singletonName" }
-                            |    this@$newName.ptr = ptr
+                            |    ptr
                             |}
                             |""".trimMargin(),
                     MemberName("kotlinx.cinterop", "memScoped"),
@@ -232,35 +214,25 @@ class Class @JsonCreator constructor(
                     MemberName("kotlin", "requireNotNull")
                 )
             )
-        }
-        else {
-
-            val noArgConstructor = if (!isInstanciable) {
-                FunSpec.constructorBuilder()
-                    .addModifiers(KModifier.INTERNAL)
-                    .callThisConstructor("null")
-            } else {
-                FunSpec.constructorBuilder()
-                    .callThisConstructor("null")
-                    .addStatement(
-                        """if (%M()) {
-                   |    this.ptr = %M("$newName", "$oldName")
-                   |}
-                   |""".trimMargin(),
-                        MemberName(ClassName("godot.core", "Godot"), "shouldInitPtr"),
-                        MemberName("godot.internal.utils", "invokeConstructor")
-                    )
+        } else {
+            if (isInstanciable) {
+                newFunBuilder.addStatement(
+                    "return %M(\"$newName\", \"$oldName\")",
+                    MemberName("godot.internal.utils", "invokeConstructor")
+                )
             }
 
-            typeBuilder.addFunction(noArgConstructor.build())
+            val primaryConstructorBuilder = FunSpec.constructorBuilder()
+                .callSuperConstructor()
 
-            typeBuilder.primaryConstructor(
-                FunSpec.constructorBuilder()
-                    .addParameter(ParameterSpec("_ignore", Any::class.asTypeName().copy(nullable = true)))
-                    .callSuperConstructor()
-                    .addModifiers(KModifier.INTERNAL)
-                    .build()
-            ).addSuperclassConstructorParameter("_ignore")
+            if (!isInstanciable) {
+                primaryConstructorBuilder.addModifiers(KModifier.INTERNAL)
+            }
+            typeBuilder.primaryConstructor(primaryConstructorBuilder.build())
+        }
+
+        if (isInstanciable || isSingleton) {
+            typeBuilder.addFunction(newFunBuilder.build())
         }
     }
 

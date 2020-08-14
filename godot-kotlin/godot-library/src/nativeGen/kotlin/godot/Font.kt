@@ -12,17 +12,12 @@ import godot.icalls._icall_Unit_RID_Vector2_String_Color_Long_Color
 import godot.icalls._icall_Vector2_String
 import godot.icalls._icall_Vector2_String_Double
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.String
 
-open class Font internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
-  internal constructor() : this(null)
-
+open class Font internal constructor() : Resource() {
   open fun draw(
     canvasItem: RID,
     position: Vector2,

@@ -8,17 +8,16 @@ import godot.internal.utils.getMethodBind
 import kotlin.Double
 import kotlin.Long
 import kotlin.requireNotNull
+import kotlinx.cinterop.COpaquePointer
 import kotlinx.cinterop.cstr
 import kotlinx.cinterop.invoke
 import kotlinx.cinterop.memScoped
 
 object Performance : Object() {
-  init {
-    memScoped {
-        val ptr = nullSafe(Godot.gdnative.godot_global_get_singleton).invoke("Performance".cstr.ptr)
-        requireNotNull(ptr) { "No instance found for singleton Performance" }
-        this@Performance.ptr = ptr
-    }
+  override fun __new(): COpaquePointer = memScoped {
+      val ptr = nullSafe(Godot.gdnative.godot_global_get_singleton).invoke("Performance".cstr.ptr)
+      requireNotNull(ptr) { "No instance found for singleton Performance" }
+      ptr
   }
 
   fun getMonitor(monitor: Long): Double {

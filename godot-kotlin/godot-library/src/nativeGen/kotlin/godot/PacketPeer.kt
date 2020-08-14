@@ -13,13 +13,10 @@ import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Variant_Boolean
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 
-open class PacketPeer internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
+open class PacketPeer internal constructor() : Reference() {
   open var allowObjectDecoding: Boolean
     get() {
       val mb = getMethodBind("PacketPeer","is_object_decoding_allowed")
@@ -39,8 +36,6 @@ open class PacketPeer internal constructor(
       val mb = getMethodBind("PacketPeer","set_encode_buffer_max_size")
       _icall_Unit_Long(mb, this.ptr, value)
     }
-
-  internal constructor() : this(null)
 
   open fun getAvailablePacketCount(): Long {
     val mb = getMethodBind("PacketPeer","get_available_packet_count")

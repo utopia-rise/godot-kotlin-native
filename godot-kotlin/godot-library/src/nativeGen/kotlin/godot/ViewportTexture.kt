@@ -1,17 +1,14 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.NodePath
 import godot.icalls._icall_NodePath
 import godot.icalls._icall_Unit_NodePath
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
+import kotlinx.cinterop.COpaquePointer
 
-open class ViewportTexture internal constructor(
-  _ignore: Any?
-) : Texture(_ignore) {
+open class ViewportTexture : Texture() {
   open var viewportPath: NodePath
     get() {
       val mb = getMethodBind("ViewportTexture","get_viewport_path_in_scene")
@@ -22,12 +19,7 @@ open class ViewportTexture internal constructor(
       _icall_Unit_NodePath(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("ViewportTexture", "ViewportTexture")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("ViewportTexture", "ViewportTexture")
 
   open fun getViewportPathInScene(): NodePath {
     val mb = getMethodBind("ViewportTexture","get_viewport_path_in_scene")

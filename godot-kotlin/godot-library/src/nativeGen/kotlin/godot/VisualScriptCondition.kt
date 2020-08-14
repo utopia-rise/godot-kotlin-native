@@ -1,17 +1,10 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
+import kotlinx.cinterop.COpaquePointer
 
-open class VisualScriptCondition internal constructor(
-  _ignore: Any?
-) : VisualScriptNode(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("VisualScriptCondition", "VisualScriptCondition")
-        }
-
-  }
+open class VisualScriptCondition : VisualScriptNode() {
+  override fun __new(): COpaquePointer = invokeConstructor("VisualScriptCondition",
+      "VisualScriptCondition")
 }

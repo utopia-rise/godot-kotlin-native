@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Signal1
 import godot.core.Variant
 import godot.core.VariantArray
@@ -25,15 +24,13 @@ import godot.icalls._icall_Variant
 import godot.icalls._icall_Variant_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.NotImplementedError
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class OptionButton internal constructor(
-  _ignore: Any?
-) : Button(_ignore) {
+open class OptionButton : Button() {
   val itemFocused: Signal1<Long> by signal("index")
 
   val itemSelected: Signal1<Long> by signal("index")
@@ -44,12 +41,7 @@ open class OptionButton internal constructor(
       return _icall_Long(mb, this.ptr)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("OptionButton", "OptionButton")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("OptionButton", "OptionButton")
 
   open fun _focused(arg0: Long) {
   }

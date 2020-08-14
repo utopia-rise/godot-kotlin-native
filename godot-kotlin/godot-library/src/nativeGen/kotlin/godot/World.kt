@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.RID
 import godot.icalls._icall_Environment
 import godot.icalls._icall_PhysicsDirectSpaceState
@@ -9,11 +8,9 @@ import godot.icalls._icall_RID
 import godot.icalls._icall_Unit_Object
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
+import kotlinx.cinterop.COpaquePointer
 
-open class World internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
+open class World : Resource() {
   open val directSpaceState: PhysicsDirectSpaceState
     get() {
       val mb = getMethodBind("World","get_direct_space_state")
@@ -52,12 +49,7 @@ open class World internal constructor(
       return _icall_RID(mb, this.ptr)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("World", "World")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("World", "World")
 
   open fun getDirectSpaceState(): PhysicsDirectSpaceState {
     val mb = getMethodBind("World","get_direct_space_state")

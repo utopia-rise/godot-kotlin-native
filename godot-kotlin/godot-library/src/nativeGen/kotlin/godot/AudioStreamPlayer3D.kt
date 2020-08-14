@@ -2,7 +2,6 @@
 package godot
 
 import godot.AudioStreamPlayer3D
-import godot.core.Godot.shouldInitPtr
 import godot.core.Signal0
 import godot.core.signal
 import godot.icalls._icall_AudioStream
@@ -19,16 +18,14 @@ import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_Unit_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.NotImplementedError
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class AudioStreamPlayer3D internal constructor(
-  _ignore: Any?
-) : Spatial(_ignore) {
+open class AudioStreamPlayer3D : Spatial() {
   val finished: Signal0 by signal()
 
   open var areaMask: Long
@@ -217,12 +214,8 @@ open class AudioStreamPlayer3D internal constructor(
       _icall_Unit_Double(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("AudioStreamPlayer3D", "AudioStreamPlayer3D")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("AudioStreamPlayer3D",
+      "AudioStreamPlayer3D")
 
   open fun _busLayoutChanged() {
   }

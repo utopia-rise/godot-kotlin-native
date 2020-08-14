@@ -16,13 +16,10 @@ import godot.icalls._icall_Unit_String
 import godot.icalls._icall_VariantArray
 import godot.icalls._icall_Variant_String
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.String
 
-open class Script internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
+open class Script internal constructor() : Resource() {
   open var sourceCode: String
     get() {
       val mb = getMethodBind("Script","get_source_code")
@@ -32,8 +29,6 @@ open class Script internal constructor(
       val mb = getMethodBind("Script","set_source_code")
       _icall_Unit_String(mb, this.ptr, value)
     }
-
-  internal constructor() : this(null)
 
   open fun canInstance(): Boolean {
     val mb = getMethodBind("Script","can_instance")

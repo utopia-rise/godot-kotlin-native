@@ -2,7 +2,6 @@
 package godot
 
 import godot.core.Dictionary
-import godot.core.Godot.shouldInitPtr
 import godot.core.GodotError
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Long_Object
@@ -10,20 +9,13 @@ import godot.icalls._icall_Node_Long
 import godot.icalls._icall_SceneState
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.NotImplementedError
+import kotlinx.cinterop.COpaquePointer
 
-open class PackedScene internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("PackedScene", "PackedScene")
-        }
-
-  }
+open class PackedScene : Resource() {
+  override fun __new(): COpaquePointer = invokeConstructor("PackedScene", "PackedScene")
 
   open fun _getBundledScene(): Dictionary {
     throw NotImplementedError("_get_bundled_scene is not implemented for PackedScene")

@@ -2,7 +2,6 @@
 package godot
 
 import godot.PhysicalBone
-import godot.core.Godot.shouldInitPtr
 import godot.core.Transform
 import godot.core.Vector3
 import godot.icalls._icall_Boolean
@@ -16,15 +15,13 @@ import godot.icalls._icall_Unit_Vector3
 import godot.icalls._icall_Unit_Vector3_Vector3
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class PhysicalBone internal constructor(
-  _ignore: Any?
-) : PhysicsBody(_ignore) {
+open class PhysicalBone : PhysicsBody() {
   open var bodyOffset: Transform
     get() {
       val mb = getMethodBind("PhysicalBone","get_body_offset")
@@ -105,12 +102,7 @@ open class PhysicalBone internal constructor(
       _icall_Unit_Double(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("PhysicalBone", "PhysicalBone")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("PhysicalBone", "PhysicalBone")
 
   open fun bodyOffset(schedule: Transform.() -> Unit): Transform = bodyOffset.apply{
       schedule(this)

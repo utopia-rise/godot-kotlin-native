@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.PoolStringArray
 import godot.core.VariantArray
 import godot.icalls._icall_Boolean_String
@@ -19,22 +18,15 @@ import godot.icalls._icall_Unit_String_Object_Long
 import godot.icalls._icall_Unit_String_String
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.NotImplementedError
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class SpriteFrames internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("SpriteFrames", "SpriteFrames")
-        }
-
-  }
+open class SpriteFrames : Resource() {
+  override fun __new(): COpaquePointer = invokeConstructor("SpriteFrames", "SpriteFrames")
 
   open fun _getAnimations(): VariantArray {
     throw NotImplementedError("_get_animations is not implemented for SpriteFrames")

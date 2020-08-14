@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.RID
 import godot.core.Vector2
 import godot.icalls._icall_Long
@@ -10,12 +9,10 @@ import godot.icalls._icall_RID
 import godot.icalls._icall_Vector2
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class Physics2DTestMotionResult internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
+open class Physics2DTestMotionResult : Reference() {
   open val collider: Object
     get() {
       val mb = getMethodBind("Physics2DTestMotionResult","get_collider")
@@ -70,12 +67,8 @@ open class Physics2DTestMotionResult internal constructor(
       return _icall_Vector2(mb, this.ptr)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Physics2DTestMotionResult", "Physics2DTestMotionResult")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("Physics2DTestMotionResult",
+      "Physics2DTestMotionResult")
 
   open fun getCollider(): Object {
     val mb = getMethodBind("Physics2DTestMotionResult","get_collider")

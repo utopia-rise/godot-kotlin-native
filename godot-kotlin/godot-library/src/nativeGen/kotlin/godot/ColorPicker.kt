@@ -2,7 +2,6 @@
 package godot
 
 import godot.core.Color
-import godot.core.Godot.shouldInitPtr
 import godot.core.PoolColorArray
 import godot.core.Signal1
 import godot.core.signal
@@ -13,16 +12,14 @@ import godot.icalls._icall_Unit_Boolean
 import godot.icalls._icall_Unit_Color
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.String
 import kotlin.Unit
+import kotlinx.cinterop.COpaquePointer
 
-open class ColorPicker internal constructor(
-  _ignore: Any?
-) : BoxContainer(_ignore) {
+open class ColorPicker : BoxContainer() {
   val colorChanged: Signal1<Color> by signal("color")
 
   val presetAdded: Signal1<Color> by signal("color")
@@ -99,12 +96,7 @@ open class ColorPicker internal constructor(
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("ColorPicker", "ColorPicker")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("ColorPicker", "ColorPicker")
 
   open fun color(schedule: Color.() -> Unit): Color = color.apply{
       schedule(this)

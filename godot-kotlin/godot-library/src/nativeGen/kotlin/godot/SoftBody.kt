@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.NodePath
 import godot.core.VariantArray
 import godot.icalls._icall_Boolean
@@ -18,14 +17,12 @@ import godot.icalls._icall_Unit_Object
 import godot.icalls._icall_VariantArray
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
+import kotlinx.cinterop.COpaquePointer
 
-open class SoftBody internal constructor(
-  _ignore: Any?
-) : MeshInstance(_ignore) {
+open class SoftBody : MeshInstance() {
   open var areaAngularStiffness: Double
     get() {
       val mb = getMethodBind("SoftBody","get_areaAngular_stiffness")
@@ -156,12 +153,7 @@ open class SoftBody internal constructor(
       _icall_Unit_Double(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("SoftBody", "SoftBody")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("SoftBody", "SoftBody")
 
   open fun _drawSoftMesh() {
   }

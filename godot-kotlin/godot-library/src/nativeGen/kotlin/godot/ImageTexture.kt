@@ -3,7 +3,6 @@ package godot
 
 import godot.Image
 import godot.ImageTexture
-import godot.core.Godot.shouldInitPtr
 import godot.core.GodotError
 import godot.core.RID
 import godot.core.Vector2
@@ -18,14 +17,12 @@ import godot.icalls._icall_Unit_Object_Long
 import godot.icalls._icall_Unit_Vector2
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Double
 import kotlin.Long
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class ImageTexture internal constructor(
-  _ignore: Any?
-) : Texture(_ignore) {
+open class ImageTexture : Texture() {
   open var lossyQuality: Double
     get() {
       val mb = getMethodBind("ImageTexture","get_lossy_storage_quality")
@@ -46,12 +43,7 @@ open class ImageTexture internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("ImageTexture", "ImageTexture")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("ImageTexture", "ImageTexture")
 
   open fun _reloadHook(rid: RID) {
   }

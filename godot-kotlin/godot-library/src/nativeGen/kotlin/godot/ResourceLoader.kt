@@ -14,18 +14,17 @@ import godot.internal.utils.getMethodBind
 import kotlin.Boolean
 import kotlin.String
 import kotlin.requireNotNull
+import kotlinx.cinterop.COpaquePointer
 import kotlinx.cinterop.cstr
 import kotlinx.cinterop.invoke
 import kotlinx.cinterop.memScoped
 
 object ResourceLoader : Object() {
-  init {
-    memScoped {
-        val ptr =
-        nullSafe(Godot.gdnative.godot_global_get_singleton).invoke("ResourceLoader".cstr.ptr)
-        requireNotNull(ptr) { "No instance found for singleton ResourceLoader" }
-        this@ResourceLoader.ptr = ptr
-    }
+  override fun __new(): COpaquePointer = memScoped {
+      val ptr =
+      nullSafe(Godot.gdnative.godot_global_get_singleton).invoke("ResourceLoader".cstr.ptr)
+      requireNotNull(ptr) { "No instance found for singleton ResourceLoader" }
+      ptr
   }
 
   fun exists(path: String, typeHint: String = ""): Boolean {

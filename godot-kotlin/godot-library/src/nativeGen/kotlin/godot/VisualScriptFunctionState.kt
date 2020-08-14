@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.core.Variant
 import godot.core.VariantArray
 import godot.icalls._icall_Boolean
@@ -13,16 +12,11 @@ import kotlin.Any
 import kotlin.Boolean
 import kotlin.NotImplementedError
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class VisualScriptFunctionState internal constructor(
-  _ignore: Any?
-) : Reference(_ignore) {
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("VisualScriptFunctionState", "VisualScriptFunctionState")
-        }
-
-  }
+open class VisualScriptFunctionState : Reference() {
+  override fun __new(): COpaquePointer = invokeConstructor("VisualScriptFunctionState",
+      "VisualScriptFunctionState")
 
   open fun _signalCallback(vararg __var_args: Any?): Variant {
     throw NotImplementedError("_signal_callback is not implemented for VisualScriptFunctionState")

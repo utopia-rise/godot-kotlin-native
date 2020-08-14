@@ -2,7 +2,6 @@
 package godot
 
 import godot.core.Dictionary
-import godot.core.Godot.shouldInitPtr
 import godot.core.Signal2
 import godot.core.Variant
 import godot.core.Variant.Type
@@ -37,23 +36,16 @@ import godot.icalls._icall_Vector2_String_Long
 import godot.icalls._icall_VisualScriptNode_String_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Long
 import kotlin.NotImplementedError
 import kotlin.String
+import kotlinx.cinterop.COpaquePointer
 
-open class VisualScript internal constructor(
-  _ignore: Any?
-) : Script(_ignore) {
+open class VisualScript : Script() {
   val nodePortsChanged: Signal2<String, Long> by signal("function", "id")
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("VisualScript", "VisualScript")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("VisualScript", "VisualScript")
 
   open fun _getData(): Dictionary {
     throw NotImplementedError("_get_data is not implemented for VisualScript")

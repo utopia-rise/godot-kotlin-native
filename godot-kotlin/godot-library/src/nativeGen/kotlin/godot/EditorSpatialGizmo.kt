@@ -16,18 +16,13 @@ import godot.icalls._icall_Unit_PoolVector3Array
 import godot.icalls._icall_Unit_PoolVector3Array_Object_Boolean_Boolean
 import godot.icalls._icall_Unit_PoolVector3Array_Object_Boolean_Color
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.NotImplementedError
 import kotlin.String
 
-open class EditorSpatialGizmo internal constructor(
-  _ignore: Any?
-) : SpatialGizmo(_ignore) {
-  internal constructor() : this(null)
-
+open class EditorSpatialGizmo internal constructor() : SpatialGizmo() {
   open fun addCollisionSegments(segments: PoolVector3Array) {
     val mb = getMethodBind("EditorSpatialGizmo","add_collision_segments")
     _icall_Unit_PoolVector3Array( mb, this.ptr, segments)

@@ -1,7 +1,6 @@
 // THIS FILE IS GENERATED! DO NOT EDIT IT MANUALLY! ALL CHANGES TO IT WILL BE OVERWRITTEN ON EACH BUILD
 package godot
 
-import godot.core.Godot.shouldInitPtr
 import godot.icalls._icall_Boolean
 import godot.icalls._icall_Double
 import godot.icalls._icall_OpenSimplexNoise
@@ -11,16 +10,14 @@ import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Object
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 import kotlin.NotImplementedError
 import kotlin.UninitializedPropertyAccessException
+import kotlinx.cinterop.COpaquePointer
 
-open class NoiseTexture internal constructor(
-  _ignore: Any?
-) : Texture(_ignore) {
+open class NoiseTexture : Texture() {
   open var asNormalmap: Boolean
     get() {
       val mb = getMethodBind("NoiseTexture","is_normalmap")
@@ -79,12 +76,7 @@ open class NoiseTexture internal constructor(
       _icall_Unit_Long(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("NoiseTexture", "NoiseTexture")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("NoiseTexture", "NoiseTexture")
 
   open fun _generateTexture(): Image {
     throw NotImplementedError("_generate_texture is not implemented for NoiseTexture")

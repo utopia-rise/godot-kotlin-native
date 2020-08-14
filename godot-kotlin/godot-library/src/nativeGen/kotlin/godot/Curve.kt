@@ -2,7 +2,6 @@
 package godot
 
 import godot.Curve
-import godot.core.Godot.shouldInitPtr
 import godot.core.Signal0
 import godot.core.VariantArray
 import godot.core.Vector2
@@ -22,14 +21,12 @@ import godot.icalls._icall_Unit_Long_Long
 import godot.icalls._icall_Vector2_Long
 import godot.internal.utils.getMethodBind
 import godot.internal.utils.invokeConstructor
-import kotlin.Any
 import kotlin.Double
 import kotlin.Long
 import kotlin.NotImplementedError
+import kotlinx.cinterop.COpaquePointer
 
-open class Curve internal constructor(
-  _ignore: Any?
-) : Resource(_ignore) {
+open class Curve : Resource() {
   val rangeChanged: Signal0 by signal()
 
   open var bakeResolution: Long
@@ -62,12 +59,7 @@ open class Curve internal constructor(
       _icall_Unit_Double(mb, this.ptr, value)
     }
 
-  constructor() : this(null) {
-    if (shouldInitPtr()) {
-            this.ptr = invokeConstructor("Curve", "Curve")
-        }
-
-  }
+  override fun __new(): COpaquePointer = invokeConstructor("Curve", "Curve")
 
   open fun _getData(): VariantArray {
     throw NotImplementedError("_get_data is not implemented for Curve")

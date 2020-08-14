@@ -13,14 +13,11 @@ import godot.icalls._icall_Unit_Long
 import godot.icalls._icall_Unit_Long_Boolean
 import godot.icalls._icall_VariantArray
 import godot.internal.utils.getMethodBind
-import kotlin.Any
 import kotlin.Boolean
 import kotlin.Double
 import kotlin.Long
 
-open class CSGShape internal constructor(
-  _ignore: Any?
-) : GeometryInstance(_ignore) {
+open class CSGShape internal constructor() : GeometryInstance() {
   open var calculateTangents: Boolean
     get() {
       val mb = getMethodBind("CSGShape","is_calculating_tangents")
@@ -80,8 +77,6 @@ open class CSGShape internal constructor(
       val mb = getMethodBind("CSGShape","set_use_collision")
       _icall_Unit_Boolean(mb, this.ptr, value)
     }
-
-  internal constructor() : this(null)
 
   open fun _updateShape() {
   }
