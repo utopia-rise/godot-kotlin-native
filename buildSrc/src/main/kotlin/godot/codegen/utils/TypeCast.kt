@@ -162,14 +162,7 @@ fun String.convertTypeToKotlin(): String {
 val String.typeNameForICalls: TypeName
     get() {
         val icallType = convertTypeForICalls()
-        val className = ClassName(icallType.getPackage(), icallType)
-        return when (icallType) {
-            "GodotArray" -> className.parameterizedBy(ANY.copy(nullable = true))
-            "Dictionary" -> {
-                className.parameterizedBy(ANY, ANY)
-            }
-            else -> className
-        }
+        return ClassName(icallType.getPackage(), icallType).convertIfTypeParameter()
     }
 
 fun String.convertTypeForICalls(): String {

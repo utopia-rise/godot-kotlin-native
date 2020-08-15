@@ -52,26 +52,10 @@ class ICall(
         if (returnType.isEnum()) returnType = "Long"
     }
 
-    private fun createReturnTypeClass(): TypeName = when (returnType) {
-        "GodotArray" -> {
-            ClassName(
-                returnType.getPackage(),
-                returnType
-            ).parameterizedBy(ANY.copy(nullable = true))
-        }
-        "Dictionary" -> {
-            ClassName(
-                returnType.getPackage(),
-                returnType
-            ).parameterizedBy(ANY, ANY)
-        }
-        else -> {
-            ClassName(
-                if (returnType.isEnum()) "kotlin" else returnType.getPackage(),
-                if (returnType.isEnum()) "Long" else returnType
-            )
-        }
-    }
+    private fun createReturnTypeClass() = ClassName(
+        if (returnType.isEnum()) "kotlin" else returnType.getPackage(),
+        if (returnType.isEnum()) "Long" else returnType
+    ).convertIfTypeParameter()
 
     private fun generateICallMethodBlock(shouldReturn: Boolean, spec: FunSpec.Builder) {
         val codeBlockBuilder = CodeBlock.builder()
@@ -210,8 +194,8 @@ class ICall(
                         codeBlockBuilder.add(
                             "    %M<%T, %T>(retVar.%M.%M())\n",
                             MemberName("godot.core", returnTypeClassSimpleName),
-                            ANY,
-                            ANY,
+                            ANY.copy(nullable = true),
+                            ANY.copy(nullable = true),
                             MemberName("kotlinx.cinterop", "pointed"),
                             MemberName("kotlinx.cinterop", "readValue")
                         )

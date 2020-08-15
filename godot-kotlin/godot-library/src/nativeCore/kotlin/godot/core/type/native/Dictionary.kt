@@ -412,7 +412,7 @@ class Dictionary<K, V> : NativeCoreType<godot_dictionary>, MutableMap<K, V> {
  * T may be Any or a Godot type.
  * An error will be thrown otherwise.
  */
-inline fun <reified K : Any, reified V : Any> Dictionary(): Dictionary<K, V> {
+inline fun <reified K : Any?, reified V : Any?> Dictionary(): Dictionary<K, V> {
     val keyType = (variantMappers[K::class]
         ?: throw TypeCastException("Dictionary generic key type can either be Any or a Godot type. Nullable are not accepted"))
         as VariantMapper<K>
@@ -427,7 +427,7 @@ inline fun <reified K : Any, reified V : Any> Dictionary(): Dictionary<K, V> {
  * T may be Any or a Godot type.
  * An error will be thrown otherwise.
  */
-inline fun <reified K : Any, reified V : Any> Dictionary(native: CValue<godot_dictionary>): Dictionary<K, V> {
+inline fun <reified K : Any?, reified V : Any?> Dictionary(native: CValue<godot_dictionary>): Dictionary<K, V> {
     val keyType = (variantMappers[K::class]
         ?: throw TypeCastException("Dictionary generic key type can either be Any or a Godot type. Nullable are not accepted"))
         as VariantMapper<K>
