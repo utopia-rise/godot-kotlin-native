@@ -31,12 +31,12 @@ func get_percentile(percentile):
 func get_min():
     var copy = data.duplicate()
     copy.sort()
-    return copy[0]
+    return copy[-1]
 
 func get_max():
     var copy = data.duplicate()
     copy.sort()
-    return copy[-1]
+    return copy[0]
 
 func get_results():
     var result = {}
