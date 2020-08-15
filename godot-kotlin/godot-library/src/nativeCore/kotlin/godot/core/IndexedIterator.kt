@@ -40,25 +40,23 @@ internal class Entry<K, V>(
     }
 }
 
-internal class MapIterator<K : Any, V : Any>(
+internal class MapIterator<K, V>(
     private val keyIterator: MutableIterator<K>,
     private val getter: (K) -> V,
     private val setter: (K, V) -> Unit,
     private val eraser: (K) -> Unit
 ) : MutableIterator<MutableMap.MutableEntry<K, V>> {
-    lateinit var key: K
+    var key: Any? = null
 
-    override fun hasNext(): Boolean {
-        return keyIterator.hasNext()
-    }
+    override fun hasNext() = keyIterator.hasNext()
 
     override fun next(): MutableMap.MutableEntry<K, V> {
         key = keyIterator.next()
-        return Entry(key, getter, setter)
+        return Entry(key as K, getter, setter)
     }
 
     override fun remove() {
         keyIterator.remove()
-        eraser(key)
+        eraser(key as K)
     }
 }

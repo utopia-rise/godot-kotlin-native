@@ -3,6 +3,7 @@ package godot.core
 import godot.gdnative.godot_dictionary
 import godot.internal.type.NativeCoreType
 import godot.internal.type.callNative
+import godot.internal.type.isNullable
 import godot.internal.type.nullSafe
 import godot.internal.utils.GodotScope
 import kotlinx.cinterop.CPointer
@@ -12,12 +13,14 @@ import kotlinx.cinterop.invoke
 
 
 @ExperimentalUnsignedTypes
-class Dictionary<K : Any, V : Any> : NativeCoreType<godot_dictionary>, MutableMap<K, V> {
+class Dictionary<K, V> : NativeCoreType<godot_dictionary>, MutableMap<K, V> {
 
     //########################INTERNAL#############################
     override var _handle = cValue<godot_dictionary> {}
     private val keyMapper: VariantMapper<K>
     private val valueMapper: VariantMapper<V>
+    private val isKeyNullable: Boolean
+    private val isValueNullable: Boolean
 
     private fun typedKeyWrap(value: K): Variant {
         return keyMapper.toGodot(value)
@@ -38,10 +41,14 @@ class Dictionary<K : Any, V : Any> : NativeCoreType<godot_dictionary>, MutableMa
                 Value received: ${this.unwrap().toString()}"""
             )
         }
+        if (type == VariantType.NIL) {
+            if (!isKeyNullable) throw TypeCastException("Expected a non nullable $type but received a null.")
+            else return null as K
+        }
         return keyMapper.toKotlin(this)
     }
 
-    private fun Variant.typedValueUnwrap(): V? {
+    private fun Variant.typedValueUnwrap(): V {
         val type = this.type
         if (type != valueMapper.type) {
             throw TypeCastException(
@@ -50,16 +57,20 @@ class Dictionary<K : Any, V : Any> : NativeCoreType<godot_dictionary>, MutableMa
             )
         }
         if (type == VariantType.NIL) {
-            return null
+            if (!isValueNullable) throw TypeCastException("Expected a non nullable $type but received a null.")
+            else return null as V
         }
         return valueMapper.toKotlin(this)
     }
 
     //CONSTRUCTOR
     @PublishedApi
-    internal constructor(p_keyMapper: VariantMapper<K>, p_valueMapper: VariantMapper<V>) {
+    internal constructor(p_keyMapper: VariantMapper<K>, p_valueMapper: VariantMapper<V>, p_isKeyNullable: Boolean,
+                         p_isValueNullable: Boolean) {
         keyMapper = p_keyMapper
         valueMapper = p_valueMapper
+        isKeyNullable = p_isKeyNullable
+        isValueNullable = p_isValueNullable
         callNative {
             nullSafe(Godot.gdnative.godot_dictionary_new)(it)
         }
@@ -69,10 +80,14 @@ class Dictionary<K : Any, V : Any> : NativeCoreType<godot_dictionary>, MutableMa
     internal constructor(
         p_keyMapper: VariantMapper<K>,
         p_valueMapper: VariantMapper<V>,
+        p_isKeyNullable: Boolean,
+        p_isValueNullable: Boolean,
         native: CValue<godot_dictionary>
     ) {
         keyMapper = p_keyMapper
         valueMapper = p_valueMapper
+        isKeyNullable = p_isKeyNullable
+        isValueNullable = p_isValueNullable
         setRawMemory(native)
     }
 
@@ -136,7 +151,7 @@ class Dictionary<K : Any, V : Any> : NativeCoreType<godot_dictionary>, MutableMa
 
             override fun add(element: MutableMap.MutableEntry<K, V>): Boolean {
                 val ret = has(element.key)
-                this@Dictionary.set(element.key, element.value)
+                this@Dictionary[element.key] = element.value
                 return ret
             }
 
@@ -180,6 +195,8 @@ class Dictionary<K : Any, V : Any> : NativeCoreType<godot_dictionary>, MutableMa
     constructor(other: Dictionary<K, V>) {
         keyMapper = other.keyMapper
         valueMapper = other.valueMapper
+        isKeyNullable = other.isKeyNullable
+        isValueNullable = other.isValueNullable
         _handle = other._duplicate(false)
     }
 
@@ -221,7 +238,7 @@ class Dictionary<K : Any, V : Any> : NativeCoreType<godot_dictionary>, MutableMa
      * The deep parameter causes inner dictionaries and arrays to be copied recursively, but does not apply to objects.
      */
     fun duplicate(deep: Boolean = false): Dictionary<K, V> {
-        return Dictionary(keyMapper, valueMapper).also {
+        return Dictionary(keyMapper, valueMapper, isKeyNullable, isValueNullable).also {
             _handle = _duplicate(deep)
         }
     }
@@ -349,17 +366,11 @@ class Dictionary<K : Any, V : Any> : NativeCoreType<godot_dictionary>, MutableMa
 
 
     //UTILITIES
-    override operator fun get(key: K): V {
-        val ret = Variant(
-            callNative {
-                nullSafe(Godot.gdnative.godot_dictionary_get)(it, typedKeyWrap(key).ptr)
-            }
-        ).typedValueUnwrap()
-        if(ret == null){
-            throw IllegalArgumentException("${key.toString()} is not a valid key for this dictionary")
+    override operator fun get(key: K) = Variant(
+        callNative {
+            nullSafe(Godot.gdnative.godot_dictionary_get)(it, typedKeyWrap(key).ptr)
         }
-        return ret
-    }
+    ).typedValueUnwrap()
 
 
     operator fun set(key: K, value: V) {
@@ -398,7 +409,7 @@ class Dictionary<K : Any, V : Any> : NativeCoreType<godot_dictionary>, MutableMa
 //CONSTRUCTOR
 /**
  * Build a empty Dictionaru.
- * T may be Any or a Godot type, not nullable.
+ * T may be Any or a Godot type.
  * An error will be thrown otherwise.
  */
 inline fun <reified K : Any, reified V : Any> Dictionary(): Dictionary<K, V> {
@@ -408,12 +419,12 @@ inline fun <reified K : Any, reified V : Any> Dictionary(): Dictionary<K, V> {
     val valueType = (variantMappers[V::class]
         ?: throw TypeCastException("Dictionary generic value type can either be Any or a Godot type. Nullable are not accepted"))
         as VariantMapper<V>
-    return Dictionary(keyType, valueType)
+    return Dictionary(keyType, valueType, isNullable<K>(), isNullable<V>())
 }
 
 /**
  * Build a empty Dictionaru.
- * T may be Any or a Godot type, not nullable.
+ * T may be Any or a Godot type.
  * An error will be thrown otherwise.
  */
 inline fun <reified K : Any, reified V : Any> Dictionary(native: CValue<godot_dictionary>): Dictionary<K, V> {
@@ -423,5 +434,5 @@ inline fun <reified K : Any, reified V : Any> Dictionary(native: CValue<godot_di
     val valueType = (variantMappers[V::class]
         ?: throw TypeCastException("Dictionary generic value type can either be Any or a Godot type. Nullable are not accepted"))
         as VariantMapper<V>
-    return Dictionary(keyType, valueType, native)
+    return Dictionary(keyType, valueType, isNullable<K>(), isNullable<V>(), native)
 }
