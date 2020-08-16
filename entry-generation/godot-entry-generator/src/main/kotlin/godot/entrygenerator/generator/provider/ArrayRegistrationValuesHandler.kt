@@ -21,17 +21,6 @@ class ArrayRegistrationValuesHandler(
         }
     }
 
-    override fun getDefaultValue(): Pair<String, Array<out Any>> {
-        return if (propertyDescriptor.type.arguments.firstOrNull()?.type?.isEnum() == true) {
-            if (propertyDescriptor.isLateInit || !isVisibleInEditor()) {
-                return "%L" to arrayOf("null")
-            }
-            getDefaultValueExpression(propertyDescriptor.assignmentPsi) ?: throw IllegalStateException("") //TODO: error
-        } else {
-            super.getDefaultValue()
-        }
-    }
-
     /**
      * Hint string array formatting: https://github.com/godotengine/godot/blob/00949f0c5fcc6a4f8382a4a97d5591fd9ec380f8/editor/editor_properties_array_dict.cpp
      */

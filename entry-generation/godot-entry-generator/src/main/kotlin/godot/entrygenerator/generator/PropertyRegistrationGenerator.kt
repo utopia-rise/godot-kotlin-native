@@ -1,9 +1,8 @@
 package godot.entrygenerator.generator
 
-import com.squareup.kotlinpoet.ClassName
-import com.squareup.kotlinpoet.FunSpec
+import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.MemberName.Companion.member
-import com.squareup.kotlinpoet.asTypeName
+import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import godot.entrygenerator.extension.getAnnotationValue
 import godot.entrygenerator.extension.getFirstRegistrableTypeAsFqNameStringOrNull
 import godot.entrygenerator.extension.isCompatibleList
@@ -36,8 +35,6 @@ object PropertyRegistrationGenerator {
         properties.forEach { propertyDescriptor ->
             if (propertyDescriptor.type.isEnum()) {
                 registerEnum(className, propertyDescriptor, bindingContext, registerClassControlFlow)
-            } else if (propertyDescriptor.type.isCompatibleList() && propertyDescriptor.type.arguments.firstOrNull()?.type?.isEnum() == true) {
-                registerEnumList(className, propertyDescriptor, bindingContext, registerClassControlFlow)
             } else if (
                 KotlinBuiltIns.isSetOrNullableSet(propertyDescriptor.type)
                 && propertyDescriptor.type.arguments.firstOrNull()?.type?.isEnum() == true
@@ -61,26 +58,6 @@ object PropertyRegistrationGenerator {
 
         registerClassControlFlow.addStatement(
             "enumFlagProperty(%S,·%L,·${defaultValueStringTemplate.replace(" ", "·")},·%L,·%T)",
-            propertyDescriptor.name,
-            className.member(propertyDescriptor.name.asString()).reference(),
-            *defaultValueStringTemplateValues,
-            shouldBeVisibleInEditor(propertyDescriptor),
-            mapRpcModeAnnotationToClassName(getRpcModeEnum(propertyDescriptor))
-        )
-    }
-
-    private fun registerEnumList(
-        className: ClassName,
-        propertyDescriptor: PropertyDescriptor,
-        bindingContext: BindingContext,
-        registerClassControlFlow: FunSpec.Builder
-    ) {
-        val defaultValueProvider =
-            DefaultValueHandlerProvider.provideDefaultValueHandler(propertyDescriptor, bindingContext)
-        val (defaultValueStringTemplate, defaultValueStringTemplateValues) = defaultValueProvider.getDefaultValue()
-
-        registerClassControlFlow.addStatement(
-            "enumListProperty(%S,·%L,·${defaultValueStringTemplate.replace(" ", "·")},·%L,·%T)",
             propertyDescriptor.name,
             className.member(propertyDescriptor.name.asString()).reference(),
             *defaultValueStringTemplateValues,
@@ -196,9 +173,10 @@ object PropertyRegistrationGenerator {
         return argumentTemplateString to ClassName(packageAsString, typeAsString)
     }
 
-    private fun getTypeToVariantConverter(propertyDescriptor: PropertyDescriptor): Pair<String, ClassName> {
-        val className = when {
-            isOfType(propertyDescriptor.type, "godot.internal.type.CoreType") -> ClassName("godot.internal.type", "CoreType")
+    private fun getTypeToVariantConverter(propertyDescriptor: PropertyDescriptor): Pair<String, TypeName> {
+        return "getTypeToVariantConversionFunction<%T>()" to when {
+            isOfType(propertyDescriptor.type, "godot.internal.type.CoreType") ->
+                ClassName("godot.internal.type", "CoreType").parameterizedBy(STAR)
             isOfType(propertyDescriptor.type, "godot.Object") -> ClassName("godot", "Object")
             isOfType(propertyDescriptor.type, "godot.core.Variant") -> ClassName("godot.core", "Variant")
             KotlinBuiltIns.isInt(propertyDescriptor.type) -> Int::class.asTypeName()
@@ -209,8 +187,6 @@ object PropertyRegistrationGenerator {
             KotlinBuiltIns.isStringOrNullableString(propertyDescriptor.type) -> String::class.asTypeName()
             else -> throw IllegalArgumentException("Registered property \"${propertyDescriptor.fqNameSafe}\" is of unregistrable type: ${propertyDescriptor.type}. You can only register properties which are either primitive or derive from a Godot type")
         }
-
-        return "getTypeToVariantConversionFunction<%T>()" to className
     }
 
     private fun isOfType(type: KotlinType, typeFqName: String): Boolean {

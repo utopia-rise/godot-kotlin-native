@@ -1,10 +1,8 @@
 package godot.entrygenerator.generator
 
-import com.squareup.kotlinpoet.ClassName
-import com.squareup.kotlinpoet.FunSpec
+import com.squareup.kotlinpoet.*
 import com.squareup.kotlinpoet.MemberName.Companion.member
-import com.squareup.kotlinpoet.TypeName
-import com.squareup.kotlinpoet.asTypeName
+import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import godot.entrygenerator.extension.getAnnotationValue
 import godot.entrygenerator.extension.getFirstRegistrableTypeAsFqNameStringOrNull
 import godot.entrygenerator.mapper.RpcModeAnnotationMapper.mapRpcModeAnnotationToClassName
@@ -104,10 +102,11 @@ object FunctionRegistrationGenerator {
         return template to templateArguments.toTypedArray()
     }
 
-    private fun getTypeToVariantConverter(functionDescriptor: FunctionDescriptor): Pair<String, ClassName> {
+    private fun getTypeToVariantConverter(functionDescriptor: FunctionDescriptor): Pair<String, TypeName> {
         return functionDescriptor.returnType?.let { returnType ->
-            val className = when {
-                isOfType(returnType, "godot.internal.type.CoreType") -> ClassName("godot.internal.type", "CoreType")
+            val typeName = when {
+                isOfType(returnType, "godot.internal.type.CoreType") ->
+                    ClassName("godot.internal.type", "CoreType").parameterizedBy(STAR)
                 isOfType(returnType, "godot.Object") -> ClassName("godot", "Object")
                 isOfType(returnType, "godot.core.Variant") -> ClassName("godot.core", "Variant")
                 KotlinBuiltIns.isInt(returnType) -> Int::class.asTypeName()
@@ -120,8 +119,8 @@ object FunctionRegistrationGenerator {
                 else -> throw IllegalArgumentException("Registered functions \"${functionDescriptor.fqNameSafe}\" return type is of unregistrable type: ${returnType}. You can only register functions which return either a primitive or a type derived from a Godot type")
             }
 
-            className?.let {
-                "getTypeToVariantConversionFunction<%T>()" to className
+            typeName?.let {
+                "getTypeToVariantConversionFunction<%T>()" to typeName
             } ?: "{ %T() }" to ClassName("godot.core", "Variant")
         } ?: "{ %T() }" to ClassName("godot.core", "Variant")
     }

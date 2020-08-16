@@ -1,5 +1,6 @@
 package godot.entrygenerator.generator.provider
 
+import com.squareup.kotlinpoet.ANY
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.MemberName
 import godot.entrygenerator.extension.assignmentPsi
@@ -60,9 +61,7 @@ abstract class RegistrationValuesHandler(
             return "%L" to arrayOf("null")
         }
         val defaultValue = getDefaultValueExpression(propertyDescriptor.assignmentPsi)
-        if (defaultValue == null) {
-            throw IllegalStateException("") //TODO: error
-        }
+            ?: throw IllegalStateException("") //TODO: error
         val params = mutableListOf<Any>()
         params.add(ClassName("godot.core", "Variant"))
         params.addAll(defaultValue.second)
@@ -184,7 +183,12 @@ abstract class RegistrationValuesHandler(
                             val params = mutableListOf<Any>()
                             params.add(MemberName(pkg, functionName))
                             transformedArgs.forEach { params.addAll(it!!.second) }
-                            return "%M(${transformedArgs.joinToString { it!!.first }})" to params.toTypedArray()
+                            return if (params.size == 1) {
+                                params.add(ANY.copy(nullable = true))
+                                "%M<%T>(${transformedArgs.joinToString { it!!.first }})" to params.toTypedArray()
+                            } else {
+                                "%M(${transformedArgs.joinToString { it!!.first }})" to params.toTypedArray()
+                            }
                         }
                         //set's for enum flag registration
                         expression.getType(bindingContext)?.let(KotlinBuiltIns::isSetOrNullableSet) == true -> {
@@ -230,32 +234,6 @@ abstract class RegistrationValuesHandler(
             //operators like the `or` operator
             expression is KtOperationReferenceExpression -> {
                 return "%L" to arrayOf(expression.text)
-            }
-            //EnumArray -> int to enum mapping function
-            expression is KtLambdaExpression && expression.parents.firstOrNull { it is KtNameReferenceExpression || it is KtCallExpression } != null -> {
-                expression.parents.forEach { parent ->
-                    val packagePathOfParent = when (parent) {
-                        is KtNameReferenceExpression -> parent
-                            .referenceExpression()
-                            ?.getReferenceTargets(bindingContext)
-                            ?.firstOrNull()
-                            ?.fqNameSafe
-                            ?.asString()
-                        is KtCallExpression -> parent
-                            .referenceExpression()
-                            ?.getReferenceTargets(bindingContext)
-                            ?.firstOrNull()
-                            ?.fqNameSafe
-                            ?.asString()
-                        else -> null
-                    }
-
-                    //we could (and maybe should) check that the user is not using any refs inside the lambda, but IMHO this would be overkill and too much work to catch all edge cases
-                    //if he uses refs it just does not compile and he has to figure out himself whats wrong. I guess with proper documentation on how this function should be used, that's enough
-                    if (packagePathOfParent?.matches(Regex("^godot\\.core\\.(EnumArray.*|enumVariantArrayOf)\$")) == true) {
-                        return "%L" to arrayOf(expression.text)
-                    }
-                }
             }
         }
 
