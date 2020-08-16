@@ -535,7 +535,7 @@ internal fun GodotArray(native: CValue<godot_array>): GodotArray<Any?> {
  * Build a GodotArray based on the vararg arguments.
  * Warning: Might be slow with a lot of arguments because GDNative can only append items one by one
  */
-inline fun <reified T> GodotArrayOf(vararg elements: T) = GodotArray<T>().also { arr ->
+inline fun <reified T> godotArrayOf(vararg elements: T) = GodotArray<T>().also { arr ->
     elements.forEach {
         arr.append(it)
     }

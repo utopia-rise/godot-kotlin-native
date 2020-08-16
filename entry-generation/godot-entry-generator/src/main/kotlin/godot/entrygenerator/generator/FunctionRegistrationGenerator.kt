@@ -79,13 +79,6 @@ object FunctionRegistrationGenerator {
                 val firstRegistrableType = it.type.getFirstRegistrableTypeAsFqNameStringOrNull()
                     ?: throw IllegalArgumentException("Registered function \"${functionDescriptor.fqNameSafe}\" receives an unregistrable type: ${it.name}. All arguments of a registered functions have to be either primitive or derive from a Godot type")
 
-                if (firstRegistrableType == "godot.core.EnumArray") {
-                    throw IllegalArgumentException("Registered function \"${functionDescriptor.fqNameSafe}\" receives an EnumArray as param: ${it.name}. EnumArrays cannot be registered as params for functions. Use IntVariantArray instead.")
-                }
-                if (firstRegistrableType == "godot.core.ObjectArray") {
-                    throw IllegalArgumentException("Registered function \"${functionDescriptor.fqNameSafe}\" receives an ObjectArray as param: ${it.name}. ObjectArray cannot be registered as params for functions. Use VariantArray instead and use the asObjectArray() function for conversion.")
-                }
-
                 val typeAsString = firstRegistrableType
                     .replaceBeforeLast(".", "")
                     .replace(".", "")
