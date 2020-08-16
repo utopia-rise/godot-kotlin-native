@@ -7,6 +7,7 @@ import godot.annotation.*
 import godot.core.*
 import godot.registration.RPCMode
 import godot.registration.Range
+import godot.core.godotArrayOf
 
 const val FLAG_1 = 1
 const val FLAG_2 = 2
@@ -123,98 +124,83 @@ class TestingClass : Node() {
 //    var resourceVisibleInEditorButInitialized: Resource = Resource() // <- ...should fail!
 
     @RegisterProperty
-    var pureVariantArray = VariantArray()
+    var pureVariantArray = GodotArray<Any?>()
 
     @RegisterProperty
-    var intVariantArray = intVariantArrayOf(1, 2)
+    var intVariantArray = godotArrayOf(1, 2)
 
     @RegisterProperty
-    var realVariantArray = realVariantArrayOf(1.0, 2.0)
+    var realVariantArray = godotArrayOf(1.0, 2.0)
 
     @RegisterProperty
-    var booleanVariantArray = booleanVariantArrayOf(true, false)
+    var booleanVariantArray = godotArrayOf(true, false)
 
     @RegisterProperty
-    var aabbVariantArray = AABBArray(listOf(AABB(Vector3(), Vector3())))
+    var aabbVariantArray = GodotArray(listOf(AABB(Vector3(), Vector3())))
 
     @RegisterProperty
-    var basisVariantArray = BasisArray(listOf(Basis()))
+    var basisVariantArray = GodotArray(listOf(Basis()))
 
     @RegisterProperty
-    var colorVariantArray = ColorArray(listOf(Color(0, 0, 0)))
+    var colorVariantArray = GodotArray(listOf(Color(0, 0, 0)))
 
     @RegisterProperty
-    var nodePathVariantArray = NodePathArray(listOf(NodePath("some/Node/Path")))
+    var nodePathVariantArray = GodotArray(listOf(NodePath("some/Node/Path")))
 
     @RegisterProperty
-    var planeVariantArray = PlaneArray(listOf(Plane()))
+    var planeVariantArray = GodotArray(listOf(Plane()))
 
     @RegisterProperty
-    var quatVariantArray = QuatArray(listOf(Quat()))
+    var quatVariantArray = GodotArray(listOf(Quat()))
 
     @RegisterProperty
-    var rect2VariantArray = Rect2Array(listOf(Rect2()))
+    var rect2VariantArray = GodotArray(listOf(Rect2()))
 
     @RegisterProperty
-    var ridVariantArray = RIDArray(listOf(RID()))
+    var ridVariantArray = GodotArray(listOf(RID()))
 
     @RegisterProperty
-    var transform2DVariantArray = Transform2DArray(listOf(Transform2D()))
+    var transform2DVariantArray = GodotArray(listOf(Transform2D()))
 
     @RegisterProperty
-    var transformVariantArray = TransformArray(listOf(Transform()))
+    var transformVariantArray = GodotArray(listOf(Transform()))
 
     @RegisterProperty
-    var vector2VariantArray = Vector2Array(listOf(Vector2()))
+    var vector2VariantArray = GodotArray(listOf(Vector2()))
 
     @RegisterProperty
-    var vector3VariantArray = Vector3Array(listOf(Vector3()))
+    var vector3VariantArray = GodotArray(listOf(Vector3()))
 
 
     @RegisterProperty
     var variantArrayDifferentTypes =
-        variantArrayOf(variantArrayOf(1, "a")) //should not generate typed array hint string
+        godotArrayOf(godotArrayOf(1, "a")) //should not generate typed array hint string
 
     @RegisterProperty
-    var variantArrayAnyDifferentTypes = variantArrayOf(1, 2, "a", "b") //should not generate typed array hint string
+    var variantArrayAnyDifferentTypes = godotArrayOf(1, 2, "a", "b") //should not generate typed array hint string
 
     @RegisterProperty
-    var twoDimensionalArrayVariantArray = variantArrayOf(
-        variantArrayOf(1, 2), variantArrayOf(3, 4)
+    var twoDimensionalArrayVariantArray = godotArrayOf(
+        godotArrayOf(1, 2), godotArrayOf(3, 4)
     )
 
     @RegisterProperty
-    var threeDimensionalArrayVariantArray = variantArrayOf( //can not generate typed array hint string
-        variantArrayOf(variantArrayOf(1, 2), variantArrayOf(3, 4)),
-        variantArrayOf(variantArrayOf(5, 6), variantArrayOf(7, 8))
+    var threeDimensionalArrayVariantArray = godotArrayOf( //can not generate typed array hint string
+        godotArrayOf(godotArrayOf(1, 2), godotArrayOf(3, 4)),
+        godotArrayOf(godotArrayOf(5, 6), godotArrayOf(7, 8))
     )
 
     @RegisterProperty
-    var enumArray = EnumArray(listOf(TestEnum.ENUM1, TestEnum.ENUM2)) { enumAsInt ->
-        TestEnum.values().first { it.ordinal == enumAsInt }
-    }
+    var enumArray = GodotArray(listOf(TestEnum.ENUM1, TestEnum.ENUM2))
 
     @RegisterProperty
-    var enumArray2 = EnumArray(
-        listOf(TestEnum.ENUM1, TestEnum.ENUM2),
-        { enumAsInt ->
-            TestEnum.values().first { it.ordinal == enumAsInt }
-        }) //not moved out of parenthesis on purpose! To test the behaviour this way as well!
-
+    var enumArray2 = GodotArray(GodotArray(listOf(TestEnum.ENUM1, TestEnum.ENUM2)))
 
     @RegisterProperty
-    var enumArray3 = EnumArray(EnumArray(listOf(TestEnum.ENUM1, TestEnum.ENUM2)) { enumAsInt ->
-        TestEnum.values().first { it.ordinal == enumAsInt }
-    })
+    var enumArray3 = GodotArray<TestEnum>()
 
     @RegisterProperty
-    var enumArray4 = EnumArray { enumAsInt ->
-        TestEnum.values().first { it.ordinal == enumAsInt }
-    }
-
-    @RegisterProperty
-    var enumArray5 = enumVariantArrayOf(
-        { enumAsInt -> TestEnum.values().first { it.ordinal == enumAsInt } },
+    var enumArray4 = godotArrayOf(
         TestEnum.ENUM1,
         TestEnum.ENUM2
     )
@@ -266,10 +252,10 @@ class TestingClass : Node() {
         GD.print("Property: ${this::enumTest.name} -> $enumTest")
         GD.print("Property: ${this::flag.name} -> $flag")
 
-        GD.print("\nPrinting ${this::twoDimensionalArrayVariantArray.name} content:")
-        twoDimensionalArrayVariantArray.forEach {
-            GD.print("    Variant type: ${it.type}")
-        }
+//        GD.print("\nPrinting ${this::twoDimensionalArrayVariantArray.name} content:")
+//        twoDimensionalArrayVariantArray.forEach {
+//            GD.print("    Variant type: ${it::}")
+//        }
 
         GD.print("\nPrinting ${this::intVariantArray.name} content:")
         intVariantArray.forEach {
@@ -298,7 +284,7 @@ class TestingClass : Node() {
         p6: Curve,
         p7: Texture,
         p8: String,
-        p9: VariantArray
+        p9: GodotArray<Any?>
     ) {
         GD.print("testFunctionWithManyParams called with:")
         GD.print("p0: $p0")
