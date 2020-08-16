@@ -252,11 +252,6 @@ class TestingClass : Node() {
         GD.print("Property: ${this::enumTest.name} -> $enumTest")
         GD.print("Property: ${this::flag.name} -> $flag")
 
-//        GD.print("\nPrinting ${this::twoDimensionalArrayVariantArray.name} content:")
-//        twoDimensionalArrayVariantArray.forEach {
-//            GD.print("    Variant type: ${it::}")
-//        }
-
         GD.print("\nPrinting ${this::intVariantArray.name} content:")
         intVariantArray.forEach {
             GD.print("    $it")

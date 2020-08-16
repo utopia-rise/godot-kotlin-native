@@ -436,7 +436,7 @@ inline class Variant internal constructor(@PublishedApi internal val _handle: CV
 
 //FAKE CONSTRUCTORS. Necessary because inline classes don't support secondary constructors yet.
 //NULL
-@PublishedApi internal fun Variant() = Variant(
+fun Variant() = Variant(
     godotScoped {
         cValue<godot_variant> {
             nullSafe(Godot.gdnative.godot_variant_new_nil)(this.ptr)
@@ -445,7 +445,7 @@ inline class Variant internal constructor(@PublishedApi internal val _handle: CV
 )
 
 //PRIMITIVES
-@PublishedApi internal fun Variant(from: Boolean) = Variant(
+fun Variant(from: Boolean) = Variant(
     godotScoped {
         cValue<godot_variant> {
             nullSafe(Godot.gdnative.godot_variant_new_bool)(this.ptr, from)
@@ -453,7 +453,7 @@ inline class Variant internal constructor(@PublishedApi internal val _handle: CV
     }
 )
 
-@PublishedApi internal fun Variant(from: Int) = Variant(
+fun Variant(from: Int) = Variant(
     godotScoped {
         cValue<godot_variant> {
             nullSafe(Godot.gdnative.godot_variant_new_int)(this.ptr, from.toLong())
@@ -461,7 +461,7 @@ inline class Variant internal constructor(@PublishedApi internal val _handle: CV
     }
 )
 
-@PublishedApi internal fun <T : Enum<T>> Variant(from: Enum<T>) = Variant(
+fun <T : Enum<T>> Variant(from: Enum<T>) = Variant(
     godotScoped {
         cValue<godot_variant> {
             nullSafe(Godot.gdnative.godot_variant_new_int)(
@@ -472,7 +472,7 @@ inline class Variant internal constructor(@PublishedApi internal val _handle: CV
     }
 )
 
-@PublishedApi internal fun Variant(from: Long) = Variant(
+fun Variant(from: Long) = Variant(
     godotScoped {
         cValue<godot_variant> {
             nullSafe(Godot.gdnative.godot_variant_new_int)(this.ptr, from)
@@ -480,7 +480,7 @@ inline class Variant internal constructor(@PublishedApi internal val _handle: CV
     }
 )
 
-@PublishedApi internal fun Variant(from: Float) = Variant(
+fun Variant(from: Float) = Variant(
     godotScoped {
         cValue<godot_variant> {
             nullSafe(Godot.gdnative.godot_variant_new_real)(this.ptr, from.toDouble())
@@ -488,7 +488,7 @@ inline class Variant internal constructor(@PublishedApi internal val _handle: CV
     }
 )
 
-@PublishedApi internal fun Variant(from: Double) = Variant(
+fun Variant(from: Double) = Variant(
     godotScoped {
         cValue<godot_variant> {
             nullSafe(Godot.gdnative.godot_variant_new_real)(this.ptr, from)
@@ -496,7 +496,7 @@ inline class Variant internal constructor(@PublishedApi internal val _handle: CV
     }
 )
 
-@PublishedApi internal fun Variant(from: String) = Variant(
+fun Variant(from: String) = Variant(
     godotScoped {
         cValue<godot_variant> {
             nullSafe(Godot.gdnative.godot_variant_new_string)(
@@ -509,7 +509,7 @@ inline class Variant internal constructor(@PublishedApi internal val _handle: CV
 
 
 //OBJECT
-@PublishedApi internal fun Variant(from: Object) = Variant(
+fun Variant(from: Object) = Variant(
     godotScoped {
         cValue<godot_variant> {
             nullSafe(Godot.gdnative.godot_variant_new_object)(this.ptr, from.ptr)
@@ -536,125 +536,124 @@ internal fun <T : CPointed> wrapCore(
 
 
 //CORE
-@PublishedApi internal fun Variant(from: AABB) = wrapCore(
+fun Variant(from: AABB) = wrapCore(
     Godot.gdnative.godot_variant_new_aabb,
     from
 )
 
-@PublishedApi internal fun Variant(from: Basis) = wrapCore(
+fun Variant(from: Basis) = wrapCore(
     Godot.gdnative.godot_variant_new_basis,
     from
 )
 
-@PublishedApi internal fun Variant(from: Color) = wrapCore(
+fun Variant(from: Color) = wrapCore(
     Godot.gdnative.godot_variant_new_color,
     from
 )
 
-@PublishedApi internal fun Variant(from: NodePath) = wrapCore(
+fun Variant(from: NodePath) = wrapCore(
     Godot.gdnative.godot_variant_new_node_path,
     from
 )
 
-@PublishedApi internal fun Variant(from: Plane) = wrapCore(
+fun Variant(from: Plane) = wrapCore(
     Godot.gdnative.godot_variant_new_plane,
     from
 )
 
-@PublishedApi internal fun Variant(from: Quat) = wrapCore(
+fun Variant(from: Quat) = wrapCore(
     Godot.gdnative.godot_variant_new_quat,
     from
 )
 
-@PublishedApi internal fun Variant(from: RID) = wrapCore(
+fun Variant(from: RID) = wrapCore(
     Godot.gdnative.godot_variant_new_rid,
     from
 )
 
-@PublishedApi internal fun Variant(from: Vector2) = wrapCore(
+fun Variant(from: Vector2) = wrapCore(
     Godot.gdnative.godot_variant_new_vector2,
     from
 )
 
-@PublishedApi internal fun Variant(from: Vector3) = wrapCore(
+fun Variant(from: Vector3) = wrapCore(
     Godot.gdnative.godot_variant_new_vector3,
     from
 )
 
-@PublishedApi internal fun Variant(from: Transform2D) = wrapCore(
+fun Variant(from: Transform2D) = wrapCore(
     Godot.gdnative.godot_variant_new_transform2d,
     from
 )
 
-@PublishedApi internal fun Variant(from: Transform) = wrapCore(
+fun Variant(from: Transform) = wrapCore(
     Godot.gdnative.godot_variant_new_transform,
     from
 )
 
-@PublishedApi internal fun Variant(from: Rect2) = wrapCore(
+fun Variant(from: Rect2) = wrapCore(
     Godot.gdnative.godot_variant_new_rect2,
     from
 )
 
-@PublishedApi internal fun <K : Any, V : Any> Variant(from: Dictionary<K, V>) = wrapCore(
+fun <K : Any, V : Any> Variant(from: Dictionary<K, V>) = wrapCore(
     Godot.gdnative.godot_variant_new_dictionary,
     from
 )
 
-@PublishedApi internal fun Variant(from: Variant) = from
+fun Variant(from: Variant) = from
 
 //CONTAINER CORE
-@PublishedApi internal fun Variant(from: PoolByteArray) =
+fun Variant(from: PoolByteArray) =
     wrapCore(
         Godot.gdnative.godot_variant_new_pool_byte_array,
         from
     )
 
-@PublishedApi internal fun Variant(from: PoolColorArray) =
+fun Variant(from: PoolColorArray) =
     wrapCore(
         Godot.gdnative.godot_variant_new_pool_color_array,
         from
     )
 
-@PublishedApi internal fun Variant(from: PoolIntArray) =
+fun Variant(from: PoolIntArray) =
     wrapCore(
         Godot.gdnative.godot_variant_new_pool_int_array,
         from
     )
 
-@PublishedApi internal fun Variant(from: PoolRealArray) =
+fun Variant(from: PoolRealArray) =
     wrapCore(
         Godot.gdnative.godot_variant_new_pool_real_array,
         from
     )
 
-@PublishedApi internal fun Variant(from: PoolStringArray) =
+fun Variant(from: PoolStringArray) =
     wrapCore(
         Godot.gdnative.godot_variant_new_pool_string_array,
         from
     )
 
-@PublishedApi internal fun Variant(from: PoolVector2Array) =
+fun Variant(from: PoolVector2Array) =
     wrapCore(
         Godot.gdnative.godot_variant_new_pool_vector2_array,
         from
     )
 
-@PublishedApi internal fun Variant(from: PoolVector3Array) =
+fun Variant(from: PoolVector3Array) =
     wrapCore(
         Godot.gdnative.godot_variant_new_pool_vector3_array,
         from
     )
 
-@PublishedApi internal fun <T> Variant(from: GodotArray<T>) =
+fun <T> Variant(from: GodotArray<T>) =
     wrapCore(
         Godot.gdnative.godot_variant_new_array,
         from
     )
 
 //Use the wrap function to check if the type of the parameter is valid
-@PublishedApi internal fun Variant(from: Any?): Variant =
-    Variant.wrap(from)
+fun Variant(from: Any?): Variant = Variant.wrap(from)
 
 //EXTENSION METHOD TO CAST PRIMITIVES TO VARIANT
 @PublishedApi internal fun Any?.toVariant() = Variant(this)
