@@ -50,7 +50,7 @@ class ArrayRegistrationValuesHandler(
                     loop@ while (currentElementType != null) {
                         when {
                             currentElementType.isCompatibleList() -> {
-                                append(":\${godot.core.VariantType.ARRAY.ordinal}")
+                                append(":\${godot.core.VariantType.ARRAY.value}")
                                 currentElementType = currentElementType.arguments.firstOrNull()?.type
                             }
                             currentElementType.getJetTypeFqName(false).isGodotPrimitive() || currentElementType.isCoreType() -> {
