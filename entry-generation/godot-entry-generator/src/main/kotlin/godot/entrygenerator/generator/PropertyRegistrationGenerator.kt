@@ -5,7 +5,6 @@ import com.squareup.kotlinpoet.MemberName.Companion.member
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import godot.entrygenerator.extension.getAnnotationValue
 import godot.entrygenerator.extension.getFirstRegistrableTypeAsFqNameStringOrNull
-import godot.entrygenerator.extension.isCompatibleList
 import godot.entrygenerator.generator.provider.DefaultValueHandlerProvider
 import godot.entrygenerator.mapper.RpcModeAnnotationMapper.mapRpcModeAnnotationToClassName
 import godot.entrygenerator.mapper.TypeToVariantAsClassNameMapper
@@ -104,7 +103,7 @@ object PropertyRegistrationGenerator {
 
         registerClassControlFlow
             .addStatement(
-                "property(%S,·%L,·$typeToVariantTemplate,·$variantToTypeTemplate,·%T,·${defaultValueStringTemplate.replace(" ", "·")},·%L,·%T,·%T,·%S)",
+                "property(%S,·%L,·$typeToVariantTemplate,·$variantToTypeTemplate,·%T,·${defaultValueStringTemplate.replace(" ", "·")},·%L,·%T,·%T,·%L)",
                 propertyDescriptor.name,
                 className.member(propertyDescriptor.name.asString()).reference(),
                 typeToVariantTemplateValue,
@@ -118,7 +117,7 @@ object PropertyRegistrationGenerator {
                 shouldBeVisibleInEditor(propertyDescriptor),
                 mapRpcModeAnnotationToClassName(getRpcModeEnum(propertyDescriptor)),
                 defaultValueProvider.getPropertyTypeHint(),
-                hintString
+                "\"$hintString\"" //not using %S because of unwanted string excaping. Using %L instead which needs wrapping inside `\"...\"`
             )
     }
 

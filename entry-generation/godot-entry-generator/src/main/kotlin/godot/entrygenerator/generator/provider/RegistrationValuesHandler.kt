@@ -1,6 +1,5 @@
 package godot.entrygenerator.generator.provider
 
-import com.squareup.kotlinpoet.ANY
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.MemberName
 import godot.entrygenerator.extension.assignmentPsi
@@ -11,10 +10,10 @@ import godot.entrygenerator.model.REGISTER_PROPERTY_ANNOTATION_VISIBLE_IN_EDITOR
 import org.jetbrains.kotlin.backend.common.serialization.findPackage
 import org.jetbrains.kotlin.builtins.KotlinBuiltIns
 import org.jetbrains.kotlin.descriptors.PropertyDescriptor
+import org.jetbrains.kotlin.js.descriptorUtils.getJetTypeFqName
 import org.jetbrains.kotlin.js.resolve.diagnostics.findPsi
 import org.jetbrains.kotlin.psi.*
 import org.jetbrains.kotlin.psi.psiUtil.containingClassOrObject
-import org.jetbrains.kotlin.psi.psiUtil.parents
 import org.jetbrains.kotlin.psi.psiUtil.referenceExpression
 import org.jetbrains.kotlin.resolve.BindingContext
 import org.jetbrains.kotlin.resolve.bindingContextUtil.getReferenceTargets
@@ -172,19 +171,31 @@ abstract class RegistrationValuesHandler(
                             return "%T(${transformedArgs.joinToString { it!!.first }})" to params.toTypedArray()
                         }
                         //godot arrays and kotlin collections
-                        //Note: kotlin collections only as constructor arguments or function params. TypeToVariantAsClassNameMapper already enshures that they are not registered as property types
-                        ref is DeserializedSimpleFunctionDescriptor && (
-                            ref.fqNameSafe.asString().matches(Regex("^godot\\.core\\..*(ArrayOf|Array)\$"))
-                                || ref.findPackage().fqName.asString() == "kotlin.collections"
-                            ) -> {
+                        //Note: kotlin collections only as constructor arguments or function params. TypeToVariantAsClassNameMapper already ensures that they are not registered as property types
+                        ref is DeserializedSimpleFunctionDescriptor && (ref.fqNameSafe.asString().matches(Regex("^godot\\.core\\..*(ArrayOf|Array)\$")) || ref.findPackage().fqName.asString() == "kotlin.collections") -> {
                             val fqName = ref.fqNameSafe
                             val pkg = fqName.parent().asString()
                             val functionName = fqName.shortName().asString()
                             val params = mutableListOf<Any>()
                             params.add(MemberName(pkg, functionName))
+
+                            if (transformedArgs.isEmpty()) {
+                                params.add(
+                                    propertyDescriptor
+                                        .type
+                                        .arguments
+                                        .first()
+                                        .type
+                                        .getJetTypeFqName(false)
+                                        .let {
+                                            val packagePath = it.replaceAfterLast(".", "").removeSuffix(".")
+                                            val className = it.replaceBeforeLast(".", "").removePrefix(".")
+                                            ClassName(packagePath, className)
+                                        }
+                                )
+                            }
                             transformedArgs.forEach { params.addAll(it!!.second) }
-                            return if (params.size == 1) {
-                                params.add(ANY.copy(nullable = true))
+                            return if (transformedArgs.isEmpty()) {
                                 "%M<%T>(${transformedArgs.joinToString { it!!.first }})" to params.toTypedArray()
                             } else {
                                 "%M(${transformedArgs.joinToString { it!!.first }})" to params.toTypedArray()
