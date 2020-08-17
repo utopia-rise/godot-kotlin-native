@@ -191,21 +191,6 @@ class TestingClass : Node() {
     )
 
     @RegisterProperty
-    var enumArray = GodotArray(listOf(TestEnum.ENUM1, TestEnum.ENUM2))
-
-    @RegisterProperty
-    var enumArray2 = GodotArray(GodotArray(listOf(TestEnum.ENUM1, TestEnum.ENUM2)))
-
-    @RegisterProperty
-    var enumArray3 = GodotArray<TestEnum>()
-
-    @RegisterProperty
-    var enumArray4 = godotArrayOf(
-        TestEnum.ENUM1,
-        TestEnum.ENUM2
-    )
-
-    @RegisterProperty
     @EnumFlag
     var enumFlag = setOf(TestEnum.ENUM2)
 

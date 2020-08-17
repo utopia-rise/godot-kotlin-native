@@ -3,9 +3,7 @@ package godot.internal.type
 import godot.core.Variant
 import godot.internal.utils.GodotScope
 import godot.internal.utils.godotScoped
-import kotlinx.cinterop.CPointer
-import kotlinx.cinterop.CStructVar
-import kotlinx.cinterop.CValue
+import kotlinx.cinterop.*
 
 
 abstract class CoreType<C : CStructVar> {
@@ -42,6 +40,7 @@ internal inline fun <T, reified C : CStructVar> callNative(
     return godotScoped {
         val ptr = nativeCore.ptr
         val ret: T = block(ptr)
+        nativeCore._handle = ptr.pointed.readValue()
         ret
     }
 }
