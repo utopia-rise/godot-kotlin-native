@@ -35,7 +35,7 @@ class Dictionary<K, V> : NativeCoreType<godot_dictionary>, MutableMap<K, V> {
 
     private fun Variant.typedKeyUnwrap(): K {
         val type = this.type
-        if (type != keyMapper.type) {
+        if (keyMapper.type != null && type != keyMapper.type) {
             throw TypeCastException(
                 """Expected a Variant of type ${keyMapper.type} but received $type instead.
                 Value received: ${this.unwrap().toString()}"""
@@ -50,7 +50,7 @@ class Dictionary<K, V> : NativeCoreType<godot_dictionary>, MutableMap<K, V> {
 
     private fun Variant.typedValueUnwrap(): V {
         val type = this.type
-        if (type != valueMapper.type) {
+        if (valueMapper.type != null && type != valueMapper.type) {
             throw TypeCastException(
                 """Expected a Variant of type ${valueMapper.type} but received $type instead.
                 Value received: ${this.unwrap().toString()}"""

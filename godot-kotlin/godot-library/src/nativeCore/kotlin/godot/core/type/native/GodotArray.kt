@@ -25,7 +25,7 @@ class GodotArray<T> : NativeCoreType<godot_array>, MutableCollection<T> {
 
     private fun Variant.typedUnwrap(): T {
         val type = this.type
-        if (type != mapper.type) {
+        if (mapper.type != null && type != mapper.type) {
             throw TypeCastException(
                 """Expected a Variant of type ${mapper.type} but received $type instead.
                 Value received: ${this.unwrap().toString()}"""
