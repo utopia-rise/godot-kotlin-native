@@ -2,14 +2,11 @@ import godot.*
 import godot.annotation.RegisterClass
 import godot.annotation.RegisterFunction
 import godot.annotation.RegisterProperty
-import godot.core.Basis
-import godot.core.GD
-import godot.core.VariantArray
-import godot.core.Vector3
+import godot.core.*
 
 @RegisterClass
 class FollowCamera : Camera() {
-    private val collisionExceptions = VariantArray()
+    private val collisionExceptions = GodotArray<Any?>()
 
     @RegisterProperty
     var minDistance = 0.5
@@ -69,7 +66,7 @@ class FollowCamera : Camera() {
 
         if (!col.empty()) {
             // If main ray was occluded, get camera closer, this is the worst case scenario
-            delta = col["position"].asVector3() - target
+            delta = col["position"] as Vector3 - target
         } else if (!colLeft.empty() && colRight.empty()) {
             // If only left ray is occluded, turn the camera around to the right
             delta = Basis(up, GD.deg2rad(-dt * autoturnSpeed)).xform(delta)

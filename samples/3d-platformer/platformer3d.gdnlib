@@ -1,6 +1,7 @@
 [entry]
 
 Windows.64="res://build/bin/windowsX64/debugShared/platformer3d.dll"
+X11.64="res://build/bin/linuxX64/debugShared/libplatformer3d.so"
 
 [dependencies]
 
