@@ -16,7 +16,11 @@ subdir("entry-generation") {
     include("godot-compiler-native-plugin")
     include("godot-compiler-plugin")
     include("godot-compiler-plugin-common")
-    include("godot-entry-generator")
+}
+includeBuild("entry-generation/godot-kotlin-entry-generator") {
+    dependencySubstitution {
+        substitute(module("com.utopia-rise:godot-kotlin-entry-generator")).with(project(":")) // assuming godot-kotlin-entry-generator is the root project of entry-generator/godot-kotlin-entry-generator
+    }
 }
 
 subdir("utils") {

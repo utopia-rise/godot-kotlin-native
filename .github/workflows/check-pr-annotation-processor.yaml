@@ -3,7 +3,6 @@ on:
   pull_request:
     paths:
       - 'plugins/godot-annotation-processor/**'
-      - 'plugins/godot-entry-generator/**'
       - 'build.gradle.kts'
       - 'buildSrc/**'
       - 'gradle.properties'

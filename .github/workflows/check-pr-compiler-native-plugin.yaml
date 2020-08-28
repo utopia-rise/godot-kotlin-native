@@ -4,7 +4,6 @@ on:
     paths:
       - 'entry-generation/godot-compiler-native-plugin/**'
       - 'entry-generation/godot-compiler-plugin-common/**'
-      - 'entry-generation/godot-entry-generator/**'
       - 'entry-generation/godot-annotation-processor/**'
       - 'build.gradle.kts'
       - 'buildSrc/**'
