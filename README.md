@@ -12,22 +12,29 @@ You don't have to worry about any binding logic. Just write your game scripts li
 
 ## Important notes
 
-This version of the binding is currently in **Alpha** state and by no means production ready!
+This version of the binding is currently in **Alpha** state and by no means production ready!  
+
+This state will not change in the near foreseeable future. The Kotlin Native performance is not where it needs to be to make this binding efficient. Currently, the build times are incredibly slow due to the lack of incremental build support in Kotlin Native. Also, the runtime performance is much slower than GDScript in many cases.  
+The only case where this binding shines at the moment is in computation heavy scenarios like implementing an A* pathfinding algorithm where not many calls through the cinterop layer of K/N are necessary. In all other cases were many calls are needed, like Input checking and small logic in function like `_process`, the performance is not great because of the current performance of the K/N cinterop layer.  
+We were and are in touch with JB regarding those issues on youtrack and slack: [KT-40652](https://youtrack.jetbrains.com/issue/KT-40652) and [KT-40679](https://youtrack.jetbrains.com/issue/KT-40679)
+
+To still be able to use kotlin in a performant way, we started another project [(godot-jvm)](https://github.com/utopia-rise/godot-jvm/) which leverages an embedded JVM to use kotlin on the JVM rather than native. On our first tests, this increases performance dramatically and one can leverage the full JVM ecosystem. Head over there to see development updates.  
+This binding will not die though. We will provide bugfixes for existing bugs if necessary, keep it as up to date as our time allows us to do, but we will not improve tooling or add new features until the performance of K/N is more acceptable.
 
 ## Documentation
 
 One can find the documentation for this binding [here](https://godot-kotl.in).
 
-## Setting up IntelliJ IDEA
-1. Add `godot.kotlin.dev` to `~/.gradle/gradle.properties` (on Windows you might need to stop any Gradle daemons running for this property to be picked up)
-2. Run the initial build: `./gradlew publishToMavenLocal`  (this will take a while)
-3. In IntelliJ IDEA, import the root `build.gradle.kts`.
-4. After importing the main binding, in the Gradle sidebar in IntelliJ IDEA, import the `build.gradle.kts` of the sample you want to import. (repeat for every sample you want to develop)
-
 ## Developer discussion
 
 Ask questions and collaborate on Discord:
 https://discord.gg/qSU2EQs
+
+## Setting up IntelliJ IDEA for local builds or contribution
+1. Add `godot.kotlin.dev` to `~/.gradle/gradle.properties` (on Windows you might need to stop any Gradle daemons running for this property to be picked up)
+2. Run the initial build: `./gradlew publishToMavenLocal`  (this will take a while)
+3. In IntelliJ IDEA, import the root `build.gradle.kts`.
+4. After importing the main binding, in the Gradle sidebar in IntelliJ IDEA, import the `build.gradle.kts` of the sample you want to import. (repeat for every sample you want to develop)
 
 ## Contribution Guidelines:
 - **CodeStyle:**  
