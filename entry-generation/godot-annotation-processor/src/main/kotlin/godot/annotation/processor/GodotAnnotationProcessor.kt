@@ -4,6 +4,7 @@ import de.jensklingenberg.mpapt.model.AbstractProcessor
 import de.jensklingenberg.mpapt.model.Element
 import de.jensklingenberg.mpapt.model.RoundEnvironment
 import de.jensklingenberg.mpapt.utils.KotlinPlatformValues
+import godot.entrygenerator.EntryGenerationType
 import godot.entrygenerator.EntryGenerator
 import org.jetbrains.kotlin.descriptors.ClassDescriptor
 import org.jetbrains.kotlin.descriptors.FunctionDescriptor
@@ -100,9 +101,8 @@ class GodotAnnotationProcessor(
     }
 
     override fun processingOver() {
-        val entryGenerator = EntryGenerator(bindingContext)
-        entryGenerator.generateEntryFile(entryGenerationOutputDir, classes, properties, functions, signals)
-        entryGenerator.generateGdnsFiles(
+        EntryGenerator.generateEntryFile(EntryGenerationType.KOTLIN_NATIVE, bindingContext, entryGenerationOutputDir, classes, properties, functions, signals)
+        EntryGenerator.generateGdnsFiles(
             gdnsGenerationOutputDir,
             gdnlibGenerationOutputFile,
             cleanGeneratedGdnsFiles,

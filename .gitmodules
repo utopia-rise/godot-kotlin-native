@@ -1,3 +1,6 @@
 [submodule "godot-kotlin/godot-headers"]
 	path = godot-kotlin/godot-headers
 	url = https://github.com/GodotNativeTools/godot_headers
+[submodule "entry-generation/godot-kotlin-entry-generator"]
+	path = entry-generation/godot-kotlin-entry-generator
+	url = git@github.com:utopia-rise/godot-kotlin-entry-generator.git
