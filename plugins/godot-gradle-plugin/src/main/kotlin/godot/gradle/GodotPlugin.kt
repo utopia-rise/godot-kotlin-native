@@ -9,7 +9,6 @@ import org.gradle.kotlin.dsl.getByType
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
-import org.jetbrains.kotlin.konan.target.HostManager
 import java.io.File
 
 class GodotPlugin : Plugin<Project> {
@@ -51,7 +50,7 @@ class GodotPlugin : Plugin<Project> {
                 dependencies {
                     // TODO: remove this once we have published the godot-library artifact.
                     // don't add dependencies to targets not buildable in the current host
-                    if (HostManager().isEnabled(this@configureSourceSets.konanTarget)) {
+                    if (this@configureSourceSets.publishable) {
                         implementation("com.utopia-rise:godot-library:${GodotBuildProperties.godotKotlinVersion}")
                     }
                 }
@@ -101,6 +100,7 @@ class GodotPlugin : Plugin<Project> {
             platforms.forEach { platform ->
                 val target = when (platform) {
                     GodotPlatform.LINUX_X64 -> mpp.linuxX64("linuxX64")
+                    GodotPlatform.SERVER_X64 -> mpp.linuxX64("serverX64")
                     GodotPlatform.WINDOWS_X64 -> mpp.mingwX64("windowsX64")
                     GodotPlatform.OSX_X64 -> mpp.macosX64("macosX64")
                     GodotPlatform.ANDROID_X64 -> mpp.androidNativeX64("androidX64")

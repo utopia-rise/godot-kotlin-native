@@ -67,6 +67,7 @@ open class GenerateGdnlib : DefaultTask() {
             GodotPlatform.ANDROID_ARM64 -> "Android.arm64-v8a"
             GodotPlatform.IOS_X64 -> "iOS.64"
             GodotPlatform.IOS_ARM64 -> "iOS.arm64"
+            GodotPlatform.SERVER_X64 -> "Server.64"
         }
     }
 }
